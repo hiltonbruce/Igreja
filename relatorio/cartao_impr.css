@@ -1,0 +1,96 @@
+#Endereco {
+	position:absolute;
+	left:103px;
+	top:97px;
+	width:255px;
+	height:34px;
+	z-index:4;
+	font-size:80%;
+}
+#Razao {
+	position:absolute;
+	left:94px;
+	top:52px;
+	width:276px;
+	height:40px;
+	z-index:5;
+}
+#foto {
+	position:absolute;
+	left:281px;
+	top:159px;
+	width:84px;
+	height:102px;
+	z-index:6;
+}
+#cargo {
+	position:absolute;
+	left:34px;
+	top:178px;
+	width:244px;
+	height:35px;
+	z-index:7;
+	text-align:center;
+	font-size: 100%;
+}
+#Nome {
+	position:absolute;
+	left:17px;
+	top:408px;
+	width:355px;
+	height:33px;
+	z-index:8;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 120%;
+}
+#memsagem {
+	position:absolute;
+	left:34px;
+	top:148px;
+	width:244px;
+	height:29px;
+	z-index:9;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	text-align:center;
+}
+#Rol {
+	position:absolute;
+	left:278px;
+	top:134px;
+	width:88px;
+	height:23px;
+	z-index:10;
+	text-align:center;
+}
+#verso1 {
+	position:absolute;
+	left:526px;
+	top:183px;
+	width:216px;
+	height:86px;
+	z-index:11;
+	font-size: 80%;
+}
+
+#verso2 {
+	position:absolute;
+	left:781px;
+	top:182px;
+	width:230px;
+	height:86px;
+	z-index:11;
+	font-size: 80%;
+}
+#Pastor {
+	position:absolute;
+	left:559px;
+	top:442px;
+	width:376px;
+	height:24px;
+	z-index:12;
+	text-align:center;
+	font-family:"Courier New", Courier, monospace;
+	font-size: 80%;
+}

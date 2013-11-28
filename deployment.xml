@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package xmlns="http://www.zend.com/server/deployment-descriptor/1.0" version="1.0">
+    <name>assembleia</name>
+    <version>
+        <release>2.0.0</release>
+    </version>
+    <icon>br_igreja.jpg</icon>
+    <appdir>data</appdir>
+</package>

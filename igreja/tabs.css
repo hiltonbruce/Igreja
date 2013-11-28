@@ -1,0 +1,65 @@
+/* CSS Document */
+
+body {
+  font: 65%/1.6 "Myriad Pro", Frutiger, "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Verdana, sans-serif;
+}
+
+.clear {
+  clear: both;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+caption {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+col {
+  border-right: 1px solid #000;
+}
+
+col#albumCol {
+  border: none;
+}
+
+thead {
+  background: #ccc url(images/bar.gif) repeat-x left center;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+th {
+  text-align: left;
+}
+
+#playlistPosHead {
+  text-indent: -1000em;
+}
+
+th, td {
+  padding: 0.1em 1em;
+}
+
+.odd {
+  background-color:#DCDCDC;
+}
+
+
+.dados {
+  background-color: #FFFFFF;
+}
+
+
+.odd2 {
+  background-color:#BFEFFF;
+}
+
+

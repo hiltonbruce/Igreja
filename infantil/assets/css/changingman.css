@@ -1,0 +1,172 @@
+/* Created by Andy Clarke (http://www.stuffandnonsense.co.uk) with CSS assistance from Brothercake (http://www.brothercake.com)
+
+XHTML and CSS only, released under a Creative Commons Deed Attribution 2.0 (http://creativecommons.org/licenses/by/2.0/)
+You are free:
+
+* To copy, distribute, display, and perform the work
+* To make derivative works
+* To make commercial use of the work */
+
+@import url(ie.css);
+
+/* body (for all browsers) */
+body { font : 78%/140% "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif; text-align : center; color : #666; }
+
+/* body (for modern browsers) */
+body[id="changingman"] { background : #fff url(../images/body-bg.png) repeat-x; }
+
+/* universals */
+*  { margin : 0; padding : 0; }
+h1, h2, h3, h4, p, ul, ol, dl  { padding : .5em 10px; }
+
+/* hx */
+h1, h2 { font : 140% Arial, Helvetica, sans-serif; font-weight : normal; color : #333; }
+
+/* Styled h1 (for all browsers) */
+#nav-main h1 { height : 180px; width : 200px; margin-bottom : 10px; padding : 0; text-indent : -9999px; }
+
+/* Styled h1 (for modern browsers) */
+div[id="nav-main"] h1 { background :  url(../images/h1-1.png) no-repeat center top; }
+
+/* h2 */
+div.keypoint h2 { padding : 0 0 .5em 0; }
+
+/* h3 */
+div.keypoint h3 { padding : 0 0 .5em 0; }
+
+/* p */
+div.keypoint p { padding : .5em 0; }
+div.introduction p { font-size : 104%; }
+p#siteinfo-legal  { margin-top : 10em; font-size : 72%; text-transform : uppercase; text-align : right; }
+dd p, form p { padding-left : 0; }
+h3+p { padding-top : 0 ; }
+form+p { color : #888; }
+blockquote p { padding : 0; }
+
+/* abbr, acronym */
+abbr, acronym { text-decoration : none; border-bottom : 1px dotted #888; cursor : help; }
+a abbr, a acronym { text-decoration : underline ; border-bottom : 0px dotted #888; cursor : hand; }
+
+/* a */
+a:link { color : #369; text-decoration : underline; }
+a:visited { color : #668cb3; }
+a:hover { color : #555; }
+a:focus, a:active { color : #333; }
+div#nav-main ul li a:link, #nav-main ul li a:visited { color : #fff; text-decoration : none; }
+div#nav-main ul li a:hover, #nav-main ul li a:active, #nav-main ul li a:focus { color : #fff; text-decoration : underline; }
+
+/* Graphical home page anchor */
+span#sp-1 a {
+display : block;
+width : 140px;
+height : 170px;
+margin-left : 10px;
+text-decoration : none;
+text-indent : -9999px;
+}
+
+/* dl */
+
+dl { font-size : 100%; }
+div.keypoint dl { display : inline-table; }
+
+/* IE Mac, you can't see this ;)  \*/
+* html div.keypoint dl { height : 1%; }
+div.keypoint dl { display : block; padding : 0;
+}
+/* IE Mac, you can open your eyes now. */
+
+div.keypoint dl:after {
+content : "."; 
+display : block; 
+height : 0; 
+clear : both; 
+visibility : hidden;
+}
+
+/* dt */
+dt { margin-bottom : 1em; font-weight : normal; font-size : 110%; letter-spacing : -1px; }
+
+/* dd */
+dd { padding-bottom : 1em; }
+
+/* ul */
+ul { list-style-type : none; }
+#nav-main ul { text-align : center; font : normal 130%/160% Arial, Helvetica, sans-serif; letter-spacing: -1px; }
+div.keypoint ul { padding : .5em 0; }
+div.inset ul { padding : 0 0 .5em 0; }
+h3+p+ul { margin : 0 10px 1em 10px; padding : .5em 0 1em 0 ; border-bottom : 1px solid #d0d5d5;}
+
+/* img */
+img, img a { border : none; }
+
+/* header images */
+span#sp-1, span#sp-2 { display : block; height : 170px; }
+span#sp-1 { background :  url(../images/sp-1.png) no-repeat left bottom; }
+
+/* All browsers */
+div.keypoint, div.inset { margin : 10px; padding : 15px; }
+div.inset { margin-left : 0; }
+
+/* Modern browsers */
+div[class="keypoint"] { background : #f4f2e6 url(../images/keypoint-bg.gif) right repeat-y; }
+div[class="inset"] { background : #e1f7d0 url(../images/inset-bg.gif) right repeat-y; }
+
+/* Rounded boxes for better browsers, square ones for IE */
+
+/* Before pseudo class for modern browsers */
+div.keypoint:before, div.inset:before {
+display : block;
+margin : -15px -15px 0 -15px;
+height : 15px;
+border : none;
+line-height : 0.1;
+font-size : 1px;
+}
+
+div.keypoint:before { background : transparent url(../images/keypoint-before-right.gif) no-repeat top right; content : url(../images/keypoint-before-left.gif); }
+div.inset:before { background : transparent url(../images/inset-before-right.gif) no-repeat top right; content : url(../images/inset-before-left.gif);}
+
+/* After pseudo class for modern browsers */
+div.keypoint:after, div.inset:after {
+clear : both;
+display : block;
+height : 8px;
+margin : -15px;
+padding-top : 15px;
+line-height : 0.1;
+font-size : 1px;
+}
+
+div.keypoint:after { background : transparent url(../images/keypoint-after-right.gif) scroll no-repeat bottom right; content :  url(../images/keypoint-after-left.gif); }
+div.inset:after { background : transparent url(../images/inset-after-right.gif) scroll no-repeat bottom right; content :  url(../images/inset-after-left.gif); }
+
+/* Additional colour variations */
+div.introduction { background-color : #c4efa1; }
+div.featured { background-color : #faf4c8; }
+div.standards { display : none; }
+
+/* Layout divs */
+#content, #content-main, #content-sub { float : left; text-align : left; }
+
+/* The content wrapper */
+#content { width : 96%; margin : 0 2%; }
+
+/* The content wrapper for modern browsers */
+div[id="content"] { background :  url(../images/content-bg.png) repeat-x left top; }
+
+/* The left column */
+#content-main { width : 34%; padding : 0 200px 20px 0; min-height : 15em; color : #111; }
+
+/* The right column */
+#content-sub { width : 34%; margin : 0 0 0 -200px; padding : 0 0 20px 200px; min-height : 15em; }
+
+/* The center column */
+#nav-main { position : fixed; top : 0; left : 34.6%; width : 200px; min-height : 60em; padding-bottom : 50px; color : #fff; }
+
+/* Tweak center column position for Apple Safari */
+*[id^="nav-main"]#nav-main { left : 35%; margin-left : -4px; }
+*[id^="nav-main"]#nav-main:lang(en) { left : 34.6%; margin-left : 0; }
+
+/* The center column for modern browsers */
+div[id="nav-main"] { background :  url(../images/content-main-bg.png) no-repeat; }

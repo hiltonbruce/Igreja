@@ -1,0 +1,111 @@
+<?php
+
+if (empty($_SESSION['valid_user']))
+header("Location: ../");
+
+	$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");
+	$nome_cidade = $rec->nome()." - ".$rec->codUf();
+	//echo "<h1> teste ".$_POST["cid_end"]."</h1>";
+	
+	$rec_end = new DBRecord ("cidade",$_POST["cid_end"],"id");//Faz a busca do cidade pelo id e traz o nome
+	$cid_end = $rec_end->nome()." - ".$rec_end->coduf();
+
+?>
+<script type="text/JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+
+<fieldset>
+<legend>Dados Pessoais - Cadastro</legend>
+<form method="post" action="" >
+  <p><label>Nome:</label>
+    <input name="nome" type="text" id="nome" size="64" tabindex="1" onselect="1"/>
+  </p><hr />
+  	<p><label>Endere&ccedil;o:</label>
+	<input name="endereco" type="text" id="endereco" size="32" maxlength="40" tabindex="2">
+	N&ordm;
+	<input name="numero" type="text" id="numero" size="11" maxlength="5" tabindex="3">
+	</p>
+  	<?PHP
+		echo "<p>Cidade: $cid_end</p>";
+		echo "<p><label><span style='padding-right:105px'>Bairro:</span>Complementos:</label>";
+		$lst_cid = new sele_cidade("bairro",$_POST["cid_end"],"idcidade","bairro","bairro");
+		$vlr_linha=$lst_cid->ListDados ("4");
+		
+		if (isset($_POST["cid_end"])){
+			$_SESSION["cid_end"] = $_POST["cid_end"];
+		}
+	?>
+	<input name="complemento" type="text" id="complemento" tabindex="5" />
+	</p>Bairro n&atilde;o cadastrado... <a href="./?escolha=tab_auxiliar/cadastro_bairro.php&amp;uf=<?PHP echo $rec_end->codUf();?>">Clique aqui!</a><p>Nacionalidade: <?PHP echo $_SESSION["nacao"];?> - Natural de: <?PHP echo $nome_cidade;?>
+
+	<p><label><span style="padding-right:120px">Sexo:</span>Data&nbsp;de&nbsp;Nascimento:</label>
+	<select name="sexo" id="sexo" tabindex="6">
+	<option value=""  selected>- Selecionar um(a) -</option>
+	<option value="M" >Masculino</option>
+	<option value="F" >Feminino</option></select>
+	
+	
+		<input name="datanasc" type="text" id="datanasc" size="15" maxlength="10" tabindex="7">
+		(Ex.: 21/01/2008)
+	</p>
+	<p><label>Pai:</label>
+	<input name="pai" type="text" id="pai" size="50" maxlength="40" tabindex="8">
+	Rol:
+	<input name="rol_pai" type="text" id="rol_pai" size="5" maxlength="5" tabindex="9"/>
+    <a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=2')" tabindex="10"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
+	<p><label>M&atilde;e:</label>
+	<input name="mae" type="text" id="mae" size="50" maxlength="40" tabindex="11">
+	Rol:
+	<input name="rol_mae" type="text" id="rol_mae" size="5" maxlength="5" tabindex="12" />
+    <a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=2')" tabindex="13"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
+  <label><span style="padding-right:130px">CEP:</span><span style="padding-right:110px">Telefone:</span>Escolaridade:</label>
+	<input name="cep" type="text" id="cep" size="20" tabindex="14">
+	<input name="fone_resid" type="text" id="fone_resid" size="20" tabindex="15">
+	<select name="escolaridade" size="1" class="AzulMedio" id="escolaridade" tabindex="16">
+	  <option value="Branco"></option>
+	  <option value="N&atilde;o Estuda">N&atilde;o Estuda</option>
+	  <option value="N&atilde;o Sabe Informar!">N&atilde;o Sabe Informar!</option>
+	  <option value="Alfabetizado">alfabetizado</option>
+	  <option value="1&ordm; Ano">1&ordm; Ano</option>
+	  <option value="2&ordm; Ano">2&ordm; Ano</option>
+	  <option value="3&ordm; Ano">3&ordm; Ano</option>
+	  <option value="4&ordm; Ano">4&ordm; Ano</option>
+	  <option value="5&ordm; Ano">5&ordm; Ano</option>
+	  <option value="6&ordm; Ano">6&ordm; Ano</option>
+	  <option value="7&ordm; Ano">7&ordm; Ano</option>
+	  <option value="8&ordm; Ano">8&ordm; Ano</option>
+	  <option value="9&ordm; Ano">9&ordm; Ano</option>
+	  <option value="1&ordm; Ano - M&eacute;dio">1&ordm; Ano - M&eacute;dio</option>
+	  <option value="2&ordm; Ano - M&eacute;dio">2&ordm; &ordm; Ano - M&eacute;dio</option>
+	  <option value="3&ordm; Ano - M&eacute;dio">3&ordm; Ano - M&eacute;dio</option>
+	  <option value="Superior Incompleto">Superior Incompleto</option>
+	  <option value="Superior Completo">Superior Completo</option>
+	  <option value="Mestrado">Mestrado</option>
+	  <option value="Doutorado">Doutorado</option>
+	  <option value="P&oacute;s-Doutorado">P&oacute;s-Doutorado</option>
+	  <option value="PHD">PHD</option>
+	</select></p>
+	
+  <p>
+    <label><span style="padding-right:98px">Gradua&ccedil;&atilde;o:</span><span>Email:</span></label>
+
+    <input name="graduacao" type="text" id="graduacao" tabindex="17">
+
+	<input name="email" type="text" id="email" size="48" tabindex="18"/>
+  </p>
+	<p><label>Observa&ccedil;&atilde;o:</label>
+	<textarea name="obs" cols="37" rows="2" id="obs" tabindex="19"></textarea>
+	</p>
+	<input type="submit" name="Submit" value="Salvar" tabindex="20">
+	<h5>Obs: A data deve estar no formato: dd/mm/aaaa (00/00/0000).
+	O(s) item(ns) com (<font color="#FF0000">*</font>) s&atilde;o de preenchimento obrigat&oacute;rio!
+    <input type="hidden" name="escolha" value="adm/cad_dados_pess.php">
+	</h5>
+</form>
+</fieldset>

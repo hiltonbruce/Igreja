@@ -1,0 +1,123 @@
+*{ margin: 0; padding: 0; }
+.clear {
+  clear: both;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	color: #505367;
+	background-color: #fff;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 18px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+	
+#container { margin: 1em auto; width: 95%; text-align: left;}
+
+#header { width:800px; height: 127px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
+ background-position: left bottom; margin: 0; padding: 0 20px 0 100px; text-align:right;}
+ 
+#header p { width:800px; height: 127px; padding: 30px 20px 0 300px; text-align:right;}
+#mainnav {
+height: 20px;
+margin: 0;
+padding: 10px 0 0;
+text-align:left;
+font-size: 20px;
+}
+	
+#content { height: auto; margin: 1px 0 0; padding: 0; }
+	
+#footer {
+	color: #636466;
+	width: 95%;
+	font-size: 0.8em; 
+	text-align: right;
+	clear: both;
+}
+
+#pastor {
+	position:relative;
+	width:200px;
+	padding: 0 0 0 150px;
+	text-align:center;
+	top: -50px;
+}
+
+#secretario {
+	float:right;auto
+	position:relative;
+	width:400px;
+	text-align:center;
+	top: -85px;
+}
+h2 { font-size: 120%; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
+a    { color: #e7790e; font-size: 0.9em; text-decoration: underline  }
+a:link    { color: #e7790e; font-size: 1em; text-decoration: underline }
+a:link:after, a:visited:after {
+	content:"("attr(href)")";
+	font-size: 80%;
+	color:#555555;
+}
+p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
+
+/* Tabelas */
+
+table {
+  border-collapse: collapse;
+  width: 95%;
+  border: 1px solid #000;
+}
+
+caption {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+col {
+  border-right: 1px solid #000;
+}
+
+col#albumCol {
+  border: none;
+}
+
+thead {
+  background: #ccc;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+th {
+  font-weight: normal;
+  text-align: left;
+}
+
+#playlistPosHead {
+  text-indent: -1000em;
+}
+
+th, td {
+  padding: 0.1em 1em;
+}
+
+.odd {
+  background-color:#E8E8E8; 
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+tr:hover {
+  background-color:#3d80df;
+  color: #fff;
+}
+
+thead tr:hover {
+  background-color: transparent;
+  color: inherit;
+}
+

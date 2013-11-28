@@ -1,0 +1,86 @@
+/* --------- 1. defaults  --------- */
+
+* {
+		margin: 0;
+		padding: 0;
+		}
+
+body {
+		padding: 20px;
+		}
+		
+/*  --------- 2. fonts ---------- */
+
+html {
+		font-size: 100%;
+		}
+
+body {
+		font: 62.5%/1.5 "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+		}
+
+/* ---------- 3. tables ---------- */
+
+table {
+		border-collapse: collapse;
+		} 
+
+tbody {
+		display: table-row-group;
+		}
+
+th, td { 
+		border: 1px solid #bbbbbb; 
+		font-size: 1.2em;
+		padding: 4px 10px;
+		line-height: 1.2;
+		width: 180px !important;
+		} 
+
+tbody td {
+		border-top: 0;
+		border-bottom: 0;
+		}
+
+caption {
+		font-weight: bold;
+		font-size: 1.4em;
+		text-transform: uppercase;
+		padding: 0 0 5px;
+		color: #333333;
+		}
+
+th {
+		background: #e4e5e4 url(table-heading-background.gif) 0 50% repeat-x; 
+		text-align: left;
+		}
+
+tfoot {
+		background-color: #e2e2e2;
+		color: #555555;
+		}
+
+tfoot td {
+		font-size: 1.0em;
+		text-align: center;
+		width: 600px !important;
+		padding: 0 0;
+		}
+
+tfoot a {
+		display: none;
+		}
+
+tbody tr.alt td {
+		background: #d8ddf0;
+		}
+
+tbody tr.over td, tbody tr:hover td {
+		background: #4f70dc;
+		color: #ffffff;
+		}
+
+tbody tr.over+tr td {
+		background-image: url(shadow.png);
+		background-repeat: repeat-x;
+		}

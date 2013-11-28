@@ -1,0 +1,66 @@
+/* CSS Document */
+
+body {
+  font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.clear {
+  clear: both;
+}
+
+table {
+  border-collapse: collapse;
+  width: 49em;
+  border: 1px solid #000;
+}
+
+caption {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+col {
+  border-right: 1px solid #000;
+}
+
+col#albumCol {
+  border: none;
+}
+
+thead {
+  background: #ccc;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+th {
+  font-weight: normal;
+  text-align: left;
+}
+
+#playlistPosHead {
+  text-indent: -1000em;
+}
+
+th, td {
+  padding: 0.1em 1em;
+}
+
+.odd {
+  background-color:#E8E8E8; 
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+tr:hover {
+  background-color:#3d80df;
+  color: #fff;
+}
+
+thead tr:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+

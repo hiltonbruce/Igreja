@@ -1,0 +1,95 @@
+.clear {
+  clear: both;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #777;
+  margin-left: 1px;
+  width: 98%;
+}
+
+table#direita {
+  border-collapse: collapse;
+  width: auto;
+  border: 1px solid #777;
+  margin-left: 1px;
+}
+
+caption {
+  font-size: 1.2em;
+  font:icon;
+  text-align:center;
+  font-weight: bold;
+  margin: 1em 0;
+  color:#000000;
+}
+
+col {
+  border-right: 1px solid #0000CC;
+}
+
+col#albumCol {
+  border-right: none;
+}
+
+thead {
+  background: #ccc repeat-x left center;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;  
+  color:#000000;
+}
+
+th {
+  font-weight: normal;
+  text-align: left;
+}
+
+td {
+	text-align:left;
+}
+
+td#moeda {
+	text-align:right;
+}
+
+td a, td a:hover {
+	display:block; color: #FF4500; 
+}
+
+#playlistPosHead {
+  text-indent: -1000em;
+}
+
+th, td {
+  padding: 0.1em 1em;
+}
+
+tr:hover {
+  background-color:#C1CDCD;
+  color:green;
+}
+
+thead tr:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+.odd {
+  background-color:#DCDCDC;
+}
+
+.total {
+	background-color:#000;
+	font-weight:bold;
+	color:#ccc;
+}
+
+.dados {
+  background-color: #FFFFFF;
+}
+
+
+.odd2 {
+  background-color:#BFEFFF;
+}

@@ -1,0 +1,17 @@
+can't read "treediffs(6ee045ec0305f2d21843a37022667d19343e73b6)": no such variable
+can't read "treediffs(6ee045ec0305f2d21843a37022667d19343e73b6)": no such variable
+    while executing
+"lsearch -exact $treediffs($ids) $fname"
+    (procedure "makediffhdr" line 7)
+    invoked from within
+"makediffhdr $fname $ids"
+    (procedure "getblobdiffline" line 61)
+    invoked from within
+"getblobdiffline file6 6ee045ec0305f2d21843a37022667d19343e73b6"
+    ("eval" body line 1)
+    invoked from within
+"eval $script"
+    (procedure "dorunq" line 11)
+    invoked from within
+"dorunq"
+    ("after" script)

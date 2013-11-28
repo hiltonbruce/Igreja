@@ -1,0 +1,293 @@
+/* 
+* 2011 - Joseilton Costa Bruce
+*/
+
+body {
+	color:#333333;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	margin:0 auto;
+	background-image:url(img/leftside.jpg);
+}
+
+a, a:visited, a:link { color:#000000; text-decoration:underline; }
+
+a:hover { color: #666666; }
+
+h1 { font-size:18px; margin:0; color:#333333; border-bottom: 1px dashed #333333; text-shadow: 2px 5px 10px #999; }
+
+h2 { font-size:12px; margin:0; color:#333333; border-bottom: 1px dashed #333333; border-top:1px dotted #333333; }
+
+h1 a, h1 a:visited, h1 a:link { text-decoration:none; }
+
+h2 a, h2 a:visited, h2 a:link { text-decoration:none; padding:10px; line-height:25px; }
+
+h2 img { margin-right:5px; border:0; }
+
+input {
+	text-align:center;	
+}
+
+form label {
+	display:block;
+}
+
+form span {
+	padding-right:125px;
+}
+
+input:focus {
+	background-color:#FFFF00;
+}
+
+.text_area {
+	/* define o tamanho barra da area de texto class="text_area" */  
+  width: 98%;
+  height: 50px;
+}
+
+#progreso {
+	/* define a barra de progresso para textarea */
+  background: url(img/textarea.png) no-repeat;
+  background-position: -550px 0px;
+  width: 550px;
+  height: 14px;
+  text-align: center;
+  color: #000000;
+  font-size: 8pt;
+  font-family: Arial;
+  text-transform: uppercase;
+}
+
+div.wrap1 {
+	width: 95%;
+	margin: 0 auto;
+	overflow: hidden;
+	border:1px solid #c3c3c3;
+}
+
+div.wrap2 {
+	width: 100%;
+	background-repeat:repeat-y;
+	border: 1px solid #0000FF;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+div .logo {
+	width:100%;
+	height:75px;
+	background-color: white;
+	background-image: url(img/90_anos.jpg);	
+	background-repeat:no-repeat;
+	padding:30px;
+}
+
+div.logo .slogan {
+	font-size:9px;
+	font-weight:normal;
+	margin-top:3px;
+}
+
+div.info, div.info1 {
+	width:100%;
+	line-height:40px;
+	background-color:#FFFFFF;
+	padding-left:20px;
+	padding-right:20px;
+	background-image:url(img/info.gif);
+	background-repeat:repeat-x;
+}
+
+div.info1 { 
+	background-image:url(img/info1.gif);
+	float:left; 
+	border-top:1px solid #fff; 
+	background-color:#e4e4e4;
+	color:#999;
+	font-size:120%;
+}
+
+div.info1 a, div.info1 a:link, div.info1 a:visited { color:#999; }
+
+div.info1 a:hover { color: #665; }
+
+div .leftpanel {
+	background-image:url(img/bgright.jpg);
+	background-repeat: repeat-y;
+	background-color: white;
+	width:16%;
+	display: inline;
+	float:left;
+}
+
+div .rightpanel {
+	background-color: #c9e9f8;
+	width:23%;
+	float:right;
+}
+
+#content {
+	width: 82%;
+	float: right;
+}
+
+div .mainpanel {
+	width:77%;
+	float:left;
+}
+
+div.wrap1  {
+	/* only with left panel- background-image: url(img/bg1.gif); */
+	/* right and left panel */ background-image: url(img/bgcentro.jpg);
+	/* only with right panel - background-image: url(img/bg3.gif); */
+}
+
+div.leftpanel .header, div.rightpanel .header {
+	background-image:url(img/header_.png);
+	background-repeat:no-repeat;
+	width:180px;
+	line-height:35px;
+	padding-left:20px;
+	color:#FFFFFF;
+	overflow:hidden;
+	font-weight:bold;
+	-webkit-box-shadow: 2px 5px 25px #4c4c4c;
+	-moz-box-shadow: 2px 5px 25px #4c4c4c;
+}
+
+.text { padding:8px; text-align:justify;}
+/* uplatnuje sa na left a right stlpec */
+.text img { margin-right:10px; margin-bottom: 10px; border:0;  float:left; }
+
+.text_ { padding:15px; text-align:justify; }
+/* uplatnuje sa na hlavny stlpec */
+.text_ img { vertical-align:middle; border:0; }
+
+span.divider {
+	border-bottom:1px dashed #333333; 
+	padding-bottom:5px; 
+	margin-bottom:5px; 
+	display:block;
+}
+
+div.rightpanel .inquiry, div.leftpanel .inquiry {
+	padding:3px; 
+	text-align:justify;
+}
+
+.inquiry a, .inquiry a:link, .inquiry a:visited, .inquiry a:hover, .mainpanel a  { 
+	text-decoration:none;
+	 }
+
+fieldset {
+	width: 96%;
+	margin: 1em 0;
+	padding: 4px;
+	border: 1px solid #0033FF;
+}
+
+legend {
+	font-weight:bold;
+	border: 1px solid #0033FF;
+	padding: 1px 4px;
+	background-color: #FFF;
+}
+
+#lst_cad p{
+	padding:2px 1px; margin: 0;
+	font: 12px Arial;
+	background-color:#00CCFF; color:#000066;
+	}
+	
+span#rodape{
+	font-weight:bold;
+	background:#00CCFF;
+	font-weight: bold;
+	}
+
+a#rodape{
+	text-decoration:underline;
+	font-size:16px;
+	}
+
+
+tr:hover#form {
+  background-color: transparent;
+  color: inherit;
+}
+
+.box {
+  width: 100%;
+  background: url(img/bottom-left.gif) no-repeat left bottom;
+}
+
+.box-outer {
+  background: url(img/bottom-right.gif) no-repeat right bottom;
+  padding-bottom: 5%;
+}
+
+.box-inner {
+  background: url(img/top-left.gif) no-repeat left top;
+}
+
+.box-titulo {
+  background: url(img/top-right.gif) no-repeat right top;
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+
+.box h5, .box b {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.autocomplete_list * {
+	font: 10px Arial, Helvetica, Verdana, sans-serif;
+	color: blue;
+}
+
+.autocomplete_list { 
+	background: #FEFEFE;
+	display: block;
+	border: 1px solid #7C7C7C;
+	text-align: left; z-index: 200; 
+}
+
+.autocomplete_list, .autocomplete_list ol, .autocomplete_list li { 
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0; 
+}
+
+.autocomplete_list li { 
+	margin: 0; 
+	text-align: left;
+	cursor: pointer; 
+	padding: .3em .5em;
+	border: none;		
+}
+
+.autocomplete_list .current_item { 
+	background: #B4D5FE;
+	color: black;
+}
+
+.autocomplete_list li { 
+	color: #696969;
+}
+
+.autocomplete_icon { 
+	background-image: url(autocomplete.gif);	
+	cursor: pointer;
+	cursor: hand;
+	display:none;
+}
+
+.query-text{
+	font-weight: bold;
+	float:none !important;
+	padding:0 !important;
+}

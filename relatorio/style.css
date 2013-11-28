@@ -1,0 +1,156 @@
+*{ margin: 0; padding: 0; }
+
+body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; color: #505367; background-color: #fff;  }
+	
+	#container { margin: 1em auto; width: 800px; text-align: left; background: url(../img/log_70anos.jpg) no-repeat 50%; }
+	
+	#header { width:800px; height: 125px; background-image: url(header2.jpg); background-repeat: no-repeat; background-position: left bottom; margin: 0; padding: 0 20px 0 100px; text-align:center; font-family:"Times New Roman", Times, serif;}
+	#header h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
+	
+	#mainnav {height: 20px; margin: 0; padding: 10px 0 0; text-align:center; font-size: 200%; font-family:"Times New Roman", Times, serif;}
+	
+		#content { height: auto; margin: 1px 0 0; padding: 0; }
+	
+#footer {
+	color: #636466; 
+	font-size: 0.8em; 
+	height: 50px; 
+	background-repeat: no-repeat; 
+	background-position: top; 
+	text-align: right; 
+	clear: both; 
+	margin: 0; 
+	padding-top: 25px; 
+	padding: 10px 0 0 0;
+	background-image: url(horbar.gif);
+}
+
+#footer a { 
+	color: #636466; 
+	text-decoration: underline 
+}
+
+a:link:after, a:visited:after {
+	content:"("attr(href)")";
+	font-size: 80%;
+	color:#555555;
+}
+
+#footer a:link       { color: #636466; text-decoration: underline }
+#footer a:visited { }
+#footer a:hover      { color: #e7790e }
+
+#added-div1 {
+	position:relative; 
+	width:800px;
+	z-index:1; 
+	height: auto; 
+	float: left; 
+	margin: 25px 15px 5px 0; 
+	padding: 0;
+	font-size:23px;
+	font-family:"Times New Roman", Times, serif;
+}
+
+#added-div-2 {
+	position:relative; 
+	width:800px;
+	z-index:2;
+	background-repeat: no-repeat; 
+	background-position: center bottom;
+	float: left; 
+	margin: 3px 0 5px; 
+	padding: 0; 
+}
+
+#pastor {
+	position:relative;
+	width:200px;
+	padding: 0 0 0 150px;
+	text-align:center;
+	top: -50px;
+}
+
+#secretario {
+	float:right;
+	position:relative;
+	width:400px;
+	text-align:center;
+	top: -85px;
+}
+
+#vencimento {
+	float:left;
+	width:800px;
+	text-align:right;
+	color:#FF0000;
+}
+
+h1{ 
+	color: #0000FF;
+	font-size: 300%;
+	font-family: Forte; 
+	font-weight: normal; 
+	text-align: left; 
+	height: 50px; 
+	padding-top: 25px; 
+	padding-left: 20px;
+	font-family:"Times New Roman", Times, serif;
+	
+}
+h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
+h3, legend { color: #3366FF; font-size: 150%; font-family: Forte; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px; font-family:"Times New Roman", Times, serif;}
+h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
+h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
+a    { color: #e7790e; font-size: 0.9em; text-decoration: underline  }
+a:link    { color: #e7790e; font-size: 1em; text-decoration: underline }
+a:visited { }
+a:hover    { color: #000; }
+a:active  { color: #800000 }
+p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
+#navcontainer  { float: right ; margin: 0; padding: 5px 20px 0 0; }
+#current  { color: #e13100 ; font-weight: normal; }
+#current a   { color: #e13100; font-weight: normal }
+#current a:link   { color: #e13100; font-weight: normal }
+#current a:visited { text-decoration: none; list-style-type: none }
+#current a:hover   { color: #e13100 }
+.rightcol{ font-size: 0.9em; margin-bottom: 5px; padding: 5px; }
+.bottom { color: #5e6a66; background-image: url(../img/comadep.gif); background-repeat: no-repeat; background-position: left bottom; height: 100px; margin: 0 0 0; padding: 0 0 0 0; }
+
+.bottomleft { color: #f6f6cc; font-size: 0.8em; background-repeat: no-repeat; background-position: center; height: 40px; margin: 0; padding: 3px 0 0 5px; }
+.bottomleft a    { color: #f6f6cc; font-size: 0.9em; text-decoration: underline }
+.bottomleft a:link    { color: #f6f6cc; font-size: 1em; text-decoration: underline }
+.bottomleft a:visited { }
+.bottomleft a:hover    { color: #a12621; }
+.bottomleft a:active  { color: #800000 }
+.textchunk{ font-size: 0.9em; background-repeat: no-repeat; background-position: center top; height: 200px; padding-top: 5px; padding-left: 240px; }
+.textchunks{ font-size: 0.9em; background-repeat: no-repeat; background-position: center top; height: 80px; padding: 10px 20px 10px 40px; }
+.sidenavlist li       { text-align: left; list-style-type: none; display: block; margin-top: 0; padding-left: 0; width: auto ; padding-top: 3px; padding-right: 10px; border-bottom: 1px solid #f48195; }
+.sidenavlist a                 { color: #000; font-size: 0.8em; text-decoration: none; list-style-type: none; display: block; margin-left: 0; width: 120px; border-width: medium medium 1px; border-color: #000 #000 #e7790e  }
+.sidenavlist a:link        { color: #000; font-size: 0.8em; text-decoration: none; list-style-type: none; display: block; margin-left: 0 }
+.sidenavlist a:visited   { text-decoration: none; list-style-type: none }
+.sidenavlist a:hover             { color: #e7790e; text-decoration: none; border-right-width: medium; border-bottom-color: #f6f6cc; border-bottom-width: 1px; list-style-type: none; }
+ul.sidenavlist            { list-style-type: none; margin-left: 0; padding-left: 0 }
+.sidecurrent { text-decoration: none }
+.sidecurrent a           { color: #ce0000; list-style-type: none }
+.sidecurrent a:link           { color: #ce0000; list-style-type: none }
+.sidecurrent a:visited { text-decoration: none; list-style-type: none }
+.sidecurrent a:hover { }
+
+legend {
+	font-size: 90%;
+}
+
+#foto {
+	float:right;
+	left:207px;
+	top:174px;
+	width:86px;
+	height:93px;
+	z-index:3;
+}
+#Tipo {
+	float:left;
+	width:700px;
+	padding: 20px 5px 0;
+}

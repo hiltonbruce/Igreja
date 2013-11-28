@@ -30,10 +30,16 @@ __Desenvolvimento__
 #### Equipe técnica
 - Joseilton C Bruce - Bayeux - PB - Brasil
 
+##Banco de Dados
+ A biblioteca pear-DB deve está instalada no servidor onde estará o sistema, caso contrário a aplicação não irá autenticar.
+ Utilizando o PHPMyadmin, você deve antes criar o banco de dados 'assembleia' e depois importar a estrutura do banco que está no diretório /Banco, nele existe alguns dados mínimos para a inicialização da aplicação.
+ O usuario de acesso ao banco está no script /func_class/constantes.php (user:'usuarioBanco' e password:'senha').
+ O usuario da aplicação é: ''111.111.111-11'' e a senha:'admin'
+
 ## Licença
 
 #### __Tipo MIT__
- Copyright (c) <2013> <Joseilton Costa Bruce>
+ Copyright (c) 2013 Autor:Joseilton Costa Bruce
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal

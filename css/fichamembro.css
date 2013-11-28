@@ -1,0 +1,157 @@
+*{ margin: 0; padding: 0; }
+
+body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; color: #505367; background-color: #fff;  }
+	
+	#container { margin: -1em auto; width: 800px; text-align: left; background: url(../img/95anosJPtransp.jpg) no-repeat 50%; }
+	
+	#header { width:800px; height: 127px; background-image: url(../img/95anosJPLogoII.jpg); background-repeat: no-repeat;
+	 background-position: left bottom; margin: 0; padding: 0 20px 0 80px;}
+	#header p { width:400px; height: 127px; padding: 50px 20px 0 300px; text-align:right;}
+	
+#footer {
+	color: #636466; 
+	font-size: 0.8em; 
+	height: 50px; 
+	background-repeat: no-repeat; 
+	background-position: top; 
+	text-align: left; 
+	clear: both; 
+	margin: 0; 
+	padding-top: 25px; 
+	padding: 10px 0 0 0;
+	background-image: url(horbar.gif);
+}
+
+#footer a { 
+	color: #636466; 
+	text-decoration: underline;
+	text-align: left;
+}
+
+a:link:after, a:visited:after {
+	content:"("attr(href)")";
+	font-size: 80%;
+	color:#555555;
+}
+
+#footer a:link       { color: #636466; text-decoration: underline }
+#footer a:visited { }
+#footer a:hover      { color: #e7790e }
+
+#added-div1 {
+	position:relative; 
+	width:800px;
+	z-index:1; 
+	height: auto;
+	float: left; 
+	margin: 5px 15px 5px 0; 
+	padding: 0;
+	font-size:23px;
+	font-family:"Times New Roman", Times, serif;
+}
+h1{ 
+	color: #0000FF;
+	font-size: 300%;
+	font-family: Forte; 
+	font-weight: normal; 
+	text-align: left; 
+	height: 50px; 
+	padding-top: 25px; 
+	padding-left: 20px;
+	font-family:"Times New Roman", Times, serif;
+	
+}
+h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
+h3, legend { color: #3366FF; font-size: 150%; font-family: Forte; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px; font-family:"Times New Roman", Times, serif;}
+h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
+h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
+a    { color: #e7790e; font-size: 0.9em; text-decoration: underline  }
+a:link    { color: #e7790e; font-size: 1em; text-decoration: underline }
+a:visited { }
+a:hover    { color: #000; }
+a:active  { color: #800000 }
+p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
+#navcontainer  { float: right ; margin: 0; padding: 5px 20px 0 0; }
+#current  { color: #e13100 ; font-weight: normal; }
+#current a   { color: #e13100; font-weight: normal }
+#current a:link   { color: #e13100; font-weight: normal }
+
+.sidecurrent a:hover { }
+
+legend {
+	font-size: 90%;
+}
+#Tipo {
+	float:left;
+	width:700px;
+	padding: 20px 5px 0;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #777;
+  margin-left: 1px;
+  width: 98%;
+}
+
+caption {
+  font-size: 1.2em;
+  font:icon;
+  text-align:center;
+  font-weight: bold;
+  margin: 1em 0;
+  color:#000000;
+}
+
+col {
+  border-right: 1px solid #0000CC;
+}
+
+col#albumCol {
+  border-right: none;
+}
+
+thead {
+  background: #ccc repeat-x left center;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;  
+  color:#000000;
+}
+
+th {
+  font-weight: normal;
+  text-align: left;
+}
+
+td {
+	text-align:left;
+}
+
+
+#playlistPosHead {
+  text-indent: -1000em;
+}
+
+th, td {
+  padding: 0.1em 1em;
+}
+
+
+.odd {
+  background-color:#CCC;
+}
+
+.total {
+	background-color:#000;
+	font-weight:bold;
+	color:#ccc;
+}
+
+.dados {
+  background-color: #FFFFFF;
+}
+
+
+.odd2 {
+  background-color:#BFEFFF;
+}

@@ -1,0 +1,191 @@
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Assembleia de Deus - Bayeux - PB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
+</head>
+<body>
+<div class="wrap1">
+  <div class="wrap2">
+    <div class="logo"></div>
+    <div id="menu">
+      <div class="menu">
+        <ul>
+          <li><span class="left"></span><span class="hlavny"><a href="http://www.free-css.com/">Home</a></span><span class="right"></span></li>
+          <li><img src="img/divider2.png" alt="" /></li>
+          <li><span class="hlavny_"><a  href="index1.html">2 Columns (1)</a></span></li>
+          <li><img src="img/divider2.png" alt="" /></li>
+          <li><span class="hlavny_"><a href="index2.html">2 Columns (2)</a></span></li>
+          <li><img src="img/divider2.png" alt="" /></li>
+          <li><span class="hlavny_"><a href="http://www.free-css.com/" >Links</a></span></li>
+          <li><img src="img/divider2.png" alt="" /></li>
+          <li><span class="hlavny_"><a href="http://www.free-css.com/">Contact</a></span></li>
+        </ul>
+      </div>
+      <div class="info"> E não vos embriagueis com vinho, em que há contenda, mas enchei-vos do Espírito (Ef 5.18)</div>	  
+      <div class="leftpanel">
+        <div class="header">Departamentos</div>
+        <ul id="categories">
+          <li style="border-top:0;"><a href="http://www.free-css.com/">USADEBY</a></li>
+          <li><a href="http://www.free-css.com/">COMADEBY</a></li>
+          <li><a href="http://www.free-css.com/">Infantil</a></li>
+          <li><a href="http://www.free-css.com/">Item 3</a></li>
+          <li class="selected"><a href="http://www.free-css.com/">Item 4 - selected</a></li>
+          <li>
+		  		  <a href="./?escolha=adm/cadastro.php">Cadastro</a></li>
+		            <li><a href="http://www.free-css.com/">Item 6</a></li>
+          <li><a href="http://www.free-css.com/">Item 7</a></li>
+        </ul>
+        <br />
+        <div class="header">Administra&ccedil;&atilde;o:</div>
+        <div class="text">
+          <br /><h4> Nome: MISAEL GOMES DA SILVA<br /> Cargo: PRESBÍTERO</h4>Computador: Hilton-PC.mshome.net<h4><a href='logout.php'>Sair</a></h4><h4><a href='./?escolha=autentica/alt_senha.php'>Trocar Senha</a></h4>          <br />
+          <br />
+        </div>
+      </div>
+      <div class="mainpanel">
+        		<table width="auto" border="0">
+  <tr>
+    <td width="418" >
+		<div id="tabs">
+		  <ul>
+			<li><a id="current"  href="./?escolha=adm/dados_pessoais.php"><span>Dados Pessoais</span></a></li>
+			<li><a  href="./?escolha=adm/dados_ecles.php"><span>Eclesi&aacute;stico</span></a></li>
+			<li><a  href="./?escolha=adm/dados_profis.php"><span>Profissional</span></a></li>
+			<li><a  href="./?escolha=adm/dados_famil.php"><span>Familiar</span></a></li>
+			<li><a  href="./?escolha=adm/dados_cartas.php"><span>Cartas</span></a></li>
+		  </ul>
+		 </div>	</td>
+    <td width="156" >
+		<form action="" method="post">
+			<label>Procurar...
+			<input type="image" src="img/lupa_32x32.png" height="16" width="16" name="Submit2" value="submit" alt="procurar" title="Click aqui para pesquisar Membro!" style="background:none"/>
+			<input name="pesquisar" type="text" id="pesquisar" />
+			</label>
+		 </form>	</td>
+  </tr>
+</table>
+
+		
+	<h1>
+	<form id="form1" name="form1" method="get" action="" >
+	  Rol n&ordm; : 7	  <input name="bsc_rol" type="text" id="bsc_rol" title="Insira o n&ordm; do Rol"/>
+	  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
+	  <input type="submit" name="Submit2" value="Listar..." title="Click aqui para listar os dados do Membro"/>
+	  <a href="./?escolha=adm/dados_pessoais.php&amp;bsc_rol=6" > <img src="img/1910_32x32.png" alt="Anterior Anterior" width="22" height="22" title="Registro Anterior" align="absmiddle" border="0" /></a> 
+	  <a href="./?escolha=adm/dados_pessoais.php&amp;bsc_rol=8"><img src="img/1967_32x32.png" width="22" height="22" title="Pr&oacute;ximo Registro" alt="Pr&oacute;ximo Registro" align="absmiddle" border="0"/></a>
+	</form>
+	</h1>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Lista dados Eclesi&aacute;sticos</title>
+</head>
+<body>
+
+
+<div id="lst_cad">
+	<form enctype="multipart/form-data" method="post" action="adm/salvar_foto.php">
+	  <input type="hidden" name="MAX_FILE_SIZE" value="200000">
+	  Salvar foto no banco:
+	  <input name="userfile" type="file" id="userfile" size="40">
+	 
+	  <input type="submit" name="Submit" value="Enviar...">
+	  
+	</form>
+		<table width="550">
+      <tr>
+        <td colspan="2">Nome:<p>ANTÔNIO RIBEIRO</td>
+        <td rowspan="3" align="center"><img src="img_membros/7.jpg" width="84" height="107" border="1" /></td>
+      </tr>
+      <tr>
+        <td>Sexo:
+        <p>M</p></td>
+        <td>Data Nascimento:
+        <p>1935-06-14 </p></td>
+      </tr>
+      <tr>
+        <td>Nacionalidade:
+        <p>BRASILEIRA</p></td>
+        <td>Naturalidade:
+        <p>AREIA - PB</p></td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="2">Pai:
+        <p>MANOEL VIANA DOS SANTOS</p></td>
+        <td>Rol do Pai :
+          <p>0</p></td>
+      </tr>
+      <tr>
+        <td colspan="2">M&atilde;e
+          <p>ANA RIBEIRO DE SOUZA</p></td>
+        <td>Rol da M&atilde;e :
+          <p>0</p></td>
+      </tr>
+      <tr>
+        <td colspan="2">Endere&ccedil;o:<p>RUA FLÁVIO MAROJA FI</td>
+        <td>N&uacute;mero:
+          <p>0</p></td>
+      </tr>
+      <tr>
+        <td>Complementos:<p>Cel. 8828-7643</p></td>
+        <td colspan="2">Bairro:<p>SESI</td>
+        </tr>
+      <tr>
+        <td>Cidade:<p>BAYEUX - PB</p></td>
+        <td>CEP:<p>58.306-090</p></td>
+        <td>Telefone:<p>(0**83) 3232-3807</p></td>
+      </tr>
+      <tr>
+        <td colspan="2">Email:<p></p></td>
+        <td>Escolaridade:<p></p></td>
+      </tr>
+      
+      <tr>
+        <td colspan="3">Observa&ccedil;&otilde;es<p>CGADB. Nº 41028</p></td>
+      </tr>
+    </table>
+	</div>
+</body>
+</html>      </div>
+      <div class="rightpanel">
+        <div class="header">Matriz</div>
+        <div class="inquiry"><span class="text"><strong>Igreja Evang&eacute;lica <br />
+			 Assembleia<strong> de</strong> Deus</strong><br />
+			<br />
+			Av. Eng. de Carvalho, <br />
+			<span class="divider">Bayeux - Para&iacute;ba - Brasil </span> <br />
+			Telefone: ** 0000 0000<br />
+			E-mail: e-mail@domain.com<br />
+			ICQ: 000-000-000<br />
+			Skype: assembleiabayeux </span><br />
+			<br />
+        </div>
+        <div class="header">Congrega&ccedil;&otilde;es:</div>
+        <div class="text"> <strong>Tamba&iacute;<br />
+          Imaculada<br />
+          Jd. Aeroporto I<br />
+          Jd. Aeroporto II<br />
+          Trav. S&atilde;o Paulo<br />
+          Porto Manoel Louren&ccedil;o<br />
+          Alto da Boa Vista </strong><br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="info1">
+      <div style="display:inline; float:left;">&copy; 2009 <a href="http://www.assembleiabayeux.com.br/">www.assembleiabayeux.com.br</a>. Design <a href="http:#">Joseilton Costa Bruce</a>.</div>
+	  <div style="display:inline; float:right;"><a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px" src="img/valid-xhtml11-blue.png" alt="Validar XHTML 1.1" /></a> 
+	  <a href="http://jigsaw.w3.org/css-validator/check/referer">  <img style="border:0;width:88px;height:31px" src="img/vcss.gif" alt="Validar CSS!" align="bottom"/></a>
+      <a href="mailto:hiltonbruce@gmail.com">Joseilton</a></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

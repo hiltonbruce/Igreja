@@ -1,0 +1,54 @@
+/* Created by Andy Clarke (http://www.stuffandnonsense.co.uk) with black magic by Brothercake (http://www.brothercake.com)
+
+XHTML and CSS only, released under a Creative Commons Deed Attribution 2.0 (http://creativecommons.org/licenses/by/2.0/)
+You are free:
+
+* To copy, distribute, display, and perform the work
+* To make derivative works
+* To make commercial use of the work */
+
+/* Height behaves like min-height in Win/IE (but not in Mac/IE) */
+@media screen, projection {
+* html #content-main, * html #content-sub { height : 15em; }
+}
+
+/* Set pixel column widths and dimensions for IE5 because the flexi-columns rely on the content box model */
+* html #content-main, * html #content-sub { width : 450px; widt\h : 34%; }
+
+/* Use position absolute on center column for Win/IE5 and then emulate position fixed for Win/IE6 (http://devnull.tagsoup.com/fixed/) .
+Actually all Win/IE versions can see this, but it doesn't work in IE5 because IE5 doesn't have HTML as the canvas. */
+
+@media screen, projection {
+* html #nav-main { position : absolute; }
+* html { overflow : hidden; }
+* html body { height : 100%; overflow : hidden; }
+* html #content { height : 100%; width : 100%; wid\th : 96%; margin : 0; padding : 0 2%; overflow : auto; }
+}
+
+/* Re-position center column */
+* html #nav-main { left : 2%; lef\t : 34.6%; margin : 0 0 0 250px; ma\rgin : 0; }
+
+/* Tweak center packground position for Mac/IE5 */
+
+* html #nav-main { height : 60em; background-position : -2px top;
+
+/* Hide reversion from Mac/IE \*/
+background-position : left top;
+/* End hiding */
+}
+
+/* Give WinIE6 less sexy graphics */
+* html #nav-main { background :  url(../images/content-main-bg.gif) repeat-x left top; }
+* html span#sp-1 { background :  url(../images/sp-1.jpg) no-repeat left bottom; }
+* html #nav-main h1 { background :  url(../images/h1-1.jpg) no-repeat center top; }
+
+/* Give WinIE6 muted colour boxes  
+(line-height prevents the IE Peekaboo bug http://www.positioniseverything.net/explorer/peekaboo.html) */
+* html .keypoint, * html .introduction { background : #f4f2e6; line-height : 1.2;}
+* html .inset { background : #fff; }
+
+/* Give WinIE6 muted colour box borders */
+* html .introduction, * html .keypoint, * html .inset {
+border-right : 1px solid #d0d5d5;
+border-bottom : 1px solid #d0d5d5;
+}

@@ -1,0 +1,230 @@
+<!--
+
+/* 
+� 2008 - Design, CSS Style by P&B Creations, pbcreations.sk
+� 2008 - Martin Plakinger (CEO)
+*/
+
+div#menu .menu {
+		height: 47px;
+		width:auto;
+		background-image: url('img/menu.png');
+		background-repeat: repeat-x;
+	}
+	
+	*> div#menu .menu { margin-top: -11px; }
+	
+	div#menu .menu ul {
+		padding: 0;
+		list-style: none;
+		line-height: normal;
+		margin-left: -7px;
+	}
+	
+	*> div#menu .menu ul { margin-left:0; }
+	
+	div#menu .menu li {
+		display: inline;
+		
+	}
+	
+	div#menu li span.left {
+		background-image:url("img/menu-left.gif");
+		background-repeat:no-repeat;
+		width: 5px;
+		height: 64px;
+		overflow: visible;
+		position: relative;
+		bottom:15px;
+		vertical-align: bottom;
+		visibility:visible;
+		display:block;
+		padding-top: 15px;
+		margin-bottom: -32px;
+		float:left;
+	}
+	
+	div#menu li span.hlavny {
+		background-image:url("img/menu-central.gif");
+		background-repeat:repeat-x;
+		height: 64px;
+		overflow: visible;
+		position: relative;
+		bottom:15px;
+		vertical-align: bottom;
+		visibility:visible;
+		display:block;
+		float: left;
+		padding-top: 15px;
+		margin-bottom: -32px;
+		text-align: center;
+		text-decoration: none;
+		padding-left:40px;
+		padding-right:40px;
+	}
+	
+	
+	div#menu li span.hlavny a, div#menu li span.hlavny a:visited, div#menu li span.hlavny a:link { color:#000000; }
+	
+	div#menu li span.hlavny_ {
+		height: 64px;
+		overflow: visible;
+		position: relative;
+		bottom:15px;
+		vertical-align: bottom;
+		visibility:visible;
+		display:block;
+		float: left;
+		padding-top: 15px;
+		margin-bottom: -32px;
+		text-align: center;
+		text-decoration: none;
+		padding-left:45px;
+		padding-right:45px;
+	}
+	
+	div#menu li span.right {
+		background-image:url("img/menu-right.gif");
+		background-repeat:no-repeat;
+		width: 6px;
+		height:64px;
+		overflow: visible;
+		position: relative;
+		bottom:15px;
+		vertical-align: bottom;
+		visibility:visible;
+		display:block;
+		padding-top: 15px;
+		margin-bottom: -32px;
+		float: left;
+	}
+	
+	div#menu .menu a, div#menu .menu a:visited, div#menu .menu a:active {
+		color:#fff;
+		display:block;
+		float: left;
+		padding: 16px 0 0 0;
+		margin:0;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	div#menu .menu img {
+		display:block;
+		float: left;
+		margin: 0px;
+		margin-bottom: -16px;
+		padding: 12px 0 0 0;
+		text-align: center;
+		text-decoration: none;
+	}
+	
+	div#menu .menu a:hover { color:#FFFFFF; text-decoration:underline; }
+
+/* categories */
+
+ul#categories {
+	width:200px;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	font-size: 11px;
+}
+
+ul#categories li {
+	display: block;
+	padding: 0px;
+	line-height: 30px;
+	border-bottom: 1px #33CCFF solid;
+	border-top: 1px solid #f9faf7;
+	height: 30px;
+	margin-top: -2px; 
+	margin-bottom: -2px;
+}
+
+*> ul#categories li { margin-top: 0px; margin-bottom: 0px; }
+
+ul#categories li.selected {
+	text-decoration: none; 
+	background-color:#0066FF;
+}
+
+ul#categories li a {
+	display: block;
+	overflow: hidden;
+	padding: 0px 0px 0px 40px;
+	line-height: 30px;
+	text-decoration: none;
+	font-size: 11px;
+	background: url("img/arrow.gif") 26px 12px no-repeat;
+}
+ul#categories li a:hover { 
+	text-decoration: underline; 
+	background-color:#00CCFF;
+}
+
+#tabs {
+	float:left;
+	width:100%;
+	font-size:93%;
+	border-bottom: 2px solid #528CCC;
+	line-height:normal;
+	}
+
+#tabs ul {
+	margin:0;
+	padding:15px 10px 0 0px;
+	list-style:none;
+	}
+
+#tabs li {
+	display:inline;
+	margin:0;
+	padding:0;
+	}
+
+#tabs a {
+	float:left;
+	background:url("img/tableft.gif") no-repeat left top;
+	margin:0;
+	padding:0 0 0 4px;
+	text-decoration:none;
+	}
+
+#tabs a span {
+	float:left;
+	display:block;
+	background:url("img/tabright.gif") no-repeat right top;
+	padding:5px 15px 4px 6px;
+	color:#FFF;
+	}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#tabs a span {float:none;}
+
+/* End IE5-Mac hack */
+#tabs a:hover span {
+	color:#FFF;
+	}
+
+#tabs a:hover {
+	background-position:0% -42px;
+	}
+
+#tabs a:hover span {
+	background-position:100% -42px;
+	}
+	
+#tabs li a#current {
+background-position:0% -42px;
+background:url("img/header.jpg") no-repeat right top;
+cursor:default;
+}
+
+#tabs li a#current span {
+background-position:0% -42px;
+background:url("img/header.jpg") no-repeat right top;
+cursor:default;
+}
+

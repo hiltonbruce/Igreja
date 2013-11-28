@@ -1,0 +1,16 @@
+tbody {
+		display: none;
+		}
+
+tfoot a {
+		display: block;
+		text-decoration: none;
+		text-transform: uppercase;
+		color: #000000;
+		padding: 4px 0;
+		background: url(down-arrow.gif) 5px 60% no-repeat;
+		}
+
+tfoot a:hover {
+		background-color: #eeeeee;
+		}

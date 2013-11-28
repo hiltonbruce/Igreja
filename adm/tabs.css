@@ -1,0 +1,52 @@
+table#pendencia {
+  border-collapse: collapse;
+  border: 1px solid #777;
+  margin-left: 1px;
+  width: auto;
+}
+col {
+  border-right: 1px solid #0000CC;
+}
+
+col#albumCol {
+  border-right: none;
+}
+td#pendencia {
+	color:#000000;
+	text-align:right;
+}
+
+td a {
+  display:block;
+}
+
+#playlistPosHead {
+  text-indent: -1000em;
+}
+
+th, td {
+  padding: 0.1em .8em;
+}
+
+tr#pendencia:hover {
+  background-color:#3d80df;
+  color: #fff;
+}
+
+td#pendencia {
+    width: 30px;
+}
+
+div#tab_pend {
+  margin: 5px;
+}
+
+caption#pendencia {
+  text-align:center;
+  font-weight: bold;
+}
+
+td:hover#pendencia {
+  background-color: #C5E9F2;
+  color:#fff;
+}
