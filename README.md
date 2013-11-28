@@ -22,8 +22,6 @@ __Controle administrativo e financeiro para Igrejas Evangélicas__
 
   O Senhor Jesus esteve presente durante todo desenvolvimento me dando o rumo em meio a tantos códigos. Espero no Deus de Abraão, Isaque e Jacó que o uso deste software ajude a abençoar sua igreja, facilitando trabalhos e lhe permitindo mais tempo e dedicação nas outras áreas da obra de Deus.
 
-   No link suporte você tem como entrar em contato com o desenvolvedor do sistema.
-
    Deus abençoe a igreja!
 
 #### Gerência do projeto
