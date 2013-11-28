@@ -32,7 +32,7 @@ __Desenvolvimento__
 
 ## Licença
 
-#### __MIT__
+#### __Tipo MIT__
  Copyright (c) <2013> <Joseilton Costa Bruce>
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
