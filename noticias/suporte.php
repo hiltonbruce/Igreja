@@ -8,4 +8,4 @@
 <h1>Desenvolvedor: Joseilton Costa Bruce</h1>
 <h2>Email para contato: hiltonbruce@gmail.com</h2>
 <h2>Telefone de contato: 55 83 </h2>
-<h2>Brasil - Para�ba - Bayeux</h2>
+<h2>Brasil - Paraíba - Bayeux</h2>

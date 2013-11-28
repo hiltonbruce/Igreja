@@ -1,11 +1,14 @@
 /fotos_igreja
+/func_class/constantes.php
+/flash
+/docs
 /_notes
 /img_igrejas
-/docs
+/img_membros
+/img
 /teste
 /tmp
-/flash
+/.settings
 .directory
 .buildpath
 .project
-/.settings
