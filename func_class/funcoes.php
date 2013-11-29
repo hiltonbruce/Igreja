@@ -1,7 +1,11 @@
 <?PHP
 function conectar() {
 	require_once("DB.php");
-	require_once('func_class/constantes.php');
+	if (file_exists("func_class/constantes.php")){
+		require_once('func_class/constantes.php');
+	}elseif (file_exists('../func_class/constantes.php')){
+		require('../func_class/constantes.php');
+	}
 	$db =& DB::Connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage()); }
 }

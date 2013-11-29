@@ -8,8 +8,11 @@ controle ("deletar");
 	$tabela = htmlEntities ($_GET["tabela"], ENT_QUOTES, "ISO-8859-1" );
 	$campo = htmlEntities ($_GET["campo"], ENT_QUOTES, "ISO-8859-1");
 	
-
-		$ver = mysql_query("DELETE FROM $tabela WHERE $campo =$id LIMIT 1") or die (mysql_error());
+	if ($tabela=='igreja' && $id=='1' ) {
+		echo "<script> alert('A sede da igreja não pode ser APAGADA!');window.history.go(-1);</script></a>";
+		echo "A sede da igreja não pode ser APAGADA!";
+	}else {
+				$ver = mysql_query("DELETE FROM $tabela WHERE $campo =$id LIMIT 1") or die (mysql_error());
 
 		if($ver){
 				echo "<script> alert('Apagado com sucesso');window.history.go(-1);</script></a>";
@@ -20,5 +23,7 @@ controle ("deletar");
 				$erro=mysql_error();
 				echo "Não foi possível apagar, apresentou o seguite erro:  '$erro'";
 				}
+}
+
 				
  ?> 

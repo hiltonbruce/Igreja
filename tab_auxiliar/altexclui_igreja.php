@@ -39,7 +39,15 @@
 				?>
 			</td>
 			<td>
-				<a href="./?escolha=sistema/excluir.php&campo=rol&tabela=igreja&id=<?php echo $chave;?>">Excluir...</a>
+				<?php 
+					if ($chave!='1') {
+						?>
+							<a href="./?escolha=sistema/excluir.php&campo=rol&tabela=igreja&id=<?php echo $chave;?>">Excluir...</a>
+						<?php
+					}else {
+						echo '<span class="divider">A sede não pode ser excluída!</span>';
+					}
+				?>
 				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&rol=<?php echo $chave;?>">Editar informa&ccedil;&otilde;es</a>
 			</td>
     	</tr>

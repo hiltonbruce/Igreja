@@ -3,8 +3,11 @@
 // arquivos de classes
 
 require_once( "DB.php" );
-require_once('func_class/constantes.php');
-
+	if (file_exists("func_class/constantes.php")){
+		require_once('func_class/constantes.php');
+	}elseif (file_exists('../func_class/constantes.php')){
+		require('../func_class/constantes.php');
+	}
 class consulta_id
 {
   var $h;
