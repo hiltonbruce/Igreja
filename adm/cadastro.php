@@ -11,7 +11,7 @@ header("Location: ../");
 	$rec_end = new DBRecord ("cidade",$id_cid,"id");//Faz a busca do cidade pelo id e traz o nome
 	$cid_end = $rec_end->nome()." - ".$rec_end->coduf();
 	
-	$ind = 1; //Define o índece dos campos do formulário
+	$ind = 1; //Define o ï¿½ndece dos campos do formulï¿½rio
 
 ?>
 <script type="text/JavaScript">
@@ -30,7 +30,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <input name="nome" type="hidden" id="nome" value="<?PHP echo $_SESSION["nome_cad"];?>" />
     Doador de Sangue?
 	<input type='radio' name='doador' value='Sim' tabindex='<?PHP echo $ind++;?>' />Sim
-	<input type='radio' name='doador' value='Não' tabindex='<?PHP echo $ind++;?>' />N&atilde;o
+	<input type='radio' name='doador' value='Nï¿½o' tabindex='<?PHP echo $ind++;?>' />N&atilde;o
 	
 	<select name='sangue' size='1' class='AzulMedio' id='sangue' tabindex='<?PHP echo $ind++;?>'>
 		<option value=''>Tipo de Sangue</option>
@@ -120,12 +120,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	<input name="pai" type="text" id="pai" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
 	Rol:
 	<input name="rol_pai" type="text" id="rol_pai" size="5" maxlength="5" tabindex="<?PHP echo $ind++;?>"/>
-    <a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=2')" tabindex="<?PHP echo $ind++;?>"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
+    <a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=0')" tabindex="<?PHP echo $ind++;?>"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
 	<p><label>M&atilde;e:</label>
 	<input name="mae" type="text" id="mae" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
 	Rol:
 	<input name="rol_mae" type="text" id="rol_mae" size="5" maxlength="5" tabindex="<?PHP echo $ind++;?>" />
-    <a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=2')" tabindex="<?PHP echo $ind++;?>"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
+    <a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=0')" tabindex="<?PHP echo $ind++;?>"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
 
 	<p><label>Observa&ccedil;&atilde;o:</label>
 	<textarea name="obs" cols="37" rows="2" id="obs" tabindex="<?PHP echo $ind++;?>"></textarea>
