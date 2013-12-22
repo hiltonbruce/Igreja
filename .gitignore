@@ -1,5 +1,4 @@
 /fotos_igreja
-/func_class/constantes.php
 /flash
 /docs
 /_notes
@@ -12,3 +11,4 @@
 .directory
 .buildpath
 .project
+/func_class/constantes.php
