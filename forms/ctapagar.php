@@ -1,11 +1,15 @@
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
+
 <fieldset>
 	<legend>Agendar Contas &agrave; Pagar</legend>
 	<script type="text/javascript">
 $(document).ready(function(){
 
 	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular, resp, alias, cpf) {
-			$("#id_val").val(rol);
+		this.setValue = function( id, nome, celular, resp, alias, cpf) {
+			$("#id_val").val(id);
 			$("#estado_val").val(nome);
 			$("#sigla_val").val(celular);
 			$("#resp_val").val(resp);
