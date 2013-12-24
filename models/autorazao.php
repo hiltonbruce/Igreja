@@ -36,7 +36,7 @@ while( $campo = mysql_fetch_array( $res ) )
 }
 if ($linhas>10) {
 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
-	echo 'S&atilde;o mostradas ggg at&eacute; as 10 primeiras!</p>';
+	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
 }
 
 ?>

@@ -73,9 +73,8 @@ $(document).ready(function(){
 			cols="30" id="referente" tabindex="<?PHP
    echo ++$ind;?>"
 			onKeyDown="textCounter(this.form.referente,this.form.remLen,255);"
-			onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);">
-			<?php echo $_GET["motivo"];?>
-		</textarea>
+			onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"
+			><?php echo $_GET["motivo"];?></textarea>
 		<div id="progreso"></div>
 		(Max. 255 Carateres) <input readonly type=text name=remLen size=3
 			maxlength=3 value="255"> Caracteres restantes <br /> Rol do Credor <input

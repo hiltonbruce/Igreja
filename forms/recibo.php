@@ -30,7 +30,7 @@ switch ($_GET["rec"]){
 		echo '<input type="text" name="nome" autofocus="autofocus" value="'.$_GET["nome"].'" size="40" tabindex="'.++$ind.'" />';
 		?>
 		<label>CPF:</label>
-			<input name="cpf" type="text" value="<?php echo $_GET["cpf"];?>" maxlength="14" OnKeyPress="formatar('###.###.###-##', this);" tabindex="<?PHP echo ++$ind;?>" />
+			<input name="cpf" type="text" value="<?php echo $_GET["cpf"];?>" id="cpf" tabindex="<?PHP echo ++$ind;?>" />
 		<?php
 		echo '<label>Identidade:</label>';
 		echo '<input name="rg" type="text" value="'.$_GET["rg"].'" tabindex="'.$ind++.'" />Número e Expedidor';
@@ -57,8 +57,8 @@ switch ($_GET["rec"]){
 					<input name="valor" type="text" id="valor" size="14" tabindex="<?PHP echo ++$ind; ?>" value="<?php echo $_GET["valor"];?>" />
 				</td><td>
 					<label>Data</label>
-					<input name="data" type="text" id="data" OnKeyPress="formatar('##/##/####', this);" 
-					tabindex="<?PHP echo ++$ind; ?> "maxlength="10" value="<?php echo $_GET["data"];?>" /> Em branco para hoje
+					<input name="data" type="text" id="data" tabindex="<?PHP echo ++$ind; ?>" 
+					value="<?php echo $_GET["data"];?>" /> Em branco para hoje
 				</td>
 			</tr>
 			<tr>
