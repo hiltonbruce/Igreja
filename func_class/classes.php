@@ -911,7 +911,7 @@ class aniversario {
 
 		$this->dia_consulta = date("d/m",mktime(12,0,0,$this->mes,$prox_dia,$this->ano));//recupera o dia para consulta
 
-		$this->consulta = "{$prox_dia}/{$this->mes}/{$this->ano}";
+		$this->consulta = date("d/m/Y",mktime(12,0,0,$this->mes,$prox_dia,$this->ano));//recupera o dia para consulta
 
 		$this->semana_consulta = date("m",mktime(12,0,0,$this->mes,($_GET["proxima"]*7)+date('d'),$this->ano));//recupera a semana para consulta
 		$this->mes_consulta = date("m",mktime(12,0,0,$this->mes+$_GET["proxima"],$this->dia,$this->ano));//recupera a semana para consulta
