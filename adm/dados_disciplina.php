@@ -1,7 +1,7 @@
 <h3>
 	<a
-		href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>&novo=novo">Novo
-		Registro, Clique aqui! ...</a>
+		href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>&novo=novo"><button>Novo
+		Registro</button>, Clique aqui! ...</a>
 </h3>
 
 <fieldset>
