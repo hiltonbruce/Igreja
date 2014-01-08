@@ -21,12 +21,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$atualizar= new updatesist('agenda',$_POST['atualizar'],'id');
 		$atualizar->resppgto	=	$_POST['resppgto'];
 		$atualizar->status		= 	$_POST['status'];
-		$atualizar->multa		=	$valor_us =strtr($_POST['multa'], ',','.' );
+		$atualizar->multa		=	strtr($_POST['multa'], ',','.' );
 		$valor_us =strtr($_POST['valor'], ',','.' );
 		$atualizar->valor		=	$valor_us;
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
 		$atualizar->hist	= 	$hist;
-		$total = number_format(strtr($_POST['valor']+$_POST['multas'], ',','.' ),2,",",".");
+		$total = number_format($atualizar->valor+$atualizar->multa,2,",",".");
 
 		if ($_POST['status']=='2'){
 			$pagamento = ($_POST['datapgto']=='') ? date('Y-m-d') : br_data($_POST['datapgto'],"Data do pagamento!");
