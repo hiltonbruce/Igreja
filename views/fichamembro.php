@@ -222,7 +222,13 @@ if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
 				?>
 				<tr "<?php echo "$cor";?>">
 					<td rowspan="2"><?php echo ++$indece;?></td>
-					<td><?php echo $Tipo->situacao_confirma();?></td>
+					<td><?php
+						if ($Tipo->situacao_confirma()=='Membro') {
+							echo 'Conciliação';
+						}else {
+							echo $Tipo->situacao_confirma();
+						}
+					?></td>
 					<td><?php echo $coluna["data_ini"];?></td>
 					<td><?php echo $coluna["data_fim"];?></td>
 					<td><?php echo $coluna["cad"];?></td>

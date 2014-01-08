@@ -28,7 +28,7 @@
 	    <a href="relatorio/ficha.php" title="Imprimir ficha completa">
 	 		<button>Imprimir ficha tipo 1</button>
 		</a>
-		<a href="./views/fichamembro.php?rol=<?php echo $rol;?>" title="Imprimir ficha completa">
+		<a href="./views/fichamembro.php?rol=<?php echo $bsc_rol;?>" title="Imprimir ficha completa">
 			<button>Imprimir ficha tipo 2</button>
 		</a>
 	  <?PHP }

@@ -28,23 +28,26 @@ class formceia {
 		}
 		
 		switch ($this->dia) {
-			case 7:
+			case 6:
 			$d7 = 'checked="checked"';//Sábado
 			break;
-			case 6:
+			case 5:
 			$d6 = 'checked="checked"';//Sexta
 			break;
-			case 5:
+			case 4:
 			$d5 = 'checked="checked"';//Quinta
 			break;
-			case 4:
+			case 3:
 			$d4 = 'checked="checked"';//Quarta
 			break;
-			case 3:
+			case 2:
 			$d3 = 'checked="checked"';//Terça
+			break;
+			case 1:
+			$d2 = 'checked="checked"';//Segunda
 			break;			
 			default:
-			$d2 = 'checked="checked"';//Segunda
+			$d1 = 'checked="checked"';
 			break;
 		}
 		?>
@@ -69,17 +72,17 @@ class formceia {
 			<tbody>
 				<tr>
 				<td>Segunda
-		  		<input type="radio" id="dia" <?php echo $d2;?> name="dia" value="2" tabindex = "<?php echo ++$ind; ?>" ></td>
+		  		<input type="radio" id="dia" <?php echo $d2;?> name="dia" value="1" tabindex = "<?php echo ++$ind; ?>" ></td>
 		  		<td>Terça
-		  		<input type="radio" id="dia" <?php echo $d3;?> name="dia" value="3" tabindex = "<?php echo ++$ind; ?>" ></td>
+		  		<input type="radio" id="dia" <?php echo $d3;?> name="dia" value="2" tabindex = "<?php echo ++$ind; ?>" ></td>
 		  		<td>Quarta
-		  		<input type="radio" id="dia" <?php echo $d4;?> name="dia" value="4" tabindex = "<?php echo ++$ind; ?>" ></td>
+		  		<input type="radio" id="dia" <?php echo $d4;?> name="dia" value="3" tabindex = "<?php echo ++$ind; ?>" ></td>
 		  		<td>Quinta
-		  		<input type="radio" id="dia" <?php echo $d5;?> name="dia" value="5" tabindex = "<?php echo ++$ind; ?>" ></td>
+		  		<input type="radio" id="dia" <?php echo $d5;?> name="dia" value="4" tabindex = "<?php echo ++$ind; ?>" ></td>
 		  		<td>Sexta
-		  		<input type="radio" id="dia" <?php echo $d6;?> name="dia" value="6" tabindex = "<?php echo ++$ind; ?>" ></td>
+		  		<input type="radio" id="dia" <?php echo $d6;?> name="dia" value="5" tabindex = "<?php echo ++$ind; ?>" ></td>
 		  		<td>Sábado
-		  		<input type="radio" id="dia" <?php echo $d7;?> name="dia" value="7" tabindex = "<?php echo ++$ind; ?>" ></td>
+		  		<input type="radio" id="dia" <?php echo $d7;?> name="dia" value="6" tabindex = "<?php echo ++$ind; ?>" ></td>
 		  		</tr>
 	  		</tbody>
 	  	</table>
@@ -109,25 +112,25 @@ class formceia {
 		}
 		
 		switch ($this->dia) {
-			case 7:
+			case 6:
 			$dia = 'todo Sábado';//Sábado
 			break;
-			case 6:
+			case 5:
 			$dia = 'toda Sexta-Feira';//Sexta
 			break;
-			case 5:
+			case 4:
 			$dia = 'toda Quinta-Feira';//Quinta
 			break;
-			case 4:
+			case 3:
 			$dia = 'toda Quarta-Feira';//Quarta
 			break;
-			case 3:
+			case 2:
 			$dia = 'toda Terça-Feira';//Terça
 			break;
-			case 2:
+			case 1:
 			$dia = 'toda Segunda-Feira';//Terça
 			break;
-			case 1:
+			case 0:
 			$dia = 'todo Domingo';//Terça
 			break;		
 			default:
