@@ -38,6 +38,7 @@ if (checkdate($m,$d,$y)) {
 		<tbody>
 		<?php
 		$parc 		= (int)$_POST['parc'];
+		$loopTab 	= $parc;
 		$valoint100 =  ($valor/$parc)*100;
 		list($inte,$decim) = explode('.',"$valoint100");
 		list($valortrun,$dvlrt) = explode('.',$valor*100);
@@ -49,7 +50,8 @@ if (checkdate($m,$d,$y)) {
 			$valores = "<input name='frequencia' type='hidden' id='frequencia' value='2' />";
 		}elseif ($parc=='0' || $parc=='' ){
 			//Agendamento automático para todos os meses
-			$parc = 1;
+			$parctrun = $valortrun;
+			$parc = 0; $loopTab = 1;
 			$valores = "<input name='frequencia' type='hidden' id='frequencia' value='0' />";
 		}else {
 			//Agendamento único
@@ -60,7 +62,7 @@ if (checkdate($m,$d,$y)) {
 
 		//Concluir inserindo o cadastro no banco script models/cadagendapgto.php...
 
-		for ($j = 0; $j < $parc; $j++) {
+		for ($j = 0; $j < $loopTab; $j++) {
 
 			if (($m+$j)=='2' && $d>'28') {
 				$dia = '28';
@@ -85,9 +87,9 @@ if (checkdate($m,$d,$y)) {
 				</td>
 				<td><?php
 				echo $vencimento;
-				?> <input name='vencimento<?php echo $j;?>' type='text' size='10'
+				?> <input name='vencimento<?php echo $j;?>' type='text'
 					tabindex="<?PHP echo $ind++;?>" maxlength="10"
-					onkeypress="formatar('##/##/####', this);" required='required'
+					id='data' required='required'
 					value='<?php echo $vencimento;?>' />
 				</td>
 				<td style='text-align: right;'><?php
@@ -106,6 +108,7 @@ if (checkdate($m,$d,$y)) {
 				$parctotal += $parctrun;
 				$diferenca1 = $parctotal - $valor;
 				echo number_format($parctrun,2,',', '.');
+				
 				?> <input name='valor<?php echo $j;?>' type='hidden'
 					id='valor<?php echo $j;?>' value='<?php echo $parctrun;?>' />
 				</td>
@@ -118,6 +121,8 @@ if (checkdate($m,$d,$y)) {
 					}else {
 						$motparc = ($j+1).' de '.$parc.' - Última parcela';
 					}
+				}elseif($_POST['parc']=='0' || $_POST['parc']=='') {
+						$motparc = 'Agendamento mensal e automático';
 				}else {
 					$motparc =  'Parcela: '.($j+1).' de '.$parc;
 				}

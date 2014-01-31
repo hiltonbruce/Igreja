@@ -2,7 +2,7 @@
 
 $parc 		= (int)$_POST['parc'];
 $hist 		= $_SESSION['valid_user'].": ".date("Y-m-d h:i:s");
-$frequencia	= (int)$_POST['frequencia'];
+$frequencia	= ($parc=='0')? 1:0;
 $igreja 	= (int)$_POST['igreja'];
 $credor 	= (int)$_POST['id'];
 $numcredor 	= true;
