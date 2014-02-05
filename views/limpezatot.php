@@ -52,7 +52,7 @@ if ($_GET['limpeza']!='4') {
 			echo $tbodytab->TotMatEntregar();
 		?>
 	</tbody>
-</table>
+</table>teste
 <div style="page-break-before: always;"> </div>
 <table id="listTable" >
 	<caption>Material de Limpeza Total Adquirido no Mercado Autorizado  - <?php echo $mesref;?></caption>	

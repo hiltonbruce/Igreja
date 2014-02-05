@@ -74,7 +74,6 @@
 	  <?PHP
 	  
 	// echo '<h1> SESSION[valid_user]- '.$_SESSION['valid_user'].'--Session[setor]-- '.$_SESSION['setor'].' - '.$_SESSION['nome'].'--Session[cid_end]-- '.$_SESSION['cid_end'].'</h1>';
-	  
 		  if (!empty($_SESSION['valid_user']))
 		  {
 		  ?>
