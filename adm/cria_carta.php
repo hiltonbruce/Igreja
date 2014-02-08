@@ -40,7 +40,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	  
 		<?PHP
 		if (!empty($_GET["uf"])){
-		conectar();
+		//conectar();
 		$vl_uf=$_GET["uf"];
 		$lst_cid = new sele_cidade("cidade","$vl_uf","codUf","nome","cidade");
 		echo "<label>Cidade de Destino:</label>";		
