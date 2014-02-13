@@ -3,7 +3,6 @@
  * @author Wellington Ribeiro - IdealMind.com.br
  * @since 31/10/2009
  */
-
 require_once '../../func_class/funcoes.php';
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );

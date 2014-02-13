@@ -1,15 +1,9 @@
 <?PHP
 function conectar() {
-	require_once("DB.php");
-	if (file_exists("func_class/constantes.php")){
-		require('func_class/constantes.php');
-		echo "<h1> 1111 </h1>";
-	}elseif (file_exists('../func_class/constantes.php')){
-		require('../func_class/constantes.php');
-		echo "<h1> 2222 </h1>";
-	}
+	require_once("DB.php");	
+	$dns = "mysql://root:x9735pla@localhost/assembleia";
 	$db =& DB::Connect ($dns, array());
-	if (PEAR::isError($db)){ die ($db->getMessage().' teste '); }
+	if (PEAR::isError($db)){ die ($db->getMessage()); }
 }
 
 function br_data ($dt,$cmp){
@@ -39,21 +33,21 @@ function checadata ($dt){
 			$y = $dta[2];
 			$res = checkdate($m,$d,$y);
 			if ($res == 1 ){
-				//Data válida
+				//Data vï¿½lida
 				return true;
 			}else{
-				//Data inválida
+				//Data invï¿½lida
 				return false;
 			}
 }
 
 function conv_valor_br ($data) {
-		//O exemplo seguinte pega uma data no padrão ISO (AAAA-MM-DD) e retorna valor no formato DD/MM/YYYY
+		//O exemplo seguinte pega uma data no padrï¿½o ISO (AAAA-MM-DD) e retorna valor no formato DD/MM/YYYY
 		if (ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data, $registros)) {
 			$res="$registros[3]/$registros[2]/$registros[1]";
 			return $res;
 		} else {
-			echo "<blink><strong>Formato de data inválido: $data</strong></blink>";
+			echo "<blink><strong>Formato de data invï¿½lido: $data</strong></blink>";
 		}
 }
 
@@ -113,7 +107,7 @@ function cargo_dt () {
 }
 
 function carta ($id){
-	//Devolve o tipo de carta se Apresentação ou Mudança
+	//Devolve o tipo de carta se Apresentaï¿½ï¿½o ou Mudanï¿½a
 
 	switch ($id){
 		case "1":
@@ -179,19 +173,19 @@ function data_venc($data){
 		if ($res == 1 ){
 			return date("d/m/Y",(mktime(0, 1, 0, $m, $d+30, $y)));
 			}else{
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y');</script>";
-				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y');</script>";
+				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
 				break;
 			}
 	}else{
-		echo "<script> alert('Data não informada!');</script>";
-		echo "<h1> Data não informada! </h1>";
+		echo "<script> alert('Data nï¿½o informada!');</script>";
+		echo "<h1> Data nï¿½o informada! </h1>";
 
 	}
 }
 
 function data_batismo($data,$link){
-	//Verifica se a data é válida e se é posterior a atual
+	//Verifica se a data ï¿½ vï¿½lida e se ï¿½ posterior a atual
 	if (isset ($data)){
 		$dta = explode("/",$data);
 		$d=$dta[0];
@@ -203,16 +197,16 @@ function data_batismo($data,$link){
 		echo "bat -> $batismo  ** atual->".mktime();
 		
 		if ($res != 1 ){
-			echo "<script> alert('Data inválida! Você digitou: $data');  location.href='$link';</script>";
+			echo "<script> alert('Data invï¿½lida! Vocï¿½ digitou: $data');  location.href='$link';</script>";
 			break;
 		}elseif ($batismo<mktime()){
-			echo "<script> alert('Data anterior a hoje! Você digitou: $data, e é alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
+			echo "<script> alert('Data anterior a hoje! Vocï¿½ digitou: $data, e ï¿½ alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
 			break;
 		}
 		
 	}else{
-		echo "<script> alert('Data não informada!');</script>";
-		echo "<h1> Data não informada! </h1>";
+		echo "<script> alert('Data nï¿½o informada!');</script>";
+		echo "<h1> Data nï¿½o informada! </h1>";
 
 	}
 }
@@ -237,7 +231,7 @@ function validaCPF($cpf) {
 	if (ereg("^([0-9]){3}.([0-9]){3}.([0-9]){3}-([0-9]){2}",$cpf)){
 		//echo "<script> alert('CPF formato Verdadeiro!');</script>";
 
-		$cpf = str_replace(array(".","-"), "", $cpf);//remove caracteres para tratar a string como número
+		$cpf = str_replace(array(".","-"), "", $cpf);//remove caracteres para tratar a string como nï¿½mero
 
 
 		if (strlen($cpf) <> 11 || ($cpf == '11111111111') || ($cpf == '22222222222') ||
@@ -247,7 +241,7 @@ function validaCPF($cpf) {
 			($cpf == '99999999999') || ($cpf == '00000000000'))
 			return false;
 
-		// Verifica 1º digito
+		// Verifica 1ï¿½ digito
 		for ($i = 0; $i < 9; $i++) {
 			$soma += (($i+1) * $cpf[$i]);
 		}
@@ -260,7 +254,7 @@ function validaCPF($cpf) {
 
 		$soma = 0;
 
-		// Verifica 2º digito
+		// Verifica 2ï¿½ digito
 		for ($i = 9, $j = 0; $i > 0; $i--, $j++) {
 			$soma += ($i * $cpf[$j]);
 		}
@@ -279,7 +273,7 @@ function validaCPF($cpf) {
 		}
 
 	}elseif ($_POST["submit"]=="Alterar CPF ..."){
-		echo "<script> alert('CPF com formato INVÁLIDO!');</script>";
+		echo "<script> alert('CPF com formato INVï¿½LIDO!');</script>";
 	}
 
 }
@@ -300,7 +294,7 @@ function semana ($data) {
 		//echo '<h1>'.$d.'/'.$m.'<br/>'.date('w',mktime(1,0,0,$m,$i,$y)).'</h1>';
 		
 		//echo '<h2>'.$semana.'</h2>';
-		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o lançamento
+		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o lanï¿½amento
 			//echo $d.' ++++++++++ '.$i;
 			if (date('w',mktime(1,0,0,$m,$i,$y))=='1' && $semana<5) {
 				$semana++;
@@ -380,7 +374,7 @@ function link_corrent ($link) {
 }
 
 function link_ativo ($val_link,$variavel) {
-	/*	Define se este botão ou limk é o corrente e o define para tal com mudança
+	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if ($variavel==$val_link) {
@@ -389,7 +383,7 @@ function link_ativo ($val_link,$variavel) {
 }
 
 function id_corrente ($val_link) {
-	/*	Define se este botão ou limk é o corrente e o define para tal com mudança
+	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
@@ -398,7 +392,7 @@ function id_corrente ($val_link) {
 }
 
 function id_left ($val_link) {
-	/*	Define se este botão ou limk é o corrente e o define para tal com mudança
+	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
@@ -408,7 +402,7 @@ function id_left ($val_link) {
 }
 
 function prox_ant_ano (){
-//cria link para o próximo ou o ano anterior
+//cria link para o prï¿½ximo ou o ano anterior
 
      if (empty($_GET["ano"]))
 	  $y = date("Y");
@@ -421,13 +415,13 @@ function prox_ant_ano (){
      }
      $pro = $y+1;
      $ant = $y-1;
-     //echo "<a href='".$_GET["escolha"]."&ano=".$y+1."'>Próximo Ano</a>";
+     //echo "<a href='".$_GET["escolha"]."&ano=".$y+1."'>Prï¿½ximo Ano</a>";
      echo "<div  align='center' >";
      echo "<table class='tabela' >";
      
      echo "<tr>";
      echo '<td>';
-     echo '<label>Congregação: </label>';
+     echo '<label>Congregaï¿½ï¿½o: </label>';
      ?>
      <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' >
      <?php
@@ -444,7 +438,7 @@ function prox_ant_ano (){
      echo "Proximo&nbsp;Ano&nbsp;&nbsp;>></a></td>";
      echo '<td>';
      echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=1'>";
-     echo "Imprimir Calendário&nbsp;&nbsp;&nbsp;</a></td>";
+     echo "Imprimir Calendï¿½rio&nbsp;&nbsp;&nbsp;</a></td>";
      echo '</td>';
      echo "</tr>";
      echo "</table>";
@@ -502,7 +496,7 @@ function a_ou_o ($sexo) {
 }
 
 function data_extenso ($data) {
-	//Fluxo para atribuir nome por extenso do dia e mês na impressão para o período
+	//Fluxo para atribuir nome por extenso do dia e mï¿½s na impressï¿½o para o perï¿½odo
 	$dta = explode("/","$data");
 			$d = $dta[0];
 			$m = $dta[1];
@@ -510,8 +504,8 @@ function data_extenso ($data) {
 			$ver_data = checkdate($m,$d,$y);
 
 	if (!$ver_data){
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
-				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y'); window.history.go(-2);</script>";
+				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
 				break;
 			}
 
@@ -539,7 +533,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Março";
+		case 3: $mes_extenso="Marï¿½o";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -559,15 +553,15 @@ function data_extenso ($data) {
 				break;
 		case 12: $mes_extenso="Dezembro";
 				break;
-		default: echo $mes_extenso="Mês incorreto";
-	}//fim do case para o mês
+		default: echo $mes_extenso="Mï¿½s incorreto";
+	}//fim do case para o mï¿½s
 
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
 }
 
-function controle ($tipo){ //O tipo é definido como consulta, atualização, inserir, administração de usuário
+function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
 
-	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
+	$alerta = "<script> alert('Desculpe mas vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
 		
@@ -625,7 +619,7 @@ function controle ($tipo){ //O tipo é definido como consulta, atualização, inser
 
 function ver_cad (){
 	//Verifica se o rol selecionado tem cadastro
-	$ver_cadastro = new DBRecord ("membro",$_SESSION['rol'],"rol"); //Aqui será selecionado a informação do campo
+	$ver_cadastro = new DBRecord ("membro",$_SESSION['rol'],"rol"); //Aqui serï¿½ selecionado a informaï¿½ï¿½o do campo
 	if ($ver_cadastro->rol()=="" ) {
 	echo "<h3>N&atilde;o h&aacute; cadastro para o Rol: {$_SESSION["rol"]}.</h3>";
 	unset ($_SESSION["rol"]);
@@ -635,7 +629,7 @@ function ver_cad (){
 
 function form_preenchido($form_vars)
 	{
-		//Testa se cada variável tem um valor
+		//Testa se cada variï¿½vel tem um valor
 	  foreach ($form_vars as $key => $value)
 	  {
 		 if (!isset($key) || ($value == ''))
@@ -658,7 +652,7 @@ function situacao ($situacao,$rol){
 			$data = mysql_fetch_array($result);
 
 			if ($data ["dt_fim"]!="00/00/0000")
-				$estilo = "<span style='color:#FF0000'><blink>Displinado até: </blink></span>".$data ["dt_fim"];
+				$estilo = "<span style='color:#FF0000'><blink>Displinado atï¿½: </blink></span>".$data ["dt_fim"];
 			else
 				$estilo = "<span style='color:#FF0000'><blink>Displinado por prazo indeterminado </blink></span>";
 
@@ -685,16 +679,16 @@ function situacao ($situacao,$rol){
 	}
 
 function toUpper($string) {
-	//Converte para maíuscula as vogais acentuadas
-    return (strtoupper(strtr($string, 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ' )));
+	//Converte para maï¿½uscula as vogais acentuadas
+    return (strtoupper(strtr($string, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' )));
     };
 
 
 function extenso($valor = 0, $maiusculas = false) {
 
-$singular = array("centavo", "real", "mil", "milhão", "bilhão", "trilhão", "quatrilhão");
-$plural = array("centavos", "reais", "mil", "milhões", "bilhões", "trilhões",
-"quatrilhões");
+$singular = array("centavo", "real", "mil", "milhï¿½o", "bilhï¿½o", "trilhï¿½o", "quatrilhï¿½o");
+$plural = array("centavos", "reais", "mil", "milhï¿½es", "bilhï¿½es", "trilhï¿½es",
+"quatrilhï¿½es");
 
 $c = array("", "cem", "duzentos", "trezentos", "quatrocentos",
 "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos");
@@ -702,7 +696,7 @@ $d = array("", "dez", "vinte", "trinta", "quarenta", "cinquenta",
 "sessenta", "setenta", "oitenta", "noventa");
 $d10 = array("dez", "onze", "doze", "treze", "quatorze", "quinze",
 "dezesseis", "dezesete", "dezoito", "dezenove");
-$u = array("", "um", "dois", "três", "quatro", "cinco", "seis",
+$u = array("", "um", "dois", "trï¿½s", "quatro", "cinco", "seis",
 "sete", "oito", "nove");
 
 $z = 0;

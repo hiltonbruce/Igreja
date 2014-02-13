@@ -3,7 +3,7 @@
 	require_once("DB.php");
 	
 	if (file_exists("func_class/constantes.php")){
-		require_once('func_class/constantes.php');
+		require('func_class/constantes.php');
 	}elseif (file_exists('../func_class/constantes.php')){
 		require('../func_class/constantes.php');
 	}
@@ -11,20 +11,20 @@
 	if (PEAR::isError($db)){ die ($db->getMessage());exit;}
 
 	/*
-		 *@categoria  Paginação
-		 * @Pacote    Rodapé
+		 *@categoria  Paginaï¿½ï¿½o
+		 * @Pacote    Rodapï¿½
 		 * @autor     Joseilton Costa Bruce <hiltonbruce@gmail.com>
 		 * @copyright 2009
-		 * @licença   www.gnu.org/licenses/licenses.html#GPL
+		 * @licenï¿½a   www.gnu.org/licenses/licenses.html#GPL
 		 * @version   CVS: $Id: rodape.php,v 0.10 2009/03/30 05:27:25 aharvey Exp $
 	*/
 
 	class rodape {
-		protected $_pagina; //Recebe a quantidade de Links de páginas disponíveis
-		protected $_url; //Recebe o número da página para direcionar as solicitações
-		protected $_linkpagina; //nome do link com a paginação
-		protected $_urlextra; //Recebe o link da página atual para enviar a url da página
-		protected $_linkppag; //Define a quantidade de links numéricos na página
+		protected $_pagina; //Recebe a quantidade de Links de pï¿½ginas disponï¿½veis
+		protected $_url; //Recebe o nï¿½mero da pï¿½gina para direcionar as solicitaï¿½ï¿½es
+		protected $_linkpagina; //nome do link com a paginaï¿½ï¿½o
+		protected $_urlextra; //Recebe o link da pï¿½gina atual para enviar a url da pï¿½gina
+		protected $_linkppag; //Define a quantidade de links numï¿½ricos na pï¿½gina
 
 		function __construct($_pagina=0,$_url=0,$_linkpagina="",$_urlextra="",$_linkppag=0) {
 			$this->_pagina = $_pagina;
@@ -35,15 +35,15 @@
 		}
 
 		public function getPagina(){
-			//Total de link de páginas
+			//Total de link de pï¿½ginas
 			return $this->_pagina;
 		}
 
-		public function getUrl(){ //Página atual para o PHP, ou seja, para o usuário ela é este valor + 1 - Visual
+		public function getUrl(){ //Pï¿½gina atual para o PHP, ou seja, para o usuï¿½rio ela ï¿½ este valor + 1 - Visual
 			return $this->_url;
 		}
 
-		public function getLinkpagina(){ //nome do link da página. Ex.
+		public function getLinkpagina(){ //nome do link da pï¿½gina. Ex.
 			return $this->_linkpagina;
 		}
 
@@ -51,7 +51,7 @@
 			return $this->_urlextra;
 		}
 
-		public function getLinkppag(){ //Se a quant de links por páginas for maior q a quant de paginas disponíveis ele retorna quant de páaginas
+		public function getLinkppag(){ //Se a quant de links por pï¿½ginas for maior q a quant de paginas disponï¿½veis ele retorna quant de pï¿½aginas
 			if ($this->_linkppag<=$this->_pagina)
 			return $this->_linkppag;
 			else
@@ -59,7 +59,7 @@
 		}
 
 		public function getQuantpg() {
-		//Total de páginas
+		//Total de pï¿½ginas
 			if ($this->getLinkppag()>0)
 			return ceil(($this->getUrl())/$this->getLinkppag());
 			else
@@ -67,7 +67,7 @@
 		}
 
 		public function getUltimapg(){
-		//limita o loop for ao valor da última página
+		//limita o loop for ao valor da ï¿½ltima pï¿½gina
 			if (($this->getQuantpg()*$this->getLinkppag())<=$this->getPagina())
 			return $this->getQuantpg()*$this->getLinkppag();
 			elseif (($this->getQuantpg()*$this->getLinkppag())>$this->getPagina())
@@ -75,10 +75,10 @@
 		}
 
 		public function getDados(){
-			echo 	"Links de Página: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
-					"linkPágina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
-					"url da página: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
-					"Link por Página: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
+			echo 	"Links de Pï¿½gina: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
+					"linkPï¿½gina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
+					"url da pï¿½gina: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
+					"Link por Pï¿½gina: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
 					"urlExtra: \$this->getUrlextra() : <span >".$this->getUrlextra()."</span><br/>".
 					"For final: \$this->getQuantpg()*\$this->getLinkppag(): <span>".$this->getQuantpg()*$this->getLinkppag()."</span><br/>".
 					"Total de paginas: getQuantpg() = ceil((\$this->getUrl()+1)/\$this->getLinkppag()) <span>".$this->getQuantpg()."</span><br/>";
@@ -89,7 +89,7 @@
 			{
 				$url = $this->_url-1;
 				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=1'>In&iacute;cio</a> | ".
-						"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>Anterior</a>"; //Vai p a página anterior
+						"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>Anterior</a>"; //Vai p a pï¿½gina anterior
 			}
 		}
 
@@ -98,12 +98,12 @@
 			{
 				$url = $this->_url-1;
 				echo 	"<a href='./{$this->getUrlextra()}'>In&iacute;cio</a> | ".
-						"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a página anterior
+						"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a pï¿½gina anterior
 			}
 		}
 		*/
 		public function getRodapemeio() {
-			//Define a parte central da paginação
+			//Define a parte central da paginaï¿½ï¿½o
 
 			for ($i=($this->getUltimapg()-$this->getLinkppag() ); $i<($this->getUltimapg()); $i++)
 			{
@@ -131,13 +131,13 @@
 			}
 		}
 
-		public function getRodaperes() { //Total das páginas disponibilizadas
+		public function getRodaperes() { //Total das pï¿½ginas disponibilizadas
 			if ($this->getPagina()>"1"){
 				return $this->getPagina()." p&aacute;ginas";
 			}elseif ($this->getPagina()=="1"){
 				return $this->getPagina()." p&aacute;gina";
 			}else {
-				return "Não há nenhuma informação para esta pesquisa!";
+				return "Nï¿½o hï¿½ nenhuma informaï¿½ï¿½o para esta pesquisa!";
 			}
 		}
 
@@ -180,10 +180,10 @@
 		}
 	/* Exemplo para chamada desta classe
 	$_urlLi="escolha=".$_GET["escolha"]."&menu=".$_GET["menu"]."&ord_m=".$_GET["ord_m"];
-	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de páginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por página)
+	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de pï¿½ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por pï¿½gina)
 	$_rod->getDados();
 	$_rod->getRodape();
-	Exemplo de CSS para o Radapé:
+	Exemplo de CSS para o Radapï¿½:
 
 	span#rodape{
 	font-weight:bold;
@@ -201,10 +201,10 @@
 
 class DBRecord {
   /*Exemplo de funcionamento desta classe:
-	$rec = new DBRecord ("tabela","opção","campo"); Aqui será selecionado a informação do campo da tabela autor igual a opçao
+	$rec = new DBRecord ("tabela","opï¿½ï¿½o","campo"); Aqui serï¿½ selecionado a informaï¿½ï¿½o do campo da tabela autor igual a opï¿½ao
 	print $rec->Name()."\n"; Imprime o valor na tela
-	$rec->Name = "Novo Nome"; Aqui é atribuido a esta variável um valor para UpDate
-	$rec->Update(); É feita a chamada do método q realiza a atualização no Banco
+	$rec->Name = "Novo Nome"; Aqui ï¿½ atribuido a esta variï¿½vel um valor para UpDate
+	$rec->Update(); ï¿½ feita a chamada do mï¿½todo q realiza a atualizaï¿½ï¿½o no Banco
   */
 
   var $h;
@@ -231,7 +231,7 @@ class DBRecord {
   }
 
   public function cad_organica($ind) {
-     //Lista subordinado à do script igreja/cad_organica
+     //Lista subordinado ï¿½ do script igreja/cad_organica
      $lin = mysql_query("SELECT * from {$this->{'table'}} ORDER BY id_igreja,codigo ");
 
 
@@ -451,8 +451,8 @@ class insert {
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		$idCad = mysql_insert_id();
 		if ($inserir){
-				$idCad =  "<script> alert('Inclusão ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
-				//echo "Inclusão realizada com sucesso!";
+				$idCad =  "<script> alert('Inclusï¿½o ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
+				//echo "Inclusï¿½o realizada com sucesso!";
 		}else{
 			echo "<script> alert('Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!');window.history.go(-1);</script>";
 			echo "Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!";
@@ -481,7 +481,7 @@ class editar_form {
 		$this->vlr_get		= $vlr_get;             //Valor relacionado ao get
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
-		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edição do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
+		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para ediï¿½ï¿½o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
 			if ($this->campo=="datanasc" || $this->campo=="batismo_em_aguas" || $this->campo=="dt_mudanca_denominacao"  || $this->campo=="auxiliar" || $this->campo=="diaconato" || $this->campo=="presbitero" || $this->campo=="data" || $this->campo=="dat_aclam") {
 			$this->formato = "formatar('##/##/####', this);";
 			$this->maxcaratere = 10;
@@ -497,16 +497,16 @@ class editar_form {
 
 	if ($this->campo==$this->vlr_get)
 		{
-			/* Formulário para edição por item. Neste form os campos são recebidos de qualquer
-			campo para edição da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que é
-			passado, também é responsável pelo da tabela que será alterada e o GET-tabela traz o nome da tabela
-			que sofrerá alteração. Em agumas ocasiões também é passado o campo UF.*/
+			/* Formulï¿½rio para ediï¿½ï¿½o por item. Neste form os campos sï¿½o recebidos de qualquer
+			campo para ediï¿½ï¿½o da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que ï¿½
+			passado, tambï¿½m ï¿½ responsï¿½vel pelo da tabela que serï¿½ alterada e o GET-tabela traz o nome da tabela
+			que sofrerï¿½ alteraï¿½ï¿½o. Em agumas ocasiï¿½es tambï¿½m ï¿½ passado o campo UF.*/
 
 			//echo $this->campo." = ".$this->vlr_get;
 			$ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
 			?>
 			<form id="form1" name="form1" method="post" action="">
-			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receberá os dados -->
+			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receberï¿½ os dados -->
 			<input type="hidden" name="campo" value="<?PHP echo "{$this->campo}";?>" />
 			<input type="hidden" name="tabela" value="<?PHP echo $_GET["tabela"];?>" />
 			<input type="hidden" name="id" value="<?PHP echo $ident;?>" />
@@ -560,9 +560,9 @@ class editar_form {
 
 			}
 
-			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")//Abre para edição 2 campos para Pai e Mãe
+			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")//Abre para ediï¿½ï¿½o 2 campos para Pai e Mï¿½e
 			{
-			//Nos campos Pai e Mãe é aberto um segundo campo do form para o rol e a opção, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
+			//Nos campos Pai e Mï¿½e ï¿½ aberto um segundo campo do form para o rol e a opï¿½ï¿½o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
 			Rol:
 			<input name="<?PHP echo "rol_{$this->campo}";?>" type="text" value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" />
@@ -609,7 +609,7 @@ class editar_form {
 	}
 	public function getMostrar(){
 		if (empty($this->valor)){
-			$this->valor = "Não Informado";
+			$this->valor = "Nï¿½o Informado";
 		}
 
 		if ($this->vlr_get == "situacao_espiritual") {
@@ -635,9 +635,9 @@ class sele_cidade {
 		$this->valor = $valor;//O valor do campo no banco de dados
 		$this->campo = $campo;//Campo para pesquisa no Banco
 
-		//Monta a parte o retorno html do formulário
-		$this->campo_retorno = $campo_retorno;//Campo que será retornado
-		$this->texto_field = $texto_field;//O nome que será relaciondo ao campo de retorno para envio pelo form
+		//Monta a parte o retorno html do formulï¿½rio
+		$this->campo_retorno = $campo_retorno;//Campo que serï¿½ retornado
+		$this->texto_field = $texto_field;//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
 
 		if (DB::isError($res))
 		{
@@ -646,20 +646,20 @@ class sele_cidade {
 		}
 	}
 
-	function ListDados ($indice){//indice da sequência do formulário
+	function ListDados ($indice){//indice da sequï¿½ncia do formulï¿½rio
 
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
 	$this->res = $db->query($sql_lst, array( $this->valor ));
 
-	//Obtém o número de linhas
+	//Obtï¿½m o nï¿½mero de linhas
 	$num_linhas = (int)$this->res->numRows();
 
 	//Mostra as linhas de select
 	if ($num_linhas>0){
 	echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='$indice'>";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
-					echo "<option value='{$_SESSION["cid_end"]}'>Cód. - {$_SESSION["cid_end"]}</option>";
+					echo "<option value='{$_SESSION["cid_end"]}'>Cï¿½d. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
 					echo "<option value='2585'>Bayeux</option>";
 				}else{
@@ -675,13 +675,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
 		echo "Voc&ecirc; n&atilde;o informou a cidade ou falta atualizar! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Não há nenhum bairro cadastrado para o endereço desta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado para o endereï¿½o desta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='$indice'>";		
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -700,8 +700,8 @@ class List_sele {
 	function __construct ($tabela="", $campo_retorno= "", $texto_field=""){
 
 		$this->tabela = $tabela;//
-		$this->campo_retorno = $campo_retorno;//Campo que será retornado
-		$this->texto_field = $texto_field;//O nome que será relaciondo ao campo de retorno para envio pelo form
+		$this->campo_retorno = $campo_retorno;//Campo que serï¿½ retornado
+		$this->texto_field = $texto_field;//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
 		$this->query = "SELECT * from {$this->tabela} ";
 
 		$this->sql_lst = mysql_query($this->query.' ORDER BY '.$this->campo_retorno);
@@ -793,7 +793,7 @@ class ultimo_registro {
 
      function ultimo_registro ($codigo,$campo){
 
-	//seleciona o ultimo registro subordinado ao código escolhido
+	//seleciona o ultimo registro subordinado ao cï¿½digo escolhido
 	if (empty($codigo))
 	  $codigo .=".00";
 
@@ -839,7 +839,7 @@ class List_congr {
 }
 
 class central {
-	//Define o script da página central
+	//Define o script da pï¿½gina central
 
 	function get(){
 
@@ -876,15 +876,15 @@ class aniversario {
 		//$sql_lst = "SELECT * from membro WHERE DATE_FORMAT(datanasc,'%d/%m/%Y')=? ORDER BY {$this->campo_retorno}";
 		//$this->res = $db->query($sql_lst, array( $this->valor ));
 
-		$this->dia = date('d/m');//Recupera o dia e mês
+		$this->dia = date('d/m');//Recupera o dia e mï¿½s
 		$this->semana = date('w');//Recupera a semana
-		$this->mes = date('m');//Recupera o mês
+		$this->mes = date('m');//Recupera o mï¿½s
 		$this->ano = date('Y');//Recupera o ano
 		$this->query = "SELECT m.rol, m.nome, DATE_FORMAT(m.datanasc,'%Y') AS idade, DATE_FORMAT(m.datanasc,'%m') AS mes,DATE_FORMAT(m.datanasc,'%d') AS dia, DATE_FORMAT(c.data,'%Y') AS casamento, DATE_FORMAT(e.batismo_em_aguas,'%Y') AS batismo, e.congregacao from membro AS m, eclesiastico AS e, est_civil AS c WHERE e.situacao_espiritual<2 AND m.rol=e.rol AND m.rol=c.rol AND ";
 
 
 		switch ($_GET["ord"]){
-		//Ordena a lista pelas seguintes tabelas conforme as opções que define a tabela a ser escolhida
+		//Ordena a lista pelas seguintes tabelas conforme as opï¿½ï¿½es que define a tabela a ser escolhida
 			case "2";
 				$this->ord = "e.congregacao";
 				break;
@@ -989,11 +989,11 @@ class aniversario {
 	if ($semana<10 && $semana>0) {$semana="0".$semana;}
 
 	if ($semana < "1"){
-		echo "<script> alert('Você já atingiu o Ano anterior!');</script>";
-		echo "Você já atingiu o Ano anterior!";
+		echo "<script> alert('Vocï¿½ jï¿½ atingiu o Ano anterior!');</script>";
+		echo "Vocï¿½ jï¿½ atingiu o Ano anterior!";
 	} elseif ($semana > "53") {
-		echo "<script> alert('Você já atingiu o Ano seguinte!');</script>";
-		echo "Você já atingiu o Ano seguinte!";
+		echo "<script> alert('Vocï¿½ jï¿½ atingiu o Ano seguinte!');</script>";
+		echo "Vocï¿½ jï¿½ atingiu o Ano seguinte!";
 	}
 
 		$sql_semana = mysql_query ($this->query." DATE_FORMAT(m.datanasc,'%m')='{$this->semana_consulta}'".$this->query_fim) or die (mysql_error());
@@ -1005,7 +1005,7 @@ class aniversario {
 			$var_aniv = date('W',mktime (0,0,0,$this->dados["mes"],$this->dados["dia"],date ('Y')));
 
 			if ($semana == $var_aniv) {
-			//Como o MySQL retornava o valor da semana do ano em que o membro nasceu e em muitos casos diferente da semana atual optei selecionar do banco o mês inteiro e impor esta condição e assim aparentemente não houve erro na listagem.
+			//Como o MySQL retornava o valor da semana do ano em que o membro nasceu e em muitos casos diferente da semana atual optei selecionar do banco o mï¿½s inteiro e impor esta condiï¿½ï¿½o e assim aparentemente nï¿½o houve erro na listagem.
 			$inc++;
 			$this->tot_aniv ++;
 
@@ -1130,7 +1130,7 @@ class situacao_espiritual {
 				return "<span style='color:#006633'><blink>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</blink></span>";
 				break;
 			case "2":
-				return 	"<span style='color:#FF0000'><blink>Displinado até: </blink></span>".$this->data_fim;
+				return 	"<span style='color:#FF0000'><blink>Displinado atï¿½: </blink></span>".$this->data_fim;
 				break;
 			default:
 				return "<span style='color:#FF0000'><blink>{$this->situacao}</blink></span>";
