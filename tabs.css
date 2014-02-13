@@ -79,12 +79,17 @@ thead tr:hover {
   background-color:#DCDCDC;
 }
 
-.total {
+#total {
 	background-color:#000;
 	font-weight:bold;
 	color:#ccc;
 }
 
+#subtotal {
+	background-color:#0000CD;
+	font-weight:bold;
+	color:#FFFF00;
+}
 .dados {
   background-color: #FFFFFF;
 }

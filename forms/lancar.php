@@ -22,7 +22,8 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 				</tr>
 				<tr>
 					<td colspan="3">
-						<?php 
+						<?php
+						conectar();
 							require_once 'forms/tes/autoCompletaContas.php';
 						?>
 					</td>

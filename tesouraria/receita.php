@@ -36,7 +36,10 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			
 			$linkAcesso 	= 'escolha=tesouraria/receita.php&menu=top_tesouraria&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 			
-			require_once 'forms/concluirdiz.php';
+			if ($_GET['rec']<'7') {
+				//Form fechar caixa
+				require_once 'forms/concluirdiz.php';
+			}
 
 			switch ($_GET['rec']) {
 				case '0':

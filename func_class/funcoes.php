@@ -2,12 +2,14 @@
 function conectar() {
 	require_once("DB.php");
 	if (file_exists("func_class/constantes.php")){
-		require_once('func_class/constantes.php');
+		require('func_class/constantes.php');
+		echo "<h1> 1111 </h1>";
 	}elseif (file_exists('../func_class/constantes.php')){
 		require('../func_class/constantes.php');
+		echo "<h1> 2222 </h1>";
 	}
 	$db =& DB::Connect ($dns, array());
-	if (PEAR::isError($db)){ die ($db->getMessage()); }
+	if (PEAR::isError($db)){ die ($db->getMessage().' teste '); }
 }
 
 function br_data ($dt,$cmp){

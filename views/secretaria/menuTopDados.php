@@ -8,7 +8,9 @@
 	<li><a <?PHP id_corrente ("cartao");?> href="./?escolha=adm/cartao.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Cart&atilde;o</span></a></li>
 	<li><a <?PHP id_corrente ("disciplina");?> href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Registros</span></a></li>
 	<?php if ($_SESSION["setor"]=='2' || $_SESSION["nivel"]>'10') { ?><!-- Verifica se é tesouraria -->
-		<li><a <?PHP id_corrente ("saldoMembros");?> href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Financeiro</span></a></li>
+		<li><a <?PHP id_corrente ("saldoMembros");?> 
+				href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol=<?php echo $bsc_rol;?>&ano=<?php echo $_GET['ano'];?>">
+				<span>Financeiro</span></a></li>
     <?php } ?>
   </ul>
 </div>

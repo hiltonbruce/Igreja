@@ -1,13 +1,19 @@
 <?php
 $nivel1 	= '';
 $nivel2 	= '';
-$comSaldo	= '';
+$comSaldo	= '';$menorAno = 0;$maiorAno=0;
 $lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" ORDER BY anorefer,mesrefer ');
 
 while ($contas = mysql_fetch_array($lista)) {
 
 	$mesr 		= $contas['mesrefer'];
 	$anor 		= $contas['anorefer'];
+	if ($menorAno>$anor || $menorAno == 0) {
+		$menorAno=$anor;
+	}
+	if ($maiorAno<$anor || $maiorAno ==0) {
+		$maiorAno=$anor;
+	}
 	$periodo	= "$mesr$anor";
 	$dz 		= 'dizimos'."$mesr$anor";
 	$ofc 		='ofertaCultos'."$mesr$anor";
@@ -65,15 +71,17 @@ while ($contas = mysql_fetch_array($lista)) {
 				//echo $dz.'   ** '.$$dz.'   ** '.$dev.' -->';
 }
 	
-	$ano = 2013;
+	$ano = ($_GET['ano']<='2000') ? $menorAno:$_GET['ano'];
 	$cor= true;
 	for ($cont=1; $cont<13 ; $cont++){
 		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
 		$dz = 'dizimos'."$cont$ano"; $of = 'ofertaCultos'."$cont$ano"; $ofm = 'ofertaMissoes'."$cont$ano";
 		$ofs = 'ofertaSenhoras'."$cont$ano"; $ofmoc = 'ofertaMocidade'."$cont$ano"; $ofi = 'ofertaInfantil'."$cont$ano";
 		$ofe = 'ofertaEnsino'."$cont$ano";
+		$totDizAno  += $$dz;$totOfertaAno  += $$of;$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;
+		$totMocidadeAno  += $$ofmoc;$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;
 		
-		$nivel1 .= '<tr '.$bgcolor.'><td>'.$cont.'/'.$ano.'</td>';
+		$nivel1 .= '<tr '.$bgcolor.'><td>'.sprintf("%02u",$cont ).'/'.$ano.'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';

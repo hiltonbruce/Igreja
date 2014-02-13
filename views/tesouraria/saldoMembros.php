@@ -37,13 +37,18 @@ require_once 'models/tes/histFinMembro.php';
 			?>
 		</tbody>
 		<tfoot>
-			<?php 
-				printf("<tr class='total'>"); 
-				echo ('<td id="moeda" >Totais: .....</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
+			<?php  
+				printf("<tr id='subtotal'>"); 
+				echo ('<td>Total em '.$ano.': .....</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
+					<td id="moeda">'.number_format($totOfertaAno,2,',','.').'</td><td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>');
+				echo ('<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td><td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>
+				<td id="moeda">'.number_format($totInfantilAno,2,',','.').'</td><td id="moeda">'.number_format($totEnsinoAno,2,',','.').'</td></tr>');
+				printf("<tr id='total'>"); 
+				echo ('<td>Total Acumulado: .....</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
 				echo ('<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
 				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td><td id="moeda">'.number_format($totEnsino,2,',','.').'</td></tr>');
 			?>
 		</tfoot>
 	</table>
-	Em: <?php echo date('d/m/Y');?>
+	Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribuição: '.$menorAno.' ** Ultimo ano de contribuição: '.$maiorAno;?>
