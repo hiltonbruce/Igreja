@@ -15,7 +15,6 @@ $linkLancamento = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 	  <li><a <?PHP link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" ><span>Plano de Contas</span></a></li>
 	</ul>
 </div>&nbsp;
-
 <?php
 $dizmista = new dizresp($_SESSION['valid_user']);
 $idIgreja = (empty($_GET['igreja'])) ? 1:$_GET['igreja'];
@@ -55,10 +54,12 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once ('forms/ofertaEBD.php');
 					break;
 				case '7':
+					require_once 'forms/tes/histFinanceiro.php';
 					require_once 'models/saldos.php';
 					require_once ('views/saldos.php');
 					break;
 				case '8':
+					require_once 'forms/tes/histFinanceiro.php';
 					require_once 'models/saldos.php';
 					require_once ('views/saldos.php');
 					break;
@@ -71,6 +72,11 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					$tabela = 'dizimooferta';
 					$campo 	= 'id';
 					require_once 'models/tes/excluir.php';
+					break;
+				case '11':
+					$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
+					require_once 'forms/tes/histFinanceiro.php';
+					require_once 'views/tesouraria/saldoMembros.php';
 					break;
 				default:
 					require_once 'forms/receita.php';

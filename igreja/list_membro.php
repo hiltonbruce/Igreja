@@ -1,7 +1,5 @@
 <link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
-
 <?PHP
-
 controle ("consulta");
 $ordenar = new igreja ();
 
