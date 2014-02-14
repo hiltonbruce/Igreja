@@ -39,7 +39,9 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 				//Form fechar caixa
 				require_once 'forms/concluirdiz.php';
 			}
-
+			
+			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
+			
 			switch ($_GET['rec']) {
 				case '0':
 					require_once ('forms/prestacao.php');
@@ -74,7 +76,6 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once 'models/tes/excluir.php';
 					break;
 				case '11':
-					$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
 					require_once 'forms/tes/histFinanceiro.php';
 					require_once 'views/tesouraria/saldoMembros.php';
 					break;

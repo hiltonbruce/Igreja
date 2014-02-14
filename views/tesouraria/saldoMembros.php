@@ -11,7 +11,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 }else {
 	$igreja = (int)$_GET['igreja'];
 	$ingSeleciona = new DBRecord('igreja', $igreja, 'rol');
-	$cong = 'Igrejas - '.$ingSeleciona->razao().'<br />';
+	$cong = 'Igreja - '.$ingSeleciona->razao().'<br />';
 	$hisFinanceiro = 2;
 	require_once 'forms/tes/histFinanceiro.php';
 }
