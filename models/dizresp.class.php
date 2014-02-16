@@ -63,7 +63,7 @@ function dizimistas($igreja,$linkLancamento) {
 		}
 		$total = number_format($total,2,',','.');
 		echo '</tbody>';
-		echo '<tfoot><tr class="total"><td colspan="3">Total:
+		echo '<tfoot><tr id="total"><td colspan="3">Total:
 		 ..........................................................................................R$
 		 </td><td id="moeda">
 		 '.$total.'</td><td></td></tr></tfoot>';
