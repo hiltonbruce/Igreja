@@ -39,7 +39,7 @@ function dizimistas($igreja,$linkLancamento) {
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
 			
 			//Criar link para alteração pelo cadastrador - Realizar critica tb qdo abrir
-			if ($_SESSION["valid_user"]==$linha['tesoureiro'] || $_SESSION["setor"]>'50') {
+			if ($_SESSION["valid_user"]==$linha['tesoureiro']) {
 				if ($_GET['tipo']==1) {
 					$corrigir = $valor;
 				}else {
