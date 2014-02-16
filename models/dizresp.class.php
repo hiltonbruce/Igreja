@@ -9,15 +9,24 @@ function __construct($tesoureiro='') {
 		
 	}
 	
-function dizimistas($igreja,$linkLancamento) {
+function dizimistas($igreja,$linkLancamento,$mes,$ano) {
 		
 	if ($igreja=='') {
 		$filtroIgreja = '';
 	} else {
-		$filtroIgreja = 'AND d.igreja="'.$igreja.'"';
+		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';
 	}
-		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0" 
-			'.$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+	
+	if ($mes>0 && $mes<12 && $ano>2000 && $ano<2050) {$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
+		$consulta .= ' AND mesrefer = '.$mes.' AND anorefer='.$ano;
+		$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
+		$this->dquery = mysql_query( $consulta ) or die (mysql_error());
+		$lancConfirmado = true;
+	}else {
+		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.
+				$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+			$lancConfirmado = false;
+	}
 		
 		
 		//echo '<tbody>';
@@ -39,7 +48,7 @@ function dizimistas($igreja,$linkLancamento) {
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
 			
 			//Criar link para alteração pelo cadastrador - Realizar critica tb qdo abrir
-			if ($_SESSION["valid_user"]==$linha['tesoureiro']) {
+			if ($_SESSION["valid_user"]==$linha['tesoureiro'] && !$lancConfirmado) {
 				if ($_GET['tipo']==1) {
 					$corrigir = $valor;
 				}else {

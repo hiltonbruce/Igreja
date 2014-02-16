@@ -19,8 +19,11 @@ controle ("tes");
 		exit;
 	}
 	
-
+	if ($tabela=='dizimooferta') {
+		$ver = mysql_query('DELETE FROM '.$tabela.' WHERE id='.$id.' AND lancamento="0" ') or die (mysql_error());
+	}else {
 		$ver = mysql_query("DELETE FROM $tabela WHERE id=$id ") or die (mysql_error());
+	}
 
 		if($ver){
 				echo "<script> alert('Apagado com sucesso');window.history.go(-1);</script></a>";

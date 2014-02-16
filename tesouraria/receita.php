@@ -68,6 +68,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					break;
 				case '9':
 					$idDizOf = $_GET['idDizOf'];
+					require_once 'forms/tes/histResumo.php';
 					require_once 'views/tesouraria/tabDizimosOfertas.php';
 					break;
 				case '10':

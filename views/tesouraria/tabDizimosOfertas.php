@@ -1,5 +1,12 @@
 <?php
+$mes = $_GET['mes'];
+$ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
+if ($mes>0 && $mes<12 && $ano>2000 && $ano<2050) {
+	$statusLancamento = 'Lançamento Confirmado';
+}else {
+	$statusLancamento = 'Lançamento Pendente';
+}
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
 <table>
@@ -37,7 +44,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
 				$dirigenteIgreja = $dirCong->nome();
 			}
-				echo '<h2>Igreja: '.$igrejaSelecionada->razao().' - Dirigente: '.$dirigenteIgreja.',
+				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().' - Dirigente: '.$dirigenteIgreja.',
 			 1&ordm; Tesoureiro: Não informado! </h2>';			
 			
 			printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
@@ -65,7 +72,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					//echo '<h1>Teste1</h1>';
 				} else {
 					$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
-					$dizmista->dizimistas($roligreja,$apagarEntrada);
+					$dizmista->dizimistas($roligreja,$apagarEntrada,$mes,$ano);
 					//echo '<h1>Teste2</h1>';
 				}
 			?>

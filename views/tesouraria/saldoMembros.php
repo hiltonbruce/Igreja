@@ -69,7 +69,9 @@ require_once 'models/tes/histFinMembro.php';
 						'</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
 				echo ('<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
 				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td><td id="moeda">'.number_format($totEnsino,2,',','.').'</td></tr>');
+				$totGeral = $totDizimo+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
 			?>
 		</tfoot>
 	</table>
+	<h2>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h2>
 	Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribuição: '.$menorAno.' ** Ultimo ano de contribuição: '.$maiorAno;?>
