@@ -1,7 +1,11 @@
+<?php 
+	$id = (int)$_GET["id"];
+	$tabela = $_GET["tabela"];
+?>
 <script>
 	function pergunta() {
-		var p=window.confirm("OK para APAGAR?");
-		window.location=(p) ? "./?conf=ok&escolha=tesouraria/receita.php&menu=top_tesouraria&rec=10&idDizOf=<?php echo $id;?>" : "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=9&idDizOf=<?php echo $id;?>";}
+		var p=window.confirm("CONFIRME! Para APAGAR o registro <?PHP echo $id;?>");
+		window.location=(p) ? "./?conf=ok&escolha=models/tes/excluir.php&tabela=<?php echo $tabela;?>&id=<?php echo $id;?>" : "./?escolha=tesouraria/receita.php&igreja=&menu=top_tesouraria&rec=1";}
 </script>
 <?PHP
 controle ("tes");
@@ -10,16 +14,16 @@ controle ("tes");
 	
 	if (empty($_GET["conf"])){
 		echo "<script>pergunta();</script>";
-		echo '<a href="./?conf=ok&escolha=tesouraria/receita.php&menu=top_tesouraria&rec=10&idDizOf='.$id.'">
+		echo '<a href="./?conf=ok&escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$id.'">
 				Você realmente deseja apagar?</a>';
 		exit;
 	}
 	
 
-		$ver = mysql_query("DELETE FROM $tabela WHERE $campo=$id LIMIT 1") or die (mysql_error());
+		$ver = mysql_query("DELETE FROM $tabela WHERE id=$id ") or die (mysql_error());
 
 		if($ver){
-				echo "<script> alert('Apagado com sucesso');window.history.go(-2);</script></a>";
+				echo "<script> alert('Apagado com sucesso');window.history.go(-1);</script></a>";
 				echo "Item apagado com sucesso<br><a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=9'>Voltar...</a>";
 				}
 				else

@@ -1,5 +1,4 @@
 <?PHP
-
 $cont_lin=0;
 if ($_GET["Submit"]=="Imprimir") {
 
@@ -15,14 +14,14 @@ if ($_GET["Submit"]=="Imprimir") {
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-<title>Lista de Membros - Igreja: <?php echo $igreja->razao();?></title>
+<title>Lista de Membros - Igreja: <?php echo $igreja->razao();?>
+</title>
 <link rel="stylesheet" type="text/css" media="print, screen"
 	href="tabs.css" />
 </head>
 <body>
 
-
-<?PHP
+	<?PHP
 }else {
 	$igreja = new DBRecord ("igreja",$_GET["id"],"rol");
 }
@@ -51,9 +50,10 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 
 		<colgroup>
 			<col id="Rol">
-			<col id="Nome">
-			<col id="Congrega&ccedil;&atilde;o">
-			<col id="albumCol" />
+				<col id="Nome">
+					<col id="Congrega&ccedil;&atilde;o">
+						<col id="albumCol" />
+		
 		</colgroup>
 
 		<thead>
@@ -62,13 +62,13 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				<th scope="col">Nome</th>
 				<?php 
 				if ($_GET['ext']==1) {
-				?>
+					?>
 				<th scope="col">Nascido em:</th>
 				<th scope="col">Telefones</th>
 				<?php 
 				}else {
-					
-				?>
+
+					?>
 				<th scope="col">Congregação</th>
 				<th scope="col">Cargo</th>
 				<?php 
@@ -76,34 +76,35 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			</tr>
 		</thead>
 		<tbody>
-		<?PHP
-			
-		while($coluna = mysql_fetch_array($sql3))
-		{
+			<?PHP
 
-			$ls++;
-			
-			if ($ls>1)
+			while($coluna = mysql_fetch_array($sql3))
 			{
-				$cor="class='dados'";
-				$ls=0;
-			}
-			else
-			{$cor="class='odd'";
-			}
-			
-			if ($_GET['ext']=='1') {
-				$bairro = new DBRecord( bairro, $coluna["bairro"], 'id');
-				$cidade = new DBRecord(cidade, $coluna["cidade"], 'id');
-			?>
+
+				$ls++;
+					
+				if ($ls>1)
+				{
+					$cor="class='dados'";
+					$ls=0;
+				}
+				else
+				{$cor="class='odd'";
+				}
+					
+				if ($_GET['ext']=='1') {
+					$bairro = new DBRecord( bairro, $coluna["bairro"], 'id');
+					$cidade = new DBRecord(cidade, $coluna["cidade"], 'id');
+					?>
 			<tr <?php echo "$cor";?>>
 				<td rowspan="2"><?php echo $coluna["rol"];?></td>
 				<td><?php echo $coluna["nome"];
-					$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
-					echo ' - Cong.: '.$congregacao->razao();
-					echo ', '.cargo ($coluna["rol"]);
-				
-				?></td>
+				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
+				echo ' - Cong.: '.$congregacao->razao();
+				echo ', '.cargo ($coluna["rol"]);
+
+				?>
+				</td>
 				<td rowspan="2" style="text-align: center;"><?php
 				echo conv_valor_br($coluna["datanasc"]);
 				?></td>
@@ -113,13 +114,14 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			</tr>
 			<tr <?php echo "$cor";?>>
 				<td>Endereço: <?php echo $coluna["endereco"].', Nº '.
-				$coluna["numero"].', Bairro: '.$bairro->bairro()
-				.' - '.$cidade->nome().'-'.$cidade->coduf().
-				', Complem.: '.$coluna["complemento"];?></td>
+						$coluna["numero"].', Bairro: '.$bairro->bairro()
+						.' - '.$cidade->nome().'-'.$cidade->coduf().
+						', Complem.: '.$coluna["complemento"];?>
+				</td>
 			</tr>
 			<?PHP
-		}else {
-		?>
+				}else {
+					?>
 			<tr <?php echo "$cor";?>>
 				<td><?php echo $coluna["rol"];?></td>
 				<td><?php echo $coluna["nome"];				
@@ -134,9 +136,9 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			</tr>
 			<?PHP	}
 
-		}//loop while produtos
+			}//loop while produtos
 
-		?>
+			?>
 		</tbody>
 	</table>
 
@@ -153,7 +155,7 @@ if ($total>"1"){
 }
 
 if ($_GET["Submit"]=="Imprimir") {
-?>
+	?>
 </body>
 </html>
 <?php }?>

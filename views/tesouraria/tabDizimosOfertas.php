@@ -1,6 +1,5 @@
 <?php
-$apagarEntrada	= '?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=10&idDizOf='.$idDizOf;
-
+$apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
 <table>
@@ -43,7 +42,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 			
 			printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
 			 </h2>",number_format($dizmista->outrosdizimos($_GET['rolIgreja']),2,',','.'));?>
-			Dízimos e Ofertas - <?php printf(' Resp.: %s',$_SESSION {'nome'});?></caption>
+			<?php printf(' Resp. pelo lan&ccedil;amento: %s',$_SESSION {'nome'});?></caption>
 			<colgroup>
 				<col id="Data">
 				<col id="Rol/Nome">
@@ -66,8 +65,9 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					//echo '<h1>Teste1</h1>';
 				} else {
 					$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
-					$dizmista->dizimistas($roligreja,$linkLancamento);
+					$dizmista->dizimistas($roligreja,$apagarEntrada);
 					//echo '<h1>Teste2</h1>';
 				}
 			?>
 </table>
+<a href="controller/modeloPrint.php/?rec=9&tipo=1&igreja=<?php echo $_GET['igreja']?>"><button>Imprimir ...</button> </a>

@@ -504,8 +504,8 @@ function data_extenso ($data) {
 			$ver_data = checkdate($m,$d,$y);
 
 	if (!$ver_data){
-				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y'); window.history.go(-2);</script>";
-				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato inválida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
+				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
 				break;
 			}
 
@@ -533,7 +533,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Marï¿½o";
+		case 3: $mes_extenso="Março";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -553,7 +553,7 @@ function data_extenso ($data) {
 				break;
 		case 12: $mes_extenso="Dezembro";
 				break;
-		default: echo $mes_extenso="Mï¿½s incorreto";
+		default: echo $mes_extenso="Mês incorreto";
 	}//fim do case para o mï¿½s
 
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
@@ -561,7 +561,7 @@ function data_extenso ($data) {
 
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
 
-	$alerta = "<script> alert('Desculpe mas vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para $tipo!');location.href='./';</script>";
+	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
 		

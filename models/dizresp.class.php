@@ -40,9 +40,14 @@ function dizimistas($igreja,$linkLancamento) {
 			
 			//Criar link para alteração pelo cadastrador - Realizar critica tb qdo abrir
 			if ($_SESSION["valid_user"]==$linha['tesoureiro'] || $_SESSION["setor"]>'50') {
-				$corrigir = '<a href="'.$linkLancamento.'&rec=9&igreja='.$linha['rolIgreja'].'&idDizOf='.$linha['id'].'" 
-						title="clique aqui para corrigir!">'.$valor.'
-						<img src="img/blackeditar.png" alt="Corrigir valor" /></a>';
+				if ($_GET['tipo']==1) {
+					$corrigir = $valor;
+				}else {
+					$corrigir = '<a href="'.$linkLancamento.$linha['id'].'" 
+						title="clique aqui para apagar!">'.$valor.'
+						<img src="img/blackeditar.png" alt="Apagar item" /></a>';
+				}
+				
 			}else {
 				$corrigir = $valor;
 			}

@@ -2,7 +2,8 @@
 $ind=1; 
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 $_SESSION['lancar']=true;
-$linkLancamento = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
+$linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
+$linkLancamento .= '&igreja='.$_GET['igreja'];
 ?> 
 <div id="tabs">
 	<ul>
@@ -25,7 +26,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 
 	// verifica se há valor a ser lançado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);
-	$tituloColuna5 = 'Igreja';
+	$tituloColuna5 = ($idIgreja>'1') ? 'Congregação':'Igreja';
 	if ($_POST['concluir']=='1') {
 			$tituloColuna5 = 'Status';
 			require_once 'forms/lancdizimo.php';
