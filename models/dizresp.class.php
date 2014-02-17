@@ -9,7 +9,7 @@ function __construct($tesoureiro='') {
 		
 	}
 	
-function dizimistas($igreja,$linkLancamento,$mes,$ano) {
+function dizimistas($igreja,$linkLancamento,$mes,$ano,$tipo) {
 		
 	if ($igreja=='') {
 		$filtroIgreja = '';
@@ -17,7 +17,7 @@ function dizimistas($igreja,$linkLancamento,$mes,$ano) {
 		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';
 	}
 	
-	if ($mes>0 && $mes<12 && $ano>2000 && $ano<2050) {$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
+	if ($mes>0 && $mes<12 && $ano>2000 && $ano<2050 && $tipo=='9') {$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 		$consulta .= ' AND mesrefer = '.$mes.' AND anorefer='.$ano;
 		$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
 		$this->dquery = mysql_query( $consulta ) or die (mysql_error());

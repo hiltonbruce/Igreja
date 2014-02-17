@@ -72,7 +72,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					//echo '<h1>Teste1</h1>';
 				} else {
 					$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
-					$dizmista->dizimistas($roligreja,$apagarEntrada,$mes,$ano);
+					$dizmista->dizimistas($roligreja,$apagarEntrada,$mes,$ano,$_GET['rec']);
 					//echo '<h1>Teste2</h1>';
 				}
 			?>
