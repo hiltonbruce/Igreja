@@ -33,7 +33,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 	if ($_GET['idDizOf']>0) {
 	//Incluir form para alterar ou excluir pre-lançamento de Dízimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
-		} 
+		}
 ?>
 <table  style="width: 95%;">
 		<caption>
