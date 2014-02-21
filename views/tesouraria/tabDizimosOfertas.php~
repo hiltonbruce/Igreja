@@ -75,7 +75,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					$dizmista->dizimistas($roligreja,$apagarEntrada,$mes,$ano,$_GET['rec']);
 					//echo '<h1>Teste2</h1>';
 				}
-				$linkResumo = '&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
+				
 			?>
 </table>
-<a href="controller/modeloPrint.php/?rec=9&tipo=1<?php echo $linkResumo;?>"><button>Imprimir ...</button> </a>
+<a href="controller/modeloPrint.php/?rec=9&tipo=1&igreja=<?php echo $_GET['igreja']?>"><button>Imprimir ...</button> </a>

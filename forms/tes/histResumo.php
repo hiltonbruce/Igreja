@@ -4,7 +4,7 @@
 		Por Congrega&ccedil;&atilde;o:
 		<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'igreja');
-		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'required="required" autofocus="autofocus" ');
+		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],' autofocus="autofocus" ');
 		echo $listaIgreja;
 		?>
 		Mês: <input type="text" name="mes" value="<?php echo $_GET['mes'];?>"tabindex="<?PHP echo ++$ind; ?>" />
