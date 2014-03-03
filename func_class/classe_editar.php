@@ -26,7 +26,7 @@ class editar_form {
 	public function getFormSexo () {
 	// Se o campo for sexo retorna um campo select
 	return ?>
-			<select name="select">
+			<select name="select" autofocus="autofocus" >
 				<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 				<option value="M">Masculino</option>
 				<option value="F">Femino</option>
@@ -37,7 +37,7 @@ class editar_form {
 	public function getFormPais () {
 	// Se o campo for sexo retorna um campo select
 	return ?>
-			<select name="select">
+			<select name="select" autofocus="autofocus" >
 				<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 				<option value="M">Masculino</option>
 				<option value="F">Femino</option>
@@ -68,11 +68,11 @@ class editar_form {
 			  <?PHP
 			  //No caso para o campo naturalidade o campo UF é adiconado 
 			  echo $this->valor;if ($this->campo=="naturalidade" || $this->campo=="cidade"){/*DEVE-SE SE ADICIONAR OUTRO FORM PARA UF*/}
-			  ?>" size="30"/>
+			  ?>" size="30" autofocus="autofocus" />
 			<?PHP
 			}else //Campo para form tipo textarea
 			{
-				echo "<textarea name='{$this->campo}' cols='50' >{$this->valor}</textarea>";
+				echo "<textarea autofocus='autofocus' name='{$this->campo}' cols='50' >{$this->valor}</textarea>";
 			}
 
 			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")
@@ -80,7 +80,7 @@ class editar_form {
 			//Nos campos Pai e Mãe é aberto um segundo campo do form para o rol e a opção, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
 			Rol:
-			<input name="<?PHP echo "rol_{$this->campo}";?>" type="text" value="<?PHP echo $arr_dad["rol_{$this->campo}"];?>" size="10" />
+			<input name="<?PHP echo "rol_{$this->campo}";?>" autofocus="autofocus" type="text" value="<?PHP echo $arr_dad["rol_{$this->campo}"];?>" size="10" />
 			<?php
 			if ($this->campo=="conjugue") {$form=2;}else{$form=3;}
 			?>
@@ -106,7 +106,7 @@ class form_sexo extends editar_form {
 	if ($this->campo=="sexo")
 			{
 			?>
-			  <select name="select">
+			  <select name="select" autofocus="autofocus" >
 				<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 				<option value="M">Masculino</option>
 				<option value="F">Femino</option>
