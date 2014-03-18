@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="org.eclipse.cvs:1.4.0.v20130314-1330"/>
+		<item value="org.eclipse.dltk.core:5.0.0.201309220703"/>
+		<item value="org.eclipse.emf.common:2.9.0.v20130528-0742"/>
+		<item value="org.eclipse.emf.ecore:2.9.0.v20130528-0742"/>
+		<item value="org.eclipse.epp.mpc:1.2.0.I20130320-1535"/>
+		<item value="org.eclipse.help.source:2.0.0.v20130314-1330"/>
+		<item value="org.eclipse.help:2.0.0.v20130314-1330"/>
+		<item value="org.eclipse.jdt:3.9.0.v20130314-1330"/>
+		<item value="org.eclipse.pde:3.9.0.v20130314-1330"/>
+		<item value="org.eclipse.rcp.source:4.3.0.v20130314-1730"/>
+		<item value="org.eclipse.rcp:4.3.0.v20130314-1730"/>
+	</list>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="256" key="DIALOG_Y_ORIGIN"/>
+		<item value="327" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+</section>
