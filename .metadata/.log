@@ -1,0 +1,44 @@
+!SESSION 2014-03-14 10:45:35.762 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130314-1330
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Command-line arguments:  -data /var/www/igrejas/GitHub/Igreja -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.equinox.app 0 0 2014-03-14 10:45:36.834
+!MESSAGE Product org.eclipse.sdk.ide could not be found.
+
+!ENTRY org.eclipse.ui 2 0 2014-03-14 10:45:37.342
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2014-03-14 10:45:37.342
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.php.ui', id='org.eclipse.dltk.ui.edit.text.java.source.quickMenu', categoryId='org.eclipse.jdt.ui.category.source'
+
+!ENTRY org.eclipse.ui 2 0 2014-03-14 10:45:37.768
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2014-03-14 10:45:37.768
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.php.ui', id='org.eclipse.dltk.ui.edit.text.java.source.quickMenu', categoryId='org.eclipse.jdt.ui.category.source'
+!SESSION 2014-03-14 10:48:11.918 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130314-1330
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Command-line arguments:  -data /var/www/igrejas/GitHub/Igreja -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.equinox.app 0 0 2014-03-14 10:48:12.965
+!MESSAGE Product org.eclipse.sdk.ide could not be found.
+
+!ENTRY org.eclipse.ui 2 0 2014-03-14 10:48:13.872
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2014-03-14 10:48:13.872
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.php.ui', id='org.eclipse.dltk.ui.edit.text.java.source.quickMenu', categoryId='org.eclipse.jdt.ui.category.source'
+
+!ENTRY org.eclipse.e4.ui.workbench 1 0 2014-03-14 10:48:13.954
+!MESSAGE Removing existing binding for org.eclipse.e4.css.OpenSpy to M2+M3+F5
+
+!ENTRY org.eclipse.e4.ui.workbench 1 0 2014-03-14 10:48:13.956
+!MESSAGE Removing existing binding for org.eclipse.e4.css.OpenSctachpad to M2+M3+F6
+
+!ENTRY org.eclipse.ui 2 0 2014-03-14 10:48:14.211
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2014-03-14 10:48:14.211
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.php.ui', id='org.eclipse.dltk.ui.edit.text.java.source.quickMenu', categoryId='org.eclipse.jdt.ui.category.source'
