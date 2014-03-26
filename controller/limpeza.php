@@ -1,6 +1,6 @@
 <?php
 $igreja = ($_GET['igreja']>0) ? $_GET['igreja']:$_POST['igreja'];
-
+$saltoPagina = '<div style="page-break-before: always;"> </div>';
 switch ($_GET['limpeza']) {
 	case '1':
 		//Mostrar totalizador geral para impressão
@@ -69,6 +69,7 @@ switch ($_GET['limpeza']) {
 		$ref = new ultimoid('limpezpedid');
 		$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
 		//Dados para montar o cabeçalho do documento para imprimir
+		$saltoPagina = '';
 		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
 		$dadosjgreja .= '<br /> '.$sede->cidade().' - '.$sede->uf().' - CNPJ:';
 		$dadosjgreja .= $sede->cnpj().'<br />	CEP: '.$sede->cep().' - Fone:';
