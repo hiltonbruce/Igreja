@@ -27,7 +27,9 @@ if ($_GET['limpeza']!='4') {
 		?>
 	</tbody>
 </table>
-<div style="page-break-before: always;"> </div>
+	<?PHP 
+		echo $saltoPagina;
+	?>
 <table id="listTable" >
 	<caption>Relação do Material de Limpeza Total para Entrega - <?php echo $mesref;?></caption>
 	
@@ -52,8 +54,10 @@ if ($_GET['limpeza']!='4') {
 			echo $tbodytab->TotMatEntregar();
 		?>
 	</tbody>
-</table>teste
-<div style="page-break-before: always;"> </div>
+</table>
+	<?PHP 
+		echo $saltoPagina;
+	?>
 <table id="listTable" >
 	<caption>Material de Limpeza Total Adquirido no Mercado Autorizado  - <?php echo $mesref;?></caption>	
 		<colgroup>
@@ -78,8 +82,8 @@ if ($_GET['limpeza']!='4') {
 		?>
 	</tbody>
 </table>
-<div style="page-break-before: always;"> </div>
-<?php 
+	<?PHP 
+		echo $saltoPagina;
 }
 	require_once $todascongreg;
 	if ($dadoscong->matlimpeza()=='0') {
@@ -89,7 +93,7 @@ if ($_GET['limpeza']!='4') {
       <h2><?PHP  print $dadoscong->cidade()." - ".$dadoscong->uf().", ".data_extenso (date('d/m/Y'));?></h2>
       <p>&nbsp;</p>
       <p class="bottom">&nbsp;</p>
-	  <div id="pastor"><?PHP echo 'Joseilton C Bruce';?><br />Tesoureiro </div>
+	  <div id="pastor"><?PHP echo 'Joseilton Costa Bruce';?><br />Tesoureiro </div>
 	  <div id="secretario"><?PHP echo '_____________________';?><br />Zelador(a)</div>
 	</div>
 	<?php 

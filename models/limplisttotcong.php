@@ -46,7 +46,7 @@ if ($_GET['limpeza']=='4') {
 		$tabtodas .= '</tbody></table>';
 		$tabtodas .= '<fieldset><legend>Obs.:</legend> As congregações que não enviarem a lista de material de limpeza
 		no próximo bimestre não serão relacionadas para entrega!</fieldset>';
-		$tabtodas .= '<div style="page-break-before: always;"> </div>';
+		$tabtodas .= $saltoPagina;
 	}
 	
 	echo  $tabtodas;

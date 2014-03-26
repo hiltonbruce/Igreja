@@ -25,6 +25,8 @@
      Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
     </div>
   </div>
-<div style="page-break-before: always;"> </div>
+	<?PHP 
+		echo $saltoPagina;
+	?>
 </body>
 </html>
