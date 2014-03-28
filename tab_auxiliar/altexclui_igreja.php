@@ -14,7 +14,8 @@
       <tr>
         <th scope="col">Nome da atual</th>
         <th scope="col">Alterar Nome:</th>
-        <th scope="col">Excluir igreja!</th>
+        <th scope="col">Excluir</th>
+        <th scope="col">Editar igreja!</th>
       </tr>
     </thead>
 
@@ -42,13 +43,20 @@
 				<?php 
 					if ($chave!='1') {
 						?>
-							<a href="./?escolha=sistema/excluir.php&campo=rol&tabela=igreja&id=<?php echo $chave;?>">Excluir...</a>
+							<a href="./?escolha=sistema/excluir.php&campo=rol&tabela=igreja&id=
+							<?php echo $chave.'&igreja='.$lista[$chave];?>">
+							<img src="img/not.png" alt="Voltar 1 dia" width="22" height="22" title="Voltar 1 dia" align="absmiddle" border="0" />
+							Excluir...</a>
 						<?php
 					}else {
-						echo '<span class="divider">A sede não pode ser excluída!</span>';
+						echo '<span class="divider" title="A sede não pode ser excluída!">Sede</span>';
 					}
 				?>
-				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&rol=<?php echo $chave;?>">Editar informa&ccedil;&otilde;es</a>
+				</td>
+				<td>
+				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&rol=<?php echo $chave;?>">
+				<img src="img/blackeditar.png" alt="Voltar 1 dia" width="22" height="22" title="Voltar 1 dia" align="absmiddle" border="0" />
+				Dados</a>
 			</td>
     	</tr>
     		<?PHP

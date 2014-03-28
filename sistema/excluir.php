@@ -1,3 +1,9 @@
+<script language="javascript">
+<!--
+function pergunta() {
+	var p=window.confirm("Você realmente deseja desativar permanentemente a igreja: <?php echo $_GET["igreja"];?> ?");
+	window.location=(p) ? "./?escolha=sistema/excluir.php&campo=rol&tabela=igreja&id=<?php echo $_GET['id'];?>&conf=ok" : "./?escolha=tab_auxiliar/altexclui_igreja.php&uf=PB";}
+</script>
 <?PHP
 
 controle ("deletar");
@@ -11,6 +17,8 @@ controle ("deletar");
 	if ($tabela=='igreja' && $id=='1' ) {
 		echo "<script> alert('A sede da igreja não pode ser APAGADA!');window.history.go(-1);</script></a>";
 		echo "A sede da igreja não pode ser APAGADA!";
+	}elseif (empty($_GET["conf"])){
+			echo "<script>pergunta();</script>";
 	}else {
 				$ver = mysql_query("DELETE FROM $tabela WHERE $campo =$id LIMIT 1") or die (mysql_error());
 
