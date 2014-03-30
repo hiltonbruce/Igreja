@@ -20,6 +20,26 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 
 		$atualizar= new updatesist('agenda',$_POST['atualizar'],'id');
 		$atualizar->resppgto	=	$_POST['resppgto'];
+		
+		//Verifica se o vencimento é uma data validade e atualiza
+		if (checadata($_POST['vencimento'])) {
+			$vencimento = br_data ($_POST['vencimento'],'Data de Vencimento');
+			$dataAtual = new DateTime($atualizar->vencimento());
+			$dataVenc  = new DateTime($vencimento);
+			if ($dataVenc->format('Y-m')== $dataAtual->format('Y-m')) {
+				$atualizar->vencimento	= $vencimento;
+			}else {
+				echo "<h1>".$dataVenc->format('Y-m')."</h1>";
+				echo "<h1>".$dataAtual->format('Y-m')."</h1>";
+				echo "<script> alert('O vencimento só poderá ser alterado o dia!');</script>";
+				echo 'O vencimento só poderá ser alterado o dia!';
+			}
+			
+		}else {
+			echo "<script> alert('O vencimento com data invalida! {$_POST['vencimento']}');</script>";
+		}
+		
+		
 		$atualizar->status		= 	$_POST['status'];
 		$atualizar->multa		=	strtr($_POST['multa'], ',','.' );
 		$valor_us =strtr($_POST['valor'], ',','.' );
