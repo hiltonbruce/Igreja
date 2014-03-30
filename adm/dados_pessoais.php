@@ -54,16 +54,36 @@ $ind = 1;
 			$mes = date ('m') - date('m',$arr_dad["nasc"]);
 			$dia = date ('d') - $arr_dad["dia"];
 			
-			if ($mes <= '0' ) {
-				if ( $dia < '0' ) {
-					$idade = date ('Y') - $arr_dad["nasc"];
-					echo $idade - '1'." Anos ";
-				} else {
-					echo date ('Y-m-d') - $arr_dad["nasc"]." Anos ";
-				}
-			}else{
-				echo date ('Y-m-d') - $arr_dad["nasc"]." Anos ";
+			/*
+			 * 
+			 * Calcular a idade do membro
+			 * 
+			 * */
+			$dataAtual = new DateTime('NOW');
+			$dataNasc  = new DateTime($arr_dad["nasc"]);
+			$diferenca = $dataNasc->diff($dataAtual);
+			//print_r($dataNasc);
+			//echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
+			
+			
+			if ($diferenca->y>1) {
+				echo $diferenca->y.' Anos, ';
+			}elseif ($diferenca->y>0){
+				echo $diferenca->y.' ano, ';
 			}
+			if ($diferenca->m>1) {
+				echo $diferenca->m.' meses, ';
+			}elseif ($diferenca->m>0){
+				echo $diferenca->m.' mes, ';
+			}
+			if ($diferenca->d>1) {
+				echo $diferenca->d.' dias<br/>';
+			}elseif ($diferenca->d>0) {
+				echo $diferenca->d.' dia<br/>';
+			}
+			//echo $dataNasc->format('Y-m').' FormatoNasc<br/>';
+			
+			
 		?><div><?PHP print mostra_foto();?></div></td>
       </tr>
       <tr>

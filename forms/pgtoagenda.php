@@ -16,13 +16,13 @@
 	$vencimento = $itemagenda->vencimento();
 	$dataAtual = new DateTime('NOW');
 	$dataVenc  = new DateTime($vencimento);
-	/*
+	
 	$diferenca = $dataVenc->diff($dataAtual);
-	print_r($dataVenc);
+	print_r($diferenca);
 	echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
 	echo $diferenca->m.' meses<br/>';
 	echo $dataVenc->format('Y-m').' FormatoVenc<br/>';
-	*/
+	/**/
 	if ($dataAtual->format('U') > $dataVenc->format('U')) {
 		echo 'Conta Vencida<br/>';
 	}else {
