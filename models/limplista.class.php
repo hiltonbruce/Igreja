@@ -211,6 +211,43 @@ class limplista {
 	return $tabtbody;
 	
 	}
+	
+	public function ListaMaterial() {
+		//Select mysql na tabela limpeza para listar o total para o período
+	
+		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid, p.tempo  ';
+		$tot 	.= 'FROM limpeza AS p ';
+		$totLimp = mysql_query($tot);
+		$incrrc=0; //indece p/ zebrar tabela
+		$tabtbody = ''; //Limpa variável para receber os dados da tabela
+			
+		while($lista = mysql_fetch_array($totLimp)){
+								
+			//Faz o trabalho de zebrar a tabela
+			if ($inclimp%2=="0") {
+				$tabtbody .= "<tr class='odd' >";
+			} else {
+				$tabtbody .=  '<tr>';
+			}
+	
+			++$inclimp;
+				
+			//Coluna Item
+			$tabtbody .= sprintf("<td>%'03u</td>",$inclimp);
+				
+			//Coluna Unidade
+			$tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
+				
+			//Coluna Discriminação
+			$tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
+				
+			//Coluna Quantidade Solicitada
+			$tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$lista['tempo']);
+		}
+	
+		return $tabtbody;
+	
+	}
 }
 
 ?>

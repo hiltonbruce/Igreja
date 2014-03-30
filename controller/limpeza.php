@@ -30,7 +30,6 @@ switch ($_GET['limpeza']) {
 		$todascongreg = '../models/limplisttotcong.php';
 		
 		require_once '../tesouraria/modeloimpress.php';
-		
 	break;
 	
 	case '2':
@@ -87,6 +86,34 @@ switch ($_GET['limpeza']) {
 		$ref = new ultimoid('limpezpedid');
 		$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
 		require_once 'forms/limpeza/mudarperiodo.php';
+	break;
+	case '6':
+		//Mostrar Lista de todos os materiais disponíveis
+		error_reporting(E_ALL);
+		ini_set('display_errors', 'off');
+		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
+		require "../func_class/funcoes.php";
+		require "../func_class/classes.php";
+		function __autoload ($classe) {
+			require_once ("../models/$classe.class.php");
+		}
+		//montar um cabeçalho padrão e remover as chamadas a cima
+		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
+		$ref = new ultimoid('limpezpedid');
+		$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
+		
+		//Dados para montar o cabeçalho do documento para imprimir
+		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
+		$dadosjgreja .= '<br /> '.$sede->cidade().' - '.$sede->uf().' - CNPJ:';
+		$dadosjgreja .= $sede->cnpj().'<br />	CEP: '.$sede->cep().' - Fone:';
+		$dadosjgreja .= $sede->fone().' - Fax: '.$sede->fax();
+		$siteigreja	  = $sede->site();
+		$emailigreja  = $sede->email();
+		$icone		  = '../ad.ico';
+		$titulo		  = 'Material de limpeza Disponibilizado';
+		$arquivo	  = '../views/limpezaLista.php';
+		
+		require_once '../tesouraria/modeloimpress.php';
 	break;
 	
 	default:

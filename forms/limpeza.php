@@ -98,7 +98,9 @@
 			</tr>
 		</tbody>
 	</table>
-</form><a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'><button type="button">Alterar Período...</button></a>
+</form>
+<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'><button type="button">Alterar Período...</button></a>
+<a href='./controller/limpeza.php?limpeza=6'><button type="button">Material Disponível...</button></a>
 </fieldset>
 
 <?php
