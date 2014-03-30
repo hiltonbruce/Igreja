@@ -1,18 +1,19 @@
 <link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
 
-<fieldset><legend>Alteração e Exclusão de Igrejas</legend>
+<fieldset><legend>Alteraï¿½ï¿½o e Exclusï¿½o de Igrejas</legend>
 <table id="Tabela de igrejas" summary="Lista de todos as igrejas da Cidade." style="text-align: left; width: 100%;">
     <caption>
       Todos as igrejas da Cidade de Bayeux-PB
     </caption>
     <colgroup>
 		<col id="Nome da atual">
-		<col id="Alterar para:">
+		<col id="Alterar Nome:">
+		<col id="Excluir">
 		<col id="Excluir igreja!">
 	</colgroup>
     <thead>
       <tr>
-        <th scope="col">Nome da atual</th>
+        <th id="playlistPosHead" scope="col">Nome da atual</th>
         <th scope="col">Alterar Nome:</th>
         <th scope="col">Excluir</th>
         <th scope="col">Editar igreja!</th>
@@ -49,7 +50,7 @@
 							Excluir...</a>
 						<?php
 					}else {
-						echo '<span class="divider" title="A sede não pode ser excluída!">Sede</span>';
+						echo '<span class="divider" title="A sede nï¿½o pode ser excluï¿½da!">Sede</span>';
 					}
 				?>
 				</td>
