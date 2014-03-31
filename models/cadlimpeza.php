@@ -32,13 +32,15 @@ if (checadata($_POST['data'])) {
 			//deletar item
 			$prodCadastrado = $db->query('DELETE FROM limpezpedid WHERE id=?',array($row['id']));
 			echo '<script>alert("** O item foi apagado! **");</script>';
-		}else {
+		}elseif ($quant>0) {
 			$cong = new DBRecord('igreja',$igreja, 'rol');
 			$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$item,$quant,$mesref,$data,$igreja,$cong->matlimpeza(),$hist);
 			echo $dadosagenda.' *** <br />';
 			$pedLimpeza= new insert ($dadosagenda,"limpezpedid");
 			echo $pedLimpeza->inserir();
 
+		}else {
+			echo '<script>alert("** Quantidade invalida! **");</script>';			
 		}
 
 
