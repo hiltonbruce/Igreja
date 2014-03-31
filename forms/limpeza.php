@@ -70,7 +70,7 @@
 					?>
 				</td>
 				<td>
-					<input type="text" name="quant" tabindex="<?PHP echo ++$ind;?>" />
+					<input type="text" name="quant" required='required' tabindex="<?PHP echo ++$ind;?>" />
 				</td>
 				<td>
 					<?php 
@@ -82,8 +82,7 @@
 			<tr>
 				<td>
 					<label>Data:</label>
-					<input type="text" name="data" required='required' OnKeyPress
-					="formatar('##/##/####', this);" 
+					<input type="text" name="data" required='required' id='data'
 						tabindex="<?PHP echo ++$ind;?>" value="<?php echo $data;?>" maxlength="10" />
 				</td>
 				<td>
