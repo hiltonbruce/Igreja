@@ -11,18 +11,21 @@ class limplista {
 	
 	var $mesref;
 	
-	function limplista ($mesref){
+	function limplista ($mesref,$mesAnt01,$mesAnt02){
 		//Select mysql na tabela limpeza, limpezpedid e igreja
-		  $this->mesref	 = $mesref;
+		  $this->mesref	 	= $mesref;
+		  $this->anterior1	= $mesAnt01;
+		  $this->anterior2  = $mesAnt02;
 		  $this->igreja	 = $igreja;
 		
 	}
 	
 	function tabelaLimp ($igreja) {
-		$sql 	 = 'SELECT l.quant,p.discrim,p.unid,p.quant as qunid ';
+		$sql 	 = 'SELECT l.quant,p.discrim,p.unid,p.quant as qunid, l.item AS item ';
 		$sql 	.= 'FROM limpezpedid AS l, limpeza AS p ';
-		$sql 	.= 'WHERE igreja = "'.$igreja.'" AND mesref="'.$this->mesref.'" AND ';
-		$sql 	.= 'p.id = l.item ORDER BY p.discrim ';
+		$sql 	.= 'WHERE igreja = "'.$igreja.'" AND ';
+		$sql 	.= '(mesref="'.$this->mesref.'" OR mesref="'.$this->anterior1.'" OR mesref="'.$this->anterior2.'")';
+		$sql 	.= ' AND p.id = l.item ORDER BY p.discrim ';
 		$sqlLimp = mysql_query($sql);
 		$incrrc=0; //indece p/ zebrar tabela
 		$this->tabtbody = ''; //Limpa variável para receber os dados da tabela
@@ -30,19 +33,102 @@ class limplista {
 		
 		if (mysql_num_rows($sqlLimp)>0) {
 			
+			$itemInicial='';
+			$colAnt02 = '<td></td>';
+			$colAnt01 = '<td></td>';
+			$colAtual = '<td></td></tr>';
+			
 			while($lista = mysql_fetch_array($sqlLimp)){
 				
-				//Faz o trabalho de zebrar a tabela
-				if ($inclimp%2=="0") {
-					$this->tabtbody .= "<tr class='odd' >";
-				} else { 
-					$this->tabtbody .=  '<tr>';
-				}
-			
-				++$inclimp;
 				
-				//Coluna Item
-				$this->tabtbody .= sprintf("<td>%'03u</td>",$inclimp);
+				
+				switch ($lista['mesref']) {
+					case $this->mesref:
+						//Coluna Atual
+						$colAtual = sprintf("<td>%s</td></tr>",$lista['quant']);
+						break;
+					case $this->anterior1:
+						//Coluna Anterior01
+						$colAnt01 = sprintf("<td>%s</td>",$lista['quant']);
+						break;
+					case $this->anterior2:
+						//Coluna Anterior02
+						$colAnt02 = sprintf("<td>%s</td>",$lista['quant']);
+						break;
+				}
+				
+				
+				//Faz o trabalho de zebrar a tabela
+				$itemColuna++;
+				
+				if ($itemInicial!=$linha['item']) {
+					
+					if ($inclimp%2=="0" && $itemColuna=='1') {
+						$colInicio = "<tr class='odd' >";
+					} elseif ($itemColuna=='1') { 
+						$colInicio =  '<tr>';
+					}
+					
+					
+					
+					$itemInicial = $linha['item'];
+					++$inclimp;
+					
+				}
+					//Coluna Item
+					$colItem = sprintf("<td>%'03u</td>",$inclimp);
+					$colUnid = sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
+					$colDescr= '<td> '.$lista['discrim'].' </td>';
+				
+					if ($itemInicial==$linha['item'] && $itemColuna>'3') {
+						$this->tabtbody .= $colInicio.$colAnt02.$colAnt01.$colItem.$colUnid.$colDescr.$colAtual;
+						$itemColuna = 0;
+					}
+				/*
+				if ($itemColuna=='1' && $lista['mesref']==$this->anterior2) {
+					//Coluna Anterior02
+					$anterior2 = sprintf("<td>%s</td>",$lista['quant']);
+				}
+				
+				if ($lista['mesref']==$this->anterior1) {
+					if ($anterior2=='') {
+						//Coluna Anterior02
+						$anterior2 = '<td></td>';
+						$itemColuna = 2;
+					}
+					//Coluna Anterior01
+					$anterior1 .= sprintf("<td>%s</td>",$lista['quant']);
+				}elseif ($itemColuna!='2' && $lista['mesref']==$this->anterior1) {
+					$anterior1 = sprintf("<td>%s</td>",$lista['quant']);
+				}
+				
+				if ($lista['mesref']==$this->mesref) {
+					if ($anterior2=='') {
+						//Coluna Anterior02
+						$anterior2 = '<td></td>';
+					}
+					if ($anterior1=='') {
+					//Coluna Anterior01
+					$anterior1 = '<td></td>';
+					}
+					if ($lista['quant']=='' AND $lista['mesref']==$this->mesref) {
+						$colAtual = '<td></td>';
+						++$inclimp;
+						$itemColuna = 2;
+					}else {
+						$colAtual = sprintf("<td style='text-align: center;'>%s</td>",$lista['quant']);
+						++$inclimp;
+						$itemColuna = 2;
+					}
+				}
+				
+				
+				
+				//Coluna Anterior02
+				$this->tabtbody .= sprintf("<td>%s</td>",$itemColuna);
+				//Coluna Anterior01
+				$this->tabtbody .= sprintf("<td>%s</td>",$itemColuna);
+				
 				
 				//Coluna Unidade
 				$this->tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
@@ -50,11 +136,11 @@ class limplista {
 				//Coluna Discriminação
 				$this->tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
 				
-				//Coluna Quantidade Solicitada
-				$this->tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$lista['quant']);
+				//Coluna Quantidade Atual
 				
-				//Coluna Quantidade entregue
-				$this->tabtbody .= "<td></td>";
+				$this->tabtbody .= $colAtual;
+				*/
+				
 				
 			}
 		

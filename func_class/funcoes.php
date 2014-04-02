@@ -768,4 +768,61 @@ function material ()
 	return $material;
 	
 }
+
+function periodoLimp ($mesRef) {
+	/*
+	 * Devolve o periodo da listagem do material de limpeza
+	 */
+	 
+	$mesref = ($mesRef!='') ? $mesRef:$_GET['mesref'];
+	
+	//$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
+	
+	list($mref,$aref) = explode('/', $mesref);
+	$linkperido = 'mes='.$mref.'&ano='.$aref;
+	
+	switch ($mref) {
+		case 2:
+			$periodo = 'Fev e Mar/';
+			$anterio1 = '12'.$aref-1;
+			$anterio2 = '10'.$aref-1;
+			break;
+		case 4:
+			$periodo = 'Abr e Mai/';
+			$anterio1 = '02'.$aref;
+			$anterio2 = '12'.$aref-1;
+			break;
+		case 6:
+			$periodo = 'Jun e Jul/';
+			$anterio1 = '04'.$aref;
+			$anterio2 = '02'.$aref;
+			break;
+		case 8:
+			$periodo = 'Ago e Set/';
+			$anterio1 = '06'.$aref;
+			$anterio2 = '04'.$aref;
+			break;
+		case 10:
+			$periodo = 'Out e Nov/';
+			$anterio1 = '08'.$aref;
+			$anterio2 = '06'.$aref;
+			break;
+		case 12:
+			$periodo = 'Dez e Jan/';
+			$anterio1 = '10'.$aref;
+			$anterio2 = '08'.$aref;
+			break;
+		default:
+			$periodo = '';
+			break;
+	}
+	
+	if ($periodo!='') {
+		$periodos = array($periodo.$aref,'12/2013','10/2013');
+		return $periodos;
+	}else {
+		$periodos = array('Nenhum período definido!');
+		return $periodos;
+	}
+}
 ?>

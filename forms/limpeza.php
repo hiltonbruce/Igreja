@@ -7,46 +7,18 @@
 	if ($_POST['item']!='' && $_POST['']!='quant') {
 		require_once 'models/cadlimpeza.php';
 	}
-	$mesref = ($mesref!='') ? $mesref:$_GET['mesref'];
-
 	$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
 	
-	list($mref,$aref) = explode('/', $mesref);
-	$linkperido = 'mes='.$mref.'&ano='.$aref;
-	$periodo = 'para ';
-	
-	switch ($mref) {
-		case 2:
-		 $periodo .= 'Fev e Mar/';
-		break;
-		case 4:
-		 $periodo .= 'Abr e Mai/';
-		break;
-		case 6:
-		 $periodo .= 'Jun e Jul/';
-		break;
-		case 8:
-		 $periodo .= 'Ago e Set/';
-		break;
-		case 10:
-		 $periodo .= 'Out e Nov/';
-		break;
-		case 12:
-		 $periodo .= 'Dez e Jan/';
-		break;
-		default:
-			$periodo = 'Nenhum período definido!';
-		break;
-	}
-	
-	if (strstr($periodo, 'para')) {
-		$periodo .= $aref;
+	if (empty($_GET['mesref'])) {
+		$periodo = periodoLimp($mesref);
+	}else {
+		$periodo = periodoLimp($_GET['mesref']);
 	}
 	
 	//Incluir tabela com resumo do pedido
 ?>
 <fieldset>
-<legend>Solicitação de Material de Limpeza, <?php echo $periodo;?></legend>
+<legend>Solicitação de Material de Limpeza, para: <?php echo $periodo['0'];?></legend>
 <form method='post' name='limpeza' >
 	<table id="listTable" style="width: 100%;">
 			<colgroup>
@@ -70,7 +42,7 @@
 					?>
 				</td>
 				<td>
-					<input type="text" name="quant" required='required' tabindex="<?PHP echo ++$ind;?>" />
+					<input type="text" name="quant" tabindex="<?PHP echo ++$ind;?>" />
 				</td>
 				<td>
 					<?php 
@@ -104,7 +76,7 @@
 
 <?php
 	if ( $igreja >0) {
-		//Lista materiais caso a tenha iniciado a listagem
+		//Lista materiais da congregação
 		require_once 'views/tabLimpeza.php';
 	}
 ?>
