@@ -11,4 +11,4 @@
 .directory
 .buildpath
 .project
-/func_class/constantes.php
+func_class/constantes.php

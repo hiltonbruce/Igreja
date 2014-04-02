@@ -9,7 +9,7 @@
 	}
 	$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
 	
-	if (empty($_GET['mesref'])) {
+	if (empty($_GET['mes']) && empty($_GET['ano'])) {
 		$periodo = periodoLimp($mesref);
 	}else {
 		$periodo = periodoLimp($_GET['mesref']);

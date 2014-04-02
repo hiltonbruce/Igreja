@@ -15,8 +15,8 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 	<thead>
 		<tr>
 			<th scope="col">item</th>
-			<th scope="col"><?php echo $periodo['1'];?></th>
 			<th scope="col"><?php echo $periodo['2'];?></th>
+			<th scope="col"><?php echo $periodo['1'];?></th>
 			<th scope="col">Unidade</th>
 			<th scope="col">Discriminação</th>
 			<th scope="col">Atual</th>
@@ -25,9 +25,15 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 	<tbody>
 		<?php 
 			$tbodytab = new limplista($mesref,$periodo['1'],$periodo['2']);
-			echo $tbodytab->tabelaLimp($congregcao->rol());
+			
+			require_once 'help/tes/tabLimpeza.php';
+			echo '22';
 		?>
 	</tbody>
 </table>
 <a href="./controller/limpeza.php?limpeza=4&igreja=<?php echo $igreja;?>">
 <button type="button">Imprimir <?php echo $congregcao->razao();?></button></a>
+<?php 
+	//print_r($tbodytab->tabelaLimp($congregcao->rol()));
+
+?>
