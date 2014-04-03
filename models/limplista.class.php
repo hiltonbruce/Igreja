@@ -57,6 +57,56 @@ class limplista {
 		
 	}
 	
+	function tabLimp ($igreja) {
+		$sql 	 = 'SELECT l.quant,p.discrim,p.unid,p.quant as qunid ';
+		$sql 	.= 'FROM limpezpedid AS l, limpeza AS p ';
+		$sql 	.= 'WHERE igreja = "'.$igreja.'" AND mesref="'.$this->mesref.'" AND ';
+		$sql 	.= 'p.id = l.item ORDER BY p.discrim ';
+		$sqlLimp = mysql_query($sql);
+		$incrrc=0; //indece p/ zebrar tabela
+		$this->tabtbody = ''; //Limpa variável para receber os dados da tabela
+	
+	
+		if (mysql_num_rows($sqlLimp)>0) {
+				
+			while($lista = mysql_fetch_array($sqlLimp)){
+	
+				//Faz o trabalho de zebrar a tabela
+				if ($inclimp%2=="0") {
+					$this->tabtbody .= "<tr class='odd' >";
+				} else {
+					$this->tabtbody .=  '<tr>';
+				}
+					
+				++$inclimp;
+	
+				//Coluna Item
+				$this->tabtbody .= sprintf("<td>%'03u</td>",$inclimp);
+	
+				//Coluna Unidade
+				$this->tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
+	
+				//Coluna Discriminação
+				$this->tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
+	
+				//Coluna Quantidade Solicitada
+				$this->tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$lista['quant']);
+	
+				//Coluna Quantidade entregue
+				$this->tabtbody .= "<td></td>";
+	
+			}
+	
+		}else {
+			//Coluna Quantidade entregue
+			$this->tabtbody .= "<td colspan='5'> Nenhum item Solicitado</td>";
+				
+		}
+	
+		return $this->tabtbody;
+	
+	}
+	
 	public function TotMaterial() {
 		//Select mysql na tabela limpeza para listar o total para o período
 	

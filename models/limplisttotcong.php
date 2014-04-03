@@ -41,7 +41,7 @@ if ($_GET['limpeza']=='4') {
 						</tr>
 					</thead>
 					<tbody>';
-		$tabtodas .= $tbodytab->tabelaLimp ($roligreja['rol']);//$tbodytab->tabelaLimp($roligreja['rol']) -> vem do script que o chama /views/limpezatot.php
+		$tabtodas .= $tbodytab->tabLimp ($roligreja['rol']);//$tbodytab->tabelaLimp($roligreja['rol']) -> vem do script que o chama /views/limpezatot.php
 
 		$tabtodas .= '</tbody></table>';
 		$tabtodas .= '<fieldset><legend>Obs.:</legend> As congregações que não enviarem a lista de material de limpeza

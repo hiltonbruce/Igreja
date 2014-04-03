@@ -40,8 +40,8 @@ switch ($_GET['limpeza']) {
 		require_once ("aniv/style.css");
 		echo "</style>";
 			//Mostrar totalizador dentro da aplicação
-		echo '<a href="./controller/limpeza.php?limpeza=1"><button type="button">Imprimir totalizador</button></a>';
-		$todascongreg = './models/limplisttotcong.php';//Lista os pedidos das outras congregações
+		echo '<a href="controller/limpeza.php?limpeza=1"><button type="button">Imprimir totalizador</button></a>';
+		$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações
 		require_once 'views/limpezatot.php';
 	break;
 	case '3':
