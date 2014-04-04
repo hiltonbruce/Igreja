@@ -27,7 +27,7 @@
 		$fonte_recurso = (int)$_POST["fonte"];
 		$rolmembro = (int)$_POST["rol"];
 		$lancamento = (int)$_POST["lancamento"];
-		$referente = htmlentities ($_POST["referente"]);
+		$referente = $_POST["referente"];
 		$nome = $_POST["nome"];
       	$cpf = $_POST["cpf"];
       	$rg = $_POST["rg"];

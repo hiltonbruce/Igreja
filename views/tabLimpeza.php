@@ -25,9 +25,7 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 	<tbody>
 		<?php 
 			$tbodytab = new limplista($mesref,$periodo['1'],$periodo['2']);
-			
 			require_once 'help/tes/tabLimpeza.php';
-			echo '22';
 		?>
 	</tbody>
 </table>

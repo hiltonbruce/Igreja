@@ -780,18 +780,17 @@ function periodoLimp ($mesRef) {
 	
 	list($mref,$aref) = explode('/', $mesref);
 	$linkperido = 'mes='.$mref.'&ano='.$aref;
-	
+	$anoAnterior = $aref-1;
 	switch ($mref) {
 		case 2:
 			$periodo = 'Fev e Mar/';
-			$ano = $aref-1;
-			$anterio1 = '12/'.$ano;
-			$anterio2 = '10/'.$ano;
+			$anterio1 = '12/'.$anoAnterior;
+			$anterio2 = '10/'.$anoAnterior;
 			break;
 		case 4:
 			$periodo = 'Abr e Mai/';
 			$anterio1 = '02/'.$aref;
-			$anterio2 = '12/'.$aref-1;
+			$anterio2 = '12/'.$anoAnterior;
 			break;
 		case 6:
 			$periodo = 'Jun e Jul/';
