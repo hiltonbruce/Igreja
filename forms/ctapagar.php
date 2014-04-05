@@ -47,8 +47,7 @@ $(document).ready(function(){
 					echo $congr->List_Selec (++$ind,$_GET['congregacao'],'autofocus="autofocus" required="required"');
 					?></td>
 					<td><input name="venc" type="text" id="venc" size='10'
-						tabindex="<?PHP echo ++$ind;?>" maxlength="10"
-						onkeypress="formatar('##/##/####', this);" required='required'
+						tabindex="<?PHP echo ++$ind;?>" id='data' required='required'
 						value='<?php echo $_GET['venc'];?>' /></td>
 					<td><input name="valor" type="text" id="valor" size='10'
 						" 
@@ -84,7 +83,7 @@ $(document).ready(function(){
 			<caption>Dados do Credor</caption>
 			<tbody>
 				<tr>
-					<td colspan='3'>Razão Social:<br /> <input type="text"
+					<td colspan='3'>Razão Social:(Mínimo de 5 caracteres p/ novo Cadastro!)<br /> <input type="text"
 						tabindex="<?PHP echo ++$ind;?>" name="nome" id="campo_estado"
 						size='80%' value='<?php echo $_GET['nome'];?>' /></td>
 				</tr>
@@ -93,7 +92,7 @@ $(document).ready(function(){
 						value='<?php echo $_GET['id'];?>' /> Nome Abreviado:<br />
 					<input type="text" name="alias" tabindex="<?php echo ++$ind;?>"
 						size='50%' id="alias_val" />*</td>
-					<td>CNPJ/CPF:<br />
+					<td>CNPJ:<br />
 					<input type="text" id="sigla_val" tabindex="<?php echo ++$ind;?>"
 						name="sigla" value="" />*</td>
 					<td></td>

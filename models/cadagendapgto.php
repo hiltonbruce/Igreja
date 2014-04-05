@@ -10,7 +10,7 @@ $datven 	= true;
 
 //Inserir a opção para novo Cadastro
 
-if ($credor=='' && $_POST['rol']>'0') {
+if ($credor=='' && $_POST['rol']>0) {
 	$credor=$_POST['rol'].'r';
 }elseif (strlen($_POST['nome'])>'5' && strlen($_POST['cnpj'])=='18') {
 	//Cadastrar fornecedor
@@ -31,11 +31,6 @@ if ($credor=='' && $_POST['rol']>'0') {
 
 
 echo "<h1>** $credor ***</h1>";
-
-
-
-
-
 
 
 for ($j2 = 0; $j2 < $parc; $j2++) {

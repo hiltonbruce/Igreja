@@ -53,6 +53,9 @@ td#moeda {
 	text-align:right;
 }
 
+td#centro {
+	text-align:center;
+}
 td a, td a:hover {
 	display:block; color: #FF4500; 
 }

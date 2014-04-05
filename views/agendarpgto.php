@@ -96,12 +96,12 @@ if (checkdate($m,$d,$y)) {
 
 				// <select name="$this->campo;" tabindex=$ind++>
 				$par = $j+1;
-				$ajustparc .= "<option value='$j'>Ajuste na: $par &ordf; - Parcela</option>";
+				$ajustparc .= " <option value='$j'>Percela com valor ajustado no: $par &ordm; m&ecirc;s</option>";
 					
 				if ($parc==$par) {
 					$diferenca = $parctrun;
 					$parctrun = $valortrun - $parctotal;
-					$ajustparc = "<option value='$j'>Ajuste na: $par &ordf; - Parcela</option>".$ajustparc;
+					$ajustparc = "<option value='$j'>Percela com valor ajustado no: $par &ordm; m&ecirc;s</option>".$ajustparc;
 				}
 
 
