@@ -83,6 +83,7 @@ switch ($_POST['tipo']) {
 		$linr .= "rec={$_POST['rec']}&igreja={$_POST["rolIgreja"]}&";
 		$linr .= "data={$_POST['data']}&mes={$_POST['mes']}&ano={$_POST['ano']}";
 		$linkreturn .= "&data=".$_POST["data"]."&mes=$m&ano=$y";
+		$linkreturn .= "&acescamp=".$_POST["acescamp"];
 		echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
 		//echo "<script>location.href='$linkreturn';</script>";
 		echo "<a href='$linkreturn' autofofus='autofofus' ><button>Continuar...</button><a>";

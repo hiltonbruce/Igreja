@@ -143,12 +143,17 @@ function calcularDiaSemana($dia,$mes,$ano)
 
      if ($ceia=="" &&  $d==$dia_ceia && $semana==$semana_ceia) //Se 1ª Sexta marca santa ceia
 	 {
-	 $classe=( $d==$dia_ceia ? "td_marcado8" : "td_dia");
-	 $ceia = $classe;
+	 	if ($d==$dia_ceia) {
+	 		$classe ="td_marcado8";
+	 		$igreja[substr($meses[$idx], 0,3)] =  $cnt_dias;
+	 	}else {
+	 		$classe ="td_dia";
+	 	}
+		$ceia = $classe;
 	 }
 
 	//Cria a célula referente ao dia atual
-	$temp_ln=$temp_ln."<td class='".$classe."'>".$cnt_dias++."</td>";
+	$temp_ln=$temp_ln."<td class='".$classe."'> ".$cnt_dias++."</td>";
         $daux++;
         if($daux>6) $daux=0;
        }
@@ -183,7 +188,18 @@ function calcularDiaSemana($dia,$mes,$ano)
 
    $tabela=$tabela.$legenda."</table>";
    $tabela=$tabela."</table>";
+  } 
+  print_r($igreja);
+  
+  for($idx2=0;$idx2<12;$idx2++) //Gera o cabeçalho da tabela do mês atual
+  	$ceiaTodos=$ceiaTodos."<td class='td_semana'>".substr($meses[$idx2],0,3)."</td>";
+  	$tabTodasCeias=$ceiaTodos."</tr>"; //Fecha o cabeçalho
+  	 
+  foreach ($igreja as $key => $vlDia){
+  	$tabTodasCeias .= $key.'->'.$vlDia.' ; ';
   }
-  return($tabela);
+  return($tabela.$tabTodasCeias);
  }
+
+
 ?>

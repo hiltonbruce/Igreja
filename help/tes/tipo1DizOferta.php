@@ -11,6 +11,7 @@ if (($_POST["rol"]!='' && $_POST["nome"]=='') || ($_POST["rol"]!='' && $_POST["n
 	$nome = '';
 }
 //corrigir os post para oferta...
+$msg = "<script> alert('Você não definiu para qual CONTA deseja contribuir. Refaça o lançamento!');</script>";
 for ($i = 0; $i < 13; $i++) {
 
 	$campo = 'oferta'.$i;
@@ -34,7 +35,12 @@ for ($i = 0; $i < 13; $i++) {
 				$conta = "'704','1','4'";//Voto
 				break;
 			case 4:
+				if ($_POST['acescamp']=='') {
+					$msg = "<script> alert('Você não definiu para qual campnha deseja contribuir. Refaça o lançamento da campanha!');</script>";
+					$conta ='';
+				}else {
 				$conta = "'{$_POST['acescamp']}','1','6'";//Campanha
+				}
 				break;
 			case 5:
 				if ($rolIgreja=='1') {
@@ -65,18 +71,22 @@ for ($i = 0; $i < 13; $i++) {
 				$conta = "'721','3','7'";//Voto em Circ. de Oração
 				break;
 			default:
-				;
 				break;
 		}
 
 		$congcontrib = ($congcontrib=='') ? $_POST["rolIgreja"]:$congcontrib;
 			
-		//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-		$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
-		$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
-		$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
-		$dados = new insert ($value,"dizimooferta");
-		$dados->inserir();
+		
+		if ($conta=='') {
+			echo $msg;			
+		}else {
+			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
+			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
+			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
+			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
+			$dados = new insert ($value,"dizimooferta");
+			$dados->inserir();
+			}
 	}
 
 }

@@ -420,8 +420,8 @@ function prox_ant_ano (){
      echo "<table class='tabela' >";
      
      echo "<tr>";
-     echo '<td>';
-     echo '<label>Congrega��o: </label>';
+     echo '<td colspan="4">';
+     echo '<label>Congrega&ccedil;&atilde;o: </label>';
      ?>
      <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' >
      <?php
@@ -429,16 +429,16 @@ function prox_ant_ano (){
      echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=',$_GET["id"]);
      echo '</select>';
      echo '</td>';
-     echo "<td class='td_marcado7'>";
+     echo "</td></tr></tr><td class='td_marcado7'>";
      echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$ant."&id={$_GET["id"]}'>";
      echo "<<&nbsp;&nbsp;Ano Anterior</a>";
-     echo "</td><td class='cabecalho'>";
+     echo "<td class='cabecalho'>";
      echo "Santa Ceia</td><td class='td_marcado7' >";
      echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$pro."&id={$_GET["id"]}'>";
      echo "Proximo&nbsp;Ano&nbsp;&nbsp;>></a></td>";
      echo '<td>';
      echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=1'>";
-     echo "Imprimir Calend�rio&nbsp;&nbsp;&nbsp;</a></td>";
+     echo "Imprimir Calend&aacute;rio&nbsp;&nbsp;&nbsp;</a></td>";
      echo '</td>';
      echo "</tr>";
      echo "</table>";

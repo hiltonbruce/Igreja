@@ -4,23 +4,24 @@ class List_campanha extends List_sele {
 	function __construct (){
 
 		$this->texto_field = $texto_field;
-		$this->query = "SELECT * FROM contas WHERE codigo LIKE '4.1.1.003.%' ";	
-		$this->sql_lst = mysql_query($this->query." ORDER BY titulo") or die (mysql_error());
+		$this->query = "SELECT * FROM contas WHERE status ='1' AND codigo LIKE '4.1.1.003.%' ";	
+		$this->sql_lst = mysql_query($this->query." ORDER BY id DESC") or die (mysql_error());
 	}
 
-	function List_Selec ($ind){
+	function List_Selec ($ind,$campanha){
 
 	  //Mostra as linhas de select
 
-	  echo "<select name='acescamp' id='acescamp' class='' tabindex='$ind'>";
-
+	  $linha0 = '<select name="acescamp" id="acescamp" class="" tabindex="'.$ind.'">';
+	  $linha1="<option></option>";$linha2 = '';
        while($this->col_lst = mysql_fetch_array($this->sql_lst))
        {
-			$linha1 = "<option value='".$this->col_lst["acesso"]."'>".$this->col_lst["titulo"]."</option>";
+			$linha2 .= "<option value='".$this->col_lst["acesso"]."'>".$this->col_lst["titulo"]."</option>";
+			if ($campanha==$this->col_lst["acesso"]) {
+				$linha1 = "<option value='".$this->col_lst["acesso"]."'>".$this->col_lst["titulo"]."</option>".$linha1;
+			}
        	}
-      echo $linha1;
-	  echo "</select>";
-	  return $ind;
+	  return $linha0.$linha1.$linha2.'</select>';
 	}
 
 }

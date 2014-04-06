@@ -54,13 +54,13 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 			</tr>
 			<tr>
 				<td>Data: <br /> <input type="text" id="data" name="data"
-					value="<?php echo $dtlanc;?>" />
+					value="<?php echo $dtlanc;?>" required="required"/>
 				</td>
-				<td>Referente <br />Mês:<input type="text" id="mes" name="mes"
-					size="2" value="<?php echo $meslanc;?>"
-					OnKeyPress="formatar('##', this);" /> Ano: <input type="text"
+				<td>Referente <br />Mês:<input type="text" id="mesnum" name="mes"
+					size="2" value="<?php echo $meslanc;?>" required="required" />
+					 Ano: <input type="text"
 					id="ano" name="ano" size="4" value="<?php echo $anolanc;?>"
-					OnKeyPress="formatar('##', this);" />
+					 required="required"/>
 				</td>
 				<td>Congreg. do membro: <br /> <input type="text" id="cong"
 					disabled="disabled" value="" />
@@ -94,7 +94,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 				<tr>
 					<td colspan="2">Qual Campanha ? <br /> <?php 
 					$campanha = new List_campanha;
-					$campanha -> List_Selec(++$ind);
+					echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
 					?>
 					</td>
 					<td><label>Campanha (Valor):</label><input type="text" id="oferta4"

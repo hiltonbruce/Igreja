@@ -26,9 +26,9 @@ $data = br_data($_POST['data'], 'Data do lançamento inválida!');
 
 if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) {
 	
-	//Faz o lançamento do débito da tabela lancamento
-	$tablanc = mysql_query('SELECT devedora,tipo,valor FROM dizimooferta 
-			WHERE lancamento="0" AND igreja = "'.$roligreja.'"');
+	//Faz o lançamento do débito para tabela lancamento
+	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor FROM dizimooferta 
+			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora');
 	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
 	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
 	
@@ -63,7 +63,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		 
    	//Lança provisões conta Despesa
 	$semaddesp = new atualconta('3.1.6.001.005',$idlancmis);
-	$semaddesp->atualizar($provmissoes,'D',$roligreja); //Faz o lançamento da provisão de missões - Despesa
+   	if ($provmissoes>0) {
+   		$semaddesp->atualizar($provmissoes,'D',$roligreja); //Faz o lançamento, se possuir valor, da provisão de missões - Despesa
+   	}
+	
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
@@ -73,7 +76,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$corlinha = !$corlinha;
 	
 	$provcomad = new atualconta('3.1.1.001.007',$idlancmis);
-	$provcomad->atualizar($provcomadep,'D',$roligreja); //Faz o lançamento da provisão de Comadep - Despesa
+	if ($provcomadep>0) {
+		$provcomad->atualizar($provcomadep,'D',$roligreja); //Faz o lançamento, se possuir valor, da provisão de Comadep - Despesa
+	}
+	
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
@@ -84,7 +90,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$exibideb .= sprintf("<tr class='total'><td>Total debitado</td><td id='moeda'>R$ %s</td><td></td><td></td></tr>",number_format($totalDeb,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php
 		
-	//Faz o leiaute do lançamento do crédito da tabela lancamento
+	//Faz o leiaute do lançamento do crédito e lança para tabela lancamento
 	$tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
 	
 	while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
@@ -105,7 +111,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	//Lança provisões conta credora no Ativo
 
 	$provsemad = new atualconta('1.1.1.001.007',$idlancmis);
-	$provsemad->atualizar($provmissoes,'C',$roligreja); //Faz o lançamento da provisão de missões - Ativo
+	if ($provmissoes>0) {
+		$provsemad->atualizar($provmissoes,'C',$roligreja); //Faz o lançamento, se possuir valor, da provisão de missões - Ativo
+	}
+	
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
 	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
@@ -114,7 +123,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	
 	$corlinha 	= !$corlinha;
 	$provcomad 	= new atualconta('1.1.1.001.006',$idlancmis); //Faz o lançamento da provisão de Comadep - Ativo
-	$provcomad->atualizar($provcomadep,'C',$roligreja);//Faz o lançamento da provisão da COMADEP - Ativo
+	if ($provcomadep) {
+		$provcomad->atualizar($provcomadep,'C',$roligreja);//Faz o lançamento, se possuir valor, da provisão da COMADEP - Ativo
+	}
+	
 	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
 	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",

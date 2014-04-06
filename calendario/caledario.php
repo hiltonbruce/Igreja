@@ -1,17 +1,23 @@
-<?
+<?PHP
 $imprimir = false;
-if ($_GET['imp']=='1') {
+if ($_GET['imp']>'0') {
 	
-	function __autoload ($classe) { 
-		require_once ("../models/$classe.class.php");
-	}
 		
 	date_default_timezone_set('America/Recife');
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
-	require("funcs_impress.php");
+	if ($_GET['imp']==2) {
+		require 'imprSantaCeiaTodas.php';
+	}else {
+		require("funcs_impress.php");
+	}
+	
+	
+	function __autoload ($classe) { 
+		require_once ("../models/$classe.class.php");
+	}
 
 	$roligreja	= (empty($_GET['id'])) ? '1':$_GET['id'];
 
@@ -53,7 +59,7 @@ if ($_GET['imp']=='1') {
 	</thead>
    </table>
 
-	<?php
+	<?PHP
 	
 }else {
 	require("calendario/funcs.php");
@@ -150,8 +156,6 @@ if ($_GET['imp']=='1') {
     </div>
 
 <?PHP
-
-
 
      }
      ?>

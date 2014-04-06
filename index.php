@@ -164,6 +164,7 @@ jQuery(function($) {
       $('#expedicao').mask('99/99/9999');
       $('#venc').mask('99/99/9999');
       $('#ano').mask('9999');
+      $('#mesnum').mask('99');
       $('#fone').mask('(99) 9999-9999');
       $('#celular').mask('(99) 9999-9999');
       $('#cpf').mask("999.999.999-99");
