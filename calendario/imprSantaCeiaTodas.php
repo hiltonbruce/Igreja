@@ -188,8 +188,12 @@ function calcularDiaSemana($dia,$mes,$ano)
 
    $tabela=$tabela.$legenda."</table>";
    $tabela=$tabela."</table>";
-  } 
-  print_r($igreja);
+  }
+  foreach ($igreja AS $key => $valor) {
+  	echo $key.' => '.$valor;
+  	
+  }
+  
   
   for($idx2=0;$idx2<12;$idx2++) //Gera o cabeçalho da tabela do mês atual
   	$ceiaTodos=$ceiaTodos."<td class='td_semana'>".substr($meses[$idx2],0,3)."</td>";
@@ -200,6 +204,5 @@ function calcularDiaSemana($dia,$mes,$ano)
   }
   return($tabela.$tabTodasCeias);
  }
-
 
 ?>

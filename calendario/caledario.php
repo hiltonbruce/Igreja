@@ -62,6 +62,7 @@ if ($_GET['imp']>'0') {
 	<?PHP
 	
 }else {
+	
 	require("calendario/funcs.php");
 	$colunas = 2;
 }
@@ -108,7 +109,7 @@ if ($_GET['imp']>'0') {
 	  $dia_ceia = substr ($ceia,-1);
 	  $semana_ceia = substr ($ceia,-2,1);
 
-	  $todos = "1";
+	//  $todos = "1";
 	 if($_GET["mes"]=="") //Caso a classe ainda não esteja definida após o for acima
 	 $mes= "1"; else $mes=(int)$_GET["mes"];
 
@@ -133,6 +134,11 @@ if ($_GET['imp']>'0') {
 	                     array(array()),
                       $nome_igreja,/*Define o texto do Rodapé do calendário*/
                       "Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
+	$todasCeias = new igreja('');
+	$arrayIgrejas = $todasCeias->ArrayIgrejaDados();
+	
+	print_r($arrayIgrejas);
+	
      if ($_GET["id"]<2)
 	  echo "<div >Cultos: Todas as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
      else

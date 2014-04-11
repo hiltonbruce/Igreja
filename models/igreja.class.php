@@ -50,5 +50,21 @@ class igreja {
 				}
 	}
 	
+	function ArrayIgrejaDados(){
+		
+		
+		global $db;
+		$db->setFetchMode(DB_FETCHMODE_ASSOC);
+		
+		$res =& $db->query('SELECT * FROM igreja');
+		while ($res->fetchInto($row)) {
+			// Assuming DB's default fetchmode is DB_FETCHMODE_ORDERED
+			$linhas[] = $row;
+		}
+		return $linhas;
+	
+	}
+	
+	
 }
 ?>
