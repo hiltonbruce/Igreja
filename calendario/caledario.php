@@ -1,5 +1,6 @@
 <?PHP
 $imprimir = false;
+
 if ($_GET['imp']>'0') {
 	
 		
@@ -8,19 +9,18 @@ if ($_GET['imp']>'0') {
 	ini_set('display_errors', 'off');
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
-	if ($_GET['imp']==2) {
+	if ($_GET['imp']=='2') {
 		require 'imprSantaCeiaTodas.php';
 	}else {
 		require("funcs_impress.php");
 	}
 	
 	
-	function __autoload ($classe) { 
+	function __autoload ($classe) {
 		require_once ("../models/$classe.class.php");
 	}
-
+	
 	$roligreja	= (empty($_GET['id'])) ? '1':$_GET['id'];
-
 	$igreja 	= new DBRecord ("igreja",$roligreja,"rol");
 	$sede 		= new DBRecord ("igreja",'1',"rol");
 	$colunas 	= 6;
@@ -62,8 +62,10 @@ if ($_GET['imp']>'0') {
 	<?PHP
 	
 }else {
-	
+	$roligreja	= (empty($_GET['id'])) ? '1':$_GET['id'];
+	$igreja 	= new DBRecord ("igreja",$roligreja,"rol");
 	require("calendario/funcs.php");
+	
 	$colunas = 2;
 }
 	/*
@@ -96,15 +98,17 @@ if ($_GET['imp']>'0') {
 	  $id_igreja = (int) $_GET ["id"];
 	  if (empty($id_igreja)){$id_igreja =1;}
 
-	  $igreja_rodape = new DBRecord ("igreja",$id_igreja,"rol");
-	  $ceia = $igreja_rodape->ceia();
-	  $nome_igreja = $igreja_rodape->razao();
+	  $igreja_rodape = $dadocong;
+	  $ceia = $igreja->ceia();
+	  $nome_igreja = $igreja->razao();
 
-	  if ($id_igreja<>1) {
+	  
+	  /*if ($id_igreja<>1) {
 	  $nome_igreja="Congrega&ccedil;&atilde;o: ".$nome_igreja;
 	  }else {
 	  $nome_igreja="Templo ".$nome_igreja;
 	  }
+	  */
 
 	  $dia_ceia = substr ($ceia,-1);
 	  $semana_ceia = substr ($ceia,-2,1);
@@ -125,27 +129,64 @@ if ($_GET['imp']>'0') {
 	  else
 	  $y = (int)$_GET["ano"];
 	  
-	  if ($_GET['imp']!='1') {
+	  if ($_GET['imp']=='') {
 	  	//Gera cabelho de alteração de ano
 	  	prox_ant_ano ();
 	  }
 
-	echo gerarCalendario($mes,$y,$todos,$colunas,
-	                     array(array()),
-                      $nome_igreja,/*Define o texto do Rodapé do calendário*/
-                      "Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
-	$todasCeias = new igreja('');
-	$arrayIgrejas = $todasCeias->ArrayIgrejaDados();
+	  if ($_GET['imp']!='2') {
+		 echo gerarCalendario($mes,$y,$todos,$colunas,
+		                 array(array()),
+	                     $nome_igreja,/*Define o texto do Rodapé do calendário*/
+	                    "Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
+	  }
+	  
+	//Mostra todas as ceias de todas as igrejas
+	if ($_GET['imp']=='2') {
+		$todasCeias = new igreja('');
+		$arrayIgrejas = $todasCeias->ArrayIgrejaDados();
+		$meses=array("Jan","Fev","Mar","Abr","Mai","Jun",
+				"Jul","Ago","Set","Out","Nov","Dez");
+		$cabMes = '<table class="tabela" height=220><tr><td width=300></td>';
+		
+		for($ms=0; $ms<12; $ms++)
+		{
+		$cabMes .='<td class="cabecalho">'.$meses[$ms].'</td>'; //Cria uma tabela para o mês atual
+		}
+		
+		$cabMes .= '</tr>';
 	
-	print_r($arrayIgrejas);
+		//Monta as linhas
+		foreach ($igreja as $key => $vlDia){
+			$tabTodasCeias .= $key.'->'.$vlDia.' ; ';
 	
-     if ($_GET["id"]<2)
+		}
+		//print_r($arrayIgrejas);
+		foreach ($arrayIgrejas AS $key => $dadosCong){
+			//echo $key.' - rol: '.$dadosCong['rol'].' --> '.$dadosCong['razao'].' <---> ';
+			
+			
+		$dia_ceia = substr ($dadosCong['ceia'],-1);
+		$semana_ceia = substr ($dadosCong['ceia'],-2,1);
+			
+		 $todCeias = gerarCalendario($mes,$y,$todos,$colunas,
+				array(array()),
+				$dadosCong['razao'],/*Define o texto do Rodapé do calendário*/
+				"Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
+		 $diasCeias .= '<tr>'.$todCeias.'</tr>';	
+		
+		}
+		$diasCeias .= '</table>';
+		echo $cabMes.$diasCeias;
+	}
+	
+	
+     if ($_GET["id"]<2 && $_GET["imp"]<2)
 	  echo "<div >Cultos: Todas as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
      else
-	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos. Das 19h às 21h</div>";
-
-     
-     if (isset($_GET['imp']) && $_GET['imp']='1') {
+	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
+		
+     if (isset($_GET['imp']) && $_GET['imp']>'0') {
      	echo '</body></html>';
 	?>
 

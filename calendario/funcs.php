@@ -44,8 +44,8 @@ function calcularDiaSemana($dia,$mes,$ano)
   {
 
    //Carrega o css do calendário e armazena em $dados
-   $arq=fopen("calendario.css","r");
-   $tam=filesize("calendario.css");
+   $arq=fopen("css/calendario.css","r");
+   $tam=filesize("css/calendario.css");
    $dados=fread($arq,$tam);
    fclose($arq);
    //Coloca o css carregado no código do calendário
@@ -57,7 +57,7 @@ function calcularDiaSemana($dia,$mes,$ano)
    $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o número de dias de cada mês
    $meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
                 "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
-   $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","Sáb");
+   $dias=array("Dom","Seg","Ter","Quarta","Qui","Sex","Sáb");
 
    $idx=$mes-1;
    $total=$idx+$nmeses; //Total de meses a serem considerados
@@ -143,12 +143,15 @@ function calcularDiaSemana($dia,$mes,$ano)
 
      if ($ceia=="" &&  $d==$dia_ceia && $semana==$semana_ceia) //Se 1ª Sexta marca santa ceia
 	 {
-	 $classe=( $d==$dia_ceia ? "td_marcado8" : "td_dia");
-	 $ceia = $classe;
+		 $classe=( $d==$dia_ceia ? "td_marcado8" : "td_dia");
+		 $titulo = 'title="Santa Ceia do Senhor"';
+		 $ceia = $classe;
+	 }else {
+	 	$titulo = '';
 	 }
 
 	//Cria a célula referente ao dia atual
-	$temp_ln=$temp_ln."<td class='".$classe."'>".$cnt_dias++."</td>";
+	$temp_ln=$temp_ln.'<td class="'.$classe.'" '.$titulo.' >  '.$cnt_dias++.'</td>';
         $daux++;
         if($daux>6) $daux=0;
        }

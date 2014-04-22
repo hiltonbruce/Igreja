@@ -44,8 +44,8 @@ function calcularDiaSemana($dia,$mes,$ano)
   {
 
    //Carrega o css do calendário e armazena em $dados
-   $arq=fopen("calendario.css","r");
-   $tam=filesize("calendario.css");
+   $arq=fopen("../css/calendario.css","r");
+   $tam=filesize("../css/calendario.css");
    $dados=fread($arq,$tam);
    fclose($arq);
    //Coloca o css carregado no código do calendário
@@ -176,7 +176,7 @@ function calcularDiaSemana($dia,$mes,$ano)
     }
     $tabela=$tabela."</tr>";
    }
-   $legenda="<table class=table><tr><td class='cabecalho' colspan=2>Legenda</td></tr>";
+   $legenda="<table class=table><tr><td class='cabecalho' colspan=2>Legenda eee</td></tr>";
 
    $i=1;//define a cor para idenficar a legenda no calendário
     $legenda=$legenda."<tr><td class='td_marcado".$i."'>&nbsp;</td><td class='td_leg'>".$leg."</td></tr>";
