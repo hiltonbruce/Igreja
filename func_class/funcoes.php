@@ -402,7 +402,7 @@ function id_left ($val_link) {
 }
 
 function prox_ant_ano (){
-//cria link para o prï¿½ximo ou o ano anterior
+//cria link para o próximo ou o ano anterior
 
      if (empty($_GET["ano"]))
 	  $y = date("Y");
@@ -420,7 +420,7 @@ function prox_ant_ano (){
      echo "<table class='tabela' >";
      
      echo "<tr>";
-     echo '<td colspan="4">';
+     echo '<td colspan="3">';
      echo '<label>Congrega&ccedil;&atilde;o: </label>';
      ?>
      <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' >
@@ -428,7 +428,9 @@ function prox_ant_ano (){
      $estnatal = new List_sele('igreja', 'razao','id');
      echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=',$_GET["id"]);
      echo '</select>';
-     echo '</td>';
+     echo '</td><td>';
+     echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=2'>";
+     echo " Imprimir Todas as Igrejas&nbsp;&nbsp;&nbsp;</a></td>";
      echo "</td></tr></tr><td class='td_marcado7'>";
      echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$ant."&id={$_GET["id"]}'>";
      echo "<<&nbsp;&nbsp;Ano Anterior</a>";

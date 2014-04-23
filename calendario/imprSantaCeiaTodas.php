@@ -32,7 +32,7 @@ function calcularDiaSemana($dia,$mes,$ano)
   return($dia_semana);
  }
 
- function gerarCalendario($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg,$dia_ceia,$semana_ceia)//$feriados,$marcados,$rodapes)
+ function gerarCalendario($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg,$dia_ceia,$semana_ceia,$classDias)//$feriados,$marcados,$rodapes)
  {
   if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
@@ -67,8 +67,7 @@ function calcularDiaSemana($dia,$mes,$ano)
      $qtd[$i]=count($datas[$i]);
 
    $nq=count($qtd);
-   
-   $tabDias = '<td class="td_marcado1">'.$rodapes.'</td>';
+   $tabDias = '';
 
    while($idx<$total)
    {
@@ -139,7 +138,7 @@ function calcularDiaSemana($dia,$mes,$ano)
 	 		$igreja[substr($meses[$idx], 0,3)] =  $cnt_dias;
 	 		$cnt_dias = sprintf (" %'02u",$cnt_dias);
 	 		
-	 		$tabDias .= '<td class="td_marcado7">'.$cnt_dias.'</td>';//Cria a celula do dia da ceia
+	 		$tabDias .= '<td class="'.$classDias.'">'.$cnt_dias.'</td>';//Cria a celula do dia da ceia
 	 	}
 	 }
 
@@ -176,7 +175,7 @@ function calcularDiaSemana($dia,$mes,$ano)
   	$tabTodasCeias=$ceiaTodos."</tr><tr>"; //Fecha o cabeçalho	
   	
   $tabTodasCeias=$ceiaTodos."</tr>"; //Fecha o cabeçalho
-  $tabDias ='<tr>'.$tabDias.'</tr>';
+  $tabDias = $tabDias.'</tr>';
   return($tabDias);
  }
 

@@ -130,8 +130,7 @@ if ($_GET['imp']>'0') {
 	  $y = (int)$_GET["ano"];
 	  
 	  if ($_GET['imp']=='') {
-	  	//Gera cabelho de alteração de ano
-	  	prox_ant_ano ();
+	  	prox_ant_ano ();//Gera cabelho de alteração de ano
 	  }
 
 	  if ($_GET['imp']!='2') {
@@ -164,16 +163,25 @@ if ($_GET['imp']>'0') {
 		//print_r($arrayIgrejas);
 		foreach ($arrayIgrejas AS $key => $dadosCong){
 			//echo $key.' - rol: '.$dadosCong['rol'].' --> '.$dadosCong['razao'].' <---> ';
+		
+		
+		if ($dadosCong['rol']==$_GET['id']) {
+			$classIgreja = 'td_marcado8';
+			$classDias 	 = 'td_marcado5';
+		}else {
+			$classIgreja = 'td_marcado1';
+			$classDias 	 = 'td_marcado7';		
+		}
 			
-			
+		$todCeias ='<tr><td class="'.$classIgreja.'">'.$dadosCong['razao'].'</td>';
 		$dia_ceia = substr ($dadosCong['ceia'],-1);
 		$semana_ceia = substr ($dadosCong['ceia'],-2,1);
 			
-		 $todCeias = gerarCalendario($mes,$y,$todos,$colunas,
+		 $todCeias .= gerarCalendario($mes,$y,$todos,$colunas,
 				array(array()),
 				$dadosCong['razao'],/*Define o texto do Rodapé do calendário*/
-				"Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
-		 $diasCeias .= '<tr>'.$todCeias.'</tr>';	
+				"Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia,$classDias);
+		 $diasCeias .= $todCeias.'</tr>';	
 		
 		}
 		$diasCeias .= '</table>';
@@ -184,7 +192,7 @@ if ($_GET['imp']>'0') {
      if ($_GET["id"]<2 && $_GET["imp"]<2)
 	  echo "<div >Cultos: Todas as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
      else
-	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
+	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segundas, Quartas e Domingos. Das 19h às 21h</div>";
 		
      if (isset($_GET['imp']) && $_GET['imp']>'0') {
      	echo '</body></html>';
