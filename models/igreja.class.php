@@ -23,13 +23,13 @@ class igreja {
 	
 	function Arrayigreja(){
 
-		$this->query = "SELECT rol,razao FROM igreja ";
+		$this->query = "SELECT rol,razao,status FROM igreja ";
 		$this->sql_lst = mysql_query("{$this->query} ORDER BY razao") or die (mysql_error());
 	//echo "<h1>Teste</h1>";
 
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-		    $bairr_array [$this->col_lst["rol"]]=$this->col_lst["razao"];
+		    $bairr_array [$this->col_lst['rol']]=array ($this->col_lst['razao'],$this->col_lst['status'],$this->col_lst['rol']);
 	       }
 	  return $bairr_array;
 	
@@ -56,7 +56,7 @@ class igreja {
 		global $db;
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		
-		$res =& $db->query('SELECT * FROM igreja');
+		$res =& $db->query('SELECT * FROM igreja WHERE status="1"');
 		while ($res->fetchInto($row)) {
 			// Assuming DB's default fetchmode is DB_FETCHMODE_ORDERED
 			$linhas[] = $row;
