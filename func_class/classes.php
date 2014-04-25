@@ -837,7 +837,10 @@ class List_congr {
 
 	while($col_lst = mysql_fetch_array($sql_lst))
 		{
-			echo "</strong><a href='./?escolha=igreja/mostrar.php&id={$col_lst["rol"]}&menu=top_igreja'>{$col_lst[$this->campo_retorno]}</a><br/></strong>";
+			if ($col_lst["status"]=='1') {
+				echo "</strong><a href='./?escolha=igreja/mostrar.php&id={$col_lst["rol"]}&
+						menu=top_igreja'>{$col_lst[$this->campo_retorno]}</a><br/></strong>";
+			}
 		}
 	}
 }

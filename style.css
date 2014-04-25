@@ -23,6 +23,14 @@ h2 a, h2 a:visited, h2 a:link { text-decoration:none; padding:10px; line-height:
 
 h2 img { margin-right:5px; border:0; }
 
+#lanc{
+	padding:6px 5px; margin: 2;
+	font: Arial;
+	font-size:20px;
+	background-color:#8BCDDD; color:#000066;
+    border-top: 1px solid #a5a5a5;
+	}
+
 input {
 	text-align:center;	
 }

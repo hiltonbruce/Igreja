@@ -29,9 +29,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 		type="text" name="hist" id="hist" size="60" autofocus="autofocus"
 		tabindex="<?PHP echo ++$ind;?>"> <input type="submit" name="Submit"
 		value="Lançar..." tabindex="<?PHP echo ++$ind;?>" /> <label>Data:</label>
-	<input type="text" name="data"
-	
-		OnKeyPress="formatar('##/##/####', this);"
+	<input type="text" name="data" id = "data"
 		value="<?php echo date('d/m/Y');?>" tabindex="<?PHP echo ++$ind;?>"> <label>Ou
 		Sugestões de hist&oacute;rico</label> <label><input type="radio"
 		name="histsug" value="Ref. dízimos nesta data"

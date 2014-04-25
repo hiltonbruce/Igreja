@@ -18,7 +18,7 @@ if ($_POST["rol"]!='') {
 for ($i = 0; $i < 3; $i++) {
 
 	$campo = 'oferta'.$i;
-	printf ("$campo: %s",$_POST["$campo"]);
+	//printf ("$campo: %s",$_POST["$campo"]);
 		
 	$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );//Captura o valor e vonverte p o padrão americano
 

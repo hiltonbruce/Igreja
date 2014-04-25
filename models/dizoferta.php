@@ -19,19 +19,97 @@ controle ("tes");
 
 	$vlr = false;
 	
+	$contribuinte = ($_POST['nome']=='') ? 'An&ocirc;nimo':$_POST['nome'];
+	
+echo '<fieldset><legend>Pre-Lançamento</legend>';
+echo '<table>';
+echo '<thead><tr><th colspan="2">Contibuinte: '.($_POST['nome']=='') ? 'An&ocirc;nimo':$_POST['nome'].'</th></tr>';
+echo '<tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
+
 for ($i = 0; $i < 13; $i++) {
 	//verifica se há algum campo algum campo com valor
 		$campo = 'oferta'.$i;
-		printf ("$campo: %s",$_POST["$campo"]);
 		
 		$vlrPost = strtr($_POST["$campo"], ', .','.,,' );
+
+		$valorBR = number_format($_POST["$campo"],2,",",".");
+		
+		switch ($i) {
+			case '0':
+				if ($vlrPost>0) 
+					printf ("<tr id='lanc'><td>Dizimo:</td><td id='moeda'><button>R$ %s </button></td></tr>",$valorBR);
+				
+			break;
+			case '1':
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Oferta:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+				break;
+			case 2:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Oferta Extra:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+				break;
+			case 3:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Voto:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+				break;
+			case 4:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Campanha:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+			case 5:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Oferta p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+				break;
+			case 6:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Envelope p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+				break;
+			case 7:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Cofre p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+			case 8:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Carn&ecirc;s p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+			case 9:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Adulto:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+			case 10:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Mocidade:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+			case 11:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Infantil:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+			case 12:
+				if ($vlrPost>0)
+					printf ("<tr id='lanc'><td>Voto Ora&ccedil;&atilde;o:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+			
+			break;
+		}
 		
 		if ($vlrPost>'0') {
 			$vlr = true;
-			break;
 		}
 	}
-		
+	
+echo '</tbody></table>';
+echo '</fieldset>';
+	
 $dta = explode("/",$_POST["data"]);
 		$d=$dta[0];
 		$m=$dta[1];
@@ -86,7 +164,7 @@ switch ($_POST['tipo']) {
 		$linkreturn .= "&acescamp=".$_POST["acescamp"];
 		echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
 		//echo "<script>location.href='$linkreturn';</script>";
-		echo "<a href='$linkreturn' autofofus='autofofus' ><button>Continuar...</button><a>";
+		echo "<a href='$linkreturn' ><button autofofus='autofofus'>Continuar...</button><a>";
 }elseif (!$rolIgreja) {//Se não foneceu o número da igreja
 	echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";
 	echo $msgErro;
