@@ -1,7 +1,7 @@
 <?PHP
 function conectar() {
 	require_once("DB.php");	
-	$dns = "mysql://root:x9735pla2@localhost/assembleia";
+	$dns = "mysql://root:x9735pla@localhost/assembleia";
 	$db =& DB::Connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage()); }
 }
@@ -654,7 +654,7 @@ function situacao ($situacao,$rol){
 			$data = mysql_fetch_array($result);
 
 			if ($data ["dt_fim"]!="00/00/0000")
-				$estilo = "<span style='color:#FF0000'><blink>Displinado at�: </blink></span>".$data ["dt_fim"];
+				$estilo = "<span style='color:#FF0000'><blink>Displinado at&eacute;: </blink></span>".$data ["dt_fim"];
 			else
 				$estilo = "<span style='color:#FF0000'><blink>Displinado por prazo indeterminado </blink></span>";
 

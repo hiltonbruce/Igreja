@@ -30,9 +30,9 @@ for ($i = 0; $i < 13; $i++) {
 	//verifica se há algum campo algum campo com valor
 		$campo = 'oferta'.$i;
 		
-		$vlrPost = strtr($_POST["$campo"], ', .','.,,' );
+		$vlrPost = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );
 
-		$valorBR = number_format($_POST["$campo"],2,",",".");
+		$valorBR = number_format($vlrPost, 2, ',', ' ');
 		
 		switch ($i) {
 			case '0':

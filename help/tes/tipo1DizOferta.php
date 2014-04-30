@@ -17,9 +17,9 @@ for ($i = 0; $i < 13; $i++) {
 	$campo = 'oferta'.$i;
 	//printf ("$campo: %s",$_POST["$campo"]);
 		
-	$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );//Captura o valor e vonverte p o padrão americano
+	//$valor = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );//Captura o valor e vonverte p o padrão americano
 
-	if ($valor>0) {
+	if ($vlrPost>0) {
 
 		switch ($i) {
 			case 0:
@@ -81,7 +81,7 @@ for ($i = 0; $i < 13; $i++) {
 			echo $msg;			
 		}else {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
+			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$vlrPost',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
