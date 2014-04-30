@@ -121,10 +121,10 @@ $rolIgreja = (empty($_POST['rolIgreja'])) ? false:(int)$_POST['rolIgreja'];
 $ultregistro = mysql_query ('SELECT data FROM dizimooferta WHERE lancamento="0" AND igreja="'.$rolIgreja.'" ORDER BY id DESC LIMIT 1');
 $vlrregistro = mysql_fetch_row($ultregistro);
 
-echo '<H1>Data do registo: '.$vlrregistro[0].'</h1>';
+echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';
 echo '<H1>Data do lançamento: '.$datalanc.'</h1>';
-$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
-$msgErro .= "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'>Continuar...<a>";
+//$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
+$msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'><button>Continuar...</button><a>";
 	
 if (($vlr && $vlrregistro[0] == $datalanc) || ($vlr && $vlrregistro[0] =='') && $rolIgreja ) {
 	//Verifica se o caixa do ultimo culto foi encerrado e se há algum valor em dizimo, oferta ou oferta extra
@@ -167,12 +167,18 @@ switch ($_POST['tipo']) {
 		echo "<a href='$linkreturn' ><button autofofus='autofofus'>Continuar...</button><a>";
 }elseif (!$rolIgreja) {//Se não foneceu o número da igreja
 	echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";
+	$msgErro .= '<div class="alert alert-error">Voc&ecirc; n&atilde;o informou a Igreja!';
+	$msgErro .= ' <u>O lan&ccedil;mento <b>N&Atilde;O</b> foi confirmado!</u></div>';
 	echo $msgErro;
-}elseif ($vlrregistro[0] <> $datalanc) {
+}elseif ($vlrregistro[0] <> $datalanc && $vlrregistro[0]<>'') {
 	echo "<script>alert('Você não encerrou o caixa do último culto! Faça agora para continuar...');</script>";
+	$msgErro .= '<div class="alert alert-error">Voc&ecirc; n&atilde;o encerrou o caixa do &uacute;ltimo culto!';
+	$msgErro .= ' <u>O lan&ccedil;mento <b>N&Atilde;O</b> foi confirmado!</u></div>';
 	echo $msgErro;
 } else {
 	echo "<script>alert('Valor não Informado!');</script>";
+	$msgErro .= '<div class="alert alert-error">Voc&ecirc; n&atilde;o informou o valor!';
+	$msgErro .= ' <u>O lan&ccedil;mento <b>N&Atilde;O</b> ser&aacute; realizado com valor zero (R$ 0,00)!</u></div>';
 	echo $msgErro;
 }
 	/*
