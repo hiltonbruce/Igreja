@@ -1,9 +1,7 @@
-
 <script type="text/javascript" src="js/autocomplete.js"></script>
-<script
-	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link
-	rel="stylesheet" type="text/css" href="css/autocomplete.css"><script type="text/javascript">
+<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
+<script type="text/javascript">
 $(document).ready(function(){
 
 	new Autocomplete("campo_estado", function() {
@@ -47,7 +45,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 				<td colspan="2">Nome:<br /> <input type="text" name="nome"
 				id="campo_estado" size="50%"
 					tabindex="<?php echo ++$ind;?>" />
-				
+				</td>
 				<td><label>Rol:<br /> <input type="text" id="rol" name="rol"
 						value="" /> </label>
 				</td>

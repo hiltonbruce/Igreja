@@ -18,29 +18,8 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';
 	}
 	
-	if ($dataValid && $mes>0 && $mes<12 && $ano>2000 && $ano<2050 && $tipo=='9') {
-		$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
-		$consulta .= ' AND d.data = "'.$dataValid.'"';
-		$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data ';
-		$this->dquery = mysql_query( $consulta ) or die (mysql_error());
-		$lancConfirmado = true;
-	}elseif ($mes>0 && $mes<12 && $ano>2000 && $ano<2050 && $tipo=='9') {
-		$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
-		$consulta .= ' AND mesrefer = '.$mes.' AND anorefer='.$ano;
-		$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
-		$this->dquery = mysql_query( $consulta ) or die (mysql_error());
-		$lancConfirmado = true;
-	}elseif (($mes=='0' || empty($mes)) && $mes<12 && $ano>2000 && $ano<2050 && $tipo=='9') {
-		$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
-		$consulta .= ' AND anorefer='.$ano;
-		$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
-		$this->dquery = mysql_query( $consulta ) or die (mysql_error());
-		$lancConfirmado = true;		
-	}else {
-		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.
-				$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
-			$lancConfirmado = false;
-	}
+	//Gera a query de busca
+	require_once 'help/tes/dizrespclass.php';
 		
 		
 		//echo '<tbody>';

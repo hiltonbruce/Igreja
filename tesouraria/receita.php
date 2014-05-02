@@ -7,7 +7,7 @@ $linkLancamento .= '&igreja='.$_GET['igreja'];
 ?> 
 <div id="tabs">
 	<ul>
-	  <li><a <?PHP link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0"><span>Anônimo</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0"><span>Busca</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1"><span>Entradas</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3"><span>Esc. Bíblica</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "2"); ?> href="<?php echo $linkLancamento;?>&rec=2"><span>Diversos</span></a></li>
@@ -36,7 +36,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			
 			$linkAcesso 	= 'escolha=tesouraria/receita.php&menu=top_tesouraria&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 			
-			if ($_GET['rec']<'7') {
+			if ($_GET['rec']=='1') {
 				//Form fechar caixa
 				require_once 'forms/concluirdiz.php';
 			}
@@ -45,7 +45,9 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			
 			switch ($_GET['rec']) {
 				case '0':
-					require_once ('forms/prestacao.php');
+					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
+					require_once ('forms/tes/busca.php');
+					require_once 'forms/tes/histResumo.php';
 					break;
 				case '1':
 					require_once ('forms/autodizimo.php');
@@ -68,8 +70,8 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					break;
 				case '9':
 					$idDizOf = $_GET['idDizOf'];
+					$rec = (empty($_GET['rec'])) ? 9:$_GET['rec'];
 					require_once 'forms/tes/histResumo.php';
-					require_once 'views/tesouraria/tabDizimosOfertas.php';
 					break;
 				case '10':
 					$id = (int)$_GET["idDizOf"];
@@ -95,8 +97,6 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 	header("Location: ./");
 }
 	unset($_SESSION['lancar']);
-	if ($_GET['rec']!='9' && $_GET['rec']!='8' && $_GET['rec']!='7') {
 		require_once 'views/tesouraria/tabDizimosOfertas.php';
-	}
 	
 ?>

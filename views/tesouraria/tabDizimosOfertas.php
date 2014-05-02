@@ -81,8 +81,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 			?>
 </table>
 <?php 
-	if (empty($_GET['escolha'])) {
-		break;
+	if (!empty($_GET['escolha'])) {
+		echo '<a href="controller/modeloPrint.php/?rec=9&tipo=1<?php echo $linkResumo;?>"><button>Imprimir ...</button> </a>';
 	}
 ?>
-<a href="controller/modeloPrint.php/?rec=9&tipo=1<?php echo $linkResumo;?>"><button>Imprimir ...</button> </a>
