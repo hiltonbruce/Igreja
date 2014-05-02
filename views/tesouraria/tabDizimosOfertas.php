@@ -4,9 +4,9 @@ $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
 if ($ano>2000 && $ano<2050) {
-	$statusLancamento = 'Lançamento Confirmado';
+	$statusLancamento = 'Lanï¿½amento Confirmado';
 }else {
-	$statusLancamento = 'Lançamento Pendente';
+	$statusLancamento = 'Lanï¿½amento Pendente';
 }
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
@@ -32,7 +32,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 	//require_once 'forms/concluirdiz.php';
 	
 	if ($_GET['idDizOf']>0) {
-	//Incluir form para alterar ou excluir pre-lançamento de Dízimos e Ofertas
+	//Incluir form para alterar ou excluir pre-lanï¿½amento de Dï¿½zimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
 		}
 ?>
@@ -46,7 +46,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				$dirigenteIgreja = $dirCong->nome();
 			}
 				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().' - Dirigente: '.$dirigenteIgreja.',
-			 1&ordm; Tesoureiro: Não informado! </h2>';			
+			 1&ordm; Tesoureiro: Nï¿½o informado! </h2>';			
 			
 			printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
 			 </h2>",number_format($dizmista->outrosdizimos($_GET['rolIgreja']),2,',','.'));?>
@@ -72,7 +72,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					$dizmista->concluir($idIgreja);
 					//echo '<h1>Teste1</h1>';
 				} else {
-					//tabela com a lista p confirmar lançamento
+					//tabela com a lista p confirmar lanï¿½amento
 					$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
 					$dizmista->dizimistas($roligreja,$apagarEntrada,$dia,$mes,$ano,$_GET['rec']);
 					//echo '<h1>Teste2</h1>';
@@ -82,6 +82,6 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 </table>
 <?php 
 	if (!empty($_GET['escolha'])) {
-		echo '<a href="controller/modeloPrint.php/?rec=9&tipo=1<?php echo $linkResumo;?>"><button>Imprimir ...</button> </a>';
+		echo '<a href="controller/modeloPrint.php/?rec=9&tipo=1'.$linkResumo.'"><button>Imprimir ...</button> </a>';
 	}
 ?>
