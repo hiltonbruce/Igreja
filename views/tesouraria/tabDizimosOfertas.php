@@ -1,8 +1,9 @@
 <?php
+$dia = $_GET['dia'];
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
-if ($mes>0 && $mes<12 && $ano>2000 && $ano<2050) {
+if ($ano>2000 && $ano<2050) {
 	$statusLancamento = 'Lançamento Confirmado';
 }else {
 	$statusLancamento = 'Lançamento Pendente';
@@ -71,11 +72,17 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					$dizmista->concluir($idIgreja);
 					//echo '<h1>Teste1</h1>';
 				} else {
+					//tabela com a lista p confirmar lançamento
 					$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
-					$dizmista->dizimistas($roligreja,$apagarEntrada,$mes,$ano,$_GET['rec']);
+					$dizmista->dizimistas($roligreja,$apagarEntrada,$dia,$mes,$ano,$_GET['rec']);
 					//echo '<h1>Teste2</h1>';
 				}
-				$linkResumo = '&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
+				$linkResumo = '&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'].'&dia='.$_GET['dia'];
 			?>
 </table>
+<?php 
+	if (empty($_GET['escolha'])) {
+		break;
+	}
+?>
 <a href="controller/modeloPrint.php/?rec=9&tipo=1<?php echo $linkResumo;?>"><button>Imprimir ...</button> </a>

@@ -33,10 +33,10 @@ function checadata ($dt){
 			$y = $dta[2];
 			$res = checkdate($m,$d,$y);
 			if ($res == 1 ){
-				//Data vï¿½lida
+				//Data válida
 				return true;
 			}else{
-				//Data invï¿½lida
+				//Data inválida
 				return false;
 			}
 }
