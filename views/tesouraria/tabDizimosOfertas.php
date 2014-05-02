@@ -4,9 +4,9 @@ $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
 if ($ano>2000 && $ano<2050) {
-	$statusLancamento = 'Lan�amento Confirmado';
+	$statusLancamento = 'Lan&ccidil;amento Confirmado';
 }else {
-	$statusLancamento = 'Lan�amento Pendente';
+	$statusLancamento = 'Lan&ccidil;amento Pendente';
 }
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
