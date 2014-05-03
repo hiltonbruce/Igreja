@@ -19,7 +19,11 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 	}
 	
 	//Gera a query de busca
-	require_once 'help/tes/dizrespclass.php';
+	if (empty($_GET['escolha']) || empty($_POST['escolha'])) {
+		require_once '../help/tes/dizrespclass.php';
+	}else {
+		require_once 'help/tes/dizrespclass.php';
+	}
 		
 		
 		//echo '<tbody>';
@@ -28,7 +32,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 			
 			$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
-			$tipo = $mostracta->titulo;//Define o titulo para a variável
+			$tipo = $mostracta->titulo;//Define o titulo para a variï¿½vel
 			
 			$valor = number_format($linha['valor'],2,',','.');
 			if ($linha['confirma']=='') {
@@ -40,7 +44,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
 			
-			//Criar link para alteração pelo cadastrador - Realizar critica tb qdo abrir
+			//Criar link para alteraï¿½ï¿½o pelo cadastrador - Realizar critica tb qdo abrir
 			if ($_SESSION["valid_user"]==$linha['tesoureiro'] && !$lancConfirmado) {
 				if ($_GET['tipo']==1) {
 					$corrigir = $valor;
@@ -56,7 +60,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			
 			$linkMembro= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
 			echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td>
-				<td><a href="'.$linkMembro.'" title="Detalhar contribuições!">'
+				<td><a href="'.$linkMembro.'" title="Detalhar contribuiï¿½ï¿½es!">'
 				.$rol.' - '.$linha['nome'].'</a></td><td>'.$tipo.'</td><td 
 				 id="moeda">'.$corrigir.'</td>
 				 		<td>'.$linha['razao'].'</td></tr>';
@@ -170,7 +174,7 @@ function concluir($igreja) {
 	
 			
 			$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
-			$tipo = $mostracta->titulo;//Define o titulo para a variável
+			$tipo = $mostracta->titulo;//Define o titulo para a variï¿½vel
 			
 			//$tesoureiro = $linha['tesoureiro'];
 			
