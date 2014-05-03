@@ -3,10 +3,10 @@ $dia = $_GET['dia'];
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
-if ($ano>2000 && $ano<2050) {
-	$statusLancamento = 'Lan&ccidil;amento Confirmado';
+if ((($ano>2000 && $ano<2050) || empty($_GET['ano'])) && ($_GET['rec']=='9' || $_GET['rec']=='0')) {
+	$statusLancamento = 'Lan&ccedil;amento Confirmado';
 }else {
-	$statusLancamento = 'Lan&ccidil;amento Pendente';
+	$statusLancamento = 'Lan&ccedil;amento Pendente';
 }
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
@@ -32,7 +32,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 	//require_once 'forms/concluirdiz.php';
 	
 	if ($_GET['idDizOf']>0) {
-	//Incluir form para alterar ou excluir pre-lanï¿½amento de Dï¿½zimos e Ofertas
+	//Incluir form para alterar ou excluir pre-lançamento de Dízimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
 		}
 ?>
@@ -46,7 +46,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				$dirigenteIgreja = $dirCong->nome();
 			}
 				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().' - Dirigente: '.$dirigenteIgreja.',
-			 1&ordm; Tesoureiro: Nï¿½o informado! </h2>';			
+			 1&ordm; Tesoureiro: N&atilde;o informado! </h2>';			
 			
 			printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
 			 </h2>",number_format($dizmista->outrosdizimos($_GET['rolIgreja']),2,',','.'));?>
@@ -77,11 +77,11 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 					$dizmista->dizimistas($roligreja,$apagarEntrada,$dia,$mes,$ano,$_GET['rec']);
 					//echo '<h1>Teste2</h1>';
 				}
-				$linkResumo = '&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'].'&dia='.$_GET['dia'];
+				$linkResumo = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'].'&dia='.$_GET['dia'];
 			?>
 </table>
 <?php 
 	if (!empty($_GET['escolha'])) {
-		echo '<a href="controller/modeloPrint.php/?rec=9&tipo=1'.$linkResumo.'"><button>Imprimir ...</button> </a>';
+		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" ><button>Imprimir ...</button> </a>';
 	}
 ?>

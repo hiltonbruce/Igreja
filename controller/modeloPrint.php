@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+ini_set('display_errors', 'off');
 
 $cont_lin=0;
 session_start();
@@ -34,7 +34,7 @@ $tipo = $_GET['tipo'];
 switch ($tipo) {
 	case '1':
 	
-	$tituloColuna5 = ($idIgreja>'1') ? 'Congrega��o':'Igreja';
+	$tituloColuna5 = ($idIgreja>'1') ? 'Congrega&ccedil;o':'Igreja';
 	$nomeArquivo = '../views/tesouraria/tabDizimosOfertas.php';
 	require_once '../views/modeloPrint.php';	
 	break;

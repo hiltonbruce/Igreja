@@ -1,7 +1,7 @@
 <?PHP
 function conectar() {
 	require_once("DB.php");	
-	$dns = "mysql://root:x9735pla2@localhost/assembleia";
+	$dns = "mysql://root:x9735pla@localhost/assembleia";
 	$db =& DB::Connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage()); }
 }
