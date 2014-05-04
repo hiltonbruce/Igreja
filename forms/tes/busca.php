@@ -27,7 +27,7 @@ $(document).ready(function(){
 		<table style="background-color: #D3D3D3; border: 0;">
 		<tbody>
 			<tr>
-				<td colspan="2">Nome:<br /> <input type="text" name="nome"
+				<td colspan="3">Nome:<br /> <input type="text" name="nome"
 				id="campo_estado" size="50%" autofocus="autofocus"
 					tabindex="<?php echo ++$ind;?>" />
 				</td>
@@ -35,7 +35,7 @@ $(document).ready(function(){
 						value="" tabindex="<?php echo ++$ind;?>" /> </label>
 				</td>
                       </tr><tr>
-				<td colspan="2">Congreg. do membro: <br /> <input type="text" id="cong"
+				<td colspan="3">Congreg. do membro: <br /> <input type="text" id="cong"
 					disabled="disabled" value="" size="40%" />
 				</td>
 				<td>
@@ -52,15 +52,28 @@ $(document).ready(function(){
 					Dia: <br /><input type="text" size="2" maxlength="2" name="dia" value="<?php echo $_GET['dia'];?>"tabindex="<?PHP echo ++$ind; ?>" />
 				</td>
 				<td>
-					Mês:<br /> <input type="text" name="mes" value="<?php echo $_GET['mes'];?>"tabindex="<?PHP echo ++$ind; ?>" />
+					Mês:<br /> 
+					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" >
+					      <?php
+					      	$linha1 = '<option value="">Selecione o mês...</option>';
+						      foreach(arrayMeses() as $mes => $meses) {            
+								 $linha2 = '<option value='.$mes.'>'.$meses.'</options>';
+								 if ($_GET['mes']==$mes) {
+								 	$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
+								 }
+						      }
+						      echo $linha1.$linha2;
+					      ?>
+				      </select>
 				</td>
 				<td>
 					Ano: <br /><input type="text" name="ano" value="<?php echo $_GET['ano'];?>"tabindex="<?PHP echo ++$ind; ?>" />  
 					<input type="hidden" name="membro"	value="<?php echo true;?>" /> 
 					<input type="hidden" name="fin"	value="<?php echo $fin;?>" /> 
+				</td><td>
+					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
 					<input type="hidden" name="rec"	value="<?php echo $rec;?>" /> <input type="submit" name="Submit" value="Listar..."
 					tabindex="<?PHP echo ++$ind; ?>" /> 
-					<input name="escolha" type="hidden" value="tesouraria/receita.php" /> 
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				</td>
 			</tr>

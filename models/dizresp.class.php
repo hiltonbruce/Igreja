@@ -21,12 +21,13 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 	//Gera a query de busca
 	$incluiPessoa ='';
 	
-	if (!empty($_GET['membro']) && $_GET['membro']==true) {
+	if (!empty($_GET['nome']) || $_GET['rol']>0 ) {
 		
-		if (!empty($_GET['membro']) && $_GET['membro']==true && $_GET['rol']>0) {
+		$nome = trim($_GET['nome']);
+		if ($_GET['rol']>0) {
 			$incluiPessoa =' AND d.rol = "'.(int)$_GET['rol'].'" ';
-		}elseif (!empty($_GET['membro']) && $_GET['membro']==true && (strlen($_GET['nome']))>'3'){
-			$incluiPessoa =' AND d.nome LIKE "%'.$_GET['nome'].'%" ';
+		}elseif ((strlen($_GET['nome']))>'3'){
+			$incluiPessoa =' AND d.nome LIKE "%'.$nome.'%" ';
 		}elseif (!empty($_GET['membro']) && $_GET['membro']==true) {
 			$incluiPessoa =' AND d.nome = "" AND d.rol = "0" ';
 		}

@@ -47,7 +47,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 				case '0':
 					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
 					require_once ('forms/tes/busca.php');
-					require_once 'forms/tes/histResumo.php';
+					//require_once 'forms/tes/histResumo.php';
 					break;
 				case '1':
 					require_once ('forms/autodizimo.php');

@@ -561,6 +561,24 @@ function data_extenso ($data) {
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
 }
 
+function arrayMeses () {
+	$meses = array(
+			'01' => 'Janeiro',
+			'02' => 'Fevereiro',
+			'03' => 'Março',
+			'04' => 'Abril',
+			'05' => 'Maio',
+			'06' => 'Junho',
+			'07' => 'Julho',
+			'08' => 'Agosto',
+			'09' => 'Setembro',
+			'10' => 'Outubro',
+			'11' => 'Novembro',
+			'12' => 'Dezembro'
+	);
+	return $meses;
+}
+
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
 
 	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
