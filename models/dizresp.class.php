@@ -54,10 +54,10 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
-		}elseif (($mes=='0' || empty($mes)) && ($ano=='0' || empty($ano)) && ($tipo=='9')) {
+		}elseif (($mes=='0' || empty($mes)) && ($ano=='0' ) && ($tipo=='9')) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
+			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.igreja,d.data DESC,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
@@ -105,7 +105,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			
 			$linkMembro= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
 			echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td>
-				<td><a href="'.$linkMembro.'" title="Detalhar contribui��es!">'
+				<td><a href="'.$linkMembro.'" title="Detalhar contribui&ccedil;&otilde;es confimardas!">'
 				.$rol.' - '.$linha['nome'].'</a></td><td>'.$tipo.'</td><td 
 				 id="moeda">'.$corrigir.'</td>
 				 		<td>'.$linha['razao'].'</td></tr>';

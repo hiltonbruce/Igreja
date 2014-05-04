@@ -3,10 +3,10 @@ $dia = $_GET['dia'];
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
-if ((($ano>2000 && $ano<2050) || empty($_GET['ano'])) && ($_GET['rec']=='9' || $_GET['rec']=='0')) {
+if ((($ano>2000 && $ano<2050) || $_GET['ano']=='0') && ($_GET['rec']=='9' || $_GET['rec']=='0')) {
 	$statusLancamento = 'Lan&ccedil;amento Confirmado';
 }else {
-	$statusLancamento = 'Lan&ccedil;amento Pendente';
+	$statusLancamento = 'Aguardando confima&ccedil;&atilde;o!';
 }
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>

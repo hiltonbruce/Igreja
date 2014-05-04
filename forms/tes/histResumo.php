@@ -9,7 +9,8 @@
 		?></p>
 		Dia: <input type="text" size="2" maxlength="2" name="dia" value="<?php echo $_GET['dia'];?>"tabindex="<?PHP echo ++$ind; ?>" />
 		Mês: <input type="text" name="mes" value="<?php echo $_GET['mes'];?>"tabindex="<?PHP echo ++$ind; ?>" />
-		Ano: <input type="text" name="ano" value="<?php echo $_GET['ano'];?>"tabindex="<?PHP echo ++$ind; ?>" /> 
+		Ano: <input type="text" name="ano" class="dica" value="<?php echo $_GET['ano'];?>" tabindex="<?PHP echo ++$ind; ?>" />
+			<span>Em branco lista os pendentes e ZERO os confimados</span>
 			<input type="hidden" name="fin"	value="<?php echo $fin;?>" /> 
 			<input type="hidden" name="rec"	value="<?php echo $rec;?>" /> <input type="submit" name="Submit" value="Listar..."
 			tabindex="<?PHP echo ++$ind; ?>" /> 
