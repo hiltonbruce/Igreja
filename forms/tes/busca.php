@@ -27,19 +27,19 @@ $(document).ready(function(){
 		<table style="background-color: #D3D3D3; border: 0;">
 		<tbody>
 			<tr>
-				<td colspan="3">Nome:<br /> <input type="text" name="nome"
-				id="campo_estado" size="75%" autofocus="autofocus"
+				<td colspan="2">Nome:<br /> <input type="text" name="nome"
+				id="campo_estado" size="50%" autofocus="autofocus"
 					tabindex="<?php echo ++$ind;?>" />
 				</td>
-			</tr>
-			<tr><td><label>Rol:<br /> <input type="text" id="rol" name="rol"
+			     <td><label>Rol:<br /> <input type="text" id="rol" name="rol"
 						value="" tabindex="<?php echo ++$ind;?>" /> </label>
 				</td>
-				<td>Congreg. do membro: <br /> <input type="text" id="cong"
-					disabled="disabled" value="" size="50%" />
+                      </tr><tr>
+				<td colspan="2">Congreg. do membro: <br /> <input type="text" id="cong"
+					disabled="disabled" value="" size="40%" />
 				</td>
 				<td>
-					Congrega&ccedil;&atilde;o:
+					Congrega&ccedil;&atilde;o:<br />
 					<?php
 						$bsccredor = new List_sele('igreja', 'razao', 'igreja');
 						$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'');
