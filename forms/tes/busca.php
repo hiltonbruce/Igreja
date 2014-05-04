@@ -57,7 +57,7 @@ $(document).ready(function(){
 					      <?php
 					      	$linha1 = '<option value="">Selecione o mês...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {            
-								 $linha2 = '<option value='.$mes.'>'.$meses.'</options>';
+								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($_GET['mes']==$mes) {
 								 	$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
 								 }
