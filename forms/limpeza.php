@@ -21,19 +21,6 @@
 <legend>Solicitação de Material de Limpeza, para: <?php echo $periodo['0'];?></legend>
 <form method='post' name='limpeza' >
 	<table id="listTable" style="width: 100%;">
-			<colgroup>
-				<col id="item">
-				<col id="Quantidade">
-				<col id="albumCol"/>
-			</colgroup>
-		<thead>
-			<tr>
-				<th scope="col">item</th>
-				<th scope="col">Quantidade:</th>
-				<th scope="col">Igreja:</th>
-			</tr>
-		</thead>
-		<tbody>
 			<tr>
 				<td>
 					<?php 

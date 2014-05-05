@@ -21,7 +21,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 	//Gera a query de busca
 	$incluiPessoa ='';
 	
-	if (!empty($_GET['nome']) || $_GET['rol']>0 ) {
+	if (!empty($_GET['nome']) || $_GET['rol']>=0 ) {
 		
 		$nome = trim($_GET['nome']);
 		if ($_GET['rol']>0) {
@@ -55,7 +55,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
-		}elseif (($mes=='0' || empty($mes)) && ($ano=='0' ) && ($tipo=='9')) {
+		}elseif (($mes=='0' || empty($mes)) && ($ano=='0') && ($tipo=='9')) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.igreja,d.data DESC,d.id ';

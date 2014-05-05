@@ -1,12 +1,12 @@
 <?php
 if ($_GET['limpeza']=='4') {
 	//$dadoscong vem do script controller/limpeza.php
-	$todacongr 	 = 'SELECT rol,razao FROM igreja WHERE rol="'.$dadoscong->rol().'" ORDER BY razao';
+	$todacongr 	 = 'SELECT rol,razao,matlimpeza FROM igreja WHERE rol="'.$dadoscong->rol().'" ORDER BY razao';
 }elseif ($_GET['limpeza']=='1') {
 	//$dadoscong vem do script controller/limpeza.php
-	$todacongr 	 = 'SELECT rol,razao FROM igreja WHERE matlimpeza="1" ORDER BY razao';
+	$todacongr 	 = 'SELECT rol,razao,matlimpeza FROM igreja WHERE matlimpeza="1" ORDER BY razao';
 }else {
-	$todacongr 	 = 'SELECT rol,razao FROM igreja ORDER BY razao';
+	$todacongr 	 = 'SELECT rol,razao,matlimpeza FROM igreja ORDER BY razao';
 }
 	
 	$todacongrLimp = mysql_query($todacongr);
@@ -44,8 +44,10 @@ if ($_GET['limpeza']=='4') {
 		$tabtodas .= $tbodytab->tabLimp ($roligreja['rol']);//$tbodytab->tabelaLimp($roligreja['rol']) -> vem do script que o chama /views/limpezatot.php
 
 		$tabtodas .= '</tbody></table>';
-		$tabtodas .= '<fieldset><legend>Obs.:</legend> As congregações que não enviarem a lista de material de limpeza
+		if ($roligreja['matlimpeza']=='1') {
+			$tabtodas .= '<fieldset><legend>Obs.:</legend> As congregações que não enviarem a lista de material de limpeza
 		no próximo bimestre não serão relacionadas para entrega!</fieldset>';
+		}
 		$tabtodas .= $saltoPagina;
 	}
 	

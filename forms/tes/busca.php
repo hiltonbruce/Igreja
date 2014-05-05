@@ -27,16 +27,12 @@ $(document).ready(function(){
 		<table style="background-color: #D3D3D3; border: 0;">
 		<tbody>
 			<tr>
-				<td colspan="3">Nome:<br /> <input type="text" name="nome"
-				id="campo_estado" size="50%" autofocus="autofocus"
-					tabindex="<?php echo ++$ind;?>" />
+				<td colspan="2">Nome:<br /> <input type="text" name="nome"
+				id="campo_estado" size="30%" autofocus="autofocus"
+					tabindex="<?php echo ++$ind;?>" value="<?php if ($_GET['rol']<'1') echo $_GET['nome'];?>" />
 				</td>
-			     <td><label>Rol:<br /> <input type="text" id="rol" name="rol"
-						value="" tabindex="<?php echo ++$ind;?>" /> </label>
-				</td>
-                      </tr><tr>
-				<td colspan="3">Congreg. do membro: <br /> <input type="text" id="cong"
-					disabled="disabled" value="" size="40%" />
+			     <td><label>Rol: (Zero p/ An&ocirc;nimo)<br /> <input type="text" id="rol" name="rol"
+						value="<?php echo $_GET['rol'];?>" tabindex="<?php echo ++$ind;?>" size="5" /> </label>
 				</td>
 				<td>
 					Congrega&ccedil;&atilde;o:<br />
@@ -46,7 +42,7 @@ $(document).ready(function(){
 						echo $listaIgreja;
 					?> 
 				</td>
-			</tr>
+               </tr>
 			<tr>
 				<td>
 					Dia: <br /><input type="text" size="2" maxlength="2" name="dia" value="<?php echo $_GET['dia'];?>"tabindex="<?PHP echo ++$ind; ?>" />
@@ -67,7 +63,8 @@ $(document).ready(function(){
 				      </select>
 				</td>
 				<td>
-					Ano: <br /><input type="text" name="ano" value="<?php echo $_GET['ano'];?>"tabindex="<?PHP echo ++$ind; ?>" />  
+					Ano:(Zero p/ todos os anos) <br />
+					<input type="text" name="ano" value="<?php echo $_GET['ano'];?>"tabindex="<?PHP echo ++$ind; ?>" size="5" />  
 					<input type="hidden" name="membro"	value="<?php echo true;?>" /> 
 					<input type="hidden" name="fin"	value="<?php echo $fin;?>" /> 
 				</td><td>
