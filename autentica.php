@@ -62,7 +62,7 @@
 
 	if (isset($_SESSION['valid_user']))
 	{
-		echo "<br><h4> Nome: ".$_SESSION['nome']."<br/> Cargo: ".$_SESSION['cargo']."<br/> CPF: ".$_SESSION['valid_user']."</h4>".
+		echo "<br><h5> Nome: ".$_SESSION['nome']."<br/> Cargo: ".$_SESSION['cargo']."<br/> CPF: ".$_SESSION['valid_user']."</h5>".
 				"Computador: ".$_SESSION['computador'];
 		echo "<h4><a href='logout.php'>Sair</a></h4><h4><a href='./?escolha=alt_senha.php'>Trocar Senha</a></h4>";
 		

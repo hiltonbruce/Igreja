@@ -3,11 +3,6 @@ $dia = $_GET['dia'];
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
-if ((($ano>2000 && $ano<2050) || $_GET['ano']=='0') && ($_GET['rec']=='9' || $_GET['rec']=='0')) {
-	$statusLancamento = 'Lan&ccedil;amento Confirmado';
-}else {
-	$statusLancamento = 'Aguardando confima&ccedil;&atilde;o!';
-}
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
 <table>
@@ -35,9 +30,28 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 	//Incluir form para alterar ou excluir pre-lançamento de Dízimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
 		}
+		
+		
+	if ($_POST['concluir']=='1') {
+			$tabLancamento = $dizmista->concluir($idIgreja);
+		} else {
+			//tabela com a lista p confirmar lanï¿½amento
+			$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
+			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,$mes,$ano,$_GET['rec']);
+			$tabLancamento= $resultado['1'];
+			
+			if ($resultado['2']) {
+				$statusLancamento = 'Lan&ccedil;amentos Confirmado';
+			}elseif ($resultado['0']!=0) {
+				$statusLancamento = 'Aguardando confima&ccedil;&atilde;o!';
+			}else {
+				$statusLancamento = '';
+			}
+		}
+		
 ?>
 <table  style="width: 95%;">
-		<caption>
+		<caption class="text-left">
 			<?php
 			$dirigenteIgreja = $igrejaSelecionada->pastor();
 			
@@ -46,11 +60,10 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				$dirigenteIgreja = $dirCong->nome();
 			}
 				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().' - Dirigente: '.$dirigenteIgreja.',
-			 1&ordm; Tesoureiro: N&atilde;o informado! </h2>';			
+			 1&ordm; Tesoureiro: N&atilde;o informado!</h2>';			
 			
 			printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
-			 </h2>",number_format($dizmista->outrosdizimos($_GET['rolIgreja']),2,',','.'));?>
-			<?php printf(' Resp. pelo lan&ccedil;amento: %s',$_SESSION {'nome'});?></caption>
+			 </h2>",number_format($dizmista->outrosdizimos($_GET['rolIgreja']),2,',','.'));?></caption>
 			<colgroup>
 				<col id="Data">
 				<col id="Rol/Nome">
@@ -63,20 +76,12 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				<th scope="col">Data Lan&ccedil;.</th>
 				<th scope="col">Rol/Nome</th>
 				<th scope="col">Tipo</th>
-				<th scope="col">Valor &agrave; lan&ccedil;ar (R$)</th>
+				<th scope="col">Valor(R$)</th>
 				<th scope="col"><?php echo $tituloColuna5;?></th>
 			</tr>
 		</thead>
 			<?php 
-				if ($_POST['concluir']=='1') {
-					$dizmista->concluir($idIgreja);
-					//echo '<h1>Teste1</h1>';
-				} else {
-					//tabela com a lista p confirmar lanï¿½amento
-					$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
-					$dizmista->dizimistas($roligreja,$apagarEntrada,$dia,$mes,$ano,$_GET['rec']);
-					//echo '<h1>Teste2</h1>';
-				}
+				echo $tabLancamento;
 				$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 				$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 			?>

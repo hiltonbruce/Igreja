@@ -51,7 +51,7 @@ $(document).ready(function(){
 					Mês:<br /> 
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" >
 					      <?php
-					      	$linha1 = '<option value="">Selecione o mês...</option>';
+					      	$linha1 = '<option value="0">Selecione o mês...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {            
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($_GET['mes']==$mes) {
@@ -69,7 +69,8 @@ $(document).ready(function(){
 					<input type="hidden" name="fin"	value="<?php echo $fin;?>" /> 
 				</td><td>
 					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
-					<input type="hidden" name="rec"	value="<?php echo $rec;?>" /> <input type="submit" name="Submit" value="Listar..."
+					<input type="hidden" name="rec"	value="<?php echo $rec;?>" /> 
+					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 					tabindex="<?PHP echo ++$ind; ?>" /> 
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				</td>

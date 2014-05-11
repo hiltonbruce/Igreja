@@ -1,3 +1,3 @@
 <?PHP
-        $dns = "mysql://root:x9735pla2@localhost/assembleia";
+        $dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
 ?>

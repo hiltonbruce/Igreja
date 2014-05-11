@@ -1636,10 +1636,9 @@ fieldset {
   border: 0;
 }
 legend {
-  display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 21px;
   line-height: inherit;
   color: #333;
