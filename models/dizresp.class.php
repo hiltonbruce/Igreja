@@ -17,7 +17,14 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 	} else {
 		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';
 	}
-		
+	
+	if ($mes>'0' && $mes<='12') {
+		$consMes = ' AND mesrefer = '.$mes;
+	}
+	
+	if ($dia>0 && $dia<=31) {
+		$consDia = ' AND DATE_FORMAT(data, "%d") = '.$dia;
+	}
 	if ($tipo=='9' || $tipo =='0') {
 		$conTipos = true;
 	}else {
@@ -48,24 +55,17 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
-		}elseif ($mes>'0' && $mes<='12' && $ano>'2000' && $ano<'2050' && $conTipos) {
+		}elseif ($ano>'2000' && $ano<'2050' && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
-			$consulta .= ' AND mesrefer = '.$mes.' AND anorefer='.$ano;
+			$consulta .= $consMes.$consDia.' AND anorefer='.$ano;
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
-		}elseif (($mes==0 || empty($mes)) && $ano>2000 && $ano<2050 && $conTipos) {
+		}elseif ($ano=='0') {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
-			$consulta .= ' AND anorefer='.$ano;
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
-			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
-			$lancConfirmado = true;
-		}elseif (($mes==0 || empty($mes)) && $ano=='0') {
-			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
-			$consulta .= $incluiPessoa;
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.igreja,d.data DESC,d.id ';
+			$consulta .= $consMes.$consDia.$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.igreja,d.data DESC,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
