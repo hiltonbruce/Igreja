@@ -17,10 +17,11 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 	} else {
 		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';
 	}
+		
 	if ($tipo=='9' || $tipo =='0') {
-		$conTipos == true;
+		$conTipos = true;
 	}else {
-		$consTipos ==false;
+		$consTipos =false;
 	}
 	
 	//Gera a query de busca
@@ -40,14 +41,14 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		
 	}
 	
-		if ($dataValid && $mes>0 && $mes<12 && $ano>2000 && $ano<2050 && $conTipos) {
+		if ($dataValid && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= ' AND d.data = "'.$dataValid.'"';
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
-		}elseif ($mes>0 && $mes<12 && $ano>2000 && $ano<2050 && $conTipos) {
+		}elseif ($mes>'0' && $mes<='12' && $ano>'2000' && $ano<'2050' && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= ' AND mesrefer = '.$mes.' AND anorefer='.$ano;
