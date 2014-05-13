@@ -118,7 +118,8 @@
  <div id="content">
       <div class="mainpanel">
         <?PHP
-		if ($_SESSION["valid_user"]){			
+		
+		if ($_SESSION["valid_user"]){	
 			if (strstr($_GET["escolha"],"adm/")){
 				if (strstr($_GET["escolha"],"adm/dados_pessoais"))
 					require_once ("top_dados.php");
@@ -136,10 +137,14 @@
 			}elseif (strstr($_GET["escolha"],"aniv/")){
 				require_once ("top_aniv.php");			
 			}
+			
+			$cent = new central();//Chama o script da pagina de acordo com $_get ou $_post ["escolha"]
+			require ($cent->get());
+			
+		}else {
+				require_once ('noticias/painel.php');			
 		}
 		
-		$cent = new central();//Chama o script da pagina de acordo com $_get ou $_post ["escolha"]
-		require_once("{$cent->get()}");
 	   ?>
       </div>
 	  
