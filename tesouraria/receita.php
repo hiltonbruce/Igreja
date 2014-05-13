@@ -83,6 +83,10 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once 'forms/tes/histFinanceiro.php';
 					require_once 'views/tesouraria/saldoMembros.php';
 					break;
+				case '12':
+					require_once 'forms/tes/histFinanceiro.php';
+					require_once 'views/tesouraria/saldoIgrejas.php';
+					break;
 				default:
 					require_once 'forms/receita.php';
 				break;

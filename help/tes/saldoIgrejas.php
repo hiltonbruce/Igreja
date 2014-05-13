@@ -12,13 +12,13 @@
 	foreach ($igrejas->ArrayIgrejaDados() as $igreja) {
 		$saldos = new tes_igreja ($igreja['rol'],$ano);
 		$valores = $saldos->ArraySaldos();
-		$bgcolor = $cor ? 'class="odd"' : '';
+		$bgcolor = $cor ? 'class="odd2"' : 'class="odd"';
 		
 		
 		$linha .= '<tr '.$bgcolor.'><td>'.$igreja['razao'].'</td>';
 		//print_r( $saldos->ArraySaldos());echo '<br />';
 		for ($i = 1; $i < 13; $i++) {
-			$entrada =($valores[$i]>0) ? number_format($valores[$i],2,',','.'):'';
+			$entrada =($valores[$i]>0) ? number_format($valores[$i],2,',','.'):'---';
 			$linha .= '<td id="moeda">'.$entrada.'</td>';
 			$total += $valores[$i];
 			$totalMes[$i] += $valores[$i];

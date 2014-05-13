@@ -2,7 +2,8 @@
 
 	require_once 'help/tes/saldoIgrejas.php';	
 ?>
-<table>
+</div>
+<table style="width:100%">
 	<caption>
 		<?php echo $cong;?>
 		Histórico Financeiro de Dízimos e Ofertas - Ano de referência:
