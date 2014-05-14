@@ -40,6 +40,9 @@ th {
   text-align: left;
 }
 
+.centro {
+  text-align: center;
+}
 #playlistPosHead {
   text-indent: -1000em;
 }
@@ -62,4 +65,18 @@ th, td {
   background-color:#BFEFFF;
 }
 
+a {
+	text-decoration:none;
+	color : #000;
+}
 
+
+td#moeda {
+	text-align:right;
+}
+
+#total {
+	background-color:#000;
+	font-weight:bold;
+	color:#ccc;
+}

@@ -4,8 +4,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo 'Título';?></title>
-<link rel="stylesheet" type="text/css" media="print, screen" href="../../tabs.css" />
-<link rel="stylesheet" type="text/css" media="print, screen, projection" href="../../style.css"/>
+<link rel="stylesheet" type="text/css" media="print, screen" href="../../igreja/tabs.css" />
 </head>
 <body>
 <?PHP

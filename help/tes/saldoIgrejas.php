@@ -12,10 +12,14 @@
 	foreach ($igrejas->ArrayIgrejaDados() as $igreja) {
 		$saldos = new tes_igreja ($igreja['rol'],$ano);
 		$valores = $saldos->ArraySaldos();
-		$bgcolor = $cor ? 'class="odd2"' : 'class="odd"';
+		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 		
+		//Monta link para detalhar a igreja
+		$linkIgreja  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria';
+		$linkIgreja .= '&igreja='.$igreja['rol'].'&ano='.$_GET['ano'].'&fin=2&';
+		$linkIgreja .= 'rec=11" title="Detalhar entradas">'.$igreja['razao'].'</a>';
 		
-		$linha .= '<tr '.$bgcolor.'><td>'.$igreja['razao'].'</td>';
+		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
 		//print_r( $saldos->ArraySaldos());echo '<br />';
 		for ($i = 1; $i < 13; $i++) {
 			$entrada =($valores[$i]>0) ? number_format($valores[$i],2,',','.'):'---';
@@ -33,16 +37,16 @@
 	
 	//Cabeçalho da tabela
 	$colgroup = '<col id="igreja">';
-	$tabThead = '<th scope="col">Igrejas</th>';
+	$tabThead = '<tr><th scope="col">Igrejas</th>';
 	$tabFoot = '<tr id="total"><td>Totais</td>';
 	
 	foreach(arrayMeses() as $mes => $meses) {
 		$colgroup .= '<col id="'.substr($meses, 0, 3).'">';
-		$tabThead .= '<th scope="col">'.substr($meses, 0, 3).'</th>';
+		$tabThead .= '<th scope="col" class="centro">'.substr($meses, 0, 3).'</th>';
 		$tabFoot  .= '<td id="moeda">'.number_format($totalMes[(int)$mes],2,',','.').'</td>';
 	}
 	$colgroup .= '<col id="Total">';
-	$tabThead .= '<th scope="col">Total</th>';
-	$tabFoot  .= '<td>'.number_format($totalGeral,2,',','.').'</td></tr>';
+	$tabThead .= '<th scope="col"  class="centro">Total</th></tr>';
+	$tabFoot  .= '<td id="moeda">'.number_format($totalGeral,2,',','.').'</td></tr>';
 		
 ?>

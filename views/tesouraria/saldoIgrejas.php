@@ -1,14 +1,17 @@
-<?php
-
-	require_once 'help/tes/saldoIgrejas.php';	
-?>
 </div>
 <table style="width:100%">
 	<caption>
 		<?php echo $cong;?>
 		Histórico Financeiro de Dízimos e Ofertas - Ano de referência:
 		<?php echo $ano;?>
-		- Valores em Real(R$)
+		- Valores em Real(R$) 
+		<?php
+			//Oculta o botao imprimir para não sair na impressão
+			$linkImpressao ='tesouraria/receita.php/?rec=13';
+			if ($_GET['rec']!='13') {
+				echo '<a href="'.$linkImpressao.'" target="_black" title="Imprimir demonstrativo"><button class="btn btn-default glyphicon glyphicon-print"> </button></a>';
+			}
+		?>
 	</caption>
 	<colgroup>
 		<?php echo $colgroup;?>

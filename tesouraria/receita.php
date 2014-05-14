@@ -1,5 +1,30 @@
 <?php
-$ind=1; 
+if ($_GET['rec']=='13') {
+	session_start();
+	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+		
+	
+		//imprimir entradas de todas as congregações - mensal
+		require "../func_class/funcoes.php";
+		require "../func_class/classes.php";
+	function __autoload ($classe) {
+		
+		list($dir,$nomeClasse) = explode('_', $classe);
+		
+		if (file_exists("../models/$dir/$classe.class.php")){
+			
+			require_once ("../models/$dir/$classe.class.php");
+		}elseif (file_exists("../models/$classe.class.php")){
+			require_once ("../models/$classe.class.php");
+		}
+
+	}
+		require_once '../help/tes/saldoIgrejas.php';
+		$nomeArquivo='../views/tesouraria/saldoIgrejas.php';
+		require_once '../views/modeloPrint.php';
+	}
+}else {
+$ind=1;
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 $_SESSION['lancar']=true;
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
@@ -85,6 +110,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					break;
 				case '12':
 					require_once 'forms/tes/histFinanceiro.php';
+					require_once 'help/tes/saldoIgrejas.php';
 					require_once 'views/tesouraria/saldoIgrejas.php';
 					break;
 				default:
@@ -102,5 +128,5 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 }
 	unset($_SESSION['lancar']);
 		require_once 'views/tesouraria/tabDizimosOfertas.php';
-	
+}
 ?>
