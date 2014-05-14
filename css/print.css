@@ -1,0 +1,117 @@
+ Arquivo para definição da página para impressão
+body {
+	background: #FFFFFF ;
+	width:auto;
+	padding: 0 5%;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 700px;
+  width: auto;
+  border: 1px solid #3399FF;
+}
+
+#container { 
+	margin: 1em auto;
+	text-align: left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:70%;
+}
+	
+#lst_cad p{
+	padding:2px 1px; margin: 0;
+	font: 12px Arial; height:15px;
+	background-color:#CCCCCC; color:#000066;
+
+}
+
+h3 {
+	font: 14pt bold;
+	text-align:left;
+}
+
+#printLogo {
+	padding: 2em 0 1em;
+	border-bottom: 0.5 solid #555555;
+	margin-bottom: 2em;
+}
+
+.homeLeftColumn, .homeRightColumn {
+	float:left;
+	width:45%;
+}
+
+.homeLeftColumn {
+	margin-right:9.5%;
+}
+
+a:link:after, a:visited:after {
+	content:"("attr(href)")";
+	font-size: 80%;
+	color:#555555;
+	background:#ffffff;
+}
+
+.odd {
+  background-color:#F0F0F0;
+}
+
+.info {
+	background:#FFFFFF
+}
+
+col {
+	border-right: 1px solid #666666;
+}
+
+col#albumCol {
+	border:none;
+}
+
+thead {
+  background: #ccc;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;
+  border:#000000;
+  font: 14pt;
+}
+
+td {
+text-align:left;
+}
+
+tr#botom{
+  background: #9D9D9D;
+  font: 14pt bold;
+}
+
+tr:hover {
+  background-color:#3d80df;
+  color: #fff;
+}
+
+thead tr:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+#footer {
+	color: #636466;
+	font-size: 0.8em;
+	height: 40px;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-align: right;
+	clear: both;
+	margin: 0;
+	padding-top: 20px;
+	padding-right: 10px;
+	position:absolute;
+	top:700px;
+	width: 705px;
+}
+#footer a       { color: #636466; text-decoration: underline }
+#footer a:link       { color: #636466; text-decoration: underline }
+#footer a:visited { }
+#footer a:hover      { color: #e7790e }
