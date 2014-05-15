@@ -74,6 +74,12 @@ a {
 	color : #000;
 }
 
+a:link:after, a:visited:after {
+	content:"("attr(href)")";
+	font-size: 80%;
+	color:#555555;
+	background:#ffffff;
+}
 
 td#moeda {
 	text-align:right;
@@ -84,3 +90,22 @@ td#moeda {
 	font-weight:bold;
 	color:#ccc;
 }
+#footer {
+	color: #636466; 
+	font-size: 0.8em; 
+	height: 50px; 
+	background-repeat: no-repeat; 
+	background-position: top; 
+	text-align: left; 
+	clear: both; 
+	margin: 0; 
+	padding-top: 25px; 
+	padding: 10px 0 0 0;
+	background-image: url(../img/horbar.jpg);
+    background-size: 100% 30px;
+}
+
+#footer a       { color: #636466; text-decoration: underline }
+#footer a:link       { color: #636466; text-decoration: underline }
+#footer a:visited { }
+#footer a:hover      { color: #e7790e }

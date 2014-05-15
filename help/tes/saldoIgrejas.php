@@ -15,9 +15,13 @@
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 		
 		//Monta link para detalhar a igreja
-		$linkIgreja  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria';
-		$linkIgreja .= '&igreja='.$igreja['rol'].'&ano='.$_GET['ano'].'&fin=2&';
-		$linkIgreja .= 'rec=11" title="Detalhar entradas">'.$igreja['razao'].'</a>';
+		if ($_GET['rec']=='13') {
+			$linkIgreja = $igreja['razao'];
+		}else {
+			$linkIgreja  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria';
+			$linkIgreja .= '&igreja='.$igreja['rol'].'&ano='.$_GET['ano'].'&fin=2&';
+			$linkIgreja .= 'rec=11" title="Detalhar entradas">'.$igreja['razao'].'</a>';
+		}
 		
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
 		//print_r( $saldos->ArraySaldos());echo '<br />';

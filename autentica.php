@@ -101,10 +101,10 @@
   <form name="" method="post" action="">
   		
 		<p><label>CPF:</label>
-		<input name="cpf" type="text" id="cpf" size="15" autofocus="autofocus" OnKeyPress="formatar('###.###.###-##', this);" tabindex="<?php echo ++$ind;?>" maxlength="14">
+		<input name="cpf" type="text" id="cpf" size="15" autofocus="autofocus" class="form-control" tabindex="<?php echo ++$ind;?>" maxlength="14">
 		</p>
 		<p><label>Senha:</label>
-		<input name="senha" type="password" id="senha" size="15" tabindex="<?php echo ++$ind;?>">
+		<input name="senha" type="password" id="senha" class="form-control" size="15" tabindex="<?php echo ++$ind;?>">
 		</p>
 		<p>
 	  	<input type="submit" name="Submit" value="logar" tabindex="3" />
