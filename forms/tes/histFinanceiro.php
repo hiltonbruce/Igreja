@@ -1,6 +1,6 @@
-
+<fieldset>
+	<legend>Detalhar entradas</legend>
 <table class="table">
-	<caption>Detalhar entradas</caption>
 	<tbody>
 		<tr id="form">
 			<td>&nbsp;<br />
@@ -32,3 +32,4 @@
 	
 	</tbody>
 </table>
+</fieldset>

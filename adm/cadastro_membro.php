@@ -20,13 +20,19 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <fieldset>
 <legend>Dados Pessoais - Cadastro de Membro</legend>
 <form method="post" action="">
-      <label>Estado Natal: </label>
-	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+<table>
+	<tbody>
+		<tr>
+			<td colspan="2"><label>Estado Natal: </label>
+	   	<select name="uf_nasc" id="uf_nasc" class="form-control" idonchange="MM_jumpMenu('parent',this,0)"
+	   	 tabindex="<?PHP echo ++$ind; ?>" >
 	  <?PHP
 			$estnatal = new List_UF('estado', 'nome','uf_nasc');
 			echo $estnatal->List_Selec_pop('escolha=adm/cadastro_membro.php&uf=',$_GET['uf']);
 		?>
-	  </select>
+	  </select></td>
+			<td>
+      
 	  <?PHP
 		if (!empty($_GET["uf"])){
 		$vl_uf=$_GET["uf"];
@@ -34,15 +40,24 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		echo "<label>Cidade Natal:</label>";		
 		$vlr_linha=$lst_cid->ListDados (++$ind);//3 é o indice do formulário
 		}
-		?>
-	<label>CPF:</label>
-	<input name="cpf" type="text" id="cpf" tabindex="<?PHP echo ++$ind; ?>" OnKeyPress="formatar('###.###.###-##', this);" value="<?PHP echo $_SESSION["cpf"];?>" maxlength="14" />
-	<h4>Confirmando o CPF em branco ser&aacute; utilizado o número do rol.</h4>
+		?></td>
+		</tr>
+		<tr>
+			<td colspan="2">
 	<label>Nome:</label>
-	<input name="nome_cad" type="text" id="nome_cad" tabindex="<?PHP echo ++$ind; ?>" size="40" />
+	<input name="nome_cad" class="form-control" type="text" required="required"
+	id="nome_cad" tabindex="<?PHP echo ++$ind; ?>" size="40" /></td>
+		<td>
+	<label>CPF:</label>
+	<input name="cpf" type="text" id="cpf" tabindex="<?PHP echo ++$ind; ?>" class="form-control" 
+	placeholder="CPF em branco ser&aacute; utilizado o n&ordm; do rol" value="<?PHP echo $_SESSION["cpf"];?>"/>
+		</td>
+		</tr>
+		<tr>
+			<td>
   
 	<label>Nacionalidade:</label>
-	  <select name="nacionalidade" id="nacionalidade" tabindex="<?PHP echo ++$ind; ?>" >
+	  <select name="nacionalidade" id="nacionalidade" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
 		<option value="Brasil">Brasil</option>
 	 	<option value="Afeganistão">Afeganistão</option>
 		<option value="África do Sul">África do Sul</option>
@@ -291,10 +306,16 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		<option value="Zimbábue">Zimbábue</option> 	
 	</select>
 	
-	
-	<input name="nacionalidade" type="text" id="nacionalidade" value="Brasileira" size="20" onselect="1" tabindex="<?PHP echo ++$ind; ?>"/>
-	    <input type="submit" name="Submit" value="Continuar..." tabindex="<?PHP echo ++$ind; ?>"/>
-  </label>
+	</td>
+			<td><label>&nbsp;</label>
+			<input name="nacionalidade" class="form-control" type="text" id="nacionalidade" value="Brasileira" size="20" onselect="1" tabindex="<?PHP echo ++$ind; ?>"/>
+	    </td>
+			<td><label>&nbsp;</label>
+	<input type="submit" class="btn btn-primary" name="Submit" value="Continuar..." tabindex="<?PHP echo ++$ind; ?>"/>
+ </td>
+		</tr>
+	</tbody>
+</table>
   <input name="escolha" type="hidden" value="adm/cad_membro_end.php" />
 </form>
 </fieldset>

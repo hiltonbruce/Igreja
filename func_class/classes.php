@@ -661,7 +661,7 @@ class sele_cidade {
 
 	//Mostra as linhas de select
 	if ($num_linhas>0){
-	echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='$indice'>";
+	echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
 					echo "<option value='{$_SESSION["cid_end"]}'>C�d. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){

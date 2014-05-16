@@ -69,10 +69,6 @@ th, td {
   padding: 0.1em 1em;
 }
 
-tr:hover {
-  background-color:#C1CDCD;
-  color:green;
-}
 
 thead tr:hover {
   background-color: transparent;

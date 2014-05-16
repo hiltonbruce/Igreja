@@ -71,30 +71,43 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		<fieldset>
 <legend>Dados Pessoais - Cadastro de Membro</legend>
 <form method="post" action="">
-  <p><label></label>
-	Nome: <?PHP echo $_SESSION["nome_cad"];?></p>
-	<p><label></label>
-	CPF: <?PHP echo $_SESSION["cpf"];?></p>
-	
-	<p>Nacionalidade: <h5><?PHP echo $_SESSION["nacao"];?></h5>
-	</p>
-	<p>Natural de: <h5><?PHP echo $nome_cidade;?></h5>
-	<p>Endere&ccedil;o Residencial: </p>	   
-	<p><label>UF:</label>
-	<select name="uf_end" id="uf_end" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+<table>
+	<tbody>
+		<tr>
+			<td><label>Nome:</label>
+	<button class="btn btn-default"><?PHP echo $_SESSION["nome_cad"];?></button></td>
+			<td><label>CPF: </label>
+	<button class="btn btn-default"><?PHP echo $_SESSION["cpf"];?></button></td>
+		</tr>
+		<tr>
+			<td><label>Nacionalidade:</label>
+	<button class="btn btn-default"><?PHP echo $_SESSION["nacao"];?></button></td>
+			<td><label>Natural de: </label>
+	<button class="btn btn-default"><?PHP echo $nome_cidade;?></button></td>		
+		</tr>
+			<td><label>UF:</label>
+	<select name="uf_end" class="form-control" id="uf_end" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 		<?PHP
 			$estnatal = new List_UF('estado', 'nome','uf_end');
 			echo $estnatal->List_Selec_pop('escolha=adm/cad_membro_end.php&uf_end=',$_GET['uf_end']);
 		?>
 	  </select>
-		<?PHP
+				</td>
+			<td><label>Cidade:</label>
+			<?PHP
 		$vl_uf=$uf_end;
 		$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cid_end");
-		echo "Cidade:";		
 		$vlr_linha=$lst_cid->ListDados ("2");//"2" é o indice de tabulação do formulário
-		?></p>
+	?>
+			</td>
+		<tr>
+		</tr>
+	</tbody>
+</table>	   
 	<p><label></label>
-	  <input type="submit" name="Submit" value="Continuar..." tabindex="3">
+		
+	<p><label></label>
+	  <input type="submit" class="btn btn-primary" name="Submit" value="Continuar..." tabindex="3">
       <input name="escolha" type="hidden" value="adm/cadastro.php" />
   </p>
 </form>

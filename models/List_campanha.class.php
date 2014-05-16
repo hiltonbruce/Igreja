@@ -12,7 +12,7 @@ class List_campanha extends List_sele {
 
 	  //Mostra as linhas de select
 
-	  $linha0 = '<select name="acescamp" id="acescamp" class="" tabindex="'.$ind.'">';
+	  $linha0 = '<select name="acescamp" id="acescamp"  class="form-control" tabindex="'.$ind.'">';
 	  $linha1="<option></option>";$linha2 = '';
        while($this->col_lst = mysql_fetch_array($this->sql_lst))
        {
