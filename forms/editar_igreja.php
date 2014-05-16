@@ -6,8 +6,8 @@ if ($_SESSION['nivel']>4){
 	$igreja = new DBRecord('igreja',$_GET['rol'], 'rol');
 	
 $tabela = "igreja";
-$tab="sistema/atualizar_rol.php";//link q informa o script quem receberá os dados do form para atualizar
-$tab_edit="forms/editar_igreja.php&tabela=$tabela&rol={$igreja->rol()}&campo=";//Link de chamada da mesma página para abrir o form de edição do item
+$tab="sistema/atualizar_rol.php";//link q informa o script quem receberï¿½ os dados do form para atualizar
+$tab_edit="forms/editar_igreja.php&tabela=$tabela&rol={$igreja->rol()}&campo=";//Link de chamada da mesma pï¿½gina para abrir o form de ediï¿½ï¿½o do item
 
 $ind = 1;
 
@@ -16,7 +16,7 @@ $ind = 1;
 	{
 		?>
 	<form>
-     <label>Congregação: </label>
+     <label>Congregaï¿½ï¿½o: </label>
      <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' >
      <?php 
 	     $estnatal = new List_sele('igreja', 'razao','id');
@@ -28,14 +28,9 @@ $ind = 1;
 	<legend>Editar dados da Igreja: <?php echo $igreja->razao();?> </legend>
 	<table  style="text-align: left; width: 100%;">
       <tr>
-        <td colspan="2" >Dire&ccedil;&atilde;o: 
+        <td colspan="3" >Dire&ccedil;&atilde;o: 
         <?PHP
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
-		?></td>
-        <td>Cargo:
-        <?PHP
-			$nome = new editar_form("cnpj",$igreja->cnpj(),$tab,$tab_edit);
 			$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
