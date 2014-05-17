@@ -1,13 +1,10 @@
 <script language="javascript">
 <!--
 	function pergunta() {
-		var p=window.confirm("O CPF não é válido, mesmo assim deseja ultiliza-lo:  <?php echo $_POST["cpf"];?>.
-				 E estando em branco será utilizado o número do rol.");
-		window.location=(p) ? "./?conf_cpf_ruim=ok&escolha=adm/cad_membro_end.php" : "./?escolha=adm/cadastro_membro.php&uf=PB";}
+		var p=window.confirm("O CPF não é válido, mesmo assim deseja ultiliza-lo:  <?php echo $_POST["cpf"];?>.E estando em branco será utilizado o número do rol.");window.location=(p) ? "./?conf_cpf_ruim=ok&escolha=adm/cad_membro_end.php" : "./?escolha=adm/cadastro_membro.php&uf=PB";}
 		
 	function pergunta_nome() {
-		var p=window.confirm("O nome já está sendo utlizado:  <?php echo $_POST["nome_cad"];?>. OK para continuar com este nome?");
-		window.location=(p) ? "./?conf_cpf_ruim=ok&conf_nome_ruim=ok&escolha=adm/cad_membro_end.php" : "./?escolha=adm/cadastro_membro.php&uf=PB";}		
+		var p=window.confirm("O nome já está sendo utlizado:  <?php echo $_POST["nome_cad"];?>. OK para continuar com este nome?");	window.location=(p) ? "./?conf_cpf_ruim=ok&conf_nome_ruim=ok&escolha=adm/cad_membro_end.php" : "./?escolha=adm/cadastro_membro.php&uf=PB";}		
 		
 </script>
 
