@@ -25,34 +25,47 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 <fieldset>
 <legend>Dados Pessoais - Cadastro</legend>
+<table class="table">
 <form method="post" action="" >
-  <label>Nome:</label><h3><?PHP echo $_SESSION["nome_cad"];?></h3><hr />
-    <input name="nome" type="hidden" id="nome" value="<?PHP echo $_SESSION["nome_cad"];?>" />
-    Doador de Sangue?
-	<input type='radio' name='doador' value='Sim' tabindex='<?PHP echo $ind++;?>' />Sim
-	<input type='radio' name='doador' value='Nï¿½o' tabindex='<?PHP echo $ind++;?>' />N&atilde;o
-	
-	<select name='sangue' size='1' class='AzulMedio' id='sangue' tabindex='<?PHP echo $ind++;?>'>
-		<option value=''>Tipo de Sangue</option>
-		<option value='A+'>A+</option>
-		<option value='A-'>A-</option>
-		<option value='B+'>B+</option>
-		<option value='B-'>B-</option>
-		<option value='AB+'>AB+</option>
-		<option value='AB-'>AB-</option>
-		<option value='O+'>O+</option>
-		<option value='O-'>O-</option>
-	</select>
-  	
-  	<p><label>Endere&ccedil;o:</label>
-	<input name="endereco" type="text" id="endereco" size="32" maxlength="40" tabindex="<?PHP echo $ind++;?>">
-	N&ordm;
-	<input name="numero" type="text" id="numero" size="11" maxlength="5" tabindex="<?PHP echo $ind++;?>">
-	</p>
-  	<?PHP
-		echo "<p>Cidade: $cid_end</p>";
-		echo "<p><label><span style='padding-right:120px'>Bairro:</span>Complementos:</label>";
-		
+	<tbody>
+		<tr>
+			<td colspan="3">
+				<label>Nome:</label><button class="form-control" ><?PHP echo $_SESSION["nome_cad"];?></button>
+				<input name="nome" type="hidden" id="nome" value="<?PHP echo $_SESSION["nome_cad"];?>" />
+			</td>
+			</tr><tr>
+			<td></td>
+			<td>
+		    <label>Doador de Sangue?</label><br />
+			<label class="checkbox-inline"><input type='radio' name='doador' value='Sim' tabindex='<?PHP echo $ind++;?>' />Sim</label>
+			<label class="checkbox-inline"><input type='radio' name='doador' value='Não' tabindex='<?PHP echo $ind++;?>' />N&atilde;o</label>
+			</td>
+				<td> <label>Tipo</label><br />
+				<select name='sangue' placeholder="Tipo Sanguínio" class="btn btn-default" tabindex='<?PHP echo $ind++;?>'>
+					<option value=''>Tipo de Sangue</option>
+					<option value='A+'>A+</option>
+					<option value='A-'>A-</option>
+					<option value='B+'>B+</option>
+					<option value='B-'>B-</option>
+					<option value='AB+'>AB+</option>
+					<option value='AB-'>AB-</option>
+					<option value='O+'>O+</option>
+					<option value='O-'>O-</option>
+				</select></td>
+			</tr>
+		<tr>
+			<td colspan="2"><label>Endere&ccedil;o:</label>
+	<input name="endereco" type="text" id="endereco" size="32" class="form-control" maxlength="40" tabindex="<?PHP echo $ind++;?>"></td>
+			<td>
+	<label>N&ordm;</label>
+	<input name="numero" type="text" id="numero" size="11" class="form-control" maxlength="5" tabindex="<?PHP echo $ind++;?>"></td>
+		</tr>
+		<tr>
+			<?PHP
+		echo "<td colspan='2'><label>Cidade:</label> <button class='form-control'>$cid_end</button>";
+		echo '<td><label>CEP:</label><input name="cep" type="text" id="cep" class="form-control" ';
+		echo 'tabindex="<?PHP echo $ind++;?>"></td><tr>';
+		echo "<tr><td><label>Bairro:</label>";
 		$lst_cid = new sele_cidade("bairro",$id_cid,"idcidade","bairro","bairro");
 		
 		$vlr_linha=$lst_cid->ListDados ($ind++);
@@ -61,22 +74,30 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			$_SESSION["cid_end"] = $id_cid;
 		}
 	?>
-	<input name="uf_resid" type="hidden" value="<?PHP echo $rec_end->coduf();?>" />
+	<td><label>Complementos:</label>
+		<input name="uf_resid" type="hidden" value="<?PHP echo $rec_end->coduf();?>" />
 	<input name="cidade" type="hidden" value="<?PHP echo $rec_end->id();?>" />
-	<input name="complemento" type="text" id="complemento" tabindex="<?PHP echo $ind++;?>" />
-	
-	</p>Bairro n&atilde;o cadastrado... <a href="./?escolha=tab_auxiliar/cadastro_bairro.php&uf=<?PHP echo $rec_end->coduf();?>&cidade=<?PHP echo $rec_end->id();?>">Clique aqui!</a>
-	
-	<p>Nacionalidade: <?PHP echo $_SESSION["nacao"];?> - Natural de: <?PHP echo $nome_cidade;?>
-	<input name="uf_nasc" type="hidden" value="<?PHP echo $rec->coduf();?>" /><p>
-
-	<label><span style="padding-right:100px">Telefone:</span>Celular:</label>
-	<input name="fone_resid" type="text" id="fone_resid" OnKeyPress="formatar('## ####-####', this);" value= "83" size="15"  maxlength="12" tabindex="<?PHP echo $ind++;?>">
-	<input name="celular" type="text" id="celular" OnKeyPress="formatar('## ####-####', this);"  value= "83" size="20" maxlength="12" tabindex="<?PHP echo $ind++;?>">	
-	
-	  <label><span style="padding-right:125px">CEP:</span>Escolaridade:</label>
-	<input name="cep" type="text" id="cep" size="15" maxlength="11" OnKeyPress="formatar('##.####-###', this);" tabindex="<?PHP echo $ind++;?>">
-	<select name="escolaridade" size="1" class="AzulMedio" id="escolaridade" tabindex="<?PHP echo $ind++;?>">
+	<input name="complemento" class="form-control" type="text" id="complemento" tabindex="<?PHP echo $ind++;?>" /></td>
+			<td><label>Bairro n&atilde;o cadastrado... </label><a href="./?escolha=tab_auxiliar/cadastro_bairro.php&uf=
+		<?PHP echo $rec_end->coduf();?>&cidade=<?PHP echo $rec_end->id();?>"><button class="btn btn-primary">Clique aqui!</button></a></td>
+		</tr>
+		<tr>
+			<td><label>Nacionalidade: </label><button class="form-control" ><?PHP echo $_SESSION["nacao"];?></button>
+			</td>
+			<td colspan="2"><label>Natural de:</label><button class="form-control" ><?PHP echo $nome_cidade;?></button>
+			<input name="uf_nasc" class="form-control" type="hidden" value="<?PHP echo $rec->coduf();?>" />
+			</td>
+			</tr><tr>
+			<td><label>Telefone:</label>
+			<input name="fone_resid" class="form-control" type="text" id="fone" tabindex="<?PHP echo $ind++;?>">
+			</td>
+			<td colspan="2"><label>Celular:</label>
+			<input name="celular" class="form-control" type="text" id="celular" tabindex="<?PHP echo $ind++;?>">
+			</td>
+		</tr>
+		<tr>
+			<td><label>Escolaridade:</label>
+	<select name="escolaridade" size="1" class="form-control" id="escolaridade" tabindex="<?PHP echo $ind++;?>">
 	  <option value=""></option>
 	  <option value="N&atilde;o Estuda">N&atilde;o Estuda</option>
 	  <option value="N&atilde;o Sabe Informar!">N&atilde;o Sabe Informar!</option>
@@ -100,41 +121,71 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	  <option value="P&oacute;s-Doutorado">P&oacute;s-Doutorado</option>
 	  <option value="PHD">PHD</option>
 	</select>
-    <p><label><span style="padding-right:120px">Gradua&ccedil;&atilde;o:</span><span>Email:</span></label>
+			<td colspan="2"><label>Gradua&ccedil;&atilde;o:</label>
 
-    <input name="graduacao" type="text" id="graduacao" tabindex="<?PHP echo $ind++;?>">
-
-	<input name="email" type="text" id="email" size="40" tabindex="<?PHP echo $ind++;?>"/>
-  </p>
-	<p><label><span style="padding-right:130px">Sexo:</span>Data&nbsp;de&nbsp;Nascimento:</label>
-	<select name="sexo" id="sexo" tabindex="<?PHP echo $ind++;?>">
+    <input name="graduacao" type="text"class="form-control"  tabindex="<?PHP echo $ind++;?>"></td>
+		</tr>
+		<tr>
+			<td><label>Email:</label>
+			<input name="email" type="text" class="form-control" tabindex="<?PHP echo $ind++;?>"/></td>
+			<td><label>Sexo:</label>
+			<select name="sexo" id="sexo" class="form-control" tabindex="<?PHP echo $ind++;?>">
 		<option value=""  selected>- Selecionar um(a) -</option>
 		<option value="M" >Masculino</option>
 		<option value="F" >Feminino</option>
 	</select>
+			</td>
+			<td><label>Data&nbsp;de&nbsp;Nascimento:</label>	
+				<input name="datanasc" type="text" class="form-control" id="datanasc" placeholder="(Ex.: 21/01/2008)"
+				 tabindex="<?PHP echo $ind++;?>">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><label>Pai:</label>
+			
+	<input name="pai" type="text" id="pai"class="form-control"  size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
+			</td>
+			<td><label><a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=0')"
+			  title="Click aqui para pesquisar membros!" 
+			  tabindex="<?PHP echo $ind++;?>">Rol: <img border="0" src="img/lupa_32x32.png"
+			  width="18" height="18" align="absbottom" /> Pesquisar...</a>
+			</label>
+			<input name="rol_pai" type="text" class="form-control" tabindex="<?PHP echo $ind++;?>"/>
+    </td>
+		</tr>
+		<tr>
+			<td colspan="2"><label>M&atilde;e:</label>
+	<input name="mae" type="text" id="mae"  class="form-control" maxlength="40" tabindex="<?PHP echo $ind++;?>">
+			</td>
+			<td><label><a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=0')"
+			 tabindex="<?PHP echo $ind++;?>">Rol:
+    <img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" 
+    title="Click aqui para pesquisar membros!" />Pesquisar...</a>
+    <input name="rol_mae" type="text" class="form-control" 
+			 maxlength="5" tabindex="<?PHP echo $ind++;?>" />
+			</label>
+			</td>
+		</tr>
 		
-	<input name="datanasc" type="text" id="datanasc" size="15" maxlength="10"  OnKeyPress="formatar('##/##/####', this);" tabindex="<?PHP echo $ind++;?>">
-		(Ex.: 21/01/2008)
-	</p>
-	<p><label>Pai:</label>
-	<input name="pai" type="text" id="pai" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
-	Rol:
-	<input name="rol_pai" type="text" id="rol_pai" size="5" maxlength="5" tabindex="<?PHP echo $ind++;?>"/>
-    <a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=0')" tabindex="<?PHP echo $ind++;?>"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
-	<p><label>M&atilde;e:</label>
-	<input name="mae" type="text" id="mae" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
-	Rol:
-	<input name="rol_mae" type="text" id="rol_mae" size="5" maxlength="5" tabindex="<?PHP echo $ind++;?>" />
-    <a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=0')" tabindex="<?PHP echo $ind++;?>"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a></p>
-
-	<p><label>Observa&ccedil;&atilde;o:</label>
-	<textarea name="obs" cols="37" rows="2" id="obs" tabindex="<?PHP echo $ind++;?>"></textarea>
-	</p>
-	<input type="submit" name="Submit" value="Salvar" tabindex="<?PHP echo $ind++;?>">
-	<h5>Obs: A data deve estar no formato: dd/mm/aaaa (00/00/0000).
-	O(s) item(ns) com (<font color="#FF0000">*</font>) s&atilde;o de preenchimento obrigat&oacute;rio!
+		<tr>
+			<td colspan="2"><label>Observa&ccedil;&atilde;o:</label>
+	<textarea name="obs" cols="37" class="form-control" rows="2" id="obs" tabindex="<?PHP echo $ind++;?>"></textarea>
+			
+			</td>
+			<td><label>&nbsp;</label><br>
+			<input type="submit" class="btn btn-primary" name="Submit" value="Salvar" tabindex="<?PHP echo $ind++;?>">
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="3">
+			Obs: A data deve estar no formato: dd/mm/aaaa (00/00/0000).
     <input name="tabela" type="hidden" id="tabela" value="membro" />
     <input type="hidden" name="escolha" value="adm/cad_dados_pess.php">
-	</h5>
+			</th>
+		</tr>
+	</tfoot>
+</table>
 </form>
 </fieldset>

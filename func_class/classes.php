@@ -661,13 +661,13 @@ class sele_cidade {
 
 	//Mostra as linhas de select
 	if ($num_linhas>0){
-	echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
+	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
-					echo "<option value='{$_SESSION["cid_end"]}'>Cï¿½d. - {$_SESSION["cid_end"]}</option>";
+					echo "<option value='{$_SESSION["cid_end"]}'>Cód. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
 					echo "<option value='2585'>Bayeux</option>";
 				}else{
-					echo "<option value=''>-->> Escolha <<--</option>";
+// 					echo "<option value=''>-->> Escolha  <<--</option>";
 				}
 		for ($i=0; $i<$num_linhas; $i++)
 		{
@@ -679,14 +679,14 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Voc&ecirc; n&atilde;o informou a cidade ou falta atualizar! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.</h2>";
+		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado para o endereï¿½o desta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
-		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='$indice'>";		
+		echo "<script> alert('Não há nenhum bairro cadastrado para o endereço desta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";		
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
 		echo "</select>";

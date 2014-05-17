@@ -1,7 +1,8 @@
 <script language="javascript">
 <!--
 	function pergunta() {
-		var p=window.confirm("O CPF não é válido, mesmo assim deseja ultiliza-lo:  <?php echo $_POST["cpf"];?>. E estando em branco será utilizado o número do rol.");
+		var p=window.confirm("O CPF não é válido, mesmo assim deseja ultiliza-lo:  <?php echo $_POST["cpf"];?>.
+				 E estando em branco será utilizado o número do rol.");
 		window.location=(p) ? "./?conf_cpf_ruim=ok&escolha=adm/cad_membro_end.php" : "./?escolha=adm/cadastro_membro.php&uf=PB";}
 		
 	function pergunta_nome() {
@@ -34,7 +35,8 @@ if (isset($_POST["nacionalidade"])){
 	
 	if ($profis->cpf()<>"") {
 	?>
-		<h2>CPF: <?PHP echo "{$_POST["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> ! <a href="./?escolha=adm/cadastro_membro.php&uf=<?PHP echo $_POST["uf_nasc"];?>">Voltar...</a>
+		<h2>CPF: <?PHP echo "{$_POST["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> ! 
+		<a href="./?escolha=adm/cadastro_membro.php&uf=<?PHP echo $_POST["uf_nasc"];?>">Voltar...</a>
             <script language="JavaScript" type="text/javascript">
 			alert("CPF: <?PHP echo "{$_POST["cpf"]} já cadastrado para o Rol: {$profis->rol()}"?>...");
 			location.href="./?escolha=adm/cadastro_membro.php&uf=<?PHP echo $_POST["uf_nasc"];?>";
@@ -75,15 +77,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	<tbody>
 		<tr>
 			<td><label>Nome:</label>
-	<button class="btn btn-default"><?PHP echo $_SESSION["nome_cad"];?></button></td>
+	<button class="form-control"><?PHP echo $_SESSION["nome_cad"];?></button></td>
 			<td><label>CPF: </label>
-	<button class="btn btn-default"><?PHP echo $_SESSION["cpf"];?></button></td>
+	<button class="form-control"><?PHP echo $_SESSION["cpf"];?></button></td>
 		</tr>
 		<tr>
 			<td><label>Nacionalidade:</label>
-	<button class="btn btn-default"><?PHP echo $_SESSION["nacao"];?></button></td>
+	<button class="form-control"><?PHP echo $_SESSION["nacao"];?></button></td>
 			<td><label>Natural de: </label>
-	<button class="btn btn-default"><?PHP echo $nome_cidade;?></button></td>		
+	<button class="form-control"><?PHP echo $nome_cidade;?></button></td>		
 		</tr>
 			<td><label>UF:</label>
 	<select name="uf_end" class="form-control" id="uf_end" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
