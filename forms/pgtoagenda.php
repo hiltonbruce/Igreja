@@ -94,25 +94,25 @@
 			<tbody>
 				<tr>
 					<td><label>Valor:</label> <input type="text" name="valor"
-						id="valor" tabindex="<?PHP echo ++$ind; ?>"
+						id="valor" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo $itemagenda->valor();?>"></td>
 					<td><label>Juros e Multas:</label> <input type="text" name="multa"
-						id="multa" tabindex="<?PHP echo ++$ind; ?>"
+						id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo $itemagenda->multa();?>"></td>
 					<td><label>Pago em:</label> <input type="text" name="data"
-						id="data" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
+						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
 						value="<?php echo $dataget;?>"></td>
 				</tr>
 				<tr>
 					<td><label>Vencimento:</label> <input type="text" name="vencimento"
-						id="data" tabindex="<?PHP echo ++$ind; ?>"
+						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo conv_valor_br($itemagenda->vencimento());?>"></td>
 					<td><label>Resp.Pagamento:</label> <input type="text"
-						name="resppgto" id="resppgto" tabindex="<?PHP echo ++$ind; ?>"
+						name="resppgto" id="resppgto" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo $itemagenda->resppgto();?>"></td>
-					<td><label></label> <input type="hidden" name="atualizar"
+					<td><label></label> <label>&nbsp;</label> <input type="hidden" name="atualizar"
 						value="<?php echo $_GET['id'];?>"> <input type="submit"
-						name="Submit" value="Registrar..."
+						name="Submit" class="btn btn-primary" value="Registrar..."
 						tabindex="<?php echo ++$ind; ?>"></td>
 				</tr>
 			</tbody>

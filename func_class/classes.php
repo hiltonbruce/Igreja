@@ -451,7 +451,7 @@ class insert {
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		if ($inserir){
 				$idCad = mysql_insert_id();
-				echo "<script> alert('Inclusão ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
+				//echo "<script> alert('Inclusão ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
 				//echo "Inclusï¿½o realizada com sucesso!";
 		}else{
 			echo "<script> alert('Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!');window.history.go(-1);</script>";

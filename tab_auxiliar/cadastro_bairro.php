@@ -1,6 +1,9 @@
 <?PHP
 $cidade = (empty($_POST["cidade"])) ? (int)$_GET["cidade"]:(int)$_POST["cidade"];
-if ($cidade>'0' && empty($_POST["bairro"])){
+
+$uf = (empty($_POST["uf"])) ? $_GET["uf"]:$_POST["uf"];
+
+if (($cidade>'0' && empty($_POST["bairro"])) || empty($_GET["cidade"])) {
 ?>
 <script type="text/JavaScript">
 <!--
@@ -17,10 +20,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
  	<tbody>
  		<tr>
  			<td><label>Estado:</label>
-				<?PHP
-				if (empty($_GET["uf"]) && empty($_POST["uf"]))
-				{?>
 				<select name="destino" id="destino" onchange="MM_jumpMenu('parent',this,0)" class="form-control" >
+				<?PHP
+				if ($uf!='')
+				{?>
+					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=<?php echo $uf;?>'><?php echo $uf;?></option>
+				<?PHP
+				}
+				?>
 					<option value="">Escolha o Estado</option>
 					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=AC'>Acre</option>
 					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=AL'>Alagoas</option>
@@ -48,13 +55,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					<option value="./?escolha=tab_auxiliar/cadastro_bairro.php&amp;uf=SP">S&atilde;o Paulo</option>
 					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=SE'>Sergipe</option>
 					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=TO'>Tocantins</option>
-				</select>
-				<?PHP
-				}else{
-					echo '<input type="hidden" value="'.$_GET['uf'].'">';
-					echo '<span disabled="disabled" id="disabledSelect" class="form-control" >'.$_GET['uf'].'</span>';				
-				} 
-				?>		
+				</select>		
  			</td>
  			<td>
 				<?PHP

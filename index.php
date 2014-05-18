@@ -87,7 +87,7 @@
           <li <?PHP id_left ("adm/");?>  style="border-top:0;"><a href="./?escolha=adm/cadastro_membro.php&uf=PB">Cadastro de Membros</a></li>
           <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB">Novos Convertidos</a></li>
           <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja">Sede e Congrega&ccedil;&otilde;es</a></li>
-          <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php&uf=PB">Cadastrar Bairro</a></li>
+          <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php">Cadastrar Bairro</a></li>
           <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario">Form/Recib/Certid&otilde;es</a></li>
           <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv">Aniversariantes</a></li>
           <li <?PHP id_left ("cetad");?>><a href="./?escolha=cetad/pgto.php&menu=top_cetad">CETAD</a></li>
