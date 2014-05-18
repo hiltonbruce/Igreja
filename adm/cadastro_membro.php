@@ -58,7 +58,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
 	<label>Nacionalidade:</label>
 	  <select name="nacionalidade" id="nacionalidade" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
-		<option value="Brasil">Brasil</option>
+		<option value="Brasileira">Brasil</option>
 	 	<option value="Afeganistão">Afeganistão</option>
 		<option value="África do Sul">África do Sul</option>
 		<option value="Albânia">Albânia</option>
@@ -308,7 +308,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	
 	</td>
 			<td><label>&nbsp;</label>
-			<input name="nacionalidade" class="form-control" type="text" id="nacionalidade" value="Brasileira" size="20" onselect="1" tabindex="<?PHP echo ++$ind; ?>"/>
+			<input name="nacionalidade1" class="form-control" type="text" 
+			size="20" onselect="1" tabindex="<?PHP echo ++$ind; ?>"/>
 	    </td>
 			<td><label>&nbsp;</label>
 	<input type="submit" class="btn btn-primary" name="Submit" value="Continuar..." tabindex="<?PHP echo ++$ind; ?>"/>

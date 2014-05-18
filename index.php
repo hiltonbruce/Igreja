@@ -51,6 +51,8 @@
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/alert.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />

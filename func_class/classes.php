@@ -449,9 +449,9 @@ class insert {
 	public function inserir() {
 
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
-		$idCad = mysql_insert_id();
 		if ($inserir){
-				$idCad =  "<script> alert('Inclusão ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
+				$idCad = mysql_insert_id();
+				echo "<script> alert('Inclusão ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
 				//echo "Inclusï¿½o realizada com sucesso!";
 		}else{
 			echo "<script> alert('Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!');window.history.go(-1);</script>";
@@ -650,7 +650,7 @@ class sele_cidade {
 		}
 	}
 
-	function ListDados ($indice){//indice da sequï¿½ncia do formulï¿½rio
+	function ListDados ($indice,$id){//indice da sequï¿½ncia do formulï¿½rio
 
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
@@ -661,6 +661,7 @@ class sele_cidade {
 
 	//Mostra as linhas de select
 	if ($num_linhas>0){
+	$linhoOptions1 = '';
 	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
 					echo "<option value='{$_SESSION["cid_end"]}'>Cód. - {$_SESSION["cid_end"]}</option>";
@@ -672,9 +673,12 @@ class sele_cidade {
 		for ($i=0; $i<$num_linhas; $i++)
 		{
 			$linhas = $this->res->fetchRow(DB_FETCHMODE_ASSOC);
-			echo "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+			if ($id == $linhas["id"]) {
+				$linhoOptions1 = "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+			}
+			$linhoOptions .= "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
 		}
-	echo "</select>";
+	echo $linhoOptions1.$linhoOptions.'</select>';
 	//Disconecta do Banco
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){

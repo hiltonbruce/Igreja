@@ -21,7 +21,7 @@ if (empty($_GET['uf_end'])){
 
 if (isset($_POST["nacionalidade"])){
 	
-	$_SESSION["nacao"] = $_POST["nacionalidade"];
+	$_SESSION["nacao"] = (strlen($_POST["nacionalidade1"])>'4') ? $_POST["nacionalidade1"]:$_POST["nacionalidade"];
 	$_SESSION["cid_natal"] = $_POST["cid_nasc"];
 	$_SESSION["cpf"] = ltrim($_POST["cpf"]);
 	$_SESSION["nome_cad"] = ltrim($_POST["nome_cad"]);

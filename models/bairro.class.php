@@ -15,10 +15,10 @@ class bairro {
 	function exitecad (){
 		
 		if (mysql_num_rows( $this->result)>0){
-		 	echo "<h2>O bairro ' $this->bairro ' j&aacute; est&aacute; cadastrado na Cidade de ";
+		 	echo '<div class="alert alert-error" >O bairro '.$this->bairro.' j&aacute; est&aacute; cadastrado para Cidade ';
 		 	return true;
 		 } else {
-		 	echo "<h1>Novo Bairro Cadastrado: $this->bairro</h1>";
+		 	echo '<div class="alert bg-success">Novo Bairro Cadastrado: '.$this->bairro.'</div>';
 		 	return false;
 		 }
 	}
