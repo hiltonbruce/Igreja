@@ -25,18 +25,22 @@ $(document).ready(function(){
 	<caption style="text-align: left; font-weight:bold">Busca por nome do Membro</caption>
 	<tbody>
 		<tr>
-			<td colspan="2">Nome:<br /><input type="text" name="nome" id="campo_estado" size="50%" />
+			<td><label>Nome:</label><input type="text" name="nome" id="campo_estado" size="50%" class="btn btn-default btn-sm" />
 			<input type="hidden" name="escolha" value="adm/rest_busca.php">
-			<input type="submit" name="listar" value="Listar dados...">
+			</td><td><label>&nbsp;</label>
+			<input type="submit" class="btn btn-primary btn-sm" name="listar" value="Listar dados...">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">Endereço:<br /><input type="text" id="estado_val" name="estado" disabled="disabled" value="" size="75%" />
+			<td colspan="2">Endereço:<br />
+			<input type="text" id="estado_val" class="btn btn-default btn-sm" name="estado" disabled="disabled" value="" size="75%" />
 			</td>
 		</tr>
 		<tr>
-			<td>Fone: <br /><input type="text" id="id_val" name="id" disabled="disabled" value="" /></td>
-			<td>Celular:<br /><input type="text" id="sigla_val" name="sigla" disabled="disabled" value="" /></td>
+			<td>Fone: <br />
+			<input type="text" id="id_val" name="id" class="btn btn-default btn-sm" disabled="disabled" value="" /></td>
+			<td>Celular:<br />
+			<input type="text" id="sigla_val" class="btn btn-default btn-sm" name="sigla" disabled="disabled" value="" /></td>
 	</tbody>
 </table>
 </form>

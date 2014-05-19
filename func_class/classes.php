@@ -514,7 +514,7 @@ class editar_form {
 			switch ($this->campo){
 				case "sexo":
 					?>
-					  <select name="<?PHP echo $this->campo;?>" autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
+					  <select class="form-control" name="<?PHP echo $this->campo;?>" autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="M">Masculino</option>
 						<option value="F">Femino</option>
@@ -523,7 +523,7 @@ class editar_form {
 					break;
 				case "situacao_espiritual":
 					?>
-					  <select name="<?PHP echo $this->campo;?>"  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
+					  <select class="form-control" name="<?PHP echo $this->campo;?>"  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="1">Em Comunh&atilde;o</option>
 						<option value="3">Faleceu</option>
@@ -534,7 +534,7 @@ class editar_form {
 					<?PHP
 					break;
 				case "obs";
-					echo "<textarea autofocus='autofocus' name='{$this->campo}' cols='50' onselect='1'  tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea>";
+					echo "<textarea class='form-control' autofocus='autofocus' name='{$this->campo}' cols='50' onselect='1'  tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea>";
 					break;
 				case "uf_nasc":
 					$ind++;
@@ -544,7 +544,7 @@ class editar_form {
 					echo sele_uf ($this->valor,"uf_resid");
 					break;
 				case "tipo":
-					echo 	"<select name='$this->campo' autofocus='autofocus' size='1' class='AzulMedio' id='$this->campo' tabindex='$ind++'>".
+					echo 	"<select class='form-control' name='$this->campo' autofocus='autofocus' size='1' class='AzulMedio' id='$this->campo' tabindex='$ind++'>".
 							  "<option value='$this->valor' selected>".carta ($this->valor)."</option>".
 							  "<option value='1'>".carta (1)."</option>".
 							  "<option value='2'>".carta (2)."</option>".
@@ -553,7 +553,7 @@ class editar_form {
 					break;
 				default:
 					?>
-					<input type="text" autofocus="autofocus" name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" size="30" tabindex="<?PHP echo $ind++;?>" OnKeyPress="<?PHP echo "{$this->formato}";?>" maxlength="<?PHP echo $this->maxcaratere;?>"/>
+					<input type="text" class="form-control" autofocus="autofocus" name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" size="30" tabindex="<?PHP echo $ind++;?>" OnKeyPress="<?PHP echo "{$this->formato}";?>" maxlength="<?PHP echo $this->maxcaratere;?>"/>
 					<?PHP
 					break;
 
@@ -565,7 +565,7 @@ class editar_form {
 			//Nos campos Pai e M�e � aberto um segundo campo do form para o rol e a op��o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
 			Rol:
-			<input name="<?PHP echo "rol_{$this->campo}";?>" autofocus="autofocus" type="text" 
+			<input name="<?PHP echo "rol_{$this->campo}";?>" class='btn btn-default btn-sm' autofocus="autofocus" type="text" 
 			value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" />
 			<?php
 			if ($this->campo=="conjugue") {$form=2;}else{$form=3;}
@@ -577,7 +577,7 @@ class editar_form {
 			<?PHP
 			}
 			?>
-			<input type="submit" name="Submit" value="Alterar..."  tabindex="<?PHP echo $ind++;?>" />
+			<input type="submit" class='btn btn-primary btn-sm' name="Submit" value="Alterar..."  tabindex="<?PHP echo $ind++;?>" />
 			</form>
 			<?PHP
 

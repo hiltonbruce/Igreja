@@ -105,7 +105,7 @@
 				</tr>
 				<tr>
 					<td><label>Vencimento:</label> <input type="text" name="vencimento"
-						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+						id="Venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo conv_valor_br($itemagenda->vencimento());?>"></td>
 					<td><label>Resp.Pagamento:</label> <input type="text"
 						name="resppgto" id="resppgto" class="form-control" tabindex="<?PHP echo ++$ind; ?>"

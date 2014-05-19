@@ -67,7 +67,7 @@
 	  }
 	  
 	  ?>
-	  <input name="bsc_rol" type="text" id="bsc_rol" title="Insira o n&ordm; do Rol"/>
+	  <input name="bsc_rol" class="btn btn-default btn-sm" type="text" id="bsc_rol" title="Insira o n&ordm; do Rol"/>
 	  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
 	  <input type="submit" name="Submit2" value="Listar..." title="Click aqui para listar os dados do Membro"/>
 	  <a href="./?escolha=adm/dados_pessoais.php&amp;bsc_rol=<?PHP echo $anterior;?>"><img src="img/1910_32x32.png" alt="Anterior Anterior" width="22" height="22" title="Registro Anterior" align="absmiddle" border="0" /></a> 

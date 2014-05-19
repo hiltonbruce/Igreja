@@ -22,7 +22,7 @@ $ind = 1;
 	  Salvar foto:
 	  <input name="userfile" type="file" size="40">
 	 
-	  <input type="submit" name="Submit" value="Enviar...">
+	  <input type="submit" class="btn btn-primary btn btn-sm" name="Submit" value="Enviar...">
 	  
 	</form>
 	<?PHP

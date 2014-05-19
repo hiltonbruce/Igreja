@@ -51,8 +51,6 @@
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/alert.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
@@ -107,7 +105,9 @@
           <li><a href="#">Item 6</a></li>
           <li><a href="#">Item 7</a></li>
           <?PHP  } ?>
-          <li <?PHP id_left ("caledario.php");?>><a  class="glyphicon glyphicon-tree-deciduous" href="./?escolha=calendario/caledario.php" title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es">&nbsp;Santa&nbsp;Ceia</a></li>
+          <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php" 
+          title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es"
+          ><span class="glyphicon glyphicon-tree-deciduous" >&nbsp;</span>&nbsp;Santa&nbsp;Ceia</a></li>
         </ul>
         <br />
         <div class="header">Administra&ccedil;&atilde;o:</div>
@@ -165,6 +165,9 @@
     </div>
   </div>
 </body>
+
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/alert.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput-1.3.1.min_.js"></script>
 <script type="text/javascript">// <![CDATA[
 jQuery(function($) {
