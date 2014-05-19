@@ -153,7 +153,7 @@ div.wrap1  {
 div.leftpanel .header, div.rightpanel .header {
 	background-image:url(img/header_.png);
 	background-repeat:no-repeat;
-	width:180px;
+	width:100%;
 	line-height:35px;
 	padding-left:20px;
 	color:#FFFFFF;

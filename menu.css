@@ -57,7 +57,7 @@ div#menu .menu {
 		float: left;
 		padding-top: 15px;
 		margin-bottom: -32px;
-		text-align: center;
+		text-align: left;
 		text-decoration: none;
 		padding-left:40px;
 		padding-right:40px;
@@ -124,8 +124,8 @@ div#menu .menu {
 /* categories */
 
 ul#categories {
-	width:200px;
-	position: relative;
+	width:100%;
+        position: relative;
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
@@ -153,11 +153,10 @@ ul#categories li.selected {
 ul#categories li a {
 	display: block;
 	overflow: hidden;
-	padding: 0px 0px 0px 40px;
+	padding: 0px 0px 0px 4px;
 	line-height: 30px;
 	text-decoration: none;
 	font-size: 11px;
-	background: url("img/arrow.gif") 26px 12px no-repeat;
 }
 ul#categories li a:hover { 
 	text-decoration: underline; 

@@ -1,4 +1,4 @@
-<?PHP
+]<?PHP
 	session_start();
 	//echo $_GET["escolha"]." -----------".$_POST["escolha"];
 	require_once ("func_class/classes.php");
@@ -58,7 +58,7 @@
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
-<link rel='stylesheet' type='text/css' media='screen, projection' href='tabs.css' />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
 <link rel="icon" type="image/gif" href="br_igreja.jpg">
 </head>
 <body>
@@ -84,13 +84,13 @@
 
         <div class="header">Sistemas</div>
         <ul id="categories">
-          <li <?PHP id_left ("adm/");?>  style="border-top:0;"><a href="./?escolha=adm/cadastro_membro.php&uf=PB">Cadastro de Membros</a></li>
-          <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB">Novos Convertidos</a></li>
-          <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja">Sede e Congrega&ccedil;&otilde;es</a></li>
-          <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php">Cadastrar Bairro</a></li>
-          <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario">Form/Recib/Certid&otilde;es</a></li>
-          <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv">Aniversariantes</a></li>
-          <li <?PHP id_left ("cetad");?>><a href="./?escolha=cetad/pgto.php&menu=top_cetad">CETAD</a></li>
+          <li <?PHP id_left ("adm/");?> ><a class="glyphicon glyphicon-user" href="./?escolha=adm/cadastro_membro.php&uf=PB"> Membros</a></li>
+          <li <?PHP id_left ("nv_convertido/");?>><a class="glyphicon glyphicon-hand-right" href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB">&nbsp;Novos&nbsp;Convertidos</a></li>
+          <li <?PHP id_left ("igreja/");?>><a class="glyphicon glyphicon-fire" href="./?escolha=igreja/list_membro.php&menu=top_igreja"> Igrejas</a></li>
+          <li <?PHP id_left ("tab_auxiliar/");?>><a class="glyphicon glyphicon-picture" href="./?escolha=tab_auxiliar/cadastro_bairro.php">&nbsp;Cadastrar Bairro</a></li>
+          <li <?PHP id_left ("relatorio/");?>><a class="glyphicon glyphicon-list-alt" href="./?escolha=relatorio/formularios.php&menu=top_formulario">&nbsp;Recibos e Certid&otilde;es</a></li>
+          <li <?PHP id_left ("aniv/");?>><a class="glyphicon glyphicon-gift"  href="./?escolha=aniv/aniversario.php&menu=top_aniv">&nbsp;Aniversariantes</a></li>
+          <li <?PHP id_left ("cetad");?>><a class="glyphicon glyphicon-pencil" href="./?escolha=cetad/pgto.php&menu=top_cetad">&nbsp;CETAD</a></li>
 		  <?PHP
 		  }
 		  	else
@@ -107,7 +107,7 @@
           <li><a href="#">Item 6</a></li>
           <li><a href="#">Item 7</a></li>
           <?PHP  } ?>
-          <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php" title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es">Santa Ceia</a></li>
+          <li <?PHP id_left ("caledario.php");?>><a  class="glyphicon glyphicon-tree-deciduous" href="./?escolha=calendario/caledario.php" title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es">&nbsp;Santa&nbsp;Ceia</a></li>
         </ul>
         <br />
         <div class="header">Administra&ccedil;&atilde;o:</div>
