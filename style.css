@@ -2,7 +2,7 @@
 * 2011 - Joseilton Costa Bruce
 */
 
-body {
+body, table {
 	color:#333333;
 	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	font-size:11px;

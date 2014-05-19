@@ -84,13 +84,13 @@
 
         <div class="header">Sistemas</div>
         <ul id="categories">
-          <li <?PHP id_left ("adm/");?> ><a class="glyphicon glyphicon-user" href="./?escolha=adm/cadastro_membro.php&uf=PB"> Membros</a></li>
-          <li <?PHP id_left ("nv_convertido/");?>><a class="glyphicon glyphicon-hand-right" href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB">&nbsp;Novos&nbsp;Convertidos</a></li>
-          <li <?PHP id_left ("igreja/");?>><a class="glyphicon glyphicon-fire" href="./?escolha=igreja/list_membro.php&menu=top_igreja"> Igrejas</a></li>
-          <li <?PHP id_left ("tab_auxiliar/");?>><a class="glyphicon glyphicon-picture" href="./?escolha=tab_auxiliar/cadastro_bairro.php">&nbsp;Cadastrar Bairro</a></li>
-          <li <?PHP id_left ("relatorio/");?>><a class="glyphicon glyphicon-list-alt" href="./?escolha=relatorio/formularios.php&menu=top_formulario">&nbsp;Recibos e Certid&otilde;es</a></li>
-          <li <?PHP id_left ("aniv/");?>><a class="glyphicon glyphicon-gift"  href="./?escolha=aniv/aniversario.php&menu=top_aniv">&nbsp;Aniversariantes</a></li>
-          <li <?PHP id_left ("cetad");?>><a class="glyphicon glyphicon-pencil" href="./?escolha=cetad/pgto.php&menu=top_cetad">&nbsp;CETAD</a></li>
+          <li <?PHP id_left ("adm/");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
+          <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB"><span class="glyphicon glyphicon-hand-right" >&nbsp;</span>&nbsp;Novos&nbsp;Convertidos</a></li>
+          <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span class="glyphicon glyphicon-fire">&nbsp;</span>&nbsp;Igrejas</a></li>
+          <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture" >&nbsp;</span>&nbsp;Cadastrar Bairro</a></li>
+          <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt" >&nbsp;</span>&nbsp;Recibos e Certid&otilde;es</a></li>
+          <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift" >&nbsp;</span>&nbsp;Aniversariantes</a></li>
+          <li <?PHP id_left ("cetad");?>><a href="./?escolha=cetad/pgto.php&menu=top_cetad"><span class="glyphicon glyphicon-pencil" >&nbsp;</span>&nbsp;CETAD</a></li>
 		  <?PHP
 		  }
 		  	else
