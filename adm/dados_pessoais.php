@@ -49,7 +49,7 @@ $ind = 1;
 			
 			echo situacao ($arr_dad["situacao_espiritual"]);//Mostra o estado do membro: se Em comunhão, disciplinado, falecido...
 			
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();
 		?></td>
 		<td rowspan="3" align="center"><?PHP
 					//echo " - Idade: ";
@@ -89,6 +89,7 @@ $ind = 1;
 			
 		?><div><?PHP print mostra_foto();?></div></td>
       </tr>
+      		<?php $nome->getEditar();?><!-- Mostra form para nome -->
       <tr>
         <td >Pai:
         <?PHP

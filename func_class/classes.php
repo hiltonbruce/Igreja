@@ -514,7 +514,7 @@ class editar_form {
 			switch ($this->campo){
 				case "sexo":
 					?>
-					  <select class="form-control" name="<?PHP echo $this->campo;?>" autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
+					  <select name="<?PHP echo $this->campo;?>" autofocus="autofocus" class="form-control" >
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="M">Masculino</option>
 						<option value="F">Femino</option>
@@ -553,7 +553,15 @@ class editar_form {
 					break;
 				default:
 					?>
-					<input type="text" class="form-control" autofocus="autofocus" name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" size="30" tabindex="<?PHP echo $ind++;?>" OnKeyPress="<?PHP echo "{$this->formato}";?>" maxlength="<?PHP echo $this->maxcaratere;?>"/>
+					
+			      <tr>
+			      	<td>
+			      		<input type="text" class="form-control" autofocus="autofocus" 
+						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" 
+						size="30" tabindex="<?PHP echo $ind++;?>" OnKeyPress="<?PHP echo "{$this->formato}";?>" 
+						maxlength="<?PHP echo $this->maxcaratere;?>"/>
+					</td>
+					
 					<?PHP
 					break;
 
@@ -564,6 +572,7 @@ class editar_form {
 			{
 			//Nos campos Pai e M�e � aberto um segundo campo do form para o rol e a op��o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
+			<td>
 			Rol:
 			<input name="<?PHP echo "rol_{$this->campo}";?>" class='btn btn-default btn-sm' autofocus="autofocus" type="text" 
 			value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" />
@@ -571,14 +580,16 @@ class editar_form {
 			if ($this->campo=="conjugue") {$form=2;}else{$form=3;}
 			?>
 			<a href="javascript:lancarSubmenu('campo=<?PHP echo $this->campo;?>
-				&rol=rol_<?PHP echo $this->campo;?>&form=<?PHP echo $form;?>')">
-				<img border="0" src="img/lupa_32x32.png" width="18" height="18" 
-				align="absbottom" title="Click aqui para pesquisar membros!"  tabindex="<?PHP echo $ind++;?>"/></a>
+				&rol=rol_<?PHP echo $this->campo;?>&form=<?PHP echo $form;?>')"
+				 title="Click aqui para pesquisar membros!"  >
+				<span class="btn btn-link glyphicon glyphicon-search" > Pesquisar...</span></a>
 			<?PHP
 			}
 			?>
+			<td>
 			<input type="submit" class='btn btn-primary btn-sm' name="Submit" value="Alterar..."  tabindex="<?PHP echo $ind++;?>" />
 			</form>
+      			</td></tr>
 			<?PHP
 
 		}else{

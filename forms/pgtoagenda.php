@@ -83,7 +83,7 @@
 						Pendente</label> 
 					</td>
 					<td><label> <input type="radio" id="status"
-						name="status" value="3"
+						required="required" name="status" value="3"
 						tabindex="<?php echo ++$ind; ?>" <?php echo $quitado;?>>
 						Quitado</label>
 					</td>
@@ -95,7 +95,7 @@
 				<tr>
 					<td><label>Valor:</label> <input type="text" name="valor"
 						id="valor" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
-						value="<?php echo $itemagenda->valor();?>"></td>
+						required="required" value="<?php echo $itemagenda->valor();?>"></td>
 					<td><label>Juros e Multas:</label> <input type="text" name="multa"
 						id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo $itemagenda->multa();?>"></td>
@@ -105,8 +105,8 @@
 				</tr>
 				<tr>
 					<td><label>Vencimento:</label> <input type="text" name="vencimento"
-						id="Venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
-						value="<?php echo conv_valor_br($itemagenda->vencimento());?>"></td>
+						id="venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+						required="required" value="<?php echo conv_valor_br($itemagenda->vencimento());?>"></td>
 					<td><label>Resp.Pagamento:</label> <input type="text"
 						name="resppgto" id="resppgto" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo $itemagenda->resppgto();?>"></td>
