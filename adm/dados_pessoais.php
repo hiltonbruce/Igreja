@@ -18,12 +18,15 @@ $ind = 1;
 
 ?>
 	<form enctype="multipart/form-data" method="post" action="adm/salvar_foto.php">
-	  <input type="hidden" name="MAX_FILE_SIZE" value="200000">
-	  Salvar foto:
-	  <input name="userfile" type="file" size="40">
-	 
-	  <input type="submit" class="btn btn-primary btn btn-sm" name="Submit" value="Enviar...">
-	  
+		<table style="width:40%;">
+			<tr>
+				<td>
+				  <input type="hidden" name="MAX_FILE_SIZE" value="200000">
+				  Salvar foto:
+				  <input name="userfile" type="file" size="40"  class="btn btn-primary"></td>
+				<td><input type="submit" class="btn btn-primary" name="Submit" value="Enviar..."></td>
+			</tr>
+		</table>
 	</form>
 	<?PHP
 	if (!empty($bsc_rol))
