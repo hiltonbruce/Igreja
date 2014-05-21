@@ -88,7 +88,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 						type="hidden" value="<?PHP echo $rec_end->coduf();?>" /> <input
 						name="cidade" type="hidden" value="<?PHP echo $rec_end->id();?>" />
 						<input name="complemento" class="form-control" type="text"
-						id="complemento" tabindex="<?PHP echo $ind++;?>" /></td>
+						id="complemento" tabindex="<?PHP echo $ind++;?>" placeholder="Casa, apto ..." />
+					</td>
 					<td><label>Bairro n&atilde;o cadastrado... </label><a 
 						href="./?escolha=tab_auxiliar/cadastro_bairro.php&uf=
 						<?PHP echo $rec_end->coduf();?>&cidade=<?PHP echo $rec_end->id();?>

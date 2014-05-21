@@ -68,7 +68,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           </script>
         </h2>
 		<fieldset>
-<legend>Dados Pessoais - Cadastro de Membro</legend>
+<legend>Cadastro de Membro - Endere&ccedil;o residencial</legend>
 <form method="post" action="">
 <table>
 	<tbody>

@@ -482,8 +482,8 @@ class editar_form {
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
 		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edi��o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
-			if ($this->campo=="datanasc" || $this->campo=="batismo_em_aguas" || $this->campo=="dt_mudanca_denominacao"  || $this->campo=="auxiliar" || $this->campo=="diaconato" || $this->campo=="presbitero" || $this->campo=="data" || $this->campo=="dat_aclam") {
-			$this->formato = "formatar('##/##/####', this);";
+			if ($this->campo=="datanasc" || $this->campo=="batismo_em_aguas" || $this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar" || $this->campo=="diaconato" || $this->campo=="presbitero" || $this->campo=="data" || $this->campo=="dat_aclam") {
+			$this->formato = "id='data'";
 			$this->maxcaratere = 10;
 		}
 	}
@@ -558,7 +558,7 @@ class editar_form {
 			      	<td>
 			      		<input type="text" class="form-control" autofocus="autofocus" 
 						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" 
-						size="30" tabindex="<?PHP echo $ind++;?>" OnKeyPress="<?PHP echo "{$this->formato}";?>" 
+						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
 						maxlength="<?PHP echo $this->maxcaratere;?>"/>
 					</td>
 					
