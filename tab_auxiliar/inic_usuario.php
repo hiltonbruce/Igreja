@@ -2,21 +2,12 @@
 
 <fieldset><legend>Alteração e Inicializa&ccedil;&atilde;o de Senhas</legend>
 <table id="Tabela de usuarios" summary="Lista de todos os usuarios com acesso ao sistema." style="text-align: left; width: 100%;">
-    <caption>
-      Usuários com Acesso
-    </caption>
     <colgroup>
 		<col id="Usuários">
 		<col id="Inicializar/Excluir!">
+		<col id="">
+		<col id="!">
 	</colgroup>
-    <thead>
-      <tr>
-        <th scope="col">Usu&aacute;rios</th>
-        <th scope="col">Inicializar/Excluir</th>
-      </tr>
-      
-    </thead>
-
     <tbody>
     <?php
   
@@ -33,14 +24,16 @@
 		$zebrar = ($contar % 2) == 0 ? "class='odd'" : "";
 		?>
 		<tr <?php echo $zebrar;?>>
-			<td><?php
+			<td width='50%'><?php
 				echo "CPF: ".$usuario->cpf." - Cargo:".$usuario->cargo;
 					$alterar = new formusuario();
 					$alterar->alt_nome($usuario->nome, $usuario->id, ++$ind);
 				?>
 			</td>
 			<td>
-				<a href="./?escolha=sistema/excluir.php&campo=id&tabela=usuario&id=<?php echo $usuario->id;?>">Excluir...</a>
+				<a href="./?escolha=sistema/excluir.php&campo=id&tabela=usuario&id=<?php echo $usuario->id;?>">
+				<button class='btn btn-primary btn-sm' ><span class='glyphicon glyphicon-remove'></span> Excluir...</button></a>
+				</td><td><label>&nbsp;</label>
 				<?php 
 				
 					$alterar->ini_senha($usuario->id, ++$ind)

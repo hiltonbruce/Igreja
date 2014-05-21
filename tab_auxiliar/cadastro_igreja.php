@@ -25,7 +25,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				<tr>
 					<td>
 						<label>Estado:</label>
-							<select name="destino" id="destino" onchange="MM_jumpMenu('parent',this,0)">
+							<select name="destino" class="form-control" id="destino" onchange="MM_jumpMenu('parent',this,0)">
 							<?PHP
 							if (empty($_GET["uf_end"]))
 							{?>
@@ -77,7 +77,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				</tr>
 				<tr>
 					<td colspan="2"> <label>igreja:</label>
-    					<input name="razao" type="text" id="razao" tabindex = "<?php echo ++$ind; ?>" size="55">    				</td>
+    					<input name="razao" class="form-control" type="text" id="razao" 
+    					required="required" tabindex = "<?php echo ++$ind; ?>" size="55">
+    				</td>
 				</tr>
 				<tr>
 					<td><label>Setor:</label>
@@ -85,36 +87,45 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 						$setor = new setor(++$ind);
 						?>					</td>
 					<td><label>CNPJ</label>
-						<input name="cnpj" type="text" id="cnpj" tabindex = "<?php echo ++$ind; ?>"  maxlength="18" onkeypress="formatar('##.###.###/####-##', this);">					</td>
+						<input name="cnpj" type="text" class="form-control" id="cnpj" tabindex = "<?php echo ++$ind; ?>" >
+					</td>
 				</tr>
 				<tr>
 					<td><label>Endereço Web</label>
-						<input name="site" type="text" id="site" tabindex = "<?php echo ++$ind; ?>" value='www.adpb.com.br'>					</td>
+						<input name="site" class="form-control" type="text" id="site" tabindex = "<?php echo ++$ind; ?>" value='www.adpb.com.br'>
+					</td>
 					<td><label>Email:</label>
-                      <input name="email" type="text" id="email" tabindex = "<?php echo ++$ind; ?>" /></td>
+                      <input name="email" class="form-control" type="text" id="email" tabindex = "<?php echo ++$ind; ?>" />
+                     </td>
 				</tr>
 				<tr>
 				  <td colspan="2"><label>Pastor ou Dirigente (Rol ou Nome)</label>
-                    <input name="pastor" type="text" id="pastor" tabindex = "<?php echo ++$ind; ?>" size="55" /></td>
+                    <input name="pastor" required="required" class="form-control" type="text" id="pastor" tabindex = "<?php echo ++$ind; ?>" size="55" />
+                  </td>
 			  </tr>
 				<tr>
 					<td><label>Endereço</label>
-						<input name="rua" type="text" id="rua" tabindex = "<?php echo ++$ind; ?>" size="30" >					</td>
+						<input name="rua" required="required" class="form-control" type="text" id="rua" tabindex = "<?php echo ++$ind; ?>" size="30" >
+					</td>
 					<td><label>Número</label>
-						<input name="numero" type="text" id="numero" tabindex = "<?php echo ++$ind; ?>" size="5">					</td>
+						<input name="numero" required="required" class="form-control" type="text" id="numero" tabindex = "<?php echo ++$ind; ?>" size="5">
+					</td>
 				</tr>
 				<tr>
 					<td><label>CEP</label>
-						<input name="cep" type="text" id="cep" tabindex = "<?php echo ++$ind; ?>" maxlength="10" onkeypress="formatar('##.###-###', this);">					</td>
+						<input name="cep" class="form-control" type="text" id="cep" tabindex = "<?php echo ++$ind; ?>">
+					</td>
 			<td><label>Telefone</label>
-				<input name="fone" type="text" id="fone" tabindex = "<?php echo ++$ind; ?>" maxlength="12" onkeypress="formatar('## ####-####', this);" value="83">	
+				<input name="fone" class="form-control" type="text" id="fone" tabindex = "<?php echo ++$ind; ?>">	
 			</td>
 				</tr>
 				<tr>
 					<td><label>Rol do 1º Secretario</label>
-						<input name="secretario1" type="text" id="secretario1" tabindex = "<?php echo ++$ind; ?>">					</td>
+						<input name="secretario1" class="form-control" type="text" id="secretario1" tabindex = "<?php echo ++$ind; ?>">
+					</td>
 					<td><label>Rol do 2º Secretario</label>
-						<input name="secretario2" type="text" id="secretario2" tabindex = "<?php echo ++$ind; ?>">					</td>
+						<input name="secretario2" class="form-control" type="text" id="secretario2" tabindex = "<?php echo ++$ind; ?>">
+					</td>
 				</tr>
 			</thead>
 		</table>
@@ -149,7 +160,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </fieldset>
    <label>
     <input type="hidden" name="escolha" value="models/cad_igreja.php">
-    <input type="submit" name="Submit" value="Cadastrar" tabindex = "<?php echo ++$ind; ?>" >
+    <input type="submit"  class="btn btn-primary" name="Submit" value="Cadastrar" tabindex = "<?php echo ++$ind; ?>" >
     </label>
 </form>
 <?PHP

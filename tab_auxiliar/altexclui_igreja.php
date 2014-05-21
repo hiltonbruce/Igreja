@@ -59,7 +59,7 @@
 								<input type="hidden" name="tabela" value="igreja">
 								<input type="hidden" name="id" value="<?php echo $chave.'&igreja='.$lista[$chave];?>">
 								<input type="hidden" name="status" value="<?php echo $status;?>">
-								<button	title='<?php echo $titleButton;?>' >
+								<button	title='<?php echo $titleButton;?>' class="btn btn-primary btn-xs" >
 							<img src="<?php echo $scrStatus;?>" alt="Desativar" width="22" height="22" align="absmiddle" border="0" />
 							<?php echo $nomButton;?></button>
 							</form>
@@ -72,7 +72,7 @@
 				<td>
 				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&rol=<?php echo $chave;?>"
 				 title="Editar as informa&ccedil;&otilde;es gerais desta Igreja: Dirigente, secretário, tesoureiro, etc." >
-				 <button>
+				 <button class="btn btn-primary btn-xs">
 				<img src="img/blackeditar.png" alt="Voltar 1 dia" width="22" height="22" align="absmiddle" border="0" />
 				Dados</button></a>
 			</td>

@@ -9,7 +9,7 @@ class formigreja {
 			<input name='id' type='hidden' id='id' value='{$id}'  />
 			<input name='tabela' type='hidden' value='igreja' />
 			<input name='campo' type='hidden' value='razao' />
-			<input type='submit' name='Submit' value='Alterar Nome' tabindex='{++$ind}' />
+			<input type='submit' class='btn btn-primary btn-sm' name='Submit' value='Alterar Nome' tabindex='{++$ind}' />
 		</form>
 		";
 		
