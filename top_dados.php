@@ -1,37 +1,60 @@
 <?php 
-	//Primeira fase para retirada da sessão como indece de acesso para listar os dados do membro
+	//Primeira fase para retirada da sessï¿½o como indece de acesso para listar os dados do membro
 	require_once 'views/secretaria/menuTopDados.php';
 ?>
 	
-	<form id="form1" name="form1" method="get" action="">
-	  <?PHP
-	  echo "$campo_rol";//valor recebido do script index.php
-	  $anterior=$bsc_rol-1;
-	  $proximo=$bsc_rol+1;
-	  if ($anterior<=0)
-	  {
-	  $anterior=0;
-	  }
-	  
-	  ?>
-	  <input name="bsc_rol" type="text" id="bsc_rol"   class="btn btn-default btn-sm" title="Insira o Rol" value="<?PHP echo $bsc_rol; ?>"/>
-	  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
-	  <input type="submit" name="Submit2"  class="btn btn-primary btn-sm" value="Listar..." title="Click aqui para listar os dados do Membro" />
-	</form>	
-	  <a href="./?escolha=<?PHP echo $_GET["escolha"];?>&bsc_rol=<?PHP echo $anterior;?>" >Registro Anterior
-	  	<img src="img/1910_32x32.png" alt="Registro Anterior" width="22" height="22" title="Registro Anterior" align="absmiddle" border="0" />
-	  </a> 
+
+	<table>
+		<tr>
+			<td width = "8%"><form id="form1" name="form1" method="get" action="" >
+			<label>
+			<?PHP
+			  echo $campo_rol;//valor recebido do script index.php
+			  $anterior=$bsc_rol-1;
+			  $proximo=$bsc_rol+1;
+			  if ($anterior<=0)
+			  {
+			  $anterior=0;
+			  }
+			  ?></label>
+			  </td>
+			<td width = "15%">
+			  
+			  <input name="bsc_rol" type="text" id="bsc_rol"   class="form-control" title="Insira o Rol" value="<?PHP echo $bsc_rol; ?>"/>
+			  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
+	  		</td>
+			<td>
+			  <input type="submit" name="Submit2"  class="btn btn-primary btn-sm" value="Listar..." title="Click aqui para listar os dados do Membro" />
+			</form>	
+			</td>
+	
+			<td>
+	  <a href="./?escolha=<?PHP echo $_GET["escolha"];?>&bsc_rol=<?PHP echo $anterior;?>" >
+	  <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-chevron-left"></span>
+	  &nbsp;Registro Anterior
+	  </button></a>
+	  	</td>
+			<td>
 	  <a href="./?escolha=<?PHP echo $_GET["escolha"];?>&bsc_rol=<?PHP echo $proximo;?>" >
-	  	<img src="img/1967_32x32.png" width="22" height="22" title="Pr&oacute;ximo Registro" alt="Pr&oacute;ximo Registro" align="absmiddle" border="0"/>Pr&oacute;ximo Registro
-	  </a>
-	  <?PHP if ($_GET["escolha"]<>"adm/cartao.php" && $_GET["escolha"]<>"adm/dados_cartas.php") {//O script cartao_print.php possui opção própria para impressão ?> 
+	  <button class="btn btn-default btn-sm">&nbsp;Pr&oacute;ximo Registro&nbsp;
+	  <span class="glyphicon glyphicon-chevron-right"></span></button></a></td>
+			<td>
+	  <?PHP if ($_GET["escolha"]<>"adm/cartao.php" && $_GET["escolha"]<>"adm/dados_cartas.php") {//O script cartao_print.php possui opï¿½ï¿½o prï¿½pria para impressï¿½o ?> 
 	    <a href="relatorio/ficha.php" title="Imprimir ficha completa">
-	 		<button class="btn btn-primary btn-sm">Imprimir ficha tipo 1</button>
+	 		<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span>
+	 		&nbsp;Ficha 1</button>
 		</a>
+	  </td>
+	  <td>
 		<a href="./views/fichamembro.php?rol=<?php echo $bsc_rol;?>" title="Imprimir ficha completa">
-			<button class="btn btn-primary btn-sm">Imprimir ficha tipo 2</button>
-		</a>
-	  <?PHP }
+			<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span>&nbsp;Ficha 2
+			</button>
+		</a></td>
+	  <?PHP } ?>
+		</tr>
+	</table>
+	
+	<?php 
 	  
 		require_once 'forms/autocompleta.php';
 		

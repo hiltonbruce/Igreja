@@ -26,7 +26,7 @@ $(document).ready(function(){
 	<tbody>
 		<tr>
 			<td colspan="3"><label>Nome:</label>
-				<input type="text" name="nome" id="campo_estado" size="40%" class="btn btn-default btn-sm" />
+				<input type="text" name="nome" id="campo_estado" size="40%" class="form-control" />
 				<input type="hidden" name="escolha" value="adm/rest_busca.php">
 			</td><td><label>&nbsp;</label>
 			<input type="submit" class="btn btn-primary btn-sm" name="listar" value="Listar dados...">
