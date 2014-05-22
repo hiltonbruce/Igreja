@@ -23,7 +23,7 @@ function __autoload ($classe) {
 	}
 }
 
-$dizmista = new dizresp($_SESSION['valid_user']);
+$dizmista = new dizresp($_SESSION['valid_user'],true/*impressao*/);
 $idIgreja = (empty($_GET['igreja'])) ? 1:$_GET['igreja'];
 if ((int)$_POST['rolIgreja']>0) {
 	$idIgreja=$_POST['rolIgreja'];

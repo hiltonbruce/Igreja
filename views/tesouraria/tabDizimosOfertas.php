@@ -50,7 +50,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 		}
 		
 ?>
-<table  style="width: 95%;">
+<table style="width: 95%;">
 		<caption class="text-left">
 			<?php
 			$dirigenteIgreja = $igrejaSelecionada->pastor();
@@ -80,7 +80,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				<th scope="col"><?php echo $tituloColuna5;?></th>
 			</tr>
 		</thead>
-			<?php 
+			<?php
 				echo $tabLancamento;
 				$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 				$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
@@ -88,6 +88,8 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 </table>
 <?php 
 	if (!empty($_GET['escolha'])) {
-		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" ><button>Imprimir ...</button> </a>';
+		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
+		echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
+		echo '</span> Imprimir ...</button> </a>';
 	}
 ?>

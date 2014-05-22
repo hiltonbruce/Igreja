@@ -1,16 +1,19 @@
 <table style="width:100%">
 	<caption>
-		<?php echo $cong;?>
-		Histórico Financeiro - Ano de referência:
-		<?php echo $ano;?>
-		- Valores em Real (R$) 
 		<?php
-			//Oculta o botao imprimir para não sair na impressão
-			$linkImpressao ='tesouraria/receita.php/?rec=13';
-			if ($_GET['rec']!='13') {
-				echo '<a href="'.$linkImpressao.'" target="_black" title="Imprimir demonstrativo"><button class="btn btn-default glyphicon glyphicon-print"> </button></a>';
-			}
-		?>
+		//Cabeçalho da tabela
+		//Oculta o botao imprimir para não sair na impressão
+		$linkImpressao ='tesouraria/receita.php/?rec=13';
+		if ($_GET['rec']!='13') {
+			echo '<a href="'.$linkImpressao.'" ';
+			echo 'target="_black" title="Imprimir demonstrativo">';
+			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
+			$imprimir = '';
+		}else {
+			$imprimir = '<script type="text/javascript">window.print();</script>';
+		}
+		echo $cong.'Histórico Financeiro - Ano de referência:'.$ano;
+		echo '- Valores em Real (R$)';?>
 	</caption>
 	<colgroup>
 		<?php echo $colgroup;?>
@@ -20,7 +23,7 @@
 			<?php echo $tabThead;?>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="periodo">
 			<?php echo $linha;?>
 	</tbody>
 	<tfoot>
@@ -43,4 +46,6 @@
 	 <a rel="nofollow" href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information">Site&nbsp;</a>
      - Email: <a href="mailto: <?PHP echo "{$sede->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>
-	<?php } ?>
+	<?php }
+	echo $imprimir;
+	?>

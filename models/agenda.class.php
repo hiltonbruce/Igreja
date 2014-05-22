@@ -310,10 +310,10 @@ class agenda {
 		}
 			
 		if ($inc_pen>1)	{
-			echo "<tr class='dados'>";
+			echo "<tr id='destac' class='dados'>";
 			$inc_pen=0;
 		}else {
-			echo "<tr>";}
+			echo "<tr id='destac'>";}
 
 			echo "<td><a title = '{$coluna_pen["nome"]}' href='./?escolha=tesouraria/agenda.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
 							&pagina1_pen={$_GET["pagina1_pen"]}'>".substr($evento,0,40)."<a></td>";

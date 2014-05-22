@@ -32,7 +32,10 @@ col#albumCol {
   border-right: none;
 }
 
-
+tbody#periodo tr:hover,tbody#recibos tr:hover {
+  background-color:#C1CDCD;
+  color:green;
+}
 
 thead {
   background: #ccc repeat-x left center;

@@ -1,11 +1,12 @@
 <?php
 class dizresp {
 	
-function __construct($tesoureiro='') {
+function __construct($tesoureiro='',$print='') {
 		$this->var_string = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,
 		 d.nome,d.tipo,d.valor,i.razao,d.credito,d.tesoureiro, d.confirma, 
 		i.rol AS rolIgreja FROM dizimooferta AS d, igreja AS i ";
 		$this->tesoureiro = $tesoureiro;
+		$this->impressao = ($print==true) ? true:false;
 		
 	}
 	
@@ -79,7 +80,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		}
 		
 		$total = 0;
-		$tabela = '<tbody>';
+		$tabela = '<tbody id="periodo">';
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 			
@@ -110,10 +111,18 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 				$corrigir = $valor;
 			}
 			
-			$linkMembro= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
+			if ( $this->impressao) {
+				$linkMembro= $rol.' - '.$linha['nome'];
+				
+			}else {
+				$linkMembro  = '<a href="';
+				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
+				$linkMembro .= '" title="Detalhar contribui&ccedil;&otilde;es confimardas!">';
+				$linkMembro .= $rol.' - '.$linha['nome'].'</a>';
+			}
+			
 			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td>
-				<td><a href="'.$linkMembro.'" title="Detalhar contribui&ccedil;&otilde;es confimardas!">'
-				.$rol.' - '.$linha['nome'].'</a></td><td>'.$tipo.'</td><td 
+				<td>'.$linkMembro.'</td><td>'.$tipo.'</td><td 
 				 id="moeda">'.$corrigir.'</td>
 				 		<td>'.$linha['razao'].'</td></tr>';
 						$total += $linha['valor'];
@@ -224,7 +233,7 @@ function concluir($igreja) {
 		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0" AND
 		 d.igreja="'.$igreja.'" AND d.igreja=i.rol ORDER BY tesoureiro,tipo,nome ') or die (mysql_error());
 		$totaltes=0;
-		$tabLancamento =  '<tbody>';
+		$tabLancamento =  '<tbody id="periodo" >';
 	
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';

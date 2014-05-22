@@ -24,8 +24,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	<tbody>
 		<tr>
 			<td colspan="2"><label>Estado Natal: </label>
-	   	<select name="uf_nasc" id="uf_nasc" class="form-control" idonchange="MM_jumpMenu('parent',this,0)"
-	   	 tabindex="<?PHP echo ++$ind; ?>" >
+	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" 
+	   	class="form-control" >
 	  <?PHP
 			$estnatal = new List_UF('estado', 'nome','uf_nasc');
 			echo $estnatal->List_Selec_pop('escolha=adm/cadastro_membro.php&uf=',$_GET['uf']);
