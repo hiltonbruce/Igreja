@@ -700,15 +700,15 @@ function situacao ($situacao,$rol){
 
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
-    return (strtoupper(strtr($string, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' )));
+    return (strtoupper(strtr($string, 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ' )));
     };
 
 
 function extenso($valor = 0, $maiusculas = false) {
 
-$singular = array("centavo", "real", "mil", "milhï¿½o", "bilhï¿½o", "trilhï¿½o", "quatrilhï¿½o");
-$plural = array("centavos", "reais", "mil", "milhï¿½es", "bilhï¿½es", "trilhï¿½es",
-"quatrilhï¿½es");
+$singular = array("centavo", "real", "mil", "milh&atilde;o", "bilh&atilde;o", "trilh&atilde;o", "quatrilh&atilde;o");
+$plural = array("centavos", "reais", "mil", "milh&otilde;es", "bilh&otilde;es", "trilh&otilde;es",
+"quatrilh&otilde;es");
 
 $c = array("", "cem", "duzentos", "trezentos", "quatrocentos",
 "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos");
@@ -716,7 +716,7 @@ $d = array("", "dez", "vinte", "trinta", "quarenta", "cinquenta",
 "sessenta", "setenta", "oitenta", "noventa");
 $d10 = array("dez", "onze", "doze", "treze", "quatorze", "quinze",
 "dezesseis", "dezesete", "dezoito", "dezenove");
-$u = array("", "um", "dois", "trï¿½s", "quatro", "cinco", "seis",
+$u = array("", "um", "dois", "tr&ecirc;s", "quatro", "cinco", "seis",
 "sete", "oito", "nove");
 
 $z = 0;

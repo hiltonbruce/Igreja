@@ -493,6 +493,10 @@ class editar_form {
 	if ($this->valor=="")
 	{
 	$this->valor="N&atilde;o informado";
+	}elseif ($this->campo=='valor') {
+		
+		$trans = array("." => ",", "," => ".");
+		$this->valor = strtr($this->valor,$trans);
 	}
 
 	if ($this->campo==$this->vlr_get)

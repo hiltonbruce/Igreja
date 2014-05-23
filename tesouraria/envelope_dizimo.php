@@ -54,6 +54,11 @@ th, td {
 		padding: 4px 10px;
 		line-height: 1.2;
 		}
+		
+tr { 
+		border-top: 1px solid #000;
+		}
+		
 #footer { font-size: 50%;}
 a:link:after, a:visited:after {
 	content:"("attr(href)")";
