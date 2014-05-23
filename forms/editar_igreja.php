@@ -16,8 +16,8 @@ $ind = 1;
 	{
 		?>
 	<form>
-     <label>Congrega��o: </label>
-     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' >
+     <label>Alterar Igreja: </label>
+     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-controll" >
      <?php 
 	     $estnatal = new List_sele('igreja', 'razao','id');
 	     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$_GET["rol"]);
@@ -177,7 +177,7 @@ $ind = 1;
 		?></td>
         <td>Telefone:
         <?PHP
-		$nome = new editar_form("foned",$igreja->fone,$tab,$tab_edit);
+		$nome = new editar_form("fone",$igreja->fone,$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
         <td colspan="2">Fax:
