@@ -501,7 +501,7 @@ class editar_form {
 
 	if ($this->campo==$this->vlr_get)
 		{
-			/* Formulï¿½rio para ediï¿½ï¿½o por item. Neste form os campos sï¿½o recebidos de qualquer
+			/* Formulário para edição por item. Neste form os campos sï¿½o recebidos de qualquer
 			campo para ediï¿½ï¿½o da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que ï¿½
 			passado, tambï¿½m ï¿½ responsï¿½vel pelo da tabela que serï¿½ alterada e o GET-tabela traz o nome da tabela
 			que sofrerï¿½ alteraï¿½ï¿½o. Em agumas ocasiï¿½es tambï¿½m ï¿½ passado o campo UF.*/
@@ -509,7 +509,9 @@ class editar_form {
 			//echo $this->campo." = ".$this->vlr_get;
 			$ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
 			?>
+			
 			<form id="form1" name="form1" method="post" action="">
+			<table><tbody><tr><td>
 			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receberï¿½ os dados -->
 			<input type="hidden" name="campo" value="<?PHP echo "{$this->campo}";?>" />
 			<input type="hidden" name="tabela" value="<?PHP echo $_GET["tabela"];?>" />
@@ -517,16 +519,16 @@ class editar_form {
 			<?PHP
 			switch ($this->campo){
 				case "sexo":
-					?>
+					?></td><td>
 					  <select name="<?PHP echo $this->campo;?>" autofocus="autofocus" class="form-control" >
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="M">Masculino</option>
 						<option value="F">Femino</option>
-					  </select>
+					  </select></td>
 					<?PHP
 					break;
 				case "situacao_espiritual":
-					?>
+					?></td><td>
 					  <select class="form-control" name="<?PHP echo $this->campo;?>"  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="1">Em Comunh&atilde;o</option>
@@ -534,37 +536,41 @@ class editar_form {
 						<option value="4">Modou de Denomina&ccedil;&atilde;o</option>
 						<option value="5">Afastou-se da Igreja</option>
 						<option value="6">Transferido</option>
-					  </select>
+					  </select></td>
 					<?PHP
 					break;
 				case "obs";
-					echo "<textarea class='form-control' autofocus='autofocus' name='{$this->campo}' cols='50' onselect='1'  tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea>";
+					echo "</td><td><textarea class='form-control' autofocus='autofocus'";
+					echo "name='{$this->campo}' cols='50' onselect='1' ";
+					echo "tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea></td>";
 					break;
 				case "uf_nasc":
 					$ind++;
+					echo '</td><td>';
 					echo sele_uf ($this->valor,"uf_nasc");
+					echo '</td>';
 					break;
 				case "uf_resid":
+					echo '</td><td>';
 					echo sele_uf ($this->valor,"uf_resid");
+					echo '</td>';
 					break;
 				case "tipo":
-					echo 	"<select class='form-control' name='$this->campo' autofocus='autofocus' size='1' class='AzulMedio' id='$this->campo' tabindex='$ind++'>".
+					echo 	"</td><td><select class='form-control' name='$this->campo' autofocus='autofocus' size='1' class='AzulMedio' id='$this->campo' tabindex='$ind++'>".
 							  "<option value='$this->valor' selected>".carta ($this->valor)."</option>".
 							  "<option value='1'>".carta (1)."</option>".
 							  "<option value='2'>".carta (2)."</option>".
 							  "<option value='3'>".carta (3)."</option>".
-							"</select>";
+							"</select></td>";
 					break;
 				default:
 					?>
-					
-			      <tr>
-			      	<td>
+					</td><td>
 			      		<input type="text" class="form-control" autofocus="autofocus" 
 						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" 
 						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
 						maxlength="<?PHP echo $this->maxcaratere;?>"/>
-					</td>
+					</td></td>
 					
 					<?PHP
 					break;
@@ -592,8 +598,7 @@ class editar_form {
 			?>
 			<td>
 			<input type="submit" class='btn btn-primary btn-sm' name="Submit" value="Alterar..."  tabindex="<?PHP echo $ind++;?>" />
-			</form>
-      			</td></tr>
+			</tr></tbody></table></form>
 			<?PHP
 
 		}else{

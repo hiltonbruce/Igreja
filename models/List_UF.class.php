@@ -3,7 +3,7 @@ class List_UF extends List_sele {
 
 	function List_Selec ($ind,$item){
 
-	  	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' required='required' tabindex='++$ind'>";
+	  	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' required='required' class='form-control' tabindex='++$ind'>";
 		$linha1 =  "<option value=''>-->> Escolha <<--</option>";
 		$linhas .= '';
 		

@@ -4,6 +4,12 @@ if ($_SESSION['nivel']>4){
 //ver_cad();
 
 	$igreja = new DBRecord('igreja',$_GET['rol'], 'rol');
+	if ($igreja->pastor()==(int)$igreja->pastor()) {
+		$congregacao = new DBRecord('membro',$igreja->pastor(),'rol');
+		$dirigente = $congregacao->nome();
+	}else {
+		$dirigente=$igreja->pastor();
+	}
 	
 $tabela = "igreja";
 $tab="sistema/atualizar_rol.php";//link q informa o script quem receber� os dados do form para atualizar
@@ -15,23 +21,27 @@ $ind = 1;
 	if (!empty($_GET["rol"]))
 	{
 		?>
-	<form>
-     <label>Alterar Igreja: </label>
-     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-controll" >
-     <?php 
-	     $estnatal = new List_sele('igreja', 'razao','id');
-	     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$_GET["rol"]);
-     ?>
-     </select>
-     </form>
 	<fieldset>
 	<legend>Editar dados da Igreja: <?php echo $igreja->razao();?> </legend>
 	<table  style="text-align: left; width: 100%;">
       <tr>
-        <td colspan="3" >Dire&ccedil;&atilde;o: 
+      	<td>
+			<form>
+		     <label>Alterar Igreja: </label>
+		     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-control" >
+		     <?php 
+			     $estnatal = new List_sele('igreja', 'razao','id');
+			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$_GET["rol"]);
+		     ?>
+		     </select>
+		     </form>
+     	</td>
+        <td colspan="2" >Dire&ccedil;&atilde;o: 
         <?PHP
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			echo '<p><a title="Click aqui para alaterar este campo!"';
+			echo 'href="./?escolha='.$tab_edit.'pastor" autofocus="autofocus" >'.$dirigente.'</a></p>';
+			$nome->getEditar();
 		?></td>
       </tr>
       <tr>
@@ -164,7 +174,7 @@ $ind = 1;
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "igreja";?>" />
             <input name="id" type="hidden" id="id" value="<?PHP echo $_GET["rol"];?>" />
-            <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
+            <input name="Submit" type="submit" class='btn btn-primary btn-sm' id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
             </label>
           </form>
           <?PHP } ?></td>
@@ -216,7 +226,7 @@ $ind = 1;
 			  	<input name='tabela' type='hidden' value='igreja' />
 			  	<input name='id' type='hidden' value='<?php echo $igreja->rol();?>' />
 			  	<input name='campo' type='hidden' value='ceia' />
-			  	<input type='submit' name='Submit' value='Alterar' tabindex='{++$ind}' />
+			  	<input type='submit' class='btn btn-primary btn-sm' name='Submit' value='Alterar' tabindex='{++$ind}' />
 		<?PHP
 			echo "</form>";
 			}
