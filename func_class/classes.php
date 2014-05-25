@@ -488,11 +488,14 @@ class editar_form {
 		}
 	}
 
-	public function getEditar(){
+	public function getEditar($placeholder){
 	$ind = 1;
-	if ($this->valor=="")
-	{
-	$this->valor="N&atilde;o informado";
+	if ($this->valor=="" || $this->valor=='N&atilde;o Informado!'){
+		$this->valor='';
+		if ($placeholder=='') {
+			$placeholder='Informe aqui para alterar!';
+		}
+		
 	}elseif ($this->campo=='valor') {
 		
 		$trans = array("." => ",", "," => ".");
@@ -529,7 +532,8 @@ class editar_form {
 					break;
 				case "situacao_espiritual":
 					?></td><td>
-					  <select class="form-control" name="<?PHP echo $this->campo;?>"  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
+					  <select class="form-control" name="<?PHP echo $this->campo;?>" placeholder='<?php echo $placeholder;?>' 
+					  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="1">Em Comunh&atilde;o</option>
 						<option value="3">Faleceu</option>
@@ -540,7 +544,7 @@ class editar_form {
 					<?PHP
 					break;
 				case "obs";
-					echo "</td><td><textarea class='form-control' autofocus='autofocus'";
+					echo "</td><td><textarea class='form-control' autofocus='autofocus' placeholder='<?php echo $placeholder;?>'";
 					echo "name='{$this->campo}' cols='50' onselect='1' ";
 					echo "tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea></td>";
 					break;
@@ -556,7 +560,8 @@ class editar_form {
 					echo '</td>';
 					break;
 				case "tipo":
-					echo 	"</td><td><select class='form-control' name='$this->campo' autofocus='autofocus' size='1' class='AzulMedio' id='$this->campo' tabindex='$ind++'>".
+					echo 	"</td><td><select class='form-control' name='$this->campo' autofocus='autofocus' size='1'".
+							  " class='AzulMedio' id='$this->campo' placeholder=' $placeholder' tabindex='$ind++'>".
 							  "<option value='$this->valor' selected>".carta ($this->valor)."</option>".
 							  "<option value='1'>".carta (1)."</option>".
 							  "<option value='2'>".carta (2)."</option>".
@@ -566,7 +571,7 @@ class editar_form {
 				default:
 					?>
 					</td><td>
-			      		<input type="text" class="form-control" autofocus="autofocus" 
+			      		<input type="text" class="form-control" autofocus="autofocus" placeholder="<?php echo $placeholder;?>"
 						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" 
 						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
 						maxlength="<?PHP echo $this->maxcaratere;?>"/>
@@ -611,7 +616,7 @@ class editar_form {
 					elseif ($this->valor=="2")
 						$exibi_opcao="Mudan&ccedil;a";
 					else
-						$exibi_opcao="N&atilde;o Infomado";
+						$exibi_opcao="N&atilde;o Informado";
 
 					break;
 
@@ -621,7 +626,7 @@ class editar_form {
 					elseif ($this->valor=="F")
 						$exibi_opcao="Feminino";
 					else
-						$exibi_opcao="N&atilde;o Infomado";
+						$exibi_opcao="N&atilde;o Informado";
 					break;
 
 				default:
@@ -633,7 +638,7 @@ class editar_form {
 	}
 	public function getMostrar(){
 		if (empty($this->valor)){
-			$this->valor = "N&atilde;o Informado";
+			$this->valor = "N&atilde;o Informado!";
 		}
 
 		if ($this->vlr_get == "situacao_espiritual") {

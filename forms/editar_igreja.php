@@ -4,11 +4,14 @@ if ($_SESSION['nivel']>4){
 //ver_cad();
 
 	$igreja = new DBRecord('igreja',$_GET['rol'], 'rol');
-	if ($igreja->pastor()==(int)$igreja->pastor()) {
+	
+	if ($igreja->pastor()>0) {
 		$congregacao = new DBRecord('membro',$igreja->pastor(),'rol');
 		$dirigente = $congregacao->nome();
-	}else {
+	}elseif ($igreja->pastor()!='') {
 		$dirigente=$igreja->pastor();
+	}else {
+		$dirigente = 'Informe o Rol do dirigente';
 	}
 	
 $tabela = "igreja";
@@ -41,7 +44,7 @@ $ind = 1;
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
 			echo '<p><a title="Click aqui para alaterar este campo!"';
 			echo 'href="./?escolha='.$tab_edit.'pastor" autofocus="autofocus" >'.$dirigente.'</a></p>';
-			$nome->getEditar();
+			$nome->getEditar('Informe o Rol do Membro');
 		?></td>
       </tr>
       <tr>
@@ -108,23 +111,22 @@ $ind = 1;
         <td>Bairro:
           <?PHP		
 		//inicio
-		$bairro = new DBRecord ("bairro",$igreja->bairro(),"id");
-		
-		echo $igreja->bairro." - ".$bairro->bairro();
-		$nome = new editar_form("bairro",$bairro->bairro(),$tab,$tab_edit);
-		$nome->getMostrar();
+		$bairro = new DBRecord('bairro',$igreja->bairro(), 'id');
+		echo '<p><a title="Click aqui para alaterar este campo!"';
+		echo 'href="./?escolha='.$tab_edit.'bairro" autofocus="autofocus" >* '.$bairro->bairro().' *</a></p>';
 		
 		if ($_GET["campo"]=="bairro"){
 		?>
-          <form id="form3" name="form3" method="post" action="">$cong->ceia()
-            <input name="escolha2" type="hidden" id="escolha2" value="<?PHP echo "adm/atualizar_dados.php";?>" />
-            <input name="campo2" type="hidden" id="campo2" value="<?PHP echo $_GET["campo"];?>" />
+          <form id="form3" name="form3" method="post" action="">
+            <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "sistema/atualizar_rol.php";?>" />
+            <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
             <?PHP
-			$lst_bairro = new sele_cidade("bairro",$arr_dad["cidade"],"idcidade","bairro","bairro");	
+			$lst_bairro = new sele_cidade("bairro",$igreja->cidade(),"idcidade","bairro","bairro");	
 			$vlr_bairro=$lst_bairro->ListDados ($ind++);
 		?>
-            <input name="tabela2" type="hidden" id="tabela2" value="<?PHP echo "membro";?>" />
-            <input name="Submit3" type="submit" id="Submit2" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
+            <input name="tabela" type="hidden" id="tabela" value="igreja" />
+            <input name="id" type="hidden" id="tabela" value="<?php echo $igreja->rol();?>" />
+            <input name="Submit3" type="submit" class="btn btn-primary btn-sm" id="Submit2" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
           </form>
         <?PHP
 		}
@@ -151,7 +153,7 @@ $ind = 1;
 			?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "igreja";?>" />
             <input name="id" type="hidden" id="id" value="<?PHP echo $_GET["rol"];?>" />
-            <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
+            <input name="Submit" type="submit" class="btn btn-primary btn-sm" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
           </form>
         <?PHP
 		}
@@ -167,7 +169,7 @@ $ind = 1;
           </p>
           <form id="form2" name="form2" method="post" action="">
             <?PHP
-			echo sele_uf ("uf",$igreja->uf());
+			echo sele_uf ($igreja->uf(),'uf');
 		?>
             <label>
             <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "sistema/atualizar_rol.php";?>" />
