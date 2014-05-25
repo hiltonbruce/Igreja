@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-    <tr><td class='odd'>Igreja</td>
+    <tr><td class='odd'>Igreja - Tabela de manutenção para administração do sistema </td>
       </tr>
     </tbody>
   </table>
@@ -27,8 +27,8 @@
 				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Alterar Excluir Igreja" tabindex="<?PHP echo ++$ind;?>" />
 			</form></li>
   	<li><form method="get" class="form-horizontal" action="">
-				<input name="escolha" type="hidden" value="tab_auxiliar/cadastro_bairro.php" />
-				<input name="uf" type="hidden" value="PB" />
+				<input name="escolha" type="hidden" value="controller/administracao.php" />
+				<input name="cad" type="hidden" value="1" />
 				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Funções..." tabindex="<?PHP echo ++$ind;?>" />
 			</form></li>
   	<li><form method="get" class="form-horizontal" action="">
@@ -47,4 +47,3 @@
 				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="usuários" tabindex="<?PHP echo ++$ind;?>" />
 			</form></li>
 </ul>
-      	Tabela de manutenção para administração do sistema 
