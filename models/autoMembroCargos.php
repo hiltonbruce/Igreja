@@ -9,13 +9,16 @@ require_once '../func_class/classes.php';
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
 
-$sqllinhas = "SELECT m.*,e.congregacao as igreja FROM membro as m,eclesiastico as e where locate('$q',nome) > 0 AND m.rol=e.rol";
+$sqllinhas  = "SELECT m.*,e.congregacao as igreja FROM membro as m,";
+$sqllinhas .= "eclesiastico as e where locate('$q',nome) > 0 AND m.rol=e.rol";
 //critÈrios de fonÈtica
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
 
-$sql = "SELECT * FROM membro where locate('$q',nome) > 0 order by locate('$q',nome) limit 10";
+$sql  = "SELECT m.*,i.razao AS igreja FROM membro as m,";
+$sql .= "eclesiastico AS e, igreja AS i WHERE LOCATE('$q',nome) > 0 AND ";
+$sql .= "m.rol=e.rol AND i.rol=e.congregacao order by locate('$q',nome) limit 10";
 
 $res = mysql_query( $sql );
 
@@ -28,11 +31,11 @@ while( $campo = mysql_fetch_array( $res ) )
 	$endereco = strtoupper(strtr( $campo ['endereco'], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco .=', '.$campo['numero'];
 	$cargo = cargo($campo['rol']);
-	$igreja = $campo['igreja'];
+	$cong = htmlentities($campo['igreja'],ENT_QUOTES,'iso-8859-1');
 	$sigla = $cargo.' - '.htmlentities($campo['celular'],ENT_QUOTES,'iso-8859-1');
 	$estado = addslashes($estado);
 	$html = preg_replace("/(" . $q . ")/i", "<span style=\"font-weight:bold\">\$1</span>", $estado);
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$igreja');\">$html ($sigla - $igreja)</li>\n";
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$cong');\">$html ($sigla $cong)</li>\n";
 }
 if ($linhas>10) {
 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';

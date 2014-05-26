@@ -5,11 +5,11 @@
 $(document).ready(function(){
 
 	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular,igreja ) {
+		this.setValue = function( rol, nome, celular, igreja ) {
 			$("#id_val").val(rol);
 			$("#estado_val").val(nome);
 			$("#sigla_val").val(celular);
-			$("#igreja").val(igreja);
+			$("#igreja_val").val(igreja);
 		}
 		if ( this.isModified )
 			this.setValue("");
@@ -27,8 +27,8 @@ $(document).ready(function(){
 			<td colspan="3"><label>Nome:</label>
 				<input type="text" name="nome" id="campo_estado" size="40%" class="form-control" autofocus="autofocus" />
 				<input type="hidden" name="escolha" value="adm/rest_busca.php">
-			</td><td><label>Igreja</label>
-			<input type="text" disabled="disabled" class="form-control" name="igreja" value="">
+			</td><td><label>Igreja que congrega</label>
+			<input type="text"  name="igreja" id="igreja_val" disabled="disabled" class="form-control">
 			</td>
 		</tr>
 		<tr>

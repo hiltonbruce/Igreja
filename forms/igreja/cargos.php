@@ -14,12 +14,14 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		<tbody>
 			<tr>
 				<td>
-					<label>Valor (R$):</label>
-					<input name="valor" type="text" class="form-control" id="valor" size="14" tabindex="<?PHP echo ++$ind; ?>" value="<?php echo $_GET["valor"];?>" />
+					<label>Valor que recebe (R$):</label>
+					<input name="valor" type="text" class="form-control" id="valor" size="14" 
+					tabindex="<?PHP echo ++$ind; ?>" value="<?php echo $_GET["valor"];?>"
+					 placeholder="Zero ou em branco p/ voluntário" />
 				</td><td colspan="2">
-					<label>Data</label>
-					<input name="data" type="text" id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
-					value="<?php echo $_GET["data"];?>" placeholder="Em branco para hoje" />
+					<label>Frequência (em dias)</label>
+					<input name="frequencia" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
+					placeholder="A cada quantos dias é pago" />
 				</td>
 			</tr>
 			<tr>
@@ -31,7 +33,22 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 					?>
 				</td>
 				<td colspan="2">
-					<label>Igreja:</label>
+					<label>Hierarquia</label>
+					<?php 
+						$congr = new List_sele ("igreja","razao","igreja");
+		 				echo $congr->List_Selec (++$ind,$_GET['igreja'],' class="form-control"');
+					?>
+				</td>
+			</tr>
+				<td>	
+					<label>Cargo/Função na Igreja:</label>
+					<?php 						
+						$congr = new List_sele ("fontes", "discriminar", "fonte");
+		 				echo $congr->List_Selec (++$ind,$_GET['fonte'],' class="form-control"');
+					?>
+				</td>
+				<td colspan="2">
+					<label>Igreja que exerce a função:</label>
 					<?php 
 						$congr = new List_sele ("igreja","razao","igreja");
 		 				echo $congr->List_Selec (++$ind,$_GET['igreja'],' class="form-control"');
