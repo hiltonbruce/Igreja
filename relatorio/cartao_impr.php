@@ -192,9 +192,9 @@ body {
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
 <div id="cargo">&nbsp;</div>
 <div id="Nome">
- <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?></div>
+ <?PHP print '<b>'.strtoupper(toUpper($rec_pessoais->nome())).'</b>';?></div>
 <div id="Layer7">&nbsp;</div>
-<div id="Rol"><?PHP printf ("Rol: %'04u",$_SESSION["rol"]);?></div>
+<div id="Rol"><?PHP printf ("<b>Rol: %'04u </b>",$_SESSION["rol"]);?></div>
 <div id="verso1">
 <?PHP
 	print "Filia&ccedil;&atilde;o: <br />{$rec_pessoais->pai()}<br /> e {$rec_pessoais->mae()}<hr>";
