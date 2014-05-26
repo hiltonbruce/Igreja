@@ -185,18 +185,17 @@ body {
 <body>
 <div id="cartao"></div>
 <div id="Endereco">
-  <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
-   <?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?>
+  <div align="center">&nbsp;
   </div>
 </div>
 <div id="Razao">
-  Igreja Assembleia de Deus
+  &nbsp;
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
-<div id="cargo">Carteira de Identidade de <?PHP echo cargo($_SESSION["rol"]);?></div>
+<div id="cargo">&nbsp;</div>
 <div id="Nome">
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?></div>
-<div id="Layer7"> &quot;Este cart&atilde;o s&oacute; ter&aacute; validade com apresenta&ccedil;&atilde;o da carta&quot;</div>
+<div id="Layer7">&nbsp;</div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$_SESSION["rol"]);?></div>
 <div id="verso1">
 <?PHP
@@ -215,7 +214,7 @@ body {
 	print "<br />Congrega&ccedil;&atilde;o: ".$cong->razao();
 ?>
 </div>
-<div id="Pastor"><strong><?PHP echo strtoupper(toUpper($igreja->pastor()));?></strong></div>
+<div id="Pastor"><strong>&nbsp;</strong></div>
 
 </body>
 </html>
