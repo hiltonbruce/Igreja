@@ -116,6 +116,7 @@ body {
 }
 #Nome {
 	position:absolute;
+	text-shadow: 1px 1px #FFFFFF;
 	left:39px;
 	top:249px;
 	width:354px;
@@ -137,6 +138,7 @@ body {
 }
 #Rol {
 	position:absolute;
+	text-shadow: 1px 1px #FFFFFF;
 	left:402px;
 	top:141px;
 	width:114px;
