@@ -148,6 +148,7 @@ body {
 }
 #verso1 {
 	position:absolute;
+	text-shadow: 1px 1px #FFFFFF;
 	left:573px;
 	top:22px;
 	width:216px;
@@ -158,6 +159,7 @@ body {
 
 #verso2 {
 	position:absolute;
+	text-shadow: 1px 1px #FFFFFF;
 	left:820px;
 	top:20px;
 	width:230px;
