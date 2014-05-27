@@ -19,6 +19,13 @@
 	
 	$igreja = new DBRecord ("igreja","1","rol");
 	
+	if ($igreja->cidade()>0) {
+		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
+		$origem=$cidOrigem->nome();
+	}else {
+		$origem = $igreja->cidade();
+	}
+	
 	if ($_POST["reimprimir"]==""){
 		
 		$cad_igreja = (int) $_POST['igreja'];
@@ -182,7 +189,7 @@
 
   <div id="header">
 	<p>
-	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> {$igreja->cidade()} - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
+	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
 	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?> 
 	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
     <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>

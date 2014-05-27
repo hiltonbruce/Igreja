@@ -10,6 +10,13 @@
 	$igreja 		= new DBRecord ("igreja","1","rol");
 	$cid_batismo 	= new DBRecord ("cidade",$ecles->local_batismo(),"id");
     $rol 			= $_POST["bsc_rol"];
+    
+    if ($igreja->cidade()>0) {
+    		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
+			$origem=$cidOrigem->nome();
+		}else {
+		 	$origem = $igreja->cidade();
+		}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -56,7 +63,7 @@
 	  </fieldset>
     </div>
     <div id="added-div-2">
-      <h3><?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h3>
+      <h3><?PHP  print $origem." - ".$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h3>
       <p>&nbsp;</p>
       <p class="bottom">&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
@@ -70,7 +77,7 @@
 	  </div>
     </div>
     <div id="footer">
-	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
+	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?><br />
 
 	  Copyright &copy; <a href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information"></a>
       Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a> <br />
