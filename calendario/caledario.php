@@ -32,6 +32,7 @@ if ($_GET['imp']>'0') {
 	}else {
 		//Congregações
 		$dadocong 	= new DBRecord ("igreja",$roligreja,"rol");
+		$igreja_rodape = $dadocong;
 		$dirigente 	= new DBRecord ("membro",$dadocong->pastor(),"rol");
 		$dircon		= '<b>Dirig. </b>'.cargo($dadocong->pastor()).': '.$dirigente->nome();
 		$templo		= '<b>Congreg.: </b>'.$igreja->razao();
@@ -98,7 +99,7 @@ if ($_GET['imp']>'0') {
 	  $id_igreja = (int) $_GET ["id"];
 	  if (empty($id_igreja)){$id_igreja =1;}
 
-	  $igreja_rodape = $dadocong;
+	  
 	  $ceia = $igreja->ceia();
 	  $nome_igreja = $igreja->razao();
 

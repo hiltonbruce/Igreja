@@ -25,7 +25,7 @@ $value = "'','{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST
 	'{$_POST["email"]}','$ceia','{$_POST["oracao"]}','{$_POST["pastor"]}','{$_POST["secretario1"]}',
 	'{$_POST["secretario2"]}','1','{$_POST["rua"]}','{$_POST["numero"]}','{$_POST["bairro"]}',
 	'{$_POST["cidade"]}','PB','{$_POST["cep"]}',
-	'{$_POST["fone"]}','{$_POST["fax"]}',NOW(),'$hist'";	
+	'{$_POST["fone"]}','1',NOW(),'$hist'";
 
 $dados = new insert ($value,"igreja");
 $dados->inserir();
