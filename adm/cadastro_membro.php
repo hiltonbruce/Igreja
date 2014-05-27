@@ -30,7 +30,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			$estnatal = new List_UF('estado', 'nome','uf_nasc');
 			echo $estnatal->List_Selec_pop('escolha=adm/cadastro_membro.php&uf=',$_GET['uf']);
 		?>
-	  </select></td>
+	  </select>
+			<input name="uf" type="hidden" required="required"
+			value="<?php echo $_GET['uf'];?>" /></td>
 			<td>
       
 	  <?PHP

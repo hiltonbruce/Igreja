@@ -3,7 +3,7 @@ $cidade = (empty($_POST["cidade"])) ? (int)$_GET["cidade"]:(int)$_POST["cidade"]
 
 $uf = (empty($_POST["uf"])) ? $_GET["uf"]:$_POST["uf"];
 
-if (($cidade>'0' && empty($_POST["bairro"])) || empty($_GET["cidade"])) {
+if (($cidade>'0' && empty($_POST["bairro"])) || (empty($_POST["cidade"]) && empty($_POST["cidade"]))) {
 ?>
 <script type="text/JavaScript">
 <!--
@@ -101,17 +101,22 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 {
 	//Inserir dados na tadela bairro
 	$bairros = new bairro($cidade,$_POST["bairro"]);
+	$linkRetorno = (empty($_SESSION["nome_cad"])) ? $_GET['escolha']:'adm/';
 	if ($bairros->exitecad()) {
 		echo $_GET['nomeCid'].'</div>';
 		echo('<script> alert("Bairro: '.$_POST['bairro'].', já cadastrado para esta cidade '.$_GET['nomeCid'].'!");</script>');
+		echo '<h3>Deseja voltar e continuar o cadastro ? <a href="./?escolha=';
+		echo $_GET['escolha'].'&cid_end=';
+		echo $cidade.'"><button class="btn btn-primary">Clique aqui...</button></a></h3>';
 	}else {
 		$log = "Inserido por:{$_SESSION["valid_user"]}";
 	$value = "'','{$_POST["bairro"]}','$cidade',NULL,'$log'";
 	$carta = new insert ("$value","bairro");
 	$idBairro = $carta->inserir();
 	}
-	if (isset($_SESSION["cid_end"])){//Se o usuário já vinha realizado o cadastro aqui dá opção de continuar
-		echo '<h3>Deseja voltar e continuar o cadastro ? <a href="./?escolha=adm/cadastro.php&cid_end=';
+	if ($idBairro>'0'){//Se o usuário já vinha realizado o cadastro aqui dá opção de continuar
+		echo '<h3>Deseja voltar e continuar o cadastro ? <a href="./?escolha=';
+		echo $_GET['escolha'].'&cid_end=';
 		echo $cidade.'&bairro='.$idBairro.'"><button class="btn btn-primary">Clique aqui...</button></a></h3>';
 	}
 	

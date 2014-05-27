@@ -13,10 +13,12 @@
 if (empty($_SESSION['valid_user']))
 header("Location: ../");
 
-if (empty($_GET['uf_end'])){
+if (empty($_GET['uf']) && empty($_POST['uf'])){
 	$uf_end = "PB";
+}elseif (!empty($_POST['uf_end'])) {
+	$uf_end = $_POST['uf'];
 }else{
-	$uf_end = $_GET['uf_end'];
+	$uf_end = $_GET['uf'];
 }
 
 if (isset($_POST["nacionalidade"])){
@@ -88,7 +90,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	<select name="uf_end" class="form-control" id="uf_end" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 		<?PHP
 			$estnatal = new List_UF('estado', 'nome','uf_end');
-			echo $estnatal->List_Selec_pop('escolha=adm/cad_membro_end.php&uf_end=',$_GET['uf_end']);
+			echo $estnatal->List_Selec_pop('escolha=adm/cad_membro_end.php&uf_end=',$uf_end);
 		?>
 	  </select>
 				</td>
