@@ -89,6 +89,13 @@
           <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt" >&nbsp;</span>&nbsp;Recibos e Certid&otilde;es</a></li>
           <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift" >&nbsp;</span>&nbsp;Aniversariantes</a></li>
           <li <?PHP id_left ("cetad");?>><a href="./?escolha=cetad/pgto.php&menu=top_cetad"><span class="glyphicon glyphicon-pencil" >&nbsp;</span>&nbsp;CETAD</a></li>
+          <?php 
+          	if ($_SESSION['nivel']>'10') {
+         	 ?>
+         		<li <?PHP id_left ("backup");?>><a href="./backup/"><span class="glyphicon glyphicon-export" >&nbsp;</span>&nbsp;Backup de Dados</a></li>
+		   	 <?php	
+          	}
+          ?>
 		  <?PHP
 		  }
 		  	else
