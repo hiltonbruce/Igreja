@@ -10,7 +10,7 @@
 	<label>Valor</label>
 	<input name="valor" type="text" id="valor" tabindex="<?PHP echo ++$ind; ?>"/>
 	<label>Data</label>
-	<input name="data" type="text" id="data" OnKeyPress="formatar('##/##/####', this);" tabindex="<?PHP echo ++$ind; ?> "maxlength="10" /> Em branco para hoje!
+	<input name="data" type="text" id="data" tabindex="<?PHP echo ++$ind; ?> "maxlength="10" /> Em branco para hoje!
 	<label></label>
 	<input type="submit" name="Submit" value="Lançar..." tabindex="<?PHP echo ++$ind; ?>"/>
   <input name="escolha" type="hidden" value="tesouraria/receita.php" />

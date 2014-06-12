@@ -1,24 +1,7 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-<script type="text/javascript">
-$(document).ready(function(){
 
-	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular ) {
-			$("#id_val").val(rol);
-			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
-		}
-		if ( this.isModified )
-			this.setValue("");
-		if ( this.value.length < 1 && this.isNotClick )
-			return ;
-		return "models/autocomplete.php?q=" + this.value;
-	});
-
-});
-</script>
 <!-- Desenvolvido por Wellington Ribeiro -->
 <form method="get" name="autocompletar" action="">
 <table style="background-color:#D3D3D3;">
@@ -44,7 +27,20 @@ $(document).ready(function(){
 </table>
 </form>
 
-
+<script type="text/javascript">
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#sigla_val").val(celular);
+		}
+		if ( this.isModified )
+			this.setValue("");
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/autocomplete.php?q=" + this.value;
+	});
+</script>
 	
 	
 	

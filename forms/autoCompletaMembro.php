@@ -1,25 +1,7 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-<script type="text/javascript">
-$(document).ready(function(){
 
-	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular, igreja ) {
-			$("#id_val").val(rol);
-			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
-			$("#igreja_val").val(igreja);
-		}
-		if ( this.isModified )
-			this.setValue("");
-		if ( this.value.length < 1 && this.isNotClick )
-			return ;
-		return "models/autoMembroCargos.php?q=" + this.value;
-	});
-
-});
-</script>
 <!-- Desenvolvido por Wellington Ribeiro -->
 <table class="table">
 	<tbody>
@@ -41,7 +23,21 @@ $(document).ready(function(){
 			<input type="text" id="sigla_val" class="btn btn-default btn-sm" name="sigla" disabled="disabled" value="" /></td>
 	</tbody>
 </table>
-
+<script type="text/javascript">
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular, igreja ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#sigla_val").val(celular);
+			$("#igreja_val").val(igreja);
+		}
+		if ( this.isModified )
+			this.setValue("");
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/autoMembroCargos.php?q=" + this.value;
+	});
+</script>
 
 	
 	
