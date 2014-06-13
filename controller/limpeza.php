@@ -115,14 +115,49 @@ switch ($_GET['limpeza']) {
 		
 		require_once '../tesouraria/modeloimpress.php';
 	break;
+	case '7':
+		//Mostrar Lista de todos os materiais disponíveis
+		error_reporting(E_ALL);
+		ini_set('display_errors', 'off');
+		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
+		require "../func_class/funcoes.php";
+		require "../func_class/classes.php";
+		function __autoload ($classe) {
+			require_once ("../models/$classe.class.php");
+		}
+		//montar um cabeçalho padrão e remover as chamadas a cima
+		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
+		
+		//Dados para montar o cabeçalho do documento para imprimir
+		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
+		$dadosjgreja .= '<br /> '.$sede->cidade().' - '.$sede->uf().' - CNPJ:';
+		$dadosjgreja .= $sede->cnpj().'<br />	CEP: '.$sede->cep().' - Fone:';
+		$dadosjgreja .= $sede->fone().' - Fax: '.$sede->fax();
+		$siteigreja	  = $sede->site();
+		$emailigreja  = $sede->email();
+		
+		$tbodytab = new limplista();
+		//Variável com a lista
+		$tabMaterial = $tbodytab->materialFormPed();
+		
+		$arrayComIgrejas = new igreja();
+		//print_r ($arrayComIgrejas->ArrayIgrejaDados());
+		$icone		  = '../ad.ico';
+		$titulo		  = 'Formul&aacute;rio para pedido de Material de limpeza';
+		$arquivo	  = '../views/tesouraria/limpezaFormPedido.php';
+		
+		foreach ($arrayComIgrejas->ArrayIgrejaDados() as $chave => $valor) {
+			$nomeIgreja =$valor['razao'];
+			require '../views/modImprRodape.php';
+		}
+		
+		
+	break;
 	
 	default:
 		//Mostra lista por congregação pelo $_GET['igreja']
 		$ref = new ultimoid('limpezpedid');
 		$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
-		echo "<style type='text/css'>";
-		require_once ("aniv/style.css");
-		echo "</style>";
 		require_once 'forms/limpeza.php';
 	break;
 }

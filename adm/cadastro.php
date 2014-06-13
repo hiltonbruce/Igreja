@@ -166,7 +166,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</select>
 					</td>
 					<td><label>Data&nbsp;de&nbsp;Nascimento:</label> <input
-						name="datanasc" type="text" class="form-control" id="datanasc"
+						name="datanasc" type="text" class="form-control" id="data"
 						placeholder="(Ex.: 21/04/1968)" tabindex="<?PHP echo $ind++;?>">
 					</td>
 				</tr>

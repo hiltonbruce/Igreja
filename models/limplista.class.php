@@ -255,7 +255,7 @@ class limplista {
 		//Select mysql na tabela limpeza para listar o total para o período
 	
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid, p.tempo  ';
-		$tot 	.= 'FROM limpeza AS p ';
+		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
 		$tabtbody = ''; //Limpa variável para receber os dados da tabela
@@ -282,6 +282,36 @@ class limplista {
 				
 			//Coluna Quantidade Solicitada
 			$tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$lista['tempo']);
+		}
+	
+		return $tabtbody;
+	
+	}	public function materialFormPed() {
+		//Select mysql na tabela limpeza para listar o total para o período
+	
+		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid  ';
+		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
+		$totLimp = mysql_query($tot);
+		$incrrc=0; //indece p/ zebrar tabela
+		$tabtbody = ''; //Limpa variável para receber os dados da tabela
+			
+		while($lista = mysql_fetch_array($totLimp)){
+								
+			//Faz o trabalho de zebrar a tabela
+			if ($inclimp%4=="0") {
+				$tabtbody .= "<tr class='odd' >";
+			} elseif ($inclimp%2=="0") {
+				$tabtbody .=  '<tr>';
+			}
+	
+			++$inclimp;
+				
+			//Coluna Unidade
+			$tabtbody .= sprintf("<td>(%s %s) %s</td>",$lista['qunid'],$lista['unid'],$lista['discrim']);
+				
+			//Coluna Quantidade
+			$tabtbody .= '<td> &nbsp;&nbsp;&nbsp; </td>';//Modificar qdo apliar para outros documentos
+				
 		}
 	
 		return $tabtbody;

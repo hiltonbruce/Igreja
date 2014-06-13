@@ -67,7 +67,7 @@ if ($diasemissao>'2') {
 									<input name="campo" id="campo" type="hidden" value="recebeu">
 									<input name="tabela" id="tabela" type="hidden" value="tes_recibo">
 									<input name="id" id="id" type="hidden" value="<?php echo $id;?>">
-									<input name="Submit" type="submit" value="Alterar..." >
+									<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >
 									</form>
 								<?php
 							}				
@@ -105,13 +105,13 @@ if ($diasemissao>'2') {
 					<form name="fornec" id="fornec" action="" method="post">
 					<?php		
 						$for_num = new List_sele ("fontes", "discriminar", "fonte");
-		 				echo $for_num->List_Selec ($ind++,$_GET['fonte']);
+		 				echo $for_num->List_Selec ($ind++,$_GET['fonte'],'class="form-control"');
 					?>
 					<input name="escolha" type="hidden" id="escolha" value="sistema/atualizar_sistema.php">
 					<input name="campo" id="campo" type="hidden" value="fonte">
 					<input name="tabela" id="tabela" type="hidden" value="tes_recibo">
 					<input name="id" id="id" type="hidden" value="<?php echo $id;?>">
-					<input name="Submit" type="submit" value="Alterar..." >
+					<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >
 					</form>
 				<?php 
 				}
@@ -151,13 +151,13 @@ if ($diasemissao>'2') {
 				  <form id="form1" name="form1" method="post" action="">
 		         <?PHP
 				 	$congr = new List_sele ("igreja","razao","igreja");
-				 	echo $congr->List_Selec ($ind++,$_GET['igreja']);
+				 	echo $congr->List_Selec ($ind++,$_GET['igreja'],'class="form-control"');
 				 ?>
 					<input name="escolha" type="hidden" id="escolha" value="sistema/atualizar_sistema.php">
 					<input name="campo" id="campo" type="hidden" value="igreja">
 					<input name="tabela" id="tabela" type="hidden" value="tes_recibo">
 					<input name="id" id="id" type="hidden" value="<?php echo $id;?>">
-					<input name="Submit" type="submit" value="Alterar..." >
+					<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >
 				  </form>
 				  <?php
 					 }

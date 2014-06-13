@@ -51,12 +51,11 @@ class igreja {
 	}
 	
 	function ArrayIgrejaDados(){
-		
-		
+		//Devolve um array com os dados de todas as igrejas
 		global $db;
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		
-		$res =& $db->query('SELECT * FROM igreja WHERE status="1"');
+		$res =& $db->query('SELECT * FROM igreja WHERE status="1" ORDER BY razao');
 		while ($res->fetchInto($row)) {
 			// Assuming DB's default fetchmode is DB_FETCHMODE_ORDERED
 			$linhas[] = $row;

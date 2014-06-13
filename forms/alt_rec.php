@@ -6,7 +6,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 <td>
 	<form id = "2" action="tesouraria/recibo_print.php" method="post">
 		<input type="hidden" name="reimprimir" id="reimprimir" value="<?php echo $rec_alterar->id();?>">
-		<input type="submit" value = "Re - Imprimir este recibo" >
+		<input type="submit" class="btn btn-primary" value = "Re - Imprimir este recibo" >
 </form>
 </td>
 <td style="text-align: right;">
@@ -39,7 +39,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 			echo '<input type="hidden" name="menu" id="menu" value="top_tesouraria">';
 		?>
 		<input type="hidden" name="rec" id="rec" value="<?php echo $rec_alterar->tipo();?>">
-		<input type="submit" value = "Editar como novo...">
+		<input type="submit" class="btn btn-primary" value = "Editar como novo...">
 	</form>
 </td>
 

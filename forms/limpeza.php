@@ -1,9 +1,6 @@
 
 <?php 
 	$igreja = ($_POST['igreja']>0) ? $_POST['igreja']:$_GET['igreja'];
-	echo "<style type='text/css'>";
-	require_once ("aniv/style.css");
-	echo "</style>";
 	if ($_POST['item']!='' && $_POST['']!='quant') {
 		require_once 'models/cadlimpeza.php';
 	}
@@ -20,18 +17,18 @@
 <fieldset>
 <legend>Solicitação de Material de Limpeza, para: <?php echo $periodo['0'];?></legend>
 <form method='post' name='limpeza' >
-	<table style="width: 100%;"  class="table table-bordered" >
+	<table style="width: 100%;">
 			<tr>
-				<td>
+				<td><label>Item</label>
 					<?php 
 						$item = new List_sele('limpeza', 'discrim', 'item');
 						echo $item->List_Selec(++$ind,'',' class="form-control" ');
 					?>
 				</td>
-				<td>
+				<td><label>Quantidade</label>
 					<input type="text" name="quant" placeholder="Quantidade" class="form-control" tabindex="<?PHP echo ++$ind;?>" />
 				</td>
-				<td>
+				<td><label>Igreja</label>
 					<?php 
 						$item = new List_sele('igreja', 'razao', 'igreja');
 						echo $item->List_Selec(++$ind,$igreja,' class="form-control" requrided="requrided"');
@@ -58,7 +55,10 @@
 	</table>
 </form>
 <a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'><button type="button" class="btn btn-primary">Alterar Período...</button></a>
-<a href='./controller/limpeza.php?limpeza=6'><button type="button" class="btn btn-primary">Material Disponível...</button></a>
+<a href='./controller/limpeza.php?limpeza=6' target="_blank">
+<button type="button" class="btn btn-primary">Material Disponível...</button></a>
+<a href='./controller/limpeza.php?limpeza=7' target="_blank">
+<button type="button" class="btn btn-primary">Lista para Pedido...</button></a>
 </fieldset>
 
 <?php
