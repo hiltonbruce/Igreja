@@ -19,7 +19,7 @@
 	$link_suporte ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span><span class='right'></span></li>";
 				$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	
-	if ((strstr($_GET["escolha"],"tesouraria")) || (strstr($_POST["escolha"],"tesouraria"))){
+	if ((strstr($_GET["menu"],"tesouraria")) || (strstr($_POST["escolha"],"tesouraria"))){
 		$link_tesour ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro</a></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 				

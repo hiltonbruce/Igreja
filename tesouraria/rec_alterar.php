@@ -26,9 +26,9 @@ if ($diasemissao>'2') {
 </form>
 <div id="tabs">
 	<ul>
-	  <li><a <?PHP link_ativo($_GET["rec"], "1");?> href="./?escolha=tesouraria/recibo.php&menu=top_tesouraria&rec=1"><span>Membros da Igreja</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "2");?> href="./?escolha=tesouraria/recibo.php&menu=top_tesouraria&rec=2"><span>Pessoa Jur&iacute;dica</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/recibo.php&menu=top_tesouraria&rec=3"><span>Não Membros</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "1");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=1"><span>Membros da Igreja</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "2");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=2"><span>Pessoa Jur&iacute;dica</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=3"><span>Não Membros</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id-1;?>"><span>Recibo Anterior</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id+1;?>"><span>Próximo Recibo</span></a></li>
 	</ul>

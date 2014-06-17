@@ -1,16 +1,12 @@
 
-<?php 
-	$igreja = ($_POST['igreja']>0) ? $_POST['igreja']:$_GET['igreja'];
+<?php
 	if ($_POST['item']!='' && $_POST['']!='quant') {
 		require_once 'models/cadlimpeza.php';
 	}
 	$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
 	
-	if (empty($_GET['mes']) && empty($_GET['ano'])) {
-		$periodo = periodoLimp($mesref);
-	}else {
-		$periodo = periodoLimp($_GET['mesref']);
-	}
+	print_r ($periodo);
+	echo $periodo;
 	
 	//Incluir tabela com resumo do pedido
 ?>
@@ -42,11 +38,9 @@
 						tabindex="<?PHP echo ++$ind;?>" value="<?php echo $data;?>" maxlength="10" />
 				</td>
 				<td>&nbsp;<br />
-					<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=2&<?php echo $linkperido;?>">
-					<button type="button" class="btn btn-primary" >Mostrar totalizador</button></a>
 				</td>
 				<td>&nbsp;<br />
-					<input type="submit"  class="btn btn-primary" name="Submit" value="Enviar..." tabindex="<?PHP echo ++$ind; ?>"/>
+					<input type="submit"  class="btn btn-primary" name="Submit" value="Lançar..." tabindex="<?PHP echo ++$ind; ?>"/>
 					<input type="hidden" name="mes" value="<?PHP echo $_GET['mes'];?>"/>
 					<input type="hidden" name="ano" value="<?PHP echo $_GET['ano'];?>"/>
 				</td>
@@ -54,12 +48,15 @@
 		</tbody>
 	</table>
 </form>
-<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'><button type="button" class="btn btn-primary">Alterar Período...</button></a>
+</fieldset>
+					<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=2&<?php echo $linkperido;?>">
+					<button type="button" class="btn btn-primary" >Mostrar totalizador</button></a>
+<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'>
+<button type="button" class="btn btn-primary">Alterar Período...</button></a>
 <a href='./controller/limpeza.php?limpeza=6' target="_blank">
 <button type="button" class="btn btn-primary">Material Disponível...</button></a>
 <a href='./controller/limpeza.php?limpeza=7' target="_blank">
-<button type="button" class="btn btn-primary">Lista para Pedido...</button></a>
-</fieldset>
+<button type="button" class="btn btn-primary">Formulário de Pedido...</button></a>
 
 <?php
 	if ( $igreja >0) {

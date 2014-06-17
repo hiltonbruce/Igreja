@@ -6,7 +6,7 @@
 */
 
 div#menu .menu {
-		height: 47px;
+		height: 32px;
 		width:auto;
 		background-image: url('img/menu.png');
 		background-repeat: repeat-x;
@@ -75,7 +75,7 @@ div#menu .menu {
 		visibility:visible;
 		display:block;
 		float: left;
-		padding-top: 15px;
+		padding-top: 10px;
 		margin-bottom: -32px;
 		text-align: center;
 		text-decoration: none;

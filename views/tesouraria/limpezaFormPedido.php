@@ -2,7 +2,7 @@
 if ($_GET['limpeza']!='4') {
 ?>
 <table id="listTable" >
-	<caption>Pedido de Material de limpeza: <?php echo $nomeIgreja;?></caption>
+	<caption>Material de limpeza: <?php echo $nomeIgreja;?> - Período: </caption>
 	
 		<colgroup>
 			<col id="item">

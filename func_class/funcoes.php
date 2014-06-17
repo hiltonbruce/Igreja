@@ -451,7 +451,13 @@ function prox_ant_ano (){
 function ver_nome ($val_link) {
 	/*	retorna verdadeiro se link possui esta string em qualquer parte
 	*/
-	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
+	if (strstr($_GET["menu"], $val_link) || strstr($_POST["menu"], $val_link)) {
+	 	$tes = true;
+	}else {
+		$tes = false;
+	}
+	
+	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link)) || $tes) {
 		return true;
 	}else{
 		return false;

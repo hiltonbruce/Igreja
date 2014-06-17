@@ -35,7 +35,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 				echo '<input type="hidden" name="rol" id="rol" value="'.$rec_alterar->recebeu().'">';
 				break;
 			}
-			echo '<input type="hidden" name="escolha" id="escolha" value="tesouraria/recibo.php">';
+			echo '<input type="hidden" name="escolha" id="escolha" value="controller/recibo.php">';
 			echo '<input type="hidden" name="menu" id="menu" value="top_tesouraria">';
 		?>
 		<input type="hidden" name="rec" id="rec" value="<?php echo $rec_alterar->tipo();?>">
