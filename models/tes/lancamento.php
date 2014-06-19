@@ -21,6 +21,15 @@ $corlinha = false;
 	$credora 	= new DBRecord('contas',$creditar,'acesso');
 	$devedora 	= new DBRecord('contas',$debitar,'acesso');
 	
+	if ($credora->tipo()=='D' && ($credora->saldo()-$valor)<'0') {
+	 $msgErro = 'Saldo não permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
+	}elseif ($devedora->tipo()=='C' && ($devedora->saldo()-$valor)<'0'){
+	 $msgErro = 'Saldo não permitido para Conta: '.$debitar->titulo().' que ficaria com o valor de '.($debitar->saldo()-$valor);
+	}else {
+	 $msgErro='';
+	}
+	
+	
 	if ($credora->nivel4()=='1.1.1.001') {
 	 ;//testar se cta de caixa e não permitir o lancamento se ficar negativo e a de despesas tb
 	}
@@ -38,7 +47,7 @@ $referente = (strlen($_POST['referente'])>'5') ? $_POST['referente']:false;//Atr
 
 $data = br_data($_POST['data'], 'Data do lançamento inválida!');
 
-if ($status && $referente && checadata($_POST['data'])) {
+if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	
 
 	
@@ -159,7 +168,9 @@ if ($status && $referente && checadata($_POST['data'])) {
 	if ($referente=='' && !$status) {
 		$mensagem = 'Não existe nada a ser lançado!';
 	}elseif ($referente=='') {
-		$mensagem = 'Você não informou o motivo do lançamento!' ;
+		$mensagem = 'Você não informou o motivo do lançamento com um mínimo de 5 caracteres!' ;
+	}elseif ($msgErro!='') {
+		$mensagem = $msgErro;
 	}else {
 		$mensagem = 'Não exite valores a ser lançado!';
 	}
