@@ -35,7 +35,9 @@ $linkLancamento .= '&igreja='.$_GET['igreja'];
 	  <li><a <?PHP link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0"><span>Busca</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1"><span>Entradas</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3"><span>Esc. Bíblica</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "2"); ?> href="<?php echo $linkLancamento;?>&rec=2"><span>Diversos</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "2"); ?> href="<?php echo $linkLancamento;?>&rec=2"><span>Lan&ccedil;amentos</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "4"); ?> href="<?php echo $linkLancamento;?>&rec=4"><span>Lan&ccedil;ar Recibo</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "5"); ?> href="<?php echo $linkLancamento;?>&rec=5"><span>Lan&ccedil;ar Despesa</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9"><span>Resumo</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "7"); ?> href="<?php echo $linkLancamento;?>&rec=7"><span>Saldos</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" ><span>Plano de Contas</span></a></li>
@@ -78,10 +80,15 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once ('forms/autodizimo.php');
 					break;
 				case '2':
+				    $form = 'forms/tes/autoCompletaContas.php';
 					require_once ('forms/lancar.php');
 					break;
 				case '3':
 					require_once ('forms/ofertaEBD.php');
+					break;
+				case '5':
+				    $form = 'forms/tes/autoLancarDespesas.php';
+					require_once ('forms/lancar.php');
 					break;
 				case '7':
 					require_once 'forms/tes/histFinanceiro.php';

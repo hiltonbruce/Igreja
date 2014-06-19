@@ -1,4 +1,7 @@
 <?php
+if (empty($_POST['numeros']) || $_POST['numeros']=='0') {
+	header("Location: ../?escolha=controller/recibo.php&menu=top_tesouraria&rec=5");
+}
 session_start();
 $ind=1; 
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){

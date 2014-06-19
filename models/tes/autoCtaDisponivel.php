@@ -8,13 +8,15 @@ require_once "../../func_class/classes.php";
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
 
-$sqllinhas = "SELECT * FROM contas where locate('$q',titulo) > 0  AND acesso > '0' ";
+$sqllinhas  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0  AND nivel3="1.1.1" ';
+$sqllinhas .= 'AND tipo="D" AND acesso > "0" ';
 //critérios de fonética
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
 
-$sql = "SELECT * FROM contas where locate('$q',titulo) > 0 AND acesso > '0' order by locate(codigo,'$q') limit 10";
+$sql  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0 AND acesso > "0" ';
+$sql .= 'AND tipo="D" AND nivel3="1.1.1" order by locate(codigo,"'.$q.'") limit 10';
 
 $res = mysql_query( $sql );
 
@@ -39,7 +41,7 @@ while( $campo = mysql_fetch_array( $res ) )
 	$estado = addslashes($estado);
 	$html = preg_replace("/(" . $q . ")/i", "<U style='font-weight:bold'>\$1</U>", $estado);
 	$estado = strtoupper(strtr( $campo['titulo'], 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ'));
-	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
+	//$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$detalhe');\">$acesso - $html ($nomeGrp)</li>\n";
 }
 if ($linhas>10) {

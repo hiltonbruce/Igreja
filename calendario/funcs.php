@@ -72,7 +72,7 @@ function calcularDiaSemana($dia,$mes,$ano)
 
    while($idx<$total)
    {
-    $tabela=$tabela."<tr>";
+    $tabela .= "<tr>";
     for($ms=0; $ms<$ncols && $idx<$total; $ms++)
     {
      $temp_tb="<td valign='top'><table class='tabela' width=100 height=220>
@@ -170,22 +170,22 @@ function calcularDiaSemana($dia,$mes,$ano)
       $temp_tb=$temp_tb."<tr><td colspan=7 class='rodape'>".$rodapes.
                "</td></tr></table><br></td>";
 
-     $tabela=$tabela.$temp_tb;
+     $tabela .= $temp_tb;
      $dia=$daux;
      $ceia = "";$culto="";
      $idx++; //Passa para o próximo mês
      $sem=0;
      $semana=0;
     }
-    $tabela=$tabela."</tr>";
+    $tabela .= "</tr>";
    }
    $legenda="<table class=table><tr><td class='cabecalho' colspan=2>Legenda</td></tr>";
 
    $i=1;//define a cor para idenficar a legenda no calendário
     $legenda=$legenda."<tr><td class='td_marcado".$i."'>&nbsp;</td><td class='td_leg'>".$leg."</td></tr>";
 
-   $tabela=$tabela.$legenda."</table>";
-   $tabela=$tabela."</table>";
+   $tabela .= $legenda."</table>";
+   $tabela .= "</table>";
   }
   return($tabela);
  }

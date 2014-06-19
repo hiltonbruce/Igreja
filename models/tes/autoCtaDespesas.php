@@ -5,16 +5,19 @@
  */
 require_once '../../func_class/funcoes.php';
 require_once "../../func_class/classes.php";
+
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
 
-$sqllinhas = "SELECT * FROM contas where locate('$q',titulo) > 0  AND acesso > '0' ";
+$sqllinhas  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0  AND nivel1="3" ';
+$sqllinhas .= 'AND tipo="C" AND acesso > "0" ';
 //critérios de fonética
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
 
-$sql = "SELECT * FROM contas where locate('$q',titulo) > 0 AND acesso > '0' order by locate(codigo,'$q') limit 10";
+$sql  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0 AND acesso > "0" ';
+$sql .= 'AND tipo="D" AND nivel1="3" order by locate(codigo,"'.$q.'") limit 10';
 
 $res = mysql_query( $sql );
 

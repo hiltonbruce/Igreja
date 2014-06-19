@@ -8,7 +8,7 @@ if ($_POST['valor']<=0 || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar']<
 	$dizimista = false;
 }else {
 	$status = true;
-	$valor = $_POST['valor'];
+	$valor = strtr( str_replace(array('.'),array(''),$_POST['valor']), ',.','.,' );
 	$debitar = $_POST['acessoDebitar'];
 	$creditar =  $_POST['acessoCreditar'];
 }
@@ -17,6 +17,13 @@ if ($_POST['valor']<=0 || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar']<
 $totalDeb = 0;
 $totalCred = 0;
 $corlinha = false;
+
+	$credora 	= new DBRecord('contas',$creditar,'acesso');
+	$devedora 	= new DBRecord('contas',$debitar,'acesso');
+	
+	if ($credora->nivel4()=='1.1.1.001') {
+	 ;//testar se cta de caixa e não permitir o lancamento se ficar negativo e a de despesas tb
+	}
 	
 	$ultimoLancNumero = mysql_query('SELECT max(lancamento) AS lanc FROM lancamento');//Traz o valor do ultimo lançamento
 	$lancmaior = mysql_fetch_array($ultimoLancNumero);
@@ -33,8 +40,7 @@ $data = br_data($_POST['data'], 'Data do lançamento inválida!');
 
 if ($status && $referente && checadata($_POST['data'])) {
 	
-	$credora 	= new DBRecord('contas',$creditar,'acesso');
-	$devedora 	= new DBRecord('contas',$debitar,'acesso');
+
 	
 	//Faz o lançamento do débito da tabela lancamento
 	$exibideb = '<tr><td colspan="4">Debito</td></tr>';

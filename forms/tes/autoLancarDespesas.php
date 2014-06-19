@@ -8,8 +8,9 @@
 <table style="background-color: #D3D3D3;">
 	<tbody>
 		<tr>
-			<td colspan="3">Conta:<br /> <input type="text" name="nome" class="form-control"
-				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>" />
+			<td colspan="3">Despesas com:<br /> <input type="text" name="nome" class="form-control"
+				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>" 
+				placeholder="Qual a Despesa?"/>
 			</td>
 		</tr>
 		<tr>
@@ -34,15 +35,16 @@
 <table style="background-color: #D3D3D3;">
 	<tbody>
 		<tr>
-			<td colspan="3">Conta:<br /> <input type="text" name="nome1" class="form-control"
-				id="estado" size="78%" tabindex="<?PHP echo ++$ind; ?>" />
+			<td colspan="3"><label>Pago pela Conta:</label><input type="text"
+				 name="nome1" class="form-control" id="estado" size="78%" 
+				 placeholder="Gasto pago com o recurso/conta: Caixa, Banco ... ?" tabindex="<?PHP echo ++$ind; ?>" />
 			</td>
 		</tr>
 		<tr>
 			<td>Código/tipo:<br /> <input type="text" id="nome" name="codigo"
 				disabled="disabled" value="" class="form-control" />
 			</td>
-			<td>Saldo Atual: <br /> <input type="text" id="id" name="id"
+			<td>Saldo Atual: <br /> <input type="text" id="id_val2" name="id"
 				disabled="disabled" value="" class="form-control" /></td>
 			<td>Acesso:<br /> <input type="text" id="acesso2"
 				name="acessoCreditar" value="" required="required"
@@ -70,12 +72,12 @@
 			this.setValue("");
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
-		return "models/tes/autoCompletaContas.php?q=" + this.value;
+		return "models/tes/autoCtaDespesas.php?q=" + this.value;
 	});
 
 	new Autocomplete("estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {
-			$("#id").val(rol);
+			$("#id_val2").val(rol);
 			$("#nome").val(nome);
 			$("#acesso2").val(celular);
 			$("#detalhe2").val(detalhe);
@@ -84,6 +86,6 @@
 			this.setValue("");
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
-		return "models/tes/autoCompletaContas.php?q=" + this.value;
+		return "models/tes/autoCtaDisponivel.php?q=" + this.value;
 	});
 </script>

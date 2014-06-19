@@ -6,8 +6,20 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 <td>
 	<form id = "2" action="tesouraria/recibo_print.php" method="post">
 		<input type="hidden" name="reimprimir" id="reimprimir" value="<?php echo $rec_alterar->id();?>">
+		<label>&nbsp;</label>
 		<input type="submit" class="btn btn-primary" value = "Re - Imprimir este recibo" >
 </form>
+</td><td>
+ <?php 
+  if ($rec_alterar->lancamento()<'1') {
+   $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
+   $linkLancamento .= '&recibo='.$rec_alterar->id();
+   echo '<a href="'.$linkLancamento.'&rec=4"><button type="button" ';
+   echo 'class="btn btn-primary">Lançar esta despesa</button></a>';
+  }else {
+   echo '&nbsp;';
+  }
+ ?>	
 </td>
 <td style="text-align: right;">
 	<form id = "form1" action="" method="get">
@@ -39,6 +51,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 			echo '<input type="hidden" name="menu" id="menu" value="top_tesouraria">';
 		?>
 		<input type="hidden" name="rec" id="rec" value="<?php echo $rec_alterar->tipo();?>">
+		<label>&nbsp;</label>
 		<input type="submit" class="btn btn-primary" value = "Editar como novo...">
 	</form>
 </td>

@@ -6,7 +6,7 @@ class List_igreja extends List_sele {
 	function __construct ($texto_field=""){
 
 		$this->texto_field = $texto_field;
-		$this->query = "SELECT * from igreja";	
+		$this->query = "SELECT * from igreja WHERE status='1'";	
 		$this->sql_lst = mysql_query($this->query." ORDER BY razao") or die (mysql_error());
 	}
 
@@ -33,20 +33,22 @@ class List_igreja extends List_sele {
 	  return $ind;
 	}
 
-	function igreja_pop ($ind,$igreja){
+	function igreja_pop ($ind,$igreja,$link){
 	//Lista Select para uso com javascrip popup
-
-	//$sql_lst = mysql_query("SELECT * from {$this->tabela} ORDER BY {$this->campo_retorno}");
 
 	//Mostra as linhas de select
 	?>
-		<select name='igreja' id='igreja' onchange='MM_jumpMenu("parent",this,0)' tabindex='<?php echo $ind;?>' >
+		<select name='igreja' id='igreja' class="form-control" onchange='MM_jumpMenu("parent",this,0)' tabindex='<?php echo $ind;?>' >
 	<?php
-	
+	if (empty($link)) {
+	 $valor = 'escolha='.$_GET['escolha'].'&menu=top_tesouraria&rec='.$_GET['rec'].'&rol=';
+	}else {
+	 $valor = $link;
+	}
 		//echo "<select name='igreja' id='igreja' onchange='MM_jumpMenu('parent',this,0)' tabindex='$ind' >";
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
-			$valor = 'escolha='.$_GET['escolha'].'&menu=top_tesouraria&rec='.$_GET['rec'].'&rol=';
+			
 			//echo "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst[$this->campo_retorno]."</option>";
 			
 	       	if ($igreja==$this->col_lst["rol"]) {

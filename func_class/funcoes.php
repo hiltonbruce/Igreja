@@ -1,7 +1,14 @@
 <?PHP
 function conectar() {
-	require_once("DB.php");	
-	$dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
+	require_once("DB.php");
+	if (file_exists("func_class/constantes.php")){
+	 require('func_class/constantes.php');
+	}elseif (file_exists('../func_class/constantes.php')){
+	 require('../func_class/constantes.php');
+	}elseif (file_exists('../../func_class/constantes.php')){
+	 require('../../func_class/constantes.php');
+	}
+	//$dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
 	$db =& DB::Connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage()); }
 }
@@ -422,16 +429,12 @@ function prox_ant_ano (){
      echo "<tr>";
      echo '<td colspan="3">';
      echo '<label>Congrega&ccedil;&atilde;o: </label>';
-     ?>
-     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' >
-     <?php
-     $estnatal = new List_sele('igreja', 'razao','id');
-     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=',$_GET["id"]);
-     echo '</select>';
-     echo '</td><td>';
+     $estnatal = new List_Igreja('igreja', 'razao','id');
+     $estnatal->igreja_pop('',$_GET["id"],'escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=');     
+     echo '</td><td><label>&nbsp;</label>';
      echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=2'>";
-     echo " Imprimir Todas as Igrejas&nbsp;&nbsp;&nbsp;</a></td>";
-     echo "</td></tr></tr><td class='td_marcado7'>";
+     echo '<button type="button" class="btn btn-primary btn-sm"> Imprimir Todas ';
+     echo 'as Igrejas&nbsp;&nbsp;&nbsp;</button></a></td></td></tr></tr><td class="td_marcado7">';
      echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$ant."&id={$_GET["id"]}'>";
      echo "<<&nbsp;&nbsp;Ano Anterior</a>";
      echo "<td class='cabecalho'>";
@@ -440,8 +443,8 @@ function prox_ant_ano (){
      echo "Proximo&nbsp;Ano&nbsp;&nbsp;>></a></td>";
      echo '<td>';
      echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=1'>";
-     echo "Imprimir Calend&aacute;rio&nbsp;&nbsp;&nbsp;</a></td>";
-     echo '</td>';
+     echo '<button type="button" class="btn btn-primary btn-sm">Imprimir Calend&aacute;rio';
+     echo '&nbsp;&nbsp;&nbsp;</button></a></td></td>';
      echo "</tr>";
      echo "</table>";
      echo "</div>";

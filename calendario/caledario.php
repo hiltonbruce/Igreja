@@ -131,7 +131,7 @@ if ($_GET['imp']>'0') {
 	  $y = (int)$_GET["ano"];
 	  
 	  if ($_GET['imp']=='') {
-	  	prox_ant_ano ();//Gera cabelho de alteração de ano
+	  	prox_ant_ano ();//Gera cabelho de alteração de ano e a lista de congregações
 	  }
 
 	  if ($_GET['imp']!='2') {

@@ -169,6 +169,8 @@ if ($diasemissao>'2') {
 			?>
 			</td>
 	      </tr>
+	    </table>
+	    <table>
 	      <tr style="background-color: transparent;">
 			<?PHP
 				require_once 'forms/alt_rec.php';

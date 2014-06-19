@@ -1,12 +1,12 @@
 <fieldset>
 <legend>Impress&atilde;o de Recibos</legend>
-<form id="form1" name="form1" method="post" action="forms/recibo.php">
+<form id="form1" name="form1" method="post" action="forms/recibo.php" target="_blank">
 <table>
 	<tbody>
 	<tr>
 	<td colspan="3"><label>N&uacute;mero, sequ&ecirc;ncia ou faixa de recibos</label> <input
 		type="text" name="numeros" class="form-control" autofocus="autofocus"
-		tabindex="<?PHP echo $ind++;?>"
+		tabindex="<?PHP echo $ind++;?>" required="required"
 		value="<?php echo $_GET["nome"];?>" /></td>
 </tr>
 <tr><td colspan="2"><p>Exemplos: 1,2,3->Imprimir recibos 1,2,3 | 1-5->Imprimir 
