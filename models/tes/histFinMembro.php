@@ -4,7 +4,7 @@ $nivel2 	= '';
 $comSaldo	= '';$menorAno = 0;$maiorAno=0;
 switch ($hisFinanceiro) {
 	case 1:
-		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" ORDER BY anorefer,mesrefer ');
+		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" AND credito!="803" ORDER BY anorefer,mesrefer ');
 	break;
 	case 2:
 		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY anorefer,mesrefer ');
@@ -43,7 +43,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	  	if ($contas['credito']=='700') {
 				$$dz 		+= $valor;
 				$totDizimo 	+= $valor;
-	  		}elseif ($contas['credito']=='730' || $contas['credito']=='731') {
+	  		}elseif ($contas['credito']>'729' && $contas['credito']<'800') {
 				$$ofCampanha += $valor;
 				$totOfertaCampanha += $valor;
 			}else {

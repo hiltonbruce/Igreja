@@ -28,7 +28,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	
 	//Faz o lançamento do débito para tabela lancamento
 	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor FROM dizimooferta 
-			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora');
+			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora,tipo');
 	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
 	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
 	
@@ -45,7 +45,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		$contcaixa->atualizar($valor,'D',$roligreja); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$valorTotal += $valor;
 		
-		if ($tablancarr['devedora']=='2') {
+		if ($tablancarr['devedora']=='2'&& $tablancarr['tipo']!='9') {
 			$provmissoes += round(($valor*0.4),2);
 		}elseif ($tablancarr['tipo']!='9') {
 			//Para tipo 9 não há provisão para COMADEP ou Missões

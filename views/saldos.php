@@ -1,5 +1,19 @@
 <table>
-		<caption>Balancete - Saldo em: <?php echo date('d/m/Y');?></caption>
+		<caption>
+		<?php 
+		$linkImpressao ='tesouraria/receita.php/?rec=14';
+		if ($_GET['rec']!='14') {
+			echo '<a href="'.$linkImpressao.'" ';
+			echo 'target="_black" title="Imprimir demonstrativo">';
+			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
+			$imprimir = '';
+		}else {
+			$imprimir = '<script type="text/javascript">window.print();</script>';
+		}
+		
+		?>
+			
+		Balancete - Saldo em: <?php echo date('d/m/Y');?></caption>
 		<colgroup>
 				<col id="Conta">
 				<col id="Acesso">
@@ -25,7 +39,7 @@
 		</tbody>
 		<tfoot>
 			<?php 
-				printf("<tr class='total'>"); 
+				printf("<tr id='total'>"); 
 				printf("<td colspan='2' id='moeda' >Total de Débitos: ..... R$ %s D</td>",number_format($debito,2,',','.'));
 				printf("<td colspan='2' id='moeda'>Total de Crédito: ..... R$ %s C</td><td></td></tr>",number_format($credito,2,',','.'));
 			?>

@@ -135,6 +135,7 @@ if (($vlr && $vlrregistro[0] == $datalanc) || ($vlr && $vlrregistro[0] =='') && 
 	
 switch ($_POST['tipo']) {
 	case '1':
+		//Dizimos, ofertas, missões, orações
 		require_once 'help/tes/tipo1DizOferta.php'; //Aplica formatações e atualiza o banco
 		$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$_POST["rolIgreja"]}";
 	break;
@@ -147,6 +148,7 @@ switch ($_POST['tipo']) {
 		$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=0&igreja={$_POST["rolIgreja"]}";
 	break;
 	case '4':
+		//EBD
 		require_once 'help/tes/tipo4DizOferta.php';
 		$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=0&igreja={$_POST["rolIgreja"]}";
 	break;

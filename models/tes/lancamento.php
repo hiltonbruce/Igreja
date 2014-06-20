@@ -68,8 +68,8 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 			if ($debitar=='2') {
 				//Provisão para Missões
 				$provmissoes += $valor*0.4;
-			}elseif ($devedora->nivel4()=='1.1.1.001' && $devedora->acesso()>0 && $devedora->tipo()=='D' ) {
-				//Para tipo 9 não há provisão para COMADEP ou Missões
+			}elseif ($devedora->nivel4()=='1.1.1.001' && $devedora->acesso()>0 && $devedora->tipo()=='D' && $credora->acesso()!='803') {
+				//Para tipo 8 não há provisão para COMADEP ou Missões
 				$provcomadep += $valor*0.1;
 			}
 		
