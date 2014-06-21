@@ -1,26 +1,34 @@
 <?php
-if ($_GET['rec']>'12' && $_GET['rec']<'15') {
+$titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
+if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
 	switch ($_GET['rec']) {
 		case '13':
-		//imprimir entradas de todas as congregações - mensal
-		require_once '../help/tes/saldoIgrejas.php';
-		$nomeArquivo='../views/tesouraria/saldoIgrejas.php';
-		require_once '../views/modeloPrint.php';
-		
-		break;case '14':
-		//imprimir
-					require_once '../models/saldos.php';
-		$nomeArquivo='../views/saldos.php';
-		require_once '../views/modeloPrint.php';
-		
-		break;
+			//imprimir entradas de todas as congregações - mensal
+			require_once '../help/tes/saldoIgrejas.php';
+			$nomeArquivo='../views/tesouraria/saldoIgrejas.php';
+			require_once '../views/modeloPrint.php';
+			break;
+		case '14':
+			//imprimir
+			if (!empty($_GET['dtBalac'])) {
+				$titTabela = 'Balancete - Saldo em: '.$_GET['dtBalac'];
+			}
+			
+			require_once '../models/saldos.php';
+			$nomeArquivo='../views/saldos.php';
+			require_once '../views/modeloPrint.php';
+			break;
 		
 		default:
-			;
-		break;
+			//imprimir plano de contas
+			$titTabela = 'Plano de Contas em: '.date('d/m/Y');
+			require_once '../models/saldos.php';
+			$nomeArquivo='../views/saldos.php';
+			require_once '../views/modeloPrint.php';
+			break;
 	}
 		
 	}
@@ -98,6 +106,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					break;
 				case '8':
 					require_once 'forms/tes/histFinanceiro.php';
+					$titTabela = 'Plano de Contas em: '.date('d/m/Y');
 					require_once 'models/saldos.php';
 					require_once ('views/saldos.php');
 					break;

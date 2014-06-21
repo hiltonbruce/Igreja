@@ -56,7 +56,7 @@ a:link:after, a:visited:after {
 	z-index:1;
 	height: auto;
 	float: left;
-	margin: 25px 15px 5px 0;
+	margin: 5px 15px 5px 0;
 	padding: 0;
 	font-size:23px;
 	background-repeat: no-repeat;
@@ -103,6 +103,19 @@ a:link:after, a:visited:after {
 	text-align:right;
 	color:#FF0000;
 }
+#polegar {
+	position:absolute;
+	text-shadow: 1px 1px #FFFFFF;
+	background-color: #F5F5F5;
+	color:#9A9A9A; 
+	border: 1px solid #CCC;
+	left:12px;
+	top:451px;
+	width:134px;
+	height:140px;
+	z-index:10;
+	text-align:center;
+}
 
 h1{ 
 	color: #0000FF;
@@ -129,12 +142,13 @@ legend {
 }
 
 #Tipo {
-	float:left;
-	width:700px;
-	padding: 20px 100px 0;
-	text-decoration: underline;
-	color: #3366FF;
+	float:center;
+	padding: 10px 10px  10px 10px;
 	font-size: 150%;
+	text-align: center;
+	color: #000;
+	background-color: #CCC;
+	border-color: #46b8da;
 }
 #End_Igreja {
 	float: right;

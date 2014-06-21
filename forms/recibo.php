@@ -30,7 +30,7 @@ switch ($recMenu){
 		error_reporting(E_ALL);
 		ini_set('display_errors', 'off');
 		
-		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
+		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
 		require "../func_class/funcoes.php";
 		require "../func_class/classes.php";
 		function __autoload ($classe) {			

@@ -155,7 +155,7 @@ $(document).ready(function(){
 					$desp1->List_sel(++$ind,'desp3');
 					?></td>
 					<td><input type="hidden" name="escolha"
-						value="tesouraria/despesa.php"> <input type="hidden" name="menu"
+						value="controller/despesa.php"> <input type="hidden" name="menu"
 						value="top_tesouraria"></td>
 				</tr>
 				<tr>

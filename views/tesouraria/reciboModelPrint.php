@@ -96,15 +96,14 @@
 
 <div id="mainnav">
 		<div style="text-align: right;"><h4><?php printf ("N&uacute;mero: %'05u",$numRec);?></h4></div>
-	<div id="Tipo">
-			Recibo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+	<div id="content"><div id="Tipo">
+			Recibo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 Valor: R$ <?php echo $vlr;?> <br />
   </div>
-  </div>
-	<div id="content">
     <div id="added-div1">
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -129,7 +128,7 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
-    	<div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?></div>
+    	<div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?><div id="polegar">Polegar</div></div>
 	 </div>
     </div>
     <div id="footer">

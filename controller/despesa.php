@@ -4,9 +4,9 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 ?> 
 <div id="tabs">
 	<ul>
-	  <li><a <?PHP link_ativo($_GET["age"], "1");?> href="./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=1"><span>Adiant. p/ Compras</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["age"], "2");?> href="./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=2"><span>Prestar Contas</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["age"], "3");?> href="./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=3"><span>Agendar Contas &agrave; Pagar</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["age"], "1");?> href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=1"><span>Adiant. p/ Compras</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["age"], "2");?> href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=2"><span>Prestar Contas</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["age"], "3");?> href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=3"><span>Agendar Contas &agrave; Pagar</span></a></li>
 	</ul>
 </div>
 
