@@ -24,8 +24,11 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 		case '4'://Relatório COMADEP
 			if (!empty($_GET['data']) && checadata($_GET['data'])) {
 				$dtRelatorio = data_extenso ($_GET['data']);
+				list($d,$m,$a) = explode('/', $_GET['data']);
+				$mesRelatorio = $a.$m;
 			}else {
 				$dtRelatorio = data_extenso (date('d/m/Y'));
+				$mesRelatorio = date('Ym');
 			}
 			$titTabela = 'Relatório COMADEP - '.$dtRelatorio;
 			$recLink = '10';

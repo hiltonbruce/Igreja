@@ -1,29 +1,37 @@
 <?php
 $nivel1 	= '';
 $nivel2 	= '';
-$comSaldo	= '';
-$lista = mysql_query('SELECT * FROM contas ORDER BY codigo ');
+$comSaldo	= '';$planoCta=array();
+
+$plano = mysql_query('SELECT * FROM contas ORDER BY codigo ');
+while ($cta = mysql_fetch_array($plano)) {
+	$planoCta[$cta['id']]=array('titulo'=>$cta['titulo'],'acesso'=>$cta['acesso'],'codigo'=>$cta['codigo'],''=>$cta['']);
+}
+
+//print_r($planoCta);
+
+$lista = mysql_query('SELECT  l.valor AS saldo,l.* FROM lancamento AS l WHERE DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ORDER BY l.conta ') or die(mysql_error());
+
 while ($contas = mysql_fetch_array($lista)) {
-	if ($contas['acesso']>'0') {
-	$valores = mysql_query('SELECT SUM(valor) AS saldo,conta FROM lancamento WHERE conta="'.$contas['acesso'].'" AND DATE_FORMAT(data,"%Y%m")="201402"') or die(mysql_error());
-	$vlrTotal = mysql_fetch_array($valores);
-	
-		if ($vlrTotal['saldo']<'0' && $contas['tipo']=='D') {
+
+		if ($contas['saldo']<'0' && $contas['tipo']=='D') {
 		   $tipoCta = 'C';
-		}elseif ($vlrTotal['saldo']<'0' && $contas['tipo']=='C') {
+		}elseif ($contas['saldo']<'0' && $contas['tipo']=='C') {
 		  $tipoCta = 'D';
 		}else {
 		 $tipoCta = $contas['tipo'];
 		}
-		$sldConta = (abs($vlrTotal['saldo']));
+		$sldConta = (abs($contas['saldo']));
 		
-	$acesso =  sprintf("[%04s]\n", $contas['acesso']);
+
+		
+	$acesso = ($contas['acesso']>0) ? sprintf("[%04s]\n", $contas['acesso']):'';
 	//Balancete de todas as contas
 		$title = $contas['descricao'];
 	if (strlen($contas['codigo'])<10) {
 		//Grupo de contas
 		$bgcolor = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
-		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
+		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$planoCta[$contas['conta']]['titulo'].
 		'</td><td></td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
 		$cor= true;
 	}else {
@@ -38,11 +46,11 @@ while ($contas = mysql_fetch_array($lista)) {
 	}
 
 	//Balancete de todas as contas com saldo
-	if ($vlrTotal['saldo']!=0) {
+	if ($contas['saldo']!=0) {
 		if (strlen($contas['codigo'])<10) {
 			//Grupo de contas
 			$bgcolor2 = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
-			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
+			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$planoCta[$contas['conta']]['titulo'].
 			'</td><td></td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
 			$cor2 = true;
 		}else {
@@ -55,10 +63,9 @@ while ($contas = mysql_fetch_array($lista)) {
 		}
 	}
 	if ($contas['tipo']=='D' && $contas['acesso']!='0') {
-		$debito += $vlrTotal['saldo'];
+		$debito += $contas['saldo'];
 	}elseif ($contas['tipo']=='C' && $contas['acesso']!='0') {
-		$credito += $vlrTotal['saldo'];
-	}
-		
+		$credito += $contas['saldo'];
 	}
 }
+?>
