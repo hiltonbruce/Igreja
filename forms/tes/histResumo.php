@@ -15,7 +15,7 @@
 					<input type="hidden" name="fin"	value="<?php echo $fin;?>" /> 
 					<input type="hidden" name="rec"	value="<?php echo $rec;?>" />
 					&nbsp;<br />
-  					<button type="submit" class="btn btn-default" tabindex="<?PHP echo ++$ind; ?>" >Listar...</button>
+  					<button type="submit" class="btn btn-primary btn-sm" tabindex="<?PHP echo ++$ind; ?>" >Listar...</button>
 					<input name="escolha" type="hidden" value="tesouraria/receita.php" /> 
 					<input name="menu" type="hidden" value="top_tesouraria" />				
 				</td>

@@ -1,20 +1,12 @@
 <table>
 		<caption>
 		<?php		
-		if ($_GET['rec']=='7') {
-			$mes = date('m'); // Mês desejado, pode ser por ser obtido por POST, GET, etc.
-			$ano = date('Y'); // Ano atual
-			$ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano)); 
-			$recLink = '14&dtBalac='.$ultimo_dia.'/'.$mes.'/'.$ano;
-		}elseif ($_GET['rec']=='8') {
-			$recLink = '15&tipo=1';
-		}else {
+		if (empty($recLink)) {
 			$recLink = '';
-		}
+		}		
 		
-		$linkImpressao ='tesouraria/receita.php/?rec=';
 		if ($recLink!='') {
-			echo '<a href="'.$linkImpressao.$recLink.'" ';
+			echo '<a href="'.$linkImpressao.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
 			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
 			$imprimir = '';

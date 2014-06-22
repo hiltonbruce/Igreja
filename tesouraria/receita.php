@@ -4,6 +4,14 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
+	$igreja = new DBRecord ("igreja","1","rol");
+	if ($igreja->cidade()>0) {
+		$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
+		$origem = $cidSede->nome();
+	}else {
+		$origem = $igreja->cidade();
+	}
+	
 	switch ($_GET['rec']) {
 		case '13':
 			//imprimir entradas de todas as congregações - mensal
@@ -102,12 +110,19 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 				case '7':
 					require_once 'forms/tes/histFinanceiro.php';
 					require_once 'models/saldos.php';
+					$mes = date('m'); // Mês desejado, pode ser por ser obtido por POST, GET, etc.
+					$ano = date('Y'); // Ano atual
+					$ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano)); 
+					$recLink = '14&dtBalac='.$ultimo_dia.'/'.$mes.'/'.$ano;
+					$linkImpressao ='tesouraria/receita.php/?rec='.$recLink;
 					require_once ('views/saldos.php');
 					break;
 				case '8':
 					require_once 'forms/tes/histFinanceiro.php';
 					$titTabela = 'Plano de Contas em: '.date('d/m/Y');
 					require_once 'models/saldos.php';
+					$recLink = '15&tipo=1';
+					$linkImpressao ='tesouraria/receita.php/?rec='.$recLink;
 					require_once ('views/saldos.php');
 					break;
 				case '9':

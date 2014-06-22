@@ -17,7 +17,7 @@ function List_sel ($ind,$texto_field){
 	//*****************************************************************
 	//*Concluir a config do selec p/ formulario de contas a pagar     *
 	//*****************************************************************
-	echo "<select name='{$texto_field}' id='{$texto_field}' tabindex='$ind'>";
+	echo "<select name='{$texto_field}' id='{$texto_field}' tabindex='$ind' class='form-control'>";
 	echo "<option value=''>-->> Escolha <<--</option>";
 	  while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	  {
