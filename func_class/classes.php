@@ -171,10 +171,10 @@
 				"<input name='$campo' type='hidden' value='{$_GET[$campo]}'>".
 				"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
 				"<input name='id' type='hidden' value='{$_GET["id"]}'>".
-				"<input name='nome' type='hidden' value='{$_GET["nome"]}'>".
-				"<input name='{$this->_linkpagina}' type='text' size='3' />".
-				"<input type='submit' name='Submit' value='Listar...' />".
-				"</form>";
+				"<input name='nome' type='hidden' value='{$_GET["nome"]}'><div class='row'><div class='col-xs-2'>".
+				"<input name='{$this->_linkpagina}' class='form-control' type='text' size='3' />".
+				"</div><div class='col-xs-2'><input type='submit' class='btn btn-primary btn-sm' name='Submit' value='Listar...' />".
+				"</div></div></form>";
 		}
 
 		function __destruct() {
@@ -484,7 +484,7 @@ class editar_form {
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
 		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edi��o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
-			if ($this->campo=="datanasc" || $this->campo=="batismo_em_aguas" || $this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar" || $this->campo=="diaconato" || $this->campo=="presbitero" || $this->campo=="data" || $this->campo=="dat_aclam") {
+			if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" || $this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar" || $this->campo=="diaconato" || $this->campo=="presbitero" || $this->campo=="data" || $this->campo=="dat_aclam") {
 			$this->formato = "id='data'";
 			$this->maxcaratere = 10;
 		}
@@ -524,7 +524,7 @@ class editar_form {
 			<?PHP
 			switch ($this->campo){
 				case "sexo":
-					?></td><td>
+					?></td><td><label>&nbsp;</label>
 					  <select name="<?PHP echo $this->campo;?>" autofocus="autofocus" class="form-control" >
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="M">Masculino</option>
@@ -533,7 +533,7 @@ class editar_form {
 					<?PHP
 					break;
 				case "situacao_espiritual":
-					?></td><td>
+					?></td><td><label>&nbsp;</label>
 					  <select class="form-control" name="<?PHP echo $this->campo;?>" placeholder='<?php echo $placeholder;?>' 
 					  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
@@ -546,23 +546,23 @@ class editar_form {
 					<?PHP
 					break;
 				case "obs";
-					echo "</td><td><textarea class='form-control' autofocus='autofocus' placeholder='<?php echo $placeholder;?>'";
+					echo "</td><td><label>&nbsp;</label><textarea class='form-control' autofocus='autofocus' placeholder='<?php echo $placeholder;?>'";
 					echo "name='{$this->campo}' cols='50' onselect='1' ";
 					echo "tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea></td>";
 					break;
 				case "uf_nasc":
 					$ind++;
-					echo '</td><td>';
+					echo '</td><td><label>&nbsp;</label>';
 					echo sele_uf ($this->valor,"uf_nasc");
 					echo '</td>';
 					break;
 				case "uf_resid":
-					echo '</td><td>';
+					echo '</td><td><label>&nbsp;</label>';
 					echo sele_uf ($this->valor,"uf_resid");
 					echo '</td>';
 					break;
 				case "tipo":
-					echo 	"</td><td><select class='form-control' name='$this->campo' autofocus='autofocus' size='1'".
+					echo 	"</td><td><label>&nbsp;</label><select class='form-control' name='$this->campo' autofocus='autofocus' size='1'".
 							  " class='AzulMedio' id='$this->campo' placeholder=' $placeholder' tabindex='$ind++'>".
 							  "<option value='$this->valor' selected>".carta ($this->valor)."</option>".
 							  "<option value='1'>".carta (1)."</option>".
@@ -573,6 +573,7 @@ class editar_form {
 				default:
 					?>
 					</td><td>
+					<label>&nbsp;</label>
 			      		<input type="text" class="form-control" autofocus="autofocus" placeholder="<?php echo $placeholder;?>"
 						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" 
 						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
@@ -590,20 +591,25 @@ class editar_form {
 			//Nos campos Pai e M�e � aberto um segundo campo do form para o rol e a op��o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
 			<td>
-			Rol:
-			<input name="<?PHP echo "rol_{$this->campo}";?>" class='btn btn-default btn-sm' autofocus="autofocus" type="text" 
-			value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" />
+		    <div class="row">
+		 	 <div class="col-xs-4">
+			<label>Rol:</label>
+			<input name="<?PHP echo "rol_{$this->campo}";?>" class='form-control input-sm' autofocus="autofocus" type="text" 
+			value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" /></div>
 			<?php
 			if ($this->campo=="conjugue") {$form=2;}else{$form=3;}
 			?>
+		 	 <div class="col-xs-2">
+			<label>&nbsp;</label>
 			<a href="javascript:lancarSubmenu('campo=<?PHP echo $this->campo;?>
 				&rol=rol_<?PHP echo $this->campo;?>&form=<?PHP echo $form;?>')"
 				 title="Click aqui para pesquisar membros!"  >
-				<span class="btn btn-link glyphicon glyphicon-search" > Pesquisar...</span></a>
+				<span class="btn btn-link glyphicon glyphicon-search" > Pesquisar...</span></a></div></div>
 			<?PHP
 			}
 			?>
 			<td>
+			<label>&nbsp;</label>
 			<input type="submit" class='btn btn-primary btn-sm' name="Submit" value="Alterar..."  tabindex="<?PHP echo $ind++;?>" />
 			</tr></tbody></table></form>
 			<?PHP

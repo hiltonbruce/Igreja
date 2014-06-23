@@ -35,8 +35,30 @@ $ind = 1; //Define o indice dos campos do formulário
 		<td>Congrega&ccedil;&atilde;o:
         <?PHP
 		$nome = new editar_form("id_cong",$igreja->razao(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?>
+		$nome->getMostrar();
+		
+		
+		if ($_GET["campo"]=="id_cong"){
+			?>
+				  <form id="form1" name="form1" method="post" action="">
+				    <div class="row">
+				 	 <div class="col-xs-6">
+				         <?PHP
+						 	$congr = new List_sele ("igreja","razao","id_cong");
+						 	echo $congr->List_Selec (++$ind,$igreja->rol(),'class="form-control input-sm"');
+						 ?>
+					</div>
+				 	 <div class="col-xs-2">
+						 <input name="escolha" type="hidden" id="escolha" value="adm/atualizar_dados.php" />
+						  <input name="tabela" type="hidden" id="tabela" value="cart_apresentacao" />
+						  <input name="id" type="hidden" id="id" value="<?php echo $apresenta->rol();?>" />
+						  <input name="campo" type="hidden" id="campo" value="id_cong" />
+						  <input name="Alterar..." type="submit" class="btn btn-primary btn-sm" id="Alterar..." value="Alterar..." tabindex="2" />
+					</div></div>
+				  </form>
+				<?PHP
+				}
+				?>
 		</td>
       </tr>
       <tr>
@@ -132,15 +154,20 @@ $ind = 1; //Define o indice dos campos do formulário
       </tr>
     </table>
     <form id="form1" name="form1" method="post" action="relatorio/carta_apres.php">
+    <div class="row">
+ 	 <div class="col-xs-6">
       <input name="rol" type="hidden" id="rol" value="<?PHP echo $apresenta->rol();?>" />
-      Secret&aacute;rio:
-		<select name="secretario" id="secretario" tabindex="<?PHP echo $ind++;?>">
+      <label>Secret&aacute;rio:</label>
+		<select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
 			<option value="<?PHP echo fun_igreja ($igreja_sede->secretario1());?>"><?PHP echo fun_igreja ($igreja_sede->secretario1());?></option>
 			<option value="<?PHP echo fun_igreja ($igreja_sede->secretario2());?>"><?PHP echo fun_igreja ($igreja_sede->secretario2());?></option>
 		</select>
-        <label>
-        <input type="submit" name="Submit" value="Imprimir..." />
-        </label>
+		</div>
+ 	 	<div class="col-xs-2">
+        <label>&nbsp;</label>
+        <input type="submit" class="btn btn-primary btn-sm" name="Submit" value="Imprimir..." />
+        </div>
+        </div>
   </form>
     <?PHP
     }else {
