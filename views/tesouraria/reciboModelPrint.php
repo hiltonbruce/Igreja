@@ -128,7 +128,7 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
-    	<div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?><div id="polegar">Polegar</div></div>
+    	<div id="polegar">Polegar</div><div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?></div>
 	 </div>
     </div>
     <div id="footer">

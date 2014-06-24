@@ -14,9 +14,6 @@
 		?>
     </div>
     <div id="footer">
-     Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
-    </div>
-    <div id="footer">
 	<?PHP echo "Templo SEDE: {$sede->rua()}, N&ordm; {$sede->numero()} - $origem - {$sede->uf()}";?><br />
 
 	  Copyright &copy; <a href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>

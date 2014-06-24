@@ -10,8 +10,18 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || $_GET['limpeza']>='6') {
 		require "../func_class/funcoes.php";
 		require "../func_class/classes.php";
 		function __autoload ($classe) {
+		
+		list($dir,$nomeClasse) = explode('_', $classe);
+		//$dir = strtr( $classe, '_','/' );
+		
+		if (file_exists("../models/$dir/$classe.class.php")){
+				
+			require_once ("../models/$dir/$classe.class.php");
+		}elseif (file_exists("../models/$classe.class.php")){
 			require_once ("../models/$classe.class.php");
 		}
+		}
+		
 		//montar um cabeçalho padrão e remover as chamadas a cima
 		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
 		$ref = new ultimoid('limpezpedid');
@@ -91,14 +101,8 @@ switch ($_GET['limpeza']) {
 		//Mostrar Lista de todos os materiais disponíveis$ref = new ultimoid('limpezpedid');
 		$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
 		
-		error_reporting(E_ALL);
-		ini_set('display_errors', 'off');
 		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
-		require "../func_class/funcoes.php";
-		require "../func_class/classes.php";
-		function __autoload ($classe) {
-			require_once ("../models/$classe.class.php");
-		}
+		
 		//montar um cabeçalho padrão e remover as chamadas a cima
 		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
 		

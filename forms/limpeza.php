@@ -5,9 +5,6 @@
 	}
 	$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
 	
-	print_r ($periodo);
-	echo $periodo;
-	
 	//Incluir tabela com resumo do pedido
 ?>
 <fieldset>

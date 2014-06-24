@@ -104,13 +104,11 @@ a:link:after, a:visited:after {
 	color:#FF0000;
 }
 #polegar {
-	position:absolute;
+	float:left;
 	text-shadow: 1px 1px #FFFFFF;
 	background-color: #F5F5F5;
 	color:#9A9A9A; 
 	border: 1px solid #CCC;
-	left:12px;
-	top:451px;
 	width:134px;
 	height:140px;
 	z-index:10;
