@@ -47,7 +47,7 @@ if (checkdate($m,$d,$y)) {
 		if ($parc>1) {
 			//Agendamento com quantidade definida
 			$parctrun = $inte/100;
-			$valores = "<input name='frequencia' type='hidden' id='frequencia' value='2' />";
+			$valores = "<input name='frequencia' class='form-control' type='hidden' id='frequencia' value='2' />";
 		}elseif ($parc=='0' || $parc=='' ){
 			//Agendamento automático para todos os meses
 			$parctrun = $valortrun;
@@ -85,12 +85,15 @@ if (checkdate($m,$d,$y)) {
 				echo $congr->razao();
 				?>
 				</td>
-				<td><?php
-				echo $vencimento;
-				?> <input name='vencimento<?php echo $j;?>' type='text'
-					tabindex="<?PHP echo $ind++;?>" maxlength="10"
-					id='data' required='required'
-					value='<?php echo $vencimento;?>' />
+				<td>
+				<div class="form-horizontal form-group">
+				    <label class="col-sm-2 control-label">
+				    <?php echo $vencimento;	?> </label>
+				    <div class="col-sm-6">
+					<input name='vencimento<?php echo $j;?>' type='text'
+					tabindex="<?PHP echo $ind++;?>"
+					id='data' required='required' class="form-control"
+					value='<?php echo $vencimento;?>' /></div></div>
 				</td>
 				<td style='text-align: right;'><?php
 
@@ -140,7 +143,7 @@ if (checkdate($m,$d,$y)) {
 				<td colspan="4" style="background-color: #F0E68C; font-size: 120%">
 					Beneficiado: <?php
 					$dadosEmpresa  = '<input type="submit" name="submit"
-				tabindex="<?PHP echo $ind++;?>" value="Agendar..." />';
+				tabindex="<?PHP echo $ind++;?>" class="btn btn-primary btn-sm" value="Agendar..." />';
 					if ($_POST['rol']!='') {
 						$memb = new DBRecord('membro',$_POST['rol'] ,'rol');
 						echo $memb->rol().' - '.$memb->nome().' - Valor Total: ---> R$ '.number_format($valortrun,2,',','.');
@@ -193,7 +196,7 @@ if (checkdate($m,$d,$y)) {
 				name="age" value="5" /> <input type="hidden" name="tabela"
 				value="agenda" /> <input type="hidden" name="rol"
 				value="<?php echo $_POST['rol'];?>" /> <input type="hidden"
-				name="escolha" value="tesouraria/despesa.php" /> <input
+				name="escolha" value="controller/despesa.php" /> <input
 				type="hidden" name="menu" value="top_tesouraria" /> <?php							
 				}else {
 					echo 'Click no botão voltar e informe o Credor!';
@@ -214,8 +217,8 @@ if (checkdate($m,$d,$y)) {
 		</tr>
 	</table>
 </form> <a
-				href="./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=3<?php echo $linkvoltar;?>">
-					<button>Voltar...!</button> </a>
+				href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=3<?php echo $linkvoltar;?>">
+					<button type="button" class="btn btn-primary btn-sm">Voltar...!</button> </a>
 Referente a:
 <br />
 <span style="font-size: 150%;"><?php echo $_POST['motivo'];?> </span>

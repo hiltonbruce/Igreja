@@ -37,9 +37,10 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			require_once ('views/saldos.php');
 		break;
 		case '5':
-			require_once 'models/cadagendapgto.php';//Contas a pagar
+			require_once 'models/cadagendapgto.php';//Agenda despesa
 		break;
-		
+		case '6':
+-			require_once 'views/agendarpgto.php';//Contas a pagar
 		default:
 			;
 		break;

@@ -490,7 +490,7 @@ class editar_form {
 		}
 	}
 
-	public function getEditar($placeholder){
+	public function getEditar($placeholder,$fJScript){
 	$ind = 1;
 	if ($this->valor=="" || $this->valor=='N&atilde;o Informado!'){
 		$this->valor='';
@@ -597,7 +597,9 @@ class editar_form {
 			<input name="<?PHP echo "rol_{$this->campo}";?>" class='form-control input-sm' autofocus="autofocus" type="text" 
 			value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" /></div>
 			<?php
-			if ($this->campo=="conjugue") {$form=2;}else{$form=3;}
+			if ($fJScript!='') {
+				$form=$fJScript;
+			}elseif ($this->campo=="conjugue") {$form=2;}else{$form=3;}
 			?>
 		 	 <div class="col-xs-2">
 			<label>&nbsp;</label>

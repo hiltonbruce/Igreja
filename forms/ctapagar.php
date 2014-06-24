@@ -166,7 +166,7 @@ $(document).ready(function(){
 						value="controller/despesa.php"> <input type="hidden" name="menu"
 						value="top_tesouraria"><input type="submit" name="listar"
 						 class="btn btn-primary" tabindex="<?php echo ++$ind;?>" value="Agendar Pagamento...">
-						  <input type="hidden" name="age" " value="4"></td>
+						  <input type="hidden" name="age" " value="6"></td>
 				</tr>
 			</tbody>
 		</table>

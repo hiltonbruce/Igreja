@@ -65,7 +65,7 @@ $ind = 1; //Define o indice dos campos do formulário
         <td colspan="2">Pai:
         <?PHP
 		$nome = new editar_form("pai",$apresenta->pai(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','0');
 		?></td>
         <td>Rol do Pai:
 			<?PHP
@@ -78,7 +78,7 @@ $ind = 1; //Define o indice dos campos do formulário
         <td colspan="2">M&atilde;e:
 		<?PHP
 		$nome = new editar_form("mae",$apresenta->mae(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','0');
 		?></td>
 		<?php
 		if ($_GET["campo"]!=="mae")

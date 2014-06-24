@@ -55,7 +55,7 @@ for ($j2 = 0; $j2 < $parc; $j2++) {
 
 	}
 	//echo $agenda->inserir();
-	echo "<script>location.href='./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=3';</script>";
+	echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=3';</script>";
 	$variav = 'valor'.$j2;
 	$$variav = $_POST["valor$j2"];
 
@@ -94,7 +94,7 @@ if ($credor!='' && $datven && $numcredor) {
 		echo $dadosagenda.' *** <br />';
 		$agenda= new insert ($dadosagenda,"agenda");
 		echo $agenda->inserir();
-		echo "<script>location.href='./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=3';</script>";
+		echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=3';</script>";
 	}else {
 		for ($j2 = 0; $j2 < $parc; $j2++) {
 			//Realiza loop para inserir os dados
@@ -109,7 +109,7 @@ if ($credor!='' && $datven && $numcredor) {
 
 			if ($j2=='$parc') {
 				echo $agenda->inserir();
-				echo "<script>location.href='./?escolha=tesouraria/despesa.php&menu=top_tesouraria&age=3';</script>";
+				echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=3';</script>";
 			}else {
 				$agenda->inserir();
 			}
