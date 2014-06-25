@@ -30,7 +30,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 				$dtRelatorio = data_extenso (date('d/m/Y'));
 				$mesRelatorio = date('Ym');
 			}
-			$titTabela = 'Relatório COMADEP - '.$dtRelatorio;
+			$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio;
 			$recLink = '10';
 			$linkImpressao ='controller/despesa.php/?rec='.$recLink;
 			require_once 'models/tes/relatorioComadep.php';

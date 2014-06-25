@@ -48,22 +48,27 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				$statusLancamento = '';
 			}
 		}
-		
 ?>
 <table style="width: 95%;">
 		<caption class="text-left">
 			<?php
-			$dirigenteIgreja = $igrejaSelecionada->pastor();
+			$dirigenteIgreja = ' - '.$igrejaSelecionada->pastor();
 			
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
-				$dirigenteIgreja = $dirCong->nome();
+				$dirigenteIgreja = ' - Dirigente: '.$dirCong->nome();
 			}
-				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().' - Dirigente: '.$dirigenteIgreja.',
+			
+				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().$dirigenteIgreja.',
 			 1&ordm; Tesoureiro: N&atilde;o informado!</h2>';			
 			
-			printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
-			 </h2>",number_format($dizmista->outrosdizimos($_GET['rolIgreja']),2,',','.'));?></caption>
+			$sldPendente = $dizmista->outrosdizimos($_GET['rolIgreja']);
+			
+			if ($sldPendente>0) {
+				printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
+			 </h2>",number_format($sldPendente,2,',','.'));
+			}
+			?></caption>
 			<colgroup>
 				<col id="Data">
 				<col id="Rol/Nome">

@@ -29,11 +29,11 @@ if ((int)$_POST['rolIgreja']>0) {
 	$idIgreja=$_POST['rolIgreja'];
 }
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+$igreja = new DBRecord('igreja', '1', 'rol');
 
 $tipo = $_GET['tipo'];
 switch ($tipo) {
 	case '1':
-	
 	$tituloColuna5 = ($idIgreja>'1') ? 'Congrega&ccedil;o':'Igreja';
 	$nomeArquivo = '../views/tesouraria/tabDizimosOfertas.php';
 	require_once '../views/modeloPrint.php';	
