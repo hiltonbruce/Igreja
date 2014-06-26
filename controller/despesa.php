@@ -1,4 +1,61 @@
 <?php
+
+if ($_GET['rec']>'12' && $_GET['rec']<'20') {
+	session_start();
+	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+		require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
+		$igreja = new DBRecord ("igreja","1","rol");
+
+		if (!empty($_GET['data']) && checadata($_GET['data'])) {
+			list($d,$m,$a) = explode('/', $_GET['data']);
+			$mesRelatorio = $a.$m;
+		}else {
+			list($d,$m,$a) = explode('/',date('d/m/Y'));
+			$mesRelatorio = date('Ym');
+		}
+			
+		if ($m<date('m')) {
+			$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
+		}
+		
+		if ($igreja->cidade()>0) {
+			$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
+			$origem = $cidSede->nome();
+		}else {
+			$origem = $igreja->cidade();
+		}
+
+		switch ($_GET['rec']) {
+			case '13':
+				
+				
+				$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
+				$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio;
+				require_once '../models/tes/relatorioComadep.php';
+				$nomeArquivo='../views/saldosComadep.php';
+				//require_once ('');
+				require_once '../views/modeloPrint.php';
+				break;
+
+			default:
+				break;
+		}
+
+	}
+}else {
+
+	if (!empty($_GET['data']) && checadata($_GET['data'])) {
+		list($d,$m,$a) = explode('/', $_GET['data']);
+		$mesRelatorio = $a.$m;
+	}else {
+		list($d,$m,$a) = explode('/',date('d/m/Y'));
+		$mesRelatorio = date('Ym');
+	}
+		
+	if ($m<date('m')) {
+		$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
+	}
+
 $ind=1; 
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 ?> 
@@ -22,16 +79,9 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			require_once 'forms/ctapagar.php';//Contas a pagar
 		break;
 		case '4'://Relatório COMADEP
-			if (!empty($_GET['data']) && checadata($_GET['data'])) {
-				$dtRelatorio = data_extenso ($_GET['data']);
-				list($d,$m,$a) = explode('/', $_GET['data']);
-				$mesRelatorio = $a.$m;
-			}else {
-				$dtRelatorio = data_extenso (date('d/m/Y'));
-				$mesRelatorio = date('Ym');
-			}
+			$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 			$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio;
-			$recLink = '10';
+			$recLink = '13&data='.$_GET['data'];
 			$linkImpressao ='controller/despesa.php/?rec='.$recLink;
 			require_once 'models/tes/relatorioComadep.php';
 			require_once ('views/saldos.php');
@@ -51,5 +101,6 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	$_SESSION = array();
 	session_destroy();
 	header("Location: ./");
+}
 }
 ?>

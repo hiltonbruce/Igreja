@@ -1,4 +1,4 @@
- Arquivo para definição da página para impressão
+ Arquivo para definiï¿½ï¿½o da pï¿½gina para impressï¿½o
 body {
 	background: #FFFFFF ;
 	width:auto;
@@ -115,3 +115,24 @@ thead tr:hover {
 #footer a:link       { color: #636466; text-decoration: underline }
 #footer a:visited { }
 #footer a:hover      { color: #e7790e }
+
+#header { height: 125px; background-image: url(../header2.jpg); background-repeat: no-repeat; background-position: top bottom; margin: 0; padding: 0 20px 0 100px; text-align:center; font-family:"Times New Roman", Times, serif;}
+
+
+td#moeda {
+	text-align:right;
+}
+#total {
+	background-color:#000;
+	font-weight:bold;
+	color:#ccc;
+}
+
+#subtotal {
+	background-color:#0000CD;
+	font-weight:bold;
+	color:#FFFF00;
+}
+.dados {
+  background-color: #FFFFFF;
+}

@@ -4,7 +4,9 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $titTabela;?></title>
-<link rel="stylesheet" type="text/css" media="print, screen" href="../../igreja/tabs.css" />
+<link rel="stylesheet" type="text/css" href="../../tesouraria/style.css" />
+<link rel="stylesheet" type="text/css" href="../../tabs.css" />
+<link rel="icon" type="image/gif" href="../../br_igreja.jpg">
 </head>
 <body>  
 <div id="header">

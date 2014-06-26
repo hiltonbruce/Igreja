@@ -1,7 +1,7 @@
 <?php
 $nivel1 	= '';
 $nivel2 	= '';
-$comSaldo	= '';$planoCta=array();$saldo=array();$cor=true;$sldGrupo=array();
+$comSaldo	= '';$planoCta=array();$cor=true;$sldGrupo=array();
 
 $plano = mysql_query('SELECT * FROM contas ORDER BY codigo ');
 while ($cta = mysql_fetch_array($plano)) {
@@ -11,7 +11,7 @@ while ($cta = mysql_fetch_array($plano)) {
 
 //print_r($planoCta);
 
-$lista = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")="'.$mesRelatorio.'" ORDER BY conta ') or die(mysql_error());
+$lista = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")="'.$mesRelatorio.'" ORDER BY conta') or die(mysql_error());
 
 while ($contas = mysql_fetch_array($lista)) {
 	if ($contas['d_c']=='D') {
@@ -26,7 +26,6 @@ while ($contas = mysql_fetch_array($lista)) {
 
 $ctaAtual = '';
 //print_r($sldGrupo);
-//print_r($saldo);
 
 //echo $planoCta['5']['4'];
 
@@ -49,13 +48,13 @@ foreach ($saldo AS $chave => $valor){
 		
 		if ($ctaAtual==$planoCta[$chave]['4'] || $ctaAtual==''){
 			//Contas simples
-			$nivel1 .='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$planoCta[$chave]['0'].
+			$nivel1 .='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$planoCta[$chave]['0'].
 			'</td><td id="moeda"></td><td id="moeda">'.$vlrSaldo.'</td></tr>';
 			$sldGrupoCta = abs($sldGrupo [$planoCta[$chave]['4']]);
 		}else {
 			//Grupo de contas
 			$bgcolorGrp = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
-			$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td></td><td title="'.$title.'">
+			$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">
 			'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td></td></tr>';
 			if ($nivel2=='') {
 				$nivel2 .=$nivelGrupo.$nivel1;
@@ -74,7 +73,7 @@ foreach ($saldo AS $chave => $valor){
 			}
 				
 			//Contas simples
-			$nivel1 ='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$planoCta[$chave]['0'].
+			$nivel1 ='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$planoCta[$chave]['0'].
 			'</td><td id="moeda"></td><td id="moeda">'.$vlrSaldo.'</td></tr>';
 		}
 		
@@ -82,9 +81,22 @@ foreach ($saldo AS $chave => $valor){
 		
 		$ctaAtual = $planoCta[$chave]['4'];
 		
-			
+			//echo ' - Conta -> '.$planoCta[$chave]['2'];
 }
 
+
+//Testar pq não está entrando no loop
+//Grupo de contas
+if ($nivelGrupo=='') {
+	$bgcolorGrp = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
+	$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">
+				'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td></td></tr>';
+	
+	$nivel2 .=$nivelGrupo.$nivel1;
+}
+
+$nivel1=$nivel2;
+//print_r($saldo);
 //print_r($planoGrupo);
 /*
  * 
