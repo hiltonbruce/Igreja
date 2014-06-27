@@ -1,23 +1,22 @@
 *{ margin: 0; padding: 0; }
 
-body {
+body,table {
 	margin: 0;
 	padding: 0;
 	text-align: left;
 	color: #505367;
 	background-color: #fff;
-	font-family: "Times New Roman", Times, serif;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	font-size: 18px;
 	background-repeat:no-repeat;
 	background-position:center;
-	background-image: url(../img/ADfundo.jpg);
 }
 	
 	#container { margin: 1em auto; width: 800px; text-align: left;}
 	
-	#header { width:800px; height: 127px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
-	 background-position: left bottom; margin: 0; padding: 0 20px 0 100px; text-align:right;}
-	#header p { width:400px; height: 127px; padding: 30px 20px 0 300px; text-align:right;}
+	#header { width:auto; height: 80px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
+	 background-position: left bottom; margin: 0; padding: 0 20px 0 10px; text-align:right;}
+	#header p { position:relative;width:400px; height: 100%; padding: 0 20px 0 10px; text-align:right;float: right;}
 	#mainnav {
 	height: 20px;
 	margin: 0;
@@ -26,7 +25,7 @@ body {
 	font-size: 20px;
 }
 	
-		#content { height: auto; margin: 1px 0 0; padding: 0; }
+#content { height: auto; margin: 1px 0 0; padding: 0; }
 	
 #footer {
 	color: #636466; 

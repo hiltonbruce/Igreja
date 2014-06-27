@@ -1,4 +1,4 @@
-]<?PHP
+<?PHP
 	session_start();
 	//echo $_GET["escolha"]." -----------".$_POST["escolha"];
 	require_once ("func_class/classes.php");

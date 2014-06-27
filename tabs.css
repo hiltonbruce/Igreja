@@ -1,7 +1,3 @@
-.clear {
-  clear: both;
-}
-
 table {
   border-collapse: collapse;
   margin-left: 1px;
@@ -38,9 +34,9 @@ tbody#periodo tr:hover,tbody#recibos tr:hover {
 }
 
 thead {
-  background: #ccc repeat-x left center;
-  border-top: 1px solid #a5a5a5;
-  border-bottom: 1px solid #a5a5a5;  
+  background: #B2B0B0;
+  border: 2px solid #000;
+  font-size: 120%;
   color:#000000;
 }
 
@@ -79,13 +75,15 @@ thead tr:hover {
 }
 
 .odd {
-  background-color:#DCDCDC;
+	background-color:#DCDCDC;
+	color:#000;
 }
 
 #total {
 	background-color:#000;
 	font-weight:bold;
 	color:#ccc;
+	font-size: 80%;
 }
 
 #subtotal {
@@ -94,7 +92,8 @@ thead tr:hover {
 	color:#FFFF00;
 }
 .dados {
-  background-color: #FFFFFF;
+	background-color: #FFFFFF;
+	color:#000;
 }
 
 

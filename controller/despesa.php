@@ -84,7 +84,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			$recLink = '13&data='.$_GET['data'];
 			$linkImpressao ='controller/despesa.php/?rec='.$recLink;
 			require_once 'models/tes/relatorioComadep.php';
-			require_once ('views/saldos.php');
+			require_once ('views/saldosComadep.php');
 		break;
 		case '5':
 			require_once 'models/cadagendapgto.php';//Agenda despesa

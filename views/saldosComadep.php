@@ -19,15 +19,18 @@
 		</caption>
 		<colgroup>
 				<col id="Conta">
-				<col id="Acesso">
 				<col id="Descrição">
+				<col id="Movimento">
+				<col id="Saldo Anterior">
 				<col id="Saldo Atual">
 			</colgroup>
 		<thead>
 			<tr>
 				<th scope="col">Conta</th>
 				<th scope="col">Descri&ccedil;&atilde;o</th>
-				<th scope="col" colspan="2" style="text-align: center;"> Saldo atual em Real </th>
+				<th scope="col" style="text-align: center;">Movimento</th>
+				<th scope="col" style="text-align: center;">Saldo Atual</th>
+				<th scope="col" style="text-align: center;">Saldo Anterior</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,7 +47,7 @@
 			<?php 
 				printf("<tr id='total'>"); 
 				printf("<td colspan='2' id='moeda' >Total de Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
-				printf("<td colspan='2' id='moeda'>Total de Crédito: R$ %s C</td></tr>",number_format($credito,2,',','.'));
+				printf("<td colspan='3' id='moeda'>Total de Crédito: R$ %s C</td></tr>",number_format($credito,2,',','.'));
 			?>
 		</tfoot>
 	</table>

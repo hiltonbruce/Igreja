@@ -10,7 +10,7 @@ while ($cta = mysql_fetch_array($plano)) {
 }
 
 //print_r($planoCta);
-
+//Busca do movimento no mês
 $lista = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")="'.$mesRelatorio.'" ORDER BY conta') or die(mysql_error());
 
 while ($contas = mysql_fetch_array($lista)) {
@@ -24,6 +24,33 @@ while ($contas = mysql_fetch_array($lista)) {
 	
 }
 
+//Busca o movimento dos meses anteriores
+/*
+$codAND = '';
+$disponivel = mysql_query('SELECT id FROM contas WHERE acesso!="0" ORDER BY codigo') or die(mysql_error());
+while ($disAcesso = mysql_fetch_array($disponivel) ) {
+	$busAcesso .= $codAND.'conta="'.$disAcesso['id'].'"';
+	$codAND = ' OR ';
+}
+
+echo $busAcesso;
+*/
+$lancDisponivel = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")<"'.$mesRelatorio.'" AND conta>0 ORDER BY conta') or die(mysql_error());
+
+while ($contasDisp = mysql_fetch_array($lancDisponivel)) {
+	if ($contasDisp['d_c']=='D') {
+		$saldoDisp[$contasDisp['conta']] += $contasDisp['valor'];
+		$sldGrupoDisp [$planoCta[$contasDisp['conta']]['4']] += $contasDisp['valor'];
+	}else {
+		$saldoDisp[$contasDisp['conta']] -= $contasDisp['valor'];
+		$sldGrupoDisp [$planoCta[$contasDisp['conta']]['4']] -= $contasDisp['valor'];
+	}
+
+}
+
+
+
+
 $ctaAtual = '';
 //print_r($sldGrupo);
 
@@ -31,7 +58,7 @@ $ctaAtual = '';
 
 foreach ($saldo AS $chave => $valor){
 	
-		$bgcolor = ($cor) ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
+		$bgcolor = ($cor) ? 'class="dados"' : 'class="odd"';
 		$acesso = sprintf("[%04s]\n", $planoCta[$chave]['1']);
 		$vlrSaldo = abs($saldo[$chave]);
 		
@@ -42,20 +69,52 @@ foreach ($saldo AS $chave => $valor){
 			$credito += $vlrSaldo;
 		}
 		
-		$vlrSaldo = number_format($vlrSaldo,2,',','.').$planoCta[$chave]['3'];
+		$vlrSaldo = number_format($vlrSaldo,2,',','.');
+		if ($saldo[$chave]<0) {
+			$vlrSaldo .= 'C';
+		}else {
+			$vlrSaldo .= 'D';
+		}
+		
+		
+		
+		$vlrSaldoDisp = number_format(abs($saldoDisp[$chave]),2,',','.');
+		if ($saldoDisp[$chave]<0) {
+			 $vlrSaldoDisp .= 'C';
+		}else {
+			$vlrSaldoDisp .= 'D';
+		}
+		
+		$vlrSaldoAtual = number_format(abs($saldo[$chave]+$saldoDisp[$chave]),2,',','.');
+		
+		if (($saldo[$chave]+$saldoDisp[$chave])<0) {
+			$vlrSaldoAtual  .= 'C';
+		}else {
+			$vlrSaldoAtual .= 'D';
+		}
+		
+		$grupoAtualForm = number_format(abs($sldGrupoAtual),2,',','.');
+		if ($sldGrupoAtual<0) {
+			$grupoAtualForm .= 'C';
+		}else {
+			$grupoAtualForm .= 'D';
+		}
+		
+		
+		
 		
 		//echo $planoCta[$chave]['4'].' -- ';
 		
 		if ($ctaAtual==$planoCta[$chave]['4'] || $ctaAtual==''){
 			//Contas simples
-			$nivel1 .='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$planoCta[$chave]['0'].
-			'</td><td id="moeda"></td><td id="moeda">'.$vlrSaldo.'</td></tr>';
-			$sldGrupoCta = abs($sldGrupo [$planoCta[$chave]['4']]);
+			$nivel1 .='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$acesso.$planoCta[$chave]['0'].
+			'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 		}else {
 			//Grupo de contas
-			$bgcolorGrp = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
-			$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">
-			'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td></td></tr>';
+			$bgcolorGrp = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
+			$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
+			'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td id="moeda">'.$grupoAtualForm.'</td>
+					<td id="moeda">'.number_format($sldGrupoCtaDisp,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td></tr>';
 			if ($nivel2=='') {
 				$nivel2 .=$nivelGrupo.$nivel1;
 			}else {
@@ -65,7 +124,6 @@ foreach ($saldo AS $chave => $valor){
 			}
 			
 			$saldoAtual=0;
-			$sldGrupoCta = abs($sldGrupo [$planoCta[$chave]['4']]);
 			
 			if ($cor==false) {
 				$cor = !$cor;
@@ -73,10 +131,14 @@ foreach ($saldo AS $chave => $valor){
 			}
 				
 			//Contas simples
-			$nivel1 ='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$planoCta[$chave]['0'].
-			'</td><td id="moeda"></td><td id="moeda">'.$vlrSaldo.'</td></tr>';
+			$nivel1 ='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$acesso.$planoCta[$chave]['0'].
+			'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 		}
 		
+			$sldGrupoCta = $sldGrupo [$planoCta[$chave]['4']];
+			$sldGrupoCtaDisp = $sldGrupoDisp [$planoCta[$chave]['4']];
+			$sldGrupoAtual = $sldGrupoCtaDisp+$sldGrupoCta;
+			
 			$cor = !$cor;
 		
 		$ctaAtual = $planoCta[$chave]['4'];
@@ -88,15 +150,18 @@ foreach ($saldo AS $chave => $valor){
 //Testar pq não está entrando no loop
 //Grupo de contas
 if ($nivelGrupo=='') {
-	$bgcolorGrp = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
-	$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">
-				'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td></td></tr>';
+	$bgcolorGrp = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;""';
+	$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
+				'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td id="moeda">'.$grupoAtualForm.'</td><td id="moeda">
+				'.number_format($sldGrupoCtaDisp,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td></tr>';
 	
 	$nivel2 .=$nivelGrupo.$nivel1;
 }
 
 $nivel1=$nivel2;
-//print_r($saldo);
+
+//print_r($saldoDisp);
+//print_r($sldGrupoDisp);
 //print_r($planoGrupo);
 /*
  * 
