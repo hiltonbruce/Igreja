@@ -40,14 +40,14 @@ while ($contas = mysql_fetch_array($lista)) {
 			//Grupo de contas
 			$bgcolor2 = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
-			'</td><td></td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
+			'</td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td><td></td></tr>';
 			$cor2 = true;
 		}else {
 			//Contas
 			$bgcolor2 = $cor2 ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td>
-					<td title="'.$title.'">'.$contas['titulo'].'</td><td id="moeda">'
-					.number_format($sldConta,2,',','.').$tipoCta.'</td><td></td></tr>';
+					<td title="'.$title.'">'.$contas['titulo'].'</td><td></td><td id="moeda">'
+					.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
 			$cor2 = !$cor2;
 		}
 	}

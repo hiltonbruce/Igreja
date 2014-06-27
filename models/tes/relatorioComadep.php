@@ -11,7 +11,7 @@ while ($cta = mysql_fetch_array($plano)) {
 
 //print_r($planoCta);
 //Busca do movimento no mês
-$lista = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")="'.$mesRelatorio.'" ORDER BY conta') or die(mysql_error());
+$lista = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")='.$mesRelatorio.' ORDER BY conta') or die(mysql_error());
 
 while ($contas = mysql_fetch_array($lista)) {
 	if ($contas['d_c']=='D') {
@@ -35,7 +35,7 @@ while ($disAcesso = mysql_fetch_array($disponivel) ) {
 
 echo $busAcesso;
 */
-$lancDisponivel = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")<"'.$mesRelatorio.'" AND conta>0 ORDER BY conta') or die(mysql_error());
+$lancDisponivel = mysql_query('SELECT  * FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")<'.$mesRelatorio.' AND conta>0 ORDER BY conta') or die(mysql_error());
 
 while ($contasDisp = mysql_fetch_array($lancDisponivel)) {
 	if ($contasDisp['d_c']=='D') {

@@ -1,22 +1,42 @@
 <?php
+$dataMov = $_GET['dia'].'/'.$_GET['mes'].'/'.$_GET['ano'];
+list($d,$m,$a) = explode('/', $dataMov);
+if (!empty($_GET['igreja']) && $_GET['igreja']>0) {
+	$rolIgreja = ' AND igreja="'.$_GET['igreja'].'"';
+}else {
+	$rolIgreja = '';
+}
 
 if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 		require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
 		$igreja = new DBRecord ("igreja","1","rol");
-
-		if (!empty($_GET['data']) && checadata($_GET['data'])) {
-			list($d,$m,$a) = explode('/', $_GET['data']);
-			$mesRelatorio = $a.$m;
+		
+		if ($_GET['igreja']>'1') {
+			$igrejaRelatorio = new DBRecord ("igreja",$_GET['igreja'],"rol");
+			$congRelatorio = $igrejaRelatorio->razao();
+		}elseif ($_GET['igreja']==$igreja->rol()){
+			$congRelatorio = $igreja->razao();
 		}else {
-			list($d,$m,$a) = explode('/',date('d/m/Y'));
-			$mesRelatorio = date('Ym');
+			$congRelatorio = '';
 		}
-			
+		
 		if ($m<date('m')) {
 			$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
+		}elseif ($m>date('m')){
+			$d = date('d');
+			$m = date('m');
+			$a = date('Y');
 		}
+
+		if (!empty($dataMov) && checadata($dataMov)) {
+			$mesRelatorio = '"'.$a.$m.'"';
+		}else {
+			list($d,$m,$a) = explode('/',date('d/m/Y'));
+			$mesRelatorio = '"'.date('Ym').'"';
+		}
+			
 		
 		if ($igreja->cidade()>0) {
 			$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
@@ -26,14 +46,13 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 		}
 
 		switch ($_GET['rec']) {
+			
 			case '13':
-				
-				
+				$mesRelatorio .=$rolIgreja;
 				$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-				$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio;
+				$titTabela = 'Fluxo das Contas - '.$dtRelatorio.'<h3>'.$congRelatorio.'<h3>';
 				require_once '../models/tes/relatorioComadep.php';
 				$nomeArquivo='../views/saldosComadep.php';
-				//require_once ('');
 				require_once '../views/modeloPrint.php';
 				break;
 
@@ -41,20 +60,41 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 				break;
 		}
 
+		
 	}
 }else {
+	
 
-	if (!empty($_GET['data']) && checadata($_GET['data'])) {
-		list($d,$m,$a) = explode('/', $_GET['data']);
-		$mesRelatorio = $a.$m;
+	if (!empty($dataMov) && checadata($dataMov)) {
+		list($d,$m,$a) = explode('/', $dataMov);
+		$mesRelatorio = '"'.$a.$m.'"';
 	}else {
 		list($d,$m,$a) = explode('/',date('d/m/Y'));
-		$mesRelatorio = date('Ym');
+		$mesRelatorio = '"'.date('Ym').'"';
 	}
-		
+
+	if ($_GET['igreja']>'0') {
+		$igrejaRelatorio = new DBRecord ("igreja",$_GET['igreja'],"rol");
+		$congRelatorio = ' Igreja: '.$igrejaRelatorio->razao();
+	}else {
+		$congRelatorio = '';
+	}
+	
 	if ($m<date('m')) {
 		$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
+	}elseif ($m>date('m')){
+			$d = date('d');
+			$m = date('m');
+			$a = date('Y');
+		}
+		
+	if (!empty($dataMov) && checadata($dataMov)) {
+		$mesRelatorio = '"'.$a.$m.'"';
+	}else {
+		list($d,$m,$a) = explode('/',date('d/m/Y'));
+		$mesRelatorio = '"'.date('Ym').'"';
 	}
+		
 
 $ind=1; 
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
@@ -79,12 +119,14 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			require_once 'forms/ctapagar.php';//Contas a pagar
 		break;
 		case '4'://Relatório COMADEP
+			$mesRelatorio .=$rolIgreja;
 			$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-			$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio;
-			$recLink = '13&data='.$_GET['data'];
-			$linkImpressao ='controller/despesa.php/?rec='.$recLink;
+			$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio.$congRelatorio;;
+			$recLink = '13&dia='.$d.'&mes='.$m.'&ano='.$a;
+			$linkImpressao ='controller/despesa.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
 			require_once 'models/tes/relatorioComadep.php';
 			require_once ('views/saldosComadep.php');
+			require_once 'forms/tes/mesComadep.php';
 		break;
 		case '5':
 			require_once 'models/cadagendapgto.php';//Agenda despesa
@@ -95,7 +137,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			;
 		break;
 	}
-
+	
 } else {
 	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
