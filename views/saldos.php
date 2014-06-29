@@ -26,9 +26,9 @@
 		<thead>
 			<tr>
 				<th scope="col">Conta</th>
-				<th scope="col">Acesso</th>
+				<th scope="col">Cód.</th>
 				<th scope="col">Descri&ccedil;&atilde;o</th>
-				<th scope="col" colspan="2" style="text-align: center;"> Saldo atual em Real </th>
+				<th scope="col" colspan="2" style="text-align: center;"> Saldo atual (R$) </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,8 +44,8 @@
 		<tfoot>
 			<?php 
 				printf("<tr id='total'>"); 
-				printf("<td colspan='2' id='moeda' >Total de Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
-				printf("<td colspan='2' id='moeda'>Total de Crédito: R$ %s C</td><td></td></tr>",number_format($credito,2,',','.'));
+				printf("<td colspan='2' id='moeda' >Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
+				printf("<td colspan='2' id='moeda'>Crédito: R$ %s C</td><td></td></tr>",number_format($credito,2,',','.'));
 			?>
 		</tfoot>
 	</table>

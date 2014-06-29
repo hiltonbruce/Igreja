@@ -1,6 +1,7 @@
 <?php
-$dataMov = $_GET['dia'].'/'.$_GET['mes'].'/'.$_GET['ano'];
-list($d,$m,$a) = explode('/', $dataMov);
+$d = $_GET['dia'];$m=$_GET['mes'];$a=$_GET['ano'];
+$dataMov = $d.'/'.$m.'/'.$a;
+
 if (!empty($_GET['igreja']) && $_GET['igreja']>0) {
 	$rolIgreja = ' AND igreja="'.$_GET['igreja'].'"';
 }else {
@@ -31,6 +32,10 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 		}
 
 		if (!empty($dataMov) && checadata($dataMov)) {
+			$mesRelatorio = '"'.$a.$m.'"';
+		}elseif ($m>'0' && $m<'13') {
+			$a = date('Y');
+			$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
 			$mesRelatorio = '"'.$a.$m.'"';
 		}else {
 			list($d,$m,$a) = explode('/',date('d/m/Y'));
@@ -64,10 +69,13 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	}
 }else {
 	
-
+		
 	if (!empty($dataMov) && checadata($dataMov)) {
-		list($d,$m,$a) = explode('/', $dataMov);
 		$mesRelatorio = '"'.$a.$m.'"';
+	}elseif ($m>'0' && $m<'13') {
+			$a = date('Y');
+			$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
+			$mesRelatorio = '"'.$a.$m.'"';
 	}else {
 		list($d,$m,$a) = explode('/',date('d/m/Y'));
 		$mesRelatorio = '"'.date('Ym').'"';
@@ -87,13 +95,7 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 			$m = date('m');
 			$a = date('Y');
 		}
-		
-	if (!empty($dataMov) && checadata($dataMov)) {
-		$mesRelatorio = '"'.$a.$m.'"';
-	}else {
-		list($d,$m,$a) = explode('/',date('d/m/Y'));
-		$mesRelatorio = '"'.date('Ym').'"';
-	}
+
 		
 
 $ind=1; 

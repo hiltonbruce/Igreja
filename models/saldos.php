@@ -19,13 +19,13 @@ while ($contas = mysql_fetch_array($lista)) {
 		$title = $contas['descricao'];
 	if (strlen($contas['codigo'])<10) {
 		//Grupo de contas
-		$bgcolor = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
+		$bgcolor = 'style="background:#C9DBF2;color:#000;border-bottom: 1px dashed #1e90ff;"';
 		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
 		'</td><td></td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
 		$cor= true;
 	}else {
 		//Contas
-		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
+		$bgcolor = $cor ? 'style="background:#ffffff;color:#000;"' : 'style="background:#d0d0d0;color:#000;"';
 		
 		
 		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.
@@ -38,13 +38,13 @@ while ($contas = mysql_fetch_array($lista)) {
 	if ($contas['saldo']!=0) {
 		if (strlen($contas['codigo'])<10) {
 			//Grupo de contas
-			$bgcolor2 = 'style="background:#B0C4DE; color:#000;border-bottom: 1px dashed #1e90ff;"';
+			$bgcolor2 = 'style="background:#C9DBF2;color:#000;border-bottom: 1px dashed #1e90ff;"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
 			'</td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td><td></td></tr>';
 			$cor2 = true;
 		}else {
 			//Contas
-			$bgcolor2 = $cor2 ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
+			$bgcolor2 = $cor2 ? 'style="background:#ffffff;color:#000;"' : 'style="background:#d0d0d0;color:#000;"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td>
 					<td title="'.$title.'">'.$contas['titulo'].'</td><td></td><td id="moeda">'
 					.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
