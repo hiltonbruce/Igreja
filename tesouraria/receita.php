@@ -80,11 +80,6 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			
 			$linkAcesso 	= 'escolha=tesouraria/receita.php&menu=top_tesouraria&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 			
-			if ($_GET['rec']=='1') {
-				//Form fechar caixa
-				require_once 'forms/concluirdiz.php';
-			}
-			
 			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
 			
 			switch ($_GET['rec']) {
@@ -94,6 +89,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					//require_once 'forms/tes/histResumo.php';
 					break;
 				case '1':
+					require_once 'forms/concluirdiz.php';
 					require_once ('forms/autodizimo.php');
 					break;
 				case '2':
@@ -102,6 +98,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					break;
 				case '3':
 					require_once ('forms/ofertaEBD.php');
+					require_once 'forms/concluirdiz.php';
 					break;
 				case '5':
 				    $form = 'forms/tes/autoLancarDespesas.php';
