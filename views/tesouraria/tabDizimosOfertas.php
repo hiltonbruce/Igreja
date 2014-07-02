@@ -31,7 +31,7 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 	require_once 'forms/tes/editDizOferta.php';
 		}
 		
-		
+$tabMembros = new membro();
 	if ($_POST['concluir']=='1') {
 			$tabLancamento = $dizmista->concluir($idIgreja);
 		} else {
@@ -52,21 +52,33 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 <table style="width: 95%;">
 		<caption class="text-left">
 			<?php
-			$dirigenteIgreja = ' - '.$igrejaSelecionada->pastor();
+			$dirigenteIgreja = $igrejaSelecionada->pastor();
+			
 			
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
-				$dirigenteIgreja = ' - Dirigente: '.$dirCong->nome();
+				$dirigenteIgreja = 'Dirigente: '.$dirCong->nome();
+				$tesIgreja = $tabMembros->nomes()[$igrejaSelecionada->secretario1()]['0'];
+			}else {
+				$tesIgreja = $tabMembros->nomes()['4037']['0'];
 			}
 			
-				echo $statusLancamento.'<h2>Igreja: '.$igrejaSelecionada->razao().$dirigenteIgreja.',
-			 1&ordm; Tesoureiro: N&atilde;o informado!</h2>';			
+			
+			if ($_GET['escolha']=='') {
+				$fonIni = '<p style="font-size: 80%;padding: 0 0 0 0;margin-bottom: 0;">';
+				$fonFim = '</p>';
+			}else {
+				$fonIni = '<h2>';
+				$fonFim = '</h2>';
+			}
+				echo $fonIni.$statusLancamento.$fonFim.$fonIni.'Igreja: '.$igrejaSelecionada->razao().$fonFim.$fonIni
+						.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;	
 			
 			$sldPendente = $dizmista->outrosdizimos($_GET['rolIgreja']);
 			
 			if ($sldPendente>0) {
-				printf("<h2>Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
-			 </h2>",number_format($sldPendente,2,',','.'));
+				printf("$fonIni Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s 
+			  $fonFim",number_format($sldPendente,2,',','.'));
 			}
 			?></caption>
 			<colgroup>
@@ -91,7 +103,8 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 				$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 			?>
 </table>
-<?php 
+<?php
+print_r($tabMembros->nomes());
 	if (!empty($_GET['escolha'])) {
 		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 		echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
