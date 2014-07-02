@@ -4,7 +4,9 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
+	
 	$igreja = new DBRecord ("igreja","1","rol");
+	
 	if ($igreja->cidade()>0) {
 		$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
 		$origem = $cidSede->nome();

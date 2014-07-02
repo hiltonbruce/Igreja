@@ -9,18 +9,18 @@
 	$igrejas = new igreja();$linha='';
 	
 	$cor= true;
-	foreach ($igrejas->ArrayIgrejaDados() as $igreja) {
-		$saldos = new tes_igreja ($igreja['rol'],$ano);
+	foreach ($igrejas->ArrayIgrejaDados() as $igrejaDados) {
+		$saldos = new tes_igreja ($igrejaDados['rol'],$ano);
 		$valores = $saldos->ArraySaldos();
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 		
 		//Monta link para detalhar a igreja
 		if ($_GET['rec']=='13') {
-			$linkIgreja = $igreja['razao'];
+			$linkIgreja = $igrejaDados['razao'];
 		}else {
 			$linkIgreja  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria';
-			$linkIgreja .= '&igreja='.$igreja['rol'].'&ano='.$_GET['ano'].'&fin=2&';
-			$linkIgreja .= 'rec=11" title="Detalhar entradas">'.$igreja['razao'].'</a>';
+			$linkIgreja .= '&igreja='.$igrejaDados['rol'].'&ano='.$_GET['ano'].'&fin=2&';
+			$linkIgreja .= 'rec=11" title="Detalhar entradas">'.$igrejaDados['razao'].'</a>';
 		}
 		
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
