@@ -58,7 +58,13 @@ $tabMembros = new membro();
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
 				$dirigenteIgreja = 'Dirigente: '.$dirCong->nome();
-				$tesIgreja = $tabMembros->nomes()[$igrejaSelecionada->secretario1()]['0'];
+				$cargoIgreja = new tes_cargo;
+				//print_r($cargoIgreja->dadosArray());
+			
+				$tesArray = $cargoIgreja->dadosArray()['8'][$idIgreja];
+				$tesIgreja = $tesArray['nome'];
+				//reset($tesIgreja);
+				//print_r($tesIgreja );
 			}else {
 				$tesIgreja = $tabMembros->nomes()['4037']['0'];
 			}
@@ -104,7 +110,7 @@ $tabMembros = new membro();
 			?>
 </table>
 <?php
-print_r($tabMembros->nomes());
+//print_r($tabMembros->nomes());
 	if (!empty($_GET['escolha'])) {
 		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 		echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
