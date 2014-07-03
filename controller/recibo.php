@@ -1,24 +1,74 @@
 <?php
 $ind=1;
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-?> 
-<div id="tabs">
-	<ul>
-	  <li><a <?PHP link_ativo($_GET["rec"], "1");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=1">
-	      <span>Membros da Igreja</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "2");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=2">
-	      <span>Pessoa Jur&iacute;dica</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=3">
-	      <span>Não Membros</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "4");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=4">
-	      <span>Recibos dia 15</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "5");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=5">
-	      <span>Impress&atilde;o de Recibos</span></a></li>
-	</ul>
-</div>
-<?php
+require_once 'help/tes/cabRecPgto.php';//Link's dos recibo 
+$recMenu = (empty($_POST["rec"])) ? $_GET["rec"]:$_POST["rec"];
 
-require_once 'forms/recibo.php';
+switch ($recMenu){
+	case 2:
+		//Recibos Pessoa Jurídica
+		require_once 'forms/tes/recInicio.php';
+		require_once 'forms/tes/recPesJuridica.php';
+		require_once 'forms/tes/recFinal.php';
+		break;
+	case 3:
+		//Recibos para não Membros
+		require_once 'forms/tes/recInicio.php';
+		require_once 'forms/tes/recNaoMembro.php';
+		require_once 'forms/tes/recFinal.php';
+		break;
+	case 4:
+		//Recibos para de pgto
+		$pgtoDias = new tes_cargo();
+		$listaPgto = $pgtoDias->dadosCargo();
+		$recLink='#';
+		$titTabela = 'Listagem para Pagamento';
+		require_once 'help/tes/reciboPgto.php';
+		require_once 'views/tesouraria/recPgto.php';
+		//print_r($listaPgto);
+		break;
+	case 5:
+		//Form para impressão de vários Recibos
+		require_once 'forms/tes/recImprVarios.php';
+		break;
+	case 6:
+		//Impressão de vários Reciboserror_reporting(E_ALL);
+		error_reporting(E_ALL);
+		ini_set('display_errors', 'off');
+
+		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
+		require "../func_class/funcoes.php";
+		require "../func_class/classes.php";
+		function __autoload ($classe) {
+			list($dir,$nomeClasse) = explode('_', $classe);
+				
+			if (file_exists("../models/$dir/$classe.class.php")){
+					
+				require_once ("../models/$dir/$classe.class.php");
+			}elseif (file_exists("../models/$classe.class.php")){
+				require_once ("../models/$classe.class.php");
+			}
+				
+		}
+		$saltoPagina = '<div style="page-break-before: always;"> </div>';
+
+		$igreja = new DBRecord ("igreja","1","rol");
+
+		if ($igreja->cidade()>0) {
+			$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
+			$origem=$cidOrigem->nome();
+		}else {
+			$origem = $igreja->cidade();
+		}
+		require_once '../help/tes/reciboImpr.php';
+		break;
+	default:
+		//Recibos de Membros
+		require_once 'forms/tes/recInicio.php';
+		require_once 'forms/tes/recMembro.php';
+		require_once 'forms/tes/recFinal.php';
+		break;
+}
 /*
 $valor = 5000.00;
 $dim = extenso($valor);

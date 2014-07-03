@@ -118,7 +118,7 @@ foreach ($saldo AS $chave => $valor){
 			
 			if ($cor==false) {
 				$cor = !$cor;
-				$bgcolor = ($cor) ? 'style="background:#ffffff; color:#000;"' : 'style="background:#d0d0d0; color:#000;"';
+				$bgcolor = ($cor) ? 'class="dados"' : 'class="odd"';
 			}
 				
 			//Contas simples

@@ -797,7 +797,7 @@ class List_sele {
 		echo $linha1.$linhas;
 	}
 
-	function List_sel (){
+	function List_sel ($ind){
 
 	//Mostra as linhas de select
 	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='++$ind'>";
