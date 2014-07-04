@@ -1,6 +1,6 @@
 <fieldset>
 <legend>Impress&atilde;o de Recibos</legend>
-<form id="form1" name="form1" method="post" action="forms/recibo.php" target="_blank">
+<form id="form1" name="form1" method="post" action="controller/recibo.php" target="_blank">
 <table>
 	<tbody>
 	<tr>
@@ -17,6 +17,6 @@ todos do 1 ao 5 | 8 - ->apartir do cinco em diante</p><p>Obs.:As sequências não 
 </tbody>
 </table>
 <label></label>
-<input type="hidden" name="rec" value="6">
+<input type="hidden" name="rec" value="20">
 </form>
 </fieldset>

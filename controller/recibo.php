@@ -1,7 +1,13 @@
 <?php
 $ind=1;
+if ($_GET['rec']>'19' || $_POST['rec']>'19') {
+	session_start();
+}else {
+	require_once 'help/tes/cabRecPgto.php';//Link's dos recibo 
+}
+
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-require_once 'help/tes/cabRecPgto.php';//Link's dos recibo 
+
 $recMenu = (empty($_POST["rec"])) ? $_GET["rec"]:$_POST["rec"];
 
 switch ($recMenu){
@@ -31,25 +37,14 @@ switch ($recMenu){
 		//Form para impressão de vários Recibos
 		require_once 'forms/tes/recImprVarios.php';
 		break;
-	case 6:
+	case 20:
 		//Impressão de vários Reciboserror_reporting(E_ALL);
 		error_reporting(E_ALL);
 		ini_set('display_errors', 'off');
 
 		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
-		require "../func_class/funcoes.php";
-		require "../func_class/classes.php";
-		function __autoload ($classe) {
-			list($dir,$nomeClasse) = explode('_', $classe);
-				
-			if (file_exists("../models/$dir/$classe.class.php")){
-					
-				require_once ("../models/$dir/$classe.class.php");
-			}elseif (file_exists("../models/$classe.class.php")){
-				require_once ("../models/$classe.class.php");
-			}
-				
-		}
+		
+		require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
 		$saltoPagina = '<div style="page-break-before: always;"> </div>';
 
 		$igreja = new DBRecord ("igreja","1","rol");

@@ -158,6 +158,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 	header("Location: ./");
 }
 	unset($_SESSION['lancar']);
-		require_once 'views/tesouraria/tabDizimosOfertas.php';
+	
+	require_once 'views/tesouraria/tabDizimosOfertas.php';
 }
 ?>

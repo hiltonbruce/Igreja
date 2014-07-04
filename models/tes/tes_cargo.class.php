@@ -5,30 +5,32 @@ class tes_cargo {
 	
 	function __construct () {
 		
-		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao FROM cargoigreja AS c, ';
-		$sqlConsulta .= 'igreja AS i,membro AS m, funcao AS f WHERE c.igreja=i.rol ';
-		$sqlConsulta .= 'AND c.rol=m.rol AND c.descricao=f.id AND ativo="1" ORDER BY igreja';
+		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao ';
+		$sqlConsulta .= ' FROM cargoigreja AS c,igreja AS i,membro AS m, funcao AS f ';
+		$sqlConsulta .= 'WHERE c.igreja=i.rol AND c.rol=m.rol AND ';
+		$sqlConsulta .= 'c.descricao=f.id AND ativo="1" ORDER BY c.descricao,c.igreja';
 		$this->query = $sqlConsulta;
 		$this->membros = mysql_query($this->query) or die (mysql_error());
 		
 		while($dados = mysql_fetch_array($this->membros))
 		{
-			$todos[$dados['descricao']][$dados['igreja']] = 
+			if ($dados['rol']!='0') {//Só membros da igreja
+				$todos[$dados['descricao']][$dados['igreja']][$dados['hierarquia']]= 
 				array('nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],
 						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
 						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']);
-			$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
-				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],
-						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
-						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']);
+			}
 			
+			$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
+				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],'naoMembro'=>$dados['naomembro'],
+						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
+						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo'],'hierarquia'=>$dados['hierarquia']);
 		}
 		$this->arrayNomeIgreja = $todos;
 		$this->arrayCargo = $arrayCargos;
 	}
 
 	function dadosArray () {
-		
 		return $this->arrayNomeIgreja;
 	}
 	
