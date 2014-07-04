@@ -6,9 +6,9 @@ class tes_cargo {
 	function __construct () {
 		
 		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao ';
-		$sqlConsulta .= ' FROM cargoigreja AS c,igreja AS i,membro AS m, funcao AS f ';
+		$sqlConsulta .= 'FROM cargoigreja AS c,igreja AS i,membro AS m, funcao AS f ';
 		$sqlConsulta .= 'WHERE c.igreja=i.rol AND c.rol=m.rol AND ';
-		$sqlConsulta .= 'c.descricao=f.id AND ativo="1" ORDER BY c.descricao,c.igreja';
+		$sqlConsulta .= 'c.descricao=f.id AND ativo="1" ORDER BY f.descricao,c.igreja';
 		$this->query = $sqlConsulta;
 		$this->membros = mysql_query($this->query) or die (mysql_error());
 		
