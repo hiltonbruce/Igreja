@@ -9,27 +9,27 @@
 			<td colspan="3"><label>Nome:</label>
 				<input type="text" name="nome" id="campo_estado" size="40%" class="form-control" autofocus="autofocus" />
 				<input type="hidden" name="escolha" value="adm/rest_busca.php">
-			</td><td><label>Igreja que congrega</label>
-			<input type="text"  name="igreja" id="igreja_val" disabled="disabled" class="form-control">
+			</td><td> <label>Rol:</label> <input type="text" id="rol" name="rol"
+						value="" class="form-control" placeholder="N&ordm; do membro na igreja" /> 
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">Endereço:<br />
-			<input type="text" id="estado_val" class="btn btn-default btn-sm" name="estado" disabled="disabled" value="" size="30%" />
+			<td colspan="4"><label>Endereço:</label>
+			<input type="text" id="estado_val" class="form-control" name="estado" disabled="disabled" value="" />
 			</td>
-			<td>Fone: <br />
-			<input type="text" id="id_val" name="id" class="btn btn-default btn-sm" disabled="disabled" value="" /></td>
-			<td>Celular:<br />
-			<input type="text" id="sigla_val" class="btn btn-default btn-sm" name="sigla" disabled="disabled" value="" /></td>
+		</tr>
 	</tbody>
 </table>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular, igreja ) {
-			$("#id_val").val(rol);
+		this.setValue = function( fone, nome, celular, igreja, rol,cpf,rg ) {
+			$("#id_val").val(fone);
 			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
+			$("#cel").val(celular);
 			$("#igreja_val").val(igreja);
+			$("#rol").val(rol);
+			$("#cpf").val(cpf);
+			$("#rg").val(rg);
 		}
 		if ( this.isModified )
 			this.setValue("");

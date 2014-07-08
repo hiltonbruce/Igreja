@@ -30,7 +30,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					tabindex="<?php echo ++$ind;?>" />
 				</td>
 				<td><label>Rol:</label> <input type="text" id="rol" name="rol"
-						value="" class="form-control" placeholder="N&ordm; do membro na igreja" /> </label>
+						value="" class="form-control" placeholder="N&ordm; do membro na igreja" />
 				</td>
 			</tr>
 			<tr>

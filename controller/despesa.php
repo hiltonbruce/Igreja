@@ -111,6 +111,8 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=3"><span>Agendar Despesa</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["age"], "4");?>
 			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=4"><span>COMADEP</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["age"], "7");?>
+			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=7"><span>Folha</span></a></li>
 	</ul>
 </div>
 <?php
@@ -135,6 +137,8 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 		break;
 		case '6':
 -			require_once 'views/agendarpgto.php';//Contas a pagar
+		case '7':
+-			require_once 'forms/tes/folha.php';
 		default:
 			;
 		break;

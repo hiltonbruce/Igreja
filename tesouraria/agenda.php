@@ -1,4 +1,3 @@
-
 <h1>Agenda Finaceira</h1>
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
@@ -57,7 +56,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->datapgto	=	'';
 		}
 		$atualizar->Update();
-
+		require_once 'forms/tes/buscaAgenda.php';// Busca por Despesas Agendadas
 		echo $mensagem;
 
 	}elseif ($_POST['Submit']=='Inserir...'){
@@ -66,7 +65,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$maior_idfat = mysql_query($maior_idfat);
 		$maior_idfat = mysql_fetch_array($maior_idfat);
 		$maior = $valores['maior_idfat'];//Última fatura lançada
+	}else {
+
+		require_once 'forms/tes/buscaAgenda.php'; // Busca por Despesas Agendadas
 	}
+	
+	
 	require_once 'tesouraria/periodo10dias.php';//Agenda com o período 5 dias a antes e após a data atual
 	if ($_GET['fixa']=='on') {
 		?>
