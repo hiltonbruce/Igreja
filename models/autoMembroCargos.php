@@ -37,8 +37,8 @@ while( $campo = mysql_fetch_array( $res ) )
 	$rg			= $campo['rg'].' - '.$campo['orgao_expedidor'];
 	$cong 		= $cargo.' - '.htmlentities($campo['igreja'],ENT_QUOTES,'iso-8859-1');
 	$sigla 		= htmlentities($campo['celular'],ENT_QUOTES,'iso-8859-1');
-	$estado 	= addslashes($estado);
-	$html = preg_replace("/(" . $q . ")/i", "<span style=\"font-weight:bold\">\$1</span>", $estado);
+	$estado 	= $estado;
+	$html = preg_replace("/(" . $q . ")/i","<span style=\"font-weight:bold;\">\$1</span>",$estado);
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$cong','$rol','$cpf','$rg');\">$html ($sigla $cong)</li>\n";
 }
 if ($linhas>10) {

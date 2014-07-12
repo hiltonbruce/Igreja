@@ -121,7 +121,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	switch ($agenda) {
 		case '3':
 			require_once 'forms/ctapagar.php';//Contas a pagar
-		break;
+			break;
 		case '4'://Relatório COMADEP
 			$mesRelatorio .=$rolIgreja;
 			$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
@@ -131,17 +131,29 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			require_once 'models/tes/relatorioComadep.php';
 			require_once ('views/saldosComadep.php');
 			require_once 'forms/tes/mesComadep.php';
-		break;
+			break;
 		case '5':
 			require_once 'models/cadagendapgto.php';//Agenda despesa
-		break;
+			break;
 		case '6':
 -			require_once 'views/agendarpgto.php';//Contas a pagar
+			break;
 		case '7':
--			require_once 'forms/tes/folha.php';
+-			require_once 'forms/tes/folha.php';//Form p cadastrar cargos
+			break;
+		case '8':
+			
+			//Recibos para de pgto
+			$pgtoDias = new tes_cargo();
+			$listaPgto = $pgtoDias->cargoIgreja($_POST['rolIgreja'],$_POST['idfunc'] );
+			$recLink='#';
+			$titTabela = 'Listagem para Pagamento';
+			print_r($listaPgto);
+			require_once 'models/tes/cadCargoIgreja.php';//Cadastrar Membro no Cargo despesa
+			break;
 		default:
 			;
-		break;
+			break;
 	}
 	
 } else {

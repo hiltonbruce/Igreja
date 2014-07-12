@@ -37,6 +37,16 @@ class tes_cargo {
 	function dadosCargo() {
 		return $this->arrayCargo;
 	}
+	
+	function cargoIgreja($rolIgreja,$descricao) {
+		$cargoAtivo = array();
+		foreach ($this->arrayCargo as $chave => $valor) {
+			if ($valor['igreja']==$rolIgreja && $valor['descricao']==$descricao) {
+				$cargoAtivo [] = $valor;
+			}
+		}
+		return $cargoAtivo;
+	}
 
 }
 ?>
