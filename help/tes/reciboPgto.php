@@ -8,29 +8,31 @@ foreach ($listaPgto as $chave => $valor) {
 	$bgcolor2 = $cor2 ? 'class="dados"' : 'class="odd"';
 	$vlrPgto = ($valor['pgto']>'0') ? true:false;
 	
+	$momeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
+	
 	if ($valor['diapgto']=='1' && $vlrPgto) {
-		$dia1 .='<tr '.$bgcolor.'><td>'.$valor['nome'].'</td><td>'.$valor['nomeFunc'].
+		$dia1 .='<tr '.$bgcolor.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$valor['diapgto'].'</td></tr>';
 		$cor = !$cor;
 		$totDia1 += $valor['pgto'];
 	}elseif ($valor['diapgto']=='15' && $vlrPgto){
-		$dia15 .='<tr '.$bgcolor1.'><td>'.$valor['nome'].'</td><td>'.$valor['nomeFunc'].
+		$dia15 .='<tr '.$bgcolor1.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$valor['diapgto'].'</td></tr>';
 		$cor1 = !$cor1;
 		$totDia15 += $valor['pgto'];
 	}elseif ($valor['diapgto']=='661' && $vlrPgto) {
-		$diaOutros .='<tr '.$bgcolor2.'><td>'.$valor['naoMembro'].'</td><td>'.$valor['nomeFunc'].
+		$diaOutros .='<tr '.$bgcolor2.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">Sexta</td></tr>';
 		$cor2 = !$cor2;
 		$totOutros += $valor['pgto'];
 	}elseif ($vlrPgto) {
-		$diaOutros .='<tr '.$bgcolor2.'><td>'.$valor['nome'].'</td><td>'.$valor['nomeFunc'].
+		$diaOutros .='<tr '.$bgcolor2.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$valor['diapgto'].'</td></tr>';
