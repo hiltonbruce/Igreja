@@ -148,7 +148,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			$listaPgto = $pgtoDias->cargoIgreja($_POST['rolIgreja'],$_POST['idfunc'] );
 			$recLink='#';
 			$titTabela = 'Listagem para Pagamento';
-			print_r($listaPgto);
+			//print_r($listaPgto);
 			require_once 'models/tes/cadCargoIgreja.php';//Cadastrar Membro no Cargo despesa
 			break;
 		default:

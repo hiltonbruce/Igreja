@@ -27,7 +27,7 @@ controle ("tes");
 	$dados->inserir();
 	echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
 	
-		//echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=7'; </script>";
+		echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=7'; </script>";
 		echo "<a href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=7'>Continuar...<a>";
 	
 ?>
