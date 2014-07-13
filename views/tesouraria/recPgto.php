@@ -30,14 +30,14 @@
 				<th scope="col">Dia Pgto</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id='periodo'>
 			<?php
 				echo $nivel1;
 			?>
 		</tbody>
 		<tfoot>
 			<?php 
-				echo '<tr id="total">'; 
+				echo '<tr id="total" style="font-size:130%;">'; 
 				echo '<td colspan="3" id="moeda" >Total Geral ---> </td>';
 				printf("<td colspan='2' id='moeda'>R$ %s </td></tr>",number_format($debito,2,',','.'));
 			?>
