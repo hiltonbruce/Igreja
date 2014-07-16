@@ -1,5 +1,11 @@
+<?php 
+	$rolConsuta = (int)$_GET['bsc_rol'];
+?>
+
 <div>
-  <h2><a href="relatorio/cartao_impr.php">Visualizar impress&atilde;o ?<img src="img/Bank-Check-48x48.png" width="41" height="45" align="absmiddle"/></a>*<br />
+  <h2><a href="relatorio/cartao_impr.php?bsc_rol=<?php echo $rolConsuta;?>">
+  Visualizar impress&atilde;o ?<img src="img/Bank-Check-48x48.png" width="41" height="45" align="absmiddle"/>
+  </a>*<br />
   </h2>
     </div>
  <?PHP
@@ -7,11 +13,13 @@ if ($_SESSION['nivel']>4){
 $tab="adm/atualizar_dados.php";//link q informa o script quem receberá os dados do form para atualizar
 $tab_edit="adm/dados_pessoais.php&tabela=membro&campo=";//Link de chamada da mesma página para abrir o form de edição do item
 
-$dad_cad = mysql_query ("SELECT *,m.obs AS mobs,DATE_FORMAT(m.datanasc,'%d/%m/%Y')AS br_datanasc, DATE_FORMAT(e.batismo_em_aguas,'%d/%m/%Y')AS dt_batismo FROM membro AS m, eclesiastico AS e, profissional AS p, est_civil AS ec WHERE m.rol='".$_SESSION["rol"]."' AND m.rol=e.rol AND m.rol=p.rol AND m.rol=ec.rol ");
+$dad_cad = mysql_query ("SELECT *,m.obs AS mobs,DATE_FORMAT(m.datanasc,'%d/%m/%Y')AS br_datanasc,
+		 DATE_FORMAT(e.batismo_em_aguas,'%d/%m/%Y')AS dt_batismo FROM membro AS m, eclesiastico AS e,
+		 profissional AS p, est_civil AS ec WHERE m.rol='".$rolConsuta."' AND m.rol=e.rol AND m.rol=p.rol AND m.rol=ec.rol ");
 
 if (mysql_num_rows($dad_cad)<1)//Lista independente de outras tabelas
 {
-	$dad_cad = mysql_query ("SELECT * FROM membro WHERE rol='".$_SESSION["rol"]."'");
+	$dad_cad = mysql_query ("SELECT * FROM membro WHERE rol='".$rolConsuta."'");
 }
 
 if (mysql_num_rows($dad_cad)<1)//Informa que o rol não possui niguem registrado
@@ -25,11 +33,11 @@ $arr_dad = mysql_fetch_array ($dad_cad);
 ?>
 <div id="lst_cad">
   <?PHP
-	if (!empty($_SESSION["rol"]))
+	if (!empty($rolConsuta))
 	{
-	 if (file_exists("img_membros/".$_SESSION["rol"].".jpg"))
+	 if (file_exists("img_membros/".$rolConsuta.".jpg"))
 		{
-			$img=$_SESSION["rol"].".jpg";
+			$img=$rolConsuta.".jpg";
 		}
 		else
 		{
@@ -64,7 +72,7 @@ $arr_dad = mysql_fetch_array ($dad_cad);
         <td colspan="2">Cargo:<strong>
         <?PHP
 		
-		$rec = new DBRecord ("eclesiastico","{$_SESSION["rol"]}","rol");
+		$rec = new DBRecord ("eclesiastico",$rolConsuta,"rol");
 		//echo $rec->diacono()." - ".$rec->presbiterio()." - ".$rec->evangelista()." - ".$rec->pastor();
 		
 		if ($rec->pastor()>"0000-00-00") {

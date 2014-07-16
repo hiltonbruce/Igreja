@@ -2,15 +2,17 @@
 session_start();
 ob_start ();
 
+$rolConsuta = $_GET['bsc_rol'];
+
 if ($_SESSION['nivel']>4)
 {
 require "../func_class/funcoes.php";
 require "../func_class/classes.php";
 
-	$rec_pessoais = new DBRecord ("membro","{$_SESSION["rol"]}","rol");
-	$rec_ecl = new DBRecord ("eclesiastico","{$_SESSION["rol"]}","rol");
-	$rec_prof = new DBRecord ("profissional","{$_SESSION["rol"]}","rol");
-	$rec_civil = new DBRecord ("est_civil","{$_SESSION["rol"]}","rol");
+	$rec_pessoais = new DBRecord ("membro",$rolConsuta,"rol");
+	$rec_ecl = new DBRecord ("eclesiastico",$rolConsuta,"rol");
+	$rec_prof = new DBRecord ("profissional",$rolConsuta,"rol");
+	$rec_civil = new DBRecord ("est_civil",$rolConsuta,"rol");
 	$igreja = new DBRecord ("igreja","1","rol");
 	$cong = new DBRecord ("igreja",$rec_ecl->congregacao(),"rol");
 	$cidade = new DBRecord ("cidade",$rec_pessoais->naturalidade(),"id");
@@ -30,23 +32,23 @@ require "../func_class/classes.php";
 	if ($rec_ecl->situacao_espiritual()<>"1"){
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
-	}elseif (cargo($_SESSION["rol"])=="Pastor") {
+	}elseif (cargo($rolConsuta)=="Pastor") {
 		$background_cartao = "pastor"; //Define a imagem de fundo do cartão
-	}elseif (cargo($_SESSION["rol"])=="Evangelista") {
+	}elseif (cargo($rolConsuta)=="Evangelista") {
 		$background_cartao = "evangelista";
-	}elseif (cargo($_SESSION["rol"])=="Presb&iacute;tero") {
+	}elseif (cargo($rolConsuta)=="Presb&iacute;tero") {
 		$background_cartao = "presbitero";
-	}elseif (cargo($_SESSION["rol"])=="Di&aacute;cono") {
+	}elseif (cargo($rolConsuta)=="Di&aacute;cono") {
 		$background_cartao = "diacono";
-	}elseif (cargo($_SESSION["rol"])=="Auxiliar"){
+	}elseif (cargo($rolConsuta)=="Auxiliar"){
 		$background_cartao = "auxiliar"; //Define a imagem de fundo do cartão
 	}else {
 		$background_cartao = "membro";
 	}
 	
-	 if (file_exists("../img_membros/".$_SESSION["rol"].".jpg"))//Verifica se a imagem esta arquivada
+	 if (file_exists("../img_membros/".$rolConsuta.".jpg"))//Verifica se a imagem esta arquivada
 		{
-			$img=$_SESSION["rol"].".jpg";
+			$img=$rolConsuta.".jpg";
 		}
 		else
 		{
@@ -193,11 +195,11 @@ body {
   Igreja Assembleia de Deus
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
-<div id="cargo">Carteira de Identidade de <?PHP echo cargo($_SESSION["rol"]);?></div>
+<div id="cargo">Carteira de Identidade de <?PHP echo cargo($rolConsuta);?></div>
 <div id="Nome">
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?></div>
 <div id="Layer7"> &quot;Este cart&atilde;o s&oacute; ter&aacute; validade com apresenta&ccedil;&atilde;o da carta&quot;</div>
-<div id="Rol"><?PHP printf ("Rol: %'04u",$_SESSION["rol"]);?></div>
+<div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
 <div id="verso1">
 <?PHP
 	print "Filia&ccedil;&atilde;o: <br />{$rec_pessoais->pai()}<br /> e {$rec_pessoais->mae()}<hr>";

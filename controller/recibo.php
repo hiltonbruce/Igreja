@@ -2,6 +2,43 @@
 $ind=1;
 if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 	session_start();
+	
+	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+		require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
+		$igreja = new DBRecord ("igreja","1","rol");
+	
+		if ($_GET['igreja']>'1') {
+			$igrejaRelatorio = new DBRecord ("igreja",$_GET['igreja'],"rol");
+			$congRelatorio = $igrejaRelatorio->razao();
+		}elseif ($_GET['igreja']==$igreja->rol()){
+			$congRelatorio = $igreja->razao();
+		}else {
+			$congRelatorio = '';
+		}
+		
+		$recMenu = (empty($_GET["rec"])) ? $_POST["rec"]:$_GET["rec"];
+		switch ($recMenu) {
+			case '20':
+				//Recibos para de pgto
+				$pgtoDias = new tes_cargo();
+				$listaPgto = $pgtoDias->dadosCargo();
+				$recLink='';
+				$titTabela = 'Listagem para Pagamento';
+				require_once '../help/tes/reciboPgto.php';
+				
+				$nomeArquivo='../views/tesouraria/recPgto.php';
+				require_once '../views/modeloPrint.php';
+				
+			break;
+			
+			default:
+				;
+			break;
+		}
+		
+		
+	}
+	
 }else {
 	require_once 'help/tes/cabRecPgto.php';//Link's dos recibo 
 }
@@ -27,7 +64,7 @@ switch ($recMenu){
 		//Recibos para de pgto
 		$pgtoDias = new tes_cargo();
 		$listaPgto = $pgtoDias->dadosCargo();
-		$recLink='#';
+		$recLink='controller/recibo.php/?rec=20';
 		$titTabela = 'Listagem para Pagamento';
 		require_once 'help/tes/reciboPgto.php';
 		require_once 'views/tesouraria/recPgto.php';

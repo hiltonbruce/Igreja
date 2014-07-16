@@ -5,7 +5,7 @@ class formrecbusca extends formularioalterar {
 		
 		switch ($_GET['escolha']) {
 			case 'tesouraria/receita.php':
-				 $idformulario = 4;
+				 $idformulario = 3;
 				//echo 'teste1';
 			break;
 			case 'tesouraria/rec_alterar.php':
@@ -13,7 +13,7 @@ class formrecbusca extends formularioalterar {
 				 $idformulario = ($_GET['campo']=='') ? 4:5;
 			break;
 			case 'tesouraria/agenda.php':
-				 $idformulario = 2;
+				 $idformulario = 3;
 				//echo 'teste1';
 			break;
 			case 'tesouraria/agenda.php':

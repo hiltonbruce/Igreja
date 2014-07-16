@@ -8,39 +8,41 @@ foreach ($listaPgto as $chave => $valor) {
 	$bgcolor2 = $cor2 ? 'class="dados"' : 'class="odd"';
 	$vlrPgto = ($valor['pgto']>'0') ? true:false;
 	
-	$momeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
+	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
 	$nomeDiaPgto = ($valor['diapgto']=='661') ? 'Sexta':$valor['diapgto'];
 	
+	$nomeMembro = sprintf ("%'05u - %s",$valor['rolMembro'],$nomeMembro);
+	
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
-		$dia1 .='<tr '.$bgcolor.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
+		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor = !$cor;
 		$totMinisterio += $valor['pgto'];
 	}elseif ($valor['descricao']=='8' && $vlrPgto){
-		$dia15 .='<tr '.$bgcolor1.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
+		$dia15 .='<tr '.$bgcolor1.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor1 = !$cor1;
 		$totTesoureiro += $valor['pgto'];
 	}elseif ($valor['descricao']=='12' && $vlrPgto) {
-		$diaZelador .='<tr '.$bgcolor2.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaZelador .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor2 = !$cor2;
 		$totZelador += $valor['pgto'];
 	}elseif ($valor['descricao']=='14' && $vlrPgto) {
-		$diaAux .='<tr '.$bgcolor2.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaAux .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor2 = !$cor2;
 		$totAuxilio += $valor['pgto'];
 	}elseif ($vlrPgto) {
-		$diaOutros .='<tr '.$bgcolor2.'><td>'.$momeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaOutros .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';

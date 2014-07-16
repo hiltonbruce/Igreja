@@ -1,8 +1,7 @@
 <table>
 		<caption>
-		<?php		
-		
-		if ($recLink!='' || !empty($recLink)) {
+		<?php
+		if ($recLink!='' && !empty($recLink)) {
 			echo '<a href="'.$recLink.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
 			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';

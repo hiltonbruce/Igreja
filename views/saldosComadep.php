@@ -1,11 +1,8 @@
 <table>
 		<caption>
-		<?php		
-		if (empty($recLink)) {
-			$recLink = '';
-		}		
+		<?php
 		
-		if ($recLink!='') {
+		if ($recLink!='' && !empty($recLink)) {
 			echo '<a href="'.$linkImpressao.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
 			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
@@ -45,12 +42,12 @@
 		</tbody>
 		<tfoot>
 			<?php 
-				printf("<tr id='total'>"); 
+				echo '<tr id="total" style="font-size:130%;">'; 
 				printf("<td colspan='2' id='moeda' >Total de Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
 				printf("<td colspan='3' id='moeda'>Total de Crédito: R$ %s C</td></tr>",number_format($credito,2,',','.'));
 			?>
 		</tfoot>
 	</table>
 	<?php 
-		//echo $imprimir;
+		echo $imprimir;
 	?>
