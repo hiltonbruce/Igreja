@@ -146,37 +146,45 @@ class menutes {
 		<form action="" method="get">
 		<?php
 			$for_num = new List_sele("credores", "alias", "recebeu");
-			echo $for_num->List_sel($ind++);
+			echo $for_num->List_sel($ind++,'class="form-control"');
 		?>
 			<input type="hidden" name="tipo" id="tipo" value="2">
 			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receberá os dados -->
 			<input type="hidden" name="menu" value="top_tesouraria" />
-			<input type="submit" name="Submit" value="Listar Recibos..." />
+			<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Listar Recibos..." />
 		</form>
 		</fieldset>
 		<fieldset>
 		<legend>Não Membros</legend>
 		<form action="" method="get">
-			<label>Por: Nome</label>
-			<input type="text" name="nome" id="nome" size="20" >
-			<label>ou por: CPF</label>
-			<input type="text" name="cpf" id="cpf" size="20" >
-			<label>ou por:RG</label>
-			<input type="text" name="rg" id="rg" size="20" >
+			<label>Por Nome</label>
+			<input type="text" name="nome" class="form-control" id="nome" size="20" >
+			<label>ou por CPF</label>
+			<input type="text" name="cpf" class="form-control" id="cpf" size="20" >
+			<label>ou por RG</label>
+			<input type="text" name="rg" class="form-control" id="rg" size="20" >
 			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receberá os dados -->
 			<input type="hidden" name="menu" value="top_tesouraria" />
 			<input type="hidden" name="tipo" id="tipo" value="3">
-			<input type="submit" name="Submit" value="Procurar Recibos" />
+			<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Procurar Recibos" />
 		</form>
 		</fieldset>
 
 		<fieldset>
 		<legend>Por Número</legend>
 		<form action="" method="get">
-			N&ordm;<input type="text" name="id" id="id" size="10" >
-			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receberá os dados -->
-			<input type="hidden" name="menu" value="top_tesouraria" />
-			<input type="submit" name="Submit" value="Mostrar Recibo" />
+			<div class="row">
+				<div class="col-sm-7">
+				<label>N&ordm;</label>
+					<input type="text" class="form-control" name="id" id="id" size="10" >
+				</div>
+			<div class="col-xs-2">
+				<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receberá os dados -->
+				<input type="hidden" name="menu" value="top_tesouraria" />
+				<label>&nbsp;</label>
+				<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Mostrar!" />
+			</div>
+		</div>
 		</form>
 		</fieldset>
 		</div></div></div></div>

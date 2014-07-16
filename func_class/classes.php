@@ -797,10 +797,10 @@ class List_sele {
 		echo $linha1.$linhas;
 	}
 
-	function List_sel ($ind){
+	function List_sel ($ind,$req){
 
 	//Mostra as linhas de select
-	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='++$ind'>";
+	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' $req tabindex='++$ind'>";
 	echo "<option value=''>-->> Escolha <<--</option>";
 	  while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	  {
