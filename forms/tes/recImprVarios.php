@@ -10,13 +10,13 @@
 		value="<?php echo $_GET["nome"];?>" /></td>
 </tr>
 <tr><td colspan="2"><p>Exemplos: 1,2,3->Imprimir recibos 1,2,3 | 1-5->Imprimir 
-todos do 1 ao 5 | 8 - ->apartir do cinco em diante</p><p>Obs.:As sequências não devem ultrapassar 200 recibos</p>
+todos do 1 ao 5 | 8 - ->apartir do cinco em diante</p><p>Obs.:As sequï¿½ncias nï¿½o devem ultrapassar 200 recibos</p>
 </td>
 	<td><input type="submit" class="btn btn-primary" name="Submit" value="Imprimir..." tabindex="<?PHP echo ++$ind; ?>"/></td>
 </tr>
 </tbody>
 </table>
 <label></label>
-<input type="hidden" name="rec" value="20">
+<input type="hidden" name="rec" value="21">
 </form>
 </fieldset>

@@ -31,6 +31,21 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				
 			break;
 			
+			case '21':
+				//Impressão de vários Reciboserror_reporting(E_ALL);
+				error_reporting(E_ALL);
+				ini_set('display_errors', 'off');
+		
+				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
+				$saltoPagina = '<div style="page-break-before: always;"> </div>';		
+				if ($igreja->cidade()>0) {
+					$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
+					$origem=$cidOrigem->nome();
+				}else {
+					$origem = $igreja->cidade();
+				}
+				require_once '../help/tes/reciboImpr.php';
+				break;
 			default:
 				;
 			break;
@@ -73,26 +88,6 @@ switch ($recMenu){
 	case 5:
 		//Form para impressão de vários Recibos
 		require_once 'forms/tes/recImprVarios.php';
-		break;
-	case 20:
-		//Impressão de vários Reciboserror_reporting(E_ALL);
-		error_reporting(E_ALL);
-		ini_set('display_errors', 'off');
-
-		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
-		
-		require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
-		$saltoPagina = '<div style="page-break-before: always;"> </div>';
-
-		$igreja = new DBRecord ("igreja","1","rol");
-
-		if ($igreja->cidade()>0) {
-			$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
-			$origem=$cidOrigem->nome();
-		}else {
-			$origem = $igreja->cidade();
-		}
-		require_once '../help/tes/reciboImpr.php';
 		break;
 	default:
 		//Recibos de Membros
