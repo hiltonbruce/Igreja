@@ -31,7 +31,7 @@ ver_cad();
 			<?PHP
 				$nome = new editar_form("rol_conjugue",$arr_dad["rol_conjugue"],$tab,$tab_edit);
 				$nome->getMostrar();$nome->getEditar();
-			?>			</td>
+			?></td>
 		<?php 
 		} ?>
       </tr>

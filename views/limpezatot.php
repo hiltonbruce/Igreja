@@ -86,8 +86,9 @@ if ($_GET['limpeza']!='4') {
 		echo $saltoPagina;
 }
 	require_once $todascongreg;
-	if ($dadoscong->matlimpeza()=='0') {
+	if ($dadoscong->matlimpeza()!='0') {
 		//Assinatura do tesoureiro(a) e elador(a)
+		//$dadoscong vem do script controller/limpeza.php
 	?>
 	<div id="added-div-2">
       <h2><?PHP  print $dadoscong->cidade()." - ".$dadoscong->uf().", ".data_extenso (date('d/m/Y'));?></h2>

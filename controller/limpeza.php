@@ -51,6 +51,7 @@ if (empty($_GET['mes']) && empty($_GET['ano'])) {
 
 switch ($_GET['limpeza']) {
 	case '1':
+		$dadoscong	= new DBRecord('igreja','1', 'rol');//Traz os dados da congregação
 		//Mostrar totalizador geral para impressão
 	
 		$titulo		  = 'Totalizador material de limpeza - Todas as Congregações';
@@ -61,12 +62,13 @@ switch ($_GET['limpeza']) {
 	break;
 	
 	case '2':
+		$dadoscong	= new DBRecord('igreja','1', 'rol');//Traz os dados da congregação
 		//Mostrar totalizador geral para visualizar na tela
 		echo "<style type='text/css'>";
 		require_once ("aniv/style.css");
 		echo "</style>";
 			//Mostrar totalizador dentro da aplicação
-		echo '<a href="controller/limpeza.php?limpeza=1"><button type="button">Imprimir totalizador</button></a>';
+		echo '<a href="controller/limpeza.php?limpeza=1"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
 		$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações
 		require_once 'views/limpezatot.php';
 	break;
@@ -83,6 +85,7 @@ switch ($_GET['limpeza']) {
 		$titulo		  = 'Totalizador material de limpeza - Congregação:'. $dadoscong->razao();
 		$arquivo	  = '../views/limpezatot.php';
 		$todascongreg = '../models/limplisttotcong.php';
+		$saltoPagina  = '';
 		require_once '../tesouraria/modeloimpress.php';
 	break;
 	case '5'://Formulário para mudança do periodo de cadastro do material

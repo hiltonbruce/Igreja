@@ -115,5 +115,40 @@ $tabMembros = new membro();
 		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 		echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 		echo '</span> Imprimir ...</button> </a>';
-	}
+	}else {
+?>
+		<span id="text-right">Conferido por:</span>
+	<table style="width: 95%;">
+			<colgroup>
+				<col id="Data">
+				<col id="Primeiro">
+				<col id="Segundo">
+				<col id="Terceiro">
+				<col id="albumCol"/>
+			</colgroup>
+		<thead>
+			<tr>
+				<th scope="col">Data</th>
+				<th scope="col">Primeiro</th>
+				<th scope="col">Segundo</th>
+				<th scope="col">Terceiro</th>
+				<th scope="col">Dirigente</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>_____/_____/______</td>
+				<td>__________________________</td>
+				<td>__________________________</td>
+				<td>__________________________</td>
+				<td>__________________________</td>
+			</tr>		
+		</tbody>
+		<tfoot>
+		<tr id='total'><td colspan="5"></td>
+		</tr>
+		</tfoot>
+	</table>
+<?php 
+}
 ?>

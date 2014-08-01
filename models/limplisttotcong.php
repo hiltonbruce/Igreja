@@ -48,7 +48,7 @@ if ($_GET['limpeza']=='4') {
 			$tabtodas .= '<fieldset><legend>Obs.:</legend> As congregações que não enviarem a lista de material de limpeza
 		no próximo bimestre não serão relacionadas para entrega!</fieldset>';
 		}
-		$tabtodas .= $saltoPagina;
+		//$tabtodas .= $saltoPagina;
 	}
 	
 	echo  $tabtodas;

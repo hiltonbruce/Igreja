@@ -30,7 +30,7 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 	</tbody>
 </table>
 <a href="./controller/limpeza.php?limpeza=4&igreja=<?php echo $igreja;?>">
-<button type="button">Imprimir <?php echo $congregcao->razao();?></button></a>
+<button type="button" class="btn btn-primary">Imprimir <?php echo $congregcao->razao();?></button></a>
 <?php 
 	//print_r($tbodytab->tabelaLimp($congregcao->rol()));
 

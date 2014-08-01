@@ -1,3 +1,10 @@
+<?php 
+	if (empty($_GET['altdias'])) {
+		$dias=0;
+	}else {
+		$dias=$_GET['altdias'];
+	}
+?>
 <fieldset>
 <legend>Busca por Despesas Agendadas</legend>
 <table>

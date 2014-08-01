@@ -599,7 +599,7 @@ class editar_form {
 			<?php
 			if ($fJScript!='') {
 				$form=$fJScript;
-			}elseif ($this->campo=="conjugue") {$form=2;}else{$form=3;}
+			}elseif ($this->campo=="conjugue") {$form=0;}else{$form=3;}
 			?>
 		 	 <div class="col-xs-2">
 			<label>&nbsp;</label>
