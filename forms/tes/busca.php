@@ -48,6 +48,20 @@ $(document).ready(function(){
 					?> 
 				</td>
                </tr>
+            <tr>
+            	<td colspan="2">
+            		<label>Para Débito na Conta:</label>
+            		<input type="text" name="debito" 
+					value="<?php echo $_GET['debito'];?>"tabindex="<?PHP echo ++$ind; ?>"
+					 class="form-control" placeholder="Contas por Código. Separando por virgula. Ex.: 701,705,805" />
+            	</td>
+            	<td colspan="2">
+            		<label>Para Crédito na Conta:</label>
+            		<input type="text" name="credito" 
+					value="<?php echo $_GET['credito'];?>"tabindex="<?PHP echo ++$ind; ?>"
+					 class="form-control" placeholder="Contas por Código. Separando por virgula. Ex.: 701,705,805" />
+            	</td>
+            </tr>
 			<tr id="form">
 				<td>
 					Dia: <br /><input type="text" size="2" maxlength="2" name="dia" 

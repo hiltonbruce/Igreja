@@ -8,18 +8,10 @@ unset($_SESSION["cid_natal"]);
 unset($_SESSION["cid_end"]);
 unset($_SESSION["cpf"]);
 ?>
-<script type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-</script>
 
 <fieldset>
-<legend>Dados Pessoais - Cadastro de Membro</legend>
-<form method="post" action="">
+<legend>Dados Pessoais - Cadastro de Membro </legend>
+<form method="post" action="" >
 <table>
 	<tbody>
 		<tr>

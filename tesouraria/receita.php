@@ -80,7 +80,8 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			require_once 'models/feccaixaculto.php';
 		} else {
 			
-			$linkAcesso 	= 'escolha=tesouraria/receita.php&menu=top_tesouraria&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
+			$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
+			$linkAcesso .= '&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 			
 			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
 			

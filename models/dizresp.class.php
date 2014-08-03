@@ -10,7 +10,7 @@ function __construct($tesoureiro='',$print='') {
 		
 	}
 	
-function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
+function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 
 	$dataValid = (checadata ($dia.'/'.$mes.'/'.$ano)) ? $ano.'-'.$mes.'-'.$dia:false;
 	if ($igreja=='') {
@@ -32,6 +32,33 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		$consTipos =false;
 	}
 	
+	//Monta a query para consulta de conta pelo nº de acesso
+	$queryAcesso = '';
+	if (!empty($cred)) {
+		$acessos = explode(',', $cred);
+		$concatenar = ' ';
+		foreach ($acessos as $numAcesso) {
+			$queryCred .= $concatenar.'credito="'.(int)$numAcesso.'"';
+			$concatenar = ' OR ';
+		}
+		$queryCred = ' AND ('.$queryCred.')';
+	}else {
+		$queryCred = '';
+	}
+	if (!empty($deb)) {
+		$acessos = explode(',', $deb);
+		$concatenar = ' ';
+		foreach ($acessos as $numAcesso) {
+			$queryDeb .= $concatenar.'devedora="'.(int)$numAcesso.'"';
+			$concatenar = ' OR ';
+		}
+		$queryDeb = ' AND ('.$queryDeb.')';
+	}else {
+		$queryDeb = '';
+	}
+	
+	$queryAcesso = $queryCred.$queryDeb;
+	
 	//Gera a query de busca
 	$incluiPessoa ='';
 	
@@ -52,6 +79,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		if ($dataValid && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
+			$consulta .= $queryAcesso;
 			$consulta .= ' AND d.data = "'.$dataValid.'"';
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
@@ -59,6 +87,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		}elseif ($ano>'2000' && $ano<'2050' && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
+			$consulta .= $queryAcesso;
 			$consulta .= $consMes.$consDia.' AND anorefer='.$ano;
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
@@ -66,15 +95,16 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo) {
 		}elseif ($ano=='0') {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
+			$consulta .= $queryAcesso;
 			$consulta .= $consMes.$consDia.$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.igreja,d.data DESC,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
-			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento>"0"'.$incluiPessoa.
+			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento>"0"'.$incluiPessoa.$queryAcesso.
 					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
 		}else {
-			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.
+			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
 					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 				$lancConfirmado = false;
 		}

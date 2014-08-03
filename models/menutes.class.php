@@ -290,6 +290,7 @@ function recibosmembros (){
 				<col id="Nome">
 				<col id="Motivo">
 				<col id="Valor(R$)">
+				<col id="igreja">
 				<col id="albumCol"/>
 			</colgroup>
 		<thead>
@@ -298,6 +299,7 @@ function recibosmembros (){
 				<th scope="col">Nome</th>
 				<th scope="col">Motivo</th>
 				<th scope="col">Valor(R$)</th>
+				<th scope="col">Igreja</th>
 				<th scope="col">Data</th>
 			</tr>
 		</thead>
@@ -337,6 +339,7 @@ function recibosmembros (){
 						&pag_rec={$_GET["pag_rec"]}'>".$nome_rec."<a></td>";
 					echo "<td>".$coluna_pen["motivo"]."</td>";
 					echo "<td style=' text-align: right;'>".number_format($coluna_pen["valor"],2,",",".")."</td>";
+					echo "<td>".$coluna_pen["igreja"]."</td>";
 					echo "<td>".conv_valor_br ($coluna_pen["data"])."</td>";
 				echo "</tr>";
 					

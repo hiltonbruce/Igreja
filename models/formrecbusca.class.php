@@ -45,7 +45,7 @@ class formrecbusca extends formularioalterar {
 		 	
 		}
 		
-		echo $_GET['escolha'].' ** '.$idformulario;
+		//echo $_GET['escolha'].' ** '.$idformulario;
 	   		?>
 				<form id="form1" name="form1" method="get" action="">
 				<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receberá os dados -->

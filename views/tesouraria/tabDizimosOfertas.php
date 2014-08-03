@@ -37,7 +37,9 @@ $tabMembros = new membro();
 		} else {
 			//tabela com a lista p confirmar lan�amento
 			$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
-			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,$mes,$ano,$_GET['rec']);
+			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
+												$mes,$ano,$_GET['rec'],$_GET['credito'],
+												$_GET['debito']);
 			$tabLancamento= $resultado['1'];
 			
 			if ($resultado['2']) {
@@ -107,6 +109,7 @@ $tabMembros = new membro();
 				echo $tabLancamento;
 				$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 				$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
+				$linkResumo .= '&credito='.$_GET['credito'];
 			?>
 </table>
 <?php
@@ -137,11 +140,11 @@ $tabMembros = new membro();
 		</thead>
 		<tbody>
 			<tr>
-				<td>_____/_____/______</td>
-				<td>__________________________</td>
-				<td>__________________________</td>
-				<td>__________________________</td>
-				<td>__________________________</td>
+				<td>&nbsp;</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>		
 		</tbody>
 		<tfoot>

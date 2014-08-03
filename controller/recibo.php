@@ -82,6 +82,7 @@ switch ($recMenu){
 		$recLink='controller/recibo.php/?rec=20';
 		$titTabela = 'Listagem para Pagamento';
 		require_once 'help/tes/reciboPgto.php';
+		require_once 'forms/tes/gerarRecFolha.php'; 
 		require_once 'views/tesouraria/recPgto.php';
 		//print_r($listaPgto);
 		break;
