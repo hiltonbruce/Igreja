@@ -16,7 +16,8 @@ $vlrregistro = mysql_fetch_row($ultregistro);
 echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';
 echo '<H1>Data do lançamento: '.$datalanc.'</h1>';
 //$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
-$msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'><button>Continuar...</button><a>";
+$msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&
+		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' >Continuar...</button><a>";
 	
 if (($vlr && $vlrregistro[0] == $datalanc) || ($vlr && $vlrregistro[0] =='') && $rolIgreja ) {
 	//Verifica se o caixa do ultimo culto foi encerrado e se há algum valor em dizimo, oferta ou oferta extra
@@ -56,9 +57,9 @@ switch ($_POST['tipo']) {
 		$linr .= "data={$_POST['data']}&mes={$_POST['mes']}&ano={$_POST['ano']}";
 		$linkreturn .= "&data=".$_POST["data"]."&mes=$m&ano=$y";
 		$linkreturn .= "&acescamp=".$_POST["acescamp"];
-		echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
+		//echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
 		//echo "<script>location.href='$linkreturn';</script>";
-		echo "<a href='$linkreturn' ><button autofofus='autofofus'>Continuar...</button><a>";
+		echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1'>Continuar...</button><a>";
 }elseif (!$rolIgreja) {//Se não foneceu o número da igreja
 	echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";
 	$msgErro .= '<div class="alert alert-error">Voc&ecirc; n&atilde;o informou a Igreja!';

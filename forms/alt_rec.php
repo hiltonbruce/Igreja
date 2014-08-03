@@ -4,10 +4,10 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 
 ?>
 <td>
-	<form id = "2" action="forms/recibo.php" method="post" target="_black">
+	<form id = "2" action="controller/recibo.php" method="post" target="_black">
 		<input type="hidden" name="numeros" id="reimprimir" value="<?php echo $rec_alterar->id();?>">
 		<label>&nbsp;</label>
-		<input type="hidden" name="rec" value = "6" >
+		<input type="hidden" name="rec" value = "21" >
 		<input type="submit" class="btn btn-primary" value = "Re - Imprimir este recibo" >
 </form>
 </td><td>

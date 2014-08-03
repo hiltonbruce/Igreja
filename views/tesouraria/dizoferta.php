@@ -18,11 +18,11 @@ controle ("tes");
 
 	$vlr = false;
 	
-	$contribuinte = ($_POST['nome']=='') ? 'An&ocirc;nimo':$_POST['nome'];
+	$contribuinte = (empty($_POST['nome'])) ? 'An&ocirc;nimo':$_POST['nome'];
 	
 echo '<fieldset><legend>Pre-Lançamento</legend>';
 echo '<table>';
-echo '<thead><tr><th colspan="2">Contibuinte: '.($_POST['nome']=='') ? 'An&ocirc;nimo':$_POST['nome'].'</th></tr>';
+echo '<thead><tr><th colspan="2">Contibuinte: '.$contribuinte.'</th></tr>';
 echo '<tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
 if ($_POST['tipo']=='4') {
 for ($i = 0; $i < 3; $i++) {
@@ -36,22 +36,22 @@ for ($i = 0; $i < 3; $i++) {
 		switch ($i) {
 			case '0':
 				if ($vlrPost>0) 
-					printf ("<tr id='lanc'><td>Ofertas EBD:</td><td id='moeda'><button>R$ %s </button></td></tr>",$valorBR);
+					printf ("<tr id='lanc'><td>Ofertas EBD:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s </button></td></tr>",$valorBR);
 				
 			break;
 			case '1':
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Corpo de Prof. da EBD:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					printf ("<tr id='lanc'><td>Corpo de Prof. da EBD:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 2:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Arrecadado pgto de Revistas:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					printf ("<tr id='lanc'><td>Arrecadado pgto de Revistas:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			Default:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Outras Arrecadações - Dep. de Ensino</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					printf ("<tr id='lanc'><td>Outras Arrecadações - Dep. de Ensino</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 		}

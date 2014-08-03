@@ -1,12 +1,12 @@
 <form method="post" action="">
 	&nbsp;
-	<table>
+	<table class='table'>
 		<tbody>
 			<tr>
 				<td><label>Gerar Recibos: </label> <select name="grupo" required='required'
 					id="grupo" tabindex="<?PHP echo ++$ind; ?>" class="form-control" autofocus="autofocus">
 						<option></option>
-						<option value="1">Ministéio</option>
+						<option value="1">Ministério</option>
 						<option value="2">Tesoureiros</option>
 						<option value="3">Auxílio</option>
 						<option value="4">Zelador</option>
