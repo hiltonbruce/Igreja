@@ -24,6 +24,8 @@ foreach ($listaPgto as $chave => $valor) {
 	$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 	$bgcolor1 = $cor1 ? 'class="dados"' : 'class="odd"';
 	$bgcolor2 = $cor2 ? 'class="dados"' : 'class="odd"';
+	$bgcolor3 = $cor3 ? 'class="dados"' : 'class="odd"';
+	$bgcolor4 = $cor4 ? 'class="dados"' : 'class="odd"';
 	$vlrPgto = ($valor['pgto']>'0') ? true:false;
 	
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
@@ -72,11 +74,11 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['descricao']=='14' && $vlrPgto) {
 		//Lista dos Auxilios
-		$diaAux .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaAux .='<tr '.$bgcolor3.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
-		$cor2 = !$cor2;
+		$cor3 = !$cor3;
 		$totAuxilio += $valor['pgto'];
 		//Cadastra o recibo
 		if ($auxilio!='') {
@@ -85,11 +87,11 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($vlrPgto) {
 		//Lista dos Demais Pgto
-		$diaOutros .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaOutros .='<tr '.$bgcolor4.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
-		$cor2 = !$cor2;
+		$cor4 = !$cor4;
 		$totOutros += $valor['pgto'];
 		//Cadastra o recibo
 		if ($demaisPgto!='') {

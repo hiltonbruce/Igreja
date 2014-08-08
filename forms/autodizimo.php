@@ -29,7 +29,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 				id="campo_estado" size="50%" class="form-control"
 					tabindex="<?php echo ++$ind;?>" />
 				</td>
-				<td><label>Rol:</label> <input type="text" id="rol" name="rol"
+				<td><label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?php echo ++$ind;?>" 
 						value="" class="form-control" placeholder="N&ordm; do membro na igreja" />
 				</td>
 			</tr>
@@ -57,18 +57,18 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 		<table>
 			<tbody>
 				<tr>
-					<td><label>D&iacute;zimo:</label><input type="text" id="oferta0"
+					<td><label>D&iacute;zimo:</label><input type="text" id="oferta0" autocomplete="off"
 						class="form-control" name="oferta0" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>Oferta:</label><input type="text" id="oferta1"
+					<td><label>Oferta:</label><input type="text" id="oferta1" autocomplete="off"
 						 class="form-control" name="oferta1" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>Oferta Extra:</label><input type="text" id="oferta2"
+					<td><label>Oferta Extra:</label><input type="text" id="oferta2" autocomplete="off"
 						class="form-control" name="oferta2" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 				</tr>
 				<tr>
-					<td><label>Voto:</label><input type="text" id="oferta3"
+					<td><label>Voto:</label><input type="text" id="oferta3" autocomplete="off"
 						class="form-control" name="oferta3" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 					<td></td>
@@ -81,7 +81,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
 					?>
 					</td>
-					<td><label>Campanha (Valor):</label><input type="text" id="oferta4"
+					<td><label>Campanha (Valor):</label><input type="text" id="oferta4" autocomplete="off"
 						 class="form-control" name="oferta4" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 			
@@ -93,18 +93,18 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 		<table  class="table">
 			<tbody>
 				<tr>
-					<td><label>Oferta:</label><input type="text" id="oferta5"
+					<td><label>Oferta:</label><input type="text" id="oferta5" autocomplete="off"
 						class="form-control" name="oferta5" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>Envelopes:</label><input type="text" id="oferta6"
+					<td><label>Envelopes:</label><input type="text" id="oferta6" autocomplete="off"
 						class="form-control" name="oferta6" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>Cofres:</label><input type="text" id="oferta7"
+					<td><label>Cofres:</label><input type="text" id="oferta7" autocomplete="off"
 						class="form-control" name="oferta7" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 				</tr>
 				<tr>
-					<td><label>Carnês:</label><input type="text" id="oferta8"
+					<td><label>Carnês:</label><input type="text" id="oferta8" autocomplete="off"
 						class="form-control" name="oferta8" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 					<td></td>
@@ -119,18 +119,18 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 		<table class="table">
 			<tbody>
 				<tr>
-					<td><label>Adulto:</label><input type="text" id="oferta9"
+					<td><label>Adulto:</label><input type="text" id="oferta9" autocomplete="off"
 						class="form-control" name="oferta9" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>Mocidade:</label><input type="text" id="oferta10"
+					<td><label>Mocidade:</label><input type="text" id="oferta10" autocomplete="off"
 						class="form-control" name="oferta10" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>Infantil:</label><input type="text" id="oferta11"
+					<td><label>Infantil:</label><input type="text" id="oferta11" autocomplete="off"
 						class="form-control" name="oferta11" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 				</tr>
 				<tr>
-					<td><label>Voto:</label><input type="text" id="oferta12"
+					<td><label>Voto:</label><input type="text" id="oferta12" autocomplete="off"
 						class="form-control" name="oferta12" value="" tabindex="<?php echo ++$ind;?>" />
 					</td>
 					<td></td>

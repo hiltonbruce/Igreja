@@ -157,3 +157,7 @@ legend {
 	z-index:3;
 	Text-align: left;
 }
+
+.table-bordered {
+	border-bottom: 2px solid #000;
+}

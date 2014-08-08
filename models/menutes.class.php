@@ -339,7 +339,14 @@ function recibosmembros (){
 						&pag_rec={$_GET["pag_rec"]}'>".$nome_rec."<a></td>";
 					echo "<td>".$coluna_pen["motivo"]."</td>";
 					echo "<td style=' text-align: right;'>".number_format($coluna_pen["valor"],2,",",".")."</td>";
-					echo "<td>".$coluna_pen["igreja"]."</td>";
+					
+					if ($idCongPgto!=$coluna_pen["igreja"]) {
+						$idCongPgto = $coluna_pen["igreja"];
+						$dadosCong = new DBRecord('igreja',$idCongPgto,'rol');
+						$nomeCongPgto = $dadosCong->razao();
+					}
+					echo "<td>".$nomeCongPgto."</td>";
+					
 					echo "<td>".conv_valor_br ($coluna_pen["data"])."</td>";
 				echo "</tr>";
 					

@@ -121,30 +121,30 @@ $tabMembros = new membro();
 	}else {
 ?>
 		<span id="text-right">Conferido por:</span>
-	<table style="width: 95%;">
+	<table>
 			<colgroup>
 				<col id="Data">
-				<col id="Primeiro">
-				<col id="Segundo">
-				<col id="Terceiro">
 				<col id="albumCol"/>
 			</colgroup>
 		<thead>
 			<tr>
 				<th scope="col">Data</th>
-				<th scope="col">Primeiro</th>
-				<th scope="col">Segundo</th>
-				<th scope="col">Terceiro</th>
-				<th scope="col">Dirigente</th>
+				<th scope="col">Assinatura</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
+				<td rowspan="4">&nbsp;</td>
+				<td width="85%">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class='odd'>&nbsp;</td>
+			</tr>
+			<tr>
 				<td>&nbsp;</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+			</tr>
+			<tr>
+				<td class='odd'>&nbsp;</td>
 			</tr>		
 		</tbody>
 		<tfoot>

@@ -36,7 +36,7 @@
 		</tbody>
 		<tfoot>
 			<?php 
-				echo '<tr id="total" style="font-size:130%;">'; 
+				echo '<tr id="total">'; 
 				echo '<td colspan="3" id="moeda" >Total Geral ---> </td>';
 				printf("<td colspan='2' id='moeda'>R$ %s </td></tr>",number_format($debito,2,',','.'));
 			?>
