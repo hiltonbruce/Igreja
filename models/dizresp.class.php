@@ -2,9 +2,9 @@
 class dizresp {
 	
 function __construct($tesoureiro='',$print='') {
-		$this->var_string = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,
-		 d.nome,d.tipo,d.valor,i.razao,d.credito,d.tesoureiro, d.confirma, 
-		i.rol AS rolIgreja FROM dizimooferta AS d, igreja AS i ";
+		$this->var_string  = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,d.congcadastro,";
+		$this->var_string .= "d.nome,d.tipo,d.valor,i.razao,d.credito,d.tesoureiro, d.confirma,";
+		$this->var_string .= "i.rol AS rolIgreja FROM dizimooferta AS d, igreja AS i ";
 		$this->tesoureiro = $tesoureiro;
 		$this->impressao = ($print==true) ? true:false;
 		
@@ -81,7 +81,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 			$consulta .= $incluiPessoa;
 			$consulta .= $queryAcesso;
 			$consulta .= ' AND d.data = "'.$dataValid.'"';
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data ';
+			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($ano>'2000' && $ano<'2050' && $conTipos) {
@@ -89,7 +89,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 			$consulta .= $incluiPessoa;
 			$consulta .= $queryAcesso;
 			$consulta .= $consMes.$consDia.' AND anorefer='.$ano;
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ';
+			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($ano=='0') {
@@ -101,11 +101,11 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
 			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento>"0"'.$incluiPessoa.$queryAcesso.
-					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
 		}else {
 			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
-					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ') or die (mysql_error());
 				$lancConfirmado = false;
 		}
 		
@@ -151,10 +151,16 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 				$linkMembro .= $rol.' - '.$linha['nome'].'</a>';
 			}
 			
+			if ($congMembro!=$linha['congcadastro'] ) {
+				$congMembro = $linha['congcadastro'];
+				$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
+				$nomeCongMembro = $dadosCongMembro->razao();
+			}
+			
 			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td>
 				<td>'.$linkMembro.'</td><td>'.$tipo.'</td><td 
 				 id="moeda">'.$corrigir.'</td>
-				 		<td>'.$linha['razao'].'</td></tr>';
+				 		<td>'.$nomeCongMembro.'</td></tr>';
 						$total += $linha['valor'];
 			$cor = !$cor;
 		}
