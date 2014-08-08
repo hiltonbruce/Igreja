@@ -24,7 +24,8 @@ class tes_cargo {
 			$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
 				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],'naoMembro'=>$dados['naomembro'],
 						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
-						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo'],'hierarquia'=>$dados['hierarquia']);
+						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']
+						,'hierarquia'=>$dados['hierarquia']);
 		}
 		$this->arrayNomeIgreja = $todos;
 		$this->arrayCargo = $arrayCargos;

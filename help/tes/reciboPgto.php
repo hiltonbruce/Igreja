@@ -1,4 +1,22 @@
 <?php
+//Limpa as variáveis
+$ministerio = '';$tesoureiro = '';$auxilio = '';$zeladores = '';$demaisPgto = '';$rec_tipo=false;
+
+if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'6') {
+	//Verifica click duplo no form de criar recibos
+	if ((check_transid($_POST["transid"]) || $_POST["transid"]<1)) {
+		//houve click duplo no form
+		$gerarPgto = true;
+	}else {
+		//Não houve click duplo no form
+		$gerarPgto = false;
+		//Grava no banco codigo de autorização para o novo recibo
+		add_transid($_POST["transid"]);
+		//script que orienta a criação dos recibos
+		$gerar = 'help/tes/gerarRecGrupo.php';
+		require_once 'help/tes/definirRecGrupo.php';
+	}
+}
 $dia1 ='';$dia15 ='';$diaOutros ='';
 $cor=true;$cor1=true;$cor2=true;
 foreach ($listaPgto as $chave => $valor) {
@@ -14,40 +32,70 @@ foreach ($listaPgto as $chave => $valor) {
 	$nomeMembro = sprintf ("%'05u - %s",$valor['rolMembro'],$nomeMembro);
 	
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
+		//Lista do Ministério
 		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor = !$cor;
 		$totMinisterio += $valor['pgto'];
+		//Cadastra o recibo
+		if ($ministerio!='') {
+			require $gerar;
+			require $ministerio;
+		}
 	}elseif ($valor['descricao']=='8' && $vlrPgto){
+		//Lista dos Tesoureiros
 		$dia15 .='<tr '.$bgcolor1.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor1 = !$cor1;
 		$totTesoureiro += $valor['pgto'];
+		//Cadastra o recibo
+		if ($tesoureiro!='') {
+			require $gerar;
+			require $tesoureiro;
+		}
 	}elseif ($valor['descricao']=='12' && $vlrPgto) {
+		//Lista dos Zeladores
 		$diaZelador .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor2 = !$cor2;
 		$totZelador += $valor['pgto'];
+		//Cadastra o recibo
+		if ($zeladores!='') {
+			require $gerar;
+			require $zeladores;
+		}
 	}elseif ($valor['descricao']=='14' && $vlrPgto) {
+		//Lista dos Auxilios
 		$diaAux .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor2 = !$cor2;
 		$totAuxilio += $valor['pgto'];
+		//Cadastra o recibo
+		if ($auxilio!='') {
+			require $gerar;
+			require $auxilio;
+		}
 	}elseif ($vlrPgto) {
+		//Lista dos Demais Pgto
 		$diaOutros .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.number_format($valor['pgto'],2,',','.').'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor2 = !$cor2;
 		$totOutros += $valor['pgto'];
+		//Cadastra o recibo
+		if ($demaisPgto!='') {
+			require $gerar;
+			require $demaisPgto;
+		}
 	}
 	
 //echo '<br />'.$indice.' -- > ';

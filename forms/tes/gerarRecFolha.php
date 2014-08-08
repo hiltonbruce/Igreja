@@ -28,5 +28,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<input type="hidden" name="transid" value="<?php echo (get_transid());?>">
+	<input type="hidden" name="rec" value="4">
 </form>
 

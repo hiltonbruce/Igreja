@@ -88,16 +88,28 @@
 	}elseif (($rec_tipo=='3' && $rolmembro=='') && ($cpf=='' xor $rg=='')) {
 		echo "<script> alert('Para NÃO membros da Igreja é obrigatório informar o nome completo, e pelo menos o RG ou CPF!');location.href='".$link."';</script>";
 		$erro=1;
+	}elseif ($rec_tipo=='2' && $numero==""){
+		echo "<script> alert('Fornecedor não definido!');location.href='".$link."';</script>";
+		$erro=1;
+	}elseif ($rec_tipo=='' || $rec_tipo>'3'){
+		$erro =1;
 	}
 
-	
-	
-		
 		$hist = $_SESSION['valid_user'].": ".date("d/m/Y h:i:s");
 	
-		//Verifica o tipo de recibo de dá o texto apropriado
+		//Verifica click duplo no form de criar recibos
+		if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
+			//houve click duplo no form
+			$gerarPgto = true;
+		}else {
+			//Não houve click duplo no form
+			$gerarPgto = false;
+			//Grava no banco codigo de autorização para o novo recibo
+			add_transid($_POST["transid"]);
+		}
 		
-	require_once '../models/tes/insertRecibos.php';
+		//Verifica o tipo de recibo no formato apropriado
+		require_once '../models/tes/insertRecibos.php';
 	
 	if (empty($_POST['reimprimir'])){
 	$rec_num = new ultimoid('tes_recibo');//recupera o id do último insert no mysql (número do recibo)	

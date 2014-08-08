@@ -24,12 +24,7 @@ switch ($rec_tipo){
 		$responsavel = $membro->nome()."<br />CPF: ".$prof->cpf()." - RG: ".$prof->rg();
 		$recebeu = $rolmembro;//Define o beneficiário do recibo
 		break;
-	case 2:
-		if ($numero==""){
-			echo "<script> alert('Fornecedor não definido!');location.href='".$link."';</script>";
-			$erro=1;
-		}
-			
+	case 2:			
 		$nome = new DBRecord ("credores",$numero,"id");
 		$cidade = new DBRecord ("cidade",$nome->cidade(),"id");
 			
@@ -54,21 +49,21 @@ switch ($rec_tipo){
 		break;
 	default:
 		echo "<script> alert('Recibo indefinido!');location.href='../?escolha=tesouraria/recibo.php&menu=top_tesouraria&rec={$_POST["rec"]}';</script>";
-		$erro =1;
 }
 
-//Cadastra o recibo na tabela
-if (check_transid($_POST["transid"]) || $_POST["transid"]=="") {
-echo "<script> alert('Este recibo já foi registrado!');</script>";
+
+if ($gerarPgto) {
+	//Verifica click duplo ou se é para gerar 
+	echo "<script> alert('Este recibo já foi registrado!');</script>";
 }elseif ($erro != 1){
-
-add_transid($_POST["transid"]);
-$dt = br_data($data,"Data do recibo invalida: $data");
-		$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','','$fonte_recurso',";
-		$value .= "'$lancamento','$referente','$dt','$hist'";
-
-		$dados = new insert ($value,"tes_recibo");
-				$dados->inserir();
+	
+	//Cadastra o recibo na tabela
+	$dt = br_data($data,"Data do recibo invalida: $data");
+			$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','','$fonte_recurso',";
+			$value .= "'$lancamento','$referente','$dt','$hist'";
+	
+			$dados = new insert ($value,"tes_recibo");
+			$dados->inserir();
 
 }
 ?>
