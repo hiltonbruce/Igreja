@@ -385,8 +385,11 @@ function link_ativo ($val_link,$variavel) {
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if ($variavel==$val_link) {
-		echo "id='current'";
-	}
+			echo "id='current'";
+			return 'active';
+		}else {
+			return '';
+		}
 }
 
 function id_corrente ($val_link) {
@@ -395,6 +398,9 @@ function id_corrente ($val_link) {
 	*/
 	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
 		echo "id='current'";
+		return 'active';
+	}else {
+		return '';
 	}
 }
 

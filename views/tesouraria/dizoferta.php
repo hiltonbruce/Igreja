@@ -16,14 +16,23 @@
  */
 controle ("tes");
 
+if ($_POST["rol"]>'0' ) {
+	//Se for informado o rol, então traz o nome do banco
+	$nomecont = new DBRecord('membro', $_POST["rol"], 'rol');
+	$nome = $nomecont -> nome();
+	$eclesia = new DBRecord('eclesiastico', $_POST["rol"], 'rol');
+	$congcontrib = $eclesia->congregacao();
+} elseif (!empty($_POST["nome"]))  {
+	$nome = $_POST["nome"];
+} else {
+	$nome = 'An&ocirc;nimo';
+}
 	$vlr = false;
 	
-	$contribuinte = (empty($_POST['nome'])) ? 'An&ocirc;nimo':$_POST['nome'];
-	
-echo '<fieldset><legend>Pre-Lançamento</legend>';
-echo '<table>';
-echo '<thead><tr><th colspan="2">Contibuinte: '.$contribuinte.'</th></tr>';
-echo '<tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
+$mostraLanc  =  '<fieldset><legend>Pre-Lançamento</legend>';
+$mostraLanc .=  '<table>';
+$mostraLanc .=  '<thead><tr><th colspan="2">Contibuinte: <span class="badge">'.$nome.'</span></th></tr>';
+$mostraLanc .=  '</thead><tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
 if ($_POST['tipo']=='4') {
 for ($i = 0; $i < 3; $i++) {
 	//verifica se há algum campo algum campo com valor
@@ -36,22 +45,22 @@ for ($i = 0; $i < 3; $i++) {
 		switch ($i) {
 			case '0':
 				if ($vlrPost>0) 
-					printf ("<tr id='lanc'><td>Ofertas EBD:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s </button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Ofertas EBD:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s </button></td></tr>",$valorBR);
 				
 			break;
 			case '1':
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Corpo de Prof. da EBD:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Corpo de Prof. da EBD:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 2:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Arrecadado pgto de Revistas:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Arrecadado pgto de Revistas:</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			Default:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Outras Arrecadações - Dep. de Ensino</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Outras Arrecadações - Dep. de Ensino</td><td id='moeda'><button class='btn btn-primary' tabindex='1'>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 		}
@@ -72,67 +81,67 @@ for ($i = 0; $i < 13; $i++) {
 		switch ($i) {
 			case '0':
 				if ($vlrPost>0) 
-					printf ("<tr id='lanc'><td>Dizimo:</td><td id='moeda'><button>R$ %s </button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Dizimo:</td><td id='moeda'><button>R$ %s </button></td></tr>",$valorBR);
 				
 			break;
 			case '1':
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Oferta:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Oferta:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 2:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Oferta Extra:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Oferta Extra:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 3:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Voto:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Voto:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 4:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Campanha:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Campanha:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 			case 5:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Oferta p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Oferta p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 6:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Envelope p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Envelope p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 				break;
 			case 7:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Cofre p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Cofre p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 			case 8:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Carn&ecirc;s p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Carn&ecirc;s p/ Missões:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 			case 9:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Adulto:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Adulto:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 			case 10:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Mocidade:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Mocidade:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 			case 11:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Infantil:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Oferta Ora&ccedil;&atilde;o - Infantil:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 			case 12:
 				if ($vlrPost>0)
-					printf ("<tr id='lanc'><td>Voto Ora&ccedil;&atilde;o:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
+					$mostraLanc .= sprintf ("<tr id='lanc'><td>Voto Ora&ccedil;&atilde;o:</td><td id='moeda'><button>R$ %s</button></td></tr>",$valorBR);
 			
 			break;
 		}
@@ -143,6 +152,6 @@ for ($i = 0; $i < 13; $i++) {
 	}
 }
 	
-echo '</tbody></table>';
-echo '</fieldset>';
+$mostraLanc .= '</tbody></table>';
+$mostraLanc .=  '</fieldset>';
 ?>

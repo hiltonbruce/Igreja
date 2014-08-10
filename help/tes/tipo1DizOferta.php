@@ -1,15 +1,4 @@
 <?php
-if (($_POST["rol"]!='' && $_POST["nome"]=='') || ($_POST["rol"]!='' && $_POST["nome"]!='')) {
-	//Se for informado o rol, então traz o nome do banco
-	$nomecont = new DBRecord('membro', $_POST["rol"], 'rol');
-	$nome = $nomecont -> nome();
-	$eclesia = new DBRecord('eclesiastico', $_POST["rol"], 'rol');
-	$congcontrib = $eclesia->congregacao();
-} elseif ($_POST["nome"]!='')  {
-	$nome = $_POST["nome"];
-} else {
-	$nome = '';
-}
 //corrigir os post para oferta...
 $msg = "<script> alert('Você não definiu para qual CONTA deseja contribuir. Refaça o lançamento!');</script>";
 for ($i = 0; $i < 13; $i++) {

@@ -3,8 +3,8 @@ class dizresp {
 	
 function __construct($tesoureiro='',$print='') {
 		$this->var_string  = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,d.congcadastro,";
-		$this->var_string .= "d.nome,d.tipo,d.valor,i.razao,d.credito,d.tesoureiro, d.confirma,";
-		$this->var_string .= "i.rol AS rolIgreja FROM dizimooferta AS d, igreja AS i ";
+		$this->var_string .= "d.nome,d.tipo,d.valor,d.obs,i.razao,d.credito,d.tesoureiro, ";
+		$this->var_string .= "d.confirma,i.rol AS rolIgreja FROM dizimooferta AS d, igreja AS i ";
 		$this->tesoureiro = $tesoureiro;
 		$this->impressao = ($print==true) ? true:false;
 		
@@ -116,6 +116,10 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 			
 			$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $mostracta->titulo;//Define o titulo para a vari�vel
+			
+			if ($linha['obs']!='') {
+				$tipo = '<span title="'.$linha['obs'].'"><span class="glyphicon glyphicon-paperclip"></span> '.$tipo.'</span>';
+			}
 			
 			$valor = number_format($linha['valor'],2,',','.');
 			if ($linha['confirma']=='') {
@@ -276,7 +280,7 @@ function concluir($igreja) {
 	
 			
 			$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
-			$tipo = $mostracta->titulo;//Define o titulo para a vari�vel
+			$tipo = $mostracta->titulo();//Define o titulo para a vari�vel
 			
 			//$tesoureiro = $linha['tesoureiro'];
 			

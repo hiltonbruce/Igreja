@@ -44,24 +44,45 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	}
 }else {
 $ind=1;
+$tabRelatorio = 'views/tesouraria/tabDizimosOfertas.php';
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 $_SESSION['lancar']=true;
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
 ?> 
-<div id="tabs">
-	<ul>
-	  <li><a <?PHP link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0"><span>Busca</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1"><span>Entradas</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3"><span>Esc. Bíblica</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "2"); ?> href="<?php echo $linkLancamento;?>&rec=2"><span>Lan&ccedil;amentos</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "4"); ?> href="<?php echo $linkLancamento;?>&rec=4"><span>Lan&ccedil;ar Recibo</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "5"); ?> href="<?php echo $linkLancamento;?>&rec=5"><span>Lan&ccedil;ar Despesa</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9"><span>Resumo</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "7"); ?> href="<?php echo $linkLancamento;?>&rec=7"><span>Saldos</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" ><span>Plano de Contas</span></a></li>
-	</ul>
-</div>&nbsp;
+	<p>
+	  <a <?PHP $b=link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Busca</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Entradas</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Esc. Bíblica</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "2"); ?> href="<?php echo $linkLancamento;?>&rec=2">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;amentos</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "21"); ?> href="<?php echo $linkLancamento;?>&rec=21" title="Relatório de Lançamentos" >
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lançamentos Relatório</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "4"); ?> href="<?php echo $linkLancamento;?>&rec=4">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;ar Recibo</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "5"); ?> href="<?php echo $linkLancamento;?>&rec=5">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;ar Despesa</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Resumo</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "7"); ?> href="<?php echo $linkLancamento;?>&rec=7">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Saldos</button></a>
+	  
+	  <a <?PHP $b=link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" >
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Plano de Contas</button></a>
+	  
+	</p>
+
 <?php
 $dizmista = new dizresp($_SESSION['valid_user']);
 $idIgreja = (empty($_GET['igreja'])) ? 1:$_GET['igreja'];
@@ -84,10 +105,10 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			$linkAcesso .= '&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 			
 			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
+					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
 			
 			switch ($_GET['rec']) {
 				case '0':
-					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
 					require_once ('forms/tes/busca.php');
 					//require_once 'forms/tes/histResumo.php';
 					break;
@@ -145,6 +166,11 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once 'help/tes/saldoIgrejas.php';
 					require_once 'views/tesouraria/saldoIgrejas.php';
 					break;
+				case '21':
+					require_once ('forms/tes/relatorioLanc.php');
+					$tituloColuna5 = 'Valor(R$)';
+					$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
+					break;
 				default:
 					require_once 'forms/receita.php';
 				break;
@@ -160,6 +186,6 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 }
 	unset($_SESSION['lancar']);
 	
-	require_once 'views/tesouraria/tabDizimosOfertas.php';
+	require_once $tabRelatorio;
 }
 ?>

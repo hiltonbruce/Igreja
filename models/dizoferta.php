@@ -1,5 +1,6 @@
 <h1><img src="img/loading2.gif" width="30" height="30"></h1>
 <?PHP
+
 require_once 'views/tesouraria/dizoferta.php';
 
 $dta = explode("/",$_POST["data"]);
@@ -25,7 +26,6 @@ if (($vlr && $vlrregistro[0] == $datalanc) || ($vlr && $vlrregistro[0] =='') && 
 	$sem = semana($_POST["data"]);
 	
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-	
 switch ($_POST['tipo']) {
 	case '1':
 		//Dizimos, ofertas, missões, orações
@@ -50,7 +50,7 @@ switch ($_POST['tipo']) {
 		$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja={$_POST["rolIgreja"]}";
 	break;
 }
-
+	echo $mostraLanc;
 	//echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
 		$linr = "./?escolha={$_POST['escolha']}&menu={$_POST['menu']}&";
 		$linr .= "rec={$_POST['rec']}&igreja={$_POST["rolIgreja"]}&";
