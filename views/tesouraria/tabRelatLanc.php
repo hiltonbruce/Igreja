@@ -1,39 +1,13 @@
 <?php
-$dia = $_GET['dia'];
-$mes = $_GET['mes'];
-$ano = $_GET['ano'];
-$apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
-if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
-?>
-<table>
-	<tbody>
-		<tr>
-			<td><label>Igreja: </label>
-				<select name="igreja" id="igreja" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" ><?php						 
-				$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$_GET['igreja']);
-				//echo $listaIgreja;
-				?></select>
-			</td>
-			<td>
-				Ou <a href="<?php echo $apagarEntrada;?>" ><button>Apagar</button></a> esta entrada!
-			</td>
-		</tr>
-	</tbody>
 
-</table>
-<?PHP	
-}
-
-$tabMembros = new membro();
-			//tabela com a lista p confirmar lanï¿½amento
-			$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
+	$tabMembros = new membro();
+	//tabela com a lista p confirmar lanï¿½amento
+	
+	$lancContabil = new tes_relatorioLanc();
+	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano);
+	$tabLancamento= $resultado['0'];
 			
-			$lancContabil = new tes_relatorioLanc();
-			$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano);
-			$tabLancamento= $resultado['0'];
-			
-			
-			$statusLancamento = 'Lan&ccedil;amentos Contábeis';
+	$statusLancamento = 'Lan&ccedil;amentos Contábeis';
 ?>
 <table style="width: 95%;">
 		<caption class="text-left">

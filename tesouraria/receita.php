@@ -167,7 +167,13 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once 'views/tesouraria/saldoIgrejas.php';
 					break;
 				case '21':
+					
 					require_once ('forms/tes/relatorioLanc.php');
+					
+					$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
+					$ano = empty($_GET['ano']) ? '':$_GET['ano'];
+					$roligreja = (empty($_GET['igreja'])) ? '1':$_GET['igreja'];
+					
 					$tituloColuna5 = 'Valor(R$)';
 					$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
 					break;
