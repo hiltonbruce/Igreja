@@ -5,7 +5,7 @@ function __construct() {
 		$this->var_string  = 'SELECT l.lancamento,DATE_FORMAT(l.data,"%d/%m/%Y") AS data,l.igreja,';
 		$this->var_string .= 'l.valor,l.hist,i.referente,l.conta,l.d_c ';
 		$this->var_string .= 'FROM lancamento AS l, lanchist AS i ';
-		$this->var_string .= 'WHERE l.lancamento=i.idlanca';
+		$this->var_string .= 'WHERE l.lancamento=i.idlanca ';
 		
 	}
 	
@@ -15,32 +15,33 @@ function histLancamentos ($igreja,$mes,$ano) {
 	while ($ctas = mysql_fetch_array($queryContas)) {
 		$conta[$ctas['id']] = array ('acesso'=>$ctas['acesso'],'titulo'=>$ctas['titulo'],'codigo'=>$ctas['codigo']);
 	}
-	//print_r ($conta);
-	if ($igreja=='0') {
-		$opIgreja = '';
-	}else {
-		$opIgreja= ' AND l.igreja = "'.$igreja;
+	
+	$queryIgrejas = mysql_query('SELECT rol,razao FROM igreja') or die (mysql_error());
+	while ($igrejaNome = mysql_fetch_array($queryIgrejas)) {
+		$dadosIgreja[$igrejaNome['rol']] = array ('nome'=>$igrejaNome['razao']);
 	}
 	
-	$opIgreja .= '" AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.lancamento,l.id';
-	$dquery = mysql_query($this->var_string.$opIgreja) or die (mysql_error());
+	//print_r ($conta);
+	if ($igreja>'0' ) {
+		$opIgreja= $this->var_string.' AND l.igreja = "'.$igreja.'"';
+	}else {
+		$opIgreja = $this->var_string;
+	}
+	
+	$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.lancamento,l.id';
+	$dquery = mysql_query($opIgreja) or die (mysql_error());
 		
 	$tabela = '<tbody id="periodo">';
 	$lancAtual = '';  $lancamento = $lancAtual;
 	
 	while ($linha = mysql_fetch_array($dquery)) {
-		$bgcolor = $cor ? '#d0d0d0' : '#ffffff';		
-		if ($congMembro!=$linha['congcadastro'] ) {
-			$congMembro = $linha['congcadastro'];
-			$dadosCongMembro = new DBRecord ('igreja',$linha['igreja'],'rol');
-			$nomeCongMembro = $dadosCongMembro->razao();
-		}
-		
+		$bgcolor = $cor ? '#d0d0d0' : '#ffffff';
 		
 		$lancAtual = $linha['lancamento'];
 		
 		if ($lancAtual!=$lancamento && $lancamento!='') {
-			$dataLanc  = '<p>Data do Lan&ccedil;amento: '.$linha['data'].'</p>';
+			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
+			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$titulo1;
 			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$referente.$historico.'</td>
 			<td id="moeda">'.$lancValor.'</td></tr>';
@@ -49,16 +50,17 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$titulo1  = '';$lancValor = '';
 		}
 		
-		$historico  = '<p>Hist&oacute;rico: '.$linha['referente'].'</p>';
+		$historico  = '<p>Hist&oacute;rico: '.$linha['referente'].', '.$dadosIgreja[$linha['igreja']]['nome'].'</p>';
 		$lancamento = $lancAtual;
-		$titulo1  .= '<p>'.$conta[$linha['conta']]['codigo'].' - '.$conta[$linha['conta']]['titulo'].' - '.$linha['d_c'].'</p>';
+		$titulo1  .= '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
 		$valor = number_format($linha['valor'],2,',','.');
-		$lancValor .= '<p>'.$valor.' '.$linha['d_c'].'</p>';
-		
+		$lancValor .= '<p>'.$valor.' '.$linha['d_c'].'</p>';		
+		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 		
 		}
-		
+	
 	$resultado = array($tabela,$lancConfirmado);
+	
 	return $resultado;
 	}
 	

@@ -70,11 +70,15 @@ col#albumCol {
 }
 
 thead {
-  background: #ccc;
+  background: #696969;
   border-top: 1px solid #a5a5a5;
   border-bottom: 1px solid #a5a5a5;
   border:#000000;
   font: 14pt;
+}
+
+tfoot {
+	border: 1px solid #000;
 }
 
 td {
@@ -108,10 +112,25 @@ thead tr:hover {
 	padding-top: 20px;
 	padding-right: 10px;
 	position:absolute;
-	top:700px;
 	width: 705px;
 }
 #footer a       { color: #636466; text-decoration: underline }
 #footer a:link       { color: #636466; text-decoration: underline }
 #footer a:visited { }
 #footer a:hover      { color: #e7790e }
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999;
+  border-radius: 10px;
+   border: 1px solid #fff;
+}

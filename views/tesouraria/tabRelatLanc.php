@@ -38,7 +38,7 @@
 				$fonFim = '</h2>';
 			}
 				echo $fonIni.$statusLancamento.$fonFim.$fonIni.'Igreja: '.$igrejaSelecionada->razao().$fonFim.$fonIni
-						.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;	
+						.$dirigenteIgreja.', 1&ordm; Tesoureiro:'.$tesIgreja.$fonFim;	
 			
 		
 			?></caption>
@@ -54,51 +54,17 @@
 		</thead>
 			<?php
 				echo $tabLancamento;
-				$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
+				$linkResumo  = 'rec=15&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 				$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 				$linkResumo .= '&credito='.$_GET['credito'];
 			?>
+			<tfoot><tr><th>Rubricar:</th><th>Data:</th></tr></tfoot>
 </table>
 <?php
 //print_r($tabMembros->nomes());
 	if (!empty($_GET['escolha'])) {
-		echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
+		echo '<a href="tesouraria/receita.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 		echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 		echo '</span> Imprimir ...</button> </a>';
-	}else {
-?>
-		<span id="text-right">Conferido por:</span>
-	<table>
-			<colgroup>
-				<col id="Data">
-				<col id="albumCol"/>
-			</colgroup>
-		<thead>
-			<tr>
-				<th scope="col">Data</th>
-				<th scope="col">Assinatura</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td rowspan="4">&nbsp;</td>
-				<td width="85%">&nbsp;</td>
-			</tr>
-			<tr>
-				<td class='odd'>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td class='odd'>&nbsp;</td>
-			</tr>		
-		</tbody>
-		<tfoot>
-		<tr id='total'><td colspan="5"></td>
-		</tr>
-		</tfoot>
-	</table>
-<?php 
-}
+	}
 ?>

@@ -31,6 +31,17 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 			$nomeArquivo='../views/saldos.php';
 			require_once '../views/modeloPrint.php';
 			break;
+		case '15':
+			$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
+			$titTabela = 'Relatório de Lançamentos';
+			$linkImpressao ='tesouraria/receita.php/?rec=15';
+			$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
+			$ano = empty($_GET['ano']) ? '':$_GET['ano'];
+			$roligreja = '1';
+			$tituloColuna5 = 'Valor(R$)';
+			 $nomeArquivo='../views/tesouraria/tabRelatLanc.php';
+			require_once '../views/modeloPrint.php';
+			break;
 		
 		default:
 			//imprimir plano de contas
@@ -167,12 +178,10 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 					require_once 'views/tesouraria/saldoIgrejas.php';
 					break;
 				case '21':
-					
 					require_once ('forms/tes/relatorioLanc.php');
-					
 					$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
 					$ano = empty($_GET['ano']) ? '':$_GET['ano'];
-					$roligreja = (empty($_GET['igreja'])) ? '1':$_GET['igreja'];
+					$roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
 					
 					$tituloColuna5 = 'Valor(R$)';
 					$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
