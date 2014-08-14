@@ -60,41 +60,9 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 $_SESSION['lancar']=true;
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
-?> 
-	<p>
-	  <a <?PHP $b=link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Busca</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Entradas</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Esc. Bíblica</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "2"); ?> href="<?php echo $linkLancamento;?>&rec=2">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;amentos</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "21"); ?> href="<?php echo $linkLancamento;?>&rec=21" title="Relatório de Lançamentos" >
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lançamentos Relatório</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "4"); ?> href="<?php echo $linkLancamento;?>&rec=4">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;ar Recibo</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "5"); ?> href="<?php echo $linkLancamento;?>&rec=5">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;ar Despesa</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Resumo</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "7"); ?> href="<?php echo $linkLancamento;?>&rec=7">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Saldos</button></a>
-	  
-	  <a <?PHP $b=link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" >
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Plano de Contas</button></a>
-	  
-	</p>
 
-<?php
+require_once 'views/tesouraria/menu.php';//Sub-Menu de links 
+
 $dizmista = new dizresp($_SESSION['valid_user']);
 $idIgreja = (empty($_GET['igreja'])) ? 1:$_GET['igreja'];
 if ((int)$_POST['rolIgreja']>0) {

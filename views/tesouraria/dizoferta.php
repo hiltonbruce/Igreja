@@ -17,21 +17,31 @@
 controle ("tes");
 
 if ($_POST["rol"]>'0' ) {
-	//Se for informado o rol, então traz o nome do banco
-	$nomecont = new DBRecord('membro', $_POST["rol"], 'rol');
-	$nome = $nomecont -> nome();
+	if (!empty($_POST["nome"])) {
+		$nome = $_POST["nome"];
+		$mostrarNome =  $_POST["rol"].' &bull; '.$nome;
+	}else {
+		//Se for informado o rol, então traz o nome do banco
+		$nomecont = new DBRecord('membro', $_POST["rol"], 'rol');
+		$nome = $nomecont -> nome();
+		$mostrarNome =  $nomecont -> rol().' &bull; '.$nome;
+	}
+	
 	$eclesia = new DBRecord('eclesiastico', $_POST["rol"], 'rol');
 	$congcontrib = $eclesia->congregacao();
 } elseif (!empty($_POST["nome"]))  {
 	$nome = $_POST["nome"];
+	$mostrarNome =  'Congregado &bull; '.$nome;
 } else {
-	$nome = 'An&ocirc;nimo';
+	$nome = 'Anônimo';
+	$mostrarNome =  'An&ocirc;nimo';
 }
+	$nome = trim($nome);
 	$vlr = false;
 	
 $mostraLanc  =  '<fieldset><legend>Pre-Lançamento</legend>';
 $mostraLanc .=  '<table>';
-$mostraLanc .=  '<thead><tr><th colspan="2">Contibuinte: <span class="badge">'.$nome.'</span></th></tr>';
+$mostraLanc .=  '<thead><tr><th colspan="2">Contibuinte: <span class="badge">'.$mostrarNome.'</span></th></tr>';
 $mostraLanc .=  '</thead><tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
 if ($_POST['tipo']=='4') {
 for ($i = 0; $i < 3; $i++) {

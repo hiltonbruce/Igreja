@@ -11,7 +11,8 @@
 			$auxilio = $scrip;
 		break;
 		case '4':
-			$zelador = $scrip;
+			//Demais Zeladores
+			$zeladores = $scrip;
 		break;
 		case '5':
 			//Demais Pagamentos

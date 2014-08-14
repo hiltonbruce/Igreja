@@ -49,7 +49,6 @@
 <title>Assembleia de Deus - Bayeux - PB</title>
 
 <script type="text/javascript" src="js/funcoes.js"></script>
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -194,4 +193,7 @@ jQuery(function($) {
       $('#sigla_val').mask("99.999.999/9999-99");
    });
 // ]]&gt;</script>
+
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 </html>
