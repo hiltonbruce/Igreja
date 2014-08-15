@@ -100,22 +100,8 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 
 $ind=1; 
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-?> 
-<div id="tabs">
-	<ul>
-	  <li><a <?PHP link_ativo($_GET["age"], "1");?>
-			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=1"><span>Adiant. p/ Compras</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["age"], "2");?> 
-			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=2"><span>Prestar Contas</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["age"], "3");?>
-			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=3"><span>Agendar Despesa</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["age"], "4");?>
-			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=4"><span>COMADEP</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["age"], "7");?>
-			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=7"><span>Folha</span></a></li>
-	</ul>
-</div>
-<?php
+
+	require_once 'views/menus/subDespesas.php';//Sub-Menu das despesas
 
 	$agenda = ($_POST['age']!='') ? $_POST['age']:$_GET['age'];
 	switch ($agenda) {

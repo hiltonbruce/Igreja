@@ -1,20 +1,33 @@
-<div id="tabs">
-  <ul>
-	<li><a <?PHP id_corrente ("_pessoais"); ?> href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Pessoais</span></a></li>
-	<li><a <?PHP id_corrente ("_ecles");?> href="./?escolha=adm/dados_ecles.php&uf_end=PB&campo=cidade&bsc_rol=<?php echo $bsc_rol;?>"><span>Eclesi&aacute;stico</span></a></li>
-	<li><a <?PHP id_corrente ("_profis"); ?> href="./?escolha=adm/dados_profis.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Profissional</span></a></li>
-	<li><a <?PHP id_corrente ("_famil");?> href="./?escolha=adm/dados_famil.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Familiar</span></a></li>
-	<li><a <?PHP id_corrente ("_cartas");?> href="./?escolha=adm/dados_cartas.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Cartas</span></a></li>
-	<li><a <?PHP id_corrente ("cartao");?> href="./?escolha=adm/cartao.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Cart&atilde;o</span></a></li>
-	<li><a <?PHP id_corrente ("disciplina");?> href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>"><span>Registros</span></a></li>
+<div>
+<a <?PHP $b=id_corrente ("_pessoais"); ?> href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Pessoais</button>
+</a>
+<a <?PHP $b=id_corrente ("_ecles");?> href="./?escolha=adm/dados_ecles.php&uf_end=PB&campo=cidade&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Eclesi&aacute;stico</button>
+</a>
+<a <?PHP $b=id_corrente ("_profis"); ?> href="./?escolha=adm/dados_profis.php&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Profissional</button>
+</a>
+<a <?PHP $b=id_corrente ("_famil");?> href="./?escolha=adm/dados_famil.php&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Familiar</button>
+</a></li>
+<a <?PHP $b=id_corrente ("_cartas");?> href="./?escolha=adm/dados_cartas.php&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Cartas</button>
+</a>
+<a <?PHP $b=id_corrente ("cartao");?> href="./?escolha=adm/cartao.php&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Cart&atilde;o</button>
+</a>
+<a <?PHP $b=id_corrente ("disciplina");?> href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>">
+	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Registros</button>
+</a>
 	<?php if ($_SESSION["setor"]=='2' || $_SESSION["nivel"]>'10') { ?><!-- Verifica se é tesouraria -->
-		<li><a <?PHP id_corrente ("saldoMembros");?> 
+		<a <?PHP $b=id_corrente ("saldoMembros");?> 
 				href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol=<?php echo $bsc_rol;?>&ano=<?php echo $_GET['ano'];?>">
-				<span>Financeiro</span></a></li>
-    <?php } ?>
-  </ul>
+				<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Financeiro</button>
+</a>
 </div>
-<?php 
+    <?php } 
+    
 	if (!(strstr($_GET["escolha"], "dados_pessoais.php") || strstr($_GET["escolha"], "cartao.php")) && isset($_SESSION["membro"]))
 		{
 			echo 'Dados atuais de: <b>'.$_SESSION["membro"].'</b> - ';		

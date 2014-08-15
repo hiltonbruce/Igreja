@@ -4,15 +4,25 @@
 	require_once ("./igreja/classes.php");
 	$igreja = new DBRecord ("igreja",$_GET["id"],"rol");
 ?>
-<div id="tabs">
-		  <ul>
-			<li><a <?PHP id_corrente ("_membro");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span>Membros</span></a></li>
-			<li><a <?PHP id_corrente ("_ecles");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span>Dirigentes</span></a></li>
-			<li><a <?PHP id_corrente ("_estrutura");?> href="./?escolha=igreja/cad_organica.php&menu=top_igreja"><span>Estrutura</span></a></li>
-			<li><a <?PHP id_corrente ("_famil");?> href="./?escolha=igreja/cad_organica.php&menu=top_igreja"><span>Hor&aacute;rios</span></a></li>
-			<li><a <?PHP id_corrente ("_cargos");?> href="./?escolha=igreja/cad_cargos.php&menu=top_igreja"><span>Cargos</span></a></li>
-			<li><a <?PHP id_corrente ("_orgao");?> href="./?escolha=igreja/cad_orgaos.php&menu=top_igreja"><span>Org&auml;os</span></a></li>
-		  </ul>
+<div>
+<a <?PHP $b=id_corrente ("_membro");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Membros</button>
+</a>
+<a <?PHP $b=link_ativo($_GET["cargo"], "6");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja&cargo=6">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Dirigentes</button>
+</a>
+<a <?PHP $b=id_corrente ("_estrutura");?> href="./?escolha=igreja/cad_organica.php&menu=top_igreja">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Estrutura</button>
+</a>
+<a <?PHP $b=id_corrente ("_famil");?> href="./?escolha=igreja/cad_organica.php&menu=top_igreja">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Hor&aacute;rios</button>
+</a>
+<a <?PHP $b=id_corrente ("_cargos");?> href="./?escolha=igreja/cad_cargos.php&menu=top_igreja">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Cargos</button>
+</a>
+<a <?PHP $b=id_corrente ("_orgao");?> href="./?escolha=igreja/cad_orgaos.php&menu=top_igreja">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Org&auml;os</button>
+</a>
 </div>
 <table style ="width:auto;">
 <thead>
