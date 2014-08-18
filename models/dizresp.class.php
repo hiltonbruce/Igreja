@@ -152,7 +152,8 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 				$linkMembro  = '<a href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
 				$linkMembro .= '" title="Detalhar contribui&ccedil;&otilde;es confimardas!">';
-				$linkMembro .= $rol.' - '.$linha['nome'].' - Ref.: '.$linha['mesrefer'].'/'.$linha['anorefer'].'</a>';
+				$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
+				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
 			}
 			
 			if ($congMembro!=$linha['congcadastro'] ) {
