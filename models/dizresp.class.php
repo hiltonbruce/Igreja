@@ -3,7 +3,7 @@ class dizresp {
 	
 function __construct($tesoureiro='',$print='') {
 		$this->var_string  = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,d.congcadastro,";
-		$this->var_string .= "d.nome,d.tipo,d.valor,d.obs,i.razao,d.credito,d.tesoureiro, ";
+		$this->var_string .= "d.nome,d.mesrefer,d.anorefer,d.tipo,d.valor,d.obs,i.razao,d.credito,d.tesoureiro, ";
 		$this->var_string .= "d.confirma,i.rol AS rolIgreja FROM dizimooferta AS d, igreja AS i ";
 		$this->tesoureiro = $tesoureiro;
 		$this->impressao = ($print==true) ? true:false;
@@ -20,7 +20,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 	}
 	
 	if ($mes>'0' && $mes<='12') {
-		$consMes = ' AND mesrefer = '.$mes;
+		$consMes = ' AND DATE_FORMAT(data, "%m") = '.$mes;
 	}
 	
 	if ($dia>0 && $dia<=31) {
@@ -88,7 +88,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= $queryAcesso;
-			$consulta .= $consMes.$consDia.' AND anorefer='.$ano;
+			$consulta .= $consMes.$consDia.' AND DATE_FORMAT(data, "%Y") ='.$ano;
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ';
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
@@ -152,7 +152,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 				$linkMembro  = '<a href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
 				$linkMembro .= '" title="Detalhar contribui&ccedil;&otilde;es confimardas!">';
-				$linkMembro .= $rol.' - '.$linha['nome'].'</a>';
+				$linkMembro .= $rol.' - '.$linha['nome'].' - Ref.: '.$linha['mesrefer'].'/'.$linha['anorefer'].'</a>';
 			}
 			
 			if ($congMembro!=$linha['congcadastro'] ) {

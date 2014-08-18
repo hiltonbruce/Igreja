@@ -48,9 +48,9 @@
 <head>
 <title>Assembleia de Deus - Bayeux - PB</title>
 
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
-<script type="text/javascript" src="js/jquery.maskedinput-1.3.1.min_.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />

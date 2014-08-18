@@ -58,7 +58,15 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 		
 		}
-	
+		
+		if ($titulo1 != '') {
+			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
+			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
+			$referente .= $dataLanc.$titulo1;
+			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$referente.$historico.'</td>
+			<td id="moeda">'.$lancValor.'</td></tr>';
+		}
+		
 	$resultado = array($tabela,$lancConfirmado);
 	
 	return $resultado;
