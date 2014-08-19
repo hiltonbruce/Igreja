@@ -127,7 +127,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 			}else {
 				$status = 'Confimado!';
 			}
-			$bgcolor = $cor ? '#d0d0d0' : '#ffffff';
+			$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
 			
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
 			
@@ -162,7 +162,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 				$nomeCongMembro = $dadosCongMembro->razao();
 			}
 			
-			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td>
+			$tabela .= '<tr '.$bgcolor.'><td>'.$linha['data'].'</td>
 				<td>'.$linkMembro.'</td><td>'.$tipo.'</td><td 
 				 id="moeda">'.$corrigir.'</td>
 				 		<td>'.$nomeCongMembro.'</td></tr>';
@@ -292,7 +292,7 @@ function concluir($igreja) {
 			}else {
 				$status = 'Confimado!';
 			}
-			$bgcolor = $cor ? '#d0d0d0' : '#ffffff';
+			$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
 			$rol = $linha['nome']<>'' ? $linha['rol'].' - '.$linha['nome'] : 'An&ocirc;nimo';
 			
 			if ($tesoureiro!=$linha['tesoureiro']) {
@@ -310,7 +310,7 @@ function concluir($igreja) {
 			}
 			$totaltes += $vlr;
 			
-			$tabLancamento .= '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
+			$tabLancamento .= '<tr '.$bgcolor.'><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			$total += $linha['valor'];
 			$cor = !$cor;
 		}

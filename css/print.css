@@ -9,7 +9,7 @@ table {
   border-collapse: collapse;
   min-width: 700px;
   width: auto;
-  border: 1px solid #3399FF;
+  border: 1px solid #000000;
 }
 
 #container { 
@@ -70,13 +70,10 @@ col#albumCol {
 }
 
 thead {
-  background: #696969;
-  color: #FFF;
-  font-weight: bold;
-  border-top: 1px solid #a5a5a5;
-  border-bottom: 1px solid #a5a5a5;
-  border:1px solid #FFF;
-  font: 14pt;
+  background: #CFCFCF;
+  border: 2px solid #000;
+  font-size: 120%;
+  color:#000000;
 }
 
 tfoot {
@@ -87,19 +84,18 @@ td {
 text-align:left;
 }
 
+td#moeda, p#moeda {
+	text-align:right;
+}
+
 tr#botom{
   background: #9D9D9D;
   font: 14pt bold;
 }
 
-tr:hover {
-  background-color:#3d80df;
-  color: #fff;
-}
-
-thead tr:hover {
-  background-color: transparent;
-  color: inherit;
+tbody#periodo tr:hover {
+   background-color: #CCC;
+  	color: #000000;
 }
 
 #footer {
@@ -113,7 +109,6 @@ thead tr:hover {
 	margin: 0;
 	padding-top: 20px;
 	padding-right: 10px;
-	position:absolute;
 	width: 705px;
 }
 #footer a       { color: #636466; text-decoration: underline }

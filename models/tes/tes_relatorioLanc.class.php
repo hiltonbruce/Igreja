@@ -35,7 +35,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 	$lancAtual = '';  $lancamento = $lancAtual;
 	
 	while ($linha = mysql_fetch_array($dquery)) {
-		$bgcolor = $cor ? '#d0d0d0' : '#ffffff';
+		$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
 		
 		$lancAtual = $linha['lancamento'];
 		
@@ -43,8 +43,8 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
 			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$titulo1;
-			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$referente.$historico.'</td>
-			<td id="moeda">'.$lancValor.'</td></tr>';
+			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
+			<td>'.$lancValor.'</td></tr>';
 			$cor = !$cor;
 			$referente  = '';
 			$titulo1  = '';$lancValor = '';
@@ -54,7 +54,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$lancamento = $lancAtual;
 		$titulo1  .= '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
 		$valor = number_format($linha['valor'],2,',','.');
-		$lancValor .= '<p>'.$valor.' '.$linha['d_c'].'</p>';		
+		$lancValor .= '<p id="moeda">'.$valor.' '.$linha['d_c'].'</p>';		
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 		
 		}
@@ -63,7 +63,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
 			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$titulo1;
-			$tabela .= '<tr style="background:'.$bgcolor.'"><td>'.$referente.$historico.'</td>
+			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
 			<td id="moeda">'.$lancValor.'</td></tr>';
 		}
 		

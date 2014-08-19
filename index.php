@@ -82,7 +82,7 @@
 
         <div class="header">Sistemas</div>
         <ul id="categories">
-          <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=1"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
+          <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
           <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB"><span class="glyphicon glyphicon-hand-right" >&nbsp;</span>&nbsp;Novos&nbsp;Convertidos</a></li>
           <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span class="glyphicon glyphicon-fire">&nbsp;</span>&nbsp;Igrejas</a></li>

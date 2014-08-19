@@ -21,7 +21,7 @@ caption {
 }
 
 col {
-  border-right: 1px solid #0000CC;
+  border-right: 1px solid #000000;
 }
 
 col#albumCol {
@@ -34,7 +34,7 @@ tbody#periodo tr:hover,tbody#recibos tr:hover {
 }
 
 thead {
-  background: #B2B0B0;
+  background: #CFCFCF;
   border: 2px solid #000;
   font-size: 120%;
   color:#000000;
@@ -49,7 +49,7 @@ td {
 	text-align:left;
 }
 
-td#moeda {
+td#moeda, p#moeda  {
 	text-align:right;
 }
 
@@ -75,8 +75,15 @@ thead tr:hover {
 }
 
 .odd {
-	background-color:#DCDCDC;
+	background-color:#E8E8E8;
 	color:#000;
+}
+
+.odd3 {
+	background-color:#FFFFFF;
+	color:#000;
+	 border-bottom: 1px dotted #000;
+	 border-top: 1px dotted #000;
 }
 
 #total {
