@@ -44,7 +44,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$titulo1;
 			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
-			<td>'.$lancValor.'</td></tr>';
+			<td style="width:18%;">'.$lancValor.'</td></tr>';
 			$cor = !$cor;
 			$referente  = '';
 			$titulo1  = '';$lancValor = '';

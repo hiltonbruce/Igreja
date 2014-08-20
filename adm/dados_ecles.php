@@ -37,13 +37,13 @@ if ($_SESSION['nivel']>4){
          <?PHP
 			$lst_cid = new sele_cidade("cidade","$vl_uf","{$arr_dad["uf"]}","nome","cid_nasc");
 		 	$congr = new List_sele ("igreja","razao","congregacao");
-		 	echo $congr->List_Selec (++$ind,$igreja->rol());
+		 	echo $congr->List_Selec (++$ind,$igreja->rol(),' class="form-control" ');
 		 ?>
 		 <input name="escolha" type="hidden" id="escolha" value="adm/atualizar_dados.php" />
 		  <input name="tabela" type="hidden" id="tabela" value="eclesiastico" />
 			<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
 		  <input name="campo" type="hidden" id="campo" value="congregacao" />
-		  <input name="Alterar..." type="submit" id="Alterar..." value="Alterar..." tabindex="2" />
+		  <input name="Alterar..." class="btn btn-primary btn-xs" type="submit" id="Alterar..." value="Alterar..." tabindex="2" />
 		  </form>
 		<?PHP
 		}

@@ -7,9 +7,14 @@
 	if (strstr($itemagenda->credor(),'r')) {
 		$credor = new DBRecord('membro', (int)$itemagenda->credor(), 'rol');
 		$nomecredor = 'Rol: '.$credor->rol().'-'.$credor->nome();
+		$credor = '<input type="text" name="credor" class="form-control" 
+		 required="required" value="'.$nomecredor ;
+		$credorCompl = true;//Para o caso de membros da igreja
+		
 	}else {
 		$credor = new DBRecord('credores', $itemagenda->credor(), 'id');
 		$nomecredor = $credor->alias();
+		$credorCompl = false;
 	}
 
 	
@@ -23,10 +28,23 @@
 	echo $diferenca->m.' meses<br/>';
 	echo $dataVenc->format('Y-m').' FormatoVenc<br/>';
 	*/
-	if ($dataAtual->format('U') > $dataVenc->format('U')) {
-		echo 'Conta Vencida<br/>';
+	if ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
+		?>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+		<a href="#" class="alert-link">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		Vencida! Esta conta ainda não foi paga!</a>
+		</div>
+		
+		<?php 
 	}else {
-		echo 'Conta OK<br/>';
+		?>
+		<div class="alert alert-success alert-dismissible"" role="alert">
+		<a href="#" class="alert-link">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		Conta Paga, Obrigado!</a>
+		</div>
+		<?php
 	}
 		
 	$pendende = '';
@@ -60,9 +78,6 @@
 		$igreja_array = new DBRecord('igreja',$itemagenda->igreja(), 'rol');
 		$igreja_pgto = $igreja_array->razao();
 	}
-	echo 'Igreja: '.$igreja_pgto.' - credor --> '.$nomecredor;
-	echo '<br /> Motivo: '.$itemagenda->motivo().' --> Valor: R$ '.$itemagenda->valor();
-	echo '<br /> Vencimento: '.conv_valor_br($itemagenda->vencimento());
 	?>
 	</p>
 	<form action="" method="post" name="cadastro_igreja">
@@ -70,12 +85,39 @@
 		<table style="text-align: left; width: 100%;">
 			<tbody>
 				<tr>
+					<td><label>Igreja</label>
+						 <?PHP
+						 	$congr = new List_sele ("igreja","razao","igreja");
+						 	echo $congr->List_Selec (++$ind,$itemagenda->igreja(),' class="form-control" ');
+						 ?>
+					</td>
+					<td colspan="3" rowspan="2">
+						<label>Motivo</label>
+						<textarea rows="" cols="" name="motivo" required="required" 
+						 tabindex="<?PHP echo ++$ind; ?>" class="form-control"
+						 ><?php echo $itemagenda->motivo();?></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td><label>Credor:</label>
+						 <?PHP
+						 	if ($credorCompl) {
+						 		echo $credor.'tabindex="'.++$ind.'" placeholder="Rol do Memdro"';
+						 	}else {
+								$congr = new List_sele ("credores","alias","credor");
+								echo $congr->List_Selec (++$ind,$itemagenda->credor(),' class="form-control" required="required" ');
+						 	}
+						 
+						 ?>
+					</td>
+				</tr>
+				<tr>
 					<td><label><input type="radio" id="status" <?php echo $pago;?>
-						name="status" value="2" tabindex="<?php echo ++$ind; ?>">Pago</label> 
+						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago</label> 
 					</td>
 					<td><label> <input type="radio"
 						id="status" name="status" value="1" <?php echo $enviado;?>
-						tabindex="<?php echo ++$ind; ?>">Enviado para pagamento</label>
+						tabindex="<?php echo ++$ind; ?>"> Enviado para pagamento</label>
 					</td>
 					<td><label><input type="radio" id="status"
 						name="status" autofocus="autofocus" value="0"
@@ -104,7 +146,7 @@
 						value="<?php echo $dataget;?>"></td>
 				</tr>
 				<tr>
-					<td><label>Vencimento:</label> <input type="text" name="vencimento"
+					<td><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
 						id="venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						required="required" value="<?php echo conv_valor_br($itemagenda->vencimento());?>"></td>
 					<td><label>Resp.Pagamento:</label> <input type="text"

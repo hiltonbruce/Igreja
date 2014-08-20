@@ -68,7 +68,7 @@
 		<thead>
 			<tr>
 				<th scope="col">Descrição</th>
-				<th scope="col"><?php echo $tituloColuna5;?></th>
+				<th scope="col" class="centro"><?php echo $tituloColuna5;?></th>
 			</tr>
 		</thead>
 			<?php
