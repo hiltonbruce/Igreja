@@ -28,22 +28,33 @@
 	echo $diferenca->m.' meses<br/>';
 	echo $dataVenc->format('Y-m').' FormatoVenc<br/>';
 	*/
-	if ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
+	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
 		?>
+		<div class="alert alert-info alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      Conta com vencimento hoje!
+	    </div>
+		<?php
+	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
+		?>	
 		<div class="alert alert-danger alert-dismissible" role="alert">
-		<a href="#" class="alert-link">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		Vencida! Esta conta ainda não foi paga!</a>
-		</div>
-		
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      Vencida! Esta conta ainda não foi paga!
+	    </div>
+		<?php 
+	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
+		?>	
+		<div class="alert alert-warning alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      Conta ainda dentro do prazo para pagamento!
+	    </div>
 		<?php 
 	}else {
 		?>
-		<div class="alert alert-success alert-dismissible"" role="alert">
-		<a href="#" class="alert-link">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		Conta Paga, Obrigado!</a>
-		</div>
+		<div class="alert alert-success alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      Conta Paga, Obrigado!
+	    </div>
 		<?php
 	}
 		
