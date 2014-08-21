@@ -65,28 +65,28 @@ $(document).ready(function(){
 		?>
 		<div class="alert alert-success alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situação: <?php echo $dataget;?></strong>
+	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situação em: <?php echo $dataget;?></strong>
 	    </div>
 		<?php
 	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>	
 		<div class="alert alert-danger alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação: <?php echo $dataget;?></strong>
+	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação em: <?php echo $dataget;?></strong>
 	    </div>
 		<?php 
 	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>	
 		<div class="alert alert-warning alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta ainda dentro do prazo para pagamento! <strong>Situação: <?php echo $dataget;?></strong>
+	      Conta ainda dentro do prazo para pagamento! <strong>Situação em: <?php echo $dataget;?></strong>
 	    </div>
 		<?php 
 	}else {
 		?>
 		<div class="alert alert-info alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta PAGA, Obrigado! <strong>Situação: <?php echo $dataget;?></strong>
+	      Conta PAGA, Obrigado! <strong>Situação em: <?php echo $dataget;?></strong>
 	    </div>
 		<?php
 	}
