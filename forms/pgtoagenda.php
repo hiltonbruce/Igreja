@@ -1,3 +1,27 @@
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
+<script type="text/javascript">
+$(document).ready(function(){
+
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular, congr ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#sigla_val").val(celular);
+			$("#rol").val(celular);
+			$("#cong").val(congr);
+		}
+		
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/autodizimo.php?q=" + this.value;
+	});
+
+});
+</script>
+<!-- Desenvolvido por Wellington Ribeiro -->
+
 <fieldset>
 	<legend>Lançar Pagamento</legend>
 	<p style="background: white; color: blue; font-size: 14px;">
@@ -5,16 +29,25 @@
 
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
 	if (strstr($itemagenda->credor(),'r')) {
-		$credor = new DBRecord('membro', (int)$itemagenda->credor(), 'rol');
-		$nomecredor = 'Rol: '.$credor->rol().'-'.$credor->nome();
-		$credor = '<input type="text" name="credor" class="form-control" 
-		 required="required" value="'.$nomecredor ;
+		$rolMembro = ltrim ($itemagenda->credor(),'r');
+		$credor = new DBRecord('membro', (int)$rolMembro, 'rol');
+		$nomeMembro = $credor->nome();
 		$credorCompl = true;//Para o caso de membros da igreja
+		
+		$mudaTipo = '<div class="bs-callout bs-callout-warning">
+		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
+			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
+		  </div>';
 		
 	}else {
 		$credor = new DBRecord('credores', $itemagenda->credor(), 'id');
 		$nomecredor = $credor->alias();
 		$credorCompl = false;
+		$mudaTipo = '<div class="bs-callout bs-callout-warning">
+		    <p><label><input type="checkbox" id="status" name="paraMembro"
+		value="1" tabindex="<?php echo ++$ind; ?>">
+		&nbsp;Mudar este compromisso para credor Membro da Igreja!</label></p>
+		  </div>';
 	}
 
 	
@@ -30,30 +63,30 @@
 	*/
 	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
 		?>
-		<div class="alert alert-info alert-dismissible" role="alert">
+		<div class="alert alert-success alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta com vencimento hoje!
+	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situação: <?php echo $dataget;?></strong>
 	    </div>
 		<?php
 	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>	
 		<div class="alert alert-danger alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Vencida! Esta conta ainda não foi paga!
+	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação: <?php echo $dataget;?></strong>
 	    </div>
 		<?php 
 	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>	
 		<div class="alert alert-warning alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta ainda dentro do prazo para pagamento!
+	      Conta ainda dentro do prazo para pagamento! <strong>Situação: <?php echo $dataget;?></strong>
 	    </div>
 		<?php 
 	}else {
 		?>
-		<div class="alert alert-success alert-dismissible" role="alert">
+		<div class="alert alert-info alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta Paga, Obrigado!
+	      Conta PAGA, Obrigado! <strong>Situação: <?php echo $dataget;?></strong>
 	    </div>
 		<?php
 	}
@@ -92,7 +125,6 @@
 	?>
 	</p>
 	<form action="" method="post" name="cadastro_igreja">
-		<h3>Situação: <?php echo $dataget;?></h3>
 		<table style="text-align: left; width: 100%;">
 			<tbody>
 				<tr>
@@ -110,16 +142,22 @@
 					</td>
 				</tr>
 				<tr>
-					<td><label>Credor:</label>
+					<td>
 						 <?PHP
 						 	if ($credorCompl) {
-						 		echo $credor.'tabindex="'.++$ind.'" placeholder="Rol do Memdro"';
+						 		require_once 'forms/completaNomeRol.php';
 						 	}else {
+						 		echo '<label>Credor:</label>';
 								$congr = new List_sele ("credores","alias","credor");
 								echo $congr->List_Selec (++$ind,$itemagenda->credor(),' class="form-control" required="required" ');
 						 	}
 						 
 						 ?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<?php echo $mudaTipo;?>						
 					</td>
 				</tr>
 				<tr>
@@ -165,7 +203,7 @@
 						value="<?php echo $itemagenda->resppgto();?>"></td>
 					<td><label></label> <label>&nbsp;</label> <input type="hidden" name="atualizar"
 						value="<?php echo $_GET['id'];?>"> <input type="submit"
-						name="Submit" class="btn btn-primary" value="Registrar..."
+						name="Submit" class="btn btn-primary" value="Atualizar..."
 						tabindex="<?php echo ++$ind; ?>"></td>
 				</tr>
 			</tbody>

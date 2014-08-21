@@ -1,4 +1,3 @@
-<h1><img src="img/loading2.gif" width="30" height="30"></h1>
 <?PHP
 
 require_once 'views/tesouraria/dizoferta.php';
@@ -14,8 +13,23 @@ $rolIgreja = (empty($_POST['rolIgreja'])) ? false:(int)$_POST['rolIgreja'];
 $ultregistro = mysql_query ('SELECT data FROM dizimooferta WHERE lancamento="0" AND igreja="'.$rolIgreja.'" ORDER BY id DESC LIMIT 1');
 $vlrregistro = mysql_fetch_row($ultregistro);
 
-echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';
-echo '<H1>Data do lançamento: '.$datalanc.'</h1>';
+?>
+	<table>
+		<tbody>
+			<tr>
+				<td><?php echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';?></td>
+				<td rowspan="2"><?PHP print mostra_foto($_POST["rol"]);?></td>
+			</tr>
+			<tr>
+				<td>
+				<?php echo '<H1>Data do lançamento: '.$datalanc.'</h1>';?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<?php
+
+
 //$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
 $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&
 		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' >Continuar...</button><a>";

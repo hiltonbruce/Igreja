@@ -38,7 +38,18 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			echo "<script> alert('O vencimento com data invalida! {$_POST['vencimento']}');</script>";
 		}
 		
+		if ($_POST['paraMembro']=='1') {
+			 $atualizar->credor		= 	'r0';
+		}elseif ($_POST['paraCredor']=='1'){
+			$atualizar->credor		= 	'0';
+		}elseif (!empty($_POST['rol']) ){
+			$atualizar->credor		= 'r'.(int)$_POST['rol'];
+		}elseif (!empty($_POST['credor']) ) {
+			$atualizar->credor		= 	(int)$_POST['credor'];
+		}
 		
+		$atualizar->igreja		= 	$_POST['igreja'];
+		$atualizar->motivo		= 	$_POST['motivo'];
 		$atualizar->status		= 	$_POST['status'];
 		$atualizar->multa		=	strtr($_POST['multa'], ',','.' );
 		$valor_us =strtr($_POST['valor'], ',','.' );
