@@ -1,6 +1,6 @@
 <?php 
 	if (empty($_GET['altdias'])) {
-		$dias=0;
+		$dias='';
 	}else {
 		$dias=$_GET['altdias'];
 	}
@@ -15,7 +15,9 @@
 					<input type="hidden" name='escolha' value="tesouraria/agenda.php">
 					<input type="hidden" name='menu' value="top_tesouraria">
 					<label>N&ordm;&nbsp;negativo&nbsp;volta&nbsp;e&nbsp;positivo&nbsp;andianta&nbsp;a&nbsp;agenda</label>
-					<input type="text" name="altdias" class="form-control" title="Valor negativo volta e positivo andianta os dias na agenda">
+					<input type="text" name="altdias" class="form-control" value="<?php echo $dias;?>"
+					placeholder="Valor negativo volta e positivo andianta os dias na agenda"
+					title="Valor negativo volta e positivo andianta os dias na agenda">
 			</td>
 			<td>
 					<label>&nbsp;</label>
@@ -76,6 +78,8 @@
 	  	<input type="text" name="motivo" class="form-control" autofocus="autofocus"
 	  	 placeholder="Informe o motivo para procurarmos">
 	  <input type="hidden" name="menu" value="top_tesouraria">
+	  <input type="hidden" name="igreja" value="<?PHP echo $_GET["igreja"];?>">
+	  <input type="hidden" name="altdias" value="<?PHP echo $dias;?>">
 	  <input type="hidden" name="escolha" value="<?PHP echo $_GET["escolha"];?>">
 	  <input type="hidden" name="credor" value="<?php echo $_GET['credor']?>"></td>
 			<td><label>&nbsp;</label><input type="submit" class="btn btn-primary" value="Listar...">

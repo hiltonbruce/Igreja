@@ -1,6 +1,4 @@
 <?php
-conectar();
-
 class membro {
 	
 	function __construct () {
@@ -10,7 +8,6 @@ class membro {
 	}
 
 	function nomes () {
-		$ind = 0;
 		while($dados = mysql_fetch_array($this->membros))
 		{
 			$mud_acent = strtoupper(strtr($dados["nome"], 'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC'));

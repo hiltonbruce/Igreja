@@ -1,5 +1,11 @@
 <?php
 class agenda {
+	
+	function  __construct () {
+		$this->membro = new membro();
+		$this->credor = new tes_credores();
+		$this->igreja = new igreja();
+	}
 
 	function nomes () {
 		$ind = 0;
@@ -430,12 +436,16 @@ class agenda {
 	
 	function vencidasMotivo($motivo,$credor) { //Contas vencidas por motivo
 		
+		$dadosMembros	= $this->membro->nomes();
+		$dadosCredores	= $this->credor->dados();
+		$dadosIgreja	= $this->igreja->Arrayigreja();
+		//print_r ($dadosMembros);
 		$filtrarCredor = ((int)$credor!='') ? ' a.credor = "'.$credor.'" AND ':'';
-		$listvenc  = 'SELECT f.razao, a.vencimento, a.valor, a.id, ';
-		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, a.status ';
-		$listvenc .= 'FROM agenda AS a, credores AS f, igreja AS i  WHERE f.id=a.credor AND '.$filtrarCredor;
-		$listvenc .= 'i.rol=a.igreja AND a.status<"2" AND TO_DAYS(a.vencimento) < TO_DAYS(NOW())';
-		$listvenc .= 'AND motivo LIKE "%'.$motivo.'%"';
+		$listvenc  = 'SELECT vencimento,valor,id,igreja,credor,';
+		$listvenc .= 'DATE_FORMAT(datapgto,"%d/%m/%Y") AS pgto,motivo,status ';
+		$listvenc .= 'FROM agenda WHERE '.$filtrarCredor;
+		$listvenc .= ' status<"2" AND TO_DAYS(vencimento) < TO_DAYS(NOW())';
+		$listvenc .= 'AND motivo LIKE "%'.$motivo.'%" ORDER BY vencimento ';
 		$listvenc_array = mysql_query($listvenc);
 		
 		while ($contas = mysql_fetch_array($listvenc_array)) {
@@ -453,13 +463,23 @@ class agenda {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
 			}
+			if (strstr($contas['credor'], 'r')) {
+				$rolMembro = trim ($contas['credor'], 'r');
+				$nome = $dadosMembros[(int)$rolMembro]['0'];
+			}elseif (strstr($contas['credor'], '@')) {
+				list ($r,$rolMembro) = explode ('@',$contas['credor']);
+				$nome = $dadosMembros[(int)$rolMembro]['0'];
+			}else {
+				$nome = $dadosCredores[$contas['credor']]['0'];
+			}
+			
 			$p++;
 			$trtab = ($p % 2) == 0 ? '<tr class="dados" >' : '<tr >';
 			$tabela .=  $trtab;
 			$tabela .=  '<td>'.conv_valor_br($contas ['vencimento']).'</td><td>';
 			$tabela .=  '<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria
 				&id='.$contas['id'].'&pagina1_fix='.$_GET['pagina1_fix'].'" title="'.$titulo.'">';
-			$tabela .=  $contas['nome'].$evento.$contas ['igreja'];
+			$tabela .=  $evento.$nome.':'.$dadosIgreja[$contas ['igreja']]['0'];
 			$tabela .=  ' -> '.$contas['motivo'].'<a></td>';
 			$tabela .= '<td>'.$contas['pgto'].'<a></td>';
 			$tabela .=  '<td style="text-align: right;" >'.number_format($contas['valor'],2,",",".").'</td>';

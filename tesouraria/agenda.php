@@ -8,7 +8,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$despesasInserirdas = $lista->insdespmes();
 
 	if (!empty($_GET['vencidas'])) {
-		require_once 'tesouraria/vencidas.php';
+		require_once 'tesouraria/vencidas.php';//Faz a busca dos compromissos agendados
 	}
 	
 	if ($_GET['id']>0 && empty($_POST['atualizar'])) {

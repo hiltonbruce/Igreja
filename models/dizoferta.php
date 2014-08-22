@@ -18,7 +18,14 @@ $vlrregistro = mysql_fetch_row($ultregistro);
 		<tbody>
 			<tr>
 				<td><?php echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';?></td>
-				<td rowspan="2"><?PHP print mostra_foto($_POST["rol"]);?></td>
+				<td rowspan="2">
+						<?PHP 
+							//Exibe a foto do contribuinte
+								if ($_POST["rol"]>'0') {
+									print mostra_foto($_POST["rol"]);
+								}
+							?>
+				</td>
 			</tr>
 			<tr>
 				<td>
