@@ -1,5 +1,17 @@
 <?php
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
+
+if (!empty($dataMov) && checadata($dataMov)) {
+	$mesRelatorio = '"'.$a.$m.'"';
+}elseif ($m>'0' && $m<'13') {
+	$a = date('Y');
+	$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
+	$mesRelatorio = '"'.$a.$m.'"';
+}else {
+	list($d,$m,$a) = explode('/',date('d/m/Y'));
+	$mesRelatorio = '"'.date('Ym').'"';
+}
+
 if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
@@ -42,6 +54,14 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 			 $nomeArquivo='../views/tesouraria/tabRelatLanc.php';
 			require_once '../views/modeloPrint.php';
 			break;
+			case '16':
+				$mesRelatorio .=$rolIgreja;
+				$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
+				$titTabela = 'Fluxo das Contas - '.$dtRelatorio.'<h3>'.$congRelatorio.'<h3>';
+				require_once '../models/tes/relatorioComadep.php';
+				$nomeArquivo='../views/saldosComadep.php';
+				require_once '../views/modeloPrint.php';
+				break;
 		
 		default:
 			//imprimir plano de contas
@@ -102,6 +122,16 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 				case '3':
 					require_once ('forms/ofertaEBD.php');
 					require_once 'forms/concluirdiz.php';
+					break;
+				case '4'://Relatório COMADEP					
+					$mesRelatorio .=$rolIgreja;
+					$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
+					$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio.$congRelatorio;
+					$recLink = '16&dia='.$d.'&mes='.$m.'&ano='.$a;
+					$linkImpressao ='tesouraria/receita.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
+					require_once 'models/tes/relatorioComadep.php';
+					require_once ('views/saldosComadep.php');
+					require_once 'forms/tes/mesComadep.php';
 					break;
 				case '5':
 				    $form = 'forms/tes/autoLancarDespesas.php';

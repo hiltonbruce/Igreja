@@ -52,14 +52,7 @@ if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 
 		switch ($_GET['rec']) {
 			
-			case '13':
-				$mesRelatorio .=$rolIgreja;
-				$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-				$titTabela = 'Fluxo das Contas - '.$dtRelatorio.'<h3>'.$congRelatorio.'<h3>';
-				require_once '../models/tes/relatorioComadep.php';
-				$nomeArquivo='../views/saldosComadep.php';
-				require_once '../views/modeloPrint.php';
-				break;
+			
 
 			default:
 				break;
@@ -107,16 +100,6 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	switch ($agenda) {
 		case '3':
 			require_once 'forms/ctapagar.php';//Contas a pagar
-			break;
-		case '4'://Relatório COMADEP
-			$mesRelatorio .=$rolIgreja;
-			$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-			$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio.$congRelatorio;;
-			$recLink = '13&dia='.$d.'&mes='.$m.'&ano='.$a;
-			$linkImpressao ='controller/despesa.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
-			require_once 'models/tes/relatorioComadep.php';
-			require_once ('views/saldosComadep.php');
-			require_once 'forms/tes/mesComadep.php';
 			break;
 		case '5':
 			require_once 'models/cadagendapgto.php';//Agenda despesa

@@ -175,8 +175,8 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 		$tabela .=  '<tfoot><tr id="total"><td colspan="5">Não há lançamentos para esta busca ou pendentes!</td></tr></tfoot>';
 		}else {
 		$tabela .=  '<tfoot><tr id="total"><td colspan="3" id="moeda">Total: 
-		 </td><td id="moeda">
-		 R$ '.$total.'</td><td></td></tr></tfoot>';
+		 </td><td id="dados" colspan="2" >
+		 '.$total.'</td></tr></tfoot>';
 		}
 		$resultado = array($total,$tabela,$lancConfirmado);
 		return $resultado;

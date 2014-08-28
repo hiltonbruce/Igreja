@@ -69,5 +69,11 @@
 	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=2">Contábil</a></li>
 	  </ul>
 	</div>
-	
+	  
+	 <div class="btn-group">
+		<a <?PHP $b=link_ativo($_GET["age"], "4");?>
+				href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=4">
+				<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">COMADEP</button>
+		</a>
+	</div>
 	</p>
