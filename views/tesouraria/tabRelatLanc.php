@@ -79,5 +79,7 @@
 <?php
 //print_r($tabMembros->nomes());
 
+print_r ($resultado['1']);
+
 echo($imprimir);
 ?>
