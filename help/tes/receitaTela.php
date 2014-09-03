@@ -17,19 +17,20 @@ switch ($_GET['rec']) {
 		require_once ('forms/ofertaEBD.php');
 		require_once 'forms/concluirdiz.php';
 		break;
-	case '4'://Relatório COMADEP					
+	case '5':
+	    $form = 'forms/tes/autoLancarDespesas.php';
+		require_once ('forms/lancar.php');
+		break;
+	case '6'://Relatório COMADEP
+		require_once 'help/tes/relatorioComadep.php';
 		$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 		$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio.$congRelatorio;
 		$recLink = '16&dia='.$d.'&mes='.$m.'&ano='.$a;
 		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
 		require_once 'models/tes/relatorioComadep.php';
-		require_once ('views/saldosComadep.php');
 		require_once 'forms/tes/mesComadep.php';
-		break;
-	case '5':
-	    $form = 'forms/tes/autoLancarDespesas.php';
-		require_once ('forms/lancar.php');
+		require_once ('views/saldosComadep.php');
 		break;
 	case '7':
 		require_once 'forms/tes/histFinanceiro.php';

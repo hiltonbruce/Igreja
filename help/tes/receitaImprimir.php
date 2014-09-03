@@ -30,6 +30,8 @@ switch ($_GET['rec']) {
 		require_once '../views/modeloPrint.php';
 		break;
 		case '16':
+			//Relatorio COMADEP
+			require_once '../help/tes/relatorioComadep.php';			
 			$mesRelatorio .=$rolIgreja;
 			$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 			$titTabela = 'Fluxo das Contas - '.$dtRelatorio.'<h3>'.$congRelatorio.'<h3>';

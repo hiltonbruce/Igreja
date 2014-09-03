@@ -1,17 +1,6 @@
 <?php
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
 
-if (!empty($dataMov) && checadata($dataMov)) {
-	$mesRelatorio = '"'.$a.$m.'"';
-}elseif ($m>'0' && $m<'13') {
-	$a = date('Y');
-	$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
-	$mesRelatorio = '"'.$a.$m.'"';
-}else {
-	list($d,$m,$a) = explode('/',date('d/m/Y'));
-	$mesRelatorio = '"'.date('Ym').'"';
-}
-
 if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
@@ -40,7 +29,7 @@ $linkLancamento .= '&igreja='.$_GET['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links 
 
 $dizmista = new dizresp($_SESSION['valid_user']);
-$idIgreja = (empty($_GET['igreja'])) ? 1:$_GET['igreja'];
+$idIgreja = (empty($_GET['igreja'])) ? 1:(int)$_GET['igreja'];
 if ((int)$_POST['rolIgreja']>0) {
 	$idIgreja=$_POST['rolIgreja'];
 }

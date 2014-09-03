@@ -11,7 +11,13 @@ while ($cta = mysql_fetch_array($plano)) {
 
 //print_r($planoCta);
 //Busca do movimento no mês
-$lista = mysql_query('SELECT  *,DATE_FORMAT(data,"%Y%m") AS	dt FROM lancamento WHERE DATE_FORMAT(data,"%Y%m")<='.$mesRelatorio.' ORDER BY conta') or die(mysql_error());
+
+$queryLanc  = 'SELECT l.*,DATE_FORMAT(l.data,"%Y%m") AS dt FROM lancamento AS l, contas AS c';
+$queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<='.$mesRelatorio;
+$queryLanc .= ' AND c.id=l.conta';
+$queryLanc .= ' ORDER BY c.codigo';
+$lista = mysql_query($queryLanc) or die(mysql_error());
+		
 
 while ($contas = mysql_fetch_array($lista)) {
 	
@@ -133,9 +139,25 @@ foreach ($saldo AS $chave => $valor){
 			$cor = !$cor;
 		
 		$ctaAtual = $planoCta[$chave]['4'];
-		print_r ($sldGrupo);
+		//print_r ($sldGrupo);
 			//echo ' - Conta -> '.$planoCta[$chave]['2'];
 }
+
+if ($teste) {
+	//Grupo de contas
+	$bgcolorGrp = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
+	$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
+	'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td id="moeda">'.$grupoAtualForm.'</td>
+	<td id="moeda">'.number_format($sldGrupoCtaDisp,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td></tr>';
+	if ($nivel2=='') {
+		$nivel2 .=$nivelGrupo.$nivel1;
+	}else {
+		$nivelGrupo = $nivel2.$nivelGrupo.$nivel1;
+		$nivel2 = $nivelGrupo;
+		$nivelGrupo ='';
+	}
+}
+
 
 
 //Testar pq não está entrando no loop

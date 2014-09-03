@@ -40,8 +40,8 @@
 					?> 
 				</td>
 				<td>
-					<input name="escolha" type="hidden" value="controller/despesa.php" /><br />
-					<input type="hidden" name="age"	value="4" />
+					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
+					<input type="hidden" name="rec"	value="6" />
 					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 					tabindex="<?PHP echo ++$ind; ?>" /> 
 					<input name="menu" type="hidden" value="top_tesouraria" />
