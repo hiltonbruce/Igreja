@@ -31,7 +31,8 @@ foreach ($listaPgto as $chave => $valor) {
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
 	$nomeDiaPgto = ($valor['diapgto']=='661') ? 'Sexta':$valor['diapgto'];
 	
-	$nomeMembro = sprintf ("%'05u - %s",$valor['rolMembro'],$nomeMembro);
+	$remove = '<a href="./?#" title="Remover!"> <span class="glyphicon glyphicon-remove"> </span></a>';
+	$nomeMembro = sprintf ("% %'05u - %s ",$remove,$valor['rolMembro'],$nomeMembro);
 	
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
 		//Lista do Ministério

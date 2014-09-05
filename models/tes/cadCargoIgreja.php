@@ -17,15 +17,25 @@
  */
 controle ("tes");
 	
-	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
+	$cadMembro = new tes_ativaCargo ($_POST['rolIgreja'],$_POST['idfunc'],$_POST['hieraquia']);
+	$ativarCad = $cadMembro->cadMembroCargo($_POST['rol'],$_POST['nome'].',CPF: '.$_POST['cpf'].',RG: '.$_POST['rg'],$_POST['valor'],$_POST['diapgto'],$_POST['fonte']);
 	
-	$value  = "'','".$_POST['idfunc']."','','1','".$_POST['rolIgreja']."','".$_POST['rol']."','',";
-	$value .= "'".$_POST['hieraquia']."','1','".$_POST['valor']."','".$_POST['diapgto']."','";
-	$value .= $_POST['fonte']."','".$hist."','NOW()'";
+	//print_r ($ativarCad);
+	if ($ativarCad['Desativado']=='1') {
+		$atualCad = 'uma atualização!';
+	}elseif ($ativarCad['Desativado']>'1'){
+		$atualCad = $ativarCad['Desativado'].' atualizações!';
+	}else {
+		$atualCad = '';
+	}
 	
-	$dados = new insert ($value,'cargoigreja');
-	$dados->inserir();
-	echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
+	if ($ativarCad['Cadastro']>'0') {
+		$insertCad = ' Um cadastro!';
+	}else {
+		$insertCad = ' Erro! Nenhumm cadastro realizado!';
+	}
+	
+	echo '<script> alert("Houve: '.$atualCad.$insertCad.'");</script>';//recupera o id do último insert no mysql
 	
 		echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=7'; </script>";
 		echo "<a href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=7'>Continuar...<a>";
