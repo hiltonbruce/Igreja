@@ -17,8 +17,10 @@
  */
 controle ("tes");
 	
+if (!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf']) && !empty($_POST['rg'])) ) {
+
 	$cadMembro = new tes_ativaCargo ($_POST['rolIgreja'],$_POST['idfunc'],$_POST['hieraquia']);
-	$ativarCad = $cadMembro->cadMembroCargo($_POST['rol'],$_POST['nome'].',CPF: '.$_POST['cpf'].',RG: '.$_POST['rg'],$_POST['valor'],$_POST['diapgto'],$_POST['fonte']);
+	$ativarCad = $cadMembro->cadMembroCargo($_POST['rol'],$_POST['nome'].',CPF: '.$_POST['cpf'].',RG: '.$_POST['rg'],$_POST['valor'],$_POST['diapgto'],$_POST['fonte'],$_POST['acesso']);
 	
 	//print_r ($ativarCad);
 	if ($ativarCad['Desativado']=='1') {
@@ -34,7 +36,9 @@ controle ("tes");
 	}else {
 		$insertCad = ' Erro! Nenhumm cadastro realizado!';
 	}
-	
+	}else {
+		$insertCad = 'Erro! Nenhumm cadastro realizado! Você não informou o benefiaciado! Rol ou Nome com CPF e RG';
+	}
 	echo '<script> alert("Houve: '.$atualCad.$insertCad.'");</script>';//recupera o id do último insert no mysql
 	
 		echo "<script>location.href='./?escolha=controller/despesa.php&menu=top_tesouraria&age=7'; </script>";

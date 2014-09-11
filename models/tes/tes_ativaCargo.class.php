@@ -13,7 +13,7 @@ class tes_ativaCargo {
 		
 	}
 
-	function cadMembroCargo($rol,$nome,$valor,$diapgto,$fonte) {
+	function cadMembroCargo($rol,$nome,$valor,$diapgto,$fonte,$codDespesa) {
 		//Cadastra e atualiza o cargo se já estive outro com a mesmo função exceto Ministério
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 		
@@ -41,8 +41,8 @@ class tes_ativaCargo {
 		$desativadoCad = $db->affectedRows();
 		
 		//Insert o membro no cargo
-		$sth = $db->prepare('INSERT INTO  cargoigreja VALUES ("",?,"", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-		$data = array( $this->descricao,'1', $this->igreja, $rol, $nome, $this->hierarquia, $valor, $diapgto, $fonte,$hist, date('Y-m-d H:i:s'));
+		$sth = $db->prepare('INSERT INTO  cargoigreja VALUES ("",?,"", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+		$data = array( $this->descricao,'1', $this->igreja, $rol, $nome, $this->hierarquia, $valor, $diapgto, $fonte,$codDespesa, $hist, date('Y-m-d H:i:s'));
 		$db->execute($sth, $data);// Always check that result is not an error
 		if (PEAR::isError($res)) {
 			die($res->getMessage());

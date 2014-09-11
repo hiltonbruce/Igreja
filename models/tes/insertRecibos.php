@@ -59,7 +59,7 @@ if ($gerarPgto) {
 	
 	//Cadastra o recibo na tabela
 	$dt = br_data($data,"Data do recibo invalida: $data");
-			$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','','$fonte_recurso',";
+			$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','$codConta','$fonte_recurso',";
 			$value .= "'$lancamento','$referente','$dt','$hist'";
 	
 			$dados = new insert ($value,"tes_recibo");

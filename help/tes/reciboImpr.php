@@ -46,9 +46,15 @@ $resultado = array_unique($recibosArray);
 <link rel="SHORTCUT ICON" href="../ad.ico"  type="../image/vnd.microsoft.icon" />
 </head>
 <body>
-<?php 
+<?php
+$envelope = ($_POST['envelope']=='1') ? true:false;
 	foreach ($resultado as $chave => $numRec) {
-	 require '../views/tesouraria/reciboModelPrint.php';
+		if ($envelope) {
+			require '../views/tesouraria/envelopeModelPrint.php';
+		}else {
+			require '../views/tesouraria/reciboModelPrint.php';
+		}
+	 
 	 echo $saltoPagina;
 	}
 	//Loop p impressão de todos os recibos
