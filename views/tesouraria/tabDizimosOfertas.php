@@ -50,6 +50,18 @@ $tabMembros = new membro();
 				$statusLancamento = '';
 			}
 		}
+
+		
+		if (!empty($_GET['escolha'])) {
+			
+			$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
+			$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
+			$linkResumo .= '&credito='.$_GET['credito'];
+			
+			echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
+			echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
+			echo '</span>&nbsp;&nbsp;&nbsp;Imprimir a tabela abaixo...</button> </a>';
+		}		
 ?>
 <table style="width: 95%;">
 		<caption class="text-left">
@@ -107,9 +119,6 @@ $tabMembros = new membro();
 		</thead>
 			<?php
 				echo $tabLancamento;
-				$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
-				$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
-				$linkResumo .= '&credito='.$_GET['credito'];
 			?>
 </table>
 <?php
@@ -121,7 +130,7 @@ $tabMembros = new membro();
 	}else {
 ?>
 		<span id="text-right">Conferido por:</span>
-	<table>
+	<table style="width: 95%;">
 			<colgroup>
 				<col id="Data">
 				<col id="albumCol"/>

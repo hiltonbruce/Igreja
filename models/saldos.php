@@ -19,18 +19,21 @@ while ($contas = mysql_fetch_array($lista)) {
 		$title = $contas['descricao'];
 	if (strlen($contas['codigo'])<10) {
 		//Grupo de contas
+		$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
+		
 		$bgcolor = 'style="background:#C9DBF2;color:#000;border-bottom: 1px dashed #1e90ff;"';
 		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
-		'</td><td></td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
+		'</td><td></td><td id="moeda">'.$valorExibir.'</td></tr>';
 		$cor= true;
 	}else {
 		//Contas
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 		
+		$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
 		
 		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.
 				'</td><td title="'.$title.'">'.$contas['titulo'].'</td><td id="moeda">'
-				.number_format($sldConta,2,',','.').$tipoCta.'</td><td></td></tr>';
+				.$valorExibir.'</td><td></td></tr>';
 		$cor = !$cor;
 	}
 
@@ -38,16 +41,21 @@ while ($contas = mysql_fetch_array($lista)) {
 	if ($contas['saldo']!=0) {
 		if (strlen($contas['codigo'])<10) {
 			//Grupo de contas
+			
+			$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
+			
 			$bgcolor2 = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
-			'</td><td id="moeda">'.number_format($sldConta,2,',','.').$tipoCta.'</td><td></td></tr>';
+			'</td><td id="moeda">'.$valorExibir.'</td><td></td></tr>';
 			$cor2 = true;
 		}else {
 			//Contas
+			$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
+			
 			$bgcolor2 = $cor2 ? 'style="background:#ffffff;color:#000;"' : 'style="background:#d0d0d0;color:#000;"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td>
 					<td title="'.$title.'">'.$contas['titulo'].'</td><td></td><td id="moeda">'
-					.number_format($sldConta,2,',','.').$tipoCta.'</td></tr>';
+					.$valorExibir.'</td></tr>';
 			$cor2 = !$cor2;
 		}
 	}
