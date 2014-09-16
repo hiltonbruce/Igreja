@@ -28,6 +28,9 @@ $(document).ready(function(){
 	<?php
 
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
+	$datapgto = conv_valor_br ($itemagenda->datapgto());
+	$datapgto = ($datapgto=='00/00/0000') ? $dataget:$datapgto;
+	
 	if (strstr($itemagenda->credor(),'r')) {
 		$rolMembro = ltrim ($itemagenda->credor(),'r');
 		$credor = new DBRecord('membro', (int)$rolMembro, 'rol');
@@ -190,9 +193,9 @@ $(document).ready(function(){
 					<td><label>Juros e Multas:</label> <input type="text" name="multa"
 						id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 						value="<?php echo $itemagenda->multa();?>"></td>
-					<td><label>Pago em:</label> <input type="text" name="data"
+					<td><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
 						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
-						value="<?php echo $dataget;?>"></td>
+						value="<?php echo $datapgto;?>"></td>
 				</tr>
 				<tr>
 					<td><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
