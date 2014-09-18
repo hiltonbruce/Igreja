@@ -84,7 +84,8 @@
 	}
 	if ($erro!='1') {
 ?>
-<div id="container">
+
+<div style="width: 665px;">
   <div id="header">
 	<p>
 	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />

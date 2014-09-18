@@ -70,13 +70,15 @@
 	}
 	if ($erro!='1') {
 ?>
+<div style="width: 340px;margin-left: 150px;">
 <div id="mainnav">
-		<div style="text-align: right;"><h4><?php printf ("N&uacute;mero do recibo: %'05u",$numRec);?></h4></div>
+		<div style="text-align: right;"><h4 style="font-size: 80%;">
+			<?php printf ("N&uacute;mero do recibo: %'05u",$numRec);?></h4></div>
   </div>
-	<div id="content">
-	<?php echo $vlr;?><br />
+	<div style="font-size: 80%;" id="content">
+	<?php echo $vlr;?>
   </div>
-    <div id="added-div1">
+    <div style="width: 340px;font-size: 80%; " id="added-div1">
 
 	<?php
 		echo $texto.$referente;
@@ -92,9 +94,9 @@
 		echo $obs;
 		?>
     </div>
-    </div>
     <div id="footer">
      Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
+    </div>
     </div>
   <?php 
 	}

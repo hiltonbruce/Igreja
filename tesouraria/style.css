@@ -15,8 +15,8 @@ body,table {
 	#container { margin: 1em auto; width: 800px; text-align: left;}
 	
 	#header { width:auto; height: 80px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
-	 background-position: left bottom; margin: 0; padding: 0 20px 0 10px; text-align:right;}
-	#header p { position:relative;width:400px; height: 100%; padding: 0 20px 0 10px; text-align:right;float: right;}
+	 background-position: left bottom; margin: 0; padding: 0 0 0 10px; text-align:right;}
+	#header p { position:relative;width:400px; height: 100%; padding: 0 0 0 10px; text-align:right;float: right;}
 	#mainnav {
 	height: 20px;
 	margin: 0;
@@ -51,7 +51,7 @@ a:link:after, a:visited:after {
 
 #added-div1 {
 	position:relative;
-	width:800px;
+	width: 100%;
 	z-index:1;
 	height: auto;
 	float: left;
@@ -63,7 +63,7 @@ a:link:after, a:visited:after {
 }
 
 #added-div-2 {
-	width:800px;
+	width:100%;
 	z-index:2;
 	float: right;
 	margin: 3px 0 5px;
