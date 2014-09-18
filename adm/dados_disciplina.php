@@ -1,7 +1,7 @@
 <h3>
 	<a
-		href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>&novo=novo"><button>Novo
-		Registro</button>, Clique aqui! ...</a>
+		href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>&novo=novo">
+		<button class='btn btn-primary'>Novo Registro</button>, Clique aqui! ...</a>
 </h3>
 
 <fieldset>
@@ -174,10 +174,10 @@
 				<tr>
 					<td width="327" rowspan="5" id="form"><label>Detalhamento: <textarea
 								name="motivo" cols="30" rows="6" required="required" id="motivo"
-								tabindex="<?php echo ++$ind;?>"></textarea>
+								tabindex="<?php echo ++$ind;?>" class="form-control" ></textarea>
 					</label></td>
 					<td>Dirigente do Culto: <input name="dirigente" type="text"
-						tabindex="<?php echo ++$ind;?>" />
+						tabindex="<?php echo ++$ind;?>" class="form-control"  />
 					</td>
 				</tr>
 				<tr>
@@ -185,7 +185,7 @@
 				</tr>
 				<tr>
 					<td><label>Situacao Espiritual</label> <select name="situacao"
-						tabindex="<?PHP echo ++$ind;?>">
+						tabindex="<?PHP echo ++$ind;?>" class="form-control" >
 							<option value="2">Displinado</option>
 							<option value="1">Em Comunh&atilde;o</option>
 							<option value="3">Falecido</option>
@@ -197,14 +197,14 @@
 				</tr>
 				<tr>
 					<td width="229">Data do Registro: <label><input type="text"
-							name="data_ini" id='data' tabindex="<?php echo ++$ind;?>" /> </label>(Em
+							name="data_ini" id='data' tabindex="<?php echo ++$ind;?>" class="form-control"  /> </label>(Em
 						branco para data atual)
 					</td>
 				</tr>
 
 				<tr>
 					<td>Tempo em dias (para disciplina): <label><input type="text"
-							name="prazo" tabindex="<?php echo ++$ind;?>" /> </label> (Em
+							name="prazo" tabindex="<?php echo ++$ind;?>"  class="form-control" /> </label> (Em
 						branco para INDETERMINDO)
 					</td>
 				</tr>
@@ -214,7 +214,7 @@
 			name="escolha" type="hidden" id="escolha"
 			value="adm/dados_disciplina.php" /> <input name="bsc_rol"
 			type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" /> <label> <input
-			type="submit" name="Submit" value="Cadastrar..."
+			type="submit" class='btn btn-primary' name="Submit" value="Cadastrar..."
 			tabindex="<?php echo ++$ind;?>" />
 		</label>
 	</form>
@@ -244,7 +244,7 @@
 			}
 			?> <input type="hidden" name="data_ini"
 			value="<?php echo $_POST["data_ini"];?>" />
-		</label>
+		</label>class='btn btn-primary' 
 		<table width="100%">
 			<thead>
 				<tr>
@@ -263,12 +263,12 @@
 			</thead>
 		</table>
 		<label>Sua senha: <input name="senha" type="password" id="senha"
-			tabindex="1" />
+			tabindex="1" class="form-control"  />
 		</label> <input name="tabela" type="hidden" id="tabela"
 			value="disciplina" /> <input name="bsc_rol" type="hidden" id="campo"
 			value="<?PHP echo $bsc_rol;?>" /> <input name="escolha" type="hidden"
 			id="escolha" value="adm/cad_dados_pess.php" /> <label> <input
-			type="submit" name="Submit" value="Confimar..."
+			type="submit" class='btn btn-primary' name="Submit" value="Confimar..."
 			tabindex="<?php echo ++$ind;?>" />
 		</label>
 	</form>

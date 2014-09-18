@@ -28,13 +28,13 @@
 </div>
     <?php } 
     
-	if (!(strstr($_GET["escolha"], "dados_pessoais.php") || strstr($_GET["escolha"], "cartao.php")) && isset($_SESSION["membro"]))
+	if (!(strstr($_GET["escolha"], 'dados_pessoais.php') || strstr($_GET['escolha'], 'cartao.php')) && isset($_SESSION['membro']))
 		{
-			echo 'Dados atuais de: <b>'.$_SESSION["membro"].'</b> - ';		
+			echo 'Dados atuais de: <b>'.$_SESSION['membro'].'</b> - ';		
 		}
-			$ecles = new DBRecord ("eclesiastico",$bsc_rol,"rol");
-			$igreja = new DBRecord ("igreja",$ecles->congregacao,"rol");
-			echo "Cargo: ".cargo($_GET["bsc_rol"])." - Congrega: {$igreja->razao}";			
+			$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");
+			$igreja = new DBRecord ('igreja',$ecles->congregacao,'rol');
+			echo 'Cargo: '.cargo($_GET["bsc_rol"]).' - Congrega: '.$igreja->razao().', '.situacao ($ecles->situacao_espiritual());			
 ?>
 		
 		

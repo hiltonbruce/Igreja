@@ -60,10 +60,9 @@
 		
 		if (!(strstr($_GET["escolha"], "dados_pessoais.php") || strstr($_GET["escolha"], "cartao.php")) && isset($_SESSION["membro"]))
 		{
-			echo "Membro: {$_SESSION["membro"]} - ";		
+			echo 'Membro: '.$_SESSION["membro"].' - ';	
 		}
-			$ecles = new DBRecord ("eclesiastico",$bsc_rol,"rol");
-			$igreja = new DBRecord ("igreja",$ecles->congregacao,"rol");
-			echo "Cargo: ".cargo($bsc_rol)." - Congrega: {$igreja->razao}";		
+			
+			echo 'Cargo: '.cargo($bsc_rol).' - Congrega: '.$igreja->razao();		
 		
 		?>

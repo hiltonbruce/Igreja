@@ -17,27 +17,28 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 </script>
 <form action="" id = "exterior" method="post" >
 	<input type="hidden" name="exterior" value="1">
-	<input type="submit" name="Submit" value="Clique aqui se carta para Exterior" tabindex="<?PHP echo $ind++;?>">
+	<input type="submit" class='btn btn-primary' name="Submit" value="Clique aqui se carta para Exterior" tabindex="<?PHP echo $ind++;?>">
 </form>
 
 <fieldset>
 <legend>Carta - Cadastro</legend>
 <form action="" id = "exterior" method="post" >
 	<input type="hidden" name="exterior" value="1">
-	<input type="submit" name="Submit" value="Carta - Exterior" tabindex="<?PHP echo $ind++;?>">
+	<input type="submit" class='btn btn-primary' name="Submit" value="Carta - Exterior" tabindex="<?PHP echo $ind++;?>">
 </form>
 
-<form method="post" action="">	
+<form method="post" action="">
+<div class="row">
+	<div class="col-xs-4">
 	 <label>Estado de Destino:</label> 
-	  
-	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 	  <?PHP
 			$estnatal = new List_UF('estado', 'nome','uf_nasc');
 			echo $estnatal->List_Selec_pop('escolha=adm/cria_carta.php&bsc_rol='.$bsc_rol.'&uf=',$_GET['uf']);
 		?>
 	  </select>
-	  
-	  
+	</div>
+	<div class="col-xs-4">
 		<?PHP
 		if (!empty($_GET["uf"])){
 		//conectar();
@@ -46,28 +47,32 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		echo "<label>Cidade de Destino:</label>";		
 		$vlr_linha=$lst_cid->ListDados ($ind++);
 		?>
+		</div>
+	<div class="col-xs-4">
 		<label>Tipo:</label>
-			<select name="tipo" id="tipo" tabindex="<?PHP echo $ind++;?>">
+			<select name="tipo" id="tipo" tabindex="<?PHP echo $ind++;?>" class="form-control">
 			  <option value="">&lt;&lt;--Tipo de Carta--&gt;&gt;</option>
 			  <option value="1">Recomenda&ccedil;&atilde;o</option>
 			  <option value="2">Mudan&ccedil;a</option>
 			  <option value="3">Tr&acirc;nsito</option>
 			</select>
-		<p>Qual Igreja/Instuição:
-        <label>
-        <input name="igreja" type="text" id="igreja" tabindex="<?PHP echo $ind++;?>" value="Assembleia de Deus" />
-        </label> </p>
-			
-  <p>
+	</div>
+	
+	<div class="col-xs-4">	
+        <label>Qual Igreja/Instuição: </label>
+        <input name="igreja" type="text" id="igreja" tabindex="<?PHP echo $ind++;?>" value="Assembleia de Deus" class="form-control" />
+    </div> 
+  <div class="col-xs-6">
   <label>Observa&ccedil;&atilde;o:</label>
-	<textarea name="obs" cols="37" rows="2" id="obs" tabindex="<?PHP echo $ind++;?>" ><?PHP echo $_POST["obs"];?></textarea></p>
-		
+	<textarea name="obs" cols="70" rows="2" id="obs" class="form-control" tabindex="<?PHP echo $ind++;?>" ><?PHP echo $_POST["obs"];?></textarea>
+	</div>
+	</div>	
 		
 	<?PHP	
 		}
 	?>
 
-	    <input type="submit" name="Submit" value="Salvar" tabindex="<?PHP echo $ind++;?>">
+	    <input type="submit" class='btn btn-primary' name="Submit" value="Salvar" tabindex="<?PHP echo $ind++;?>">
 	<h5>Obs: A data deve estar no formato: dd/mm/aaaa (00/00/0000)</h5>
 </form>
 </fieldset>
@@ -76,26 +81,36 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 ?>	
 	<fieldset>
 		<legend>Cadastro de carta para o exterior</legend>
-		<form method="post" action="">		  
+		<form method="post" action="">
+		
+<div class="row">
+	<div class="col-xs-4">	  
 			<label>País de destino: </label>
-				<input name="pais" type="text" id="pais" tabindex="<?PHP echo $ind++;?>" />
+				<input name="pais" type="text" id="pais" tabindex="<?PHP echo $ind++;?>" class="form-control" />
+	</div>
+	<div class="col-xs-4">
 				<label>Cidade: </label>
-				<input name="cidade" type="text" id="cidade" tabindex="<?PHP echo $ind++;?>" />
+				<input name="cidade" type="text" id="cidade" tabindex="<?PHP echo $ind++;?>" class="form-control"/>
+	</div>
+	<div class="col-xs-4">
 			<label>Tipo:</label>
-					<select name="tipo" id="tipo" tabindex="<?PHP echo $ind++;?>">
+					<select name="tipo" id="tipo" tabindex="<?PHP echo $ind++;?>" class="form-control">
 					  <option value="">&lt;&lt;--Tipo de Carta--&gt;&gt;</option>
 					  <option value="1">Recomenda&ccedil;&atilde;o</option>
 					  <option value="2">Mudan&ccedil;a</option>
 					  <option value="3">Tr&acirc;nsito</option>
 					</select>
-				<p>Qual Igreja/Instuição:
-		        <label>
-		        <input name="igreja" type="text" id="igreja" tabindex="<?PHP echo $ind++;?>" value="Assembleia de Deus" />
-		        </label> </p>
-					
-		  <p><label>Observa&ccedil;&atilde;o:</label>
-					<textarea name="obs" cols="37" rows="2" id="obs" tabindex="<?PHP echo $ind++;?>" ><?PHP echo $_POST["obs"];?></textarea></p>		
-			    <input type="submit" name="Submit" value="Salvar" tabindex="<?PHP echo $ind++;?>">
+	</div>
+	<div class="col-xs-4">
+				
+		        <label>Qual Igreja/Instuição:</label> 
+		        <input name="igreja" type="text" id="igreja" tabindex="<?PHP echo $ind++;?>" value="Assembleia de Deus" class="form-control" />
+	</div>
+	<div class="col-xs-6">
+		  <label>Observa&ccedil;&atilde;o:</label>
+					<textarea name="obs" cols="70" rows="2" id="obs" tabindex="<?PHP echo $ind++;?>" class="form-control" ><?PHP echo $_POST["obs"];?></textarea>
+	</div></div>			
+			    <input type="submit" class='btn btn-primary' name="Submit" value="Salvar" tabindex="<?PHP echo $ind++;?>">
 			<h5>Obs: A data deve estar no formato: dd/mm/aaaa (00/00/0000)
 		  </h5>
 		</form>
@@ -120,6 +135,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		$rec = new DBRecord ("eclesiastico",$bsc_rol,"rol");
 		$rec->situacao_espiritual = 6; //Aqui é atribuido a esta variável o valor para UpDate
 		$rec->UpDate();
+		//Insere o histórico para registro da transferência
+		$motivo = 'Transferido para igreja: '.$_POST["igreja"].' conf. carta de mudança.';
+		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
+		$value = "'','{$bsc_rol}','6','$motivo',NOW(),'','$hist',NOW()";
+		$disciplina = new insert ("$value","disciplina");
+		$disciplina -> inserir();
 	}
 
 	echo "<script>location.href='./?escolha=adm/dados_cartas.php&bsc_rol=$bsc_rol'</script>";

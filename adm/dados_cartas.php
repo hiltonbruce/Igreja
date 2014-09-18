@@ -1,12 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Lista dados Eclesi&aacute;sticos</title>
-</head>
-<body>
-
-
 <?PHP
 if ($_SESSION['nivel']>4){
 
@@ -30,6 +21,10 @@ $inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no 
 $sql3 = mysql_query ("$query"." LIMIT $inicio,$nmpp") or die (mysql_error()); 
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 $arr_dad = mysql_fetch_array ($sql3);
+
+list($diav,$mesv,$anov) = explode("/", $arr_dad["data"]);
+//echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
+$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias após a emissão do recibo
 		
 ?>
 <div id="lst_cad">
@@ -46,16 +41,51 @@ $arr_dad = mysql_fetch_array ($sql3);
 			//$nome->getMostrar();$nome->getEditar();
 			?></td>
         <td>Data:
-          <?PHP
-		$nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+          <?PHP 
+          if ($diasemissao==1) {
+          	echo ' (Criada hoje)';
+          }elseif ($diasemissao<3){
+          echo ' (Criada ontem!)';
+          }else {
+          	echo ' (Criada à: '.$diasemissao. ' dias)';
+          }
+          
+       $nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
+		$nome->getMostrar();
+		
+		if ($diasemissao<='3') {
+			$nome->getEditar();
+		}elseif ($_GET['campo']=='data') {
+			?>
+			<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			Prazo <strong>EXPIRADO</strong>! Você tem até <strong>3 dias</strong> para alterar esta data!
+				    </div>
+			<?php
+		}
+		
+			
 		?></td>
       </tr>
       <tr>
         <td colspan="2">Igreja/Institui&ccedil;&atilde;o: 
           <?PHP
 		$nome = new editar_form("igreja",$arr_dad["igreja"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();
+		
+		
+		if ($diasemissao<='20') {
+			$nome->getEditar();
+		}elseif ($_GET['campo']=='igreja')  {
+			?>
+			<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			Prazo <strong>EXPIRADO</strong>! Você tem até <strong>20 dias</strong> para alterar a Igreja de destino!
+			</div>
+			<?php
+		}
+		
+		
 		?></td>
       </tr>
       <tr>
@@ -76,7 +106,18 @@ $arr_dad = mysql_fetch_array ($sql3);
 		if (isset($cidade)){
 				//print $cidade;
 				$cid = new editar_form("destino",$cidade,$tab,$tab_edit);
-				$cid->getMostrar();$cid->getEditar();
+				$cid->getMostrar();
+				if ($diasemissao<='20') {
+					$cid->getEditar();
+				}elseif ($_GET['campo']=='destino')  {
+					?>
+					<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					Prazo <strong>EXPIRADO</strong>! Você tem até <strong>20 dias</strong> para alterar o destino!
+					</div>
+					<?php
+				}
+		
 			}else{
 				echo "<h3>N&acirc;o h&aacute; registro de nenhuma carta para este membro</h3>";
 			}
@@ -90,34 +131,59 @@ $arr_dad = mysql_fetch_array ($sql3);
         <td colspan="3">Observa&ccedil;&otilde;es
 		<?PHP
 		$nome = new editar_form("obs",$arr_dad["obs"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?>		</td>
+		$nome->getMostrar();
+				if ($diasemissao<='20') {
+					$nome->getEditar();
+				}elseif ($_GET['campo']=='obs')  {
+					?>
+					<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					Prazo <strong>EXPIRADO</strong>! Você tem até <strong>20 dias</strong> para alterar a observação!
+					</div>
+					<?php
+				}
+		
+		?></td>
       </tr>
     </table>
 	<?PHP
 	}}
-	?>&Uacute;ltima ocorr&ecirc;ncia para este Membro 
+	if ($ecles->situacao_espiritual()=='1') {
+	?>&Uacute;ltima ocorr&ecirc;ncia para este Membro
 	<form id="form1" name="form1" method="get" action="">
 	  <label>
-	    <input type="submit" name="Submit" value="Nova Carta" />
+	    <input type="submit" class='btn btn-primary' name="Submit" value="Nova Carta" />
       </label>
       <input name="escolha" type="hidden" id="escolha" value="adm/cria_carta.php" />
       <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
       <input name="uf" type="hidden" id="uf" value="PB" />
 	</form>
+	<?php 
+	}else {
+		echo '<div class="bs-callout bs-callout-warning">';
+		echo '<h4>Esta pessoa não está com situação regular em nosso rol de membro! </h4>';
+		echo 'Para emissão de outra carta é necessário que esteja em comunhão com a igreja! ';
+		echo 'Se deseja emitir nova transferência, caso a anterior tenha perdido a validade, ';
+		echo 'ou qualquer outro tipo de carta, reintegre-o a comunhão da igreja e emita nova carta! ';
+		echo 'Tendo, ainda, 3 dias para alterar a data e 20 para os demais dados! <br>';
+		echo '<strong>Você ainda poderá re-imprimir a última!</strong>';
+		echo '</div>';
+	}
+	?>
 </div>
 <form id="form2" name="form2" method="post" action="relatorio/carta_print.php">
   
   <input type="hidden" name="id_carta" value="<?PHP echo $arr_dad["id"];?>" />
       <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
+  <div class="row">
+  <div class="col-xs-5"> 
   <label>Secretário que ir&aacute; assinar a carta:</label>
-  <select name="secretario" id="secretario">
+  <select name="secretario" id="secretario" class='form-control'>
     <option value="<?PHP echo fun_igreja ($igreja->secretario1());?>"><?PHP echo fun_igreja ($igreja->secretario1());?></option>
     <option value="<?PHP echo fun_igreja ($igreja->secretario2());?>"><?PHP echo fun_igreja ($igreja->secretario2());?></option>
-  </select>
+  </select></div>
   <!-- Envia o id para a impressão da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o"/>
   
+  </div>
 </form>
-</body>
-</html>
