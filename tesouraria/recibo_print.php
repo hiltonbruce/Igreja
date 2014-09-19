@@ -13,8 +13,19 @@
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
 	
-		function __autoload ($classe) { 
-		require_once ("../models/$classe.class.php");
+		function __autoload ($classe) {
+		
+		list($dir,$nomeClasse) = explode('_', $classe);
+		//$dir = strtr( $classe, '_','/' );
+		
+		if (file_exists("../models/$dir/$classe.class.php")){
+				
+			require_once ("../models/$dir/$classe.class.php");
+		}elseif (file_exists("../models/$classe.class.php")){
+			require_once ("../models/$classe.class.php");
+		}
+		
+		
 	}
 	
 	$igreja = new DBRecord ("igreja","1","rol");

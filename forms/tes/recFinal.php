@@ -23,10 +23,24 @@
 				echo $congr->List_Selec (++$ind,$_GET['igreja'],' class="form-control"');
 		?>
 	</td>
+<tr>
+	<td colspan="3">	
+		<label>Debitar conta:</label>
+		<input name="debito" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
+		value="<?php echo $_GET["data"];?>" placeholder="Se mais de uma conta: separar por virgula!" />
+		
+	</td>
 </tr>
 <tr>
 	<td colspan="3">
-	<label>Referente a/motivo do recibo</label>
+		<label>Creditar conta:</label>
+		<input name="credito" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
+		value="<?php echo $_GET["data"];?>" placeholder="Se mais de uma conta: separar por virgula!" />
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+	<label>Referente a ou motivo do recibo</label>
    <textarea class="text_area form-control" name="referente" cols="25" id="referente" tabindex="<?PHP
    echo $ind++;?>" onKeyDown="textCounter(this.form.referente,this.form.remLen,255);" 
 		onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"

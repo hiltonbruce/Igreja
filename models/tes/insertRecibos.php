@@ -57,7 +57,47 @@ if ($gerarPgto) {
 	echo "<script> alert('Este recibo já foi registrado!');</script>";
 }elseif ($erro != 1){
 	
+	$contas = new tes_conta();
+	$contasAtivas = $contas->ativosArray();
+	//print_r ($contasAtivas);
+	$debito ='';
+	
+	
 	//Cadastra o recibo na tabela
+	if (strstr($_POST['debito'], ',')) {
+		$debitoContas	= explode(',',$_POST['debito']);
+		//print_r($debitoContas);
+		$virgula = '';
+		foreach ($debitoContas as $acesso){
+			if ($acesso!='0') {
+				$debito .= $virgula.$contasAtivas[$acesso]['id'];
+				$virgula = ',';
+			}
+		}
+	}else {
+		$debitoContas	= (int)$_POST['debito'];
+		$debito = $contasAtivas[$debitoContas]['id'];
+	}	
+	
+	if (strstr($_POST['credito'], ',')) {
+		$creditoContas = explode(',',$_POST['credito']);
+		//print_r($debitoContas);
+		$virgula = '';
+		foreach ($creditoContas as $acesso){
+			if ($acesso!='0') {
+				$credito .= $virgula.$contasAtivas[$acesso]['id'];
+				$virgula = ',';
+			}
+		}
+	}else {
+		$creditoContas = (int)$_POST['credito'];
+		$credito = $contasAtivas[$creditoContas]['id'];
+	}
+	//echo("<h1>$debitoContas - $debito</h1>");
+	//echo("<h1> $creditoContas - $credito</h1>");
+	
+	$codConta = $debito.'@'.$credito;
+	
 	$dt = br_data($data,"Data do recibo invalida: $data");
 			$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','$codConta','$fonte_recurso',";
 			$value .= "'$lancamento','$referente','$dt','$hist'";

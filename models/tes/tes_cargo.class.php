@@ -34,7 +34,7 @@ class tes_cargo {
 	function dadosArray () {
 		return $this->arrayNomeIgreja;
 	}
-	
+
 	function dadosCargo() {
 		return $this->arrayCargo;
 	}
