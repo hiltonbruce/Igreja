@@ -40,7 +40,7 @@ if ($_POST["rol"]>'0' ) {
 	$vlr = false;
 	
 $mostraLanc  =  '<fieldset><legend>Pre-Lançamento</legend>';
-$mostraLanc .=  '<table>';
+$mostraLanc .=  '<table class="table">';
 $mostraLanc .=  '<thead><tr><th colspan="2">Contibuinte: <span class="badge">'.$mostrarNome.'</span></th></tr>';
 $mostraLanc .=  '</thead><tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
 if ($_POST['tipo']=='4') {

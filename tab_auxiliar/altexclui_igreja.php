@@ -1,9 +1,6 @@
-<link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
-
-<fieldset><legend>Alterar cadastro e/ou Destivar Igrejas</legend>
 <table id="Tabela de igrejas" summary="Lista de todos as igrejas da Cidade." style="text-align: left; width: 100%;">
     <caption>
-      Todos as igrejas da Assembleia de Deus em Bayeux-PB
+      Alterar cadastro e/ou Destivar Igrejas
     </caption>
     <colgroup>
 		<col id="Nome da atual">
@@ -83,4 +80,3 @@
     ?>
     </tbody>
   </table>
- </fieldset>

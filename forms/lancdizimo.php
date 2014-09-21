@@ -25,28 +25,54 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	$ind = 0;
 	?>
 <form method="post" action="">
-	<label>Hist&oacute;rico do lan&ccedil;amento:</label> <input
-		type="text" name="hist" id="hist" size="60" autofocus="autofocus"
-		tabindex="<?PHP echo ++$ind;?>"> <input type="submit" name="Submit"
-		value="Lançar..." tabindex="<?PHP echo ++$ind;?>" /> <label>Data:</label>
-	<input type="text" name="data" id = "data"
-		value="<?php echo date('d/m/Y');?>" tabindex="<?PHP echo ++$ind;?>"> <label>Ou
-		Sugestões de hist&oacute;rico</label> <label><input type="radio"
+		<label>Hist&oacute;rico do lan&ccedil;amento:</label> <input
+			type="text" name="hist" id="hist" size="60" autofocus="autofocus" class="form-control"
+			tabindex="<?PHP echo ++$ind;?>">
+	<div class="col-xs-4">
+		<label>Data:</label>
+		<input type="text" name="data" id="data" class="form-control"
+			value="<?php echo date('d/m/Y');?>" tabindex="<?PHP echo ++$ind;?>">
+	</div>
+	<div class="col-xs-2">
+			<label>&nbsp;</label>
+  			<input type="submit" name="Submit" class='btn btn-primary'
+			value="Lançar..." tabindex="<?PHP echo ++$ind;?>" />
+	</div>
+	<div class="col-xs-6"><label>&nbsp;</label></div> 
+	<p>Ou marque uma das	sugestões de hist&oacute;rico abaixo</p>
+	
+		
+	<br />
+	<div class="radio">
+		<label><input type="radio"
 		name="histsug" value="Ref. dízimos nesta data"
-		tabindex="<?PHP echo ++$ind;?>"> Ref. dizimos nesta data</label> <label><input
-		type="radio" name="histsug" value="Ref. dízimos e ofertas nesta data"
-		tabindex="<?PHP echo ++$ind;?>"> Ref. dizimos e ofertas nesta data</label>
-	<label><input type="radio" name="histsug"
+		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos nesta data</label>
+	</div>
+	<div class="radio">
+		 <label>
+		 <input type="radio" name="histsug" value="Ref. dízimos e ofertas nesta data"
+		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos e ofertas nesta data</label>
+	</div>
+	<div class="radio">
+		<label><input type="radio" name="histsug"
 		value="Ref. dízimos, ofertas e oferta-extra nesta data"
-		tabindex="<?PHP echo ++$ind;?>"> Ref. dizimos, ofertas e oferta-extra
-		nesta data</label> <label><h3>Com Missões</h3><input type="radio" name="histsug"
+		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos, ofertas e oferta-extra
+		nesta data</label>
+	</div>
+		<h3>Com Missões</h3>
+	<div class="radio">
+		<label><input type="radio" name="histsug"
 		value="Ref. dízimos, ofertas, oferta-extra, votos e ofertas de missões nesta data"
-		tabindex="<?PHP echo ++$ind;?>"> Ref. dizimos, ofertas, oferta-extra,
-		votos e ofertas de missões nesta data</label> <label><input
-		type="radio" name="histsug"
+		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos, ofertas, oferta-extra,
+		votos e ofertas de missões nesta data</label>
+	</div>
+	<div class="radio">
+		<label><input type="radio" name="histsug"
 		value="Ref. dízimos e ofertas de missões nesta data"
-		tabindex="<?PHP echo ++$ind;?>"> Ref. dizimos e ofertas de missões
-		nesta data</label> <input name="escolha" type="hidden"
+		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos e ofertas de missões
+		nesta data</label> 
+	</div>
+		<input name="escolha" type="hidden"
 		value="<?php echo $_GET['escolha'];?>" /> <input name="lancar"
 		type="hidden" value="1" /> <input name="igreja" type="hidden"
 		value="<?php echo $roligreja;?>" />
