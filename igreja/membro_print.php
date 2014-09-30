@@ -38,8 +38,9 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 	?>
 	<table>
 		<caption>
-			Lista de Membros
+			Lista de 
 			<?PHP
+			echo $_GET['titTabela'];
 
 			if ($_GET["id"]!=="" && $_GET["id"]!=="0" && $igreja->razao()!==""){
 				echo " - Igreja: {$igreja->razao()}";

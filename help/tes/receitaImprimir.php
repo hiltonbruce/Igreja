@@ -26,7 +26,7 @@ switch ($_GET['rec']) {
 		$roligreja = '1';
 		$tituloColuna5 = 'Valor(R$)';
 		require_once '../models/saldos.php';
-		$nomeArquivo='../views/saldos.php';
+		$nomeArquivo='../views/tesouraria/tabRelatLanc.php';
 		require_once '../views/modeloPrint.php';
 		break;
 		case '16':

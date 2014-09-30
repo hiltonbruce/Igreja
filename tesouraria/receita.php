@@ -51,7 +51,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
 					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
 			
-			require_once 'help/tes/receitaTela.php';//Opções de exibir na tela as opções
+			require_once 'help/tes/receitaTela.php';//Opções de exibir na tela a escolha
 	}
 
 
