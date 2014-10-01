@@ -1,7 +1,11 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
+<?php 
+	if (empty($formCampos)) {
+		$formCampos='';
+	}
+?>
 <!-- Desenvolvido por Wellington Ribeiro -->
 <form method="get" name="autocompletar" action="">
 <table style="background-color:#D3D3D3;">
@@ -16,13 +20,17 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">Endereço:<br />
-			<input type="text" id="estado_val" class="btn btn-default btn-sm" name="estado" disabled="disabled" value="" size="30%" />
+			<td colspan="2"><label>Endereço:</label> 
+			<input type="text" id="estado_val" class="form-control" name="estado" value="" size="30%" />
 			</td>
-			<td>Fone: <br />
-			<input type="text" id="id_val" name="id" class="btn btn-default btn-sm" disabled="disabled" value="" /></td>
-			<td>Celular:<br />
-			<input type="text" id="sigla_val" class="btn btn-default btn-sm" name="sigla" disabled="disabled" value="" /></td>
+			<td><label>Fone:</label>
+			<input type="text" id="id_val" name="id" class="form-control" value="" /></td>
+			<td><label>Celular:</label>
+			<input type="text" id="sigla_val" class="form-control" name="sigla" value="" /></td>
+		</tr>
+		<?php 
+			echo $formCampos;
+		?>
 	</tbody>
 </table>
 </form>

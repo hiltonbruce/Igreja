@@ -32,9 +32,12 @@
 		{
 			echo 'Dados atuais de: <b>'.$_SESSION['membro'].'</b> - ';		
 		}
-			$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");
-			$igreja = new DBRecord ('igreja',$ecles->congregacao,'rol');
-			echo 'Cargo: '.cargo($_GET["bsc_rol"]).' - Congrega: '.$igreja->razao().', '.situacao ($ecles->situacao_espiritual());			
+	if (!empty($_GET["bsc_rol"])) {
+		$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");
+		$igreja = new DBRecord ('igreja',$ecles->congregacao,'rol');
+		echo 'Cargo: '.cargo($_GET["bsc_rol"]).' - Congrega: '.$igreja->razao().', '.situacao ($ecles->situacao_espiritual());
+	}
+						
 ?>
 		
 		
