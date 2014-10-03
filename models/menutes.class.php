@@ -103,7 +103,7 @@ class menutes {
 	<?PHP
 
 	//Classe que monta o rodape
-	$_rod_pen = new rodape($paginas_pen,$_GET["pag_mostra"],"pag_mostra",$_urlLi_pen,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+	$_rod_pen = new rodape($paginas_pen,$_GET["pag_mostra"],"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
 	
 	?> 
@@ -360,21 +360,21 @@ function recibosmembros (){
 	echo'Maior valor: R$ '.number_format($maximo,2,",",".").' - Menor valor: R$ '.number_format($minimo,2,",",".");
 	echo ' - Valor m&eacute;dio: R$ '.number_format($media,2,",",".").' - Total de: R$ '.number_format($total,2,",",".").'<br />';
 	//Classe que monta o rodape
-	$_rod_pen = new rodape($paginas_pen,$_GET["pag_rec"],"pag_rec",$_urlLi_pen,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+	$_rod_pen = new rodape($paginas_pen,$_GET["pag_rec"],"pag_rec",$_urlLi_pen,10);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
 	
 	//$_rod->getDados();
 	
 	
 	if ($paginas_pen>1)
-		echo "<br><span class='style4'>$paginas_pen p&aacute;ginas";
+		echo "<span class='style4'>$paginas_pen p&aacute;ginas";
 		else
-		echo "<br><span class='style4'>$paginas_pen p&aacute;gina";
+		echo "<span class='style4'>$paginas_pen p&aacute;gina";
 		
-	echo "<br />";
+	echo "";
 	if ($total_pen>"1")
 	{
-		printf ("Com %s recibos!",number_format($total_pen, 0, ',', '.'));
+		printf (" e com %s recibos!",number_format($total_pen, 0, ',', '.'));
 			
 	}elseif ($total_pen=="1"){
 		echo "Com apenas um recibo!";

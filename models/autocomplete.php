@@ -4,40 +4,39 @@
  * @since 31/10/2009
  */
 
-require_once '../func_class/funcoes.php';
-require_once '../func_class/classes.php';
+require_once '../help/impressao.php';
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
 
-$sqllinhas = "SELECT * FROM membro where locate('$q',nome) > 0 ";
-//critérios de fonética
-
-$reslinhas = mysql_query( $sqllinhas );
-$linhas = mysql_num_rows($reslinhas);
-
 $quantNomes = substr_count(trim($q),' ');
+
+//critérios de fonética
+$exp = new fonetica($q,'nome');
+
 
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' AND nome LIKE '%$q4%' order by locate('$q1',nome) limit 10";
+	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' AND nome LIKE '%$q4%' order by locate('$q1',nome) ";
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' order by locate('$q1',nome) limit 10";
+	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' order by locate('$q1',nome) ";
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
-	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' order by locate('$q1',nome) limit 10";
+	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' order by locate('$q1',nome) ";
 	break;
 	
 	default:
-	$sql = "SELECT * FROM membro where locate('$q',nome) > 0 order by locate('$q',nome) limit 10";
+	$sql = "SELECT * FROM membro where locate('$q',nome) > 0 order by locate('$q',nome) ";
 	break;
 }
 
 
 $res = mysql_query( $sql );
+
+$linhas = mysql_num_rows($res);
 
 while( $campo = mysql_fetch_array( $res ) )
 {
@@ -78,9 +77,16 @@ while( $campo = mysql_fetch_array( $res ) )
 	}
 	
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla');\">$html ($sigla)</li>\n";
+	
+	$quantExibir++;
+	
+	if ($quantExibir>'9') {
+		break;
+	}
 }
-if ($linhas>10) {
-	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
+
+	echo '<p style="text-align: right;">Total de '.$linhas.'ocorr&ecirc;ncias<br />';
 	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
-}
+
+	
 ?>

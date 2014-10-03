@@ -15,7 +15,7 @@ if (mysql_num_rows($dad_cad)<1)//Lista independente de outras tabelas
 
 $arr_dad = mysql_fetch_array ($dad_cad);
 $ind = 1;
-
+if (!empty($_GET['bsc_rol'])) {
 ?>
 	<form enctype="multipart/form-data" method="post" action="adm/salvar_foto.php">
 		<table style="width:40%;">
@@ -24,13 +24,13 @@ $ind = 1;
 				  <input type="hidden" name="MAX_FILE_SIZE" value="200000">
 				  Salvar foto:
 				  <input name="userfile" type="file" size="40"  class="btn btn-primary"></td>
-				<td><input type="submit" class="btn btn-primary" name="Submit" value="Enviar..."></td>
+				<td>
+					<label>&nbsp;</label><input type="submit" class="btn btn-primary" name="Submit" value="Enviar..."></td>
 			</tr>
 		</table>
 	</form>
-	<?PHP
-	if (!empty($bsc_rol))
-	{
+<?PHP
+
 	 if (file_exists("img_membros/".$bsc_rol.".jpg"))
 		{
 			$img=$bsc_rol.".jpg";

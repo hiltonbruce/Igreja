@@ -22,12 +22,12 @@
 	*/
 
 	class rodape {
-		protected $_pagina; //Recebe a quantidade de Links de pï¿½ginas disponï¿½veis
-		protected $_url; //Recebe o nï¿½mero da pï¿½gina para direcionar as solicitaï¿½ï¿½es
-		protected $_linkpagina; //nome do link com a paginaï¿½ï¿½o
-		protected $_urlextra; //Recebe o link da pï¿½gina atual para enviar a url da pï¿½gina
-		protected $_linkppag; //Define a quantidade de links numï¿½ricos na pï¿½gina
-
+		protected $_pagina; //Recebe a quantidade de Links de páginas disponíveis
+		protected $_url; //Recebe o número da página para direcionar as solicitações
+		protected $_linkpagina; //nome do link com a paginação
+		protected $_urlextra; //Recebe o link da página atual para enviar a url da página
+		protected $_linkppag; //Define a quantidade de links numéricos na página
+	
 		function __construct($_pagina=0,$_url=0,$_linkpagina="",$_urlextra="",$_linkppag=0) {
 			$this->_pagina = $_pagina;
 			$this->_url=$_url;
@@ -35,170 +35,177 @@
 			$this->_urlextra=$_urlextra;
 			$this->_linkppag=$_linkppag;
 		}
-
+	
 		public function getPagina(){
-			//Total de link de pï¿½ginas
+			//Total de link de páginas
 			return $this->_pagina;
 		}
-
-		public function getUrl(){ //Pï¿½gina atual para o PHP, ou seja, para o usuï¿½rio ela ï¿½ este valor + 1 - Visual
+	
+		public function getUrl(){ //Página atual para o PHP, ou seja, para o usuário ela é este valor + 1 - Visual
 			return $this->_url;
 		}
-
-		public function getLinkpagina(){ //nome do link da pï¿½gina. Ex.
+	
+		public function getLinkpagina(){ //nome do link da página. Ex.
 			return $this->_linkpagina;
 		}
-
+	
 		public function getUrlextra(){
 			return $this->_urlextra;
 		}
-
-		public function getLinkppag(){ //Se a quant de links por pï¿½ginas for maior q a quant de paginas disponï¿½veis ele retorna quant de pï¿½aginas
+	
+		public function getLinkppag(){ //Se a quant de links por páginas for maior q a quant de paginas disponíveis ele retorna quant de páaginas
 			if ($this->_linkppag<=$this->_pagina)
-			return $this->_linkppag;
+				return $this->_linkppag;
 			else
-			return $this->_pagina;
+				return $this->_pagina;
 		}
-
+	
 		public function getQuantpg() {
-		//Total de pï¿½ginas
+			//Total de páginas
 			if ($this->getLinkppag()>0)
-			return ceil(($this->getUrl())/$this->getLinkppag());
+				return ceil(($this->getUrl())/$this->getLinkppag());
 			else
-			return 0;
+				return 0;
 		}
-
+	
 		public function getUltimapg(){
-		//limita o loop for ao valor da ï¿½ltima pï¿½gina
+			//limita o loop for ao valor da última página
 			if (($this->getQuantpg()*$this->getLinkppag())<=$this->getPagina())
-			return $this->getQuantpg()*$this->getLinkppag();
+				return $this->getQuantpg()*$this->getLinkppag();
 			elseif (($this->getQuantpg()*$this->getLinkppag())>$this->getPagina())
 			return $this->getPagina();
 		}
-
+	
 		public function getDados(){
-			echo 	"Links de Pï¿½gina: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
-					"linkPï¿½gina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
-					"url da pï¿½gina: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
-					"Link por Pï¿½gina: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
+			echo 	"Links de Página: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
+					"linkPágina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
+					"url da página: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
+					"Link por Página: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
 					"urlExtra: \$this->getUrlextra() : <span >".$this->getUrlextra()."</span><br/>".
 					"For final: \$this->getQuantpg()*\$this->getLinkppag(): <span>".$this->getQuantpg()*$this->getLinkppag()."</span><br/>".
 					"Total de paginas: getQuantpg() = ceil((\$this->getUrl()+1)/\$this->getLinkppag()) <span>".$this->getQuantpg()."</span><br/>";
 		}
-
+	
 		public function getRodapeinic() {
 			if ($this->_url>1)
 			{
 				$url = $this->_url-1;
-				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=1'>In&iacute;cio</a> | ".
-						"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>Anterior</a>"; //Vai p a pï¿½gina anterior
+				echo 	"<ul class='pagination pagination-sm'><li><a href='./{$this->getUrlextra()}&{$this->_linkpagina}=1'>In&iacute;cio</a>";
+				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>&laquo;</a>"; //Vai p a página anterior
+			}else {
+				echo '<ul class="pagination pagination-sm">';
 			}
-		}
-
-		/*public function getRodapeinicPesq() {
-			if ($this->_url>0)
-			{
-				$url = $this->_url-1;
-				echo 	"<a href='./{$this->getUrlextra()}'>In&iacute;cio</a> | ".
-						"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a pï¿½gina anterior
-			}
-		}
-		*/
-		public function getRodapemeio() {
-			//Define a parte central da paginaï¿½ï¿½o
-
+	}
+	
+	/*public function getRodapeinicPesq() {
+	if ($this->_url>0)
+	{
+	$url = $this->_url-1;
+	echo 	"<a href='./{$this->getUrlextra()}'>In&iacute;cio</a> | ".
+	"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a página anterior
+	}
+	}
+	*/
+	public function getRodapemeio() {
+		//Define a parte central da paginação
+		
 			for ($i=($this->getUltimapg()-$this->getLinkppag() ); $i<($this->getUltimapg()); $i++)
 			{
 				$pg=$i+1;
 				$url = $this->getLinkpagina()."=".($i+1);
 				if ($pg!=($this->getUrl()))
-				{
-					echo " | <span style='text-decoration: underline;'><a id='rodape' href='./{$this->getUrlextra()}&$url'>$pg</a></span>";
-
-				}else{
-					echo " | <span id='rodape' style='font-weight: bold;'>$pg</span>";
-				}
+					{
+					echo "<li><a href='./{$this->getUrlextra()}&$url'>$pg</a></li>";
+				
+					}else{
+						echo '<li><a class="btn btn-primary active disabled">'.$pg.'</a></li>';
+					}
 			}//Fim loop for
+		echo '';
+	}
+	
+	public function getRodapefim(){
+		if ($pagina <= ($this->getPagina()))
+		{
+			$mais = $pagina + 1;
+			$fim=$this->getPagina();
+			$proxima = $this->getUrl()+1;
+				if ($proxima<$this->getPagina()){
+						echo 	"<li class='next'><a href='./".$this->getUrlextra()."&".$this->_linkpagina."=".$proxima."'>&raquo;</a></li>";
+						echo	"<li><a href='./".$this->getUrlextra()."&".$this->getLinkpagina()."=$fim'>Fim</a></li></ul>";
+				}else {
+					echo '</ul>';
+				}
+			
 		}
-
-		public function getRodapefim(){
-			if ($pagina <= ($this->getPagina()))
-			{
-				$mais = $pagina + 1;
-				$fim=$this->getPagina();
-				$proxima = $this->getUrl()+1;
-				if ($proxima<$this->getPagina())
-				echo 	" | <a href='./".$this->getUrlextra()."&".$this->_linkpagina."=".$proxima."'>Pr&oacute;xima</a>".
-						" | <a href='./".$this->getUrlextra()."&".$this->getLinkpagina()."=$fim'>Fim</a>";
-			}
-		}
-
-		public function getRodaperes() { //Total das pï¿½ginas disponibilizadas
-			if ($this->getPagina()>"1"){
-				return $this->getPagina()." p&aacute;ginas";
-			}elseif ($this->getPagina()=="1"){
-				return $this->getPagina()." p&aacute;gina";
-			}else {
-				return "Nï¿½o hï¿½ nenhuma informaï¿½ï¿½o para esta pesquisa!";
-			}
-		}
-
-		public function getRodape() {
-			return 	"{$this->getRodapeinic()}<br/>".
-				"{$this->getRodapemeio()}<br/>".
-				"{$this->getRodapefim()}";
-
-		}
-
-		public function form_rodape ($texto) {
-
-			echo 	"<form id='form' name='form' method='get' action=''>".$texto.
-				"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
-				"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
-				"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
-				"<input name='id' type='hidden' value='{$_GET["id"]}'>".
-				"<input name='nome' type='hidden' value='{$_GET["nome"]}'>".
-				"<input name='{$this->_linkpagina}' type='text' size='3' />".
-				"<input type='submit' name='Submit' value='Listar...' />".
-				"</form>";
-		}
-
-		public function form_rodape_get ($texto,$campo) {
-
-			echo 	"<form id='form' name='form' method='get' action=''>".$texto.
-				"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
-				"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
-				"<input name='$campo' type='hidden' value='{$_GET[$campo]}'>".
-				"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
-				"<input name='id' type='hidden' value='{$_GET["id"]}'>".
-				"<input name='nome' type='hidden' value='{$_GET["nome"]}'><div class='row'><div class='col-xs-2'>".
-				"<input name='{$this->_linkpagina}' class='form-control' type='text' size='3' />".
-				"</div><div class='col-xs-2'><input type='submit' class='btn btn-primary btn-sm' name='Submit' value='Listar...' />".
-				"</div></div></form>";
-		}
-
-		function __destruct() {
-				echo $this->getRodaperes ();
-		}
+	}
+	
+	public function getRodaperes() { //Total das páginas disponibilizadas
+	if ($this->getPagina()>"1"){
+	return "<br/><span>Total de ".$this->getPagina()." p&aacute;ginas";
+		}elseif ($this->getPagina()=="1"){
+		return "<br/><span>Total de ".$this->getPagina()." p&aacute;gina";
+		}else {
+		return "Não há nenhuma informação para esta pesquisa!";
+	}
+	}
+	
+	public function getRodape() {
+	return 	"{$this->getRodapeinic()}".
+	"{$this->getRodapemeio()}".
+	"{$this->getRodapefim()}";
+	
+	}
+	
+	public function form_rodape ($texto) {
+	
+	echo 	"<form id='form' name='form' method='get' action=''>".
+	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
+	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
+	"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
+	"<input name='id' type='hidden' value='{$_GET["id"]}'>".
+	"<input name='nome' type='hidden' value='{$_GET["nome"]}'><div class='row'>".
+	"<div class='col-xs-3'><input name='{$this->_linkpagina}'class='form-control input-sm' type='text' size='3' /></div>".
+	"<div class='col-xs-3'><input class='btn btn-primary btn-sm' type='submit' name='Submit' value='$texto ...' /></div>".
+	"</div></form>";
+	}
+	
+	public function form_rodape_get ($texto,$campo) {
+	
+	echo 	"<form id='form' name='form' method='get' action=''>".$texto.
+	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
+	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
+	"<input name='$campo' type='hidden' value='{$_GET[$campo]}'>".
+	"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
+	"<input name='id' type='hidden' value='{$_GET["id"]}'>".
+	"<input name='nome' type='hidden' value='{$_GET["nome"]}'>".
+	"<input name='{$this->_linkpagina}' type='text' size='3' />".
+	"<input type='submit' name='Submit' value='Listar...' />".
+	"</form>";
+	}
+	
+	function __destruct() {
+		//foi removido pois ao final da página aparecia informações do rodapé
+	//echo $this->getRodaperes ();
+	}
 	/* Exemplo para chamada desta classe
 	$_urlLi="escolha=".$_GET["escolha"]."&menu=".$_GET["menu"]."&ord_m=".$_GET["ord_m"];
-	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de pï¿½ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por pï¿½gina)
+	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de páginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por página)
 	$_rod->getDados();
 	$_rod->getRodape();
-	Exemplo de CSS para o Radapï¿½:
-
+	Exemplo de CSS para o Radapé:
+	
 	span#rodape{
 	font-weight:bold;
 	background:#00CCFF;
 	font-weight: bold;
 	}
-
+	
 	a#rodape{
 	text-decoration:underline;
 	font-size:16px;
 	}
-	*/
-	}
+	*/}
 
 
 class DBRecord {

@@ -127,7 +127,7 @@
 	<?PHP
 
 	//Classe que monta o rodape
-	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
 	?>
 	</div></div></div></div>
@@ -226,7 +226,7 @@
 
 	<?PHP
 		//Classe que monta o rodape
-		$_rod_disc = new rodape($paginas_disc,$_GET["pagina1_disc"],"pagina1_disc",$_urlLi_disc,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+		$_rod_disc = new rodape($paginas_disc,$_GET["pagina1_disc"],"pagina1_disc",$_urlLi_disc,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 		$_rod_disc->getRodape(); $_rod_disc->form_rodape ("P&aacute;gina:");
 		
 		?>

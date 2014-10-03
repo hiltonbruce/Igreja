@@ -8,12 +8,12 @@
 ?>
 <!-- Desenvolvido por Wellington Ribeiro -->
 <form method="get" name="autocompletar" action="">
-<table style="background-color:#D3D3D3;">
-	<caption style="text-align: left; font-weight:bold">Busca por nome do Membro</caption>
+<table style="background-color:#D3D3D3;" class="table">
 	<tbody>
 		<tr>
-			<td colspan="3"><label>Nome:</label>
-				<input type="text" name="nome" id="campo_estado" size="40%" class="form-control" />
+			<td colspan="3"><label>Busca por nome:</label>
+				<input type="text" name="nome" id="campo_estado" size="40%" class="form-control"
+				placeholder="Nome, sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!" />
 				<input type="hidden" name="escolha" value="adm/rest_busca.php">
 			</td><td><label>&nbsp;</label>
 			<input type="submit" class="btn btn-primary btn-sm" name="listar" value="Listar dados...">
@@ -27,6 +27,10 @@
 			<input type="text" id="id_val" name="id" class="form-control" value="" /></td>
 			<td><label>Celular:</label>
 			<input type="text" id="sigla_val" class="form-control" name="sigla" value="" /></td>
+		</tr>
+		<tr>
+			<td colspan="4">&nbsp;</td>
+
 		</tr>
 		<?php 
 			echo $formCampos;
@@ -44,7 +48,7 @@
 		}
 		if ( this.isModified )
 			this.setValue("");
-		if ( this.value.length < 1 && this.isNotClick )
+		if ( this.value.length < 2 && this.isNotClick )
 			return ;
 		return "models/autocomplete.php?q=" + this.value;
 	});
