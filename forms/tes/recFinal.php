@@ -23,28 +23,34 @@
 				echo $congr->List_Selec (++$ind,$_GET['igreja'],' class="form-control"');
 		?>
 	</td>
+</tr>
 <tr>
-	<td colspan="3">	
+	<td>	
 		<label>Debitar conta:</label>
 		<input name="debito" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
-		value="<?php echo $_GET["data"];?>" placeholder="Se mais de uma conta: separar por virgula!" />
+		value="<?php echo $_GET["data"];?>" placeholder="Códigos de acesso separados por virgula!" />
 		
 	</td>
-</tr>
-<tr>
-	<td colspan="3">
+	<td colspan="2">
 		<label>Creditar conta:</label>
 		<input name="credito" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
-		value="<?php echo $_GET["data"];?>" placeholder="Se mais de uma conta: separar por virgula!" />
+		value="<?php echo $_GET["data"];?>" placeholder="Códigos de acesso separados por virgula!" />
 	</td>
 </tr>
 <tr>
 	<td colspan="3">
-	<label>Referente a ou motivo do recibo</label>
+		<?php 
+			require_once 'forms/tes/autoCompletaContas.php';
+		?>	
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+	<label>Referente a:</label>
    <textarea class="text_area form-control" name="referente" cols="25" id="referente" tabindex="<?PHP
    echo $ind++;?>" onKeyDown="textCounter(this.form.referente,this.form.remLen,255);" 
 		onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"
-		><?php echo $_GET["referente"];?></textarea>
+		placeholder="Informe de maneira curta o que motivou a emissão deste recibo"><?php echo $_GET["referente"];?></textarea>
    
    <div id="progreso"></div>
    (Max. 255 Carateres)
@@ -59,4 +65,4 @@ Caracteres restantes
 	<input type="hidden" name="rec" value="<?php echo $rec;?>">
 	<input type="hidden" name="transid" value="<?php echo (get_transid());?>">
 </form>
-</fieldset>
+</fieldset>	

@@ -1,6 +1,6 @@
 <tr>
 	<td><label>Nome</label> <input type="text" name="nome"
-		class="form-control" autofocus="autofocus" size="40"
+		class="form-control" autofocus="autofocus" 
 		tabindex="<?PHP echo $ind++;?>" value="<?php echo $_GET["nome"];?>" />
 	</td>
 	<td><a href="javascript:lancarSubmenu('campo=nome&rol=rol&form=0')"> <img

@@ -5,24 +5,37 @@
  * @final Joseilton Costa Bruce
  * @since 29/12/2011
  */
-function __autoload ($classe) {
-	require_once ("../models/$classe.class.php");
-}
-require_once '../func_class/classes.php';
-require_once '../func_class/funcoes.php';
+require_once '../help/impressao.php';
+conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
+$quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 
 //echo '<h1>Teste: '.$_GET['teste'].'</h1>';
 
-$sqllinhas = "SELECT * FROM membro where locate('$q',nome) > 0 ";
 //critÈrios de fonÈtica
+$exp = new fonetica($q,'nome');
 
-$reslinhas = mysql_query( $sqllinhas );
-$linhas = mysql_num_rows($reslinhas);
-
-$sql = "SELECT * FROM membro WHERE LOCATE('$q',nome) > 0 ORDER BY LOCATE('$q',nome) LIMIT 10";
+switch ($quantNomes) {
+	case '3':
+	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
+	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' AND nome LIKE '%$q4%' order by locate('$q1',nome) ";
+	break;
+	case '2':
+	 list($q1,$q2,$q3) = explode (' ',$q);
+	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' order by locate('$q1',nome) ";
+	break;
+	case '1':
+	 list($q1,$q2) = explode (' ',$q);
+	 $sql = "SELECT * FROM membro where  nome LIKE '%$q1%' AND nome LIKE '%$q2%' order by locate('$q1',nome) ";
+	break;
+	
+	default:
+	$sql = "SELECT * FROM membro where locate('$q',nome) > 0 order by locate('$q',nome) ";
+	break;
+}
 
 $res = mysql_query( $sql );
+$linhas = mysql_num_rows($res);
 
 while( $campo = mysql_fetch_array( $res ) )
 {
@@ -37,11 +50,42 @@ while( $campo = mysql_fetch_array( $res ) )
 	$endereco = strtoupper(strtr( $campo ['rol'], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	//$endereco .=', '.$campo['numero'];
 	$estado = addslashes($estado);
-	$html = preg_replace("/(" . $q . ")/i", "<span style=\"font-weight:bold\">\$1</span>", $estado);
+	$destaque = "<span style=\"font-weight:bold\">\$1</span>";
+	switch ($quantNomes) {
+		case '3':
+			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i","/(" . $q3 . ")/i","/(" . $q4 . ")/i");
+			$replacements = array($destaque,$destaque,$destaque,$destaque);
+			// preg_replace($patterns, $replacements, $string);
+			$html = preg_replace($patterns, $replacements, $estado);
+						
+		break;
+		case '2':
+			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i","/(" . $q3 . ")/i");
+			$replacements = array($destaque,$destaque,$destaque);
+			// preg_replace($patterns, $replacements, $string);
+			$html = preg_replace($patterns, $replacements, $estado);
+		break;
+		case '1':
+			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i");
+			$replacements = array($destaque,$destaque);
+			// preg_replace($patterns, $replacements, $string);
+			$html = preg_replace($patterns, $replacements, $estado);
+		break;
+		
+		default:
+			$html = preg_replace("/(" . $q . ")/i", $destaque, $estado);
+		break;
+	}
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
+	
+	$quantExibir++;
+	
+	if ($quantExibir>'9') {
+		break;
+	}
 }
 if ($linhas>10) {
 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
-	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
+	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras! +++</p>';
 }
 ?>
