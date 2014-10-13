@@ -8,7 +8,7 @@
 <table style="background-color: #D3D3D3;">
 	<tbody>
 		<tr>
-			<td colspan="3">Conta:<br /> <input type="text" name="nome" class="form-control"
+			<td colspan="3">Conta:<br /> <input type="text" name="conta" class="form-control"
 				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>" />
 			</td>
 		</tr>
@@ -19,7 +19,7 @@
 			<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
 				disabled="disabled" value="" /></td>
 			<td>Código de acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
-				value="" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+				value="" tabindex="<?PHP echo ++$ind; ?>" /></td>
 		</tr>
 		<tr>
 			<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"

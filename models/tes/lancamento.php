@@ -4,7 +4,7 @@ controle ('tes');
 $ultimolanc = 0;
 $roligreja =(int) $_POST['rolIgreja'];
 
-if ($_POST['valor']<=0 || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar']<1) {
+if ($_POST['valor']<='0' || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar']<1) {
 	$dizimista = false;
 }else {
 	$status = true;

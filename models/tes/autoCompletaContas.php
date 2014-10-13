@@ -22,8 +22,8 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = number_format($campo['saldo'],2,',','.');
-	//$estado = $campo['nome'];
-	$estado = htmlentities($campo['titulo'],ENT_QUOTES,'iso-8859-1');
+	$estado = strtr( $campo['titulo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
 	$endereco = strtoupper(strtr( $campo ['codigo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	if ($campo['tipo']=='D') {
 		$tipo = 'Devedora';

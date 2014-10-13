@@ -10,7 +10,7 @@ switch ($_GET['rec']) {
 		require_once ('forms/autodizimo.php');
 		break;
 	case '2':
-	    $form = 'forms/tes/autoCompletaContas.php';
+	    $form = 'forms/tes/lancarContabil.php';
 		require_once ('forms/lancar.php');
 		break;
 	case '3':
