@@ -35,7 +35,7 @@ ver_cad();
 		</script>
 		
 		<form method="post" action="" >
-			<input type="text" name="cpf" onkeypress="formatar('###.###.###-##', this);" maxlength="14" value="<?PHP echo $arr_dad["cpf"];?>" tabindex="<?PHP echo $ind++;?>"/>
+			<input type="text" name="cpf" id="cpf" maxlength="14" value="<?PHP echo $arr_dad["cpf"];?>" tabindex="<?PHP echo $ind++;?>"/>
 			<input type="hidden" name="tabela" value="profissional" />
 			<input type="hidden" name="campo" value="cpf" />
 			<input type="hidden" name="cpf_atual" value="<?PHP echo $arr_dad["cpf"];?>" />

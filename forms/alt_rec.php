@@ -48,6 +48,10 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 				echo '<input type="hidden" name="rol" id="rol" value="'.$rec_alterar->recebeu().'">';
 				break;
 			}
+			
+			list($deb,$cred)=explode( "@",$rec_alterar->conta());
+			echo '<input type="hidden" name="deb" id="rec" value="'.$deb.'">';
+			echo '<input type="hidden" name="cred" id="rec" value="'.$cred.'">';
 			echo '<input type="hidden" name="escolha" id="escolha" value="controller/recibo.php">';
 			echo '<input type="hidden" name="menu" id="menu" value="top_tesouraria">';
 		?>

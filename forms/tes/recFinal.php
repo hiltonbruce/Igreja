@@ -28,13 +28,13 @@
 	<td>	
 		<label>Debitar conta:</label>
 		<input name="debito" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
-		value="<?php echo $_GET["data"];?>" placeholder="Códigos de acesso separados por virgula!" />
+		value="<?php echo $_GET["deb"];?>" placeholder="Códigos de acesso separados por virgula!" />
 		
 	</td>
 	<td colspan="2">
 		<label>Creditar conta:</label>
 		<input name="credito" type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>" 
-		value="<?php echo $_GET["data"];?>" placeholder="Códigos de acesso separados por virgula!" />
+		value="<?php echo $_GET["cred"];?>" placeholder="Códigos de acesso separados por virgula!" />
 	</td>
 </tr>
 <tr>

@@ -39,13 +39,37 @@ $ind = 1;
 		     </select>
 		     </form>
      	</td>
+     	</tr>
+     	<tr>
         <td colspan="2" >Dire&ccedil;&atilde;o: 
         <?PHP
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
 			echo '<p><a title="Click aqui para alaterar este campo!"';
 			echo 'href="./?escolha='.$tab_edit.'pastor" autofocus="autofocus" >'.$dirigente.'</a></p>';
-			$nome->getEditar('Informe o Rol do Membro');
+			
+		echo '</td><td>';
+			
+			
+		echo 'Rol: <p>'.$igreja->pastor().'</p>';
+
 		?></td>
+		<?php 
+		
+			if (!empty($_GET['campo']) && $_GET['campo']=='pastor') {
+				
+				$cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
+				
+				echo '<form id="form1" name="form1" method="post" action="">';				
+				echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
+				echo '<input type="hidden" name="campo" value="pastor">';				
+				echo '<input type="hidden" name="tabela" value="igreja">';
+				echo '<input type="hidden" name="id" value="'.$cong.'">';
+				require_once 'forms/igreja/dirigenteAuto.php';
+				echo '</form>';
+				
+			}
+		
+		?>
       </tr>
       <tr>
         <td >Rol 1 &ordm; Secret&aacute;rio: :
