@@ -51,10 +51,38 @@
 				$rec_tipo=3;
 				list($nome,$cpf,$rg)=explode( ",",$valor['naoMembro']);
 				$cpf = trim( $cpf, 'CPF: ');
-				$rg = ltrim( $rg, 'RG: ' );
-				
+				$rg = ltrim( $rg, 'RG: ' );				
 			}
 			//Demais Pagamentos
+		break;
+		case '6':
+			//Sexta-Feira	
+			if ($valor['rolMembro']>'0') {
+				$rec_tipo=1;
+				$rolmembro = $valor['rolMembro'];
+			}else {
+				$rec_tipo=3;
+				list($nome,$cpf,$rg)=explode( ",",$valor['naoMembro']);
+				$cpf = trim( $cpf, 'CPF: ');
+				$rg = ltrim( $rg, 'RG: ' );				
+			}
+		break;
+		case '7':
+			//Pgto's quinzenal	
+			if ($valor['rolMembro']>'0') {
+				$rec_tipo=1;
+				$rolmembro = $valor['rolMembro'];
+			}else {
+				$rec_tipo=3;
+				list($nome,$cpf,$rg)=explode( ",",$valor['naoMembro']);
+				$cpf = trim( $cpf, 'CPF: ');
+				$rg = ltrim( $rg, 'RG: ' );				
+			}
+		break;
+		case '8':
+			//Sede
+			$rec_tipo=1;
+			$rolmembro = $valor['rolMembro'];
 		break;
 		
 		default:

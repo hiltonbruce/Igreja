@@ -24,6 +24,22 @@
 			$demaisPgto= $scrip;
 		break;
 		
+		case '6':
+			///Sexta-Feira
+			$codConta = 212;
+			$sextaFeira= $scrip;
+		break;
+		case '7':
+			//Qunzena
+			$codConta = 212;
+			$quinza= $scrip;
+		break;
+		case '8':
+			//Qunzena
+			$codConta = 485;
+			$sede= $scrip;
+		break;
+		
 		default:
 			//grupo = 1 -> Ministerio
 			$codConta = 485;

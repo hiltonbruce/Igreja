@@ -1,8 +1,8 @@
 <?php
 //Limpa as variáveis
-$ministerio = '';$tesoureiro = '';$auxilio = '';$zeladores = '';$demaisPgto = '';$rec_tipo=false;
+$ministerio = '';$tesoureiro = '';$auxilio = '';$zeladores = '';$sexta = '';$demaisPgto = '';$rec_tipo=false;
 
-if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'6') {
+if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 	//Verifica click duplo no form de criar recibos
 	if ((check_transid($_POST["transid"]) || $_POST["transid"]<1)) {
 		//houve click duplo no form
@@ -26,6 +26,8 @@ foreach ($listaPgto as $chave => $valor) {
 	$bgcolor2 = $cor2 ? 'class="dados"' : 'class="odd"';
 	$bgcolor3 = $cor3 ? 'class="dados"' : 'class="odd"';
 	$bgcolor4 = $cor4 ? 'class="dados"' : 'class="odd"';
+	$bgcolor5 = $cor5 ? 'class="dados"' : 'class="odd"';
+	$bgcolor6 = $cor6 ? 'class="dados"' : 'class="odd"';$bgcolor7 = $cor7 ? 'class="dados"' : 'class="odd"';
 	
 	
 	
@@ -41,7 +43,7 @@ foreach ($listaPgto as $chave => $valor) {
 	
 	
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
-	$nomeDiaPgto = ($valor['diapgto']=='661') ? 'Sexta':$valor['diapgto'];
+  	$nomeDiaPgto = $valor['diapgto'];
 	
 	$remove = '<a href="./?#" title="Remover!"> <span class="glyphicon glyphicon-remove"> </span></a>';
 	$nomeMembro = sprintf ("%s %'05u - %s ",$remove,$valor['rolMembro'],$nomeMembro);
@@ -98,6 +100,45 @@ foreach ($listaPgto as $chave => $valor) {
 			require $gerar;
 			require $auxilio;
 		}
+	}elseif ($valor['diapgto']=='661' && $vlrPgto) {
+		//Pgto's as Sexta
+		$diaSexta .='<tr '.$bgcolor5.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		'</td><td title="'.$title.'">'.$valor['razao'].
+		'</td><td id="moeda">'.$pgto.'</td>
+				<td class="text-center">Sexta</td></tr>';
+		$cor5 = !$cor5;
+		$totSexta += $valor['pgto'];
+		//Cadastra o recibo
+		if ($sextaFeira!='') {
+			require $gerar;
+			require $sextaFeira;
+		}
+	}elseif ($valor['diapgto']=='615' && $vlrPgto) {
+		//Pgto's da Quinzena
+		$diaQuinza .='<tr '.$bgcolor6.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		'</td><td title="'.$title.'">'.$valor['razao'].
+		'</td><td id="moeda">'.$pgto.'</td>
+				<td class="text-center">Quinzenal</td></tr>';
+		$cor6 = !$cor6;
+		$totQuinza += $valor['pgto'];
+		//Cadastra o recibo
+		if ($quinza!='') {
+			require $gerar;
+			require $quinza;
+		}
+	}elseif ($valor['diapgto']=='600' && $vlrPgto) {
+		//Pgto's da Sede
+		$diaSede .='<tr '.$bgcolor7.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		'</td><td title="'.$title.'">'.$valor['razao'].
+		'</td><td id="moeda">'.$pgto.'</td>
+				<td class="text-center">15</td></tr>';
+		$cor7 = !$cor7;
+		$totSede += $valor['pgto'];
+		//Cadastra o recibo
+		if ($sede!='') {
+			require $gerar;
+			require $sede;
+		}
 	}elseif ($vlrPgto) {
 		//Lista dos Demais Pgto
 		$diaOutros .='<tr '.$bgcolor4.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
@@ -143,11 +184,29 @@ if ($totZelador>'0') {
 }else {
 	$diaAux='';
 }
+if ($totSexta>'0') {
+	$diaSexta = '<tr id="subtotal"><td colspan="3">Total para Sexta-Feira:</td><td id="moeda">'
+	.number_format($totSexta,2,',','.').'</td><td></td></tr>'.$diaSexta.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+}else {
+	$diaSexta='';
+}
+if ($totQuinza>'0') {
+	$diaQuinza = '<tr id="subtotal"><td colspan="3">Total para Quinzena:</td><td id="moeda">'
+	.number_format($totQuinza,2,',','.').'</td><td></td></tr>'.$diaQuinza.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+}else {
+	$diaQuinza='';
+}
+if ($totSede>'0') {
+	$diaSede = '<tr id="subtotal"><td colspan="3">Total para Sede:</td><td id="moeda">'
+	.number_format($totSede,2,',','.').'</td><td></td></tr>'.$diaSede.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+}else {
+	$diaSede='';
+}
 if ($totOutros>'0') {
 $diaOutros = '<tr id="subtotal"><td colspan="3">Total dos demais Pgto&prime;s:</td><td id="moeda">'
 		.number_format($totOutros,2,',','.').'</td><td></td></tr>'.$diaOutros;
 }else {
 	$Outros='';
 }
-$nivel1 = $dia1.$dia15.$diaAux.$diaZelador.$diaOutros;
-$debito = $totMinisterio+$totTesoureiro+$totAuxilio+$totZelador+$totOutros;
+$nivel1 = $dia1.$dia15.$diaAux.$diaZelador.$diaSexta.$diaQuinza.$diaSede.$diaOutros;
+$debito = $totMinisterio+$totTesoureiro+$totAuxilio+$totZelador+$totSexta+$totQuinza+$totSede+$totOutros;

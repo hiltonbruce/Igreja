@@ -26,9 +26,18 @@ require_once 'forms/autoCompletaMembro.php';
 					$listaIgreja = $bsccredor->List_Selec($ind++,$_GET['idfunc'],'class="form-control" required="required" ');
 					echo $listaIgreja;
 					?></td>
-			<td><label>Dia pgto:</label>
-			<input type="text" name="diapgto" id='dia' tabindex="<?PHP echo $ind++;?>" 
-				 required="required" class="form-control" ></td>
+			<td><label>Dia pgto:</label> <select name="diapgto" required='required'
+					tabindex="<?PHP echo ++$ind; ?>" class="form-control" autofocus="autofocus">
+						<option></option>
+						<option value="1">Dia 1º</option>
+						<option value="15">Dia 15</option>
+						<option value="661">Toda Sexta</option>
+						<option value="615">Por Quinzena</option>
+						<option value="600">Pgto's da Sede</option>
+				</select>
+		   
+		   
+		   </td>
 			<td>	
 				<label>Fonte para pgto:</label>
 				<?php 						

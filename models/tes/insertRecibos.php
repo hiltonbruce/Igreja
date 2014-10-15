@@ -55,7 +55,7 @@ switch ($rec_tipo){
 if ($gerarPgto) {
 	//Verifica click duplo ou se é para gerar 
 	echo "<script> alert('Este recibo já foi registrado!');</script>";
-}elseif ($erro != 1){
+}elseif ($erro != '1'){
 	
 	$contas = new tes_conta();
 	$contasAtivas = $contas->ativosArray();

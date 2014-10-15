@@ -5,7 +5,7 @@ class tes_cargo {
 	
 	function __construct () {
 		
-		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao ';
+		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao, i.status AS igrejaStautus ';
 		$sqlConsulta .= 'FROM cargoigreja AS c,igreja AS i,membro AS m, funcao AS f ';
 		$sqlConsulta .= 'WHERE c.igreja=i.rol AND c.rol=m.rol AND ';
 		$sqlConsulta .= 'c.descricao=f.id AND c.status="1" ORDER BY c.igreja,m.nome,f.descricao';
@@ -20,12 +20,14 @@ class tes_cargo {
 						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
 						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']);
 			}
-			
-			$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
+			if ($dados['igrejaStautus']!='0') { //Remove as igrejas desativadas
+				$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
 				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],'naoMembro'=>$dados['naomembro'],
 						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
 						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']
 						,'hierarquia'=>$dados['hierarquia']);
+			}
+			
 		}
 		$this->arrayNomeIgreja = $todos;
 		$this->arrayCargo = $arrayCargos;

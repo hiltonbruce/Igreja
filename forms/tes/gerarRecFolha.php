@@ -10,6 +10,9 @@
 						<option value="2">Tesoureiros</option>
 						<option value="3">Auxílio</option>
 						<option value="4">Zelador</option>
+						<option value="6">Pgto's-Sexta-Feira</option>
+						<option value="7">Pgto's Quinzenal</option>
+						<option value="8">Pgto's Sede</option>
 						<option value="5">Demais Pgto's</option>
 				</select>
 				</td>
