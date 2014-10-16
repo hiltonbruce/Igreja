@@ -32,7 +32,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 		
 	$tabela = '<tbody id="periodo">';
-	$lancAtual = '';  $lancamento = $lancAtual;
+	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaDep='';
 	
 	while ($linha = mysql_fetch_array($dquery)) {
 		$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
@@ -40,28 +40,45 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$lancAtual = $linha['lancamento'];
 		
 		if ($lancAtual!=$lancamento && $lancamento!='') {
+			if ($valorCaixaDeb<=0) {
+				$CaixaDep='';
+			}
+			
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
-			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
-			$referente .= $dataLanc.$titulo1;
+			$dataLanc  .= $dtLanc.' </span> <span class="badge">'.$numLanc.'</span></p>';
+			$referente .= $dataLanc.$CaixaDep.$titulo1;
 			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
 			<td style="width:18%;">'.$lancValor.'</td></tr>';
 			$cor = !$cor;
 			$referente  = '';
-			$titulo1  = '';$lancValor = '';
+			$titulo1  = '';$lancValor = '';$valorCaixaDeb=0;
 		}
 		
+		$dtLanc = $linha['data'];
 		$historico  = '<p>Hist&oacute;rico: '.$linha['referente'].', '.$dadosIgreja[$linha['igreja']]['nome'].'</p>';
 		$lancamento = $lancAtual;
-		$titulo1  .= '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
-		$valor = number_format($linha['valor'],2,',','.');
-		$lancValor .= '<p id="moeda">'.$valor.' '.$linha['d_c'].'</p>';		
+		
+		if ($linha['conta']=='5' && $linha['d_c']=='D'){
+			$valorCaixaDeb += $linha['valor'];
+			$CaixaDep  = '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
+			$valor = number_format($valorCaixaDeb,2,',','.');
+			$lancValor = '<p id="moeda">'.$valor.' '.$linha['d_c'].'</p>';
+		}else {
+			$titulo1  .= '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
+			$valor = number_format($linha['valor'],2,',','.');
+			$lancValor .= '<p id="moeda">'.$valor.' '.$linha['d_c'].'</p>';
+		}
+		
+		
+		
+		
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 		
 		}
 		
 		if ($titulo1 != '') {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
-			$dataLanc  .= $linha['data'].'</span> <span class="badge">'.$numLanc.'</span></p>';
+			$dataLanc  .= $dtLanc.'</span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$titulo1;
 			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
 			<td id="moeda">'.$lancValor.'</td></tr>';
