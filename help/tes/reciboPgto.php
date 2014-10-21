@@ -159,52 +159,52 @@ foreach ($listaPgto as $chave => $valor) {
 }
 
 if ($totMinisterio>'0') {
-	$dia1 = '<tr id="subtotal"><td colspan="3">Total para o Ministério:</td><td id="moeda">'
-		.number_format($totMinisterio,2,',','.').'</td><td></td></tr>'.$dia1.'<tr id="total"><td colspan="5" >&nbsp;</td></tr>';
+	$dia1 = '<tbody><tr id="subtotal" class="sub"><th><strong>Ministério</strong></th><td></td><td></td><td id="moeda">'
+		.number_format($totMinisterio,2,',','.').'</td><td></td></tr>'.$dia1.'</tbody>';
 }else {
 	$dia1='';
 }
 
 if ($totTesoureiro>'0') {
-$dia15 = '<tr id="subtotal"><td colspan="3">Total para o Tesoureiro:</td><td id="moeda">'
-		.number_format($totTesoureiro,2,',','.').'</td><td></td></tr>'.$dia15.'<tr id="total"><td colspan="5" >&nbsp;</td></tr>';
+$dia15 = '<tbody><tr id="subtotal" class="sub"><th><strong>Tesoureiro</strong></th><td></td><td></td><td id="moeda">'
+		.number_format($totTesoureiro,2,',','.').'</td><td></td></tr>'.$dia15.'</tbody>';
 }else {
 	$dia15='';
 }
 
 if ($totAuxilio>'0') {
-	$diaAux = '<tr id="subtotal"><td colspan="3">Total em Auxílio:</td><td id="moeda">'
-	.number_format($totAuxilio,2,',','.').'</td><td></td></tr>'.$diaAux.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+	$diaAux = '<tbody><tr id="subtotal" class="sub"><th><strong>Auxílio</strong></th><td></td><td></td><td id="moeda">'
+	.number_format($totAuxilio,2,',','.').'</td><td></td></tr>'.$diaAux.'</tbody>';
 }else {
 	$diaAux='';
 }
 if ($totZelador>'0') {
-	$diaZelador = '<tr id="subtotal"><td colspan="3">Total para Zelador:</td><td id="moeda">'
-	.number_format($totZelador,2,',','.').'</td><td></td></tr>'.$diaZelador.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+	$diaZelador = '<tbody><tr id="subtotal" class="sub"><th><strong>Total para Zelador:</strong></th><td></td><td></td><td id="moeda">'
+	.number_format($totZelador,2,',','.').'</td><td></td></tr>'.$diaZelador.'</tbody>';
 }else {
 	$diaAux='';
 }
 if ($totSexta>'0') {
-	$diaSexta = '<tr id="subtotal"><td colspan="3">Total para Sexta-Feira:</td><td id="moeda">'
-	.number_format($totSexta,2,',','.').'</td><td></td></tr>'.$diaSexta.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+	$diaSexta = '<tbody><tr id="subtotal" class="sub"><th><strong>Sexta-Feira</strong></th><td></td><td></td><td id="moeda">'
+	.number_format($totSexta,2,',','.').'</td><td></td></tr>'.$diaSexta.'</tbody>';
 }else {
 	$diaSexta='';
 }
 if ($totQuinza>'0') {
-	$diaQuinza = '<tr id="subtotal"><td colspan="3">Total para Quinzena:</td><td id="moeda">'
-	.number_format($totQuinza,2,',','.').'</td><td></td></tr>'.$diaQuinza.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+	$diaQuinza = '<tbody><tr id="subtotal" class="sub"><th><strong>Quinzena</strong></th><td></td><td></td><td id="moeda">'
+	.number_format($totQuinza,2,',','.').'</td><td></td></tr>'.$diaQuinza.'</tbody>';
 }else {
 	$diaQuinza='';
 }
 if ($totSede>'0') {
-	$diaSede = '<tr id="subtotal"><td colspan="3">Total para Sede:</td><td id="moeda">'
-	.number_format($totSede,2,',','.').'</td><td></td></tr>'.$diaSede.'<tr id="total"><td colspan="5">&nbsp;</td></tr>';
+	$diaSede = '<tbody><tr id="subtotal" class="sub"><th><strong>Sede</strong></th><td></td><td></td><td id="moeda">'
+	.number_format($totSede,2,',','.').'</td><td></td></tr>'.$diaSede.'</tbody>';
 }else {
 	$diaSede='';
 }
 if ($totOutros>'0') {
-$diaOutros = '<tr id="subtotal"><td colspan="3">Total dos demais Pgto&prime;s:</td><td id="moeda">'
-		.number_format($totOutros,2,',','.').'</td><td></td></tr>'.$diaOutros;
+$diaOutros = '<tbody><tr id="subtotal" class="sub"><th><strong>Demais pgto&prime;s</strong></th><td></td><td></td><td id="moeda">'
+		.number_format($totOutros,2,',','.').'</td><td></td></tr>'.$diaOutros.'</tbody>';
 }else {
 	$Outros='';
 }

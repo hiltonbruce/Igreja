@@ -362,3 +362,10 @@ tr:hover#form {
 .alert-block p + p {
   margin-top: 5px;
 }
+
+/* oculta e revelar campos */
+
+/* CSS para efeitos jQuery 
+.impar {background:#d6e2e5;} */
+img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inline;}
+/* Fim CSS para efeitos jQuery */

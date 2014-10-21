@@ -386,7 +386,8 @@ class agenda {
 			}
 
 			if (strstr($periodo_dados['credor'],'r')) {
-				$membro = new DBRecord('membro',(int)$periodo_dados['credor'],'rol' );
+				$rolCredor = str_replace('r', "", $periodo_dados['credor']);
+				$membro = new DBRecord('membro',$rolCredor,'rol' );
 				$evento .= 'Membro: '.$membro->nome();
 			}else {
 				$credor= new DBRecord('credores',$periodo_dados['credor'],'id');

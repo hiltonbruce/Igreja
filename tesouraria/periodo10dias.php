@@ -4,10 +4,10 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$d = ((int)$dias=='0' ) ? date("d"): $dias;
 	$m = date("m");
 	$y = date("Y");
-	$credor = ($_GET['credor']>'0') ? $_GET['credor']:'0';
+	//$credor = ($_GET['credor']>'0') ? $_GET['credor']:'0';
 	
  ?>
-<table cellspacing="0" id="Contas do per&iacute;odo" width="95%" >
+<table cellspacing="0" id="Contas do per&iacute;odo" width="95%" class='table table-condensed' >
 			<colgroup>
 				<col id="dia">
 				<col id="Evento">
@@ -39,10 +39,17 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			}
 		?>
 		</tbody>
-</table>
+		<tfoot>
+			<tr>
+				<th colspan="3" class="info"><h5>Exibi um trecho de 12 dias. Faixa em verde é o dia atual!
+		 Contas vencidas a mais de 5 dias:		
 	<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&vencidas=1&data=<?php echo $dataget;?>" title="Clique aqui para Listar...">
-	<button class="btn btn-primary">Contas vencidas a mais de 5 dias: <?php echo $lista->vencidas();?></button>
-	</a>
+	<button class="btn btn-primary">Click aqui!</button> Atualmente são:<?php echo $lista->vencidas();?>
+	</a></h5>
+				</th>
+			</tr>
+		</tfoot>
+</table>
 <?php	
 }
  ?>
