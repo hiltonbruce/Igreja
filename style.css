@@ -117,7 +117,7 @@ div.info1 {
 
 div.info1 a, div.info1 a:link, div.info1 a:visited { color:#999; }
 
-div.info1 a:hover { color: #665; }
+div.info1 { color: #665; }
 
 div .leftpanel {
 	background-image:url(img/bgright.jpg);
@@ -188,7 +188,6 @@ div.rightpanel .inquiry, div.leftpanel .inquiry {
 	 }
 
 fieldset {
-	width: 96%;
 	margin: 1em 0;
 	padding: 4px;
 	border: 1px solid #0033FF;

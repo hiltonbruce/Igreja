@@ -2,7 +2,23 @@
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dataget = ($_POST['data']!='') ? $_POST['data']:$_GET['data'];
-	$dataget = ($dataget=='') ? date('d/m/Y'):$dataget;
+	
+	$hora=date('H');
+	list($diaPgto,$mesPgto,$anoPgto) = explode ('-',date("d-m-Y"));
+	if ($hora<"13")
+	{
+		$sauda="Bom Dia! ";
+		$currentPgto  = mktime(0, 0, 0, $mesPgto  , $diaPgto, $anoPgto);
+	}else{
+		$sauda="Boa Noite! ";
+		$currentPgto  = mktime(0, 0, 0, $mesPgto  , $diaPgto+1, $anoPgto);
+	}
+	
+	$dtPgto = date('d/m/Y',$currentPgto);
+	
+	
+	echo date('d/m/Y',$currentPgto);
+
 
 	$lista = new agenda();
 	$despesasInserirdas = $lista->insdespmes();

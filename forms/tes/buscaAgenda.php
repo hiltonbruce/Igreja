@@ -26,14 +26,14 @@
 			</td>
 			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $_GET["escolha"];?>&menu=top_tesouraria&igreja=
 			<?php echo $_GET['igreja']?>&credor=<?php echo $_GET['credor']?>&altdias=
-			<?PHP echo $dias-1;?>" ><button type="button" class="btn btn-primary"> 
+			<?PHP echo $dias-1;?>" ><button type="button" class="form-control btn-primary"> 
 			 <span class=" glyphicon glyphicon-arrow-left"> </span> Voltar 1 dia</button></a>
 
   </td>
 					
 			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $_GET["escolha"];?>&menu=top_tesouraria&igreja=<?php echo $_GET['igreja']?>&credor=
 			<?php echo $_GET['credor']?>&altdias=<?PHP echo $dias+1;?>" >
-	  	<button type="button" class="btn btn-primary">
+	  	<button type="button" class="form-control btn-primary">
 	  	Adiantar 1 dia <span class="glyphicon glyphicon-arrow-right"> </span></button></a></td>
 		</tr>
 		<tr>

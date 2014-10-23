@@ -360,8 +360,14 @@ class agenda {
 			$periodo .= ' a.igreja='.$_GET['igreja'].' AND ';
 			}
 		$periodo .= ' a.vencimento = "'.$dia.'"';
-		$periodo_array = mysql_query($periodo);
-
+		$periodo_array = mysql_query($periodo)  or die (mysql_error());
+		
+		$numLinhas	= mysql_num_rows($periodo_array);
+		
+		//echo "<h1>Linhas Afetadas $numLinhas</h1>";
+		
+		if ($numLinhas>0) {
+			
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 
 			if ($periodo_dados['status']=='2') {//Marca os já pagos
@@ -401,7 +407,10 @@ class agenda {
 			echo ' --> R$ '.number_format($periodo_dados['valor'],2,",",".").'<br />';
 			$total += $periodo_dados['valor'];
 		}
-		echo '<a></td><td  style="text-align: right;" >R$ '.number_format($total,2,",",".").'</td>';
+	}else {
+		$total=0;
+	}
+		echo '</td><td  style="text-align: right;" >R$ '.number_format($total,2,",",".").'</td>';
 	}
 
 	function vencidas() { //Quantidade de contas vencidas as mais de cinco dias
@@ -414,7 +423,7 @@ class agenda {
 
 	function listavencidas($data) { //Contas vencidas
 		$listvenc  = 'SELECT f.razao, DATE_FORMAT(a.vencimento,"%d/%m/%Y") AS vencimento, a.valor, a.id, ';
-		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo ';
+		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, f.alias AS nome ';
 		$listvenc .= 'FROM agenda AS a, credores AS f, igreja AS i  WHERE f.id=a.credor AND ';
 		$listvenc .= 'i.rol=a.igreja AND a.status<"2" AND TO_DAYS(a.vencimento) < TO_DAYS(NOW())';
 		$listvenc_array = mysql_query($listvenc);

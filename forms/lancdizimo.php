@@ -23,6 +23,8 @@ while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;
+	
+	$dtlanc = (empty($_POST['dataLancamento']) ) ? date('d/m/Y'):$_POST['dataLancamento'];
 	?>
 <form method="post" action="">
 		<label>Hist&oacute;rico do lan&ccedil;amento:</label> <input
@@ -31,7 +33,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	<div class="col-xs-4">
 		<label>Data:</label>
 		<input type="text" name="data" id="data" class="form-control"
-			value="<?php echo date('d/m/Y');?>" tabindex="<?PHP echo ++$ind;?>">
+			value="<?php echo $dtlanc;?>" tabindex="<?PHP echo ++$ind;?>">
 	</div>
 	<div class="col-xs-2">
 			<label>&nbsp;</label>
@@ -39,7 +41,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 			value="Lançar..." tabindex="<?PHP echo ++$ind;?>" />
 	</div>
 	<div class="col-xs-6"><label>&nbsp;</label></div> 
-	<p>Ou marque uma das	sugestões de hist&oacute;rico abaixo</p>
+	<p>Ou marque uma das sugestões de hist&oacute;rico abaixo</p>
 	
 		
 	<br />

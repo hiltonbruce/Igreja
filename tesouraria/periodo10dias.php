@@ -5,9 +5,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$m = date("m");
 	$y = date("Y");
 	//$credor = ($_GET['credor']>'0') ? $_GET['credor']:'0';
+	//Array's para troca do dia da semana para portugês
+	$diaEn = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+	$diaBr   = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b');	
 	
  ?>
-<table cellspacing="0" id="Contas do per&iacute;odo" width="95%" class='table table-condensed' >
+<table id="Contas do per&iacute;odo" class='table table-condensed' >
 			<colgroup>
 				<col id="dia">
 				<col id="Evento">
@@ -33,7 +36,10 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 				$trtab = ($p % 2) == 0 ? '<tr class="dados" >' : '<tr >';
 				}
 				echo $trtab;
-				echo '<td>'.date('d/m',$dia_periodo).' - '.date('D',$dia_periodo).'</td><td>';
+				$diaSemana = date('D',$dia_periodo);
+				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
+				
+				echo '<td>'.date('d/m',$dia_periodo).' - '.$diaSemana.'</td><td>';
 				$evento = $lista->periodo(date('Y-m-d',$dia_periodo),$credor,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
 			}

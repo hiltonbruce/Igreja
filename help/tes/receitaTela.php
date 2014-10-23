@@ -1,5 +1,6 @@
 <?php
 //Opções de exibir na tela para o script /tesouraria/receita.php
+$dtlanc = ($_GET['data']=='') ? date('d/m/Y'):$_GET['data'];
 switch ($_GET['rec']) {
 	case '0':
 		require_once ('forms/tes/busca.php');

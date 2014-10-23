@@ -7,6 +7,7 @@
 				<form method="post" action="">
 					<input name="escolha" type="hidden" value="<?php echo $_GET['escolha'];?>" />
 					<input name="concluir" type="hidden" value="1" />
+					<input name="dataLancamento" type="hidden" value="<?php echo $dtlanc;?>" />
 					<input name="rolIgreja" type="hidden" value="<?php echo $igrejaSelecionada->rol();?>" />
 					<label>Igreja: 
 					<?php

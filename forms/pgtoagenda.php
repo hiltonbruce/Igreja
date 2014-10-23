@@ -1,27 +1,3 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-<script type="text/javascript">
-$(document).ready(function(){
-
-	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular, congr ) {
-			$("#id_val").val(rol);
-			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
-			$("#rol").val(celular);
-			$("#cong").val(congr);
-		}
-		
-		if ( this.value.length < 1 && this.isNotClick )
-			return ;
-		return "models/autodizimo.php?q=" + this.value;
-	});
-
-});
-</script>
-<!-- Desenvolvido por Wellington Ribeiro -->
-
 <fieldset>
 	<legend>Lançar Pagamento</legend>
 	<p style="background: white; color: blue; font-size: 14px;">
@@ -29,12 +5,13 @@ $(document).ready(function(){
 
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
 	$datapgto = conv_valor_br ($itemagenda->datapgto());
-	$datapgto = ($datapgto=='00/00/0000') ? $dataget:$datapgto;
+	
+	$dtParaPgto = ($datapgto=='00/00/0000') ? $dtPgto:$datapgto;
 	
 	if (strstr($itemagenda->credor(),'r')) {
 		$rolMembro = ltrim ($itemagenda->credor(),'r');
-		$credor = new DBRecord('membro', (int)$rolMembro, 'rol');
-		$nomeMembro = $credor->nome();
+		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
+		$nomeMembro = $credorAgenda->nome();
 		$credorCompl = true;//Para o caso de membros da igreja
 		
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
@@ -43,8 +20,8 @@ $(document).ready(function(){
 		  </div>';
 		
 	}else {
-		$credor = new DBRecord('credores', $itemagenda->credor(), 'id');
-		$nomecredor = $credor->alias();
+		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
+		$nomecredor = $credorAgenda->alias();
 		$credorCompl = false;
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
 		    <p><label><input type="checkbox" id="status" name="paraMembro"
@@ -195,7 +172,7 @@ $(document).ready(function(){
 						value="<?php echo $itemagenda->multa();?>"></td>
 					<td><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
 						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
-						value="<?php echo $datapgto;?>"></td>
+						value="<?php echo $dtPgto;?>"></td>
 				</tr>
 				<tr>
 					<td><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"

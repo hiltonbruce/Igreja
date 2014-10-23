@@ -4,7 +4,7 @@
 
 <!-- Desenvolvido por Wellington Ribeiro -->
 <?php
-$dtlanc = ($_GET['data']=='') ? date('d/m/Y'):$_GET['data'];
+
 $meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
 $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 ?>
