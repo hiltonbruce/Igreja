@@ -60,10 +60,10 @@
 	<tbody>
 		<tr>
 			<td><label>Despesas:</label>
-	  		<input type="checkbox" name="fixa">Mensais e
+	  		<input type="checkbox" name="fixa"> Mensais e
 		</td>
 			<td><label>&nbsp;</label>
-		  <input type="checkbox" name="prazo">Com prazo determinado
+		  <input type="checkbox" name="prazo"> Com prazo determinado
 		</td>
 			<td><label>Com prazo:</label>
 	 		  <input type="radio" name='vencidas' value="2" checked="checked"> Com data vencida ou
