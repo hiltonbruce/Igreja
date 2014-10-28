@@ -28,7 +28,7 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 		
 		{
 		?>
-		<table style ="width:auto;cellspacing:0;" >
+		<table class='table table-hover table-striped table-bordered'>
 		
 		<caption>Lista de Dirigentes</caption>
 		
@@ -60,19 +60,9 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			while($coluna = mysql_fetch_array($sql3))
 			{
 			
-			$ls+=1;
-			if ($ls>1)	
-					{
-					$cor="class='odd'";
-					$ls=0;
-					}
-					else 
-					{$cor="class='od2'";
-					}
 			?>
-            <tr "<?php echo "$cor";?>">
+            <tr>
 
-            <tr "<?php echo "$cor";?>">
 				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo (int)$coluna["pastor"];?>"><?php echo (int)$coluna["pastor"];?></a></td>
 				
 				<td><?php

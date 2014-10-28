@@ -8,6 +8,14 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 	$hisFinanceiro = 3;
 	$cong = 'Todas as Igrejas<br />';
 	require_once 'forms/tes/histFinanceiro.php';
+}elseif (!empty($_GET['igreja']) && !empty($_GET['mes'])) {
+	$igreja = (int)$_GET['igreja'];
+	
+	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
+	$mesAno = $_GET['mes'].$ano;
+	$hisFinanceiro = 4;
+	$cong = 'Todas as Igrejas<br />';
+	require_once 'forms/tes/histFinanceiro.php';
 }else {
 	$igreja = (int)$_GET['igreja'];
 	$ingSeleciona = new DBRecord('igreja', $igreja, 'rol');

@@ -75,12 +75,13 @@ $tabMembros = new membro();
 				$cargoIgreja = new tes_cargo;
 				//print_r($cargoIgreja->dadosArray());
 			
-				$tesArray = $cargoIgreja->dadosArray()['8'][$idIgreja]['1'];
-				$tesIgreja = $tesArray['nome'];
+				$tesArray = $cargoIgreja->dadosArray();
+				$tesIgreja = $tesArray['8'][$idIgreja]['1']['nome'];
 				//reset($tesIgreja);
-				//print_r($tesIgreja );
+				//print_r($tesArray );
 			}else {
-				$tesIgreja = $tabMembros->nomes()['4037']['0'];
+				$tesSede = $tabMembros->nomes();
+				$tesIgreja = $tesSede ['4037']['0'];
 			}
 			
 			

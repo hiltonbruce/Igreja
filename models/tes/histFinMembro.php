@@ -8,7 +8,10 @@ switch ($hisFinanceiro) {
 	break;
 	case 2:
 		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY anorefer,mesrefer ');
-	break;	
+	break;
+	case 4:
+		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" AND DATE_FORMAT(data,"%m%Y")="'.$mesAno.'" ORDER BY anorefer,mesrefer ');
+	break;
 	default:
 		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" ORDER BY anorefer,mesrefer ');
 	break;
