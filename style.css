@@ -43,8 +43,12 @@ form span {
 	padding-right:125px;
 }
 
-input:focus, select:focus {
+input:focus {
 	background-color:#FFFF99;
+}
+
+select:focus {
+	background-color:#FFFFCC;
 }
 
 .text_area {

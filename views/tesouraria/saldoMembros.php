@@ -3,14 +3,13 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 	require_once ("views/secretaria/menuTopDados.php");
 	$hisFinanceiro = 1;
 	$cong = '';
-}elseif ((int)$_GET['igreja']=='') {
+}elseif ($_GET['igreja']>0 && empty($_GET['mes'])) {
 	$igreja = (int)$_GET['igreja'];
 	$hisFinanceiro = 3;
 	$cong = 'Todas as Igrejas<br />';
 	require_once 'forms/tes/histFinanceiro.php';
 }elseif (!empty($_GET['igreja']) && !empty($_GET['mes'])) {
 	$igreja = (int)$_GET['igreja'];
-	
 	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 	$mesAno = $_GET['mes'].$ano;
 	$hisFinanceiro = 4;
