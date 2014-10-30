@@ -10,10 +10,42 @@ if ($_GET["Submit"]=="Imprimir") {
 	require_once ("../func_class/classes.php"); 
 	
 	controle ("consulta");
-	echo "<style type='text/css'> <!--";
-	require_once ("style.css");
-	echo "</style>";
+$igreja = new DBRecord ( 'igreja', '1', 'rol' );
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title><?php echo $titTabela;?></title>
+<link rel="stylesheet" type="text/css" href="../tabs.css" />
+<link rel="icon" type="image/gif" href="../br_igreja.jpg">
+</head>
+<body>  
+<div id="header">
+	<p>
+	<?PHP
+	//print_r($igreja);
+	echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
+	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?> 
+	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
+    <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
+	</p>
+</div>
+
+<?php
+
+	$fimPagina = ' <div id="footer">
+    Copyright &copy; 2014  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
+    </div>
+</body>
+</html>';
+
 }else {
+	$fimPagina = 'Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro. 
+';
 echo "<style type='text/css'> <!--";
 	require_once ("aniv/style.css");
 ?>
@@ -37,7 +69,7 @@ if ($_GET["congregacao"]>"0" ) {
 }
 ?>
 
-<table cellspacing="0" id="listTable" summary="Idade, Rol, Nome, Congregação e Cargo">
+<table cellspacing="0" id="listTable" class='table' summary="Idade, Rol, Nome, Congregação e Cargo">
 <caption>
 Lista de Aniversariantes 
 <?PHP 
@@ -89,4 +121,7 @@ $aniv->nome_dia();
 </tbody>
 
 </table>
-Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro. 
+
+<?php
+	echo $fimPagina ;
+?>

@@ -26,7 +26,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ofs 		= 'ofertaSenhoras'.$periodo;//Ofertas de Senhoras do mês
 	$ofsSem		= $ofs.$semana;//Ofertas de Senhoras do mês separando a semana
 
-	$ofe 		= 'ofertaEnsino'.$periodo;//Ofertas de Escola Bíblica do mês
+	$ofe 		= 'ofertaEnsino'.$periodo;
 	$ofeSem 	= $ofe.$semana;
 
 	$ofmoc 		= 'ofertaMocidade'.$periodo;

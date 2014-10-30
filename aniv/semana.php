@@ -35,7 +35,7 @@ if ($_GET["congregacao"]>"0" ) {
 	$cong_sele = " - Congrega&ccedil;&atilde;o: ".$congrega->razao();
 }
 ?>
-<table cellspacing="0" id="playlistTable" summary="Top 15 songs played. Top artitst include Coldplay, Yeah Yeah Yeahs, Snow Patrol, Deeper Water, Kings of Leon, Embrace, Oasis, Franz Ferdinand, Jet, The Bees, Blue States, Kaiser Chiefs and Athlete.">
+<table cellspacing="0" id="playlistTable" class='table' summary="Top 15 songs played. Top artitst include Coldplay, Yeah Yeah Yeahs, Snow Patrol, Deeper Water, Kings of Leon, Embrace, Oasis, Franz Ferdinand, Jet, The Bees, Blue States, Kaiser Chiefs and Athlete.">
 <caption>
 Lista de Aniversariantes da Semana <?PHP echo $cong_sele;?>
 </caption>

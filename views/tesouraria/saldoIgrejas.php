@@ -1,4 +1,4 @@
-<table class='table-bordered'>
+<table class='table table-bordered'>
 	<caption>
 		<?php
 		//Cabeçalho da tabela

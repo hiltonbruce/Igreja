@@ -17,7 +17,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dtPgto = date('d/m/Y',$currentPgto);
 	
 	
-	echo date('d/m/Y',$currentPgto);
+	//echo date('d/m/Y',$currentPgto);
 
 
 	$lista = new agenda();

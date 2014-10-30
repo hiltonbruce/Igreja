@@ -3,16 +3,9 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 	require_once ("views/secretaria/menuTopDados.php");
 	$hisFinanceiro = 1;
 	$cong = '';
-}elseif ($_GET['igreja']>0 && empty($_GET['mes'])) {
-	$igreja = (int)$_GET['igreja'];
+}elseif (empty($_GET['igreja'])) {
+	$igreja = '';
 	$hisFinanceiro = 3;
-	$cong = 'Todas as Igrejas<br />';
-	require_once 'forms/tes/histFinanceiro.php';
-}elseif (!empty($_GET['igreja']) && !empty($_GET['mes'])) {
-	$igreja = (int)$_GET['igreja'];
-	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
-	$mesAno = $_GET['mes'].$ano;
-	$hisFinanceiro = 4;
 	$cong = 'Todas as Igrejas<br />';
 	require_once 'forms/tes/histFinanceiro.php';
 }else {
@@ -25,7 +18,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 
 require_once 'models/tes/histFinMembro.php';
 ?>
-<table>
+<table id="horario" >
 		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência: 
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
@@ -38,6 +31,7 @@ require_once 'models/tes/histFinMembro.php';
 				<col id="Mocidade">
 				<col id="Infantil">
 				<col id="Ensino">
+				<col id="Total">
 			</colgroup>
 		<thead>
 			<tr>
@@ -50,9 +44,9 @@ require_once 'models/tes/histFinMembro.php';
 				<th scope="col">Mocidade</th>
 				<th scope="col">Infantil</th>
 				<th scope="col">Ensino</th>
+				<th scope="col">Total</th>
 			</tr>
 		</thead>
-		<tbody>
 			<?php
 			if ($_GET['tipo']==1) {
 				echo $nivel1;//Valor veio do script /models/saldos.php
@@ -60,23 +54,28 @@ require_once 'models/tes/histFinMembro.php';
 				echo $nivel1;//Valor veio do script /models/saldos.php
 			}				
 			?>
-		</tbody>
 		<tfoot>
 			<?php  
 				printf("<tr id='subtotal'>"); 
-				echo ('<td>Total em '.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
+				echo ('<td>Em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').
 						'</td><td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>'.
 						'</td><td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>');
-				echo ('<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td><td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>
-				<td id="moeda">'.number_format($totInfantilAno,2,',','.').'</td><td id="moeda">'.number_format($totEnsinoAno,2,',','.').'</td></tr>');
+				echo '<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td><td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>
+				<td id="moeda">'.number_format($totInfantilAno,2,',','.').'</td>';
+				echo '<td id="moeda">'.number_format($totEnsinoAno,2,',','.').'</td>';
+				echo '<td id="moeda">'.number_format($totTotal,2,',','.').'</td></tr>';
+
 				printf("<tr id='total'>"); 
-				echo ('<td>Saldo até '.$maiorAno.'</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
+				echo ('<td>Total&nbsp;</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td><td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</td>'.
 						'</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
-				echo ('<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
-				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td><td id="moeda">'.number_format($totEnsino,2,',','.').'</td></tr>');
+				echo '<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
+				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td>';
+				echo '<td id="moeda">'.number_format($totEnsino,2,',','.').'</td>';
+
 				$totGeral = $totDizimo+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
+				echo '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>';
 			?>
 		</tfoot>
 	</table>
