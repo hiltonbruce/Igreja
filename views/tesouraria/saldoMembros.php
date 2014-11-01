@@ -71,8 +71,10 @@ require_once 'models/tes/histFinMembro.php';
 
 				printf("<tr id='total'>"); 
 				echo ('<td>Total&nbsp;</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
-					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td><td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</td>'.
-						'</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
+					<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>
+					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>
+						<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</td>
+						</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
 				echo '<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
 				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totEnsino,2,',','.').'</td>';
