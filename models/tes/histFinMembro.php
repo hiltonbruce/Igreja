@@ -4,13 +4,13 @@ $nivel2 	= '';
 $comSaldo	= '';$menorAno = 0;$maiorAno=0;
 switch ($hisFinanceiro) {
 	case 1:
-		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" AND credito!="803" ORDER BY anorefer,mesrefer ');
+		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" ORDER BY anorefer,mesrefer ');
 	break;
 	case 2:
-		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY anorefer,mesrefer ');
+		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY data,anorefer,mesrefer ');
 	break;
 	default:
-		$lista = mysql_query('SELECT * FROM dizimooferta WHERE lancamento<>"0" ORDER BY anorefer,mesrefer ');
+		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" ORDER BY anorefer,mesrefer ');
 	break;
 }
 
@@ -35,10 +35,12 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$dz = 'dizimos'."$cont$ano"; $of = 'ofertaCultos'."$cont$ano"; $ofm = 'ofertaMissoes'."$cont$ano";
 		$ofs = 'ofertaSenhoras'."$cont$ano"; $ofmoc = 'ofertaMocidade'."$cont$ano"; $ofi = 'ofertaInfantil'."$cont$ano";
 		$ofe = 'ofertaEnsino'."$cont$ano";$ofCampanha = 'ofertaCampanha'."$cont$ano";
+		$ofExtra = 'ofertaExtra'."$cont$ano";
+		 
 		//Soma da coluna
-		$totDizAno  += $$dz;$totOfertaAno  += $$of;$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;
-		$totMocidadeAno  += $$ofmoc;$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;
-		$totCampanhaAno += $$ofCampanha;
+		$totDizAno  += $$dz;$totOfertaExtraAno  += $$ofExtra;$totOfertaAno  += $$of;
+		$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;$totMocidadeAno  += $$ofmoc;
+		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
 
 		//Soma linha
 		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
@@ -46,6 +48,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 
 		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.sprintf("%02u",$cont ).'/'.$ano.'</strong></th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
+		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofCampanha,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';
@@ -56,13 +59,14 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').' </td></tr>';
 
 		for ($i=1; $i < 6; $i++) { 
-			$dizSem 	= $dz.$i;$ofSem 	= $of.$i;$ofCampanhaSem 	= $ofCampanha.$i;
-			$ofmSem 	= $ofm.$i;$ofsSem 	= $ofs.$i;$ofmocSem 	= $ofmoc.$i;
-			$ofiSem 	= $ofi.$i;$ofeSem 	= $ofe.$i;
+			$dizSem = $dz.$i;$ofSem = $of.$i;$ofExtraSem = $ofExtra.$i;
+			$ofCampanhaSem	= $ofCampanha.$i;$ofmSem = $ofm.$i;$ofsSem = $ofs.$i;
+			$ofmocSem = $ofmoc.$i;$ofiSem = $ofi.$i;$ofeSem = $ofe.$i;
 			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
 
 			$nivel1 .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
+			$nivel1 .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';

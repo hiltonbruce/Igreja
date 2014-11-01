@@ -1,8 +1,8 @@
 <?php
 while ($contas = mysql_fetch_array($lista)) {
 
-	$mesr 		= $contas['mesrefer'];
-	$anor 		= $contas['anorefer'];
+	$mesr 		=$contas['mes'];
+	$anor 		= $contas['ano'];
 	$semana 	= $contas['semana'];
 	if ($menorAno>$anor || $menorAno == 0) {
 		$menorAno=$anor;
@@ -13,6 +13,9 @@ while ($contas = mysql_fetch_array($lista)) {
 	$periodo	= "$mesr$anor";
 	$dz 		= 'dizimos'.$periodo;//dizimos do mês
 	$dizSem 	= $dz.$semana;//Dizimos do mês separando a semana
+	
+	$ofExtra	= 'ofertaExtra'.$periodo;//Ofertas do mês
+	$ofExtraSem	= $ofExtra.$semana;//Ofertas do mês separando a semana
 
 	$ofc 		= 'ofertaCultos'.$periodo;//Ofertas do mês
 	$ofcSem 	= $ofc.$semana;//Ofertas do mês separando a semana
@@ -49,6 +52,11 @@ while ($contas = mysql_fetch_array($lista)) {
 				$$ofCampanha += $valor;
 				$$ofCampSem   += $valor;
 				$totOfertaCampanha += $valor;
+			}elseif ($contas['credito']=='704') {
+				//ofertas extra
+				$$ofExtra 		+= $valor;
+				$$ofExtraSem   	+= $valor;
+				$totOfertaExtra += $valor;
 			}else {
 				$$ofc += $valor;
 				$$ofcSem += $valor;

@@ -18,12 +18,13 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 
 require_once 'models/tes/histFinMembro.php';
 ?>
-<table id="horario" >
+<table id="horario" class='table'>
 		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência: 
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
 				<col id="Dízimos">
+				<col id="Ofertas Extras">
 				<col id="Ofertas">
 				<col id="Campanhas">
 				<col id="Missões">
@@ -37,6 +38,7 @@ require_once 'models/tes/histFinMembro.php';
 			<tr>
 				<th scope="col">Mês</th>
 				<th scope="col">Dízimos</th>
+				<th scope="col">Extras</th>
 				<th scope="col">Ofertas</th>
 				<th scope="col">Campanhas</th>
 				<th scope="col">Missões</th>
@@ -58,6 +60,7 @@ require_once 'models/tes/histFinMembro.php';
 			<?php  
 				printf("<tr id='subtotal'>"); 
 				echo ('<td>Em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
+						<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').
 						'</td><td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>'.
 						'</td><td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>');
@@ -74,7 +77,7 @@ require_once 'models/tes/histFinMembro.php';
 				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totEnsino,2,',','.').'</td>';
 
-				$totGeral = $totDizimo+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
+				$totGeral = $totDizimo+$totOfertaExtra+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
 				echo '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>';
 			?>
 		</tfoot>
