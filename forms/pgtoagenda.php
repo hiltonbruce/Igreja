@@ -172,7 +172,7 @@
 						value="<?php echo $itemagenda->multa();?>"></td>
 					<td><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
 						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
-						value="<?php echo $dtPgto;?>"></td>
+						value="<?php echo $dtParaPgto;?>"></td>
 				</tr>
 				<tr>
 					<td><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
