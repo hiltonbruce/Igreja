@@ -20,7 +20,7 @@
 		}else {
 			$linkIgreja  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria';
 			$linkIgreja .= '&igreja='.$igrejaDados['rol'].'&ano='.$_GET['ano'].'&fin=2&';
-			$linkIgreja .= 'rec=11" title="Detalhar entradas">'.$igrejaDados['razao'].'</a>';
+			$linkIgreja .= 'rec=11&direita=1" title="Detalhar entradas">'.$igrejaDados['razao'].'</a>';
 		}
 		
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';

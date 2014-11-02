@@ -44,12 +44,15 @@ require_once 'help/tes/histFinanceiroMembro.php';
 
 		//Soma linha
 		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
+		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
+		$totSubTotal +=$subTotal;
 		$totTotal += $totMes;
 
 		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.sprintf("%02u",$cont ).'/'.$ano.'</strong></th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';
+		$nivel1 .= '<td id="moeda">'.number_format($subTotal,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofCampanha,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofs,2,',','.').'</td>';
@@ -63,11 +66,13 @@ require_once 'help/tes/histFinanceiroMembro.php';
 			$ofCampanhaSem	= $ofCampanha.$i;$ofmSem = $ofm.$i;$ofsSem = $ofs.$i;
 			$ofmocSem = $ofmoc.$i;$ofiSem = $ofi.$i;$ofeSem = $ofe.$i;
 			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
+			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
 
 			$nivel1 .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofSem,2,',','.').'</td>';
+			$nivel1 .= '<td id="moeda">'.number_format($subTotalSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
 			$nivel1 .= '<td id="moeda">'.number_format($$ofsSem,2,',','.').'</td>';

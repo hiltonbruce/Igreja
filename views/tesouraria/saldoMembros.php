@@ -26,6 +26,7 @@ require_once 'models/tes/histFinMembro.php';
 				<col id="Dízimos">
 				<col id="Ofertas Extras">
 				<col id="Ofertas">
+				<col id="Sub-Total">
 				<col id="Campanhas">
 				<col id="Missões">
 				<col id="Senhoras">
@@ -40,6 +41,7 @@ require_once 'models/tes/histFinMembro.php';
 				<th scope="col">Dízimos</th>
 				<th scope="col">Extras</th>
 				<th scope="col">Ofertas</th>
+				<th scope="col">Sub-Total</th>
 				<th scope="col">Campanhas</th>
 				<th scope="col">Missões</th>
 				<th scope="col">Senhoras</th>
@@ -62,6 +64,7 @@ require_once 'models/tes/histFinMembro.php';
 				echo ('<td>Em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').
+						'<td id="moeda">'.number_format($totSubTotal,2,',','.').
 						'</td><td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>'.
 						'</td><td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>');
 				echo '<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td><td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>
@@ -73,6 +76,7 @@ require_once 'models/tes/histFinMembro.php';
 				echo ('<td>Total&nbsp;</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>
+						<td id="moeda">--o--</td>
 						<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</td>
 						</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
 				echo '<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
