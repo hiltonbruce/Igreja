@@ -15,7 +15,13 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	}
 	
 	$dtPgto = date('d/m/Y',$currentPgto);
-	
+	if (!empty($_POST['credor'])) {
+		$credorAgenda = $_POST['credor'];
+	}elseif (!empty($_GET['credor'])){
+		$credorAgenda = $_GET['credor'];
+	}else {
+		$credorAgenda= '';
+	}
 	
 	//echo date('d/m/Y',$currentPgto);
 
