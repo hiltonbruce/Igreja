@@ -4,7 +4,8 @@ $nivel2 	= '';
 $comSaldo	= '';$menorAno = 0;$maiorAno=0;
 switch ($hisFinanceiro) {
 	case 1:
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" ORDER BY anorefer,mesrefer ');
+		//Listagem para historico finaceiro das contribuições dos membros
+		$lista = mysql_query('SELECT *,mesrefer AS mes,anorefer AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" ORDER BY anorefer,mesrefer ');
 	break;
 	case 2:
 		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY data,anorefer,mesrefer ');
