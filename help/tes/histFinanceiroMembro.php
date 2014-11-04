@@ -1,15 +1,17 @@
 <?php
 while ($contas = mysql_fetch_array($lista)) {
 
-	$mesr 		=$contas['mes'];
+	$mesr 		= $contas['mes'];
 	$anor 		= $contas['ano'];
 	$semana 	= $contas['semana'];
+
 	if ($menorAno>$anor || $menorAno == 0) {
 		$menorAno=$anor;
 	}
 	if ($maiorAno<$anor || $maiorAno ==0) {
 		$maiorAno=$anor;
 	}
+
 	$periodo	= "$mesr$anor";
 	$dz 		= 'dizimos'.$periodo;//dizimos do mês
 	$dizSem 	= $dz.$semana;//Dizimos do mês separando a semana

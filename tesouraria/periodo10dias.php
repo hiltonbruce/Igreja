@@ -40,7 +40,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
 				
 				echo '<td>'.date('d/m',$dia_periodo).' - '.$diaSemana.'</td><td>';
-				$evento = $lista->periodo(date('Y-m-d',$dia_periodo),$credorAgenda,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
+				$evento = $lista->periodo(date('Y-m-d',$dia_periodo),$credor,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
 			}
 		?>

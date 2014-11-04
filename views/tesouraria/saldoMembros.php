@@ -19,7 +19,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 require_once 'models/tes/histFinMembro.php';
 ?>
 <table id="horario" class='table'>
-		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência: 
+		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência:&nbsp;  
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
@@ -67,20 +67,23 @@ require_once 'models/tes/histFinMembro.php';
 						'<td id="moeda">'.number_format($totSubTotal,2,',','.').
 						'</td><td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>'.
 						'</td><td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>');
-				echo '<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td><td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>
-				<td id="moeda">'.number_format($totInfantilAno,2,',','.').'</td>';
+				echo '<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td>
+					<td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>
+					<td id="moeda">'.number_format($totInfantilAno,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totEnsinoAno,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totTotal,2,',','.').'</td></tr>';
 
-				printf("<tr id='total'>"); 
+				printf("<tr id='total'>");
+				$totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
 				echo ('<td>Total&nbsp;</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>
-						<td id="moeda">--o--</td>
+						<td id="moeda">'.number_format($totSubTotal,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</td>
 						</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>');
-				echo '<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td><td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
-				<td id="moeda">'.number_format($totInfantil,2,',','.').'</td>';
+				echo '<td id="moeda">'.number_format($totSenhoras,2,',','.').'</td>
+					<td id="moeda">'.number_format($totMocidade,2,',','.').'</td>
+					<td id="moeda">'.number_format($totInfantil,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totEnsino,2,',','.').'</td>';
 
 				$totGeral = $totDizimo+$totOfertaExtra+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;

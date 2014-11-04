@@ -12,8 +12,8 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-		echo $cong.'Histórico Financeiro - Ano de referência:'.$ano;
-		echo '- Valores em Real (R$)';?>
+		echo $cong.'Histórico Financeiro - Ano de referência: '.$ano;
+		echo ' - Valores em Real (R$)';?>
 	</caption>
 	<colgroup>
 		<?php echo $colgroup;?>

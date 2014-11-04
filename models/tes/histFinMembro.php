@@ -2,6 +2,22 @@
 $nivel1 	= '';
 $nivel2 	= '';
 $comSaldo	= '';$menorAno = 0;$maiorAno=0;
+$nivelSem = '
+			<tr class="success">
+				<th class="text-center">Período</th>
+				<th class="text-center">Dízimos</th>
+				<th class="text-center">Extras</th>
+				<th class="text-center">Ofertas</th>
+				<th class="text-center">Sub-Total</th>
+				<th class="text-center">Campanhas</th>
+				<th class="text-center">Missões</th>
+				<th class="text-center">Senhoras</th>
+				<th class="text-center">Mocidade</th>
+				<th class="text-center">Infantil</th>
+				<th class="text-center">Ensino</th>
+				<th class="text-center">Total</th>
+			</tr>';
+
 switch ($hisFinanceiro) {
 	case 1:
 		//Listagem para historico finaceiro das contribuições dos membros
@@ -18,18 +34,23 @@ switch ($hisFinanceiro) {
 //LÃ³gica para monta o conjunto de variÃ¡veis para cmpor a tabelar a seguir
 require_once 'help/tes/histFinanceiroMembro.php'; 
 
+
 	if ($_GET['ano']=='') {
-		$ano = date('Y');
-	}elseif ($_GET['ano']<$menorAno){
-		$ano = $menorAno;
-	}elseif ($_GET['ano']>$maiorAno){
-		$ano = $maiorAno;
-	}else {
-		$ano = $_GET['ano'];
-	}
+			$ano = date('Y');
+		}elseif ($_GET['ano']<$menorAno){
+			$ano = $menorAno;
+		}elseif ($_GET['ano']>$maiorAno){
+			$ano = $maiorAno;
+		}else {
+			$ano = $_GET['ano'];
+		}
 	 
+	//echo "<h1> ** $ano **</h1>";
+
 	$ano = ($ano=='') ? date('Y'):$ano;
-	
+
+	//$ano = 2013;
+	//echo "<h1> ** $ano **</h1>";
 	$cor= true;
 	for ($cont=1; $cont<13 ; $cont++){
 		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
@@ -69,21 +90,27 @@ require_once 'help/tes/histFinanceiroMembro.php';
 			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
 
-			$nivel1 .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($subTotalSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofsSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofmocSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofiSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($$ofeSem,2,',','.').'</td>';
-			$nivel1 .= '<td id="moeda">'.number_format($totMesSem,2,',','.').' </td></tr>';
-			$nivel1 .= '</tr>';
-		}
 
+
+
+
+
+			$nivel1Sem .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($subTotalSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofsSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmocSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofiSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofeSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').' </td></tr>';
+			$nivel1Sem .= '</tr>';
+		}
+		$nivel1 .= $nivelSem.$nivel1Sem;
+		$nivel1Sem = '';//Limpa a variável para o próximo mês
 
 		$nivel1 .= '</tbody>';
 
@@ -102,7 +129,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		var mais = '<a href="#"><img src="img/mais.gif" alt="Revelar/ocultar cidades" class="maismenos" /></a>'
 			$('table#horario tbody tr:not(.sub):even').addClass('impar');			
 			$('table#horario tbody tr:not(.sub)').hide();	 
-			$('.sub th').css({borderBottom: '1px solid #333'}).prepend(mais);
+			$('.sub th').css({border: '1px solid #333'}).prepend(mais);
 				$('img',$('.sub th'))
 					.click(function(event){
 						event.preventDefault();
