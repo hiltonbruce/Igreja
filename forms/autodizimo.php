@@ -1,23 +1,14 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
-<!-- Desenvolvido por Wellington Ribeiro -->
-<?php
-
-$meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
-$anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
-?>
+<!-- Desenvolvido por Wellington Ribeiro o autocompletar-->
+<!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
 <fieldset>
 <legend>Dizimo e Ofertas ref. Igreja</legend>
 <form method="post" name="" action="">
-	
 		<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" autofocus="autofocus" ');
 		echo $listaIgreja;
 		?>
-		
+
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
 			<?php echo semana(date('d/m/Y'));?>
@@ -27,10 +18,10 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 			<tr>
 				<td colspan="3"><label>Nome:</label> <input type="text" name="nome"
 				id="campo_estado" size="50%" class="form-control"
-				placeholder="Nome do dizimista para iniciarmos a busca no cadastro da Igreja!" 
+				placeholder="Nome do dizimista para iniciarmos a busca no cadastro da Igreja!"
 					tabindex="<?php echo ++$ind;?>" />
 				</td>
-				<td><label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?php echo ++$ind;?>" 
+				<td><label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?php echo ++$ind;?>"
 						value="" class="form-control" placeholder="N&ordm; do membro na igreja" />
 				</td>
 			</tr>
@@ -81,7 +72,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					type="submit" name="listar" value="Lançar..."></td>
 				</tr>
 				<tr>
-					<td colspan="2"><label> Qual Campanha ?</label><?php 
+					<td colspan="2"><label> Qual Campanha ?</label><?php
 					$campanha = new List_campanha;
 					echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
 					?>
@@ -90,7 +81,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 						 class="form-control" name="oferta4" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
-			
+
 			</tbody>
 		</table>
 	</fieldset>
@@ -159,7 +150,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 	<table class="table">
 		<tbody>
 			<tr>
-				<td colspan="2"><textarea name="obs" id="obs" class="form-control" 
+				<td colspan="2"><textarea name="obs" id="obs" class="form-control"
 						cols="50%" tabindex="<?php echo ++$ind;?>"></textarea>
 				</td>
 				<td><input type="hidden" name="tipo" id="tipo" value="1"> <input
@@ -173,6 +164,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 	</fieldset>
 </form>
 </fieldset>
+<script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular, congr ) {
@@ -182,7 +174,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-		
+
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value;
