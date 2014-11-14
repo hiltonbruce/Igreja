@@ -346,7 +346,7 @@ class agenda {
 	function periodo ($dia,$credor,$pagamento) {
 
 		$periodo  = 'SELECT a.vencimento, a.valor, a.id, a.credor,';
-		$periodo .= 'a.igreja, a.status ';
+		$periodo .= 'a.igreja, a.status, a.motivo ';
 		$periodo .= 'FROM agenda AS a WHERE ';
 		if ($credor>'0') {
 			$periodo .= ' a.credor='.$credor.' AND ';
@@ -370,45 +370,46 @@ class agenda {
 
 			if ($periodo_dados['status']=='2') {//Marca os já pagos
 				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/> ';
-				$titulo = 'Dívida Paga! Obrigado.';
+				$titulo = 'Dívida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
 				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/> ';
-				$titulo = 'Atualizado. Aguardado confirmação de pgto!';
+				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
 				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/> ';
-				$titulo = 'Dívida vencida!';
+				$titulo = 'Dívida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
-				$titulo = 'Click aqui atualizar!';
+				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];
 			}
 
 			if ($periodo_dados['igreja']<'1') {
 				$evento .= 'Templo Sede - ';
 			}else {
 				$igreja_ev = new DBRecord('igreja',$periodo_dados['igreja'], 'rol');
-				$evento .= $igreja_ev->razao().' - ';
+				$evento .= $igreja_ev->razao();
 			}
 
 			if (strstr($periodo_dados['credor'],'r')) {
 				$rolCredor = str_replace('r', "", $periodo_dados['credor']);
 				$membro = new DBRecord('membro',$rolCredor,'rol' );
-				$evento .= 'Membro: '.$membro->nome();
+				$evento .= ' &rarr; '.$membro->nome();
 			}else {
 				$credor= new DBRecord('credores',$periodo_dados['credor'],'id');
-				$evento .= ' Credor: -> '.$credor->alias();
+				$evento .= ' &rarr; '.$credor->alias();
 			}
 
 			echo '<a title="'.$titulo.'" href="./?escolha=tesouraria/agenda.php&
 			menu=top_tesouraria&id='.$periodo_dados['id'].'&pagina1_fix='.$_GET['pagina1_fix'].$linkcredor.'">';
 			echo $evento;
 
-			echo ' --> R$ '.number_format($periodo_dados['valor'],2,",",".").'<br />';
+			echo ' &rarr; R$ '.number_format($periodo_dados['valor'],2,",",".").
+			'</a> (<span class="text-info">'.$periodo_dados['motivo'].'</span>)<br />';
 			$total += $periodo_dados['valor'];
 		}
 	}else {
 		$total=0;
 	}
-		echo '</td><td  class="text-right" >R$ '.number_format($total,2,",",".").'</td>';
+		echo '</td><td  class="text-right" >'.number_format($total,2,",",".").'</td>';
 	}
 
 	function vencidas() { //Quantidade de contas vencidas as mais de cinco dias
@@ -433,8 +434,8 @@ class agenda {
 			$tabela .= '<td>'.$contas ['vencimento'].'</td><td>';
 			$tabela .= '<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria';
 			$tabela .= '&id='.$contas['id'].'&pagina1_fix='.$_GET['pagina1_fix'].'&data='.$data.'">';
-			$tabela .= $contas['nome'].' -> '.$contas ['igreja'];
-			$tabela .= ' -> '.$contas['motivo'].'<a></td>';
+			$tabela .= $contas['nome'].' &rarr; '.$contas ['igreja'];
+			$tabela .= ' &rarr; '.$contas['motivo'].'<a></td>';
 			$tabela .= '<td>'.$contas['pgto'].'<a></td>';
 			$tabela .= '<td style="text-align: right;" >'.number_format($contas['valor'],2,",",".").'</td>';
 			$tabela .= '</tr>';
@@ -488,7 +489,7 @@ class agenda {
 			$tabela .=  '<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria
 				&id='.$contas['id'].'&pagina1_fix='.$_GET['pagina1_fix'].'" title="'.$titulo.'">';
 			$tabela .=  $evento.$nome.':'.$dadosIgreja[$contas ['igreja']]['0'];
-			$tabela .=  ' -> '.$contas['motivo'].'<a></td>';
+			$tabela .=  ' &rarr; '.$contas['motivo'].'<a></td>';
 			$tabela .= '<td>'.$contas['pgto'].'<a></td>';
 			$tabela .=  '<td style="text-align: right;" >'.number_format($contas['valor'],2,",",".").'</td>';
 			$tabela .=  '</tr>';
@@ -508,13 +509,13 @@ class agenda {
 
 			if ($contas['status']=='2') {//Marca os já pagos
 				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/>';
-				$titulo = 'Dívida Paga! Obrigado.';
+				$titulo = 'Dívida Paga! Obrigado. Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']=='1'){
 				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/>';
-				$titulo = 'Atualizado. Aguardado confirmação de pgto!';
+				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
 				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/>';
-				$titulo = 'Dívida vencida!';
+				$titulo = 'Dívida vencida! Motivo:'.$contas['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -526,7 +527,7 @@ class agenda {
 			$tabela .=  '<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&
 				id='.$contas['id'].'&pagina1_fix='.$_GET['pagina1_fix'].'" title="'.$titulo.'">';
 			$tabela .=  $contas['nome'].$evento.$contas ['igreja'];
-			$tabela .=  ' -> '.$contas['motivo'].'<a></td>';
+			$tabela .=  ' &rarr; '.$contas['motivo'].'<a></td>';
 			$tabela .= '<td>'.$contas['pgto'].'<a></td>';
 			$tabela .=  '<td style="text-align: right;" >'.number_format($contas['valor'],2,",",".").'</td>';
 			$tabela .=  '</tr>';

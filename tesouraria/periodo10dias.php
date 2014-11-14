@@ -20,7 +20,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			<tr>
 				<th scope="col">Dia</th>
 				<th scope="col">Evento</th>
-				<th scope="col">Total</th>
+				<th scope="col">Total&nbsp;(R$)</th>
 			</tr>
 		</thead>
 		<tbody id="periodo" >
@@ -39,7 +39,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 				$diaSemana = date('D',$dia_periodo);
 				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
 
-				echo '<td>'.date('d/m',$dia_periodo).' - '.$diaSemana.'</td><td>';
+				echo '<td>'.date('d/m',$dia_periodo).'&nbsp;-&nbsp;'.$diaSemana.'</td><td>';
 				$evento = $lista->periodo(date('Y-m-d',$dia_periodo),$credor,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
 			}

@@ -26,9 +26,11 @@
 
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" >
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Plano de Contas</button></a>
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>"
+	  	data-toggle="tooltip" data-placement="bottom" >Plano de Contas</button></a>
 	</div>
-	  <?php if ($_GET['rec']=='4' || $_GET['rec']=='5' || $_GET['rec']=='21'  || $_GET['rec']=='2') {
+	  <?php if ($_GET['rec']=='4' || $_GET['rec']=='5' || $_GET['rec']=='21'  ||
+	  $_GET['rec']=='22'  || $_GET['rec']=='2') {
 	  	$linkAtivo='active';
 	  }else {
 	  	$linkAtivo='';
@@ -67,6 +69,11 @@
 		  	$linkAtivo='';
 		  }?>
 	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=2">Lan&ccedil;. Cont&aacute;bil</a></li>
+	    <?PHP
+	    	$linkAtivo = ($_GET['rec']=='22' ) ?  'class="active"': '' ;
+	    	$linkEstonoDefino = 'data-toggle="tooltip" data-placement="bottom" href="'.$linkLancamento.'&rec=22" title="Estorna dizimos e ofertas"'
+	    ?>
+	    <li <?php echo $linkAtivo;?>><a <?php echo $linkEstonoDefino;?> >Estorno Definido</a></li>
 	  </ul>
 	</div>
 

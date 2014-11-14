@@ -38,7 +38,7 @@ switch ($_GET['rec']) {
 		require_once 'models/saldos.php';
 		$mes = date('m'); // Mês desejado, pode ser por ser obtido por POST, GET, etc.
 		$ano = date('Y'); // Ano atual
-		$ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano)); 
+		$ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano));
 		$recLink = '14&dtBalac='.$ultimo_dia.'/'.$mes.'/'.$ano;
 		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink;
 		require_once ('views/saldos.php');
@@ -76,9 +76,12 @@ switch ($_GET['rec']) {
 		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
 		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
 		$roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
-		
+
 		$tituloColuna5 = 'Valor(R$)';
 		$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
+		break;
+	case '22':
+		require_once ('forms/tes/busca.php');
 		break;
 	default:
 		require_once 'forms/receita.php';
