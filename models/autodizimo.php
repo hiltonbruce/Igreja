@@ -6,6 +6,7 @@
  * @since 29/12/2011
  */
 require_once '../help/impressao.php';
+$linha1='';$linha2='';
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
@@ -76,7 +77,12 @@ while( $campo = mysql_fetch_array( $res ) )
 			$html = preg_replace("/(" . $q . ")/i", $destaque, $estado);
 		break;
 	}
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
+	
+	if ($_GET['igreja']==$ecles->congregacao()) {
+		$linha1 .= "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
+	}else {
+		$linha2 .= "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";		
+	}
 	
 	$quantExibir++;
 	
@@ -84,6 +90,7 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 }
+echo $linha1.$linha2;
 if ($linhas>10) {
 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
 	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras! +++</p>';

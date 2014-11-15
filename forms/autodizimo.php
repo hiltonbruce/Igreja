@@ -1,7 +1,7 @@
 <!-- Desenvolvido por Wellington Ribeiro o autocompletar-->
 <!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
 <fieldset>
-<legend>Dizimo e Ofertas ref. Igreja</legend>
+<legend>Dizimo e Ofertas</legend>
 <form method="post" name="" action="">
 		<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
@@ -177,6 +177,6 @@
 
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
-		return "models/autodizimo.php?q=" + this.value;
+		return "models/autodizimo.php?q=" + this.value + "&igreja=" + <?php echo $_GET['igreja'];?> ;
 	});
 </script>
