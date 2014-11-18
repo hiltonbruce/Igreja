@@ -1,7 +1,7 @@
 <?PHP
 	controle ("consulta");
 	//unset($_SESSION["rol"]);
-	require_once ("./igreja/classes.php");
+	//require_once ("./igreja/classes.php");
 	$igreja = new DBRecord ("igreja",$_GET["id"],"rol");
 ?>
 <div>
@@ -32,7 +32,7 @@
 	if (!ver_nome("cad_organica")) {
 	?>
 	<form id="form2" name="form2" method="post" action="" >
-	
+
 	<td>
 	 <?PHP
 	  if (empty($_GET["id"]))
@@ -41,7 +41,7 @@
 		}else{
 			$id_ig=$_GET["id"];
 		}
-	
+
 	//valor recebido do script index.php
 	  $anterior=$id_ig-1;
 	  $proximo=$id_ig+1;
@@ -49,10 +49,10 @@
 	  {
 	  	$anterior=0;
 	  }
-	  
+
 	  $link = "./?escolha={$_GET["escolha"]}&menu=top_igreja&id={$_GET["id"]}&ord={$_GET["ord"]}&cargo=";
 	  $link_foto = "./?escolha=igreja/lst_memfoto.php&menu=top_igreja&ord={$_GET["ord"]}&id={$_GET["id"]}&cargo={$_GET["cargo"]}&foto=";
-	  
+
 	  ?><label>Escolha a Congrega&ccedil;&atilde;o:</label>
 	  <select name="menu1" onchange="MM_jumpMenu('parent',this,0)"  class="form-control" >
 			<?PHP
@@ -62,7 +62,7 @@
 	  </select>
 	  </td>
 	  <td>
-	  <?php 
+	  <?php
 	  switch ($_GET['cargo']) {
 	  	//Define a 1ª linha do proximo form
 	  	case 1:
@@ -110,7 +110,7 @@
 	  </tr>
 	  <tr>
 	  <td>
-	  <?php 
+	  <?php
 	  	//1ª Linha do form (filtro)
 	  	switch ($_GET['foto']) {
 	  		case '1':
@@ -119,7 +119,7 @@
 	  		case '2':
 	  		$linha1 = '<option value="'.$link.'2">Sem fotos</option>';
 	  		break;
-	  		
+
 	  		default:
 	  			$linha1 = '';
 	  		break;
@@ -132,7 +132,7 @@
 		<option value="<?PHP echo $link_foto;?>1">Listar com fotos</option>
 		<option value="<?PHP echo $link_foto;?>2">Listar sem fotos</option>
 	  </select>
-	  
+
     </form>
     </td>
     <td>
@@ -146,14 +146,14 @@
       <label>&nbsp;</label>
       <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
     </form>
-    
+
     <?php }
     elseif ($_GET["cargo"]>"5"){
     ?>
     <fieldset>
     <legend> Impressão com dados pessoais:</legend>
 	<form id="form1" name="form1" method="get" action="igreja/dirigente_print.php">
-	
+
 	<div class="radio-inline">
 	<label>
      <input type="radio" name="ext" value="1" />Sim </label>
@@ -165,16 +165,16 @@
       <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
       <input name="titTabela" type="hidden" value="<?PHP echo $titTabela;?>" />
     </form></fieldset>
-    <?php 
+    <?php
     } else{
-    ?>    
+    ?>
 	<form id="form1" name="form1" method="get" action="igreja/membro_print.php">
     <fieldset>
     <legend> Impressão com dados pessoais:</legend>
       <input name="id" type="hidden" value="<?PHP echo $_GET["id"];?>" />
       <input name="ord" type="hidden" value="<?PHP echo $_GET["ord"];?>" />
       <input type="hidden" name="cargo" value="<?PHP echo $_GET["cargo"];?>" />
-      
+
 	<div class="radio-inline">
 	<label><input type="radio" name="ext" value="1" />Sim</label>
     </div>
@@ -185,7 +185,7 @@
       <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
       <input name="titTabela" type="hidden" value="<?PHP echo $titTabela;?>" />
     </form></fieldset>
-    <?php 
+    <?php
     }
     ?>
 	</td>

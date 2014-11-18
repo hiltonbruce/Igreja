@@ -12,7 +12,12 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-		echo $cong.'Histórico Financeiro - Ano de referência: '.$ano;
+		if (empty($titulo)) {
+			echo $cong.'Histórico Financeiro - Ano de referência: '.$ano;
+		} else {
+			echo $titulo;
+		}
+
 		echo ' - Valores em Real (R$)';?>
 	</caption>
 	<colgroup>

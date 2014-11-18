@@ -83,6 +83,11 @@ switch ($_GET['rec']) {
 	case '22':
 		require_once ('forms/tes/busca.php');
 		break;
+	case '23':
+		//require_once 'forms/tes/histFinanceiro.php';
+		require_once 'help/tes/saldoCargos.php';
+		require_once 'views/tesouraria/saldoCargos.php';
+		break;
 	default:
 		require_once 'forms/receita.php';
 	break;
