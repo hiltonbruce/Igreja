@@ -20,9 +20,11 @@
 		if ($_GET['rec']=='13') {
 			$linkIgreja = $igrejaDados['razao'];
 		}else {
-			$linkIgreja  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria';
-			$linkIgreja .= '&igreja='.$igrejaDados['rol'].'&ano='.$_GET['ano'].'&fin=2&';
-			$linkIgreja .= 'rec=11&direita=1" title="Detalhar entradas">'.mostra_foto ($igrejaDados['rol']).$igrejaDados['nome'].'</a>';
+			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
+			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
+			$linkIgreja  = '<a '.$linkMemb.' >';
+			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</a></td><td>';
+			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a>';
 		}
 
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
@@ -43,8 +45,8 @@
 
 	//Cabeçalho da tabela
 	$colgroup = '<col id="Nome">';
-	$tabThead = '<tr><th scope="col">Nome</th>';
-	$tabFoot = '<tr id="total"><td>Totais</td>';
+	$tabThead = '<tr><th scope="col" colspan="2">Nomes</th>';
+	$tabFoot = '<tr id="total"><td colspan="2">Totais</td>';
 
 	foreach(arrayMeses() as $mes => $meses) {
 		$colgroup .= '<col id="'.substr($meses, 0, 3).'">';

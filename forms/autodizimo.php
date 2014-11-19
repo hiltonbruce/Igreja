@@ -177,6 +177,6 @@
 
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
-		return "models/autodizimo.php?q=" + this.value + "&igreja=" + <?php echo $_GET['igreja'];?> ;
+		return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
 	});
 </script>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 ?>
 <script type="text/javascript" src="js/autocomplete.js"></script>
@@ -15,7 +15,7 @@ $(document).ready(function(){
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-		
+
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value;
@@ -45,35 +45,35 @@ $(document).ready(function(){
 						$bsccredor = new List_sele('igreja', 'razao', 'igreja');
 						$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control"');
 						echo $listaIgreja;
-					?> 
+					?>
 				</td>
                </tr>
             <tr>
             	<td colspan="2">
             		<label>Para Débito na Conta:</label>
-            		<input type="text" name="debito" 
+            		<input type="text" name="debito"
 					value="<?php echo $_GET['debito'];?>"tabindex="<?PHP echo ++$ind; ?>"
 					 class="form-control" placeholder="Contas por Código. Separando por virgula. Ex.: 701,705,805" />
             	</td>
             	<td colspan="2">
             		<label>Para Crédito na Conta:</label>
-            		<input type="text" name="credito" 
+            		<input type="text" name="credito"
 					value="<?php echo $_GET['credito'];?>"tabindex="<?PHP echo ++$ind; ?>"
 					 class="form-control" placeholder="Contas por Código. Separando por virgula. Ex.: 701,705,805" />
             	</td>
             </tr>
 			<tr id="form">
 				<td>
-					Dia: <br /><input type="text" size="2" maxlength="2" name="dia" 
+					Dia: <br /><input type="text" size="2" maxlength="2" name="dia"
 					value="<?php echo $_GET['dia'];?>"tabindex="<?PHP echo ++$ind; ?>"
 					 class="form-control" placeholder="dia" />
 				</td>
 				<td>
-					Mês:<br /> 
+					Mês:<br />
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';
-						      foreach(arrayMeses() as $mes => $meses) {            
+						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($_GET['mes']==$mes) {
 								 	$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
@@ -85,15 +85,15 @@ $(document).ready(function(){
 				</td>
 				<td>
 					Ano:(Zero p/ todos os anos) <br />
-					<input type="text" name="ano" value="<?php echo $ano;?>" 
-					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />  
-					<input type="hidden" name="membro"	value="<?php echo true;?>" /> 
-					<input type="hidden" name="fin"	value="<?php echo $fin;?>" /> 
+					<input type="text" name="ano" value="<?php echo $ano;?>"
+					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
+					<input type="hidden" name="membro"	value="<?php echo true;?>" />
+					<input type="hidden" name="fin"	value="<?php echo $fin;?>" />
 				</td><td>
 					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
-					<input type="hidden" name="rec"	value="<?php echo $rec;?>" /> 
+					<input type="hidden" name="rec"	value="<?php echo $rec;?>" />
 					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
-					tabindex="<?PHP echo ++$ind; ?>" /> 
+					tabindex="<?PHP echo ++$ind; ?>" />
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				</td>
 			</tr>

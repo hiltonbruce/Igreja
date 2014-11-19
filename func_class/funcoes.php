@@ -60,7 +60,7 @@ function conv_valor_br ($data) {
 
 function sele_uf ($valor,$campo) {
 	//Lista para input select para UF, onde:
-	//$valor traz a uf do Estado atual	
+	//$valor traz a uf do Estado atual
 	$for_num = new List_UF("estado", "nome", $campo);
 	return $for_num->List_Selec ('1',$valor);
 }
@@ -166,7 +166,7 @@ function mostra_foto ($rol) {
 			}else{
 				$img="../img_membros/ver_foto.jpg";
 			}
-		return "<img src='$img' alt='Foto do Membro' width='75' height='98' border='1' align='absmiddle' />";
+		return "<img src='$img' class='img-thumbnail' alt='Foto do Membro' width='75' height='98' border='1' align='absmiddle' />";
 }
 
 function data_venc($data){
@@ -200,9 +200,9 @@ function data_batismo($data,$link){
 		$y=$dta[2];
 		$res = checkdate($m,$d,$y);
 		$batismo = mktime(23, 59, 59, $m, $d, $y);
-		
+
 		echo "bat -> $batismo  ** atual->".mktime();
-		
+
 		if ($res != 1 ){
 			echo "<script> alert('Data invï¿½lida! Vocï¿½ digitou: $data');  location.href='$link';</script>";
 			break;
@@ -210,7 +210,7 @@ function data_batismo($data,$link){
 			echo "<script> alert('Data anterior a hoje! Vocï¿½ digitou: $data, e ï¿½ alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
 			break;
 		}
-		
+
 	}else{
 		echo "<script> alert('Data nï¿½o informada!');</script>";
 		echo "<h1> Data nï¿½o informada! </h1>";
@@ -286,20 +286,20 @@ function validaCPF($cpf) {
 }
 
 function semana ($data) {
-	
+
 	$dta = explode("/",$data);
 		$d=$dta[0];
 		$m=$dta[1];
 		$y=$dta[2];
 		//$res = ;
 	if (checkdate($m,$d,$y)) {
-		
+
 		$semana = 1;
 		$anoatual = date ('y');
 		$diafim = date ('d',mktime(1,0,0,$m+1,0,$y));
-		
+
 		//echo '<h1>'.$d.'/'.$m.'<br/>'.date('w',mktime(1,0,0,$m,$i,$y)).'</h1>';
-		
+
 		//echo '<h2>'.$semana.'</h2>';
 		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o lanï¿½amento
 			//echo $d.' ++++++++++ '.$i;
@@ -309,13 +309,13 @@ function semana ($data) {
 			}
 				if ($d==$i) {
 				$sem=$semana;}
-							
+
 			//echo(date('d/M/Y',mktime(1,0,0,$m,$i,$y)).' <--> '.date('w',mktime(1,0,0,$m,$i,y)).' ********** ');
 		}
 	}
-	
+
 	return $sem;
-	
+
 }
 
 
@@ -431,12 +431,12 @@ function prox_ant_ano (){
      //echo "<a href='".$_GET["escolha"]."&ano=".$y+1."'>Prï¿½ximo Ano</a>";
      echo "<div  align='center' >";
      echo "<table class='tabela' >";
-     
+
      echo "<tr>";
      echo '<td colspan="3">';
      echo '<label>Congrega&ccedil;&atilde;o: </label>';
      $estnatal = new List_Igreja('igreja', 'razao','id');
-     $estnatal->igreja_pop('',$_GET["id"],'escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=');     
+     $estnatal->igreja_pop('',$_GET["id"],'escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=');
      echo '</td><td><label>&nbsp;</label>';
      echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=2'>";
      echo '<button type="button" class="btn btn-primary btn-sm"> Imprimir Todas ';
@@ -465,7 +465,7 @@ function ver_nome ($val_link) {
 	}else {
 		$tes = false;
 	}
-	
+
 	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link)) || $tes) {
 		return true;
 	}else{
@@ -599,13 +599,13 @@ function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o,
 	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
-		
+
 		$id = ($_POST["id"]=="") ? $_GET["id"]:$_POST["id"];
 		$dados = new DBRecord("usuario", $id, "id");
 		$autoriza = $_SESSION['nivel'] >= $dados->nivel ? 0 : 1;
-		
+
 	}
-	
+
 	switch ($tipo) {
 		case "consulta":
 			if ($_SESSION["nivel"]<5){
@@ -799,20 +799,20 @@ function material ()
 				4=>"M&eacute;dico",5=>"Constru&ccedil;&atilde;o Civil",6=>"Eletr&ocirc;nico",
 				7=>"Som e V&iacute;deo",8=>"Inform&aacute;tica",9=>"Vestu&aacute;rio",
 				10=>"Eclesi&aacute;stico",11=>"Decora&ccedil;&aatilde;o");
-	
+
 	return $material;
-	
+
 }
 
 function periodoLimp ($mesRef) {
 	/*
 	 * Devolve o periodo da listagem do material de limpeza
 	 */
-	 
+
 	$mesref = ($mesRef!='') ? $mesRef:$_GET['mes'].'/'.$_GET['ano'];
-	
+
 	//$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
-	
+
 	list($mref,$aref) = explode('/', $mesref);
 	$linkperido = 'mes='.$mref.'&ano='.$aref;
 	$anoAnterior = $aref-1;
@@ -851,7 +851,7 @@ function periodoLimp ($mesRef) {
 			$periodo = '';
 			break;
 	}
-	
+
 	if ($periodo!='') {
 		$periodos = array($periodo.$aref,$anterio1,$anterio2);
 		return $periodos;

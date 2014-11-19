@@ -10,40 +10,55 @@ $linha1='';$linha2='';
 conectar();
 $q = mysql_real_escape_string( $_GET['q'] );
 $igrejaRol = mysql_real_escape_string( $_GET['igreja'] );
+if (empty($_GET['igreja'])) {
+	$igrejaRol = 0;
+} else {
+	$igrejaRol =(int)$_GET['igreja'];
+}
+
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 
 //echo '<h1>Teste: '.$_GET['teste'].'</h1>';
 
-//critÃ©rios de fonÃ©tica
-$exp = new fonetica($q,'nome');
+//critÃƒÂ©rios de fonÃƒÂ©tica
+//$exp = new fonetica($q,'nome');
 
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND
-	  m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND m.nome LIKE '%$q3%' AND m.nome LIKE '%$q4%'
-	  ORDER BY case when e.congregacao=$igrejaRol then 0 else 1 end ASC,LOCATE('$q1',m.nome) ";
+	 $sql  = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND";
+	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND m.nome LIKE '%$q3%' AND m.nome LIKE '%$q4%' ORDER BY ";
+	 if ($igrejaRol>0) {
+	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
+	 }
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND
-	  m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND m.nome LIKE '%$q3%' ORDER BY case when e.congregacao=$igrejaRol
-	  then 0 else 1 end ASC,locate('$q1',m.nome) ";
+	 $sql  = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND";
+	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND m.nome LIKE '%$q3%' ORDER BY ";
+	 if ($igrejaRol>0) {
+	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
+	 }
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
-	 $sql = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND
-	 (m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%') ORDER BY case when e.congregacao=$igrejaRol then 0 else 1 end ASC,locate('$q1',m.nome) ";
+	 $sql  = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol";
+	 $sql .= " AND (m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%') ORDER BY ";
+	 if ($igrejaRol>0) {
+		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
+	 }
 	break;
-
 	default:
 	$q=trim($q);
-	$sql = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND
-	 locate('$q',m.nome) > 0 ORDER BY case when e.congregacao=$igrejaRol then 0 else 1 end ASC,locate('$q',m.nome)";
+	 $sql = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE ";
+	 $sql .= "m.rol=e.rol AND locate('$q',m.nome) > 0 ORDER BY ";
+	 if ($igrejaRol>0) {
+	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
+	 }
 	break;
 }
 
-$res = mysql_query( $sql );
+$res = mysql_query( $sql."locate('$q',m.nome)" );
 $linhas = mysql_num_rows($res);
 
 while( $campo = mysql_fetch_array( $res ) )
@@ -51,8 +66,8 @@ while( $campo = mysql_fetch_array( $res ) )
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = $campo['celular'];
 	$sigla = $campo['rol'];
-	$ecles = new DBRecord ('eclesiastico',$campo ['rol'],'rol');
-	$igreja = new DBRecord ('igreja',$ecles->congregacao(),'rol');
+	//$ecles = new DBRecord ('eclesiastico',$campo ['rol'],'rol');
+	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
 	$cargo = cargo($sigla);
 	$nomecong = $cargo.' - '.htmlentities($igreja->razao(),ENT_QUOTES,'iso-8859-1');
 	$estado = strtoupper(strtr( $campo ['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));;
@@ -86,11 +101,7 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 
-	if ($igrejaRol==$ecles->congregacao()) {
-		$linha1 .= "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
-	}else {
-		$linha2 .= "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
-	}
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
 
 	$quantExibir++;
 
@@ -98,9 +109,10 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 }
-echo $linha1.$linha2;
 
+if ($linhas>10) {
 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
-	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras! +++</p>';
+	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
+}
 
 ?>
