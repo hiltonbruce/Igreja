@@ -35,6 +35,9 @@
 			<?php echo $tabFoot;?>
 	</tfoot>
 </table>
+<div class="bs-example bs-example-bg-classes">
+    <p class="bg-info">Esta consulta gerou um total de <kbd><?PHP echo $totalLinhas;?></kbd> ocorr&ecirc;ncias.</p>
+  </div>
 <?PHP
 
 	if ($_GET['rec']=='13') {

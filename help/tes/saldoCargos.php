@@ -24,7 +24,7 @@
 			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
 			$linkIgreja  = '<a '.$linkMemb.' >';
 			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</a></td><td>';
-			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a>';
+			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].$igrejaDados['rol'].'</a>';
 		}
 
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
@@ -86,4 +86,5 @@
 					break;
 		}
 
+		$totalLinhas = $igrejas->linhas($cargoMembro,$_GET['cargo']);
 ?>

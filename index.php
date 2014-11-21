@@ -55,6 +55,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="css/docs.min.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
 <link rel="icon" type="image/gif" href="br_igreja.jpg">
