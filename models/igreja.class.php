@@ -63,7 +63,7 @@ class igreja {
 		return $linhas;
 
 	}
-/*
+
 	function ordenar($ordenar) {//ordena a listagem e seleciona por cargo
 
 		$ordenar = (empty($_GET["ord"])) ? $ordenar :  $_GET["ord"];
@@ -141,6 +141,6 @@ class igreja {
 		return $linhas;
 
 	}
-	*/
+
 }
 ?>
