@@ -6,8 +6,9 @@
 	}
 
 	//Loops para o corpo da tabela
-	$igrejas = new cargos();$linha='';
-	$cargoMembro = (empty($_GET['cargo'])) ? 1 : $_GET['cargo'] ;
+	$linhas = ($linhas=='') ? 10 : $linhas ;
+	$igrejas = new cargos($_GET['pagina'],$linhas);$linha='';
+	$cargoMembro = (empty($_GET['cargo'])) ? 0 : $_GET['cargo'] ;
 
 	$cor= true;
 	foreach ($igrejas->ArrayCargosDados($cargoMembro) as $igrejaDados) {
@@ -24,7 +25,7 @@
 			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
 			$linkIgreja  = '<a '.$linkMemb.' >';
 			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</a></td><td>';
-			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].$igrejaDados['rol'].'</a>';
+			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a><br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
@@ -82,7 +83,7 @@
 					break;
 
 				default:
-					$titulo = '';
+					$titulo = 'Todos os Membros - Limitado agora aos primeiros 300';
 					break;
 		}
 

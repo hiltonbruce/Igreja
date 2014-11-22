@@ -2,15 +2,14 @@
 class cargos {
 
 
-	protected $limitSQL01;
-	protected $limitSQL02;
+	protected $pagina;
+	protected $linhasPorPag;
 
-	function __construct ($limitSQL01="",$limitSQL02=""){
-
-		//$this->result = mysql_query("SELECT * FROM igreja WHERE rol='$cargoIgreja' ") or die (mysql_error());
-		$this->limitSQL01 = ($limitSQL01=='') ?  0:$limitSQL01;
-		$this->limitSQL02 = ($limitSQL02=='') ?  300:$limitSQL01;
-
+	function __construct ($pagina="",$linhasPorPag=""){
+		$pagina = ($pagina<'1') ? 1 : $pagina ;
+		//$linhasPorPag =  $pagina-1 ;
+		$this->linhasPorPagina = ($linhasPorPag==0) ?  300:$linhasPorPag;
+		$this->linhaInicial = ($pagina=='1') ?  0:($pagina-1)*$linhasPorPag;
 	}
 
 	function ArrayCargosDados($cargo,$opCargo) {
@@ -51,7 +50,7 @@ class cargos {
 
 		$querys  = "SELECT m.*,i.razao from membro AS m, eclesiastico AS e, igreja AS i WHERE m.rol=e.rol AND";
 		$querys .= ' e.situacao_espiritual<2 '.$congreg.' AND e.congregacao=i.rol';
-		$querys .= ' ORDER BY nome LIMIT '.$this->limitSQL01.','.$this->limitSQL02;
+		$querys .= ' ORDER BY i.rol,m.nome LIMIT '.$this->linhaInicial.','.$this->linhasPorPagina;
 
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 
