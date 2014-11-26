@@ -144,8 +144,8 @@
 				}else{
 					echo "Nenhum resultado";
 				}
-
-				echo ' Tendo '.$totDizimistas.' dizimados no mês '.$mesDiz.'/'.$ano;
+				$percentual = ($totDizimistas*100)/$totalLinhas;
+				echo ' Tendo '.$totDizimistas.' dizimados no mês '.$mesDiz.'/'.$ano.' ( '.round($percentual,2).'% )';
 			?>
 	</td>
 	</tr>
