@@ -1,7 +1,7 @@
 	<?PHP
 
 	require_once("DB.php");
-	
+
 	if (file_exists("func_class/constantes.php")){
 		require('func_class/constantes.php');
 	}elseif (file_exists('../func_class/constantes.php')){
@@ -27,7 +27,7 @@
 		protected $_linkpagina; //nome do link com a paginação
 		protected $_urlextra; //Recebe o link da página atual para enviar a url da página
 		protected $_linkppag; //Define a quantidade de links numéricos na página
-	
+
 		function __construct($_pagina=0,$_url=0,$_linkpagina="",$_urlextra="",$_linkppag=0) {
 			$this->_pagina = $_pagina;
 			$this->_url=$_url;
@@ -35,31 +35,31 @@
 			$this->_urlextra=$_urlextra;
 			$this->_linkppag=$_linkppag;
 		}
-	
+
 		public function getPagina(){
 			//Total de link de páginas
 			return $this->_pagina;
 		}
-	
+
 		public function getUrl(){ //Página atual para o PHP, ou seja, para o usuário ela é este valor + 1 - Visual
 			return $this->_url;
 		}
-	
+
 		public function getLinkpagina(){ //nome do link da página. Ex.
 			return $this->_linkpagina;
 		}
-	
+
 		public function getUrlextra(){
 			return $this->_urlextra;
 		}
-	
+
 		public function getLinkppag(){ //Se a quant de links por páginas for maior q a quant de paginas disponíveis ele retorna quant de páaginas
 			if ($this->_linkppag<=$this->_pagina)
 				return $this->_linkppag;
 			else
 				return $this->_pagina;
 		}
-	
+
 		public function getQuantpg() {
 			//Total de páginas
 			if ($this->getLinkppag()>0)
@@ -67,7 +67,7 @@
 			else
 				return 0;
 		}
-	
+
 		public function getUltimapg(){
 			//limita o loop for ao valor da última página
 			if (($this->getQuantpg()*$this->getLinkppag())<=$this->getPagina())
@@ -75,7 +75,7 @@
 			elseif (($this->getQuantpg()*$this->getLinkppag())>$this->getPagina())
 			return $this->getPagina();
 		}
-	
+
 		public function getDados(){
 			echo 	"Links de Página: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
 					"linkPágina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
@@ -85,7 +85,7 @@
 					"For final: \$this->getQuantpg()*\$this->getLinkppag(): <span>".$this->getQuantpg()*$this->getLinkppag()."</span><br/>".
 					"Total de paginas: getQuantpg() = ceil((\$this->getUrl()+1)/\$this->getLinkppag()) <span>".$this->getQuantpg()."</span><br/>";
 		}
-	
+
 		public function getRodapeinic() {
 			if ($this->_url>1)
 			{
@@ -96,7 +96,7 @@
 				echo '<ul class="pagination pagination-sm">';
 			}
 	}
-	
+
 	/*public function getRodapeinicPesq() {
 	if ($this->_url>0)
 	{
@@ -108,7 +108,7 @@
 	*/
 	public function getRodapemeio() {
 		//Define a parte central da paginação
-		
+
 			for ($i=($this->getUltimapg()-$this->getLinkppag() ); $i<($this->getUltimapg()); $i++)
 			{
 				$pg=$i+1;
@@ -116,14 +116,14 @@
 				if ($pg!=($this->getUrl()))
 					{
 					echo "<li><a href='./{$this->getUrlextra()}&$url'>$pg</a></li>";
-				
+
 					}else{
 						echo '<li><a class="btn btn-primary active disabled">'.$pg.'</a></li>';
 					}
 			}//Fim loop for
 		echo '';
 	}
-	
+
 	public function getRodapefim(){
 		if ($pagina <= ($this->getPagina()))
 		{
@@ -136,10 +136,10 @@
 				}else {
 					echo '</ul>';
 				}
-			
+
 		}
 	}
-	
+
 	public function getRodaperes() { //Total das páginas disponibilizadas
 	if ($this->getPagina()>"1"){
 	return "<br/><span>Total de ".$this->getPagina()." p&aacute;ginas";
@@ -149,16 +149,16 @@
 		return "Não há nenhuma informação para esta pesquisa!";
 	}
 	}
-	
+
 	public function getRodape() {
 	return 	"{$this->getRodapeinic()}".
 	"{$this->getRodapemeio()}".
 	"{$this->getRodapefim()}";
-	
+
 	}
-	
+
 	public function form_rodape ($texto) {
-	
+
 	echo "<form id='form' name='form' method='get' action=''>".
 	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
 	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
@@ -167,13 +167,13 @@
 	"<input name='rec' type='hidden' value='{$_GET["rec"]}'>".
 	"<input name='direita' type='hidden' value='{$_GET["direita"]}'>".
 	"<input name='nome' type='hidden' value='{$_GET["nome"]}'><div class='row'>".
-	"<div class='col-xs-3'><input name='{$this->_linkpagina}'class='form-control input-sm' type='text' size='3' /></div>".
+	"<div class='col-xs-4'><input name='{$this->_linkpagina}'class='form-control input-sm' type='text' size='3' /></div>".
 	"<div class='col-xs-3'><input class='btn btn-primary btn-sm' type='submit' name='Submit' value='$texto ...' /></div>".
 	"</div></form>";
 	}
-	
+
 	public function form_rodape_get ($texto,$campo) {
-	
+
 	echo 	"<form id='form' name='form' method='get' action=''>".$texto.
 	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
 	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
@@ -185,7 +185,7 @@
 	"<input type='submit' name='Submit' value='Listar...' />".
 	"</form>";
 	}
-	
+
 	function __destruct() {
 		//foi removido pois ao final da página aparecia informações do rodapé
 	//echo $this->getRodaperes ();
@@ -196,13 +196,13 @@
 	$_rod->getDados();
 	$_rod->getRodape();
 	Exemplo de CSS para o Radapé:
-	
+
 	span#rodape{
 	font-weight:bold;
 	background:#00CCFF;
 	font-weight: bold;
 	}
-	
+
 	a#rodape{
 	text-decoration:underline;
 	font-size:16px;
@@ -266,7 +266,7 @@ class DBRecord {
 	  if ($id_igreja > 1 && $id_igreja==$line[1]){
 // </tbody></table>
 	  ?>
-	  
+
 	  <table width="565" border = "1" summary="Lista Unidades Oranicas da Igreja." >
 	  <caption>
 
@@ -324,7 +324,7 @@ class DBRecord {
 
 
      echo "</tbody></table>";
-     
+
      return $ind;
 	}
 
@@ -363,13 +363,13 @@ class DBRecord {
     }else {
     	 $sql = "UPDATE {$this->{'table'}} SET $fields WHERE rol = ?";
     }
-   
+
 	//echo "$sql";
     $sth = $db->prepare( $sql );
     //echo "$sth";
 	$db->execute( $sth, $values );
   }
-  
+
   public function UpdateID ()
   {
     global $db;
@@ -422,7 +422,7 @@ class DBRecord {
     //echo "$sth<br/>$fields";
      $db->execute( $sth, $values );
   }
-  
+
   	/*
      function __destruct() {
 	  echo "$sth \n";
@@ -493,10 +493,10 @@ class editar_form {
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
 		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para ediï¿½ï¿½o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
-			if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" || 
-					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar" 
-					|| $this->campo=="diaconato" || $this->campo=="presbitero" || 
-					$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="data" 
+			if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" ||
+					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
+					|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
+					$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="data"
 					|| $this->campo=="dat_aclam") {
 			$this->formato = "id='data'";
 			$this->maxcaratere = 10;
@@ -510,9 +510,9 @@ class editar_form {
 		if ($placeholder=='') {
 			$placeholder='Informe aqui para alterar!';
 		}
-		
+
 	}elseif ($this->campo=='valor') {
-		
+
 		$trans = array("." => ",", "," => ".");
 		$this->valor = strtr($this->valor,$trans);
 	}
@@ -527,7 +527,7 @@ class editar_form {
 			//echo $this->campo." = ".$this->vlr_get;
 			$ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
 			?>
-			
+
 			<form id="form1" name="form1" method="post" action="">
 			<table><tbody><tr><td>
 			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receberï¿½ os dados -->
@@ -547,7 +547,7 @@ class editar_form {
 					break;
 				case "situacao_espiritual":
 					?></td><td><label>&nbsp;</label>
-					  <select class="form-control" name="<?PHP echo $this->campo;?>" placeholder='<?php echo $placeholder;?>' 
+					  <select class="form-control" name="<?PHP echo $this->campo;?>" placeholder='<?php echo $placeholder;?>'
 					  autofocus="autofocus" tabindex="<?PHP echo $ind++;?>">
 						<option value="<?PHP echo $this->valor;?>"><?PHP echo $this->valor;?></option>
 						<option value="1">Em Comunh&atilde;o</option>
@@ -588,11 +588,11 @@ class editar_form {
 					</td><td>
 					<label>&nbsp;</label>
 			      		<input type="text" class="form-control" autofocus="autofocus" placeholder="<?php echo $placeholder;?>"
-						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>" 
+						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>"
 						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
 						maxlength="<?PHP echo $this->maxcaratere;?>"/>
 					</td></td>
-					
+
 					<?PHP
 					break;
 
@@ -607,7 +607,7 @@ class editar_form {
 		    <div class="row">
 		 	 <div class="col-xs-4">
 			<label>Rol:</label>
-			<input name="<?PHP echo "rol_{$this->campo}";?>" class='form-control input-sm' autofocus="autofocus" type="text" 
+			<input name="<?PHP echo "rol_{$this->campo}";?>" class='form-control input-sm' autofocus="autofocus" type="text"
 			value="<?PHP echo $_GET["rol_{$this->campo}"];?>" size="10"  tabindex="<?PHP echo $ind++;?>" /></div>
 			<?php
 			if ($fJScript!='') {
@@ -738,7 +738,7 @@ class sele_cidade {
 		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
 		echo "<script> alert('Não há nenhum bairro cadastrado para o endereço desta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
-		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";		
+		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
 		echo "</select>";
@@ -771,9 +771,9 @@ class List_sele {
 	  	}else {
 	  		$linhas =  "<option value='0'>-->> Todas <<--</option>";
 	  	}
-		
+
 		$linhas .= '';
-		
+
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
 	       	if ($this->col_lst["rol"]=='') {
@@ -789,7 +789,7 @@ class List_sele {
 	       	}
 	       }
 	    $linha3 = "</select>";
-	    
+
 	  return $linha1.$linhas.$linha3 ;
 	}
 
@@ -798,7 +798,7 @@ class List_sele {
 	//Mostra as linhas de select
 	$linha1='';
 	$linhas .="<option value='./?$link{$this->col_lst["rol"]}'>Todas</option>";
-	
+
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
 			if ($this->col_lst["rol"]==$rol) {
@@ -1145,7 +1145,7 @@ class situacao_espiritual {
 
 	protected $situacao;
 	protected $rol;
-	
+
 	function __construct ($situacao="",$rol=""){
 
 		$this->valor = $situacao;
@@ -1241,4 +1241,4 @@ class pendencias {
 
 ?>
 
-	
+

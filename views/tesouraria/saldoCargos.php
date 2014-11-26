@@ -1,3 +1,5 @@
+
+
 <table>
 	<tr>
 	<?PHP
@@ -10,7 +12,7 @@
 					//Cabeçalho da tabela
 					//Oculta o botao imprimir para não sair na impressão
 					$linkImpressao ='tesouraria/receita.php/?rec=23';
-					
+
 			if (empty($titulo)) {
 				echo '<td>'.$cong.'Histórico Financeiro - Ano de referência: '.$ano.'</td>';
 			} else {
@@ -53,7 +55,35 @@
 					<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
 				</select>
 			</td>
-
+			<form action='' method='get'>
+			<td>
+					<label>Mês:</label>
+					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
+					      <?php
+					      	$linha1 = '<option value="0">Selecione o mês...</option>';
+						      foreach(arrayMeses() as $mes => $meses) {
+								 $linha2 .= '<option value='.(int)$mes.'>'.$meses.'</options>';
+								 if ($_GET['mes']==$mes) {
+								 	$linha1 = '<option value='.(int)$mes.'>'.$meses.'</options>'.$linha1;
+								 }
+						      }
+						      echo $linha1.$linha2;
+					      ?>
+				      </select>
+				</td>
+				<td>
+					<label>Ano</label>
+					<input type="text" name="ano" value="<?php echo $ano;?>"
+					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
+					<input type="hidden" name="direita"	value="1" />
+					<input type="hidden" name="ord" value="<?php echo $_GET['ord'];?>" />
+				</td><td>
+					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
+					<input type="hidden" name="rec"	value="<?php echo $rec;?>" />
+					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
+					tabindex="<?PHP echo ++$ind; ?>" />
+					<input name="menu" type="hidden" value="top_tesouraria" />
+				</td>
 		  <?PHP
 
 		}
@@ -68,6 +98,11 @@
 		echo $titulo.' - Valores em Real (R$)</td>';
 	?>
 	</tr>
+
+</form>
+</table>
+
+<table>
 	<tr>
 		<td>
 			<?PHP
@@ -84,12 +119,12 @@
 					$pagina = $_GET["pagina"]-1;
 
 					if ($pagina<0) {$pagina=0;} //Especifica um valor p variável página caso ela esteja setada
-				$_rod = new rodape($paginas,$_GET["pagina"],"pagina",$_urlLi,8);
+				$_rod = new rodape($paginas,$_GET["pagina"],"pagina",$_urlLi,12);
 				//(Quantidade de páginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por página)
 				$_rod->getRodape();
 			?>
 		</td>
-		<td><br>
+		<td>
 			<?php
 			 $_rod->form_rodape ("Ir para P&aacute;gina: ");
 				//$_rod->getDados();
@@ -116,7 +151,21 @@
 </table>
 
 <div class="bs-example bs-example-bg-classes">
-    <p class="bg-info">Esta consulta gerou um total de <kbd><?PHP echo $totalLinhas;?></kbd> ocorr&ecirc;ncias.</p>
+    <p class="bg-info">Esta consulta gerou um total de <kbd><?PHP echo $totalLinhas;?></kbd> ocorr&ecirc;ncias
+    	<?PHP
+    	if ($totalLinhas>"1")
+				{
+					printf("( %s ).",$titulo);
+
+				}elseif ($totalLinhas=="1"){
+					echo "Com apenas um $titulo,";
+				}else{
+					echo "Nenhum resultado";
+				}
+				$percentual = ($totDizimistas*100)/$totalLinhas;
+				echo ' Tendo '.$totDizimistas.' dizimistas no mês '.$mesDiz.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
+		?>
+		</p>
   </div>
 <table>
 	<tr>
@@ -130,22 +179,9 @@
 			 $_rod->form_rodape ("Ir para P&aacute;gina: ");
 				//$_rod->getDados();
 			 if ($paginas>1)
-					echo "<br><span class='style4'>Total de $paginas p&aacute;ginas";
+					echo "<span class='style4'>Total de $paginas p&aacute;ginas";
 					else
-					echo "<br><span class='style4'>Total de $paginas p&aacute;gina";
-
-				echo "<br />";
-				if ($totalLinhas>"1")
-				{
-					printf("Com %s %ss,",number_format($totalLinhas, 0, ',', '.'),$titulo);
-
-				}elseif ($totalLinhas=="1"){
-					echo "Com apenas um $titulo,";
-				}else{
-					echo "Nenhum resultado";
-				}
-				$percentual = ($totDizimistas*100)/$totalLinhas;
-				echo ' Tendo '.$totDizimistas.' dizimados no mês '.$mesDiz.'/'.$ano.' ( '.round($percentual,2).'% )';
+					echo "<span class='style4'>Total de $paginas p&aacute;gina";
 			?>
 	</td>
 	</tr>
