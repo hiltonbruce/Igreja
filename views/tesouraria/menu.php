@@ -83,4 +83,10 @@
 				<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">COMADEP</button>
 		</a>
 	</div>
+	 <div class="btn-group">
+		<a <?PHP $b=link_ativo($_GET["rec"], "23");?>
+				href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=23&cargo=&ano=&mes=&direita=1">
+				<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Dizimistas</button>
+		</a>
+	</div>
 	</p>

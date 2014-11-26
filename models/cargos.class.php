@@ -10,6 +10,12 @@ class cargos {
 		//$linhasPorPag =  $pagina-1 ;
 		$this->linhasPorPagina = ($linhasPorPag==0) ?  300:$linhasPorPag;
 		$this->linhaInicial = ($pagina=='1') ?  0:($pagina-1)*$linhasPorPag;
+
+		$this->congreg1 = " AND DATE_FORMAT(e.auxiliar,'%d') <> '00'  AND DATE_FORMAT(e.diaconato,'%d') = '00' AND DATE_FORMAT(e.presbitero,'%d') = '00' AND DATE_FORMAT(e.evangelista,'%d') = '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
+		$this->congreg2 = " AND DATE_FORMAT(e.diaconato,'%d') <> '00' AND DATE_FORMAT(e.presbitero,'%d') = '00' AND DATE_FORMAT(e.evangelista,'%d') = '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
+		$this->congreg3 = " AND DATE_FORMAT(e.presbitero,'%d') <> '00' AND DATE_FORMAT(e.evangelista,'%d') = '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
+		$this->congreg4 = " AND DATE_FORMAT(e.evangelista,'%d') <> '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
+		$this->congreg5 = " AND DATE_FORMAT(e.pastor,'%d') <> '00' ";
 	}
 
 	function ArrayCargosDados($cargo,$opCargo) {
@@ -106,5 +112,24 @@ class cargos {
 
 	}
 
+	function totDizimMembro($mes,$opCargo,$ano) {
+
+		$opcCargo = 'congreg'.$opCargo;
+		$congreg = $this->$opcCargo;
+
+		global $db;
+
+		$query  = "SELECT m.rol from membro AS m, eclesiastico AS e, igreja AS i, dizimooferta AS d WHERE m.rol=e.rol AND";
+		$query .= ' e.situacao_espiritual<2 '.$congreg.' AND e.congregacao=i.rol AND m.rol=d.rol';
+		$query .= ' AND d.valor>"0" AND d.anorefer ="'.trim($ano).'" AND d.mesrefer = "'.$mes.'" AND d.credito = "700" GROUP BY d.rol ';
+
+		$db->setFetchMode(DB_FETCHMODE_ASSOC);
+
+		$res = & $db->query($query) ;
+
+		return $res->numRows();
+
+
+	}
 }
 ?>

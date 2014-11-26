@@ -8,14 +8,15 @@
 	//Loops para o corpo da tabela
 	$linhas = ($linhas=='') ? 10 : $linhas ;
 	$igrejas = new cargos($_GET['pagina'],$linhas);$linha='';
-	$cargoMembro = (empty($_GET['cargo'])) ? 0 : $_GET['cargo'] ;
-
+	$cargoMembro = (empty($_GET['ord'])) ? 0 : $_GET['ord'] ;
+	$mesDiz = (empty($_GET['mes'])) ? 1 : $_GET['mes'] ;
+	$totDizimistas = $igrejas->totDizimMembro($mesDiz,$cargoMembro,$ano);
+	//print_r($totDizimistas);
 	$cor= true;
 	foreach ($igrejas->ArrayCargosDados($cargoMembro) as $igrejaDados) {
 		$saldos = new tes_Cargos ($igrejaDados['rol'],$ano);
 		$valores = $saldos->ArraySaldos();
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
-
 
 		//Monta link para detalhar a igreja
 		if ($_GET['rec']=='13') {
@@ -83,9 +84,9 @@
 					break;
 
 				default:
-					$titulo = 'Todos os Membros - Limitado agora aos primeiros 300';
+					$titulo = 'Todos os Membros';
 					break;
 		}
 
-		$totalLinhas = $igrejas->linhas($cargoMembro,$_GET['cargo']);
+		$totalLinhas = $igrejas->linhas($cargoMembro,$_GET['ord']);
 ?>

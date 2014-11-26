@@ -5,8 +5,8 @@ class tes_Cargos {
 	protected $ano;
 
 	function __construct ($rol='',$ano=''){
-		$this->rol = $rol;
-		$this->ano = $ano;
+		$this->rol = trim($rol);
+		$this->ano = trim($ano);
 	}
 
 	function ArraySaldos(){

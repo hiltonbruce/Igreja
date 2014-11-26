@@ -159,11 +159,13 @@
 	
 	public function form_rodape ($texto) {
 	
-	echo 	"<form id='form' name='form' method='get' action=''>".
+	echo "<form id='form' name='form' method='get' action=''>".
 	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
 	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
 	"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
 	"<input name='id' type='hidden' value='{$_GET["id"]}'>".
+	"<input name='rec' type='hidden' value='{$_GET["rec"]}'>".
+	"<input name='direita' type='hidden' value='{$_GET["direita"]}'>".
 	"<input name='nome' type='hidden' value='{$_GET["nome"]}'><div class='row'>".
 	"<div class='col-xs-3'><input name='{$this->_linkpagina}'class='form-control input-sm' type='text' size='3' /></div>".
 	"<div class='col-xs-3'><input class='btn btn-primary btn-sm' type='submit' name='Submit' value='$texto ...' /></div>".
