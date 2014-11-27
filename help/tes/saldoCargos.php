@@ -7,7 +7,8 @@
 
 	//Loops para o corpo da tabela
 	$linhas = ($linhas=='') ? 10 : $linhas ;
-	$igrejas = new cargos($_GET['pagina'],$linhas);$linha='';
+	$filtrarIgreja = (empty($_GET['id'])) ? '' : $_GET['id'] ;
+	$igrejas = new cargos($_GET['pagina'],$linhas,$filtrarIgreja);$linha='';
 	$cargoMembro = (empty($_GET['ord'])) ? 0 : $_GET['ord'] ;
 	$mesDiz = (empty($_GET['mes'])) ? 1 : $_GET['mes'] ;
 	$totDizimistas = $igrejas->totDizimMembro($mesDiz,$cargoMembro,$ano);
@@ -25,7 +26,7 @@
 			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
 			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
 			$linkIgreja  = '<a '.$linkMemb.' >';
-			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</a></td><td>';
+			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'<div class="text-center"><kbd>'.cargo($igrejaDados['rol']).'</kbd></div></a></td><td>';
 			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a><br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 

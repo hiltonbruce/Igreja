@@ -5,9 +5,11 @@
 	<?PHP
 
 		$_urlLi  ='?escolha=tesouraria/receita.php&menu=top_tesouraria&direita=1&';
-		$_urlLi .='rec=23&ano='.$_GET['ano'].'&mes='.$_GET['mes'].'&ord=';
+		$_urlLi .='rec=23&ano='.$_GET['ano'].'&id='.$_GET['id'].'&mes='.$_GET['mes'].'&ord=';
 		$link 	 = $_urlLi;
 		$_urlLi .= $_GET["ord"].'&id='.$_GET["id"];//Montando o Link para ser passada a classe
+
+		$idIgreja = (empty($_GET['id']) || $_GET['id']<0 ) ? 0 : $_GET['id'] ;
 
 					//Cabeçalho da tabela
 					//Oculta o botao imprimir para não sair na impressão
@@ -46,7 +48,7 @@
 				<label>Cargo</label>
 				<select name="cargo" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
 				  <?php echo $linhaCargo;?>
-				    <option value="<?PHP echo $link;?>0">--&gt;&gt;Listar todos&lt;&lt;--</option>
+				    <option value="<?PHP echo $link;?>0">Membros Cadastrados</option>
 					<option value="<?PHP echo $link;?>1">Auxiliar de Trabalho</option>
 					<option value="<?PHP echo $link;?>2">Di&aacute;cono</option>
 					<option value="<?PHP echo $link;?>3">Presb&iacute;tero</option>
@@ -57,7 +59,7 @@
 			</td>
 			<form action='' method='get'>
 			<td>
-					<label>Mês:</label>
+					<label>Mês para estatistica:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';
@@ -72,6 +74,14 @@
 				      </select>
 				</td>
 				<td>
+					<label>Igreja</label>
+					<?php
+					$bsccredor = new List_sele('igreja', 'razao', 'id');
+					$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['id'],'class="form-control" ');
+					echo $listaIgreja;
+					?>
+				</td>
+				<td>
 					<label>Ano</label>
 					<input type="text" name="ano" value="<?php echo $ano;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
@@ -84,19 +94,7 @@
 					tabindex="<?PHP echo ++$ind; ?>" />
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				</td>
-		  <?PHP
 
-		}
-		if ($_GET['rec']!='13') {
-			echo '<td><br><a href="'.$linkImpressao.'" ';
-			echo 'target="_black" title="Imprimir demonstrativo">';
-			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
-			$imprimir = '';
-		}else {
-			$imprimir = '<script type="text/javascript">window.print();</script>';
-		}
-		echo $titulo.' - Valores em Real (R$)</td>';
-	?>
 	</tr>
 
 </form>
@@ -108,7 +106,7 @@
 			<?PHP
 
 				//Classe que monta o rodape
-				$nmpp="20"; //Número de mensagens por párginas
+				$nmpp=$linhas; //Número de mensagens por párginas
 				$paginas = ceil ($totalLinhas/$nmpp); //Retorna o total de páginas
 					if ($_GET["pagina"]<1) {
 						$_GET["pagina"] = 1;
@@ -127,11 +125,25 @@
 		<td>
 			<?php
 			 $_rod->form_rodape ("Ir para P&aacute;gina: ");
+			 	echo $titulo.' - Valores em Real (R$)';
 				//$_rod->getDados();
 			?>
 	</td>
 	</tr>
 </table>
+ <?PHP
+
+					}
+					if ($_GET['rec']!='13') {
+						echo '<td><br><a href="'.$linkImpressao.'" ';
+						echo 'target="_black" title="Imprimir demonstrativo">';
+						echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
+						$imprimir = '';
+					}else {
+						$imprimir = '<script type="text/javascript">window.print();</script>';
+					}
+					echo '</td>';
+				?>
 
 <table class='table table-bordered'>
 	<colgroup>
