@@ -27,7 +27,7 @@ $data = br_data($_POST['data'], 'Data do lançamento inválida!');
 if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) {
 
 	//Faz o lançamento do débito para tabela lancamento
-	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor FROM dizimooferta
+	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor,credito FROM dizimooferta
 			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora,tipo');
 	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
 	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
