@@ -22,6 +22,13 @@
 		$vlr = number_format("$valor_us",2,",",".");
 		$dim = extenso($valor_us);
 		$dim = ereg_replace(" E "," e ",ucwords($dim));
+		
+		if ($igreja->cidade()>0) {
+			$cidIgreja = new DBRecord('cidade', $igreja->cidade(),'id');
+			$nomeCidIgreja = $cidIgreja->nome();
+		}else {
+			$nomeCidIgreja = $greja->cidade();
+		}
 	
 	
 		//Verifica o tipo de recibo de dá o texto apropriado
@@ -47,7 +54,7 @@
 					}
 				}
 			$texto .=', rol N&ordm: '.$rolmembro;
-			$texto .= ', recebi da Igreja Evang&eacute;lica Assembleia de Deus - '. $igreja->cidade().' - '.$igreja->uf();
+			$texto .= ', recebi da Igreja Evang&eacute;lica Assembleia de Deus - '. $nomeCidIgreja.' - '.$igreja->uf();
 			$responsavel = $membro->nome()."<br />CPF: ".$prof->cpf()." - RG: ".$prof->rg();
 			$recebeu = $rolmembro;//Define o beneficiário do recibo
 			break;
@@ -74,7 +81,7 @@
 		case 3:
 			$texto = "Eu, ".strtoupper( toUpper($nome)).", ";
 	      	$texto .= "CPF: ".$cpf.", RG: ".$rg.", ";
-			$texto .= "recebi da Igreja Evang&eacute;lica Assembleia de Deus - ". $igreja->cidade()." - ".$igreja->uf();
+			$texto .= "recebi da Igreja Evang&eacute;lica Assembleia de Deus - ". $nomeCidIgreja." - ".$igreja->uf();
 			$responsavel = $nome."<br />CPF: ".$cpf." - RG: ".$rg;
 			$recebeu = strtoupper( toUpper($nome)).", CPF: ".$cpf.", RG: ".$rg;//Define o beneficiário do recibo 
 			break;
@@ -94,7 +101,6 @@
     <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>
 </div>
-
 <div id="mainnav">
 		<div style="text-align: right;"><h4><?php printf ("N&uacute;mero: %'05u",$numRec);?></h4></div>
   </div>
@@ -128,7 +134,7 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
+    <?PHP  print $nomeCidIgreja." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
     	<div id="polegar">Polegar</div><div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?></div>
 	 </div>
     </div>
