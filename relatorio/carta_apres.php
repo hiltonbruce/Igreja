@@ -33,27 +33,41 @@
 	
 	$cidade = new DBRecord ("cidade",$most_certidao->cidade(),"id");
 	
+	if ($most_certidao->sexo()=="F") {
+		$estilo = "menina";
+	}elseif ($most_certidao->sexo()=="M"){
+		$estilo = "menino";
+	}
+	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Certid&atilde;o de Apresenta&ccedil;&atilde;o</title>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-<link rel="stylesheet" type="text/css" href="style_apresentacao.css" />
-<link rel="shortcut icon" type="image/ico" href="../img/br_igreja.gif">
+<link rel="stylesheet" type="text/css" href="<?php echo $estilo;?>.css" />
+<link rel="shortcut icon" type="image/ico" href="../ad.ico" />
 </head>
 <body>
 <div id="container">
-    <h1>Igreja Assembleia de Deus</h1>
+-    <h1>Igreja Assembleia de Deus</h1>
+  <div id="header"></div>
 <div id="mainnav">
-<div id="foto"><?PHP printf ("<h5>Registro N&ordm;:</h5> %'03u",$most_certidao->rol());?></div>
   <div id="Tipo">
 	  Certid&atilde;o de Apresenta&ccedil;&atilde;o
   </div>
+  <div id="foto"><?PHP printf ("<h4>Registro N&ordm;:</h4> %'05u",$most_certidao->rol());?></div>
   </div>
 	<div id="content">
     <div id="added-div1">
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Certifico que  foi apresentada, conforme o rito evang&eacute;lico, no dia <?PHP echo conv_valor_br ($most_certidao->dt_apresent());?>, a crian&ccedil;a  <strong><?PHP echo strtoupper( toUpper($most_certidao->nome()));?></strong>, do sexo <?PHP echo sexo($most_certidao->sexo());?>, nascid<?PHP echo a_ou_o ($most_certidao->sexo());?> no dia <?PHP echo conv_valor_br ($most_certidao->dt_nasc());?>, na maternidade: <?PHP echo $most_certidao->maternidade();?>, na cidade de <?PHP echo "{$cidade->nome()} - {$cidade->coduf()}";?>. Conforme certid&atilde;o de nascimento n&ordm; <?PHP echo $most_certidao->num_cert();?> / livro n&ordm; <?PHP echo $most_certidao->livro();?> / folha n&ordm; <?PHP echo $most_certidao->fl();?>. Filh<?PHP echo a_ou_o ($most_certidao->sexo());?> do Sr. <?PHP echo strtoupper( toUpper($most_certidao->pai()));?> e da Sra. <?PHP echo strtoupper( toUpper($most_certidao->mae()));?>.</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Certifico que a folha n&ordm; <u><b>&nbsp;<?PHP echo $most_certidao->fl();?>&nbsp;</b></u>
+		 do livro n&ordm; <u><b>&nbsp;<?PHP echo $most_certidao->livro();?>&nbsp;</b></u> de crian&ccedil;as, filhos de membros da igreja, consta
+		  que foi apresentada, conforme o rito evang&eacute;lico, no dia <?PHP echo conv_valor_br ($most_certidao->dt_apresent());?>
+		  , a crian&ccedil;a  <u><b>&nbsp;<?PHP echo strtoupper( toUpper($most_certidao->nome()));?></b></u>,
+		   do sexo <?PHP echo sexo($most_certidao->sexo());?>, nascid<?PHP echo a_ou_o ($most_certidao->sexo());?> no dia
+		<?PHP echo conv_valor_br ($most_certidao->dt_nasc());?>. Filh<?PHP echo a_ou_o ($most_certidao->sexo());?>
+		do Sr. <?PHP echo strtoupper( toUpper($most_certidao->pai()));?> e da Sra. <?PHP echo strtoupper( toUpper($most_certidao->mae()));?>.
+	</p>
     </div>
     <div id="added-div-2">
 
@@ -66,6 +80,14 @@
     </div>
 
   </div>
+ <div id="footer">
+	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>
+	  Copyright &copy; <a href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information"></a>
+      Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a>
+	   <?PHP echo "CNPJ: {$igreja->cnpj()}";?><br />
+   		<?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()}";?><br />
+	  <p style='text-align:right;'>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></p>
+    </div>
 </div>
 </body>
 </html>

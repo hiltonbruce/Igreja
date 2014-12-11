@@ -51,6 +51,8 @@ for ($i = 0; $i < 3; $i++) {
 		$vlrPost = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );
 
 		$valorBR = number_format($vlrPost, 2, ',', ' ');
+
+		$totalContr += $vlrPost;
 		
 		switch ($i) {
 			case '0':
@@ -87,6 +89,7 @@ for ($i = 0; $i < 13; $i++) {
 		$vlrPost = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );
 
 		$valorBR = number_format($vlrPost, 2, ',', ' ');
+		$totalContr += $vlrPost;
 		
 		switch ($i) {
 			case '0':
@@ -161,7 +164,11 @@ for ($i = 0; $i < 13; $i++) {
 		}
 	}
 }
-	
+
 $mostraLanc .= '</tbody></table>';
 $mostraLanc .=  '</fieldset>';
+
+$valorTotal = number_format($totalContr, 2, ',', ' ');
+$mostraLanc .=' <div class="bs-callout bs-callout-default">
+    <h4>Total da contribuição:<span class="navbar-right">'.$valorTotal.'</span></h4></div>';
 ?>

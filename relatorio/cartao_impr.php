@@ -187,8 +187,8 @@ body {
 <body>
 <div id="cartao"></div>
 <div id="Endereco">
-  <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
-   <?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?>
+  <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>
+   <?PHP echo "CEP: {$igreja->cep()} <br /> Fone: {$igreja->fone()} - CNPJ: ".$igreja->cnpj();?>
   </div>
 </div>
 <div id="Razao">
