@@ -18,17 +18,6 @@
 	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">
 	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Resumo</button></a>
 	</div>
-
-	 <div class="btn-group">
-	  <a <?PHP $b=link_ativo($_GET["rec"], "7"); ?> href="<?php echo $linkLancamento;?>&rec=7">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Saldos</button></a>
-	</div>
-
-	 <div class="btn-group">
-	  <a <?PHP $b=link_ativo($_GET["rec"], "8"); ?> href="<?php echo $linkLancamento;?>&rec=8&tipo=1" title="Plano de Contas" >
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>"
-	  	data-toggle="tooltip" data-placement="bottom" >Plano de Contas</button></a>
-	</div>
 	  <?php if ($_GET['rec']=='4' || $_GET['rec']=='5' || $_GET['rec']=='21'  ||
 	  $_GET['rec']=='22'  || $_GET['rec']=='2') {
 	  	$linkAtivo='active';
@@ -76,17 +65,7 @@
 	    <li <?php echo $linkAtivo;?>><a <?php echo $linkEstonoDefino;?> >Estorno Definido</a></li>
 	  </ul>
 	</div>
-
-	 <div class="btn-group">
-		<a <?PHP $b=link_ativo($_GET["rec"], "6");?>
-				href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=6">
-				<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">COMADEP</button>
-		</a>
-	</div>
-	 <div class="btn-group">
-		<a <?PHP $b=link_ativo($_GET["rec"], "23");?>
-				href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=23&cargo=&ano=&mes=&direita=1">
-				<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Dizimistas</button>
-		</a>
-	</div>
+	<?PHP
+		require_once 'views/menus/planoCtaMenu.php'
+	?>
 	</p>
