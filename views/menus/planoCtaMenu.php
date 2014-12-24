@@ -1,6 +1,6 @@
 
     <?php if ($_GET['rec']=='4' || $_GET['rec']=='5' || $_GET['rec']=='21'  ||
-    $_GET['rec']>'5'  || $_GET['rec']<'9') {
+    $_GET['rec']>'5' & $_GET['rec']<'9') {
       $linkAtivo='active';
     }else {
       $linkAtivo='';
@@ -17,7 +17,7 @@
           }else {
             $linkAtivo='';
           }?>
-        <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=8">Plano de Contas</a></li>
+        <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=8&tipo=1">Plano de Contas</a></li>
 
           <?php if ($_GET['rec']=='7' ) {
             $linkAtivo='class="active"';
