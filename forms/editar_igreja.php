@@ -4,7 +4,7 @@ if ($_SESSION['nivel']>4){
 //ver_cad();
 
 	$igreja = new DBRecord('igreja',$_GET['rol'], 'rol');
-	
+
 	if ($igreja->pastor()>0) {
 		$congregacao = new DBRecord('membro',$igreja->pastor(),'rol');
 		$dirigente = $congregacao->nome();
@@ -13,7 +13,7 @@ if ($_SESSION['nivel']>4){
 	}else {
 		$dirigente = 'Informe o Rol do dirigente';
 	}
-	
+
 $tabela = "igreja";
 $tab="sistema/atualizar_rol.php";//link q informa o script quem receber� os dados do form para atualizar
 $tab_edit="forms/editar_igreja.php&tabela=$tabela&rol={$igreja->rol()}&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
@@ -32,7 +32,7 @@ $ind = 1;
 			<form>
 		     <label>Alterar Igreja: </label>
 		     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-control" >
-		     <?php 
+		     <?php
 			     $estnatal = new List_sele('igreja', 'razao','id');
 			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$_GET["rol"]);
 		     ?>
@@ -41,34 +41,34 @@ $ind = 1;
      	</td>
      	</tr>
      	<tr>
-        <td colspan="2" >Dire&ccedil;&atilde;o: 
+        <td colspan="2" >Dire&ccedil;&atilde;o:
         <?PHP
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
 			echo '<p><a title="Click aqui para alaterar este campo!"';
 			echo 'href="./?escolha='.$tab_edit.'pastor" autofocus="autofocus" >'.$dirigente.'</a></p>';
-			
+
 		echo '</td><td>';
-			
-			
+
+
 		echo 'Rol: <p>'.$igreja->pastor().'</p>';
 
 		?></td>
-		<?php 
-		
+		<?php
+
 			if (!empty($_GET['campo']) && $_GET['campo']=='pastor') {
-				
+
 				$cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
-				
-				echo '<form id="form1" name="form1" method="post" action="">';				
+
+				echo '<form id="form1" name="form1" method="post" action="">';
 				echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
-				echo '<input type="hidden" name="campo" value="pastor">';				
+				echo '<input type="hidden" name="campo" value="pastor">';
 				echo '<input type="hidden" name="tabela" value="igreja">';
 				echo '<input type="hidden" name="id" value="'.$cong.'">';
 				require_once 'forms/igreja/dirigenteAuto.php';
 				echo '</form>';
-				
+
 			}
-		
+
 		?>
       </tr>
       <tr>
@@ -118,7 +118,7 @@ $ind = 1;
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
-      
+
       <tr>
         <td colspan="2">Endere&ccedil;o:
 		<?PHP
@@ -133,19 +133,19 @@ $ind = 1;
       </tr>
       <tr>
         <td>Bairro:
-          <?PHP		
+          <?PHP
 		//inicio
 		$bairro = new DBRecord('bairro',$igreja->bairro(), 'id');
 		echo '<p><a title="Click aqui para alaterar este campo!"';
 		echo 'href="./?escolha='.$tab_edit.'bairro" autofocus="autofocus" >* '.$bairro->bairro().' *</a></p>';
-		
+
 		if ($_GET["campo"]=="bairro"){
 		?>
           <form id="form3" name="form3" method="post" action="">
             <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "sistema/atualizar_rol.php";?>" />
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
             <?PHP
-			$lst_bairro = new sele_cidade("bairro",$igreja->cidade(),"idcidade","bairro","bairro");	
+			$lst_bairro = new sele_cidade("bairro",$igreja->cidade(),"idcidade","bairro","bairro");
 			$vlr_bairro=$lst_bairro->ListDados ($ind++);
 		?>
             <input name="tabela" type="hidden" id="tabela" value="igreja" />
@@ -154,25 +154,25 @@ $ind = 1;
           </form>
         <?PHP
 		}
-		
+
 		//fim
 		?></td>
         <td>Cidade:
-          <?PHP		
+          <?PHP
 		//inicio
 		$cidade = new DBRecord ("cidade",$igreja->cidade(),"id");
-		
+
 		echo $igreja->cidade;
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-		
+
 		if ($_GET["campo"]=="cidade"){
 		?>
           <form id="form3" name="form3" method="post" action="">
             <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "sistema/atualizar_rol.php";?>" />
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
             <?PHP
-				$lst_cid = new sele_cidade("cidade",$igreja->uf,"coduf","nome","cidade");	
+				$lst_cid = new sele_cidade("cidade",$igreja->uf,"coduf","nome","cidade");
 				$vlr_linha=$lst_cid->ListDados ($ind++);
 			?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "igreja";?>" />
@@ -181,11 +181,11 @@ $ind = 1;
           </form>
         <?PHP
 		}
-		
+
 		//fim
 		?></td>
 		<td colspan="2">UF:
-        
+
           <p><a href="./?escolha=<?PHP echo $tab_edit;?>uf"><?PHP print " > {$igreja->uf()} < ";?></a>
               <?PHP
 		if ($_GET["campo"]=="uf"){
@@ -222,8 +222,8 @@ $ind = 1;
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
-      
-      
+
+
       <tr>
         <td colspan="4">C&iacute;rculo de Ora&ccedil;&atilde;o:
           <p>
@@ -239,14 +239,26 @@ $ind = 1;
 		$ceia = new formceia($igreja->rol());
 		?>
 		<p><a href="./?escolha=<?PHP echo $tab_edit;?>ceia"><?PHP print $ceia->mostradiasemana();?></a></p>
-		</td></tr>
+		</td></tr><td colspan="3">
+  Dias de Cultos
+        <table class='table'>
+            <tbody>
+            <tr class="primary">
+                <?PHP
+                    require_once 'forms/igreja/alterarDiaCulto.php'
+                ?>
+            </tr>
+            </tbody>
+        </table>
+        </td></tr>
+
     </table>
-	
+
     </fieldset>
 	        <?PHP
 			if ($_GET['campo']=='ceia'){
 				echo "<form method='post' action='' id='formceia'>";
-				echo $ceia->formulario(++$ind);
+				$ceia->formulario(++$ind);
 				?>
 			  	<input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
 			  	<input name='tabela' type='hidden' value='igreja' />

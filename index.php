@@ -144,8 +144,8 @@
 					require_once ("views/secretaria/menuTopDados.php");
 			}elseif (isset ($_GET["menu"])) {
 				require_once ("{$_GET["menu"]}.php");
-			}elseif (isset ($_POST["menu"])){
-				require_once ("{$_GET["menu"]}.php");
+			}elseif (!empty($_POST["menu"])){
+				require_once ("{$_POST["menu"]}.php");
 			}elseif (strstr($_GET["escolha"],"aniv/")){
 				require_once ("top_aniv.php");
 			}

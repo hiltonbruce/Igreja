@@ -1,16 +1,16 @@
-<?php 
+<?php
 class formceia {
-	
+
 	function formceia($igreja){
-		
+
 		$cong = new	DBRecord('igreja', $igreja, 'rol');
 		$this->semana = substr($cong->ceia(), -2,1);    // retorna a numero da semana
 		$this->dia = substr($cong->ceia(), -1);    // retorna a numero do dia da semana 2-seg, 3-ter ...
-		
+
 	}
-	
+
 	function formulario ($ind){
-		
+
 		$cong = new	DBRecord('igreja', $igreja, 'rol');
 		$semana = substr($cong->ceia(), -2,1);    // retorna a numero da semana
 		$dia = substr($cong->ceia(), -1);    // retorna a numero do dia da semana 2-seg, 3-ter ...
@@ -26,7 +26,7 @@ class formceia {
 			$s1 = 'checked="checked"';
 			break;
 		}
-		
+
 		switch ($this->dia) {
 			case 6:
 			$d7 = 'checked="checked"';//Sábado
@@ -45,7 +45,7 @@ class formceia {
 			break;
 			case 1:
 			$d2 = 'checked="checked"';//Segunda
-			break;			
+			break;
 			default:
 			$d1 = 'checked="checked"';
 			break;
@@ -53,46 +53,50 @@ class formceia {
 		?>
 		<fieldset>
   		<legend>Santa Ceia</legend>
-		<table style="text-align: left; width: 100%; background-color: #00CCFF; " >
+		<table class='table' >
 			<tbody>
-				<tr>
-				<td>1ª Sem
-		  		<input type="radio" id="semana" <?php echo $s1;?> name="semana" value="1" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>2ª Sem
-		  		<input type="radio" id="semana" <?php echo $s2;?> name="semana" value="2" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>3ª Sem
-		  		<input type="radio" id="semana" <?php echo $s3;?> name="semana" value="3" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>4ª Sem
-		  		<input type="radio" id="semana" <?php echo $s4;?> name="semana" value="4" tabindex = "<?php echo ++$ind; ?>" ></td>
+				<tr  class="bg-primary">
+				<td><div class="radio"><label>
+		  		<input type="radio" id="semana" autofocus='autofocus' <?php echo $s1;?> name="semana" value="1"
+		  			tabindex="<?php echo ++$ind; ?>" >1ª Semana</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="semana" <?php echo $s2;?> name="semana" value="2"
+		  			tabindex="<?php echo ++$ind; ?>" >2ª Semana</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="semana" <?php echo $s3;?> name="semana" value="3"
+		  			tabindex="<?php echo ++$ind; ?>" >3ª Semana</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="semana" <?php echo $s4;?> name="semana" value="4"
+		  			tabindex="<?php echo ++$ind; ?>" >4ª Semana</label></div></td>
 		  		</tr>
 	  		</tbody>
 	  	</table>
-		<table style="text-align: left; width: 100%; background-color: #00CCFF; " >
-		<caption>Dia da Semana</caption>
+		<table class='table' >
 			<tbody>
-				<tr>
-				<td>Segunda
-		  		<input type="radio" id="dia" <?php echo $d2;?> name="dia" value="1" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>Terça
-		  		<input type="radio" id="dia" <?php echo $d3;?> name="dia" value="2" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>Quarta
-		  		<input type="radio" id="dia" <?php echo $d4;?> name="dia" value="3" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>Quinta
-		  		<input type="radio" id="dia" <?php echo $d5;?> name="dia" value="4" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>Sexta
-		  		<input type="radio" id="dia" <?php echo $d6;?> name="dia" value="5" tabindex = "<?php echo ++$ind; ?>" ></td>
-		  		<td>Sábado
-		  		<input type="radio" id="dia" <?php echo $d7;?> name="dia" value="6" tabindex = "<?php echo ++$ind; ?>" ></td>
+				<tr class="bg-primary">
+				<td><div class="radio"><label>
+		  		<input type="radio" id="dia" <?php echo $d2;?> name="dia" value="1" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="dia" <?php echo $d3;?> name="dia" value="2" tabindex = "<?php echo ++$ind; ?>" >Terça</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="dia" <?php echo $d4;?> name="dia" value="3" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="dia" <?php echo $d5;?> name="dia" value="4" tabindex = "<?php echo ++$ind; ?>" >Quinta</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="dia" <?php echo $d6;?> name="dia" value="5" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></div></td>
+		  		<td><div class="radio"><label>
+		  		<input type="radio" id="dia" <?php echo $d7;?> name="dia" value="6" tabindex = "<?php echo ++$ind; ?>" >Sábado</label></div></td>
 		  		</tr>
 	  		</tbody>
 	  	</table>
   		</fieldset>
 		<?php
+		return $ind;
 	}
-	
-	function mostradiasemana () {		
-		
-		
+
+	function mostradiasemana () {
+
+
 		switch ($this->semana) {
 			case 4:
 			$semana = '4&ordf Semana';
@@ -110,7 +114,7 @@ class formceia {
 			$semana = 'Semana Não Informada!';
 			break;
 		}
-		
+
 		switch ($this->dia) {
 			case 6:
 			$dia = 'todo Sábado';//Sábado
@@ -132,14 +136,14 @@ class formceia {
 			break;
 			case 0:
 			$dia = 'todo Domingo';//Terça
-			break;		
+			break;
 			default:
 			$dia = 'Dia Não Informado';//Segunda
 			break;
 		}
-		
+
 		return 'Mensalmente '.$dia.' da '.$semana;
-		
+
 	}
 }
 

@@ -1,8 +1,7 @@
-<link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
 <?PHP
 if (!empty($_GET['idcidade'])){
 		$idcidade = (int)$_GET['idcidade'];}
-	else 
+	else
 		{$idcidade = "2655";}
 $ind=0;
 $link_est = "./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=";
@@ -20,7 +19,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 	<form action="" method="post" name="cadastro_igreja">
 	<fieldset><legend>Cadastrar Sede e Congrações</legend>
-		<table style="text-align: left; width: 100%;">
+		<table class='table'>
 			<thead>
 				<tr>
 					<td>
@@ -33,7 +32,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 							<?PHP
 							}else{
 								echo "<option value={$_GET['uf_end']}>{$_GET['uf_end']}</option>";
-							} 
+							}
 							?>
 								<option value='<?PHP echo $link_est;?>AC'>Acre</option>
 								<option value='<?PHP echo $link_est;?>AL'>Alagoas</option>
@@ -66,18 +65,18 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 							<?PHP
 							if (!empty($_GET["uf_end"]))
 							{
-								
+
 								//conectar();
 								$vl_uf=$_GET["uf_end"];
 								$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cidade");
-								echo "<label>Cidade:</label>";		
+								echo "<label>Cidade:</label>";
 								$vlr_linha=$lst_cid->ListDados (++$ind);
-							
+
 							?>
 				</tr>
 				<tr>
 					<td colspan="2"> <label>igreja:</label>
-    					<input name="razao" class="form-control" type="text" id="razao" 
+    					<input name="razao" class="form-control" type="text" id="razao"
     					required="required" tabindex = "<?php echo ++$ind; ?>" size="55">
     				</td>
 				</tr>
@@ -116,7 +115,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 						<input name="cep" class="form-control" type="text" id="cep" tabindex = "<?php echo ++$ind; ?>">
 					</td>
 			<td><label>Telefone</label>
-				<input name="fone" class="form-control" type="text" id="fone" tabindex = "<?php echo ++$ind; ?>">	
+				<input name="fone" class="form-control" type="text" id="fone" tabindex = "<?php echo ++$ind; ?>">
 			</td>
 				</tr>
 				<tr>
@@ -131,52 +130,74 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		</table>
 	<?PHP } ?>
 
-   
   </fieldset>
-	  <?php 
+	  <?php
 	  $ceia = new formceia();
-		echo $ceia->formulario(++$ind);
+	  $ind = $ceia->formulario(++$ind);
 	  ?>
   <fieldset>
   <legend>Dia do Circulo de Ora&ccedil;&atilde;o</legend>
-		<table style="text-align: left; width: 100%;">
+		<table class='table'>
 			<tbody>
-			<tr>
-			<td>Segunda
-	  		<input type="radio" id="dia" name="oracao" value="2" tabindex = "<?php echo ++$ind; ?>" ></td>
-	  		<td>Terça
-	  		<input type="radio" id="dia" name="oracao" value="3" tabindex = "<?php echo ++$ind; ?>" ></td>
-	  		<td>Quarta
-	  		<input type="radio" id="dia" name="oracao" value="4" tabindex = "<?php echo ++$ind; ?>" ></td>
-	  		<td>Quinta
-	  		<input type="radio" id="dia" name="oracao" value="5" tabindex = "<?php echo ++$ind; ?>" ></td>
-	  		<td>Sexta
-	  		<input type="radio" id="dia" name="oracao" value="6" tabindex = "<?php echo ++$ind; ?>" ></td>
-	  		<td>Sábado
-	  		<input type="radio" id="dia" name="oracao" value="7" tabindex = "<?php echo ++$ind; ?>" ></td>
+			<tr class="bg-primary">
+			<td><div class="radio"><label>
+	  		<input type="radio" id="dia" name="oracao" value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></div></td>
+	  		<td><div class="radio"><label>
+	  		<input type="radio" id="dia" name="oracao" value="3" tabindex = "<?php echo ++$ind; ?>" >Terça</label></div></td>
+	  		<td><div class="radio"><label>
+	  		<input type="radio" id="dia" name="oracao" value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></div></td>
+	  		<td><div class="radio"><label>
+	  		<input type="radio" id="dia" name="oracao" value="5" tabindex = "<?php echo ++$ind; ?>" >Quinta</label></div></td>
+	  		<td><div class="radio"><label>
+	  		<input type="radio" id="dia" name="oracao" value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></div></td>
+	  		<td><div class="radio"><label>
+	  		<input type="radio" id="dia" name="oracao" value="7" tabindex = "<?php echo ++$ind; ?>" >Sábado</label></div></td>
+	  		</tr>
+	  		</tbody>
+	  	</table>
+  </fieldset>
+  <fieldset>
+  <legend>Dias de Cultos</legend>
+		<table class='table'>
+			<tbody>
+			<tr class="bg-primary">
+				<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto1" value="1" tabindex = "<?php echo ++$ind; ?>" >Domingo</label></td>
+		  		<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto2" value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></td>
+		  		<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto3" value="3" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label></td>
+		  		<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto4" value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></td>
+		  		<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto5" value="5" tabindex = "<?php echo ++$ind; ?>" >Quinta</label></td>
+		  		<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto6" value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></td>
+		  		<td><label class="checkbox">
+		  		<input type="checkbox" id="dia" name="culto7" value="7" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label></td>
 	  		</tr>
 	  		</tbody>
 	  	</table>
   </fieldset>
    <label>
     <input type="hidden" name="escolha" value="models/cad_igreja.php">
-    <input type="submit"  class="btn btn-primary" name="Submit" value="Cadastrar" tabindex = "<?php echo ++$ind; ?>" >
+    <input type="submit"  class="btn btn-primary" name="Submit" value=	"Cadastrar" tabindex = "<?php echo ++$ind; ?>" >
     </label>
 </form>
 <?PHP
-}elseif ($_SESSION['nivel']>4)//Verifica se o usuário tem autorização para o cadastro e realiza inserção 
+}elseif ($_SESSION['nivel']>4)//Verifica se o usuário tem autorização para o cadastro e realiza inserção
 {
-	
+
 	//Inserir dados na tadela igreja
 	$log = "Inserido por: {$_SESSION["valid_user"]}";
-	
+
 	$igreja = htmlentities ($_POST["igreja"]);
 	$cidade = (int)$_POST["cidade"];
-	
+
 	$rec = new bairro($cidade, $igreja);
-	
+
 	if (!$rec->exitecad()) { //verifica se o igreja já está cadastrado para esta cidade
-	
+
 	$value = "'','$igreja','$cidade',NULL,'$log'";
 	$carta = new insert ("$value","igreja");
 	$carta->inserir();
@@ -187,7 +208,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		echo "<h3><a href=./?escolha=tab_auxiliar/cadastro_igreja&uf_end=PB>Cadastrar outra igreja? Clique aqui...</a></h3>";
 		echo "<script> alert('Cadastrar outra igreja!'); location.href='<?PHP echo $link_est;?>PB';</script>";
 
-	
+
 }else{
 	echo "Desculpe! Mas voc&ecirc; não te autoriza&ccedil;&atilde;o para esta terefa.";
 }
@@ -201,7 +222,7 @@ $form = new HTML_QuickForm();
 //$element =& $form->addElement('autocomplete','teams','Times favoritos: ');
 //$element->setOptions($teams);
 $element =& $form->addElement('autocomplete', 'iautoComp', array('Your favourite fruit:', 'This is autocomplete element.<br />Start typing and see how it suggests possible completions.'), array('Pear', 'Orange', 'Apple'), array('size' => 30));
-   
+
 echo $form;
 			*/
 ?>

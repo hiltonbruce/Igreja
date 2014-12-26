@@ -1,4 +1,4 @@
-/* 
+/*
 * 2011 - Joseilton Costa Bruce
 */
 
@@ -32,7 +32,7 @@ h2 img { margin-right:5px; border:0; }
 	}
 
 input {
-	text-align:center;	
+	text-align:center;
 }
 
 form label {
@@ -52,7 +52,7 @@ select:focus {
 }
 
 .text_area {
-	/* define o tamanho barra da area de texto class="text_area" */  
+	/* define o tamanho barra da area de texto class="text_area" */
   width: 98%;
   height: 50px;
 }
@@ -89,7 +89,7 @@ div .logo {
 	width:100%;
 	height:75px;
 	background-color: white;
-	background-image: url(img/90_anos.jpg);	
+	background-image: url(img/90_anos.jpg);
 	background-repeat:no-repeat;
 	padding:30px;
 }
@@ -110,10 +110,10 @@ div.info, div.info1 {
 	background-repeat:repeat-x;
 }
 
-div.info1 { 
+div.info1 {
 	background-image:url(img/info1.gif);
-	float:left; 
-	border-top:1px solid #fff; 
+	float:left;
+	border-top:1px solid #fff;
 	background-color:#e4e4e4;
 	color:#999;
 	font-size:120%;
@@ -176,18 +176,18 @@ div.leftpanel .header, div.rightpanel .header {
 .text_ img { vertical-align:middle; border:0; }
 
 span.divider {
-	border-bottom:1px dashed #333333; 
-	padding-bottom:5px; 
-	margin-bottom:5px; 
+	border-bottom:1px dashed #333333;
+	padding-bottom:5px;
+	margin-bottom:5px;
 	display:block;
 }
 
 div.rightpanel .inquiry, div.leftpanel .inquiry {
-	padding:3px; 
+	padding:3px;
 	text-align:justify;
 }
 
-.inquiry a, .inquiry a:link, .inquiry a:visited, .inquiry a:hover, .mainpanel a  { 
+.inquiry a, .inquiry a:link, .inquiry a:visited, .inquiry a:hover, .mainpanel a  {
 	text-decoration:none;
 	 }
 
@@ -210,7 +210,7 @@ legend {
 	font: 12px Arial;
 	background-color:#00CCFF; color:#000066;
 	}
-	
+
 span#rodape{
 	font-weight:bold;
 	background:#00CCFF;
@@ -260,38 +260,38 @@ tr:hover#form {
 	color: blue;
 }
 
-.autocomplete_list { 
+.autocomplete_list {
 	background: #FEFEFE;
 	display: block;
 	border: 1px solid #7C7C7C;
-	text-align: left; z-index: 200; 
+	text-align: left; z-index: 200;
 }
 
-.autocomplete_list, .autocomplete_list ol, .autocomplete_list li { 
-	list-style-type: none; 
-	margin: 0; 
-	padding: 0; 
+.autocomplete_list, .autocomplete_list ol, .autocomplete_list li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
-.autocomplete_list li { 
-	margin: 0; 
+.autocomplete_list li {
+	margin: 0;
 	text-align: left;
-	cursor: pointer; 
+	cursor: pointer;
 	padding: .3em .5em;
-	border: none;		
+	border: none;
 }
 
-.autocomplete_list .current_item { 
+.autocomplete_list .current_item {
 	background: #B4D5FE;
 	color: black;
 }
 
-.autocomplete_list li { 
+.autocomplete_list li {
 	color: #696969;
 }
 
-.autocomplete_icon { 
-	background-image: url(autocomplete.gif);	
+.autocomplete_icon {
+	background-image: url(autocomplete.gif);
 	cursor: pointer;
 	cursor: hand;
 	display:none;
@@ -368,7 +368,28 @@ tr:hover#form {
 
 /* oculta e revelar campos */
 
-/* CSS para efeitos jQuery 
+/* CSS para efeitos jQuery
 .impar {background:#d6e2e5;} */
 img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inline;}
 /* Fim CSS para efeitos jQuery */
+
+.table > thead > tr > td.primary,
+.table > tbody > tr > td.primary,
+.table > tfoot > tr > td.primary,
+.table > thead > tr > th.primary,
+.table > tbody > tr > th.primary,
+.table > tfoot > tr > th.primary,
+.table > thead > tr.primary > td,
+.table > tbody > tr.primary > td,
+.table > tfoot > tr.primary > td,
+.table > thead > tr.primary > th,
+.table > tbody > tr.primary > th,
+.table > tfoot > tr.primary > th {
+  background-color: #00CCFF;
+}
+.table-hover > tbody > tr > td.primary:hover,
+.table-hover > tbody > tr > th.primary:hover,
+.table-hover > tbody > tr.primary:hover > td,
+.table-hover > tbody > tr.primary:hover > th {
+  background-color: #3276b1;
+}

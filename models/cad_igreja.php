@@ -16,17 +16,25 @@
  * Insere dados no banco do form cadastro.php na tabela:igreja
  */
 controle("inserir");
+$virgula = '';
+for ($i=1; $i<8; $i++) {
+    $culto = 'culto'.$i;
+    if (!empty($_POST[$culto]) && $_POST[$culto]>0 && $_POST[$culto]<8) {
+       $diasDeCulto .= $virgula.$_POST[$culto];
+       $virgula = '-';
+    }
+}
 
 $ceia = $_POST["semana"].$_POST["dia"];
 
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
-$value = "'','{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}',
-	'{$_POST["email"]}','$ceia','{$_POST["oracao"]}','{$_POST["pastor"]}','{$_POST["secretario1"]}',
-	'{$_POST["secretario2"]}','1','{$_POST["rua"]}','{$_POST["numero"]}','{$_POST["bairro"]}',
-	'{$_POST["cidade"]}','PB','{$_POST["cep"]}',
-	'{$_POST["fone"]}','1',NOW(),'$hist'";
-
+$value  = "'','{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}'";
+$value .= ",'{$_POST["email"]}','$ceia','{$_POST["oracao"]}','$diasDeCulto','{$_POST["pastor"]}'";
+$value .= ",'{$_POST["secretario1"]}','{$_POST["secretario2"]}','1','{$_POST["rua"]}'";
+$value .= ",'{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','PB','{$_POST["cep"]}'";
+$value .= ",'{$_POST["fone"]}','1',NOW(),'$hist'";
+echo "<h1> $value </h1>";
 $dados = new insert ($value,"igreja");
 $dados->inserir();
 echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
