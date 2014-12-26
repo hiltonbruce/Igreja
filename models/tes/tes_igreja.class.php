@@ -23,8 +23,8 @@ class tes_igreja {
 
 	function dataEntrada () {
 
-		$ultimaEntrada  = 'SELECT lancamento,data,mesrefer,anorefer FROM dizimooferta
-		WHERE igreja="'.$this->igreja.'" ORDER BY data DESC LIMIT 1';
+		$ultimaEntrada  = 'SELECT lancamento,data,mesrefer,anorefer FROM dizimooferta';
+		$ultimaEntrada .= ' WHERE igreja="'.$this->igreja.'" ORDER BY data DESC LIMIT 1';
 		$dados = mysql_query($ultimaEntrada);
 		$resUltimoDia = mysql_fetch_array($dados);
 		//print_r($resUltimoDia);
@@ -45,6 +45,18 @@ class tes_igreja {
 			$dtUltLanc->modify('+1 day');
 			$mesLanc = $dtUltLanc->format('m');
 			$anoLanc = $dtUltLanc->format('Y');
+
+
+			list($culto1,$culto2,$culto3,$culto4) = explode('-', $resUltimoDia['cultos']);
+			//acrescentar na pesquisa os dias de cultos
+			//$frase  = $resUltimoDia['cultos'];
+			$numDias = array(1, 2, 3, 4, 5, 6, 7);
+			$nomeDias   = array('next Sunday','next Monday','next Tuesday','next Wednesday','next Thursday','next Friday','next Saturday' );
+			$culto1 = str_replace($numDias, $nomeDias, $culto1);
+			$culto2 = str_replace($numDias, $nomeDias, $culto2);
+			$culto3 = str_replace($numDias, $nomeDias, $culto3);
+			$culto4 = str_replace($numDias, $nomeDias, $culto4);
+
 
 			switch ($dtUltLanc->format('w')) {
 				case '1':
