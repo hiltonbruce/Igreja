@@ -1,6 +1,6 @@
 
     <?php if ($_GET['rec']=='4' || $_GET['rec']=='5' || $_GET['rec']=='21'  ||
-    $_GET['rec']>'5' & $_GET['rec']<'9') {
+    $_GET['rec']>'5' & $_GET['rec']<'9' || $_GET['rec']=='23') {
       $linkAtivo='active';
     }else {
       $linkAtivo='';

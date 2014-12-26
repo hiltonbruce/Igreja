@@ -62,11 +62,13 @@
 					<label>Mês para estatistica:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
+					      $mesEstatisca = (empty($_GET['mes']) || $_GET['mes']>12) ? 1 : $_GET['mes'] ;
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.(int)$mes.'>'.$meses.'</options>';
-								 if ($_GET['mes']==$mes) {
+								 if ($mesEstatisca==$mes) {
 								 	$linha1 = '<option value='.(int)$mes.'>'.$meses.'</options>'.$linha1;
+								 	$mesPesquisa = $meses;
 								 }
 						      }
 						      echo $linha1.$linha2;
@@ -131,19 +133,36 @@
 	</td>
 	</tr>
 </table>
+
+
+    <p class="bg-success">
  <?PHP
 
 					}
 					if ($_GET['rec']!='13') {
-						echo '<td><br><a href="'.$linkImpressao.'" ';
+						echo '<a href="'.$linkImpressao.'" ';
 						echo 'target="_black" title="Imprimir demonstrativo">';
 						echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
 						$imprimir = '';
 					}else {
 						$imprimir = '<script type="text/javascript">window.print();</script>';
 					}
-					echo '</td>';
-				?>
+
+		echo 'Esta consulta gerou um total de <kbd>'.$totalLinhas.'</kbd> ocorr&ecirc;ncias';
+
+    	if ($totalLinhas>"1")
+				{
+					printf("( %s ).",$titulo);
+
+				}elseif ($totalLinhas=="1"){
+					echo "Com apenas um $titulo,";
+				}else{
+					echo "Nenhum resultado";
+				}
+				$percentual = ($totDizimistas*100)/$totalLinhas;
+				echo ' Tendo '.$totDizimistas.' dizimistas no mês de: '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
+		?>
+		</p>
 
 <table class='table table-bordered'>
 	<colgroup>
@@ -175,7 +194,7 @@
 					echo "Nenhum resultado";
 				}
 				$percentual = ($totDizimistas*100)/$totalLinhas;
-				echo ' Tendo '.$totDizimistas.' dizimistas no mês '.$mesDiz.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
+				echo ' Tendo '.$totDizimistas.' dizimistas no mês de: '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
 		?>
 		</p>
   </div>
