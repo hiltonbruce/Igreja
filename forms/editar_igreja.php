@@ -226,11 +226,10 @@ $ind = 1;
 
       <tr>
         <td colspan="4">C&iacute;rculo de Ora&ccedil;&atilde;o:
-          <p>
-		<?PHP
-		$nome = new editar_form("obs",$igreja->mobs(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?></p></td>
+            <?PHP
+                require_once 'forms/igreja/alterarDiaOracao.php'
+            ?>
+        </td>
       </tr>
       <tr>
       	<td colspan="3">
