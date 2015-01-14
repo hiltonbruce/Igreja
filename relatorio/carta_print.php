@@ -31,13 +31,22 @@
 </head>
 <body>
 <div id="container">
-  <div id="header"  class='row'>
-  <div class="col-md-2"></div>
-  <div class="col-md-9 text-left">
-	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?><br />
-	  <?PHP echo " CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
-	  Copyright &copy; http://<?PHP echo "{$igreja->site()}";?>/
-      Email: <?PHP echo "{$igreja->email()}";?> 
+	<table>
+		<tr>
+			<td><img src="../img/AssDeus.png"></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td>
+				<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?><br />
+				  <?PHP echo " CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
+				  Copyright &copy; http://<?PHP echo "{$igreja->site()}";?>/
+			      Email: <?PHP echo "{$igreja->email()}";?> 
+			</td>
+		</tr>
+	</table>
+  <div class='row'>
+  <div class="col-md-4"></div>
+  <div class="col-md-8 text-left">
+	
    	</div>
   </div>
 <div id="mainnav">
@@ -105,28 +114,26 @@
       	 <p>
       <fieldset>
 	  <legend>Observa&ccedil;&otilde;es:</legend>
-      <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?PHP echo $carta->obs(); ?>.</p>
+      <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?PHP echo $carta->obs(); ?></p>
 	  </fieldset>
     </div>
-    <div class='text-right'>
-      <?PHP  print $origem." - ".$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?>
+
+    <h4 class='text-right'><?PHP  print $origem." - ".$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h4>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
 	  <div id="secretario"><?PHP echo strtoupper($_POST["secretario"]);?><br />
       Secret&aacute;rio </div>
-	    <div class="bs-callout bs-callout-info text-center" id="callout-helper-context-color-accessibility">
-	    	<h4>Alcan&ccedil;ando Vidas para Cristo</h4>
-		</div>
 
+		<p><h2 class="text-center">Alcan&ccedil;ando Vidas para Cristo</h2></p>
 
 	  <div id="vencimento">Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
         <?PHP 
 		echo data_venc(conv_valor_br($carta->data()));
 		?> (validade)
 	  </div>
-    </div>
+    
     <div id="footer">
 	  <p>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
     </div>

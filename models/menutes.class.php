@@ -125,6 +125,7 @@ class menutes {
 	
 	function buscarecibo() {
 		//formulários laterais de busca de recido da tesouraria
+		$ind =0;
 		?>
 		<div class="box">
 		<div class="box-outer">
