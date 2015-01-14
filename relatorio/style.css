@@ -4,7 +4,9 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; 
 	
 	#container { margin: 1em auto; width: 800px; text-align: left; background: url(../img/log_70anos.jpg) no-repeat 50%; }
 	
-	#header { width:800px; height: 125px; background-image: url(header2.jpg); background-repeat: no-repeat; background-position: left bottom; margin: 0; padding: 0 20px 0 100px; text-align:center; font-family:"Times New Roman", Times, serif;}
+	#header { width:800px; height: 80px; background-image: url(../img/AssDeus.png); background-repeat: no-repeat;
+		 background-position: left top; margin: 0; padding: 0 20px 0 120px; 
+		 text-align:center; font-family:"Times New Roman", Times, serif;}
 	#header h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
 	
 	#mainnav {height: 20px; margin: 0; padding: 10px 0 0; text-align:center; font-size: 200%; font-family:"Times New Roman", Times, serif;}
@@ -32,7 +34,6 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; 
 
 a:link:after, a:visited:after {
 	content:"("attr(href)")";
-	font-size: 80%;
 	color:#555555;
 }
 
@@ -65,10 +66,10 @@ a:link:after, a:visited:after {
 
 #pastor {
 	position:relative;
-	width:200px;
+	width:400px;
 	padding: 0 0 0 150px;
 	text-align:center;
-	top: -50px;
+	top: -10px;
 }
 
 #secretario {
@@ -76,7 +77,7 @@ a:link:after, a:visited:after {
 	position:relative;
 	width:400px;
 	text-align:center;
-	top: -85px;
+	top: -45px;
 }
 
 #vencimento {
@@ -102,18 +103,8 @@ h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height
 h3, legend { color: #3366FF; font-size: 150%; font-family: Forte; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px; font-family:"Times New Roman", Times, serif;}
 h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
 h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
-a    { color: #e7790e; font-size: 0.9em; text-decoration: underline  }
-a:link    { color: #e7790e; font-size: 1em; text-decoration: underline }
-a:visited { }
-a:hover    { color: #000; }
-a:active  { color: #800000 }
 p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
 #navcontainer  { float: right ; margin: 0; padding: 5px 20px 0 0; }
-#current  { color: #e13100 ; font-weight: normal; }
-#current a   { color: #e13100; font-weight: normal }
-#current a:link   { color: #e13100; font-weight: normal }
-#current a:visited { text-decoration: none; list-style-type: none }
-#current a:hover   { color: #e13100 }
 .rightcol{ font-size: 0.9em; margin-bottom: 5px; padding: 5px; }
 .bottom { color: #5e6a66; background-image: url(../img/comadep.gif); background-repeat: no-repeat; background-position: left bottom; height: 100px; margin: 0 0 0; padding: 0 0 0 0; }
 
