@@ -1,34 +1,34 @@
 *{ margin: 0; padding: 0; }
 
 body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; color: #505367; background-color: #fff;ont-family:"Times New Roman", Times, serif;  }
-	
+
 	#container { margin: 1em auto; width: 800px; text-align: left; background: url(../img/log_70anos.jpg) no-repeat 50%; }
-	
-	#header { width: 900px; height: 100px; margin: 0; padding: 0 20px 0 120px; 
+
+	#header { width: 900px; height: 100px; margin: 0; padding: 0 20px 0 120px;
 		 text-align:center; font-family:"Times New Roman", Times, serif;}
 	#header h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
-	
-	#mainnav {height: 20px; margin: 0; padding: 10px 0 0; text-align:center; font-size: 200%; font-family:"Times New Roman", Times, serif;}
-	
+
+	#mainnav {height: 20px; margin: 0; padding: 40px 0 0; text-align:center; font-size: 200%; font-family:"Times New Roman", Times, serif;}
+
 		#content { height: auto; margin: 1px 0 0; padding: 0; }
-	
+
 #footer {
-	color: #636466; 
-	font-size: 0.8em; 
-	height: 50px; 
-	background-repeat: no-repeat; 
-	background-position: top; 
-	text-align: right; 
-	clear: both; 
-	margin: 0; 
-	padding-top: 25px; 
+	color: #636466;
+	font-size: 0.8em;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-position: top;
+	text-align: right;
+	clear: both;
+	margin: 0;
+	padding-top: 25px;
 	padding: 10px 0 0 0;
 	background-image: url(horbar.gif);
 }
 
-#footer a { 
-	color: #636466; 
-	text-decoration: underline 
+#footer a {
+	color: #636466;
+	text-decoration: underline
 }
 
 a:link:after, a:visited:after {
@@ -41,26 +41,34 @@ a:link:after, a:visited:after {
 #footer a:hover      { color: #e7790e }
 
 #added-div1 {
-	position:relative; 
+	position:relative;
 	width:800px;
-	z-index:1; 
-	height: auto; 
-	float: left; 
-	margin: 25px 15px 5px 0; 
+	z-index:1;
+	height: auto;
+	float: left;
+	margin: 25px 15px 5px 0;
 	padding: 0;
 	font-size:23px;
 	font-family:"Times New Roman", Times, serif;
 }
 
 #added-div-2 {
-	position:relative; 
+	position:relative;
 	width:800px;
 	z-index:2;
-	background-repeat: no-repeat; 
+	background-repeat: no-repeat;
 	background-position: center bottom;
-	float: left; 
-	margin: 3px 0 5px; 
-	padding: 0; 
+	float: left;
+	margin: 3px 0 5px;
+	padding: 0;
+}
+
+#data {
+	position:relative;
+	width:800px;
+	padding: 0 0 0 150px;
+	text-align:right;
+	top: 600px;
 }
 
 #pastor {
@@ -68,7 +76,7 @@ a:link:after, a:visited:after {
 	width:400px;
 	padding: 0 0 0 150px;
 	text-align:center;
-	top: -10px;
+	top: 20px;
 }
 
 #secretario {
@@ -76,7 +84,7 @@ a:link:after, a:visited:after {
 	position:relative;
 	width:400px;
 	text-align:center;
-	top: -45px;
+	top: -20px;
 }
 
 #vencimento {
@@ -86,19 +94,27 @@ a:link:after, a:visited:after {
 	color:#FF0000;
 }
 
-h1{ 
+.mensagem {
+	float:left;
+	width: 800px;
+	text-align:center;
+	color:#428BCA;
+	font-size: 24px;
+}
+
+h1{
 	color: #0000FF;
 	font-size: 300%;
-	font-family: Forte; 
-	font-weight: normal; 
-	text-align: left; 
-	height: 50px; 
-	padding-top: 25px; 
+	font-family: Forte;
+	font-weight: normal;
+	text-align: left;
+	height: 50px;
+	padding-top: 25px;
 	padding-left: 20px;
 	font-family:"Times New Roman", Times, serif;
-	
+
 }
-h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
+h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0;  }
 h3, legend { color: #3366FF; font-size: 150%; font-family: Forte; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px; font-family:"Times New Roman", Times, serif;}
 h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
 h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
@@ -136,7 +152,7 @@ legend {
 	left:207px;
 	top:174px;
 	width:86px;
-	height:93px;
+	height:120px;
 	z-index:3;
 }
 #Tipo {
