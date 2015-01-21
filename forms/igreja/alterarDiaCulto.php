@@ -4,7 +4,7 @@
 
                $frase  = $igreja->cultos();
                $numDias = array(1, 2, 3, 4, 5, 6, 7);
-               $nomeDias   = array('Domingos','Segundas','Ter&ccedil;as','Quartas','Quintas','Sextas','S&aacute;bados' );
+               $nomeDias   = array('Segundas','Ter&ccedil;as','Quartas','Quintas','Sextas','S&aacute;bados','Domingos' );
                $diasDeCulto = str_replace($numDias, $nomeDias, $frase);
                $diasDeCulto = ($diasDeCulto=='') ? 'Adicione os dias de Culto... Aqui!':$diasDeCulto;
               echo '<p><a href="./?escolha='.$tab_edit.'cultos">&nbsp;'.$diasDeCulto.'&nbsp;</a></p>';
@@ -22,19 +22,19 @@
      ?>
      <form method='post' action='' id='culto'>
           <label class="checkbox">
-          <input type="checkbox" autofocus='autofocus' id="dia" name="culto1" <?php echo $mak1;?> value="1" tabindex = "<?php echo ++$ind; ?>" >Domingo</label></td>
+          <input type="checkbox" autofocus='autofocus' id="dia" name="culto1" <?php echo $mak7;?> value="7" tabindex = "<?php echo ++$ind; ?>" >Domingo</label></td>
           <td><label class="checkbox">
-          <input type="checkbox" id="dia" name="culto2" <?php echo $mak2;?> value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></td>
+          <input type="checkbox" id="dia" name="culto2" <?php echo $mak1;?> value="1" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></td>
           <td><label class="checkbox">
-          <input type="checkbox" id="dia" name="culto3" <?php echo $mak3;?> value="3" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label></td>
+          <input type="checkbox" id="dia" name="culto3" <?php echo $mak2;?> value="2" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label></td>
           <td><label class="checkbox">
-          <input type="checkbox" id="dia" name="culto4" <?php echo $mak4;?> value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></td>
+          <input type="checkbox" id="dia" name="culto4" <?php echo $mak3;?> value="3" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></td>
           <td><label class="checkbox">
-          <input type="checkbox" id="dia" name="culto5" <?php echo $mak5;?> value="5" tabindex = "<?php echo ++$ind; ?>" >Quinta</label></td>
+          <input type="checkbox" id="dia" name="culto5" <?php echo $mak4;?> value="4" tabindex = "<?php echo ++$ind; ?>" >Quinta</label></td>
           <td><label class="checkbox">
-          <input type="checkbox" id="dia" name="culto6" <?php echo $mak6;?> value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></td>
+          <input type="checkbox" id="dia" name="culto6" <?php echo $mak5;?> value="5" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></td>
           <td><label class="checkbox">
-          <input type="checkbox" id="dia" name="culto7" <?php echo $mak7;?> value="7" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label></td>
+          <input type="checkbox" id="dia" name="culto7" <?php echo $mak6;?> value="6" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label></td>
           <td><input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
           <input name='tabela' type='hidden' value='igreja' />
           <input name='id' type='hidden' value='<?php echo $igreja->rol();?>' />

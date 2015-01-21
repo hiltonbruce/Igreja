@@ -23,8 +23,8 @@ class tes_igreja {
 
 	function dataEntrada () {
 
-		$ultimaEntrada  = 'SELECT lancamento,data,mesrefer,anorefer FROM dizimooferta';
-		$ultimaEntrada .= ' WHERE igreja="'.$this->igreja.'" ORDER BY data DESC LIMIT 1';
+		$ultimaEntrada  = 'SELECT d.lancamento,d.data,d.mesrefer,d.anorefer,i.cultos FROM dizimooferta AS d,igreja AS i';
+		$ultimaEntrada .= ' WHERE igreja="'.$this->igreja.'" AND i.rol = d.igreja ORDER BY data DESC LIMIT 1';
 		$dados = mysql_query($ultimaEntrada);
 		$resUltimoDia = mysql_fetch_array($dados);
 		//print_r($resUltimoDia);
@@ -41,25 +41,30 @@ class tes_igreja {
 				,'igreja'=>$this->igreja );
 		} else {
 
-			//Calcando a próximo data para lançamento (róximo culto)
-			$dtUltLanc->modify('+1 day');
+			//Calcando a próximo data para lançamento (próximo culto)
+			//$dtUltLanc->modify('+1 day');
 			$mesLanc = $dtUltLanc->format('m');
 			$anoLanc = $dtUltLanc->format('Y');
+print_r($dtUltLanc);
+			$diaUltimoCulto = $dtUltLanc->format('N');
+			list($culto[1],$culto[2],$culto[3],$culto[4]) = explode('-', $resUltimoDia['cultos']);
 
-
-			list($culto1,$culto2,$culto3,$culto4) = explode('-', $resUltimoDia['cultos']);
+			$cultos = array($culto[1] => $culto[1],$culto[2] => $culto[2],$culto[3] => $culto[3],$culto[4] => $culto[4]);
 			//acrescentar na pesquisa os dias de cultos
 			//$frase  = $resUltimoDia['cultos'];
 			$numDias = array(1, 2, 3, 4, 5, 6, 7);
-			$nomeDias   = array('next Sunday','next Monday','next Tuesday','next Wednesday','next Thursday','next Friday','next Saturday' );
-			$culto1 = str_replace($numDias, $nomeDias, $culto1);
+			$nomeDias   = array('1'=>'next Monday','2'=>'next Tuesday','3'=>'next Wednesday',
+				'4'=>'next Thursday','5'=>'next Friday','6'=>'next Saturday','7'=>'next Sunday');
+			/*$culto1 = str_replace($numDias, $nomeDias, $culto1);
 			$culto2 = str_replace($numDias, $nomeDias, $culto2);
 			$culto3 = str_replace($numDias, $nomeDias, $culto3);
-			$culto4 = str_replace($numDias, $nomeDias, $culto4);
+			$culto4 = str_replace($numDias, $nomeDias, $culto4);*/
+print_r($nomeDias);
+			$diaProxCulto = ($culto[$diaUltimoCulto]>7 || $culto[$diaUltimoCulto]<1) ? $diaUltimoCulto:$culto[2];
+			echo "<h1>".$resUltimoDia['cultos'].' -- '.$diaProxCulto.' ** '.$nomeDias[$cultos[$diaProxCulto]].' == '.$cultos[$diaProxCulto]."</h1>";
 
-
-			switch ($dtUltLanc->format('w')) {
-				case '1':
+			switch ($dtUltLanc->format('N')) {
+				case '7':
 				//Segunda-feira
 					if ($this->igreja=='1') {
 						$proxCulto = $dtUltLanc->format('d/m/Y');
@@ -69,7 +74,9 @@ class tes_igreja {
 						$mesLanc = $dtUltLanc->format('m');
 						$anoLanc = $dtUltLanc->format('Y');
 					}
-				case '2':
+					echo "string";
+					break;
+				case '1':
 				//Terça-feira
 					if ($this->igreja=='1') {
 						$proxCulto = $dtUltLanc->modify('next wednesday');
@@ -81,7 +88,7 @@ class tes_igreja {
 					}
 					break;
 
-				case '3':
+				case '2':
 				//Quarta-feira
 					if ($this->igreja=='1') {
 						$proxCulto = $dtUltLanc->format('d/m/Y');
@@ -93,7 +100,7 @@ class tes_igreja {
 					}
 						break;
 
-				case '4':
+				case '3':
 				//Quinta-feira
 					if ($this->igreja=='1') {
 						$proxCulto = $dtUltLanc->modify('next friday');
@@ -107,7 +114,7 @@ class tes_igreja {
 
 					break;
 
-				case '5':
+				case '4':
 					//Sexta-feira
 					if ($this->igreja=='1') {
 						$proxCulto = $dtUltLanc->format('d/m/Y');
@@ -119,7 +126,7 @@ class tes_igreja {
 					}
 					break;
 
-				case '6':
+				case '5':
 					//Sábado
 					$proxCulto = $dtUltLanc->modify('next sunday');
 					$proxCulto = $proxCulto->format('d/m/Y');
