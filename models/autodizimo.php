@@ -61,6 +61,9 @@ switch ($quantNomes) {
 $res = mysql_query( $sql."locate('$q',m.nome)" );
 $linhas = mysql_num_rows($res);
 
+# 1ªlinha em branco
+echo "<li onselect=\" \">... </li>\n";
+
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
