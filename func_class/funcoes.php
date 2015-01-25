@@ -166,7 +166,7 @@ function mostra_foto ($rol) {
 			}else{
 				$img="../img_membros/ver_foto.jpg";
 			}
-		return "<img src='$img' class='img-thumbnail' alt='Foto do Membro' width='75' height='98' border='1' align='absmiddle' />";
+		return "<img src='$img' class='img-thumbnail' alt='Foto do Membro' width='114' height='149' border='1' align='absmiddle' />";
 }
 
 function data_venc($data){
