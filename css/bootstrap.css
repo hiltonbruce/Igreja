@@ -184,13 +184,7 @@ td,
 th {
   padding: 0;
 }
-@media print {
-  * {
-    color: #000 !important;
-    text-shadow: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
+
   a,
   a:visited {
     text-decoration: underline;
@@ -239,7 +233,7 @@ th {
   }
   .table td,
   .table th {
-    background-color: #fff !important;
+    background-color: #transparent !important;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
