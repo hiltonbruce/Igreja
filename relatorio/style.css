@@ -64,19 +64,18 @@ a:link:after, a:visited:after {
 }
 
 #data {
-	position:relative;
+	float:right;
 	width:800px;
 	padding: 0 0 0 150px;
 	text-align:right;
-	top: 600px;
 }
 
 #pastor {
-	position:relative;
+	float:left;
 	width:400px;
-	padding: 0 0 0 150px;
+	padding: 0 0 0 50px;
 	text-align:center;
-	top: 20px;
+	top: -20px;
 }
 
 #secretario {
@@ -84,7 +83,7 @@ a:link:after, a:visited:after {
 	position:relative;
 	width:400px;
 	text-align:center;
-	top: -20px;
+	top: -40px;
 }
 
 #vencimento {

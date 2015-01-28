@@ -9,6 +9,7 @@
 	$ecles 			= new DBRecord ("eclesiastico",$_POST['bsc_rol'],"rol");
 	$profissional	= new DBRecord ("profissional",$_POST['bsc_rol'],"rol");
 	$igreja 		= new DBRecord ("igreja","1","rol");
+	$cidadeNatal	= new DBRecord ("cidade",$membro->naturalidade(),"id");
 	$cid_batismo 	= new DBRecord ("cidade",$ecles->local_batismo(),"id");
     $rol 			= $_POST["bsc_rol"];
 
@@ -93,15 +94,16 @@
     <table class='table table-bordered'>
 		<tbody>
 			<tr>
-				<td><h4><small>Rol</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
 				<td colspan='3'><h4><small>Nome:</small><br><?php print strtoupper( toUpper($membro->nome())); ?></h4></td>
-				<td><h4><small>Func. Eclesiast&iacute;ca:</small><br><?php print cargo($_POST['bsc_rol']); ?></h4></td>
+				<td><h4><small>Rol</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
 				<td><h4><small>Est. Civil</small><br><?php print $est_civil->estado_civil(); ?></h4></td>
+				<td><h4><small>Func. Eclesiast&iacute;ca:</small><br><?php print cargo($_POST['bsc_rol']); ?></h4></td>
 			</tr>
 			<tr>
-				<td colspan='2'><h4><small>RG:</small><br><?php print $profissional->rg(); ?></h4></td>
+				<td><h4><small>RG:</small><br><?php print $profissional->rg(); ?></h4></td>
 				<td><h4><small>CPF:</small><br><?php print $profissional->cpf(); ?></h4></td>
 				<td><h4><small>Data de Nasc.:</small><br><?php print conv_valor_br($membro->datanasc()); ?></h4></td>
+				<td><h4><small>Naturailidade:</small><br><?php print $cidadeNatal->nome().'-'.$cidadeNatal->coduf(); ?></h4></td>
 				<td><h4><small>Batismo</small><br><?php print conv_valor_br($ecles->batismo_em_aguas()); ?></h4></td>
 				<td><h4><small>Membro Desde:</small><br><?php print conv_valor_br($ecles->dat_aclam()); ?></h4></td>
 			</tr>
@@ -113,17 +115,27 @@
       	 else {
       	 	print "a";} ?> recebais no Senhor como usam fazer os Santos.
       	 <p>
-      <fieldset>
-	  <legend>Observa&ccedil;&otilde;es:</legend>
-      <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?PHP echo $carta->obs(); ?></p>
-	  </fieldset>
-    </div>
+		<?php
+			if ($carta->obs()!='') {
+				?>
+					 <fieldset>
+						<legend>Observa&ccedil;&otilde;es:</legend>
+						<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?PHP echo $carta->obs(); ?></p>
+					 </fieldset>
+				<?php
+			}else {
+
+				echo '<br /><br />';
+			}
+		?>	      
+	     
+    </div><br />
 
     <div id="data">
         <h4><?PHP echo $origem.' - '.$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h4></div>
-
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+        <br /><br /><br />
+	    <p>&nbsp;</p>
+	    <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
 	  <div id="secretario"><?PHP echo strtoupper($_POST["secretario"]);?><br />
