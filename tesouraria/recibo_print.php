@@ -2,43 +2,43 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 	session_start();
-	
+
 	if ($_SESSION["setor"]<50 && $_SESSION["setor"]!=2){
 		echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 		$_SESSION = array();
 		session_destroy();
 		header("Location: ./");
 	}
-	
+
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
-	
+
 		function __autoload ($classe) {
-		
+
 		list($dir,$nomeClasse) = explode('_', $classe);
 		//$dir = strtr( $classe, '_','/' );
-		
+
 		if (file_exists("../models/$dir/$classe.class.php")){
-				
+
 			require_once ("../models/$dir/$classe.class.php");
 		}elseif (file_exists("../models/$classe.class.php")){
 			require_once ("../models/$classe.class.php");
 		}
-		
-		
+
+
 	}
-	
+
 	$igreja = new DBRecord ("igreja","1","rol");
-	
+
 	if ($igreja->cidade()>0) {
 		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 		$origem=$cidOrigem->nome();
 	}else {
 		$origem = $igreja->cidade();
 	}
-	
+
 	if ($_POST["reimprimir"]==""){
-		
+
 		$cad_igreja = (int) $_POST['igreja'];
 		$valor = $_POST["valor"];
 		$rec_tipo = (int)$_POST["rec"];
@@ -49,15 +49,15 @@
 		$nome = $_POST["nome"];
       	$cpf = $_POST["cpf"];
       	$rg = $_POST["rg"];
-		
+
 		$numero = ($_POST["numero"]=="") ? $_POST["razao"]:$_POST["numero"];
-	
+
 		if (empty($_POST["data"])) {
 			$data = date("d/m/Y");
 		}else {
 			$data = $_POST["data"];
 		}
-		
+
 	}else {
 		$reimprimir = new DBRecord("tes_recibo", (int)$_POST["reimprimir"], "id");
 		$cad_igreja = $reimprimir->igreja();
@@ -73,20 +73,20 @@
 		$rg = trim( $rg, 'RG: ' );
 		$referente = $reimprimir->motivo();
 	}
-	
-	
+
+
 		$fonte = new DBRecord ("fontes",$fonte_recurso,"id");
-	
+
 	//Formata o valor e defini para exibição por texto por extenso
 		$valor_us =strtr("$valor", ',','.' );
 		$vlr = number_format("$valor_us",2,",",".");
 		$dim = extenso($valor_us);
 		$dim = ereg_replace(" E "," e ",ucwords($dim));
-	
-	
+
+
 	$link = "../?escolha=tesouraria/recibo.php&menu=top_tesouraria&valor=$valor&referente={$_POST["referente"]}&data={$_POST["data"]}";
 	$link .= "&nome=".$_POST["nome"]."&rol=".$_POST["rol"]."&rec=".$_POST["rec"];
-	
+
 	if (empty($valor)){
 		echo "<script> alert('Você não definiu o valor do recibo!');location.href='".$link."';</script>";
 		$erro=1;
@@ -107,7 +107,7 @@
 	}
 
 		$hist = $_SESSION['valid_user'].": ".date("d/m/Y h:i:s");
-	
+
 		//Verifica click duplo no form de criar recibos
 		if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
 			//houve click duplo no form
@@ -118,17 +118,17 @@
 			//Grava no banco codigo de autorização para o novo recibo
 			add_transid($_POST["transid"]);
 		}
-		
+
 		//Verifica o tipo de recibo no formato apropriado
 		require_once '../models/tes/insertRecibos.php';
-	
+
 	if (empty($_POST['reimprimir'])){
-	$rec_num = new ultimoid('tes_recibo');//recupera o id do último insert no mysql (número do recibo)	
+	$rec_num = new ultimoid('tes_recibo');//recupera o id do último insert no mysql (número do recibo)
 	$numrecibo = $rec_num->ultimo();}
 	else {
 		$numrecibo = $_POST['reimprimir'];
 	}
-	
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -144,7 +144,7 @@
   <div id="header">
 	<p>
 	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
-	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?> 
+	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?>
 	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
     <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>
@@ -152,7 +152,7 @@
 
 <div id="mainnav">
 		<div style="text-align: right;"><h4><?php printf ("N&uacute;mero: %'05u",$numrecibo);?></h4></div>
-	
+
   </div>
 	<div id="content"><div id="Tipo">
 			Recibo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -184,9 +184,9 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
+    <?PHP  print $origem." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
     	<div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?><div id="polegar">Polegar</div></div>
-    	
+
 	 </div>
     </div>
     <div id="footer">
@@ -195,4 +195,4 @@
   </div>
 </body>
 </html>
-	
+
