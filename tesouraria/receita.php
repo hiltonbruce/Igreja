@@ -1,6 +1,7 @@
 <?php
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
-
+$tabela = (empty($_GET['tabela'])) ? '' : $_GET['tabela'];
+$idLanc = (empty($_GET['id'])) ? '' : $_GET['id'];
 if ($_GET['rec']>'12' && $_GET['rec']<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
@@ -51,7 +52,7 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
 					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
 			
-			require_once 'help/tes/receitaTela.php';//Opções de exibir na tela a escolha
+			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
 	}
 
 

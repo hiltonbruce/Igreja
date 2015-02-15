@@ -10,7 +10,7 @@ function __construct($tesoureiro='',$print='') {
 		
 	}
 	
-function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
+function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$linkAlterar) {
 
 	$dataValid = (checadata ($dia.'/'.$mes.'/'.$ano)) ? $ano.'-'.$mes.'-'.$dia:false;
 	if ($igreja=='') {
@@ -136,9 +136,10 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb) {
 				if ($_GET['tipo']==1) {
 					$corrigir = $valor;
 				}else {
-					$corrigir = '<a href="'.$linkLancamento.$linha['id'].'" 
-						title="clique aqui para apagar!">'.$valor.'
-						<img src="img/blackeditar.png" alt="Apagar item" /></a>';
+					$corrigir = $valor.'&nbsp;&nbsp;<a href="'.$linkAlterar.$linha['id'].'" title="Alterar!"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+						&nbsp;<a href="'.$linkLancamento.$linha['id'].'" 
+						title="Apagar!">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
 				}
 				
 			}else {

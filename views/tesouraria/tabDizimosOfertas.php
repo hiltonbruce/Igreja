@@ -2,7 +2,8 @@
 $dia = $_GET['dia'];
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
-$apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id='.$idDizOf;
+$apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id=';
+$alterarEntrada	= '?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja=1&rec=1&tabela=dizimooferta&id=';
 if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 ?>
 <table>
@@ -39,7 +40,7 @@ $tabMembros = new membro();
 			$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
 			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
 												$mes,$ano,$_GET['rec'],$_GET['credito'],
-												$_GET['debito']);
+												$_GET['debito'],$alterarEntrada);
 			$tabLancamento= $resultado['1'];
 
 			if ($resultado['2']) {
