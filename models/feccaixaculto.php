@@ -174,3 +174,23 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	echo $mensagem;
 
 }
+
+?>
+<fieldset>
+	<legend>Próxima Igreja: </legend>
+	<form>
+		<div class="row">
+		  <div class="col-xs-4">
+			<label>Próxima Igreja: </label>
+				<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+					<?php
+						$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
+						$linkAcesso .= '&rec=1&igreja=';
+						$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
+						$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,'');
+						//echo $listaIgreja;
+					?>
+			</select>
+		</div></div>
+	</form>
+</fieldset>

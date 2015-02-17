@@ -13,7 +13,12 @@ if (empty($_GET['data'])) {
 	$meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
 	$anolanc = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 }
-
+if (empty($idIgreja)) {
+	$idIgreja = $rolIgreja;
+	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+	$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
+	$linkAcesso .= '&rec=1&idDizOf='.$idDizOf.'&igreja=';
+}
 ?>
 
 <fieldset>
@@ -39,7 +44,7 @@ if (empty($_GET['data'])) {
 					<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 						<?php
 							$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
-							$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$_GET['igreja']);
+							$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$idIgreja);
 							//echo $listaIgreja;
 						?>
 				</select>

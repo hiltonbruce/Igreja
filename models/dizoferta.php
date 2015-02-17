@@ -81,6 +81,7 @@ switch ($_POST['tipo']) {
 		//echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
 		//echo "<script>location.href='$linkreturn';</script>";
 		echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1'>Continuar...</button><a>";
+		require 'forms/concluirdiz.php';
 }elseif (!$rolIgreja) {//Se não foneceu o número da igreja
 	echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";
 	$msgErro .= '<div class="alert alert-error">Voc&ecirc; n&atilde;o informou a Igreja!';
