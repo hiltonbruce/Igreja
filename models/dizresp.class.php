@@ -145,6 +145,13 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 			}else {
 				$corrigir = $valor;
 			}
+
+
+			if ($congMembro!=$linha['congcadastro'] ) {
+				$congMembro = $linha['congcadastro'];
+				$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
+				$nomeCongMembro = $dadosCongMembro->razao();
+			}
 			
 			if ( $this->impressao) {
 				$linkMembro= $rol.' - '.$linha['nome'];
@@ -152,21 +159,15 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 			}else {
 				$linkMembro  = '<a href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
-				$linkMembro .= '" title="Detalhar contribui&ccedil;&otilde;es confimardas!">';
+				$linkMembro .= '" title="Detalhar contribui&ccedil;&otilde;es confimardas!('.$nomeCongMembro.')">';
 				$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
-			}
-			
-			if ($congMembro!=$linha['congcadastro'] ) {
-				$congMembro = $linha['congcadastro'];
-				$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
-				$nomeCongMembro = $dadosCongMembro->razao();
 			}
 			
 			$tabela .= '<tr '.$bgcolor.'><td>'.$linha['data'].'</td>
 				<td>'.$linkMembro.'</td><td>'.$tipo.'</td><td 
 				 id="moeda">'.$corrigir.'</td>
-				 		<td>'.$nomeCongMembro.'</td></tr>';
+				 		<td class="text-center">'.$linha['razao'].'</td></tr>';
 						$total += $linha['valor'];
 			$cor = !$cor;
 		}

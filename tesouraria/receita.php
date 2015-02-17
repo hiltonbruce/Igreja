@@ -30,7 +30,7 @@ $linkLancamento .= '&igreja='.$_GET['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links 
 
 $dizmista = new dizresp($_SESSION['valid_user']);
-$idIgreja = (empty($_GET['igreja'])) ? 1:(int)$_GET['igreja'];
+$idIgreja = (empty($_GET['igreja'])) ? 0:(int)$_GET['igreja'];
 if ((int)$_POST['rolIgreja']>0) {
 	$idIgreja=$_POST['rolIgreja'];
 }
