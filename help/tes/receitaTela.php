@@ -8,7 +8,11 @@ switch ($_GET['rec']) {
 		break;
 	case '1':
 		require_once 'forms/concluirdiz.php';
-		require_once ('forms/autodizimo.php');
+		if (!empty($_GET['id'])) {
+			require_once ('forms/tes/alteraPreLanc.php');
+		}else{
+			require_once ('forms/autodizimo.php');
+		}
 		break;
 	case '2':
 	    $form = 'forms/tes/lancarContabil.php';
