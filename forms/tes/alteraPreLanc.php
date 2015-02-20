@@ -102,7 +102,7 @@
 			<tbody>
 				<tr>
 					<td colspan="2"><label>Tipo:</label>
-						 <select class='form-control'>
+						 <select name='acesso' class='form-control'>
 							  <?php echo $lanContr;?>
 							  <option value=""> *** Informe o tipo ***</option>
 							  <option value="700,1,1">Dizimo</option>
@@ -134,7 +134,7 @@
 					?>
 					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
-					type="submit" name="listar" value="Lançar..."></td>
+					type="submit" name="listar" value="Alterar..."></td>
 				</tr>
 			</tbody>
 		</table>
@@ -148,8 +148,8 @@
 						cols="50%" tabindex="<?php echo ++$ind;?>"></textarea>
 				</td>
 				<td><input type="hidden" name="tipo" id="tipo" value="1"> <input
-					type="hidden" name="escolha" value="models/dizoferta.php"> <input
-					type="submit" name="listar" value="Lançar..."
+					type="hidden" name="escolha" value="models/tes/corrigiPreLanc.php"> <input
+					type="submit" name="listar" value="Alterar..."
 					 class="btn btn-primary" tabindex="<?php echo ++$ind;?>">
 					 <input type="hidden" name="id" value="<?php echo $idLanc;?>">
 					 <input type="hidden" name="tabela" value="<?php echo $tabela;?>">

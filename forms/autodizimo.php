@@ -157,8 +157,6 @@
 					type="hidden" name="escolha" value="models/dizoferta.php"> <input
 					type="submit" name="listar" value="Lançar..."
 					 class="btn btn-primary" tabindex="<?php echo ++$ind;?>">
-					 <input type="hidden" name="id" value="<?php echo $idLanc;?>">
-					 <input type="hidden" name="tabela" value="<?php echo $tabela;?>">
 				</td>
 			</tr>
 		</tbody>
