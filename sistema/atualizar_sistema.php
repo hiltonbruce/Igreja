@@ -7,7 +7,7 @@ list($anov, $mesv, $diav) = explode("-", $rec_alterar->data());
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
 $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias após a emissão do recibo
 
-if (($_POST ['tabela']=='tes_recibo' && $diasemissao<'2') || $_POST ['tabela']!='tes_recibo' || $_SESSION["setor"]=='99'){
+if (($_POST ['tabela']=='tes_recibo' && $diasemissao<'3') || $_POST ['tabela']!='tes_recibo' || $_SESSION["setor"]=='99'){
 
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
