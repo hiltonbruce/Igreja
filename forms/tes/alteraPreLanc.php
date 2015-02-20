@@ -37,11 +37,11 @@
 			case '822':
 				$lanContr = '<option value="822,2,5">Missões - Carnês</option>';
 				break;
-			case '':
+			case '823':
 				$lanContr = '<option value="823,2,5">Missões - Cofre</option>';
 				break;
 			case '824':
-				$lanContr = '<option value="824,2,5">Missões - Votos</option>';
+				$lanContr = '<option value="824,2,5">Missões - Envelopes</option>';
 				break;
 			case '825':
 				$lanContr = '<option value="825,2,5">Missões - Votos</option>';
@@ -122,15 +122,14 @@
 						</select>
 					</td>
 					<td><label>Valor:</label><input type="text" id="oferta0" autocomplete="off"
-						class="form-control" name="oferta0" value="<?php echo $lancAltera->valor();?>" tabindex="<?php echo ++$ind;?>"
+						class="form-control" name="oferta0" value="<?php echo number_format($lancAltera->valor(), 2, ",", ".");?>" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 				</tr>
 				<tr>
-
-					<td colspan="2"><label> Qual Campanha ?</label><?php
-					$campanha = new List_campanha;
-					echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
+					<td colspan="2"><label><!-- Qual Campanha ?--></label><?php
+					//$campanha = new List_campanha;
+					//echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
 					?>
 					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
