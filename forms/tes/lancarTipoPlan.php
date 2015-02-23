@@ -9,7 +9,9 @@
 			?>
 	</select>
 	<?PHP
-		$titTabela = 'Despesas';
+		$titTabela = 'Lan&ccedil;ar Despesas';
+		$pgtoDias = new tes_despesas();
+		require_once 'help/tes/lancTipoPlan.php';
 		require_once 'views/tesouraria/lancTipoPlan.php';
 	?>
 </form>
