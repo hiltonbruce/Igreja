@@ -9,6 +9,7 @@
 			?>
 	</select>
 	<?PHP
+		$titTabela = 'Despesas';
 		require_once 'views/tesouraria/lancTipoPlan.php';
 	?>
 </form>

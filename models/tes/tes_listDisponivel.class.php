@@ -19,10 +19,10 @@ class tes_listDisponivel extends List_sele {
 
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
-			if ($this->col_lst['acesso']==$caixa) {
-				$linha1  = '<option value="./?'.$link.$this->col_lst['acesso'].'">'.$this->col_lst['titulo'].' -> Saldo = '.$this->col_lst['saldo'].'</option>';
+			if ($this->col_lst["acesso"]==$caixa) {
+				$linha1  = "<option value='./?$link{$this->col_lst["acesso"]}'>".$this->col_lst['titulo'].' -> Saldo : '.$this->col_lst['saldo']."</option>";
 			}
-			 $linhas .='<option value="./?'.$link.$this->col_lst['acesso'].'">'.$this->col_lst['titulo'].' -> Saldo : '.$this->col_lst['saldo'].'</option>';
+			 $linhas .="<option value='./?$link{$this->col_lst["acesso"]}'>".$this->col_lst['titulo'].' -> Saldo : '.$this->col_lst['saldo']."</option>";
 		}
 
 		return $linha1.$linhas;

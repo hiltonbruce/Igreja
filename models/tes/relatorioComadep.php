@@ -108,10 +108,14 @@ foreach ($saldo AS $chave => $valor){
 			'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 		}else {
 			//Grupo de contas
+			$movSld = ($grupoAtualForm>'0') ? 'D' : 'C' ;
+			$saldoAtl = ($sldGrupoCta>'0') ? 'D' : 'C' ;
+			$saldoAntr = ($sldGrupoCta>'0') ? 'D' : 'C' ;
 			$bgcolorGrp = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
-			$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
-			'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td id="moeda">'.$grupoAtualForm.'</td>
-					<td id="moeda">'.number_format($sldGrupoCtaDisp,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td></tr>';
+			$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
+				.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format(abs($sldGrupoCta),2,',','.').$movSld
+				./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($grupoAtualForm),2,',','.').$saldoAtl.'</td>
+				<td id="moeda">'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
 			if ($nivel2=='') {
 				$nivel2 .=$nivelGrupo.$nivel1;
 			}else {

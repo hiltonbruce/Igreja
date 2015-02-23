@@ -1,14 +1,6 @@
 <table id="horario"  class="table table-bordered">
 		<caption>
 		<?php
-		if ($linkAcesso!='' && !empty($linkAcesso)) {
-			echo '<a href="'.$recLink.'" ';
-			echo 'target="_black" title="Imprimir demonstrativo">';
-			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
-			$imprimir = '';
-		}else {
-			//$imprimir = '<script type="text/javascript">window.print();</script>';
-		}
 		
 		echo $titTabela;
 		?>
@@ -17,7 +9,7 @@
 				<col id="Acesso">
 				<col id="Conta">
 				<col id="Igreja">
-				<col id="VAlor">
+				<col id="Valor">
 			</colgroup>
 		<thead>
 			<tr>
@@ -38,11 +30,6 @@
 			?>
 		</tfoot>
 	</table>
-	
-	
-	<?php 
-		echo $imprimir;
-	?>
 	
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
