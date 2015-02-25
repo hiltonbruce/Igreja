@@ -1,6 +1,6 @@
-<?php 
+<?php
 class menutes {
-	
+
 	function mostra (){
 		//Lista todos os recibos
 		$_urlLi_pen="?escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&id={$_GET["id"]}";//Montando o Link para ser passada a classe
@@ -8,25 +8,25 @@ class menutes {
 		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
-					
+
 		//Faz os calculos na paginação
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
-		
-		if ($_GET["pag_mostra"]<1) { 
+
+		if ($_GET["pag_mostra"]<1) {
 			$_GET["pag_mostra"] = 1;
 		} elseif ($_GET["pag_mostra"]>$paginas_pen) {
 			$_GET["pag_mostra"] = $paginas_pen;
 		}
-		
+
 		$pagina_pen = $_GET["pag_mostra"]-1;
-			
+
 		if ($pagina_pen<0) {$pagina_pen=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_pen=$pagina_pen * $nmpp_pen; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
-		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error()); 
+		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-						
+
 		 //inicia o cabe?alho de pagina??o
 
 		?>
@@ -35,10 +35,10 @@ class menutes {
 		<div class="box-outer">
 		<div class="box-inner">
 		<div class="box-titulo">
-		
+
 		<table cellspacing="0" >
 		<caption id="recibos">Recibos Recentes</caption>
-		
+
 			<colgroup>
 				<col id="N&ordm;">
 				<col id="Nome">
@@ -56,7 +56,7 @@ class menutes {
 			$inc_pen=0;
 			while($coluna_pen = mysql_fetch_array($sql3_pen))
 			{
-				
+
 				switch ($coluna_pen["tipo"])
 				{
 					case 1;
@@ -71,15 +71,15 @@ class menutes {
 						$nome_rec = $coluna_pen["recebeu"];
 						break;
 				}
-				
+
 				++$inc_pen;
-				if ($inc_pen>1)	
+				if ($inc_pen>1)
 					{
 						echo "<tr class='odd2'>";
 						$inc_pen=0;
 					}else {
 						echo "<tr>";}
-				
+
 					echo "<td><a title = '{$coluna_pen["id"]}' href='./?escolha=tesouraria/rec_alterar.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
 						&pag_mostra={$_GET["pag_mostra"]}'>";
 					printf ("%'03u<a></td>",$coluna_pen["id"]);
@@ -87,14 +87,14 @@ class menutes {
 						&pag_mostra={$_GET["pag_mostra"]}'>".substr($nome_rec,0,7)."<a></td>";
 					echo "<td>".conv_valor_br ($coluna_pen["data"])."</td>";
 				echo "</tr>";
-					
+
 			}//loop while produtos
-			
-	?>	
+
+	?>
 		</tbody>
 	</table>
 	</div></div></div></div>
-	
+
 	<div class="box">
 	<div class="box-outer">
 	<div class="box-inner">
@@ -105,10 +105,10 @@ class menutes {
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pag_mostra"],"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
-	
-	?> 
+
+	?>
 	</div></div></div></div>
-	
+
 	<?php
 
 	if ($total_pen>"1"){
@@ -117,12 +117,12 @@ class menutes {
 		echo " um recibo!";
 	}else{
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
-	}	
-		//Fim das informa??es das pendencias 
-		
+	}
+		//Fim das informa??es das pendencias
+
 		//Início das pendencias de disciplinados
 	}
-	
+
 	function buscarecibo() {
 		//formulários laterais de busca de recido da tesouraria
 		$ind =0;
@@ -134,14 +134,16 @@ class menutes {
 		<h1>Busca de Recibos</h1>
 		<fieldset>
 		<legend>Membros</legend>
-		
+
 		<?php
+			$tab_edit = (empty($tab_edit)) ? '' : $tab_edit ;
+			$tab = (empty($tab)) ? '' : $tab ;
 			$form = new formrecbusca("recebeu","nome",$tab,$tab_edit);
 			$form->formcab();
-			$form->getMostrar();	
+			$form->getMostrar();
 		?>
 		</fieldset>
-		
+
 		<fieldset>
 		<legend>Credores</legend>
 		<form action="" method="get">
@@ -189,25 +191,25 @@ class menutes {
 		</form>
 		</fieldset>
 		</div></div></div></div>
-		
+
 		<?php
 	}
-	
+
 function recibosmembros (){
 		//Lista os valores máximo, mínimo, médio e total de determinado beneficiado
 		//Lista os recibos de um determinado membro
-		
+
 		$id =(int)$_GET ['recebeu'];
 		$_urlLi_pen="?escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&recebeu={$_GET["recebeu"]}";//Montando o Link para ser passada a classe
-		
+
 		$extr  = 'SELECT MAX(valor) AS maximo, MIN(valor) AS minimo, AVG(valor)';
 		$extr .= ' AS media, SUM(valor) as total FROM tes_recibo WHERE recebeu='.$id ;
 		$extr .= ' AND recebeu>0';
-		
+
 		if ($_GET['tipo']=='2') {
 			//Recibos Credores - altera a string $extr
 			$extr .= ' AND tipo="2"';
-			
+
 		}elseif ($_GET['tipo']=='3') {
 			//Recibos de não Membros ou que não eram na epoca ou feitos como tal
 			//Altera a string $extr
@@ -220,7 +222,7 @@ function recibosmembros (){
 			if (($nome!='' || $cpf!='') && $rg!='') {
 				$rg = 'OR '.$rg;
 			}
-			
+
 			$extr  = 'SELECT MAX(valor) AS maximo, MIN(valor) AS minimo, AVG(valor)';
 			if ($nome=='' && $cpf=='' && $rg=='') {
 				$extr .= ' AS media, SUM(valor) as total FROM tes_recibo ';
@@ -231,7 +233,7 @@ function recibosmembros (){
 			$_urlLi_pen .= '&nome='.$_GET['nome'].'&cpf='.$_GET['cpf'].'&rg='.$_GET['rg'].'&tipo='.$_GET['tipo'];
 			//Adicionar ao link do rodapé para o tipo 3
 		}
-		
+
 		$extr_rec = mysql_query($extr);
 		$valores = mysql_fetch_array($extr_rec);
 		$maximo = $valores['maximo'];
@@ -239,12 +241,12 @@ function recibosmembros (){
 		$media = $valores['media'];
 		$total = $valores['total'];
 		/**/
-		
-		
+
+
 		if ($_GET['tipo']==2) {
 			$query_pen  = 'SELECT t.id, t.recebeu, t.valor, t.data, t.motivo, t.tipo, f.razao ';
 			$query_pen .= 'FROM tes_recibo AS t, credores AS f WHERE t.recebeu='.$id;
-			$query_pen .= ' AND t.tipo=2 AND t.recebeu = f.id ORDER BY t.id DESC ';	
+			$query_pen .= ' AND t.tipo=2 AND t.recebeu = f.id ORDER BY t.id DESC ';
 		}elseif ($_GET['tipo']==3) {
 			//Recibos não membros
 			if ($nome=='' && $cpf=='' && $rg=='') {
@@ -259,33 +261,33 @@ function recibosmembros (){
 		$nmpp_pen="20"; //Número de mensagens por párginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Paginação na mesma página
-					
+
 		//Faz os calculos na paginação
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
-		
-		if ($_GET["pag_rec"]<1) { 
+
+		if ($_GET["pag_rec"]<1) {
 			$_GET["pag_rec"] = 1;
 		} elseif ($_GET["pag_rec"]>$paginas_pen) {
 			$_GET["pag_rec"] = $paginas_pen;
 		}
-		
+
 		$pagina_pen = $_GET["pag_rec"]-1;
-			
+
 		if ($pagina_pen<0) {$pagina_pen=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_pen=$pagina_pen * $nmpp_pen; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
-		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error()); 
+		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-						
+
 		 //inicia o cabe?alho de pagina??o
 
 		?>
 		<br />
-		
+
 		<table cellspacing="0" >
 		<caption id="recibos">Lista de Recibos</caption>
-		
+
 			<colgroup>
 				<col id="N&ordm;">
 				<col id="Nome">
@@ -309,7 +311,7 @@ function recibosmembros (){
 			$inc_pen=0;
 			while($coluna_pen = mysql_fetch_array($sql3_pen))
 			{
-				
+
 				switch ($coluna_pen["tipo"])
 				{
 					case 1;
@@ -324,15 +326,15 @@ function recibosmembros (){
 						$nome_rec = $coluna_pen["recebeu"];
 						break;
 				}
-				
+
 				++$inc_pen;
-				if ($inc_pen>1)	
+				if ($inc_pen>1)
 					{
 						echo "<tr class='dados'>";
 						$inc_pen=0;
 					}else {
 						echo "<tr>";}
-				
+
 					echo "<td><a title = '{$coluna_pen["id"]}' href='./?escolha=tesouraria/rec_alterar.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
 						&pag_rec={$_GET["pag_rec"]}'>";
 					printf ("%'03u<a></td>",$coluna_pen["id"]);
@@ -340,19 +342,19 @@ function recibosmembros (){
 						&pag_rec={$_GET["pag_rec"]}'>".$nome_rec."<a></td>";
 					echo "<td>".$coluna_pen["motivo"]."</td>";
 					echo "<td style=' text-align: right;'>".number_format($coluna_pen["valor"],2,",",".")."</td>";
-					
+
 					if ($idCongPgto!=$coluna_pen["igreja"]) {
 						$idCongPgto = $coluna_pen["igreja"];
 						$dadosCong = new DBRecord('igreja',$idCongPgto,'rol');
 						$nomeCongPgto = $dadosCong->razao();
 					}
 					echo "<td>".$nomeCongPgto."</td>";
-					
+
 					echo "<td>".conv_valor_br ($coluna_pen["data"])."</td>";
 				echo "</tr>";
-					
+
 			}//loop while produtos
-			
+
 	?>
 		</tbody>
 	</table>
@@ -363,27 +365,27 @@ function recibosmembros (){
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pag_rec"],"pag_rec",$_urlLi_pen,10);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
-	
+
 	//$_rod->getDados();
-	
-	
+
+
 	if ($paginas_pen>1)
 		echo "<span class='style4'>$paginas_pen p&aacute;ginas";
 		else
 		echo "<span class='style4'>$paginas_pen p&aacute;gina";
-		
+
 	echo "";
 	if ($total_pen>"1")
 	{
 		printf (" e com %s recibos!",number_format($total_pen, 0, ',', '.'));
-			
+
 	}elseif ($total_pen=="1"){
 		echo "Com apenas um recibo!";
 	}else{
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
-	}	
-		//Fim das informa??es das pendencias 
-		
+	}
+		//Fim das informa??es das pendencias
+
 		//Início das pendencias de disciplinados
 	}
 }

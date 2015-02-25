@@ -1,4 +1,4 @@
-<?php 
+<?php
 class formularioalterar {
 
 	public $campo;
@@ -8,22 +8,22 @@ class formularioalterar {
 
 	function __construct ($vlr_get="",$valor="",$acao="",$link_form="") {
 
-		$this->campo 		= $_GET["campo"];       //Nome do campo para get
+		$this->campo 		= (!empty($_GET["campo"])) ? $_GET["campo"]:'';       //Nome do campo para get
 		$this->vlr_get		= $vlr_get;             //Valor relacionado ao get
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
 		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edição do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
-		
+
 	}
-	
+
 	public function formcab () {
 		//*Cabeçalho do formulário
-		
+
 			/* Formulário para edição por item. Neste form os campos são recebidos de qualquer
 			campo para edição da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que é
 			passado, também é responsável pelo da tabela que será alterada e o GET-tabela traz o nome da tabela
 			que sofrerá alteração. Em agumas ocasiões também é passado o campo UF.*/
-		
+
 			if ($this->campo==$this->vlr_get)
 			{
 
@@ -39,10 +39,10 @@ class formularioalterar {
 	}
 
 	public function getditar(){
-	$ind = 1;	
+	$ind = 1;
 	if ($this->campo==$this->vlr_get)
 	{
-		
+
 		if ($this->valor=="")
 		{
 			$this->valor="N&atilde;o informado";
@@ -55,12 +55,12 @@ class formularioalterar {
 		}
 
 	}
-	
+
 	public function getMostrar(){
-		
+
 	if ($this->campo==$this->vlr_get)
 	{
-		
+
 		if ($this->valor=="")
 		{
 			$this->valor="N&atilde;o informado";
@@ -71,12 +71,12 @@ class formularioalterar {
 				</form>
 			<?PHP
 		}
-		
+
 		if (empty($this->valor)){
 			$this->valor = "Não Informado";
 		}
 				echo "<p><a title='Click aqui para alaterar este campo!' href='./?escolha={$this->link_form}'  tabindex='$ind++' >{$this->valor}</a></p>";
-		
+
 	}
 
 }
