@@ -1,24 +1,11 @@
+<strong><?php echo $titTabela;?></strong>
 <table id="horario"  class="table table-bordered">
-		<caption>
-		<?php
-
-		echo $titTabela;
-		?>
-		</caption>
 		<colgroup>
 				<col id="Acesso">
-				<col id="Conta">
+				<col id="Historico">
 				<col id="Igreja">
 				<col id="Valor">
 			</colgroup>
-		<thead>
-			<tr>
-				<th scope="col">Conta</th>
-				<th scope="col">Nome</th>
-				<th scope="col">Igreja</th>
-				<th scope="col">Valor</th>
-			</tr>
-		</thead>
 			<?php
 				echo $nivel1;
 			?>
@@ -30,7 +17,7 @@
 			?>
 		</tfoot>
 	</table>
-
+</div>
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[

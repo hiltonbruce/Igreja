@@ -51,6 +51,10 @@ select:focus {
 	background-color:#FFFFCC;
 }
 
+textarea:focus {
+    background-color:#FFFFCC;
+}
+
 .text_area {
 	/* define o tamanho barra da area de texto class="text_area" */
   width: 98%;
