@@ -8,7 +8,7 @@ class tes_listDisponivel extends List_sele {
 		$this->texto_field = 'acesso';//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
 		$this->query = "SELECT * from {$this->tabela} ";
 
-		$this->sql_lst = mysql_query($this->query.' WHERE tipo="D" AND nivel3="1.1.1" AND acesso>"0" ORDER BY "codigo"');
+		$this->sql_lst = mysql_query($this->query.' WHERE tipo="D" AND nivel3="1.1.1" AND acesso>"0" ORDER BY codigo ');
 	}
 
 	function List_Selec_pop ($link,$caixa){
@@ -20,9 +20,11 @@ class tes_listDisponivel extends List_sele {
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
 			if ($this->col_lst["acesso"]==$caixa) {
-				$linha1  = "<option value='./?$link{$this->col_lst["acesso"]}'>".$this->col_lst['titulo'].' -> Saldo : '.$this->col_lst['saldo']."</option>";
+				$linha1  = "<option value='./?$link{$this->col_lst["acesso"]}'>".$this->col_lst['titulo'].
+				' -> Saldo : '.number_format($this->col_lst['saldo'],2,',','.')."</option>";
 			}
-			 $linhas .="<option value='./?$link{$this->col_lst["acesso"]}'>".$this->col_lst['titulo'].' -> Saldo : '.$this->col_lst['saldo']."</option>";
+			 $linhas .="<option value='./?$link{$this->col_lst["acesso"]}'>".$this->col_lst['titulo'].
+			 ' -> Saldo : '.number_format($this->col_lst['saldo'],2,',','.')."</option>";
 		}
 
 		return $linha1.$linhas;
