@@ -122,7 +122,7 @@
 						</select>
 					</td>
 					<td><label>Valor:</label><input type="text" id="oferta0" autocomplete="off"
-						class="form-control" name="oferta0" value="<?php echo number_format($lancAltera->valor(), 2, ",", ".");?>" tabindex="<?php echo ++$ind;?>"
+						class="form-control" name="oferta0" value="<?php echo number_format($lancAltera->valor(), 2, ",", "");?>" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 				</tr>

@@ -15,9 +15,10 @@ if (empty($_POST['id'])) {
 	$preLanc->mesrefer = $_POST['mes'];
 	$preLanc->anorefer = $_POST['ano'];
 
-	$vlrPost = strtr( str_replace(array('.'),array(''),$_POST["oferta0"]), ',.','.,' );
-	$valorBR = number_format($vlrPost, 2, ',', ' ');
-	$preLanc->valor = $valorBR;
+	$vlrPost = strtr(str_replace(array('.',','),array(',','.'),$_POST["oferta0"]), ',','.' );
+	//$vlrPost = strtr( str_replace(array('.',','),array('','.'),$_POST["oferta0"]), ',.','.,' );
+	$valorBR = number_format($vlrPost, 2, ',', '.');
+	$preLanc->valor = $vlrPost;
 
 	$preLanc->nome = $_POST['nome'];
 	$preLanc->rol = $_POST['rol'];
@@ -26,5 +27,5 @@ if (empty($_POST['id'])) {
 	$mensagem = 'atualizado com Sucesso';
 	}
 
-echo "<script> alert('$mensagem!'); window.history.go(-1);</script>"
+echo "<script> alert('$mensagem!{$_POST["oferta0"]}-$valorBR - $vlrPost'); window.history.go(-1);</script>"
  ?>
