@@ -26,23 +26,28 @@ $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND";
-	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND m.nome LIKE '%$q3%' AND m.nome LIKE '%$q4%' ORDER BY ";
+	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
+	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND";
+	 $sql .= " m.nome LIKE '%$q3%' AND m.nome LIKE '%$q4%' ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
 	 }
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND";
-	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND m.nome LIKE '%$q3%' ORDER BY ";
+	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
+	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND";
+	 $sql .= " m.nome LIKE '%$q3%' ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
 	 }
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE m.rol=e.rol";
+	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol";
 	 $sql .= " AND (m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%') ORDER BY ";
 	 if ($igrejaRol>0) {
 		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
@@ -50,8 +55,9 @@ switch ($quantNomes) {
 	break;
 	default:
 	$q=trim($q);
-	 $sql = "SELECT e.congregacao,m.* FROM membro AS m, eclesiastico AS e WHERE ";
-	 $sql .= "m.rol=e.rol AND locate('$q',m.nome) > 0 ORDER BY ";
+	 $sql = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	 $sql .= " eclesiastico AS e WHERE";
+	 $sql .= " m.rol=e.rol AND locate('$q',m.nome) > 0 ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
 	 }
@@ -73,7 +79,18 @@ while( $campo = mysql_fetch_array( $res ) )
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
 	$cargo = cargo($sigla);
 	$nomecong = $cargo.' - '.htmlentities($igreja->razao(),ENT_QUOTES,'iso-8859-1');
-	$estado = strtoupper(strtr( $campo ['nome'], 'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));;
+	switch ($campo['situacao_espiritual']) {
+		case '3':
+			$nomecong .= '<mark>&nbsp;FALECIDO </mark>';
+			break;
+		case '4':
+			$nomecong .= '<mark>&nbsp; MUDOU DE IGREJA </mark>';
+			break;
+		case '6':
+			$nomecong .= '<mark>&nbsp; TRANSFERIDO </mark>';
+			break;
+	}
+	$estado = strtoupper(strtr( $campo ['nome'], 'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco = strtoupper(strtr( $campo ['rol'],'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	//$endereco .=', '.$campo['numero'];
 	//$estado = addslashes($estado);

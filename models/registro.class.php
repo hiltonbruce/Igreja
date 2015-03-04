@@ -1,8 +1,8 @@
 <?php
 class registro extends numlinhas {
-	
+
 	function registros () {
-		$s1=0;$s2=0;$s3=0;$s4=0;$s5=0;$s6=0;				
+		$s1=0;$s2=0;$s3=0;$s4=0;$s5=0;$s6=0;
 
 		while ($this->res->fetchInto($regist1, DB_FETCHMODE_ASSOC)) {
 				//Concluir os tipo de registro para listar na fichamembro
@@ -13,7 +13,7 @@ class registro extends numlinhas {
 					break;
 				case "2":
 					++$s2;
-					$sit2	= ($s2<2) ? $s2.' - Displina':$s2.' - Displinas';
+					$sit2	= ($s2<2) ? $s2.' - Disciplina':$s2.' - Displinas';
 					break;
 				case "3":
 					++$s3;
@@ -36,9 +36,9 @@ class registro extends numlinhas {
 					break;
 			}
 		}
-		
+
 		return $sit1.' '.$sit2.' '.$sit3.' '.$sit4.' '.$sit5.' '.$sit6.' '.$situacao;
 	}
-	
-	
+
+
 }

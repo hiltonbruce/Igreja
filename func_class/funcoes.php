@@ -687,9 +687,9 @@ function situacao ($situacao,$rol){
 			$data = mysql_fetch_array($result);
 
 			if ($data ["dt_fim"]!="00/00/0000")
-				$estilo = "<span style='color:#FF0000'><blink>Displinado at&eacute;: </blink></span>".$data ["dt_fim"];
+				$estilo = "<span style='color:#FF0000'><blink>Disciplinado at&eacute;: </blink></span>".$data ["dt_fim"];
 			else
-				$estilo = "<span style='color:#FF0000'><blink>Displinado por prazo indeterminado </blink></span>";
+				$estilo = "<span style='color:#FF0000'><blink>Disciplinado por prazo indeterminado </blink></span>";
 
 			break;
 		case "3":

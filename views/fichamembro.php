@@ -1,11 +1,11 @@
-<?PHP	
+<?PHP
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
-	
+
 	session_start();
 	require_once ("../func_class/classes.php");
-	require_once ("../func_class/funcoes.php");	    
-	function __autoload ($classe) { 
+	require_once ("../func_class/funcoes.php");
+	function __autoload ($classe) {
 	require_once ("../models/$classe.class.php");
 	}
 	controle("consulta");
@@ -18,7 +18,7 @@
 	$cidade 	= new DBRecord ("cidade",$membro->naturalidade(),"id");
 	$cidend 	= new DBRecord ("cidade",$membro->cidade(),"id");
 	$bairro 	= new DBRecord ("bairro",$membro->bairro(),"id");
-	$numreg		= new registro ('disciplina', 'rol', $rol);	
+	$numreg		= new registro ('disciplina', 'rol', $rol);
 	$sede 		= new DBRecord ("igreja",'1',"rol");
 	if ($ecles->congregacao()=='1') {
 		//Sede
@@ -33,9 +33,9 @@
 	}
 	if ($numreg->totlinhas()>1) {
 		$reg = $numreg->totlinhas().' registros, sendo: '.$numreg->registros();
-		
+
 	}elseif ($numreg->totlinhas()==1){
-		
+
 		$reg = '1 (um) registro, sendo: '.$numreg->registros();
 	}else {
 		$reg = 'Sem registro neste cadastro!';
@@ -107,7 +107,7 @@
       <tr>
         <td colspan="3"><b>Cidade: </b><?php echo $cidend->nome().' - '.$cidend->coduf();?></td>
       </tr>
-      <?php 
+      <?php
       	if ($membro->sexo()=='F') {
       		echo '<tr><td colspan="3"><b>Batismo:</b> '.conv_valor_br($ecles->batismo_em_aguas()).'</td></tr>';
       	}else {
@@ -126,15 +126,15 @@
       </tbody>
 	  <tfoot>
 	      <tr>
-	        <td colspan="3" style="background-color:#CCCCCC;font-size:90%"><?php echo $reg;?> </td>
+	        <td colspan="3" style="background-color:#CCCCCC;font-size:90%"><?php echo $reg;?></td>
 	      </tr>
 	  </tfoot>
     </table>
     </div>
     <div id="footer">
-	<?PHP 
+	<?PHP
 	echo "Templo: {$sede->razao()}: {$sede->rua()}, N&ordm; {$sede->numero()} - {$sede->cidade()} - {$sede->uf()}";
-	
+
 	?><br />
 	  Copyright &copy; <a onclick='target="_blank"' href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>
       Email: <a rel="nofollow" href="mailto: <?PHP echo "{$sede->email()}";?>" onclick='target="_blank"'><?PHP echo "{$sede->email()}";?></a> <br />
@@ -142,11 +142,11 @@
    		<?PHP echo "CEP: {$sede->cep()} - Fone: {$sede->fone()} - Fax: {$sede->fax()}";?><br />
 	  <p>Designed by <a rel="nofollow"  onclick='target="_blank"' href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
     </div>
- 
+
 <!-- FOOTER CENTER "Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a>"-->
 <!-- NEW PAGE -->
 <!-- HEADER CENTER <?php echo "Anexo - Ficha Rol: $rol";?>" -->
-<?php 
+<?php
 if (strlen($membro->obs()>'4') ) {
 ?>
 <div style="page-break-before: always;"></div>
@@ -168,20 +168,20 @@ if (strlen($membro->obs()>'4') ) {
     </table>
 	</div>
     </p>
-	
+
 <?PHP
 }
 if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
-	
+
 	$query = "SELECT id,situacao,motivo,cad,DATE_FORMAT(data_ini,'%d/%m/%Y')
-				 AS data_ini, DATE_FORMAT(data_fim,'%d/%m/%Y') AS data_fim 
+				 AS data_ini, DATE_FORMAT(data_fim,'%d/%m/%Y') AS data_fim
 				 from disciplina WHERE rol = '{$_GET["rol"]}' " or die (mysql_error());
-				
-	$sql3 = mysql_query ($query) or die (mysql_error()); 
+
+	$sql3 = mysql_query ($query) or die (mysql_error());
 			//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-	
+
 	if (mysql_num_rows ($sql3)>0) {
-			
+
 ?>
 <div style="page-break-before: always;">
    <div id="added-div1">
@@ -194,7 +194,7 @@ if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
 					<col id="At&eacute; o dia" />
 					<col id="albumCol" />
 				</colgroup>
-				
+
 				<thead>
 					<tr>
 					<th scope="col">Item</th>
@@ -206,17 +206,17 @@ if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
 				</thead>
 				<tbody>
 			<?PHP
-				
+
 				while($coluna = mysql_fetch_array($sql3))
 				{
 				$Tipo = new situacao_espiritual ($coluna['situacao'],$_GET['rol']);
 				$ls+=1;
-				if ($ls>1)	
+				if ($ls>1)
 						{
 						$cor="class='odd'";
 						$ls=0;
 						}
-						else 
+						else
 						{$cor="class='od2'";
 						}
 				?>
@@ -237,13 +237,13 @@ if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
 					<td colspan="4"><p>Descri&ccedil;&atilde;o</p><?php echo $coluna["motivo"];?></td>
 				</tr>
 				<?PHP
-				
+
 				}//loop while
-				
-		?>	
+
+		?>
 			</tbody>
 			</table></div>
-	
+
 		<?PHP
 		}}
     ?>
