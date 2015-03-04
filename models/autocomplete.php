@@ -48,7 +48,11 @@ while( $campo = mysql_fetch_array( $res ) )
 	$endereco .=', '.$campo['numero'];
 	$cargo = cargo($campo['rol']);
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
-	$sigla = $cargo.' - '.htmlentities($igreja->razao().' - '.$campo['celular'],ENT_QUOTES,'iso-8859-1');
+	if ($igreja->razao()=='') {
+		$sigla = $cargo.'- <code> Congrega&ccedil;&atilde;o&nbsp;n&atilde;o&nbsp;definida!</code> - '.$campo['celular'];
+	} else {
+		$sigla = $cargo.' - '.htmlentities($igreja->razao().' - '.$campo['celular'],ENT_QUOTES,'iso-8859-1');
+	}
 
 	switch ($campo['situacao_espiritual']) {
 		case '2':
