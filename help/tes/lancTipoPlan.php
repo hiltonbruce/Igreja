@@ -9,6 +9,7 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 	$bsccredor = new List_sele('igreja', 'razao','rolIgreja'.$chave);
 	$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" autofocus="autofocus" ');
 	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control"/>';
+	$conta ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
 
 if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 	$listDesp .= $cabDespesa.$dia1.'</tbody>';
@@ -18,7 +19,7 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 		//Lista das despesas disponíveis
 		$dia1 .='<tr '.$bgcolor.'><td>'.$valor['codigo'].'-<abbr title="'.$valor['descricao'].'">'
-		.$valor['titulo'].'</abbr></td>	<td>'.$campoHist.'</td>
+		.$valor['titulo'].$conta.'</abbr></td>	<td>'.$campoHist.'</td>
 		<td><label>Igreja</label>'.$listaIgreja.
 		'</td><td>'.$campoValor.'</td></tr>';
 		$cor = !$cor;

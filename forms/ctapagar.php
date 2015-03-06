@@ -4,27 +4,6 @@
 
 <fieldset>
 	<legend>Agendar Contas &agrave; Pagar</legend>
-	<script type="text/javascript">
-$(document).ready(function(){
-
-	new Autocomplete("campo_estado", function() {
-		this.setValue = function( id, nome, celular, resp, alias, cpf) {
-			$("#id_val").val(id);
-			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
-			$("#resp_val").val(resp);
-			$("#alias_val").val(alias);
-			$("#cpf_val").val(cpf);
-		}
-		if ( this.isModified )
-			this.setValue("");
-		if ( this.value.length < 1 && this.isNotClick )
-			return ;
-		return "models/autorazao.php?q=" + this.value;
-	});
-
-});
-</script>
 	<!-- Desenvolvido por Wellington Ribeiro -->
 	<blink>
 		<h2>Criar buscas para alteração e eliminação de grupos de agendamento
@@ -68,7 +47,7 @@ $(document).ready(function(){
 					<td colspan="4">Referente a:<br />
 		<textarea class="text_area" name="motivo" required="required"
 			cols="30" id="referente" tabindex="<?PHP
-   echo ++$ind;?>" class="form-control" 
+   echo ++$ind;?>" class="form-control"
 			onKeyDown="textCounter(this.form.referente,this.form.remLen,255);"
 			onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"
 			><?php echo $_GET["motivo"];?></textarea><div id="progreso"></div></td>
@@ -78,47 +57,47 @@ $(document).ready(function(){
 			class="form-control" maxlength=3 value="255"> Caracteres restantes
 					</td>
 					<td><label>Rol do Credor</label>  <input
-			name="rol" id="rol" tabindex="<?php echo ++$ind;?>;" class="form-control" 
+			name="rol" id="rol" tabindex="<?php echo ++$ind;?>;" class="form-control"
 			value="<?php echo $_GET['rol'];?>" placeholder="Exclusivo para Membros" ></td>
 					<td colspan="2"> OU... Preencha o formulário abaixo!</td>
 				</tr>
 			</tfoot>
 		</table>
-		
-		
-		 
+	<?php
+		require_once 'forms/tes/lancarContabil.php';
+	?>
 		<table style="background-color: #D3D3D3;">
 			<caption>Dados do Credor</caption>
 			<tbody>
 				<tr>
 					<td colspan='3'><label>Razão Social:</label><input type="text"
-						tabindex="<?PHP echo ++$ind;?>" name="nome" id="campo_estado"
+						tabindex="<?PHP echo ++$ind;?>" name="nome" id="credor3"
 						size='80%' value='<?php echo $_GET['nome'];?>' class="form-control"
 						placeholder="Mínimo de 5 caracteres p/ novo Cadastro!" /></td>
 				</tr>
 				<tr>
-					<td colspan='2'><input type="hidden" name="id" id="id_val"
+					<td colspan='2'><input type="hidden" name="id" id="valCredor"
 						class="form-control" value='<?php echo $_GET['id'];?>' />
 						<label> Nome Abreviado:</label>
 					<input type="text" name="alias" tabindex="<?php echo ++$ind;?>"
-						class="form-control" size='50%' id="alias_val" /></td>
+						class="form-control" size='50%' id="aliasCredor" /></td>
 					<td><label>CNPJ:</label>
-					<input type="text" id="sigla_val" tabindex="<?php echo ++$ind;?>"
+					<input type="text" id="siglaCredor" tabindex="<?php echo ++$ind;?>"
 						class="form-control" name="sigla" value="" /></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td colspan="2"><label>Responsavel:</label>
-					<input type="text" id="resp_val" tabindex="<?php echo ++$ind;?>"
+					<input type="text" id="respCredor" tabindex="<?php echo ++$ind;?>"
 						class="form-control" name="resp" value="" size='50%' /></td>
 					<td><label>CPF:</label>
-					<input type="text" id="cpf_val" name="cpf"
+					<input type="text" id="cpfCredor" name="cpf"
 						class="form-control" tabindex="<?php echo ++$ind;?>" value="" /></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td colspan="2"><label>Endereço:</label>
-					<input type="text" id="estado_val" tabindex="<?php echo ++$ind;?>"
+					<input type="text" id="estadorCredor" tabindex="<?php echo ++$ind;?>"
 						class="form-control" name="estado" value="" size="50">
 					</td>
 					<td><label>Bairro:</label>
@@ -148,17 +127,17 @@ $(document).ready(function(){
 					<td></td>
 				</tr>
 				<tr>
-					<td><label>Fornecedor de:</label><?php 
+					<td><label>Fornecedor de:</label><?php
 					$desp1 = new ListDespesa('acesso');
 					$desp1->List_sel(++$ind,'desp1');
 					?></td>
 					<td></td>
-					<td><label>Fopnecedor de:</label><?php 
+					<td><label>Fopnecedor de:</label><?php
 					$desp1 = new ListDespesa('acesso');
 					$desp1->List_sel(++$ind,'desp2');?></td>
 				</tr>
 				<tr>
-					<td><label>Fornecedor de:</label><?php 
+					<td><label>Fornecedor de:</label><?php
 					$desp1 = new ListDespesa('acesso');
 					$desp1->List_sel(++$ind,'desp3');
 					?></td>
@@ -172,3 +151,21 @@ $(document).ready(function(){
 		</table>
 	</form>
 </fieldset>
+	<script type="text/javascript">
+	new Autocomplete("credor3", function() {
+		this.setValue = function( id, nome, celular, resp, alias, cpf) {
+			$("#valCredor").val(id);
+			$("#estadorCredor").val(nome);
+			$("#siglaCredor").val(celular);
+			$("#respCredor").val(resp);
+			$("#aliasCredor").val(alias);
+			$("#cpfCredor").val(cpf);
+		}
+		if ( this.isModified )
+			this.setValue("");
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/autorazao.php?q=" + this.value;
+	});
+
+</script>

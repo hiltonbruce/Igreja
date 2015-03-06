@@ -9,7 +9,7 @@
 	<tbody>
 		<tr>
 			<td colspan="3">Despesas com:<br /> <input type="text" name="nome" class="form-control"
-				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>" 
+				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
 				placeholder="Qual a Despesa?"/>
 			</td>
 		</tr>
@@ -36,7 +36,7 @@
 	<tbody>
 		<tr>
 			<td colspan="3"><label>Pago pela Conta:</label><input type="text"
-				 name="nome1" class="form-control" id="estado" size="78%" 
+				 name="nome1" class="form-control" id="estado" size="78%"
 				 placeholder="Gasto pago com o recurso/conta: Caixa, Banco ... ?" tabindex="<?PHP echo ++$ind; ?>" />
 			</td>
 		</tr>

@@ -1,3 +1,6 @@
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+
 <fieldset>
 	<legend>Lançar Pagamento</legend>
 	<p style="background: white; color: blue; font-size: 14px;">
@@ -5,20 +8,20 @@
 
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
 	$datapgto = conv_valor_br ($itemagenda->datapgto());
-	
+
 	$dtParaPgto = ($datapgto=='00/00/0000') ? $dtPgto:$datapgto;
-	
+
 	if (strstr($itemagenda->credor(),'r')) {
 		$rolMembro = ltrim ($itemagenda->credor(),'r');
 		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
 		$nomeMembro = $credorAgenda->nome();
 		$credorCompl = true;//Para o caso de membros da igreja
-		
+
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
 		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
 			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
 		  </div>';
-		
+
 	}else {
 		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
 		$nomecredor = $credorAgenda->alias();
@@ -30,7 +33,7 @@
 		  </div>';
 	}
 
-	
+
 	$vencimento = $itemagenda->vencimento();
 	$dataAtual = new DateTime('NOW');
 	$dataVenc  = new DateTime($vencimento);
@@ -49,19 +52,19 @@
 	    </div>
 		<?php
 	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
-		?>	
+		?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação em: <?php echo $dataget;?></strong>
 	    </div>
-		<?php 
+		<?php
 	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
-		?>	
+		?>
 		<div class="alert alert-warning alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 	      Conta ainda dentro do prazo para pagamento! <strong>Situação em: <?php echo $dataget;?></strong>
 	    </div>
-		<?php 
+		<?php
 	}else {
 		?>
 		<div class="alert alert-info alert-dismissible" role="alert">
@@ -70,7 +73,7 @@
 	    </div>
 		<?php
 	}
-		
+
 	$pendende = '';
  	$pago= '';
 	$enviado = '';
@@ -114,9 +117,9 @@
 						 	echo $congr->List_Selec (++$ind,$itemagenda->igreja(),' class="form-control" ');
 						 ?>
 					</td>
-					<td colspan="3" rowspan="2">
-						<label>Motivo</label>
-						<textarea rows="" cols="" name="motivo" required="required" 
+					<td colspan="2" rowspan="3">
+						<label>Hist&oacute;rico:</label>
+						<textarea rows="6" cols="" name="motivo" required="required"
 						 tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 						 ><?php echo $itemagenda->motivo();?></textarea>
 					</td>
@@ -131,18 +134,48 @@
 								$congr = new List_sele ("credores","alias","credor");
 								echo $congr->List_Selec (++$ind,$itemagenda->credor(),' class="form-control" required="required" ');
 						 	}
-						 
+
 						 ?>
 					</td>
 				</tr>
+					<td>
+						<label><strong>Pagamento realizado pela fonte: </strong></label>
+						<select name="disponivel" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
+							<?php
+								$bsccredor = new tes_listDisponivel();
+								$listaIgreja = $bsccredor->List_Selec($_GET['acesso']);
+								echo $listaIgreja;
+							?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">Despesas com:<br /> <input type="text" name="nome" class="form-control"
+						id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
+						placeholder="Qual a Despesa?"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Código/tipo:<br /> <input type="text" id="estado_val" class="form-control"
+						name="estado_val" disabled="disabled" value="" />
+					</td>
+					<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
+						disabled="disabled" value="" /></td>
+					<td>Acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
+						value="" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+				</tr>
+				<tr>
+					<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
+						disabled="disabled" class="form-control" /></td>
+				</tr>
 				<tr>
 					<td colspan="4">
-						<?php echo $mudaTipo;?>						
+						<?php echo $mudaTipo;?>
 					</td>
 				</tr>
 				<tr>
 					<td><label><input type="radio" id="status" <?php echo $pago;?>
-						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago</label> 
+						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago</label>
 					</td>
 					<td><label> <input type="radio"
 						id="status" name="status" value="1" <?php echo $enviado;?>
@@ -151,7 +184,7 @@
 					<td><label><input type="radio" id="status"
 						name="status" autofocus="autofocus" value="0"
 						tabindex="<?php echo ++$ind; ?>" <?php echo $pendende;?>>
-						Pendente</label> 
+						Pendente</label>
 					</td>
 					<td><label> <input type="radio" id="status"
 						required="required" name="status" value="3"
@@ -191,3 +224,19 @@
 
 	</form>
 </fieldset>
+
+<script type="text/javascript">
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular,detalhe ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#acesso").val(celular);
+			$("#detalhe").val(detalhe);
+		}
+		if ( this.isModified )
+			this.setValue("");
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/tes/autoCompletaContas.php?q=" + this.value;
+	});
+</script>

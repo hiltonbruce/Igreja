@@ -100,7 +100,7 @@ if (checkdate($m,$d,$y)) {
 				// <select name="$this->campo;" tabindex=$ind++>
 				$par = $j+1;
 				$ajustparc .= " <option value='$j'>Percela com valor ajustado no: $par &ordm; m&ecirc;s</option>";
-					
+
 				if ($parc==$par) {
 					$diferenca = $parctrun;
 					$parctrun = $valortrun - $parctotal;
@@ -111,11 +111,11 @@ if (checkdate($m,$d,$y)) {
 				$parctotal += $parctrun;
 				$diferenca1 = $parctotal - $valor;
 				echo number_format($parctrun,2,',', '.');
-				
+
 				?> <input name='valor<?php echo $j;?>' type='hidden'
 					id='valor<?php echo $j;?>' value='<?php echo $parctrun;?>' />
 				</td>
-				<td style='text-align: right;'><?php 
+				<td style='text-align: right;'><?php
 				if ($parc==($j+1)) {
 					if ($_POST['parc']=='0' || $_POST['parc']=='') {
 						$motparc = 'Agendamento mensal e automático';
@@ -164,6 +164,8 @@ if (checkdate($m,$d,$y)) {
 						$dadosEmpresa .= '<input type="hidden" name="desp1" value="'.$_POST['desp1'].'"/>';
 						$dadosEmpresa .= '<input type="hidden" name="desp2" value="'.$_POST['desp2'].'"/>';
 						$dadosEmpresa .= '<input type="hidden" name="desp3" value="'.$_POST['desp3'].'"/>';
+						$dadosEmpresa .= '<input type="hidden" name="acesso" value="'.$_POST['acesso'].'"/>';
+						$dadosEmpresa .= '<input type="hidden" name="acesso2" value="'.$_POST['acesso2'].'"/>';
 					}else {
 						echo 'Você deve informar o nome do credor! - Valor Total: ---> R$ '.number_format($valortrun,2,',','.');
 						$errcredor = false;
@@ -175,12 +177,12 @@ if (checkdate($m,$d,$y)) {
 			</tr>
 		</tfoot>
 		<tr style="background: #C8E8F7;">
-			<td colspan='2'><?php //echo $valores;?> <!-- 
-					
+			<td colspan='2'><?php //echo $valores;?> <!--
+
 						Completar o restante dos input's para o caso de cadastro de novo credor
-					
+
 					 --> <input type="hidden" name="id"
-				value='<?php echo $_POST['id'];?>' /> <?php 
+				value='<?php echo $_POST['id'];?>' /> <?php
 				if ($errcredor) {
 					if ("$diferenca"!="$parctrun" && $parc>1) {
 						echo '<select name="ajusteparc" tabindex="'.$ind++.'">';
@@ -197,13 +199,13 @@ if (checkdate($m,$d,$y)) {
 				value="agenda" /> <input type="hidden" name="rol"
 				value="<?php echo $_POST['rol'];?>" /> <input type="hidden"
 				name="escolha" value="controller/despesa.php" /> <input
-				type="hidden" name="menu" value="top_tesouraria" /> <?php							
+				type="hidden" name="menu" value="top_tesouraria" /> <?php
 				}else {
 					echo 'Click no botão voltar e informe o Credor!';
 				}
 				?>
 			</td>
-			<td colspan='2'><?php 
+			<td colspan='2'><?php
 			$linkvoltar  = "&congregacao=".$_POST['congregacao'];
 			$linkvoltar .= "&venc=".$_POST['venc'];
 			$linkvoltar .= "&valor=".number_format($valortrun,2,',','.');
@@ -216,6 +218,8 @@ if (checkdate($m,$d,$y)) {
 			</td>
 		</tr>
 	</table>
+	<input type="hidden" name="acesso" value="<?php echo $_POST['acessoDebitar'];?>"/>
+	<input type="hidden" name="acesso2" value="<?php echo $_POST['acessoCreditar'];?>"/>
 </form> <a
 				href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=3<?php echo $linkvoltar;?>">
 					<button type="button" class="btn btn-primary btn-sm">Voltar...!</button> </a>
