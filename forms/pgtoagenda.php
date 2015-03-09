@@ -140,10 +140,10 @@
 				</tr>
 					<td>
 						<label><strong>Pagamento realizado pela fonte: </strong></label>
-						<select name="disponivel" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
+						<select name="creditar" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
 							<?php
 								$bsccredor = new tes_listDisponivel();
-								$listaIgreja = $bsccredor->List_Selec($_GET['acesso']);
+								$listaIgreja = $bsccredor->List_Selec($itemagenda->creditar());
 								echo $listaIgreja;
 							?>
 						</select>
@@ -161,8 +161,8 @@
 					</td>
 					<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
 						disabled="disabled" value="" /></td>
-					<td>Acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
-						value="" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+					<td>Acesso:<br /> <input type="text" id="acesso" name="debitar" class="form-control"
+						value="<?php echo $itemagenda->debitar();?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"

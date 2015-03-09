@@ -7,7 +7,7 @@ $dta = explode("/",$_POST["data"]);
 		$m=$dta[1];
 		$y=$dta[2];
 		$res = checkdate($m,$d,$y);
-		
+
 $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
 $rolIgreja = (empty($_POST['rolIgreja'])) ? false:(int)$_POST['rolIgreja'];
 $ultregistro = mysql_query ('SELECT data FROM dizimooferta WHERE lancamento="0" AND igreja="'.$rolIgreja.'" ORDER BY id DESC LIMIT 1');
@@ -19,7 +19,7 @@ $vlrregistro = mysql_fetch_row($ultregistro);
 			<tr>
 				<td><?php echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';?></td>
 				<td rowspan="2">
-						<?PHP 
+						<?PHP
 							//Exibe a foto do contribuinte
 								if ($_POST["rol"]>'0') {
 									print mostra_foto($_POST["rol"]);
@@ -40,12 +40,12 @@ $vlrregistro = mysql_fetch_row($ultregistro);
 //$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
 $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&
 		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' >Continuar...</button><a>";
-	
+
 if (($vlr && $vlrregistro[0] == $datalanc) || ($vlr && $vlrregistro[0] =='') && $rolIgreja ) {
 	//Verifica se o caixa do ultimo culto foi encerrado e se há algum valor em dizimo, oferta ou oferta extra
-		
+
 	$sem = semana($_POST["data"]);
-	
+
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 switch ($_POST['tipo']) {
 	case '1':
@@ -81,7 +81,7 @@ switch ($_POST['tipo']) {
 		//echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
 		//echo "<script>location.href='$linkreturn';</script>";
 		echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1'>Continuar...</button><a>";
-		require 'forms/concluirdiz.php';
+		require 'forms/concluirdiz.php';//Formulário para fecha o caixa
 }elseif (!$rolIgreja) {//Se não foneceu o número da igreja
 	echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";
 	$msgErro .= '<div class="alert alert-error">Voc&ecirc; n&atilde;o informou a Igreja!';

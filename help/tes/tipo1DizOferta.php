@@ -5,7 +5,7 @@ for ($i = 0; $i < 13; $i++) {
 
 	$campo = 'oferta'.$i;
 	//printf ("$campo: %s",$_POST["$campo"]);
-		
+
 	$valor = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );//Captura o valor e converte p o padrão americano
 
 	if ($valor>0) {
@@ -64,10 +64,9 @@ for ($i = 0; $i < 13; $i++) {
 		}
 
 		$congcontrib = ($congcontrib=='') ? $_POST["rolIgreja"]:$congcontrib;
-			
-		
+
 		if ($conta=='') {
-			echo $msg;			
+			echo $msg;
 		}else {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
 			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
