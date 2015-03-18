@@ -34,13 +34,9 @@
 <div id="container">
 	<table>
 		<tr>
-			<td><img src="../img/AssDeus.png" alt="Brasão Assembleia de Deus" height="75" width="225"></td>
+			<td><img src="../relatorio/header2.jpg" alt="Brasão Assembleia de Deus"></td>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td>
-				<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?><br />
-				  <?PHP echo " CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
-				  Copyright &copy; http://<?PHP echo "{$igreja->site()}";?>/
-			      Email: <?PHP echo "{$igreja->email()}";?>
 			</td>
 		</tr>
 	</table>
@@ -127,8 +123,8 @@
 
 				echo '<br /><br />';
 			}
-		?>	      
-	     
+		?>
+
     </div><br />
 
     <div id="data">
@@ -149,7 +145,12 @@
 	  </div>
 
     <div id="footer">
-	  <p>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
+                        <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?>
+                          <?PHP echo "<br /> CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
+                          Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> -
+                          Email: <?PHP echo "{$igreja->email()}";?>
+                         <br /><small>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">
+                            Joseilton Costa Bruce.</a></small>
     </div>
   </div>
 </div>

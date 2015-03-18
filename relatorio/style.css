@@ -13,16 +13,15 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; 
 		#content { height: auto; margin: 1px 0 0; padding: 0; }
 
 #footer {
-	color: #636466;
-	font-size: 0.8em;
+	color: #000000;
+	font-size: 1.0em;
 	height: 50px;
+	padding-top: 10px;
 	background-repeat: no-repeat;
 	background-position: top;
-	text-align: right;
+	text-align: center;
 	clear: both;
 	margin: 0;
-	padding-top: 25px;
-	padding: 10px 0 0 0;
 	background-image: url(horbar.gif);
 }
 
@@ -116,7 +115,6 @@ h1{
 h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0;  }
 h3, legend { color: #3366FF; font-size: 150%; font-family: Forte; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px; font-family:"Times New Roman", Times, serif;}
 h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
-h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
 p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
 #navcontainer  { float: right ; margin: 0; padding: 5px 20px 0 0; }
 .rightcol{ font-size: 0.9em; margin-bottom: 5px; padding: 5px; }
