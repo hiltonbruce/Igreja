@@ -71,13 +71,19 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->credor		= 	(int)$_POST['credor'];
 		}
 
-		$atualizar->igreja		= 	$_POST['igreja'];
-		$atualizar->motivo		= 	$_POST['motivo'];
+		$atualizar->igreja		= 	$_POST['rolIgreja'];
+		$atualizar->motivo		= 	$_POST['referente'];
 		$atualizar->status		= 	$_POST['status'];
-		$atualizar->creditar	= 	$_POST['creditar'];
-		$atualizar->debitar		= 	$_POST['debitar'];
-		$atualizar->multa		=	strtr($_POST['multa'], ',','.' );
-		$valor_us 				=	strtr($_POST['valor'], ',','.' );
+		if ($atualizar->idlanc()=='0') {
+			#Apos confirmação de lançamento as contas não podem ser alteradas
+			$atualizar->creditar	= 	$_POST['acessoCreditar'];
+			$atualizar->debitar		= 	$_POST['acessoDebitar'];
+			$lancDespesa = true;
+		}else{
+			$lancDespesa = false;
+		}
+		$atualizar->multa		=	abs(strtr($_POST['multa'], ',','.' ));
+		$valor_us 				=	abs(strtr($_POST['valor'], ',','.' ));
 		$atualizar->valor		=	$valor_us;
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
 		$atualizar->hist	= 	$hist;
@@ -91,7 +97,14 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$mensagem = '<script> alert("Conta enviada para Pagamento! Responsável: '.$_POST['resppgto'].');</script>';
 			$atualizar->datapgto	=	'';
 		}
-		$atualizar->Update();
+
+		if ($_POST['status']=='2' && $lancDespesa) {
+			# realiza lançamento da despesa e Atualiza agenda
+			require_once 'models/tes/lancAgenda.php';
+		}else {
+			# Atualiza agenda
+			$atualizar->Update();
+		}
 		require_once 'forms/tes/buscaAgenda.php';// Busca por Despesas Agendadas
 		echo $mensagem;
 

@@ -9,7 +9,7 @@ if ($_POST['valor']<='0' || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar'
 	$dizimista = false;
 }else {
 	$status = true;
-	$valor = strtr( str_replace(array('.'),array(''),$_POST['valor']), ',.','.,' );
+	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor']), ',.','.,' ):$valor_us;
 	$debitar = $_POST['acessoDebitar'];
 	$creditar =  $_POST['acessoCreditar'];
 }

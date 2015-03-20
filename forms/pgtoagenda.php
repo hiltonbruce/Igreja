@@ -48,13 +48,13 @@
 				<tr>
 					<td><label>Igreja</label>
 						 <?PHP
-						 	$congr = new List_sele ("igreja","razao","igreja");
+						 	$congr = new List_sele ("igreja","razao","rolIgreja");
 						 	echo $congr->List_Selec (++$ind,$itemagenda->igreja(),' class="form-control" ');
 						 ?>
 					</td>
 					<td colspan="2" rowspan="3">
 						<label>Hist&oacute;rico:</label>
-						<textarea rows="6" cols="" name="motivo" required="required"
+						<textarea rows="6" cols="" name="referente" required="required"
 						 tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 						 ><?php echo $itemagenda->motivo();?></textarea>
 					</td>
@@ -75,7 +75,7 @@
 				</tr>
 					<td>
 						<label><strong>Pagamento realizado pela fonte: </strong></label>
-						<select name="creditar" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
+						<select name="acessoCreditar" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
 							<?php
 								$bsccredor = new tes_listDisponivel();
 								$listaIgreja = $bsccredor->List_Selec($itemagenda->creditar());
@@ -96,7 +96,7 @@
 					</td>
 					<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
 						disabled="disabled" value="" /></td>
-					<td>Acesso:<br /> <input type="text" id="acesso" name="debitar" class="form-control"
+					<td>Acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
 						value="<?php echo $itemagenda->debitar();?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
 				</tr>
 				<tr>
@@ -110,7 +110,7 @@
 				</tr>
 				<tr>
 					<td><label><input type="radio" id="status" <?php echo $pago;?>
-						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago</label>
+						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago (Efetua lan&ccedil;amento contabil)</label>
 					</td>
 					<td><label> <input type="radio"
 						id="status" name="status" value="1" <?php echo $enviado;?>
