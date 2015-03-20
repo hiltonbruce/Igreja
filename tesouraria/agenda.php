@@ -74,7 +74,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$atualizar->igreja		= 	$_POST['igreja'];
 		$atualizar->motivo		= 	$_POST['motivo'];
 		$atualizar->status		= 	$_POST['status'];
-		$atualizar->creditar		= 	$_POST['creditar'];
+		$atualizar->creditar	= 	$_POST['creditar'];
 		$atualizar->debitar		= 	$_POST['debitar'];
 		$atualizar->multa		=	strtr($_POST['multa'], ',','.' );
 		$valor_us 				=	strtr($_POST['valor'], ',','.' );

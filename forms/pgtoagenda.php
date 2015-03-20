@@ -1,78 +1,10 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-
-<fieldset>
-	<legend>Lançar Pagamento</legend>
-	<p style="background: white; color: blue; font-size: 14px;">
-	<?php
-
+<?php
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
 	$datapgto = conv_valor_br ($itemagenda->datapgto());
 
 	$dtParaPgto = ($datapgto=='00/00/0000') ? $dtPgto:$datapgto;
-
-	if (strstr($itemagenda->credor(),'r')) {
-		$rolMembro = ltrim ($itemagenda->credor(),'r');
-		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
-		$nomeMembro = $credorAgenda->nome();
-		$credorCompl = true;//Para o caso de membros da igreja
-
-		$mudaTipo = '<div class="bs-callout bs-callout-warning">
-		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
-			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
-		  </div>';
-
-	}else {
-		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
-		$nomecredor = $credorAgenda->alias();
-		$credorCompl = false;
-		$mudaTipo = '<div class="bs-callout bs-callout-warning">
-		    <p><label><input type="checkbox" id="status" name="paraMembro"
-		value="1" tabindex="<?php echo ++$ind; ?>">
-		&nbsp;Mudar este compromisso para credor Membro da Igreja!</label></p>
-		  </div>';
-	}
-
-
-	$vencimento = $itemagenda->vencimento();
-	$dataAtual = new DateTime('NOW');
-	$dataVenc  = new DateTime($vencimento);
-	/*
-	$diferenca = $dataVenc->diff($dataAtual);
-	print_r($diferenca);
-	echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
-	echo $diferenca->m.' meses<br/>';
-	echo $dataVenc->format('Y-m').' FormatoVenc<br/>';
-	*/
-	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
-		?>
-		<div class="alert alert-success alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situação em: <?php echo $dataget;?></strong>
-	    </div>
-		<?php
-	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
-		?>
-		<div class="alert alert-danger alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação em: <?php echo $dataget;?></strong>
-	    </div>
-		<?php
-	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
-		?>
-		<div class="alert alert-warning alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta ainda dentro do prazo para pagamento! <strong>Situação em: <?php echo $dataget;?></strong>
-	    </div>
-		<?php
-	}else {
-		?>
-		<div class="alert alert-info alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta PAGA, Obrigado! <strong>Situação em: <?php echo $dataget;?></strong>
-	    </div>
-		<?php
-	}
 
 	$pendende = '';
  	$pago= '';
@@ -80,19 +12,19 @@
 	switch ($itemagenda->status()) {
 		//Marca o opção do status atual no formulário
 		case 3:
-			$quitado = 'checked="checked"';
+			$quitado = 'checked="checked" autofocus="autofocus"';
 			break;
 		case 2:
-			$pago = 'checked="checked"';
+			$pago = 'checked="checked" autofocus="autofocus"';
 			break;
 		case 1:
-			$enviado = 'checked="checked"';
+			$enviado = 'checked="checked" autofocus="autofocus"';
 			break;
 		case 3:
-		 $pago= 'checked="checked"';
+		 $pago= 'checked="checked" autofocus="autofocus"';
 		 break;
 		default:
-			$pendende = 'checked="checked"';
+			$pendende = 'checked="checked" autofocus="autofocus"';
 			break;
 	}
 	//concluir a migração dos dados da tabela fatura para a de fonecedores
@@ -105,8 +37,11 @@
 		$igreja_array = new DBRecord('igreja',$itemagenda->igreja(), 'rol');
 		$igreja_pgto = $igreja_array->razao();
 	}
-	?>
-	</p>
+?>
+
+<fieldset>
+	<legend>Lançar Pagamento</legend>
+	<p style="background: white; color: blue; font-size: 14px;">
 	<form action="" method="post" name="cadastro_igreja">
 		<table style="text-align: left; width: 100%;">
 			<tbody>
@@ -182,7 +117,7 @@
 						tabindex="<?php echo ++$ind; ?>"> Enviado para pagamento</label>
 					</td>
 					<td><label><input type="radio" id="status"
-						name="status" autofocus="autofocus" value="0"
+						name="status" value="0"
 						tabindex="<?php echo ++$ind; ?>" <?php echo $pendende;?>>
 						Pendente</label>
 					</td>
@@ -223,6 +158,78 @@
 		</table>
 
 	</form>
+	<?php
+	if (strstr($itemagenda->credor(),'r')) {
+		$rolMembro = ltrim ($itemagenda->credor(),'r');
+		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
+		$nomeMembro = $credorAgenda->nome();
+		$credorCompl = true;//Para o caso de membros da igreja
+
+		$mudaTipo = '<div class="bs-callout bs-callout-warning">
+		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
+			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
+		  </div>';
+
+	}else {
+		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
+		$nomecredor = $credorAgenda->alias();
+		$credorCompl = false;
+		$mudaTipo = '<div class="bs-callout bs-callout-warning">
+		    <p><label><input type="checkbox" id="status" name="paraMembro"
+		value="1" tabindex="<?php echo ++$ind; ?>">
+		&nbsp;Mudar este compromisso para credor Membro da Igreja!</label></p>
+		  </div>';
+	}
+
+	$lancConfirmado = ($itemagenda->idlanc()>'0') ? '<p><kbd>Lan&ccedil;amento confirmado, N&ordm;: '.$itemagenda->idlanc().'</kbd></p>':'';
+
+	$vencimento = $itemagenda->vencimento();
+	$dataAtual = new DateTime('NOW');
+	$dataVenc  = new DateTime($vencimento);
+	/*
+	$diferenca = $dataVenc->diff($dataAtual);
+	print_r($diferenca);
+	echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
+	echo $diferenca->m.' meses<br/>';
+	echo $dataVenc->format('Y-m').' FormatoVenc<br/>';
+	*/
+	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
+		?>
+		<div class="alert alert-success alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situação em: <?php echo $dataget;?></strong>
+	      <?php echo $lancConfirmado;?>
+	    </div>
+		<?php
+	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
+		?>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação em: <?php echo $dataget;?></strong>
+	      <?php echo $lancConfirmado;?>
+	    </div>
+		<?php
+	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
+		?>
+		<div class="alert alert-warning alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      Conta ainda dentro do prazo para pagamento! <strong>Situação em: <?php echo $dataget;?></strong>
+	      <?php echo $lancConfirmado;?>
+	    </div>
+		<?php
+	}else {
+		?>
+		<div class="alert alert-info alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      Conta PAGA, Obrigado! <strong>Situação em: <?php echo $dataget;?></strong>
+	      <?php echo $lancConfirmado;?>
+	    </div>
+		<?php
+	}
+
+	?>
+	</p>
+
 </fieldset>
 
 <script type="text/javascript">

@@ -144,13 +144,13 @@
 		?> (validade)
 	  </div>
 
-    <div id="footer">
+    <div id="footer"><p class="text-center">
                         <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?>
-                          <?PHP echo "<br /> CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
+                          <?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
                           Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> -
-                          Email: <?PHP echo "{$igreja->email()}";?>
-                         <br /><small>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">
-                            Joseilton Costa Bruce.</a></small>
+                          Email: <?PHP echo "{$igreja->email()}";?></p>
+                         <p class="text-right"><small>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">
+                            Joseilton Costa Bruce.</a></small></p>
     </div>
   </div>
 </div>

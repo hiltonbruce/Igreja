@@ -84,15 +84,16 @@ if ($credor!='' && $datven && $numcredor) {
 	$extr_rec = mysql_query($extr);
 	$valores = mysql_fetch_array($extr_rec);
 	$idfatura = $valores['maximo']+1;//Acrescenta uma unidade p/ o novo grupo de pagamentos
+	$creditar	= $_POST['creditar'];
+	$debitar 	= $_POST['debitar'];
+	$lanc	= $_POST['idlanc'];
 
 	if ($parc=='0') {
 		$valor	= $_POST["valor0"];
 		$motivo 	= $_POST['motivo0'];
-		$creditar	= $_POST['creditar'];
-		$debitar 	= $_POST['debitar'];
 		$vencimento	= br_data($_POST['vencimento0'], 'Vencimento');
 
-		$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','','%s','%s','','','','%s'",$idfatura,$credor,$debitar,$creditar,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
+		$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s','%s','','%s','','','','%s'",$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
 		echo $dadosagenda.' *** <br />';
 		$agenda= new insert ($dadosagenda,"agenda");
 		echo $agenda->inserir();
@@ -105,7 +106,7 @@ if ($credor!='' && $datven && $numcredor) {
 			$motivo 	= $_POST['motivo'.$j2];
 			$vencimento	= br_data($_POST['vencimento'.$j2], 'Vencimento');
 
-			$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','','%s','%s','','','','%s'",$idfatura,$credor,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
+			$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s','','%s','%s','','','','%s'",$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
 			echo $dadosagenda.' *** <br />';
 			$agenda= new insert ($dadosagenda,"agenda");
 
