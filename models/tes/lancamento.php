@@ -122,11 +122,13 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$corlinha = !$corlinha;
 
 	//Lança provisões conta credora no Ativo
+	$lancprovmissoes=false;
 	if ($provmissoes>0) {
 		//Faz o lançamento da provisão de missões - Ativo
 		$provsemad = new atualconta('1.1.1.001.007',$ultimolanc);
 		$provsemad->atualizar($provmissoes,'C',$roligreja);
 		$totalCred += $provmissoes;
+		$lancprovmissoes=true;
 	}
 
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
@@ -138,7 +140,9 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	if ($provcomadep>0) {
 		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc); //Faz o lançamento da provisão de Comadep - Ativo
 		$provcomad->atualizar($provcomadep,'C',$roligreja);//Faz o lançamento da provisão da COMADEP - Ativo
+		$lancprovmissoes=true;
 	}
+
 	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
 	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
@@ -156,10 +160,12 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
 	//inserir o histórico do lançamento das provisões na tabela lanchist
 
-	//Lança o histórico do lançamento das provisões
+	//Lança o histórico do lançamento das provisões $provmissoes>0 $provcomadep>0
+	if ($lancprovmissoes) {
 	$HistProv = sprintf("'','%s','%s','%s'",$ultimolanc,'Valor provisionado da SEMAD e COMADEP sobre a receita nesta data',$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');
 	$lanchist->inserir();
+	}
 
 	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 

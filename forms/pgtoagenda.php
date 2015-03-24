@@ -2,6 +2,28 @@
 <script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <?php
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
+
+	if (strstr($itemagenda->credor(),'r')) {
+		$rolMembro = ltrim ($itemagenda->credor(),'r');
+		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
+		$nomeMembro = $credorAgenda->nome();
+		$credorCompl = true;//Para o caso de membros da igreja
+
+		$mudaTipo = '<div class="bs-callout bs-callout-warning">
+		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
+			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
+		  </div>';
+
+	}else {
+		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
+		$nomecredor = $credorAgenda->alias();
+		$credorCompl = false;
+		$mudaTipo = '<div class="bs-callout bs-callout-warning">
+		    <p><label><input type="checkbox" id="status" name="paraMembro"
+		value="1" tabindex="<?php echo ++$ind; ?>">
+		&nbsp;Mudar este compromisso para credor Membro da Igreja!</label></p>
+		  </div>';
+	}
 	$datapgto = conv_valor_br ($itemagenda->datapgto());
 
 	$dtParaPgto = ($datapgto=='00/00/0000') ? $dtPgto:$datapgto;
@@ -159,28 +181,6 @@
 
 	</form>
 	<?php
-	if (strstr($itemagenda->credor(),'r')) {
-		$rolMembro = ltrim ($itemagenda->credor(),'r');
-		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
-		$nomeMembro = $credorAgenda->nome();
-		$credorCompl = true;//Para o caso de membros da igreja
-
-		$mudaTipo = '<div class="bs-callout bs-callout-warning">
-		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
-			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
-		  </div>';
-
-	}else {
-		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
-		$nomecredor = $credorAgenda->alias();
-		$credorCompl = false;
-		$mudaTipo = '<div class="bs-callout bs-callout-warning">
-		    <p><label><input type="checkbox" id="status" name="paraMembro"
-		value="1" tabindex="<?php echo ++$ind; ?>">
-		&nbsp;Mudar este compromisso para credor Membro da Igreja!</label></p>
-		  </div>';
-	}
-
 	$lancConfirmado = ($itemagenda->idlanc()>'0') ? '<p><kbd>Lan&ccedil;amento confirmado, N&ordm;: '.$itemagenda->idlanc().'</kbd></p>':'';
 
 	$vencimento = $itemagenda->vencimento();
@@ -246,4 +246,20 @@
 			return ;
 		return "models/tes/autoCompletaContas.php?q=" + this.value;
 	});
+
+
+    new Autocomplete("campo_nome", function() {
+        this.setValue = function( rol, nome, celular, congr ) {
+            $("#fone_membro").val(rol);
+            $("#rol_membro").val(nome);
+            $("#sigla_val").val(celular);
+            $("#rol").val(fone);
+            $("#cong").val(congr);
+        }
+
+        if ( this.value.length < 1 && this.isNotClick )
+            return ;
+        return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
+    });
+
 </script>

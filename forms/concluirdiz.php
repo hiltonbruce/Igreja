@@ -1,8 +1,16 @@
 <?php
 //Calculado a data do proximo lancamento caso não seja passsado
 $roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
+/**/
+if (!empty($_GET['data'])) {
+	$dtlanc = $_GET['data'];
+} elseif(!empty($_POST['data'])) {
+	$dtlanc = $_POST['data'];
+}else {
+	$dtlanc = '';
+}
 
-if (empty($_GET['data'])) {
+if ($dtlanc == '') {
 	$dataProxLanc = new tes_igreja($roligreja,$anolanc);
 	$periodoLanc = $dataProxLanc->dataEntrada();
 	#print_r($dataProxLanc->dataEntrada());
