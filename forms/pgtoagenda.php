@@ -88,7 +88,7 @@
 						 		require_once 'forms/completaNomeRol.php';
 						 	}else {
 						 		echo '<label>Credor:</label>';
-								$congr = new List_sele ("credores","alias","credor");
+								$congr = new tes_listCredor ("credores","alias","nome");
 								echo $congr->List_Selec (++$ind,$itemagenda->credor(),' class="form-control" required="required" ');
 						 	}
 
@@ -193,6 +193,7 @@
 	echo $diferenca->m.' meses<br/>';
 	echo $dataVenc->format('Y-m').' FormatoVenc<br/>';
 	*/
+	$dataget = date ('d/M/Y H:i');
 	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-success alert-dismissible" role="alert">
