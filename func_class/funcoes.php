@@ -169,6 +169,39 @@ function mostra_foto ($rol) {
 		return "<img src='$img' class='img-thumbnail' alt='Foto do Membro' width='114' height='149' border='1' align='absmiddle' />";
 }
 
+function foto ($rol) {
+	//Mostra a foto do membro
+
+	if (!empty($rol)){
+
+		 if (file_exists("../img_membros/$rol.jpg")){
+				$img="../img_membros/$rol.jpg";
+			}elseif (file_exists("img_membros/$rol.jpg")){
+				$img="img_membros/$rol.jpg";
+			}elseif (file_exists("../img_membros/$rol.JPG")){
+				$img="../img_membros/$rol.JPG";
+			}elseif (file_exists("img_membros/$rol.JPG")){
+				$img="img_membros/$rol.JPG";
+			}elseif (file_exists("img_membros/ver_foto.jpg")){
+				$img="img_membros/ver_foto.jpg";
+			}else{
+				$img="../img_membros/ver_foto.jpg";
+			}
+	} elseif (file_exists("../img_membros/".$_SESSION["rol"].".jpg")){
+				$img="../img_membros/".$_SESSION["rol"].".jpg";
+			}elseif (file_exists("img_membros/".$_SESSION["rol"].".jpg")){
+				$img="img_membros/".$_SESSION["rol"].".jpg";
+			}elseif (file_exists("../img_membros/".$_SESSION["rol"].".JPG")){
+				$img="../img_membros/".$_SESSION["rol"].".JPG";
+			}elseif (file_exists("img_membros/".$_SESSION["rol"].".JPG")){
+				$img="img_membros/".$_SESSION["rol"].".JPG";
+			}elseif (file_exists("img_membros/ver_foto.jpg")){
+				$img="img_membros/ver_foto.jpg";
+			}else{
+				$img="../img_membros/ver_foto.jpg";
+			}
+		return $img;
+}
 function data_venc($data){
 	//acrescenta 30 dias apartir da data fornecida
 	if (isset ($data)){

@@ -5,53 +5,53 @@ $ordenar = new igreja ();
 $_urlLi="?escolha=igreja/list_membro.php&menu=top_igreja&ord={$_GET["ord"]}&foto={$_GET["foto"]}&cargo={$_GET["cargo"]}&id=".($_GET["id"]);//Montando o Link para ser passada a classe
 if ($_GET["cargo"]<"6"){
 		$query = "SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND e.situacao_espiritual<2 ".$ordenar->cargo()." ORDER BY ".$ordenar->ordenar();
-		
+
 $nmpp="20"; //Número de mensagens por párginas
 $paginacao = Array();
 $paginacao['link'] = "?"; //Paginação na mesma página
-			
+
 		//Faz os calculos na paginação
 		$sql2 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
 		$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
-		
-		if ($_GET["pagina1"]<1) { 
+
+		if ($_GET["pagina1"]<1) {
 			$_GET["pagina1"] = 1;
 		} elseif ($_GET["pagina1"]>$paginas) {
 			$_GET["pagina1"] = $paginas;
 		}
-		
+
 		$pagina = $_GET["pagina1"]-1;
-			
+
 		if ($pagina<0) {$pagina=0;} //Especifica um valor p variável página caso ela esteja setada
 		$inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no MySQL
-		$sql3 = mysql_query ($query." LIMIT $inicio,$nmpp") or die (mysql_error()); 
+		$sql3 = mysql_query ($query." LIMIT $inicio,$nmpp") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-						
+
 		 //inicia o cabeçalho de paginação
-		
+
 		{
 		?>
 		<table cellspacing="0" class='table table-hover table-striped table-bordered' >
 		<caption>
-		Lista de Membros 
+		Lista de Membros
 			<?PHP
 			$igreja = new DBRecord ("igreja",$_GET["id"],"rol");
-			
+
 			if ($_GET["id"]>0) {
 				echo " - Igreja: {$igreja->razao()}";
 			}
-			
+
 			?>
 		</caption>
-		
+
 			<colgroup>
 				<col id="Rol">
 				<col id="Nome">
 				<col id="Congrega&ccedil;&atilde;o">
 				<col id="albumCol"/>
 			</colgroup>
-			
+
 			<thead>
 				<tr>
 				<th scope="col"><a href="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=1&cargo=<?PHP echo $_GET["cargo"];?>&id=<?PHP echo $_GET["id"];?>&pagina1=<?PHP echo $_GET["pagina1"];?>" title="Ordenar por ROL">Rol
@@ -72,31 +72,38 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			</thead>
 			<tbody>
 		<?PHP
-			
+
 			while($coluna = mysql_fetch_array($sql3))
 			{
-			
+
 			?>
             <tr>
 				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["rol"];?>"><?php echo $coluna["rol"];?></a></td>
-				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["rol"];?>"><?php echo $coluna["nome"];?></a></td>
+				<td>
+					<div class="row">
+  						<div class="col-xs-1 col-xs-3">
+						<img src='<?php echo foto($coluna["rol"]);?>' class='thumbnail' alt='Foto do Membro' width='38' height='50'/>
+					</div>
+  						<div class="col-xs-6 col-md-8">
+						<a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["rol"];?>"><?php echo $coluna["nome"];?></a></td>
+					</div>
 				<td>
 					<?php
 						$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
 						echo $congregacao->razao();
-					?>					
+					?>
 				</td>
 				<td>
 					<?php
 						echo cargo ($coluna["rol"]);
-					?>				
+					?>
 				</td>
 			</tr>
 			<?PHP
-			
+
 			}//loop while produtos
-			
-	?>	
+
+	?>
 		</tbody>
 		</table>
 
@@ -111,7 +118,7 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 		echo "<br><span class='style4'>Total de $paginas p&aacute;ginas";
 		else
 		echo "<br><span class='style4'>Total de $paginas p&aacute;gina";
-		
+
 	echo "<br />";
 	if ($total>"1")
 	{
@@ -119,13 +126,13 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			printf("Com %s membros!",number_format($total, 0, ',', '.'));
 		else
 			printf("Com %s Membros!",number_format($total, 0, ',', '.'));
-			
+
 	}elseif ($total=="1"){
 		echo "Com apenas um Membro!";
 	}else{
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
 	}
-	
+
 	}
 	else {
 		require_once 'igreja/lst_dirigente.php';
