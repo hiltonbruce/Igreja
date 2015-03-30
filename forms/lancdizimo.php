@@ -23,7 +23,6 @@ while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;
-	
 	$dtlanc = (empty($_POST['dataLancamento']) ) ? date('d/m/Y'):$_POST['dataLancamento'];
 	?>
 <form method="post" action="">
@@ -40,10 +39,10 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
   			<input type="submit" name="Submit" class='btn btn-primary'
 			value="Lançar..." tabindex="<?PHP echo ++$ind;?>" />
 	</div>
-	<div class="col-xs-6"><label>&nbsp;</label></div> 
+	<div class="col-xs-6"><label>&nbsp;</label></div>
 	<p>Ou marque uma das sugestões de hist&oacute;rico abaixo</p>
-	
-		
+
+
 	<br />
 	<div class="radio">
 		<label><input type="radio"
@@ -72,7 +71,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 		<label><input type="radio" name="histsug"
 		value="Ref. dízimos e ofertas de missões nesta data"
 		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos e ofertas de missões
-		nesta data</label> 
+		nesta data</label>
 	</div>
 		<input name="escolha" type="hidden"
 		value="<?php echo $_GET['escolha'];?>" /> <input name="lancar"
@@ -86,6 +85,5 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 }else {
 	echo '<h3>Voc&ecirc; deve corrigir a pend&ecirc;ncia do lan&ccedil;amento acima para finalizar!</h3>';
 }
-
 require_once 'views/lancdizimo.php';//chama o view para montar
 ?>

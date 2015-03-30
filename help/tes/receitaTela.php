@@ -7,11 +7,11 @@ switch ($_GET['rec']) {
 		//require_once 'forms/tes/histResumo.php';
 		break;
 	case '1':
-		require_once 'forms/concluirdiz.php';
+		require_once 'forms/concluirdiz.php';#Form fecha caixa
 		if (!empty($_GET['id'])) {
-			require_once ('forms/tes/alteraPreLanc.php');
+			require_once ('forms/tes/alteraPreLanc.php');#Edita dizimo e ofertas pre-Lançamento
 		}else{
-			require_once ('forms/autodizimo.php');
+			require_once ('forms/autodizimo.php');#Form lançar dizimos e ofertas
 		}
 		break;
 	case '2':

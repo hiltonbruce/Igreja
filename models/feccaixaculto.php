@@ -110,7 +110,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	}
 
 	//Lança provisões conta credora no Ativo
-
 	$provsemad = new atualconta('1.1.1.001.007',$idlancmis);
 	if ($provmissoes>0) {
 		$provsemad->atualizar($provmissoes,'C',$roligreja); //Faz o lançamento, se possuir valor, da provisão de missões - Ativo
@@ -176,11 +175,16 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 }
 
 ?>
-<fieldset>
-	<legend>Próxima Igreja: </legend>
-	<form>
-		<div class="row">
-		  <div class="col-xs-4">
+<form>
+	<div class="row">
+		<div class="col-xs-4">
+			<label>&nbsp;</label>
+			<a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1"
+				tabindex="<?PHP echo ++$ind; ?>" >
+ 				<button type="button" class="btn btn-primary">Próximo culto da <?php echo $igrejaSelecionada->razao();?>!</button>
+ 			</a>
+		</div>
+		<div class="col-xs-4">
 			<label>Próxima Igreja: </label>
 				<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 					<?php
@@ -191,6 +195,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 						//echo $listaIgreja;
 					?>
 			</select>
-		</div></div>
-	</form>
-</fieldset>
+		</div>
+	</div>
+</form>
+<br />

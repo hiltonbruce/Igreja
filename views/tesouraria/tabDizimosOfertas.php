@@ -26,7 +26,6 @@ if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
 }
 
 	//require_once 'forms/concluirdiz.php';
-
 	if ($_GET['idDizOf']>0) {
 	//Incluir form para alterar ou excluir pre-lançamento de Dízimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
