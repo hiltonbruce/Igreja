@@ -3,13 +3,14 @@ controle ('tes');
 $provmissoes=0;
 $ultimolanc = 0;
 $roligreja =(int) $_POST['rolIgreja'];
-$motivoComplemento = (empty($_POST['nome'])) ? $_POST['credor']:$_POST['nome'];
-if () {
-	# code...
+#$motivoComplemento = (empty($_POST['nome'])) ? $_POST['credor']:$_POST['nome'];
+if (!empty($_POST['nome'])) {
+	$motivoComplemento = ' ('.$_POST['nome'].')';
+} elseif (!empty($_GET['nome'])) {
+	$motivoComplemento = ' ('.$_GET['nome'].')';
 } else {
-	# code...
+	$motivoComplemento = '';
 }
-
 
 if ($_POST['valor']<='0' || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar']<1) {
 	$dizimista = false;
@@ -66,7 +67,8 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	echo $credora->id().'<h1> tste </h>';
 
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
-		$contcaixa->atualizar($valor,'D',$roligreja,$referente); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$histLac = $referente.$motivoComplemento;
+		$contcaixa->atualizar($valor,'D',$roligreja,$histLac); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$valorTotal += $valor;
 //print_r($credora);
 		if ($credora->nivel2()=='4.1') {

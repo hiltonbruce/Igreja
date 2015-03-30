@@ -107,7 +107,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">Despesas com:<br /> <input type="text" name="nome" class="form-control"
+					<td colspan="3">Despesas com:<br /> <input type="text" name="cta" class="form-control"
 						id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
 						placeholder="Qual a Despesa?"/>
 					</td>
