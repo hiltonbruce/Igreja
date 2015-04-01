@@ -1,4 +1,5 @@
 <?php
+require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 controle ('tes');
 $provmissoes=0;
 $ultimolanc = 0;
@@ -16,7 +17,8 @@ if ($_POST['valor']<='0' || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar'
 	$dizimista = false;
 }else {
 	$status = true;
-	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor']), ',.','.,' ):$valor_us;
+	$multa = (empty($multaUS)) ? strtr( str_replace(array('.'),array(''),$_POST['multa']), ',.','.,' ):$multaUS;
+	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor']), ',.','.,' ):($valor_us);
 	$debitar = $_POST['acessoDebitar'];
 	$creditar =  $_POST['acessoCreditar'];
 }
@@ -29,7 +31,15 @@ $corlinha = false;
 	$credora 	= new DBRecord('contas',$creditar,'acesso');
 	$devedora 	= new DBRecord('contas',$debitar,'acesso');
 
-	if ($credora->tipo()=='D' && ($credora->saldo()-$valor)<'0') {
+	if ($multa>'0') {
+		$ctaMulta 	= new DBRecord('contas','571','acesso');//Conta Multas diversas
+		$histmulta = ($motivoComplemento=='') ? 'Multa':'Multa '.$motivoComplemento;
+	} else {
+		$ctaMulta = false;
+	}
+
+
+	if ($credora->tipo()=='D' && ($credora->saldo()-($valor+$multa))<'0') {
 	 $msgErro = 'Saldo não permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
 	}elseif ($devedora->tipo()=='C' && ($devedora->saldo()-$valor)<'0'){
 	 $msgErro = 'Saldo não permitido para Conta: '.$debitar->titulo().' que ficaria com o valor de '.($debitar->saldo()-$valor);
@@ -37,6 +47,11 @@ $corlinha = false;
 	 $msgErro='';
 	}
 
+	if ($ctaMulta) {
+		if ($ctaMulta->tipo()=='C' && ($ctaMulta->saldo()-$multa<'0')){
+	 		$msgErro .= 'Saldo não permitido para Conta: '.$ctaMulta->titulo().' que ficaria com o valor de '.($ctaMulta->saldo()-$multa);
+		}
+	}
 
 	if ($credora->nivel4()=='1.1.1.001') {
 	 ;//testar se cta de caixa e não permitir o lancamento se ficar negativo e a de despesas tb
@@ -64,7 +79,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
 	$caixaSenhoras = '';
-	echo $credora->id().'<h1> tste </h>';
+	//echo $credora->id().'<h1> tste </h>';
 
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$histLac = $referente.$motivoComplemento;
@@ -73,6 +88,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 //print_r($credora);
 		if ($credora->nivel2()=='4.1') {
 			//Receitas operacionais faz provisão automaticamente
+			//exceto lançamento direto para despesas não operacionais
 			if ($debitar=='2') {
 				//Provisão para Missões
 				$provmissoes += $valor*0.4;
@@ -84,10 +100,19 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		}
 
 		//Exibi lançamento
-		$caixa = new DBRecord('contas',$debitar,'acesso');
-		$totalDeb = $totalDeb + $valor;
-		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
 
+	//Faz lançameto de multa caso exista
+	if ($ctaMulta) {
+		$multaAtraso = new atualconta($ctaMulta->codigo(),$ultimolanc,$credora->id());
+		$multaAtraso->atualizar($multa,'D',$roligreja,$histmulta);
+		$totalMulta += $multa;
+		$lancMulta=true;
+		$exibideb .= sprintf("<tr class='odd' ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+		$ctaMulta->codigo(),$ctaMulta->titulo(),number_format($multa,2,',','.'),number_format($ctaMulta->saldo(),2,',','.'),$ctaMulta->tipo());
+	}
+		$caixa = new DBRecord('contas',$debitar,'acesso');
+		$totalDeb = $totalDeb + $valor + $multa;
+		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
 
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
 
@@ -120,13 +145,13 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 	//Faz o leiaute do lançamento do crédito da tabela lancamento
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc,'');
-		$contcaixa->atualizar($valor,'C',$roligreja); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($valor+$multa,'C',$roligreja); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$creditar,'acesso');//Exibi lançamento
 		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-		$caixa->codigo(),$caixa->titulo(),number_format($valor,2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo());
-		$totalCred += $valor;
+		$caixa->codigo(),$caixa->titulo(),number_format($valor+$multa,2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo());
+		$totalCred += $valor+$multa;
 		$corlinha = !$corlinha;
 
 	//Lança provisões conta credora no Ativo

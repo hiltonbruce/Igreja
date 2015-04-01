@@ -71,6 +71,13 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->credor		= 	(int)$_POST['credor'];
 		}
 
+		list($cnpj,$razao) = explode(' ',$_POST['nome'] );
+		//echo "<h1>$cnpj</h1>";
+		if ($cnpj!='') {
+			$nomeCredor = new DBRecord ('credores',$cnpj,'cnpj_cpf');
+			$atualizar->credor = $nomeCredor->id();
+		}
+
 		$atualizar->igreja		= 	$_POST['rolIgreja'];
 		$atualizar->motivo		= 	$_POST['referente'];
 		$atualizar->status		= 	$_POST['status'];
@@ -82,8 +89,9 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		}else{
 			$lancDespesa = false;
 		}
-		$atualizar->multa		=	abs(strtr($_POST['multa'], ',','.' ));
-		$valor_us 				=	abs(strtr($_POST['valor'], ',','.' ));
+		$multaUS				=	abs(strtr($_POST['multa'], ',','.' ));//Valor no padrão americano
+		$atualizar->multa		=	$multaUS;
+		$valor_us 				=	abs(strtr($_POST['valor'], ',','.' ));//Valor no padrão americano
 		$atualizar->valor		=	$valor_us;
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
 		$atualizar->hist	= 	$hist;

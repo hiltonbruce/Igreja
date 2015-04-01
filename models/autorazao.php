@@ -26,11 +26,11 @@ while( $campo = mysql_fetch_array( $res ) )
 	$id 		= $campo['id'];
 	$estado 	= strtoupper(strtr( $campo['razao'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco 	= strtoupper(strtr( $campo ['end'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$alias 		= $campo['alias'];
+	$alias 		= htmlentities($campo['alias'], ENT_QUOTES,'ISO-8859-1');
 	$sigla 		= $campo['cnpj_cpf'];
 	$cpf 		= $campo['cpf'];
 	$estado 	= addslashes($estado);
-	$resp		= $campo['responsavel'];
+	$resp		= htmlentities($campo['responsavel'], ENT_QUOTES,'ISO-8859-1');
 	$html 		= preg_replace("/(" . $q . ")/i", "<span style=\"font-weight:bold\">\$1</span>", $estado);
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$resp','$alias','$cpf');\">$html ($sigla)</li>\n";
 }

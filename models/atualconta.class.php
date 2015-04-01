@@ -16,7 +16,7 @@ class atualconta {
 	}
 
 	function atualizar($valor,$dc,$igreja,$histLanc) {
-		//Faz o lançamento na tabela lançamento e atualiza os dados da tabela contas
+		//Faz o lançamento na tabela lancamento, lanc e atualiza os dados da tabela contas
 		$data = br_data($_POST['data'], 'Data do lançamento inválida!');
 
 		for ($i = 1; $i < 6; $i++) { //atualiza os dados da tabela contas

@@ -10,9 +10,9 @@
         exit('A conta para pagamento não foi definida! Lançamento não confirmado...');
     }
 
-    if ($saldoDisp->saldo()<$valor_us) {
-        # Verifica se o disponível possui saldo para efetuar o pgto
-        exit('A conta para pagamento não saldo suficiente! Lançamento não confirmado...');
+    if ($saldoDisp->saldo()<($valor_us+$multaUS)) {
+        # Verifica se a conta possui saldo para efetuar o pgto
+        exit('A conta para pagamento não possui saldo suficiente! Lançamento não confirmado...');
     }
         $despesa    = $_POST['acessoDebitar'];
         require_once 'models/tes/lancamento.php';

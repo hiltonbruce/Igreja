@@ -66,14 +66,16 @@
 	<?php
 		require_once 'forms/tes/lancarContabil.php';
 	?>
-		<table style="background-color: #D3D3D3;">
+		<table class='table'>
 			<caption>Dados do Credor</caption>
 			<tbody>
 				<tr>
-					<td colspan='3'><label>Razão Social:</label><input type="text"
-						tabindex="<?PHP echo ++$ind;?>" name="nome" id="credor3"
+					<td colspan='3'>
+						<label>Razão Social:</label>
+						<input type="text"tabindex="<?PHP echo ++$ind;?>" name="nome" id="credor3"
 						size='80%' value='<?php echo $_GET['nome'];?>' class="form-control"
-						placeholder="Mínimo de 5 caracteres p/ novo Cadastro!" /></td>
+						placeholder="Mínimo de 5 caracteres p/ novo Cadastro!" />
+					</td>
 				</tr>
 				<tr>
 					<td colspan='2'><input type="hidden" name="id" id="valCredor"
