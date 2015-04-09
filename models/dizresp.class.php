@@ -101,7 +101,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
 			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento>"0"'.$incluiPessoa.$queryAcesso.
-					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ') or die (mysql_error());
+					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
 		}else {
 			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
