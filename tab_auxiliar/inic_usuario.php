@@ -31,9 +31,21 @@
 				?>
 			</td>
 			<td>
-				<a href="./?escolha=sistema/excluir.php&campo=id&tabela=usuario&id=<?php echo $usuario->id;?>">
-				<button class='btn btn-primary btn-sm' ><span class='glyphicon glyphicon-remove'></span> Excluir...</button></a>
-				</td><td><label>&nbsp;</label>
+				<a href="./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario&id=<?php echo $usuario->id;?>">
+				<?php
+					if ($usuario->situacao=='1') {
+						echo '<button class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove"></span> Desativar...</button></a>';
+					} else {
+						echo '<button class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-ok"></span> Ativar...</button></a>';
+					}
+
+					$situacao = ($usuario->situacao=='0') ? 1 : 0 ;
+
+					if ($_GET['id']==$usuario->id) {
+						$options->Atualizar($_GET['id'],$situacao);
+					}
+				?>				
+				</td><td>
 				<?php 
 				
 					$alterar->ini_senha($usuario->id, ++$ind)
@@ -42,9 +54,7 @@
     	</tr>
     		<?PHP
 	}
-	
     ?>
-
     </tbody>
   </table>
  </fieldset>

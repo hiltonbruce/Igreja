@@ -15,18 +15,20 @@ class usuarios {
 	       while($this->col_lst = mysql_fetch_array($this->result))
 	       {
 		    $usuario_array [] = array ("nome"=>$this->col_lst["nome"],"id"=>$this->col_lst["id"],"cpf"=>$this->col_lst["cpf"]
-		    							, "cargo"=>$this->col_lst["cargo"]);
+		    							, "cargo"=>$this->col_lst["cargo"], "situacao"=>$this->col_lst["situacao"]);
 	       }
 	  return $usuario_array;
 	
 	}
 	
-	function Deletar ($id){
+	function Atualizar ($id,$situacao){
 	
-		$ver = mysql_query("DELETE FROM igreja WHERE rol='{$this->id}' LIMIT 1");
+		$ver = mysql_query('UPDATE usuario SET situacao = "'.$situacao.'" WHERE id="'.$id.'" LIMIT 1');
+
+		$msg = ($situacao=='1') ? 'Ativado' : 'Desativado' ;
 
 		if($ver){
-				echo "<script> alert('Apagado com sucesso'); location.href='./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario';</script></a>";
+				echo '<script> alert("Usuário '.$msg.'"); location.href="./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario";</script></a>';
 				echo "Usuário apagado com sucesso<br><a href='./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario'>Voltar...</a>";
 				}
 				else

@@ -5,9 +5,9 @@
 	$cpf = $_POST['cpf'];
 	$senha = md5($_POST['senha']);
 	
-	$query = "select * from usuario "
-			."where cpf='$cpf'"
-			." and senha='$senha' ";
+	$query = 'select * from usuario '
+			.'where cpf="'.$cpf.'" '
+			.'and senha="'.$senha.'" AND situacao="1"';
  $result = mysql_query($query) or die (mysql_error());
  if (mysql_num_rows($result)>0)
 	{
