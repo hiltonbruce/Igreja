@@ -80,9 +80,16 @@
 			}
 		break;
 		case '8':
-			//Sede
+			//Sede	
+			if ($valor['rolMembro']>'0') {
 			$rec_tipo=1;
 			$rolmembro = $valor['rolMembro'];
+			}else {
+				$rec_tipo=3;
+				list($nome,$cpf,$rg)=explode( ",",$valor['naoMembro']);
+				$cpf = trim( $cpf, 'CPF: ');
+				$rg = ltrim( $rg, 'RG: ' );				
+			}
 		break;
 		
 		default:
