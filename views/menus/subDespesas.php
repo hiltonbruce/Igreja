@@ -3,7 +3,7 @@
 	href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=1">
 	<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Adiant. p/ Compras</button>
 </a>
-<a <?PHP $b=link_ativo($_GET["age"], "2");?> 
+<a <?PHP $b=link_ativo($_GET["age"], "2");?>
 			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=2">
 			<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Prestar Contas</button>
 </a>
@@ -15,4 +15,8 @@
 <a <?PHP $b=link_ativo($_GET["age"], "7");?>
 			href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=7">
 			<button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Folha</button>
+</a>
+<a <?PHP $b=link_ativo($_GET["age"], "9");?>
+            href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=9">
+            <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Demonstrativo</button>
 </a>

@@ -28,6 +28,13 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			//print_r($listaPgto);
 			require_once 'models/tes/cadCargoIgreja.php';//Cadastrar Membro no Cargo despesa
 			break;
+		case '9':
+
+			//
+			$titTabela = 'Demonstrativo de Pgto do mês:';
+			$lista = new agenda();
+			require_once 'views/tesouraria/despesaMes.php';//Cadastrar Membro no Cargo despesa
+			break;
 		default:
 			;
 			break;

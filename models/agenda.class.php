@@ -350,7 +350,7 @@ class agenda {
 		$periodo .= 'FROM agenda AS a WHERE ';
 		if ($credor>'0') {
 			$periodo .= ' a.credor='.$credor.' AND ';
-			$linkcredor = '&data="'.$dia.'yy"&credor='.$credor;
+			$linkcredor = '&data="'.$dia.'"&credor='.$credor;
 		}else {
 			$linkcredor = '&data='.$pagamento;
 		}
@@ -534,6 +534,74 @@ class agenda {
 		}
 		return $tabela;
 	}
-}
 
+	function demonstrativo ($dia,$credor,$pagamento) {
+
+		$periodo  = 'SELECT a.vencimento, a.valor, a.id, a.credor,';
+		$periodo .= 'a.igreja, a.status, a.motivo ';
+		$periodo .= 'FROM agenda AS a WHERE ';
+		if ($credor>'0') {
+			$periodo .= ' a.credor='.$credor.' AND ';
+			$linkcredor = '&data="'.$dia.'&credor='.$credor;
+		}else {
+			$linkcredor = '&data='.$pagamento;
+		}
+		if (!empty($_GET['igreja'])){
+			$periodo .= ' a.igreja='.$_GET['igreja'].' AND ';
+			}
+		$periodo .= ' a.vencimento = "'.$dia.'"';
+		$periodo_array = mysql_query($periodo)  or die (mysql_error());
+
+		$numLinhas	= mysql_num_rows($periodo_array);
+
+		//echo "<h1>Linhas Afetadas $numLinhas</h1>";
+
+		if ($numLinhas>0) {
+
+		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
+
+			if ($periodo_dados['status']=='2') {//Marca os já pagos
+				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/> ';
+				$titulo = 'Dívida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+			}elseif ($periodo_dados['status']=='1'){
+				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/> ';
+				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo: '.$periodo_dados['motivo'];
+			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
+				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/> ';
+				$titulo = 'Dívida vencida! Motivo: '.$periodo_dados['motivo'];
+			}else {
+				$evento ='';
+				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];
+			}
+
+			if ($periodo_dados['igreja']<'1') {
+				$evento .= 'Templo Sede - ';
+			}else {
+				$igreja_ev = new DBRecord('igreja',$periodo_dados['igreja'], 'rol');
+				$evento .= $igreja_ev->razao();
+			}
+
+			if (strstr($periodo_dados['credor'],'r')) {
+				$rolCredor = str_replace('r', "", $periodo_dados['credor']);
+				$membro = new DBRecord('membro',$rolCredor,'rol' );
+				$evento .= ' &rarr; '.$membro->nome();
+			}else {
+				$credor= new DBRecord('credores',$periodo_dados['credor'],'id');
+				$evento .= ' &rarr; '.$credor->alias();
+			}
+
+			echo '<a title="'.$titulo.'" href="./?escolha=tesouraria/agenda.php&
+			menu=top_tesouraria&id='.$periodo_dados['id'].'&pagina1_fix='.$_GET['pagina1_fix'].$linkcredor.'">';
+			echo $evento;
+
+			echo ' &rarr; R$ '.number_format($periodo_dados['valor'],2,",",".").
+			'</a> (<span class="text-info">'.$periodo_dados['motivo'].'</span>)<br />';
+			$total += $periodo_dados['valor'];
+		}
+	}else {
+		$total=0;
+	}
+		echo '</td><td  class="text-right" >'.number_format($total,2,",",".").'</td>';
+	}
+}
 ?>
