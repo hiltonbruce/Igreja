@@ -1,4 +1,6 @@
 <?php
+$linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
+$linkLancamento .= '&igreja='.$_POST['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 controle ('tes');
 $provmissoes=0;
@@ -42,7 +44,7 @@ $corlinha = false;
 	if ($credora->tipo()=='D' && ($credora->saldo()-($valor+$multa))<'0') {
 	 $msgErro = 'Saldo não permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
 	}elseif ($devedora->tipo()=='C' && ($devedora->saldo()-$valor)<'0'){
-	 $msgErro = 'Saldo não permitido para Conta: '.$debitar->titulo().' que ficaria com o valor de '.($debitar->saldo()-$valor);
+	 $msgErro = 'Saldo não permitido para Conta: '.$devedora->titulo().' que ficaria com o valor de '.($devedora->saldo()-$valor);
 	}else {
 	 $msgErro='';
 	}

@@ -30,7 +30,7 @@ while( $campo = mysql_fetch_array( $res ) )
 	}else {
 		$tipo = 'Credora';
 	}
-	$grupoCta = new DBRecord('contas', $campo['nivel4'], 'codigo');
+	$grupoCta = new DBRecord('contas', $campo['nivel2'], 'codigo');
 	$nomeGrp =  htmlentities($grupoCta->titulo(),ENT_QUOTES,'iso-8859-1');
 	$endereco .=',  Tipo: '.$tipo;
 	$sigla = $campo['acesso'];

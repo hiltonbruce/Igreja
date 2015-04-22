@@ -77,15 +77,14 @@ if ($_POST['ajusteparc']>=0 && $_POST['ajusteparc']<$parc) {
 
 if ($credor!='' && $datven && $numcredor) {
 	//verifica se credor foi informado e se as datas de vencimentos são validas
-	//Cadastra Credor
 	//Cadastra agenda
 
 	$extr  = 'SELECT MAX(idfatura) AS maximo FROM agenda';
 	$extr_rec = mysql_query($extr);
 	$valores = mysql_fetch_array($extr_rec);
 	$idfatura = $valores['maximo']+1;//Acrescenta uma unidade p/ o novo grupo de pagamentos
-	$creditar	= $_POST['creditar'];
-	$debitar 	= $_POST['debitar'];
+	$creditar	= $_POST['acessoCreditar'];
+	$debitar 	= $_POST['acessoDebitar'];
 	$lanc	= $_POST['idlanc'];
 
 	if ($parc=='0') {

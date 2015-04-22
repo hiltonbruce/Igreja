@@ -17,7 +17,7 @@ if (checkdate($m,$d,$y)) {
 
 <form method="post" name="agendar" action="">
 	<caption>
-		Confirmar Agenda de Pagamento:
+		Confirmar Agenda de Pagamento:jjj
 		<?php echo $congr->razao();?>
 	</caption>
 	<table style="background-color: #F3F3F3;">
@@ -164,8 +164,8 @@ if (checkdate($m,$d,$y)) {
 						$dadosEmpresa .= '<input type="hidden" name="desp1" value="'.$_POST['desp1'].'"/>';
 						$dadosEmpresa .= '<input type="hidden" name="desp2" value="'.$_POST['desp2'].'"/>';
 						$dadosEmpresa .= '<input type="hidden" name="desp3" value="'.$_POST['desp3'].'"/>';
-						$dadosEmpresa .= '<input type="hidden" name="acesso" value="'.$_POST['acesso'].'"/>';
-						$dadosEmpresa .= '<input type="hidden" name="acesso2" value="'.$_POST['acesso2'].'"/>';
+						$dadosEmpresa .= '<input type="hidden" name="acesso" value="'.$_POST['acessoDebitar'].'"/>';
+						$dadosEmpresa .= '<input type="hidden" name="acesso2" value="'.$_POST['acessoCreditar'].'"/>';
 					}else {
 						echo 'Você deve informar o nome do credor! - Valor Total: ---> R$ '.number_format($valortrun,2,',','.');
 						$errcredor = false;
@@ -218,8 +218,8 @@ if (checkdate($m,$d,$y)) {
 			</td>
 		</tr>
 	</table>
-	<input type="hidden" name="acesso" value="<?php echo $_POST['acessoDebitar'];?>"/>
-	<input type="hidden" name="acesso2" value="<?php echo $_POST['acessoCreditar'];?>"/>
+	<input type="hidden" name="acessoDebitar" value="<?php echo $_POST['acessoDebitar'];?>"/>
+	<input type="hidden" name="acessoCreditar" value="<?php echo $_POST['acessoCreditar'];?>"/>
 </form> <a
 				href="./?escolha=controller/despesa.php&menu=top_tesouraria&age=3<?php echo $linkvoltar;?>">
 					<button type="button" class="btn btn-primary btn-sm">Voltar...!</button> </a>
