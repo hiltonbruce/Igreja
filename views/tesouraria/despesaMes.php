@@ -1,9 +1,14 @@
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
-	$d = (empty($_GET['altdias'])) ? 0 : $_GET['altdias'] ;
-	//$d = ((int)$dias=='0' ) ? 1: $dias;
-	$m = date("m");
-	$y = date("Y");
+	$credor = (empty($_GET['credor'])) ? 0 : $_GET['credor'] ;
+	if (!empty($_GET['data'])) {
+		list($d,$m,$y) = explode('/', $_GET['data']);
+	}else {
+		$d =  1 ;
+		$m = date("m");
+		$y = date("Y");
+	}
+
 	//$credor = ($_GET['credor']>'0') ? $_GET['credor']:'0';
 	//Array's para troca do dia da semana para portugês
 	$diaEn = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
@@ -25,23 +30,30 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		</thead>
 		<tbody id="periodo" >
 		<?php
-			for ($p = 0; $p < 31; $p++) {
-				//$altdias = $d;
-				$dia_periodo = $p+$d;
-				$dia_periodo = strtotime("$dia_periodo days");
+			$iniDia = new datetime ("$y-$m-$d");
+			//print_r($iniDia);
+			$ultimoDia = new datetime ("$y-$m-$d");
+			$ultimoDia = $ultimoDia->modify( 'last days next month' );
 
-				if (date('d')==date('d',$dia_periodo)) {
+			$iniLoop = ($d=1) ? 0 : $d ;
+			for ($p = $iniLoop; $p < $ultimoDia->format('t'); $p++) {
+				//$altdias = $d;
+				//print date('d M Y H:i:s', strtotime('last day of', strtotime('Thu Mar 31 19:50:41 IST 2011')));
+
+				if (date('d')==$iniDia->format('d')) {
 					$trtab = '<tr bgcolor="#90EE90">';
 				}else {
 				$trtab = ($p % 2) == 0 ? '<tr class="dados" >' : '<tr >';
 				}
 				echo $trtab;
-				$diaSemana = date('D',$dia_periodo);
+				$diaSemana = $iniDia->format('D');
 				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
 
-				echo '<td>'.date('d/m',$dia_periodo).'&nbsp;-&nbsp;'.$diaSemana.'</td><td>';
-				$evento = $lista->demonstrativo(date('Y-m-d',$dia_periodo),24,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
+				echo '<td>'.$iniDia->format('d/m').'&nbsp;-&nbsp;'.$diaSemana.'</td><td>';
+				$evento = $lista->demonstrativo(date('Y-m-d',$iniDia->getTimestamp()),$credor,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
+				$iniDia->modify( '+1 day' );
+				//$dia_periodo = strtotime("$dia_periodo +1 day");
 			}
 		?>
 		</tbody>
