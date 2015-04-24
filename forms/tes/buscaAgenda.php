@@ -1,4 +1,4 @@
-<?php 
+<?php
 	if (empty($_GET['altdias'])) {
 		$dias='';
 	}else {
@@ -26,11 +26,11 @@
 			</td>
 			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $_GET["escolha"];?>&menu=top_tesouraria&igreja=
 			<?php echo $_GET['igreja'];?>&credor=<?php echo $credorAgenda;?>&altdias=
-			<?PHP echo $dias-1;?>" ><button type="button" class="form-control btn-primary"> 
+			<?PHP echo $dias-1;?>" ><button type="button" class="form-control btn-primary">
 			 <span class=" glyphicon glyphicon-arrow-left"> </span> Voltar 1 dia</button></a>
 
   </td>
-					
+
 			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $_GET["escolha"];?>&menu=top_tesouraria&igreja=<?php echo $_GET['igreja'];?>&credor=
 			<?php echo $credorAgenda;?>&altdias=<?PHP echo $dias+1;?>" >
 	  	<button type="button" class="form-control btn-primary">
@@ -39,14 +39,14 @@
 		<tr>
 			<td>Por fornecedor:
 	  <select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
-		  <?php 
+		  <?php
 		  	$bsccredor = new list_fornecedor('credores', 'alias', 'credor');
 		  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&altdias='.$dias.'&igreja='.$_GET['igreja'].'&credor=');
 		  ?>
 	  </select></td>
 			<td colspan="2">Por Igreja:
 	  <select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
-		  <?php 
+		  <?php
 		  	$bsccredor = new List_sele('igreja', 'razao', 'igreja');
 		  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&credor='.$credorAgenda.'&altdias='.$dias.'&igreja=',$_GET['igreja']);
 		  ?>
@@ -83,7 +83,6 @@
 	  <input type="hidden" name="escolha" value="<?PHP echo $_GET["escolha"];?>">
 	  <input type="hidden" name="credor" value="<?php echo $_GET['credor']?>"></td>
 			<td><label>&nbsp;</label><input type="submit" class="btn btn-primary" value="Listar...">
-			
 			<td></td>
 		</tr>
 	</tbody>

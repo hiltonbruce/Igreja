@@ -1,20 +1,56 @@
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$credor = (empty($_GET['credor'])) ? 0 : $_GET['credor'] ;
-	if (!empty($_GET['data'])) {
+	if (!empty($_GET['data']) && checadata($_GET['data'])) {
 		list($d,$m,$y) = explode('/', $_GET['data']);
 	}else {
-		$d =  1 ;
+		$d =  '01' ;
 		$m = date("m");
 		$y = date("Y");
 	}
-
+	$dt = $d.'/'.$m.'/'.$y;
 	//$credor = ($_GET['credor']>'0') ? $_GET['credor']:'0';
 	//Array's para troca do dia da semana para portugês
 	$diaEn = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 	$diaBr   = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b');
 
+	$iniDia = new datetime ("$y-$m-$d");
+	//print_r($iniDia);
+	$ultimoDia = new datetime ("$y-$m-$d");
+	$ultimoDia = $ultimoDia->modify( 'last days next month' );
+	$fimDiaMes = $iniDia->format('t');
  ?>
+ <form action="" method="get">
+ 	<div class="row">
+  <div class="col-xs-4">
+ 	<label>Por fornecedor:</label>
+	<select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+	  <?php
+	  	$bsccredor = new list_fornecedor('credores', 'alias', 'credor');
+	  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&age=9&data='.$dt.'&credor=');
+	  ?>
+	</select>
+
+  </div>
+  <div class="col-xs-2">
+	<label>Período de:</label>
+	<input name="data" id="data" class="form-control"
+	value='<?php echo $dt;?>' tabindex="<?PHP echo ++$ind; ?>" >
+  </div>
+  <div class="col-xs-2">
+	<label>até:</label>
+	<input disabled='disabled' class="form-control"
+	value='<?php echo $fimDiaMes.$iniDia->format('/m/Y');?>' tabindex="<?PHP echo ++$ind; ?>" >
+  </div>
+  <div class="col-xs-2">
+	<input type="hidden" name="menu" value="top_tesouraria">
+	<input type="hidden" name="age" value="<?PHP echo $_GET["age"];?>">
+	<input type="hidden" name="escolha" value="<?PHP echo $_GET["escolha"];?>">
+	<input type="hidden" name="credor" value="<?php echo $_GET['credor']?>"></td>
+	<label>&nbsp;</label><input type="submit" class="btn btn-primary" value="Listar...">
+  </div>
+</div>
+</form>
 <table id="Contas do per&iacute;odo" class='table table-condensed' >
 			<colgroup>
 				<col id="dia">
@@ -24,22 +60,16 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		<thead>
 			<tr>
 				<th scope="col">Dia</th>
-				<th scope="col">Evento</th>
+				<th scope="col">Evento (Ano: <?php echo $y;?>)</th>
 				<th scope="col">Total&nbsp;(R$)</th>
 			</tr>
 		</thead>
 		<tbody id="periodo" >
 		<?php
-			$iniDia = new datetime ("$y-$m-$d");
-			//print_r($iniDia);
-			$ultimoDia = new datetime ("$y-$m-$d");
-			$ultimoDia = $ultimoDia->modify( 'last days next month' );
-
 			$iniLoop = ($d=1) ? 0 : $d ;
-			for ($p = $iniLoop; $p < $ultimoDia->format('t'); $p++) {
+			for ($p = $iniLoop; $p < $fimDiaMes; $p++) {
 				//$altdias = $d;
 				//print date('d M Y H:i:s', strtotime('last day of', strtotime('Thu Mar 31 19:50:41 IST 2011')));
-
 				if (date('d')==$iniDia->format('d')) {
 					$trtab = '<tr bgcolor="#90EE90">';
 				}else {
@@ -48,12 +78,19 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 				echo $trtab;
 				$diaSemana = $iniDia->format('D');
 				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
-
 				echo '<td>'.$iniDia->format('d/m').'&nbsp;-&nbsp;'.$diaSemana.'</td><td>';
 				$evento = $lista->demonstrativo(date('Y-m-d',$iniDia->getTimestamp()),$credor,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
 				$iniDia->modify( '+1 day' );
 				//$dia_periodo = strtotime("$dia_periodo +1 day");
+				if ($fim) {
+					break;
+				}
+				if ($fimDiaMes==$iniDia->format('d')) {
+					$fim = true;
+				}else {
+					$fim = false;
+				}
 			}
 		?>
 		</tbody>
