@@ -1,11 +1,11 @@
 <?php
-class tes_relatorioLanc {
+class tes_relatLanc {
 
 function __construct() {
 		$this->var_string  = 'SELECT l.lancamento,DATE_FORMAT(l.data,"%d/%m/%Y") AS data,l.igreja,';
-		$this->var_string .= 'l.valor,l.hist,i.referente,l.conta,l.d_c ';
-		$this->var_string .= 'FROM lancamento AS l, lanchist AS i ';
-		$this->var_string .= 'WHERE l.lancamento=i.idlanca ';
+		$this->var_string .= 'l.valor,l.hist,l.referente,l.debitar,l.creditar, i.razao ';
+		$this->var_string .= 'FROM lanc AS l, igreja AS i ';
+		$this->var_string .= 'WHERE l.igreja=i.rol ';
 
 	}
 
@@ -28,7 +28,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$opIgreja = $this->var_string;
 	}
 
-	$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.lancamento,l.id';
+	$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.lancamento,l.debitar';
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 
 	$tabela = '<tbody id="periodo">';
@@ -58,19 +58,15 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$historico  = '<p>Hist&oacute;rico: '.$linha['referente'].', '.$dadosIgreja[$linha['igreja']]['nome'].'</p>';
 		$lancamento = $lancAtual;
 
-		if ($linha['conta']=='5' && $linha['d_c']=='D'){
+
 			$valorCaixaDeb += $linha['valor'];
-			$CaixaDep  = '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
+			$CaixaDep  = '<p>'.$conta[$linha['debitar']]['codigo'].' &bull; '.$conta[$linha['debitar']]['titulo'].'</p>';
 			$valor = number_format($valorCaixaDeb,2,',','.');
-			$lancValor = '<p id="moeda">'.$valor.' '.$linha['d_c'].'</p>';
-		}else {
-			$titulo1  .= '<p>'.$conta[$linha['conta']]['codigo'].' &bull; '.$conta[$linha['conta']]['titulo'].'</p>';
+			$lancValor = '<p id="moeda"><br/><br/>'.$valor.'C</p>';
+
+			$titulo1  .= '<p>'.$conta[$linha['creditar']]['codigo'].' &bull; '.$conta[$linha['creditar']]['titulo'].'</p>';
 			$valor = number_format($linha['valor'],2,',','.');
-			$lancValor .= '<p id="moeda">'.$valor.' '.$linha['d_c'].'</p>';
-		}
-
-
-
+			$lancValor .= '<p id="moeda">'.$valor.' D</p>';
 
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 
