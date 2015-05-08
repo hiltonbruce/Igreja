@@ -1235,10 +1235,6 @@ class pendencias {
 
 			if ($inc>1) {$inc=0;}
 		}
-
 	}
 }
-
 ?>
-
-

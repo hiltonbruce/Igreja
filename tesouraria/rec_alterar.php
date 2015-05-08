@@ -8,7 +8,6 @@ if ($_GET['recebeu']<1 && $_GET['tipo']<1) {
 $tab="sistema/atualizar_sistema.php";//link q informa o form quem chamar p atualizar os dados
 $tab_edit='tesouraria/rec_alterar.php&menu=top_tesouraria&tabela=tes_recibo&id='.$_GET["id"].'&pag_mostra='.$_GET["pag_mostra"].'&campo=';//Link de chamada da mesma página para abrir o form de edição do item
 
-
 $rec_alterar = new DBRecord("tes_recibo", $id, "id");
 list($anov, $mesv, $diav) = explode("-", $rec_alterar->data());
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
@@ -19,11 +18,7 @@ if ($diasemissao>'2') {
 	echo 'O prazo para alteração deste recibo está expirado!</span><br />';
 	echo 'Voc&ecirc; poder&aacute editar para um novo ou re-imprimir como está.</h2>';
 }
-
 ?>
-<form method="get" action="">
-	
-</form>
 <div id="tabs">
 	<ul>
 	  <li><a <?PHP link_ativo($_GET["rec"], "1");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=1"><span>Membros da Igreja</span></a></li>
@@ -35,8 +30,8 @@ if ($diasemissao>'2') {
 </div>
 <fieldset>
 	<div id="lst_cad">
-		<table width="100%">
-	      <tr style="background-color: transparent;">
+		<table class='table table-condensed'>
+	      <tr>
 			<td>Nome do Beneficiado:
 				<?PHP
 					switch ($rec_alterar->tipo)
@@ -46,8 +41,8 @@ if ($diasemissao>'2') {
 							$recebeu = $beneficiado->nome();
 							$form = new formmembro("recebeu",$recebeu,$tab,$tab_edit);
 							$form->formcab();
-							$form->getMostrar($rec_alterar->recebeu());	
-							
+							$form->getMostrar($rec_alterar->recebeu());
+
 							break;
 						case 2:
 							$beneficiado = new DBRecord("credores", $rec_alterar->recebeu(), "id");
@@ -55,7 +50,7 @@ if ($diasemissao>'2') {
 							$recebeu_CNPJ = $beneficiado->cnpj_cpf();
 							$nome = new editar_form("recebeu",$recebeu,$tab,$tab_edit);
 							$nome->getMostrar();
-												
+
 							if ($_GET["campo"]=='recebeu'){
 								?>
 									<form name="fornec" id="fornec" action="" method="post">
@@ -70,8 +65,7 @@ if ($diasemissao>'2') {
 									<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >
 									</form>
 								<?php
-							}				
-							
+							}
 							break;
 						default:
 							$recebeu = $rec_alterar->recebeu();
@@ -87,7 +81,7 @@ if ($diasemissao>'2') {
 			?>
 			</td>
 		</tr>
-		<tr style="background-color: transparent;">
+		<tr>
 	        <td>Motivo do pagamento:
 			<?PHP
 			$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
@@ -99,11 +93,10 @@ if ($diasemissao>'2') {
 				$nome = new editar_form("fonte",$rec_alterar->fonte(),$tab,$tab_edit);
 				$fonte = new DBRecord("fontes", $rec_alterar->fonte(), "id");
 				echo "<p><a href='./?escolha={$tab_edit}fonte&fonte={$rec_alterar->fonte()}'>".$fonte->discriminar()."</a></p>";
-				
-				if ($_GET["campo"]=="fonte"){				
+				if ($_GET["campo"]=="fonte"){
 					?>
 					<form name="fornec" id="fornec" action="" method="post">
-					<?php		
+					<?php
 						$for_num = new List_sele ("fontes", "discriminar", "fonte");
 		 				echo $for_num->List_Selec ($ind++,$_GET['fonte'],'class="form-control"');
 					?>
@@ -113,26 +106,23 @@ if ($diasemissao>'2') {
 					<input name="id" id="id" type="hidden" value="<?php echo $id;?>">
 					<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >
 					</form>
-				<?php 
+				<?php
 				}
 				?>
-			
 			</td>
 	      </tr>
 	      <tr style="background-color: transparent;">
-	        <td>Data da emiss&atilde;o: 
+	        <td>Data da emiss&atilde;o:
 	        <?PHP
 			$nome = new editar_form("data",$rec_alterar->data(),$tab,$tab_edit);
 			echo "<p>".conv_valor_br ($rec_alterar->data())."</p>";
 			?>
 			</td>
-			<td>Valor: 
+			<td>Valor:
 	        <?PHP
 			$nome = new editar_form("valor",$rec_alterar->valor(),$tab,$tab_edit);
 			echo "<p><a href='./?escolha={$tab_edit}valor'>R$ ".number_format($rec_alterar->valor(),2,",",".")."</a></p>";
 			$nome->getEditar();
-			
-	
 			?>
 			</td>
 			<td></td>
@@ -145,7 +135,7 @@ if ($diasemissao>'2') {
 				}else {
 					$rec_igreja = new DBRecord('igreja',$rec_alterar->igreja(),'rol');
 					echo "<p><a href='./?escolha={$tab_edit}igreja&igreja={$rec_igreja->rol()}'>".$rec_igreja->razao()."</a></p>";}
-											
+
 				if ($_GET["campo"]=="igreja"){
 				?>
 				  <form id="form1" name="form1" method="post" action="">
@@ -176,11 +166,10 @@ if ($diasemissao>'2') {
 				require_once 'forms/alt_rec.php';
 			?>
 		</tr>
-	    </table>	
+	    </table>
 	   </div>
 </fieldset>
-<?php			
-	
+<?php
 }else {
 	$listarecibos = new menutes();
 	//echo '<h1>Recebeu --> '.$_GET['recebeu'].'</h1';

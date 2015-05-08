@@ -20,34 +20,31 @@ if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 $dia1 ='';$dia15 ='';$diaOutros ='';
 $cor=true;$cor1=true;$cor2=true;
 foreach ($listaPgto as $chave => $valor) {
-	
+
+	$referente = $_POST['referente'].' - '.$valor['nomeFunc'];
 	$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 	$bgcolor1 = $cor1 ? 'class="dados"' : 'class="odd"';
 	$bgcolor2 = $cor2 ? 'class="dados"' : 'class="odd"';
 	$bgcolor3 = $cor3 ? 'class="dados"' : 'class="odd"';
 	$bgcolor4 = $cor4 ? 'class="dados"' : 'class="odd"';
 	$bgcolor5 = $cor5 ? 'class="dados"' : 'class="odd"';
-	$bgcolor6 = $cor6 ? 'class="dados"' : 'class="odd"';$bgcolor7 = $cor7 ? 'class="dados"' : 'class="odd"';
-	
-	
-	
-	
+	$bgcolor6 = $cor6 ? 'class="dados"' : 'class="odd"';
+	$bgcolor7 = $cor7 ? 'class="dados"' : 'class="odd"';
+
 	if (!empty($_POST['grupo']) && $valor['pgto']=='0') {
 		$vlrPgto = false;
 	}else {
 		$vlrPgto = true;
 	}
-	
-	
+
 	$pgto	= ($valor['pgto']>'0') ? $valor['pgto']:'<span class="btn btn-success btn-xs">Voluntário</span>';
-	
-	
+
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
   	$nomeDiaPgto = $valor['diapgto'];
-	
+
 	$remove = '<a href="./?#" title="Remover!"> <span class="glyphicon glyphicon-remove"> </span></a>';
 	$nomeMembro = sprintf ("%s %'05u - %s ",$remove,$valor['rolMembro'],$nomeMembro);
-	
+
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
 		//Lista do Ministério
 		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
@@ -153,7 +150,7 @@ foreach ($listaPgto as $chave => $valor) {
 			require $demaisPgto;
 		}
 	}
-	
+
 //echo '<br />'.$indice.' -- > ';
 //print_r($valor);
 }

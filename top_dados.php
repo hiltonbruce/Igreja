@@ -1,9 +1,7 @@
-<?php 
+<?php
 	//Primeira fase para retirada da sess�o como indece de acesso para listar os dados do membro
 	require_once 'views/secretaria/menuTopDados.php';
 ?>
-	
-
 	<table>
 		<tr>
 			<td width = "8%"><form id="form1" name="form1" method="get" action="" >
@@ -19,15 +17,13 @@
 			  ?></label>
 			  </td>
 			<td width = "15%">
-			  
 			  <input name="bsc_rol" type="text" id="bsc_rol"   class="form-control" title="Insira o Rol" value="<?PHP echo $bsc_rol; ?>"/>
 			  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
 	  		</td>
 			<td>
 			  <input type="submit" name="Submit2"  class="btn btn-primary btn-sm" value="Listar..." title="Click aqui para listar os dados do Membro" />
-			</form>	
+			</form>
 			</td>
-	
 			<td>
 	  <a href="./?escolha=<?PHP echo $_GET["escolha"];?>&bsc_rol=<?PHP echo $anterior;?>" >
 	  <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-chevron-left"></span>
@@ -39,7 +35,7 @@
 	  <button class="btn btn-default btn-sm">&nbsp;Pr&oacute;ximo Registro&nbsp;
 	  <span class="glyphicon glyphicon-chevron-right"></span></button></a></td>
 			<td>
-	  <?PHP if ($_GET["escolha"]<>"adm/cartao.php" && $_GET["escolha"]<>"adm/dados_cartas.php") {//O script cartao_print.php possui op��o pr�pria para impress�o ?> 
+	  <?PHP if ($_GET["escolha"]<>"adm/cartao.php" && $_GET["escolha"]<>"adm/dados_cartas.php") {//O script cartao_print.php possui op��o pr�pria para impress�o ?>
 	    <a href="relatorio/ficha.php" title="Imprimir ficha completa">
 	 		<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span>
 	 		&nbsp;Ficha 1</button>
@@ -53,13 +49,13 @@
 	  <?PHP } ?>
 		</tr>
 	</table>
-	
-	<?php 
-	  
+
+	<?php
+
 		require_once 'forms/autocompleta.php';
-		
+
 		if (!(strstr($_GET["escolha"], "dados_pessoais.php") || strstr($_GET["escolha"], "cartao.php")) && isset($_SESSION["membro"]))
 		{
-			echo 'Membro: '.$_SESSION["membro"].' - Cargo: '.cargo($bsc_rol).' - Congrega: '.$igreja->razao();	
-		}		
+			echo 'Membro: '.$_SESSION["membro"].' - Cargo: '.cargo($bsc_rol).' - Congrega: '.$igreja->razao();
+		}
 		?>
