@@ -39,34 +39,41 @@ function histLancamentos ($igreja,$mes,$ano) {
 
 		$lancAtual = $linha['lancamento'];
 
-		if ($lancAtual!=$lancamento && $lancamento!='') {
+		if ($lancAtual!=$lancamento && $lancamento!='') { //Verificar se ainda estar no mesmo lançamento
 			if ($valorCaixaDeb<=0) {
 				$CaixaDep='';
 			}
-
+			$valores='';
+			$valorCaixaDeb = number_format($valorCaixaDeb,2,',','.');
+			$lancValorCaixa = '<p id="moeda">'.$valorCaixaDeb.'C</p>';//Formata o valor p/ ser apresentado
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
 			$dataLanc  .= $dtLanc.' </span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$CaixaDep.$titulo1;
+			$historico  = '<strong>Hist&oacute;rico:</strong>'.$historico;
 			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
-			<td style="width:18%;">'.$lancValor.'</td></tr>';
+			<td style="width:18%;"><p><br/>'.$lancValorCaixa.$lancValor.'</p></td></tr>';
 			$cor = !$cor;
 			$referente  = '';
-			$titulo1  = '';$lancValor = '';$valorCaixaDeb=0;
+			$titulo1  = '';$lancValor = '';$valorCaixaDeb=0;$historico='';
 		}
 
 		$dtLanc = $linha['data'];
-		$historico  = '<p>Hist&oacute;rico: '.$linha['referente'].', '.$dadosIgreja[$linha['igreja']]['nome'].'</p>';
+		if ($histAnterior!=$linha['referente']) {
+			$historico  .= '<p>'.$linha['referente'].', '
+						.$dadosIgreja[$linha['igreja']]['nome'].'</p>';
+		}
 		$lancamento = $lancAtual;
-
+		$histAnterior = $linha['referente'];
 
 			$valorCaixaDeb += $linha['valor'];
-			$CaixaDep  = '<p>'.$conta[$linha['debitar']]['codigo'].' &bull; '.$conta[$linha['debitar']]['titulo'].'</p>';
-			$valor = number_format($valorCaixaDeb,2,',','.');
-			$lancValor = '<p id="moeda"><br/><br/>'.$valor.'C</p>';
+			$CaixaDep  = '<p>'.$conta[$linha['debitar']]['codigo'].' &bull; '
+							.$conta[$linha['debitar']]['titulo'].'</p>';
 
-			$titulo1  .= '<p>'.$conta[$linha['creditar']]['codigo'].' &bull; '.$conta[$linha['creditar']]['titulo'].'</p>';
+			$titulo1  .= '<p>'.$conta[$linha['creditar']]['codigo'].' &bull; '
+							.$conta[$linha['creditar']]['titulo'].'</p>';
 			$valor = number_format($linha['valor'],2,',','.');
-			$lancValor .= '<p id="moeda">'.$valor.' D</p>';
+			$valores ='<p id="moeda">'.$valor.' D</p>';//Valores das demais cta's que não sejam do caixa
+			$lancValor .= $valores;
 
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 
@@ -81,7 +88,6 @@ function histLancamentos ($igreja,$mes,$ano) {
 		}
 
 	$resultado = array($tabela,$lancConfirmado);
-
 	return $resultado;
 	}
 

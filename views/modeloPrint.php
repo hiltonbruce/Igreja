@@ -7,15 +7,16 @@
 <link rel="stylesheet" type="text/css" href="../../tesouraria/style.css" />
 <link rel="stylesheet" type="text/css" href="../../tabs.css" />
 <link rel="stylesheet" type="text/css" href="../../css/print.css" />
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.print.css" />
 <link rel="icon" type="image/gif" href="../../br_igreja.jpg">
 </head>
-<body>  
+<body>
 <div id="header">
 	<p>
 	<?PHP
 	//print_r($igreja);
 	echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
-	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?> 
+	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?>
 	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
     <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>

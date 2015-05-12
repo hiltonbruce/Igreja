@@ -1,6 +1,6 @@
 *{ margin: 0; padding: 0; }
 
-body,table {
+body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -11,9 +11,9 @@ body,table {
 	background-repeat:no-repeat;
 	background-position:center;
 }
-	
+
 	#container { margin: 1em auto; width: 800px; text-align: left;}
-	
+
 	#header { width:auto; height: 80px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
 	 background-position: left bottom; margin: 0; padding: 0 0 0 10px; text-align:right;}
 	#header p { position:relative;width:400px; height: 100%; padding: 0 0 0 10px; text-align:right;float: right;}
@@ -24,19 +24,19 @@ body,table {
 	text-align:left;
 	font-size: 20px;
 }
-	
+
 #content { height: auto; margin: 1px 0 0; padding: 0; }
-	
+
 #footer {
-	color: #636466; 
-	font-size: 0.8em; 
+	color: #636466;
+	font-size: 0.8em;
 	text-align: right;
-	clear: both;  
+	clear: both;
 }
 
-#footer a { 
-	color: #636466; 
-	text-decoration: underline 
+#footer a {
+	color: #636466;
+	text-decoration: underline
 }
 
 a:link:after, a:visited:after {
@@ -106,7 +106,7 @@ a:link:after, a:visited:after {
 	float:left;
 	text-shadow: 1px 1px #FFFFFF;
 	background-color: #F5F5F5;
-	color:#9A9A9A; 
+	color:#9A9A9A;
 	border: 1px solid #CCC;
 	width:134px;
 	height:140px;
@@ -114,16 +114,16 @@ a:link:after, a:visited:after {
 	text-align:center;
 }
 
-h1{ 
+h1{
 	color: #0000FF;
 	font-size: 300%;
-	font-weight: normal; 
-	text-align: left; 
-	height: 50px; 
-	padding-top: 25px; 
+	font-weight: normal;
+	text-align: left;
+	height: 50px;
+	padding-top: 25px;
 	padding-left: 20px;
 	font-family:"Times New Roman", Times, serif;
-	
+
 }
 h2 { font-size: 120%; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
 h3, legend { color: #3366FF; font-size: 150%; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px;}

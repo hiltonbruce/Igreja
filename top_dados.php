@@ -1,10 +1,11 @@
 <?php
 	//Primeira fase para retirada da sess�o como indece de acesso para listar os dados do membro
 	require_once 'views/secretaria/menuTopDados.php';
+	$foco = (empty($_GET['bsc_rol'])) ? 'autofocus="autofocus"' : '';
 ?>
-	<table>
+	<table class='table'>
 		<tr>
-			<td width = "8%"><form id="form1" name="form1" method="get" action="" >
+			<td><form id="form1" name="form1" method="get" action="" >
 			<label>
 			<?PHP
 			  echo $campo_rol;//valor recebido do script index.php
@@ -16,8 +17,9 @@
 			  }
 			  ?></label>
 			  </td>
-			<td width = "15%">
-			  <input name="bsc_rol" type="text" id="bsc_rol"   class="form-control" title="Insira o Rol" value="<?PHP echo $bsc_rol; ?>"/>
+			<td>
+			  <input name="bsc_rol" type="text" id="bsc_rol" class="form-control"
+			  <?PHP echo $foco;?> title="Insira o Rol" value="<?PHP echo $bsc_rol; ?>"/>
 			  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
 	  		</td>
 			<td>

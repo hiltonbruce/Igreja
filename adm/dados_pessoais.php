@@ -46,29 +46,29 @@ if (!empty($_GET['bsc_rol'])) {
 		<?PHP
 			$nome = new editar_form("nome",$arr_dad["nome"],$tab,$tab_edit);
 			$_SESSION["membro"]=$arr_dad["nome"];
-			
+
 			echo situacao ($arr_dad["situacao_espiritual"]);//Mostra o estado do membro: se Em comunhão, disciplinado, falecido...
-			
+
 			$nome->getMostrar();
 		?></td>
 		<td rowspan="3" align="center"><?PHP
 					//echo " - Idade: ";
-			
+
 			$mes = date ('m') - date('m',$arr_dad["nasc"]);
 			$dia = date ('d') - $arr_dad["dia"];
-			
+
 			/*
-			 * 
+			 *
 			 * Calcular a idade do membro
-			 * 
+			 *
 			 * */
 			$dataAtual = new DateTime('NOW');
 			$dataNasc  = new DateTime($arr_dad["nasc"]);
 			$diferenca = $dataNasc->diff($dataAtual);
 			//print_r($dataNasc);
 			//echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
-			
-			
+
+
 			if ($diferenca->y>1) {
 				echo $diferenca->y.' Anos, ';
 			}elseif ($diferenca->y>0){
@@ -85,8 +85,8 @@ if (!empty($_GET['bsc_rol'])) {
 				echo $diferenca->d.' dia<br/>';
 			}
 			//echo $dataNasc->format('Y-m').' FormatoNasc<br/>';
-			
-			
+
+
 		?><div><?PHP print mostra_foto();?></div></td>
       </tr>
       		<?php $nome->getEditar();?><!-- Mostra form para nome -->
@@ -137,14 +137,14 @@ if (!empty($_GET['bsc_rol'])) {
       </tr>
       <tr>
         <td colspan="2">Naturalidade:
-          <?PHP		
+          <?PHP
 		//inicio
 		$cidade = new DBRecord ("cidade",$arr_dad["naturalidade"],"id");
-		
+
 		echo $arr_dad["naturalidade"];
 		$nome = new editar_form("naturalidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-		
+
 		if ($_GET["campo"]=="naturalidade"){
 		?>
 		<form id="form3" name="form3" method="post" action="">
@@ -152,7 +152,7 @@ if (!empty($_GET['bsc_rol'])) {
 		<input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
 		<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
 		<?PHP
-			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_nasc"],"coduf","nome","naturalidade");	
+			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_nasc"],"coduf","nome","naturalidade");
 			$vlr_linha=$lst_cid->ListDados ($ind++);
 		?>
 		<input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
@@ -160,7 +160,7 @@ if (!empty($_GET['bsc_rol'])) {
         </form>
 		<?PHP
 		}
-		
+
 		//fim
 		?>		</td>
         <td colspan="2">UF:
@@ -189,14 +189,14 @@ if (!empty($_GET['bsc_rol'])) {
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
         <td>Cidade:
-          <?PHP		
+          <?PHP
 		//inicio
 		$cidade = new DBRecord ("cidade",$arr_dad["cidade"],"id");
-		
+
 		echo $arr_dad["cidade"];
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-		
+
 		if ($_GET["campo"]=="cidade"){
 		?>
           <form id="form3" name="form3" method="post" action="">
@@ -204,7 +204,7 @@ if (!empty($_GET['bsc_rol'])) {
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
             <?PHP
-			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_resid"],"coduf","nome","cidade");	
+			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_resid"],"coduf","nome","cidade");
 			$vlr_linha=$lst_cid->ListDados ($ind++);
 		?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
@@ -212,18 +212,18 @@ if (!empty($_GET['bsc_rol'])) {
           </form>
         <?PHP
 		}
-		
+
 		//fim
 		?></td>
 		<td colspan="2">Bairro:
-          <?PHP		
+          <?PHP
 		//inicio
 		$bairro = new DBRecord ("bairro",$arr_dad["bairro"],"id");
-		
+
 		echo $arr_dad["bairro"]." - ".$bairro->bairro();
 		$nome = new editar_form("bairro",$bairro->bairro(),$tab,$tab_edit);
 		$nome->getMostrar();
-		
+
 		if ($_GET["campo"]=="bairro"){
 		?>
           <form id="form3" name="form3" method="post" action="">
@@ -231,7 +231,7 @@ if (!empty($_GET['bsc_rol'])) {
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
             <?PHP
-			$lst_bairro = new sele_cidade("bairro",$arr_dad["cidade"],"idcidade","bairro","bairro");	
+			$lst_bairro = new sele_cidade("bairro",$arr_dad["cidade"],"idcidade","bairro","bairro");
 			$vlr_bairro=$lst_bairro->ListDados ($ind++);
 		?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
@@ -239,7 +239,7 @@ if (!empty($_GET['bsc_rol'])) {
           </form>
         <?PHP
 		}
-		
+
 		//fim
 		?></td>
       </tr>
@@ -287,7 +287,7 @@ if (!empty($_GET['bsc_rol'])) {
 		<?PHP
 		$nome = new editar_form("graduacao",$arr_dad["graduacao"],$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
-		?>		</td>		
+		?>		</td>
         <td colspan="2">Escolaridade:
 		<?PHP
 		$nome = new editar_form("escolaridade",$arr_dad["escolaridade"],$tab,$tab_edit);
@@ -326,12 +326,12 @@ if (!empty($_GET['bsc_rol'])) {
 			<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
 		  <input type="submit" name="Submit2" value="Alterar" tabindex="<?PHP echo $ind++;?>" />
 	      </label>
-		</form>		
+		</form>
 		<?PHP
 		}
 		?>		</td>
       </tr>
-      
+
       <tr>
         <td colspan="4">Pend&ecirc;ncias:
           <p>
