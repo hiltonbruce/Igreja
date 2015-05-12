@@ -16,7 +16,7 @@ ver_cad();
 		if (!empty($arr_dad["rol"])) {
 	?>
 <div id="lst_cad">
-	<table class='table'>
+	<table>
       <tr>
         <td colspan="2">Conjugue:
 		<?PHP

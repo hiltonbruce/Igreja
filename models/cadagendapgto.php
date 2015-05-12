@@ -92,7 +92,8 @@ if ($credor!='' && $datven && $numcredor) {
 		$motivo 	= $_POST['motivo0'];
 		$vencimento	= br_data($_POST['vencimento0'], 'Vencimento');
 
-		$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s','%s','','%s','','','','%s'",$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
+		$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s','','%s','%s','','','','%s'",
+			$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
 		echo $dadosagenda.' *** <br />';
 		$agenda= new insert ($dadosagenda,"agenda");
 		echo $agenda->inserir();

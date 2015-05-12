@@ -5,7 +5,10 @@
  */
 require_once '../../func_class/funcoes.php';
 require_once "../../func_class/classes.php";
+require_once "../../models/tes/tes_conta.class.php";
 conectar();
+$grupoContas = new tes_conta ();
+$tituloCta = $grupoContas->contasGrupos();
 $q = mysql_real_escape_string( $_GET['q'] );
 
 $sqllinhas = "SELECT * FROM contas where locate('$q',titulo) > 0  AND acesso > '0' ";
@@ -30,8 +33,10 @@ while( $campo = mysql_fetch_array( $res ) )
 	}else {
 		$tipo = 'Credora';
 	}
-	$grupoCta = new DBRecord('contas', $campo['nivel2'], 'codigo');
-	$nomeGrp =  htmlentities($grupoCta->titulo(),ENT_QUOTES,'iso-8859-1');
+	$grupoCta4 = $tituloCta[$campo['nivel4']];
+	$nomeGrp4 =  $grupoCta4['titulo'];
+	$grupoCta = $tituloCta[$campo['nivel2']];
+	$nomeGrp =  $grupoCta['titulo'];
 	$endereco .=',  Tipo: '.$tipo;
 	$sigla = $campo['acesso'];
 	$detalhe = htmlentities($campo['descricao'],ENT_QUOTES,'iso-8859-1');
@@ -40,10 +45,11 @@ while( $campo = mysql_fetch_array( $res ) )
 	$html = preg_replace("/(" . $q . ")/i", "<U style='font-weight:bold'>\$1</U>", $estado);
 	$estado = strtoupper(strtr( $campo['titulo'], '·‡„‚ÈÍÌÛıÙ˙¸Á','¡¿√¬… Õ”’‘⁄‹«'));
 	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$detalhe');\">$acesso - $html ($nomeGrp)</li>\n";
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$detalhe');\">$acesso &#9679; $html ($nomeGrp &#10148; $nomeGrp4)</li>\n";
 }
 if ($linhas>10) {
 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
 	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
+	print_r($nomeGrp);
 }
 ?>

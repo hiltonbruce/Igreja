@@ -32,7 +32,7 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 	if (!empty($_GET["bsc_rol"]))
 	{
 	?>
-	<table class='table table-condensed'>
+	<table>
       <tr>
         <td>Tipo:
           <?PHP
@@ -111,7 +111,11 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 					<?php
 				}
 			}else{
-				echo "<h3>N&acirc;o h&aacute; registro de nenhuma carta para este membro</h3>";
+                echo '<div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3>Sem registro</h3>
+                     Nenhuma carta encontrada para este membro!
+                    </div>';
 			}
 		?></td>
         <td>&nbsp;</td>

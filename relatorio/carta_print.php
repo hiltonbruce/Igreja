@@ -12,6 +12,8 @@
 	$cidadeNatal	= new DBRecord ("cidade",$membro->naturalidade(),"id");
 	$cid_batismo 	= new DBRecord ("cidade",$ecles->local_batismo(),"id");
     $rol 			= $_POST["bsc_rol"];
+    $cpf = (strlen($profissional->cpf())=='14') ? $profissional->cpf() : '*********' ;
+
 
     if ($igreja->cidade()>0) {
     		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -97,7 +99,7 @@
 			</tr>
 			<tr>
 				<td><h4><small>RG:</small><br><?php print $profissional->rg(); ?></h4></td>
-				<td><h4><small>CPF:</small><br><?php print $profissional->cpf(); ?></h4></td>
+				<td><h4><small>CPF:</small><br><?php echo $cpf; ?></h4></td>
 				<td><h4><small>Data de Nasc.:</small><br><?php print conv_valor_br($membro->datanasc()); ?></h4></td>
 				<td><h4><small>Naturalidade:</small><br><?php print $cidadeNatal->nome().'-'.$cidadeNatal->coduf(); ?></h4></td>
 				<td><h4><small>Batismo</small><br><?php print conv_valor_br($ecles->batismo_em_aguas()); ?></h4></td>
