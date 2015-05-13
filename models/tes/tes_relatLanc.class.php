@@ -35,24 +35,25 @@ function histLancamentos ($igreja,$mes,$ano) {
 	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaDep='';
 
 	while ($linha = mysql_fetch_array($dquery)) {
-		$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
-
+		$bgcolor = 'class="odd"';
 		$lancAtual = $linha['lancamento'];
 
 		if ($lancAtual!=$lancamento && $lancamento!='') { //Verificar se ainda estar no mesmo lançamento
 			if ($valorCaixaDeb<=0) {
 				$CaixaDep='';
 			}
+
+			//$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
 			$valores='';
 			$valorCaixaDeb = number_format($valorCaixaDeb,2,',','.');
 			$lancValorCaixa = '<p id="moeda">'.$valorCaixaDeb.'C</p>';//Formata o valor p/ ser apresentado
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
 			$dataLanc  .= $dtLanc.' </span> <span class="badge">'.$numLanc.'</span></p>';
-			$referente .= $dataLanc.$CaixaDep.$titulo1;
-			$historico  = '<strong>Hist&oacute;rico:</strong>'.$historico;
-			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
-			<td style="width:18%;"><p><br/>'.$lancValorCaixa.$lancValor.'</p></td></tr>';
-			$cor = !$cor;
+			$referente .= $dataLanc;
+			$referente .= $CaixaDep.$titulo1;
+			$historico  = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
+			$tabela .= '<tr '.$bgcolor.'><td colspan="2">'.$referente.$historico.'</td></tr>';
+			//$cor = !$cor;
 			$referente  = '';
 			$titulo1  = '';$lancValor = '';$valorCaixaDeb=0;$historico='';
 		}
@@ -66,11 +67,13 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$histAnterior = $linha['referente'];
 
 			$valorCaixaDeb += $linha['valor'];
-			$CaixaDep  = '<p>'.$conta[$linha['debitar']]['codigo'].' &bull; '
-							.$conta[$linha['debitar']]['titulo'].'</p>';
+			$CaixaDep  = '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
+							.$conta[$linha['debitar']]['titulo']
+							.'</td><td class="text-right">'.number_format($valorCaixaDeb,2,',','.').'</td></tr>';
 
-			$titulo1  .= '<p>'.$conta[$linha['creditar']]['codigo'].' &bull; '
-							.$conta[$linha['creditar']]['titulo'].'</p>';
+			$titulo1  .= '<tr><td>'.$conta[$linha['creditar']]['codigo'].' &bull; '
+							.$conta[$linha['creditar']]['titulo']
+							.'</td><td class="text-right">'.number_format($linha['valor'],2,',','.').'</td></tr>';
 			$valor = number_format($linha['valor'],2,',','.');
 			$valores ='<p id="moeda">'.$valor.' D</p>';//Valores das demais cta's que não sejam do caixa
 			$lancValor .= $valores;
