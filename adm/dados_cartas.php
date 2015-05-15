@@ -162,6 +162,10 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 		echo '<strong>Você ainda poderá re-imprimir a última!</strong>';
 		echo '</div>';
 	}
+    $cargoIgreja = new tes_cargo();
+    $dadosCargo = $cargoIgreja->dadosArray();
+    //print_r($dadosCargo);
+    //echo $dadosCargo['7']['1']['1']['nome'];
 	?>
 </div>
 <form id="form2" name="form2" method="post" action="relatorio/carta_print.php">
@@ -171,8 +175,8 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
   <div class="col-xs-5">
   <label>Secretário que ir&aacute; assinar a carta:</label>
   <select name="secretario" id="secretario" class='form-control'>
-    <option value="<?PHP echo fun_igreja ($igreja->secretario1());?>"><?PHP echo fun_igreja ($igreja->secretario1());?></option>
-    <option value="<?PHP echo fun_igreja ($igreja->secretario2());?>"><?PHP echo fun_igreja ($igreja->secretario2());?></option>
+    <option value="1"><?PHP echo $dadosCargo['7']['1']['1']['nome'];?></option>
+    <option value="2"><?PHP echo $dadosCargo['7']['1']['2']['nome'];?></option>
   </select></div>
   <!-- Envia o id para a impressão da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o"/>

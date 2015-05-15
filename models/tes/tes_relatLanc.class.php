@@ -32,7 +32,8 @@ function histLancamentos ($igreja,$mes,$ano) {
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 
 	$tabela = '<tbody id="periodo">';
-	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaDep='';
+	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaCentral='';
+	$CaixaMissoes ='';$CaixaOutros='';
 
 	while ($linha = mysql_fetch_array($dquery)) {
 		$bgcolor = 'class="odd"';
@@ -47,15 +48,16 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$valores='';
 			$valorCaixaDeb = number_format($valorCaixaDeb,2,',','.');
 			$lancValorCaixa = '<p id="moeda">'.$valorCaixaDeb.'C</p>';//Formata o valor p/ ser apresentado
-			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
-			$dataLanc  .= $dtLanc.' </span> <span class="badge">'.$numLanc.'</span></p>';
+			$dataLanc  = '<span class="badge">Data do Lan&ccedil;amento: ';
+			$dataLanc  .= $dtLanc.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$numLanc.'</span>';
 			$referente .= $dataLanc;
-			$referente .= $CaixaDep.$titulo1;
+			$referente .= $CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico  = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
-			$tabela .= '<tr '.$bgcolor.'><td colspan="2">'.$referente.$historico.'</td></tr>';
+			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 			//$cor = !$cor;
-			$referente  = '';
-			$titulo1  = '';$lancValor = '';$valorCaixaDeb=0;$historico='';
+			$referente  = '';$CaixaMissoes ='';$CaixaOutros='';$valorMissoes=0;
+			$titulo1  = '';$lancValor = '';$valorCentral=0;$historico='';$CaixaCentral='';
+
 		}
 
 		$dtLanc = $linha['data'];
@@ -66,17 +68,34 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$lancamento = $lancAtual;
 		$histAnterior = $linha['referente'];
 
-			$valorCaixaDeb += $linha['valor'];
-			$CaixaDep  = '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
-							.$conta[$linha['debitar']]['titulo']
-							.'</td><td class="text-right">'.number_format($valorCaixaDeb,2,',','.').'</td></tr>';
+			if ($conta[$linha['debitar']]['codigo']=='1.1.1.001.001') {
+				# Acumula o total para o Caixa Central
+				$valorCentral += $linha['valor'];
+				$CaixaCentral  = '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
+					.$conta[$linha['debitar']]['titulo']
+					.'</td><td class="text-right">'.number_format($valorCentral,2,',','.').'D</td></tr>';
+			} elseif ($conta[$linha['debitar']]['codigo']=='1.1.1.001.002') {
+				# Acumula o total para o Caixa Missões
+				$valorMissoes += $linha['valor'];
+				$CaixaMissoes  = '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
+					.$conta[$linha['debitar']]['titulo']
+					.'</td><td class="text-right">'.number_format($valorMissoes,2,',','.').'D</td></tr>';
+
+			}else {
+				# Cria a linha dos demais débitos
+				$valorOutros = $linha['valor'];
+				$CaixaOutros  .= '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
+					.$conta[$linha['debitar']]['titulo']
+					.'</td><td class="text-right">'.number_format($valorOutros,2,',','.').'D</td></tr>';
+
+			}
 
 			$titulo1  .= '<tr><td>'.$conta[$linha['creditar']]['codigo'].' &bull; '
 							.$conta[$linha['creditar']]['titulo']
-							.'</td><td class="text-right">'.number_format($linha['valor'],2,',','.').'</td></tr>';
+							.'</td><td class="text-right">'.number_format($linha['valor'],2,',','.').'C</td></tr>';
 			$valor = number_format($linha['valor'],2,',','.');
-			$valores ='<p id="moeda">'.$valor.' D</p>';//Valores das demais cta's que não sejam do caixa
-			$lancValor .= $valores;
+			//$valores ='<p id="moeda">'.$valor.' D</p>';//Valores das demais cta's que não sejam do caixa
+			//$lancValor .= $valores;
 
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 
@@ -86,8 +105,8 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
 			$dataLanc  .= $dtLanc.'</span> <span class="badge">'.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$titulo1;
-			$tabela .= '<tr '.$bgcolor.'><td>'.$referente.$historico.'</td>
-			<td id="moeda">'.$lancValor.'</td></tr>';
+			$historico = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
+			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 		}
 
 	$resultado = array($tabela,$lancConfirmado);

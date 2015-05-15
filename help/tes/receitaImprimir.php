@@ -18,12 +18,13 @@ switch ($_GET['rec']) {
 		require_once '../views/modeloPrint.php';
 		break;
 	case '15':
-		$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
+
+		$roligreja = ($_GET['igreja']>0) ? (int)$_GET['igreja'] : 1 ;
+		$igrejaSelecionada = new DBRecord('igreja', $roligreja, 'rol');
 		$titTabela = 'Relatório de Lançamentos';
 		$linkImpressao ='tesouraria/receita.php/?rec=15';
 		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
 		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
-		$roligreja = '1';
 		$tituloColuna5 = 'Valor(R$)';
 		require_once '../models/saldos.php';
 		$nomeArquivo='../views/tesouraria/tabRelatLanc.php';

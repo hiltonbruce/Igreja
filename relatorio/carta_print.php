@@ -1,7 +1,19 @@
 <?PHP
 	session_start();
-	require_once ("../func_class/classes.php");
-	require_once ("../func_class/funcoes.php");
+    require "../func_class/funcoes.php";
+    require "../func_class/classes.php";
+    function __autoload ($classe) {
+
+        list($dir,$nomeClasse) = explode('_', $classe);
+
+        if (file_exists("../models/$dir/$classe.class.php")){
+
+            require_once ("../models/$dir/$classe.class.php");
+        }elseif (file_exists("../models/$classe.class.php")){
+            require_once ("../models/$classe.class.php");
+        }
+
+    }
 	controle("consulta");
   	$carta 			= new DBRecord ("carta",$_POST["id_carta"],"id");
 	$membro 		= new DBRecord ("membro",$_POST['bsc_rol'],"rol");
@@ -14,6 +26,9 @@
     $rol 			= $_POST["bsc_rol"];
     $cpf = (strlen($profissional->cpf())=='14') ? $profissional->cpf() : '*********' ;
 
+    $cargoIgreja = new tes_cargo();
+    $dadosCargo = $cargoIgreja->dadosArray();
+   // print_r($dadosCargo);
 
     if ($igreja->cidade()>0) {
     		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -136,8 +151,8 @@
 	    <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
-	  <div id="secretario"><?PHP echo strtoupper($_POST["secretario"]);?><br />
-      Secret&aacute;rio </div>
+	  <div id="secretario"><?PHP echo  strtoupper($dadosCargo['7']['1'][$_POST["secretario"]]['nome']);?><br />
+      <?php echo $_POST["secretario"].'&ordm; '.$dadosCargo['7']['1']['1']['nomeFunc'];?> </div>
 <br><br><br><br><br><br>
 	<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
 	  <div id="vencimento">Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:

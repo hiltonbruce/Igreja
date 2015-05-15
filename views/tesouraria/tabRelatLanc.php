@@ -1,5 +1,10 @@
 <?php
 	$tabMembros = new membro();
+	$tesSede = $tabMembros->nomes();
+
+	$cargoIgreja = new tes_cargo;
+	$tesArray = $cargoIgreja->dadosArray();
+
 	//tabela com a lista p confirmar lanï¿½amento
 
 	$lancContabil = new tes_relatLanc();
@@ -21,19 +26,12 @@
 		$imprimir='';
 		$dirigenteIgreja = $igrejaSelecionada->pastor();
 
-		if ($idIgreja>'1') {
+		if ($igrejaSelecionada->rol()>'1') {
 			$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
-			$dirigenteIgreja = 'Dirigente: '.$dirCong->nome();
-			$cargoIgreja = new tes_cargo;
-			//print_r($cargoIgreja->dadosArray());
-
-			$tesArray = $cargoIgreja->dadosArray();
-			$tesIgreja = $tesArray['8'][$idIgreja]['1']['nome'];
-			//reset($tesIgreja);
-			//print_r($tesIgreja );
+			$dirigenteIgreja = $dirCong->nome();
+			$tesIgreja = $tesArray['8'][$igrejaSelecionada->rol()]['1']['nome'];//Tesoureiro das congregações
 		}else {
-			$tesSede = $tabMembros->nomes();
-			$tesIgreja = $tesSede['4037']['0'];
+			$tesIgreja = $tesArray['22']['1']['1']['nome'];//Tesoureiro Geral - Central
 		}
 
 		if ($_GET['escolha']=='') {
@@ -43,14 +41,17 @@
 			$fonIni = '<h2>';
 			$fonFim = '</h2>';
 		}
+
 		$titulo  =  $fonIni.$statusLancamento.$fonFim.$fonIni;
-		if ($_GET['igreja']>'0') {
-			$titulo .=  'Igreja: '.$igrejaSelecionada->razao().$fonFim.$fonIni;
-			$titulo .=  'Direção Atual: '.$dirigenteIgreja;
-			$titulo .=  ', 1&ordm; Tesoureiro:'.$tesIgreja.$fonFim;//Tesoureiro
-		}
+		$titulo .=  'Igreja: '.$igrejaSelecionada->razao().$fonFim.$fonIni;
+		$titulo .=  'Direção Atual: '.$dirigenteIgreja;
+		$titulo .=  ', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;//Tesoureiro
+		$titulo .=  'Data de Emiss&atilde;o: '.date('d/m/Y H:i:s');//Tesoureiro
 
 	}
+if (empty($descricoo)) {
+	$descricao='Descrição';
+}
 
 	echo($imprimir);
 
@@ -64,7 +65,7 @@
 			</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">Descrição</th>
+				<th scope="col"><?php echo $descricao;?></th>
 				<th scope="col" class="centro"><?php echo $tituloColuna5;?></th>
 			</tr>
 		</thead>
