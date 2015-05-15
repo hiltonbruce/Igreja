@@ -48,7 +48,7 @@ switch ($_GET['rec']) {
 		require_once ('views/saldos.php');
 		break;
 	case '8':
-		require_once 'forms/tes/histFinanceiro.php';
+		require_once 'forms/tes/filtroContas.php';
 		$titTabela = 'Plano de Contas em: '.date('d/m/Y');
 		require_once 'models/saldos.php';
 		$recLink = '15&tipo=1';
