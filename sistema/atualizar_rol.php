@@ -4,10 +4,10 @@ controle ("atualizar");
 
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
-$query = "select * from {$_POST["tabela"]} ";
+$id = (int)$_POST["id"];
+$query = 'SELECT * FROM '.$_POST["tabela"];
 //echo "ID: ".$_POST["id"]." Campo: ".$_POST["campo"]." Tabela: ".$_POST["tabela"]." Post[Post[campo]]: ".ltrim($_POST[$_POST["campo"]]);
-	$query .="where rol='{$_POST["id"]}'";
-	$id = (int)$_POST["id"];
+$query .=' WHERE rol="'.$id.'"';
 
 $result = mysql_query($query) or die (mysql_error());
 
@@ -42,7 +42,14 @@ $result = mysql_query($query) or die (mysql_error());
 					$atualizador = ltrim($_POST["pastor"]);
 				}
 				break;
-
+			case 'razao':
+				//$atualizador =(int)($_POST["semana"].$_POST["dia"]);
+				if ($id=='1') {
+					$atualizador = ' '.ltrim($_POST["razao"]);
+				} else {
+					$atualizador = ltrim($_POST["razao"]);
+				}
+				break;
 			default:
 				$atualizador = ltrim($_POST[$_POST["campo"]]);
 				break;

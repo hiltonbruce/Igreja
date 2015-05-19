@@ -34,7 +34,8 @@ $ind = 1;
 		     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-control" >
 		     <?php
 			     $estnatal = new List_sele('igreja', 'razao','id');
-			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$_GET["rol"]);
+                 $primLinha = (empty($_GET["rol"])) ? 1 : $_GET["rol"] ;
+			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$primLinha);
 		     ?>
 		     </select>
 		     </form>
