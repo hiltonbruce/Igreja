@@ -45,8 +45,7 @@ $result = mysql_query($query) or die (mysql_error());
 			case 'razao':
 				//$atualizador =(int)($_POST["semana"].$_POST["dia"]);
 					if ($id=='1') {
-						$atualizador = ltrim($_POST["razao"]);
-						$atualizador = ' '.$atualizador;
+						$atualizador = ' '.$_POST["razao"];
 					} else {
 						$atualizador = ltrim($_POST["razao"]);
 					}
