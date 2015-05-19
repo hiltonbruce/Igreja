@@ -44,11 +44,12 @@ $result = mysql_query($query) or die (mysql_error());
 				break;
 			case 'razao':
 				//$atualizador =(int)($_POST["semana"].$_POST["dia"]);
-				if ($id=='1') {
-					$atualizador = ' '.ltrim($_POST["razao"]);
-				} else {
-					$atualizador = ltrim($_POST["razao"]);
-				}
+					if ($id=='1') {
+						$atualizador = ltrim($_POST["razao"]);
+						$atualizador = ' '.$atualizador;
+					} else {
+						$atualizador = ltrim($_POST["razao"]);
+					}
 				break;
 			default:
 				$atualizador = ltrim($_POST[$_POST["campo"]]);
@@ -57,7 +58,6 @@ $result = mysql_query($query) or die (mysql_error());
 
 		$rec->$_POST["campo"] = $atualizador; //Aqui é atribuido a esta variável um valor para UpDate
 		$rec->Update(); //É feita a chamada do método q realiza a atualização no Banco
-
 
 		print "Para:<h3> $atualizador</h3>";
 		echo mysql_error();
