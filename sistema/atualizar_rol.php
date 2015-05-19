@@ -34,6 +34,14 @@ $result = mysql_query($query) or die (mysql_error());
 			case 'ceia':
 				$atualizador =(int)($_POST["semana"].$_POST["dia"]);
 				break;
+			case 'pastor':
+				//$atualizador =(int)($_POST["semana"].$_POST["dia"]);
+				if ($id=='1' && $_POST["pastor"]=='') {
+					$atualizador = ltrim($_POST["nome"]);
+				} else {
+					$atualizador = ltrim($_POST["pastor"]);
+				}
+				break;
 
 			default:
 				$atualizador = ltrim($_POST[$_POST["campo"]]);
