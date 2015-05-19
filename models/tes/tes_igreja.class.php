@@ -23,8 +23,10 @@ class tes_igreja {
 
 	function dataEntrada () {
 
-		$ultimaEntrada  = 'SELECT d.lancamento,d.data,d.mesrefer,d.anorefer,i.cultos FROM dizimooferta AS d,igreja AS i';
-		$ultimaEntrada .= ' WHERE igreja="'.$this->igreja.'" AND i.rol = d.igreja ORDER BY data DESC LIMIT 1';
+		$ultimaEntrada  = 'SELECT d.lancamento,d.data,d.mesrefer,d.anorefer,i.cultos ';
+		$ultimaEntrada .= 'FROM dizimooferta AS d,igreja AS i WHERE igreja="'.$this->igreja.'" ';
+		$ultimaEntrada .= 'AND i.rol = d.igreja ';
+		$ultimaEntrada .= 'ORDER BY data DESC LIMIT 1';
 		$dados = mysql_query($ultimaEntrada);
 		$resUltimoDia = mysql_fetch_array($dados);
 		//print_r($resUltimoDia);

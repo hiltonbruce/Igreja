@@ -19,8 +19,8 @@ switch ($_GET['rec']) {
 		require_once ('forms/lancar.php');
 		break;
 	case '3':
-		require_once ('forms/ofertaEBD.php');
 		require_once 'forms/concluirdiz.php';
+		require_once ('forms/ofertaEBD.php');#Form lançar ofertas Esc Bíblica
 		break;
 	case '5':
 	    $form = 'forms/tes/autoLancarDespesas.php';

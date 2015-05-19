@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
 
 <?php
-$dtlanc = ($_GET['dtlanc']=='') ? date('d/m/Y'):$_GET['dtlanc'];
+//$dtlanc = ($_GET['dtlanc']=='') ? date('d/m/Y'):$_GET['dtlanc'];
 $meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
 $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 ?>
@@ -14,7 +14,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 			<tbody>
 				<tr>
 					<td>
-						<label>Entrada ref. Igreja:</label> 
+						<label>Entrada ref. Igreja:</label>
 						<?php
 						$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 						$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'required="required" autofocus="autofocus" class="form-control" ');
@@ -23,15 +23,15 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					</td>
 					<td><label>Nome:</label><input type="text" name="nome" class="form-control"
 						id="campo_estado" size="50%" tabindex="<?php echo ++$ind;?>" />
-					
+
 					<td><label>Rol:</label> <input type="text" id="rol" name="rol"
-							value="" class="form-control" />
-					
+							value="" class="form-control" tabindex="<?php echo ++$ind;?>"/>
+
 					</td>
 				</tr>
 				<tr>
 					<td> <label>Data:</label> <input type="text" id="data" name="data"
-						class="form-control" value="<?php echo $dtlanc;?>" />
+						class="form-control" value="<?php echo $dtlanc;?>" tabindex="<?php echo ++$ind;?>"/>
 					</td>
 					<td>
      					<div class="row">
@@ -40,7 +40,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';
-						      foreach(arrayMeses() as $mes => $meses) {            
+						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if (date('m')==$mes) {
 								 	$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
@@ -49,32 +49,32 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 						      echo $linha1.$linha2;
 					      ?>
 				      </select>
-						</div>						
+						</div>
      					   <div class="col-xs-4">
 					<label class="control-label">Ano:</label> <input type="text"
 						id="ano" name="ano" value="<?php echo $anolanc;?>"
-						 class="form-control"/>
+						 class="form-control" tabindex="<?php echo ++$ind;?>"/>
 						 </div>
 						</div>
-						 
+
 					</td>
 					<td> <label>Situação e Congreg.</label> <input type="text"
-						disabled="disabled" value=""  id="cong" class="form-control"
+						disabled="disabled" value="" id="cong" class="form-control"
 						 />
 					</td>
 				</tr>
 				<tr>
 					<td> <label>Ofertas:</label> <input type="text" id="oferta0" name="oferta0"
-						value="" tabindex="<?php echo ++$ind;?>" class="form-control" 
+						value="" tabindex="<?php echo ++$ind;?>" class="form-control"
 						placeholder="Valor" />
 					</td>
-					<td><label>Arrecadado pgto de Revistas:</label><input type="text"
+					<td><label>Pgto de Revistas EBD:</label><input type="text"
 						id="oferta2" name="oferta2" value="" placeholder="Aqui não haverá provisão para COMADEP"
 						tabindex="<?php echo ++$ind;?>" class="form-control" />
 					</td>
 					<td><label>Corpo de Prof. da EBD:</label><input type="text"
 						id="oferta1" name="oferta1" value=""
-						tabindex="<?php echo ++$ind;?>" class="form-control" 
+						tabindex="<?php echo ++$ind;?>" class="form-control"
 						placeholder="Valor" />
 					</td>
 				</tr>
@@ -110,7 +110,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-		
+
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value;

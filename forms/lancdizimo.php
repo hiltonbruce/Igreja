@@ -42,32 +42,31 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	<div class="col-xs-6"><label>&nbsp;</label></div>
 	<p>Ou marque uma das sugestões de hist&oacute;rico abaixo</p>
 
-
 	<br />
-	<div class="radio">
+	<div class="checkbox-inline">
 		<label><input type="radio"
 		name="histsug" value="Ref. dízimos nesta data"
 		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos nesta data</label>
 	</div>
-	<div class="radio">
-		 <label>
-		 <input type="radio" name="histsug" value="Ref. dízimos e ofertas nesta data"
+	<div class="checkbox-inline">
+		 <label><input type="radio" name="histsug"
+		 	value="Ref. dízimos e ofertas nesta data"
 		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos e ofertas nesta data</label>
 	</div>
-	<div class="radio">
+	<div class="checkbox-inline">
 		<label><input type="radio" name="histsug"
 		value="Ref. dízimos, ofertas e oferta-extra nesta data"
 		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos, ofertas e oferta-extra
 		nesta data</label>
 	</div>
-		<h3>Com Missões</h3>
-	<div class="radio">
+		<h3><p class="bg-primary">Com Missões:</p></h3>
+	<div class="checkbox-inline">
 		<label><input type="radio" name="histsug"
 		value="Ref. dízimos, ofertas, oferta-extra, votos e ofertas de missões nesta data"
 		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos, ofertas, oferta-extra,
 		votos e ofertas de missões nesta data</label>
 	</div>
-	<div class="radio">
+	<div class="checkbox-inline">
 		<label><input type="radio" name="histsug"
 		value="Ref. dízimos e ofertas de missões nesta data"
 		tabindex="<?PHP echo ++$ind;?>" > Ref. dizimos e ofertas de missões
