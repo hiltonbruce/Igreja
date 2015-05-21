@@ -59,13 +59,16 @@ while( $campo = mysql_fetch_array( $res ) )
 			$sigla .= '<mark>&nbsp;Disciplinado </mark>';
 			break;
 		case '3':
-			$sigla .= '<mark>&nbsp;FALECIDO </mark>';
+			$sigla .= '<mark>&nbsp;Falecio </mark>';
 			break;
 		case '4':
-			$sigla .= '<mark>&nbsp;MUDOU DE IGREJA </mark>';
+			$sigla .= '<mark>&nbsp;Mudou de Igreja </mark>';
+			break;
+		case '5':
+			$sigla .= '<mark>&nbsp;Afastou-se da Igreja </mark>';
 			break;
 		case '6':
-			$sigla .= '<mark>&nbsp;TRANSFERIDO </mark>';
+			$sigla .= '&nbsp;<mark>Transferido</mark> ';
 			break;
 	}
 	$estado = addslashes($estado);

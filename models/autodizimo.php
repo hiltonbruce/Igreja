@@ -72,22 +72,28 @@ echo "<li onselect=\" \">... </li>\n";
 
 while( $campo = mysql_fetch_array( $res ) )
 {
-	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
+	//echo "Id: {$campo['id']}\t{$campo['nomecong']}\t{$campo['estado']}<br />";
 	$id = $campo['celular'];
-	$sigla = $campo['rol'];
+	$nomecong = $campo['rol'];
 	//$ecles = new DBRecord ('eclesiastico',$campo ['rol'],'rol');
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
-	$cargo = cargo($sigla);
+	$cargo = cargo($nomecong);
 	$nomecong = $cargo.' - '.htmlentities($igreja->razao(),ENT_QUOTES,'iso-8859-1');
 	switch ($campo['situacao_espiritual']) {
+		case '2':
+			$nomecong .= '&nbsp;<mark>Disciplinado</mark> ';
+			break;
 		case '3':
-			$nomecong .= '<mark>&nbsp;FALECIDO </mark>';
+			$nomecong .= '&nbsp;<mark>Falecio</mark> ';
 			break;
 		case '4':
-			$nomecong .= '<mark>&nbsp; MUDOU DE IGREJA </mark>';
+			$nomecong .= '&nbsp;<mark>Mudou de Igreja</mark> ';
+			break;
+		case '5':
+			$nomecong .= '&nbsp;<mark>Afastou-se da Igreja</mark> ';
 			break;
 		case '6':
-			$nomecong .= '<mark>&nbsp; TRANSFERIDO </mark>';
+			$nomecong .= '&nbsp;<mark>Transferido</mark> ';
 			break;
 	}
 	$estado = strtoupper(strtr( $campo ['nome'], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
@@ -121,7 +127,7 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$sigla','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
 
 	$quantExibir++;
 
