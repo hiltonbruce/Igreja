@@ -61,6 +61,13 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			echo "<script> alert('O vencimento com data invalida! {$_POST['vencimento']}');</script>";
 		}
 
+		list($cnpj,$razao) = explode(' ',$_POST['nome'] );
+		//echo "<h1>$cnpj</h1>";
+		if ($cnpj!='') {
+			$nomeCredor = new DBRecord ('credores',$cnpj,'cnpj_cpf');
+			$atualizar->credor = $nomeCredor->id();
+		}
+
 		if ($_POST['paraMembro']=='1') {
 			 $atualizar->credor		= 	'r0';
 		}elseif ($_POST['paraCredor']=='1'){
@@ -71,12 +78,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->credor		= 	(int)$_POST['credor'];
 		}
 
-		list($cnpj,$razao) = explode(' ',$_POST['nome'] );
-		//echo "<h1>$cnpj</h1>";
-		if ($cnpj!='') {
-			$nomeCredor = new DBRecord ('credores',$cnpj,'cnpj_cpf');
-			$atualizar->credor = $nomeCredor->id();
-		}
 
 		$atualizar->igreja		= 	$_POST['rolIgreja'];
 		$atualizar->motivo		= 	$_POST['referente'];

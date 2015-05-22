@@ -74,7 +74,7 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['nomecong']}\t{$campo['estado']}<br />";
 	$id = $campo['celular'];
-	$nomecong = $campo['rol'];
+	$rolMembro = $campo['rol'];
 	//$ecles = new DBRecord ('eclesiastico',$campo ['rol'],'rol');
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
 	$cargo = cargo($nomecong);
@@ -127,7 +127,7 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$endereco','$nomecong');\">$html ($nomecong)</li>\n";
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$endereco','444');\">$html ($nomecong)</li>\n";
 
 	$quantExibir++;
 

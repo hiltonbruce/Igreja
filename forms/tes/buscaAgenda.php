@@ -4,6 +4,17 @@
 	}else {
 		$dias=$_GET['altdias'];
 	}
+
+	#Marca a opção da despesa com prazo
+	if (empty($_GET['vencidas']) ) {
+		$vencida2 = 'checked="checked"';
+	} elseif ($_GET['vencidas']=='3') {
+		$vencida3 = 'checked="checked"';
+	}else {
+		$vencida2 = 'checked="checked"';
+		$vencida3 ='';
+	}
+
 ?>
 <fieldset>
 <legend>Busca por Despesas Agendadas</legend>
@@ -66,10 +77,10 @@
 		  <input type="checkbox" name="prazo"> Com prazo determinado
 		</td>
 			<td><label>Com prazo:</label>
-	 		  <input type="radio" name='vencidas' value="2" checked="checked"> Com data vencida ou
+	 		  <input type="radio" name='vencidas' value="2" <?PHP echo $vencida2;?> >Com data vencida ou
 		</td>
 			<td><label>&nbsp;</label>
-	  		<input type="radio" name='vencidas' value="3"> Todas as datas despesas!
+	  		<input type="radio" name='vencidas' value="3" <?PHP echo $vencida3;?> > Todas as datas despesas!
 		</td>
 		</tr>
 		<tr>

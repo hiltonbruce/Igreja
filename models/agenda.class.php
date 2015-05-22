@@ -11,7 +11,7 @@ class agenda {
 		$ind = 0;
 		while($this->dados = mysql_fetch_array($this->agenda))
 		{
-			$mud_acent = strtoupper(strtr($this->dados["nome"], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+			$mud_acent = strtoupper(strtr($this->dados["nome"], '√°√†√£√¢√©√™√≠√≥√µ√¥√∫√º√ß√Å√Ä√É√Ç√â√ä√ç√ì√ï√î√ö√ú√á','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 
 			$todos[$ind++] = $mud_acent;
 
@@ -22,15 +22,15 @@ class agenda {
 
 	function insdespmes(){
 
-		//verifica o mÍs da ultima conta e inseri as atuais e as que estiverem com
-		//vencimento atÈ o dia 10 de cada mÍs ser· inserida j· para o prÛximo mÍs
+		//verifica o m√™s da ultima conta e inseri as atuais e as que estiverem com
+		//vencimento at√© o dia 10 de cada m√™s ser√° inserida j√° para o pr√≥ximo m√™s
 		$ins_conta = 'SELECT * FROM agenda WHERE frequencia = "1" AND status <> "3" GROUP BY idfatura';
 		$lista = mysql_query($ins_conta);
 
 		while ($contas = mysql_fetch_array($lista)) {
 			//$despesaMes = '';
 			list($ano, $mes, $dia) = explode("-", $contas['vencimento']);
-			//echo '<br/>dia: '.$dia.' - MÍs: '.$mes.' - Ano: '.$ano;
+			//echo '<br/>dia: '.$dia.' - M√™s: '.$mes.' - Ano: '.$ano;
 
 			//$fatura += 1;
 			$fatura = ($contas['idfatura']>'0') ? $contas['idfatura']:++$fatura;
@@ -48,12 +48,12 @@ class agenda {
 
 				$mesvenc = (date('m',mktime() - mktime(0,0,0,$mesv,$diav,$anov)));
 				//corrigir os dados da tabela agenda para unificar os fornecedores
-				//adiciona campo vencimento na confirmaÁ„o de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
+				//adiciona campo vencimento na confirma√ß√£o de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
 				//Acrescentar busca por igreja, motivo, fonecedor
 				for ($i = 1; $i <= $mesvenc; $i++) {
 					$value	 = sprintf("'','%s','%s','%s','%s','','%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
 					$value 	.=',"'. $id['valor'].'","","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
-					$value	.='","'.$id['resppgto'].'","","","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro autom·tico"';
+					$value	.='","'.$id['resppgto'].'","","","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro autom√°tico"';
 					$agendamento = new insert ("$value","agenda");
 					$agendamento->inserir();/**/
 					if (strstr($id['credor'], '@')) {
@@ -87,7 +87,7 @@ class agenda {
 		$paginacao_fix = Array();
 		$paginacao_fix['link'] = "?"; //Pagina??o na mesma p?gina
 
-		//Faz os calculos na paginaÁ„o
+		//Faz os calculos na pagina√ß√£o
 		$sql2_fix = mysql_query ($query_fix) or die (mysql_error());
 		$total_fix = mysql_num_rows($sql2_fix) ; //Retorna o total de linha na tabela
 		$paginas_fix = ceil ($total_fix/$nmpp_fix); //Retorna o total de p?ginas
@@ -124,7 +124,7 @@ class agenda {
 			<th scope="col">Igreja</th>
 			<th scope="col">Motivo</th>
 			<th scope="col">Valor (R$)</th>
-			<th scope="col">SituaÁ„o</th>
+			<th scope="col">Situa√ß√£o</th>
 			<th scope="col">Vencimento</th>
 		</tr>
 	</thead>
@@ -146,13 +146,13 @@ class agenda {
 
 		switch ($coluna_fix['status']) {
 			case 1:
-				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser· realizado hoje!" width="16" height="16"/>Saiu p/ Pgto';
-				$titulo = 'Pagamento ser· realizado hoje!';
+				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser√° realizado hoje!" width="16" height="16"/>Saiu p/ Pgto';
+				$titulo = 'Pagamento ser√° realizado hoje!';
 				break;
 			case 2:
-				$status = '<img src="img/yes.png" alt="DÌvida Paga! Obrigado." width="16" height="16"/>Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
+				$status = '<img src="img/yes.png" alt="D√≠vida Paga! Obrigado." width="16" height="16"/>Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
 				$status .= ' - '.$coluna_fix['resppgto'];
-				$titulo = 'DÌvida Paga! Obrigado.';
+				$titulo = 'D√≠vida Paga! Obrigado.';
 				break;
 			case 3:
 				$status = 'Quitado';
@@ -160,14 +160,14 @@ class agenda {
 				break;
 			default:
 				if (date("Y-m-d")==$coluna_fix['vencimento']) {
-					$status .= '<img src="img/exclamacao.png" alt="DÌvida n„o Paga!" width="16" height="16" />Pgto Hoje!';
-					$titulo = 'DÌvida n„o Paga!';
+					$status .= '<img src="img/exclamacao.png" alt="D√≠vida n√£o Paga!" width="16" height="16" />Pgto Hoje!';
+					$titulo = 'D√≠vida n√£o Paga!';
 				}elseif (date("Y-m-d")>$coluna_fix['vencimento']){
-					$status .= '<img src="img/not.png" alt="DÌvida Vencida!" width="16" height="16" />Vencida!';
-					$titulo = 'DÌvida Vencida!';
+					$status .= '<img src="img/not.png" alt="D√≠vida Vencida!" width="16" height="16" />Vencida!';
+					$titulo = 'D√≠vida Vencida!';
 				}else {
-					$status .= '<img src="img/exclamacao.png" alt="DÌvida a Pagar!" width="16" height="16" />¿ Pagar';
-					$titulo = 'DÌvida a Pagar!';
+					$status .= '<img src="img/exclamacao.png" alt="D√≠vida a Pagar!" width="16" height="16" />√Ä Pagar';
+					$titulo = 'D√≠vida a Pagar!';
 				}
 				break;
 		}
@@ -211,7 +211,7 @@ class agenda {
 	$_rod_fix = new rodape($paginas_fix,$_GET["pagina1_fix"],"pagina1_fix",$_urlLi_fix,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_fix->getRodape(); $_rod_fix->form_rodape ("P&aacute;gina:");
 
-	//InÌcio das pendencias de disciplinados
+	//In√≠cio das pendencias de disciplinados
 	}
 
 	function mostra10dias (){
@@ -229,7 +229,7 @@ class agenda {
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
 
-		//Faz os calculos na paginaÁ„o
+		//Faz os calculos na pagina√ß√£o
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
@@ -249,25 +249,25 @@ class agenda {
 
 		//inicia o cabe?alho de pagina??o
 
-		?>
-<table cellspacing="0" id="Agenda">
-	<colgroup>
-		<col id="Credor">
-		<col id="Motivo">
-		<col id="Valor (R$)">
-		<col id="situacao">
-		<col id="albumCol" />
-	</colgroup>
-	<thead>
-		<tr>
-			<th scope="col">Credor(es)</th>
-			<th scope="col">Motivo</th>
-			<th scope="col">Valor(R$)</th>
-			<th scope="col">SituaÁ„o</th>
-			<th scope="col">Vencimento</th>
-		</tr>
-	</thead>
-	<tbody id="recibos">
+	?>
+	<table cellspacing="0" id="Agenda">
+		<colgroup>
+			<col id="Credor">
+			<col id="Motivo">
+			<col id="Valor (R$)">
+			<col id="situacao">
+			<col id="albumCol" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col">Credor(es)</th>
+				<th scope="col">Motivo</th>
+				<th scope="col">Valor(R$)</th>
+				<th scope="col">Situa√ß√£o</th>
+				<th scope="col">Vencimento</th>
+			</tr>
+		</thead>
+		<tbody id="recibos">
 	<?PHP
 	$inc_pen=0;
 	while($coluna_pen = mysql_fetch_array($sql3_pen))
@@ -284,10 +284,10 @@ class agenda {
 
 		switch ($coluna_pen['status']) {
 			case 1:
-				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser· realizado hoje!" width="16" height="16"/> Saiu p/ Pgto';
+				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser√° realizado hoje!" width="16" height="16"/> Saiu p/ Pgto';
 				break;
 			case 2:
-				$status = '<img src="img/yes.png" alt="DÌvida Paga! Obrigado." width="16" height="16"/> Pago em: '.conv_valor_br ($coluna_pen['datapgto']);
+				$status = '<img src="img/yes.png" alt="D√≠vida Paga! Obrigado." width="16" height="16"/> Pago em: '.conv_valor_br ($coluna_pen['datapgto']);
 				$status .= ', por '.$coluna_pen['resppgto'];
 				break;
 			case 3:
@@ -295,11 +295,11 @@ class agenda {
 				break;
 			default:
 				if (date("Y-m-d")==$coluna_pen['vencimento']) {
-					$status .= '<img src="img/exclamacao.png" alt="DÌvida n„o Paga!" width="16" height="16" /> Pgto Hoje!';
+					$status .= '<img src="img/exclamacao.png" alt="D√≠vida n√£o Paga!" width="16" height="16" /> Pgto Hoje!';
 				}elseif (date("Y-m-d")>$coluna_pen['vencimento']){
-					$status .= '<img src="img/not.png" alt="DÌvida Vencida!" width="16" height="16" /> Vencida';
+					$status .= '<img src="img/not.png" alt="D√≠vida Vencida!" width="16" height="16" /> Vencida';
 				}else {
-					$status .= '<img src="img/exclamacao.png" alt="DÌvida a Pagar!" width="16" height="16" /> ¿ Pagar';
+					$status .= '<img src="img/exclamacao.png" alt="D√≠vida a Pagar!" width="16" height="16" /> √Ä Pagar';
 				}
 				break;
 		}
@@ -340,7 +340,7 @@ class agenda {
 	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
 
-	//InÌcio das pendencias de disciplinados
+	//In√≠cio das pendencias de disciplinados
 	}
 
 	function periodo ($dia,$credor,$pagamento) {
@@ -368,15 +368,15 @@ class agenda {
 
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 
-			if ($periodo_dados['status']=='2') {//Marca os j· pagos
-				$evento = '<img src="img/yes.png" alt="DÌvida Paga! Obrigado." width="16" height="16"/> ';
-				$titulo = 'DÌvida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+			if ($periodo_dados['status']=='2') {//Marca os j√° pagos
+				$evento = '<img src="img/yes.png" alt="D√≠vida Paga! Obrigado." width="16" height="16"/> ';
+				$titulo = 'D√≠vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmaÁ„o de pgto!" width="16" height="16"/> ';
-				$titulo = 'Atualizado. Aguardado confirmaÁ„o de pgto! Motivo: '.$periodo_dados['motivo'];
+				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/> ';
+				$titulo = 'Atualizado. Aguardado confirma√ß√£o de pgto! Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="DÌvida vencida!" width="16" height="16"/> ';
-				$titulo = 'DÌvida vencida! Motivo: '.$periodo_dados['motivo'];
+				$evento = '<img src="img/not.png" alt="D√≠vida vencida!" width="16" height="16"/> ';
+				$titulo = 'D√≠vida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];
@@ -459,15 +459,15 @@ class agenda {
 
 		while ($contas = mysql_fetch_array($listvenc_array)) {
 
-			if ($contas['status']=='2') {//Marca os j· pagos
-				$evento = '<img src="img/yes.png" alt="DÌvida Paga! Obrigado." width="16" height="16"/>';
-				$titulo = 'DÌvida Paga! Obrigado.';
+			if ($contas['status']=='2') {//Marca os j√° pagos
+				$evento = '<img src="img/yes.png" alt="D√≠vida Paga! Obrigado." width="16" height="16"/>';
+				$titulo = 'D√≠vida Paga! Obrigado.';
 			}elseif ($contas['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmaÁ„o de pgto!" width="16" height="16"/>';
-				$titulo = 'Atualizado. Aguardado confirmaÁ„o de pgto!';
+				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/>';
+				$titulo = 'Atualizado. Aguardado confirma√ß√£o de pgto!';
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="DÌvida vencida!" width="16" height="16"/>';
-				$titulo = 'DÌvida vencida!';
+				$evento = '<img src="img/not.png" alt="D√≠vida vencida!" width="16" height="16"/>';
+				$titulo = 'D√≠vida vencida!';
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -499,23 +499,31 @@ class agenda {
 
 	function motivo($motivo,$credor) { //Lista contas agendas por motivo
 		$filtrarCredor = ((int)$credor!='') ? ' a.credor = "'.$credor.'" AND ':'';
-		$listvenc  = 'SELECT f.razao, a.vencimento, a.valor, a.id, a.status, ';
+
+		if (strstr($credor, 'r')) {
+			$credor = trim($credor,"membro@");
+			$opCredor = 'f.id=a.credor';
+		} else {
+			$opCredor = 'f.id=a.credor';
+		}
+
+		$listvenc  = 'SELECT a.vencimento, a.valor, a.id, a.status, ';
 		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, a.status ';
-		$listvenc .= 'FROM agenda AS a, credores AS f, igreja AS i  WHERE f.id=a.credor AND '.$filtrarCredor;
+		$listvenc .= 'FROM agenda AS a, igreja AS i  WHERE '.$filtrarCredor;
 		$listvenc .= 'i.rol=a.igreja AND motivo LIKE "%'.$motivo.'%"';
 		$listvenc_array = mysql_query($listvenc);
 
 		while ($contas = mysql_fetch_array($listvenc_array)) {
 
-			if ($contas['status']=='2') {//Marca os j· pagos
-				$evento = '<img src="img/yes.png" alt="DÌvida Paga! Obrigado." width="16" height="16"/>';
-				$titulo = 'DÌvida Paga! Obrigado. Motivo:'.$contas['motivo'];
+			if ($contas['status']=='2') {//Marca os j√° pagos
+				$evento = '<img src="img/yes.png" alt="D√≠vida Paga! Obrigado." width="16" height="16"/>';
+				$titulo = 'D√≠vida Paga! Obrigado. Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmaÁ„o de pgto!" width="16" height="16"/>';
-				$titulo = 'Atualizado. Aguardado confirmaÁ„o de pgto! Motivo:'.$contas['motivo'];
+				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/>';
+				$titulo = 'Atualizado. Aguardado confirma√ß√£o de pgto! Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="DÌvida vencida!" width="16" height="16"/>';
-				$titulo = 'DÌvida vencida! Motivo:'.$contas['motivo'];
+				$evento = '<img src="img/not.png" alt="D√≠vida vencida!" width="16" height="16"/>';
+				$titulo = 'D√≠vida vencida! Motivo:'.$contas['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -560,15 +568,15 @@ class agenda {
 
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 
-			if ($periodo_dados['status']=='2') {//Marca os j· pagos
-				$evento = '<img src="img/yes.png" alt="DÌvida Paga! Obrigado." width="16" height="16"/> ';
-				$titulo = 'DÌvida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+			if ($periodo_dados['status']=='2') {//Marca os j√° pagos
+				$evento = '<img src="img/yes.png" alt="D√≠vida Paga! Obrigado." width="16" height="16"/> ';
+				$titulo = 'D√≠vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmaÁ„o de pgto!" width="16" height="16"/> ';
-				$titulo = 'Atualizado. Aguardado confirmaÁ„o de pgto! Motivo: '.$periodo_dados['motivo'];
+				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/> ';
+				$titulo = 'Atualizado. Aguardado confirma√ß√£o de pgto! Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="DÌvida vencida!" width="16" height="16"/> ';
-				$titulo = 'DÌvida vencida! Motivo: '.$periodo_dados['motivo'];
+				$evento = '<img src="img/not.png" alt="D√≠vida vencida!" width="16" height="16"/> ';
+				$titulo = 'D√≠vida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];
