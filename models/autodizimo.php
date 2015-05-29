@@ -96,6 +96,7 @@ while( $campo = mysql_fetch_array( $res ) )
 			$nomecong .= '&nbsp;<mark>Transferido</mark> ';
 			break;
 	}
+	$exibiCong = strip_tags($nomecong);
 	$estado = strtoupper(strtr( $campo ['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco = strtoupper(strtr( $campo ['rol'],'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	//$endereco .=', '.$campo['numero'];
@@ -127,7 +128,7 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$endereco','444');\">$html ($nomecong)</li>\n";
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$endereco','$exibiCong');\">$html ($nomecong)</li>\n";
 
 	$quantExibir++;
 
