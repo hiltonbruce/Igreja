@@ -673,14 +673,18 @@ class editar_form {
             case 'secretario1':
                 if ($this->valor>0) {
                     $nomeSecr1 = new DBRecord ('membro',$this->valor,'rol');
+                    echo $msgExibir.' - '.$nomeSecr1->nome().'</a></p>';
+                }else {
+                    echo $msgExibir.'</a></p>';
                 }
-                echo $msgExibir.' - '.$nomeSecr1->nome().'</a></p>';
                 break;
             case 'secretario2':
                 if ($this->valor>0) {
                     $nomeSecr2 = new DBRecord ('membro',$this->valor,'rol');
+                    echo $msgExibir.' - '.$nomeSecr2->nome().'</a></p>';
+                }else {
+                    echo $msgExibir.'</a></p>';
                 }
-                echo $msgExibir.' - '.$nomeSecr2->nome().'</a></p>';
                 break;
 
             default:
