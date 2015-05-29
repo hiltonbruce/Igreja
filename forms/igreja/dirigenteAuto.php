@@ -1,15 +1,28 @@
 
 
 <!-- Desenvolvido por Wellington Ribeiro -->
+<?php
+	switch ($_GET['campo']) {
+		case 'secretario1':
+			$labelCampo = '1 &ordm; Secret&aacute;rio';
+			break;
+		case 'secretario2':
+			$labelCampo = '2 &ordm; Secret&aacute;rio';
+			break;
 
+		default:
+			$labelCampo = 'Dirigente';
+			break;
+	}
+?>
 			<tr>
-				<td colspan="2"><label>Nome:</label> <input type="text" name="nome"
+				<td colspan="2"><label><?php echo $labelCampo;?></label> <input type="text" name="nome"
 				id="campo_estado" size="30%" class="form-control"
-				placeholder="Nome do membro da igreja para iniciarmos a busca no cadastro!" 
+				placeholder="Nome do membro da igreja para iniciarmos a busca no cadastro!"
 				autofocus="autofocus" tabindex="<?php echo ++$ind;?>" />
 				</td>
-				<td><label>Rol:</label> <input type="text" id="rol" name="pastor" tabindex="<?php echo ++$ind;?>" 
-					class="form-control" placeholder="N&ordm; do membro na igreja" />
+				<td><label>Rol:</label> <input type="text" id="rol" name="pastor" tabindex="<?php echo ++$ind;?>"
+					class="form-control" placeholder="N&ordm; no rol do <?PHP echo $labelCampo ;?>" />
 				</td>
 			</tr>
 			<tr>
@@ -30,7 +43,7 @@
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-		
+
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value;

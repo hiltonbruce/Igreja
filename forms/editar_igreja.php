@@ -20,7 +20,6 @@ $tab_edit="forms/editar_igreja.php&tabela=$tabela&rol={$igreja->rol()}&campo=";/
 
 $ind = 1;
 
-
 	if (!empty($_GET["rol"]))
 	{
 		?>
@@ -45,17 +44,12 @@ $ind = 1;
         <td colspan="2" >Dire&ccedil;&atilde;o:
         <?PHP
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
-			echo '<p><a title="Click aqui para alaterar este campo!"';
+			echo '<p><a title="Click aqui para alterar este campo!"';
 			echo 'href="./?escolha='.$tab_edit.'pastor" autofocus="autofocus" >'.$dirigente.'</a></p>';
-
 		echo '</td><td>';
-
-
 		echo 'Rol: <p>'.$igreja->pastor().'</p>';
-
 		?></td>
 		<?php
-
 			if (!empty($_GET['campo']) && $_GET['campo']=='pastor') {
 
 				$cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
@@ -67,40 +61,37 @@ $ind = 1;
 				echo '<input type="hidden" name="id" value="'.$cong.'">';
 				require_once 'forms/igreja/dirigenteAuto.php';
 				echo '</form>';
-
 			}
-
 		?>
       </tr>
       <tr>
         <td >Rol 1 &ordm; Secret&aacute;rio: :
         <?PHP
 			$nome = new editar_form("secretario1",$igreja->secretario1(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();//$nome->getEditar();
 		?></td>
-        <td>Rol 2&ordm; Secret&aacute;rio:
+        <td colspan='2'>Rol 2&ordm; Secret&aacute;rio:
         <?PHP
 			$nome = new editar_form("secretario2",$igreja->secretario2(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
-		?></td>
-        <td>Setor:
-        <?PHP
-			$nome = new editar_form("setor",$igreja->setor(),$tab,$tab_edit);
-			$nome->getMostrar();
-			if ($_GET['campo']=='setor'){
-				echo "
-						<form method='post' action='' id='formbairro'>
-							<input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
-							<input name='id' type='hidden' id='id' value='{$igreja->rol}'  />
-							<input name='tabela' type='hidden' value='igreja' />
-							<input name='campo' type='hidden' value='setor' />";
-				$setor = new setor(++$ind);
-				echo "
-							<input type='submit' name='Submit' value='Alterar' tabindex='{++$ind}' />
-						</form>
-						";
-			}
-		?></td>
+			$nome->getMostrar();//$nome->getEditar();
+		?>
+        <?php
+
+            if (!empty($_GET['campo']) && ($_GET['campo']=='secretario1' || $_GET['campo']=='secretario2')) {
+
+                $cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
+
+                echo '<form id="form1" name="form1" method="post" action="">';
+                echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
+                echo '<input type="hidden" name="campo" value="'.$_GET['campo'].'">';
+                echo '<input type="hidden" name="tabela" value="igreja">';
+                echo '<input type="hidden" name="id" value="'.$cong.'">';
+                require_once 'forms/igreja/dirigenteAuto.php';
+                echo '</form>';
+
+            }
+
+        ?>
       </tr>
       <tr>
         <td >CNPJ
@@ -225,8 +216,26 @@ $ind = 1;
       </tr>
 
 
-      <tr>
-        <td colspan="4">C&iacute;rculo de Ora&ccedil;&atilde;o:
+      <tr></td>
+        <td>Setor:
+        <?PHP
+            $nome = new editar_form("setor",$igreja->setor(),$tab,$tab_edit);
+            $nome->getMostrar();
+            if ($_GET['campo']=='setor'){
+                echo "
+                        <form method='post' action='' id='formbairro'>
+                            <input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
+                            <input name='id' type='hidden' id='id' value='{$igreja->rol}'  />
+                            <input name='tabela' type='hidden' value='igreja' />
+                            <input name='campo' type='hidden' value='setor' />";
+                $setor = new setor(++$ind);
+                echo "
+                            <input type='submit' name='Submit' value='Alterar' tabindex='{++$ind}' />
+                        </form>
+                        ";
+            }
+        ?></td>
+        <td colspan="3">C&iacute;rculo de Ora&ccedil;&atilde;o:
             <?PHP
                 require_once 'forms/igreja/alterarDiaOracao.php'
             ?>

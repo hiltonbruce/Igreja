@@ -54,7 +54,9 @@ $result = mysql_query($query) or die (mysql_error());
 				$atualizador = ltrim($_POST[$_POST["campo"]]);
 				break;
 		}
-
+		if ($_POST["campo"]=='secretario1' || $_POST["campo"]=='secretario2') {
+			$atualizador = trim($_POST["pastor"]);
+		}
 		$rec->$_POST["campo"] = $atualizador; //Aqui é atribuido a esta variável um valor para UpDate
 		$rec->Update(); //É feita a chamada do método q realiza a atualização no Banco
 

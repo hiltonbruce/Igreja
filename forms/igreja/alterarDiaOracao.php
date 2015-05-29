@@ -22,17 +22,17 @@
      ?>
      <form method='post' action='' id='Oracao' class=''><p>
           <label class="radio-inline">
-          <input type="radio" id="dia" name="oracao" <?php echo $mak2;?> value="2" tabindex = "<?php echo ++$ind; ?>" >Toda Segunda</label>
+          <input type="radio" id="dia" name="oracao" <?php echo $mak2;?> value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label>
           <label class="radio-inline">
-          <input type="radio" id="dia" name="oracao" <?php echo $mak3;?> value="3" tabindex = "<?php echo ++$ind; ?>" >Toda Ter&ccedil;a</label>
+          <input type="radio" id="dia" name="oracao" <?php echo $mak3;?> value="3" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label>
           <label class="radio-inline">
-          <input type="radio" id="dia" name="oracao" <?php echo $mak4;?> value="4" tabindex = "<?php echo ++$ind; ?>" >Toda Quarta</label>
+          <input type="radio" id="dia" name="oracao" <?php echo $mak4;?> value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label>
           <label class="radio-inline">
-          <input type="radio" id="dia" name="oracao" <?php echo $mak5;?> value="5" tabindex = "<?php echo ++$ind; ?>" >Toda Quinta</label>
+          <input type="radio" id="dia" name="oracao" <?php echo $mak5;?> value="5" tabindex = "<?php echo ++$ind; ?>" >Quinta</label>
           <label class="radio-inline">
-          <input type="radio" id="dia" name="oracao" <?php echo $mak6;?> value="6" tabindex = "<?php echo ++$ind; ?>" >Toda Sexta</label>
+          <input type="radio" id="dia" name="oracao" <?php echo $mak6;?> value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label>
           <label class="radio-inline">
-          <input type="radio" id="dia" name="oracao" <?php echo $mak7;?> value="7" tabindex = "<?php echo ++$ind; ?>" >Todo S&aacute;bado</label>
+          <input type="radio" id="dia" name="oracao" <?php echo $mak7;?> value="7" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label>
           <input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
           <input name='tabela' type='hidden' value='igreja' />
           <input name='id' type='hidden' value='<?php echo $igreja->rol();?>' />

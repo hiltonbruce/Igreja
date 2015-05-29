@@ -663,12 +663,30 @@ class editar_form {
 		if (empty($this->valor)){
 			$this->valor = "N&atilde;o Informado!";
 		}
+        $msgExibir = '<p><a title="Click aqui para alaterar este campo!" href="./?escolha='.$this->link_form.'" tabindex="$ind++" >'.$this->valor;
+        switch ($this->vlr_get) {
+            case 'situacao_espiritual':
+                echo '<p><a title="Click aqui para alterar este registro!"'
+                    .'href="./?escolha=adm/dados_disciplina.php&bsc_rol='.$_GET["bsc_rol"].'&novo=novo"'
+                    .'tabindex="'.$ind++.'" >'.$this->valor.'</a></p>';
+                break;
+            case 'secretario1':
+                if ($this->valor>0) {
+                    $nomeSecr1 = new DBRecord ('membro',$this->valor,'rol');
+                }
+                echo $msgExibir.' - '.$nomeSecr1->nome().'</a></p>';
+                break;
+            case 'secretario2':
+                if ($this->valor>0) {
+                    $nomeSecr2 = new DBRecord ('membro',$this->valor,'rol');
+                }
+                echo $msgExibir.' - '.$nomeSecr2->nome().'</a></p>';
+                break;
 
-		if ($this->vlr_get == "situacao_espiritual") {
-			echo "<p><a title='Click aqui para alterar este registro!' href='./?escolha=adm/dados_disciplina.php&novo=novo'  tabindex='$ind++' >{$this->valor}</a></p>";
-		}else {
-			echo "<p><a title='Click aqui para alaterar este campo!' href='./?escolha={$this->link_form}'  tabindex='$ind++' >{$this->valor}</a></p>";
-		}
+            default:
+                echo $msgExibir.'</a></p>';
+                break;
+        }
 	}
 
 }
