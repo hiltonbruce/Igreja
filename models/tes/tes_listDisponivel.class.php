@@ -6,7 +6,7 @@ class tes_listDisponivel extends List_sele {
 		$this->tabela = 'contas';//
 		$this->campo_retorno = 'acesso';//Campo que serï¿½ retornado
 		$this->texto_field = 'acesso';//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
-		$this->query = 'SELECT * from '.$this->tabela.' WHERE tipo="D" saldo > "0"';
+		$this->query = 'SELECT * from '.$this->tabela.' WHERE tipo="D" AND saldo > "0"';
 
 		$this->sql_lst = mysql_query($this->query.' AND nivel3="1.1.1" AND acesso>"0" ORDER BY codigo ');
 	}
