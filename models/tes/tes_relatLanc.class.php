@@ -15,12 +15,12 @@ function histLancamentos ($igreja,$mes,$ano) {
 	while ($ctas = mysql_fetch_array($queryContas)) {
 		$conta[$ctas['id']] = array ('acesso'=>$ctas['acesso'],'titulo'=>$ctas['titulo'],'codigo'=>$ctas['codigo']);
 	}
-
+/*
 	$queryIgrejas = mysql_query('SELECT rol,razao FROM igreja') or die (mysql_error());
 	while ($igrejaNome = mysql_fetch_array($queryIgrejas)) {
 		$dadosIgreja[$igrejaNome['rol']] = array ('nome'=>$igrejaNome['razao']);
 	}
-
+*/
 	//print_r ($conta);
 	if ($igreja>'0' ) {
 		$opIgreja= $this->var_string.' AND l.igreja = "'.$igreja.'"';
@@ -28,15 +28,15 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$opIgreja = $this->var_string;
 	}
 
-	$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.lancamento,l.debitar';
+	$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.data,l.lancamento,l.debitar';
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 
-	$tabela = '<tbody id="periodo">';
+	$tabela = '<tbody>';
 	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaCentral='';
 	$CaixaMissoes ='';$CaixaOutros='';
 
 	while ($linha = mysql_fetch_array($dquery)) {
-		$bgcolor = 'class="odd"';
+		//$bgcolor = 'class="odd"';
 		$lancAtual = $linha['lancamento'];
 
 		if ($lancAtual!=$lancamento && $lancamento!='') { //Verificar se ainda estar no mesmo lançamento
@@ -52,7 +52,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 			$dataLanc  .= $dtLanc.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$numLanc.'</span>';
 			$referente .= $dataLanc;
 			$referente .= $CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
-			$historico  = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
+			$historico  = '<tr class=""><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 			//$cor = !$cor;
 			$referente  = '';$CaixaMissoes ='';$CaixaOutros='';$valorMissoes=0;
@@ -63,7 +63,7 @@ function histLancamentos ($igreja,$mes,$ano) {
 		$dtLanc = $linha['data'];
 		if ($histAnterior!=$linha['referente']) {
 			$historico  .= '<p>'.$linha['referente'].', '
-						.$dadosIgreja[$linha['igreja']]['nome'].'</p>';
+						.$linha['razao'].'</p>';
 		}
 		$lancamento = $lancAtual;
 		$histAnterior = $linha['referente'];
@@ -103,8 +103,8 @@ function histLancamentos ($igreja,$mes,$ano) {
 
 		if ($titulo1 != '') {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
-			$dataLanc  .= $dtLanc.'</span> <span class="badge">'.$numLanc.'</span></p>';
-			$referente .= $dataLanc.$titulo1;
+			$dataLanc  .= $dtLanc.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$numLanc.'</span></p>';
+			$referente .= $dataLanc.$CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 		}

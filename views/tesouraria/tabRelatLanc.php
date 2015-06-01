@@ -22,8 +22,10 @@
 		$imprimir .= '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 		$imprimir .= '</span> Imprimir ...</button> </a>';
 		$titulo='';
+		$rodape = '';
 	}else {
 		$imprimir='';
+		$rodape = '<tfoot><tr><th>Rubricar:</th><th>Data:</th></tr></tfoot>';
 		$dirigenteIgreja = $igrejaSelecionada->pastor();
 
 		if ($igrejaSelecionada->rol()>'1') {
@@ -56,12 +58,12 @@ if (empty($descricoo)) {
 	echo($imprimir);
 
 ?>
-<table class='table'>
+<table class='table table-hover table-bordered'>
 		<caption class="text-left">
 			<?php echo $titulo;?></caption>
 			<colgroup>
-				<col id="descrição">
-				<col id="albumCol"/>
+				<col id="albumCol">
+				<col id="valor"/>
 			</colgroup>
 		<thead>
 			<tr>
@@ -70,9 +72,8 @@ if (empty($descricoo)) {
 			</tr>
 		</thead>
 			<?php
-				echo $tabLancamento;
+				echo $tabLancamento.$rodape;
 			?>
-			<tfoot><tr><th>Rubricar:</th><th>Data:</th></tr></tfoot>
 </table>
 <?php
 //print_r($tabMembros->nomes());

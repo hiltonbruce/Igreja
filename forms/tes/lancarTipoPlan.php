@@ -10,27 +10,13 @@
  	</p>
   </div>
 <form method='post'><div class="alert alert-info" role="alert">
-	<table class='table'>
-		<tbody>
-			<tr>
-				<td>
-					<label><strong>Pagamento realizado pela fonte: </strong></label>
-						<select name="disponivel" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
-							<?php
-								$bsccredor = new tes_listDisponivel();
-								$listaIgreja = $bsccredor->List_Selec($_GET['acesso']);
-								echo $listaIgreja;
-							?>
-					</select>
-				</td>
-				<td>
-					<label>Data</label>
-					<input name='data' id='data' class='form-control' value='<?php echo date('d/m/Y');?>'
-					  tabindex='<?PHP echo ++$ind; ?>' />
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-xs-3">
+			<label>Data do lan&ccedil;amento</label>
+			<input name='data' id='data' class='form-control' value='<?php echo date('d/m/Y');?>'
+			  tabindex='<?PHP echo ++$ind; ?>' />
+	  	</div>
+	</div>
 	<?PHP
 		$titTabela = 'Contas de Despesas';
 		require_once 'help/tes/lancTipoPlan.php';

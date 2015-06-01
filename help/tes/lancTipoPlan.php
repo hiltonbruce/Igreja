@@ -1,5 +1,7 @@
 <?php
 $ctaDespesa = new tes_despesas();
+$bsccredor = new tes_listDisponivel();
+$listaFonte = $bsccredor->List_Selec($_GET['acesso']);
 $dia1 ='';$listDesp = '';
 $cor=true;
 //print_r($ctaDespesa->dadosArray());
@@ -17,9 +19,14 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 }
 	if (strlen($valor['codigo'])=='13') {
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
+		//lista dos caixas disponíveis para pgto
+		$fontesPgto  = '<label><strong>Caixa p/ Pgto: </strong></label>';
+		$fontesPgto .= '<select name="disponivel'.$chave.'" class="form-control" >';
+		$fontesPgto .= $listaFonte;
+		$fontesPgto .= '</select>';
 		//Lista das despesas disponíveis
 		$dia1 .='<tr '.$bgcolor.'><td>'.$valor['codigo'].'-<abbr title="'.$valor['descricao'].'">'
-		.$valor['titulo'].$conta.'</abbr></td>	<td>'.$campoHist.'</td>
+		.$valor['titulo'].$conta.'</abbr><p>'.$fontesPgto.'</p></td>	<td>'.$campoHist.'</td>
 		<td><label>Igreja</label>'.$listaIgreja.
 		'</td><td>'.$campoValor.'</td></tr>';
 		$cor = !$cor;

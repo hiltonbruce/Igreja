@@ -7,7 +7,7 @@ body {
 #header { width:90%; height: 75px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
 	 background-position: left bottom; margin: 0; padding: 0 10px 0 10px;}
 	#header p { width:auto; height: auto; float: right; padding: 5px 50px 0 3px; text-align:right;}
-	
+
 .clear {
   clear: both;
 }
@@ -91,15 +91,15 @@ td#moeda {
 	color:#ccc;
 }
 #footer {
-	color: #636466; 
-	font-size: 0.8em; 
-	height: 50px; 
-	background-repeat: no-repeat; 
-	background-position: top; 
-	text-align: left; 
-	clear: both; 
-	margin: 0; 
-	padding-top: 25px; 
+	color: #636466;
+	font-size: 0.8em;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-position: top;
+	text-align: left;
+	clear: both;
+	margin: 0;
+	padding-top: 25px;
 	padding: 10px 0 0 0;
 	background-image: url(../img/horbar.jpg);
     background-size: 100% 30px;

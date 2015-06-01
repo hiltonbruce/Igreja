@@ -61,7 +61,7 @@ a:link:after, a:visited:after {
 }
 
 col {
-	border-right: 1px solid #666666;
+	border-right: 1px solid #000000;
 }
 
 col#albumCol {
