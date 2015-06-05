@@ -12,9 +12,7 @@
 <form method='post'><div class="alert alert-info" role="alert">
 	<div class="row">
 		<div class="col-xs-3">
-			<label>Data do lan&ccedil;amento</label>
-			<input name='data' id='data' class='form-control' value='<?php echo date('d/m/Y');?>'
-			  tabindex='<?PHP echo ++$ind; ?>' />
+
 	  	</div>
 	</div>
 	<?PHP

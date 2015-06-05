@@ -1,22 +1,8 @@
 <strong><?php echo $titTabela;?></strong>
-<table id="horario"  class="table table-bordered">
-		<colgroup>
-				<col id="Acesso">
-				<col id="Historico">
-				<col id="Igreja">
-				<col id="Valor">
-			</colgroup>
+
 			<?php
 				echo $nivel1;
 			?>
-		<tfoot>
-			<?php
-				echo '<tr id="total">';
-				echo '<td colspan="3" id="moeda" ></td><td><button class="btn btn-primary">Lan&ccedil;ar!</button></td></tr>';
-
-			?>
-		</tfoot>
-	</table>
 </div>
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
