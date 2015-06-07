@@ -24,7 +24,7 @@ switch ($_GET['rec']) {
 		break;
 	case '5':
 	    $form = 'forms/tes/autoLancarDespesas.php';
-		require_once ('forms/tes/lancarTipoPlan.php');
+		require_once ('forms/tes/lancarTipoPlan.php');#Form lançar despesas tipo planilha
 		break;
 	case '6'://Relatório COMADEP
 		require_once 'help/tes/relatorioComadep.php';

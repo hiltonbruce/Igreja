@@ -5,12 +5,13 @@ $listaFonte = $bsccredor->List_Selec($_GET['acesso']);
 $dia1 ='';$listDesp = '';
 $cor=true;
 $lancar = '<br /><br /><button class="btn btn-primary">Lan&ccedil;ar!</button>';
-$dataLan = '<label>Data do lan&ccedil;amento</label>'.
-			'<input name="data" id="data" class="form-control" value="'.date('d/m/Y').'"';
 
 //print_r($ctaDespesa->dadosArray());
 foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 	//Variéveis para montagem do form
+
+	$dataLan = '<label>Data do lan&ccedil;amento</label>'.
+			'<input name="data'.$chave.'" class="form-control dataclass" value="'.date('d/m/Y').'"';
 	$campoHist = '<label>Hit&oacute;rico</label><textarea name="hist'.$chave.'" class="form-control"></textarea>';
 	$bsccredor = new List_sele('igreja', 'razao','rolIgreja'.$chave);
 	$listaIgreja = $bsccredor->List_Selec('',$_GET['igreja'],'class="form-control" required="required" autofocus="autofocus" ');

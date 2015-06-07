@@ -181,6 +181,7 @@
 jQuery(function($) {
       $.mask.definitions['~']='[+-]';
       $('#data').mask('99/99/9999');
+      $('.dataclass').mask('99/99/9999');
       $('#expedicao').mask('99/99/9999');
       $('#venc').mask('99/99/9999');
       $('#ano').mask('9999');
