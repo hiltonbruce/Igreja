@@ -9,9 +9,7 @@
 
 	date_default_timezone_set('America/Recife');
 
-
 	function __autoload ($classe) {
-
 		list($dir,$nomeClasse) = explode('_', $classe);
 		//$dir = strtr( $classe, '_','/' );
 

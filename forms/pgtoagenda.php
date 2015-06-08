@@ -107,23 +107,27 @@
 					</td>
 				</tr>
 				<tr>
+					<?PHP
+						$ctaDespesa = new DBRecord ('contas',$itemagenda->debitar(),'acesso');
+					?>
 					<td colspan="3">Despesas com:<br /> <input type="text" name="cta" class="form-control"
 						id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
-						placeholder="Qual a Despesa?"/>
+						placeholder="Qual a Despesa?" value='<?php echo $ctaDespesa->titulo();?>'/>
 					</td>
 				</tr>
 				<tr>
 					<td>Código/tipo:<br /> <input type="text" id="estado_val" class="form-control"
-						name="estado_val" disabled="disabled" value="" />
+						name="estado_val" disabled="disabled"
+						value="<?php echo $ctaDespesa->codigo().', Tipo: '.$ctaDespesa->tipo();?>" />
 					</td>
 					<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
-						disabled="disabled" value="" /></td>
+						disabled="disabled" value="<?php echo $ctaDespesa->saldo();?>" /></td>
 					<td>Acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
 						value="<?php echo $itemagenda->debitar();?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
-						disabled="disabled" class="form-control" /></td>
+						disabled="disabled" class="form-control" value="<?php echo $ctaDespesa->descricao();?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="4">
