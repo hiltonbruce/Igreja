@@ -16,16 +16,13 @@ function conectar() {
 function br_data ($dt,$cmp){
 	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd e em caso de erro e informado o campo $cmp
 
-			$dta = explode("/","$dt");
-			$d = $dta[0];
-			$m = $dta[1];
-			$y = $dta[2];
+			list ($d,$m,$y) = explode('/',$dt);
 			$res = checkdate($m,$d,$y);
 			if ($res == 1 || $dt=="00/00/0000"){
 				$dta="$y-$m-$d";
 				return "$dta";
 			}else{
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-2);</script>";
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
 				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
 				exit;
 			}
