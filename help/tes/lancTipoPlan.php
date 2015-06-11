@@ -1,6 +1,15 @@
 <?php
 $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();
+$arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
+
+foreach ($arrayDesp as $keyDesp => $vlrDesp) {
+	$linhaTab  = '<tr><td>'.$vlrDesp['titulo'].'</td><td>';
+	$linhaTab .= $vlrDesp['igreja'].'-> Ref. '.$vlrDesp['referente'];
+	$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
+	$linha[$vlrDesp['acesso']] .= $linhaTab;
+}
+
 $acesso = (empty($_GET['acesso'])) ? '' : $_GET['igreja'] ;
 $listaFonte = $bsccredor->List_Selec($acesso);
 $dia1 ='';$listDesp = '';
@@ -42,13 +51,11 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 
     }
 
-
 //Fecha a tabela se mudou de grupo de conta
 if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 	$listDesp .= $cabDespesa.$dia1.'</tbody></table></form>';
 	$dia1='';$cabDespesa='';
 }
-
 
 	if (strlen($valor['codigo'])=='13') {
 		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
@@ -62,6 +69,7 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		.$valor['titulo'].$conta.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr '.$bgcolor.'><td>'.$dataLan.
 		'<br /><br /><label><strong>Igreja</strong></label>'.$listaIgreja.
 		'</td><td>'.$campoValor.$lancar.'</td></tr>';
+		$dia1 .= $linha[$valor['acesso']];
 		$cor = !$cor;
 	} elseif (strlen($valor['codigo'])=='9') {
 		$cabDespesa = '<form  method="post"><table id="horario"><tbody><tr id="subtotal" class="sub">
