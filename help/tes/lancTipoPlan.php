@@ -4,8 +4,8 @@ $bsccredor = new tes_listDisponivel();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
-	$linhaTab  = '<tr><td>'.$vlrDesp['titulo'].'</td><td>';
-	$linhaTab .= $vlrDesp['igreja'].'-> Ref. '.$vlrDesp['referente'];
+	$linhaTab  = '<tr><td>'.$vlrDesp['igreja'].'<br />Pago em: '.$vlrDesp['data'].'</td><td>';
+	$linhaTab .= 'Ref. '.$vlrDesp['referente'];
 	$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
 	$linha[$vlrDesp['acesso']] .= $linhaTab;
 }
