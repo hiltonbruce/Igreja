@@ -53,7 +53,7 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 
 //Fecha a tabela se mudou de grupo de conta
 if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
-	$listDesp .= $cabDespesa.$dia1.'</tbody></table></form>';
+	$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>';
 	$dia1='';$cabDespesa='';
 }
 
@@ -65,8 +65,8 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$fontesPgto .= $listaFonte;
 		$fontesPgto .= '</select>';
 		//Lista das despesas disponíveis
-		$dia1 .='<table id="horario" class="table table-hover"><tbody><tr class="sub">
-		<th colspan="4" ><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
+		$dia1 .='<table id="horario" class="table table-hover"><tbody><tr class="sub label-info">
+		<th colspan="4"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
 		</tr>';
 		$dia1 .='<tr '.$bgcolor.'><td rowspan="2">'.$valor['titulo'].$conta
 		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr '.$bgcolor.'><td>'.$dataLan.
@@ -75,7 +75,7 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$dia1 .= $linha[$valor['acesso']];
 		$cor = !$cor;
 	} elseif (strlen($valor['codigo'])=='9') {
-		$cabDespesa = '<form  method="post"><div class="panel panel-primary" ><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</div>';
+		$cabDespesa = '<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</div>';
 	}/*elseif (strlen($valor['codigo'])=='5') {
 		$codigo5 = $valor['codigo'];
 	}
