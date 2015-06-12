@@ -4,8 +4,8 @@ $bsccredor = new tes_listDisponivel();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
-	$linhaTab  = '<tr><td>'.$vlrDesp['igreja'].'<br />Pago em: '.$vlrDesp['data'].'</td><td>';
-	$linhaTab .= 'Ref. '.$vlrDesp['referente'];
+	$linhaTab  = '<tr class="active"><td>'.$vlrDesp['titulo'].'</td><td>';
+	$linhaTab .= $vlrDesp['igreja'].'-> Ref. '.$vlrDesp['referente'];
 	$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
 	$linha[$vlrDesp['acesso']] .= $linhaTab;
 }
@@ -65,16 +65,17 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$fontesPgto .= $listaFonte;
 		$fontesPgto .= '</select>';
 		//Lista das despesas disponíveis
-		$dia1 .='<tr '.$bgcolor.'><td rowspan="2">'.$valor['codigo'].'-<abbr title="'.$valor['descricao'].'">'
-		.$valor['titulo'].$conta.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr '.$bgcolor.'><td>'.$dataLan.
+		$dia1 .='<table id="horario" class="table table-hover"><tbody><tr class="sub">
+		<th colspan="4" ><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
+		</tr>';
+		$dia1 .='<tr '.$bgcolor.'><td rowspan="2">'.$valor['titulo'].$conta
+		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr '.$bgcolor.'><td>'.$dataLan.
 		'<br /><br /><label><strong>Igreja</strong></label>'.$listaIgreja.
 		'</td><td>'.$campoValor.$lancar.'</td></tr>';
 		$dia1 .= $linha[$valor['acesso']];
 		$cor = !$cor;
 	} elseif (strlen($valor['codigo'])=='9') {
-		$cabDespesa = '<form  method="post"><table id="horario"><tbody><tr id="subtotal" class="sub">
-		<th colspan="4"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
-		</tr>';
+		$cabDespesa = '<form  method="post"><div class="panel panel-primary" ><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</div>';
 	}/*elseif (strlen($valor['codigo'])=='5') {
 		$codigo5 = $valor['codigo'];
 	}
