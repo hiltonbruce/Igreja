@@ -16,7 +16,7 @@ unset($_SESSION["cpf"]);
 	<tbody>
 		<tr>
 			<td colspan="2"><label>Estado Natal: </label>
-	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" 
+	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>"
 	   	class="form-control" >
 	  <?PHP
 			$estnatal = new List_UF('estado', 'nome','uf_nasc');
@@ -26,12 +26,12 @@ unset($_SESSION["cpf"]);
 			<input name="uf" type="hidden" required="required"
 			value="<?php echo $_GET['uf'];?>" /></td>
 			<td>
-      
+
 	  <?PHP
 		if (!empty($_GET["uf"])){
 		$vl_uf=$_GET["uf"];
 		$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cid_nasc");
-		echo "<label>Cidade Natal:</label>";		
+		echo "<label>Cidade Natal:</label>";
 		$vlr_linha=$lst_cid->ListDados (++$ind);//3 é o indice do formulário
 		}
 		?></td>
@@ -43,13 +43,13 @@ unset($_SESSION["cpf"]);
 	id="nome_cad" tabindex="<?PHP echo ++$ind; ?>" size="40" /></td>
 		<td>
 	<label>CPF:</label>
-	<input name="cpf" type="text" id="cpf" tabindex="<?PHP echo ++$ind; ?>" class="form-control" 
+	<input name="cpf" type="text" id="cpf" tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 	placeholder="CPF em branco ser&aacute; utilizado o n&ordm; do rol" value="<?PHP echo $_SESSION["cpf"];?>"/>
 		</td>
 		</tr>
 		<tr>
 			<td>
-  
+
 	<label>Nacionalidade:</label>
 	  <select name="nacionalidade" id="nacionalidade" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
 		<option value="Brasileira">Brasil</option>
@@ -297,12 +297,12 @@ unset($_SESSION["cpf"]);
 		<option value="Venezuela">Venezuela</option>
 		<option value="Vietnã">Vietnã</option>
 		<option value="Zâmbia">Zâmbia</option>
-		<option value="Zimbábue">Zimbábue</option> 	
+		<option value="Zimbábue">Zimbábue</option>
 	</select>
-	
+
 	</td>
 			<td><label>&nbsp;</label>
-			<input name="nacionalidade1" class="form-control" type="text" 
+			<input name="nacionalidade1" class="form-control" type="text"
 			size="20" onselect="1" tabindex="<?PHP echo ++$ind; ?>"/>
 	    </td>
 			<td><label>&nbsp;</label>
@@ -311,6 +311,51 @@ unset($_SESSION["cpf"]);
 		</tr>
 	</tbody>
 </table>
+<dl>
+	<dt id="css">Se o membro cadastrado não for brasileiro use o link abaixo?</dt>
+	<dd>
+		<div class="row">
+		  <div class="col-xs-4">
+		    <label>Cidade do País:</label>
+		    <input name="cidExtrang" type="text" class="form-control"
+		    tabindex='<?PHP echo ++$ind; ?>' placeholder="Cidade do país deste Membro">
+		  </div>
+		  <div class="col-xs-2">
+		    <label>UF do País:</label>
+		    <input name="ufExtrang" type="text" class="form-control"
+		    tabindex='<?PHP echo ++$ind; ?>' placeholder="UF do país">
+		  </div>
+		</div>
+	</dd>
+</dl>
   <input name="escolha" type="hidden" value="adm/cad_membro_end.php" />
 </form>
 </fieldset>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+	$(document).ready(function() {
+		var textoVer = '<a href="#" style="color:#666;text-decoration:none;">É extrangeiro?</a>';
+		$('dd').css('display', 'none');
+		$('dt').after(textoVer);
+
+		$('a').click(function(){
+			if ($(this).text() == 'É extrangeiro?') {
+				$(this).next().next().toggle();
+				$(this).text('Fechar se Brasileiro!');
+				$(this).next()
+				.css({
+				border: '1px solid #c30',
+				padding: '5px 10px',
+				background: '#ccc'
+				})
+				.slideToggle('slow');
+			} else {
+				$(this).text('É extrangeiro?');
+				$(this).next().slideToggle('slow');
+				$(this).next().next().toggle();
+			}
+		});
+	});
+   // ]]>
+</script>
