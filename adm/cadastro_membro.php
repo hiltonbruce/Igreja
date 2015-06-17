@@ -3,8 +3,8 @@
 if (empty($_SESSION['valid_user']))
 header("Location: ../");
 
-unset($_SESSION["nacao"]);//Limpa estas variáveis
-unset($_SESSION["cid_natal"]);
+//unset($_SESSION["nacao"]);//Limpa estas variáveis
+//unset($_SESSION["cid_natal"]);
 unset($_SESSION["cid_end"]);
 unset($_SESSION["cpf"]);
 ?>
@@ -335,7 +335,7 @@ unset($_SESSION["cpf"]);
 <script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {
-		var textoVer = '<a href="#" style="color:#666;text-decoration:none;">É extrangeiro?</a>';
+		var textoVer = '<a href="#" class="btn btn-primary" style="color:#fff;text-decoration:none;">É extrangeiro?</a>';
 		$('dd').css('display', 'none');
 		$('dt').after(textoVer);
 

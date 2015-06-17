@@ -3,8 +3,10 @@
 if (empty($_SESSION['valid_user']))
 	header("Location: ../");
 
-$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");
-$nome_cidade = $rec->nome()." - ".$rec->coduf();
+//$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");
+//$nome_cidade = $rec->nome()." - ".$rec->coduf();
+
+list($nome_cidade,$uf_nasc) = explode('-',$_SESSION["cid_natal"] );
 
 if (isset($_POST["cid_end"])) {
 	$id_cid = (int)$_POST["cid_end"];
@@ -72,9 +74,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				</tr>
 				<tr>
 					<?PHP
-					echo "<td colspan='2'><label>Cidade:</label> <button class='form-control'>$cid_end</button>";
-					echo '<td><label>CEP:</label><input name="cep" type="text" id="cep" class="form-control" ';
-					echo 'tabindex="<?PHP echo $ind++;?>"></td><tr>';
+					echo "<td colspan='2'><label>Cidade:</label> <input class='form-control' value='$cid_end' ";
+					echo 'disabled="disabled"/><td><label>CEP:</label><input name="cep" type="text" id="cep" class="form-control" ';
+					echo 'tabindex="'.$ind++.'"></td><tr>';
 					echo "<tr><td><label>Bairro:</label>";
 					$lst_cid = new sele_cidade("bairro",$id_cid,"idcidade","bairro","bairro");
 
@@ -90,7 +92,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 						<input name="complemento" class="form-control" type="text"
 						id="complemento" tabindex="<?PHP echo $ind++;?>" placeholder="Casa, apto ..." />
 					</td>
-					<td><label>Bairro n&atilde;o cadastrado... </label><a 
+					<td><label>Bairro n&atilde;o cadastrado... </label><a
 						href="./?escolha=tab_auxiliar/cadastro_bairro.php&uf=
 						<?PHP echo $rec_end->coduf();?>&cidade=<?PHP echo $rec_end->id();?>
 						&nomeCid=<?PHP echo $rec_end->nome();?>"
@@ -98,15 +100,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				</tr>
 				<tr>
 					<td><label>Nacionalidade: </label>
-						<button class="form-control">
-							<?PHP echo $_SESSION["nacao"];?>
-						</button>
+						<input class="form-control" value='<?PHP echo $_SESSION["nacao"];?>'
+						disabled='disabled' />
 					</td>
 					<td colspan="2"><label>Natural de:</label>
-						<button class="form-control">
-							<?PHP echo $nome_cidade;?>
-						</button> <input name="uf_nasc" class="form-control" type="hidden"
-						value="<?PHP echo $rec->coduf();?>" />
+						<input class='form-control' value='<?PHP echo $nome_cidade;?>'
+							 disabled='disabled' />
+						<input name="uf_nasc" class="form-control" type="hidden"
+						value="<?PHP echo $uf_nasc;?>" />
 					</td>
 				</tr>
 				<tr>
@@ -150,7 +151,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 							<option value="P&oacute;s-Doutorado">P&oacute;s-Doutorado</option>
 							<option value="PHD">PHD</option>
 					</select>
-					
+
 					<td colspan="2"><label>Gradua&ccedil;&atilde;o:</label> <input
 						name="graduacao" type="text" class="form-control"
 						tabindex="<?PHP echo $ind++;?>"></td>

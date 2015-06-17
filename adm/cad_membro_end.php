@@ -100,10 +100,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				</td>
 			<td><label>Cidade:</label>
 			<?PHP
-		$vl_uf=$uf_end;
-		$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cid_end");
-		$vlr_linha=$lst_cid->ListDados ("2");//"2" é o indice de tabulação do formulário
-	?>
+				$vl_uf=$uf_end;
+				$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cid_end");
+				$vlr_linha=$lst_cid->ListDados ("2");//"2" é o indice de tabulação do formulário
+			?>
 			</td>
 		<tr>
 		</tr>
