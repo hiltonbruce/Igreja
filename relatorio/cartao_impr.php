@@ -16,19 +16,19 @@ require "../func_class/classes.php";
 	$igreja = new DBRecord ("igreja","1","rol");
 	$cong = new DBRecord ("igreja",$rec_ecl->congregacao(),"rol");
 	$cidade = new DBRecord ("cidade",$rec_pessoais->naturalidade(),"id");
-	
+
 	$rec_ecl->c_impresso  = date("Y-m-d"); //Aqui é atribuido a esta variável um valor para UpDate
 	$rec_ecl->Update();
-	
+
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-	
+
 	$atual = $rec_ecl -> hist ();
 	$rec_ecl ->hist="@Impresso em: ". date ('d/m/Y H:i:s') .", por: $hist" . $atual ; //Aqui é atribuido a esta variável um valor para UpDate
 	$rec_ecl ->quem_imprimiu = $_SESSION['valid_user'];
 	$rec_ecl->Update(); //É feita a chamada do método q realiza a atualização no Banco
-	
-	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em águas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual(); 
-	
+
+	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em águas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();
+
 	if ($rec_ecl->situacao_espiritual()<>"1"){
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
@@ -45,7 +45,7 @@ require "../func_class/classes.php";
 	}else {
 		$background_cartao = "membro";
 	}
-	
+
 	 if (file_exists("../img_membros/".$rolConsuta.".jpg"))//Verifica se a imagem esta arquivada
 		{
 			$img=$rolConsuta.".jpg";
@@ -205,7 +205,8 @@ body {
 	print "Filia&ccedil;&atilde;o: <br />{$rec_pessoais->pai()}<br /> e {$rec_pessoais->mae()}<hr>";
 	print "Data de Nascimento: ".conv_valor_br ($rec_pessoais->datanasc());
 	print "<br />Nacionalidade: ".$rec_pessoais->nacionalidade();
-	print "<br />Natural de: {$cidade->nome()} - {$cidade->coduf()}";
+	$cidNatal = ($cidade->nome()=='') ? $rec_pessoais->naturalidade() : $cidade->nome().' - '.$cidade->coduf() ;
+	print '<br />Natural de: '.$cidNatal;
 ?>
 </div>
 <div id="verso2">
@@ -222,7 +223,7 @@ body {
 </body>
 </html>
 <?PHP
-//fim do 
+//fim do
 }else{
 echo "Dados incorretos!";
 }

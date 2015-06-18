@@ -5,20 +5,18 @@
 
 	function pergunta_nome() {
 		var p=window.confirm("O nome já está sendo utlizado:  <?php echo $_POST["nome_cad"];?>. OK para continuar com este nome?");	window.location=(p) ? "./?conf_cpf_ruim=ok&conf_nome_ruim=ok&escolha=adm/cad_membro_end.php" : "./?escolha=adm/cadastro_membro.php&uf=PB";}
-
 </script>
-
 <?php
 
 if (empty($_SESSION['valid_user']))
 header("Location: ../");
 
-if (empty($_GET['uf']) && empty($_POST['uf'])){
+if (empty($_GET['uf_end']) && empty($_POST['uf_end'])){
 	$uf_end = "PB";
 }elseif (!empty($_POST['uf_end'])) {
-	$uf_end = $_POST['uf'];
+	$uf_end = $_POST['uf_end'];
 }else{
-	$uf_end = $_GET['uf'];
+	$uf_end = $_GET['uf_end'];
 }
 
 if (isset($_POST["nacionalidade"])){

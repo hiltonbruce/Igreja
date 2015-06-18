@@ -1,15 +1,20 @@
 <?php
 
 controle ("inserir");
+    if (!empty($_GET["civil"])) {
+       $estCivil = '<option value="./?escolha=adm/dados_famil.php&civil=';
+       $estCivil .= $_GET["civil"].'">'.$_GET["civil"].'</option>';
+    } else {
+        $estCivil = '';
+    }
 
 	$familia = new DBRecord ("est_civil",$_SESSION["rol"],"rol");
-	
 	$link = "atualizar_array";//define para q página direcionará o form para atualizar
-	
+
 	if ($familia->rol()=="") {
 		$link = "cad_dados_pess";//define para q página direcionará o form para atualizar
 	}elseif ($_GET["editar"]=="editar") {
-		$link = "atualizar_array";//define para q página direcionará o form para atualizar	
+		$link = "atualizar_array";//define para q página direcionará o form para atualizar
 	}
 $ind=1;
 ?>
@@ -27,80 +32,89 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <legend>Dados Familiares - Cadastro de Membro</legend>
 <form method="post" action="">
 	<div id="lst_cad">
-	<table width="552" border="0">
-      
-      
+	<table class='table'>
       <tr>
-        <td>Estado Civil:<label>
-		<?PHP if ($_GET["civil"]=="") {?>
-          <select name="civil" id="civil" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo $ind++;?>">
-		  	<?PHP 
-			$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
-			if ((strtoupper($membro->sexo()))=="M") {
-			?>
-              <option value="./?escolha=adm/dados_famil.php&civil=Solteiro">Solteiro</option>
-              <option value="./?escolha=adm/dados_famil.php&civil=Casado">Casado</option>
-              <option value="./?escolha=adm/dados_famil.php&civil=Viúvo">Vi&uacute;vo</option>
-              <option value="./?escolha=adm/dados_famil.php&civil=Divorciado">Divorciado</option>
-			<?PHP 
-			}else {
-			?>
-              <option value="./?escolha=adm/dados_famil.php&civil=Solteira">Solteira</option>
-              <option value="./?escolha=adm/dados_famil.php&civil=Casada">Casada</option>
-              <option value="./?escolha=adm/dados_famil.php&civil=Viúva">Vi&uacute;va</option>
-              <option value="./?escolha=adm/dados_famil.php&civil=Divorciada">Divorciada</option>
-			<?PHP 
-			}
-			?>
-              <option value="./?escolha=adm/dados_famil.php&civil=Outros">Outros</option>
-			</select>
-			
-			<?PHP 
-				}
-				
-					if ($_GET["civil"]==""){
-						if ((strtoupper($membro->sexo()))=="M") {
-							echo "<input type='hidden' name='estado_civil' value='Solteiro' />";
-						}else {
-							echo "<input type='hidden' name='estado_civil' value='Solteira' />";
-						}
-					}else{
-					echo "<input type='hidden' name='estado_civil' value='{$_GET["civil"]}' />";}
-					
-					echo "<strong>{$_GET["civil"]}</strong>";
-			?>
-			</label></td>
+        <td>
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Estado Civil:</label>
+        		  <select name="civil" id="civil" onchange="MM_jumpMenu('parent',this,0)"
+                  class='form-control' tabindex="<?PHP echo $ind++;?>">
+    		  	<?PHP
+                echo $estCivil;
+    			$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
+    			if ((strtoupper($membro->sexo()))=="M") {
+    			?>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Solteiro">Solteiro</option>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Casado">Casado</option>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Viúvo">Vi&uacute;vo</option>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Divorciado">Divorciado</option>
+    			<?PHP
+    			}else {
+    			?>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Solteira">Solteira</option>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Casada">Casada</option>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Viúva">Vi&uacute;va</option>
+                    <option value="./?escolha=adm/dados_famil.php&civil=Divorciada">Divorciada</option>
+    			<?PHP
+    			}
+    			?>
+                  <option value="./?escolha=adm/dados_famil.php&civil=Outros">Outros</option>
+    			</select>
 
-       <td width="218"><label></label></td>
+    			<?PHP
+
+    					if ($_GET["civil"]==""){
+    						if ((strtoupper($membro->sexo()))=="M") {
+    							echo "<input type='hidden' name='estado_civil' value='Solteiro' />";
+    						}else {
+    							echo "<input type='hidden' name='estado_civil' value='Solteira' />";
+    						}
+    					}else{
+    					echo "<input type='hidden' name='estado_civil' value='{$_GET["civil"]}' />";}
+    			?></div></div>
       </tr>
 			<?PHP
  			if ($_GET["civil"]=="Casado" || $_GET["civil"]=="Casada" ) {
 			?>      <tr>
-        <td>Certid&atilde;o de Casamento N&ordm; :
-          <label>
-          <input name="certidao_casamento_n" type="text" id="certidao_casamento_n" tabindex="<?PHP echo $ind++;?>" />
-          </label></td>
-        <td>Data:<label>
-          <input name="data" type="text" id="data" tabindex="<?PHP echo $ind++;?>" onkeypress="formatar('##/##/####', this);" maxlength="10" /></label></td>
+        <td colspan='2'>
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Certid&atilde;o de Casamento N&ordm; :</label>
+              <input name="certidao_casamento_n" type="text" id="certidao_casamento_n"
+              class='form-control' tabindex="<?PHP echo $ind++;?>" />
+              </div>
+              <div class="col-xs-4">
+               <label>Data:</label>
+                  <input name="data" type="text" id="data" tabindex="<?PHP echo $ind++;?>"
+                  class='form-control dataclass' />
+              </div>
+              <div class="col-xs-4">
+                <label>Livro:</label>
+            <input name="livro" type="text" id="livro"
+            class='form-control' tabindex="<?PHP echo $ind++;?>"  />
+              </div>
+              <div class="col-xs-4">
+               <label>Folha:</label>
+            <input name="folhas" type="text" id="folhas"
+            class='form-control' tabindex="<?PHP echo $ind++;?>" />
+        </div></div></td>
       </tr>
       <tr>
-        <td>Livro:<label>
-            <input name="livro" type="text" id="livro" tabindex="<?PHP echo $ind++;?>"  />
-        </label></td>
-        <td>Folha:<label>
-            <input name="folhas" type="text" id="folhas" tabindex="<?PHP echo $ind++;?>" />
-        </label></td>
+        <td colspan='2'>
+            <div class="row">
+              <div class="col-xs-10"><label>Conjugue:</label>
+                  <input name="conjugue" type="text" id="conjugue"
+                  tabindex="<?PHP echo $ind++;?>" class='form-control' />
+              </div>
+              <div class="col-xs-2">
+                <label>Rol do Conjugue:</label>
+                <input name="rol_conjugue" type="text" id="rol_conjugue"
+                class='form-control' tabindex="<?PHP echo $ind++;?>" />
+              </div></div>
+            </td>
       </tr>
-      <tr>
-        <td>Conjugue:<label>
-            <input name="conjugue" type="text" id="conjugue" tabindex="<?PHP echo $ind++;?>" size="30" />
-</label></td>
-        <td>Rol do Conjugue:
-          <label>
-          <input name="rol_conjugue" type="text" id="rol_conjugue" tabindex="<?PHP echo $ind++;?>" />
-          </label></td>
-      </tr>
-      
+
 			<?PHP
 		   } // fim do else$_GET["est_civil"]=="Casado"
 		   else {
@@ -111,19 +125,22 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		   		echo "<input name='data' type='hidden' />";
 		   		echo "<input name='folhas' type='hidden' />";
 		   }
-		  ?>    
+		  ?>
       <tr>
-        <td colspan="2">Obs:
-          <label>
-          <textarea name="obs" cols="58" id="obs" tabindex="<?PHP echo $ind++;?>"></textarea>
-          </label></td>
+        <td colspan="2">
+            <div class="row">
+              <div class="col-xs-12">
+                <label>Obs:</label>
+                  <textarea name="obs" id="obs" class='form-control'
+                  tabindex="<?PHP echo $ind++;?>"></textarea>
+          </td>
         </tr>
     </table>
 	</div>
 	<input name="escolha" type="hidden" value="adm/<?PHP echo $link;?>.php" />
 	<input name="tabela" type="hidden" id="tabela" value="est_civil" />
 	<input name="hist" type="hidden" id="hist" value="<?PHP echo $_SESSION['valid_user'].": ".$_SESSION['nome'].", em: ".date("d/m/Y H:i:s")."@".$familia->hist();?>" />
-	<input type="submit" name="Submit" value="Cadastrar..." tabindex="<?PHP echo $ind++;?>" />
+	<input type="submit" class='btn btn-primary' name="Submit" value="Cadastrar..." tabindex="<?PHP echo $ind++;?>" />
 </form>
 </fieldset>
 </div>

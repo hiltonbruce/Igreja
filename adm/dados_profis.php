@@ -1,12 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Lista dados Eclesi&aacute;sticos</title>
-</head>
-<body>
-
-
 <?PHP
 if ($_SESSION['nivel']>4){
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
@@ -24,7 +15,7 @@ ver_cad();
 	{
 		if (!empty($arr_dad["rol"])) {
 	?>
-	<table width="100%">
+	<table class='table'>
       <tr>
         <td>Profiss&atilde;o:
 		<?PHP
@@ -37,11 +28,11 @@ ver_cad();
 		$nome = new editar_form("cpf",$arr_dad["cpf"],$tab,$tab_edit);
 		$nome->getMostrar();
 		if ($_GET["campo"]=="cpf") { ?>
-		
+
 		<script language="JavaScript" type="text/javascript">
 		alert("Cuidado! O sistema atualizará o CPF, mesmo se número for considerado INVÁLIDO...");
 		</script>
-		
+
 		<form method="post" action="" >
 			<input type="text" name="cpf" id='cpf' maxlength="14" value="<?PHP echo $arr_dad["cpf"];?>" tabindex="<?PHP echo $ind++;?>"/>
 			<input type="hidden" name="tabela" value="profissional" />
@@ -73,7 +64,7 @@ ver_cad();
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
-	  
+
       <tr>
         <td colspan="3">Observa&ccedil;&otilde;es
 		<?PHP
@@ -90,5 +81,3 @@ ver_cad();
 	}}
 	?>
 </div>
-</body>
-</html>
