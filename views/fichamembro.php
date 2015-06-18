@@ -15,7 +15,16 @@
 	$ecles 		= new DBRecord ("eclesiastico",$rol,"rol");
 	$prof 		= new DBRecord ("profissional",$rol,"rol");
 	$igreja 	= new DBRecord ("igreja",$ecles->congregacao(),"rol");
-	$cidade 	= new DBRecord ("cidade",$membro->naturalidade(),"id");
+
+
+    if (is_numeric($membro->naturalidade())) {
+        $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
+        $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
+    } else {
+        $cidNatal = $membro->naturalidade();
+    }
+
+	//$cidade 	= new DBRecord ("cidade",$membro->naturalidade(),"id");
 	$cidend 	= new DBRecord ("cidade",$membro->cidade(),"id");
 	$bairro 	= new DBRecord ("bairro",$membro->bairro(),"id");
 	$numreg		= new registro ('disciplina', 'rol', $rol);
@@ -82,7 +91,7 @@
         <td colspan="3"><b>Mãe: </b><?php echo $membro->mae();?></td>
       </tr>
       <tr>
-        <td colspan="3"><b>Cidade Natal: </b><u><?php echo $cidade->nome().' - '.$cidade->coduf();?></u></td>
+        <td colspan="3"><b>Cidade Natal: </b><u><?php echo $cidNatal?></u></td>
       </tr>
       <tr>
         <td colspan="3"><b>Telefones: </b><u><?php echo $membro->fone_resid().' - '.$membro->celular();?></u></td>

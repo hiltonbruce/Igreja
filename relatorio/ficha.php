@@ -3,8 +3,14 @@
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
 	//conectar ();
-  	$carta = new DBRecord ("carta",$_POST["id_carta"],"id");
+  $carta = new DBRecord ("carta",$_POST["id_carta"],"id");
 	$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
+  if (is_numeric($membro->naturalidade())) {
+      $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
+      $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
+  } else {
+      $cidNatal = $membro->naturalidade();
+  }
 	$est_civil = new DBRecord ("est_civil",$_SESSION["rol"],"rol");
 	$ecles = new DBRecord ("eclesiastico",$_SESSION["rol"],"rol");
 	$profis = new DBRecord ("profissional",$_SESSION["rol"],"rol");
@@ -32,7 +38,7 @@ body {
 	color: #a12621;
 	font-size: 1em;
 	font-weight: normal;
-	padding: -200px 20px 0; 
+	padding: -200px 20px 0;
 }
 
 fieldset {
@@ -58,22 +64,22 @@ legend {
 	z-index:5;
 }
 	#footer {
-	color: #636466; 
+	color: #636466;
 	font-size:65%;
-	height: 50px; 
-	background-repeat: no-repeat; 
-	background-position: top; 
-	text-align: left; 
-	clear: both; 
-	margin: 0; 
-	padding-top: 25px; 
+	height: 50px;
+	background-repeat: no-repeat;
+	background-position: top;
+	text-align: left;
+	clear: both;
+	margin: 0;
+	padding-top: 25px;
 	padding: 10px 0 0 0;
 	background-image: url(horbar.gif);
 		width: 800px;
 }
 
-#footer a { 
-	color: #636466; 
+#footer a {
+	color: #636466;
 	text-decoration: underline;
 }
 
@@ -83,20 +89,20 @@ a:link:after, a:visited:after {
 	color:#555555;
 }
 
-h1{ 
+h1{
 	color: #0000FF;
 	font-size: 300%;
-	font-family: Forte; 
-	font-weight: normal; 
-	text-align: left; 
-	height: 60px; 
-	padding-top: 20px; 
+	font-family: Forte;
+	font-weight: normal;
+	text-align: left;
+	height: 60px;
+	padding-top: 20px;
 	padding-left: 20px;
 	font-family:"Times New Roman", Times, serif;
-	
+
 }
 
-	
+
 .clear {
   clear: both;
 }
@@ -182,13 +188,13 @@ Ficha de Membro
   <fieldset><legend>Opções de Cadastro</legend>
 	<div id="foto"><?PHP print mostra_foto();?>
   </div>
-  
+
   <form id="form1" method="post" action="">
       <label>
         <input type="radio" name="Op&ccedil;&otilde;es de Cadstro" value="radio" />
         Re-Cadastro</label>
       <label>
-      <input type="radio" name="Op&ccedil;&otilde;es de Cadstro" value="radio" /> 
+      <input type="radio" name="Op&ccedil;&otilde;es de Cadstro" value="radio" />
       Atualiza&ccedil;&atilde;o
 	</label>
 </form>
@@ -216,7 +222,7 @@ Ficha de Membro
 <tr class="odd">
 <td colspan="2">Pai:
   <p> <?PHP echo $membro->pai();?></p></td>
-<td><p>Data Nascimento: </p>  
+<td><p>Data Nascimento: </p>
   <p> <?PHP echo conv_valor_br ($membro->datanasc());?></p></td>
 <td>Sexo:
   <p> <?PHP echo $membro->sexo();?></p></td>
@@ -227,15 +233,14 @@ Ficha de Membro
   <p> <?PHP echo $membro->mae();?></p></td>
 <td><p>Nacionalidade: </p>
   <p> <?PHP echo $membro->nacionalidade();?></p></td>
-<td><p>Natural de : </p>  
+<td><p>Natural de : </p>
   <p>	<?PHP
-			$natural = new DBRecord ("cidade",$membro->naturalidade(),"id");
-			echo $natural->nome()." - ".$membro->uf_nasc();
+			echo $cidNatal;
 		?></p></td>
 </tr>
 
 <tr class="odd">
-<td colspan="2"><p>Endere&ccedil;o: </p>  
+<td colspan="2"><p>Endere&ccedil;o: </p>
   <p> <?PHP echo $membro->endereco().", N&ordm;: ".$membro->numero();?></p></td>
 <td><p>Complementos: </p>
   <p> <?PHP echo $membro->complemento();?></p></td>
@@ -295,7 +300,7 @@ Ficha de Membro
   </p></td>
 <td>Data do Batismo em &Aacute;guas:
   <p> <?PHP echo conv_valor_br ($ecles->batismo_em_aguas());?></p></td>
-<td>Ano Batismo Espirito Santo: 
+<td>Ano Batismo Espirito Santo:
   <p>
     <?PHP
 		$igreja = new DBRecord ("igreja",$ecles->congregacao(),"rol");
@@ -481,11 +486,11 @@ Assinat. Dirigente:____________________________&nbsp;&nbsp;Assinat. Secretário:_
 	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
 
 	  Copyright &copy; <a href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information"></a>
-      Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a> 
+      Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a>
 	   <?PHP echo "CNPJ: {$igreja->cnpj()}";?><br />
    		<?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?><br />
      <p> Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
     </div>
-	
+
 </body>
 </html>

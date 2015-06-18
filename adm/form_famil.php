@@ -1,13 +1,12 @@
 <?php
-
 controle ("inserir");
+    $linkEstCivil = './?escolha=adm/dados_famil.php&bsc_rol='.$_GET['bsc_rol'].'&civil=';
     if (!empty($_GET["civil"])) {
-       $estCivil = '<option value="./?escolha=adm/dados_famil.php&civil=';
-       $estCivil .= $_GET["civil"].'">'.$_GET["civil"].'</option>';
+       $estCivil  = '<option value="'.$linkEstCivil.$_GET["civil"].'">'.$_GET["civil"].'</option>';
+       $estCivil .= '<option></option>';
     } else {
         $estCivil = '';
     }
-
 	$familia = new DBRecord ("est_civil",$_SESSION["rol"],"rol");
 	$link = "atualizar_array";//define para q página direcionará o form para atualizar
 
@@ -32,9 +31,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <legend>Dados Familiares - Cadastro de Membro</legend>
 <form method="post" action="">
 	<div id="lst_cad">
-	<table class='table'>
-      <tr>
-        <td>
             <div class="row">
               <div class="col-xs-4">
                 <label>Estado Civil:</label>
@@ -45,40 +41,35 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     			$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
     			if ((strtoupper($membro->sexo()))=="M") {
     			?>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Solteiro">Solteiro</option>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Casado">Casado</option>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Viúvo">Vi&uacute;vo</option>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Divorciado">Divorciado</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Solteiro">Solteiro</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Casado">Casado</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Viúvo">Vi&uacute;vo</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Divorciado">Divorciado</option>
     			<?PHP
     			}else {
     			?>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Solteira">Solteira</option>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Casada">Casada</option>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Viúva">Vi&uacute;va</option>
-                    <option value="./?escolha=adm/dados_famil.php&civil=Divorciada">Divorciada</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Solteira">Solteira</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Casada">Casada</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Viúva">Vi&uacute;va</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Divorciada">Divorciada</option>
     			<?PHP
     			}
     			?>
                   <option value="./?escolha=adm/dados_famil.php&civil=Outros">Outros</option>
     			</select>
-
     			<?PHP
-
-    					if ($_GET["civil"]==""){
-    						if ((strtoupper($membro->sexo()))=="M") {
-    							echo "<input type='hidden' name='estado_civil' value='Solteiro' />";
-    						}else {
-    							echo "<input type='hidden' name='estado_civil' value='Solteira' />";
-    						}
-    					}else{
-    					echo "<input type='hidden' name='estado_civil' value='{$_GET["civil"]}' />";}
-    			?></div></div>
-      </tr>
-			<?PHP
+					if ($_GET["civil"]==""){
+						if ((strtoupper($membro->sexo()))=="M") {
+							echo "<input type='hidden' name='estado_civil' value='Solteiro' />";
+						}else {
+							echo "<input type='hidden' name='estado_civil' value='Solteira' />";
+						}
+					}else{
+					echo "<input type='hidden' name='estado_civil' value='{$_GET["civil"]}' />";}
+    			?></div>
+      	<?PHP
  			if ($_GET["civil"]=="Casado" || $_GET["civil"]=="Casada" ) {
-			?>      <tr>
-        <td colspan='2'>
-            <div class="row">
+			?>
               <div class="col-xs-4">
                 <label>Certid&atilde;o de Casamento N&ordm; :</label>
               <input name="certidao_casamento_n" type="text" id="certidao_casamento_n"
@@ -98,11 +89,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                <label>Folha:</label>
             <input name="folhas" type="text" id="folhas"
             class='form-control' tabindex="<?PHP echo $ind++;?>" />
-        </div></div></td>
-      </tr>
-      <tr>
-        <td colspan='2'>
-            <div class="row">
+        </div>
               <div class="col-xs-10"><label>Conjugue:</label>
                   <input name="conjugue" type="text" id="conjugue"
                   tabindex="<?PHP echo $ind++;?>" class='form-control' />
@@ -111,10 +98,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <label>Rol do Conjugue:</label>
                 <input name="rol_conjugue" type="text" id="rol_conjugue"
                 class='form-control' tabindex="<?PHP echo $ind++;?>" />
-              </div></div>
-            </td>
-      </tr>
-
+              </div>
 			<?PHP
 		   } // fim do else$_GET["est_civil"]=="Casado"
 		   else {
@@ -126,17 +110,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		   		echo "<input name='folhas' type='hidden' />";
 		   }
 		  ?>
-      <tr>
-        <td colspan="2">
-            <div class="row">
               <div class="col-xs-12">
                 <label>Obs:</label>
                   <textarea name="obs" id="obs" class='form-control'
                   tabindex="<?PHP echo $ind++;?>"></textarea>
-          </td>
-        </tr>
-    </table>
-	</div>
+
+	</div></div><br />
 	<input name="escolha" type="hidden" value="adm/<?PHP echo $link;?>.php" />
 	<input name="tabela" type="hidden" id="tabela" value="est_civil" />
 	<input name="hist" type="hidden" id="hist" value="<?PHP echo $_SESSION['valid_user'].": ".$_SESSION['nome'].", em: ".date("d/m/Y H:i:s")."@".$familia->hist();?>" />
