@@ -2,10 +2,15 @@
 $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
-
+//Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
-	$linhaTab  = '<tr class="active"><td>'.$vlrDesp['titulo'].'<br /><small>Venc.: '.$vlrDesp['vencimento'].' -> Pago em: '.$vlrDesp['dtpgto'].'</small></td><td>';
-	$linhaTab .= $vlrDesp['igreja'].'-> Ref. '.$vlrDesp['referente'];
+	if ($vlrDesp['vencimento']!='') {
+		$vencPgto = '<br /><small>Venc.: '.$vlrDesp['vencimento'].' -> Pago em: '.$vlrDesp['dtpgto'].'</small>';
+	}else {
+		$vencPgto = '';
+	}
+	$linhaTab  = '<tr class="active"><td>'.$vlrDesp['titulo'].$vencPgto.'</td><td>';
+	$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
 	$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
 	$linha[$vlrDesp['acesso']] .= $linhaTab;
 }
@@ -80,6 +85,11 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$codigo5 = $valor['codigo'];
 	}
 echo($valor['codigo']).' **-> '.strlen($valor['codigo']).' === ';*/
+}
+
+//Último grupo do array, completando a tabela
+if ($cabDespesa!='') {
+	$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>';
 }
 
 $nivel1 = $listDesp;

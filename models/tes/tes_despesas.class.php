@@ -31,10 +31,24 @@ class tes_despesas {
 	function despesasArray ($mes,$ano) {
 		$mes = sprintf ("%'02u",$mes);
 		$mesRelatorio = $ano.$mes;
-		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc, ';
-		$sqlLancDesp .= 'DATE_FORMAT(a.vencimento,"%d/%m/%Y") AS vencimento, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS dtpgto ';
-		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i, agenda AS a WHERE c.id=l.debitar ';
-		$sqlLancDesp .= 'AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" AND l.lancamento=a.idlanc ';
+		//SQL das despesas agendadas
+		$sqlAgenda  = 'SELECT id,idlanc,DATE_FORMAT(datapgto,"%d/%m/%Y") AS dtpgto, ';
+		$sqlAgenda .= 'DATE_FORMAT(vencimento,"%d/%m/%Y") AS venc FROM agenda WHERE DATE_FORMAT(datapgto,"%Y%m")="'.$mesRelatorio.'" ';
+		$agenda = mysql_query($sqlAgenda) or die (mysql_error());
+		while ($arrayAgenda = mysql_fetch_array($agenda)) {
+			if ($arrayAgenda['idlanc']>0) {
+				$agendaLanc [$arrayAgenda['idlanc']] = array('venc' => $arrayAgenda['venc'],
+				'dtpgto' => $arrayAgenda['dtpgto'] );
+			}else {
+				$agendaSemLanc = array('vencimento' => $arrayAgenda['venc'],
+				'dtpgto' => $arrayAgenda['dtpgto'] );
+			}
+		}
+		//SQL dos lançamentos realizados
+		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, ';
+		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
+		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i WHERE c.id=l.debitar ';
+		$sqlLancDesp .= 'AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
 		$sqlLancDesp .= 'AND l.igreja=i.rol AND c.nivel1 = "3" ORDER BY c.codigo,i.razao ';
 		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
 		while($dados = mysql_fetch_array($despesa)) {
@@ -44,7 +58,7 @@ class tes_despesas {
 				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
 				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
 				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist'],'acesso'=>$dados['acesso']
-				,'dtpgto'=>$dados['dtpgto'],'vencimento'=>$dados['vencimento']);
+				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto'],'vencimento'=>$agendaLanc [$dados['lancamento']]['venc']);
 		}
 
 		return $arrayDespesas;
