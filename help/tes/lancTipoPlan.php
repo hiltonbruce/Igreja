@@ -3,16 +3,28 @@ $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
+$bgcolor = 'class="active"';
+$cor= true;
+//print_r($arrayDesp);
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
-	if ($vlrDesp['vencimento']!='') {
+	$bgcolor = $cor ? 'class="active"' : '';
+	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
 		$vencPgto = '<br /><small>Venc.: '.$vlrDesp['vencimento'].' -> Pago em: '.$vlrDesp['dtpgto'].'</small>';
-	}else {
+	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
+		$vencPgto  = '<br /><small class="glyphicon glyphicon-tag">Venc.: '.$vlrDesp['vencimento'];
+		$vencPgto .= ' -> Pago em: '.$vlrDesp['dtpgto'].'</small>';
+		$bgcolor = 'class="danger"';
+	}
+	else {
 		$vencPgto = '';
 	}
-	$linhaTab  = '<tr class="active"><td>'.$vlrDesp['titulo'].$vencPgto.'</td><td>';
+	if ($vlrDesp['dtpgto']=='00/00/0000') {
+	}
+	$linhaTab  = '<tr '.$bgcolor.'><td>'.$vlrDesp['titulo'].$vencPgto.'</td><td>';
 	$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
 	$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
 	$linha[$vlrDesp['acesso']] .= $linhaTab;
+	$cor = !$cor;
 }
 
 $acesso = (empty($_GET['acesso'])) ? '' : $_GET['igreja'] ;
