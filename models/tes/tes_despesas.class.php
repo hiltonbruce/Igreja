@@ -38,7 +38,7 @@ class tes_despesas {
 		$sqlAgenda .= ', contas AS c, igreja AS i ';
 		$sqlAgenda .= 'WHERE (DATE_FORMAT(a.datapgto,"%Y%m")="'.$mesRelatorio.'" ';
 		$sqlAgenda .= 'OR (DATE_FORMAT(a.vencimento,"%Y%m")="'.$mesRelatorio.'" AND a.idlanc="0") ) ';
-		$sqlAgenda .= 'AND a.igreja=i.rol AND c.acesso=a.debitar ';
+		$sqlAgenda .= 'AND a.igreja=i.rol AND c.acesso=a.debitar ORDER BY i.razao';
 		$agenda = mysql_query($sqlAgenda) or die (mysql_error());
 		while ($arrayAgenda = mysql_fetch_array($agenda)) {
 			if ($arrayAgenda['idlanc']>0) {
@@ -67,7 +67,7 @@ class tes_despesas {
 		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
 		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i WHERE c.id=l.debitar ';
 		$sqlLancDesp .= 'AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
-		$sqlLancDesp .= 'AND l.igreja=i.rol AND c.nivel1 = "3" ORDER BY c.codigo,i.razao ';
+		$sqlLancDesp .= 'AND l.igreja=i.rol AND c.nivel1 = "3" ORDER BY c.codigo,i.razao,l.data ';
 		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
 		while($dados = mysql_fetch_array($despesa)) {
 			//Lançamento da Despesas

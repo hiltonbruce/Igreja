@@ -9,21 +9,29 @@ $cor= true;
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	$bgcolor = $cor ? 'class="active"' : '';
 	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
-		$vencPgto = '<br /><small>Venc.: '.$vlrDesp['vencimento'].' -> Pago em: '.$vlrDesp['dtpgto'].'</small>';
+		$vencPgto  = '<small class="glyphicon glyphicon-ok"> Pago em: '.$vlrDesp['dtpgto'];
+		$vencPgto .= ' -> Venc.: '.$vlrDesp['vencimento'].'</small>';
+		$titleMsg = ', paga, obrigado!';
 	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
-		$vencPgto  = '<br /><small class="glyphicon glyphicon-tag">Venc.: '.$vlrDesp['vencimento'];
+		$vencPgto  = '<small class="glyphicon glyphicon-warning-sign"> Venc.: '.$vlrDesp['vencimento'];
 		$vencPgto .= ' -> Pago em: '.$vlrDesp['dtpgto'].'</small>';
 		$bgcolor = 'class="danger"';
+		$titleMsg = ', ainda n&atilde;o paga!';
 	}
 	else {
 		$vencPgto = '';
 	}
-	if ($vlrDesp['dtpgto']=='00/00/0000') {
+	if ($vencPgto=='') {
+		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].'"><td> Lan&ccedil;ado em: '.$vlrDesp['data'].'</td><td>';
+		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
+		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
+		$linha[$vlrDesp['acesso']] .= $linhaTab;
+	} else {
+		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].$titleMsg.'"><td>'.$vencPgto.'</td><td>';
+		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
+		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
+		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}
-	$linhaTab  = '<tr '.$bgcolor.'><td>'.$vlrDesp['titulo'].$vencPgto.'</td><td>';
-	$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
-	$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
-	$linha[$vlrDesp['acesso']] .= $linhaTab;
 	$cor = !$cor;
 }
 
@@ -82,7 +90,7 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$fontesPgto .= $listaFonte;
 		$fontesPgto .= '</select>';
 		//Lista das despesas disponíveis
-		$dia1 .='<table id="horario" class="table table-hover"><tbody><tr class="sub label-info">
+		$dia1 .='<tbody><tr class="sub label-info">
 		<th colspan="4"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
 		</tr>';
 		$dia1 .='<tr '.$bgcolor.'><td rowspan="2">'.$valor['titulo'].$conta
@@ -92,7 +100,9 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$dia1 .= $linha[$valor['acesso']];
 		$cor = !$cor;
 	} elseif (strlen($valor['codigo'])=='9') {
-		$cabDespesa = '<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</div>';
+		$cabDespesa  = '<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
+		$cabDespesa .= $valor['codigo'].'</strong> - '.$valor['titulo'].'</div><table id="horario" ';
+		$cabDespesa .= 'class="table table-hover">';
 	}/*elseif (strlen($valor['codigo'])=='5') {
 		$codigo5 = $valor['codigo'];
 	}
@@ -101,7 +111,7 @@ echo($valor['codigo']).' **-> '.strlen($valor['codigo']).' === ';*/
 
 //Último grupo do array, completando a tabela
 if ($cabDespesa!='') {
-	$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>';
+	$listDesp .= $cabDespesa.$dia1.'</form></tbody></table>';
 }
 
 $nivel1 = $listDesp;
