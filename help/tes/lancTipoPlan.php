@@ -14,7 +14,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$titleMsg = ', paga, obrigado!';
 	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
 		$vencPgto  = '<small class="glyphicon glyphicon-warning-sign"> Venc.: '.$vlrDesp['vencimento'];
-		$vencPgto .= ' -> Pago em: '.$vlrDesp['dtpgto'].'</small>';
+		$vencPgto .= '</small>';
 		$bgcolor = 'class="danger"';
 		$titleMsg = ', ainda n&atilde;o paga!';
 	}
