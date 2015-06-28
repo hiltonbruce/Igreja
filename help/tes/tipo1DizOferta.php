@@ -51,7 +51,7 @@ for ($i = 0; $i < 13; $i++) {
 				$conta = "'720','3','7'";//Oração Adulto
 				break;
 			case 10:
-				$conta = "'722','8','7'";//Oração Mocidade
+				$conta = "'900','8','7'";//Oração Mocidade
 				break;
 			case 11:
 				$conta = "'723','5','7'";//Oração Infantil

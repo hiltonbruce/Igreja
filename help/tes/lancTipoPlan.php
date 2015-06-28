@@ -23,12 +23,12 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	}
 	if ($vencPgto=='') {
 		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].'"><td> Lan&ccedil;ado em: '.$vlrDesp['data'].'</td><td>';
-		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
+		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	} else {
 		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].$titleMsg.'"><td>'.$vencPgto.'</td><td>';
-		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> Ref. '.$vlrDesp['referente'];
+		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}
