@@ -78,8 +78,17 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label>Data: </label> <input type="text" id="data" name="data"
-					value="<?php echo conv_valor_br ($lancAltera->data());?>" class="form-control" required="required"/>
+				<td>
+				<div class="row">
+				  <div class="col-xs-6">
+				    <label>Data: </label> <input type="text" id="data" name="data"
+                                        value="<?php echo conv_valor_br ($lancAltera->data());?>" class="form-control" required="required"/>
+				  </div>
+				  <div class="col-xs-4">
+				    <label>Semana: </label> <input type="text" id="semana" name="semana"
+                                        value="<?php echo $lancAltera->semana();?>" class="form-control" required="required"/>
+				  </div>
+				</div>
 				</td>
 				<td><label>Referente Mês:</label><input type="text" name="mes" maxlength="2"
 					size="2" value="<?php echo $lancAltera->mesrefer();?>" class="form-control"  required="required" />

@@ -14,7 +14,9 @@ if (empty($_POST['id'])) {
 	$preLanc->data = br_data ($_POST['data'],'Data de Lançamento');
 	$preLanc->mesrefer = $_POST['mes'];
 	$preLanc->anorefer = $_POST['ano'];
-
+	if ($_POST['semana']>0 && $_POST['semana']<6) {
+		$preLanc->semana = $_POST['semana'];
+	}
 	$vlrPost = strtr(str_replace(array('.',','),array(',','.'),$_POST["oferta0"]), ',','.' );
 	//$vlrPost = strtr( str_replace(array('.',','),array('','.'),$_POST["oferta0"]), ',.','.,' );
 	$valorBR = number_format($vlrPost, 2, ',', '.');
