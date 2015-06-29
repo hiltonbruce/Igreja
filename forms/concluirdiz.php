@@ -4,16 +4,19 @@ $roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
 /**/
 if (!empty($_GET['data'])) {
 	$dtlanc = $_GET['data'];
-	$rec = $_GET['rec'];
-	$escolha = $_GET['escolha'];
-	$menu = $_GET['menu'];
 } elseif(!empty($_POST['data'])) {
 	$dtlanc = $_POST['data'];
-	$rec = $_POST['rec'];
-	$escolha = $_POST['escolha'];
-	$menu = $_POST['menu'];
 }else {
 	$dtlanc = '';
+}
+if (!empty($_GET['menu'])) {
+        $rec = $_GET['rec'];
+        $escolha = $_GET['escolha'];
+        $menu = $_GET['menu'];
+}else {
+        $rec = $_POST['rec'];
+        $escolha = $_POST['escolha'];
+        $menu = $_POST['menu'];
 }
 
 if ($dtlanc == '') {
