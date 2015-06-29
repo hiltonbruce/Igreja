@@ -4,8 +4,14 @@ $roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
 /**/
 if (!empty($_GET['data'])) {
 	$dtlanc = $_GET['data'];
+	$rec = $_GET['rec'];
+	$escolha = $_GET['escolha'];
+	$menu = $_GET['menu'];
 } elseif(!empty($_POST['data'])) {
 	$dtlanc = $_POST['data'];
+	$rec = $_POST['rec'];
+	$escolha = $_POST['escolha'];
+	$menu = $_POST['menu'];
 }else {
 	$dtlanc = '';
 }
@@ -24,9 +30,10 @@ if ($dtlanc == '') {
 if (empty($idIgreja)) {
 	$idIgreja = $rolIgreja;
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
-	$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
-	$linkAcesso .= '&rec=1&idDizOf='.$idDizOf.'&igreja=';
 }
+
+	$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&data='.$dtlanc;
+	$linkAcesso .= '&rec='.$rec.'&idDizOf='.$idDizOf.'&mes='.$meslanc.'&ano='.$anolanc.'&igreja=';
 ?>
 
 <fieldset>

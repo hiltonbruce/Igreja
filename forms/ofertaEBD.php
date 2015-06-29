@@ -26,7 +26,6 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 
 					<td><label>Rol:</label> <input type="text" id="rol" name="rol"
 							value="" class="form-control" tabindex="<?php echo ++$ind;?>"/>
-
 					</td>
 				</tr>
 				<tr>
@@ -42,7 +41,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
-								 if (date('m')==$mes) {
+								 if ($meslanc==$mes) {
 								 	$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
 								 }
 						      }
