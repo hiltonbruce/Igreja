@@ -15,7 +15,7 @@ class tes_conta {
 		{
 			if ($dados['status']=='1' && $dados['acesso']!='0') {
 				$ativos[$dados['acesso']]=
-				array('id'=>$dados['id'],'codigo'=>$dados['codigo'],
+				array('id'=>$dados['id'],'codigo'=>$dados['codigo'],'nivel1'=>$dados['nivel1'],
 						'titulo'=>$dados['titulo'],'descricao'=>$dados['descricao'],'tipo'=>$dados['tipo']
 						,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']);
 			}
@@ -39,7 +39,7 @@ class tes_conta {
 		$this->arrayTodos	= $todasContas;
 	}
 
-	function ativosArray () {
+	function ativosArray() {
 		return $this->arrayAtivos;
 	}
 

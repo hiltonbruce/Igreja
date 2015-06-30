@@ -159,7 +159,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 			}else {
 				list($lancCPF,$lancNome) = explode(':', $linha['hist']);
 				$linkMembro  = '<a href="';
-				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$rol;
+				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&id='.$linha['id'].'&bsc_rol='.$rol;
 				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lanç. por: '.$lancNome.')">';
 				$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';

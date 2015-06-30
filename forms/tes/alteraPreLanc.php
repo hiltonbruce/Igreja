@@ -2,54 +2,50 @@
 <!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
 <?PHP
 	$lancAltera = new DBRecord('dizimooferta',$_GET['id'],'id');
-	if ($lancAltera->lancamento()=='0' || $_SESSION['nivel']>'10') {
-		switch ($lancAltera->credito()) {
-			case '700':
-				$lanContr = '<option value="700,1,1">Dizimo</option>';
-				break;
-			case '701':
-				$lanContr = '<option value="701,1,1">Oferta</option>';
-				break;
-			case '702':
-				$lanContr = '<option value="702,1,1">Oferta-Extra</option>';
-				break;
-			case '703':
-				$lanContr = '<option value="703,1,1">Voto</option>';
-				break;
-			case '720':
-				$lanContr = '<option value="720,3,7">Oração - Adulto</option>';
-				break;
-			case '721':
-				$lanContr = '<option value="721,3,7">Oração - Votos Adulto</option>';
-				break;
-			case '900':
-				$lanContr = '<option value="900,8,7">Oração - Mocidade</option>';
-				break;
-			case '723':
-				$lanContr = '<option value="723,5,7">Oração - Infantil</option>';
-				break;
-			case '820':
-				$lanContr = '<option value="820,2,5">Missões - Sede</option>';
-				break;
-			case '821':
-				$lanContr = '<option value="821,2,5">Missões - Congregações</option>';
-				break;
-			case '822':
-				$lanContr = '<option value="822,2,5">Missões - Carnês</option>';
-				break;
-			case '823':
-				$lanContr = '<option value="823,2,5">Missões - Cofre</option>';
-				break;
-			case '824':
-				$lanContr = '<option value="824,2,5">Missões - Envelopes</option>';
-				break;
-			case '825':
-				$lanContr = '<option value="825,2,5">Missões - Votos</option>';
-				break;
 
-			default:
-				$lanContr = '';
-				break;
+	if ($lancAltera->lancamento()=='0' || $_SESSION['nivel']>'10') {
+
+		$contaAtivas = new tes_conta();
+		$optionTipo = '';$lanContr = '';
+
+			//print_r($contaAtivas->ativosArray());
+		foreach ($contaAtivas->ativosArray()  as $ctaAcesso => $ctaArray) {
+			if ($ctaArray['nivel1']== '4') {
+
+				list($n1,$n2,$n3,$n4,$n5)=explode('.', $ctaArray['codigo']);
+
+				switch ($n1.$n2.$n3.$n4) {
+					case '411001':
+						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					case '411002':
+						$optionTipo .= '<option value="'.$ctaAcesso.',3,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					case '411003':
+						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					case '411004':
+						$optionTipo .= '<option value="'.$ctaAcesso.',4,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					case '411005':
+						$optionTipo .= '<option value="'.$ctaAcesso.',8,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					case '411006':
+						$optionTipo .= '<option value="'.$ctaAcesso.',5,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					case '412001':
+						$optionTipo .= '<option value="'.$ctaAcesso.',2,1">'.$ctaArray['titulo'].'</option>';
+						break;
+					default:
+						$optionTipo .= '<option value="'.$ctaAcesso.',1,2">'.$ctaArray['titulo'].'</option>';
+						break;
+				}
+			}
+			//conta atual do pré lançamento
+			if ($lancAltera->credito()==$ctaAcesso) {
+					$lanContr = '<option value="'.$lancAltera->credito().','.$lancAltera->devedora().','.$lancAltera->tipo().'">'.$ctaArray['titulo'].'</option>';
+				}
+
 		}
 ?>
 <fieldset>
@@ -60,7 +56,6 @@
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" autofocus="autofocus" ');
 		echo $listaIgreja;
 		?>
-
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
 			<?php echo semana(date('d/m/Y'));?>
@@ -78,28 +73,29 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan = '4'>
 				<div class="row">
-				  <div class="col-xs-6">
+				  <div class="col-xs-2">
 				    <label>Data: </label> <input type="text" id="data" name="data"
-                                        value="<?php echo conv_valor_br ($lancAltera->data());?>" class="form-control" required="required"/>
+                     value="<?php echo conv_valor_br ($lancAltera->data());?>" class="form-control" required="required"/>
 				  </div>
-				  <div class="col-xs-4">
+				  <div class="col-xs-2">
 				    <label>Semana: </label> <input type="text" id="semana" name="semana"
-                                        value="<?php echo $lancAltera->semana();?>" class="form-control" required="required"/>
+                     value="<?php echo $lancAltera->semana();?>" class="form-control" required="required"/>
 				  </div>
+				  <div class="col-xs-2">
+				<label>Referente Mês:</label><input type="text" name="mes" maxlength="2"
+					value="<?php echo $lancAltera->mesrefer();?>" class="form-control"  required="required" />
 				</div>
-				</td>
-				<td><label>Referente Mês:</label><input type="text" name="mes" maxlength="2"
-					size="2" value="<?php echo $lancAltera->mesrefer();?>" class="form-control"  required="required" />
-				</td>
-				<td>
+				  <div class="col-xs-2">
 					 <label>Ano:</label> <input type="text" id="ano" name="ano"
-						size="4" value="<?php echo $lancAltera->anorefer();?>"
+						value="<?php echo $lancAltera->anorefer();?>"
 					 	required="required" class="form-control" />
-				</td>
-				<td><label>Congreg. do membro:</label> <input type="text" id="cong"
+				</div>
+				  <div class="col-xs-4">
+				<label>Congreg. do membro:</label> <input type="text" id="cong"
 					class="form-control" disabled="disabled" value="<?php echo $lancAltera->congcadastro();?>" />
+				</div></div>
 				</td>
 			</tr>
 		</tbody>
@@ -112,22 +108,10 @@
 				<tr>
 					<td colspan="2"><label>Tipo:</label>
 						 <select name='acesso' class='form-control'>
-							  <?php echo $lanContr;?>
-							  <option value=""> *** Informe o tipo ***</option>
-							  <option value="700,1,1">Dizimo</option>
-							  <option value="701,1,1">Oferta</option>
-							  <option value="702,1,1">Oferta-Extra</option>
-							  <option value="703,1,1">Voto</option>
-							  <option value="720,3,7">Oração - Adulto</option>
-							  <option value="721,3,7">Oração - Votos Adulto</option>
-							  <option value="900,8,7">Oração - Mocidade</option>
-							  <option value="723,5,7">Oração - Infantil</option>
-							  <option value="820,2,5">Missões - Sede</option>
-							  <option value="821,2,5">Missões - Congregações</option>
-							  <option value="822,2,5">Missões - Carnês</option>
-							  <option value="823,2,5">Missões - Cofre</option>
-							  <option value="824,2,5">Missões - Envelopes</option>
-							  <option value="825,2,5">Missões - Votos</option>
+							  <?php
+							  	echo $lanContr;
+							   	echo $optionTipo;
+							   ?>
 						</select>
 					</td>
 					<td><label>Valor:</label><input type="text" id="oferta0" autocomplete="off"
