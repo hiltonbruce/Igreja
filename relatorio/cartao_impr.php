@@ -32,6 +32,8 @@ require "../func_class/classes.php";
 	if ($rec_ecl->situacao_espiritual()<>"1"){
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
+	}elseif ($rec_pessoais->sexo()=='F' && file_exists("../img/cartao_feminino.jpg")) {
+		$background_cartao = "feminino"; //Define a imagem de fundo do cartão
 	}elseif (cargo($rolConsuta)=="Pastor") {
 		$background_cartao = "pastor"; //Define a imagem de fundo do cartão
 	}elseif (cargo($rolConsuta)=="Evangelista") {
@@ -87,6 +89,16 @@ body {
 	height:45px;
 	z-index:4;
 	font-size: 80%;
+}
+#marca {
+	position:absolute;
+  	background: url(../img/marca.png) no-repeat;
+  	background-size: 92px 128px;
+	left:56px;
+	top:30px;
+	width:111px;
+	height:143px;
+	z-index:6;
 }
 #Razao {
 	position:absolute;
@@ -186,6 +198,8 @@ body {
 
 <body>
 <div id="cartao"></div>
+<!-- <div id='marca'></div> Cartão com logo idependente do fundo da imagem-->
+
 <div id="Endereco">
   <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>
    <?PHP echo "CEP: {$igreja->cep()} <br /> Fone: {$igreja->fone()} - CNPJ: ".$igreja->cnpj();?>
