@@ -1,6 +1,6 @@
 <table >
 		<caption>Lançamento Concluído</caption>
-		
+
 			<colgroup>
 				<col id="Conta">
 				<col id="Débito">
@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<?php 
+				<?php
 					echo $exibideb;//Valor retirado do script models/feccaixaculto.php
 					echo $exibicred;//Valor retirado do script models/feccaixaculto.php
 				?>

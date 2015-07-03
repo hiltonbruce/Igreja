@@ -2,7 +2,7 @@
 	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 ?>
 <fieldset>
-	<legend>Relatório de Lançamentos</legend>
+	<legend>Relat&oacute;rio de Lan&ccedil;amentos</legend>
     <div class="form-group">
 	<form method="get" name="" action="">
 		<table class="table">
@@ -17,7 +17,7 @@
 					?>
 				</td>
 				<td>
-					Mês:<br />
+					M&ecirc;s:<br />
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';

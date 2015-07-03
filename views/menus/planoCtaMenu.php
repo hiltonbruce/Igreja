@@ -5,10 +5,8 @@
       $linkAtivo='';
     }?>
  <div class="btn-group">
-      <button type="button" class="btn btn-info btn-xs <?php echo $linkAtivo;?>">Contas</button>
       <button type="button" class="btn btn-info btn-xs dropdown-toggle <?php echo $linkAtivo;?>" data-toggle="dropdown">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
+        Contas <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
           <?php if ($_GET['rec']=='8' ) {

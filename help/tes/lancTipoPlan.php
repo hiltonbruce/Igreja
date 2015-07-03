@@ -1,10 +1,45 @@
 <?php
+
+//print_r($ctaDespesa->dadosArray());
+$ctaDespesa = new tes_despesas();
+foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
+//Verifica se foi enviado dados para lançamento, testando e executando
+    if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>0) {
+
+    	$rolIgreja = $_POST['rolIgreja'.$chave];
+    	echo '<script> alert ('.$_POST['acesso'.$chave].')</script>';
+    	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor'.$chave]), ',.','.,' ):($valor_us);
+		$debitar = $_POST['acesso'.$chave];
+		$creditar =  $_POST['disponivel'.$chave];
+		//print_r($_POST);
+
+		$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a variável o histórico do lançamento
+		$data = br_data($_POST['data'.$chave]);
+
+		//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
+		//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
+		//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
+        # chama o script responsável pelo lançamento
+       require 'models/tes/lancModPlanilha.php';
+
+    }
+}
+$exibicred .= sprintf("<tr class='total'><td>Totais</td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
+
+
+
 $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
 $bgcolor = 'class="active"';
 $cor= true;
+$provmissoes=0;
+$ultimolanc = 0;
+
+//inicializa variáveis
+$totalDeb = 0;
+$totalCred = 0;
 //print_r($arrayDesp);
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	$bgcolor = $cor ? 'class="active"' : '';
@@ -54,28 +89,6 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control"/>';
 	$conta ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
 
-//Verifica se foi enviado dados para lançamento, testanto e executando
-
-    if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>0) {
-
-    	$rolIgreja = $_POST['rolIgreja'.$chave];
-    	echo '<script> alert ('.$_POST['acesso'.$chave].')</script>';
-    	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor'.$chave]), ',.','.,' ):($valor_us);
-		$debitar = $_POST['acesso'.$chave];
-		$creditar =  $_POST['disponivel'.$chave];
-		//print_r($_POST);
-
-		$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a variável o histórico do lançamento
-		$data = br_data($_POST['data'.$chave]);
-
-		//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
-		//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
-		//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
-        # chama o script responsável pelo lançamento
-       require 'models/tes/lancModPlanilha.php';
-
-    }
-
 //Fecha a tabela se mudou de grupo de conta
 if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 	$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>';
@@ -107,11 +120,17 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$codigo5 = $valor['codigo'];
 	}
 echo($valor['codigo']).' **-> '.strlen($valor['codigo']).' === ';*/
+
 }
 
 //Último grupo do array, completando a tabela
 if ($cabDespesa!='') {
 	$listDesp .= $cabDespesa.$dia1.'</form></tbody></table>';
+}
+
+//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
+if ($exibideb!='') {
+	require_once 'views/exibilanc.php';//monta a tabela para exibir
 }
 
 $nivel1 = $listDesp;

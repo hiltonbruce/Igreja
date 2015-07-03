@@ -1,11 +1,6 @@
 <?php
 controle ('tes');
-$provmissoes=0;
-$ultimolanc = 0;
-
 //inicializa variáveis
-$totalDeb = 0;
-$totalCred = 0;
 $corlinha = false;
 
 	$credora 	= new DBRecord('contas',$creditar,'acesso');
@@ -31,8 +26,8 @@ $corlinha = false;
 if ($msgErro=='') {
 
 	//Faz o lançamento do débito da tabela lancamento
-	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
-	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
+	//$exibideb  .= '<tr><td colspan="4">Debito</td></tr>';
+	//$exibicred .= '<tr><td colspan="4">Credito</td></tr>';
 
 	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
@@ -65,13 +60,13 @@ if ($msgErro=='') {
 		$corlinha = !$corlinha;
 
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
-	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
+	//$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
 
 	//Lança o histórico do lançamento
 	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$rolIgreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
 
-	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
+	//require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 
 }
