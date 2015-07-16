@@ -68,7 +68,19 @@ switch ($_GET['rec']) {
 		break;
 	case '11':
 		require_once 'forms/tes/histFinanceiro.php';
-		require_once 'views/tesouraria/saldoMembros.php';
+		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
+			//Lista financeira de todas as igreja com mês específico
+			$colUm = 'Igrejas';//Primeira coluna do cabecalho
+			require_once 'views/tesouraria/cabTabFin.php';//Cabeçalho da tabela
+			require_once 'views/tesouraria/saldoMesFin.php';
+			$tabThead = $nivelSem;
+			require_once 'views/tesouraria/saldoIgrejas.php';
+		} else {
+			//Lista financeira da igreja com todos os  meses
+			$colUm = 'Per&iacute;odo';//Primeira coluna do cabecalho
+			require_once 'views/tesouraria/cabTabFin.php';//Cabeçalho da tabela
+			require_once 'views/tesouraria/saldoMembros.php';
+		}
 		break;
 	case '12':
 		require_once 'forms/tes/histFinanceiro.php';

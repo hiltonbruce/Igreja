@@ -78,11 +78,11 @@ class tes_igreja {
 				$diaProxCulto=$nomeDias[$culto[1]];
 			}
 
-#Modifica a data para o proximo culto
-$proxCulto = $dtUltLanc->modify($diaProxCulto);
-$proxCulto = $proxCulto->format('d/m/Y');
-$mesLanc = $dtUltLanc->format('m');
-$anoLanc = $dtUltLanc->format('Y');
+			#Modifica a data para o proximo culto
+			$proxCulto = $dtUltLanc->modify($diaProxCulto);
+			$proxCulto = $proxCulto->format('d/m/Y');
+			$mesLanc = $dtUltLanc->format('m');
+			$anoLanc = $dtUltLanc->format('Y');
 
 			//echo "<h1>".$diaUltimoCulto.' ## '.$diaProxCulto.' ++ '.$resUltimoDia['cultos'].' -- '.$diaProxCulto.' ** '.$nomeDias[$cultos[$diaProxCulto]].' == '.$cultos[$diaProxCulto]."</h1>";
 

@@ -77,6 +77,14 @@
 	// echo '<h1> SESSION[valid_user]- '.$_SESSION['valid_user'].'--Session[setor]-- '.$_SESSION['setor'].' - '.$_SESSION['nome'].'--Session[cid_end]-- '.$_SESSION['cid_end'].'</h1>';
 		  if (!empty($_SESSION['valid_user']))
 		  {
+            if (empty($_GET['direita']) && empty($_POST['direita'])) {
+               $mainpanelIni = '<div class="mainpanel">';
+               $mainpanelFim = '</div>';
+            } else {
+               $mainpanelIni = '';
+               $mainpanelFim = '';
+            }
+
 		  ?>
 
         <div class="header">Sistemas</div>
@@ -126,8 +134,8 @@
           <br />
       </div>
  <div id="content">
-      <div class="mainpanel">
         <?PHP
+        echo $mainpanelIni;
 
 		if ($_SESSION["valid_user"]){
 			if (strstr($_GET["escolha"],"adm/")){
@@ -155,8 +163,8 @@
 				require_once ('noticias/painel.php');
 		}
 
+       echo $mainpanelFim;
 	   ?>
-      </div>
 
 	  <!-- rightpanel -->
 	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='') {

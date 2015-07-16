@@ -35,7 +35,7 @@ if (empty($idIgreja)) {
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 }
 
-	$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&data='.$dtlanc;
+	$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu;
 	$linkAcesso .= '&rec='.$rec.'&idDizOf='.$idDizOf.'&mes='.$meslanc.'&ano='.$anolanc.'&igreja=';
 ?>
 

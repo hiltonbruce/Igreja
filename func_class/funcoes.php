@@ -610,7 +610,7 @@ function arrayMeses () {
 	$meses = array(
 			'01' => 'Janeiro',
 			'02' => 'Fevereiro',
-			'03' => 'Março',
+			'03' => 'Mar&ccedil;o',
 			'04' => 'Abril',
 			'05' => 'Maio',
 			'06' => 'Junho',

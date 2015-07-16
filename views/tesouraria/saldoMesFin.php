@@ -1,57 +1,24 @@
 <?php
-if ($_GET['fin']=='' || $_GET['fin']<2) {
-	require_once ("views/secretaria/menuTopDados.php");
-	$hisFinanceiro = 1;
-	$cong = '';
-}elseif (empty($_GET['igreja'])) {
+//	require_once ("views/secretaria/menuTopDados.php");
 	$igreja = '';
 	$hisFinanceiro = 3;
-	$cong = 'Todas as Igrejas<br />';
-	require_once 'forms/tes/histFinanceiro.php';
-}else {
-	$igreja = (int)$_GET['igreja'];
-	$ingSeleciona = new DBRecord('igreja', $igreja, 'rol');
-	$cong = 'Igreja - '.$ingSeleciona->razao().'<br />';
-	$hisFinanceiro = 2;
-	require_once 'forms/tes/histFinanceiro.php';
-}
+	$cong = '<br />Todas as Igrejas';
+	//require_once 'forms/tes/histFinanceiro.php';
 
-require_once 'models/tes/histFinMembro.php';
+$mes = intval($_GET['mes']);
+require_once 'models/tes/histFinIgreja.php';
+$tabThead = $nivelSem; //Cabeçalho da tabela
+
+$mesPeriodo = sprintf('%02s',$mes);//Mês por extenso
+$mesExt = arrayMeses ();
+$mesPorExt = $mesExt[$mesPeriodo];
 ?>
-<table id="horario" class='table'>
-		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência:&nbsp;
-		<?php echo $ano;?> - Valores em Real(R$)</caption>
-		<colgroup>
-				<col id="Mes">
-				<col id="Dízimos">
-				<col id="Ofertas Extras">
-				<col id="Ofertas">
-				<col id="Sub-Total">
-				<col id="Campanhas">
-				<col id="Missões">
-				<col id="Senhoras">
-				<col id="Mocidade">
-				<col id="Infantil">
-				<col id="Ensino">
-				<col id="Total">
-			</colgroup>
-		<thead>
-			<tr>
-				<th scope="col">Mês</th>
-				<th scope="col">Dízimos</th>
-				<th scope="col">Extras</th>
-				<th scope="col">Ofertas</th>
-				<th scope="col">Sub-Total</th>
-				<th scope="col">Campanhas</th>
-				<th scope="col">Missões</th>
-				<th scope="col">Senhoras</th>
-				<th scope="col">Mocidade</th>
-				<th scope="col">Infantil</th>
-				<th scope="col">Ensino</th>
-				<th scope="col">Total</th>
-			</tr>
-		</thead>
+<div class='text-center'><h5><strong>Histórico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
+		<?php printf('%s - Per&iacute;odo:&nbsp;&nbsp;%02s de %s',$cong,$mesPorExt,$ano);?></h5></div>
+<table id="horario" class='table table-bordered'>
 			<?php
+				echo '<thead>'.$nivelSem.'</thead>';
+
 			if ($_GET['tipo']==1) {
 				echo $nivel1;//Valor veio do script /models/saldos.php
 			}else {

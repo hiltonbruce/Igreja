@@ -2,21 +2,11 @@
 $nivel1 	= '';
 $nivel2 	= '';
 $comSaldo	= '';$menorAno = 0;$maiorAno=0;
-switch ($hisFinanceiro) {
-	case 1:
-		//Listagem para historico finaceiro das contribuições dos membros
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,anorefer AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" ORDER BY anorefer,mesrefer ');
-	break;
-	case 2:
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY data,anorefer,mesrefer ');
-	break;
-	default:
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" ORDER BY anorefer,mesrefer ');
-	break;
-}
+
+$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%c")="'.$mes.'" ORDER BY igreja,anorefer,mesrefer ');
 
 //Logica para montar o conjunto de variáveis para compor a tabelar a seguir
-require_once 'help/tes/histFinanceiroMembro.php';
+require_once 'help/tes/histFinanceiroIgreja.php';
 
 	if ($_GET['ano']=='') {
 			$ano = date('Y');
@@ -29,13 +19,15 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		}
 
 	//echo "<h1> ** $ano **</h1>";
-
 	$ano = ($ano=='') ? date('Y'):$ano;
 
 	//$ano = 2013;
 	//echo "<h1> ** $ano **</h1>";
 	$cor= true;
-	for ($cont=1; $cont<13 ; $cont++){
+	$igrejas = new igreja();$linha='';
+	//print_r($igrejas->Arrayigreja());
+	foreach ($igrejas->Arrayigreja() as $cont => $igrejaDados) {
+
 		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
 		$dz = 'dizimos'."$cont$ano"; $of = 'ofertaCultos'."$cont$ano"; $ofm = 'ofertaMissoes'."$cont$ano";
 		$ofs = 'ofertaSenhoras'."$cont$ano"; $ofmoc = 'ofertaMocidade'."$cont$ano"; $ofi = 'ofertaInfantil'."$cont$ano";
@@ -53,7 +45,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$totSubTotal +=$subTotal;
 		$totTotal += $totMes;
 
-		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.sprintf("%02u",$cont ).'/'.$ano.'</strong></th>';
+		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th>'.$igrejaDados['0'].'</th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';
