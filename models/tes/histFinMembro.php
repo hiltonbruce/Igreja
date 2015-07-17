@@ -2,31 +2,38 @@
 $nivel1 	= '';
 $nivel2 	= '';
 $comSaldo	= '';$menorAno = 0;$maiorAno=0;
+
+if ($_GET['ano']=='') {
+		$ano = date('Y');
+	}elseif ($_GET['ano']<$menorAno){
+		$ano = $menorAno;
+	}elseif ($_GET['ano']>$maiorAno){
+		$ano = $maiorAno;
+	}else {
+		$ano = $_GET['ano'];
+	}
+
 switch ($hisFinanceiro) {
 	case 1:
 		//Listagem para historico finaceiro das contribuições dos membros
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,anorefer AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" AND credito!="803" ORDER BY anorefer,mesrefer ');
+		$query  = 'SELECT *,DATE_FORMAT(data,"%c") AS mes,anorefer';
+		$query .= ' AS ano FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%Y") = "'.$ano.'" AND rol="'.$bsc_rol.'"';
+		$query .= ' AND credito!="803" ORDER BY anorefer,mesrefer';
 	break;
 	case 2:
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND igreja="'.$igreja.'" ORDER BY data,anorefer,mesrefer ');
+		$query  = 'SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano';
+		$query .= ' FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%Y") = "'.$ano.'"';
+		$query .= ' AND igreja="'.$igreja.'" ORDER BY data,anorefer,mesrefer';
 	break;
 	default:
-		$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" ORDER BY anorefer,mesrefer ');
+		$query  = 'SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano';
+		$query .= ' FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%Y") = "'.$ano.'" ORDER BY anorefer,mesrefer';
 	break;
 }
 
+$lista = mysql_query($query);
 //Logica para montar o conjunto de variáveis para compor a tabelar a seguir
 require_once 'help/tes/histFinanceiroMembro.php';
-
-	if ($_GET['ano']=='') {
-			$ano = date('Y');
-		}elseif ($_GET['ano']<$menorAno){
-			$ano = $menorAno;
-		}elseif ($_GET['ano']>$maiorAno){
-			$ano = $maiorAno;
-		}else {
-			$ano = $_GET['ano'];
-		}
 
 	//echo "<h1> ** $ano **</h1>";
 

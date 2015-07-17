@@ -40,8 +40,9 @@
 		<input name="escolha" type="hidden" value="tesouraria/receita.php" />
 		<input name="menu" type="hidden" value="top_tesouraria" />
 		<input type="hidden" name="fin" value="<?php echo $fin;?>" />
-		<input type="hidden" name="rec" value="<?php echo '11';?>" />
+		<input type="hidden" name="rec" value="11" />
 		<input type="hidden" name="direita" value="1" />
 	  </div>
 	</div>
+</form>
 </fieldset>

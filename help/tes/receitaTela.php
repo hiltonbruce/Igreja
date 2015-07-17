@@ -1,7 +1,10 @@
 <?php
 //Opções de exibir na tela para o script /tesouraria/receita.php
 $dtlanc = ($_GET['data']=='') ? date('d/m/Y'):$_GET['data'];
-switch ($_GET['rec']) {
+
+$rec = (empty($_GET['rec'])) ? '' : $_GET['rec'] ;
+
+switch ($rec) {
 	case '0':
 		require_once ('forms/tes/busca.php');
 		//require_once 'forms/tes/histResumo.php';
@@ -38,6 +41,7 @@ switch ($_GET['rec']) {
 		require_once ('views/saldosComadep.php');
 		break;
 	case '7':
+		$rec = 12;
 		require_once 'forms/tes/histFinanceiro.php';
 		require_once 'models/saldos.php';
 		$mes = date('m'); // Mês desejado, pode ser por ser obtido por POST, GET, etc.
@@ -57,7 +61,7 @@ switch ($_GET['rec']) {
 		break;
 	case '9':
 		$idDizOf = $_GET['idDizOf'];
-		$rec = (empty($_GET['rec'])) ? 9:$_GET['rec'];
+		//$rec = (empty($_GET['rec'])) ? 9:$_GET['rec'];
 		require_once 'forms/tes/histResumo.php';
 		break;
 	case '10':

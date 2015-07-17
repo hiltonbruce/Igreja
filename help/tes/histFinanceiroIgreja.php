@@ -41,7 +41,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ofi 		= 'ofertaInfantil'.$periodo;
 	$ofiSem 	= $ofi.$semana;
 
-	$dev 		= (int)$contas['devedora'];
+	$dev 		= intval($contas['devedora']);
 	$valor 		= $contas['valor'];
 
 	  switch ($dev) {
