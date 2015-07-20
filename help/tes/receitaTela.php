@@ -2,13 +2,9 @@
 //Opções de exibir na tela para o script /tesouraria/receita.php
 $dtlanc = ($_GET['data']=='') ? date('d/m/Y'):$_GET['data'];
 
-$rec = (empty($_GET['rec'])) ? '' : $_GET['rec'] ;
+$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 
 switch ($rec) {
-	case '0':
-		require_once ('forms/tes/busca.php');
-		//require_once 'forms/tes/histResumo.php';
-		break;
 	case '1':
 		require_once 'forms/concluirdiz.php';#Form fecha caixa
 		if (!empty($_GET['id'])) {
@@ -109,7 +105,9 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoCargos.php';
 		break;
 	default:
-		require_once 'forms/receita.php';
-	break;
+		require_once ('forms/tes/busca.php');
+                //require_once 'forms/tes/histResumo.php';
+                //require_once 'forms/receita.php';
+		break;
 }
 ?>
