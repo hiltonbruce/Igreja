@@ -28,7 +28,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 	//Faz o lançamento do débito para tabela lancamento
 	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor,credito FROM dizimooferta
-			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora,tipo');
+			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito,tipo');
 	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
 	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
 
@@ -37,7 +37,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$caixaSenhoras = '';
 
 	while ($tablancarr = mysql_fetch_array($tablanc)) {
-
 		$debitar = $tablancarr['devedora'];
 		$devedora 	= new DBRecord('contas',$debitar,'acesso');
 		$credora 	= new DBRecord('contas',$tablancarr['credito'],'acesso');
@@ -52,22 +51,18 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			//Para tipo 9 não há provisão para COMADEP ou Missões
 			$provcomadep += round(($valor*0.1),2);
 		}
-
 		//Exibi lançamento
 		$caixa = new DBRecord('contas',$tablancarr['devedora'],'acesso');
 		$totalDeb = $totalDeb + $valor;
 		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
-
 	}
 
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
-
    	//Lança provisões conta Despesa
 	$semaddesp = new atualconta('3.1.6.001.005',$idlancmis,11);
    	if ($provmissoes>0) {
    		$semaddesp->atualizar($provmissoes,'D',$roligreja,'Valor provisionado para SEMAD sobre a receita nesta data'); //Faz o lançamento, se possuir valor, da provisão de missões - Despesa
    	}
-
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
@@ -75,12 +70,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$totalDeb = $totalDeb + $provmissoes;
 
 	$corlinha = !$corlinha;
-
 	$provcomad = new atualconta('3.1.1.001.007',$idlancmis,10);
 	if ($provcomadep>0) {
 		$provcomad->atualizar($provcomadep,'D',$roligreja,'Valor provisionado para COMADEP sobre a receita nesta data'); //Faz o lançamento, se possuir valor, da provisão de Comadep - Despesa
 	}
-
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
@@ -108,13 +101,11 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		$corlinha = !$corlinha;
 
 	}
-
 	//Lança provisões conta credora no Ativo
 	$provsemad = new atualconta('1.1.1.001.007',$idlancmis);
 	if ($provmissoes>0) {
 		$provsemad->atualizar($provmissoes,'C',$roligreja); //Faz o lançamento, se possuir valor, da provisão de missões - Ativo
 	}
-
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
 	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
@@ -181,7 +172,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			<label>&nbsp;</label>
 			<a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1"
 				tabindex="<?PHP echo ++$ind; ?>" >
- 				<button type="button" class="btn btn-primary">Próximo culto da <?php echo $igrejaSelecionada->razao();?>!</button>
+ 				<button type="button" class="btn btn-primary">Próximo culto da <?php echo $igrejaSelecionada->razao();?></button>
  			</a>
 		</div>
 		<div class="col-xs-4">

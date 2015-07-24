@@ -31,9 +31,10 @@ require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 
 $dizmista = new dizresp($_SESSION['valid_user']);
 $idIgreja = (empty($_GET['igreja'])) ? 0:(int)$_GET['igreja'];
-if ((int)$_POST['rolIgreja']>0) {
+if (intval($_POST['rolIgreja'])>0) {
 	$idIgreja=$_POST['rolIgreja'];
 }
+
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 
 	// verifica se há valor a ser lançado e libera os forms
@@ -45,7 +46,6 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 		} elseif ($_POST['lancar']=='1') {
 			require_once 'models/feccaixaculto.php';
 		} else {
-
 			$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
 			$linkAcesso .= '&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 

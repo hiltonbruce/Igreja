@@ -9,10 +9,8 @@ class atualconta {
 			$this->cod3 = $cod[0].'.'.$cod[1].'.'.$cod[2];
 			$this->cod4 = $cod[0].'.'.$cod[1].'.'.$cod[2].'.'.$cod[3];
 			$this->cod5 = $cod[0].'.'.$cod[1].'.'.$cod[2].'.'.$cod[3].'.'.$cod[4];
-
 	$this->ultimolanc = $ultimolanc;//id deste lançamento
 	$this->creditar = $creditar;
-
 	}
 
 	function atualizar($valor,$dc,$igreja,$histLanc,$data) {
@@ -51,9 +49,6 @@ class atualconta {
 				$lancNovaVersao->inserir();
 				}
 			}
-
 		}
-
 	}
-
 }

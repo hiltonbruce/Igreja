@@ -160,10 +160,10 @@ for ($i = 0; $i < 13; $i++) {
 		}
 	}
 }
-$mostraLanc .= '</tbody></table>';
-$mostraLanc .=  '</fieldset>';
-
 $valorTotal = number_format($totalContr, 2, ',', ' ');
-$mostraLanc .=' <div class="bs-callout bs-callout-default">
-    <h4>Total da contribuição:<span class="navbar-right">'.$valorTotal.'</span></h4></div>';
+$mostraLanc .= '<tr class="success"><td colspan="2">';
+$mostraLanc .= '<h4>Total da contribuição:<span class="navbar-right">'.$valorTotal.'</h4></div>';
+$mostraLanc .= '</td></tr>';
+$mostraLanc .= '</tbody></table>';
+$mostraLanc .= '</fieldset>';
 ?>

@@ -20,7 +20,7 @@
 					M&ecirc;s:<br />
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
-					      	$linha1 = '<option value="0">Selecione o mês...</option>';
+					      	$linha1 = '<option value="0">Selecione o m&ecirc;s...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($_GET['mes']==$mes) {

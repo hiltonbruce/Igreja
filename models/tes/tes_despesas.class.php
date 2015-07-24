@@ -52,7 +52,7 @@ class tes_despesas {
 			}
 			if ($arrayAgenda['idlanc']=='0') {
 				//Despesas agendadas e não pagas
-				$arrayDespesas[] = array('titulo'=>$arrayAgenda['titulo'],'codigo'=>$arrayAgenda['codigo']
+				$arrayDespesas[] = array('id'=>$arrayAgenda['id'],'titulo'=>$arrayAgenda['titulo'],'codigo'=>$arrayAgenda['codigo']
 				,'lancamento'=>$arrayAgenda['idlanc'],'debitar'=>$arrayAgenda['debitar']
 				,'creditar'=>$arrayAgenda['creditar'],'valor'=>$arrayAgenda['valor']
 				,'igreja'=>$arrayAgenda['razao'],'referente'=>$arrayAgenda['motivo']

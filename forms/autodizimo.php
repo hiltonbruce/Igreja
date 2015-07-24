@@ -5,7 +5,7 @@
 <form method="post" name="" action="">
 		<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
-		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" autofocus="autofocus" ');
+		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" ');
 		echo $listaIgreja;
 		?>
 
@@ -19,7 +19,7 @@
 				<td colspan="3"><label>Nome:</label> <input type="text" name="nome"
 				id="campo_estado" size="50%" class="form-control"
 				placeholder="Nome do dizimista para iniciarmos a busca no cadastro da Igreja!"
-					tabindex="<?php echo ++$ind;?>" />
+				autofocus="autofocus" tabindex="<?php echo ++$ind;?>" />
 				</td>
 				<td><label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?php echo ++$ind;?>"
 						value="" class="form-control" placeholder="N&ordm; do membro na igreja" />
