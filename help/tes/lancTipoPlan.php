@@ -44,15 +44,15 @@ $totalCred = 0;
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	http://localhost/igrejas/GitHub/Igreja/?escolha=tesouraria/agenda.php&menu=top_tesouraria&id=3307&pagina1_fix=&data=
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
-	$linkPagar .= '><span class="glyphicon glyphicon-usd"></span></a>';
+	$linkPagar .= '><small class="text-muted glyphicon glyphicon-new-window"></small</a>';
 	$bgcolor = $cor ? 'class="active"' : '';
 	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
-		$vencPgto  = $linkPagar.'<small class="glyphicon glyphicon-ok"> Pago em: '.$vlrDesp['dtpgto'];
-		$vencPgto .= ' -> Venc.: '.$vlrDesp['vencimento'].'</small>';
+		$vencPgto  = '<small class="text-success glyphicon glyphicon-ok"></small> Pago em: '.$vlrDesp['dtpgto'];
+		$vencPgto .= ' -> Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar;
 		$titleMsg = ', paga, obrigado!';
 	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
-		$vencPgto  = $linkPagar.'<small class="glyphicon glyphicon-warning-sign"> Venc.: '.$vlrDesp['vencimento'];
-		$vencPgto .= '</small>';
+		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign"> </small>Venc.: '.$vlrDesp['vencimento'];
+		$vencPgto .= ' '.$linkPagar;
 		$bgcolor = 'class="danger"';
 		$titleMsg = ', ainda n&atilde;o paga!';
 	}
