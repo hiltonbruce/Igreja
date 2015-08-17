@@ -47,7 +47,6 @@
 			</tr>
 		</tbody>
 	</table>
-
 	</form>
 	</div>
 </fieldset>

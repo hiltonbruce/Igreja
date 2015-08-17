@@ -1,7 +1,6 @@
 <table class='table-hover'>
 		<caption>
 		<?php
-
 		if ($recLink!='' && !empty($recLink)) {
 			echo '<a href="'.$linkImpressao.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
@@ -10,7 +9,6 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-
 		echo $titTabela;
 		?>
 		</caption>

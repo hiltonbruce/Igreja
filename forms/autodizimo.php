@@ -29,8 +29,9 @@
 				<td><label>Data: </label> <input type="text" id="data" name="data"
 					value="<?php echo $dtlanc;?>" class="form-control" required="required"/>
 				</td>
-				<td><label>Referente Mês:</label><input type="text" id="mesnum" name="mes"
-					size="2" value="<?php echo $meslanc;?>" class="form-control"  required="required" />
+				<td><label>Referente Mês:</label><input type="text" name="mes"
+					size="2" value="<?php echo $meslanc;?>" class="form-control"
+					 tabindex="<?php echo ++$ind;?>" required="required" />
 				</td>
 				<td>
 					 <label>Ano:</label> <input type="text"
@@ -90,23 +91,23 @@
 		<table  class="table">
 			<tbody>
 				<tr>
+					<td><label>Carnês:</label><input type="text" id="oferta8" autocomplete="off"
+						class="form-control" name="oferta8" value="" tabindex="<?php echo ++$ind;?>"
+						placeholder="Valor em R$ ( Carnês )"  />
+					</td>
 					<td><label>Oferta:</label><input type="text" id="oferta5" autocomplete="off"
 						class="form-control" name="oferta5" value="" tabindex="<?php echo ++$ind;?>"
-						placeholder="Valor em R$"  />
+						placeholder="Valor em R$ ( Oferta )"  />
 					</td>
 					<td><label>Envelopes:</label><input type="text" id="oferta6" autocomplete="off"
 						class="form-control" name="oferta6" value="" tabindex="<?php echo ++$ind;?>"
-						placeholder="Valor em R$"  />
-					</td>
-					<td><label>Cofres:</label><input type="text" id="oferta7" autocomplete="off"
-						class="form-control" name="oferta7" value="" tabindex="<?php echo ++$ind;?>"
-						placeholder="Valor em R$"  />
+						placeholder="Valor em R$ ( Envelopes )"  />
 					</td>
 				</tr>
 				<tr>
-					<td><label>Carnês:</label><input type="text" id="oferta8" autocomplete="off"
-						class="form-control" name="oferta8" value="" tabindex="<?php echo ++$ind;?>"
-						placeholder="Valor em R$"  />
+					<td><label>Cofres:</label><input type="text" id="oferta7" autocomplete="off"
+						class="form-control" name="oferta7" value="" tabindex="<?php echo ++$ind;?>"
+						placeholder="Valor em R$ ( Cofres )"  />
 					</td>
 					<td></td>
 					<td> <label>&nbsp;</label> <input class="btn btn-primary"
