@@ -1,5 +1,4 @@
 <?php
-
 //print_r($ctaDespesa->dadosArray());
 $ctaDespesa = new tes_despesas();
 foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
@@ -15,18 +14,14 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 
 		$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a variável o histórico do lançamento
 		$data = br_data($_POST['data'.$chave]);
-
 		//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
 		//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
 		//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
         # chama o script responsável pelo lançamento
        require 'models/tes/lancModPlanilha.php';
-
     }
 }
 $exibicred .= sprintf("<tr class='total'><td>Totais</td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
-
-
 
 $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();

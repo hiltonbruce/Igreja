@@ -49,6 +49,8 @@ $tabMembros = new membro();
 			}else {
 				$statusLancamento = '';
 			}
+
+			$statusLancamento .= $msg;
 		}
 
 
@@ -83,7 +85,6 @@ $tabMembros = new membro();
 				$tesSede = $tabMembros->nomes();
 				$tesIgreja = $tesSede ['4037']['0'];
 			}
-
 
 			if ($_GET['escolha']=='') {
 				$fonIni = '<p style="font-size: 80%;padding: 0 0 0 0;margin-bottom: 0;">';

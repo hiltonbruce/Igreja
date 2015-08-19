@@ -44,7 +44,7 @@ class tes_despesas {
 			if ($arrayAgenda['idlanc']>0) {
 				//Com confirmação de lançamento (pagas)
 				$agendaLanc [$arrayAgenda['idlanc']] = array('venc' => $arrayAgenda['venc'],
-				'dtpgto' => $arrayAgenda['dtpgto'] );
+				'dtpgto' => $arrayAgenda['dtpgto'], 'idAgenda' => $arrayAgenda['id']);
 			}else {
 				//Sem confirmação de pagamento
 				$agendaSemLanc = array('vencimento' => $arrayAgenda['venc'],
@@ -60,7 +60,6 @@ class tes_despesas {
 				,'dtpgto'=>$arrayAgenda['dtpgto'],'vencimento'=>$arrayAgenda['venc']);
 			}
 
-		}
 		//int_r($agendaNaoPago);
 		//SQL dos lançamentos realizados
 		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, ';
@@ -71,7 +70,7 @@ class tes_despesas {
 		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
 		while($dados = mysql_fetch_array($despesa)) {
 			//Lançamento da Despesas
-			$arrayDespesas[] = array('titulo'=>$dados['titulo'],'codigo'=>$dados['codigo']
+			$arrayDespesas[] = array('id'=>$agendaLanc [$dados['lancamento']]['idAgenda'],'titulo'=>$dados['titulo'],'titulo'=>$dados['titulo'],'codigo'=>$dados['codigo']
 				,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
 				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
 				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
@@ -82,6 +81,5 @@ class tes_despesas {
 		//print_r($arrayDespesas);
 		return $arrayDespesas;
 	}
-
 }
 ?>

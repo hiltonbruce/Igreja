@@ -1,5 +1,20 @@
 <?php
 	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
+
+	if (empty($_GET['ano']) && $_GET['ano']!='0' ) {
+		$ano = date('Y');
+	}else {
+		$ano = $_GET['ano'];
+	}
+
+	//Mensagem complementar para o cabeçalho da tabela
+	if ($ano=='0') {
+		$msg = ' - Todos os ANOS';
+	}elseif ($_GET['ano']=='') {
+		$msg = '';
+	} else {
+		$msg = ' - Ano de :'.$ano;
+	}
 ?>
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
