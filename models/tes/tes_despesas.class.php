@@ -59,7 +59,7 @@ class tes_despesas {
 				,'data'=>$arrayAgenda['dtLanc'],'hist'=>$arrayAgenda['hist'],'acesso'=>$arrayAgenda['acesso']
 				,'dtpgto'=>$arrayAgenda['dtpgto'],'vencimento'=>$arrayAgenda['venc']);
 			}
-
+		}
 		//int_r($agendaNaoPago);
 		//SQL dos lançamentos realizados
 		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, ';
