@@ -36,7 +36,7 @@ class menutes {
 		<div class="box-inner">
 		<div class="box-titulo">
 
-		<table cellspacing="0" >
+		<table class='table table-bordered' cellspacing="0" >
 		<caption id="recibos">Recibos Recentes</caption>
 
 			<colgroup>
@@ -101,15 +101,9 @@ class menutes {
 	<div class="box-titulo">
 
 	<?PHP
-
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pag_mostra"],"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
-
-	?>
-	</div></div></div></div>
-
-	<?php
 
 	if ($total_pen>"1"){
 		printf ("%s recibos!",number_format($total_pen, 0, ',', '.'));
@@ -118,9 +112,11 @@ class menutes {
 	}else{
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
 	}
-		//Fim das informa??es das pendencias
-
-		//Início das pendencias de disciplinados
+	?>
+	</div></div></div></div>
+	<?php
+	//Fim das informa??es das pendencias
+	//Início das pendencias de disciplinados
 	}
 
 	function buscarecibo() {
@@ -134,7 +130,6 @@ class menutes {
 		<h1>Busca de Recibos</h1>
 		<fieldset>
 		<legend>Membros</legend>
-
 		<?php
 			$tab_edit = (empty($tab_edit)) ? '' : $tab_edit ;
 			$tab = (empty($tab)) ? '' : $tab ;

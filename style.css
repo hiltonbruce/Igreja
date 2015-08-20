@@ -148,7 +148,7 @@ div .rightpanel {
 }
 
 div .mainpanel {
-	width:77%;
+	min-width:70%;
 	float:left;
 }
 
@@ -396,4 +396,29 @@ img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inli
 .table-hover > tbody > tr.primary:hover > td,
 .table-hover > tbody > tr.primary:hover > th {
   background-color: #3276b1;
+}
+
+.list-group-item-primary {
+  color: #fff;
+  background-image: linear-gradient(to bottom, #08C, #04C);
+}
+a.list-group-item-primary {
+  color: #31708f;
+}
+a.list-group-item-primary .list-group-item-heading {
+  color: inherit;
+}
+a.list-group-item-primary:hover,
+a.list-group-item-primary:focus {
+  color: #3071a9;
+  background-color: #3071a9;
+}
+a.list-group-item-primary.active,
+a.list-group-item-primary.active:hover,
+a.list-group-item-primary.active:focus {
+
+  color: #fff;
+  background-color: #3276b1;
+  background-image: linear-gradient(to bottom, #04C, #08C);
+  border-color: #31708f;
 }

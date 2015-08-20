@@ -67,7 +67,7 @@
     </div>
       <div class="info1">
 	  <?php //echo "Sess�o ".$_SESSION["setor"];?>
-        <marquee direction="left" scrollamount="3" height="25">
+        <marquee direction="left" scrollamount="3" height="15">
           E n&atilde;o vos embriagueis com vinho, em que h&aacute; contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
         </marquee>
       </div>
@@ -84,10 +84,9 @@
                $mainpanelIni = '';
                $mainpanelFim = '';
             }
-
 		  ?>
-
-        <div class="header">Sistemas</div>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-primary"><strong>Sistemas</strong></li>
         <ul id="categories">
           <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
@@ -108,10 +107,12 @@
 		  }
 		  	else
 		  {
-		  echo "<div class='header'>Departamentos</div>";
-       	  echo '<ul id="categories">';
+		  echo "<div class='header'></div>";
+       	  echo '';
 		  ?>
-
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-primary"><strong>Departamentos</strong></li>
+          <ul id="categories">
           <li style="border-top:0;"  class='selected'><a href="./">Home - selecionado</a></li>
           <li><a href="#">COMADEBY</a></li>
           <li><a href="infantil/">Infantil</a></li>
@@ -123,15 +124,13 @@
           <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php"
           title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es"
           ><span class="glyphicon glyphicon-tree-deciduous" >&nbsp;</span>&nbsp;Santa&nbsp;Ceia</a></li>
-        </ul>
-        <br />
-        <div class="header">Administra&ccedil;&atilde;o:</div>
+        </ul></ul>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o:</strong></li></ul>
           <?PHP
 				//echo "<h2>{$_SESSION["rol"]}</h2>";
 				require_once ("autentica.php");
 			?>
-          <br />
-          <br />
       </div>
  <div id="content">
         <?PHP
@@ -162,10 +161,8 @@
 		}else {
 				require_once ('noticias/painel.php');
 		}
-
        echo $mainpanelFim;
 	   ?>
-
 	  <!-- rightpanel -->
 	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='') {
 		require_once ("painel_direito.php");
