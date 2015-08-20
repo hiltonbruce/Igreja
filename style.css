@@ -148,7 +148,7 @@ div .rightpanel {
 }
 
 div .mainpanel {
-	min-width:70%;
+	max-width:77%;
 	float:left;
 }
 
