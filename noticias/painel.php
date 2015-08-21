@@ -1,18 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-</head>
-	
-<body>
-	<div class="text_">
-          <h1><a href="#">Sistema Integrado de Administra&ccedil;&atilde;o de Igreja!</a></h1>
-          <div class="text">
-            <embed src="flash/pascoa.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="240" height="111" align="left" hspace="10px"></embed>
-            <p>&nbsp;&nbsp;O sistema est&aacute; em franca expans&atilde;o e atualmente conta com os m&oacute;dulos de  cadastro de membros, controle de disciplinados, cartas de: recomendação, em transito e mudança, controle de entrega de cartão de membro, emiss&atilde;o de cart&atilde;o de membros, n&atilde;o cadastra rol's com a sequência de três seis (666), para evitar a duplicidade de cadastro critica a exist&ecirc;ncia de nomes j&aacute; cadastrados e dar a possibilidade de us&aacute;-lo ou n&atilde;o, exige o uso de CPF para o cadastro permitindo apenas o uso de um n&uacute;mero por pessoa e na aus&ecirc;ncia deste n&uacute;mero ainda d&aacute; a possibilidade, embora n&atilde;o recomendada, do n&uacute;mero do rol em substitui&ccedil;&atilde;o bastando deixar em branco o espa&ccedil;o para o CPF, listagem de membros: totais, por congrega&ccedil;&otilde;es, cargo eclesi&aacute;stico, ...</p>
-            <p>&nbsp;&nbsp;O programa tem uma estrutura coesa totalmente baseado em Soft Livre, com uso de linguagens de programa&ccedil;&atilde;o isentas de cobran&ccedil;as de quaisquer tipo de licen&ccedil;a e sem nenhuma restri&ccedil;&atilde;o de uso. Visando a implanta&ccedil;&atilde;o de intranet's para acesso locais ou externos o detentor do sistema tem total liberdade para expandi-lo.</p>
-          </div>
+<div class="text_">
+    <h1><a href="#">Sistema Integrado de Administra&ccedil;&atilde;o de Igreja!</a></h1>
+    <div class="text">
+      <embed src="flash/pascoa.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="240" height="111" align="left" hspace="10px"></embed>
+      <p>&nbsp;&nbsp;O sistema est&aacute; em franca expans&atilde;o e atualmente conta com os m&oacute;dulos de  cadastro de membros, controle de disciplinados, cartas de: recomendação, em transito e mudança, controle de entrega de cartão de membro, emiss&atilde;o de cart&atilde;o de membros, n&atilde;o cadastra rol's com a sequência de três seis (666), para evitar a duplicidade de cadastro critica a exist&ecirc;ncia de nomes j&aacute; cadastrados e dar a possibilidade de us&aacute;-lo ou n&atilde;o, exige o uso de CPF para o cadastro permitindo apenas o uso de um n&uacute;mero por pessoa e na aus&ecirc;ncia deste n&uacute;mero ainda d&aacute; a possibilidade, embora n&atilde;o recomendada, do n&uacute;mero do rol em substitui&ccedil;&atilde;o bastando deixar em branco o espa&ccedil;o para o CPF, listagem de membros: totais, por congrega&ccedil;&otilde;es, cargo eclesi&aacute;stico, ...</p>
+      <p>&nbsp;&nbsp;O programa tem uma estrutura coesa totalmente baseado em Soft Livre, com uso de linguagens de programa&ccedil;&atilde;o isentas de cobran&ccedil;as de quaisquer tipo de licen&ccedil;a e sem nenhuma restri&ccedil;&atilde;o de uso. Visando a implanta&ccedil;&atilde;o de intranet's para acesso locais ou externos o detentor do sistema tem total liberdade para expandi-lo.</p>
+</div>
 </div>
         <div class="text_">
           <h1><a href="#">Padr&otilde;es de uso Mundial </a></h1>
@@ -34,5 +26,3 @@
            <p>&nbsp;&nbsp; No link suporte voc&ecirc; tem como entrar em contato com o desenvolvedor do sistema.</p>
            <p>&nbsp;&nbsp; Deus aben&ccedil;oe a igreja!</p>
           </div></div>
-</body>
-</html>

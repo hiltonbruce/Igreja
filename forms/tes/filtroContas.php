@@ -20,6 +20,5 @@
 ?>
 	  </div>
 	  </div>
-	</div>
 </form>
 

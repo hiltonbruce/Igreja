@@ -73,20 +73,18 @@
       </div>
       <div class="leftpanel">
 	  <?PHP
-
 	// echo '<h1> SESSION[valid_user]- '.$_SESSION['valid_user'].'--Session[setor]-- '.$_SESSION['setor'].' - '.$_SESSION['nome'].'--Session[cid_end]-- '.$_SESSION['cid_end'].'</h1>';
-		  if (!empty($_SESSION['valid_user']))
-		  {
-            if (empty($_GET['direita']) && empty($_POST['direita'])) {
-               $mainpanelIni = '<div class="mainpanel">';
-               $mainpanelFim = '</div>';
-            } else {
+
+       $mainpanelIni = '<div class="mainpanel">';
+       $mainpanelFim = '</div>';
+      if (!empty($_SESSION['valid_user'])) {
+            if (!empty($_GET['direita']) && !empty($_POST['direita'])) {
                $mainpanelIni = '';
                $mainpanelFim = '';
             }
 		  ?>
         <ul class="list-group">
-          <li class="list-group-item list-group-item-primary"><strong>Sistemas</strong></li>
+          <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
         <ul id="categories">
           <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
@@ -126,7 +124,7 @@
           ><span class="glyphicon glyphicon-tree-deciduous" >&nbsp;</span>&nbsp;Santa&nbsp;Ceia</a></li>
         </ul></ul>
         <ul class="list-group">
-          <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o:</strong></li></ul>
+          <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li></ul>
           <?PHP
 				//echo "<h2>{$_SESSION["rol"]}</h2>";
 				require_once ("autentica.php");
