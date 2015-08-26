@@ -61,7 +61,8 @@
 	{
 		echo "<h5> Nome: ".$_SESSION['nome']."<br/> Cargo: ".$_SESSION['cargo']."<br/> CPF: ".$_SESSION['valid_user']."</h5>".
 				"Computador: ".$_SESSION['computador'];
-		echo "<a class='btn' href='logout.php'>Sair</a><h4><a href='./?escolha=alt_senha.php'>Trocar Senha</a></h4>";
+		echo "<p><a class='btn btn-info' href='logout.php'>Sair</a>
+		<a class='btn btn-info' href='./?escolha=alt_senha.php'>Trocar Senha</a></p>";
 
 		//Verifica se a senha foi alterada após inicialização caso contrário chama página de aletração
 		$senha_crip = md5($_SESSION["valid_user"]);

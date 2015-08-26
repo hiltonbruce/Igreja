@@ -9,16 +9,13 @@
 ?>
 <div class="rightpanel">
  <div class="inquiry">
- <div class="header">
  	<?PHP
  		$igreja = new DBRecord ("igreja","1","rol");
 		$pendencias = new pendencias ();
 		// Se n?o houver pend?ncia no cadasdtro ? mostrador os dados da igreja matriz
 		if (empty($_SESSION["valid_user"]) || $pendencias->quant_pendecias()<"0" && ( !ver_nome ("adm") || !ver_nome ("tesouraria"))) {
-			echo "Matriz";
-		?>
 
-</div>
+		?>
 		<div class="box" align="center">
 		<div class="box-outer">
 		<div class="box-inner">
@@ -29,8 +26,9 @@
     		<br /><br />Filiada &agrave;:<br /><img src="img/logo_comadep.jpg" alt="COMADEP" /><br />
 		    Pastor Presidente:<br />Jos&eacute; Carlos de Lima
     </div></div></div></div>
-	<div class="header">Congrega&ccedil;&otilde;es:</div>
-	<br />
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-primary"><strong>Congrega&ccedil;&otilde;es:</strong></li>
+    </ul>
 		<div class="box" align="center">
 		<div class="box-outer">
 		<div class="box-inner">
@@ -40,22 +38,20 @@
 			$lst_igreja->get();
 		?>
  	 </div></div></div></div>
-
 	<?PHP
 		if (isset($_SESSION["valid_user"]) && $pendencias->quant_pendecias()<"0"){
-			echo "<h4>Parabens n&atilde;o h&aacute; Pend&ecirc;ncias no Cadasdtro!</h4>";
+			echo "</div><h4>Parabens n&atilde;o h&aacute; Pend&ecirc;ncias no Cadasdtro!</h4>";
 		}
 
 		}elseif (ver_nome ("tesouraria")){//Menu Tesouraria
-			echo "Recibos</div>";
+			echo "</div>";
 	?>
 			<?php $menu = new menutes();
 			$menu->mostra();
 			$menu->buscarecibo();
-
 		}else {
 
-		echo "Pend&ecirc;ncias no Cadastro</div>";
+		echo "</div>";
 		//Início da pendência
 		$_urlLi_pen="?escolha={$_GET["escolha"]}&bsc_rol={$_GET["bsc_rol"]}";//Montando o Link para ser passada a classe
 		$query_pen = "SELECT rol,nome,obs FROM membro WHERE OBS<>'' ";
@@ -80,10 +76,8 @@
 		$inicio_pen=$pagina_pen * $nmpp_pen; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
 		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-
 		 //inicia o cabe?alho de pagina??o
-
-		?><br />
+		?>
 		<div class="box" align="center">
 		<div class="box-outer">
 		<div class="box-inner">
@@ -135,7 +129,7 @@
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
 	}
 	?>
-	</div></div></div></div>
+	</div></div></div></div><br />
 	 	 <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Disciplinados</strong></li>
       </ul>

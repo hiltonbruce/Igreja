@@ -67,9 +67,9 @@
     </div>
       <div class="info1">
 	  <?php //echo "Sess�o ".$_SESSION["setor"];?>
-        <marquee direction="left" scrollamount="3" height="15">
+        <marquee direction="left" scrollamount="3" height="27"><strong>
           E n&atilde;o vos embriagueis com vinho, em que h&aacute; contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
-        </marquee>
+       </strong></marquee>
       </div>
       <div class="leftpanel">
 	  <?PHP
@@ -85,6 +85,7 @@
 		  ?>
         <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
+        <br />
         <ul id="categories">
           <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
@@ -110,6 +111,7 @@
 		  ?>
         <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Departamentos</strong></li>
+         <br />
           <ul id="categories">
           <li style="border-top:0;"  class='selected'><a href="./">Home - selecionado</a></li>
           <li><a href="#">COMADEBY</a></li>
@@ -164,7 +166,8 @@
 	  <!-- rightpanel -->
 	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='') {
 		require_once ("painel_direito.php");
-		}?>
+		}
+    ?>
 		<!-- Fim do rightpanel -->
     </div>
 </div>
