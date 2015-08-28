@@ -51,7 +51,7 @@ function conv_valor_br ($data) {
 			$res="$registros[3]/$registros[2]/$registros[1]";
 			return $res;
 		} else {
-			echo "<blink><strong>Formato de data inv�lido: $data</strong></blink>";
+			echo "<blink><strong>Formato de data inv&aacute;lido: $data</strong></blink>";
 		}
 }
 
@@ -132,9 +132,12 @@ function carta ($id){
 	}
 }
 
-function mostra_foto ($rol) {
-	//Mostra a foto do membro
+function mostra_foto ($rol,$height,$width) {
 
+	if (empty($width)) {$width = 114;}
+	if (empty($height)) {$height = 149;}
+
+	//Mostra a foto do membro
 		 if (!empty($rol)){
 
 		 if (file_exists("../img_membros/$rol.jpg")){
@@ -163,7 +166,7 @@ function mostra_foto ($rol) {
 			}else{
 				$img="../img_membros/ver_foto.jpg";
 			}
-		return "<img src='$img' class='img-thumbnail' alt='Foto do Membro' width='114' height='149' border='1' align='absmiddle' />";
+		return "<img src='$img' class='img-thumbnail' alt='Foto do Membro' width='$width' height='$height' border='1' align='absmiddle' />";
 }
 
 function foto ($rol) {

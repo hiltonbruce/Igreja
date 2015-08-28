@@ -16,6 +16,7 @@
  */
 controle ("tes");
 
+$igreja = new DBRecord('igreja', $_POST['rolIgreja'], 'rol');
 if ($_POST["rol"]>'0' ) {
 	if (!empty($_POST["nome"])) {
 		$nome = $_POST["nome"];
@@ -28,15 +29,18 @@ if ($_POST["rol"]>'0' ) {
 	}
 	$eclesia = new DBRecord('eclesiastico', $_POST["rol"], 'rol');
 	$congcontrib = $eclesia->congregacao();
+	$igrejaContr = new DBRecord('igreja', $congcontrib, 'rol');
+	$mostrarNome .= ' - Cong.: '.$igrejaContr->razao();
 } elseif (!empty($_POST["nome"]))  {
 	$nome = $_POST["nome"];
 	$mostrarNome =  'Congregado &bull; '.$nome;
 } else {
 	$nome = 'Anônimo';
-	$mostrarNome =  'An&ocirc;nimo';
+	$mostrarNome =  'An&ocirc;nimo'.$nome;
 }
 
 $nome = trim($nome);
+$mostrarNome .=' - lan&ccedil;. para: '.$igreja->razao();
 $vlr = false;
 $mostraLanc  =  '<fieldset><legend>Pre-Lançamento</legend>';
 $mostraLanc .=  '<table class="table">';

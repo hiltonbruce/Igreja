@@ -1,6 +1,5 @@
 <?PHP
 require_once 'views/tesouraria/dizoferta.php';
-
 $dta = explode("/",$_POST["data"]);
 		$d=$dta[0];
 		$m=$dta[1];
@@ -11,29 +10,10 @@ $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
 $rolIgreja = (empty($_POST['rolIgreja'])) ? false:(int)$_POST['rolIgreja'];
 $ultregistro = mysql_query ('SELECT data FROM dizimooferta WHERE lancamento="0" AND igreja="'.$rolIgreja.'" ORDER BY id DESC LIMIT 1');
 $vlrregistro = mysql_fetch_row($ultregistro);
-?>
-	<table>
-		<tbody>
-			<tr>
-				<td><?php echo '<H1>Data do último registo: '.$vlrregistro[0].'</h1>';?></td>
-				<td>
-				<?php echo '<H1>Data do lançamento: '.$datalanc.'</h1>';?>
-				</td>
-				<td rowspan="2">
-						<?PHP
-							//Exibe a foto do contribuinte
-								if ($_POST["rol"]>'0') {
-									print mostra_foto($_POST["rol"]);
-								}
-							?>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-<?php
+
 //$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
 $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&
-		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' >Continuar...</button><a>";
+		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' autofocus='autofocus' >Continuar...</button><a>";
 
 if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && $vlrregistro[0] =='') && $rolIgreja ) {
 	//Verifica se o caixa do ultimo culto foi encerrado e se há algum valor em dizimo, oferta ou oferta extra
@@ -74,7 +54,39 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 		$linkreturn .= "&acescamp=".$_POST["acescamp"];
 		//echo '<meta http-equiv="refresh" content="2; '.$linkreturn.'">';
 		//echo "<script>location.href='$linkreturn';</script>";
-		echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1'>Continuar...</button><a>";
+
+?>
+	<table>
+		<tbody>
+			<tr>
+				<td><?php echo '<H1>Data do último registo: '.conv_valor_br ($vlrregistro[0]).'</h1>';?></td>
+				<td>
+				<?php echo '<H1>Data do lançamento: '.conv_valor_br ($datalanc).'</h1>';?>
+				</td>
+				<td rowspan="2">
+						<?PHP
+							//Exibe a foto do contribuinte
+								if ($_POST["rol"]>'0') {
+									print mostra_foto($_POST["rol"],75,57);
+								}
+							?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?PHP
+					echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1'>Continuar...</button><a>";
+					?>
+				</td>
+				<td>
+					<H1>Cong. de lanç.: <?PHP
+					echo $igreja->razao();
+					?></H1>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<?php
 		require 'forms/concluirdiz.php';//Formulário para fecha o caixa
 }elseif (!$rolIgreja) {//Se não foneceu o número da igreja
 	echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";

@@ -31,7 +31,10 @@
 				</td>
 				<td><label>Referente Mês:</label><input type="text" name="mes"
 					size="2" value="<?php echo $meslanc;?>" class="form-control"
-					 tabindex="<?php echo ++$ind;?>" required="required" />
+					 tabindex="<?php
+					 	if ($_GET['igreja']=='1') {
+					 		echo ++$ind;
+					 	}?>" required="required" />
 				</td>
 				<td>
 					 <label>Ano:</label> <input type="text"

@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 	if (isset($_POST['senha_atual']) && isset($_POST['confirma']))
 	{
 		//se o usuário acabou de tentar efetuar login
@@ -23,37 +22,32 @@ session_start();
 			}
 	}
 
-	if ($alt_senha)
-	{
+	if ($alt_senha)	{
 		echo "<script> alert('Senha Alterada com Sucesso!'); location.href='./';</script>";
 	}
 	// o usuário não tentou efetuar o login ainda ou saiu
-
 	// fornece um formulário para efetuar o login
 ?>
 <fieldset>
-<legend>Alterar Senha</legend>
-<form id="form1" name="form1" method="post" action="">
-  <label>Nova Senha:</label>
-  <input name="confirma" class="form-control" type="password" id="confirma" />
-
-  <label>Confirme Nova Senha:</label>
-  <input name="confirma2" class="form-control" type="password" id="confirma2" />
-
-  <label>Senha Atual: </label>
-  <input name="senha_atual" class="form-control" type="password" id="senha_atual" />
-    <input type="submit" name="Submit" value="OK!" />
-
-<div class="row">
-  <div class="col-xs-2">
-    <input type="text" class="form-control" placeholder=".col-xs-2">
-  </div>
-  <div class="col-xs-3">
-    <input type="text" class="form-control" placeholder=".col-xs-3">
-  </div>
-  <div class="col-xs-4">
-    <input type="text" class="form-control" placeholder=".col-xs-4">
-  </div>
-</div>
-  </form>
+    <legend>Alterar Senha</legend>
+    <form id="form1" name="form1" method="post" action="">
+        <div class="row">
+          <div class="col-xs-3">
+          <label>Nova Senha:</label>
+          <input name="confirma" class="form-control" type="password" id="confirma" />
+          </div>
+          <div class="col-xs-3">
+          <label>Confirme Nova Senha:</label>
+          <input name="confirma2" class="form-control" type="password" id="confirma2" />
+          </div>
+          <div class="col-xs-3">
+          <label>Senha Atual: </label>
+          <input name="senha_atual" class="form-control" type="password" id="senha_atual" />
+          </div>
+          <div class="col-xs-3">
+          <label>&nbsp;</label>
+            <input type="submit" class='btn btn-primary btn-sm' name="Submit" value="OK!" />
+          </div>
+        </div>
+    </form>
 </fieldset>
