@@ -11,14 +11,20 @@ $exibirlanc = '';
 $tablanc = mysql_query('SELECT SUM(valor) AS valor,devedora FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora');
 $totDebito = mysql_num_rows($tablanc);
 while ($tablancarr = mysql_fetch_array($tablanc)) {
-	$exibirlanc .= $exibir->lancamacesso ($tablancarr['valor'],$tablancarr['devedora'],'D');
+	$lanc  = $exibir->lancamacesso ($tablancarr['valor'],$tablancarr['devedora'],'D');
+	$exibirlanc .= $lanc['0'];
+
 }
 
 //Faz o leiaute do lançamento do crédito da tabela dizimooferta
 $tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
 $totCredito = mysql_num_rows($tablanc_c);
+$histLanca = array();
 while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
-	$exibirlanc .= $exibir->lancamacesso ($tablancarrc['valor'],$tablancarrc['credito'],'C');
+	$lanc = $exibir->lancamacesso ($tablancarrc['valor'],$tablancarrc['credito'],'C');
+	$exibirlanc .= $lanc['0'];
+
+	$histLanca[]=$lanc['1'];
 }
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis

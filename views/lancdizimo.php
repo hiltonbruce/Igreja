@@ -19,12 +19,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php 
+			<?php
 				echo $exibirlanc;//Valor veio do script /forms/lancdizimo.php retirado da classe lancdizimo.class.php
 			?>
 		</tbody>
 		<tfoot>
-			<?php 
+			<?php
 				printf("<tr style='background:#000000;font-weight:bold;'><td style='color:#FFFFFF;text-align:right;' colspan='2'>");
 				printf("%s %'.40s R$</td><td style='color:#FFFFFF;text-align:right;'>",'Totais','.');
 				printf(" %s</td><td style='color:#FFFFFF;text-align:right;'> %s</td><td></td><td></td></tr>",number_format($_SESSION['debito'],2,',','.'),number_format($_SESSION['credito'],2,',','.'));
@@ -32,5 +32,11 @@
 				unset($_SESSION['credito']);
 			?>
 		</tfoot>
-	</table>
-	
+	</table><h1>
+	<?php
+
+	print_r($histLanca);
+
+	?>
+
+</h1>
