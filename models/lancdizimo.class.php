@@ -6,7 +6,6 @@ class lancdizimo {
 	function lancamento($valor,$id,$dc) {
 
 		$this->conta = new DBRecord('contas', $id, 'id');
-
 		if ($this->conta->tipo() != strtoupper($dc)){
 
 			if (($this->conta->saldo()-$valor)<'0') {
@@ -64,14 +63,13 @@ class lancdizimo {
 		}
 		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td style='text-align:right;'> %s</td>",$fundo,$this->conta->codigo(),$contaNome,$debitar);
 		$exibir.= sprintf("<td style='text-align:right;'>%s</td><td style='text-align:right;'> %s</td><td>%s</td></tr>",$creditar,number_format($this->conta->saldo(),2,',','.'),$status);
+
 		}else {
 		$mens = 'Conta Inválida';
 		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td style='text-align:right;'> %s</td>",'style="background:#red;"',$mens,$mens,$mens);
 		$exibir.= sprintf("<td style='text-align:right;'>%s</td><td style='text-align:right;'> %s</td><td>%s</td></tr>",$mens,$mens,$mens);
 		}
-		return array($exibir,$contaNome);
+		return array($exibir,$this->conta->histlancam());
 	}
-
-	}
-
+}
 ?>
