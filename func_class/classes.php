@@ -798,16 +798,18 @@ class List_sele {
 
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
+
+                $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
-		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$this->col_lst[$this->campo_retorno]."</option>";
+		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
 		       	}
-			    $linhas .= "<option value='".$this->col_lst["id"]."'>".$this->col_lst[$this->campo_retorno]."</option>";
+			    $linhas .= "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
 	       	}else {
 		       	if ($item==$this->col_lst["rol"]) {
-		       		$linha1 .=  "<option value='".$this->col_lst["rol"]."'>".$this->col_lst[$this->campo_retorno]."</option>";
+		       		$linha1 .=  "<option value='".$this->col_lst["rol"]."'>".$retorLinha."</option>";
 		       	}
-			    $linhas .= "<option value='".$this->col_lst["rol"]."'>".$this->col_lst[$this->campo_retorno]."</option>";
+			    $linhas .= "<option value='".$this->col_lst["rol"]."'>".$retorLinha."</option>";
 	       	}
 	       }
 	    $linha3 = "</select>";
