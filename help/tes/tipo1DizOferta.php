@@ -54,7 +54,7 @@ for ($i = 0; $i < 13; $i++) {
 				$conta = "'900','8','7'";//Oração Mocidade
 				break;
 			case 11:
-				$conta = "'723','5','7'";//Oração Infantil
+				$conta = "'950','5','7'";//Oração Infantil
 				break;
 			case 12:
 				$conta = "'721','3','7'";//Voto em Circ. de Oração

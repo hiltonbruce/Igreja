@@ -7,7 +7,7 @@ class tes_conta {
 
 		$sqlConsulta  = 'SELECT * ';
 		$sqlConsulta .= 'FROM contas ';
-		$sqlConsulta .= 'ORDER BY codigo';
+		$sqlConsulta .= 'ORDER BY codigo,titulo';
 		$this->query = $sqlConsulta;
 		$this->membros = mysql_query($this->query) or die (mysql_error());
 

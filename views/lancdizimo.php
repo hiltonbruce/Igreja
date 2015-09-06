@@ -34,9 +34,23 @@
 		</tfoot>
 	</table><h1>
 	<?php
+	$histLancamento = array_keys(array_flip(array_unique($histLanca)));
+	print_r($histLancamento);
+	echo '<br />';
+	//echo count($histLancamento);
 
-	print_r($histLanca);
+	for ($i=0; $i < count($histLancamento)-1; $i++) {
+		if ($i==0) {
+			$hist = $histLancamento[$i];
+		} else {
+			$hist .=  ', '.$histLancamento[$i];
+		}
 
+	}
+
+		$hist .= ' e '.$histLancamento[$i].' nesta data.';
+		$hist = ucfirst($hist);
+		//echo($hist);
 	?>
 
 </h1>
