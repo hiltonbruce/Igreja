@@ -85,7 +85,6 @@
 		  ?>
         <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
-        <br />
         <ul id="categories">
           <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
@@ -126,12 +125,13 @@
           ><span class="glyphicon glyphicon-tree-deciduous" >&nbsp;</span>&nbsp;Santa&nbsp;Ceia</a></li>
         </ul></ul>
         <ul class="list-group">
-          <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li></ul>
-          <?PHP
-				//echo "<h2>{$_SESSION["rol"]}</h2>";
-				require_once ("autentica.php");
-			?>
-      </div>
+          <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li>
+           <?PHP
+  				//echo "<h2>{$_SESSION["rol"]}</h2>";
+  				require_once ("autentica.php");
+    			?>
+        </ul>
+    </div>
  <div id="content">
         <?PHP
         echo $mainpanelIni;
@@ -173,7 +173,7 @@
 </div>
 
     <div class="info1">
-      <div style="display:inline; float:left;">&copy; 2010 <a href="http://www.adpb.com.br/">www.adpb.com.br</a>. Design <a href="http:#">Joseilton Costa Bruce</a>.</div>
+      <div style="display:inline; float:left;">&copy; 2010 <a href="http://www.adby.com.br/">www.adpb.com.br</a>. Design <a href="http:#">Joseilton Costa Bruce</a>.</div>
       <div style="display:inline; float:right;"><a href="http://jigsaw.w3.org/css-validator/check/referer"></a><a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px" src="img/valid-xhtml11-blue.png" alt="Validar XHTML 1.1" /></a><img style="border:0;width:88px;height:31px" src="img/vcss.gif" alt="Validar CSS!" align="bottom"/> <a href="mailto:hiltonbruce@gmail.com">Joseilton</a></div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <!--
 
-/* 
+/*
 � 2008 - Design, CSS Style by P&B Creations, pbcreations.sk
 � 2008 - Martin Plakinger (CEO)
 */
@@ -11,23 +11,22 @@ div#menu .menu {
 		background-image: url('img/menu.png');
 		background-repeat: repeat-x;
 	}
-	
+
 	*> div#menu .menu { margin-top: -11px; }
-	
+
 	div#menu .menu ul {
 		padding: 0;
 		list-style: none;
 		line-height: normal;
 		margin-left: -7px;
 	}
-	
+
 	*> div#menu .menu ul { margin-left:0; }
-	
+
 	div#menu .menu li {
 		display: inline;
-		
 	}
-	
+
 	div#menu li span.left {
 		background-image:url("img/menu-left.gif");
 		background-repeat:no-repeat;
@@ -43,7 +42,7 @@ div#menu .menu {
 		margin-bottom: -32px;
 		float:left;
 	}
-	
+
 	div#menu li span.hlavny {
 		background-image:url("img/menu-central.gif");
 		background-repeat:repeat-x;
@@ -62,10 +61,10 @@ div#menu .menu {
 		padding-left:40px;
 		padding-right:40px;
 	}
-	
-	
+
+
 	div#menu li span.hlavny a, div#menu li span.hlavny a:visited, div#menu li span.hlavny a:link { color:#000000; }
-	
+
 	div#menu li span.hlavny_ {
 		height: 64px;
 		overflow: visible;
@@ -82,7 +81,7 @@ div#menu .menu {
 		padding-left:45px;
 		padding-right:45px;
 	}
-	
+
 	div#menu li span.right {
 		background-image:url("img/menu-right.gif");
 		background-repeat:no-repeat;
@@ -98,7 +97,7 @@ div#menu .menu {
 		margin-bottom: -32px;
 		float: left;
 	}
-	
+
 	div#menu .menu a, div#menu .menu a:visited, div#menu .menu a:active {
 		color:#fff;
 		display:block;
@@ -118,7 +117,7 @@ div#menu .menu {
 		text-align: center;
 		text-decoration: none;
 	}
-	
+
 	div#menu .menu a:hover { color:#FFFFFF; text-decoration:underline; }
 
 /* categories */
@@ -139,15 +138,15 @@ ul#categories li {
 	border-bottom: 1px #33CCFF solid;
 	border-top: 1px solid #f9faf7;
 	height: 30px;
-	margin-top: -2px; 
+	margin-top: -2px;
 	margin-bottom: -2px;
 }
 
 *> ul#categories li { margin-top: 0px; margin-bottom: 0px; }
 
 ul#categories li.selected {
-	text-decoration: none; 
-	background-color:#0066FF;
+	text-decoration: none;
+	background-color:#49A5FF;
 }
 
 ul#categories li a {
@@ -158,8 +157,8 @@ ul#categories li a {
 	text-decoration: none;
 	font-size: 11px;
 }
-ul#categories li a:hover { 
-	text-decoration: underline; 
+ul#categories li a:hover {
+	text-decoration: underline;
 	background-color:#00CCFF;
 }
 
@@ -214,7 +213,7 @@ ul#categories li a:hover {
 #tabs a:hover span {
 	background-position:100% -42px;
 	}
-	
+
 #tabs li a#current {
 background-position:0% -42px;
 background:url("img/header.jpg") no-repeat right top;
