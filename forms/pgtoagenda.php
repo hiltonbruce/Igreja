@@ -3,6 +3,21 @@
 <?php
 	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
 
+	if ($itemagenda->idlanc()>'0') {
+		$lancConfirmado  = '<p><kbd>Lan&ccedil;amento confirmado, N&ordm;: '.$itemagenda->idlanc().'</kbd></p>';
+		$lancConfirmado .= '<p class="text-danger">Ap&oacute;s confirma&ccedil;&atilde;o de ';
+		$lancConfirmado .= 'pagamento n&atilde;o &eacute; permitido atualiza&ccedil;&atilde;o das ';
+		$lancConfirmado .= 'contas de pagto e despesas! </p>';
+		$lancConfirmado .= '<p>A op&ccedil;&atilde;o para altera&ccedil;&atilde;o das ';
+		$lancConfirmado .= 'contas &eacute; extorna o lan&ccedil;amento e retificar, ';
+		$lancConfirmado .= 'e mesmo assim aqui ficarar constando a falha, por&eacute;m ';
+		$lancConfirmado .= 'no relatorio constara a falha e a corre&ccedil;&atilde;o. O que &eacute; ';
+		$lancConfirmado .= 'correto do ponto de vista cont&aacute;bil</p>';
+		$desCampoCta = 'disabled="disabled"'; #desativa campos da fonte pgto e despesa
+	} else {
+		$desCampoCta = '';
+	}
+
 	if (strstr($itemagenda->credor(),'r')) {
 		$rolMembro = ltrim ($itemagenda->credor(),'r');
 		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
@@ -97,7 +112,8 @@
 				</tr>
 					<td>
 						<label><strong>Pagamento realizado pela fonte: </strong></label>
-						<select name="acessoCreditar" id="caixa" class="form-control" tabindex="<?PHP echo ++$ind; ?>" >
+						<select name="acessoCreditar" id="caixa" class="form-control"
+						tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 							<?php
 								$bsccredor = new tes_listDisponivel();
 								$listaIgreja = $bsccredor->List_Selec($itemagenda->creditar());
@@ -112,7 +128,8 @@
 					?>
 					<td colspan="3">Despesas com:<br /> <input type="text" name="cta" class="form-control"
 						id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
-						placeholder="Qual a Despesa?" value='<?php echo $ctaDespesa->titulo();?>'/>
+						placeholder="Qual a Despesa?" value='<?php echo $ctaDespesa->titulo();?>'
+						 <?PHP echo $desCampoCta; ?> />
 					</td>
 				</tr>
 				<tr>
@@ -123,7 +140,8 @@
 					<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
 						disabled="disabled" value="<?php echo $ctaDespesa->saldo();?>" /></td>
 					<td>Acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
-						value="<?php echo $itemagenda->debitar();?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+						value="<?php echo $itemagenda->debitar();?>" required="required"
+						 <?PHP echo $desCampoCta; ?> tabindex="<?PHP echo ++$ind; ?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
@@ -185,8 +203,6 @@
 
 	</form>
 	<?php
-	$lancConfirmado = ($itemagenda->idlanc()>'0') ? '<p><kbd>Lan&ccedil;amento confirmado, N&ordm;: '.$itemagenda->idlanc().'</kbd></p>':'';
-
 	$vencimento = $itemagenda->vencimento();
 	$dataAtual = new DateTime('NOW');
 	$dataVenc  = new DateTime($vencimento);
