@@ -11,7 +11,7 @@ class tes_listCta {
         $this->texto_field = $texto_field;//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
         $this->query = "SELECT * from {$this->tabela} ";
 
-        $this->sql_lst = mysql_query($this->query.' WHERE acesso="0" ORDER BY codigo');
+        $this->sql_lst = mysql_query($this->query.' ORDER BY codigo');
     }
 
     function List_Selec_pop ($link,$id){
@@ -22,11 +22,34 @@ class tes_listCta {
 
         while($this->col_lst = mysql_fetch_array($this->sql_lst))
         {
+            if ( $this->col_lst["acesso"]=="0") {
+
             if ($this->col_lst["id"]==$id) {
                 $linha1  = "<option value='./?$link{$this->col_lst["id"]}'>".$this->col_lst['codigo'].' &bull; '.$this->col_lst[$this->campo_retorno]."</option>";
                 $cod = $this->col_lst['codigo'];
             }
              $linhas .="<option value='./?$link{$this->col_lst["id"]}'>".$this->col_lst['codigo'].' &bull; '.$this->col_lst[$this->campo_retorno]."</option>";
+        }
+        }
+
+        return array($linha1.$linhas,$cod);
+    }
+
+    function List_Selec ($id){
+    //Lista Select para uso com javascrip popup
+    //Mostra as linhas de select
+    $linha1='';
+    $linhas .='<option value="">Todas</option>';
+
+        while($this->col_lst = mysql_fetch_array($this->sql_lst))
+        {
+            if ( $this->col_lst["acesso"]!="0") {
+            if ($this->col_lst["id"]==$id) {
+                $linha1  = '<option value="'.$this->col_lst["id"].'">'.$this->col_lst['codigo'].' &bull; '.$this->col_lst[$this->campo_retorno].'</option>';
+                $cod = $this->col_lst['codigo'];
+            }
+             $linhas .='<option value="'.$this->col_lst["id"].'">'.$this->col_lst['codigo'].' &bull; '.$this->col_lst[$this->campo_retorno].'</option>';
+        }
         }
 
         return array($linha1.$linhas,$cod);

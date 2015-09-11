@@ -5,10 +5,11 @@
 	$cargoIgreja = new tes_cargo;
 	$tesArray = $cargoIgreja->dadosArray();
 
-	//tabela com a lista p confirmar lanï¿½amento
+	//tabela com a lista p confirmar lançamento
 
 	$lancContabil = new tes_relatLanc();
-	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano);
+	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer);
+
 	$tabLancamento= $resultado['0'];
 
 	$statusLancamento = 'Lan&ccedil;amentos Contábeis';

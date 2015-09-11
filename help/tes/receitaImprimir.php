@@ -32,7 +32,7 @@ switch ($_GET['rec']) {
 		break;
 	case '16':
 		//Relatorio COMADEP
-		require_once '../help/tes/relatorioComadep.php';
+		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informações da consulta
 		$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 		$titTabela = 'Fluxo das Contas - '.$dtRelatorio.'<h3>'.$congRelatorio.'<h3>';

@@ -9,7 +9,7 @@ function __construct() {
 
 	}
 
-function histLancamentos ($igreja,$mes,$ano) {
+function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 
 	$queryContas = mysql_query('SELECT id,acesso,titulo,codigo FROM contas') or die (mysql_error());
 	while ($ctas = mysql_fetch_array($queryContas)) {
@@ -22,13 +22,41 @@ function histLancamentos ($igreja,$mes,$ano) {
 	}
 */
 	//print_r ($conta);
+	#Filtro por igreja
 	if ($igreja>'0' ) {
-		$opIgreja= $this->var_string.' AND l.igreja = "'.$igreja.'"';
+		$opIgreja= $this->var_string.'AND l.igreja = "'.$igreja.'" ';
 	}else {
 		$opIgreja = $this->var_string;
 	}
 
-	$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ORDER BY l.data,l.lancamento,l.debitar';
+	#Filtro por data
+	$dataFiltro = $dia.'/'.$mes.'/'.$ano;
+	if (checadata ($dataFiltro)) {
+		$opIgreja .= 'AND DATE_FORMAT(l.data,"%d%m%Y")="'.$dia.$mes.$ano.'" ';
+	}elseif ($mes>'0' && $mes<'13' && ($ano=='' || $ano<'2011')) {
+		$opIgreja .= 'AND DATE_FORMAT(l.data,"%m")="'.$mes.'" ';
+	} else {
+		$opIgreja .= 'AND DATE_FORMAT(l.data,"%Y")="'.$mes.$ano.'" ';
+		}
+
+	#filtro por conta
+	if ($cta!='') {
+		if ($deb=='1' && $cred=='') {
+			$opIgreja .= 'AND debitar="'.$cta.'" ';
+		}elseif ($cred=='1' && $deb=='') {
+			$opIgreja .= 'AND creditar="'.$cta.'" ';
+		}else {
+			$opIgreja .= 'AND (creditar="'.$cta.'" OR debitar="'.$cta.'") ';
+		}
+
+		//$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ';
+	}
+
+	#Filtro para campo referente
+	if ($ref!='') {
+		$opIgreja .= 'AND referente LIKE "%'.$ref.'%" ';
+	}
+	$opIgreja .= 'ORDER BY l.data,l.lancamento,l.debitar ';
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 
 	$tabela = '<tbody>';

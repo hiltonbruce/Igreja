@@ -2,6 +2,7 @@
 $nivel1 	= '';$nivel2 	= '';
 $planoCta=array();$cor=true;$sldGrupo=array();
 
+#Monta array com informações das contas atualmente
 $plano = mysql_query('SELECT * FROM contas ORDER BY codigo ');
 while ($cta = mysql_fetch_array($plano)) {
 	$planoCta[$cta['id']]=array($cta['titulo'],$cta['acesso'],$cta['codigo'],$cta['tipo'],$cta['nivel4']);

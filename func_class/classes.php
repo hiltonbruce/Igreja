@@ -773,7 +773,7 @@ class List_sele {
 
 	protected $tabela;
 	protected $campo_retorno;
-	protected $texto_field;
+	protected $texto_field;//nome do campo
 
 	function __construct ($tabela="", $campo_retorno= "", $texto_field=""){
 
