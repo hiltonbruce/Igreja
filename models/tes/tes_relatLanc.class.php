@@ -36,8 +36,8 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 	}elseif ($mes>'0' && $mes<'13' && ($ano=='' || $ano<'2011')) {
 		$opIgreja .= 'AND DATE_FORMAT(l.data,"%m")="'.$mes.'" ';
 	} else {
-		$opIgreja .= 'AND DATE_FORMAT(l.data,"%Y")="'.$mes.$ano.'" ';
-		}
+		$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ';
+	}
 
 	#filtro por conta
 	if ($cta!='') {
