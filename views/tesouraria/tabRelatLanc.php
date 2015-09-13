@@ -23,7 +23,8 @@
 		$imprimir .= '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 		$imprimir .= '</span> Imprimir ...</button> </a>';
 		$titulo='';
-		$rodape = '';
+		$rodape  = '<tfoot><tr class="info"><th>Total lan&ccedil;ado:</th><th class="text-right">';
+		$rodape .= number_format($resultado['2'],2,',','.').'</th></tr></tfoot>';
 	}else {
 		$imprimir='';
 		$rodape = '<tfoot><tr><th>Rubricar:</th><th>Data:</th></tr></tfoot>';

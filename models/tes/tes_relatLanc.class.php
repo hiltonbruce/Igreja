@@ -61,7 +61,7 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 
 	$tabela = '<tbody>';
 	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaCentral='';
-	$CaixaMissoes ='';$CaixaOutros='';
+	$CaixaMissoes ='';$CaixaOutros='';$vlrTotal =0;
 
 	while ($linha = mysql_fetch_array($dquery)) {
 		//$bgcolor = 'class="odd"';
@@ -126,6 +126,7 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 			//$lancValor .= $valores;
 
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
+		$vlrTotal +=$linha['valor'];
 
 		}
 
@@ -135,9 +136,10 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 			$referente .= $dataLanc.$CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
+			$vlrTotal +=$linha['valor'];
 		}
 
-	$resultado = array($tabela,$lancConfirmado);
+	$resultado = array($tabela,$lancConfirmado,$vlrTotal);
 	return $resultado;
 	}
 
