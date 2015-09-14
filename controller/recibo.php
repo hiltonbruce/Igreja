@@ -80,7 +80,7 @@ switch ($recMenu){
 		$pgtoDias = new tes_cargo();
 		$listaPgto = $pgtoDias->dadosCargo();
 		//print_r($listaPgto);
-		$recLink='controller/recibo.php/?rec=20';
+		$recLink='escolha=controller/despesa.php&menu=top_tesouraria&id=';
 		$titTabela = 'Listagem para Pagamento';
 		require_once 'help/tes/reciboPgto.php';
 		require_once 'forms/tes/gerarRecFolha.php';

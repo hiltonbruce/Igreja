@@ -41,9 +41,39 @@ foreach ($listaPgto as $chave => $valor) {
 
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
   	$nomeDiaPgto = $valor['diapgto'];
+  	if ($_GET['id']==$valor['id']) {
+  		if ($valor['nome']=='') {
+	  		list($nome,$dcpf,$drg) = explode(',',$valor['naoMembro']);
+	  		list($tcpf,$cpf) = explode(':', $dcpf);
+	  		list($trg,$rg) = explode(':', $drg);
+  			$rol = '';
+  		}else {
+  			$rol  = $valor['rolMembro'];
+  			$nome = $nomeMembro;
+  			$cpf  = $valor['memCPF'];
+  			$rg  = $valor['memRG'];
+  			$end  = $valor['end'].' - '.$valor['num'];
+  		}
+  		$funcao =$valor['descricao'];
+  		$diapgto = $valor['diapgto'];
+  		$igreja = $valor['igreja'];
+  		$vlrPago = number_format($valor['pgto'], 2, ',', '');
+  		$hier = $valor['hierarquia'];
+  		$codCta = $valor['coddespesa'];
+  		$tipo = $valor['tipo'];
+  	}
 
-	$remove = '<a href="./?#" title="Remover!"> <span class="glyphicon glyphicon-remove"> </span></a>';
-	$nomeMembro = sprintf ("%s %'05u - %s ",$remove,$valor['rolMembro'],$nomeMembro);
+  	if ($valor['status']=='0') {
+  		$remove  = '<a href="./?'.$recLink.$valor['id'].'&remover=1&age=8" title="Ativar!"> <span class="glyphicon glyphicon-ok-sign text-success"> </span></a>';
+  		$remove  .= ' <a title="Item Desativado!" disabled> <span class="glyphicon glyphicon-ban-circle"> </span> <span class="glyphicon glyphicon-edit"></span></a>';
+  		$alterar = '';
+  	} else {
+  		$remove  = ' <a title="Item ativo!" disabled> <span class="glyphicon glyphicon-ok-sign"> </span></a>';
+  		$remove  .= '<a href="./?'.$recLink.$valor['id'].'&remover=2&age=8" title="Desativar!"> <span class="glyphicon glyphicon-ban-circle text-danger"></span></a>';
+  		$alterar = '<a href="./?'.$recLink.$valor['id'].'&age=7" title="Alterar!"> <span class="glyphicon glyphicon-edit text-info"> </span></a>';
+  	}
+
+	$nomeMembro = sprintf ("%s %s %'05u - %s ",$remove,$alterar,$valor['rolMembro'],$nomeMembro);
 
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
 		//Lista do Ministério

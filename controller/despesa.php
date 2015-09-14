@@ -16,7 +16,15 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 -			require_once 'views/agendarpgto.php';//Contas a pagar
 			break;
 		case '7':
--			require_once 'forms/tes/folha.php';//Form p cadastrar cargos
+			//Cargos e funções
+			$pgtoDias = new tes_cargo('1');
+			$listaPgto = $pgtoDias->dadosCargo();
+			$recLink='escolha=controller/despesa.php&menu=top_tesouraria&id=';
+			$titTabela = 'Listagem para Pagamento';
+			require_once 'help/tes/reciboPgto.php';
+
+			require_once 'forms/tes/folha.php';//Form p cadastrar cargos
+			require_once 'views/tesouraria/recPgto.php';
 			break;
 		case '8':
 

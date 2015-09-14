@@ -7,20 +7,23 @@
 	<tbody>
 		<tr>
 			<td colspan="3"><label>Nome:</label>
-				<input type="text" name="nome" id="campo_estado" size="40%" 
-				class="form-control" autofocus="autofocus" tabindex="<?PHP echo $ind++;?>" />
-			</td><td> <label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?PHP echo $ind++;?>" 
-						value="" class="form-control" placeholder="N&ordm; do membro na igreja" /> 
+				<input type="text" name="nome" id="campo_estado" size="40%"
+				class="form-control" autofocus="autofocus"
+				value='<?PHP echo $nome;?>' tabindex="<?PHP echo $ind++;?>" />
+			</td><td> <label>Rol:</label> <input type="text" id="rol" name="rol"
+				tabindex="<?PHP echo $ind++;?>" class="form-control"
+				placeholder="N&ordm; do membro na igreja" value='<?PHP echo $rol;?>' />
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4"><label>Endereço:</label>
-			<input type="text" id="estado_val" class="form-control" name="estado" disabled="disabled" value="" />
+			<input type="text" id="estado_val" class="form-control" name="estado"
+			disabled="disabled" value='<?PHP echo $end;?>' />
 			</td>
 		</tr>
 	</tbody>
 </table>
 
-	
-	
-	
+
+
+
