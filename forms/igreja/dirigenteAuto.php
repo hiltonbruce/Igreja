@@ -19,15 +19,21 @@
 				<td colspan="2"><label><?php echo $labelCampo;?></label> <input type="text" name="nome"
 				id="campo_estado" size="30%" class="form-control"
 				placeholder="Nome do membro da igreja para iniciarmos a busca no cadastro!"
-				autofocus="autofocus" tabindex="<?php echo ++$ind;?>" />
+				autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
+				required="required" />
 				</td>
 				<td><label>Rol:</label> <input type="text" id="rol" name="pastor" tabindex="<?php echo ++$ind;?>"
 					class="form-control" placeholder="N&ordm; no rol do <?PHP echo $labelCampo ;?>" />
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><label>Congreg. do membro:</label> <input type="text" id="cong"
+				<td><label>Congreg. do membro:</label> <input type="text" id="cong"
 					class="form-control" disabled="disabled" value="" />
+				</td>
+				<td><label>Assumir a partir de:</label> <input type="text" id="data"
+					class="form-control" name="data" tabindex="<?php echo ++$ind;?>"
+					required="required" value='<?PHP echo date('d/m/Y');?>'
+					placeholder="Data do primeiro culto"/>
 				</td>
 				<td ><label>&nbsp;</label>
 				<input name="Submit" class="btn btn-primary" type="submit" value="Alterar!">

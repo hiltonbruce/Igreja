@@ -17,8 +17,8 @@
  */
 controle ("tes");
 
-if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf']) && !empty($_POST['rg'])))))
-	&& $_GET['remover']=='' ) {
+if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf']) && !empty($_POST['rg']))))
+	|| ($_POST['id']!='')) && $_GET['remover']=='' ) {
 	if ($_POST['id']!='') {
 		$atualCargo = new DBRecord ('cargoigreja',$_POST['id'],'id');
 		$atualCargo->igreja = $_POST['rolIgreja'];

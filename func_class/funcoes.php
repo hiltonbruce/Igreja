@@ -342,16 +342,11 @@ function semana ($data) {
 			}
 				if ($d==$i) {
 				$sem=$semana;}
-
 			//echo(date('d/M/Y',mktime(1,0,0,$m,$i,$y)).' <--> '.date('w',mktime(1,0,0,$m,$i,y)).' ********** ');
 		}
 	}
-
 	return $sem;
-
 }
-
-
 
 // VERFICA CNPJ
 function validaCNPJ($cnpj) {
@@ -360,7 +355,6 @@ function validaCNPJ($cnpj) {
 		return false;
 
 	$soma = 0;
-
 	$soma += ($cnpj[0] * 5);
 	$soma += ($cnpj[1] * 4);
 	$soma += ($cnpj[2] * 3);

@@ -64,13 +64,13 @@ foreach ($listaPgto as $chave => $valor) {
   	}
 
   	if ($valor['status']=='0') {
-  		$remove  = '<a href="./?'.$recLink.$valor['id'].'&remover=1&age=8" title="Ativar!"> <span class="glyphicon glyphicon-ok-sign text-success"> </span></a>';
-  		$remove  .= ' <a title="Item Desativado!" disabled> <span class="glyphicon glyphicon-ban-circle"> </span> <span class="glyphicon glyphicon-edit"></span></a>';
+  		$remove  = '<a href="./?'.$recLink.$valor['id'].'&remover=1&age=8" title="Ativar linha!"> <span class="glyphicon glyphicon-ok-sign text-success"> </span></a>';
+  		$remove  .= ' <a title="Linha Desativada!" disabled> <span class="glyphicon glyphicon-ban-circle"> </span> <span class="glyphicon glyphicon-edit"></span></a>';
   		$alterar = '';
   	} else {
-  		$remove  = ' <a title="Item ativo!" disabled> <span class="glyphicon glyphicon-ok-sign"> </span></a>';
-  		$remove  .= '<a href="./?'.$recLink.$valor['id'].'&remover=2&age=8" title="Desativar!"> <span class="glyphicon glyphicon-ban-circle text-danger"></span></a>';
-  		$alterar = '<a href="./?'.$recLink.$valor['id'].'&age=7" title="Alterar!"> <span class="glyphicon glyphicon-edit text-info"> </span></a>';
+  		$remove  = ' <a title="Linha ativa!" disabled> <span class="glyphicon glyphicon-ok-sign"> </span></a>';
+  		$remove  .= '<a href="./?'.$recLink.$valor['id'].'&remover=2&age=8" title="Desativar linha!"> <span class="glyphicon glyphicon-ban-circle text-danger"></span></a>';
+  		$alterar = '<a href="./?'.$recLink.$valor['id'].'&age=7" title="Alterar dados!"> <span class="glyphicon glyphicon-edit text-info"> </span></a>';
   	}
 
 	$nomeMembro = sprintf ("%s %s %'05u - %s ",$remove,$alterar,$valor['rolMembro'],$nomeMembro);
