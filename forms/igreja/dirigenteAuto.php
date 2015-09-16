@@ -30,10 +30,16 @@
 				<td><label>Congreg. do membro:</label> <input type="text" id="cong"
 					class="form-control" disabled="disabled" value="" />
 				</td>
-				<td><label>Assumir a partir de:</label> <input type="text" id="data"
+				<td><?PHP
+						if ($_GET['campo']=='pastor') {
+					?>
+					<label>Assumir a partir de:</label> <input type="text" id="data"
 					class="form-control" name="data" tabindex="<?php echo ++$ind;?>"
 					required="required" value='<?PHP echo date('d/m/Y');?>'
 					placeholder="Data do primeiro culto"/>
+					<?PHP
+						}
+					?>
 				</td>
 				<td ><label>&nbsp;</label>
 				<input name="Submit" class="btn btn-primary" type="submit" value="Alterar!">
