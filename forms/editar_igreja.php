@@ -74,22 +74,20 @@ $ind = 1;
         <?PHP
 			$nome = new editar_form("secretario2",$igreja->secretario2(),$tab,$tab_edit);
 			$nome->getMostrar();//$nome->getEditar();
-		?>
-        <?php
+    //  echo '<h1>'.$igreja->secretario2().' -------<h1>';
+      if (!empty($_GET['campo']) && ($_GET['campo']=='secretario1' || $_GET['campo']=='secretario2')) {
 
-            if (!empty($_GET['campo']) && ($_GET['campo']=='secretario1' || $_GET['campo']=='secretario2')) {
+          $cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
 
-                $cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
+          echo '<form id="form1" name="form1" method="post" action="">';
+          echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
+          echo '<input type="hidden" name="campo" value="'.$_GET['campo'].'">';
+          echo '<input type="hidden" name="tabela" value="igreja">';
+          echo '<input type="hidden" name="id" value="'.$cong.'">';
+          require_once 'forms/igreja/dirigenteAuto.php';
+          echo '</form>';
 
-                echo '<form id="form1" name="form1" method="post" action="">';
-                echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
-                echo '<input type="hidden" name="campo" value="'.$_GET['campo'].'">';
-                echo '<input type="hidden" name="tabela" value="igreja">';
-                echo '<input type="hidden" name="id" value="'.$cong.'">';
-                require_once 'forms/igreja/dirigenteAuto.php';
-                echo '</form>';
-
-            }
+      }
 
         ?>
       </tr>

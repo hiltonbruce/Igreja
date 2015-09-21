@@ -13,7 +13,7 @@ class atualconta {
 	$this->creditar = $creditar;
 	}
 
-	function atualizar($valor,$dc,$igreja,$histLanc,$data) {
+	function atualizar($valor,$dc,$igreja,$data) {
 		//Faz o lançamento na tabela lancamento, lanc e atualiza os dados da tabela contas
 		if (empty($data)) {
 			$data = br_data($_POST['data'], 'Data do lançamento inválida!');
@@ -42,12 +42,12 @@ class atualconta {
 				$lancamento->inserir();
 				//Nova versão de tabela
 				if ($this->creditar >'0' ) {
-				$histLancamento = mysql_escape_string($histLanc);
-				$insertLancNova = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,
-						$linha,$this->creditar,$valor,$igreja,$histLancamento,$data,$_SESSION['valid_user']);
+				//$histLancamento = mysql_escape_string($histLanc);
+				$insertLancNova = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,$linha,$this->creditar,$valor,$igreja,$data,$_SESSION['valid_user']);
 				$lancNovaVersao = new incluir($insertLancNova, 'lanc');
 				$lancNovaVersao->inserir();
 				}
+				//echo '<h1>*** '.$data.' ***</h1>';
 			}
 		}
 	}

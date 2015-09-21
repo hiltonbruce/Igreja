@@ -3,9 +3,9 @@ class tes_relatLanc {
 
 function __construct() {
 		$this->var_string  = 'SELECT l.lancamento,DATE_FORMAT(l.data,"%d/%m/%Y") AS data,l.igreja,';
-		$this->var_string .= 'l.valor,l.hist,l.referente,l.debitar,l.creditar, i.razao ';
-		$this->var_string .= 'FROM lanc AS l, igreja AS i ';
-		$this->var_string .= 'WHERE l.igreja=i.rol ';
+		$this->var_string .= 'l.valor,l.hist,h.referente,l.debitar,l.creditar, i.razao ';
+		$this->var_string .= 'FROM lanc AS l, igreja AS i, lanchist AS h ';
+		$this->var_string .= 'WHERE l.igreja=i.rol AND l.lancamento=h.idlanca ';
 
 	}
 

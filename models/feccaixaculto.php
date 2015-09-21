@@ -42,7 +42,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		$credora 	= new DBRecord('contas',$tablancarr['credito'],'acesso');
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$valor 		= $tablancarr['valor'];
-		$contcaixa->atualizar($valor,'D',$roligreja,$referente); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$valorTotal += $valor;
 
 		if ($tablancarr['devedora']=='2'&& $tablancarr['tipo']!='9') {
@@ -61,7 +61,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
    	//Lança provisões conta Despesa
 	$semaddesp = new atualconta('3.1.6.001.005',$idlancmis,11);
    	if ($provmissoes>0) {
-   		$semaddesp->atualizar($provmissoes,'D',$roligreja,'Valor provisionado para SEMAD sobre a receita nesta data'); //Faz o lançamento, se possuir valor, da provisão de missões - Despesa
+   		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de missões - Despesa
    	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
@@ -72,7 +72,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$corlinha = !$corlinha;
 	$provcomad = new atualconta('3.1.1.001.007',$idlancmis,10);
 	if ($provcomadep>0) {
-		$provcomad->atualizar($provcomadep,'D',$roligreja,'Valor provisionado para COMADEP sobre a receita nesta data'); //Faz o lançamento, se possuir valor, da provisão de Comadep - Despesa
+		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de Comadep - Despesa
 	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
@@ -91,7 +91,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 		$credora = new DBRecord('contas',$tablancarrc['credito'],'acesso');
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc);
-		$contcaixa->atualizar($tablancarrc['valor'],'C',$roligreja); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($tablancarrc['valor'],'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$tablancarrc['credito'],'acesso');//Exibi lançamento
@@ -104,7 +104,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	//Lança provisões conta credora no Ativo
 	$provsemad = new atualconta('1.1.1.001.007',$idlancmis);
 	if ($provmissoes>0) {
-		$provsemad->atualizar($provmissoes,'C',$roligreja); //Faz o lançamento, se possuir valor, da provisão de missões - Ativo
+		$provsemad->atualizar($provmissoes,'C',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de missões - Ativo
 	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
@@ -115,7 +115,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$corlinha 	= !$corlinha;
 	$provcomad 	= new atualconta('1.1.1.001.006',$idlancmis); //Faz o lançamento da provisão de Comadep - Ativo
 	if ($provcomadep) {
-		$provcomad->atualizar($provcomadep,'C',$roligreja);//Faz o lançamento, se possuir valor, da provisão da COMADEP - Ativo
+		$provcomad->atualizar($provcomadep,'C',$roligreja,$data);//Faz o lançamento, se possuir valor, da provisão da COMADEP - Ativo
 	}
 
 	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';

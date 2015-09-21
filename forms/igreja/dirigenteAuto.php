@@ -20,9 +20,10 @@
 				id="campo_estado" size="30%" class="form-control"
 				placeholder="Nome do membro da igreja para iniciarmos a busca no cadastro!"
 				autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
-				required="required" />
+				/>
 				</td>
-				<td><label>Rol:</label> <input type="text" id="rol" name="pastor" tabindex="<?php echo ++$ind;?>"
+				<td><label>Rol:</label>
+					<input type="text" id="rol" name="pastor" tabindex="<?php echo ++$ind;?>"
 					class="form-control" placeholder="N&ordm; no rol do <?PHP echo $labelCampo ;?>" />
 				</td>
 			</tr>

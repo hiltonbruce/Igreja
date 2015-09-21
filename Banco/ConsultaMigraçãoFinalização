@@ -1,0 +1,10 @@
+http://localhost/igrejas/GitHub/Igreja/?escolha=models/migraLancamento.php&menu=top_tesouraria&anomes=201401
+
+Remover o campo 'referente' da tabela lanc
+
+Consultas para ajuste no BD
+SELECT * FROM `lanc` ORDER BY `lanc`.`debitar`  ASC
+
+SELECT *  FROM `lancamento` WHERE `lancamento` = 5437
+ORDER BY `lancamento`.`lancamento` ASC
+

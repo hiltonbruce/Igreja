@@ -9,7 +9,7 @@ $queryLanc .= ' ORDER BY l.lancamento,l.d_c DESC';
 $lista = mysql_query($queryLanc) or die(mysql_error());
 
 while ($contas = mysql_fetch_array($lista)) {
-   $value = '"","'.$contas['lancamento'].'","","'.$contas['conta'].'","'.$contas['valor'].'","'.$contas['igreja'].'","'.$contas['referente'].'","'.$contas['data'].'","Migracao"';
+   $value = '"","'.$contas['lancamento'].'","","'.$contas['conta'].'","'.$contas['valor'].'","'.$contas['igreja'].'","'.$contas['data'].'","Migracao"';
    $dados = new insert ($value,'lanc');
    $dados->inserir();
    //$idAtual = mysql_insert_id();
