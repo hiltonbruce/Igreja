@@ -18,7 +18,7 @@ switch ($_GET['rec']) {
 		require_once '../views/modeloPrint.php';
 		break;
 	case '15':
-
+		$dia = (empty($_GET['dia'])) ? '' : sprintf("%'02u",$_GET['dia']);
 		$roligreja = ($_GET['igreja']>0) ? (int)$_GET['igreja'] : 1 ;
 		$igrejaSelecionada = new DBRecord('igreja', $roligreja, 'rol');
 		$titTabela = 'Relatório de Lançamentos';
@@ -26,7 +26,7 @@ switch ($_GET['rec']) {
 		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
 		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
 		$tituloColuna5 = 'Valor(R$)';
-		require_once '../models/saldos.php';
+		//require_once '../models/saldos.php';
 		$nomeArquivo='../views/tesouraria/tabRelatLanc.php';
 		require_once '../views/modeloPrint.php';
 		break;

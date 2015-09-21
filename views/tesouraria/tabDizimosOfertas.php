@@ -132,7 +132,7 @@ $tabMembros = new membro();
 	}else {
 ?>
 		<span id="text-right">Conferido por:</span>
-	<table style="width: 95%;">
+	<table class='table table-condensed table-striped'>
 			<colgroup>
 				<col id="Data">
 				<col id="albumCol"/>
@@ -149,13 +149,13 @@ $tabMembros = new membro();
 				<td width="85%">&nbsp;</td>
 			</tr>
 			<tr>
-				<td class='odd'>&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td class='odd'>&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 		</tbody>
 		<tfoot>

@@ -1,10 +1,10 @@
-<table>
+<table class='table-hover'>
 		<caption>
-		<?php		
+		<?php
 		if (empty($recLink)) {
 			$recLink = '';
-		}		
-		
+		}
+
 		if ($recLink!='') {
 			echo '<a href="'.$linkImpressao.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
@@ -13,7 +13,7 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-		
+
 		echo $titTabela;
 		?>
 		</caption>
@@ -38,17 +38,17 @@
 				echo $nivel1;//Valor veio do script /models/saldos.php
 			}else {
 				echo $nivel2;//Valor veio do script /models/saldos.php
-			}				
+			}
 			?>
 		</tbody>
 		<tfoot>
-			<?php 
-				printf("<tr id='total'>"); 
+			<?php
+				printf("<tr id='total'>");
 				printf("<td colspan='2' id='moeda' >Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
 				printf("<td colspan='2' id='moeda'>Crédito: R$ %s C</td><td></td></tr>",number_format($credito,2,',','.'));
 			?>
 		</tfoot>
 	</table>
-	<?php 
+	<?php
 		echo $imprimir;
 	?>

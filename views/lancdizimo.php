@@ -1,4 +1,4 @@
-<table  style="width: 95%;">
+<table class='table table-hover table-condensed'>
 		<caption>Lan&ccedil;amento - Igreja: <?php 	echo $lanigreja->razao;?></caption>
 		<colgroup>
 				<col id="Conta">

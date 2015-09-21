@@ -1,6 +1,5 @@
 <?php
 	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
-	$dia = (empty($_GET['dia'])) ? '' : sprintf("%'02u",$_GET['dia']) ;
 	$refer = (empty($_GET['refer'])) ? '' : $_GET['refer'] ;
 	$cta = (empty($_GET['conta'])) ? '' : $_GET['conta'] ;
 	if (!empty($_GET['deb'])) {

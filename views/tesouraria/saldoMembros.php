@@ -18,7 +18,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 
 require_once 'models/tes/histFinMembro.php';
 ?>
-<table id="horario" class='table'>
+<table id="horario" class='table table-hover'>
 		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>

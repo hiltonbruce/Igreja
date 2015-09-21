@@ -1,4 +1,4 @@
-<table >
+<table class="table-hover">
 		<caption>Lançamento Concluído</caption>
 
 			<colgroup>

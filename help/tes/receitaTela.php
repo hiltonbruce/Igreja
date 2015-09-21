@@ -88,6 +88,7 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoIgrejas.php';
 		break;
 	case '21':
+		$dia = (empty($_GET['dia'])) ? '' : sprintf("%'02u",$_GET['dia']);
 		require_once ('forms/tes/relatorioLanc.php');
 		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
 		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
