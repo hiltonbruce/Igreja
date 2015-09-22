@@ -102,9 +102,11 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 	}
 	//Lança provisões conta credora no Ativo
+	$histProvisao = '';
 	$provsemad = new atualconta('1.1.1.001.007',$idlancmis);
 	if ($provmissoes>0) {
 		$provsemad->atualizar($provmissoes,'C',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de missões - Ativo
+		$histProvisao = 'Valor provisionado para SEMAD sobre a receita nesta data';
 	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
@@ -116,6 +118,11 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$provcomad 	= new atualconta('1.1.1.001.006',$idlancmis); //Faz o lançamento da provisão de Comadep - Ativo
 	if ($provcomadep) {
 		$provcomad->atualizar($provcomadep,'C',$roligreja,$data);//Faz o lançamento, se possuir valor, da provisão da COMADEP - Ativo
+		if ($histProvisao=='') {
+			$histProvisao = 'Valor provisionado para COMADEP sobre a receita nesta data';
+		}else {
+			$histProvisao = 'Valor provisionado para SEMAD e COMADEP sobre a receita nesta data';
+		}
 	}
 
 	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
@@ -144,7 +151,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	//inserir o histórico do lançamento das provisões na tabela lanchist
 
 	//Lança o histórico do lançamento das provisões
-	$HistProv = sprintf("'','%s','%s','%s'",$idlancmis,'Valor provisionado da SEMAD e COMADEP sobre a receita nesta data',$roligreja);
+	$HistProv = sprintf("'','%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');
 	$lanchist->inserir();
 
