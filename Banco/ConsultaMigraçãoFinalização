@@ -8,3 +8,5 @@ SELECT * FROM `lanc` ORDER BY `lanc`.`debitar`  ASC
 SELECT *  FROM `lancamento` WHERE `lancamento` = 5437
 ORDER BY `lancamento`.`lancamento` ASC
 
+Para atualizar
+UPDATE `assembleia`.`lanc` SET `debitar` = '5' WHERE `lanc`.`creditar` = 305 AND `lanc`.`debitar` = 0

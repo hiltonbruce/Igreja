@@ -1,4 +1,4 @@
-<table class='table-hover'>
+<table class='table table-hover'>
 		<caption>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
@@ -41,11 +41,13 @@
 		<tfoot>
 			<?php
 				echo '<tr id="total" style="font-size:130%;">';
-				printf("<td colspan='2' id='moeda' >Total de Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
-				printf("<td colspan='3' id='moeda'>Total de Crédito: R$ %s C</td></tr>",number_format($credito,2,',','.'));
+				printf("<td colspan='2' id='moeda' >D&eacute;bitos: R$ %s D</td>",number_format($debito,2,',','.'));
+				printf("<td colspan='3' id='moeda'>Cr&eacute;ditos: R$ %s C</td></tr>",number_format($credito,2,',','.'));
 			?>
 		</tfoot>
 	</table>
 	<?php
+				echo $grupoFora.'<br />';
+				echo $sldFora += $vlrSaldo;
 		echo $imprimir;
 	?>

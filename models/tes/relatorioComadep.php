@@ -6,7 +6,7 @@ $planoCta=array();$cor=true;$sldGrupo=array();
 $plano = mysql_query('SELECT * FROM contas ORDER BY codigo ');
 while ($cta = mysql_fetch_array($plano)) {
 	$planoCta[$cta['id']]=array($cta['titulo'],$cta['acesso'],$cta['codigo'],$cta['tipo'],$cta['nivel4']);
-	$planoGrupo[$cta['codigo']]=array($cta['titulo'],$cta['codigo'],$cta['tipo']);
+	$planoGrupo[$cta['codigo']]=array($cta['titulo'],$cta['codigo'],$cta['tipo'],$cta['nivel4']);
 }
 //print_r($planoCta);
 //Busca do movimento no mês
@@ -16,31 +16,36 @@ $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<='.$mesRelatorio;
 //$queryLanc .= ' ORDER BY ';
 $lista = mysql_query($queryLanc) or die(mysql_error());
 while ($contas = mysql_fetch_array($lista)) {
+
+	$ctaDeb = $planoCta[$contas['debitar']]['2'];
+	$ctaCred = $planoCta[$contas['creditar']]['2'];
+#echo $ctaDeb." -- ";
+#echo $ctaCred."<br />";
 	if ($contas['dt']==$a.$m) {
 			//Movimento do mês atual
 			//Contas debitadas
-			$saldo[$contas['debitar']] += $contas['valor'];
+			$saldo[$ctaDeb] += $contas['valor'];
 			$sldGrupo [$planoCta[$contas['debitar']]['4']] += $contas['valor'];
 			//Contas creditadas
-			$saldo[$contas['creditar']] -= $contas['valor'];
+			$saldo[$ctaCred] -= $contas['valor'];
 			$sldGrupo [$planoCta[$contas['creditar']]['4']] -= $contas['valor'];
 		}else {
 			//saldo meses anteriores
 			//Contas debitadas
-				$saldoDisp[$contas['debitar']] += $contas['valor'];
+				$saldoDisp[$ctaDeb] += $contas['valor'];
 				$sldGrupoDisp [$planoCta[$contas['debitar']]['4']] += $contas['valor'];
 			//Contas creditadas
-				$saldoDisp[$contas['creditar']] -= $contas['valor'];
+				$saldoDisp[$ctaCred] -= $contas['valor'];
 				$sldGrupoDisp [$planoCta[$contas['creditar']]['4']] -= $contas['valor'];
 
 			/*Quando houver saldo, mas sem movimento no mes, aqui é forçado
 			 * a aparecer
 			*/
-			if ($saldo[$contas['creditar']]==0) {
-				$saldo[$contas['creditar']] = 0;
+			if ($saldo[$ctaCred]==0) {
+				$saldo[$ctaCred] = 0;
 			}
-			if ($saldo[$contas['debitar']]==0) {
-				$saldo[$contas['debitar']] = 0;
+			if ($saldo[$ctaDeb]==0) {
+				$saldo[$ctaDeb] = 0;
 			}
 		}
 }
@@ -48,6 +53,10 @@ $ctaAtual = '';
 //print_r($sldGrupo);
 //echo $planoCta['5']['4'];
 //$saldo = array_merge($saldoDisp,$saldo);
+//print_r($saldo);
+ksort($saldo); #Ordena o array pela chave
+//echo "<br />";
+//print_r($saldo);
 
 //print_r($saldo);
 foreach ($saldo AS $chave => $valor){
@@ -56,11 +65,13 @@ foreach ($saldo AS $chave => $valor){
 		$acesso = '';
 		$vlrSaldo = abs($saldo[$chave]);
 
-		if ($planoCta[$chave]['3']=='D') {
+		if ($planoGrupo[$chave]['2']=='D') {
 				$debito += $vlrSaldo;
-
-			}else {
+			}elseif ($planoGrupo[$chave]['2']=='C') {
 				$credito += $vlrSaldo;
+			} else {
+				$grupoFora .= $chave.' - '.$planoGrupo[$chave]['2'].' ** ';
+				$sldFora .= $vlrSaldo.' - ';
 			}
 
 		$vlrSaldo = number_format($vlrSaldo,2,',','.');
@@ -92,9 +103,9 @@ foreach ($saldo AS $chave => $valor){
 			}
 
 		//echo $planoCta[$chave]['4'].' -- ';
-		if ($ctaAtual==$planoCta[$chave]['4'] || $ctaAtual==''){
+		if ($ctaAtual==$planoGrupo[$chave]['3'] || $ctaAtual==''){
 				//Contas simples
-				$nivel1 .='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$acesso.$planoCta[$chave]['0'].
+				$nivel1 .='<tr '.$bgcolor.'><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
 				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 			}else {
 				//Grupo de contas
@@ -122,17 +133,17 @@ foreach ($saldo AS $chave => $valor){
 				}
 
 				//Contas simples
-				$nivel1 ='<tr '.$bgcolor.'><td>'.$planoCta[$chave]['2'].'</td><td title="'.$title.'">'.$acesso.$planoCta[$chave]['0'].
+				$nivel1 ='<tr '.$bgcolor.'><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
 				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 			}
 
-			$sldGrupoCta = abs($sldGrupo [$planoCta[$chave]['4']]);
-			$sldGrupoCtaDisp = $sldGrupoDisp [$planoCta[$chave]['4']];
+			$sldGrupoCta = abs($sldGrupo [$planoGrupo[$chave]['3']]);
+			$sldGrupoCtaDisp = $sldGrupoDisp [$planoGrupo[$chave]['3']];
 			$sldGrupoAtual = $sldGrupoCtaDisp+$sldGrupoCta;
 
 			$cor = !$cor;
 
-		$ctaAtual = $planoCta[$chave]['4'];
+		$ctaAtual = $planoGrupo[$chave]['3'];
 		//print_r ($sldGrupo);
 			//echo ' - Conta -> '.$planoCta[$chave]['2'];
 }
@@ -169,4 +180,5 @@ if ($nivelGrupo=='') {
 
 $nivel1=$nivel2;
 
+echo $grupoFora;
 ?>
