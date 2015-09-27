@@ -17,8 +17,14 @@ $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<='.$mesRelatorio;
 $lista = mysql_query($queryLanc) or die(mysql_error());
 while ($contas = mysql_fetch_array($lista)) {
 
-	$ctaDeb = $planoCta[$contas['debitar']]['2'];
-	$ctaCred = $planoCta[$contas['creditar']]['2'];
+	$ctaDeb   = $planoCta[$contas['debitar']]['2'];#Codigo da cta
+	$tipoDeb  = $planoCta[$contas['debitar']]['3'];#Tipo da Cta -> D/C
+	$ctaCred  = $planoCta[$contas['creditar']]['2'];#Codigo da cta
+	$tipoCred = $planoCta[$contas['creditar']]['3'];#Tipo da Cta -> D/C
+				$debito += $contas['valor'];
+				//$credito += $contas['valor'];
+	$dataLancDeb[] = array( 'Cod'=>$ctaDeb,'Data'=>$contas['data'], 'Vlr'=>$contas['valor']);
+	$dataLancCred[] = array( $ctaCred,$contas['data'], $contas['valor']);
 #echo $ctaDeb." -- ";
 #echo $ctaCred."<br />";
 	if ($contas['dt']==$a.$m) {
@@ -58,13 +64,17 @@ ksort($saldo); #Ordena o array pela chave
 //echo "<br />";
 //print_r($saldo);
 
+/* print_r($dataLancDeb);
+echo "<br/><br/><br/>";
+print_r($dataLancCred);
+*/
 //print_r($saldo);
 foreach ($saldo AS $chave => $valor){
 		$bgcolor = ($cor) ? 'class="dados"' : 'class="odd"';
 		//$acesso = sprintf("[%04s]\n", $planoCta[$chave]['1']);
 		$acesso = '';
 		$vlrSaldo = abs($saldo[$chave]);
-
+/*
 		if ($planoGrupo[$chave]['2']=='D') {
 				$debito += $vlrSaldo;
 			}elseif ($planoGrupo[$chave]['2']=='C') {
@@ -73,7 +83,7 @@ foreach ($saldo AS $chave => $valor){
 				$grupoFora .= $chave.' - '.$planoGrupo[$chave]['2'].' ** ';
 				$sldFora .= $vlrSaldo.' - ';
 			}
-
+*/
 		$vlrSaldo = number_format($vlrSaldo,2,',','.');
 		if ($saldo[$chave]<0) {
 				$vlrSaldo .= 'C';

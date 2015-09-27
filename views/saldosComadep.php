@@ -40,14 +40,14 @@
 		</tbody>
 		<tfoot>
 			<?php
-				echo '<tr id="total" style="font-size:130%;">';
-				printf("<td colspan='2' id='moeda' >D&eacute;bitos: R$ %s D</td>",number_format($debito,2,',','.'));
-				printf("<td colspan='3' id='moeda'>Cr&eacute;ditos: R$ %s C</td></tr>",number_format($credito,2,',','.'));
+				echo '<tr id="total">';
+				echo '<td colspan="3"id="moeda" >Débitos e Créditos do per&iacute;odo: </td>';
+				printf("<td colspan='2' id='moeda'>R$ %s C</td>",number_format($debito,2,',','.'));
 			?>
 		</tfoot>
 	</table>
 	<?php
 				echo $grupoFora.'<br />';
-				echo $sldFora += $vlrSaldo;
+				echo $sldFora.' *** ';
 		echo $imprimir;
 	?>

@@ -65,9 +65,9 @@ while ($contas = mysql_fetch_array($lista)) {
 			$cor2 = !$cor2;
 		}
 	}
-	if ($contas['tipo']=='D' && $contas['acesso']!='0') {
-		$debito += $contas['saldo'];
-	}elseif ($contas['tipo']=='C' && $contas['acesso']!='0') {
+	if ($contas['tipo']=='D' && $contas['acesso']>'0') {
+		$debito  += $contas['saldo'];
+	}elseif ($contas['tipo']=='C' && $contas['acesso']>'0') {
 		$credito += $contas['saldo'];
 	}
 }
