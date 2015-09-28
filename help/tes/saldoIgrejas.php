@@ -30,6 +30,10 @@
 			$linha .= '<td id="moeda">'.$entrada.'</td>';
 			$total += $valores[$i];
 			$totalMes[$i] += $valores[$i];
+			if ($igrejaDados['rol']=='1') {
+				$totSedeMes[$i] = $valores[$i];
+				$totSede = $total;
+			}
 		}
 
 		$linha .= '<td id="moeda">'.number_format($total,2,',','.').'</td></tr>';
@@ -41,15 +45,21 @@
 	//Cabeçalho da tabela
 	$colgroup = '<col id="igreja">';
 	$tabThead = '<tr><th scope="col">Igrejas</th>';
-	$tabFoot = '<tr id="total"><td>Totais</td>';
+	//rodapé da tabela
+	$footCong  = '<tr id="subtotal"><td>Totais&nbsp;Congregações</td>';
+	$tabFoot   = '<tr id="total"><td>Totais</td>';
 
 	foreach(arrayMeses() as $mes => $meses) {
 		$colgroup .= '<col id="'.substr($meses, 0, 3).'">';
 		$tabThead .= '<th scope="col" class="centro">'.substr($meses, 0, 3).'</th>';
+		$footCong .= '<td id="moeda">'.number_format($totalMes[(int)$mes]-$totSedeMes[(int)$mes],2,',','.').'</td>';
 		$tabFoot  .= '<td id="moeda">'.number_format($totalMes[(int)$mes],2,',','.').'</td>';
 	}
 	$colgroup .= '<col id="Total">';
 	$tabThead .= '<th scope="col"  class="centro">Total</th></tr>';
+	$footCong .= '<td id="moeda">'.number_format($totalGeral-$totSede,2,',','.').'</td></tr>';
 	$tabFoot  .= '<td id="moeda">'.number_format($totalGeral,2,',','.').'</td></tr>';
-
+	$tabFoot  = $footCong.$tabFoot ;
+//print_r($totSedeMes);
+//print_r($igrejaDados);
 ?>

@@ -55,7 +55,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
 
 		//Soma linha
-		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
+		$totMes = $$dz+$$ofExtra+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		$totSubTotal +=$subTotal;
 		$totTotal += $totMes;
@@ -71,7 +71,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofmoc,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofi,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofe,2,',','.').'</td>';
-		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').' </td></tr>';
+		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').'</td></tr>';
 
 		for ($i=1; $i < 6; $i++) {
 			$dizSem = $dz.$i;$ofSem = $of.$i;$ofExtraSem = $ofExtra.$i;
@@ -91,7 +91,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmocSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofiSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofeSem,2,',','.').'</td>';
-			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').' </td></tr>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').'</td></tr>';
 			$nivel1Sem .= '</tr>';
 		}
 		$nivel1 .= $nivelSem.$nivel1Sem;

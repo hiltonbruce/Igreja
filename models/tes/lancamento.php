@@ -2,6 +2,17 @@
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_POST['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
+
+#Analisa se será lançado em contas a pagar e fazer o reconhecimento da despesas
+list($anoVenc,$mesVen,$diaVenc) = explode('-',$vencimento);
+$data = br_data($_POST['data'], 'Data do lançamento inválida!');
+list($anoPgto,$mesPgto,$diaPgto) = explode('-', $data);
+if ((($mesPgto>$mesVen && $anoPgto==$anoVenc) ||$anoPgto>$anoVenc) && $vencimento!='') {
+	$ctaPagar = true;
+} else {
+	$ctaPagar = false;
+}
+
 controle ('tes');
 $provmissoes=0;
 $ultimolanc = 0;
@@ -58,7 +69,7 @@ $corlinha = false;
 	 ;//testar se cta de caixa e não permitir o lancamento se ficar negativo e a de despesas tb
 	}
 
-	$ultimoLancNumero = mysql_query('SELECT max(lancamento) AS lanca FROM lancamento');//Traz o valor do ultimo lançamento
+	$ultimoLancNumero = mysql_query('SELECT max(lancamento) AS lanca FROM lanc');//Traz o valor do ultimo lançamento
 	$lancmaior = mysql_fetch_array($ultimoLancNumero);
 	$ultimolanc = (int)$lancmaior['lanca']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
 
@@ -68,8 +79,6 @@ $corlinha = false;
 //Analizar os valores para lançar o dízimo para COMADEP e SEMAD
 
 $referente = (strlen($_POST['referente'])>'4') ? $_POST['referente']:false;//Atribui a variável o histórico do lançamento
-
-$data = br_data($_POST['data'], 'Data do lançamento inválida!');
 
 if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
@@ -81,10 +90,27 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
 	$caixaSenhoras = '';
 	//echo $credora->id().'<h1> tste </h>';
+	if ($ctaPagar) {
+		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,'529');#devedora a Contas a pagar
+		$contcaixa->atualizar($valor,'D',$roligreja,$vencimento);
+		//Lança o histórico do lançamento
+		$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
+		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$histAPagar,$roligreja);
+		$lanchist = new incluir($InsertHist, 'lanchist');
+		$lanchist->inserir();
 
+		$ultimolanc++;
+		$ctaVencida = ' e vencida em: '.$_POST['vencimento'];
+		$contcaixa 	= new atualconta('2.1.1.001.099',$ultimolanc,$credora->id());
+		$histLac = $referente.$motivoComplemento;
+		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
+	} else {
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$histLac = $referente.$motivoComplemento;
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$ctaVencida = '';
+	}
+
 		$valorTotal += $valor;
 //print_r($credora);
 		if ($credora->nivel2()=='4.1') {
@@ -104,7 +130,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 	//Faz lançameto de multa caso exista
 	if ($ctaMulta) {
-		$multaAtraso = new atualconta($ctaMulta->codigo(),$ultimolanc++,$credora->id());
+		$multaAtraso = new atualconta($ctaMulta->codigo(),$ultimolanc,$credora->id());
 		$multaAtraso->atualizar($multa,'D',$roligreja,$data);
 		$totalMulta += $multa;
 		$lancMulta=true;
@@ -119,9 +145,9 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
    	//Lança provisões conta Despesa
    	if ($provmissoes>0) {
-		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc++,'11');//SEMAD (Sec de Missões) provisão e despesa
+		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
 		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
-		$histTextProv ='Valor provisionado para SEMAD sobre a receita nesta data';
+		$histTextProv =' e provisão para SEMAD sobre a receita ';
    	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
@@ -131,14 +157,14 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$totalDeb += $provmissoes;
 	$corlinha = !$corlinha;
 
-	$provcomad = new atualconta('3.1.1.001.007',$ultimolanc++,'10');//Convenção estadual COMADEP
+	$provcomad = new atualconta('3.1.1.001.007',$ultimolanc,'10');//Convenção estadual COMADEP
 	if ($provcomadep>0) {
 		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento da provisão de Comadep - Despesa
 		$totalDeb += $provcomadep;
 		if ($histTextProv!='') {
-			$histTextProv = 'Valor provisionado para COMADEP e SEMAD sobre a receita nesta data';
+			$histTextProv = ', provisão para COMADEP e SEMAD sobre a receita ';
 		} else {
-			$histTextProv = 'Valor provisionado para COMADEP sobre a receita nesta data';
+			$histTextProv = ' e provisão para COMADEP sobre a receita ';
 		}
 
 	}
@@ -152,7 +178,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	//esta variável é levada p/ o script views/exibilanc.php
 
 	//Faz o leiaute do lançamento do crédito da tabela lancamento
-		$contcaixa = new atualconta($credora->codigo(),$ultimolanc++,'');
+		$contcaixa = new atualconta($credora->codigo(),$ultimolanc,'');
 		$contcaixa->atualizar($valor+$multa,'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
@@ -166,7 +192,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$lancprovmissoes=false;
 	if ($provmissoes>0) {
 		//Faz o lançamento da provisão de missões - Ativo
-		$provsemad = new atualconta('1.1.1.001.007',$ultimolanc++);
+		$provsemad = new atualconta('1.1.1.001.007',$ultimolanc);
 		$provsemad->atualizar($provmissoes,'C',$roligreja,$data);
 		$totalCred += $provmissoes;
 		$lancprovmissoes=true;
@@ -179,7 +205,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$corlinha 	= !$corlinha;
 
 	if ($provcomadep>0) {
-		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc++); //Faz o lançamento da provisão de Comadep - Ativo
+		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc); //Faz o lançamento da provisão de Comadep - Ativo
 		$provcomad->atualizar($provcomadep,'C',$roligreja,$data);//Faz o lançamento da provisão da COMADEP - Ativo
 		$lancprovmissoes=true;
 	}
@@ -193,20 +219,22 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
 
-	//Lança o histórico do lançamento
-	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc++,$referente,$roligreja);
-	$lanchist = new incluir($InsertHist, 'lanchist');
-	$lanchist->inserir();
 
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
 	//inserir o histórico do lançamento das provisões na tabela lanchist
 
 	//Lança o histórico do lançamento das provisões $provmissoes>0 $provcomadep>0
 	if ($lancprovmissoes) {
-	$HistProv = sprintf("'','%s','%s','%s'",$ultimolanc++,$histTextProv,$roligreja);
-	$lanchist = new incluir($HistProv, 'lanchist');
-	$lanchist->inserir();
+	$HistProv = sprintf("'','%s','%s','%s'",$ultimolanc,$histTextProv,$roligreja);
+	//$lanchist = new incluir($HistProv, 'lanchist');
+	//$lanchist->inserir();
 	}
+
+	//Lança o histórico do lançamento
+	$referente .= $histTextProv.' nesta data'.$ctaVencida;
+	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
+	$lanchist = new incluir($InsertHist, 'lanchist');
+	$lanchist->inserir();
 
 	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 

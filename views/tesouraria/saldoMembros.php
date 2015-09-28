@@ -60,7 +60,7 @@ require_once 'models/tes/histFinMembro.php';
 			?>
 		<tfoot>
 			<?php
-				printf("<tr id='subtotal'>");
+				echo '<tr id="subtotal">';
 				echo ('<td>Em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').

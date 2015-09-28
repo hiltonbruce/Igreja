@@ -62,10 +62,11 @@ class tes_despesas {
 		}
 		//int_r($agendaNaoPago);
 		//SQL dos lançamentos realizados
-		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, ';
+		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, h.referente AS referente, ';
 		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
-		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i WHERE c.id=l.debitar ';
-		$sqlLancDesp .= 'AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
+		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i, lanchist AS h ';
+		$sqlLancDesp .= 'WHERE c.id=l.debitar AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
+		$sqlLancDesp .= 'AND h.idlanca=l.lancamento ';
 		$sqlLancDesp .= 'AND l.igreja=i.rol AND c.nivel1 = "3" ORDER BY c.codigo,i.razao,l.data ';
 		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
 		while($dados = mysql_fetch_array($despesa)) {
