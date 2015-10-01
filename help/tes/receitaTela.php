@@ -74,7 +74,7 @@ switch ($rec) {
 			require_once 'views/tesouraria/cabTabFin.php';//Cabeçalho da tabela
 			require_once 'views/tesouraria/saldoMesFin.php';
 			$tabThead = $nivelSem;
-			require_once 'views/tesouraria/saldoIgrejas.php';
+			//require_once 'views/tesouraria/saldoIgrejas.php';
 		} else {
 			//Lista financeira da igreja com todos os  meses
 			$colUm = 'Per&iacute;odo';//Primeira coluna do cabecalho

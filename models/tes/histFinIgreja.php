@@ -1,7 +1,7 @@
 <?php
 $nivel1 	= '';
 $nivel2 	= '';
-$comSaldo	= '';$menorAno = 0;$maiorAno=0;
+$comSaldo	= '';$menorAno = 2010;$maiorAno=2100;
 
 	if (empty($_GET['ano'])) {
 			$ano = date('Y');
@@ -35,10 +35,12 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$ofe = 'ofertaEnsino'."$cont$ano";$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
 
-		//Soma da coluna
+		//Soma da coluna para linha Sub-total das congregações Sem a Sede
+		if ($cont!='1') {
 		$totDizAno  += $$dz;$totOfertaExtraAno  += $$ofExtra;$totOfertaAno  += $$of;
 		$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;$totMocidadeAno  += $$ofmoc;
 		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
+		}
 
 		//Soma linha
 		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)

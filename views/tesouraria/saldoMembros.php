@@ -61,7 +61,7 @@ require_once 'models/tes/histFinMembro.php';
 		<tfoot>
 			<?php
 				echo '<tr class="success">';
-				echo ('<td>Total&nbsp;em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
+				echo ('<td>Contribui&ccedil;&otilde;es&nbsp;em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').
 						'<td id="moeda">'.number_format($totSubTotal,2,',','.').

@@ -18,17 +18,16 @@ $mesPorExt = $mesExt[$mesPeriodo];
 <table id="horario" class='table table-bordered'>
 			<?php
 				echo '<thead>'.$nivelSem.'</thead>';
-
-			if ($_GET['tipo']==1) {
-				echo $nivel1;//Valor veio do script /models/saldos.php
-			}else {
-				echo $nivel1;//Valor veio do script /models/saldos.php
-			}
+				if ($_GET['tipo']==1) {
+					echo $nivel1;//Valor veio do script /models/saldos.php
+				}else {
+					echo $nivel1;//Valor veio do script /models/saldos.php
+				}
 			?>
 		<tfoot>
 			<?php
 				echo '<tr id="subtotal">';
-				echo ('<td>Em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
+				echo ('<td>Total&nbsp;nas&nbsp;Congregações:</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').
 						'<td id="moeda">'.number_format($totSubTotal,2,',','.').
