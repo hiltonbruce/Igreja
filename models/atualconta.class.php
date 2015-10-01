@@ -2,6 +2,11 @@
 class atualconta {
 
 	function __construct($codigo='',$ultimolanc='',$creditar='') {
+		/*
+		*$codigo -> Número do plano de Cta a ser debitada
+		*$creditar -> acesso da Cta a ser creditada
+		*/
+
 
 		$cod = explode(".",$codigo);
 			$this->cod1 = $cod[0];

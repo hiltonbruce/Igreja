@@ -18,7 +18,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 
 require_once 'models/tes/histFinMembro.php';
 ?>
-<table id="horario" class='table table-hover'>
+<table id="horario" class='table table-hover table-condensed'>
 		<caption><?php echo $cong;?>Histórico Financeiro de Dízimos e Ofertas - Ano de referência:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
@@ -60,8 +60,8 @@ require_once 'models/tes/histFinMembro.php';
 			?>
 		<tfoot>
 			<?php
-				echo '<tr id="subtotal">';
-				echo ('<td>Em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
+				echo '<tr class="success">';
+				echo ('<td>Total&nbsp;em&nbsp;'.$ano.':</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>
 						<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'
 						<td id="moeda">'.number_format($totOfertaAno,2,',','.').
 						'<td id="moeda">'.number_format($totSubTotal,2,',','.').
@@ -75,7 +75,7 @@ require_once 'models/tes/histFinMembro.php';
 
 				printf("<tr id='total'>");
 				$totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
-				echo ('<td>Total&nbsp;</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
+				echo ('<td>Total&nbsp;Geral</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>
 						<td id="moeda">'.number_format($totSubTotal,2,',','.').'</td>

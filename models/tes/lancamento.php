@@ -83,33 +83,66 @@ $referente = (strlen($_POST['referente'])>'4') ? $_POST['referente']:false;//Atr
 if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 	//Faz o lançamento do débito da tabela lancamento
-	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
-	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
+	$exibideb = '<tr class="warning"><td colspan="4">Debito</td></tr>';
+	$exibicred = '<tr class="warning"><td colspan="4">Credito</td></tr>';
 
 	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
 	$caixaSenhoras = '';
 	//echo $credora->id().'<h1> tste </h>';
+	/*
+	* Se o pgto tiver vencimento de mês anterior ao pgto é feita
+	* a apropriação em contas a pagar no mês de referência e o lançamento tb do
+	* pgto da cta caixa e cta a pagar
+	*/
 	if ($ctaPagar) {
-		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,'529');#devedora a Contas a pagar
-		$contcaixa->atualizar($valor,'D',$roligreja,$vencimento);
+		$ctaPagar = new DBRecord ('contas','2.1.1.001.099','codigo');
+		$contApgtoAprop 	= new atualconta($devedora->codigo(),$ultimolanc+1,$ctaPagar->id());#devedora a Contas a pagar
+		$contApgtoAprop->atualizar($valor,'D',$roligreja,$vencimento);
+
+		$contcaixa = new atualconta($ctaPagar->codigo(),$ultimolanc+1,'');
+		$contcaixa->atualizar($valor,'C',$roligreja,$data);
+
+		//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
+		//$contApgtoAprop->atualizar($valor,'C',$roligreja,$vencimento);
+
 		//Lança o histórico do lançamento
 		$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
-		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$histAPagar,$roligreja);
+		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc+1,$histAPagar,$roligreja);
 		$lanchist = new incluir($InsertHist, 'lanchist');
 		$lanchist->inserir();
 
-		$ultimolanc++;
-		$ctaVencida = ' e vencida em: '.$_POST['vencimento'];
-		$contcaixa 	= new atualconta('2.1.1.001.099',$ultimolanc,$credora->id());
-		$histLac = $referente.$motivoComplemento;
-		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
-	} else {
+
+		$devedora = $ctaPagar;
+		$debitar = 350;
+		//$contApgto 	= new atualconta($ctaPagar->codigo(),$ultimolanc,$credora->id());#devedora a Contas a pagar
+		//$contApgto->atualizar($valor,'C',$roligreja,$data);
+		//$ctaVencida = ' e vencida em: '.$_POST['vencimento'];
+		//$contcaixa 	= new atualconta('2.1.1.001.099',$ultimolanc,$credora->id());
+		//$histLac = $referente.$motivoComplemento;
+		//$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
+
+		//$exibideb .= sprintf("<tr class='odd' ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+		//$credora->codigo(),$credora->titulo(),number_format($vlor,2,',','.'),number_format($credora->saldo(),2,',','.'),$credora->tipo());
+
+		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+		$ctaPagar->codigo(),$ctaPagar->titulo(),number_format($valor,2,',','.'),number_format($ctaPagar->saldo(),2,',','.'),$ctaPagar->tipo());
+		$totalCred +=$valor;
+		$corlinha = !$corlinha;
+		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+		$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+				$ctaPagar->codigo(),$ctaPagar->titulo(),number_format($valor,2,',','.'),
+				number_format($ctaPagar->saldo(),2,',','.'),$ctaPagar->tipo());
+		$totalDeb +=$valor;
+
+	}
+
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$histLac = $referente.$motivoComplemento;
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$ctaVencida = '';
-	}
+
 
 		$valorTotal += $valor;
 //print_r($credora);
@@ -126,8 +159,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 		}
 
-		//Exibi lançamento
-
+	//Exibi lançamento
 	//Faz lançameto de multa caso exista
 	if ($ctaMulta) {
 		$multaAtraso = new atualconta($ctaMulta->codigo(),$ultimolanc,$credora->id());
@@ -148,14 +180,15 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
 		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
 		$histTextProv =' e provisão para SEMAD sobre a receita ';
+
+		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+		$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
+		$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+				$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),
+				number_format($conta->saldo(),2,',','.'),$conta->tipo());
+		$totalDeb += $provmissoes;
+		$corlinha = !$corlinha;
    	}
-	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
-	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),
-			number_format($conta->saldo(),2,',','.'),$conta->tipo());
-	$totalDeb += $provmissoes;
-	$corlinha = !$corlinha;
 
 	$provcomad = new atualconta('3.1.1.001.007',$ultimolanc,'10');//Convenção estadual COMADEP
 	if ($provcomadep>0) {
@@ -167,19 +200,19 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 			$histTextProv = ' e provisão para COMADEP sobre a receita ';
 		}
 
+		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+		$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
+		$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
+						</td><td id='moeda'>%s&nbsp;%s</td></tr>",$conta->codigo(),$conta->titulo()
+						,number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+		$corlinha = !$corlinha;
 	}
-	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
-	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
-					</td><td id='moeda'>%s&nbsp;%s</td></tr>",$conta->codigo(),$conta->titulo()
-					,number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
-	$corlinha = !$corlinha;
-	$exibideb .= sprintf("<tr class='total'><td>Total debitado</td><td id='moeda'>R$ %s</td><td></td><td></td></tr>",number_format($totalDeb,2,',','.'));
+	$exibideb .= sprintf("<tr  class='primary'><td>Total debitado</td><td id='moeda'>R$ %s</td><td></td><td></td></tr>",number_format($totalDeb,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php
 
 	//Faz o leiaute do lançamento do crédito da tabela lancamento
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc,'');
-		$contcaixa->atualizar($valor+$multa,'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($multa+$valor,'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$creditar,'acesso');//Exibi lançamento
@@ -196,29 +229,29 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$provsemad->atualizar($provmissoes,'C',$roligreja,$data);
 		$totalCred += $provmissoes;
 		$lancprovmissoes=true;
+
+		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+		$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
+		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+		$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+		$corlinha 	= !$corlinha;
 	}
 
-	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
-	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-	$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
-	$corlinha 	= !$corlinha;
 
 	if ($provcomadep>0) {
 		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc); //Faz o lançamento da provisão de Comadep - Ativo
 		$provcomad->atualizar($provcomadep,'C',$roligreja,$data);//Faz o lançamento da provisão da COMADEP - Ativo
 		$lancprovmissoes=true;
+
+		$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
+		$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
+		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
+		$conta->codigo(),$conta->titulo(),number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+		$totalCred 	+= $provcomadep;
 	}
 
-	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
-	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-	$conta->codigo(),$conta->titulo(),number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
-	$totalCred 	= $totalCred + $provcomadep;
-
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
-	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
-
+	$exibicred .= sprintf("<tr class='primary'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
 
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
 	//inserir o histórico do lançamento das provisões na tabela lanchist

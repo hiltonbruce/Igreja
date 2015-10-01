@@ -47,7 +47,7 @@
 		</tfoot>
 	</table>
 	<?php
-				echo $grupoFora.'<br />';
-				echo $sldFora.' *** ';
+				//echo $grupoFora.'<br />';
+				//echo $sldFora.' *** ';
 		echo $imprimir;
 	?>

@@ -51,7 +51,6 @@ switch ($debitar) {
 	 					$caixa->titulo(),number_format($caixaMocidade,2,',','.'),
 	 					number_format($caixa->saldo(),2,',','.'),$devedora->tipo());
 	break;
-	
 	default:
 		$caixaOutros +=$valor;
  		$corOutros = (empty($corOutros)) ? $cor : $corOutros;
@@ -61,5 +60,4 @@ switch ($debitar) {
 				number_format($caixa->saldo(),2,',','.'),$devedora->tipo());
 	break;
 }
-
 $corlinha = !$corlinha;

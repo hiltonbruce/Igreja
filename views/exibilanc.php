@@ -1,4 +1,4 @@
-<table class="table-hover">
+<table class="table table-hover table-condensed table-striped">
 		<caption>Lançamento Concluído</caption>
 
 			<colgroup>
