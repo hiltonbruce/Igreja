@@ -35,16 +35,17 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$ofe = 'ofertaEnsino'."$cont$ano";$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
 
+		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		//Soma da coluna para linha Sub-total das congregações Sem a Sede
 		if ($cont!='1') {
 		$totDizAno  += $$dz;$totOfertaExtraAno  += $$ofExtra;$totOfertaAno  += $$of;
 		$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;$totMocidadeAno  += $$ofmoc;
 		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
+		$totSubTotalAno +=$subTotal;
 		}
 
 		//Soma linha
 		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
-		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		$totSubTotal +=$subTotal;
 		$totTotal += $totMes;
 
