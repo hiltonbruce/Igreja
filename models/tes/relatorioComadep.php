@@ -70,7 +70,7 @@ print_r($dataLancCred);
 */
 //print_r($saldo);
 foreach ($saldo AS $chave => $valor){
-		$bgcolor = ($cor) ? 'class="dados"' : 'class="odd"';
+		$bgcolor = 'class="dados"';
 		//$acesso = sprintf("[%04s]\n", $planoCta[$chave]['1']);
 		$acesso = '';
 		$vlrSaldo = abs($saldo[$chave]);
@@ -122,10 +122,9 @@ foreach ($saldo AS $chave => $valor){
 				$movSld = ($grupoAtualForm>'0') ? 'D' : 'C' ;
 				$saldoAtl = ($sldGrupoCta>'0') ? 'D' : 'C' ;
 				$saldoAntr = ($sldGrupoCta>'0') ? 'D' : 'C' ;
-				$bgcolorGrp = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
-				$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
+				$nivelGrupo ='<tr class="info"><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
 					.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format(abs($sldGrupoCta),2,',','.').$movSld
-					./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($grupoAtualForm),2,',','.').$saldoAtl.'</td>
+					./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td>
 					<td id="moeda">'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
 				if ($nivel2=='') {
 					$nivel2 .=$nivelGrupo.$nivel1;
@@ -137,21 +136,14 @@ foreach ($saldo AS $chave => $valor){
 
 				$saldoAtual=0;
 
-				if ($cor==false) {
-					$cor = !$cor;
-					$bgcolor = ($cor) ? 'class="dados"' : 'class="odd"';
-				}
-
 				//Contas simples
 				$nivel1 ='<tr '.$bgcolor.'><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
 				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 			}
 
-			$sldGrupoCta = abs($sldGrupo [$planoGrupo[$chave]['3']]);
+			$sldGrupoCta = $sldGrupo [$planoGrupo[$chave]['3']];
 			$sldGrupoCtaDisp = $sldGrupoDisp [$planoGrupo[$chave]['3']];
 			$sldGrupoAtual = $sldGrupoCtaDisp+$sldGrupoCta;
-
-			$cor = !$cor;
 
 		$ctaAtual = $planoGrupo[$chave]['3'];
 		//print_r ($sldGrupo);
@@ -173,22 +165,21 @@ if ($teste) {
 	}
 }
 
-
-
 //Testar pq não está entrando no loop
 //Exibe a última passagem das contas e finaliza os dados da tabela
 //Esta acresntando na ultima passagem, no final do relatorio e repetindo o grupo, as contas fora do grupos qdo elas tem saldo após o loop
 //Rever para agrupar dentro de seu grupo
 if ($nivelGrupo=='') {
-	$bgcolorGrp = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;""';
-	$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
-				'.number_format(abs($sldGrupoCta),2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td id="moeda"> '.$grupoAtualForm.'</td><td id="moeda">
-				'.number_format(abs($sldGrupoCtaDisp),2,',','.').$planoGrupo[$ctaAtual]['2'].'</td></tr>';
-
+	$saldoCta = ($sldGrupoCta>0) ? 'D' : 'C' ;
+	$saldoAtl = ($sldGrupoAtual>0) ? 'D' : 'C' ;
+	$saldoCtaDisp = ($sldGrupoCtaDisp>0) ? 'D' : 'C' ;
+	$nivelGrupo ='<tr class="info"><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
+				'.number_format(abs($sldGrupoCta),2,',','.').$saldoCta.'</td><td id="moeda"> '
+				.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td><td id="moeda">
+				'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoCtaDisp.'</td></tr>';
 	$nivel2 .=$nivelGrupo.$nivel1;
 }
 
 $nivel1=$nivel2;
-
 echo $grupoFora;
 ?>
