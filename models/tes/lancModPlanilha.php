@@ -36,7 +36,7 @@ if ($msgErro=='') {
 
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$histLac = $referente;
-		$contcaixa->atualizar($valor,'D',$rolIgreja,$histLac,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($valor,'D',$rolIgreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$valorTotal += $valor;
 //print_r($credora);
 
@@ -50,7 +50,7 @@ if ($msgErro=='') {
 
 	//Faz o leiaute do lançamento do crédito da tabela lancamento
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc,'');
-		$contcaixa->atualizar($valor,'C',$rolIgreja,$histLac,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($valor,'C',$rolIgreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$creditar,'acesso');//Exibi lançamento
