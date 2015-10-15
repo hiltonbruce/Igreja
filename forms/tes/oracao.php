@@ -9,7 +9,7 @@
     }
 ?>
 <fieldset>
-<legend>Circulos de Ora&ccedil;&otilde;es</legend>
+<legend>Circulos de Ora&ccedil;&otilde;es - ADULTOS</legend>
 <form id="form1" name="form1" method="post" action="">
 	<?php
 		for ($i=1; $i < 6; $i++) {
@@ -49,6 +49,7 @@
 		<input type="submit"  class="btn btn-primary"name="Submit" value="Lan&ccedil;ar..."
 		tabindex='<?PHP echo ++$ind; ?>'/>
 	  	<input name="escolha" type="hidden" value="views/oracao.php" />
+	  	<input name="igreja" type="hidden" value='<?php echo $roligreja;?>' />
 	  </div>
 	</div>
 </form>

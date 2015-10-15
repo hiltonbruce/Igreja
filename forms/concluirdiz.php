@@ -1,6 +1,13 @@
 <?php
-//Calculado a data do proximo lancamento caso não seja passsado
 $roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
+if (!empty($_GET['igreja'])) {
+	$roligreja = $_GET['igreja'];
+} elseif (!empty($_POST['igreja'])) {
+	$roligreja = $_POST['igreja'];
+}else {
+	$roligreja = '';
+}
+//Calculado a data do proximo lancamento caso não seja passsado
 /**/
 if (!empty($_GET['data'])) {
 	$dtlanc = $_GET['data'];

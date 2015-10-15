@@ -106,8 +106,8 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoCargos.php';
 		break;
 	case '24':
-		require_once ('forms/tes/oracao.php');
 		require_once 'forms/concluirdiz.php';
+		require_once ('forms/tes/oracao.php');
 		break;
 	default:
 		require_once ('forms/tes/busca.php');
