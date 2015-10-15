@@ -1,4 +1,5 @@
 <?PHP
+/*
 #link de exemplo da migração: ?escolha=models/migraLancamento.php&menu=top_tesouraria&anomes=201501
 #confirma se há alguma inconsistência nos lançamentos
 $anoMes = intval($_GET['anomes']);
@@ -16,7 +17,7 @@ while ($contas = mysql_fetch_array($lista)) {
    //$Atualizacao = mysql_query('UPDATE lanc SET debitar = "'.$contas['conta'].'" WHERE valor = "'.$contas['valor'].'" AND lancamento="'.$contas['lancamento'].'"');
    /*print_r($contas);*/
 }
-
+/*
 $queryLanc  = 'SELECT l.*, h.referente FROM lancamento AS l, lanchist AS h';
 $queryLanc .= ' WHERE DATE_FORMAT(l.data,"%Y%m") = "'.$anoMes.'" AND';
 $queryLanc .= ' l.lancamento=h.idlanca AND l.valor>0 AND d_c ="D"';
@@ -30,4 +31,5 @@ while ($contas = mysql_fetch_array($lista)) {
   $Atualizacao = mysql_query('UPDATE lanc SET debitar = "'.$contas['conta'].'" WHERE valor = "'.$contas['valor'].'" AND lancamento="'.$contas['lancamento'].'"');
    /*print_r($contas);*/
 }
+
 ?>

@@ -13,7 +13,10 @@
 	  <a <?PHP $b=link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3">
 	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Esc. Bíblica</button></a>
 	</div>
-
+	 <div class="btn-group">
+	  <a <?PHP $b=link_ativo($_GET["rec"], "24"); ?> href="<?php echo $linkLancamento;?>&rec=24">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Circ. Ora&ccedil;&atilde;o</button></a>
+	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">
 	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Resumo</button></a>
