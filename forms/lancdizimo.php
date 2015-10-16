@@ -8,14 +8,13 @@ $lanigreja = new DBRecord('igreja',$roligreja, 'rol' );
 $exibir = new lancdizimo($roligreja);
 //Faz o leiaute do lançamento do débito da tabela dizimooferta
 $exibirlanc = '';
-$tablanc = mysql_query('SELECT SUM(valor) AS valor,devedora FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora');
+$tablanc = mysql_query('SELECT SUM(valor) AS valor,devedora,data FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora');
 $totDebito = mysql_num_rows($tablanc);
 while ($tablancarr = mysql_fetch_array($tablanc)) {
 	$lanc  = $exibir->lancamacesso ($tablancarr['valor'],$tablancarr['devedora'],'D');
 	$exibirlanc .= $lanc['0'];
-
+	$dataLc = $tablancarr['data'];
 }
-
 //Faz o leiaute do lançamento do crédito da tabela dizimooferta
 $tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
 $totCredito = mysql_num_rows($tablanc_c);
@@ -32,7 +31,7 @@ require_once 'views/lancdizimo.php';//chama o view para montar
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;
-	$dtlanc = (empty($_POST['dataLancamento']) ) ? date('d/m/Y'):$_POST['dataLancamento'];
+	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br ($dataLc):$_POST['dataLancamento'];
 	?>
 <form method="post" action="">
 		<label>Hist&oacute;rico do lan&ccedil;amento:</label> <input
@@ -55,8 +54,8 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 		type="hidden" value="1" /> <input name="igreja" type="hidden"
 		value="<?php echo $roligreja;?>" />
 </form>
-
-	<?php
+<?php
+	//echo '<h1> ***'.$dataLc.'</h1>';
 }elseif ($totDebito<1 && $totCredito<1) {
 	echo '<h3>Essa Igreja não possui lançamento a realizar!</h3>';
 }else {

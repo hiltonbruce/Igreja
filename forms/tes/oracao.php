@@ -48,7 +48,7 @@
 	  <div class="col-xs-3">
 		<input type="submit"  class="btn btn-primary"name="Submit" value="Lan&ccedil;ar..."
 		tabindex='<?PHP echo ++$ind; ?>'/>
-	  	<input name="escolha" type="hidden" value="views/oracao.php" />
+	  	<input name="escolha" type="hidden" value="views/tesouraria/oracao.php" />
 	  	<input name="igreja" type="hidden" value='<?php echo $roligreja;?>' />
 	  </div>
 	</div>

@@ -19,12 +19,27 @@ function br_data ($dt,$cmp){
 			list ($d,$m,$y) = explode('/',$dt);
 			$res = checkdate($m,$d,$y);
 			if ($res == 1 || $dt=="00/00/0000"){
-				$dta="$y-$m-$d";
-				return "$dta";
+				return $y.'-'.$m.'-'.$d;
 			}else{
 				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
 				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
 				exit;
+			}
+}
+
+function condatabrus ($dt,$cmp){
+	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd
+	//em caso de erro é informado o campo $cmp e retorna false
+
+			list ($d,$m,$y) = explode('/',$dt);
+			$res = checkdate($m,$d,$y);
+			if ($res == 1){
+				$dta="$y-$m-$d";
+				return $dta;
+			}else{
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp');</script>";
+				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
+				return false;
 			}
 }
 

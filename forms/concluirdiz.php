@@ -14,7 +14,7 @@ if (!empty($_GET['data'])) {
 } elseif(!empty($_POST['data'])) {
 	$dtlanc = $_POST['data'];
 }else {
-	$dtlanc = '';
+	$dtlanca = '';
 }
 if (!empty($_GET['menu'])) {
         $rec = $_GET['rec'];
@@ -37,6 +37,7 @@ if ($dtlanc == '') {
 	$meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
 	$anolanc = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 }
+
 if (empty($idIgreja)) {
 	$idIgreja = $rolIgreja;
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
@@ -55,7 +56,7 @@ if (empty($idIgreja)) {
 				<form method="post" action="">
 					<input name="escolha" type="hidden" value="<?php echo $_GET['escolha'];?>" />
 					<input name="concluir" type="hidden" value="1" />
-					<input name="dataLancamento" type="hidden" value="<?php echo $dtlanc;?>" />
+					<input name="dataLancamento" type="hidden" value="<?php echo $dtlanca;?>" />
 					<input name="rolIgreja" type="hidden" value="<?php echo $igrejaSelecionada->rol();?>" />
 					<label>Igreja:
 					<?php
