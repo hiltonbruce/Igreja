@@ -14,7 +14,7 @@ if (!empty($_GET['data'])) {
 } elseif(!empty($_POST['data'])) {
 	$dtlanc = $_POST['data'];
 }else {
-	$dtlanca = '';
+	$dtlanc = '';
 }
 if (!empty($_GET['menu'])) {
         $rec = $_GET['rec'];
