@@ -38,7 +38,7 @@ class tes_despesas {
 		$sqlAgenda .= ', contas AS c, igreja AS i ';
 		$sqlAgenda .= 'WHERE (DATE_FORMAT(a.datapgto,"%Y%m")="'.$mesRelatorio.'" ';
 		$sqlAgenda .= 'OR (DATE_FORMAT(a.vencimento,"%Y%m")="'.$mesRelatorio.'" AND a.idlanc="0") ) ';
-		$sqlAgenda .= 'AND a.igreja=i.rol AND c.acesso=a.debitar ORDER BY i.razao';
+		$sqlAgenda .= 'AND a.igreja=i.rol AND c.acesso=a.debitar ORDER BY a.vencimento,i.razao';
 		$agenda = mysql_query($sqlAgenda) or die (mysql_error());
 		while ($arrayAgenda = mysql_fetch_array($agenda)) {
 			if ($arrayAgenda['idlanc']>0) {
@@ -60,7 +60,7 @@ class tes_despesas {
 				,'dtpgto'=>$arrayAgenda['dtpgto'],'vencimento'=>$arrayAgenda['venc']);
 			}
 		}
-		//int_r($agendaNaoPago);
+		//print_r($agendaNaoPago);
 		//SQL dos lançamentos realizados
 		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, h.referente AS referente, ';
 		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
