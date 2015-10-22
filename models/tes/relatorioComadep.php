@@ -1,12 +1,14 @@
 <?php
-$nivel1 	= '';$nivel2 	= '';
-$planoCta=array();$cor=true;$sldGrupo=array();
+$nivel1 	= '';$nivel2 	= '';$nivel3 	= '';
+$planoCta=array();$cor=true;$sldGrupo=array();$sldNivel3 = array();
 
 #Monta array com informações das contas atualmente
 $plano = mysql_query('SELECT * FROM contas ORDER BY codigo ');
 while ($cta = mysql_fetch_array($plano)) {
-	$planoCta[$cta['id']]=array($cta['titulo'],$cta['acesso'],$cta['codigo'],$cta['tipo'],$cta['nivel4']);
-	$planoGrupo[$cta['codigo']]=array($cta['titulo'],$cta['codigo'],$cta['tipo'],$cta['nivel4']);
+	$planoCta[$cta['id']]=array($cta['titulo'],$cta['acesso'],$cta['codigo'],$cta['tipo'],
+		$cta['nivel4'],$cta['nivel3']);
+	$planoGrupo[$cta['codigo']]=array($cta['titulo'],$cta['codigo'],$cta['tipo'],$cta['nivel4'],
+		$cta['nivel3']);
 }
 //print_r($planoCta);
 //Busca do movimento no mês
@@ -105,7 +107,7 @@ foreach ($saldo AS $chave => $valor){
 				$vlrSaldoAtual .= 'D';
 			}
 
-		$grupoAtualForm = number_format(abs($sldGrupoAtual),2,',','.');
+	//	$grupoAtualForm = number_format(abs($sldGrupoAtual),2,',','.');
 		if ($sldGrupoAtual<0) {
 				$grupoAtualForm .= 'C';
 			}else {
@@ -118,51 +120,86 @@ foreach ($saldo AS $chave => $valor){
 				$nivel1 .='<tr '.$bgcolor.'><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
 				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 			}else {
+
+				//Contas Nivel 3
+				$sldNivel3Atual[$sldGrupoN3] += $sldGrupoAtual;//Sld atual grupo nível 3
+				$sldNivel3Ant[$sldGrupoN3] += $sldGrupoCtaDisp;//Sld anterior grupo nível 3
+				$sldNivel3Mov[$sldGrupoN3] += $sldGrupoCta;//Sld do movimento grupo nível 3
+				//echo ' - Conta -> '.$planoGrupo[$sldGrupoN3]['3'].'-'.$planoGrupo[$sldGrupoN3]['0'].' - '.$sldNivel3Atual[$sldGrupoN3];
+				$n3Grupo ='<tr class="info"><td>'.$sldGrupoN3.'</td><td title="'.$title.'">'
+					.$planoGrupo[$sldGrupoN3]['0'].'</td><td id="moeda">'.number_format(abs($sldGrupoCta),2,',','.').$movSld
+					./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td>
+					<td id="moeda">'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
+
 				//Grupo de contas
 				$movSld = ($grupoAtualForm>'0') ? 'D' : 'C' ;
 				$saldoAtl = ($sldGrupoCta>'0') ? 'D' : 'C' ;
 				$saldoAntr = ($sldGrupoCta>'0') ? 'D' : 'C' ;
-				$nivelGrupo ='<tr class="info"><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
+				$nivelGrupo ='<tr class="active"><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
 					.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format(abs($sldGrupoCta),2,',','.').$movSld
 					./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td>
 					<td id="moeda">'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
-				if ($nivel2=='') {
-					$nivel2 .=$nivelGrupo.$nivel1;
+				if ($nivel3=='') {
+					$nivel2 .= $n3Grupo.$nivelGrupo.$nivel1;
+					$nivelTipo .= $n3Grupo.$nivelGrupo; //Sem nível de codigo
+					$nivel3 = $sldGrupoN3;
+				}elseif ($nivel3 != $sldGrupoN3) {
+					$nivel2 .= $n3Grupo.$nivelGrupo.$nivel1;
+					$nivelTipo .= $n3Grupo.$nivelGrupo;//Sem nível de codigo
+					$nivel3 = $sldGrupoN3;
+				}elseif ($nivel2=='') {
+					$nivel2 .= $nivelGrupo.$nivel1;
+					$nivelTipo .= $nivelGrupo;//Sem nível de codigo
 				}else {
-					$nivelGrupo = $nivel2.$nivelGrupo.$nivel1;
-					$nivel2 = $nivelGrupo;
+					$nivel2 = $nivel2.$nivelGrupo.$nivel1;
+					//$nivel2 = $nivelGrupo;
+					$nivelTipo .= $nivelGrupo;//Sem nível de codigo
 					$nivelGrupo ='';
 				}
 
 				$saldoAtual=0;
-
 				//Contas simples
 				$nivel1 ='<tr '.$bgcolor.'><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
 				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
+
 			}
 
-			$sldGrupoCta = $sldGrupo [$planoGrupo[$chave]['3']];
-			$sldGrupoCtaDisp = $sldGrupoDisp [$planoGrupo[$chave]['3']];
-			$sldGrupoAtual = $sldGrupoCtaDisp+$sldGrupoCta;
+		$sldGrupoCta = $sldGrupo [$planoGrupo[$chave]['3']];
+		$sldGrupoCtaDisp = $sldGrupoDisp [$planoGrupo[$chave]['3']];
+		$sldGrupoAtual = $sldGrupoCtaDisp+$sldGrupoCta;//Sld atual grupo nível 4
+
+		$sldGrupoN3 = $planoGrupo[$chave]['4'];//Conta de nível 3
 
 		$ctaAtual = $planoGrupo[$chave]['3'];
-		//print_r ($sldGrupo);
-			//echo ' - Conta -> '.$planoCta[$chave]['2'];
+
 }
 
+/*
+echo ' <br /><br /><br /> ';
+print_r ($sldNivel3Atual);
+echo ' <br /><br /><br /> ';
+print_r ($sldNivel3Ant);
+echo ' <br /><br /><br /> ';
+print_r ($sldNivel3Mov);
+echo ' <br /><br /><br /> '.$sldNivel3Atual['1.1.1'];
+*/
 if ($teste) {
 	//Grupo de contas
 	$bgcolorGrp = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
 	$nivelGrupo ='<tr '.$bgcolorGrp.'><td>'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
 	'.number_format($sldGrupoCta,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td><td id="moeda">'.$grupoAtualForm.'</td>
 	<td id="moeda">'.number_format($sldGrupoCtaDisp,2,',','.').$planoGrupo[$ctaAtual]['2'].'</td></tr>';
+
+	$nivelTipo .=$nivelGrupo;
+
 	if ($nivel2=='') {
 		$nivel2 .=$nivelGrupo.$nivel1;
 	}else {
-		$nivelGrupo = $nivel2.$nivelGrupo.$nivel1;
-		$nivel2 = $nivelGrupo;
+		$nivel2 = $nivel2.$nivelGrupo.$nivel1;
+		//$nivel2 = $nivelGrupo;
 		$nivelGrupo ='';
 	}
+
 }
 
 //Testar pq não está entrando no loop
@@ -178,8 +215,9 @@ if ($nivelGrupo=='') {
 				.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td><td id="moeda">
 				'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoCtaDisp.'</td></tr>';
 	$nivel2 .=$nivelGrupo.$nivel1;
+	$nivelTipo .=$nivelGrupo;//Sem nível de codigo
 }
 
-$nivel1=$nivel2;
-echo $grupoFora;
+$nivel1=$nivelTipo;//Para opção de exibir contas sem código de acesso (código completo)
+//echo $grupoFora;
 ?>
