@@ -35,12 +35,11 @@ switch ($_GET['rec']) {
 		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informações da consulta
 		$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-		$titTabela = 'Fluxo das Contas - '.$dtRelatorio.'<h3>'.$congRelatorio.'<h3>';
 		require_once '../models/tes/relatorioComadep.php';
 		$nomeArquivo='../views/saldosComadep.php';
+		$titTabela = $congRelatorio.' &bull; Fluxo das Contas - '.$dtRelatorio;
 		require_once '../views/modeloPrint.php';
 		break;
-
 	default:
 		//imprimir plano de contas
 		$titTabela = 'Plano de Contas em: '.date('d/m/Y');

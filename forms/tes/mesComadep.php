@@ -22,6 +22,15 @@
 								 }
 						      }
 						      echo $linha1.$linha2;
+
+						      //Marca a opção atual para lista Com e Sem o nível mais baixo
+						      if ($_GET['tipo']=='1') {
+						      	$Completo = '';
+						      	$Simples = 'active';
+						      }elseif ($_GET['tipo']=='2') {
+						      	$Simples = '';
+						      	$Completo = 'active';
+						      }
 					      ?>
 				      </select>
 				</td>
@@ -31,7 +40,17 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td>
+					<div class="btn-group" data-toggle="buttons">
+					  <label class="btn btn-primary <?php echo $Simples;?>">
+					    <input type="radio" name="tipo" value='1' > Simples
+					  </label>
+					  <label class="btn btn-primary <?php echo $Completo;?>">
+					    <input type="radio" name="tipo" value='2' > Completo
+					  </label>
+				  </div>
+				</td>
+				<td>
 					<label>Congrega&ccedil;&atilde;o:</label>
 					<?php
 						$bsccredor = new List_sele('igreja', 'razao', 'igreja');
@@ -40,21 +59,13 @@
 					?>
 				</td>
 				<td>
-
-  <div class="form-inline">
-  <div class="form-group">
-				  <div class="checkbox">
-				    <label>
-				      <input type="checkbox" name='tipo' value='1'> Só com Grupos
-				    </label>
-				  </div> </div>
-  <div class="form-group">
+				  <div class="form-group">
 					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
 					<input type="hidden" name="rec"	value="6" />
 					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 					tabindex="<?PHP echo ++$ind; ?>" />
 					<input name="menu" type="hidden" value="top_tesouraria" />
-				  </div> </div>
+				  </div>
 				</td>
                </tr>
 		</tbody>

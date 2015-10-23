@@ -1,4 +1,4 @@
-<table class='table table-hover table-bordered'>
+<table class='table table-hover table-bordered table-condensed'>
 		<caption>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
@@ -24,8 +24,8 @@
 				<th scope="col">Conta</th>
 				<th scope="col">Descri&ccedil;&atilde;o</th>
 				<th scope="col" style="text-align: center;">Movimento</th>
-				<th scope="col" style="text-align: center;">Saldo Atual</th>
-				<th scope="col" style="text-align: center;">Saldo Anterior</th>
+				<th scope="col" style="text-align: center;">Sld Atual</th>
+				<th scope="col" style="text-align: center;">Sld Ant.</th>
 			</tr>
 		</thead>
 		<tbody>
