@@ -14,6 +14,9 @@ while ($cta = mysql_fetch_array($plano)) {
 //Busca do movimento no mês
 $queryLanc  = 'SELECT l.*,DATE_FORMAT(l.data,"%Y%m") AS dt FROM lanc AS l';
 $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"';
+if ($idIgreja>'0') {
+$queryLanc .= ' AND igreja="'.$idIgreja.'"';
+}
 //$queryLanc .= ' AND c.id=l.creditar';
 //$queryLanc .= ' ORDER BY ';
 $lista = mysql_query($queryLanc) or die(mysql_error());
