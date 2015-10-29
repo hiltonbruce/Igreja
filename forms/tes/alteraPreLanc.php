@@ -2,7 +2,7 @@
 <!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
 <?PHP
 	$lancAltera = new DBRecord('dizimooferta',$_GET['id'],'id');
-
+	$ctaDev = $lancAltera->devedora();//Conta devedora
 	if ($lancAltera->lancamento()=='0' || $_SESSION['nivel']>'10') {
 
 		$contaAtivas = new tes_conta();
@@ -16,28 +16,28 @@
 
 				switch ($n1.$n2.$n3.$n4) {
 					case '411001':
-						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411002':
-						$optionTipo .= '<option value="'.$ctaAcesso.',3,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411003':
-						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411004':
-						$optionTipo .= '<option value="'.$ctaAcesso.',4,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411005':
-						$optionTipo .= '<option value="'.$ctaAcesso.',8,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411006':
-						$optionTipo .= '<option value="'.$ctaAcesso.',5,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '412001':
-						$optionTipo .= '<option value="'.$ctaAcesso.',2,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					default:
-						$optionTipo .= '<option value="'.$ctaAcesso.',1,2">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',2">'.$ctaArray['titulo'].'</option>';
 						break;
 				}
 			}

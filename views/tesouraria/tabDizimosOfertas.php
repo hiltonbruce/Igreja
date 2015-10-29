@@ -59,17 +59,17 @@ $tabMembros = new membro();
 			$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 			$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 			$linkResumo .= '&credito='.$_GET['credito'];
+			$linkResumo .= '&debito='.$_GET['debito'];
 
 			echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 			echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 			echo '</span>&nbsp;&nbsp;&nbsp;Imprimir a tabela abaixo...</button> </a>';
 		}
 ?>
-<table class='table'>
+<table class='table table-striped'>
 		<caption class="text-left">
 			<?php
 			$dirigenteIgreja = $igrejaSelecionada->pastor();
-
 
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
@@ -139,14 +139,12 @@ $tabMembros = new membro();
 			</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">Data</th>
 				<th scope="col">Assinatura</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td rowspan="4">&nbsp;</td>
-				<td width="85%">&nbsp;</td>
+				<td width="100%">&nbsp;</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -159,7 +157,8 @@ $tabMembros = new membro();
 			</tr>
 		</tbody>
 		<tfoot>
-		<tr id='total'><td colspan="5"></td>
+		<tr>
+				<th scope="col">Data: </th>
 		</tr>
 		</tfoot>
 	</table>

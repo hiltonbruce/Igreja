@@ -161,3 +161,14 @@ legend {
 .table-bordered {
 	border-bottom: 2px solid #000;
 }
+#total {
+	background-color:#000;
+	font-weight:bold;
+	color:#FFF;
+	font-size: 130%;
+}
+
+#subtotal {
+	background-color:#1485CC;
+	color:#FFFFFF;
+}

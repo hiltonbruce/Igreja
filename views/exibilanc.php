@@ -1,4 +1,4 @@
-<table class="table table-hover table-condensed table-striped">
+<table class="table table-hover table-condensed table-striped table-bordered">
 		<caption>Lançamento Concluído</caption>
 
 			<colgroup>
@@ -24,4 +24,9 @@
 				?>
 			</tr>
 		</tbody>
+		<tfoot>
+			<?php
+				echo $exibiRodape;
+			?>
+		</tfoot>
 	</table>

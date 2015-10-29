@@ -110,7 +110,7 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 		}
 
 		$total = 0;
-		$tabela = '<tbody id="periodo">';
+		$tabela = '';
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 
@@ -166,14 +166,14 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 			}
 
 			$tabela .= '<tr '.$bgcolor.'><td>'.$linha['data'].'</td>
-				<td>'.$linkMembro.'</td><td>'.$tipo.'</td><td
-				 id="moeda">'.$corrigir.'</td>
+				<td>'.$linkMembro.'</td><td>'.$tipo.'</td>
+				<td id="moeda">'.$corrigir.'</td>
 				 		<td class="text-center">'.$linha['razao'].'</td></tr>';
 						$total += $linha['valor'];
 			$cor = !$cor;
 		}
 		$total = number_format($total,2,',','.');
-		$tabela .=  '</tbody>';
+		$tabela .=  '';
 		if ($total==0) {
 		$tabela .=  '<tfoot><tr id="total"><td colspan="5">Não há lançamentos para esta busca ou pendentes!</td></tr></tfoot>';
 		}else {
@@ -312,7 +312,7 @@ function concluir($igreja) {
 			}
 			$totaltes += $vlr;
 
-			$tabLancamento .= '<tr '.$bgcolor.'><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
+			$tabLancamento .= '<tr><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			$total += $linha['valor'];
 			$cor = !$cor;
 		}

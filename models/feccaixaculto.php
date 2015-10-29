@@ -45,10 +45,12 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$valorTotal += $valor;
 
-		if ($tablancarr['devedora']=='2'&& $tablancarr['tipo']!='9') {
+		//Para nivel2='4.2'(Receitas não Operacionais) não há provisão para COMADEP ou Missões
+		if ($tablancarr['devedora']=='2' && $credora->nivel2()!='4.2') {
+			//provisão para fundo de Missões de 40%
 			$provmissoes += round(($valor*0.4),2);
-		}elseif ($tablancarr['tipo']!='9') {
-			//Para tipo 9 não há provisão para COMADEP ou Missões
+		}elseif ($credora->nivel2()!='4.2') {
+			//provisão para Convenção de 10%
 			$provcomadep += round(($valor*0.1),2);
 		}
 		//Exibi lançamento
@@ -154,7 +156,8 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$HistProv = sprintf("'','%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');
 	$lanchist->inserir();
-
+	//$_POST['data']
+	$exibiRodape .= '<tr class="success"><td colspan="4">Data: '.$_POST['data'].'</td></tr>';;//Rodapé lo lançamento
 	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 
 }else {
