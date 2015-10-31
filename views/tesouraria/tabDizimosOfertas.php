@@ -139,26 +139,31 @@ $tabMembros = new membro();
 			</colgroup>
 		<thead>
 			<tr>
+				<th scope="col">Nome Leg&eacute;vel</th>
 				<th scope="col">Assinatura</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td width="100%">&nbsp;</td>
+				<td width="30%">&nbsp;</td>
+				<td width="700%">&nbsp;</td>
 			</tr>
 			<tr>
+				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 		</tbody>
 		<tfoot>
 		<tr>
-				<th scope="col">Data: </th>
+				<th scope="col" colspan='2'>Data: </th>
 		</tr>
 		</tfoot>
 	</table>
