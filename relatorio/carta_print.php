@@ -140,29 +140,27 @@
 		<?php
 			if ($carta->obs()!='') {
 				?>
-					 <fieldset>
-						<legend>Observa&ccedil;&otilde;es:</legend>
-						<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?PHP echo $carta->obs(); ?></p>
-					 </fieldset>
+						<span class='text-left'><strong>Obs.:</strong>
+						<em> &nbsp;<?PHP echo $carta->obs(); ?></em></span>
 				<?php
 			}else {
 
-				echo '<br /><br />';
+				echo '<br />';
 			}
 		?>
 
-    </div><br />
-
     <div id="data">
-        <h4><?PHP echo $origem.' - '.$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h4></div>
-        <br /><br /><br />
+        <h4><?PHP echo $origem.' - '.$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h4>
+    </div>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
 	  <div id="secretario"><?PHP echo  strtoupper($dadosCargo['7']['1'][$_POST["secretario"]]['nome']);?><br />
       <?php echo $_POST["secretario"].'&ordm; '.$dadosCargo['7']['1']['1']['nomeFunc'];?> </div>
-<br><br><br><br><br><br>
+<br>
+
+    </div>
 	<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
 	  <div id="vencimento">Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
         <?PHP
@@ -170,11 +168,11 @@
 		?> (validade)
 	  </div>
 
-    <div id="footer"><p class="text-center">
+    <div id="footer"><span class="text-center">
                         <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?>
                           <?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
                           Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> -
-                          Email: <?PHP echo "{$igreja->email()}";?></p>
+                          Email: <?PHP echo "{$igreja->email()}";?></span>
                          <p class="text-right"><small>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">
                             Joseilton Costa Bruce.</a></small></p>
     </div>
