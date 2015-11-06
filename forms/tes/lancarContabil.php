@@ -1,3 +1,7 @@
+<?php
+	$acessoDebitar = (!empty($_GET['deb'] && $_GET['deb']>0)) ? $_GET['deb'] : '' ;
+	$acessoCreditar = (!empty($_GET['cred'] && $_GET['cred']>0)) ? $_GET['cred'] : '' ;
+?>
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script
 	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
@@ -20,7 +24,7 @@
 			<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
 				disabled="disabled" value="" /></td>
 			<td>Acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
-				value="" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+				value="<?PHP echo $acessoDebitar; ?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
 		</tr>
 		<tr>
 			<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
@@ -47,7 +51,7 @@
 			<td>Saldo Atual: <br /> <input type="text" id="id_val2" name="id"
 				disabled="disabled" value="" class="form-control" /></td>
 			<td>Acesso:<br /> <input type="text" id="acesso2"
-				name="acessoCreditar" value="" required="required"
+				name="acessoCreditar" value="<?PHP echo $acessoCreditar; ?>" required="required"
 				tabindex="<?PHP echo ++$ind; ?>" class="form-control" /></td>
 		</tr>
 		<tr>

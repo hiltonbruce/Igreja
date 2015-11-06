@@ -185,35 +185,38 @@ if (checkdate($m,$d,$y)) {
 				value='<?php echo $_POST['id'];?>' /> <?php
 				if ($errcredor) {
 					if ("$diferenca"!="$parctrun" && $parc>1) {
-						echo '<select name="ajusteparc" tabindex="'.$ind++.'">';
+						echo '<select name="ajusteparc" class="form-control" tabindex="'.$ind++.'">';
 						echo $ajustparc;
 						echo '</select>';
 					}
 					echo $dadosEmpresa;
-					?> <input type="hidden" name="parc" id="parc"
-				value='<?php echo $_POST['parc'];?>' /> <input type="hidden"
-				name="nome" value='<?php echo $_POST['nome'];?>' /> <input
-				type="hidden" name="igreja"
-				value='<?php echo $_POST['congregacao'];?>' /> <input type="hidden"
-				name="age" value="5" /> <input type="hidden" name="tabela"
-				value="agenda" /> <input type="hidden" name="rol"
-				value="<?php echo $_POST['rol'];?>" /> <input type="hidden"
-				name="escolha" value="controller/despesa.php" /> <input
-				type="hidden" name="menu" value="top_tesouraria" /> <?php
+					?>
+					<input type="hidden" name="parc" id="parc" value='<?php echo $_POST['parc'];?>' />
+					<input type="hidden" name="nome" value='<?php echo $_POST['nome'];?>' />
+					<input type="hidden" name="igreja" value='<?php echo $_POST['congregacao'];?>' />
+					<input type="hidden" name="age" value="5" />
+					<input type="hidden" name="tabela" value="agenda" />
+					<input type="hidden" name="rol" value="<?php echo $_POST['rol'];?>" />
+					<input type="hidden" name="escolha" value="controller/despesa.php" />
+					<input type="hidden" name="menu" value="top_tesouraria" />
+				<?php
 				}else {
 					echo 'Click no botão voltar e informe o Credor!';
 				}
 				?>
 			</td>
-			<td colspan='2'><?php
-			$linkvoltar  = "&congregacao=".$_POST['congregacao'];
-			$linkvoltar .= "&venc=".$_POST['venc'];
-			$linkvoltar .= "&valor=".number_format($valortrun,2,',','.');
-			$linkvoltar .= "&parc=".$_POST['parc'];
-			$linkvoltar .= "&nome=".$_POST['nome'];
-			$linkvoltar .= "&id=".$_POST['id'];
-			$linkvoltar .= "&motivo=".$_POST['motivo'];
-			$linkvoltar .= "&rol=".$_POST['rol'];
+			<td colspan='2'>
+			<?php
+				$linkvoltar  = "&congregacao=".$_POST['congregacao'];
+				$linkvoltar .= "&venc=".$_POST['venc'];
+				$linkvoltar .= "&valor=".number_format($valortrun,2,',','.');
+				$linkvoltar .= "&parc=".$_POST['parc'];
+				$linkvoltar .= "&nome=".$_POST['nome'];
+				$linkvoltar .= "&id=".$_POST['id'];
+				$linkvoltar .= "&motivo=".$_POST['motivo'];
+				$linkvoltar .= "&rol=".$_POST['rol'];
+				$linkvoltar .= "&cred=".$_POST['acessoCreditar'];
+				$linkvoltar .= "&deb=".$_POST['acessoDebitar'];
 			?>
 			</td>
 		</tr>
