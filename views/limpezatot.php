@@ -2,9 +2,8 @@
 $tbodytab = new limplista($mesref);
 if ($_GET['limpeza']!='4') {
 ?>
-<table id="listTable" >
+<table class='table table-striped table-hover' >
 	<caption>Relação do Material de Limpeza Total para: <?php echo $mesref;?></caption>
-	
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -22,17 +21,16 @@ if ($_GET['limpeza']!='4') {
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			echo $tbodytab->TotMaterial();
 		?>
 	</tbody>
 </table>
-	<?PHP 
+	<?PHP
 		echo $saltoPagina;
 	?>
-<table id="listTable" >
+<table class='table table-striped table-hover' >
 	<caption>Relação do Material de Limpeza Total para Entrega - <?php echo $mesref;?></caption>
-	
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -50,16 +48,16 @@ if ($_GET['limpeza']!='4') {
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			echo $tbodytab->TotMatEntregar();
 		?>
 	</tbody>
 </table>
-	<?PHP 
+	<?PHP
 		echo $saltoPagina;
 	?>
-<table id="listTable" >
-	<caption>Material de Limpeza Total Adquirido no Mercado Autorizado  - <?php echo $mesref;?></caption>	
+<table class='table table-striped table-hover' >
+	<caption>Material de Limpeza Total Adquirido no Mercado Autorizado  - <?php echo $mesref;?></caption>
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -77,12 +75,12 @@ if ($_GET['limpeza']!='4') {
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			echo $tbodytab->TotMatPegar();
 		?>
 	</tbody>
 </table>
-	<?PHP 
+	<?PHP
 		echo $saltoPagina;
 }
 	require_once $todascongreg;
@@ -97,6 +95,6 @@ if ($_GET['limpeza']!='4') {
 	  <div id="pastor"><?PHP echo 'Joseilton Costa Bruce';?><br />Tesoureiro </div>
 	  <div id="secretario"><?PHP echo '_____________________';?><br />Zelador(a)</div>
 	</div>
-	<?php 
+	<?php
 	}
 	?>

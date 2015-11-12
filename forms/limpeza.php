@@ -1,19 +1,18 @@
-
 <?php
 	if ($_POST['item']!='' && $_POST['']!='quant') {
 		require_once 'models/cadlimpeza.php';
 	}
 	$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
-	
+
 	//Incluir tabela com resumo do pedido
 ?>
 <fieldset>
 <legend>Solicitação de Material de Limpeza, para: <?php echo $periodo['0'];?></legend>
 <form method='post' name='limpeza' >
-	<table style="width: 100%;">
+	<table class='table'>
 			<tr>
 				<td><label>Item</label>
-					<?php 
+					<?php
 						$item = new List_sele('limpeza', 'discrim', 'item');
 						echo $item->List_Selec(++$ind,'',' class="form-control" ');
 					?>
@@ -22,7 +21,7 @@
 					<input type="text" name="quant" placeholder="Quantidade" class="form-control" tabindex="<?PHP echo ++$ind;?>" />
 				</td>
 				<td><label>Igreja</label>
-					<?php 
+					<?php
 						$item = new List_sele('igreja', 'razao', 'igreja');
 						echo $item->List_Selec(++$ind,$igreja,' class="form-control" requrided="requrided"');
 					?>
@@ -38,23 +37,24 @@
 				</td>
 				<td>&nbsp;<br />
 					<input type="submit"  class="btn btn-primary" name="Submit" value="Lançar..." tabindex="<?PHP echo ++$ind; ?>"/>
-					<input type="hidden" name="mes" value="<?PHP echo $_GET['mes'];?>"/>
-					<input type="hidden" name="ano" value="<?PHP echo $_GET['ano'];?>"/>
+					<input type="hidden" name="mes" value="<?PHP echo $mesPed;?>"/>
+					<input type="hidden" name="ano" value="<?PHP echo $anoPed;?>"/>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </form>
 </fieldset>
-					<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=2&<?php echo $linkperido;?>">
-					<button type="button" class="btn btn-primary" >Mostrar totalizador</button></a>
+<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=2&<?php echo $linkperido;?>">
+<button type="button" class="btn btn-primary" >Mostrar totalizador</button></a>
 <a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'>
 <button type="button" class="btn btn-primary">Alterar Período...</button></a>
 <a href='./controller/limpeza.php?limpeza=6' target="_blank">
 <button type="button" class="btn btn-primary">Material Disponível...</button></a>
 <a href='./controller/limpeza.php?limpeza=7' target="_blank">
 <button type="button" class="btn btn-primary">Formulário de Pedido...</button></a>
-
+<a href='./controller/limpeza.php?limpeza=7' target="_blank">
+<button type="button" class="btn btn-primary">Gerar Pedido</button></a>
 <?php
 	if ( $igreja >0) {
 		//Lista materiais da congregação

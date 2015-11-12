@@ -1,9 +1,9 @@
-<?php 
+<?php
 $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q chamar este
 ?>
-<table id="listTable" >
+<table class='table table-striped table-hover' >
 	<caption>Relação do Material de Limpeza para: <?php echo $congregcao->razao().' - '.$mesref;?></caption>
-	
+
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -23,7 +23,7 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			$tbodytab = new limplista($mesref,$periodo['1'],$periodo['2']);
 			require_once 'help/tes/tabLimpeza.php';
 		?>
@@ -31,7 +31,7 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 </table>
 <a href="./controller/limpeza.php?limpeza=4&igreja=<?php echo $igreja;?>">
 <button type="button" class="btn btn-primary">Imprimir <?php echo $congregcao->razao();?></button></a>
-<?php 
+<?php
 	//print_r($tbodytab->tabelaLimp($congregcao->rol()));
 
 ?>
