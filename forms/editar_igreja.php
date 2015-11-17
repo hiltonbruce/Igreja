@@ -86,10 +86,10 @@ $ind = 1;
             echo '</form>';
         }
         ?>
-      </td >
+      </td>
       </tr>
       <tr class='primary'>
-        <td >CNPJ
+        <td>CNPJ
         <?PHP
 			$nome = new editar_form("cnpj",$igreja->cnpj(),$tab,$tab_edit);
 			$nome->getMostrar();$nome->getEditar();
