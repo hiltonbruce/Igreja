@@ -3,7 +3,6 @@
 		require_once 'models/cadlimpeza.php';
 	}
 	$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
-
 	//Incluir tabela com resumo do pedido
 ?>
 <fieldset>
@@ -39,6 +38,7 @@
 					<input type="submit"  class="btn btn-primary" name="Submit" value="Lançar..." tabindex="<?PHP echo ++$ind; ?>"/>
 					<input type="hidden" name="mes" value="<?PHP echo $mesPed;?>"/>
 					<input type="hidden" name="ano" value="<?PHP echo $anoPed;?>"/>
+					<input type="hidden" name="mesref" value="<?PHP echo $mesref;?>"/>
 				</td>
 			</tr>
 		</tbody>
@@ -53,7 +53,7 @@
 <button type="button" class="btn btn-primary">Material Disponível...</button></a>
 <a href='./controller/limpeza.php?limpeza=7' target="_blank">
 <button type="button" class="btn btn-primary">Formulário de Pedido...</button></a>
-<a href='./controller/limpeza.php?limpeza=7' target="_blank">
+<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=12&<?php echo $linkperido;?>' target="_blank">
 <button type="button" class="btn btn-primary">Gerar Pedido</button></a>
 <?php
 	if ( $igreja >0) {

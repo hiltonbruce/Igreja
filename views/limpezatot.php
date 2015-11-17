@@ -27,6 +27,7 @@ if ($_GET['limpeza']!='4') {
 	</tbody>
 </table>
 	<?PHP
+	/*
 		echo $saltoPagina;
 	?>
 <table class='table table-striped table-hover' >
@@ -81,6 +82,7 @@ if ($_GET['limpeza']!='4') {
 	</tbody>
 </table>
 	<?PHP
+	*/
 		echo $saltoPagina;
 }
 	require_once $todascongreg;

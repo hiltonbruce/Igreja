@@ -4,7 +4,6 @@ if ($_GET['limpeza']!='4') {
 ?>
 <table id="listTable" >
 	<caption>Relação de Material de  Limpeza <u>PARA</u> pedido</caption>
-	
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -20,7 +19,7 @@ if ($_GET['limpeza']!='4') {
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			echo $tbodytab->ListaMaterial();
 		?>
 	</tbody>
@@ -32,6 +31,6 @@ if ($_GET['limpeza']!='4') {
 	  <div id="pastor"><?PHP echo 'Joseilton Costa Bruce';?><br />Tesoureiro </div>
 	  <div id="secretario"><?PHP echo '_____________________';?><br />Zelador(a)</div>
 	</div>
-	<?php 
+	<?php
 	}
 	?>
