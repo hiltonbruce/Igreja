@@ -156,8 +156,14 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$HistProv = sprintf("'','%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');
 	$lanchist->inserir();
-	//$_POST['data']
-	$exibiRodape .= '<tr class="success"><td colspan="4">Data: '.$_POST['data'].'</td></tr>';;//Rodapé lo lançamento
+	$dtLanc = new DateTime (br_data($_POST['data']));
+	$exibiRodape .= '<tr class="success"><td colspan="3">Data: '.$dtLanc->format('d/m/Y').'</td>';
+	$linkImpDia   = './controller/modeloPrint.php/?tipo=1&rec=0&igreja='.$roligreja;
+	$linkImpDia  .= '&ano='.$dtLanc->format('Y').'&mes='.$dtLanc->format('m').'&dia='.$dtLanc->format('d');
+	$exibiRodape .= '<td><a target=_blank href="'.$linkImpDia.'" >';
+	$exibiRodape .= '<button type="button" class="btn btn-primary btn-xs" tabindex="'.++$ind.'">';
+	$exibiRodape .= '<span class="glyphicon glyphicon-print"></span> Imprimir este dia...</button></a></td></tr>';
+	//Rodapé lo lançamento
 	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 
 }else {
@@ -176,16 +182,15 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 }
 
 ?>
-<form>
-	<div class="row">
+	<div class="row form-group">
 		<div class="col-xs-4">
 			<label>&nbsp;</label>
-			<a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1"
-				tabindex="<?PHP echo ++$ind; ?>" >
- 				<button type="button" class="btn btn-primary">Próximo culto da <?php echo $igrejaSelecionada->razao();?></button>
+			<a href="<?php echo $linkLancamento;?>&rec=1">
+ 				<button type="button" class="btn btn-primary" tabindex="<?PHP echo ++$ind; ?>" >
+ 					Próximo culto: <?php echo $igrejaSelecionada->razao();?></button>
  			</a>
 		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-3">
 			<label>Próxima Igreja: </label>
 				<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 					<?php
@@ -197,6 +202,3 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 					?>
 			</select>
 		</div>
-	</div>
-</form>
-<br />
