@@ -161,7 +161,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$linkImpDia   = './controller/modeloPrint.php/?tipo=1&rec=0&igreja='.$roligreja;
 	$linkImpDia  .= '&ano='.$dtLanc->format('Y').'&mes='.$dtLanc->format('m').'&dia='.$dtLanc->format('d');
 	$exibiRodape .= '<td><a target=_blank href="'.$linkImpDia.'" >';
-	$exibiRodape .= '<button type="button" class="btn btn-primary btn-xs" tabindex="'.++$ind.'">';
+	$exibiRodape .= '<button type="button" class="btn btn-primary btn-xs">';
 	$exibiRodape .= '<span class="glyphicon glyphicon-print"></span> Imprimir este dia...</button></a></td></tr>';
 	//Rodapé lo lançamento
 	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
@@ -175,20 +175,18 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	}else {
 		$mensagem = 'Não exite valores a ser lançado!';
 	}
-
 	echo '<script>alert("'.$mensagem.'");location.href="./?escolha=tesouraria/receita.php";</script>';
 	echo $mensagem;
-
 }
-
 ?>
-	<div class="row form-group">
-		<div class="col-xs-4">
+		<div class="col-xs-3">
 			<label>&nbsp;</label>
 			<a href="<?php echo $linkLancamento;?>&rec=1">
  				<button type="button" class="btn btn-primary" tabindex="<?PHP echo ++$ind; ?>" >
  					Próximo culto: <?php echo $igrejaSelecionada->razao();?></button>
  			</a>
+		</div>
+		<div class="col-xs-1">
 		</div>
 		<div class="col-xs-3">
 			<label>Próxima Igreja: </label>

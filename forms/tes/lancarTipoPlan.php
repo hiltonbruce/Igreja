@@ -13,14 +13,14 @@
  	</p>
 <form  method='get'>
 	<div class="row">
-		<div class="col-xs-3">
+		<!-- <div class="col-xs-3">
 		<label>Igreja</label>
 			<?php
-			$bsccredor = new List_sele('igreja', 'razao', 'igreja');
-			$listaIgreja = $bsccredor->List_Selec(++$ind,$igreja,'class="form-control" ');
-			echo $listaIgreja;
+			//$bsccredor = new List_sele('igreja', 'razao', 'igreja');
+			//$listaIgreja = $bsccredor->List_Selec(++$ind,$igreja,'class="form-control" ');
+			//echo $listaIgreja;
 			?>
-	  	</div>
+	  	</div>-->
 		<div class="col-xs-3">
 			<label>M&ecirc;s de refer&ecirc;ncia:</label>
 			<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >

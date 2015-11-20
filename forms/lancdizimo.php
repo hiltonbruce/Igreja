@@ -22,7 +22,6 @@ $histLanca = array();
 while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 	$lanc = $exibir->lancamacesso ($tablancarrc['valor'],$tablancarrc['credito'],'C');
 	$exibirlanc .= $lanc['0'];
-
 	$histLanca[]=$lanc['1'];
 }
 
@@ -33,28 +32,26 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	$ind = 0;
 	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br ($dataLc):$_POST['dataLancamento'];
 	?>
-<div class="row form-group">
+
 <form method="post" action="">
 	<div class="col-xs-12">
 		<label>Hist&oacute;rico do lan&ccedil;amento:</label> <input
 			type="text" name="hist" id="hist" size="60" autofocus="autofocus" class="form-control"
 			tabindex="<?PHP echo ++$ind;?>" value='<?PHP echo $hist;?>'>
 	</div>
-	<div class="col-xs-3">
+	<div class="col-xs-2">
 		<label>Data:</label>
 		<input type="text" name="data" id="data" class="form-control"
 			value="<?php echo $dtlanc;?>" tabindex="<?PHP echo ++$ind;?>">
 	</div>
-	<div class="col-xs-2">
+	<div class="col-xs-1">
 			<label>&nbsp;</label>
   			<input type="submit" name="Submit" class='btn btn-primary btn-sm'
 			value="Lançar..." tabindex="<?PHP echo ++$ind;?>" />
 	</div>
-	<div class="col-xs-6"><label>&nbsp;</label>
-		<input name="escolha" type="hidden"
-		value="<?php echo $_GET['escolha'];?>" /> <input name="lancar"
-		type="hidden" value="1" /> <input name="igreja" type="hidden"
-		value="<?php echo $roligreja;?>" /></div>
+		<input name="escolha" type="hidden" value="<?php echo $_GET['escolha'];?>" />
+		<input name="lancar" type="hidden" value="1" />
+		<input name="igreja" type="hidden" value="<?php echo $roligreja;?>" />
 </form>
 <?php
 	//echo '<h1> ***'.$dataLc.'</h1>';

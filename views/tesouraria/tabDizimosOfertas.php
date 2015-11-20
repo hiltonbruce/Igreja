@@ -60,14 +60,14 @@ $tabMembros = new membro();
 			$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 			$linkResumo .= '&credito='.$_GET['credito'];
 			$linkResumo .= '&debito='.$_GET['debito'];
-
-			echo '<div class="col-xs-2"><label>&nbsp;&nbsp;&nbsp;</label>
-					<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja='.$roligreja.'&rec=1" >
-		  			<button type="button" class="btn btn-primary btn-sm"
-					tabindex="'.++$ind.'"><span class="glyphicon glyphicon-backward"></span> Voltar...</button>
-					</a>
-			</div>';
-			echo '<div class="col-xs-3"><label>&nbsp;&nbsp;</label>';
+			echo '<div class="row"><div class="col-xs-1"><label>&nbsp;&nbsp;</label>';
+			echo '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja='.$roligreja.'&rec=1" >';
+		  	echo '<button type="button" class="btn btn-primary btn-sm" tabindex="'.++$ind.'">';
+		  	echo '<span class="glyphicon glyphicon-backward"></span> Voltar...</button>';
+			echo '</a></div>';
+			echo '<div class="col-xs-1">&nbsp;&nbsp;';
+			echo '</div>';
+			echo '<div class="col-xs-2"><label>&nbsp;&nbsp;</label>';
 			echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 			echo '<button type="button" class="btn btn-primary btn-sm" tabindex="'.++$ind.'" ><span class="glyphicon glyphicon-print">';
 			echo '</span>&nbsp;&nbsp;&nbsp;Imprimir a tabela abaixo...</button></a></div></div>';
