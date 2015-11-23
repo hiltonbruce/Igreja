@@ -20,7 +20,7 @@ switch ($rec_tipo){
 			}
 		}
 		$texto .=', rol N&ordm: '.$rolmembro;
-		$texto .= ', recebi da Igreja Evang&eacute;lica Assembleia de Deus - '. $igreja->cidade().' - '.$igreja->uf();
+		$texto .= ', recebi da Igreja Evang&eacute;lica Assembleia de Deus - '. $origem;
 		$responsavel = $membro->nome()."<br />CPF: ".$prof->cpf()." - RG: ".$prof->rg();
 		$recebeu = $rolmembro;//Define o beneficiário do recibo
 		break;
@@ -43,7 +43,7 @@ switch ($rec_tipo){
 	case 3:
 		$texto = "Eu, ".strtoupper( toUpper($nome)).", ";
 		$texto .= "CPF: ".$cpf.", RG: ".$rg.", ";
-		$texto .= "recebi da Igreja Evang&eacute;lica Assembleia de Deus - ". $igreja->cidade()." - ".$igreja->uf();
+		$texto .= "recebi da Igreja Evang&eacute;lica Assembleia de Deus - ". $origem;
 		$responsavel = $nome."<br />CPF: ".$cpf." - RG: ".$rg;
 		$recebeu = strtoupper( toUpper($nome)).", CPF: ".$cpf.", RG: ".$rg;//Define o beneficiário do recibo
 		break;

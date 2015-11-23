@@ -32,9 +32,9 @@
 
 	if ($igreja->cidade()>0) {
 		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
-		$origem=$cidOrigem->nome();
+		$origem=$cidOrigem->nome().' - '.$cidOrigem->coduf();
 	}else {
-		$origem = $igreja->cidade();
+		$origem = $igreja->cidade().' - '.$igreja->uf();
 	}
 
 	if ($_POST["reimprimir"]==""){

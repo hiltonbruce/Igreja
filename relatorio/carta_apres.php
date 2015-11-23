@@ -1,17 +1,17 @@
 <?PHP
 	session_start();
-	
+
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
-	
+
 	controle ("inserir");
-	
+
 	$igreja = new DBRecord ("igreja","1","rol");
-	
+    $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
-	
+
 	if (empty($_POST["id"]) && isset($_POST["nome"])) {
-	
+
 		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
 		$dt_apresent = br_data ($_POST["dt_apresent"],"dt_apresent");
 		$value="'','{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
@@ -21,18 +21,18 @@
 		$cert_apresentacao = new insert ("$value","cart_apresentacao");
 		$cert_apresentacao->inserir();
 		$most_certidao = new DBRecord ("cart_apresentacao",mysql_insert_id(),"rol");
-		
+
 	} else {
-	
+
 		$most_certidao = new DBRecord ("cart_apresentacao",$_POST["rol"],"rol");
 	}
-	
+
 	//echo "<h1>TESTE ".$most_certidao->nome()." - Post ".$_GET["id"]."</h1>";
-	
+
 	//if (isset($most_certidao->nome())) {
-	
+
 	$cidade = new DBRecord ("cidade",$most_certidao->cidade(),"id");
-	
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,7 +57,7 @@
     </div>
     <div id="added-div-2">
 
-      <h3><?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso (date("d/m/Y"));?></h3>
+      <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (date("d/m/Y"));?></h3>
     <br />
 		<div id="pastor"><?PHP echo strtoupper( toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
