@@ -160,6 +160,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$exibiRodape .= '<tr class="success"><td colspan="3">Data: '.$dtLanc->format('d/m/Y').'</td>';
 	$linkImpDia   = './controller/modeloPrint.php/?tipo=1&rec=0&igreja='.$roligreja;
 	$linkImpDia  .= '&ano='.$dtLanc->format('Y').'&mes='.$dtLanc->format('m').'&dia='.$dtLanc->format('d');
+	$linkImpDia  .= '&r1=4037&r3=72';
 	$exibiRodape .= '<td><a target=_blank href="'.$linkImpDia.'" >';
 	$exibiRodape .= '<button type="button" class="btn btn-primary btn-xs">';
 	$exibiRodape .= '<span class="glyphicon glyphicon-print"></span> Imprimir este dia...</button></a></td></tr>';

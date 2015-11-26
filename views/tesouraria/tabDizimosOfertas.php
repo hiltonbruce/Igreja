@@ -60,18 +60,40 @@ $tabMembros = new membro();
 			$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 			$linkResumo .= '&credito='.$_GET['credito'];
 			$linkResumo .= '&debito='.$_GET['debito'];
-			echo '<div class="row"><div class="col-xs-1"><label>&nbsp;&nbsp;</label>';
-			echo '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja='.$roligreja.'&rec=1" >';
+			echo '<div class="row"><div class="col-xs-2">';
+			echo '<br />';
+			echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja='.$roligreja.'&rec=1" >';
 		  	echo '<button type="button" class="btn btn-primary btn-sm" tabindex="'.++$ind.'">';
 		  	echo '<span class="glyphicon glyphicon-backward"></span> Voltar...</button>';
-			echo '</a></div>';
-			echo '<div class="col-xs-1">&nbsp;&nbsp;';
+			echo '</a></div></div>';
+			echo '<form target="_blank" action="controller/modeloPrint.php/" >';
+			echo '<div class="row">';
+			echo '<div class="col-xs-2">';
+			echo '<input name="rec" type="hidden" value="'.$_GET['rec'].'" />';
+			echo '<input name="igreja" type="hidden" value="'.$_GET['igreja'].'" />';
+			echo '<input name="ano" type="hidden" value="'.$_GET['ano'].'" />';
+			echo '<input name="mes" type="hidden" value="'.$_GET['mes'].'" />';
+			echo '<input name="nome" type="hidden" value="'.$_GET['nome'].'" />';
+			echo '<input name="dia" type="hidden" value="'.$_GET['dia'].'" />';
+			echo '<input name="credito" type="hidden" value="'.$_GET['credito'].'" />';
+			echo '<input name="debito" type="hidden" value="'.$_GET['debito'].'" />';
+			echo '<input name="tipo" type="hidden" value="1" />';
+			echo '<label>Rol 1&ordf; Assin:</label>';
+			echo '<input name="r1" type="text" value="4037" class="form-control/>';
 			echo '</div>';
-			echo '<div class="col-xs-2"><label>&nbsp;&nbsp;</label>';
-			echo '<a href="controller/modeloPrint.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
-			echo '<button type="button" class="btn btn-primary btn-sm" tabindex="'.++$ind.'" ><span class="glyphicon glyphicon-print">';
-			echo '</span>&nbsp;&nbsp;&nbsp;Imprimir a tabela abaixo...</button></a></div></div>';
-
+			echo '<div class="col-xs-2"><label>Rol 2&ordf; Assin:</label>';
+			echo '<input name="r2" type="text" class="form-control" />';
+			echo '</div>';
+			echo '<div class="col-xs-2"><label>Rol 3&ordf; Assin:</label>';
+			echo '<input name="r3" type="text" value="72" class="form-control" />';
+			echo '</div>';
+			echo '<div class="col-xs-2"><label>Rol 4&ordf; Assin:</label>';
+			echo '<input name="r4" type="text" class="form-control" />';
+			echo '</div>';
+			echo '<div class="col-xs-2"><label>&nbsp;</label>';
+			echo '<input name="submit" type="submit" class="btn btn-primary btn-sm form-control" value="Imprimir a tabela"/>';
+			echo '</div>';
+			echo '</form></div>';
 
 		}
 ?>
@@ -139,6 +161,9 @@ $tabMembros = new membro();
 		echo '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 		echo '</span> Imprimir ...</button> </a>';
 	}else {
+
+	$dadosMembros = new membro();
+	$dados = $dadosMembros->nomes();
 ?>
 		<span id="text-right">Conferido por:</span>
 	<table class='table table-condensed table-striped'>
@@ -154,19 +179,19 @@ $tabMembros = new membro();
 		</thead>
 		<tbody>
 			<tr>
-				<td width="30%">&nbsp;</td>
+				<td width="30%"><?php echo $dados[$_GET['r1']]['5'];?></td>
 				<td width="700%">&nbsp;</td>
 			</tr>
 			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
+				<td><?php echo $dados[$_GET['r2']]['5'];?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td><?php echo $dados[$_GET['r3']]['5'];?></td>
 				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><?php echo $dados[$_GET['r4']]['5'];?></td>
 				<td>&nbsp;</td>
 			</tr>
 		</tbody>

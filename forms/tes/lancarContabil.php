@@ -1,6 +1,6 @@
 <?php
-	$acessoDebitar = (!empty($_GET['deb'] && $_GET['deb']>0)) ? $_GET['deb'] : '' ;
-	$acessoCreditar = (!empty($_GET['cred'] && $_GET['cred']>0)) ? $_GET['cred'] : '' ;
+	$acessoDebitar = (!empty($_GET['deb']) && $_GET['deb']>0) ? $_GET['deb'] : '' ;
+	$acessoCreditar = (!empty($_GET['cred']) && $_GET['cred']>0) ? $_GET['cred'] : '' ;
 ?>
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script
