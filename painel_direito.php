@@ -77,6 +77,9 @@
 		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 		 //inicia o cabe?alho de pagina??o
+
+		$dadosMembro = new membro();
+		$detMemb = $dadosMembro->nomes();
 		?>
 		<div class="box" align="center">
 		<div class="box-outer">
@@ -175,6 +178,7 @@
 		<tbody id="pendencia" >
 			<?PHP
 			$inc_disc=0;
+			#print_r($detMemb);
 			while($coluna_disc = mysql_fetch_array($sql3_disc))
 			{
 			if ($inc_disc=="0") { echo "<tr id='pendencia'>"; }
@@ -182,12 +186,12 @@
 			$inc_disc++;
 			$exp = mysql_query ("SELECT * FROM disciplina WHERE rol = '{$coluna_disc["rol"]}' ORDER BY id DESC LIMIT 1 ");
 			$array_exp = mysql_fetch_array($exp);
-			$membro_disc = new DBRecord ("membro","{$coluna_disc["rol"]}","rol");
+			$membro_disc = $detMemb[$coluna_disc['rol']]['5'];
 			if ($array_exp["data_fim"]<date("Y-m-d") AND $array_exp["data_fim"]<>"0000-00-00") {
-				echo "<td id='pendencia' class='text-center' ><a title = '{$membro_disc->nome()} - Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc={$_GET["pagina1_disc"]}'><span style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
+				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc - Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc={$_GET["pagina1_disc"]}'><span style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
 				$disp_pend++;
 			}else {
-				echo "<td id='pendencia' class='text-center' ><a title = '{$membro_disc->nome()}' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc={$_GET["pagina1_disc"]}'>{$coluna_disc["rol"]}<a></td>";
+				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc={$_GET["pagina1_disc"]}'>{$coluna_disc["rol"]}<a></td>";
 			}
 
 

@@ -79,7 +79,7 @@ $tabMembros = new membro();
 			echo '<input name="debito" type="hidden" value="'.$_GET['debito'].'" />';
 			echo '<input name="tipo" type="hidden" value="1" />';
 			echo '<label>Rol 1&ordf; Assin:</label>';
-			echo '<input name="r1" type="text" value="4037" class="form-control/>';
+			echo '<input name="r1" type="text" value="4037" class="form-control"/>';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 2&ordf; Assin:</label>';
 			echo '<input name="r2" type="text" class="form-control" />';
@@ -179,19 +179,19 @@ $tabMembros = new membro();
 		</thead>
 		<tbody>
 			<tr>
-				<td width="30%"><?php echo $dados[$_GET['r1']]['5'];?></td>
+				<td width="30%"><?php echo $dados[$_GET['r1']]['6'].$dados[$_GET['r1']]['5'];?></td>
 				<td width="700%">&nbsp;</td>
 			</tr>
 			<tr>
-				<td><?php echo $dados[$_GET['r2']]['5'];?></td>
+				<td><?php echo $dados[$_GET['r2']]['6'].$dados[$_GET['r2']]['5'];?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td><?php echo $dados[$_GET['r3']]['5'];?></td>
+				<td><?php echo $dados[$_GET['r3']]['6'].$dados[$_GET['r3']]['5'];?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td><?php echo $dados[$_GET['r4']]['5'];?></td>
+				<td><?php echo $dados[$_GET['r4']]['6'].$dados[$_GET['r4']]['5'];?></td>
 				<td>&nbsp;</td>
 			</tr>
 		</tbody>
