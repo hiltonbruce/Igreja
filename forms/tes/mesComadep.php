@@ -53,7 +53,7 @@
 				<td>
 					<label>Congrega&ccedil;&atilde;o:</label>
 					<?php
-						$bsccredor = new List_sele('igreja', 'razao', 'igreja');
+						$bsccredor = new List_Igreja('igreja');
 						$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control"');
 						echo $listaIgreja;
 					?>

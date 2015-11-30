@@ -9,17 +9,17 @@
  *          AUTOR ORIGINAL SEJA CITADO.                                    *
  ***************************************************************************/
 
-function calcularDiaSemana($dia,$mes,$ano)
- {
+function calcularDiaSemana($dia,$mes,$ano) {
+
   $s=(int)($ano / 100);
   $a=$ano % 100;
 
-  if($mes<=2)
-  {
+  if($mes<=2) {
    $mes+=10;
    $a--;
+  } else {
+   $mes-=2;
   }
-  else $mes-=2;
 
   $ival=(int)(2.6*$mes-0.1);
   $q1=(int)($s / 4);

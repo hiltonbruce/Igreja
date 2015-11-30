@@ -2,8 +2,8 @@
 $imprimir = false;
 
 if ($_GET['imp']>'0') {
-	
-		
+
+
 	date_default_timezone_set('America/Recife');
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
@@ -14,17 +14,17 @@ if ($_GET['imp']>'0') {
 	}else {
 		require("funcs_impress.php");
 	}
-	
-	
+
+
 	function __autoload ($classe) {
 		require_once ("../models/$classe.class.php");
 	}
-	
+
 	$roligreja	= (empty($_GET['id'])) ? '1':$_GET['id'];
 	$igreja 	= new DBRecord ("igreja",$roligreja,"rol");
 	$sede 		= new DBRecord ("igreja",'1',"rol");
 	$colunas 	= 6;
-	
+
 	if ($roligreja=='1') {
 		//Sede
 		$dircon		= 'Pastor: '.$sede->pastor();
@@ -42,8 +42,8 @@ if ($_GET['imp']>'0') {
 
 	$imprimir = true; //permite o impressão do rodapé
 	?>
-	
-	
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -61,12 +61,12 @@ if ($_GET['imp']>'0') {
    </table>
 
 	<?PHP
-	
+
 }else {
 	$roligreja	= (empty($_GET['id'])) ? '1':$_GET['id'];
 	$igreja 	= new DBRecord ("igreja",$roligreja,"rol");
 	require("calendario/funcs.php");
-	
+
 	$colunas = 2;
 }
 	/*
@@ -99,11 +99,11 @@ if ($_GET['imp']>'0') {
 	  $id_igreja = (int) $_GET ["id"];
 	  if (empty($id_igreja)){$id_igreja =1;}
 
-	  
+
 	  $ceia = $igreja->ceia();
 	  $nome_igreja = $igreja->razao();
 
-	  
+
 	  /*if ($id_igreja<>1) {
 	  $nome_igreja="Congrega&ccedil;&atilde;o: ".$nome_igreja;
 	  }else {
@@ -129,7 +129,7 @@ if ($_GET['imp']>'0') {
 	  $y = date("Y");
 	  else
 	  $y = (int)$_GET["ano"];
-	  
+
 	  if ($_GET['imp']=='') {
 	  	prox_ant_ano ();//Gera cabelho de alteração de ano e a lista de congregações
 	  }
@@ -140,7 +140,7 @@ if ($_GET['imp']>'0') {
 	                     $nome_igreja,/*Define o texto do Rodapé do calendário*/
 	                    "Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
 	  }
-	  
+
 	//Mostra todas as ceias de todas as igrejas
 	if ($_GET['imp']=='2') {
 		$todasCeias = new igreja('');
@@ -148,61 +148,60 @@ if ($_GET['imp']>'0') {
 		$meses=array("Jan","Fev","Mar","Abr","Mai","Jun",
 				"Jul","Ago","Set","Out","Nov","Dez");
 		$cabMes = '<table class="tabela" height=220><tr><td width=300></td>';
-		
+
 		for($ms=0; $ms<12; $ms++)
 		{
 		$cabMes .='<td class="cabecalho">'.$meses[$ms].'</td>'; //Cria uma tabela para o mês atual
 		}
-		
+
 		$cabMes .= '</tr>';
-	
+
 		//Monta as linhas
 		foreach ($igreja as $key => $vlDia){
 			$tabTodasCeias .= $key.'->'.$vlDia.' ; ';
-	
+
 		}
 		//print_r($arrayIgrejas);
 		foreach ($arrayIgrejas AS $key => $dadosCong){
 			//echo $key.' - rol: '.$dadosCong['rol'].' --> '.$dadosCong['razao'].' <---> ';
-		
-		
+
+
 		if ($dadosCong['rol']==$_GET['id']) {
 			$classIgreja = 'td_marcado8';
 			$classDias 	 = 'td_marcado5';
 		}else {
 			$classIgreja = 'td_marcado1';
-			$classDias 	 = 'td_marcado7';		
+			$classDias 	 = 'td_marcado7';
 		}
-			
+
 		$todCeias ='<tr><td class="'.$classIgreja.'">'.$dadosCong['razao'].'</td>';
 		$dia_ceia = substr ($dadosCong['ceia'],-1);
 		$semana_ceia = substr ($dadosCong['ceia'],-2,1);
-			
+
 		 $todCeias .= gerarCalendario($mes,$y,$todos,$colunas,
 				array(array()),
 				$dadosCong['razao'],/*Define o texto do Rodapé do calendário*/
 				"Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia,$classDias);
-		 $diasCeias .= $todCeias.'</tr>';	
-		
+		 $diasCeias .= $todCeias.'</tr>';
+
 		}
 		$diasCeias .= '</table>';
 		echo $cabMes.$diasCeias;
 	}
-	
-	
+
      if ($_GET["id"]<2 && $_GET["imp"]<2)
 	  echo "<div >Cultos: Todas as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
      else
 	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segundas, Quartas e Domingos. Das 19h às 21h</div>";
-		
+
      if (isset($_GET['imp']) && $_GET['imp']>'0') {
      	echo '</body></html>';
 	?>
 
  <div id="footer">
-	<?PHP 
+	<?PHP
 	echo "Templo: {$sede->razao()}: {$sede->rua()}, N&ordm; {$sede->numero()} - {$sede->cidade()} - {$sede->uf()}";
-	
+
 	?><br />
 	  Copyright &copy; <a onclick='target="_blank"' href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>
       Email: <a rel="nofollow" href="mailto: <?PHP echo "{$sede->email()}";?>" onclick='target="_blank"'><?PHP echo "{$sede->email()}";?></a> <br />

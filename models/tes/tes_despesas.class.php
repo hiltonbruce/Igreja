@@ -61,11 +61,11 @@ class tes_despesas {
 			}
 		}
 		//print_r($agendaNaoPago);
-		//SQL dos lançamentos realizados
+		//SQL dos lançamentos realizados com despesas debitadas
 		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, h.referente AS referente, ';
 		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
 		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i, lanchist AS h ';
-		$sqlLancDesp .= 'WHERE c.id=l.debitar AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
+		$sqlLancDesp .= 'WHERE (c.id=l.debitar) AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
 		$sqlLancDesp .= 'AND h.idlanca=l.lancamento ';
 		$sqlLancDesp .= 'AND l.igreja=i.rol AND c.nivel1 = "3" ORDER BY c.codigo,i.razao,l.data ';
 		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
@@ -76,7 +76,26 @@ class tes_despesas {
 				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
 				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
 				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist'],'acesso'=>$dados['acesso']
-				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto'],'vencimento'=>$agendaLanc [$dados['lancamento']]['venc']);
+				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto'],
+				'vencimento'=>$agendaLanc [$dados['lancamento']]['venc'],'sld'=>'D');
+		}
+		//SQL dos lançamentos realizados com despesas creditadas
+		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, h.referente AS referente, ';
+		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
+		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i, lanchist AS h ';
+		$sqlLancDesp .= 'WHERE (c.id=l.creditar) AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
+		$sqlLancDesp .= 'AND h.idlanca=l.lancamento ';
+		$sqlLancDesp .= 'AND l.igreja=i.rol AND c.nivel1 = "3" ORDER BY c.codigo,i.razao,l.data ';
+		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
+		while($dados = mysql_fetch_array($despesa)) {
+			//Lançamento da Despesas
+			$arrayDespesas[] = array('id'=>$agendaLanc [$dados['lancamento']]['idAgenda'],'titulo'=>$dados['titulo'],'titulo'=>$dados['titulo'],'codigo'=>$dados['codigo']
+				,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
+				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
+				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
+				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist'],'acesso'=>$dados['acesso']
+				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto'],
+				'vencimento'=>$agendaLanc [$dados['lancamento']]['venc'],'sld'=>'C');
 		}
 		//echo '<br />Testando -- arrayDespesas<br /><br />';
 		//print_r($arrayDespesas);

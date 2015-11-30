@@ -37,7 +37,7 @@ $totalDeb = 0;
 $totalCred = 0;
 //print_r($arrayDesp);
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
-	http://localhost/igrejas/GitHub/Igreja/?escolha=tesouraria/agenda.php&menu=top_tesouraria&id=3307&pagina1_fix=&data=
+
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
 	$linkPagar .= '><small class="text-muted glyphicon glyphicon-new-window"></small</a>';
 	$bgcolor = $cor ? 'class="active"' : '';
@@ -57,12 +57,14 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	if ($vencPgto=='') {
 		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].'"><td> Lan&ccedil;ado em: '.$vlrDesp['data'].'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
-		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
+		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
+		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	} else {
 		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].$titleMsg.'"><td>'.$vencPgto.'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
-		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.').'</td><tr>';
+		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
+		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}
 	$cor = !$cor;

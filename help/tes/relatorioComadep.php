@@ -3,7 +3,7 @@ $d = $_GET['dia'];$m=$_GET['mes'];$a=$_GET['ano'];
 $dataMov = $d.'/'.$m.'/'.$a;
 
 	if (!empty($_GET['igreja']) && $_GET['igreja']>0) {
-		$rolIgreja = ' AND igreja="'.$_GET['igreja'].'"';
+		$rolIgreja = ' AND igreja="'.$_GET['igreja'].'" ';
 	}else {
 		$rolIgreja = '';
 	}

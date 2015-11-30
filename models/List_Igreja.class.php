@@ -1,36 +1,39 @@
 <?php
 class List_igreja extends List_sele {
-	
+
 	protected $texto_field;
-	
+
 	function __construct ($texto_field=""){
 
 		$this->texto_field = $texto_field;
-		$this->query = "SELECT * from igreja WHERE status='1'";	
+		$this->query = "SELECT * from igreja WHERE status='1' ";
 		$this->sql_lst = mysql_query($this->query." ORDER BY razao") or die (mysql_error());
 	}
 
-	function List_Selec ($ind,$igreja){
+	function List_Selec ($seq,$item,$required){
 
-	  //Mostra as linhas de select
+	  	$linha1  =  "<select name='{$this->texto_field}' id='{$this->texto_field}' $required tabindex='$seq'>";
 
-	  echo "<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='$ind'>";
-	  
-	  if ($igreja=="") {
-	  	 $igreja = 1;
-	  }
+	  	$linhas =  '<option value="0">-->> Todas as Igrejas <<--</option>';
 
-       while($this->col_lst = mysql_fetch_array($this->sql_lst))
-       {
-	       	if ($igreja==$this->col_lst["rol"]) {
-	       		$linha1 = "<option value='".$this->col_lst["rol"]."'>".$this->col_lst["razao"]."</option>";
-	       	}else {
-		    	$linst .= "<option value='".$this->col_lst["rol"]."'>".$this->col_lst["razao"]."</option>";
+		$linhas .= '<option value="-1">-->> Congrega&ccedil;&otilde;es <<--</option>';
+		if ($item=='-1') {
+					$linha1 .= '<option value="-1">-->> Congrega&ccedil;&otilde;es <<--</option>';
+		       	}
+
+	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
+	       {
+
+            $retorLinha = strtr( $this->col_lst['razao'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+
+		       	if ($item==$this->col_lst["rol"]) {
+		       		$linha1 .=  "<option value='".$this->col_lst["rol"]."'>".$retorLinha."</option>";
+		       	}
+			    $linhas .= "<option value='".$this->col_lst["rol"]."'>".$retorLinha."</option>";
 	       	}
-       	}
-      echo $linha1.$linst;
-	  echo "</select>";
-	  return $ind;
+	    $linha3 = "</select>";
+
+	  return $linha1.$linhas.$linha3 ;
 	}
 
 	function igreja_pop ($ind,$igreja,$link){
@@ -48,9 +51,9 @@ class List_igreja extends List_sele {
 		//echo "<select name='igreja' id='igreja' onchange='MM_jumpMenu('parent',this,0)' tabindex='$ind' >";
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
-			
+
 			//echo "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst[$this->campo_retorno]."</option>";
-			
+
 	       	if ($igreja==$this->col_lst["rol"]) {
 	       		$linha1 = "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst["razao"]."</option>";
 	       	}else {

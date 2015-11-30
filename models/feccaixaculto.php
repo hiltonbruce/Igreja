@@ -49,7 +49,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		if ($tablancarr['devedora']=='2' && $credora->nivel2()!='4.2') {
 			//provisão para fundo de Missões de 40%
 			$provmissoes += round(($valor*0.4),2);
-		}elseif ($credora->nivel2()!='4.2') {
+		}elseif ($credora->nivel2()!='4.2' && $credora->nivel4()!='4.1.1.003') {
 			//provisão para Convenção de 10%
 			$provcomadep += round(($valor*0.1),2);
 		}
