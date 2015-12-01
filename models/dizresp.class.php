@@ -193,8 +193,9 @@ function outrosdizimos ($igreja) {
 		$filtroIgreja = 'AND igreja="'.$igreja.'"';
 	}
 
-	$this->dquery  = mysql_query('SELECT SUM(valor) AS valor FROM dizimooferta
-	WHERE tesoureiro <> "'.$this->tesoureiro.'" AND lancamento="0" '.$filtroIgreja) or die (mysql_error());
+	$queryCons  = 'SELECT SUM(valor) AS valor FROM dizimooferta ';
+	$queryCons .= 'WHERE tesoureiro<>"'.$this->tesoureiro.'" AND lancamento="0" '.$filtroIgreja;
+	$this->dquery = mysql_query($queryCons ) or die (mysql_error());
 	$outrosdiz = mysql_fetch_array($this->dquery);
 	$totoutros = $outrosdiz['valor'];
 	return $totoutros;

@@ -2,8 +2,8 @@
 $nivelSem = '
             <tr class="success">
                 <th class="text-center">'.$colUm.'</th>
-                <th class="text-center">D&iacute;zimos</th>
-                <th class="text-center">Extras</th>
+                <th class="text-center">D&iacute;zimos/Votos</th>
+                <th class="text-center">Of.&nbsp;Ext.</th>
                 <th class="text-center">Ofertas</th>
                 <th class="text-center">Sub-Total</th>
                 <th class="text-center">Campanhas</th>

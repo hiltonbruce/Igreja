@@ -42,6 +42,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ofiSem 	= $ofi.$semana;
 
 	$dev 		= intval($contas['devedora']);
+	$cre 		= intval($contas['credora']);//Fazer a remoção da parte credora
 	$valor 		= $contas['valor'];
 
 	  switch ($dev) {
@@ -55,7 +56,7 @@ while ($contas = mysql_fetch_array($lista)) {
 				$$ofCampanha += $valor;
 				$$ofCampSem   += $valor;
 				$totOfertaCampanha += $valor;
-			}elseif ($contas['credito']=='704') {
+			}elseif ($contas['credito']=='702') {
 				//ofertas extra
 				$$ofExtra 		+= $valor;
 				$$ofExtraSem   	+= $valor;

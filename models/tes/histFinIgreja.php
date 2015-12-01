@@ -12,12 +12,13 @@ $comSaldo	= '';$menorAno = 2010;$maiorAno=2100;
 		}else {
 			$ano = $_GET['ano'];
 		}
-
-$lista = mysql_query('SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%c%Y")="'.$mes.$ano.'" ORDER BY igreja,anorefer,mesrefer ');
+$queryLista  = 'SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS ano ';
+$queryLista .= 'FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%c%Y")';
+$queryLista .= '="'.$mes.$ano.'" ORDER BY igreja,anorefer,mesrefer ';
+$lista = mysql_query($queryLista);
 
 //Logica para montar o conjunto de variáveis para compor a tabelar a seguir
 require_once 'help/tes/histFinanceiroIgreja.php';
-
 
 	//echo "<h1> ** $ano **</h1>";
 	$ano = ($ano=='') ? date('Y'):$ano;
