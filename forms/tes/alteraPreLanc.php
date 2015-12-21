@@ -2,7 +2,7 @@
 <!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
 <?PHP
 	$lancAltera = new DBRecord('dizimooferta',$_GET['id'],'id');
-	$ctaDev = $lancAltera->devedora();//Conta devedora
+	//$ctaDev = $lancAltera->devedora();//Conta devedora
 	if ($lancAltera->lancamento()=='0' || $_SESSION['nivel']>'10') {
 
 		$contaAtivas = new tes_conta();
@@ -16,28 +16,53 @@
 
 				switch ($n1.$n2.$n3.$n4) {
 					case '411001':
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+					# Caixa Geral
+						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411002':
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+					# Caixa de Senhoras
+						$optionTipo .= '<option value="'.$ctaAcesso.',3,1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411003':
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+					# Caixa Geral - Receita de Campanhas
+						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411004':
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+					# Caixa de Ensino
+						$optionTipo .= '<option value="'.$ctaAcesso.',4,1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411005':
+						//Há varios caixas na Mocidade
+						if ($n5=='002') {
+							# Setor I - Rubem
+							$ctaDev = 9;
+						} elseif ($n5=='003') {
+							# Setor II - Zebulom
+							$ctaDev = 10;
+						} elseif ($n5=='004')  {
+							# Setor III - Azer
+							$ctaDev = 11;
+						} elseif ($n5=='005')  {
+							# Setor IV - Juda
+							$ctaDev = 12;
+						}else {
+							#Caixa geral da Mocidade
+							$ctaDev = 8;
+						}
+
 						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411006':
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+					# Caixa infantil
+						$optionTipo .= '<option value="'.$ctaAcesso.',5,1">'.$ctaArray['titulo'].'</option>';
 						break;
 					case '412001':
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+					# Missões
+						$optionTipo .= '<option value="'.$ctaAcesso.',2,1">'.$ctaArray['titulo'].'</option>';
 						break;
 					default:
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',2">'.$ctaArray['titulo'].'</option>';
+					# Todas as demais receitas
+						$optionTipo .= '<option value="'.$ctaAcesso.',1,2">'.$ctaArray['titulo'].'</option>';
 						break;
 				}
 			}

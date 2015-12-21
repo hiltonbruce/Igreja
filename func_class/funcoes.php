@@ -902,4 +902,62 @@ function periodoLimp ($mesRef) {
 		return $periodos;
 	}
 }
+
+#Formata número de telefones de 8 a acima de 11 dígitos
+function formatPhoneNumber($phoneNumber) {
+    $phoneNumber = preg_replace('/[^0-9]/','',$phoneNumber);
+
+    if(strlen($phoneNumber) > 11) {
+        $countryCode = substr($phoneNumber, 0, strlen($phoneNumber)-11);
+        $areaCode = substr($phoneNumber, -11, 2);
+        $nonoDig = substr($phoneNumber, -9, 1);
+        $nextThree = substr($phoneNumber, -8, 4);
+        $lastFour = substr($phoneNumber, -4, 4);
+
+        $phoneNumber = '+'.$countryCode.' ('.$areaCode.') '.$nonoDig.' '.$nextThree.'-'.$lastFour;
+    }
+    else if(strlen($phoneNumber) == 11) {
+        $areaCode = substr($phoneNumber, 0, 2);
+        $nonoDig = substr($phoneNumber, 2, 1);
+        $nextThree = substr($phoneNumber, 1, 4);
+        $lastFour = substr($phoneNumber, 3, 4);
+
+        $phoneNumber = ' ('.$areaCode.') '.$nonoDig.' '.$nextThree.'-'.$lastFour;
+    }
+    else if(strlen($phoneNumber) == 10) {
+        $areaCode = substr($phoneNumber, 0, 2);
+        $nextThree = substr($phoneNumber, 3, 4);
+        $lastFour = substr($phoneNumber, 6, 4);
+
+        $phoneNumber = '('.$areaCode.') '.$nextThree.'-'.$lastFour;
+    }
+    else if(strlen($phoneNumber) == 9) {
+        $nonoDig = substr($phoneNumber, 0, 1);
+        $nextThree = substr($phoneNumber, 1, 4);
+        $lastFour = substr($phoneNumber, 3, 4);
+
+        $phoneNumber = $nonoDig.' '.$nextThree.'-'.$lastFour;
+    }
+    else if(strlen($phoneNumber) == 8) {
+        $nextThree = substr($phoneNumber, 0, 4);
+        $lastFour = substr($phoneNumber, 3, 4);
+
+        $phoneNumber = $nextThree.'-'.$lastFour;
+    }
+
+    return $phoneNumber;
+}
+
+#Formata número de CPF para exibição
+function formatCPFNumber ($cpfNumber){
+
+        $trid1 = substr($cpfNumber, 0, 3);
+        $trid2 = substr($cpfNumber, 3, 3);
+        $trid3 = substr($cpfNumber, 6, 3);
+        $controle = substr($cpfNumber, 9, 2);
+
+        $cpfNumber = $trid1.'.'.$trid2.'.'.$trid3.'-'.$controle;
+
+    return $cpfNumber;
+}
 ?>
