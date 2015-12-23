@@ -51,13 +51,10 @@
 	  <?PHP } ?>
 		</tr>
 	</table>
-
 	<?php
-
 		require_once 'forms/autocompleta.php';
-
 		if (!(strstr($_GET["escolha"], "dados_pessoais.php") || strstr($_GET["escolha"], "cartao.php")) && isset($_SESSION["membro"]))
 		{
 			echo 'Membro: '.$_SESSION["membro"].' - Cargo: '.cargo($bsc_rol).' - Congrega: '.$igreja->razao();
 		}
-		?>
+	?>

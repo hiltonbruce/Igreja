@@ -1,7 +1,7 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-<?php 
+<?php
 	if (empty($formCampos)) {
 		$formCampos='';
 	}
@@ -20,7 +20,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><label>Endereço:</label> 
+			<td colspan="2"><label>Endereço:</label>
 			<input type="text" id="estado_val" class="form-control" name="estado" value="" size="30%" />
 			</td>
 			<td><label>Fone:</label>
@@ -32,7 +32,7 @@
 			<td colspan="4">&nbsp;</td>
 
 		</tr>
-		<?php 
+		<?php
 			echo $formCampos;
 		?>
 	</tbody>
@@ -53,6 +53,6 @@
 		return "models/autocomplete.php?q=" + this.value;
 	});
 </script>
-	
-	
-	
+
+
+

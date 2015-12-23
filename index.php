@@ -90,7 +90,7 @@
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
           <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB"><span class="glyphicon glyphicon-hand-right" >&nbsp;</span>&nbsp;Novos&nbsp;Convertidos</a></li>
           <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span class="glyphicon glyphicon-fire">&nbsp;</span>&nbsp;Igrejas</a></li>
-          <li <?PHP id_left ("agenda");?>><a href="#"><span class="glyphicon glyphicon-time" >&nbsp;</span>&nbsp;Agenda</a></li>
+          <li <?PHP id_left ("secretaria");?>><a href="./?escolha=controller/secretaria.php&mes=<?PHP echo date('m');?>"><span class="glyphicon glyphicon-time" >&nbsp;</span>&nbsp;Agenda</a></li>
           <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture" >&nbsp;</span>&nbsp;Cadastrar Bairro</a></li>
           <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt" >&nbsp;</span>&nbsp;Ficha, Recibo e Certid&otilde;es</a></li>
           <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift" >&nbsp;</span>&nbsp;Aniversariantes</a></li>

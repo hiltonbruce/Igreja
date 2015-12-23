@@ -1,3 +1,3 @@
 <?php
-    require('calendario/funcs.php');
+   // require('calendario/funcs.php');
 ?>

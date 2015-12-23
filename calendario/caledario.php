@@ -2,8 +2,6 @@
 $imprimir = false;
 
 if ($_GET['imp']>'0') {
-
-
 	date_default_timezone_set('America/Recife');
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
@@ -14,7 +12,6 @@ if ($_GET['imp']>'0') {
 	}else {
 		require("funcs_impress.php");
 	}
-
 
 	function __autoload ($classe) {
 		require_once ("../models/$classe.class.php");
@@ -42,7 +39,6 @@ if ($_GET['imp']>'0') {
 
 	$imprimir = true; //permite o impressão do rodapé
 	?>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
