@@ -56,6 +56,8 @@
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/docs.min.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="css/calendario.css" />
+
 <link rel="icon" type="image/gif" href="br_igreja.jpg">
 </head>
 <body>

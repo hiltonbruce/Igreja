@@ -43,13 +43,8 @@ function calcularDiaSemana($dia,$mes,$ano) {
   else
   {
 
-   //Carrega o css do calendário e armazena em $dados
-   $arq=fopen("css/calendario.css","r");
-   $tam=filesize("css/calendario.css");
-   $dados=fread($arq,$tam);
-   fclose($arq);
+   //Carrega o css do calendário e armazena em css/calendario.css
    //Coloca o css carregado no código do calendário
-   echo "<style type='text/css'>".$dados."</style>";
 
    //Calcula em que dia da semana é o dia 1/$mes/$ano
    $dia_semana=calcularDiaSemana(1,$mes,$ano);
