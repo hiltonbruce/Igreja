@@ -26,8 +26,8 @@
  $marc2=array("08/02","25/03","21/04","26/05");
  $marc3=array("01-04/03","07-11/03","14-18/03","21-24/03","28-31/03");
  $marc4=array("21/05","27/05","23/07","29/07");
- $marc5=array("01/04","06/08");
- $marc6=array("10-19/07");
+ $marc5=array("01/04","05/05","06/08");
+ $marc6=array("10-19/12/2015");
 
    echo gerarCalend(date('m'),date('Y'),1,3,
                        array($marc0,$marc1,$marc2,$marc3,$marc4,$marc5,$marc6),

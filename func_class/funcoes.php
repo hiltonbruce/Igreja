@@ -1036,7 +1036,7 @@ function formatCPFNumber ($cpfNumber){
     $tabela=$tabela."<tr>";
     for($ms=0; $ms<$ncols && $idx<$total; $ms++)
     {
-     $temp_tb="<td valign='top'><table class='tabela' width=220 height=220>
+     $temp_tb="<td valign='top'><table class='table'>
               <tr><td colspan=7  class='cabecalho'>".$meses[$idx].
               "</td></tr><tr>"; //Cria uma tabela para o mês atual
 
@@ -1079,7 +1079,8 @@ function formatCPFNumber ($cpfNumber){
 	  }
 
 	  //Atribui uma classe CSS à célula (dia) atual da tabela caso
-	  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado ou $marcado)
+	  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado
+	  // ou $marcado)
 	  //Verifica se o dia atual $cnt_dias está no intervalo de dias ou se é igual
 	  //ao dia obtido
    	  if($m==$maux && (($cnt_dias>=$d1 && $cnt_dias<=$d2) ||
@@ -1088,10 +1089,11 @@ function formatCPFNumber ($cpfNumber){
 	}
 
 	if($classe=="") //Caso a classe ainda não esteja definida após o for acima
-	 $classe=($d==0 ? "td_marcado0" : "td_dia");
+	 $classe=($d==0) ? "td_marcado0" : "td_dia";
 
 	//Cria a célula referente ao dia atual
-	$temp_ln=$temp_ln."<td class='".$classe."'>".$cnt_dias++."</td>";
+	$diaAtual = '<a href="data='.$cnt_dias.'">'.$cnt_dias++.'</a>';
+	$temp_ln=$temp_ln."<td class='".$classe."'>".$diaAtual."</td>";
         $daux++;
         if($daux>6) $daux=0;
        }
@@ -1118,10 +1120,11 @@ function formatCPFNumber ($cpfNumber){
     }
     $tabela=$tabela."</tr>";
    }
-   $legenda="<table class=table><tr><td class='cabecalho' colspan=2>Legenda</td></tr>";
+   $legenda="<table class='table'><tr><td class='cabecalho' colspan=2>Legenda</td></tr>";
 
    for($i=1;$i<=$nq;$i++)
-    $legenda=$legenda."<tr><td class='td_marcado".$i."'>&nbsp;</td><td class='td_leg'>".$leg[$i-1]."</td></tr>";
+    $legenda  =$legenda."<tr><td class='td_marcado".$i."'>&nbsp;</td><td class='td_leg'>";
+	$legenda .=$leg[$i-1]."</td></tr>";
 
    $tabela=$tabela.$legenda."</table>";
    $tabela=$tabela."</table>";
