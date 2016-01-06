@@ -89,121 +89,41 @@
 }
 
 .td_marcado1{
- background: #DDF0FC;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #FF0000;
+ font-size: 12pt;
 }
 
 .td_marcado2{
- background: #d5ffd5;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #33ff33;
+ font-size: 12pt;
 }
 
 .td_marcado3{
- background: #FFE1F7;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #0000FF;
+ font-size: 12pt;
 }
 
 .td_marcado4{
- background: #FFFFD5;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #00FFFF;
+ font-size: 12pt;
 }
 
 .td_marcado5{
- background: #FFCAB0;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #FFFF00;
+ font-size: 12pt;
 }
 
 .td_marcado6{
- background: #DDF0FC;/*url('../cel1.bmp');*/
- border-top: 2px solid #0000ff;
- border-bottom: 2px solid #0000ff;
- border-left: 2px solid #0000ff;
- border-right: 2px solid #0000ff;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #FF00FF;
+ font-size: 12pt;
 }
 
 .td_marcado7{
- background: #91C8FF;/*url('../cel1.bmp');*/
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #6B8E23;
+ font-size: 12pt;
 }
 
 .td_marcado8{
- background: #D6D6EB/*url('../cel1.bmp');*/
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font-style: italic;
- font-family: verdana,"sans serif",monospace;
- font-size: 8pt;
- color: #000000;
- width: 24px;
- height: 20px;
+ color: #9932CD;
+ font-size: 12pt;
 }
