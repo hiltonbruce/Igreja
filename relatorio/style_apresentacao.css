@@ -1,39 +1,40 @@
 *{ margin: 0; padding: 0; }
 body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; color: #505367; background-color: #fff; background: url(../img/bordar_apres.jpg) no-repeat 50% 0%; }
-	
+
 	#container { margin: 3em auto; width: 640px; text-align: left; }
-	
+
 	#header { width:680px; height: 80px; margin: 0; padding: 0 20px 45px 0px; text-align:center; font-family:"Times New Roman", Times, serif;}
 	#header h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
-	
+
 	#mainnav {height: 30px; margin: 0; padding: 20px 0 0; text-align:center; font-size: 150%; font-family:"Times New Roman", Times, serif;}
-	
+
 	#content { height: auto; margin: 1px 0 0; padding: 0; }
-	
+
 
 #added-div1 {
-	position:relative; 
+	position:relative;
 	width: 520px;
-	z-index:1; 
-	height: auto; 
-	float: left; 
-	margin: 5px 20px 5px 60px; 
+	z-index:1;
+	height: auto;
+	float: left;
+	margin: 5px 20px 5px 60px;
 	padding: 5px;
 	font-size:16px;
 	font-family:"Times New Roman", Times, serif;
 }
 
 #added-div-2 {
-	position:relative; 
+	position:relative;
 	width: 650px;
-	float: left; 
-	margin: 3px 0px 5px; 
-	padding: 0; 
+	float: left;
+	margin: 3px 0px 5px;
+	padding: 0;
 }
 
 #pastor {
 	position:relative;
 	width:190px;
+	top: 20px;
 	padding: 0 0 0 150px;
 	text-align:center;
 	font-size:11px;
@@ -45,20 +46,27 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; 
 	width:315px;
 	text-align:center;
 	margin-right: 30px;
-	top: -30px;
+	top: -90px;
 	font-size:11px;
 }
 
-h1{ 
+#assinSec {
+	position:relative;
+	width:115px;
+	margin-left: 400px;
+	top: -60px;
+}
+
+h1{
 	color: #0000FF;
 	font-size: 280%;
-	font-family: Forte; 
-	font-weight: normal; 
-	text-align: center; 
-	height: 40px; 
+	font-family: Forte;
+	font-weight: normal;
+	text-align: center;
+	height: 40px;
 	padding-top: 25px;
 	font-family:"Times New Roman", Times, serif;
-	
+
 }
 h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
 h3, legend { color: #3366FF; font-size: 120%; font-family: Forte; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 2px; font-family:"Times New Roman", Times, serif;}

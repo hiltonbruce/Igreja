@@ -335,12 +335,12 @@ unset($_SESSION["cpf"]);
 <script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {
-		var textoVer = '<a href="#" class="btn btn-primary" style="color:#fff;text-decoration:none;">É extrangeiro?</a>';
+		var textoVer = '<a href="#" class="btn btn-primary" style="color:#fff;text-decoration:none;">É estrangeiro?</a>';
 		$('dd').css('display', 'none');
 		$('dt').after(textoVer);
 
 		$('a').click(function(){
-			if ($(this).text() == 'É extrangeiro?') {
+			if ($(this).text() == 'É estrangeiro?') {
 				$(this).next().next().toggle();
 				$(this).text('Fechar se Brasileiro!');
 				$(this).next()
@@ -351,7 +351,7 @@ unset($_SESSION["cpf"]);
 				})
 				.slideToggle('slow');
 			} else {
-				$(this).text('É extrangeiro?');
+				$(this).text('É estrangeiro?');
 				$(this).next().slideToggle('slow');
 				$(this).next().next().toggle();
 			}

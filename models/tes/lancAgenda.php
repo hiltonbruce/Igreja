@@ -16,7 +16,11 @@
     }
         $despesa    = $_POST['acessoDebitar'];
         require_once 'models/tes/lancamento.php';
-        $atualizar->idlanc  = $ultimolanc;//id do lancamento atual
+        if ($msgErro=='') {
+            #Se houver lançamento atualiza a agenda
+            $atualizar->idlanc  = $ultimolanc;//id do lancamento atual
+        }
+
         $atualizar->Update();
     }
 

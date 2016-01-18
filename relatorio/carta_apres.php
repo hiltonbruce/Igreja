@@ -7,6 +7,7 @@
 	controle ("inserir");
 
 	$igreja = new DBRecord ("igreja","1","rol");
+    $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
     $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
 
@@ -61,8 +62,18 @@
     <br />
 		<div id="pastor"><?PHP echo strtoupper( toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
-	  <div id="secretario"><?PHP echo strtoupper( toUpper($_POST["secretario"]));?><br />
-      Secret&aacute;rio </div>
+        <?PHP
+            $assinSecret  = '../imgAssin/'.$secretario->rol().'a.png';
+            if (!file_exists($assinSecret)){
+                    $assinSecret  = '../imgAssin/noAssin.png';
+            }
+        ?>
+        <div id='assinSec'>
+            <img src=<?PHP echo $assinSecret;?> width="109" height="80"/>
+        </div>
+	  <div id="secretario">
+        <?PHP echo cargo($secretario->rol())['1'].' '.strtoupper( toUpper($secretario->nome()));?><br />
+      Secret&aacute;rio </span></div>
     </div>
 
   </div>

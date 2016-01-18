@@ -3,14 +3,15 @@
 	if (empty ($_POST["resp_recebeu"]) && !empty($_POST["rols"])) {
 		echo "<script> alert('Você deve indicar quem está recebendo os cartões!');location.href='../?escolha=relatorio/recibos.php&rols={$_POST["rols"]}&menu=top_formulario&tipo=1';;</script>";
 		header("Location: ../");
-		
+
 	}
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
 	require_once("func.php");
 
 	$igreja = new DBRecord ("igreja","1","rol");
-	
+    $cidadeIgr = new DBRecord ("cidade",$igreja->cidade(),"id");
+
 	if (!empty($_POST["rols"])){
 		$mem_rec = new DBRecord ("membro",$_POST["resp_recebeu"],"rol");
 		$list_recibos = new emit_recibos ($_POST["rols"]);
@@ -46,7 +47,7 @@ body {
 	color: #a12621;
 	font-size: 1em;
 	font-weight: normal;
-	padding: -200px 20px 0; 
+	padding: -200px 20px 0;
 }
 
 #endereco {
@@ -59,22 +60,22 @@ body {
 }
 
 #footer {
-	color: #636466; 
+	color: #636466;
 	font-size:65%;
-	height: 50px; 
-	background-repeat: no-repeat; 
-	background-position: top; 
-	text-align: left; 
-	clear: both; 
-	margin: 0; 
-	padding-top: 25px; 
+	height: 50px;
+	background-repeat: no-repeat;
+	background-position: top;
+	text-align: left;
+	clear: both;
+	margin: 0;
+	padding-top: 25px;
 	padding: 10px 0 0 0;
 	background-image: url(horbar.gif);
 		width: 800px;
 }
 
-#footer a { 
-	color: #636466; 
+#footer a {
+	color: #636466;
 	text-decoration: underline;
 }
 
@@ -84,20 +85,20 @@ a:link:after, a:visited:after {
 	color:#555555;
 }
 
-h1{ 
+h1{
 	color: #0000FF;
 	font-size: 300%;
-	font-family: Forte; 
-	font-weight: normal; 
-	text-align: left; 
-	height: 60px; 
-	padding-top: 20px; 
+	font-family: Forte;
+	font-weight: normal;
+	text-align: left;
+	height: 60px;
+	padding-top: 20px;
 	padding-left: 20px;
 	font-family:"Times New Roman", Times, serif;
-	
+
 }
 
-	
+
 .clear {
   clear: both;
 }
@@ -221,8 +222,8 @@ if (!empty($_POST["rols"])){
 <p>
   <!-- fim div lst_cad -->
 </p>
-<p>Recebido em: 
-  <?PHP  print $igreja->cidade()." - ".$igreja->uf().", ".data_extenso ($data);?>
+<p>Recebido em:
+  <?PHP  print $cidadeIgr->nome()." - ".$cidadeIgr->coduf().", ".data_extenso ($data);?>
   <br />
 Assinatura:____________________________________________<br />
 Entregue &agrave;: <?PHP echo "Rol: {$mem_rec->rol()} - {$mem_rec->nome()}";?></p>
@@ -230,7 +231,7 @@ Entregue &agrave;: <?PHP echo "Rol: {$mem_rec->rol()} - {$mem_rec->nome()}";?></
 	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
 
 	  Copyright &copy; <a href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information"></a>
-      Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a> 
+      Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a>
 	   <?PHP echo "CNPJ: {$igreja->cnpj()}";?><br />
    		<?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?><br />
      <p> Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>

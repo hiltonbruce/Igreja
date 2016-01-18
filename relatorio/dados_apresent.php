@@ -36,8 +36,8 @@ $ind = 1; //Define o indice dos campos do formulário
         <?PHP
 		$nome = new editar_form("id_cong",$igreja->razao(),$tab,$tab_edit);
 		$nome->getMostrar();
-		
-		
+
+
 		if ($_GET["campo"]=="id_cong"){
 			?>
 				  <form id="form1" name="form1" method="post" action="">
@@ -88,7 +88,7 @@ $ind = 1; //Define o indice dos campos do formulário
 				$nome = new editar_form("rol_mae",$apresenta->rol_mae(),$tab,$tab_edit);
 				$nome->getMostrar();$nome->getEditar();
 			?>			</td>
-		<?php 
+		<?php
 		} ?>
       </tr>
       <tr>
@@ -109,7 +109,7 @@ $ind = 1; //Define o indice dos campos do formulário
 		?></td>
       </tr>
       <tr>
-        <td>UF Nascimento: 
+        <td>UF Nascimento:
         <?PHP
 		$nome = new editar_form("uf",$apresenta->uf(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
@@ -118,7 +118,7 @@ $ind = 1; //Define o indice dos campos do formulário
         <?PHP
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-		
+
 		//$nome = new editar_form("cidade",$apresenta->cidade(),$tab,$tab_edit);
 		//$nome->getMostrar();$nome->getEditar();
 		?></td>
@@ -146,7 +146,7 @@ $ind = 1; //Define o indice dos campos do formulário
 		?></td>
       </tr>
       <tr>
-        <td colspan="3">Observa&ccedil;&otilde;es:		
+        <td colspan="3">Observa&ccedil;&otilde;es:
         <?PHP
 		$nome = new editar_form("obs",$apresenta->obs(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
@@ -159,8 +159,8 @@ $ind = 1; //Define o indice dos campos do formulário
       <input name="rol" type="hidden" id="rol" value="<?PHP echo $apresenta->rol();?>" />
       <label>Secret&aacute;rio:</label>
 		<select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
-			<option value="<?PHP echo fun_igreja ($igreja_sede->secretario1());?>"><?PHP echo fun_igreja ($igreja_sede->secretario1());?></option>
-			<option value="<?PHP echo fun_igreja ($igreja_sede->secretario2());?>"><?PHP echo fun_igreja ($igreja_sede->secretario2());?></option>
+			<option value="<?PHP echo $igreja_sede->secretario1();?>"><?PHP echo fun_igreja ($igreja_sede->secretario1());?></option>
+			<option value="<?PHP echo $igreja_sede->secretario2();?>"><?PHP echo fun_igreja ($igreja_sede->secretario2());?></option>
 		</select>
 		</div>
  	 	<div class="col-xs-2">
@@ -173,7 +173,7 @@ $ind = 1; //Define o indice dos campos do formulário
     }else {
     	echo "Sem Cadastro para este id: {$_GET["id"]}";
     }
-    
+
     ?>
 </div>
 </fieldset>

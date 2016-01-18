@@ -19,8 +19,8 @@
 	}
 
 	if (strstr($itemagenda->credor(),'r')) {
-		$rolMembro = ltrim ($itemagenda->credor(),'r');
-		$credorAgenda = new DBRecord('membro', (int)$rolMembro, 'rol');
+		$rolMembro = intval($itemagenda->credor());
+		$credorAgenda = new DBRecord('membro',$rolMembro, 'rol');
 		$nomeMembro = $credorAgenda->nome();
 		$credorCompl = true;//Para o caso de membros da igreja
 

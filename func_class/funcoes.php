@@ -89,17 +89,17 @@ function cargo ($rol) {
 	}
 	$rec = new DBRecord ("eclesiastico",$opcao,"rol");
 		if ($rec->pastor()>"0000-00-00") {
-			$cargo = "Pastor";
+			$cargo = array( 'Pastor', 'Pr');
 		}elseif ($rec->evangelista()>"0000-00-00") {
-			$cargo = "Evangelista";
+			$cargo = array( 'Evangelista', 'Ev');
 		}elseif ($rec->presbitero()>"0000-00-00") {
-			$cargo = "Presb&iacute;tero";
+			$cargo = array( 'Presb&iacute;tero', 'Pb');
 		}elseif ($rec->diaconato()>"0000-00-00") {
-			$cargo = "Di&aacute;cono";
+			$cargo = array( 'Di&aacute;cono', 'Dc');
 		}elseif ($rec->auxiliar()>"0000-00-00") {
-			$cargo = "Auxiliar";
+			$cargo = array( 'Auxiliar', 'Ax');
 		}else {
-			$cargo = "Membro";
+			$cargo = array( 'Membro', 'Mb');
 		}
 	unset($_POST["rol"]);
 	return $cargo;

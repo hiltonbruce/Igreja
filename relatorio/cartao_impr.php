@@ -34,15 +34,15 @@ require "../func_class/classes.php";
 		exit;
 	}elseif ($rec_pessoais->sexo()=='F' && file_exists("../img/cartao_feminino.jpg")) {
 		$background_cartao = "feminino"; //Define a imagem de fundo do cartão
-	}elseif (cargo($rolConsuta)=="Pastor") {
+	}elseif (cargo($rolConsuta)['0']=="Pastor") {
 		$background_cartao = "pastor"; //Define a imagem de fundo do cartão
-	}elseif (cargo($rolConsuta)=="Evangelista") {
+	}elseif (cargo($rolConsuta)['0']=="Evangelista") {
 		$background_cartao = "evangelista";
-	}elseif (cargo($rolConsuta)=="Presb&iacute;tero") {
+	}elseif (cargo($rolConsuta)['0']=="Presb&iacute;tero") {
 		$background_cartao = "presbitero";
-	}elseif (cargo($rolConsuta)=="Di&aacute;cono") {
+	}elseif (cargo($rolConsuta)['0']=="Di&aacute;cono") {
 		$background_cartao = "diacono";
-	}elseif (cargo($rolConsuta)=="Auxiliar"){
+	}elseif (cargo($rolConsuta)['0']=="Auxiliar"){
 		$background_cartao = "auxiliar"; //Define a imagem de fundo do cartão
 	}else {
 		$background_cartao = "membro";
@@ -209,7 +209,7 @@ body {
   Igreja Assembleia de Deus
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
-<div id="cargo">Carteira de Identidade de <?PHP echo cargo($rolConsuta);?></div>
+<div id="cargo">Carteira de Identidade de <?PHP echo cargo($rolConsuta)['0'];?></div>
 <div id="Nome">
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?></div>
 <div id="Layer7"> &quot;Este cart&atilde;o s&oacute; ter&aacute; validade com apresenta&ccedil;&atilde;o da carta&quot;</div>

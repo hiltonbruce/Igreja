@@ -38,7 +38,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 	?>
 	<table>
 		<caption>
-			Lista de 
+			Lista de
 			<?PHP
 			echo $_GET['titTabela'];
 
@@ -54,25 +54,25 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				<col id="Nome">
 					<col id="Congrega&ccedil;&atilde;o">
 						<col id="albumCol" />
-		
+
 		</colgroup>
 
 		<thead>
 			<tr>
 				<th scope="col">Rol</th>
 				<th scope="col">Nome</th>
-				<?php 
+				<?php
 				if ($_GET['ext']==1) {
 					?>
 				<th scope="col">Nascido em:</th>
 				<th scope="col">Telefones</th>
-				<?php 
+				<?php
 				}else {
 
 					?>
 				<th scope="col">Congregação</th>
 				<th scope="col">Cargo</th>
-				<?php 
+				<?php
 				}?>
 			</tr>
 		</thead>
@@ -83,7 +83,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			{
 
 				$ls++;
-					
+
 				if ($ls>1)
 				{
 					$cor="class='dados'";
@@ -92,7 +92,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				else
 				{$cor="class='odd'";
 				}
-					
+
 				if ($_GET['ext']=='1') {
 					$bairro = new DBRecord( bairro, $coluna["bairro"], 'id');
 					$cidade = new DBRecord(cidade, $coluna["cidade"], 'id');
@@ -102,7 +102,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				<td><?php echo $coluna["nome"];
 				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
 				echo ' - Cong.: '.$congregacao->razao();
-				echo ', '.cargo ($coluna["rol"]);
+				echo ', '.cargo ($coluna["rol"])['0'];
 
 				?>
 				</td>
@@ -125,14 +125,14 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 					?>
 			<tr <?php echo "$cor";?>>
 				<td><?php echo $coluna["rol"];?></td>
-				<td><?php echo $coluna["nome"];				
+				<td><?php echo $coluna["nome"];
 				?></td>
 				<td><?php
 				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
 				echo $congregacao->razao();
 				?></td>
 				<td><?php
-				echo cargo ($coluna["rol"]);;
+				echo cargo ($coluna["rol"])['0'];
 				?></td>
 			</tr>
 			<?PHP	}

@@ -3,9 +3,9 @@ $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_POST['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 
-#Analisa se serÃ¡ lanÃ§ado em contas a pagar e fazer o reconhecimento da despesas
+#Analisa se será lançado em contas a pagar e fazer o reconhecimento da despesas
 list($anoVenc,$mesVen,$diaVenc) = explode('-',$vencimento);
-$data = br_data($_POST['data'], 'Data do lanÃ§amento invÃ¡lida!');
+$data = br_data($_POST['data'], 'Data do lançamento inválida!');
 list($anoPgto,$mesPgto,$diaPgto) = explode('-', $data);
 if ((($mesPgto>$mesVen && $anoPgto==$anoVenc) ||$anoPgto>$anoVenc) && $vencimento!='') {
 	$ctaPagar = true;
@@ -36,7 +36,7 @@ if ($_POST['valor']<='0' || $_POST['acessoDebitar']<1 || $_POST['acessoCreditar'
 	$creditar =  $_POST['acessoCreditar'];
 }
 
-//inicializa variÃ¡veis
+//inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
 //$corlinha = false;
@@ -52,37 +52,39 @@ $totalCred = 0;
 	}
 
 	if ($credora->tipo()=='D' && ($credora->saldo()-($valor+$multa))<'0') {
-	 $msgErro = 'Saldo nÃ£o permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
+	 $msgErro = 'Saldo não permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
 	}elseif ($devedora->tipo()=='C' && ($devedora->saldo()-$valor)<'0'){
-	 $msgErro = 'Saldo nÃ£o permitido para Conta: '.$devedora->titulo().' que ficaria com o valor de '.($devedora->saldo()-$valor);
+	 $msgErro = 'Saldo não permitido para Conta: '.$devedora->titulo().' que ficaria com o valor de '.($devedora->saldo()-$valor);
+	}elseif ($debitar==$creditar){
+	 $msgErro = 'Contas de Credito e Débito iguais, refaça o lançamento!';
 	}else {
 	 $msgErro='';
 	}
 
 	if ($ctaMulta) {
 		if ($ctaMulta->tipo()=='C' && ($ctaMulta->saldo()-$multa<'0')){
-	 		$msgErro .= 'Saldo nÃ£o permitido para Conta: '.$ctaMulta->titulo().' que ficaria com o valor de '.($ctaMulta->saldo()-$multa);
+	 		$msgErro .= 'Saldo não permitido para Conta: '.$ctaMulta->titulo().' que ficaria com o valor de '.($ctaMulta->saldo()-$multa);
 		}
 	}
 
 	if ($credora->nivel4()=='1.1.1.001') {
-	 ;//testar se cta de caixa e nÃ£o permitir o lancamento se ficar negativo e a de despesas tb
+	 ;//testar se cta de caixa e não permitir o lancamento se ficar negativo e a de despesas tb
 	}
 
-	$ultimoLancNumero = mysql_query('SELECT max(lancamento) AS lanca FROM lanc');//Traz o valor do ultimo lanÃ§amento
+	$ultimoLancNumero = mysql_query('SELECT max(lancamento) AS lanca FROM lanc');//Traz o valor do ultimo lançamento
 	$lancmaior = mysql_fetch_array($ultimoLancNumero);
-	$ultimolanc = (int)$lancmaior['lanca']+1;//Acrescenta uma unidade no ultimo lanÃ§amento p usar no lanÃ§amento
+	$ultimolanc = (int)$lancmaior['lanca']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
 
-//Foi criado a tabela lanchist exclusivamente para o histÃ³rico dos lanÃ§amentos
-//Antes de comeÃ§ar os lanÃ§amentos verificar se hÃ¡ inconcistÃªncia nos saldo antes de continuar
+//Foi criado a tabela lanchist exclusivamente para o histórico dos lançamentos
+//Antes de começar os lançamentos verificar se há inconcistência nos saldo antes de continuar
 //Criar uma classe que retorne falso ou verdadeiro
-//Analizar os valores para lanÃ§ar o dÃ­zimo para COMADEP e SEMAD
+//Analizar os valores para lançar o dízimo para COMADEP e SEMAD
 
-$referente = (strlen($_POST['referente'])>'4') ? $_POST['referente']:false;//Atribui a variÃ¡vel o histÃ³rico do lanÃ§amento
+$referente = (strlen($_POST['referente'])>'4') ? $_POST['referente']:false;//Atribui a variável o histórico do lançamento
 
 if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
-	//Faz o lanÃ§amento do dÃ©bito da tabela lancamento
+	//Faz o lançamento do débito da tabela lancamento
 	$exibideb = '<tr class="warning"><td colspan="4">Debito</td></tr>';
 	$exibicred = '<tr class="warning"><td colspan="4">Credito</td></tr>';
 
@@ -91,8 +93,8 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$caixaSenhoras = '';
 	//echo $credora->id().'<h1> tste </h>';
 	/*
-	* Se o pgto tiver vencimento de mÃªs anterior ao pgto Ã© feita
-	* a apropriaÃ§Ã£o em contas a pagar no mÃªs de referÃªncia e o lanÃ§amento tb do
+	* Se o pgto tiver vencimento de mês anterior ao pgto é feita
+	* a apropriação em contas a pagar no mês de referência e o lançamento tb do
 	* pgto da cta caixa e cta a pagar
 	*/
 	if ($ctaPagar) {
@@ -106,7 +108,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
 		//$contApgtoAprop->atualizar($valor,'C',$roligreja,$vencimento);
 
-		//LanÃ§a o histÃ³rico do lanÃ§amento
+		//Lança o histórico do lançamento
 		$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
 		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc+1,$histAPagar,$roligreja);
 		$lanchist = new incluir($InsertHist, 'lanchist');
@@ -131,27 +133,27 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$histLac = $referente.$motivoComplemento;
-		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lanÃ§amento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$ctaVencida = '';
 
 
 		$valorTotal += $valor;
 //print_r($credora);
 		if ($credora->nivel2()=='4.1') {
-			//Receitas operacionais faz provisÃ£o automaticamente
-			//exceto lanÃ§amento direto para despesas nÃ£o operacionais
+			//Receitas operacionais faz provisão automaticamente
+			//exceto lançamento direto para despesas não operacionais
 			if ($debitar=='2') {
-				//ProvisÃ£o para MissÃµes
+				//Provisão para Missões
 				$provmissoes += $valor*0.4;
 			}elseif ($devedora->nivel4()=='1.1.1.001' && $devedora->acesso()>0 && $devedora->tipo()=='D') {
-				//Para tipo 8 nÃ£o hÃ¡ provisÃ£o para COMADEP ou MissÃµes
+				//Para tipo 8 não há provisão para COMADEP ou Missões
 				$provcomadep += $valor*0.1;
 			}
 
 		}
 
-	//Exibi lanÃ§amento
-	//Faz lanÃ§ameto de multa caso exista
+	//Exibi lançamento
+	//Faz lançameto de multa caso exista
 	if ($ctaMulta) {
 		$multaAtraso = new atualconta($ctaMulta->codigo(),$ultimolanc,$credora->id());
 		$multaAtraso->atualizar($multa,'D',$roligreja,$data);
@@ -166,14 +168,14 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
 
-   	//LanÃ§a provisÃµes conta Despesa
+   	//Lança provisões conta Despesa
    	if ($provmissoes>0) {
-		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de MissÃµes) provisÃ£o e despesa
-		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lanÃ§amento da provisÃ£o de missÃµes - Despesa
-		$histTextProv =' e provisÃ£o para SEMAD sobre a receita ';
+		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
+		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
+		$histTextProv =' e provisão para SEMAD sobre a receita ';
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lanÃ§amento da provisÃ£o SEMAD
+		$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
 		$exibideb .= sprintf("<tr><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
 				$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),
 				number_format($conta->saldo(),2,',','.'),$conta->tipo());
@@ -181,48 +183,48 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$corlinha = !$corlinha;
    	}
 
-	$provcomad = new atualconta('3.1.1.001.007',$ultimolanc,'10');//ConvenÃ§Ã£o estadual COMADEP
+	$provcomad = new atualconta('3.1.1.001.007',$ultimolanc,'10');//Convenção estadual COMADEP
 	if ($provcomadep>0) {
-		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lanÃ§amento da provisÃ£o de Comadep - Despesa
+		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento da provisão de Comadep - Despesa
 		$totalDeb += $provcomadep;
 		if ($histTextProv!='') {
-			$histTextProv = ', provisÃ£o para COMADEP e SEMAD sobre a receita ';
+			$histTextProv = ', provisão para COMADEP e SEMAD sobre a receita ';
 		} else {
-			$histTextProv = ' e provisÃ£o para COMADEP sobre a receita ';
+			$histTextProv = ' e provisão para COMADEP sobre a receita ';
 		}
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lanÃ§amento da provisÃ£o SEMAD
+		$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
 		$exibideb .= sprintf("<tr><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
 						</td><td id='moeda'>%s&nbsp;%s</td></tr>",$conta->codigo(),$conta->titulo()
 						,number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
 		$corlinha = !$corlinha;
 	}
 	$exibideb .= sprintf("<tr  class='primary'><td>Total debitado</td><td id='moeda'>R$ %s</td><td></td><td></td></tr>",number_format($totalDeb,2,',','.'));
-	//esta variÃ¡vel Ã© levada p/ o script views/exibilanc.php
+	//esta variável é levada p/ o script views/exibilanc.php
 
-	//Faz o leiaute do lanÃ§amento do crÃ©dito da tabela lancamento
+	//Faz o leiaute do lançamento do crédito da tabela lancamento
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc,'');
-		$contcaixa->atualizar($multa+$valor,'C',$roligreja,$data); //Faz o lanÃ§amento na tabela lancamento e atualiza o saldo
+		$contcaixa->atualizar($multa+$valor,'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$caixa = new DBRecord('contas',$creditar,'acesso');//Exibi lanÃ§amento
+		$caixa = new DBRecord('contas',$creditar,'acesso');//Exibi lançamento
 		$exibicred .= sprintf("<tr><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
 		$caixa->codigo(),$caixa->titulo(),number_format($valor+$multa,2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo());
 		$totalCred += $valor+$multa;
 		//$corlinha = !$corlinha;
 
-	//LanÃ§a provisÃµes conta credora no Ativo
+	//Lança provisões conta credora no Ativo
 	$lancprovmissoes=false;
 	if ($provmissoes>0) {
-		//Faz o lanÃ§amento da provisÃ£o de missÃµes - Ativo
+		//Faz o lançamento da provisão de missões - Ativo
 		$provsemad = new atualconta('1.1.1.001.007',$ultimolanc);
 		$provsemad->atualizar($provmissoes,'C',$roligreja,$data);
 		$totalCred += $provmissoes;
 		$lancprovmissoes=true;
 
 		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$conta = new DBRecord('contas','7','acesso');//Exibi lanÃ§amento da provisÃ£o SEMAD
+		$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
 		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
 		$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
 		//$corlinha 	= !$corlinha;
@@ -230,51 +232,51 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 
 	if ($provcomadep>0) {
-		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc); //Faz o lanÃ§amento da provisÃ£o de Comadep - Ativo
-		$provcomad->atualizar($provcomadep,'C',$roligreja,$data);//Faz o lanÃ§amento da provisÃ£o da COMADEP - Ativo
+		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc); //Faz o lançamento da provisão de Comadep - Ativo
+		$provcomad->atualizar($provcomadep,'C',$roligreja,$data);//Faz o lançamento da provisão da COMADEP - Ativo
 		$lancprovmissoes=true;
 
 		//$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
-		$conta 		= new DBRecord('contas','6','acesso');//Exibi lanÃ§amento da provisÃ£o COMADEP
+		$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
 		$exibicred .= sprintf("<tr><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
 		$conta->codigo(),$conta->titulo(),number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
 		$totalCred 	+= $provcomadep;
 	}
 
-	//esta variÃ¡vel Ã© levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
+	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 	$exibicred .= sprintf("<tr class='primary'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
 
-	//echo "MissÃµes: $provmissoes, Comadep: $provcomadep";
-	//inserir o histÃ³rico do lanÃ§amento das provisÃµes na tabela lanchist
+	//echo "Missões: $provmissoes, Comadep: $provcomadep";
+	//inserir o histórico do lançamento das provisões na tabela lanchist
 
-	//LanÃ§a o histÃ³rico do lanÃ§amento das provisÃµes $provmissoes>0 $provcomadep>0
+	//Lança o histórico do lançamento das provisões $provmissoes>0 $provcomadep>0
 	if ($lancprovmissoes) {
 	$HistProv = sprintf("'','%s','%s','%s'",$ultimolanc,$histTextProv,$roligreja);
 	//$lanchist = new incluir($HistProv, 'lanchist');
 	//$lanchist->inserir();
 	}
 
-	//LanÃ§a o histÃ³rico do lanÃ§amento
+	//Lança o histórico do lançamento
 	$referente .= $histTextProv.' nesta data'.$ctaVencida;
 	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
 
-	require_once 'views/exibilanc.php'; //Exibi a tabela com o lanÃ§amento concluÃ­do
+	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 
 }else {
-	 //Fim do 1Âº if linha 7
+	 //Fim do 1º if linha 7
 	if ($referente=='' && !$status) {
-		$mensagem = 'NÃ£o existe nada a ser lanÃ§ado!';
+		$mensagem = 'Não existe nada a ser lançado!';
 	}elseif ($referente=='') {
-		$mensagem = 'VocÃª nÃ£o informou o motivo do lanÃ§amento com um mÃ­nimo de 5 caracteres!' ;
+		$mensagem = 'Você não informou o motivo do lançamento com um mínimo de 5 caracteres!' ;
 	}elseif ($msgErro!='') {
 		$mensagem = $msgErro;
 	}else {
-		$mensagem = 'NÃ£o exite valores a ser lanÃ§ado!';
+		$mensagem = 'Não exite valores a ser lançado!';
 	}
 
-	echo '<script>alert("'.$mensagem.'");location.href="./?escolha=tesouraria/receita.php&rec=2";</script>';
+	echo '<script>alert("'.$mensagem.'");window.history.go(-1);</script>';
 	echo $mensagem;
 
 }
