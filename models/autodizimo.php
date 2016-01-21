@@ -78,7 +78,7 @@ while( $campo = mysql_fetch_array( $res ) )
 	//$ecles = new DBRecord ('eclesiastico',$campo ['rol'],'rol');
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
 	$cargo = cargo($rolMembro);
-	$nomecong = $cargo.' - '.htmlentities($igreja->razao(),ENT_QUOTES,'iso-8859-1');
+	$nomecong = $cargo['0'].' - '.htmlentities($igreja->razao(),ENT_QUOTES,'iso-8859-1');
 	switch ($campo['situacao_espiritual']) {
 		case '2':
 			$nomecong .= '&nbsp;<mark>Disciplinado</mark> ';

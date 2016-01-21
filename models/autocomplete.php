@@ -37,7 +37,8 @@ switch ($quantNomes) {
 $res = mysql_query( $sql );
 
 $linhas = mysql_num_rows($res);
-
+# 1ªlinha em branco
+echo "<li onselect=\" \">... </li>\n";
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
@@ -49,9 +50,9 @@ while( $campo = mysql_fetch_array( $res ) )
 	$cargo = cargo($campo['rol']);
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
 	if ($igreja->razao()=='') {
-		$sigla = $cargo.'- <code> Congrega&ccedil;&atilde;o&nbsp;n&atilde;o&nbsp;definida!</code> - '.$campo['celular'];
+		$sigla = $cargo['0'].'- <code> Congrega&ccedil;&atilde;o&nbsp;n&atilde;o&nbsp;definida!</code> - '.$campo['celular'];
 	} else {
-		$sigla = $cargo.' - '.htmlentities($igreja->razao().' - '.$campo['celular'],ENT_QUOTES,'iso-8859-1');
+		$sigla = $cargo['0'].' - '.htmlentities($igreja->razao().' - '.$campo['celular'],ENT_QUOTES,'iso-8859-1');
 	}
 
 	switch ($campo['situacao_espiritual']) {

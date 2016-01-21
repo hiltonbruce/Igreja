@@ -90,8 +90,9 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 
 		$dtLanc = $linha['data'];
 		//Texto do histórico de cada lançamento
-		$historico  .= '<p>'.$linha['referente'].', '.$linha['razao'].'</p>';
-
+		if ($lancamento != $lancAtual) {
+			$historico  = '<p>'.$linha['referente'].', '.$linha['razao'].'</p>';
+		}
 		$lancamento = $lancAtual;
 		$histAnterior = $linha['referente'];
 
