@@ -26,7 +26,7 @@ $dataMov = $d.'/'.$m.'/'.$a;
 		$congRelatorio = '';
 	}
 
-	if ($m<date('m')) {
+	if ($m<date('m') || $a<date('Y')) {
 		$d=date("t",mktime(0,0,0,$m,1,$a));//recupera o ultimo dia do mês
 	}elseif ($m>date('m') && $a>date('Y')){
 		$d = date('d');
