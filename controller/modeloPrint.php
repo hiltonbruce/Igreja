@@ -9,14 +9,13 @@ controle('tes');
 require_once ("../func_class/classes.php");
 
 date_default_timezone_set('America/Recife');
- 
+
 function __autoload ($classe) {
 
 	list($dir,$nomeClasse) = explode('_', $classe);
 	//$dir = strtr( $classe, '_','/' );
 
 	if (file_exists("../models/$dir/$classe.class.php")){
-			
 		require_once ("../models/$dir/$classe.class.php");
 	}elseif (file_exists("../models/$classe.class.php")){
 		require_once ("../models/$classe.class.php");
@@ -36,9 +35,9 @@ switch ($tipo) {
 	case '1':
 	$tituloColuna5 = ($idIgreja>'1') ? 'Congrega&ccedil;o':'Igreja';
 	$nomeArquivo = '../views/tesouraria/tabDizimosOfertas.php';
-	require_once '../views/modeloPrint.php';	
+	require_once '../views/modeloPrint.php';
 	break;
-	
+
 	default:
 		;
 	break;

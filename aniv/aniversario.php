@@ -1,5 +1,5 @@
 <?PHP
-  
+
 $anterior=$_GET["proxima"]-1;
 $proximo=$_GET["proxima"]+1;
 
@@ -7,8 +7,8 @@ if ($_GET["Submit"]=="Imprimir") {
 
 	session_start();
 	require_once ("../func_class/funcoes.php");
-	require_once ("../func_class/classes.php"); 
-	
+	require_once ("../func_class/classes.php");
+
 	controle ("consulta");
 $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 
@@ -23,13 +23,13 @@ $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 <link rel="stylesheet" type="text/css" href="../tabs.css" />
 <link rel="icon" type="image/gif" href="../br_igreja.jpg">
 </head>
-<body>  
+<body>
 <div id="header">
 	<p>
 	<?PHP
 	//print_r($igreja);
 	echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
-	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?> 
+	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?>
 	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
     <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>
@@ -38,13 +38,13 @@ $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 <?php
 
 	$fimPagina = ' <div id="footer">
-    Copyright &copy; 2014  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
+    Copyright &copy; 2016  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
     </div>
 </body>
 </html>';
 
 }else {
-	$fimPagina = 'Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro. 
+	$fimPagina = 'Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro.
 ';
 echo "<style type='text/css'> <!--";
 	require_once ("aniv/style.css");
@@ -59,29 +59,32 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 //-->
 </script>
 
-<?PHP 
+<?PHP
 	require_once ("aniv/navega.php");
-} 
+}
 //Código para exibir de qual congregação é a lista de aniversariantes
 $congrega = new DBRecord ("igreja","{$_GET["congregacao"]}","rol");
 if ($_GET["congregacao"]>"0" ) {
 	$cong_sele = " - Congrega&ccedil;&atilde;o: ".$congrega->razao();
+} else {
+    $cong_sele = " - Todas as congrega&ccedil;&otilde;es";
 }
 ?>
 
 <table cellspacing="0" id="listTable" class='table' summary="Idade, Rol, Nome, Congregação e Cargo">
 <caption>
-Lista de Aniversariantes 
-<?PHP 
+Lista de Aniversariantes
+<?PHP
 $aniv = new aniversario;
 
 if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
-	echo " de Hoje";
+	echo " de hoje";
 }else {
-	echo "do Dia: ".$aniv->data_consulta ();}
-
+	echo "do dia: ".$aniv->data_consulta ();
+}
+echo $cong_sele;
 ?>
- 
+
 </caption>
 
 <colgroup>

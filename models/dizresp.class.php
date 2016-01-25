@@ -152,16 +152,15 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 				$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
 				$nomeCongMembro = $dadosCongMembro->razao();
 			}
-
+			#Formata exibição de ano e mÊs de referência
+			$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
 			if ( $this->impressao) {
-				$linkMembro= $rol.' - '.$linha['nome'];
-
+				$linkMembro= $rol.' - '.$linha['nome'].$mesAno;
 			}else {
 				list($lancCPF,$lancNome) = explode(':', $linha['hist']);
 				$linkMembro  = '<a href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&id='.$linha['id'].'&bsc_rol='.$rol;
 				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lanç. por: '.$lancNome.')">';
-				$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
 			}
 
