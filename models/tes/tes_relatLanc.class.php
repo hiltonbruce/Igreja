@@ -35,6 +35,8 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 		$opIgreja .= 'AND DATE_FORMAT(l.data,"%d%m%Y")="'.$dia.$mes.$ano.'" ';
 	}elseif ($mes>'0' && $mes<'13' && ($ano=='' || $ano<'2011')) {
 		$opIgreja .= 'AND DATE_FORMAT(l.data,"%m")="'.$mes.'" ';
+	}elseif (($mes<'1' || $mes>'12') && $ano!='' && $ano<=date('Y') && $cta!='') {
+		$opIgreja .= 'AND DATE_FORMAT(l.data,"%Y")="'.$ano.'" ';
 	} else {
 		$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ';
 	}

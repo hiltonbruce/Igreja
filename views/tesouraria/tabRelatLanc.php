@@ -14,9 +14,9 @@
 
 	$statusLancamento = 'Lan&ccedil;amentos Contábeis';
 
-	$linkResumo  = 'rec=15&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
-	$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
-	$linkResumo .= '&credito='.$_GET['credito'];
+	$linkResumo  = 'rec=15&igreja='.$_GET['igreja'].'&dia='.$_GET['dia'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
+	$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'];
+	$linkResumo .= '&credito='.$_GET['credito'].'&conta='.$_GET['conta'];
 
 	if (!empty($_GET['escolha'])) {
 		$imprimir  = '<a href="tesouraria/receita.php/?tipo=1&'.$linkResumo.' " target="_blank" >';

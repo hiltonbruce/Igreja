@@ -94,7 +94,6 @@ switch ($rec) {
 		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
 		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
 		$roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
-
 		$tituloColuna5 = 'Valor(R$)';
 		$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
 		break;

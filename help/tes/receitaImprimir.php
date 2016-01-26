@@ -19,7 +19,7 @@ switch ($_GET['rec']) {
 		break;
 	case '15':
 		$dia = (empty($_GET['dia'])) ? '' : sprintf("%'02u",$_GET['dia']);
-		$roligreja = ($_GET['igreja']>0) ? (int)$_GET['igreja'] : 1 ;
+		$roligreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']) ;
 		$igrejaSelecionada = new DBRecord('igreja', $roligreja, 'rol');
 		$titTabela = 'Relatório de Lançamentos';
 		$linkImpressao ='tesouraria/receita.php/?rec=15';
