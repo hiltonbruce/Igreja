@@ -89,12 +89,8 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoIgrejas.php';
 		break;
 	case '21':
-		$dia = (empty($_GET['dia'])) ? '' : sprintf("%'02u",$_GET['dia']);
+		require_once 'help/tes/varRelatorio.php';
 		require_once ('forms/tes/relatorioLanc.php');
-		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
-		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
-		$roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
-		$tituloColuna5 = 'Valor(R$)';
 		$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
 		break;
 	case '22':

@@ -18,14 +18,10 @@ switch ($_GET['rec']) {
 		require_once '../views/modeloPrint.php';
 		break;
 	case '15':
-		$dia = (empty($_GET['dia'])) ? '' : sprintf("%'02u",$_GET['dia']);
-		$roligreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']) ;
+		require_once '../help/tes/varRelatorio.php';
 		$igrejaSelecionada = new DBRecord('igreja', $roligreja, 'rol');
 		$titTabela = 'Relatório de Lançamentos';
 		$linkImpressao ='tesouraria/receita.php/?rec=15';
-		$mes = empty($_GET['mes']) ? '':$_GET['mes'] ;
-		$ano = empty($_GET['ano']) ? '':$_GET['ano'];
-		$tituloColuna5 = 'Valor(R$)';
 		//require_once '../models/saldos.php';
 		$nomeArquivo='../views/tesouraria/tabRelatLanc.php';
 		require_once '../views/modeloPrint.php';

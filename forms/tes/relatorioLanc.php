@@ -1,22 +1,5 @@
 <?php
-	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
-	$refer = (empty($_GET['refer'])) ? '' : $_GET['refer'] ;
-	$cta = (empty($_GET['conta'])) ? '' : $_GET['conta'] ;
-	if (!empty($_GET['deb'])) {
-		$deb =  'checked="checked"' ;
-		$debValor =  $_GET['deb'] ;
-	}else {
-		$deb =  '' ;
-		$debValor =  '' ;
-	}
 
-	if (!empty($_GET['cred'])) {
-		$cred =  'checked="checked"' ;
-		$credValor =  '1' ;
-	}else {
-		$cred =  '' ;
-		$credValor =  $_GET['cred'];
-	}
 
 ?>
 <fieldset>
@@ -34,10 +17,10 @@
 		<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 		      <?php
 		      	$linha1 = '<option value="0">Selecione o m&ecirc;s...</option>';
-			      foreach(arrayMeses() as $mes => $meses) {
-					 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
-					 if ($_GET['mes']==$mes) {
-					 	$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
+			      foreach(arrayMeses() as $mesRel => $meses) {
+					 $linha2 .= '<option value='.$mesRel.'>'.$meses.'</options>';
+					 if ($_GET['mes']==$mesRel) {
+					 	$linha1 = '<option value='.$mesRel.'>'.$meses.'</options>'.$linha1;
 					 }
 			      }
 			      echo $linha1.$linha2;
