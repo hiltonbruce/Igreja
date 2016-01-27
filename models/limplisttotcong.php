@@ -22,7 +22,7 @@ if ($_GET['limpeza']=='4') {
 	while($roligreja = mysql_fetch_array($todacongrLimp)){
 
 	$tabtodas .= '<table class="table table-striped table-hover" >
-					<caption>Relação do Material de Limpeza para: '.$roligreja['razao'].' - '.$mesref.'</caption>
+					<caption>Material de Limpeza - '.$roligreja['razao'].',  para os meses de '.$periodo['0'].'</caption>
 
 						<colgroup>
 							<col id="item">

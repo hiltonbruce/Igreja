@@ -1,7 +1,3 @@
-<?php
-
-
-?>
 <fieldset>
 	<legend>Relat&oacute;rio de Lan&ccedil;amentos</legend>
     <div class="form-group">

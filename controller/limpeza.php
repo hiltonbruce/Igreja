@@ -1,39 +1,29 @@
 <?php
-$igreja = ($_GET['igreja']>0) ? $_GET['igreja']:$_POST['igreja'];
 $saltoPagina = '<div style="page-break-before: always;"> </div>';
 
 if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && $_GET['limpeza']<'12' )) {
  	error_reporting(E_ALL);
-		ini_set('display_errors', 'off');
-		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
-		require "../func_class/funcoes.php";
-		require "../func_class/classes.php";
-		function __autoload ($classe) {
+	ini_set('display_errors', 'off');
+	$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
+	require "../func_class/funcoes.php";
+	require "../func_class/classes.php";
+	function __autoload ($classe) {
 
-		list($dir,$nomeClasse) = explode('_', $classe);
-		//$dir = strtr( $classe, '_','/' );
+	list($dir,$nomeClasse) = explode('_', $classe);
+	//$dir = strtr( $classe, '_','/' );
 
-			if (file_exists("../models/$dir/$classe.class.php")){
-
-				require_once ("../models/$dir/$classe.class.php");
-			}elseif (file_exists("../models/$classe.class.php")){
-				require_once ("../models/$classe.class.php");
-			}
+	#Variáveis do script
+	if (file_exists("../models/$dir/$classe.class.php")){
+			require_once ("../models/$dir/$classe.class.php");
+		}elseif (file_exists("../models/$classe.class.php")){
+			require_once ("../models/$classe.class.php");
 		}
+	}
 
+		require_once "../help/tes/varLimpeza.php";
 		//montar um cabeçalho padrão e remover as chamadas a cima
 		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
 
-			if (!empty($_GET['mesref'])) {
-				$mesref = $_GET['mesref'];
-			} elseif (!empty($_POST['mesref'])) {
-				$mesref = $_POST['mesref'];
-			}elseif (!empty($_GET['mes'])) {
-				$mesref = $_GET['mes'].'/'.$_GET['ano'];
-			} else {
-				$ref = new ultimoid('limpezpedid');
-				$mesref = $ref->ultimo('mesref');
-			}
 
 		//Dados para montar o cabeçalho do documento para imprimir
 		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
@@ -43,42 +33,15 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && 
 		$siteigreja	  = $sede->site();
 		$emailigreja  = $sede->email();
 		$icone		  = '../ad.ico';
-}else {
-	if (!empty($_GET['mesref'])) {
-		$mesref = $_GET['mesref'];
-	} elseif (!empty($_POST['mesref'])) {
-		$mesref = $_POST['mesref'];
-	} elseif (!empty($_GET['mes'])) {
-		$mesref = $_GET['mes'].'/'.$_GET['ano'];
-	} else {
-		$ref = new ultimoid('limpezpedid');
-		$mesref = $ref->ultimo('mesref');
-	}
+} else {
+	#Variáveis do script
+	require_once "help/tes/varLimpeza.php";
 }
 
 if (empty($_GET['mes']) && empty($_GET['ano'])) {
 	$periodo = periodoLimp($mesref);
 }else {
 	$periodo = periodoLimp($_GET['mesref']);
-}
-
-//Mês e ano do relatório
-if (!empty($_GET['mes'])) {
-	$mesPed = $_GET['mes'];
-	$anoPed = $_GET['ano'];
-	$mesref=$mesPed.'/'.$anoPed;
-	$linkperido = 'mes='.$mesPed.'&ano='.$anoPed.'&mesref='.$mesref;
-} elseif (!empty($_POST['mes'])) {
-	$mesPed = $_POST['mes'];
-	$anoPed = $_POST['ano'];
-	$mesref=$mesPed.'/'.$anoPed;
-	$linkperido = 'mes='.$mesPed.'&ano='.$anoPed.'&mesref='.$mesref;
-} elseif (!empty($_GET['mesref'])) {
-	list($mesPed,$anoPed) = explode('/', $_POST['mesref']);
-	$mesref=$mesPed.'/'.$anoPed;
-	$linkperido = 'mes='.$mesPed.'&ano='.$anoPed.'&mesref='.$mesref;
-}  else {
-	$linkperido = '';
 }
 
 switch ($_GET['limpeza']) {

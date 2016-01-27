@@ -3,7 +3,7 @@ $tbodytab = new limplista($mesref);
 if ($_GET['limpeza']!='4') {
 ?>
 <table class='table table-striped table-hover' >
-	<caption>Relação do Material de Limpeza Total para: <?php echo $mesref;?></caption>
+	<caption>Relação do Material de Limpeza Total - <?php echo $periodo['0'];?></caption>
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -86,16 +86,16 @@ if ($_GET['limpeza']!='4') {
 		echo $saltoPagina;
 }
 	require_once $todascongreg;
+	$dadosCidade = new DBRecord('cidade',$dadoscong->cidade(), 'id');
 	if ($dadoscong->matlimpeza()!='0') {
 		//Assinatura do tesoureiro(a) e elador(a)
 		//$dadoscong vem do script controller/limpeza.php
 	?>
 	<div id="added-div-2">
-      <h2><?PHP  print $dadoscong->cidade()." - ".$dadoscong->uf().", ".data_extenso (date('d/m/Y'));?></h2>
+      <h2><?PHP  print $dadosCidade->nome()." - ".$dadoscong->uf().", ".data_extenso (date('d/m/Y'));?></h2>
       <p>&nbsp;</p>
       <p class="bottom">&nbsp;</p>
 	  <div id="pastor"><?PHP echo 'Joseilton Costa Bruce';?><br />Tesoureiro </div>
-	  <div id="secretario"><?PHP echo '_____________________';?><br />Zelador(a)</div>
 	</div>
 	<?php
 	}

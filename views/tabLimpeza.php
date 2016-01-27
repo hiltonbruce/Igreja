@@ -2,7 +2,7 @@
 $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q chamar este
 ?>
 <table class='table table-striped table-hover' >
-	<caption>Relação do Material de Limpeza para: <?php echo $congregcao->razao().' - '.$mesref;?></caption>
+	<caption>Material de Limpeza - <?php echo $congregcao->razao().', para: '.$periodo['0'];?></caption>
 
 		<colgroup>
 			<col id="item">
