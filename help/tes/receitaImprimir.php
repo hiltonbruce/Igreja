@@ -28,8 +28,9 @@ switch ($_GET['rec']) {
 		break;
 	case '16':
 		//Relatorio COMADEP
+		$idIgreja = intval($_GET['igreja']);
 		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informações da consulta
-		$mesRelatorio .=$rolIgreja;
+		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 		require_once '../models/tes/relatorioComadep.php';
 		$nomeArquivo='../views/saldosComadep.php';

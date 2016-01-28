@@ -27,9 +27,9 @@ switch ($rec) {
 		break;
 	case '6'://Relatório COMADEP
 		require_once 'help/tes/relatorioComadep.php';
-		$mesRelatorio .=$rolIgreja;
+		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-		$titTabela = 'Fluxo das Contas - COMADEP - '.$dtRelatorio.$congRelatorio;
+		$titTabela = $congRelatorio.' &bull; Fluxo das Contas - COMADEP - '.$dtRelatorio;
 		$recLink = '16&dia='.$d.'&mes='.$m.'&ano='.$a;
 		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
 		$linkImpressao .='&tipo='.$_GET['tipo'];

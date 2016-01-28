@@ -2,14 +2,14 @@
 $d = $_GET['dia'];$m=$_GET['mes'];$a=$_GET['ano'];
 $dataMov = $d.'/'.$m.'/'.$a;
 
-	if (!empty($_GET['igreja']) && $_GET['igreja']>0) {
-		$rolIgreja = ' AND igreja="'.$_GET['igreja'].'" ';
+	if (!empty($_GET['igreja']) && $_GET['igreja']>'0') {
+		$rolIgreja = ' AND igreja="'.intval($_GET['igreja']).'" ';
 	}else {
 		$rolIgreja = '';
 	}
 
 	if ($_GET['igreja']>'1') {
-		$igrejaRelatorio = new DBRecord ("igreja",$_GET['igreja'],"rol");
+		$igrejaRelatorio = new DBRecord ("igreja",intval($_GET['igreja']),"rol");
 		$congRelatorio = $igrejaRelatorio->razao();
 	}elseif ($_GET['igreja']=='1'){
 		$igreja = new DBRecord ("igreja","1","rol");
@@ -22,8 +22,10 @@ $dataMov = $d.'/'.$m.'/'.$a;
 			$origem = $igreja->cidade();
 		}
 
+	}elseif ($_GET['igreja']=='-1') {
+		$congRelatorio = 'Congrega&ccedil;&otilde;es';
 	}else {
-		$congRelatorio = '';
+		$congRelatorio = 'Sede e Congrega&ccedil;&otilde;es';
 	}
 
 	if ($m<date('m') || $a<date('Y')) {
