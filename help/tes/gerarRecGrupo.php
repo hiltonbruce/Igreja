@@ -91,7 +91,6 @@
 				$rg = ltrim( $rg, 'RG: ' );
 			}
 		break;
-
 		default:
 			//grupo = 1 -> Ministerio
 			$rolmembro = $valor['rolMembro'];

@@ -176,6 +176,8 @@ foreach ($listaPgto as $chave => $valor) {
 		$totOutros += $valor['pgto'];
 		//Cadastra o recibo
 		if ($demaisPgto!='') {
+			$codAcessoDesp = $valor['coddespesa'];
+			$debito = 1;
 			require $gerar;
 			require $demaisPgto;
 		}

@@ -22,12 +22,10 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			$recLink='escolha=controller/despesa.php&menu=top_tesouraria&id=';
 			$titTabela = 'Listagem para Pagamento';
 			require_once 'help/tes/reciboPgto.php';
-
 			require_once 'forms/tes/folha.php';//Form p cadastrar cargos
 			require_once 'views/tesouraria/recPgto.php';
 			break;
 		case '8':
-
 			//Recibos para de pgto
 			$pgtoDias = new tes_cargo();
 			$listaPgto = $pgtoDias->cargoIgreja($_POST['rolIgreja'],$_POST['idfunc'] );

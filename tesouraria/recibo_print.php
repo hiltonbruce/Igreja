@@ -59,7 +59,7 @@
 		}
 
 	}else {
-		$reimprimir = new DBRecord("tes_recibo", (int)$_POST["reimprimir"], "id");
+		$reimprimir = new DBRecord("tes_recibo", intval($_POST["reimprimir"]), "id");
 		$cad_igreja = $reimprimir->igreja();
 		$valor = $reimprimir->valor();
 		$rec_tipo = $reimprimir->tipo();

@@ -19,7 +19,7 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 		$recMenu = (empty($_GET["rec"])) ? $_POST["rec"]:$_GET["rec"];
 		switch ($recMenu) {
 			case '20':
-				//Recibos para de pgto
+				//Recibos para pgto
 				$pgtoDias = new tes_cargo();
 				$listaPgto = $pgtoDias->dadosCargo();
 				$recLink='';

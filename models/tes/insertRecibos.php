@@ -60,13 +60,12 @@ if ($gerarPgto) {
 	$contas = new tes_conta();
 	$contasAtivas = $contas->ativosArray();
 	//print_r ($contasAtivas);
-	$debito ='';
 
 
 	//print_r($contasAtivas);
 	//Cadastra o recibo na tabela
-	if (strstr($_POST['debito'], ',')) {
-		$debitoContas	= explode(',',$_POST['debito']);
+	if (strstr($_POST['acessoDebitar'], ',')) {
+		$debitoContas	= explode(',',$_POST['acessoDebitar']);
 		//print_r($debitoContas);
 		$virgula = '';
 		foreach ($debitoContas as $acesso){
@@ -75,8 +74,10 @@ if ($gerarPgto) {
 				$virgula = ',';
 			}
 		}
-	}else {
-		$debito = (int)$_POST['debito'];
+	}elseif (!empty($_POST['acessoDebitar']) && intval($_POST['acessoDebitar'])==$_POST['acessoDebitar']) {
+		$debito = $_POST['acessoDebitar'];
+	}elseif (empty($debito)) {
+		$debito ='';
 	}
 
 	if (strstr($_POST['credito'], ',')) {
@@ -89,8 +90,12 @@ if ($gerarPgto) {
 				$virgula = ',';
 			}
 		}
-	}else {
+	}elseif (!empty($_POST['credito']) && intval($_POST['credito'])==$_POST['credito']) {
 		$credito = (int)$_POST['credito'];
+	}elseif (!empty($codAcessoDesp)) {
+		$credito = $codAcessoDesp;
+	}else {
+		$credito = '';
 	}
 	//echo("<h1>$debitoContas - $debito</h1>");
 	//echo("<h1> $creditoContas - $credito</h1>");

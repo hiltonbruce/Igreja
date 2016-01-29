@@ -1,7 +1,5 @@
 <?php
-
 	$scrip = 'models/tes/insertRecibos.php';
-	
 	switch ($_POST['grupo']) {
 		case '2':
 			//tesoureiros
@@ -23,7 +21,6 @@
 			$codConta = 180;
 			$demaisPgto= $scrip;
 		break;
-		
 		case '6':
 			///Sexta-Feira
 			$codConta = 212;
@@ -39,10 +36,14 @@
 			$codConta = 485;
 			$sede= $scrip;
 		break;
-		
-		default:
+		case '1':
 			//grupo = 1 -> Ministerio
 			$codConta = 485;
+			$ministerio = $scrip;
+		break;
+		default:
+			//Despesas diversas p/ os demais pgtos
+			$codConta = 180;
 			$ministerio = $scrip;
 		break;
 	}
