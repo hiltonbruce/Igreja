@@ -1,8 +1,10 @@
 <?php
-	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
+//	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 
 	if (empty($_GET['ano']) && $_GET['ano']!='0' ) {
 		$ano = date('Y');
+	}elseif (!empty($_GET['ano']) && $_GET['ano']==0 ) {
+		$ano = 0;
 	}else {
 		$ano = $_GET['ano'];
 	}

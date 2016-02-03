@@ -145,7 +145,7 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 	?>&Uacute;ltima ocorr&ecirc;ncia para este Membro
 	<form id="form1" name="form1" method="get" action="">
 	  <label>
-	    <input type="submit" class='btn btn-primary' name="Submit" value="Nova Carta" />
+	    <input type="submit" class='btn btn-primary' name="Submit" value="Cadastrar Carta" />
       </label>
       <input name="escolha" type="hidden" id="escolha" value="adm/cria_carta.php" />
       <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
@@ -168,6 +168,9 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
     //echo $dadosCargo['7']['1']['1']['nome'];
 	?>
 </div>
+<?PHP
+    if ($cidade!=''){
+?>
 <form id="form2" name="form2" method="post" action="relatorio/carta_print.php">
     <input type="hidden" name="id_carta" value="<?PHP echo $arr_dad["id"];?>" />
     <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
@@ -182,3 +185,6 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o"/>
   </div>
 </form>
+<?PHP
+}
+?>

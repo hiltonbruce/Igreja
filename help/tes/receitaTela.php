@@ -111,4 +111,3 @@ switch ($rec) {
                 //require_once 'forms/receita.php';
 		break;
 }
-?>
