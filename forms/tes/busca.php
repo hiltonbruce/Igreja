@@ -16,29 +16,6 @@
 		$msg = ' - Ano de :'.$ano;
 	}
 ?>
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-<script type="text/javascript">
-$(document).ready(function(){
-
-	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular, congr ) {
-			$("#id_val").val(rol);
-			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
-			$("#rol").val(celular);
-			$("#cong").val(congr);
-		}
-
-		if ( this.value.length < 1 && this.isNotClick )
-			return ;
-		return "models/autodizimo.php?q=" + this.value;
-	});
-
-});
-</script>
-<!-- Desenvolvido por Wellington Ribeiro -->
 <fieldset>
 	<legend>Lançamentos - Membros, congregados e an&ocirc;nimos</legend>
     <div class="form-group">
@@ -117,3 +94,23 @@ $(document).ready(function(){
 	</form>
 	</div>
 </fieldset>
+
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script type="text/javascript">
+
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular, congr ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#sigla_val").val(celular);
+			$("#rol").val(celular);
+			$("#cong").val(congr);
+		}
+
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/autodizimo.php?q=" + this.value;
+	});
+
+</script>
+<!-- Desenvolvido por Wellington Ribeiro -->
