@@ -39,18 +39,18 @@ $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 
 	// verifica se há valor a ser lançado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);
-	$tituloColuna5 = ($idIgreja>'1') ? 'Congregação':'Igreja';
-	if ($_POST['concluir']=='1') {
+	$tituloColuna5 = ($idIgreja > '1') ? 'Congregação' : 'Igreja';
+	if ($_POST['concluir'] == '1') {
 			$tituloColuna5 = 'Status';
 			require_once 'forms/lancdizimo.php';
-		} elseif ($_POST['lancar']=='1') {
+		} elseif ($_POST['lancar'] == '1') {
 			require_once 'models/feccaixaculto.php';
 		} else {
 			$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
 			$linkAcesso .= '&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 
-			$fin = ($_GET['fin']<'1') ? '2':$_GET['fin'];
-					$rec = (empty($_GET['rec'])) ? 0:$_GET['rec'];
+			$fin = ($_GET['fin'] < '1') ? '2' : $_GET['fin'];
+					$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'];
 
 			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
 	}

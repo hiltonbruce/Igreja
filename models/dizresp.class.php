@@ -8,7 +8,23 @@ function __construct($tesoureiro='',$print='') {
 		$this->tesoureiro = $tesoureiro;
 		$this->impressao = ($print==true) ? true:false;
 
+	$sqlcontas = mysql_query( 'SELECT * FROM contas WHERE acesso>"0" ORDER BY acesso' ) or die (mysql_error());
+	while ($linhaCta = mysql_fetch_array($sqlcontas)) {
+		$this->arrayContas[$linhaCta['acesso']] = array('id' => $linhaCta['codigo'], 'titulo' => $linhaCta['titulo'],
+			'saldo' => $linhaCta['saldo']
+			);
 	}
+	$sqlIgreja = mysql_query( 'SELECT * FROM igreja' ) or die (mysql_error());
+	while ($linhaIgr = mysql_fetch_array($sqlIgreja)) {
+		$this->arrayIgrejas[$linhaIgr['rol']] = array('razao' => $linhaIgr['razao'], 'pastor' => $linhaIgr['pastor'],
+			'rua' => $linhaIgr['rua']
+			);
+	}
+}
+
+
+function acessoContas() {
+}
 
 function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$linkAlterar) {
 
@@ -114,8 +130,8 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 
-			$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
-			$tipo = $mostracta->titulo;//Define o titulo para a variï¿½vel
+			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
+			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a variï¿½vel
 
 			if ($linha['obs']!='') {
 				$tipo = '<span title="'.$linha['obs'].'"><span class="glyphicon glyphicon-paperclip"></span> '.$tipo.'</span>';
@@ -146,11 +162,10 @@ function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$lin
 				$corrigir = $valor;
 			}
 
-
 			if ($congMembro!=$linha['congcadastro'] ) {
 				$congMembro = $linha['congcadastro'];
-				$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
-				$nomeCongMembro = $dadosCongMembro->razao();
+				//$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
+				$nomeCongMembro = $this->arrayIgrejas[$linha['congcadastro']]['razao'];
 			}
 			#Formata exibição de ano e mÊs de referência
 			$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
@@ -282,8 +297,8 @@ function concluir($igreja) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 
 
-			$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
-			$tipo = $mostracta->titulo();//Define o titulo para a variï¿½vel
+			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
+			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a variï¿½vel
 
 			//$tesoureiro = $linha['tesoureiro'];
 

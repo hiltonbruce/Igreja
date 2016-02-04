@@ -1,12 +1,12 @@
 <?php
 //	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 
-	if (empty($_GET['ano']) && $_GET['ano']!='0' ) {
+	if (empty($_GET['ano'])) {
 		$ano = date('Y');
-	}elseif (!empty($_GET['ano']) && $_GET['ano']==0 ) {
-		$ano = 0;
-	}else {
+	}elseif (!empty($_GET['ano']) && $_GET['ano']>'0' ) {
 		$ano = $_GET['ano'];
+	}else {
+		$ano = 0;
 	}
 
 	//Mensagem complementar para o cabeçalho da tabela

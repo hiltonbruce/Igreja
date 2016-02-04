@@ -67,6 +67,6 @@
 	  </ul>
 	</div>
 	<?PHP
-		require_once 'views/menus/planoCtaMenu.php'
+		require_once 'views/menus/planoCtaMenu.php';
 	?>
 	</p>
