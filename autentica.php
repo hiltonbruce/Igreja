@@ -14,11 +14,13 @@
 		// se o usuário estiver no banco de dados, registra o id do usuário
 		$col = mysql_fetch_array($result);
 
-		$_SESSION['nivel']=$col["nivel"];
+		$_SESSION['nivel'] = $col["nivel"];
 		$_SESSION['valid_user'] = $col["cpf"];
 		$_POST["rol"] = $col["cpf"];
-		$_SESSION['cargo']= $col["cargo"];
-		$_SESSION['nome']=$col["nome"];
+		$_SESSION['cargo'] = $col["cargo"];
+		$_SESSION['nome'] = $col["nome"];
+		$nomeUsuario = explode(' ', $col["nome"]);
+		$_SESSION['username'] = $nomeUsuario['0'].'_'.$nomeUsuario['1'];
 		$_SESSION['computador'] = $_SERVER["REMOTE_ADDR"];
 		$_SESSION["setor"] = $col["setor"];
 		//echo "<h1>{$col["rol"]} - {$_SESSION['nivel']}</h1>";
@@ -27,12 +29,10 @@
 			//se for IE
 				echo "<script> alert('Aconselhamos fortemente que você feche o Internet Explorer e abra o sistema com o Mozilla Firefox!');alert('Bem vindo aos nossos Sistemas!'); location.href='./?escolha=adm/cadastro_membro.php'; </script>";
 			 }
-
-				$hora=date('H');
-
-				if ($hora>"18")
+				$hora = date('H');
+				if ($hora > "18")
 					{
-						$sauda="Boa Noite! ";
+						$sauda = "Boa Noite! ";
 					}elseif ($hora>"12") {
 
 						$sauda="Boa Tarde! ";
@@ -63,7 +63,7 @@
 				'<br/>Host: '.$_SESSION['computador'].'</h5>';
 		echo "<p><a class='btn btn-info' href='logout.php'>Sair</a>
 		<a class='btn btn-info' href='./?escolha=alt_senha.php'>Trocar Senha</a></p>";
-
+		require_once 'chat/samplea.php';
 		//Verifica se a senha foi alterada após inicialização caso contrário chama página de aletração
 		$senha_crip = md5($_SESSION["valid_user"]);
 		$query_senha = "select * from usuario "

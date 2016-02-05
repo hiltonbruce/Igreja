@@ -8,12 +8,15 @@ function __construct($tesoureiro='',$print='') {
 		$this->tesoureiro = $tesoureiro;
 		$this->impressao = ($print==true) ? true:false;
 
+	// Array com os dados da tabela contas
 	$sqlcontas = mysql_query( 'SELECT * FROM contas WHERE acesso>"0" ORDER BY acesso' ) or die (mysql_error());
 	while ($linhaCta = mysql_fetch_array($sqlcontas)) {
 		$this->arrayContas[$linhaCta['acesso']] = array('id' => $linhaCta['codigo'], 'titulo' => $linhaCta['titulo'],
 			'saldo' => $linhaCta['saldo']
 			);
 	}
+
+	//Array com os dados da tabela igreja
 	$sqlIgreja = mysql_query( 'SELECT * FROM igreja' ) or die (mysql_error());
 	while ($linhaIgr = mysql_fetch_array($sqlIgreja)) {
 		$this->arrayIgrejas[$linhaIgr['rol']] = array('razao' => $linhaIgr['razao'], 'pastor' => $linhaIgr['pastor'],
@@ -22,14 +25,19 @@ function __construct($tesoureiro='',$print='') {
 	}
 }
 
+function dizimistas(
+	$igreja,
+	$linkLancamento,
+	$dia,
+	$mes,
+	$ano,
+	$tipo,
+	$cred,
+	$deb,
+	$linkAlterar) {
 
-function acessoContas() {
-}
-
-function dizimistas($igreja,$linkLancamento,$dia,$mes,$ano,$tipo,$cred,$deb,$linkAlterar) {
-
-	$dataValid = (checadata ($dia.'/'.$mes.'/'.$ano)) ? $ano.'-'.$mes.'-'.$dia:false;
-	if ($igreja=='') {
+	$dataValid = (checadata($dia.'/'.$mes.'/'.$ano)) ? $ano.'-'.$mes.'-'.$dia:false;
+	if ($igreja == '') {
 		$filtroIgreja = '';
 	} else {
 		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';

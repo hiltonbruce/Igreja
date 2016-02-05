@@ -45,8 +45,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Assembleia de Deus - Bayeux - PB</title>
-
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
 
@@ -57,6 +57,7 @@
 <link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/calendario.css" />
+<link type="text/css" rel="stylesheet" media="all" href="chat/css/chat.css" />
 
 <link rel="icon" type="image/gif" href="br_igreja.jpg">
 </head>
@@ -206,4 +207,14 @@ jQuery(function($) {
 
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+
+<?php
+  #Chamada para o Chat
+  if ($_SESSION['valid_user']!=''){
+    //Descomenta para o chat funcionar
+    echo '<script type="text/javascript" src="chat/js/chat.js"></script>';
+    $batepapo = new chat('');
+    echo $batepapo->incluir();
+  }
+?>
 </html>

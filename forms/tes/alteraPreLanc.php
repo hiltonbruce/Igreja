@@ -162,7 +162,8 @@
 		<tbody>
 			<tr>
 				<td colspan="2"><textarea name="obs" id="obs" class="form-control"
-						cols="50%" tabindex="<?php echo ++$ind;?>"></textarea>
+						cols="50%" tabindex="<?php echo ++$ind;?>"
+						><?php echo $lancAltera->obs();?></textarea>
 				</td>
 				<td><input type="hidden" name="tipo" id="tipo" value="1"> <input
 					type="hidden" name="escolha" value="models/tes/corrigiPreLanc.php"> <input
