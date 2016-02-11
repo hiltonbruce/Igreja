@@ -25,8 +25,9 @@
 	}
 
 	  if (!empty($_GET["bsc_rol"])){
-			$bsc_rol = (int)$_GET["bsc_rol"];
-			$_SESSION["rol"]=(int)$_GET["bsc_rol"];
+			$bsc_rol = intval($_GET["bsc_rol"]);
+			//$_SESSION["rol"]=(int)$_GET["bsc_rol"];
+      $membro = new DBRecord ("membro",$bsc_rol,"rol");
 		}
 
 	if (strstr($_GET["escolha"],"cadastro_membro.php") || strstr($_POST["escolha"],"cadastro_membro.php"))
@@ -35,8 +36,7 @@
 		unset($_SESSION["membro"]);
 		$campo_rol="Insira o Rol:";
 	}else{
-		$membro = new DBRecord ("membro",$bsc_rol,"rol");
-		$_SESSION["membro"]=$membro->nome();
+		//$_SESSION["membro"]=$membro->nome();
 		$campo_rol="Rol Nº:"; //Quando a variï¿½vel de sessão rol existir define 'Rol nº:' como legenda para o form listar dados do membro pelo rol
 	}
 

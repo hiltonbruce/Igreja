@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$rolConsuta = (int)$_GET['bsc_rol'];
 ?>
 
@@ -59,22 +59,22 @@ $arr_dad = mysql_fetch_array ($dad_cad);
 				default:
 					$estilo="<span style='color:#006633''>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</span>";
 					break;
-								
+
 			}
 			$nome = new editar_form("nome",$arr_dad["nome"],$tab,$tab_edit);
 			$_SESSION["membro"]=$arr_dad["nome"];
 			echo $estilo;
 			$nome->getMostrar();$nome->getEditar();
 		?></td>
-		<td rowspan="4" align="center"><img src="img_membros/<?PHP echo "$img";?>" width="75" height="98" border="1" /></td>
+		<td rowspan="4" align="center"><?PHP print mostra_foto($bsc_rol);?></td>
       </tr>
       <tr>
         <td colspan="2">Cargo:<strong>
         <?PHP
-		
+
 		$rec = new DBRecord ("eclesiastico",$rolConsuta,"rol");
 		//echo $rec->diacono()." - ".$rec->presbiterio()." - ".$rec->evangelista()." - ".$rec->pastor();
-		
+
 		if ($rec->pastor()>"0000-00-00") {
 			echo "Pastor";
 		}elseif ($rec->evangelista()>"0000-00-00") {

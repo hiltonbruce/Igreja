@@ -18,9 +18,9 @@ $query = "SELECT * from igreja ORDER BY razao";
 
 		$sql3 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql3);
-				
+
 		 //inicia o cabeçalho de paginação
-		
+
 		{
 		?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -98,10 +98,10 @@ thead tr:hover {
 </style>
 </head>
 		<table style ="width:95%;cellspacing:1; border= 1px;" >
-		
+
 		<caption>Lista de Dirigentes - <?PHP  print data_extenso (conv_valor_br(date("Y-m-d")));?>
       </caption>
-		
+
 			<colgroup>
 				<col id="Rol">
 				<col id="Nome">
@@ -109,7 +109,7 @@ thead tr:hover {
 				<col id="Novo Dirigente">
 				<col id="albumCol"/>
 			</colgroup>
-			
+
 			<thead>
 				<tr>
 				<th scope="col">Rol</th>
@@ -121,24 +121,24 @@ thead tr:hover {
 			</thead>
 			<tbody>
 		<?PHP
-			
+
 			while($coluna = mysql_fetch_array($sql3))
 			{
-			
+
 			$ls+=1;
-			if ($ls>1)	
+			if ($ls>1)
 					{
 					$cor="class='odd'";
 					$ls=0;
 					}
-					else 
+					else
 					{$cor="class='od2'";
 					}
 			?>
             <tr "<?php echo "$cor";?>">
 
 				<td><?php echo (int)$coluna["pastor"];?></td>
-				
+
 				<td><?php
 					$rol_dirigente = (int) $coluna["pastor"];
 					if ($rol_dirigente>0){
@@ -146,32 +146,40 @@ thead tr:hover {
 						$nome_dirigente = $nome->nome();}
 					else{
 						$nome_dirigente = $coluna["pastor"];}
-						
+
 				 echo $nome_dirigente;?>
 				 </td>
 				<td><?php echo $coluna["razao"];?></td>
 				<td></td>
-				<td><?php echo cargo ($coluna["pastor"]);?></td>
-				
-			<?PHP 
-			
+				<td><?php
+                    if (intval($coluna["pastor"])=='0') {
+                        $funIgreja = '-o-';
+                    } else {
+                        $funIgreja = cargo ($coluna["pastor"])['0'];
+                    }
+
+                 echo $funIgreja;
+                ?></td>
+
+			<?PHP
+
 			}//loop while produtos
-			
-	?>	
+
+	?>
 		</tbody>
 		</table>
 
 	<?PHP
 	}
 
-	
+
 	if ($total>"1")
 	{
 		if ($total>"100")
 			printf("Com %s dirigentes!",number_format($total, 0, ',', '.'));
 		else
 			printf("Com %s dirigentes!",number_format($total, 0, ',', '.'));
-			
+
 	}elseif ($total=="1"){
 		echo "Com apenas um dirigente!";
 	}else{

@@ -13,7 +13,7 @@ controle ("inserir");
 	$nome_cidade = $rec->nome()." - ".$rec->coduf();
 	//echo "<h1>Teste $uf_natal $cid_natal</h1>";
 
-	$prof = new DBRecord ("profissional",$_SESSION["rol"],"rol");
+	$prof = new DBRecord ("profissional",$bsc_rol,"rol");
 
 	$link = "atualizar_array";//define para q página direcionará o form para atualizar
 

@@ -43,7 +43,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <select name="uf_nasc" id="uf_nasc" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
               <?PHP
                 $estnatal = new List_UF('estado', 'nome','uf_end');
-                echo $estnatal->List_Selec_pop('escolha=adm/form_eclesiastico.php&bsc_rol='.$_SESSION["rol"].'&uf_end=',$_GET['uf_end']);
+                echo $estnatal->List_Selec_pop('escolha=adm/form_eclesiastico.php&bsc_rol='.$bsc_rol.'&uf_end=',$_GET['uf_end']);
               ?>
             </select>
             <input name="uf" type="hidden" id="uf" value="<?PHP echo $_GET['uf_end'];?>" />
@@ -207,7 +207,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <select name="uf_nasc" id="uf_nasc" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
           <?PHP
             $estnatal = new List_UF('estado', 'nome','uf_end');
-            echo $estnatal->List_Selec_pop('escolha=adm/form_eclesiastico.php&bsc_rol='.$_SESSION["rol"].'&uf_end=',$_GET['uf_end']);
+            echo $estnatal->List_Selec_pop('escolha=adm/form_eclesiastico.php&bsc_rol='.$bsc_rol.'&uf_end=',$_GET['uf_end']);
           ?>
         </select>
         <input name="uf" type="hidden" id="uf" value="<?PHP echo $_GET['uf_end'];?>" />

@@ -8,10 +8,10 @@ $arr_dad = mysql_fetch_array ($dad_cad);
 
 $ind = 1; //Define o indice dos campos do formulário
 
-ver_cad();
+ver_cad($bsc_rol);
 ?>
 	<?PHP
-	if (!empty($_SESSION["rol"]))
+	if (!empty($bsc_rol))
 	{
 		if (!empty($arr_dad["rol"])) {
 	?>
@@ -48,7 +48,7 @@ ver_cad();
 			<select name="estado_civil" id="estado_civil" class="form-control" tabindex="<?PHP echo $ind++;?>">
               <option value="<?PHP echo $arr_dad["estado_civil"];?>"><?PHP echo $arr_dad["estado_civil"];?></option>
 		  	<?PHP
-			$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
+			$membro = new DBRecord ("membro",$bsc_rol,"rol");
 			if ((strtoupper($membro->sexo()))=="M") {
 			?>
               <option value="Solteiro">Solteiro</option>

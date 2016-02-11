@@ -19,10 +19,10 @@ if ($_FILES ["userfile"]["type"] != "image/jpeg")
 	echo "Este arquivo não parece ser uma imagem!";
 	exit;
 }
-	
+
 //Insere o arquivo onde gostariamos ../img_membros/
-$upfile = "../img_membros/".$_SESSION["rol"].".jpg";
-	
+$upfile = "../img_membros/".intval($_POST['bsc_rol']).".jpg";
+
 if (is_uploaded_file ($_FILES ["userfile"]["tmp_name"]))
 {
 	if (!move_uploaded_file ($_FILES ["userfile"]["tmp_name"], $upfile))
@@ -37,7 +37,7 @@ else
 	echo $_FILES ["userfile"]["name"];
 	exit;
 }
-	
+
 print "<SCRIPT> alert('A foto foi enviada com sucesso...'); window.history.go(-1); </SCRIPT>\n";
 echo "O arquivo foi carregado com sucesso!<a href=''>Voltar...<a><br><br>";
 

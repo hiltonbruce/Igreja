@@ -694,11 +694,11 @@ function controle ($tipo){ //O tipo � definido como consulta, atualiza��o,
 	}
 }
 
-function ver_cad (){
+function ver_cad ($rol){
 	//Verifica se o rol selecionado tem cadastro
-	$ver_cadastro = new DBRecord ("membro",$_SESSION['rol'],"rol"); //Aqui ser� selecionado a informa��o do campo
+	$ver_cadastro = new DBRecord ("membro",$rol,"rol"); //Aqui ser� selecionado a informa��o do campo
 	if ($ver_cadastro->rol()=="" ) {
-	echo "<h3>N&atilde;o h&aacute; cadastro para o Rol: {$_SESSION["rol"]}.</h3>";
+	echo "<h3>N&atilde;o h&aacute; cadastro para o Rol: $rol.</h3>";
 	unset ($_SESSION["rol"]);
 	exit;
 	}

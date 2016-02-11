@@ -1,7 +1,7 @@
 <div id="lst_cad"><?PHP
 if ($_SESSION['nivel']>4){
 
-ver_cad();
+ver_cad($bsc_rol);
 $tabela = "membro";
 $tab="adm/atualizar_dados.php";//link q informa o script quem receberá os dados do form para atualizar
 $tab_edit="adm/dados_pessoais.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma página para abrir o form de edição do item
@@ -16,27 +16,29 @@ if (mysql_num_rows($dad_cad)<1)//Lista independente de outras tabelas
 $arr_dad = mysql_fetch_array ($dad_cad);
 $ind = 1;
 if (!empty($_GET['bsc_rol'])) {
-?>
+?><div class="row">
 	<form enctype="multipart/form-data" method="post" action="adm/salvar_foto.php">
-		<table style="width:40%;">
-			<tr>
-				<td>
-				  <input type="hidden" name="MAX_FILE_SIZE" value="200000">
-				  Salvar foto:
-				  <input name="userfile" type="file" size="40"  class="btn btn-primary"></td>
-				<td>
-					<label>&nbsp;</label><input type="submit" class="btn btn-primary" name="Submit" value="Enviar..."></td>
-			</tr>
-		</table>
+
+          <div class="col-xs-6">
+             <input type="hidden" name="MAX_FILE_SIZE" value="200000">
+             <label>Salvar foto:</label>
+             <input name="userfile" type="file" size="40" class="btn btn-primary" >
+          </div>
+          <div class="col-xs-2"><br />
+            <input name="bsc_rol" type="hidden" value='<?PHP echo $_GET['bsc_rol'];?>'>
+            <input type="submit" class="btn btn-primary" name="Submit" value="Enviar...">
+          </div>
 	</form>
+          <div class="col-xs-2"><br />
+            <a href='adm/apagarfoto.php?bsc_rol=<?PHP echo $bsc_rol;?>' class='btn btn-danger' >Excluir Foto</a>
+          </div>
+
+   </div>
 <?PHP
 
-	 if (file_exists("img_membros/".$bsc_rol.".jpg"))
-		{
+	 if (file_exists("img_membros/".$bsc_rol.".jpg")) {
 			$img=$bsc_rol.".jpg";
-		}
-		else
-		{
+		} else {
 			$img="ver_foto.jpg";
 		}
 	?>
@@ -87,7 +89,7 @@ if (!empty($_GET['bsc_rol'])) {
 			//echo $dataNasc->format('Y-m').' FormatoNasc<br/>';
 
 
-		?><div><?PHP print mostra_foto();?></div></td>
+		?><div><?PHP print mostra_foto($bsc_rol);?></div></td>
       </tr>
       		<?php $nome->getEditar();?><!-- Mostra form para nome -->
       <tr>

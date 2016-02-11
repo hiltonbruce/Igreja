@@ -7,7 +7,7 @@ controle ("inserir");
     } else {
         $estCivil = '';
     }
-	$familia = new DBRecord ("est_civil",$_SESSION["rol"],"rol");
+	$familia = new DBRecord ("est_civil",$bsc_rol,"rol");
 	$link = "atualizar_array";//define para q página direcionará o form para atualizar
 
 	if ($familia->rol()=="") {
@@ -38,7 +38,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                   class='form-control' tabindex="<?PHP echo $ind++;?>">
     		  	<?PHP
                 echo $estCivil;
-    			$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
+    			$membro = new DBRecord ("membro",$bsc_rol,"rol");
     			if ((strtoupper($membro->sexo()))=="M") {
     			?>
                     <option value="<?PHP echo $linkEstCivil;?>Solteiro">Solteiro</option>

@@ -5,40 +5,40 @@ $query = "SELECT * from igreja ORDER BY razao";
 $nmpp="20"; //Número de mensagens por párginas
 $paginacao = Array();
 $paginacao['link'] = "?"; //Paginação na mesma página
-			
+
 		//Faz os calculos na paginação
 		$sql2 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
 		$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
-		
-		if ($_GET["pagina1"]<1) { 
+
+		if ($_GET["pagina1"]<1) {
 			$_GET["pagina1"] = 1;
 		} elseif ($_GET["pagina1"]>$paginas) {
 			$_GET["pagina1"] = $paginas;
 		}
-		
+
 		$pagina = $_GET["pagina1"]-1;
-			
+
 		if ($pagina<0) {$pagina=0;} //Especifica um valor p variável página caso ela esteja setada
 		$inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no MySQL
-		$sql3 = mysql_query ($query." LIMIT $inicio,$nmpp") or die (mysql_error()); 
+		$sql3 = mysql_query ($query." LIMIT $inicio,$nmpp") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-						
+
 		 //inicia o cabeçalho de paginação
-		
+
 		{
 		?>
 		<table class='table table-hover table-striped table-bordered'>
-		
+
 		<caption>Lista de Dirigentes</caption>
-		
+
 			<colgroup>
 				<col id="Rol">
 				<col id="Nome">
 				<col id="Dirigente Atual">
 				<col id="albumCol"/>
 			</colgroup>
-			
+
 			<thead>
 				<tr>
 				<th scope="col"><a href="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=1&cargo=<?PHP echo $_GET["cargo"];?>&id=<?PHP echo $_GET["id"];?>&pagina1=<?PHP echo $_GET["pagina1"];?>" title="Ordenar por ROL">Rol
@@ -56,15 +56,15 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			</thead>
 			<tbody>
 		<?PHP
-			
+
 			while($coluna = mysql_fetch_array($sql3))
 			{
-			
+
 			?>
             <tr>
 
 				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo (int)$coluna["pastor"];?>"><?php echo (int)$coluna["pastor"];?></a></td>
-				
+
 				<td><?php
 					$rol_dirigente = (int) $coluna["pastor"];
 					if ($rol_dirigente>0){
@@ -72,17 +72,25 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 						$nome_dirigente = $nome->nome();}
 					else{
 						$nome_dirigente = $coluna["pastor"];}
-						
-					?>					
+
+					?>
 					<a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["pastor"];?>"><?php echo $nome_dirigente;?></a></td>
 				<td><?php echo $coluna["razao"];?></td>
-				<td><?php echo cargo ($coluna["pastor"]);?></td>
-				
-			<?PHP 
-			
+				<td><?php
+                    if (intval($coluna["pastor"])=='0') {
+                        $funIgreja = '-o-';
+                    } else {
+                        $funIgreja = cargo ($coluna["pastor"])['0'];
+                    }
+
+                 echo $funIgreja;
+                ?></td>
+
+			<?PHP
+
 			}//loop while produtos
-			
-	?>	
+
+	?>
 		</tbody>
 		</table>
 
@@ -97,7 +105,7 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 		echo "<br><span class='style4'>Total de $paginas p&aacute;ginas";
 		else
 		echo "<br><span class='style4'>Total de $paginas p&aacute;gina";
-		
+
 	echo "<br />";
 	if ($total>"1")
 	{
@@ -105,7 +113,7 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			printf("Com %s dirigentes!",number_format($total, 0, ',', '.'));
 		else
 			printf("Com %s dirigentes!",number_format($total, 0, ',', '.'));
-			
+
 	}elseif ($total=="1"){
 		echo "Com apenas um dirigente!";
 	}else{

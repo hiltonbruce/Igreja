@@ -33,9 +33,9 @@ if (!empty($_GET["bsc_rol"])) {
 </div>
     <?php }
 
-	if (!(strstr($_GET["escolha"], 'dados_pessoais.php') || strstr($_GET['escolha'], 'cartao.php')) && isset($_SESSION['membro']))
+	if (isset($_GET['bsc_rol']))
 		{
-			echo 'Dados atuais de: <b>'.$_SESSION['membro'].'</b> - ';
+			echo 'Dados atuais de: <b>'.$membro->nome().'</b> - ';
 		}
 
 		$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");

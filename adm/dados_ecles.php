@@ -7,10 +7,10 @@ if ($_SESSION['nivel']>4){
 	$query.="DATE_FORMAT(c_impresso,'%d/%m/%Y') AS c_impresso,DATE_FORMAT(c_entregue,'%d/%m/%Y') AS c_entregue,";
 	$query.="DATE_FORMAT(dt_muda_assembleia,'%d/%m/%Y') AS dt_muda_assembleia,DATE_FORMAT(data,'%d/%m/%Y') AS data,";
 	$query.="DATE_FORMAT(auxiliar,'%d/%m/%Y') AS auxiliar,DATE_FORMAT(dat_aclam,'%d/%m/%Y') AS dat_aclam ";
-	$query.="FROM eclesiastico WHERE rol='".$_SESSION["rol"]."'";
-	
+	$query.="FROM eclesiastico WHERE rol='".$bsc_rol."'";
+
 	$tabela = "eclesiastico";
-	ver_cad();
+	ver_cad($bsc_rol);
 	$tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
 	$tab_edit="adm/dados_ecles.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma página para abrir o form de edição do item
 	$dad_cad = mysql_query ($query);
@@ -21,8 +21,7 @@ if ($_SESSION['nivel']>4){
 
 ?>
 	<?PHP
-	if (!empty($_SESSION["rol"]))
-	{
+	if (!empty($bsc_rol)) {
 	if (!empty($arr_dad["rol"])) {
 	controle ("consulta");
 	?>
@@ -78,7 +77,7 @@ if ($_SESSION['nivel']>4){
         <td>UF:
           <p><a href="./?escolha=adm/dados_ecles.php&bsc_rol=<?php echo $bsc_rol;?>&campo=uf"><?PHP print " > {$arr_dad["uf"]} < ";?></a>
               <?PHP
-		if ($_GET["campo"]=="uf"){	
+		if ($_GET["campo"]=="uf"){
 		?>
           </p>
           <form id="form2" name="form2" method="post" action="">
@@ -100,7 +99,7 @@ if ($_SESSION['nivel']>4){
 		$nome = new editar_form("local_batismo",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
 
-		
+
 		if ($_GET["campo"]=="local_batismo"){
 		?>
           <form id="form3" name="form3" method="post" action="">
@@ -108,7 +107,7 @@ if ($_SESSION['nivel']>4){
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
             <?PHP
-			$lst_cid = new sele_cidade("cidade",$arr_dad["uf"],"coduf","nome","local_batismo");	
+			$lst_cid = new sele_cidade("cidade",$arr_dad["uf"],"coduf","nome","local_batismo");
 			$vlr_linha=$lst_cid->ListDados ($ind++);
 		?>
             <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
@@ -182,7 +181,7 @@ if ($_SESSION['nivel']>4){
 		$nome->getEditar();
 		?></td>
       </tr>
-      
+
       <tr>
         <td>Cart&atilde;o Impresso em:
         <?PHP
@@ -192,9 +191,9 @@ if ($_SESSION['nivel']>4){
         <td>Cart&atilde;o Impresso por:
           <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_imprimiu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_imprimiu"];?> - Click aqui para dados completos">
             <?PHP
-		
+
 		echo substr (fun_igreja ($arr_dad["quem_imprimiu"]),0,25);
-		
+
 		?>
           </a></p></td>
         <td><p>&nbsp;</p></td>
@@ -208,17 +207,17 @@ if ($_SESSION['nivel']>4){
         <td>Cartão Recebido por:
         <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_recebeu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_recebeu"];?> - Click aqui para dados completos">
           <?PHP
-		
+
 		echo substr (fun_igreja ($arr_dad["quem_recebeu"]),0,25);
-		
+
 		?>
         </a></p></td>
         <td>Cartão Entregue por:
 		<p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_entregou"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_entregou"];?> - Click aqui para dados completos">
          <?PHP
-		
+
 		echo substr (fun_igreja ($arr_dad["quem_entregou"]),0,25);
-		
+
 		?>
         </a></p>        </td>
       </tr>
@@ -229,17 +228,17 @@ if ($_SESSION['nivel']>4){
 		$nome = new editar_form("obs",$arr_dad["obs"],$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></p></td>
-		</tr>    
+		</tr>
 	  <tr>
 	  	<td>Recibo de entrega N&ordm;:	  </td>
 	  	<td colspan="3"><p>
-	  	
+
 	    <?PHP
 	    	if ($arr_dad["rec_entrega"]>"0") {
-	    		printf ("<a href='relatorio/recibo_print.php?recibo={$arr_dad["rec_entrega"]}' 
+	    		printf ("<a href='relatorio/recibo_print.php?recibo={$arr_dad["rec_entrega"]}'
 				title='Click aqui para re-impress&atilde;o do recibo'> %'05u &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visualizar Recibo</a>",$arr_dad["rec_entrega"]) ;
 	    	}else {
-	    		echo "Sem recibo de entrega";	
+	    		echo "Sem recibo de entrega";
 	    	}
 		?></p>
 		</td>
@@ -253,5 +252,5 @@ if ($_SESSION['nivel']>4){
 	}
 	}//Fim do if de SESSION["rol"]
 	}//Fim do if de nível
-	
+
 	?>

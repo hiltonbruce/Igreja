@@ -2,16 +2,16 @@
 if ($_SESSION['nivel']>4){
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
 $tab_edit="adm/dados_profis.php&bsc_rol=$bsc_rol&tabela=profissional&campo=";//Link de chamada da mesma página para abrir o form de edição do item
-$dad_cad = mysql_query ("SELECT * FROM profissional WHERE rol='".$_SESSION["rol"]."'");
+$dad_cad = mysql_query ("SELECT * FROM profissional WHERE rol='".$bsc_rol."'");
 $arr_dad = mysql_fetch_array ($dad_cad);
 
 $ind=1;
 
-ver_cad();
+ver_cad($bsc_rol);
 ?>
 <div id="lst_cad">
 	<?PHP
-	if (!empty($_SESSION["rol"]))
+	if (!empty($bsc_rol))
 	{
 		if (!empty($arr_dad["rol"])) {
 	?>
