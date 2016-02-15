@@ -10,7 +10,7 @@ function conectar() {
 	}
 	//$dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
 	$db =& DB::Connect ($dns, array());
-	if (PEAR::isError($db)){ die ($db->getMessage()); }
+	//if (PEAR::isError($db)){ die ($db->getMessage()); }
 }
 
 function br_data ($dt,$cmp){

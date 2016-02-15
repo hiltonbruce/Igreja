@@ -23,6 +23,7 @@ if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf'])
 		$atualCargo = new DBRecord ('cargoigreja',$_POST['id'],'id');
 		$atualCargo->igreja = $_POST['rolIgreja'];
 		$atualCargo->rol = $_POST['rol'];
+		$atualCargo->descricao = $_POST['idfunc'];
 		$atualCargo->naomembro = $_POST['nome'].',CPF: '.$_POST['cpf'].',RG: '.$_POST['rg'];
 		$atualCargo->hierarquia = $_POST['hierarquia'];
 		$atualCargo->pgto = $_POST['valor'];

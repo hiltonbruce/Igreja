@@ -30,7 +30,10 @@ if (!empty($_GET['bsc_rol'])) {
           </div>
 	</form>
           <div class="col-xs-2"><br />
-            <a href='adm/apagarfoto.php?bsc_rol=<?PHP echo $bsc_rol;?>' class='btn btn-danger' >Excluir Foto</a>
+            <button type='button' class="btn btn-danger"
+            onClick='apagar("<?php echo 'adm/apagarfoto.php?bsc_rol='.$bsc_rol;?>",
+            "<?php echo ' Apagar foto de '.$membro->nome();?>")'>
+            Apagar Foto...</button>
           </div>
 
    </div>
