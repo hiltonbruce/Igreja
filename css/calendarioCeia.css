@@ -112,15 +112,11 @@
 }
 
 .td_marcado5{
- background: #91C8FF;
+ background: #FFCAB0;
  border-top: 1px solid #f0f0f0;
  border-bottom: 1px solid #c0c0c0;
  border-left: 1px solid #f0f0f0;
  border-right: 1px solid #c0c0c0;
- text-align: center;
- font-weight:bold;
- border: 2px solid #555;
- 
 }
 
 .td_marcado6{
@@ -137,11 +133,113 @@
  border-bottom: 1px solid #c0c0c0;
  border-left: 1px solid #f0f0f0;
  border-right: 1px solid #c0c0c0;
- text-align: center; 
- 
 }
 
 .td_marcado8{
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
+
+ background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ font: bold;
 
  background: #CCCCCC;
  border-top: 1px solid #f0f0f0;
@@ -151,7 +249,7 @@
  text-align: center;
  border: 2px solid #555;
  font: bold;
- 
+
 }
 
 .td_marcado8 .td_marcado7 .td_marcado6 .td_marcado5 .td_marcado4 .td_marcado3 .td_marcado2 .td_marcado1 .td_marcado0 .td_dia {
@@ -163,24 +261,24 @@
  width: 18px;
  height: 15px;
 }
-	
+
 #footer {
-	color: #636466; 
-	font-size: 0.8em; 
-	height: 70px; 
-	background-repeat: no-repeat; 
-	background-position: top; 
-	text-align: right; 
-	clear: both; 
-	margin: 0; 
-	padding-top: 25px; 
+	color: #636466;
+	font-size: 0.8em;
+	height: 70px;
+	background-repeat: no-repeat;
+	background-position: top;
+	text-align: right;
+	clear: both;
+	margin: 0;
+	padding-top: 25px;
 	padding: 10px 0 0 0;
 	background: url('../img/bgcentro.jpg') ;
 }
 
-#footer a { 
-	color: #636466; 
-	text-decoration: underline 
+#footer a {
+	color: #636466;
+	text-decoration: underline
 }
 
 #footer a:link       { color: #636466; text-decoration: underline }

@@ -7,11 +7,6 @@ if ($_GET['imp']>'0') {
 	ini_set('display_errors', 'off');
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
-	if ($_GET['imp']=='2') {
-		require 'imprSantaCeiaTodas.php';
-	}else {
-		require("funcs_impress.php");
-	}
 
 	function __autoload ($classe) {
 		require_once ("../models/$classe.class.php");
@@ -20,6 +15,7 @@ if ($_GET['imp']>'0') {
 	$roligreja	= (empty($_GET['id'])) ? '1':$_GET['id'];
 	$igreja 	= new DBRecord ("igreja",$roligreja,"rol");
 	$sede 		= new DBRecord ("igreja",'1',"rol");
+	$cidade 	= new DBRecord ("cidade",$sede->cidade(),"id");
 	$colunas 	= 6;
 
 	if ($roligreja=='1') {
@@ -46,6 +42,13 @@ if ($_GET['imp']>'0') {
 <title>Santa Ceia</title>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" type="image/gif" href="../img/br_igreja.gif">
+<?PHP
+	if ($_GET['imp']=='2') {
+		require 'imprSantaCeiaTodas.php';
+	}else {
+		require("funcs_impress.php");
+	}
+?>
 </head>
 <body>
    <table id="playlistTable" summary="">
@@ -185,10 +188,10 @@ if ($_GET['imp']>'0') {
 		echo $cabMes.$diasCeias;
 	}
 
-     if ($_GET["id"]<2 && $_GET["imp"]<2)
-	  echo "<div >Cultos: Todas as Segunda, Quartas e Domingos. Das 19h às 21h</div>";
+     if ($_GET["id"]<2 || $_GET["imp"]<2)
+	  echo "<div >Cultos: Todas as Segunda, Quartas, Sextas e Domingos. Das 19h às 21h</div>";
      else
-	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segundas, Quartas e Domingos. Das 19h às 21h</div>";
+	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segundas, Quartas, Sextas e Domingos. Das 19h às 21h</div>";
 
      if (isset($_GET['imp']) && $_GET['imp']>'0') {
      	echo '</body></html>';
@@ -196,14 +199,13 @@ if ($_GET['imp']>'0') {
 
  <div id="footer">
 	<?PHP
-	echo "Templo: {$sede->razao()}: {$sede->rua()}, N&ordm; {$sede->numero()} - {$sede->cidade()} - {$sede->uf()}";
-
-	?><br />
-	  Copyright &copy; <a onclick='target="_blank"' href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>
-      Email: <a rel="nofollow" href="mailto: <?PHP echo "{$sede->email()}";?>" onclick='target="_blank"'><?PHP echo "{$sede->email()}";?></a> <br />
-	   <?PHP echo "CNPJ: {$sede->cnpj()}";?><br />
-   		<?PHP echo "CEP: {$sede->cep()} - Fone: {$sede->fone()} - Fax: {$sede->fax()}";?><br />
-	  <p>Designed by <a rel="nofollow"  onclick='target="_blank"' href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
+	echo 'Templo: '.$sede->razao().': '.$sede->rua().', N&ordm; '.$sede->numero().' - '.$cidade->nome().' - '.$sede->uf().' - ';
+	echo 'CNPJ: '.$sede->cnpj();
+   	echo "CEP: {$sede->cep()} - Fone: {$sede->fone()} ";
+	?>
+      <br />Email: <a rel="nofollow" href="mailto: <?PHP echo "{$sede->email()}";?>" onclick='target="_blank"'><?PHP echo "{$sede->email()}";?></a>
+	   <p>Copyright &copy; 2016 <a onclick='target="_blank"' href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>
+	   &bull;Designed by <a rel="nofollow"  onclick='target="_blank"' href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
     </div>
 
 <?PHP

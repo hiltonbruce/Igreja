@@ -44,8 +44,8 @@ function calcularDiaSemana($dia,$mes,$ano)
   {
 
    //Carrega o css do calendário e armazena em $dados
-   $arq=fopen("../css/calendario.css","r");
-   $tam=filesize("../css/calendario.css");
+   $arq=fopen("../css/calendarioCeia.css","r");
+   $tam=filesize("../css/calendarioCeia.css");
    $dados=fread($arq,$tam);
    fclose($arq);
    //Coloca o css carregado no código do calendário
@@ -137,7 +137,7 @@ function calcularDiaSemana($dia,$mes,$ano)
 	 	if ($d==$dia_ceia) {
 	 		$igreja[substr($meses[$idx], 0,3)] =  $cnt_dias;
 	 		$cnt_dias = sprintf (" %'02u",$cnt_dias);
-	 		
+
 	 		$tabDias .= '<td class="'.$classDias.'">'.$cnt_dias.'</td>';//Cria a celula do dia da ceia
 	 	}
 	 }
@@ -168,17 +168,17 @@ function calcularDiaSemana($dia,$mes,$ano)
     $tabela=$tabela."</tr>";
    }
   }
-    
+
   for($idx2=0;$idx2<12;$idx2++) { //Gera o cabeçalho da tabela do mês atual
   	$ceiaTodos .="<td class='cabecalho'>".substr($meses[$idx2],0,3)."</td>";
   }
-  	$tabTodasCeias=$ceiaTodos."</tr><tr>"; //Fecha o cabeçalho	
-  	
+  	$tabTodasCeias=$ceiaTodos."</tr><tr>"; //Fecha o cabeçalho
+
   $tabTodasCeias=$ceiaTodos."</tr>"; //Fecha o cabeçalho
   $tabDias = $tabDias.'</tr>';
   return($tabDias);
  }
 
- 
- 
+
+
 ?>
