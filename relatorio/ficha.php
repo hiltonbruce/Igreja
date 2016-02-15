@@ -3,17 +3,17 @@
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
 	//conectar ();
-  $carta = new DBRecord ("carta",$_POST["id_carta"],"id");
-	$membro = new DBRecord ("membro",$_SESSION["rol"],"rol");
+  $rolMembro = (!empty($_GET['rol'])) ? intval($_GET['rol']) : '';
+	$membro = new DBRecord ("membro",intval($rolMembro),"rol");
   if (is_numeric($membro->naturalidade())) {
       $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
       $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
   } else {
       $cidNatal = $membro->naturalidade();
   }
-	$est_civil = new DBRecord ("est_civil",$_SESSION["rol"],"rol");
-	$ecles = new DBRecord ("eclesiastico",$_SESSION["rol"],"rol");
-	$profis = new DBRecord ("profissional",$_SESSION["rol"],"rol");
+	$est_civil = new DBRecord ("est_civil",$rolMembro,"rol");
+	$ecles = new DBRecord ("eclesiastico",$rolMembro,"rol");
+	$profis = new DBRecord ("profissional",$rolMembro,"rol");
 	$igreja = new DBRecord ("igreja","1","rol");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -110,7 +110,6 @@ h1{
 table {
   border-collapse: collapse;
   width: 95%;
-  border: 1px solid #000;
 }
 
 #lst_cad p{
@@ -184,243 +183,171 @@ thead tr:hover {
 <div id="header">
 	</div>
 <div id="lst_cad">
-Ficha de Membro
-  <fieldset><legend>Opções de Cadastro</legend>
-	<div id="foto"><?PHP print mostra_foto();?>
-  </div>
-
-  <form id="form1" method="post" action="">
+<h2><u>Ficha de Cadastro</u> &bull;
+  </label>
       <label>
-        <input type="radio" name="Op&ccedil;&otilde;es de Cadstro" value="radio" />
+        <input type="checkbox" name="Op&ccedil;&otilde;es de Cadstro" value="radio" />
         Re-Cadastro</label>
       <label>
-      <input type="radio" name="Op&ccedil;&otilde;es de Cadstro" value="radio" />
+      <input type="checkbox" name="Op&ccedil;&otilde;es de Cadstro" value="radio" />
       Atualiza&ccedil;&atilde;o
-	</label>
-</form>
-  </fieldset>
+	</label></h2>
 <fieldset>
 <legend>Dados Pessoais</legend>
 <table cellspacing="0" id="playlistTable">
-
-<colgroup>
-<col id="PlaylistCol" />
-<col id="trackCol" />
-<col id="artistCol" />
-<col id="albumCol" />
-</colgroup>
-
-<thead>
-<tr>
-<th colspan="2" scope="col">Nome: <?PHP echo $membro->nome();?></th>
-<th scope="col">&nbsp;</th>
-<th scope="col">Rol:<?PHP printf (" %'03u",$_SESSION["rol"]);?></th>
-</tr>
-</thead>
-
-<tbody>
-<tr class="odd">
-<td colspan="2">Pai:
-  <p> <?PHP echo $membro->pai();?></p></td>
-<td><p>Data Nascimento: </p>
-  <p> <?PHP echo conv_valor_br ($membro->datanasc());?></p></td>
-<td>Sexo:
-  <p> <?PHP echo $membro->sexo();?></p></td>
-</tr>
-
-<tr>
-<td colspan="2"><p>M&atilde;e: </p>
-  <p> <?PHP echo $membro->mae();?></p></td>
-<td><p>Nacionalidade: </p>
-  <p> <?PHP echo $membro->nacionalidade();?></p></td>
-<td><p>Natural de : </p>
-  <p>	<?PHP
-			echo $cidNatal;
-		?></p></td>
-</tr>
-
-<tr class="odd">
-<td colspan="2"><p>Endere&ccedil;o: </p>
-  <p> <?PHP echo $membro->endereco().", N&ordm;: ".$membro->numero();?></p></td>
-<td><p>Complementos: </p>
-  <p> <?PHP echo $membro->complemento();?></p></td>
-<td>Celular:
-    <p> <?PHP echo $membro->celular();?></p></td>
-</tr>
-
-<tr>
-  <td>Cidade :
-    <p>
-      <?PHP
-  			$cidade = new DBRecord ("cidade",$membro->cidade(),"id");
-			echo $membro->cidade()." - ".$cidade->nome()." - ".$membro->uf_resid();
-		?>
-    </p></td>
-  <td>Bairro :
-    <p>
-      <?PHP
-		$bairro = new DBRecord ("bairro",$membro->bairro(),"id");
-		echo $membro->bairro()." - ".$bairro->bairro();
-		?>
-    </p></td>
-  <td>CEP:
-    <p> <?PHP echo $membro->cep();?></p></td>
-  <td>Telefone:
-    <p> <?PHP echo $membro->fone_resid();?></p></td>
-</tr>
-<tr class="odd">
-<td>Email:
-  <p> <?PHP echo $membro->email();?></p></td>
-<td>Gradua&ccedil;&atilde;o:
-  <p> <?PHP echo $membro->graduacao();?></p></td>
-<td>Escolaridade:
-  <p> <?PHP echo $membro->escolaridade();?></p></td>
-<td>&nbsp;</td>
-</tr>
-</tbody></table>
+  <colgroup>
+    <col id="PlaylistCol" />
+    <col id="trackCol" />
+    <col id="artistCol" />
+    <col id="albumCol" />
+  </colgroup>
+  <tbody>
+    <tr class="odd">
+      <td rowspan='4'>
+          <div id="foto"><?PHP print mostra_foto();?></div>
+       </td>
+      <td colspan="3" scope="col"><p>Nome: </p><h4><?PHP echo $membro->nome();?></h4></td>
+      <td scope="col"><p>Rol:</p><h4><?PHP printf (" %'03u",$rolMembro);?></h4></td>
+    </tr>
+    <tr>
+      <td colspan="2">Pai:
+        <p> <?PHP echo $membro->pai();?></p></td>
+      <td><p>Data Nascimento: </p>
+        <p> <?PHP echo conv_valor_br ($membro->datanasc());?></p></td>
+      <td>Sexo:
+        <p> <?PHP echo $membro->sexo();?></p></td>
+    </tr>
+    <tr>
+      <td colspan="2"><p>M&atilde;e: </p>
+        <p> <?PHP echo $membro->mae();?></p></td>
+      <td><p>Nacionalidade: </p>
+        <p> <?PHP echo $membro->nacionalidade();?></p></td>
+      <td><p>Natural de : </p>
+        <p>	<?PHP echo $cidNatal; ?></p>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td colspan="2"><p>Endere&ccedil;o: </p>
+        <p> <?PHP echo $membro->endereco().", N&ordm;: ".$membro->numero();?></p></td>
+      <td><p>Complementos: </p>
+        <p> <?PHP echo $membro->complemento();?></p></td>
+      <td>Celular:
+          <p> <?PHP echo $membro->celular();?></p></td>
+    </tr>
+    <tr>
+    <td colspan="2">Cidade :
+      <p>
+        <?PHP
+    			$cidade = new DBRecord ("cidade",$membro->cidade(),"id");
+  			echo $membro->cidade()." - ".$cidade->nome()." - ".$membro->uf_resid();
+  		?>
+      </p></td>
+    <td>Bairro :
+      <p>
+        <?PHP
+  		$bairro = new DBRecord ("bairro",$membro->bairro(),"id");
+  		echo $membro->bairro()." - ".$bairro->bairro();
+  		?>
+      </p></td>
+    <td>CEP:
+      <p> <?PHP echo $membro->cep();?></p></td>
+    <td>Telefone:
+      <p> <?PHP echo $membro->fone_resid();?></p></td>
+    </tr>
+      <tr class="odd">
+      <td colspan="2">Email:
+        <p> <?PHP echo $membro->email();?></p></td>
+      <td>Gradua&ccedil;&atilde;o:
+        <p> <?PHP echo $membro->graduacao();?></p></td>
+      <td>Escolaridade:
+        <p> <?PHP echo $membro->escolaridade();?></p></td>
+      <td>&nbsp;</td>
+      </tr>
+  </tbody>
+</table>
 </fieldset>
 <fieldset>
 <legend>Dados Eclesi&aacute;sticos</legend>
 <table cellspacing="0" id="playlistTable">
-
-<colgroup>
-<col id="PlaylistCol" />
-<col id="trackCol" />
-<col id="artistCol" />
-<col id="albumCol" />
+  <colgroup>
+    <col id="PlaylistCol" />
+    <col id="trackCol" />
+    <col id="artistCol" />
+    <col id="albumCol" />
 </colgroup>
-
 <tr>
 <td>Onde congrega:
-  <p>
-    <?PHP
+  <p><?PHP
 		$igreja = new DBRecord ("igreja",$ecles->congregacao(),"rol");
-		echo $ecles->congregacao()." - ".$igreja->razao();
-		?>
-  </p></td>
+		echo $ecles->congregacao()." - ".$igreja->razao();?></p>
+</td>
 <td>Data do Batismo em &Aacute;guas:
   <p> <?PHP echo conv_valor_br ($ecles->batismo_em_aguas());?></p></td>
 <td>Ano Batismo Espirito Santo:
-  <p>
-    <?PHP
+  <p><?PHP
 		$igreja = new DBRecord ("igreja",$ecles->congregacao(),"rol");
-		echo $ecles->batismo_espirito_santo();
-		?>
-  </p></td>
+		echo $ecles->batismo_espirito_santo();?></p>
+</td>
 <td>Local de Batismo:
-  <p>
-    <?PHP
+  <p><?PHP
 		$batismo = new DBRecord ("cidade",$ecles->local_batismo(),"id");
-		echo $ecles->local_batismo()." - ".$batismo->nome()." - ".$ecles->uf();
-		?>
-  </p></td>
+		echo $ecles->local_batismo()." - ".$batismo->nome()." - ".$ecles->uf();?></p>
+</td>
 </tr>
-
 <tr class="odd">
 <td>Denomina&ccedil;&atilde;o de onde veio:
-  <p>
-    <?PHP
-		echo $ecles->veio_qual_denominacao();
-		?>
-  </p></td>
+  <p><?PHP echo $ecles->veio_qual_denominacao();?></p>
+</td>
 <td>Mudou da denomina&ccedil;&atilde;o em:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->dt_mudanca_denominacao());
-		?>
+  <p><?PHP echo conv_valor_br ($ecles->dt_mudanca_denominacao());?></p>
 <td>Auxiliar de trabalho em:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->auxiliar());
-		?>
-  </p></td>
+  <p><?PHP echo conv_valor_br ($ecles->auxiliar());?></p>
+</td>
 <td>Di&aacute;cono em:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->diaconato());
-		?>
-  </p></td>
+  <p><?PHP echo conv_valor_br ($ecles->diaconato());?></p>
+</td>
 </tr>
-
 <tr>
-<td>Presbit&eacute;ro em:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->presbitero());
-		?>
-  </p></td>
-<td>Evangelista em:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->evangelista());
-		?>
-  </p></td>
-<td>Pastor em:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->pastor());
-		?>
-  </p></td>
-<td>Veio de outra Assembleia de Deus:
-  <p>
-    <?PHP
-		echo $ecles->veio_outra_assemb_deus();
-		?>
-  </p></td>
+  <td>Presbit&eacute;ro em:
+    <p><?PHP echo conv_valor_br ($ecles->presbitero());?></p>
+    </td>
+  <td>Evangelista em:
+    <p><?PHP echo conv_valor_br ($ecles->evangelista());?></p>
+  </td>
+  <td>Pastor em:
+    <p><?PHP echo conv_valor_br ($ecles->pastor());?></p>
+  </td>
+  <td>Veio de outra Assembleia de Deus:
+    <p><?PHP echo $ecles->veio_outra_assemb_deus();?></p>
+</td>
 </tr>
-
 <tr class="odd">
 <td>Data da mudan&ccedil;a da outra Assembleia:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->dt_muda_assembleia());
-		?>
-  </p></td>
+  <p><?PHP echo conv_valor_br ($ecles->dt_muda_assembleia());?></p>
+</td>
 <td>Cidade e UF de onde veio::
-  <p>
-    <?PHP
-		echo $ecles->lugar();
-		?>
-  </p></td>
+  <p><?PHP echo $ecles->lugar();?></p>
+</td>
 <td>Data:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->data());
-		?>
-  </p></td>
+  <p><?PHP echo conv_valor_br ($ecles->data());?></p>
+  </td>
 <td>Data da aclama&ccedil;&atilde;o:
-  <p>
-    <?PHP
-		echo conv_valor_br ($ecles->dat_aclam());
-		?>
-  </p></td>
+  <p><?PHP echo conv_valor_br ($ecles->dat_aclam());?></p>
+  </td>
 </tr>
-
 <tr>
-<td>Cart&atilde;o Impresso em:
-  <p>
-    <?PHP
-		echo sim_nao ($ecles->c_impresso());
-		?>
-  </p></td>
-<td>Cart&atilde;o Impresso em:
-  <p>
-    <?PHP
-		echo sim_nao ($ecles->c_entregue());
-		?>
-  </p></td>
-<td>&Eacute; membro por aclama&ccedil;&atilde;o:
-  <p>
-    <?PHP
-		echo sim_nao ($ecles->eh_membro_aclamacao());
-		?>
-  </p></td>
-<td>Situa&ccedil;&atilde;o espiritual:
-  <p>
-    <?PHP
-		echo sit_espiritual ($ecles->situacao_espiritual());
-		?>
-  </p></td>
+  <td>Cart&atilde;o Impresso em:
+    <p><?PHP echo sim_nao ($ecles->c_impresso());?></p>
+  </td>
+  <td>Cart&atilde;o Impresso em:<p>
+      <?PHP echo sim_nao ($ecles->c_entregue()); ?></p>
+  </td>
+  <td>&Eacute; membro por aclama&ccedil;&atilde;o:<p>
+      <?PHP echo sim_nao ($ecles->eh_membro_aclamacao());?></p>
+    </td>
+  <td>Situa&ccedil;&atilde;o espiritual:
+    <p><?PHP echo sit_espiritual ($ecles->situacao_espiritual());?></p>
+</td>
 </tr>
 </tbody></table>
 </fieldset>
@@ -470,18 +397,16 @@ Ficha de Membro
 </tr>
 
 <tr class="odd">
-<td colspan="4"><?PHP echo $membro->obs();?></td>
+  <td colspan="4"><?PHP echo $membro->obs().'<br/><br/>';?>
+  </td>
 </tr>
 
 </tbody>
 </table>
 </fieldset>
-
-
-Assinat. Dirigente:____________________________&nbsp;&nbsp;Assinat. Secretário:____________________________
-
+DATA:___/___/______&nbsp;&nbsp;Visto Dirigente:________________________&nbsp;&nbsp;Visto Secret.:___________________
 </div><!-- fim div lst_cad -->
-
+<br />
 <div id="footer">
 	<?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
 

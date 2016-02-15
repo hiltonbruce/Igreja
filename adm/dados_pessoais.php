@@ -16,35 +16,47 @@ if (mysql_num_rows($dad_cad)<1)//Lista independente de outras tabelas
 $arr_dad = mysql_fetch_array ($dad_cad);
 $ind = 1;
 if (!empty($_GET['bsc_rol'])) {
+
+ if (file_exists("img_membros/".$bsc_rol.".jpg")) {
+        $img=$bsc_rol.".jpg";
+    } else {
+        $img="ver_foto.jpg";
+    }
+
 ?><div class="row">
 	<form enctype="multipart/form-data" method="post" action="adm/salvar_foto.php">
-
           <div class="col-xs-6">
              <input type="hidden" name="MAX_FILE_SIZE" value="200000">
              <label>Salvar foto:</label>
              <input name="userfile" type="file" size="40" class="btn btn-primary" >
           </div>
-          <div class="col-xs-2"><br />
+          <div class="col-xs-3">
+             <label>&nbsp;</label>
             <input name="bsc_rol" type="hidden" value='<?PHP echo $_GET['bsc_rol'];?>'>
             <input type="submit" class="btn btn-primary" name="Submit" value="Enviar...">
           </div>
 	</form>
           <div class="col-xs-2"><br />
-            <button type='button' class="btn btn-danger"
-            onClick='apagar("<?php echo 'adm/apagarfoto.php?bsc_rol='.$bsc_rol;?>",
-            "<?php echo ' Apagar foto de '.$membro->nome();?>")'>
-            Apagar Foto...</button>
+             <?PHP
+                if ($img!="ver_foto.jpg") {
+                    ?>
+                     <button onclick="myFunction()" class="btn btn-danger">Apagar foto</button>
+                      <script>
+                        function myFunction() {
+                            var x;
+                            if (confirm("Apagar a foto deste membro ?") == true) {
+                                x = "OK! Para apagar foto";
+                                window.location.assign("adm/apagarfoto.php?bsc_rol=<?PHP echo $bsc_rol;?>");
+                            } else {
+                                x = "Cancelar!";
+                            }
+                        }
+                    </script>
+                    <?PHP
+                }
+            ?>
           </div>
-
    </div>
-<?PHP
-
-	 if (file_exists("img_membros/".$bsc_rol.".jpg")) {
-			$img=$bsc_rol.".jpg";
-		} else {
-			$img="ver_foto.jpg";
-		}
-	?>
 	<table width="100%">
       <tr>
         <td colspan="2">Nome:

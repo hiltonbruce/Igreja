@@ -38,13 +38,15 @@
 	  <span class="glyphicon glyphicon-chevron-right"></span></button></a></td>
 			<td>
 	  <?PHP if ($_GET["escolha"]<>"adm/cartao.php" && $_GET["escolha"]<>"adm/dados_cartas.php") {//O script cartao_print.php possui op��o pr�pria para impress�o ?>
-	    <a href="relatorio/ficha.php" title="Imprimir ficha completa">
+	    <a href="relatorio/ficha.php?rol=<?php echo $bsc_rol;?>"
+	    	title="Imprimir ficha completa" target='_black' >
 	 		<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span>
 	 		&nbsp;Ficha 1</button>
 		</a>
 	  </td>
 	  <td>
-		<a href="./views/fichamembro.php?rol=<?php echo $bsc_rol;?>" title="Imprimir ficha completa">
+		<a href="./views/fichamembro.php?rol=<?php echo $bsc_rol;?>"
+			title="Imprimir ficha completa" target='_black' >
 			<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span>&nbsp;Ficha 2
 			</button>
 		</a></td>

@@ -8,18 +8,6 @@ function lancarRecibo(n){
 	   window.open("tesouraria/pesq_recibo.php?"+n+"","janela1","width=600,height=700,scrollbars=YES,top=100");
 	}
 
-//apaga registro script views/confexof.php
-function apagar(link,placa){
-    var nome;
-    do {
-        nome = prompt ("Digite OK! "+placa+" !");
-    } while (nome == null );
-        if (nome=="ok" || nome=="Ok" || nome=="OK" || nome=="oK")
-             {window.open(link,"janela1","width=400,height=700,scrollbars=NOT,top=100");}
-         else
-             { alert ("Cancelada!");}
-}
-
 function formatar(mascara, documento){
   var i = documento.value.length;
   var saida = mascara.substring(0,1);
