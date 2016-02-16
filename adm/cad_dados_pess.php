@@ -66,12 +66,12 @@ switch ($_POST["tabela"]) {
 		if (!empty ($_POST["c_impresso"])) {
 			$c_impresso=br_data($_POST["c_impresso"],"c_impresso");
 		}
-		
+
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
 		$cad = date("Y-m-d h:i:s");
-
-		echo "Rol-------> ".$_SESSION["rol"];
-		$value = "'{$_SESSION["rol"]}','{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): '';
+		echo "Rol-------> ".$rolMembro;
+		$value = "'{$rolMembro}','{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
 				 ."'{$_POST["batismo_espirito_santo"]}','$dt_mudanca_denominacao',"
 				 ."'{$_POST["veio_qual_denominacao"]}','$auxiliar','$diaconato','$presbitero','$evangelista','$pastor',"
 				 ."'{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
@@ -80,8 +80,8 @@ switch ($_POST["tabela"]) {
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
 
-		echo "<script>location.href='./?escolha=adm/dados_profis.php&bsc_rol={$_SESSION["rol"]}'</script>";
-		echo "<a href='./?escolha=adm/dados_profis.php&bsc_rol={$_SESSION["rol"]}'>Continuar...<a>";
+		echo "<script>location.href='./?escolha=adm/dados_profis.php&bsc_rol={$rolMembro}'</script>";
+		echo "<a href='./?escolha=adm/dados_profis.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 
 		break;
 
@@ -99,22 +99,22 @@ switch ($_POST["tabela"]) {
 
 		$dados_pessoais = new insert ("$value","membro");
 		$dados_pessoais->inserir();
-		$_SESSION["rol"] = mysql_insert_id();//recupera o id do último insert no mysql
-		
+		$rolMembro = mysql_insert_id();//recupera o id do último insert no mysql
+
 		// Salta para não permitir registro 666
-		$test_rol = $_SESSION["rol"]+1;		
+		$test_rol = $rolMembro+1;
 		if ((substr_count($test_rol, '666'))>0){
 			$aut_inc = str_replace("666","667",$test_rol);
 			echo "<h1>Incrementado $aut_inc</h1>";
 			$inc = mysql_query( "ALTER TABLE  membro auto_increment = $aut_inc");
 		}
-				
+
 		if (empty($_SESSION["cpf"])) {
-			$_SESSION["cpf"]=$_SESSION["rol"];
+			$_SESSION["cpf"]=$rolMembro;
 		}
 
-		echo "<script>location.href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$_SESSION["rol"]}'</script>";
-		echo "<a href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$_SESSION["rol"]}'>Continuar...<a>";
+		echo "<script>location.href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$rolMembro}'</script>";
+		echo "<a href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$rolMembro}'>Continuar...<a>";
 
 		unset($_SESSION["nacao"]);//Limpa estas variáveis
 		unset($_SESSION["cid_natal"]);
@@ -124,11 +124,11 @@ switch ($_POST["tabela"]) {
 
 	case "profissional";
 		//insere na tabela profissional
-		$value="'{$_SESSION["rol"]}','{$_POST["profissao"]}','{$_POST["obs"]}','{$_POST["cpf"]}','{$_POST["rg"]}','{$_POST["orgao_expedidor"]}','{$_POST["onde_trabalha"]}','$hist',NOW()";
+		$value="'{$rolMembro}','{$_POST["profissao"]}','{$_POST["obs"]}','{$_POST["cpf"]}','{$_POST["rg"]}','{$_POST["orgao_expedidor"]}','{$_POST["onde_trabalha"]}','$hist',NOW()";
 		$profissional = new insert ("$value","profissional");
 		$profissional->inserir();
-		echo "<script>location.href='./?escolha=adm/dados_famil.php&bsc_rol={$_SESSION["rol"]}'</script>";
-		echo "<a href='./?escolha=adm/dados_famil.php&bsc_rol={$_SESSION["rol"]}'>Continuar...<a>";
+		echo "<script>location.href='./?escolha=adm/dados_famil.php&bsc_rol={$rolMembro}'</script>";
+		echo "<a href='./?escolha=adm/dados_famil.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 		unset($_SESSION["cpf"]);
 		break;
 
@@ -139,12 +139,12 @@ switch ($_POST["tabela"]) {
 		}else{
 			$data ="00000000";
 		}
-		$value="'{$_SESSION["rol"]}','{$_POST["estado_civil"]}','{$_POST["conjugue"]}','{$_POST["rol_conjugue"]}','{$_POST["certidao_casamento_n"]}','{$_POST["livro"]}','{$_POST["obs"]}','{$_POST["folhas"]}','{$data}','$hist',NOW()";
+		$value="'{$rolMembro}','{$_POST["estado_civil"]}','{$_POST["conjugue"]}','{$_POST["rol_conjugue"]}','{$_POST["certidao_casamento_n"]}','{$_POST["livro"]}','{$_POST["obs"]}','{$_POST["folhas"]}','{$data}','$hist',NOW()";
 		$est_civil = new insert ("$value","est_civil");
 		$est_civil->inserir();
 
-		echo "<script>location.href='./?escolha=adm/dados_famil.php&bsc_rol={$_SESSION["rol"]}'</script>";
-		echo "<a href='./?escolha=adm/dados_famil.php&bsc_rol={$_SESSION["rol"]}'>Continuar...<a>";
+		echo "<script>location.href='./?escolha=adm/dados_famil.php&bsc_rol={$rolMembro}'</script>";
+		echo "<a href='./?escolha=adm/dados_famil.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 		break;
 
 	case "nv_convert";
@@ -170,11 +170,11 @@ switch ($_POST["tabela"]) {
 		//Cadastra aluno em curso
 
 		$query = 	"SELECT rol FROM cetad_aluno "
-				."WHERE rol = '{$_SESSION["rol"]}' AND situacao = '1' ";
+				."WHERE rol = '{$rolMembro}' AND situacao = '1' ";
 
  		$result = mysql_query($query) or die (mysql_error());
 		 if (mysql_num_rows($result)>0) {
-		 	unset ($_SESSION["rol"]);
+
 			echo "<script>alert('O aluno: {$_SESSION["membro"]}, já possui matrícula ativa!');window.history.go(-1);</script>";
 			echo "<a href='./?escolha=cetad/matricula.php'>Voltar ...<a>";
 			break;
@@ -182,7 +182,7 @@ switch ($_POST["tabela"]) {
 
 		if (!empty ($_POST["curso"])) {
 		$valor = number_format($_POST["mensal"], 2, '.', ',');
-		$value = "'','{$_SESSION["rol"]}','{$_POST["nome"]}','{$_POST["curso"]}','1','$valor','{$_POST["vencimento"]}',NOW(),'$hist'";
+		$value = "'','{$rolMembro}','{$_POST["nome"]}','{$_POST["curso"]}','1','$valor','{$_POST["vencimento"]}',NOW(),'$hist'";
 		$cad = new insert ("$value","{$_POST["tabela"]}");
 		$cad -> inserir();
 
@@ -261,15 +261,15 @@ switch ($_POST["tabela"]) {
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
 			}
 
-			$value = "'','{$_SESSION["rol"]}','{$_POST["situacao"]}','{$_POST["motivo"]}','$dt_ini','$dt_fim','$hist',NOW()";
+			$value = "'','{$rolMembro}','{$_POST["situacao"]}','{$_POST["motivo"]}','$dt_ini','$dt_fim','$hist',NOW()";
 			$disciplina = new insert ("$value","disciplina");
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
-			$rec = new DBRecord ("eclesiastico",$_SESSION["rol"],"rol");
+			$rec = new DBRecord ("eclesiastico",$rolMembro,"rol");
 			$rec->situacao_espiritual = (int)$_POST["situacao"]; //Aqui é atribuido a esta variável o valor para UpDate
 			$rec->UpDate();
-			echo "<script>location.href='./?escolha=adm/dados_disciplina.php&bsc_rol={$_SESSION["rol"]}'</script>";
-			echo "<a href='./?escolha=adm/dados_disciplina.php&bsc_rol={$_SESSION["rol"]}'>Continuar...<a>";
+			echo "<script>location.href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'</script>";
+			echo "<a href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 			}else{
 			echo "<script> alert('Senha incorreta!');</script>";
 			}
@@ -292,7 +292,7 @@ switch ($_POST["tabela"]) {
 
 	case "cargo_igreja";
 		//insere na tabela
-		$value="'','{$_POST["descricao"]}','{$_POST["obs"]}','{$_POST["igreja"]}','{$_SESSION["rol"]}','{$_POST["hierarquia"]}','1','$hist',NOW()";
+		$value="'','{$_POST["descricao"]}','{$_POST["obs"]}','{$_POST["igreja"]}','{$rolMembro}','{$_POST["hierarquia"]}','1','$hist',NOW()";
 		$cargos = new insert ("$value","{$_POST["tabela"]}");
 		$cargos->inserir();
 					echo "<script>location.href='./?escolha=igreja/cad_cargos.php&menu=top_igreja'</script>";
@@ -307,7 +307,7 @@ switch ($_POST["tabela"]) {
 
 
 /*
-$value="'{$_SESSION["rol"]}','','','','','','','','','','','','','','','','','','','','','','','',''";
+$value="'{$rolMembro}','','','','','','','','','','','','','','','','','','','','','','','',''";
 $eclesiastico = new insert ("$value","eclesiastico");
 $eclesiastico->inserir();
 */

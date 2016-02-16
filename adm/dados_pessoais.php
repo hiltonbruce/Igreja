@@ -32,7 +32,7 @@ if (!empty($_GET['bsc_rol'])) {
           </div>
           <div class="col-xs-3">
              <label>&nbsp;</label>
-            <input name="bsc_rol" type="hidden" value='<?PHP echo $_GET['bsc_rol'];?>'>
+            <input name="bsc_rol" type="hidden" value='<?PHP echo $bsc_rol;?>'>
             <input type="submit" class="btn btn-primary" name="Submit" value="Enviar...">
           </div>
 	</form>
@@ -62,11 +62,10 @@ if (!empty($_GET['bsc_rol'])) {
         <td colspan="2">Nome:
 		<?PHP
 			$nome = new editar_form("nome",$arr_dad["nome"],$tab,$tab_edit);
-			$_SESSION["membro"]=$arr_dad["nome"];
-
+			//$_SESSION["membro"]=$arr_dad["nome"];
 			echo situacao ($arr_dad["situacao_espiritual"]);//Mostra o estado do membro: se Em comunhão, disciplinado, falecido...
-
 			$nome->getMostrar();
+            $nome->getEditar('','',$bsc_rol);#<!-- Mostra form para nome -->
 		?></td>
 		<td rowspan="3" align="center"><?PHP
 					//echo " - Idade: ";
@@ -106,13 +105,12 @@ if (!empty($_GET['bsc_rol'])) {
 
 		?><div><?PHP print mostra_foto($bsc_rol);?></div></td>
       </tr>
-      		<?php $nome->getEditar();?><!-- Mostra form para nome -->
       <tr>
         <td >Pai:
         <?PHP
 		$_GET["rol_pai"]=$arr_dad["rol_pai"];
 		$nome = new editar_form("pai",$arr_dad["pai"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
 	    <?php
 		if ($_GET["campo"]!=="pai")
@@ -126,7 +124,7 @@ if (!empty($_GET['bsc_rol'])) {
         <?PHP
 		$_GET["rol_mae"]=$arr_dad["rol_mae"];
 		$nome = new editar_form("mae",$arr_dad["mae"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
 		<?php
 		if ($_GET["campo"]!=="mae")
@@ -139,17 +137,17 @@ if (!empty($_GET['bsc_rol'])) {
         <td>Sexo:
 		<?PHP
 			$nome = new editar_form("sexo",$arr_dad["sexo"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		 ?></td>
         <td>Data Nascimento:
         <?PHP
 			$nome = new editar_form("datanasc",$arr_dad["br_datanasc"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td colspan="2">Nacionalidade:
         <?PHP
 			$nome = new editar_form("nacionalidade",$arr_dad["nacionalidade"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
@@ -184,26 +182,26 @@ if (!empty($_GET['bsc_rol'])) {
         <?PHP
         	$tab_edit='adm/dados_pessoais.php&tabela='.$tabela.'&bsc_rol='.$bsc_rol.'&uf_nasc='.$arr_dad["uf_nasc"].'&campo=';
 			$nome = new editar_form("uf_nasc",$arr_dad["uf_nasc"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
         <td colspan="2">Endere&ccedil;o:
 		<?PHP
 		$nome = new editar_form("endereco",$arr_dad["endereco"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td colspan="2">N&uacute;mero:
         <?PHP
 		$nome = new editar_form("numero",$arr_dad["numero"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
         <td>Complementos:
 		<?PHP
 		$nome = new editar_form("complemento",$arr_dad["complemento"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Cidade:
           <?PHP
@@ -264,46 +262,46 @@ if (!empty($_GET['bsc_rol'])) {
         <td>UF Resid&ecirc;ncia:
         <?PHP
 			$nome = new editar_form("uf_resid",$arr_dad["uf_resid"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td >Celular:
         <?PHP
 		$nome = new editar_form("celular",$arr_dad["celular"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
 		<td>Telefone:
         <?PHP
 		$nome = new editar_form("fone_resid",$arr_dad["fone_resid"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
         <td>CEP:
           <?PHP
 		$nome = new editar_form("cep",$arr_dad["cep"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Doador de Sangue:
           <?PHP
 		$nome = new editar_form("doador",$arr_dad["doador"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Tipo de Sangu&iacute;neo:
           <?PHP
 		$nome = new editar_form("sangue",$arr_dad["sangue"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
         <td>Email:
 		<?PHP
 		$nome = new editar_form("email",$arr_dad["email"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Gradua&ccedil;&atilde;o:
 		<?PHP
 		$nome = new editar_form("graduacao",$arr_dad["graduacao"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?>		</td>
         <td colspan="2">Escolaridade:
 		<?PHP
@@ -354,7 +352,7 @@ if (!empty($_GET['bsc_rol'])) {
           <p>
 		<?PHP
 		$nome = new editar_form("obs",$arr_dad["mobs"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('Pedencias do cadastro','',$bsc_rol);
 		?></p></td>
       </tr>
     </table>

@@ -22,7 +22,7 @@ ver_cad($bsc_rol);
 		<?PHP
 		$_GET["rol_conjugue"]=$arr_dad["rol_conjugue"];
 		$nome = new editar_form("conjugue",$arr_dad["conjugue"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
 		<?php
 		if ($_GET["campo"]!=="conjugue")
@@ -30,7 +30,7 @@ ver_cad($bsc_rol);
 			<td>Rol do Conjugue:
 			<?PHP
 				$nome = new editar_form("rol_conjugue",$arr_dad["rol_conjugue"],$tab,$tab_edit);
-				$nome->getMostrar();$nome->getEditar();
+				$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 			?></td>
 		<?php
 		} ?>
@@ -83,31 +83,31 @@ ver_cad($bsc_rol);
         <td colspan="2">Certid&atilde;o de Casamento N&ordm;
           <?PHP
 		$nome = new editar_form("certidao_casamento_n",$arr_dad["certidao_casamento_n"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
         <td>Data:
         <?PHP
 		$nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td><td>Livro:
           <?PHP
 		$nome = new editar_form("livro",$arr_dad["livro"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?>
 </td>
 		<td>Folhas:
         <?PHP
 		$nome = new editar_form("folhas",$arr_dad["folhas"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
         <td colspan="3">Observa&ccedil;&otilde;es:
 		<?PHP
 		$nome = new editar_form("obs",$arr_dad["obs"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?>		</td>
       </tr>
     </table>

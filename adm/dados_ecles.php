@@ -50,13 +50,13 @@ if ($_SESSION['nivel']>4){
         <td>Situa&ccedil;&atilde;o espiritual:
         <?PHP
 			$nome = new editar_form("situacao_espiritual",situacao ($arr_dad["situacao_espiritual"]),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		  ?></td>
         <td>Ano  Batismo  Esp. Santo:
         <?PHP
 		$nome = new editar_form("batismo_espirito_santo",$arr_dad["batismo_espirito_santo"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
@@ -64,13 +64,13 @@ if ($_SESSION['nivel']>4){
         <?PHP
 		$nome = new editar_form("batismo_em_aguas",$arr_dad["batismo_em_aguas"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td colspan="2">Denomina&ccedil;&atilde;o que veio:
         <?PHP
 		$nome = new editar_form("veio_qual_denominacao",$arr_dad["veio_qual_denominacao"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
@@ -89,7 +89,7 @@ if ($_SESSION['nivel']>4){
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "eclesiastico";?>" />
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
-            <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="2"/>
+            <input name="Submit" type="submit" class="btn btn-primary btn-xs" id="Submit" value="Alterar..." tabindex="2"/>
             </label>
           </form>
           <?PHP } ?></td>
@@ -105,12 +105,12 @@ if ($_SESSION['nivel']>4){
           <form id="form3" name="form3" method="post" action="">
             <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "adm/atualizar_dados.php";?>" />
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
-				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
+			<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
             <?PHP
 			$lst_cid = new sele_cidade("cidade",$arr_dad["uf"],"coduf","nome","local_batismo");
 			$vlr_linha=$lst_cid->ListDados ($ind++);
 		?>
-            <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
+            <input name="Submit" class="btn btn-primary btn-xs" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "eclesiastico";?>" />
           </form>
           <?PHP
@@ -120,7 +120,7 @@ if ($_SESSION['nivel']>4){
         <?PHP
 		$nome = new editar_form("dt_mudanca_denominacao",$arr_dad["dt_mudanca_denominacao"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
@@ -128,19 +128,19 @@ if ($_SESSION['nivel']>4){
         <?PHP
 		$nome = new editar_form("auxiliar",$arr_dad["auxiliar"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Diácono em:
         <?PHP
 		$nome = new editar_form("diaconato",$arr_dad["diaconato"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
 		<td >Presbitéro em:
         <?PHP
 		$nome = new editar_form("presbitero",$arr_dad["presbitero"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
@@ -148,18 +148,18 @@ if ($_SESSION['nivel']>4){
         <?PHP
 		$nome = new editar_form("evangelista",$arr_dad["evangelista"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Pastor em:
         <?PHP
 		$nome = new editar_form("pastor",$arr_dad["pastor"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Data:
         <?PHP
 		$nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
       <tr>
@@ -167,42 +167,38 @@ if ($_SESSION['nivel']>4){
         <?PHP
 		$nome = new editar_form("lugar",$arr_dad["lugar"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Data da mudan&ccedil;a da outra Assembleia:
         <?PHP
 		$nome = new editar_form("dt_muda_assembleia",$arr_dad["dt_muda_assembleia"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td>Data da aclama&ccedil;&atilde;o:
         <?PHP
 		$nome = new editar_form("dat_aclam",$arr_dad["dat_aclam"],$tab,$tab_edit);
 		$nome->getMostrar();
-		$nome->getEditar();
+		$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
 
       <tr>
         <td>Cart&atilde;o Impresso em:
         <?PHP
-		$nome = new editar_form("c_impresso",$arr_dad["c_impresso"],$tab,$tab_edit);
-		$nome->getMostrar();
+        echo '<p>'.$arr_dad["c_impresso"].'<p>';
 		?></td>
         <td>Cart&atilde;o Impresso por:
           <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_imprimiu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_imprimiu"];?> - Click aqui para dados completos">
-            <?PHP
-
-		echo substr (fun_igreja ($arr_dad["quem_imprimiu"]),0,25);
-
-		?>
-          </a></p></td>
+            <?PHP echo substr (fun_igreja ($arr_dad["quem_imprimiu"]),0,25);?>
+          </a>
+        </p>
+        </td>
         <td><p>&nbsp;</p></td>
       </tr>
       <tr>
         <td>Cartão Entregue em:
         <?PHP
-		$nome = new editar_form("c_entregue",$arr_dad["c_entregue"],$tab,$tab_edit);
-		$nome->getMostrar();
+        echo '<p>'.$arr_dad["c_entregue"].'</p>';
 		?></td>
         <td>Cartão Recebido por:
         <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_recebeu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_recebeu"];?> - Click aqui para dados completos">
@@ -215,18 +211,17 @@ if ($_SESSION['nivel']>4){
         <td>Cartão Entregue por:
 		<p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_entregou"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_entregou"];?> - Click aqui para dados completos">
          <?PHP
-
 		echo substr (fun_igreja ($arr_dad["quem_entregou"]),0,25);
-
 		?>
-        </a></p>        </td>
+        </a></p>
+        </td>
       </tr>
       <tr>
       <td colspan="4">Observa&ccedil;&otilde;es:
           <p>
 		<?PHP
 		$nome = new editar_form("obs",$arr_dad["obs"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></p></td>
 		</tr>
 	  <tr>

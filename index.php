@@ -28,17 +28,11 @@
 			$bsc_rol = intval($_GET["bsc_rol"]);
 			//$_SESSION["rol"]=(int)$_GET["bsc_rol"];
       $membro = new DBRecord ("membro",$bsc_rol,"rol");
-		}
+		} elseif (!empty($_POST['bsc_rol'])) {
+      $bsc_rol = intval($_POST["bsc_rol"]);
+    }
 
-	if (strstr($_GET["escolha"],"cadastro_membro.php") || strstr($_POST["escolha"],"cadastro_membro.php"))
-	{
-		unset($_SESSION["rol"]);//se for cadastrar um novo membro a variï¿½vel ï¿½ limpa e define a legenda para o form listar dados do membro pelo rol
-		unset($_SESSION["membro"]);
-		$campo_rol="Insira o Rol:";
-	}else{
-		//$_SESSION["membro"]=$membro->nome();
 		$campo_rol="Rol Nº:"; //Quando a variï¿½vel de sessão rol existir define 'Rol nº:' como legenda para o form listar dados do membro pelo rol
-	}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

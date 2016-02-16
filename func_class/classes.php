@@ -503,7 +503,7 @@ class editar_form {
 		}
 	}
 
-	public function getEditar($placeholder,$fJScript){
+	public function getEditar($placeholder,$fJScript,$ident){
 	$ind = 1;
 	if ($this->valor=="" || $this->valor=='N&atilde;o Informado!'){
 		$this->valor='';
@@ -512,11 +512,9 @@ class editar_form {
 		}
 
 	}elseif ($this->campo=='valor') {
-
 		$trans = array("." => ",", "," => ".");
 		$this->valor = strtr($this->valor,$trans);
 	}
-
 	if ($this->campo==$this->vlr_get)
 		{
 			/* Formulário para edição por item. Neste form os campos sï¿½o recebidos de qualquer
@@ -525,7 +523,10 @@ class editar_form {
 			que sofrerï¿½ alteraï¿½ï¿½o. Em agumas ocasiï¿½es tambï¿½m ï¿½ passado o campo UF.*/
 
 			//echo $this->campo." = ".$this->vlr_get;
-			$ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
+            if ($ident=='') {
+                $ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
+            }
+
 			?>
 
 			<form id="form1" name="form1" method="post" action="">
@@ -558,8 +559,8 @@ class editar_form {
 					  </select></td>
 					<?PHP
 					break;
-				case "obs";
-					echo "</td><td><label>&nbsp;</label><textarea class='form-control' autofocus='autofocus' placeholder='<?php echo $placeholder;?>'";
+				case 'obs';
+					echo '</td><td><label>&nbsp;</label><textarea class="form-control" autofocus="autofocus" placeholder="'.$placeholder.'"';
 					echo "name='{$this->campo}' cols='50' onselect='1' ";
 					echo "tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea></td>";
 					break;

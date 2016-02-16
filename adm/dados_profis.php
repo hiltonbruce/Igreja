@@ -20,7 +20,7 @@ ver_cad($bsc_rol);
         <td>Profiss&atilde;o:
 		<?PHP
 		$nome = new editar_form("profissao",$arr_dad["profissao"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?>
 	</td>
         <td>CPF:
@@ -49,19 +49,19 @@ ver_cad($bsc_rol);
         <td>Identidade:
 		<?PHP
 		$nome = new editar_form("rg",$arr_dad["rg"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?>		</td>
       </tr>
       <tr>
         <td>Org&atilde;o expedidor:
 		<?PHP
 		$nome = new editar_form("orgao_expedidor",$arr_dad["orgao_expedidor"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
         <td colspan="2">Empresa onde Trabalha:
 		<?PHP
 		$nome = new editar_form("onde_trabalha",$arr_dad["onde_trabalha"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
       </tr>
 
@@ -69,7 +69,7 @@ ver_cad($bsc_rol);
         <td colspan="3">Observa&ccedil;&otilde;es
 		<?PHP
 		$nome = new editar_form("obs",$arr_dad["obs"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
+		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?>		</td>
       </tr>
     </table>

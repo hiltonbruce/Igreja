@@ -13,17 +13,17 @@
 		{
 					//echo $_get["escolha"]."<h3> config_nupat </h3>";
 			if (!empty($_POST["escolha"])){
-			 
+
 				$perfil_usu = $_POST["escolha"];
-			
+
 			}elseif (!empty($_GET["escolha"])){
-					
+
 				$perfil_usu = $_GET["escolha"];
-			
+
 			}else{
-			
+
 				$perfil_usu="noticias/painel.php";
-			
+
 			}
 
 		?>
@@ -49,40 +49,40 @@
   </tr>
 </table>
 
-		
+
 	<h1>
 	<form id="form1" name="form1" method="get" action="">
 	  <?PHP
 	  if (!empty($_GET["bsc_rol"]))
 		{
-			$_SESSION["rol"]=(int)$_GET["bsc_rol"];
+			$bsc_rol=intval($_GET["bsc_rol"]);
 		}
-		
-	  echo "$campo_rol ".$_SESSION["rol"];
-	  $anterior=$_SESSION["rol"]-1;
-	  $proximo=$_SESSION["rol"]+1;
+
+	  echo "$campo_rol ".$bsc_rol;
+	  $anterior=$bsc_rol-1;
+	  $proximo=$bsc_rol+1;
 	  if ($anterior<=0)
 	  {
 	  $anterior=0;
 	  }
-	  
+
 	  ?>
 	  <input name="bsc_rol" class="btn btn-default btn-sm" type="text" id="bsc_rol" title="Insira o n&ordm; do Rol"/>
 	  <input name="escolha" type="hidden" id="escolha" value="adm/dados_pessoais.php" />
 	  <input type="submit" name="Submit2" value="Listar..." title="Click aqui para listar os dados do Membro"/>
-	  <a href="./?escolha=adm/dados_pessoais.php&amp;bsc_rol=<?PHP echo $anterior;?>"><img src="img/1910_32x32.png" alt="Anterior Anterior" width="22" height="22" title="Registro Anterior" align="absmiddle" border="0" /></a> 
+	  <a href="./?escolha=adm/dados_pessoais.php&amp;bsc_rol=<?PHP echo $anterior;?>"><img src="img/1910_32x32.png" alt="Anterior Anterior" width="22" height="22" title="Registro Anterior" align="absmiddle" border="0" /></a>
 	  <a href="./?escolha=adm/dados_pessoais.php&amp;bsc_rol=<?PHP echo $proximo;?>"><img src="img/1967_32x32.png" width="22" height="22" title="Pr&oacute;ximo Registro" alt="Pr&oacute;ximo Registro" align="absmiddle" border="0"/></a>
 	</form>
 	</h1>
 		<?PHP
-		
-		}else 
+
+		}else
 			{
 				$perfil_usu="noticias/painel.php";
 			}
-		
-		require_once "$perfil_usu";		
-		
+
+		require_once "$perfil_usu";
+
 		?>
 </body>
 </html>
