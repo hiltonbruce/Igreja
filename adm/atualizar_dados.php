@@ -23,25 +23,32 @@ if (validaCPF($_POST["cpf"]) && $_POST["submit"]=="Alterar CPF ..."){
 	echo "CPF inválido";
 }
 
-$query = "select * from {$_POST["tabela"]} ";
 $id = (!empty($_POST['id'])) ? intval($_POST['id']) : intval($_GET['id']);
 if ($_POST['tabela'] == 'carta') {
-	$query .='WHERE id = "'.$id.'"';
-}else {
-	$query .='WHERE rol="'.$id.'"';
-}
+	$rec = new DBRecord ($_POST["tabela"],$id,'id');
+	if ($_POST['campo']=='data') {
+		$rec->$_POST["campo"] = br_data($_POST[$_POST["campo"]],$_POST["campo"]); //Aqui é atribuido a esta variável um valor para UpDate
+	} else {
+		$rec->$_POST["campo"] = ltrim($_POST[$_POST["campo"]]); //Aqui é atribuido a esta variável um valor para UpDate
+	}
+	$rec->Update();
+	echo "<script> alert('Alteração realizada com sucesso!');window.history.go(-1);</script>";
 
-$rol = (!empty($_POST['bsc_rol'])) ? intval($_POST['bsc_rol']) : $id;
+}else {
+
+	$query = "select * from {$_POST["tabela"]} ";
+	$query .='WHERE rol="'.$id.'"';
+
+	$rol = (!empty($_POST['bsc_rol'])) ? intval($_POST['bsc_rol']) : $id;
 
 /*else {
 	$query .="where rol='{$_SESSION["rol"]}'";
 	$rol = $_SESSION["rol"];
 	}*/
 	//echo "<h1>te -{$_POST["id"]}- teste -{$_POST["tabela"]}</h1>";
-$result = mysql_query($query) or die (mysql_error());
+	$result = mysql_query($query) or die (mysql_error());
 
-   if (mysql_num_rows($result)>0)
-	{
+   if (mysql_num_rows($result)>0){
 		$rec = new DBRecord ("{$_POST["tabela"]}",$rol,"rol"); //Aqui será selecionado a informação do campo
 		print "<br \>O Campo foi atualizado de:<h3>{$rec->$_POST["campo"]()}</h3>\n"; //Imprime o valor na tela
 
@@ -57,7 +64,6 @@ $result = mysql_query($query) or die (mysql_error());
 		}else{
 			$rec->$_POST["campo"] = ltrim($_POST[$_POST["campo"]]); //Aqui é atribuido a esta variável um valor para UpDate
 		}
-
 
 		if ($_POST["campo"]=="pai" || $_POST["campo"]=="mae" || $_POST["campo"]=="conjugue") {
 				$cam="rol_{$_POST["campo"]}";
@@ -94,5 +100,6 @@ $result = mysql_query($query) or die (mysql_error());
 		$dados_pessoais = new insert ("$value","{$_POST["tabela"]}");//deve-se colocar todos valores para os campos da tabela a ser inserida
 		$dados_pessoais->inserir();
 	}
+}
 	echo mysql_error();
  ?>

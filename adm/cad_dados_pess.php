@@ -229,6 +229,9 @@ switch ($_POST["tabela"]) {
 		break;
 
 	case "disciplina";
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): '';
+		if ($rolMembro>0) {
+			//verifica
 		//insere na tabela disciplina
 		$pass = md5($_POST['senha']);
 
@@ -260,18 +263,21 @@ switch ($_POST["tabela"]) {
 			}else{
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
 			}
-
+			$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): '';
 			$value = "'','{$rolMembro}','{$_POST["situacao"]}','{$_POST["motivo"]}','$dt_ini','$dt_fim','$hist',NOW()";
 			$disciplina = new insert ("$value","disciplina");
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
 			$rec = new DBRecord ("eclesiastico",$rolMembro,"rol");
-			$rec->situacao_espiritual = (int)$_POST["situacao"]; //Aqui é atribuido a esta variável o valor para UpDate
+			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui é atribuido a esta variável o valor para UpDate
 			$rec->UpDate();
 			echo "<script>location.href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'</script>";
 			echo "<a href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 			}else{
 			echo "<script> alert('Senha incorreta!');</script>";
+			}
+			}else {
+				echo "<script> alert('Rol do membro não foi informado!');</script>";
 			}
 		break;
 

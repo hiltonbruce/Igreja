@@ -562,7 +562,7 @@ class editar_form {
 				case 'obs';
 					echo '</td><td><label>&nbsp;</label><textarea class="form-control" autofocus="autofocus" placeholder="'.$placeholder.'"';
 					echo "name='{$this->campo}' cols='50' onselect='1' ";
-					echo "tabindex='$ind++$lin->fetchRow()' >{$this->valor} </textarea></td>";
+					echo 'tabindex="'.$ind++.'" >'.$this->valor.'</textarea></td>';
 					break;
 				case "uf_nasc":
 					$ind++;

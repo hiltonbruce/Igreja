@@ -17,7 +17,7 @@
 		$query = "SELECT id,situacao,motivo,cad,DATE_FORMAT(data_ini,'%d/%m/%Y')
 		AS data_ini, DATE_FORMAT(data_fim,'%d/%m/%Y') AS data_fim
 		from disciplina WHERE rol = '".$bsc_rol."' " or die (mysql_error());
-			
+
 		$nmpp="2000"; //Número de mensagens por párginas
 		$paginacao = Array();
 		$paginacao['link'] = "?"; //Paginação na mesma página
@@ -26,13 +26,13 @@
 		$sql2 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
 		$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
-			
+
 		if ($_GET["pagina1"]<1) {
 			$_GET["pagina1"] = 1;
 		} elseif ($_GET["pagina1"]>$paginas) {
 			$_GET["pagina1"] = $paginas;
 		}
-			
+
 		$pagina = $_GET["pagina1"]-1;
 
 		if ($pagina<0) {
@@ -41,7 +41,7 @@
 		$inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no MySQL
 		$sql3 = mysql_query ($query." LIMIT $inicio,$nmpp") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-			
+
 		//inicia o cabeçalho de paginação
 
 		?>
@@ -236,7 +236,7 @@
 		</label> Registro:
 		<?PHP echo $situacao->situacao_confirma();?>
 		<label><input type="hidden" name="situacao"
-			value="<?PHP echo $_POST["situacao"];?>"> </label> <label>Data: <?php 
+			value="<?PHP echo $_POST["situacao"];?>"> </label> <label>Data: <?php
 			if ($_POST["data_ini"]<>"") {
 				echo $_POST["data_ini"];
 			}else {
@@ -244,7 +244,7 @@
 			}
 			?> <input type="hidden" name="data_ini"
 			value="<?php echo $_POST["data_ini"];?>" />
-		</label>class='btn btn-primary' 
+		</label>
 		<table width="100%">
 			<thead>
 				<tr>
@@ -258,12 +258,12 @@
 		  		}
 		  	}
 		  	?> <label><input type="hidden" name="prazo"
-							value="<?php echo (int)$_POST["prazo"];?>" /> </label></td>
+					value="<?php echo (int)$_POST["prazo"];?>" /> </label></td>
 				</tr>
 			</thead>
 		</table>
 		<label>Sua senha: <input name="senha" type="password" id="senha"
-			tabindex="1" class="form-control"  />
+			tabindex="1" class="form-control"  autofocus='autofocus' />
 		</label> <input name="tabela" type="hidden" id="tabela"
 			value="disciplina" /> <input name="bsc_rol" type="hidden" id="campo"
 			value="<?PHP echo $bsc_rol;?>" /> <input name="escolha" type="hidden"

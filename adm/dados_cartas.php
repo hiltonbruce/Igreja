@@ -6,7 +6,7 @@ $bsc_rol = intval($_GET['bsc_rol']);
 
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
 $tab_edit='adm/dados_cartas.php&tabela=carta&bsc_rol='.$bsc_rol.'&campo=';//Link de chamada da mesma página para abrir o form de edição do item
-$query = "SELECT *,DATE_FORMAT(data,'%d/%m/%Y')AS data FROM carta WHERE rol='".$bsc_rol."' ORDER BY data DESC";
+$query = "SELECT *,DATE_FORMAT(data,'%d/%m/%Y')AS data FROM carta WHERE rol='".$bsc_rol."' ORDER BY id DESC";
 $nmpp="5"; //Número de mensagens por párginas
 $paginacao = Array();
 $paginacao['link'] = "?"; //Paginação na mesma página
@@ -45,8 +45,8 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
           if ($diasemissao==1) {
           	echo ' (Criada hoje)';
           }elseif ($diasemissao<3){
-          echo ' (Criada ontem!)';
-          }else {
+            echo ' (Criada ontem!)';
+          }elseif ($anov>'2000') {
           	echo ' (Criada à: '.$diasemissao. ' dias)';
           }
 
@@ -54,7 +54,7 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 	   $nome->getMostrar();
 
 		if ($diasemissao<='3') {
-			$nome->getEditar('','',$bsc_rol);
+			$nome->getEditar('','',$arr_dad["id"]);
 		}elseif ($_GET['campo']=='data') {
 			?>
 			<div class="alert alert-danger alert-dismissible" role="alert">
@@ -71,7 +71,7 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 		$nome = new editar_form("igreja",$arr_dad["igreja"],$tab,$tab_edit);
 		$nome->getMostrar();
 		if ($diasemissao<='20') {
-			$nome->getEditar('','',$bsc_rol);
+			$nome->getEditar('','',$arr_dad["id"]);
 		}elseif ($_GET['campo']=='igreja')  {
 			?>
 			<div class="alert alert-danger alert-dismissible" role="alert">
@@ -101,7 +101,7 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 				$cid = new editar_form("destino",$cidade,$tab,$tab_edit);
 				$cid->getMostrar();
 				if ($diasemissao<='20') {
-					$cid->getEditar('','',$bsc_rol);
+					$cid->getEditar('','',$arr_dad["id"]);
 				}elseif ($_GET['campo']=='destino')  {
 					?>
 					<div class="alert alert-danger alert-dismissible" role="alert">

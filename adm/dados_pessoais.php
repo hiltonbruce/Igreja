@@ -208,7 +208,7 @@ if (!empty($_GET['bsc_rol'])) {
 		//inicio
 		$cidade = new DBRecord ("cidade",$arr_dad["cidade"],"id");
 
-		echo $arr_dad["cidade"];
+		//echo $arr_dad["cidade"];
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
 
@@ -235,7 +235,7 @@ if (!empty($_GET['bsc_rol'])) {
 		//inicio
 		$bairro = new DBRecord ("bairro",$arr_dad["bairro"],"id");
 
-		echo $arr_dad["bairro"]." - ".$bairro->bairro();
+		echo $bairro->bairro();
 		$nome = new editar_form("bairro",$bairro->bairro(),$tab,$tab_edit);
 		$nome->getMostrar();
 
