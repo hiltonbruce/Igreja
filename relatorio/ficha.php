@@ -102,7 +102,6 @@ h1{
 
 }
 
-
 .clear {
   clear: both;
 }
@@ -173,12 +172,9 @@ thead tr:hover {
   background-color: transparent;
   color: inherit;
 }
-
-
 -->
 </style>
 </head>
-
 <body>
 <div id="header">
 	</div>
@@ -204,7 +200,7 @@ thead tr:hover {
   <tbody>
     <tr class="odd">
       <td rowspan='4'>
-          <div id="foto"><?PHP print mostra_foto();?></div>
+          <div id="foto"><?PHP print mostra_foto($rolMembro);?></div>
        </td>
       <td colspan="3" scope="col"><p>Nome: </p><h4><?PHP echo $membro->nome();?></h4></td>
       <td scope="col"><p>Rol:</p><h4><?PHP printf (" %'03u",$rolMembro);?></h4></td>
