@@ -171,8 +171,8 @@
     <div id="footer"><span class="text-center">
                         <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?>
                           <?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?>
-                          Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> -
-                          Email: <?PHP echo "{$igreja->email()}";?></span>
+                          <h4>Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> -
+                          Email: <?PHP echo "{$igreja->email()}";?></h4></span>
                          <p class="text-right"><small>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">
                             Joseilton Costa Bruce.</a></small></p>
     </div>

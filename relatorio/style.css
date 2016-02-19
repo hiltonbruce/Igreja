@@ -91,6 +91,7 @@ a:link:after, a:visited:after {
 #vencimento {
 	float:left;
 	width:800px;
+	font-size: 150%;
 	text-align:right;
 	color:#FF0000;
 }
