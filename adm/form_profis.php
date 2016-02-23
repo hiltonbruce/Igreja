@@ -11,6 +11,8 @@ controle ("inserir");
 
 	$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");// Aqui será selecionado a informação do campo autor com id=2
 	$nome_cidade = $rec->nome()." - ".$rec->coduf();
+
+    $bsc_rol = (!empty($_GET['bsc_rol'])) ? intval($_GET['bsc_rol']) : intval($_POST['bsc_rol']);
 	//echo "<h1>Teste $uf_natal $cid_natal</h1>";
 
 	$prof = new DBRecord ("profissional",$bsc_rol,"rol");
@@ -99,6 +101,7 @@ controle ("inserir");
 	</div><br />
 	<input name="escolha" type="hidden" value="adm/<?PHP echo $link;?>.php" />
 	<input name="tabela" type="hidden" id="tabela" value="profissional" />
+  <input name="bsc_rol" type="hidden" id="tabela" value="<?PHP echo $bsc_rol;?>" />
 	<input name="hist" type="hidden" id="hist" value="<?PHP echo $_SESSION['valid_user'].": ".$_SESSION['nome'].", em: ".date("d/m/Y H:i:s")."@".$prof->hist();?>" />
 	<input type="submit" class='btn btn-primary' name="Submit" value="Cadastrar..."
     tabindex="<?PHP echo $ind++;?>" />

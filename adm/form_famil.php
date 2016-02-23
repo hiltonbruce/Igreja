@@ -118,6 +118,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	</div></div><br />
 	<input name="escolha" type="hidden" value="adm/<?PHP echo $link;?>.php" />
 	<input name="tabela" type="hidden" id="tabela" value="est_civil" />
+  <input name="bsc_rol" type="hidden" id="tabela" value="<?PHP echo $bsc_rol;?>" />
 	<input name="hist" type="hidden" id="hist" value="<?PHP echo $_SESSION['valid_user'].": ".$_SESSION['nome'].", em: ".date("d/m/Y H:i:s")."@".$familia->hist();?>" />
 	<input type="submit" class='btn btn-primary' name="Submit" value="Cadastrar..." tabindex="<?PHP echo $ind++;?>" />
 </form>

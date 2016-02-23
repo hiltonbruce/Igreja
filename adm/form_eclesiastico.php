@@ -18,6 +18,7 @@ if (isset($_POST["nacionalidade"])){
 }
 	$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");// Aqui será selecionado a informação do campo autor com id=2
 	$nome_cidade = $rec->nome()." - ".$rec->coduf();
+  $bsc_rol = (!empty($_GET['bsc_rol'])) ? intval($_GET['bsc_rol']) : intval($_POST['bsc_rol']);
 ?>
 <script type="text/JavaScript">
 <!--
@@ -218,6 +219,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   ?>
 	<input name="escolha" type="hidden" value="adm/cad_dados_pess.php" />
 	<input name="tabela" type="hidden" id="tabela" value="eclesiastico" />
+  <input name="bsc_rol" type="hidden" id="tabela" value="<?PHP echo $bsc_rol;?>" />
 </form>
 </fieldset>
 </div>

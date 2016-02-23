@@ -69,7 +69,7 @@ switch ($_POST["tabela"]) {
 
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
 		$cad = date("Y-m-d h:i:s");
-		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): '';
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
 		echo "Rol-------> ".$rolMembro;
 		$value = "'{$rolMembro}','{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
 				 ."'{$_POST["batismo_espirito_santo"]}','$dt_mudanca_denominacao',"
@@ -124,6 +124,7 @@ switch ($_POST["tabela"]) {
 
 	case "profissional";
 		//insere na tabela profissional
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
 		$value="'{$rolMembro}','{$_POST["profissao"]}','{$_POST["obs"]}','{$_POST["cpf"]}','{$_POST["rg"]}','{$_POST["orgao_expedidor"]}','{$_POST["onde_trabalha"]}','$hist',NOW()";
 		$profissional = new insert ("$value","profissional");
 		$profissional->inserir();
@@ -134,6 +135,7 @@ switch ($_POST["tabela"]) {
 
 	case "est_civil";
 		//insere na tabela est_civil
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
 		if (!empty ($_POST["data"])) {
 			$data=br_data($_POST["data"],"data");
 		}else{
@@ -168,7 +170,7 @@ switch ($_POST["tabela"]) {
 
 	case "cetad_aluno";
 		//Cadastra aluno em curso
-
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
 		$query = 	"SELECT rol FROM cetad_aluno "
 				."WHERE rol = '{$rolMembro}' AND situacao = '1' ";
 
@@ -229,7 +231,7 @@ switch ($_POST["tabela"]) {
 		break;
 
 	case "disciplina";
-		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): '';
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
 		if ($rolMembro>0) {
 			//verifica
 		//insere na tabela disciplina
@@ -263,7 +265,6 @@ switch ($_POST["tabela"]) {
 			}else{
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
 			}
-			$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): '';
 			$value = "'','{$rolMembro}','{$_POST["situacao"]}','{$_POST["motivo"]}','$dt_ini','$dt_fim','$hist',NOW()";
 			$disciplina = new insert ("$value","disciplina");
 			$disciplina -> inserir();
@@ -298,6 +299,7 @@ switch ($_POST["tabela"]) {
 
 	case "cargo_igreja";
 		//insere na tabela
+		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
 		$value="'','{$_POST["descricao"]}','{$_POST["obs"]}','{$_POST["igreja"]}','{$rolMembro}','{$_POST["hierarquia"]}','1','$hist',NOW()";
 		$cargos = new insert ("$value","{$_POST["tabela"]}");
 		$cargos->inserir();
