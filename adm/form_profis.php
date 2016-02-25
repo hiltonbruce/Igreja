@@ -41,7 +41,7 @@ controle ("inserir");
 	<?PHP
 	exit;
 	}
-	if ((validaCPF($_GET["cpf"]) xor (empty($_GET["conf_cpf_ruim"]))) && empty($_SESSION["cpf"])){
+	if ((validaCPF($_GET["cpf"]) xor (empty($_GET["conf_cpf_ruim"]))) && empty($_SESSION["cpf"]) && empty($_GET['bsc_rol'])){
 		echo "<script>pergunta();</script>";
 		echo "CPF inválido";
 		exit;
@@ -65,7 +65,7 @@ controle ("inserir");
                 <input type="text" disabled='disabled' class='form-control' value="<?PHP echo $cpf;?>" />
               	<input name="cpf" type="hidden" id="cpf" value="<?PHP echo $cpf;?>" />
         		<?PHP }else {?>
-    		 	<input name="cpf" type="text" id="cpf" tabindex="<?PHP echo $ind++;?>" />
+    		 	<input name="cpf" type="text" id="cpf" class='form-control' tabindex="<?PHP echo $ind++;?>" />
     			<?PHP } ?>
             </div>
               <div class="col-xs-4">

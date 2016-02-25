@@ -26,7 +26,7 @@
 			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
 			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
 			$linkIgreja  = '<a '.$linkMemb.' >';
-			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'<div class="text-center"><kbd>'.cargo($igrejaDados['rol']).'</kbd></div></a></td><td>';
+			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'<div class="text-center"><kbd>'.cargo($igrejaDados['rol'])['0'].'</kbd></div></a></td><td>';
 			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a><br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 

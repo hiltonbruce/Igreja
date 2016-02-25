@@ -3,7 +3,7 @@
 /**
  * Joseilton Costa Bruce
  *
- * LICEN«A
+ * LICEN√áA
  *
  * Please send an email
  * to hiltonbruce@gmail.com so we can send you a copy immediately.
@@ -14,7 +14,7 @@
  * @copyright  Copyright (c) 2008-2009 Joseilton Costa BRuce (http://)
  * @license    http://
  * Insere dados no banco do form cadastro.php nas tabelas:
- * Membro e com este registro pegar o n˙mero do rol e insere este n˙mero
+ * Membro e com este registro pegar o n√∫mero do rol e insere este n√∫mero
  * nas tabelas eclesiastico, est_civil e profissional
  */
 controle("inserir");
@@ -99,9 +99,9 @@ switch ($_POST["tabela"]) {
 
 		$dados_pessoais = new insert ("$value","membro");
 		$dados_pessoais->inserir();
-		$rolMembro = mysql_insert_id();//recupera o id do ˙ltimo insert no mysql
+		$rolMembro = mysql_insert_id();//recupera o id do √∫ltimo insert no mysql
 
-		// Salta para n„o permitir registro 666
+		// Salta para n√£o permitir registro 666
 		$test_rol = $rolMembro+1;
 		if ((substr_count($test_rol, '666'))>0){
 			$aut_inc = str_replace("666","667",$test_rol);
@@ -116,7 +116,7 @@ switch ($_POST["tabela"]) {
 		echo "<script>location.href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$rolMembro}'</script>";
 		echo "<a href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$rolMembro}'>Continuar...<a>";
 
-		unset($_SESSION["nacao"]);//Limpa estas vari·veis
+		unset($_SESSION["nacao"]);//Limpa estas vari√°veis
 		unset($_SESSION["cid_natal"]);
 		unset($_SESSION["cid_end"]);
 		unset($_SESSION["nome_cad"]);
@@ -177,7 +177,7 @@ switch ($_POST["tabela"]) {
  		$result = mysql_query($query) or die (mysql_error());
 		 if (mysql_num_rows($result)>0) {
 
-			echo "<script>alert('O aluno: {$_SESSION["membro"]}, j· possui matrÌcula ativa!');window.history.go(-1);</script>";
+			echo "<script>alert('O aluno: {$_SESSION["membro"]}, j√° possui matr√≠cula ativa!');window.history.go(-1);</script>";
 			echo "<a href='./?escolha=cetad/matricula.php'>Voltar ...<a>";
 			break;
 		 }
@@ -226,7 +226,7 @@ switch ($_POST["tabela"]) {
 		echo "<a href='./?escolha=cetad/matricula.php&menu=top_cetad'>Continuar...<a>";
 
 		} else {
-			echo "<script>alert('Todos os Campos s„o de preenchimento OBRIGAT”RIO!');window.history.go(-1);</script>";
+			echo "<script>alert('Todos os Campos s√£o de preenchimento OBRIGAT√ìRIO!');window.history.go(-1);</script>";
 		}
 		break;
 
@@ -260,7 +260,7 @@ switch ($_POST["tabela"]) {
 			echo $d."/".$m."/".$y;
 
 			if (empty($_POST["prazo"])) {
-				//Se prazo for deixado em branco ser· atribuido prazo indeterminado (0000-00-00)
+				//Se prazo for deixado em branco ser√° atribuido prazo indeterminado (0000-00-00)
 				$dt_fim = "0000-00-00";
 			}else{
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
@@ -270,7 +270,7 @@ switch ($_POST["tabela"]) {
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
 			$rec = new DBRecord ("eclesiastico",$rolMembro,"rol");
-			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui È atribuido a esta vari·vel o valor para UpDate
+			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui √© atribuido a esta vari√°vel o valor para UpDate
 			$rec->UpDate();
 			echo "<script>location.href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'</script>";
 			echo "<a href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'>Continuar...<a>";
@@ -278,7 +278,7 @@ switch ($_POST["tabela"]) {
 			echo "<script> alert('Senha incorreta!');</script>";
 			}
 			}else {
-				echo "<script> alert('Rol do membro n„o foi informado!');</script>";
+				echo "<script> alert('Rol do membro n√£o foi informado!');</script>";
 			}
 		break;
 
@@ -308,7 +308,7 @@ switch ($_POST["tabela"]) {
 		break;
 
 	default:
-		echo "Tabela n„o definida!";
+		echo "Tabela n√£o definida!";
 		break;
 
 }

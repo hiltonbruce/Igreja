@@ -40,7 +40,7 @@ if (!empty($_GET["bsc_rol"])) {
 
 		$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");
 		$igreja = new DBRecord ('igreja',$ecles->congregacao,'rol');
-		echo 'Cargo: '.cargo($bsc_rol)['0'].' - Congrega: '.$igreja->razao().', '.situacao ($ecles->situacao_espiritual());
+		echo 'Cargo: '.cargo($bsc_rol)['0'].' - Congrega: '.$igreja->razao().', '.situacao($ecles->situacao_espiritual(),$bsc_rol);
 	}
 
 ?>
