@@ -85,7 +85,7 @@
 				</td>
 				<td>
 					<label>Ano</label>
-					<input type="text" name="ano" value="<?php echo $ano;?>"
+					<input type="text" name="ano" value="<?php echo $anoForm;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="direita"	value="1" />
 					<input type="hidden" name="ord" value="<?php echo $_GET['ord'];?>" />

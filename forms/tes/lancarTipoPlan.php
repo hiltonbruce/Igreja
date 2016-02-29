@@ -39,7 +39,7 @@
 	  	</div>
 		<div class="col-xs-3">
 			<label>Ano</label>
-					<input type="text" name="ano" value="<?php echo $ano;?>"
+					<input type="text" name="ano" value="<?php echo $anoForm;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="direita"	value="1" /><!-- tira a tabela lateral -->
 	  	</div>

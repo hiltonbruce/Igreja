@@ -1,5 +1,14 @@
 <?php
-$d = $_GET['dia'];$m=$_GET['mes'];$a=$_GET['ano'];
+if (empty($_GET['ano'])) {
+	$a = date('Y');
+	$ano = '';
+} else {
+	$a = $_GET['ano'];
+	$ano = $a;
+}
+
+$d = $_GET['dia'];
+$m=$_GET['mes'];
 $dataMov = $d.'/'.$m.'/'.$a;
 
 	if (!empty($_GET['igreja']) && $_GET['igreja']>'0') {

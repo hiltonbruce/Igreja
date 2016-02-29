@@ -1,14 +1,6 @@
 <?php
 //	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 
-	if (empty($_GET['ano'])) {
-		$ano = date('Y');
-	}elseif (!empty($_GET['ano']) && $_GET['ano']>'0' ) {
-		$ano = $_GET['ano'];
-	}else {
-		$ano = 0;
-	}
-
 	//Mensagem complementar para o cabeçalho da tabela
 	if ($ano=='0') {
 		$msg = ' - Todos os ANOS';
@@ -79,7 +71,7 @@
 				</td>
 				<td>
 					Ano:(Zero p/ todos os anos) <br />
-					<input type="text" name="ano" value="<?php echo $ano;?>"
+					<input type="text" name="ano" value="<?php echo $anoForm;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="membro"	value="<?php echo true;?>" />
 					<input type="hidden" name="fin"	value="<?php echo $fin;?>" />

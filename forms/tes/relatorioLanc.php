@@ -25,7 +25,7 @@
 	  </div>
 	  <div class="col-xs-2">
 	  	<label>Ano:</label>
-		<input type="text" name="ano" value="<?php echo $ano;?>"
+		<input type="text" name="ano" value="<?php echo $anoForm ;?>"
 		tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 		<input type="hidden" name="membro"	value="<?php echo true;?>" />
 		<input type="hidden" name="fin"	value="<?php echo $fin;?>" />

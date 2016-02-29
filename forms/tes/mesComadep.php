@@ -35,7 +35,7 @@
 				      </select>
 				</td>
 				<td><label>Ano:(Zero p/ todos os anos)</label>
-					<input type="text" name="ano" value="<?php echo $a;?>"
+					<input type="text" name="ano" value="<?php echo $ano;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 				</td>
 			</tr>

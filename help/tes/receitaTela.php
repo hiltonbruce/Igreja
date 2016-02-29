@@ -4,6 +4,17 @@ $dtlanc = ($_GET['data']=='') ? date('d/m/Y'):$_GET['data'];
 
 $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 
+if (empty($_GET['ano'])) {
+	$ano = date('Y');
+	$anoForm = '';
+}elseif (!empty($_GET['ano']) && $_GET['ano']>'0' ) {
+	$ano = $_GET['ano'];
+	$anoForm = $ano;
+}else {
+	$ano = 0;
+	$anoForm = '';
+}
+
 switch ($rec) {
 	case '1':
 		require_once 'forms/concluirdiz.php';#Form fecha caixa
