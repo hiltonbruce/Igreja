@@ -99,7 +99,8 @@ while ($contas = mysql_fetch_array($lista)) {
 			$totMocidade 	+= $valor;
 	  	break;
 	  	default:
-	  		$linhaCargo = 'Falha';
+	  		$linhaCargo = 'definir cta script histFinaceiroIgreja.php';
+	  		//Definir outras entradas não classificadas
 	  	break;
 	  }
 
