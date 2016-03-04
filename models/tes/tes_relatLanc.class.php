@@ -13,7 +13,8 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 
 	$queryContas = mysql_query('SELECT id,acesso,titulo,codigo FROM contas') or die (mysql_error());
 	while ($ctas = mysql_fetch_array($queryContas)) {
-		$conta[$ctas['id']] = array ('acesso'=>$ctas['acesso'],'titulo'=>$ctas['titulo'],'codigo'=>$ctas['codigo']);
+		$conta[$ctas['id']] = array ('acesso'=>$ctas['acesso'],'titulo'=>$ctas['titulo'],'codigo'=>$ctas['codigo'],
+			'tipo'=>$ctas['tipo']);
 	}
 /*
 	$queryIgrejas = mysql_query('SELECT rol,razao FROM igreja') or die (mysql_error());
@@ -61,7 +62,8 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 	$opIgreja .= 'ORDER BY l.data,l.lancamento,l.debitar ';
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 
-	$tabela = '<tbody>';
+	$tabela = '';
+	$tabModeloExt = '';
 	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaCentral='';
 	$CaixaMissoes ='';$CaixaOutros='';$vlrTotal =0;
 
@@ -84,6 +86,29 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 			$referente .= $CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico  = '<tr class=""><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
+			//Modelo extrato bamcário
+
+			$histExtr = '<p>'.$linha['referente'].', '.$linha['razao'].'</p>';
+			if ($conta[$linha['debitar']]['tipo']=='D') {
+				if ($conta[$linha['creditar']]['tipo']=='C') {
+					$ctaDupla = $conta[$linha['creditar']]['titulo'].$histExtr;
+					$sld = 'C';
+				} else {
+					$ctaDupla = $conta[$linha['creditar']]['titulo'].$histExtr;
+					$sld = 'D';
+				}
+			} else {
+				if ($conta[$linha['creditar']]['tipo']=='C') {
+					$ctaDupla = $conta[$linha['creditar']]['titulo'].$$histExtr;
+					$sld = 'D';
+				} else {
+					$ctaDupla = $conta[$linha['creditar']]['titulo'].$histExtr;
+					$sld = 'C';
+				}				
+			}
+			
+			$tabModeloExt .= '<tr class="info"><td >'.$dtLanc.' &bull; '.$ctaDupla.'</td>';
+			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].$sld.'</td></tr>';
 			//$cor = !$cor;
 			$referente  = '';$CaixaMissoes ='';$CaixaOutros='';$valorMissoes=0;
 			$titulo1  = '';$lancValor = '';$valorCentral=0;$historico='';$CaixaCentral='';
@@ -138,11 +163,15 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 			$referente .= $dataLanc.$CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
+			//Modelo Extrato Bancario
+			$tabModeloExt .= '<tr class="active"><td >'.$dtLanc.' - '.$CaixaMissoes.$CaixaOutros.$titulo1.'</td>';
+			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].'</td></tr>';
+
 			$vlrTotal +=$linha['valor'];
+
 		}
 
-	$resultado = array($tabela,$lancConfirmado,$vlrTotal);
+	$resultado = array($tabela,$tabModeloExt,$vlrTotal);
 	return $resultado;
 	}
-
 }
