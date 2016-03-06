@@ -72,6 +72,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 			$ofmocSem = $ofmoc.$i;$ofiSem = $ofi.$i;$ofeSem = $ofe.$i;
 			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
+			$ofOpSem = $subTotalSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem;
 
 			$nivel1Sem .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
@@ -82,7 +83,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmocSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofiSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofeSem,2,',','.').'</td>';
-			$nivel1Sem .= '<td id="moeda">'.number_format($$ofOpSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($ofOpSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').' </td></tr>';
