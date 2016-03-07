@@ -16,7 +16,7 @@ $totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
 $totGeral = $totDizimo+$totOfertaExtra+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
 $totOperacAno = $totSubTotalAno+$totEnsinoAno+$totInfantilAno+$totMocidadeAno+$totSenhorasAno;
 $totalCong = '<tbody><tr id="subtotal" class="sub" >';
-$totalCong .= '<td>Total&nbsp;nas&nbsp;Congregações:</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>';
+$totalCong .= '<td>Total&nbsp;nas&nbsp;Congrega&ccedil;&otilde;es:</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOfertaAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totSubTotalAno,2,',','.').'</td>';

@@ -61,18 +61,23 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		$totSubTotal +=$subTotal;
 		$totTotal += $totMes;
+		$totOp = $subTotal+$$ofs+$$ofmoc+$$ofi+$$ofe;//Total das entradas operacionais
+		//Formata mês para exibição
+		$mesExibir = arrayMeses();
+		$verMes = $mesExibir [sprintf("%02u",$cont )];
 
-		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.sprintf("%02u",$cont ).'/'.$ano.'</strong></th>';
+		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.$verMes.'/'.$ano.'</strong></th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($subTotal,2,',','.').'</td>';
-		$nivel1 .= '<td id="moeda">'.number_format($$ofCampanha,2,',','.').'</td>';
-		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofs,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofmoc,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofi,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofe,2,',','.').'</td>';
+		$nivel1 .= '<td id="moeda">'.number_format($totOp,2,',','.').'</td>';
+		$nivel1 .= '<td id="moeda">'.number_format($$ofCampanha,2,',','.').'</td>';
+		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').'</td></tr>';
 
 		for ($i=1; $i < 6; $i++) {
@@ -81,18 +86,20 @@ require_once 'help/tes/histFinanceiroMembro.php';
 			$ofmocSem = $ofmoc.$i;$ofiSem = $ofi.$i;$ofeSem = $ofe.$i;
 			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
+			$totOpSem = $subTotalSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem;//Total das entradas operacionais semanal
 
 			$nivel1Sem .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($subTotalSem,2,',','.').'</td>';
-			$nivel1Sem .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
-			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofsSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmocSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofiSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofeSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($totOpSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').'</td></tr>';
 			$nivel1Sem .= '</tr>';
 		}

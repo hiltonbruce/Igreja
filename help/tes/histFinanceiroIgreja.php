@@ -41,6 +41,9 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ofi 		= 'ofertaInfantil'.$periodo;
 	$ofiSem 	= $ofi.$semana;
 
+	$demEntr	= 'outrasEntr'.$periodo;
+	$demEntrSem	= $demEntr.$semana;
+
 	$dev 		= intval($contas['devedora']);
 	$cre 		= intval($contas['credora']);//Fazer a remoção da parte credora
 	$valor 		= $contas['valor'];
@@ -92,15 +95,18 @@ while ($contas = mysql_fetch_array($lista)) {
 			$totInfantil 	+= $valor;
 
 	  	break;
-	  	case 8:
-	  		//Oferta Mocidade
-			$$ofmoc 		+= $valor;
-			$$ofmocSem 		+= $valor;
-			$totMocidade 	+= $valor;
-	  	break;
 	  	default:
+	  		if ($dev>7 && $dev<13) {
+		  		//Oferta Mocidade
+				$$ofmoc 		+= $valor;
+				$$ofmocSem 		+= $valor;
+				$totMocidade 	+= $valor;
+	  		} else {
 	  		$linhaCargo = 'definir cta script histFinaceiroIgreja.php';
-	  		//Definir outras entradas não classificadas
+		  		//Ooutras entradas não classificadas
+				$$demEntrSem	+= $valor;
+				$totDemEntr 	+= $valor;
+			}
 	  	break;
 	  }
 
