@@ -1,6 +1,5 @@
 <table class="table table-hover table-condensed table-striped table-bordered">
 		<caption>Lançamento Concluído</caption>
-
 			<colgroup>
 				<col id="Conta">
 				<col id="Débito">

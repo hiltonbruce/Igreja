@@ -51,7 +51,7 @@
 		  }else {
 		  	$linkAtivo='';
 		  }?>
-	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=5">Lan&ccedil;ar Despesa</a></li>
+	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=5">Lan&ccedil;ar Pagamentos</a></li>
 	    <li class="divider"></li>
 		  <?php if ($_GET['rec']=='2' ) {
 		  	$linkAtivo='class="active"';

@@ -7,8 +7,7 @@ class tes_despesas {
 
 		$sqlConsulta  = 'SELECT *';
 		$sqlConsulta .= 'FROM contas ';
-		$sqlConsulta .= 'WHERE ';
-		$sqlConsulta .= 'nivel1="3" ORDER BY codigo';
+		$sqlConsulta .= 'ORDER BY codigo';
 		$this->query = $sqlConsulta;
 		$this->despesa = mysql_query($this->query) or die (mysql_error());
 

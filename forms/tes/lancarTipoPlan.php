@@ -5,7 +5,7 @@
 	$igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 ?>
 <div class="bs-callout bs-callout-danger" id="callout-alerts-no-default">
-    <h4>Lan&ccedil;amento de Despesas!</h4>
+    <h4>Lan&ccedil;amentos de pagamentos</h4>
     <p>Indique no primeiro campo a conta utilizada para pagar a despesa.
     E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
      "Clicando" no sinal de "+" para que seja visualizado
@@ -52,13 +52,13 @@
 	  	</div>
 	</div>
 </form>
-
   </div>
-<div class="alert alert-info" role="alert">
+<div class="panel panel-primary">
 	<?PHP
-		$titTabela = 'Contas de Despesas - Per&iacute;odo: '.$mesEstatisca.'/'.$ano;
+		//Inicia o bloco com os forms de lançamentos
+		$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar de pagamentos - Per&iacute;odo: '.$mesEstatisca.'/'.$ano.'</h3></div>';
 		require_once 'help/tes/lancTipoPlan.php';
 		require_once 'views/tesouraria/lancTipoPlan.php';
 		//print_r($arrayDesp);
 	?>
-	</div>
+</div>

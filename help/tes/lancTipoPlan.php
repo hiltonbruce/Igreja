@@ -2,7 +2,7 @@
 //print_r($ctaDespesa->dadosArray());
 $ctaDespesa = new tes_despesas();
 foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
-//Verifica se foi enviado dados para lanÁamento, testando e executando
+//Verifica se foi enviado dados para lan√ßamento, testando e executando
     if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>0) {
 
     	$rolIgreja = $_POST['rolIgreja'.$chave];
@@ -12,27 +12,38 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 		$creditar =  $_POST['disponivel'.$chave];
 		//print_r($_POST);
 
-		$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a vari·vel o histÛrico do lanÁamento
+		$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a vari√°vel o hist√≥rico do lan√ßamento
 		$data = br_data($_POST['data'.$chave]);
 		//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
 		//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
 		//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
-        # chama o script respons·vel pelo lanÁamento
-       require 'models/tes/lancModPlanilha.php';
+        # chama o script respons√°vel pelo lan√ßamento
+        if ($debitar == $creditar) {
+        	?>
+        	<div class="alert alert-danger alert-dismissible fade in" role="alert"> 
+        	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        	<span aria-hidden="true">√ó</span></button> <strong>lan√ßamento n√£o Realizado!</strong> 
+        	Cr√©dito e Debito com mesma conta n√£o √© realizado o lan√ßamento. </div>
+        	<?PHP
+        } else {
+        	require 'models/tes/lancModPlanilha.php';
+        }
+        
+       
     }
 }
-$exibicred .= sprintf("<tr class='total'><td>Totais</td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
+$exibicred .= sprintf("<tr  class='info'><td>Totais em: %s </td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td></td></tr>",conv_valor_br($data),number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
 
 $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
-//Monta as linhas da tabela respons·vel pelas despesas ja lanÁadas no mÍs
+//Monta as linhas da tabela respons√°vel pelas despesas ja lan√ßadas no m√™s
 $bgcolor = 'class="active"';
 $cor= true;
 $provmissoes=0;
 $ultimolanc = 0;
 
-//inicializa vari·veis
+//inicializa vari√°veis
 $totalDeb = 0;
 $totalCred = 0;
 //print_r($arrayDesp);
@@ -78,8 +89,12 @@ $cor=true;
 $lancar = '<br /><br /><button class="btn btn-primary">Lan&ccedil;ar!</button>';
 
 //print_r($ctaDespesa->dadosArray());
+$ctaGrup3 = '';
+$blGrupo3Fim = '';
+$blGrupo3Ini = '';
+$blGrupo = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
 foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
-	//VariÈveis para montagem do form
+	//Vari√©veis para montagem do form
 
 	$dataLan = '<label>Data do lan&ccedil;amento</label>'.
 			'<input name="data'.$chave.'" class="form-control dataclass" value="'.date('d/m/Y').'"';
@@ -89,21 +104,44 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control"/>';
 	$conta ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
 
-//Fecha a tabela se mudou de grupo de conta
-if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
-	$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>';
-	$dia1='';$cabDespesa='';
-}
+//Contas do grupo 3
+	if (strlen($valor['codigo'])=='5') {
+			$blGrupo3Ini  = '<div class="panel panel-default">';
+			$blGrupo3Ini .= '<div class="panel-heading" role="tab" id="headingOne">';
+			$blGrupo3Ini .= '<h4 class="panel-title">';
+			$blGrupo3Ini .= '<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$chave.'" aria-expanded="true" aria-controls="collapseOne">';
+			$blGrupo3Ini .= $valor['codigo'].' &bull; '.$valor['titulo'];
+			$blGrupo3Ini .= '</a>';
+			$blGrupo3Ini .= '</h4>';
+			$blGrupo3Ini .= '</div>';
+			$blGrupo3Ini .= '<div id="collapse'.$chave.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">';
+			$blGrupo3Ini .= '<div class="panel-body">';
+
+		if ($ctaGrup3!=$valor['codigo'] && $listDesp!='') {
+			$blGrupo3Fim  = '</div>';
+			$blGrupo3Fim .= '</div>';
+			$blGrupo3Fim .= '</div>';
+		}
+
+		$ctaGrup3 = $valor['codigo'];
+	}
+
+	//Fecha a tabela se mudou de grupo de conta
+	if (strlen($valor['codigo'])=='9' && isset($cabDespesa)) {
+		$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>'.$blGrupo3Fim;
+		$dia1='';$cabDespesa='';
+		$blGrupo3Fim = '';
+	}
 
 	if (strlen($valor['codigo'])=='13') {
-		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
-		//lista dos caixas disponÌveis para pgto
+		$bgcolor = $cor ? 'class="odd"' : 'class="odd"';
+		//lista dos caixas dispon√≠veis para pgto
 		$fontesPgto  = '<label>Caixas c/ Saldo:</label>';
 		$fontesPgto .= '<select name="disponivel'.$chave.'" class="form-control" >';
 		$fontesPgto .= $listaFonte;
 		$fontesPgto .= '</select>';
-		//Lista das despesas disponÌveis
-		$dia1 .='<tbody><tr class="sub label-info">
+		//Lista das despesas dispon√≠veis
+		$dia1 .='<tbody><tr class="sub bg-info">
 		<th colspan="4"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
 		</tr>';
 		$dia1 .='<tr '.$bgcolor.'><td rowspan="2">'.$valor['titulo'].$conta
@@ -113,9 +151,10 @@ if ($codigo5!=$valor['codigo'] && strlen($valor['codigo'])=='9') {
 		$dia1 .= $linha[$valor['acesso']];
 		$cor = !$cor;
 	} elseif (strlen($valor['codigo'])=='9') {
-		$cabDespesa  = '<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
+		$cabDespesa  = $blGrupo3Ini.'<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
 		$cabDespesa .= $valor['codigo'].'</strong> - '.$valor['titulo'].'</div><table id="horario" ';
-		$cabDespesa .= 'class="table table-hover">';
+		$cabDespesa .= 'class="table">';
+		$blGrupo3Ini = '';
 	}/*elseif (strlen($valor['codigo'])=='5') {
 		$codigo5 = $valor['codigo'];
 	}
@@ -123,14 +162,14 @@ echo($valor['codigo']).' **-> '.strlen($valor['codigo']).' === ';*/
 
 }
 
-//⁄ltimo grupo do array, completando a tabela
+//√öltimo grupo do array, completando a tabela
 if ($cabDespesa!='') {
-	$listDesp .= $cabDespesa.$dia1.'</form></tbody></table>';
+	$listDesp .= $cabDespesa.$dia1.'</form></tbody></div></table>'.$blGrupo3Fim;
 }
 
-//esta vari·vel È levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
+//esta vari√°vel √© levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 if ($exibideb!='') {
 	require_once 'views/exibilanc.php';//monta a tabela para exibir
 }
 
-$nivel1 = $listDesp;
+$nivel1 = $blGrupo.$listDesp.'</div></div></div></div></div>';
