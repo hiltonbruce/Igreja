@@ -6,7 +6,7 @@
 	//require_once 'forms/tes/histFinanceiro.php';
 
 $mes = intval($_GET['mes']);
-require_once 'models/tes/histFinIgreja.php';
+require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
 $tabThead = $nivelSem; //Cabeçalho da tabela
 
 $mesPeriodo = sprintf('%02s',$mes);//Mês por extenso
@@ -20,12 +20,12 @@ $totalCong .= '<td>Total&nbsp;nas&nbsp;Congrega&ccedil;&otilde;es:</td><td id="m
 $totalCong .= '<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOfertaAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totSubTotalAno,2,',','.').'</td>';
-$totalCong .= '<td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>';
+$totalCong .= '<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totMocidadeAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totInfantilAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totEnsinoAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOperacAno,2,',','.').'</td>';
-$totalCong .= '<td id="moeda">'.number_format($totSenhorasAno,2,',','.').'</td>';
+$totalCong .= '<td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totTotal,2,',','.').'</td></tr></tbody>';
 $totalGeral =  '<tr id="total" class="sub" >';

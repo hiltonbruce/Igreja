@@ -27,9 +27,10 @@ function br_data ($dt,$cmp){
 			}
 }
 
-function condatabrus ($dt,$cmp){
+function condatabrus ($dt){
 	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd
 	//em caso de erro é informado o campo $cmp e retorna false
+	//Sem alerta de erro
 
 			list ($d,$m,$y) = explode('/',$dt);
 			$res = checkdate($m,$d,$y);
@@ -37,8 +38,6 @@ function condatabrus ($dt,$cmp){
 				$dta="$y-$m-$d";
 				return $dta;
 			}else{
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp');</script>";
-				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
 				return false;
 			}
 }

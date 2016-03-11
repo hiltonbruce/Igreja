@@ -1,5 +1,5 @@
 <?php
-$roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
+//$roligreja = (empty($_GET['igreja'])) ? '0':$_GET['igreja'];
 if (!empty($_GET['igreja'])) {
 	$roligreja = $_GET['igreja'];
 } elseif (!empty($_POST['igreja'])) {

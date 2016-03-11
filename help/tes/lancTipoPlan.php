@@ -28,9 +28,11 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
         } else {
         	require 'models/tes/lancModPlanilha.php';
         }
-        
-       
     }
+}
+
+if (!checadata($data)) {
+	$data = date('Y-m-d');
 }
 $exibicred .= sprintf("<tr  class='info'><td>Totais em: %s </td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td></td></tr>",conv_valor_br($data),number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
 
