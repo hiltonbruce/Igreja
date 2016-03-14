@@ -20,6 +20,9 @@ echo '<h1><img src="img/loading2.gif" width="30" height="30"></h1>';
  */
 controle ("tes");
 
+$idIgreja = $igreja;
+$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+
 $vlr = false;
 
 //$igreja = ($_POST['igreja']>'0') ?  $_POST['igreja']: false ;
@@ -50,6 +53,7 @@ for ($i=1; $i < 6; $i++) {
 		$sem = $_POST["$semOr"];
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
+		$ofertaOr = formataNumBanco ($ofertaOr) ;
 		if ($ofertaOr>0) {
 			$conta = "'720','3','7'";//Oração Adulto
 			$value  = "'','',$conta,'".$igreja."','','','$ofertaOr',";
@@ -59,6 +63,7 @@ for ($i=1; $i < 6; $i++) {
 			$dados->inserir();
 		}
 
+		$votoOr = formataNumBanco ($votoOr) ;
 		if ($votoOr>0) {
 			$conta = "'721','3','7'";//Voto em Circ. de Oração
 			$value  = "'','',$conta,'".$igreja."','','','$votoOr',";
@@ -86,8 +91,6 @@ for ($i=1; $i < 6; $i++) {
 			$exibLanc .= '<td class="text-center">'.number_format($votoOr,2,',','.').'</td>';
 			$exibLanc .= '<td class="text-center">'.$sem.'&ordf;</td></tr>';
 
-			$idIgreja = $igreja;
-			$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 		}
 		
 

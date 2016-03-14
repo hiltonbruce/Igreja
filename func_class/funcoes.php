@@ -1135,4 +1135,48 @@ function calcDiaSemana($dia,$mes,$ano){
   }
   return($tabela);
  }
+
+ function formataNumBanco ($numero) {
+ 	//Fomata número retuirando a virgula e substituido por ponto
+ 	//Dando prioridade para a vírgula. Verificando no final da string
+
+		$fileVirg  = substr(strrchr($numero, ","), 0);
+			//echo $fileVirg . "  fileVirg <br>";
+		$virgula = strlen($fileVirg);
+
+		$filePonto  = substr(strrchr($numero, "."), 0);
+		//	echo $filename . "  filename <br>";
+		$ponto = strlen($filePonto);
+			//echo $quantRetira . " quantRetira <br>";
+
+
+		$listCar = array('.',',');
+		$texto = "programador";
+		if ($virgula <='3' && $virgula >'1') {
+			//echo substr($texto, 0,-$quantRetira) . " ** substr <br>";
+			$file3 = substr($numero, 0,-$virgula);
+			//echo $file3. " ** file3  <br>";
+			$filename2  = substr(strrchr($numero, ","), 1);
+			$listCar = array('.',',');
+			$file4 = str_replace($listCar, '', $file3);
+			//echo $filename2. " ** filename2  <br>";
+
+			return $file4.'.'.$filename2;
+
+		} elseif ($ponto<='3' && $ponto>'1') {
+			//echo substr($texto, 0,-$quantRetira) . " ** substr <br>";
+			$file3 = substr($numero, 0,-$ponto);
+			//echo $file3. " ** file3  <br>";
+			$filename2  = substr(strrchr($numero, "."), 1);
+			$file4 = str_replace($listCar, '', $file3);
+			//echo $filename2. " ** filename2  <br>";
+
+			return $file4.'.'.$filename2;
+
+		} else {
+
+			$file4 = str_replace($listCar, '', $numero );
+			return $file4;
+	}
+}
 ?>

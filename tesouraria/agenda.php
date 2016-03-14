@@ -90,9 +90,9 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		}else{
 			$lancDespesa = false;
 		}
-		$multaUS				=	abs(strtr($_POST['multa'], ',','.' ));//Valor no padrão americano
+		$multaUS				=	formataNumBanco ($_POST['multa']);//Valor no padrão americano
 		$atualizar->multa		=	$multaUS;
-		$valor_us 				=	abs(strtr($_POST['valor'], ',','.' ));//Valor no padrão americano
+		$valor_us 				=	formataNumBanco ($_POST['valor']);//Valor no padrão americano
 		$atualizar->valor		=	$valor_us;
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
 		$atualizar->hist	= 	$hist;
