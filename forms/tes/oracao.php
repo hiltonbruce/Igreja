@@ -1,13 +1,3 @@
-<?php
-//verifica se foi passada a igreja caso contrário fixa na Sede
-    if (!empty($_GET['igreja'])) {
-        $igreja = $_GET['igreja'];
-    } elseif (!empty($_POST['igreja'])) {
-        $igreja = $_POST['igreja'];
-    }else {
-        $igreja = 1;
-    }
-?>
 <fieldset>
 <legend>Circulos de Ora&ccedil;&otilde;es - ADULTOS</legend>
 <form id="form1" name="form1" method="post" action="">
@@ -48,9 +38,16 @@
 	  <div class="col-xs-3">
 		<input type="submit"  class="btn btn-primary"name="Submit" value="Lan&ccedil;ar..."
 		tabindex='<?PHP echo ++$ind; ?>'/>
-	  	<input name="escolha" type="hidden" value="views/tesouraria/oracao.php" />
+	  	<input name="escolha" type="hidden" value="tesouraria/receita.php" />
+	  	<input name="rec" type="hidden" value='24' />
+	  	<input name="cad" type="hidden" value='1' />
 	  	<input name="igreja" type="hidden" value='<?php echo $roligreja;?>' />
 	  </div>
 	</div>
 </form>
 </fieldset>
+
+<?PHP
+	$linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
+	$linkLancamento .= '&igreja='.$roligreja.'&rec=24';
+?>

@@ -62,7 +62,7 @@ $tabMembros = new membro();
 			$linkResumo .= '&debito='.$_GET['debito'];
 			echo '<div class="row"><div class="col-xs-2">';
 			echo '<br />';
-			echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja='.$roligreja.'&rec=1" >';
+			echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.$linkLancamento.'" >';
 		  	echo '<button type="button" class="btn btn-primary btn-sm" tabindex="'.++$ind.'">';
 		  	echo '<span class="glyphicon glyphicon-backward"></span> Voltar...</button>';
 			echo '</a></div></div>';

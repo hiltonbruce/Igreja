@@ -15,6 +15,14 @@ if (empty($_GET['ano'])) {
 	$anoForm = '';
 }
 
+if (!empty($_GET['igreja'])) {
+	$roligreja = $_GET['igreja'];
+} elseif (!empty($_POST['igreja'])) {
+	$roligreja = $_POST['igreja'];
+}elseif (empty($roligreja))  {
+	$roligreja = '';
+}
+
 switch ($rec) {
 	case '1':
 		require_once 'forms/concluirdiz.php';#Form fecha caixa
@@ -114,7 +122,11 @@ switch ($rec) {
 		break;
 	case '24':
 		require_once 'forms/concluirdiz.php';
-		require_once ('forms/tes/oracao.php');
+		if (!empty($_POST['cad'])) {
+			require_once ('views/tesouraria/oracao.php');
+		} else {
+			require_once ('forms/tes/oracao.php');
+		}
 		break;
 	default:
 		require_once ('forms/tes/busca.php');

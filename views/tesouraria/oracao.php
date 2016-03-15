@@ -1,12 +1,8 @@
 <?PHP 
-
-require_once 'views/tesouraria/menu.php';//Sub-Menu de links
-echo '<h1><img src="img/loading2.gif" width="30" height="30"></h1>';
-
 /**
  * Joseilton Costa Bruce
  *
- * LICENÇA
+ * LICENÃ‡A
  *
  * Please send an email
  * to hiltonbruce@gmail.com so we can send you a copy immediately.
@@ -33,29 +29,29 @@ $exibLancCab .= '<tr><th>Data do Lan&ccedil;amento:</th><th>Oferta</th><th>';
 $exibLancCab .= 'Voto</th><th>Semana</th></tr></thead><tbody>';
 
 for ($i=1; $i < 6; $i++) {
-	$ofOr = 'of'.$i;//Variável para o post of?
-	$votOr = 'voto'.$i;//Variável para o post voto?
-	$dataOr = 'data'.$i;//Variável para o post data?
-	$semOr = 'entra'.$i;//Variável para o post entra? (ref a semana)
+	$ofOr = 'of'.$i;//VariÃ¡vel para o post of?
+	$votOr = 'voto'.$i;//VariÃ¡vel para o post voto?
+	$dataOr = 'data'.$i;//VariÃ¡vel para o post data?
+	$semOr = 'entra'.$i;//VariÃ¡vel para o post entra? (ref a semana)
 
-	//verificando se há valor e data que possibilite o lançamento
+	//verificando se hÃ¡ valor e data que possibilite o lanÃ§amento
 	$ofertaOr = ($_POST[$ofOr]>'0') ?  $_POST[$ofOr]: false ;
 	$votoOr = ($_POST[$votOr]>'0') ?  $_POST[$votOr]: false ;
 	$datalanc = condatabrus ($_POST[$dataOr]);
 	list($ano,$mes,$dia) = explode('-', $datalanc);
 
 
-	//echo '<H1>Data do lançamento: '.$_POST[$dataOr].' *** </h1>';
+	//echo '<H1>Data do lanÃ§amento: '.$_POST[$dataOr].' *** </h1>';
 
 	if (($ofertaOr || $votoOr) && $datalanc) {
-		//Verifica se há valor em oferta ou voto e se data foi enviada
+		//Verifica se hÃ¡ valor em oferta ou voto e se data foi enviada
 
 		$sem = $_POST["$semOr"];
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
-		$ofertaOr = formataNumBanco ($ofertaOr) ;
+		$ofertaOr = formataNumBanco ($ofertaOr);
 		if ($ofertaOr>0) {
-			$conta = "'720','3','7'";//Oração Adulto
+			$conta = "'720','3','7'";//OraÃ§Ã£o Adulto
 			$value  = "'','',$conta,'".$igreja."','','','$ofertaOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$igreja','{$_SESSION['valid_user']}',";
 			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
@@ -65,7 +61,7 @@ for ($i=1; $i < 6; $i++) {
 
 		$votoOr = formataNumBanco ($votoOr) ;
 		if ($votoOr>0) {
-			$conta = "'721','3','7'";//Voto em Circ. de Oração
+			$conta = "'721','3','7'";//Voto em Circ. de OraÃ§Ã£o
 			$value  = "'','',$conta,'".$igreja."','','','$votoOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$igreja','{$_SESSION['valid_user']}',";
 			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
@@ -98,4 +94,7 @@ for ($i=1; $i < 6; $i++) {
 $exibLancFim .='</tbody></table>';
 echo $exibLancCab.$exibLanc.$exibLancFim;
 require_once 'forms/concluirdiz.php';
+
+$linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
+$linkLancamento .= '&igreja='.$roligreja.'&rec=24';
 ?>

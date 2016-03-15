@@ -10,7 +10,7 @@
 	$lancContabil = new tes_relatLanc();
 	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer);
 
-	$tabLancamento= $resultado['0'];
+	$tabLancamento = $resultado['0'];
 
 	$statusLancamento = 'Lan&ccedil;amentos Contábeis';
 
@@ -53,9 +53,9 @@
 		$titulo .=  'Data de Emiss&atilde;o: '.date('d/m/Y H:i:s');//Tesoureiro
 
 	}
-if (empty($descricoo)) {
+
+if (empty($descricoo) && $tabLancamento!='') {
 	$descricao='Descrição';
-}
 
 	echo($imprimir);
 
@@ -78,9 +78,10 @@ if (empty($descricoo)) {
 			?>
 </table>
 <?php
-//print_r($tabMembros->nomes());
+	//print_r($tabMembros->nomes());
 
-print_r ($resultado['1']);
+	//print_r ($resultado['1']);
 
-echo($imprimir);
+	echo($imprimir);
+}
 ?>

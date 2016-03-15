@@ -89,25 +89,33 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 			//Modelo extrato bamcário
 
 			$histExtr = '<p>'.$linha['referente'].', '.$linha['razao'].'</p>';
+
 			if ($conta[$linha['debitar']]['tipo']=='D') {
 				if ($conta[$linha['creditar']]['tipo']=='C') {
-					$ctaDupla = $conta[$linha['creditar']]['titulo'].$histExtr;
 					$sld = 'C';
 				} else {
-					$ctaDupla = $conta[$linha['creditar']]['titulo'].$histExtr;
 					$sld = 'D';
 				}
+
 			} else {
 				if ($conta[$linha['creditar']]['tipo']=='C') {
-					$ctaDupla = $conta[$linha['creditar']]['titulo'].$$histExtr;
 					$sld = 'D';
 				} else {
-					$ctaDupla = $conta[$linha['creditar']]['titulo'].$histExtr;
 					$sld = 'C';
-				}				
+				}
+
 			}
-			
-			$tabModeloExt .= '<tr class="info"><td >'.$dtLanc.' &bull; '.$ctaDupla.'</td>';
+
+			$ctaDupla = $conta[$linha['debitar']]['titulo'].'<br /> à <br />';
+			$ctaDupla .= $conta[$linha['creditar']]['titulo'].$histExtr;
+
+			if (empty($cabData) || $cabData!=$dtLanc) {
+				$viewCabTr = '<tr class="active"><td colspan="2">'.$dtLanc.'</td>';
+				$cabData = $dtLanc;
+			}
+
+			$tabModeloExt .= $viewCabTr.'<tr><td>'.$ctaDupla.'</td>';
+			$viewCabTr = '';
 			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].$sld.'</td></tr>';
 			//$cor = !$cor;
 			$referente  = '';$CaixaMissoes ='';$CaixaOutros='';$valorMissoes=0;
@@ -164,7 +172,7 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref) {
 			$historico = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 			//Modelo Extrato Bancario
-			$tabModeloExt .= '<tr class="active"><td >'.$dtLanc.' - '.$CaixaMissoes.$CaixaOutros.$titulo1.'</td>';
+			$tabModeloExt .= $viewCabTr.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].'</td></tr>';
 
 			$vlrTotal +=$linha['valor'];
