@@ -75,10 +75,11 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 
 			while($coluna = mysql_fetch_array($sql3))
 			{
+				$numRol = sprintf("%'04u", $coluna["rol"]);
 
 			?>
             <tr>
-				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["rol"];?>"><?php echo $coluna["rol"];?></a></td>
+				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["rol"];?>"><?php echo $numRol;?></a></td>
 				<td>
 					<div class="row">
   						<div class="col-xs-1 col-xs-3">

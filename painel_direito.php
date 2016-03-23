@@ -49,6 +49,9 @@
 			<?php $menu = new menutes();
 			$menu->mostra();
 			$menu->buscarecibo();
+		}elseif (!empty($painelDireito) && file_exists($painelDireito)) {
+			//Verifica se há uma chamada a um painel específico
+			require_once $painelDireito;
 		}else {
 
 		echo "</div>";

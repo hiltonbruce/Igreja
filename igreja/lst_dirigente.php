@@ -56,15 +56,12 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			</thead>
 			<tbody>
 		<?PHP
-
 			while($coluna = mysql_fetch_array($sql3))
 			{
-
+				$numRol = sprintf("%'04u", $coluna["pastor"]);
 			?>
             <tr>
-
-				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo (int)$coluna["pastor"];?>"><?php echo (int)$coluna["pastor"];?></a></td>
-
+				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo (int)$coluna["pastor"];?>"><?php echo $numRol;?></a></td>
 				<td><?php
 					$rol_dirigente = (int) $coluna["pastor"];
 					if ($rol_dirigente>0){
@@ -72,7 +69,6 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 						$nome_dirigente = $nome->nome();}
 					else{
 						$nome_dirigente = $coluna["pastor"];}
-
 					?>
 					<a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["pastor"];?>"><?php echo $nome_dirigente;?></a></td>
 				<td><?php echo $coluna["razao"];?></td>
@@ -82,14 +78,10 @@ $paginacao['link'] = "?"; //Paginação na mesma página
                     } else {
                         $funIgreja = cargo ($coluna["pastor"])['0'];
                     }
-
                  echo $funIgreja;
                 ?></td>
-
 			<?PHP
-
 			}//loop while produtos
-
 	?>
 		</tbody>
 		</table>

@@ -6,15 +6,15 @@ if ($_GET["Submit"]=="Imprimir") {
 	require_once ("../func_class/classes.php");
 	require_once ("classes.php");
 	?>
-	<link rel="stylesheet" type="text/css" media="screen, projection" href="../aniv/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />;
 	<?PHP
 }else { ?>
-	<link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.print.css" />;
 <?PHP
 }
 
 controle ("consulta");
-$query = "SELECT * from igreja ORDER BY razao";
+$query = "SELECT * from igreja WHERE status='1' ORDER BY razao";
 
 		$sql3 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql3);
@@ -27,118 +27,37 @@ $query = "SELECT * from igreja ORDER BY razao";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Tables</title>
-<link rel="stylesheet" type="text/css" href="reset.css" />
-<style type="text/css">
-<!--
-
-body {
-  font: 75%/1.6 "Myriad Pro", Frutiger, "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Verdana, sans-serif;
-}
-
-.clear {
-  clear: both;
-}
-
-table {
-  border-collapse: collapse;
-  width: 50em;
-  border: 1px solid #666;
-}
-
-caption {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin: 1em 0;
-}
-
-col {
-  border-right: 1px solid #ccc;
-}
-
-col#albumCol {
-  border: none;
-}
-
-thead {
-  background: #ccc url(images/bar.gif) repeat-x left center;
-  border-top: 1px solid #a5a5a5;
-  border-bottom: 1px solid #a5a5a5;
-}
-
-th {
-  font-weight: normal;
-  text-align: left;
-}
-
-#playlistPosHead {
-  text-indent: -1000em;
-}
-
-th, td {
-  padding: 0.1em 1em;
-}
-
-.odd {
-  background-color:#edf5ff;
-}
-
-tr:hover {
-  background-color:#3d80df;
-  color: #fff;
-}
-
-thead tr:hover {
-  background-color: transparent;
-  color: inherit;
-}
-
-
--->
-</style>
+<title>Dirigentes de Congregações</title>
 </head>
-		<table style ="width:95%;cellspacing:1; border= 1px;" >
-
+	<table class='table table-striped table-bordered' >
 		<caption>Lista de Dirigentes - <?PHP  print data_extenso (conv_valor_br(date("Y-m-d")));?>
-      </caption>
-
+      	</caption>
 			<colgroup>
 				<col id="Rol">
 				<col id="Nome">
 				<col id="Dirigente Atual">
-				<col id="Novo Dirigente">
+				<col id="1 Dirigente">
+				<col id="2 Dirigente">
 				<col id="albumCol"/>
 			</colgroup>
-
-			<thead>
+			<thead class='navbar-inverse' style='color:#FFF;'>
 				<tr>
 				<th scope="col">Rol</th>
 				<th scope="col">Dire&ccedil;&atilde;o - Atual</th>
 				<th scope="col">Congre&ccedil;&atilde;o</th>
-				<th width="200">Nova dire&ccedil;&atilde;o</th>
+				<th scope="col" width='20%'>1&ordm; Dirigente (Atualizar)</th>
+				<th scope="col" width='20%'>2&ordm; Dirigente (Atualizar)</th>
 				<th scope="col">Cargo</th>
 				</tr>
 			</thead>
 			<tbody>
 		<?PHP
-
 			while($coluna = mysql_fetch_array($sql3))
 			{
 
-			$ls+=1;
-			if ($ls>1)
-					{
-					$cor="class='odd'";
-					$ls=0;
-					}
-					else
-					{$cor="class='od2'";
-					}
 			?>
-            <tr "<?php echo "$cor";?>">
-
-				<td><?php echo (int)$coluna["pastor"];?></td>
-
+            <tr>
+				<td><?php printf("%'05u",intval($coluna["pastor"]));?></td>
 				<td><?php
 					$rol_dirigente = (int) $coluna["pastor"];
 					if ($rol_dirigente>0){
@@ -150,6 +69,7 @@ thead tr:hover {
 				 echo $nome_dirigente;?>
 				 </td>
 				<td><?php echo $coluna["razao"];?></td>
+				<td></td>
 				<td></td>
 				<td><?php
                     if (intval($coluna["pastor"])=='0') {
@@ -168,7 +88,7 @@ thead tr:hover {
 	?>
 		</tbody>
 		</table>
-
+		<h4>
 	<?PHP
 	}
 
@@ -186,5 +106,6 @@ thead tr:hover {
 		echo "N&atilde;o obtivemos nenhum resultado!";
 	}
 ?>
+</h4>
 </body>
 </html>

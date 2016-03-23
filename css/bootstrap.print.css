@@ -1412,11 +1412,11 @@ th {
 .table > tfoot > tr > td {
   padding: 3px;
   line-height: 1.42857143;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #ddd;
 }
 .table > thead > tr > th {
-  vertical-align: bottom;
+  vertical-align: middle;
   border-bottom: 2px solid #ddd;
 }
 .table > caption + thead > tr:first-child > th,

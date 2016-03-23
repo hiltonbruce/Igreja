@@ -163,7 +163,7 @@
 	   ?>
 	  <!-- rightpanel -->
 	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='') {
-		require_once ("painel_direito.php");
+		  require_once ("painel_direito.php");
 		}
     ?>
 		<!-- Fim do rightpanel -->
