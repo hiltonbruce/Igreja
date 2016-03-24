@@ -46,10 +46,10 @@ require_once 'forms/autoCompletaMembro.php';
 			<td><label>Dia pgto:</label> <select name="diapgto" required='required'
 					tabindex="<?PHP echo ++$ind; ?>" class="form-control" autofocus="autofocus">
 						<?PHP echo $pgto;?>
-						<option value="1">Dia 1º</option>
-						<option value="15">Dia 15</option>
-						<option value="661">Toda Sexta</option>
-						<option value="615">Por Quinzena</option>
+						<option value="1">1&ordm;</option>
+						<option value="15">15</option>
+						<option value="661">Sexta</option>
+						<option value="615">Quinzena</option>
 						<option value="600">Pgto's da Sede</option>
 				</select>
 		   </td>

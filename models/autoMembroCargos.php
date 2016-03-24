@@ -12,6 +12,7 @@ $q = mysql_real_escape_string( $_GET['q'] );
 $sqllinhas  = "SELECT m.*,e.congregacao AS igreja,p.cpf,p.rg,p.orgao_expedidor ";
 $sqllinhas .= "FROM membro AS m,eclesiastico AS e,  profissional AS p ";
 $sqllinhas .= " WHERE LOCATE('$q',nome) > 0 AND m.rol=e.rol AND m.rol=p.rol";
+$sqllinhas .= " AND situacao_espiritual='1'";
 //critérios de fonética
 
 $reslinhas = mysql_query( $sqllinhas );
@@ -19,6 +20,7 @@ $linhas = mysql_num_rows($reslinhas);
 
 $sql  = "SELECT m.*,i.razao AS igreja,p.cpf,p.rg,p.orgao_expedidor FROM membro as m,";
 $sql .= "eclesiastico AS e, profissional AS p, igreja AS i WHERE LOCATE('$q',nome) > 0 AND ";
+$sql .= "situacao_espiritual='1' AND ";
 $sql .= "m.rol=e.rol AND i.rol=e.congregacao AND m.rol=p.rol order by locate('$q',nome) limit 10";
 
 $res = mysql_query( $sql );

@@ -14,7 +14,7 @@ class tes_cargo {
 		$sqlConsulta .= 'WHERE c.igreja=i.rol AND c.rol=m.rol AND ';
 		$sqlConsulta .= 'p.rol=m.rol AND c.descricao=f.id ';
 		$statusCta = ($status=='') ? 'AND c.status="1"' : '' ;
-		$sqlConsulta .= $statusCta.'ORDER BY c.igreja,m.nome,f.descricao';
+		$sqlConsulta .= $statusCta.'ORDER BY i.razao,m.nome,f.descricao';
 		$this->query = $sqlConsulta;
 		$this->membros = mysql_query($this->query) or die (mysql_error());
 

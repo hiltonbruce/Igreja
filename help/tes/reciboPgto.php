@@ -67,17 +67,19 @@ foreach ($listaPgto as $chave => $valor) {
   		$remove  = '<a href="./?'.$recLink.$valor['id'].'&remover=1&age=8" title="Ativar linha!"> <span class="glyphicon glyphicon-ok-sign text-success"> </span></a>';
   		$remove  .= ' <a title="Linha Desativada!" disabled> <span class="glyphicon glyphicon-ban-circle"> </span> <span class="glyphicon glyphicon-edit"></span></a>';
   		$alterar = '';
+  		$estado ='<button type="button" class="btn btn-info btn-xs" disabled="disabled">Inativo</button>';
   	} else {
   		$remove  = ' <a title="Linha ativa!" disabled> <span class="glyphicon glyphicon-ok-sign"> </span></a>';
   		$remove  .= '<a href="./?'.$recLink.$valor['id'].'&remover=2&age=8" title="Desativar linha!"> <span class="glyphicon glyphicon-ban-circle text-danger"></span></a>';
   		$alterar = '<a href="./?'.$recLink.$valor['id'].'&age=7" title="Alterar dados!"> <span class="glyphicon glyphicon-edit text-info"> </span></a>';
+  		$estado ='';
   	}
 
 	$nomeMembro = sprintf ("%s %s %'05u - %s ",$remove,$alterar,$valor['rolMembro'],$nomeMembro);
 
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
 		//Lista do Ministério
-		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.$estado.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';

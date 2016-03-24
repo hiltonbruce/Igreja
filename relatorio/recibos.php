@@ -28,32 +28,51 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <fieldset>
 <legend><?PHP echo leg_recibos ($_GET[tipo]); ?></legend>
 <form action="<?PHP echo AcaoFormRecibo ($_GET["tipo"]);?>" method="post" name="form1">
+  <div class="row">
+  <div class="col-xs-4">
 <label>Tipo de Recibo:</label>
-<select name="rec_tipo" onChange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo $ind++;?>">
+<select name="rec_tipo" onChange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo $ind++;?>" class="form-control">
 	<option value="" ><?PHP echo $tipo;?></option>
 	<option value="./?escolha=relatorio/recibos.php&amp;menu=top_formulario&amp;tipo=1">Cart&atilde;o de Membro</option>
 	<option value="./?escolha=relatorio/recibos.php&amp;menu=top_formulario&amp;tipo=2">Certid&atilde;o de Apresenta&ccedil;&atilde;o</option>
 </select>
+     </div>
+     </div>
   <?PHP 
 
   if (isset($_GET["tipo"])) { 
   ?>
   <label><?PHP echo $rol;?></label>
-  <input name="rols" type="text" id="rols" tabindex="<?PHP echo $ind++;?>" size="22" value="<?PHP echo $_GET["rols"];?>">
+  <input name="rols" type="text" id="rols" tabindex="<?PHP echo $ind++;?>" 
+     class="form-control" value="<?PHP echo $_GET["rols"];?>">
   <input name="tipo" type="hidden" value="<?PHP echo $tipo;?>" />
   <?PHP echo $dica1;?><label>Observa&ccedil;&otilde;es:</label>
-   <textarea class="text_area" name="obs" cols="25" wrap=physical id="obs" tabindex="<?PHP echo $ind++;?>" onKeyDown="textCounter(this.form.obs,this.form.remLen,255);" onKeyUp="textCounter(this.form.obs,this.form.remLen,255);progreso_tecla(this,255);"  ></textarea>
-   
+   <textarea class="text_area form-control" name="obs" cols="25" wrap=physical id="obs" 
+   tabindex="<?PHP echo $ind++;?>" onKeyDown="textCounter(this.form.obs,this.form.remLen,255);" 
+   onKeyUp="textCounter(this.form.obs,this.form.remLen,255);progreso_tecla(this,255);"  ></textarea>
    <div id="progreso"></div>
-   (Max. 255 Carateres)
-  <input readonly type=text name=remLen size=3 maxlength=3 value="255"> 
-Caracteres restantes
-  <label>Recebido por:</label>
-  <input name="resp_recebeu" type="text" id="resp_recebeu" tabindex="<?PHP echo $ind++;?>" value="" size="22" >
-  (Rol)
-  <input type="submit" name="Submit" value="Emitir..." tabindex="<?PHP echo $ind++;?>" >
-  
-  <?PHP } ?>
+  <div class="form-horizontal">
+     <div class="form-group form-group-lg">
+      <label class="col-sm-2 control-label" for="formGroupInputLarge">(Max. 255 Carateres)</label>
+     <div class="col-xs-2">
+      <input readonly type=text name=remLen size=3 class="form-control" maxlength=3 value="255"> 
+     </div>
+     <div class="form-group form-group-lg">
+      <label class="col-sm-2 control-label" for="formGroupInputLarge">Caracteres restantes</label>
+     </div>
+     </div>
+   </div>
+  <div class="row">
+  <div class="col-xs-2">
+  <label>Recebido por: (Rol) </label>
+  <input name="resp_recebeu" type="text" id="resp_recebeu" 
+     class="form-control" tabindex="<?PHP echo $ind++;?>" >
+   </div>
+  <div class="col-xs-2"><br />
+    <input type="submit" class="btn btn-primary" name="Submit" value="Emitir..." tabindex="<?PHP echo $ind++;?>" >
+    <?PHP } ?>
+   </div>
+   </div>
 
 </form>
 </fieldset>

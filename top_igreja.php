@@ -152,7 +152,7 @@
     ?>
     <fieldset>
     <legend> Impressão com dados pessoais:</legend>
-	<form id="form1" name="form1" method="get" action="igreja/dirigente_print.php">
+	<form id="form1" name="form1" method="get" action="igreja/dirigente_print.php" target="_blank">
 
 	<div class="radio-inline">
 	<label>
@@ -168,7 +168,7 @@
     <?php
     } else{
     ?>
-	<form id="form1" name="form1" method="get" action="igreja/membro_print.php">
+	<form id="form1" name="form1" method="get" action="igreja/membro_print.php" target="_blank">
     <fieldset>
     <legend> Impressão com dados pessoais:</legend>
       <input name="id" type="hidden" value="<?PHP echo $_GET["id"];?>" />
