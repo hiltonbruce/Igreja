@@ -16,7 +16,7 @@
  */
 controle ("tes");
 
-$idIgreja = $igreja;
+$idIgreja = $roligreja;
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 
 $vlr = false;
@@ -52,8 +52,8 @@ for ($i=1; $i < 6; $i++) {
 		$ofertaOr = formataNumBanco ($ofertaOr);
 		if ($ofertaOr>0) {
 			$conta = "'720','3','7'";//Oração Adulto
-			$value  = "'','',$conta,'".$igreja."','','','$ofertaOr',";
-			$value .= "'$datalanc','$sem','$mes','$ano','$igreja','{$_SESSION['valid_user']}',";
+			$value  = "'','',$conta,'".$roligreja."','','','$ofertaOr',";
+			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
 			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
@@ -62,8 +62,8 @@ for ($i=1; $i < 6; $i++) {
 		$votoOr = formataNumBanco ($votoOr) ;
 		if ($votoOr>0) {
 			$conta = "'721','3','7'";//Voto em Circ. de Oração
-			$value  = "'','',$conta,'".$igreja."','','','$votoOr',";
-			$value .= "'$datalanc','$sem','$mes','$ano','$igreja','{$_SESSION['valid_user']}',";
+			$value  = "'','',$conta,'".$roligreja."','','','$votoOr',";
+			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
 			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
