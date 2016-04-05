@@ -30,7 +30,7 @@ ver_cad($bsc_rol);
 			<td>Rol do Conjugue:
 			<?PHP
 				$nome = new editar_form("rol_conjugue",$arr_dad["rol_conjugue"],$tab,$tab_edit);
-				$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+				$nome->getMostrar();
 			?></td>
 		<?php
 		} ?>

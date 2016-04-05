@@ -1088,10 +1088,15 @@ function calcDiaSemana($dia,$mes,$ano){
 			}
 
 			if($classe=="") //Caso a classe ainda não esteja definida após o for acima
-			 $classe=($d==0) ? "td_marcado0" : "td_dia";
+			 $classe=($d==0) ? "td_dia":"td_marcado0" ;
 
 			//Cria a célula referente ao dia atual
-			$diaAtual = '<a href="data='.$cnt_dias.'">'.$cnt_dias++.'</a>';
+			if ($marcaDia!='') {
+				$diaAtual = '<a href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
+			} else {
+				$diaAtual = $cnt_dias++;
+			}
+						
 			$temp_ln=$temp_ln."<td class='td_marcado0'>".$diaAtual.'<br />'.$marcaDia.'</td>';
 			$marcaDia = '';
 	        $daux++;
