@@ -17,17 +17,34 @@ class tes_listDisponivel extends List_sele {
 	$linha1='';
 	$linhas ="<option value=''>Escolha a fonte pagadora!</option>";
 
-		while($this->col_lst = mysql_fetch_array($this->sql_lst))
+		while($campoList = mysql_fetch_array($this->sql_lst))
 		{
-			if ($this->col_lst["acesso"]==$caixa) {
-				$linha1  = '<option value='.$this->col_lst["acesso"].'>'.$this->col_lst['titulo'].
-				' -> Saldo : '.number_format($this->col_lst['saldo'],2,',','.')."</option>";
+			if ($campoList["acesso"]==$caixa) {
+				$linha1  = '<option value='.$campoList["acesso"].'>'.$campoList['titulo'].
+				' -> Saldo : '.number_format($campoList['saldo'],2,',','.')."</option>";
 			}
-			 $linhas .='<option value='.$this->col_lst["acesso"].'>'.$this->col_lst['titulo'].
-			 ' -> Saldo : '.number_format($this->col_lst['saldo'],2,',','.').'</option>';
+			 $linhas .='<option value='.$campoList["acesso"].'>'.$campoList['titulo'].
+			 ' -> Saldo : '.number_format($campoList['saldo'],2,',','.').'</option>';
 		}
 
 		return $linha1.$linhas;
+	}
+
+	function List_Selec_pop ($link,$id){
+	//Lista Select para uso com javascrip popup
+	//Mostra as linhas de select
+	$linha1='';
+	$linhas .="<option value='./?$link{$campoList["id"]}'>Todas</option>";
+
+		while($campoList = mysql_fetch_array($this->sql_lst))
+		{
+			if ($campoList["id"]==$id) {
+				$linha1  = "<option value='./?$link{$campoList["id"]}'>".$campoList['titulo']."</option>";
+			}
+			 $linhas .="<option value='./?$link{$campoList["id"]}'>".$campoList['titulo']."</option>";
+		}
+
+		echo $linha1.$linhas;
 	}
 
 }

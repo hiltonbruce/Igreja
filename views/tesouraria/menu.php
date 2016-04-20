@@ -15,7 +15,7 @@
 	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "24"); ?> href="<?php echo $linkLancamento;?>&rec=24">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Circ. Ora&ccedil;&atilde;o</button></a>
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;. por Semanas</button></a>
 	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">

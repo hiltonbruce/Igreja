@@ -122,9 +122,14 @@ switch ($rec) {
 		break;
 	case '24':
 		require_once 'forms/concluirdiz.php';
-		if (!empty($_POST['cad'])) {
+		if (!empty($_POST['cad']) && $roligreja>'0') {
 			require_once ('views/tesouraria/oracao.php');
 		} else {
+			if ($idIgreja<'1') {
+				echo '<script> alert("Lan&ccedil;amento cancelado! N&atilde;o foi definida a igreja!");</script>';
+			}
+				$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&igreja='.$idIgreja;
+				$linkAcesso .= '&rec='.$rec.'&cta=';
 			require_once ('forms/tes/oracao.php');
 		}
 		break;

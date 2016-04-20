@@ -16,6 +16,17 @@
 class sec_Agenda
 {
 
+	protected $ano;
+
+	function __construct($ano='') {
+
+		$this->meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+		                "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
+		$this->dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&aacute;b");
+		$this->ano = (empty($ano)) ? date('Y'):$ano;
+
+	}
+
 	function calcDiaSemana($dia,$mes,$ano){
 	  $s=(int)($ano / 100);
 	  $a=$ano % 100;
@@ -194,6 +205,30 @@ class sec_Agenda
 //	  echo '<br />';
 	//  print_r($rodapes);
 	  return($tabela);
+	 }
+
+	 function cabecalho ($mes){
+
+	     $temp_tb="<td valign='top'><table class='table'>
+	              <tr><td colspan=7  class='cabecalho'>".$meses[$mes].'/'.$ano.
+	              "</td></tr><tr>"; //Cria uma tabela para o mês atual
+
+	     for($idx2=0;$idx2<7;$idx2++) //Gera o cabeçalho da tabela do mês atual
+	     $temp_tb=$temp_tb."<td class='td_semana'>".$dias[$idx2]."</td>";
+
+	     $temp_tb=$temp_tb."</tr>"; //Fecha o cabeçalho
+
+	     return $temp_tb;
+
+	 }
+
+	 function semana ($num) {
+
+
+	 }
+
+	 function dia ($num) {
+	 	
 	 }
 }
 ?>

@@ -22,8 +22,11 @@
   Podem ser criadas marcações de datas indefinidamente, basta adicioná-las no arquivo
   'calendario.css', usando o nome de classe td_marcadoX, onde X é o número da marcação.
   */
-
-
+$sem = new DateTime ();
+print_r($sem);
+echo "<h2>";
+echo $sem->format('N');
+echo "</h2>";
  $agendaSec = new sec_Agenda;
 
    echo $agendaSec->gerarCalend(date('m'),date('Y'),1,3,
@@ -32,5 +35,6 @@
                       array("Dias Congressos","Pesquisas e Estudos","Feriados",
                             "Planejamento Acadêmico","Casamentos","Início e término do período da Campanha",
                             "Recesso"));
+
 
      ?>

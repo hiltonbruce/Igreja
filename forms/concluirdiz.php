@@ -42,11 +42,10 @@ if (empty($idIgreja)) {
 	$idIgreja = $rolIgreja;
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 }
-
 	$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu;
 	$linkAcesso .= '&rec='.$rec.'&idDizOf='.$idDizOf.'&mes='.$meslanc.'&ano='.$anolanc.'&igreja=';
+	$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 ?>
-
 <fieldset>
 	<legend>Fecha Caixa</legend>
 <table>
@@ -69,7 +68,6 @@ if (empty($idIgreja)) {
 				<label>Alterar Igreja: </label>
 					<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 						<?php
-							$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 							$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$idIgreja);
 							//echo $listaIgreja;
 						?>
