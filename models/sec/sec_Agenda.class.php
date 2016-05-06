@@ -149,7 +149,7 @@ class sec_Agenda
 
 				//Cria a célula referente ao dia atual
 				$diaMc = $cnt_dias-1;
-				$title[$diaMc] .= $rodapes[$i];
+				$title[$diaMc] .= $rodapes[$i-1];
 				if (date('dmY')==$diaMc.$mes.$ano & $marcaDia!='') {
 					$diaAtual = '<a title = "'.$title[$diaMc].'"" href="data='.$cnt_dias.'"><strong>'.'<span class="text-success">'.$cnt_dias++.'</span></strong></a>';
 				} elseif ($marcaDia!='') {

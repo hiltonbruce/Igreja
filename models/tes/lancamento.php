@@ -172,7 +172,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
    	if ($provmissoes>0) {
 		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
 		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
-		$histTextProv =' e provisão para SEMAD sobre a receita ';
+		$histTextProv =' e provisão para SEMAD sobre a receita';
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
@@ -188,9 +188,9 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento da provisão de Comadep - Despesa
 		$totalDeb += $provcomadep;
 		if ($histTextProv!='') {
-			$histTextProv = ', provisão para COMADEP e SEMAD sobre a receita ';
+			$histTextProv = ', provisão para COMADEP e SEMAD sobre a receita';
 		} else {
-			$histTextProv = ' e provisão para COMADEP sobre a receita ';
+			$histTextProv = ' e provisão para COMADEP sobre a receita';
 		}
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
@@ -257,7 +257,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	}
 
 	//Lança o histórico do lançamento
-	$referente .= $histTextProv.' nesta data'.$ctaVencida;
+	$referente .= $histTextProv.$ctaVencida;
 	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();

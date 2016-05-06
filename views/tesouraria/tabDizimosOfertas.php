@@ -56,13 +56,13 @@ $tabMembros = new membro();
 
 		if (!empty($_GET['escolha'])) {
 
-			$linkResumo  = 'rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
+			$linkResumo  = '&rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 			$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
 			$linkResumo .= '&credito='.$_GET['credito'];
 			$linkResumo .= '&debito='.$_GET['debito'];
 			echo '<div class="row"><div class="col-xs-2">';
 			echo '<br />';
-			echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.$linkLancamento.'" >';
+			echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.$linkLancamento.$linkResumo.'" >';
 		  	echo '<button type="button" class="btn btn-primary btn-sm" tabindex="'.++$ind.'">';
 		  	echo '<span class="glyphicon glyphicon-backward"></span> Voltar...</button>';
 			echo '</a></div></div>';

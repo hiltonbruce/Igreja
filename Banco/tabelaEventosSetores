@@ -1,0 +1,18 @@
+tabela eventos
+    Campos : 
+                id - inteiro
+                descricao - varchar - Título do eventos
+                tipo -> 0-Desativo, 1-Data fixa, 2-frequência semanal, 3-frequência quinzenal, 4-frequência mensal, 5-frequência semestral, 6-frequência anual, 7-frequência bianual
+                igreja - inteiro (id da tabela igreja)
+                setor - id da tabela setor
+                data - timestamp
+                cad - varchar (50) - Casdastrador
+                
+Tabela setor
+    Campos : 
+                id - inteiro
+                descricao - varchar - Titulo (150)
+                alias - Sigla ou nome abreviado
+                hierarquia - varchar (150) - Com sequência da hierarquia separado por virgula, da maior a menor
+                data - timestamp
+                cad - varchar (50) - Casdastrador

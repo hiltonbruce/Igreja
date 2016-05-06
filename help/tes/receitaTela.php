@@ -125,7 +125,7 @@ switch ($rec) {
 		if (!empty($_POST['cad']) && $roligreja>'0') {
 			require_once ('views/tesouraria/oracao.php');
 		} else {
-			if ($idIgreja<'1') {
+			if ($idIgreja<'1' && $_POST['conta']>'0') {
 				echo '<script> alert("Lan&ccedil;amento cancelado! N&atilde;o foi definida a igreja!");</script>';
 			}
 				$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&igreja='.$idIgreja;

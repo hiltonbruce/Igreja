@@ -17,7 +17,7 @@ $sqllinhas = "SELECT * FROM contas where locate('$q',titulo) > 0  AND acesso > '
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
 
-$sql = "SELECT * FROM contas where locate('$q',titulo) > 0 AND acesso > '0' order by locate(codigo,'$q') limit 10";
+$sql = "SELECT * FROM contas where locate('$q',titulo) > 0 AND acesso > '0' order by codigo limit 10";
 
 $res = mysql_query( $sql );
 

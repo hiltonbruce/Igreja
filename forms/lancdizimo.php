@@ -8,12 +8,18 @@ $lanigreja = new DBRecord('igreja',$roligreja, 'rol' );
 $exibir = new lancdizimo($roligreja);
 //Faz o leiaute do lançamento do débito da tabela dizimooferta
 $exibirlanc = '';
-$tablanc = mysql_query('SELECT SUM(valor) AS valor,devedora,data FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY devedora');
+$queryBusc  = 'SELECT SUM(valor) AS valor,devedora,data FROM ';
+$queryBusc .= 'dizimooferta WHERE lancamento="0" AND igreja = "';
+$queryBusc .= $roligreja.'" GROUP BY devedora';
+$tablanc = mysql_query($queryBusc);
 $totDebito = mysql_num_rows($tablanc);
 while ($tablancarr = mysql_fetch_array($tablanc)) {
 	$lanc  = $exibir->lancamacesso ($tablancarr['valor'],$tablancarr['devedora'],'D');
 	$exibirlanc .= $lanc['0'];
-	$dataLc = $tablancarr['data'];
+	if (empty($dataLc) || $dataLc > $tablancarr['data']) {
+		$dataLc = $tablancarr['data'];
+		$datasLanc++;
+	}
 }
 //Faz o leiaute do lançamento do crédito da tabela dizimooferta
 $tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
@@ -26,6 +32,10 @@ while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 }
 
 require_once 'views/lancdizimo.php';//chama o view para montar
+
+if ($datasLanc>'1') {
+	$hist = str_replace( "nesta data", 'neste m&ecirc;s', $hist );
+}
 
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
