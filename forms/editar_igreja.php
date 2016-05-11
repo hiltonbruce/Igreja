@@ -2,7 +2,6 @@
 if ($_SESSION['nivel']>4){
 
 //ver_cad();
-
 	$igreja = new DBRecord('igreja',$_GET['rol'], 'rol');
 
 	if ($igreja->pastor()>0) {
@@ -29,19 +28,29 @@ $ind = 1;
       <tr class='primary'>
       	<td colspan="3" >
 			<form>
-		     <label>Alterar Igreja: </label>
+		     <label>Informa&ccedil;&otilde;es da Igreja:</label>
 		     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-control" >
 		     <?php
 			     $estnatal = new List_sele('igreja', 'razao','id');
-                 $primLinha = (empty($_GET["rol"])) ? 1 : $_GET["rol"] ;
+           $primLinha = (empty($_GET["rol"])) ? 1 : $_GET["rol"] ;
 			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$primLinha);
 		     ?>
 		     </select>
 		     </form>
      	</td>
      	</tr>
+      <tr class='primary'>
+        <td colspan="3" >
+      <form>
+         <label>Alterar nome da Igreja: </label>
+          <?PHP
+          $nome = new editar_form("razao",$igreja->razao(),$tab,$tab_edit);
+          $nome->getMostrar();$nome->getEditar();
+          ?>
+      </td>
+      </tr>
      	<tr class='primary'>
-        <td colspan="2" >Dire&ccedil;&atilde;o:
+        <td colspan="2" ><label>Dire&ccedil;&atilde;o:</label>
         <?PHP
 			$nome = new editar_form("pastor",$igreja->pastor(),$tab,$tab_edit);
 			echo '<p><a title="Click aqui para alterar este campo!" ';
@@ -65,12 +74,12 @@ $ind = 1;
 		?>
       </tr>
       <tr class='primary'>
-        <td>Rol 1 &ordm; Secret&aacute;rio: :
+        <td><label>Rol 1 &ordm; Secret&aacute;rio: :</label>
       <?PHP
 			$nome = new editar_form("secretario1",$igreja->secretario1(),$tab,$tab_edit);
 			$nome->getMostrar();//$nome->getEditar();
 		?></td>
-        <td colspan='2'>Rol 2&ordm; Secret&aacute;rio:
+        <td colspan='2'><label>Rol 2&ordm; Secret&aacute;rio:</label>
         <?PHP
   			$nome = new editar_form("secretario2",$igreja->secretario2(),$tab,$tab_edit);
   			$nome->getMostrar();//$nome->getEditar();
@@ -89,36 +98,36 @@ $ind = 1;
       </td>
       </tr>
       <tr class='primary'>
-        <td>CNPJ
+        <td><label>CNPJ</label>
         <?PHP
 			$nome = new editar_form("cnpj",$igreja->cnpj(),$tab,$tab_edit);
 			$nome->getMostrar();$nome->getEditar();
 		?></td>
-		<td>Site
+		<td><label>Site</label>
           <?PHP
 			$nome = new editar_form("site",$igreja->site(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
+			$nome->getMostrar();$nome->getEditar('','',$id);
 		?></td>
-		<td>Email:
+		<td><label>Email:</label>
         <?PHP
 		$nome = new editar_form("email",$igreja->email(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
       <tr class='primary'>
-        <td colspan="2">Endere&ccedil;o:
+        <td colspan="2"><label>Endere&ccedil;o:</label>
 		<?PHP
 		$nome = new editar_form("rua",$igreja->rua(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
-        <td colspan="2">N&uacute;mero:
+        <td colspan="2"><label>N&uacute;mero:</label>
         <?PHP
 		$nome = new editar_form("numero",$igreja->numero(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
       <tr class='primary'>
-        <td>Bairro:
+        <td><label>Bairro:</label>
           <?PHP
 		//inicio
 		$bairro = new DBRecord('bairro',$igreja->bairro(), 'id');
@@ -143,12 +152,12 @@ $ind = 1;
 
 		//fim
 		?></td>
-        <td>Cidade:
+        <td><label>Cidade:</label>
           <?PHP
 		//inicio
 		$cidade = new DBRecord ("cidade",$igreja->cidade(),"id");
 
-		echo $igreja->cidade;
+		//echo $igreja->cidade;
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
 
@@ -170,8 +179,7 @@ $ind = 1;
 
 		//fim
 		?></td>
-		<td colspan="2">UF:
-
+		<td colspan="2"><label>UF:</label>
           <p><a href="./?escolha=<?PHP echo $tab_edit;?>uf"><?PHP print " > {$igreja->uf()} < ";?></a>
               <?PHP
 		if ($_GET["campo"]=="uf"){
@@ -192,19 +200,19 @@ $ind = 1;
           <?PHP } ?></td>
       </tr>
       <tr class='primary'>
-        <td>CEP:
+        <td><label>CEP:</label>
           <?PHP
         		$nome = new editar_form("cep",$igreja->cep,$tab,$tab_edit);
         		$nome->getMostrar();$nome->getEditar();
       		?>
         </td>
-        <td>Telefone:
+        <td><label>Telefone:</label>
            <?PHP
         		$nome = new editar_form("fone",$igreja->fone,$tab,$tab_edit);
         		$nome->getMostrar();$nome->getEditar();
         	?>
         </td>
-        <td colspan="2">Fax:
+        <td colspan="2"><label>Fax:</label>
         <?PHP
       		$nome = new editar_form("fax",$igreja->fax,$tab,$tab_edit);
       		$nome->getMostrar();$nome->getEditar();
@@ -212,7 +220,7 @@ $ind = 1;
       </td>
       </tr>
       <tr class='primary'>
-        <td>Setor:
+        <td><label>Setor:</label>
         <?PHP
             $nome = new editar_form("setor",$igreja->setor(),$tab,$tab_edit);
             $nome->getMostrar();
@@ -229,7 +237,7 @@ $ind = 1;
                         </form>
                         ";
             }
-        ?></td><td>Classe:
+        ?></td><td><label>Classe:</label>
         <?PHP
             $nome = new editar_form("matlimpeza",$igreja->matlimpeza(),$tab,$tab_edit);
             $nome->getMostrar();$nome->getEditar();
@@ -237,15 +245,14 @@ $ind = 1;
         <td></td>
       </tr>
       <tr class='primary'>
-        <td colspan="3">C&iacute;rculo de Ora&ccedil;&atilde;o:
+        <td colspan="3"><label>C&iacute;rculo de Ora&ccedil;&atilde;o:</label>
             <?PHP
                 require_once 'forms/igreja/alterarDiaOracao.php'
             ?>
         </td>
       </tr>
       <tr class='primary'>
-      	<td colspan="3">
-    Santa Ceia:
+      	<td colspan="3"><label>Santa Ceia:</label>
    	  <?PHP
 		$ceia = new formceia($igreja->rol());
 		?>
@@ -262,7 +269,6 @@ $ind = 1;
             </tbody>
         </table>
         </td></tr>
-
     </table>
 
     </fieldset>

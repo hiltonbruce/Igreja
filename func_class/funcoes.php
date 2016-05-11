@@ -950,14 +950,11 @@ function formatPhoneNumber($phoneNumber) {
 #Formata número de CPF para exibição
 function formatCPFNumber ($cpfNumber){
 
-        $trid1 = substr($cpfNumber, 0, 3);
-        $trid2 = substr($cpfNumber, 3, 3);
-        $trid3 = substr($cpfNumber, 6, 3);
-        $controle = substr($cpfNumber, 9, 2);
+   	$cpfNumber= wordwrap($cpfNumber, 3, '.', true);
+    $numero = substr($cpfNumber, 0, -3);
+    $controle = substr($cpfNumber, 12, 2);
 
-        $cpfNumber = $trid1.'.'.$trid2.'.'.$trid3.'-'.$controle;
-
-    return $cpfNumber;
+	return $numero.'-'.$controle;
 }
 
 /***************************************************************************

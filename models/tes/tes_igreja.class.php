@@ -25,7 +25,7 @@ class tes_igreja {
 		$ultimaEntrada  = 'SELECT d.lancamento,d.data,d.mesrefer,d.anorefer,i.cultos ';
 		$ultimaEntrada .= 'FROM dizimooferta AS d,igreja AS i WHERE igreja="'.$this->igreja.'" ';
 		$ultimaEntrada .= 'AND i.rol = d.igreja ';
-		$ultimaEntrada .= 'ORDER BY data DESC LIMIT 1';
+		$ultimaEntrada .= 'ORDER BY d.lancamento ASC,d.data DESC LIMIT 1';
 		$dados = mysql_query($ultimaEntrada);
 		$resUltimoDia = mysql_fetch_array($dados);
 		//print_r($resUltimoDia);

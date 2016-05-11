@@ -16,6 +16,7 @@ if (!empty($_GET['data'])) {
 }else {
 	$dtlanc = '';
 }
+
 if (!empty($_GET['menu'])) {
         $rec = $_GET['rec'];
         $escolha = $_GET['escolha'];
