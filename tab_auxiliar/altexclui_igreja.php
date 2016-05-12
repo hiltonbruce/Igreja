@@ -4,13 +4,13 @@
     </caption>
     <colgroup>
 		<col id="Nome da atual">
-		<col id="Excluir">
+		<col id="Ativa/Desativar">
 		<col id="Excluir igreja!">
 	</colgroup>
     <thead>
       <tr>
         <th scope="col">Nome da atual</th>
-        <th scope="col">Excluir</th>
+        <th scope="col">Ativa/Desativar</th>
         <th scope="col">Editar igreja!</th>
       </tr>
     </thead>
@@ -25,7 +25,7 @@
 
 		?>
 		<tr>
-			<td><?php echo $lista[$chave]['0'];?></td>
+			<td><?php echo '<b>'.$lista[$chave]['0'].'</b><br />'.$lista[$chave]['3'].', N&ordm;: '.$lista[$chave]['4'];?></td>
 			<td>
 				<?php 
 					if ($lista[$chave]['1']=='1')/*Status ativo da igreja*/{
