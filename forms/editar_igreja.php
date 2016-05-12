@@ -41,7 +41,7 @@ $ind = 1;
      	</tr>
       <tr class='primary'>
         <td colspan="3" >
-      <form>
+      <form method="post">
          <label>Alterar nome da Igreja: </label>
           <?PHP
           $nome = new editar_form("razao",$igreja->razao(),$tab,$tab_edit);
