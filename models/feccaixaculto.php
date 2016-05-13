@@ -32,16 +32,30 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$exibideb = '<tr class="warning"><td colspan="5">Debito</td></tr>';
 	$exibicred = '<tr class="warning"><td colspan="5">Credito</td></tr>';
 
-	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
-	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
+	$caixaCentral ='';
+	$caixaEnsino = '';
+	$caixaInfantil ='';
+	$caixaMissoes = '';
+	$caixaMocidade = '';
+	$caixaOutros = '';
 	$caixaSenhoras = '';
+	$sldAntDev = '';
+	$sldAntCred = '';
 
 	while ($tablancarr = mysql_fetch_array($tablanc)) {
 		$debitar = $tablancarr['devedora'];
 		$devedora 	= new DBRecord('contas',$debitar,'acesso');
-		$sldAntDev = number_format($devedora->saldo(),2,',','.');
+		if ($sldAntDev=='') {
+			#Manter saldo inicial se houver novo lançamento na conta
+			$sldAntDev = number_format($devedora->saldo(),2,',','.');
+		}
+
 		$credora 	= new DBRecord('contas',$tablancarr['credito'],'acesso');
-		$sldAntCred = number_format($credora->saldo(),2,',','.');
+		if ($sldAntCred =='') {
+			#Manter saldo inicial se houver novo lançamento na conta
+			$sldAntCred = number_format($credora->saldo(),2,',','.');
+		}
+		
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$valor 		= $tablancarr['valor'];
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo

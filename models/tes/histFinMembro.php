@@ -81,12 +81,18 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').'</td></tr>';
 
 		for ($i=1; $i < 6; $i++) {
-			$dizSem = $dz.$i;$ofSem = $of.$i;$ofExtraSem = $ofExtra.$i;
-			$ofCampanhaSem	= $ofCampanha.$i;$ofmSem = $ofm.$i;$ofsSem = $ofs.$i;
-			$ofmocSem = $ofmoc.$i;$ofiSem = $ofi.$i;$ofeSem = $ofe.$i;
-			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
+			$dizSem = $dz.$i;
+			$ofSem = $of.$i;
+			$ofExtraSem = $ofExtra.$i;
+			$ofCampanhaSem	= $ofCampanha.$i;
+			$ofmSem = $ofm.$i;$ofsSem = $ofs.$i;
+			$ofmocSem = $ofmoc.$i;
+			$ofiSem = $ofi.$i;
+			$ofeSem = $ofe.$i;
+
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
 			$totOpSem = $subTotalSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem;//Total das entradas operacionais semanal
+			$totMesSem = $totOpSem+$$ofmSem+$$ofCampanhaSem;//Total da Semana (linha)
 
 			$nivel1Sem .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
