@@ -2,17 +2,19 @@
 		<caption>Lançamento Concluído</caption>
 			<colgroup>
 				<col id="Conta">
-				<col id="Débito">
-				<col id="Crédito">
+				<col id="D&eacute;bito">
+				<col id="Cr&eacute;dito">
 				<col id="Valor (R$)">
+				<col id="Saldo Atual">
 				<col id="albumCol"/>
 			</colgroup>
 		<thead>
 			<tr>
 				<th scope="col">Conta</th>
-				<th scope="col">Débito (R$)</th>
-				<th scope="col">Crédito (R$)</th>
-				<th scope="col">Saldo Atual</th>
+				<th scope="col" class="text-center">D&eacute;bito (R$)</th>
+				<th scope="col" class="text-center">Cr&eacute;dito (R$)</th>
+				<th scope="col" class="text-center">Saldo Atual</th>
+				<th scope="col" class="text-center">Saldo Anterior</th>
 			</tr>
 		</thead>
 		<tbody>

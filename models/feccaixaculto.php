@@ -29,8 +29,8 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	//Faz o lançamento do débito para tabela lancamento
 	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor,credito FROM dizimooferta
 			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito,tipo');
-	$exibideb = '<tr><td colspan="4">Debito</td></tr>';
-	$exibicred = '<tr><td colspan="4">Credito</td></tr>';
+	$exibideb = '<tr class="warning"><td colspan="5">Debito</td></tr>';
+	$exibicred = '<tr class="warning"><td colspan="5">Credito</td></tr>';
 
 	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
@@ -39,7 +39,9 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	while ($tablancarr = mysql_fetch_array($tablanc)) {
 		$debitar = $tablancarr['devedora'];
 		$devedora 	= new DBRecord('contas',$debitar,'acesso');
+		$sldAntDev = number_format($devedora->saldo(),2,',','.');
 		$credora 	= new DBRecord('contas',$tablancarr['credito'],'acesso');
+		$sldAntCred = number_format($credora->saldo(),2,',','.');
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$valor 		= $tablancarr['valor'];
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
@@ -67,8 +69,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
    	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
-	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+	$sldAntSemad = number_format($conta->saldo()-$provmissoes,2,',','.');//Saldo anterior da conta
+	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
+			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
+			,$sldAntSemad);
 	$totalDeb = $totalDeb + $provmissoes;
 
 	$corlinha = !$corlinha;
@@ -77,13 +81,15 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de Comadep - Despesa
 	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
+	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão COMADEP
+	$sldAntComadep = number_format($conta->saldo()-$provcomadep,2,',','.');//Saldo anterior da conta
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
-					</td><td id='moeda'>%s&nbsp;%s</td></tr>",$conta->codigo(),$conta->titulo()
-					,number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+					</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",$conta->codigo(),$conta->titulo()
+					,number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
+					,$sldAntComadep);
 	$totalDeb = $totalDeb + $provcomadep;
 	$corlinha = !$corlinha;
-	$exibideb .= sprintf("<tr class='total'><td>Total debitado</td><td id='moeda'>R$ %s</td><td></td><td></td></tr>",number_format($totalDeb,2,',','.'));
+	$exibideb .= sprintf("<tr class='total'><td>Total debitado</td><td id='moeda'>R$ %s</td><td colspan='3'></td></tr>",number_format($totalDeb,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php
 
 	//Faz o leiaute do lançamento do crédito e lança para tabela lancamento
@@ -92,13 +98,15 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 
 		$credora = new DBRecord('contas',$tablancarrc['credito'],'acesso');
+		$sldAntCrd = number_format($credora->saldo(),2,',','.');//Saldo anterior da conta
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc);
 		$contcaixa->atualizar($tablancarrc['valor'],'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$tablancarrc['credito'],'acesso');//Exibi lançamento
-		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-		$caixa->codigo(),$caixa->titulo(),number_format($tablancarrc['valor'],2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo());
+		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
+		$caixa->codigo(),$caixa->titulo(),number_format($tablancarrc['valor'],2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo()
+		,$sldAntCrd);
 		$totalCred = $totalCred + $tablancarrc['valor'];
 		$corlinha = !$corlinha;
 
@@ -112,8 +120,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
-	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-	$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+	$antProvSemad = number_format($conta->saldo()-$provmissoes,2,',','.');//Saldo anterior da conta
+	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
+	$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
+	,$antProvSemad);
 	$totalCred = $totalCred + $provmissoes;
 
 	$corlinha 	= !$corlinha;
@@ -129,11 +139,13 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
-	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-	$conta->codigo(),$conta->titulo(),number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo());
+	$antProvComadep = number_format($conta->saldo()-$provcomadep,2,',','.');//Saldo anterior da conta
+	$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
+	$conta->codigo(),$conta->titulo(),number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
+	,$antProvComadep);
 	$totalCred 	= $totalCred + $provcomadep;
 
-	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
+	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",number_format($totalCred,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 
 	//Atualiza a tabela dizimooferta de acordo com a igreja selecionada inserido o id do lançamento no campo lançamento
@@ -161,7 +173,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$linkImpDia   = './controller/modeloPrint.php/?tipo=1&rec=0&igreja='.$roligreja;
 	$linkImpDia  .= '&ano='.$dtLanc->format('Y').'&mes='.$dtLanc->format('m').'&dia='.$dtLanc->format('d');
 	$linkImpDia  .= '&r1=4037&r3=72';
-	$exibiRodape .= '<td><a target=_blank href="'.$linkImpDia.'" >';
+	$exibiRodape .= '<td colspan="2"><a target=_blank href="'.$linkImpDia.'" >';
 	$exibiRodape .= '<button type="button" class="btn btn-primary btn-xs">';
 	$exibiRodape .= '<span class="glyphicon glyphicon-print"></span> Imprimir este dia...</button></a></td></tr>';
 	//Rodapé lo lançamento
