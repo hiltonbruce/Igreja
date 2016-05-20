@@ -10,7 +10,11 @@ if (!empty($_POST['ano'])) {
     $anoPed = date('Y');
 }
 
-if (!empty($_GET['mesref'])) {
+
+if ($_GET['mes']>0 && $_GET['mes']<13 && !empty($anoPed)) {
+     $mesref = $_GET['mes'].'/'.$anoPed;
+    $linkperido = 'mes='.$_GET['mes'].'&ano='.$anoPed.'&mesref='.$mesref;
+ } elseif (!empty($_GET['mesref'])) {
     $mesref = $_GET['mesref'];
     list($mesPed,$anoPed) = explode('/',$_GET['mesref'] );
     $linkperido = 'mes='.$mesPed.'&ano='.$anoPed.'&mesref='.$mesref;
