@@ -34,7 +34,10 @@ foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
 if (!checadata($data)) {
 	$data = date('Y-m-d');
 }
-$exibicred .= sprintf("<tr  class='info'><td>Totais em: %s </td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td></td></tr>",conv_valor_br($data),number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
+
+$exibicred .= sprintf("<tr  class='info'><td>Em: %s </td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",conv_valor_br($data),number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
+$exibicred .= '<tr class="warning"><td><strong>Hist&oacute;rico:</strong></td>';
+$exibicred .= '<td class="text-center" colspan="4"><h5>'.$referente.'</h5></td></tr>';
 
 $ctaDespesa = new tes_despesas();
 $bsccredor = new tes_listDisponivel();

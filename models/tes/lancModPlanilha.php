@@ -5,6 +5,8 @@ $corlinha = false;
 
 	$credora 	= new DBRecord('contas',$creditar,'acesso');
 	$devedora 	= new DBRecord('contas',$debitar,'acesso');
+	$sldAntDev = number_format($devedora->saldo(),2,',','.');
+	$sldAntCred = number_format($credora->saldo(),2,',','.');
 
 	if ($credora->tipo()=='D' && ($credora->saldo()-($valor))<'0') {
 	 $msgErro = 'Saldo não permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
@@ -54,8 +56,9 @@ if ($msgErro=='') {
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$creditar,'acesso');//Exibi lançamento
-		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td></tr>",
-		$caixa->codigo(),$caixa->titulo(),number_format($valor,2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo());
+		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td id='moeda'>%s</td></tr>",
+		$caixa->codigo(),$caixa->titulo(),number_format($valor,2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo(),
+		$sldAntCred);
 		$totalCred += $valor;
 		$corlinha = !$corlinha;
 
