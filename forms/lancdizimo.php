@@ -8,17 +8,16 @@ $lanigreja = new DBRecord('igreja',$roligreja, 'rol' );
 $exibir = new lancdizimo($roligreja);
 //Faz o leiaute do lançamento do débito da tabela dizimooferta
 $exibirlanc = '';
-$queryBusc  = 'SELECT SUM(valor) AS valor,devedora,data FROM ';
+$queryBusc  = 'devedora,data FROM ';
 $queryBusc .= 'dizimooferta WHERE lancamento="0" AND igreja = "';
-$queryBusc .= $roligreja.'" GROUP BY devedora';
-$tablanc = mysql_query($queryBusc);
-$totDebito = mysql_num_rows($tablanc);
+$queryBusc .= $roligreja;
+$tablanc = mysql_query('SELECT SUM(valor) AS valor,'.$queryBusc.'" GROUP BY devedora');
+$totDebito = mysql_num_rows(mysql_query('SELECT valor,'.$queryBusc.'" GROUP BY data'));
 while ($tablancarr = mysql_fetch_array($tablanc)) {
 	$lanc  = $exibir->lancamacesso ($tablancarr['valor'],$tablancarr['devedora'],'D');
 	$exibirlanc .= $lanc['0'];
 	if (empty($dataLc) || $dataLc > $tablancarr['data']) {
 		$dataLc = $tablancarr['data'];
-		$datasLanc++;
 	}
 }
 //Faz o leiaute do lançamento do crédito da tabela dizimooferta
@@ -33,7 +32,7 @@ while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 
 require_once 'views/lancdizimo.php';//chama o view para montar
 
-if ($datasLanc>'1') {
+if ($totDebito>'1') {
 	$hist = str_replace( "nesta data", 'neste m&ecirc;s', $hist );
 }
 
@@ -45,8 +44,8 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 
 <form method="post" action="">
 	<div class="col-xs-12">
-		<label>Hist&oacute;rico do lan&ccedil;amento:</label> <input
-			type="text" name="hist" id="hist" size="60" autofocus="autofocus" class="form-control"
+		<label>Hist&oacute;rico do lan&ccedil;amento:</label> 
+		<input type="text" name="hist" id="hist" size="60" autofocus="autofocus" class="form-control"
 			tabindex="<?PHP echo ++$ind;?>" value='<?PHP echo $hist;?>'>
 	</div>
 	<div class="col-xs-2">
