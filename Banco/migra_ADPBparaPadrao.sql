@@ -554,3 +554,48 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 DROP TABLE dizimo;
 
+--
+-- Estrutura para tabela `dizimooferta`
+--
+
+CREATE TABLE IF NOT EXISTS `dizimooferta` (
+`id` int(11) NOT NULL,
+  `lancamento` int(11) NOT NULL COMMENT 'Quando realizado lançamento id referente ao lançamento',
+  `credito` int(11) NOT NULL COMMENT 'Acesso da conta credora',
+  `devedora` int(11) NOT NULL COMMENT 'Acesso da conta devedora',
+  `tipo` int(1) NOT NULL COMMENT '1-Dízimo, 2-Oferta, 3-Oferta extra, 4-Voto, 5-Missões, 6-Campanha, 7 - Circulo de Oração',
+  `congcadastro` int(11) NOT NULL COMMENT 'Congregação onde este membro está cadastrado neste momento',
+  `rol` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL COMMENT 'Se tipo=1 e este campo vazio dizimo anónimo',
+  `valor` decimal(10,2) NOT NULL,
+  `data` date NOT NULL,
+  `semana` enum('1','2','3','4','5') NOT NULL,
+  `mesrefer` enum('1','2','3','4','5','6','7','8','9','10','11','12') NOT NULL COMMENT 'Mês de referência da contribuição',
+  `anorefer` int(4) NOT NULL DEFAULT '2012',
+  `igreja` int(11) NOT NULL,
+  `tesoureiro` varchar(14) NOT NULL COMMENT 'CPF do tesoureiro responsável pelo lançamento',
+  `confirma` varchar(14) NOT NULL COMMENT 'CPF do 2º tesoureiro confirmando lançamento',
+  `obs` varchar(255) NOT NULL,
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `hist` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=38935 DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `dizimooferta`
+--
+ALTER TABLE `dizimooferta`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `dizimooferta`
+--
+ALTER TABLE `dizimooferta`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
