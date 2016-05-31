@@ -1,6 +1,6 @@
 <?php
 //Opções de exibir na tela para o script /tesouraria/receita.php
-$dtlanc = ($_GET['data']=='') ? date('d/m/Y'):$_GET['data'];
+//$dtlanc = (empty($dtlanc)) ? date('d/m/Y'):$_GET['data'];
 
 $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 
