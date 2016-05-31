@@ -13,6 +13,8 @@ if (!empty($_GET['data'])) {
 	$dtlanc = $_GET['data'];
 } elseif(!empty($_POST['data'])) {
 	$dtlanc = $_POST['data'];
+} elseif(!empty($_POST['dataLancamento'])) {
+	$dtlanc = $_POST['dataLancamento'];
 }else {
 	$dtlanc = '';
 }
