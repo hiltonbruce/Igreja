@@ -17,19 +17,19 @@
 				switch ($n1.$n2.$n3.$n4) {
 					case '411001':
 					# Caixa Geral
-						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411002':
 					# Caixa de Senhoras
-						$optionTipo .= '<option value="'.$ctaAcesso.',3,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411003':
 					# Caixa Geral - Receita de Campanhas
-						$optionTipo .= '<option value="'.$ctaAcesso.',1,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411004':
 					# Caixa de Ensino
-						$optionTipo .= '<option value="'.$ctaAcesso.',4,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411005':
 						//Há varios caixas na Mocidade
@@ -50,25 +50,25 @@
 							$ctaDev = 8;
 						}
 
-						$optionTipo .= '<option value="'.$ctaAcesso.','.$ctaDev.',1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411006':
 					# Caixa infantil
-						$optionTipo .= '<option value="'.$ctaAcesso.',5,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '412001':
 					# Missões
-						$optionTipo .= '<option value="'.$ctaAcesso.',2,1">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					default:
 					# Todas as demais receitas
-						$optionTipo .= '<option value="'.$ctaAcesso.',1,2">'.$ctaArray['titulo'].'</option>';
+						$optionTipo .= '<option value="'.$ctaAcesso.',2">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 				}
 			}
 			//conta atual do pré lançamento
 			if ($lancAltera->credito()==$ctaAcesso) {
-					$lanContr = '<option value="'.$lancAltera->credito().','.$lancAltera->devedora().','.$lancAltera->tipo().'">'.$ctaArray['titulo'].'</option>';
+					$lanContr = '<option value="'.$lancAltera->credito().','.$lancAltera->tipo().'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 				}
 
 		}
@@ -101,20 +101,20 @@
 				<td colspan = '4'>
 				<div class="row">
 				  <div class="col-xs-2">
-				    <label>Data: </label> <input type="text" id="data" name="data"
+				    <label>Data: </label> <input type="text" id="data" name="data" tabindex="<?php echo ++$ind;?>" 
                      value="<?php echo conv_valor_br ($lancAltera->data());?>" class="form-control" required="required"/>
 				  </div>
 				  <div class="col-xs-2">
-				    <label>Semana: </label> <input type="text" id="semana" name="semana"
+				    <label>Semana: </label> <input type="text" id="semana" name="semana" tabindex="<?php echo ++$ind;?>" 
                      value="<?php echo $lancAltera->semana();?>" class="form-control" required="required"/>
 				  </div>
 				  <div class="col-xs-2">
-				<label>Referente Mês:</label><input type="text" name="mes" maxlength="2"
+				<label>Referente Mês:</label><input type="text" name="mes" maxlength="2" tabindex="<?php echo ++$ind;?>" 
 					value="<?php echo $lancAltera->mesrefer();?>" class="form-control"  required="required" />
 				</div>
 				  <div class="col-xs-2">
 					 <label>Ano:</label> <input type="text" id="ano" name="ano"
-						value="<?php echo $lancAltera->anorefer();?>"
+						value="<?php echo $lancAltera->anorefer();?>" tabindex="<?php echo ++$ind;?>" 
 					 	required="required" class="form-control" />
 				</div>
 				  <div class="col-xs-4">
@@ -131,8 +131,8 @@
 		<table>
 			<tbody>
 				<tr>
-					<td colspan="2"><label>Tipo:</label>
-						 <select name='acesso' class='form-control'>
+					<td colspan="2"><label>Receita:</label>
+						 <select name='acesso' class='form-control' tabindex="<?php echo ++$ind;?>" >
 							  <?php
 							  	echo $lanContr;
 							   	echo $optionTipo;
@@ -145,10 +145,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><label><!-- Qual Campanha ?--></label><?php
-					//$campanha = new List_campanha;
-					//echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
-					?>
+					<td colspan="2"><label>Caixa</label>
+						<select name='caixa' class='form-control' tabindex="<?php echo ++$ind;?>" >
+							<?php
+							$campanha = new tes_listDisponivel;
+							echo $campanha -> List_Selec ($lancAltera->devedora());
+						?>
+						</select>
 					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
 					type="submit" name="listar" value="Alterar..."></td>

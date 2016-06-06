@@ -7,9 +7,9 @@ if (empty($_POST['id'])) {
 	$idLanc = (int)$_POST['id'];
 	$preLanc = new DBRecord('dizimooferta',$idLanc,'id');
 	$preLanc->igreja = $_POST['rolIgreja'];
-	list($credito,$devedora,$tipo) = explode(',', $_POST['acesso']);
+	list($credito,$tipo) = explode(',', $_POST['acesso']);
 	$preLanc->credito = $credito;
-	$preLanc->devedora = $devedora;
+	$preLanc->devedora = intval($_POST['caixa']);
 	$preLanc->tipo = $tipo;
 	$preLanc->data = br_data ($_POST['data'],'Data de Lançamento');
 	$preLanc->mesrefer = $_POST['mes'];

@@ -75,7 +75,7 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 			<tr>
 				<td>
 					<?PHP
-					echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1'>Continuar...</button><a>";
+					echo "<a href='$linkreturn' ><button class='btn btn-primary' tabindex='1' autofocus='autofocus'>Continuar...</button><a>";
 					?>
 				</td>
 				<td>
