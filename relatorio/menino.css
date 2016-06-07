@@ -1,39 +1,39 @@
 *{ margin: 0; padding: 0; }
 body { margin: 0; padding: 0; width: 1075px;  font: 85% tahoma, sans-serif; color: #505367; background-color: #fff; background: url(../img/menino.jpg) no-repeat 0% 0%; }
-	
+
 	#container { margin-top: 3em; width: 1000px; text-align: center; }
-	
+
 	#header {height: 15em; }
 	h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
-	
+
 	#mainnav {height: 20px; margin: 0; padding: 30px 0 0; text-align:center; font-family:"Times New Roman", Times, serif;}
-	
+
 	#content { height: 600px; margin: 1px 0 0; padding: 0; }
-	
+
 
 #added-div1 {
 	width: 750px;
-	z-index:1; 
-	height: auto; 
-	float: left; 
-	margin-left: 1em; 
+	z-index:1;
+	height: auto;
+	float: left;
+	margin-left: 1em;
 	padding: 40px 10px 10px 150px;
 	font-size:18px;
 	font-family:"Times New Roman", Times, serif;
 }
 
 #added-div-2 {
-	position:relative; 
+	position:relative;
 	width: 900px;
-	float: left; 
-	margin-top: 20px; 
-	padding-left: 100px; 
+	float: left;
+	margin-top: 20px;
+	padding-left: 100px;
 }
 
 #pastor {
 	position:relative;
 	width:250px;
-	margin-top: 40px; 
+	margin-top: 40px;
 	padding: 0 0 0 100px;
 	text-align:center;
 	font-size:10px;
@@ -42,37 +42,30 @@ body { margin: 0; padding: 0; width: 1075px;  font: 85% tahoma, sans-serif; colo
 #secretario {
 	float:right;
 	position:relative;
-	width:580px;
+	width:280px;
 	text-align:center;
-	margin-right: 30px;
-	top: -25px;
-	font-size:10px;
+	margin-right: 190px;
+	top: -125px;
+	font-size:11px;
 }
 
-#footer {
-	position:relative; 
-	width: 850px;
-	float: left; 
-	margin-top: -255px; 
-	padding-left: 100px; 
-	text-align:center;
-	margin-right: 30px;
-	top: -25px;
-	font-size:10px;
-
+#assinSec {
+	position:relative;
+	width:115px;
+	margin-left: 440px;
+	top: -100px;
 }
 
-h1{ 
+h1{
 	color: #0000FF;
 	font-size: 280%;
-	font-family: Forte; 
-	font-weight: normal; 
-	text-align: center; 
-	height: 40px; 
+	font-family: Forte;
+	font-weight: normal;
+	text-align: center;
+	height: 40px;
 	padding-top: 25px;
 	font-family:"Times New Roman", Times, serif;
 
-	
 }
 h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
 h3, legend { color: #3366FF; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 2px; font-family:"Times New Roman", Times, serif;}
@@ -90,7 +83,7 @@ p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:ju
 	width:150px;
 	z-index:3;
 	margin-top: -10px;
-	margin-left: 7em;
+	margin-left: 10em;
 }
 #Tipo {
 	float:left;

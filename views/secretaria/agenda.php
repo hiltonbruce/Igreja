@@ -1,3 +1,14 @@
+<div class="btn-group" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="badge">+</span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Agendar culto</a></li>
+      <li><a href="#">Agendar Casamento</a></li>
+    </ul>
+  </div>
+</div>
 <?PHP
   /*
   Função geradora de calendário.
