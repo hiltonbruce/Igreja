@@ -599,3 +599,732 @@ ALTER TABLE `dizimooferta`
 --
 ALTER TABLE `dizimooferta`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+CREATE TABLE IF NOT EXISTS `eclesiastico1` (
+  `rol` int(11) NOT NULL,
+  `congregacao` varchar(100) NOT NULL,
+  `batismo_em_aguas` date NOT NULL,
+  `local_batismo` varchar(100) NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `batismo_espirito_santo` year(4) NOT NULL,
+  `dt_mudanca_denominacao` date NOT NULL,
+  `veio_qual_denominacao` varchar(100) NOT NULL,
+  `auxiliar` date NOT NULL,
+  `diaconato` date NOT NULL,
+  `presbitero` date NOT NULL,
+  `evangelista` date NOT NULL,
+  `pastor` date NOT NULL,
+  `veio_outra_assemb_deus` varchar(3) NOT NULL,
+  `dt_muda_assembleia` date NOT NULL,
+  `lugar` varchar(100) NOT NULL,
+  `data` date NOT NULL,
+  `dat_aclam` date NOT NULL,
+  `c_impresso` date NOT NULL,
+  `quem_imprimiu` int(11) NOT NULL,
+  `c_entregue` date NOT NULL,
+  `quem_recebeu` int(11) NOT NULL,
+  `quem_entregou` int(11) NOT NULL,
+  `rec_entrega` int(11) NOT NULL,
+  `situacao_espiritual` int(1) NOT NULL,
+  `envelope` varchar(500) NOT NULL,
+  `hist` varchar(255) NOT NULL,
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `obs` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE  TABLE  `adjp`.`est_civil1` (  `rol` int( 11  )  NOT  NULL ,
+ `estado_civil` varchar( 50  )  NOT  NULL ,
+ `filhos` int( 2  )  NOT  NULL  COMMENT  'Número de filhos',
+ `conjugue` varchar( 200  )  NOT  NULL ,
+ `rol_conjugue` int( 11  )  NOT  NULL ,
+ `certidao_casamento_n` varchar( 255  )  NOT  NULL ,
+ `livro` varchar( 100  )  NOT  NULL ,
+ `obs` varchar( 250  )  NOT  NULL ,
+ `folhas` varchar( 20  )  NOT  NULL ,
+ `data` date NOT  NULL  COMMENT  'Data do casamento',
+ `hist` varchar( 255  )  NOT  NULL ,
+ `dt_cadastro` timestamp NOT  NULL  DEFAULT CURRENT_TIMESTAMP  ) ENGINE  = InnoDB  DEFAULT CHARSET  = latin1;
+ALTER  TABLE  `adjp`.`est_civil1`  ADD  PRIMARY  KEY (  `rol`  );
+SELECT TABLE_NAME FROM information_schema.VIEWS
+            WHERE TABLE_SCHEMA = 'adjp'
+                AND TABLE_NAME = 'est_civil1';
+SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
+INSERT INTO `adjp`.`est_civil1` SELECT * FROM `adjp`.`est_civil`;
+
+ALTER TABLE `est_civil1` DROP `filhos`;
+
+--
+-- Estrutura para tabela `eventos`
+--
+
+CREATE TABLE IF NOT EXISTS `eventos` (
+`id` int(11) NOT NULL,
+  `descricao` varchar(150) NOT NULL COMMENT 'Título do eventos',
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cad` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `eventos`
+--
+ALTER TABLE `eventos`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `eventos`
+--
+ALTER TABLE `eventos`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Estrutura para tabela `fatura`
+--
+
+CREATE TABLE IF NOT EXISTS `fatura` (
+`id` int(11) NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `rol` int(11) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `rg` varchar(50) NOT NULL,
+  `cnpj` varchar(18) NOT NULL,
+  `igreja` int(11) NOT NULL COMMENT 'Destinado a congreção indicada',
+  `datainicio` date NOT NULL,
+  `tipo` int(11) NOT NULL COMMENT '1-Folha pgto, 2-Administrativo, 3-Eclesiástico, 4-Tesoureiro(passes), 5-Limpeza, 6-Social',
+  `frequencia` int(11) NOT NULL COMMENT '1-Todos os Menses, 2-Mensal c/ quantidade, 3-Quinzenal, 4-Semanal',
+  `hist` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `fatura`
+--
+ALTER TABLE `fatura`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `fatura`
+--
+ALTER TABLE `fatura`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+DROP TABLE fornecedores;
+
+--
+-- Estrutura para tabela `funcao`
+--
+
+DROP TABLE funcao;
+
+CREATE TABLE IF NOT EXISTS `funcao` (
+`id` int(2) NOT NULL,
+  `descricao` varchar(200) NOT NULL,
+  `tipo` int(1) NOT NULL DEFAULT '1' COMMENT '0-Auxílio,1-Cargo',
+  `hist` varchar(255) NOT NULL,
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `funcao`
+--
+
+INSERT INTO `funcao` (`id`, `descricao`, `tipo`, `hist`, `cad`) VALUES
+(1, 'Dirigente de Congregação', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:35:42'),
+(2, 'Professor do CETAD', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:43:26'),
+(3, 'Professor de Escola Bíblica', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:43:41'),
+(4, 'Dirigente de Mocidade', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:44:17'),
+(5, 'Superintendente de Escola Bíblica', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:45:17'),
+(6, 'Dirigente de Circulo de Oração', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:45:49'),
+(7, 'Secretário', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:51:24'),
+(8, 'Tesoureiro', 1, '2272: Jailton Costa Bruce', '2014-03-08 02:19:51'),
+(9, 'Porteiro', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:52:04'),
+(10, 'Dirigente de Circulo de Oração Infantil', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:59:41'),
+(11, 'Dirigente de Circulo de Oração de Mocidade', 1, '2272: Jailton Costa Bruce', '2009-10-08 03:00:06'),
+(12, 'Zelador(a)', 1, '2272: Jailton Costa Bruce', '2009-10-08 03:00:40'),
+(13, 'Pastor da Cidade', 1, '2272: Jailton Costa Bruce  ', '2014-03-01 03:05:42'),
+(14, 'Auxílio Social', 0, 'Joseilton', '2014-05-05 15:11:57'),
+(15, 'Tesoureiro de Missões', 1, 'Joseilton', '2014-07-04 22:09:43'),
+(16, 'Secretário de Missões', 1, 'Joseilton', '2014-07-04 22:09:53'),
+(17, 'Ministério', 1, 'Joseilton', '2014-07-04 22:08:05'),
+(18, 'Mestre de Obras', 1, 'Joseilton', '2014-07-04 22:08:05'),
+(19, 'Pedreiro', 1, 'Joseilton', '2014-07-04 22:08:33'),
+(20, 'Servente de Pedreiro', 1, 'Joseilton', '2014-07-04 22:08:33'),
+(21, 'Vigia', 0, 'Joseilton', '2014-07-12 23:03:08'),
+(22, 'Tesoureiro Geral', 1, 'Joseilton', '2014-07-13 22:33:02'),
+(23, 'Manuteção predial', 1, '', '2014-10-16 00:59:06'),
+(24, 'Auxiliar de Serviços', 1, '', '2014-10-16 01:01:47'),
+(25, 'Técnico de Áudio ', 1, '', '2016-02-13 00:14:06'),
+(26, 'Pintor', 1, '   Joseilton', '2016-02-19 11:23:26'),
+(27, 'Secretário da Umadeby', 1, 'Joseilton', '2016-03-23 20:05:28');
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `funcao`
+--
+ALTER TABLE `funcao`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `funcao`
+--
+ALTER TABLE `funcao`
+MODIFY `id` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+
+--
+-- Estrutura para tabela `igreja1`
+--
+
+CREATE TABLE IF NOT EXISTS `igreja1` (
+`rol` int(5) NOT NULL,
+  `razao` varchar(150) NOT NULL,
+  `setor` int(11) NOT NULL,
+  `cnpj` varchar(18) NOT NULL,
+  `site` varchar(255) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `ceia` int(2) NOT NULL COMMENT 'Dia da Santa Ceia. 1º dígito ref. semana do mês. 2º dígito ref. dia da semana. Domingo como 1º dia',
+  `oracao` int(1) NOT NULL COMMENT 'Dia da semena do circulo de oração. Domingo como 1º dia da semana',
+  `cultos` varchar(15) NOT NULL,
+  `pastor` varchar(150) NOT NULL COMMENT 'Nome completo do Pastor ou dirigente da Igreja',
+  `secretario1` int(11) NOT NULL COMMENT 'Rol do membro',
+  `secretario2` int(11) NOT NULL COMMENT 'Rol do membro',
+  `matlimpeza` binary(1) NOT NULL DEFAULT '1' COMMENT '1 - Entregue na congregação, 0 - Adquirir em mercado autorizado',
+  `rua` varchar(200) NOT NULL,
+  `numero` varchar(10) NOT NULL,
+  `bairro` varchar(200) NOT NULL,
+  `cidade` varchar(200) NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `cep` varchar(10) NOT NULL,
+  `fone` varchar(9) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0 - Destivada, 1 - Ativada',
+  `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hist` varchar(150) NOT NULL COMMENT 'log do cadastrador'
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `igreja`
+--
+ALTER TABLE `igreja1`
+ ADD PRIMARY KEY (`rol`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `igreja`
+--
+ALTER TABLE `igreja1`
+MODIFY `rol` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- Estrutura para tabela `lanc`
+--
+
+CREATE TABLE IF NOT EXISTS `lanc` (
+`id` int(11) NOT NULL,
+  `lancamento` int(11) NOT NULL,
+  `debitar` int(11) NOT NULL COMMENT 'id da tabelas contas - debitada',
+  `creditar` int(11) NOT NULL COMMENT 'id da tabelas contas -  Creditada',
+  `valor` decimal(12,2) NOT NULL,
+  `igreja` int(11) NOT NULL COMMENT 'Informar para qual igreja',
+  `data` date NOT NULL,
+  `hist` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='Dados dos lançamentos';
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `lanc`
+--
+ALTER TABLE `lanc`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `lanc`
+--
+ALTER TABLE `lanc`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Estrutura para tabela `lancamento`
+--
+
+CREATE TABLE IF NOT EXISTS `lancamento` (
+`id` int(11) NOT NULL,
+  `lancamento` int(11) NOT NULL,
+  `conta` int(11) NOT NULL,
+  `d_c` varchar(1) NOT NULL COMMENT 'D - Debitado, C - Creditado',
+  `valor` decimal(12,2) NOT NULL,
+  `igreja` int(11) NOT NULL COMMENT 'Informar para qual igreja',
+  `dizconven` bit(1) NOT NULL DEFAULT b'1' COMMENT 'Se o credito não incidir no dizimo da convenção o valor deve ser zero',
+  `data` date NOT NULL,
+  `hist` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `lancamento`
+--
+ALTER TABLE `lancamento`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `lancamento`
+--
+ALTER TABLE `lancamento`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Estrutura para tabela `lanchist`
+--
+
+CREATE TABLE IF NOT EXISTS `lanchist` (
+`id` int(11) NOT NULL,
+  `idlanca` int(11) NOT NULL COMMENT 'id da tabela lançamento',
+  `referente` varchar(300) NOT NULL,
+  `igreja` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='Texto detalhando o motivo do lançamento, a que se refere';
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `lanchist`
+--
+ALTER TABLE `lanchist`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `lanchist`
+--
+ALTER TABLE `lanchist`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Estrutura para tabela `limpeza`
+--
+
+CREATE TABLE IF NOT EXISTS `limpeza` (
+`id` int(11) NOT NULL,
+  `discrim` varchar(100) NOT NULL,
+  `unid` varchar(20) NOT NULL,
+  `quant` int(11) NOT NULL COMMENT 'Quantidade por uidade',
+  `tempo` int(11) NOT NULL COMMENT 'tempo em meses de duração',
+  `tipo1` int(11) NOT NULL,
+  `tipo2` int(11) NOT NULL,
+  `tipo3` int(11) NOT NULL,
+  `tipo4` int(11) NOT NULL,
+  `tipo5` int(11) NOT NULL,
+  `valor` decimal(10,0) NOT NULL,
+  `status` bit(1) NOT NULL DEFAULT b'1',
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hist` varchar(50) NOT NULL DEFAULT 'Joseilton'
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1 COMMENT='Lista de material de limpeza disponível para entrega';
+
+--
+-- Fazendo dump de dados para tabela `limpeza`
+--
+
+INSERT INTO `limpeza` (`id`, `discrim`, `unid`, `quant`, `tempo`, `tipo1`, `tipo2`, `tipo3`, `tipo4`, `tipo5`, `valor`, `status`, `cad`, `hist`) VALUES
+(1, 'Água sanitária', 'litros', 2, 2, 0, 15, 7, 5, 0, 0, b'1', '2013-01-29 06:18:19', 'Joseilton'),
+(2, 'Balde 5 litros', 'Unid', 1, 4, 0, 0, 0, 0, 0, 0, b'1', '2013-01-29 06:18:19', 'Joseilton'),
+(3, 'Balde grande', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:08:38', 'Joseilton'),
+(5, 'Cera liquida incolor', 'litros', 5, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:27:44', 'Joseilton'),
+(6, 'Cera incolor', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:27:44', 'Joseilton'),
+(7, 'Cesto de lixo', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-29 09:00:00', 'Joseilton'),
+(8, 'Cesto de lixo grande', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-29 09:00:00', 'Joseilton'),
+(9, 'Cloro', 'litros', 5, 2, 0, 3, 1, 1, 0, 0, b'1', '2013-01-30 07:31:06', 'Joseilton'),
+(10, 'Desinfetante', 'litros', 5, 2, 0, 5, 3, 2, 0, 0, b'1', '2013-01-29 09:00:00', 'Joseilton'),
+(11, 'Destac p/ piso', 'unid', 1, 2, 0, 5, 3, 1, 0, 0, b'1', '2013-01-30 07:32:10', 'Joseilton'),
+(12, 'Detergente', 'Militros', 200, 2, 0, 1, 1, 1, 0, 0, b'1', '2013-01-30 07:32:10', 'Joseilton'),
+(13, 'Espanador', 'unid', 1, 3, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:32:42', 'Joseilton'),
+(14, 'Esponja', 'unid', 1, 2, 0, 5, 4, 2, 0, 0, b'1', '2013-01-30 07:32:42', 'Joseilton'),
+(15, 'Flanela', 'unid', 1, 2, 0, 5, 3, 2, 0, 0, b'1', '2013-01-30 07:33:16', 'Joseilton'),
+(16, 'Limpa vidro - refil', 'ml', 500, 2, 0, 4, 2, 0, 0, 0, b'1', '2013-01-30 07:33:16', ''),
+(17, 'Lustra móveis', 'ml', 200, 2, 0, 10, 4, 2, 0, 0, b'1', '2013-01-30 07:34:34', 'Joseilton'),
+(18, 'Luva emborrachada', 'par', 1, 2, 0, 2, 1, 1, 0, 0, b'1', '2013-01-30 07:34:34', 'Joseilton'),
+(19, 'Mangueira', 'm', 25, 12, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:35:50', 'Joseilton'),
+(20, 'Óleo de peroba', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:35:50', 'Joseilton'),
+(21, 'Pá', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:36:33', 'Joseilton'),
+(22, 'Palha de aço', 'pc', 1, 2, 0, 2, 1, 1, 0, 0, b'1', '2013-01-30 07:36:33', 'Joseilton'),
+(23, 'Pano de chão', 'unid', 1, 6, 0, 5, 3, 2, 0, 0, b'1', '2013-01-30 07:37:05', 'Joseilton'),
+(24, 'Pano de prato', 'unid', 1, 6, 0, 4, 3, 1, 0, 0, b'1', '2013-01-30 07:37:05', 'Joseilton'),
+(25, 'Papel higiênico', 'pc c/ 4 unid', 1, 2, 0, 25, 14, 10, 0, 0, b'1', '2013-01-30 07:37:46', 'Joseilton'),
+(26, 'Pastilha para banheiro', 'unid', 1, 2, 0, 25, 17, 10, 0, 0, b'1', '2013-01-30 07:37:46', 'Joseilton'),
+(27, 'Limpeza Pesada', 'Litro', 1, 2, 0, 16, 6, 3, 0, 0, b'1', '2013-01-30 07:38:22', 'Joseilton'),
+(28, 'Querosene', 'ml', 200, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:38:22', 'Joseilton'),
+(29, 'Rodo', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:38:55', 'Joseilton'),
+(30, 'Sabão de coco', 'unid', 1, 2, 0, 0, 1, 1, 0, 0, b'1', '2013-01-30 07:38:55', 'Joseilton'),
+(31, 'Sabão de pedra', 'unid', 1, 2, 0, 2, 2, 1, 0, 0, b'1', '2013-01-30 07:39:22', 'Joseilton'),
+(32, 'Sabão em pó Ala ou Bem-te-vi', 'g', 500, 2, 0, 25, 15, 8, 0, 0, b'1', '2013-01-30 07:39:22', 'Joseilton'),
+(33, 'Sabão líquido', 'Litro', 1, 2, 0, 1, 0, 0, 0, 0, b'1', '2013-01-30 07:40:26', 'Joseilton'),
+(34, 'Sabonete', 'g', 90, 2, 0, 0, 2, 1, 0, 0, b'1', '2013-01-30 07:40:26', 'Joseilton'),
+(35, 'Saco de lixo - 100 litros', 'pc c/ 5 unid', 1, 2, 0, 10, 4, 2, 0, 0, b'1', '2013-01-30 07:41:49', 'Joseilton'),
+(36, 'Saco de lixo - 30 litros', 'pc c/ 5 unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:41:49', 'Joseilton'),
+(37, 'Saco de lixo - 60 litros', 'pc c/ 5 unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:42:24', 'Joseilton'),
+(39, 'Tapete de porta', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:43:32', 'Joseilton'),
+(40, 'Toalha de mão', 'unid', 1, 6, 0, 4, 2, 2, 0, 0, b'1', '2013-01-30 07:44:03', 'Joseilton'),
+(41, 'Vaselina líquida', 'ml', 200, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:44:03', 'Joseilton'),
+(42, 'Vassoura de nylon', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:44:32', 'Joseilton'),
+(43, 'Vassoura de pelo', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:44:58', 'Joseilton'),
+(44, 'Vassoura de talo', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:44:58', 'Joseilton'),
+(45, 'Vassoura p/ vaso sanitário', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:45:21', 'Joseilton'),
+(46, 'Vassourão', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-01-30 07:45:21', 'Joseilton'),
+(47, 'Veja multiuso', 'ml', 200, 2, 0, 5, 2, 2, 0, 0, b'1', '2013-01-30 07:45:47', 'Joseilton'),
+(48, 'Veneno p/ inseto – aerosol', 'unid', 1, 4, 0, 3, 1, 1, 0, 0, b'1', '2013-01-30 07:46:10', 'Joseilton'),
+(49, 'Lixeira p/ Banheiro', 'litros', 5, 6, 0, 0, 0, 0, 0, 0, b'1', '2013-05-16 02:05:56', 'Joseilton'),
+(50, 'Detergente limpa alumínio', 'litro', 1, 2, 0, 1, 1, 1, 0, 0, b'1', '2013-05-16 02:10:11', 'Joseilton'),
+(51, 'Saco de Lixo - 15 litros', 'unid/pc', 5, 2, 0, 10, 5, 3, 0, 0, b'1', '2013-05-28 03:36:32', 'Joseilton'),
+(52, 'Limpa vidro com gatilho', 'ml', 500, 2, 0, 1, 1, 1, 0, 0, b'1', '2013-08-14 00:45:52', 'Joseilton'),
+(53, 'Adesivo sanitário', 'Unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2014-11-12 03:05:37', 'Joseilton'),
+(55, 'Agua sanitária de 1litro', 'litros', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2015-08-20 01:43:59', 'Joseilton'),
+(56, 'Espanador de teto', 'Unid', 1, 2, 0, 0, 0, 0, 0, 0, b'1', '2016-01-26 22:14:53', 'Joseilton'),
+(57, 'Tapete frete de Igreja', 'unid', 1, 12, 0, 0, 0, 0, 0, 0, b'1', '2016-01-26 22:17:33', 'Joseilton'),
+(58, 'Lixeira média', 'Unid', 1, 3, 0, 0, 0, 0, 0, 0, b'1', '2016-01-26 22:20:47', 'Joseilton');
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `limpeza`
+--
+ALTER TABLE `limpeza`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `limpeza`
+--
+ALTER TABLE `limpeza`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
+
+
+--
+-- Estrutura para tabela `limpezpedid`
+--
+
+CREATE TABLE IF NOT EXISTS `limpezpedid` (
+`id` int(11) NOT NULL,
+  `item` int(11) NOT NULL,
+  `quant` int(2) NOT NULL,
+  `mesref` varchar(7) NOT NULL COMMENT 'Mes de referência (01/2013)',
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `igreja` int(11) NOT NULL,
+  `entrega` binary(1) NOT NULL DEFAULT '1' COMMENT '1 - Entregue na congregação, 0 - Adquirir em mercado autorizado',
+  `hist` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `limpezpedid`
+--
+ALTER TABLE `limpezpedid`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `limpezpedid`
+--
+ALTER TABLE `limpezpedid`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Estrutura para tabela `login`
+--
+
+CREATE TABLE IF NOT EXISTS `login` (
+  `nome` varchar(20) NOT NULL,
+  `tempo` varchar(20) NOT NULL,
+  `status` int(1) NOT NULL COMMENT 'Vazio - Online, 1- Ausente, 2-desconectado, 3-Não pertube'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `login`
+--
+ALTER TABLE `login`
+ ADD PRIMARY KEY (`nome`);
+
+
+--
+-- Estrutura para tabela `membro`
+--
+
+CREATE TABLE IF NOT EXISTS `membro1` (
+`rol` int(11) NOT NULL,
+  `nome` varchar(200) NOT NULL,
+  `nacionalidade` varchar(100) NOT NULL,
+  `naturalidade` varchar(150) NOT NULL,
+  `uf_nasc` varchar(2) NOT NULL,
+  `sexo` varchar(1) NOT NULL,
+  `endereco` varchar(200) NOT NULL,
+  `numero` varchar(20) NOT NULL,
+  `complemento` varchar(150) NOT NULL,
+  `cep` varchar(15) NOT NULL,
+  `bairro` varchar(150) NOT NULL,
+  `cidade` varchar(150) NOT NULL,
+  `uf_resid` varchar(4) NOT NULL,
+  `escolaridade` varchar(30) NOT NULL,
+  `graduacao` varchar(50) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `fone_resid` varchar(50) NOT NULL,
+  `celular` varchar(50) NOT NULL,
+  `datanasc` date NOT NULL,
+  `obs` text NOT NULL,
+  `doador` varchar(4) NOT NULL,
+  `sangue` varchar(5) NOT NULL,
+  `mae` varchar(200) NOT NULL,
+  `rol_mae` int(11) NOT NULL,
+  `pai` varchar(200) NOT NULL,
+  `rol_pai` int(11) NOT NULL,
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hist` varchar(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `membro`
+--
+ALTER TABLE `membro1`
+ ADD PRIMARY KEY (`rol`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `membro`
+--
+ALTER TABLE `membro1`
+MODIFY `rol` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Estrutura para tabela `organica`
+--
+
+DROP TABLE organica;
+
+
+CREATE TABLE IF NOT EXISTS `organica` (
+`id` int(11) NOT NULL,
+  `hier` int(11) NOT NULL COMMENT 'Hierarquia de cada grupo-função, 0 como nível mais alto',
+  `codigo` varchar(13) NOT NULL,
+  `conta` int(11) NOT NULL,
+  `alias` varchar(50) NOT NULL COMMENT 'Nome para exibição',
+  `cargo1` varchar(150) NOT NULL,
+  `cargo2` varchar(150) NOT NULL,
+  `descricao` varchar(200) NOT NULL,
+  `cad` varchar(150) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `organica`
+--
+
+INSERT INTO `organica` (`id`, `hier`, `codigo`, `conta`, `alias`, `cargo1`, `cargo2`, `descricao`, `cad`, `data`) VALUES
+(1, 0, '1', 0, 'Pastor Local', 'Pastor', 'Pastora', 'Direção Geral  ', '', '2011-09-19 00:38:17'),
+(2, 1, '1.01.01.001', 0, 'Tesouraria Geral', '1º Tesoureiro', '1ª Tesoureira', 'Tesouraria Geral', '', '2011-09-19 00:13:58'),
+(3, 1, '1.02.01.001', 0, 'Secretaria Executiva', '1º Secretário', '1ª Secretária', 'Secretaria Executiva', '', '2011-09-19 00:04:45'),
+(4, 1, '1.03.01.001', 0, 'SEMADBY', '1º Secretario', '1ª Secretaria', 'Secretaria de Missões', '', '2011-09-19 00:04:45'),
+(5, 1, '1.04.01.001', 0, 'USADEBY', 'Lider', 'Lider', 'União de Senhoras', '', '2011-09-19 00:04:45'),
+(6, 1, '1.05.01.001', 0, 'UMADEBY', '1º Secretario', '1ª Secretaria', 'União da Mocidade', '', '2011-09-19 00:07:03'),
+(7, 1, '1.06.01.001', 0, 'DEPIADBY', 'Coordenador', 'Coordenadora', 'Departamento Infatil', '', '2011-09-19 00:05:33'),
+(8, 1, '1.07.01.001', 0, 'DEADBY', 'Coordenador', 'Coordenadora', 'Departamento de Ensino', '', '2011-09-19 00:05:33'),
+(9, 1, '1.08.01.001', 0, 'DEMADBY', 'Coordenador', 'Coordenadora', 'Departamento de Música', '', '2011-09-19 00:05:33'),
+(11, 1, '1.09.02.001', 0, 'Dir de Congregação', 'Dirigente', 'Dirigente', 'Dirigente de Congregação', '', '2009-12-30 14:17:54'),
+(12, 2, '1.09.02.010', 0, 'Secretaria Executiva', '', '', 'Secretaria Executiva da Congregação', '', '2009-12-30 13:54:24'),
+(13, 2, '1.09.02.005', 0, 'Tesouraria da Congregação', 'Tesoureiro', 'Tesoureira', 'Financeiro da Congregação', '', '2009-12-30 13:54:24'),
+(14, 3, '1.03.06.001', 0, 'GEPA - Andreazza I', 'Coordenador', 'Coordenadora', 'Grupo de Envangelismo', '', '2009-12-30 13:54:24'),
+(15, 3, '1.04.01.100', 0, 'Circulo de Oração', 'Dirigente', 'Dirigente', 'Circulo de Oração', '', '2009-12-29 03:18:07'),
+(16, 3, '1.04.01.200', 0, 'Camp de Visitas', 'Dirigente', 'Dirigente', 'Campanha de Visitas', '', '2009-12-30 13:54:24'),
+(17, 2, '1.05.01.110', 0, 'Setor I', 'Coordenador', 'Coordenadora', 'UMADEBY - Setor I', '', '2011-09-19 00:06:54'),
+(18, 2, '1.05.01.120', 0, 'Setor II', 'Coordenador', 'Coordenadora', 'UMADEBY - Setor II', '', '2011-09-19 00:06:54'),
+(19, 2, '1.05.01.130', 0, 'Setor III', 'Coordenador', 'Coordenadora', 'UMADEBY - Setor III', '', '2011-09-19 00:06:54'),
+(20, 2, '1.05.01.140', 0, 'Setor IV', 'Coordenador', 'Coordenadora', 'UMADEBY - Setor IV', '', '2011-09-19 00:06:54'),
+(21, 3, '1.06.01.100', 0, 'Dir de Crianças', 'Dirigente', 'Dirigente', 'Dirigente de Crianças da Congregação', '', '2009-12-30 14:15:58'),
+(22, 2, '1.07.01.100', 0, 'Superintendente EB', 'Superintendente', 'Superintendente', 'Escola Bíblica Dominical', '', '2009-12-30 14:15:58'),
+(23, 2, '1.08.01.170', 0, 'Coral Adulto', 'Dirigente', 'Dirigente', 'Coral Adulto da Congregação', '', '2009-12-30 14:15:58'),
+(24, 2, '1.08.01.190', 0, 'Coral Jovem', 'Dirigente', 'Dirigente', 'Coral Jovem da Congregação', '', '2009-12-30 14:15:58'),
+(25, 3, '1.06.01.200', 0, 'Soldadinhos de Cristo', 'Dirigente', 'Dirigente', 'Coral Infantil da Congregação', '', '2009-12-30 14:15:58'),
+(26, 2, '1.08.01.210', 0, 'Conj Eletrônico', 'Dirigente', 'Dirigente', 'Conjunto Eletrônico da Congregação', '', '2009-12-30 14:15:58'),
+(27, 1, '1.01.01.002', 0, 'Tesouraria Geral', '2º Tesoureiro', '2ª Tesoureira', 'Tesouraria Geral', '', '0000-00-00 00:00:00'),
+(28, 1, '1.02.01.002', 0, 'Secretaria Executiva', '2º Secretário', '2ª Secretária', 'Secretaria Executiva', '', '0000-00-00 00:00:00'),
+(29, 1, '1.02.01.003', 0, 'Secretaria Executiva', 'Secretário Adjunto', 'Secretária Adjunta', 'Secretaria Executiva', '', '0000-00-00 00:00:00'),
+(30, 1, '1.10.01.001', 0, 'SEASADBY', '1º Secretário', '1ª Secretária', 'Secretaria de Ação Social', '', '2011-09-19 00:43:52'),
+(31, 2, '1.04.01.002', 0, 'USADEBY', 'Coordenador', 'Coordenadora', 'União de Senhoras', '', '2011-09-24 02:09:12'),
+(32, 2, '1.04.01.003', 0, 'USADEBY', 'Coordenador', 'Coordenadora', 'União de Senhoras', '', '2011-09-24 02:09:12'),
+(33, 2, '1.08.01.100', 0, 'Asas da Alva', 'Dirigente', 'Dirigente', 'Conjunto Vocal', '', '2011-09-25 02:47:22'),
+(34, 2, '1.08.01.150', 0, 'Primícias do Louvor', 'Dirigente', 'Dirigente', 'Conjunto eletrônico', '', '2011-09-25 02:47:22'),
+(39, 2, '1.07.01.101', 0, 'Vice-Superintendente EB', 'Superintendente Substituto', 'Superintendente Substituta', 'Escola Bíblica Dominical', '', '2011-09-25 02:55:39'),
+(41, 4, '1.09.02.020', 0, 'Portaria', 'Porteiro', 'Porteira', 'Porteiro da congregação', '', '2011-09-25 03:03:13'),
+(42, 4, '1.09.02.021', 0, 'Limpeza', 'Zelador', 'Zeladora', 'Consevação e limpeza', '', '2011-09-25 03:03:13'),
+(43, 3, '1.09.02.011', 0, 'Coral Adulto', 'Dirigente', 'Dirigente', 'Coral Adulto', '', '2011-09-26 03:13:32'),
+(44, 3, '1.09.02.012', 0, 'Coral Jovem', 'Dirigente', 'Dirigente', 'Coral Jovem', '', '2011-09-26 03:13:32'),
+(47, 3, '1.09.02.013', 0, 'Coral Infantil', 'Dirigente', 'Dirigente', 'Coral Infantil', '', '2011-09-26 03:15:46'),
+(48, 3, '1.09.02.014', 0, 'Conjunto Eletrônico', 'Dirigente', 'Dirigente', 'Conjunto Eletrônico', '', '2011-09-26 03:15:46'),
+(49, 4, '1.10.01.100', 0, 'Assistido da Ação Social', 'Assistido', 'Assistida', 'Oferta ou Auxílio', '', '2011-09-26 03:29:06'),
+(50, 4, '1.09.02.022', 0, 'Segurança', 'Vigia', 'Vigia', 'Vigilância', '', '2011-09-26 18:39:58'),
+(53, 2, '1.00.002', 0, 'Evangelista', 'Evangelista', 'Evangelista', 'Ministério de Evangelista', '', '0000-00-00 00:00:00'),
+(54, 2, '1.00.003', 0, 'Presbiterio', 'Presbítero', 'Presbítero', 'Presbiterio', '645.822.304-82', '0000-00-00 00:00:00'),
+(55, 2, '1.08.01.010', 0, 'Sonoplastia Templo Sede', 'Sonoplasta', 'Sonoplasta', 'Sonoplastia Templo Sede', '', '2011-09-28 13:14:04');
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `organica`
+--
+ALTER TABLE `organica`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `codigo` (`codigo`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `organica`
+--
+ALTER TABLE `organica`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=56;
+
+
+
+DROP TABLE papeis;
+
+--
+-- Estrutura para tabela `profissional1`
+--
+
+CREATE TABLE IF NOT EXISTS `profissional1` (
+  `rol` int(11) NOT NULL,
+  `profissao` varchar(150) NOT NULL,
+  `obs` varchar(250) NOT NULL,
+  `cpf` varchar(20) NOT NULL,
+  `rg` varchar(20) NOT NULL,
+  `orgao_expedidor` varchar(150) NOT NULL,
+  `onde_trabalha` varchar(200) NOT NULL,
+  `hist` varchar(255) NOT NULL,
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `profissional`
+--
+ALTER TABLE `profissional1`
+ ADD PRIMARY KEY (`rol`);
+
+ DROP TABLE responsavel;
+
+--
+-- Estrutura para tabela `tes_recibo`
+--
+
+DROP TABLE tes_recibo;
+
+CREATE TABLE IF NOT EXISTS `tes_recibo` (
+`id` int(20) NOT NULL,
+  `igreja` int(11) NOT NULL,
+  `tipo` int(1) NOT NULL,
+  `recebeu` varchar(255) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `conta` varchar(30) NOT NULL COMMENT 'id da tabela contas',
+  `fonte` int(2) NOT NULL COMMENT 'Indica a fonte do recurso a que se refere esta saída',
+  `lancamento` int(11) NOT NULL,
+  `motivo` varchar(300) NOT NULL,
+  `data` date NOT NULL,
+  `hist` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='Será registrado a entrega de todos os recibos nesta tabela';
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `tes_recibo`
+--
+ALTER TABLE `tes_recibo`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `tes_recibo`
+--
+ALTER TABLE `tes_recibo`
+MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+
+
+-- Remove tabela unidades
+DROP TABLE unidades;

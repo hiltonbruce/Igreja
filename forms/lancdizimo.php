@@ -53,7 +53,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 		<input type="text" name="data" id="data" class="form-control"
 			value="<?php echo $dtlanc;?>" tabindex="<?PHP echo ++$ind;?>">
 	</div>
-	<div class="col-xs-1">
+	<div class="col-xs-2">
 			<label>&nbsp;</label>
   			<input type="submit" name="Submit" class='btn btn-primary btn-sm'
 			value="Lançar..." tabindex="<?PHP echo ++$ind;?>" />
