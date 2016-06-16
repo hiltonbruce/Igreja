@@ -44,15 +44,15 @@ form span {
 }
 
 input:focus {
-	background-color:#FFFF99;
+	background-color:#FFFFB7;
 }
 
 select:focus {
-	background-color:#FFFFCC;
+	background-color:#FFFFB7;
 }
 
 textarea:focus {
-    background-color:#FFFFCC;
+    background-color:#FFFFB7;
 }
 
 .text_area {
@@ -95,6 +95,8 @@ div .logo {
 	background-color: white;
 	background-image: url(img/90_anos.jpg);
 	background-repeat:no-repeat;
+	background-size: 673px 75px;
+	background-position: top center;
 	padding:30px;
 }
 

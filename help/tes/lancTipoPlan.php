@@ -1,7 +1,6 @@
 <?php
 //print_r($ctaDespesa->dadosArray());
-$ctaDespesa = new tes_despesas();
-foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
+foreach ($arrayDespesas as $chave => $valor) {
 //Verifica se foi enviado dados para lançamento, testando e executando
     if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>0) {
 
@@ -39,8 +38,7 @@ $exibicred .= sprintf("<tr  class='info'><td>Em: %s </td><td id='moeda'>R$ %s</t
 $exibicred .= '<tr class="warning"><td><strong>Hist&oacute;rico:</strong></td>';
 $exibicred .= '<td class="text-center" colspan="4"><h5>'.$referente.'</h5></td></tr>';
 
-$ctaDespesa = new tes_despesas();
-$bsccredor = new tes_listDisponivel();
+//$ctaDespesa = new tes_despesas();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
 $bgcolor = 'class="active"';
@@ -86,8 +84,6 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	$cor = !$cor;
 }
 
-$acesso = (empty($_GET['acesso'])) ? '' : $_GET['igreja'] ;
-$listaFonte = $bsccredor->List_Selec($acesso);
 $dia1 ='';$listDesp = '';
 $igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 $cor=true;
@@ -98,14 +94,14 @@ $ctaGrup3 = '';
 $blGrupo3Fim = '';
 $blGrupo3Ini = '';
 $blGrupo = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-foreach ($ctaDespesa->dadosArray() as $chave => $valor) {
+foreach ($arrayDespesas as $chave => $valor) {
 	//Variéveis para montagem do form
 
 	$dataLan = '<label>Data do lan&ccedil;amento</label>'.
 			'<input name="data'.$chave.'" class="form-control dataclass" value="'.date('d/m/Y').'"';
 	$campoHist = '<label>Hit&oacute;rico</label><textarea name="hist'.$chave.'" class="form-control"></textarea>';
-	$bsccredor = new List_sele('igreja', 'razao','rolIgreja'.$chave);
-	$listaIgreja = $bsccredor->List_Selec('',$igreja,'class="form-control" autofocus="autofocus" ');
+	$bscCredorList = new List_sele('igreja', 'razao','rolIgreja'.$chave);
+	$listaIgreja = $bscCredorList->List_Selec('',$igreja,'class="form-control" autofocus="autofocus" ');
 	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control"/>';
 	$conta ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
 

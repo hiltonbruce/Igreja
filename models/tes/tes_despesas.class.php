@@ -5,7 +5,7 @@ class tes_despesas {
 
 	function __construct () {
 
-		$sqlConsulta  = 'SELECT *';
+		$sqlConsulta  = 'SELECT * ';
 		$sqlConsulta .= 'FROM contas WHERE nivel1="3" ';
 		$sqlConsulta .= 'ORDER BY codigo';
 		$this->query = $sqlConsulta;
@@ -62,6 +62,7 @@ class tes_despesas {
 		//print_r($agendaNaoPago);
 		//SQL dos lançamentos realizados com despesas debitadas
 		$sqlLancDesp  = 'SELECT l.*,c.acesso, c.titulo, c.codigo,c.tipo,i.razao, h.referente AS referente, ';
+		$sqlLancDesp .= 'c.id AS idcta, ';
 		$sqlLancDesp .= 'DATE_FORMAT(l.data,"%d/%m/%Y") AS dtLanc ';
 		$sqlLancDesp .= 'FROM lanc AS l, contas AS c, igreja AS i, lanchist AS h ';
 		$sqlLancDesp .= 'WHERE (c.id=l.debitar) AND DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
