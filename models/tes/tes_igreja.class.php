@@ -25,8 +25,18 @@ class tes_igreja {
 		$ultimaEntrada  = 'SELECT d.lancamento,d.data,d.mesrefer,d.anorefer,i.cultos ';
 		$ultimaEntrada .= 'FROM dizimooferta AS d,igreja AS i WHERE igreja="'.$this->igreja.'" ';
 		$ultimaEntrada .= 'AND i.rol = d.igreja ';
+		$verSemLanc .= $ultimaEntrada.' AND d.lancamento="0" ORDER BY d.data DESC LIMIT 1';
 		$ultimaEntrada .= 'ORDER BY d.data DESC,d.lancamento ASC LIMIT 1';
-		$dados = mysql_query($ultimaEntrada);
+		$dadosSemLanc = mysql_query($verSemLanc);
+
+		if ( mysql_fetch_row($dadosSemLanc)>0) {
+			#Se possui lançamentos pendentes
+			$dados = mysql_query($verSemLanc);
+		} else {
+			#ultima data de lançamento
+			$dados = mysql_query($ultimaEntrada);
+		}
+		
 		$resUltimoDia = mysql_fetch_array($dados);
 		//print_r($resUltimoDia);
 		$dtUltLanc = new DateTime($resUltimoDia['data']);
