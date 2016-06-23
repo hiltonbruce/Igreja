@@ -1,4 +1,4 @@
-<table class='table table-hover table-bordered table-condensed'>
+<table class='table table-hover table-bordered table-condensed table-striped'>
 		<caption>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
@@ -26,7 +26,7 @@
 				<th scope="col" style="text-align: center;">Movimento</th>
 				<th scope="col" style="text-align: center;">Sld Atual</th>
 				<th scope="col" style="text-align: center;">Sld Ant.</th>
-			</tr>
+			</tr3
 		</thead>
 		<tbody>
 			<?php
