@@ -192,7 +192,7 @@ foreach ($saldo AS $chave => $valor){
 				$saldoAntr = '';
 			}
 
-			$nivelGrupo ='<tr class="active"><td class="text-right">'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
+			$nivelGrupo ='<tr class="success"><td class="text-right">'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'
 				.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">'.number_format(abs($sldGrupoCta),2,',','.').$movSld
 				./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td>
 				<td id="moeda">'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
@@ -220,7 +220,7 @@ foreach ($saldo AS $chave => $valor){
 
 			$saldoAtual=0;
 			//Contas simples
-			$nivel1 ='<tr class="active"><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
+			$nivel1 ='<tr><td>'.$planoGrupo[$chave]['1'].'</td><td title="'.$title.'">'.$acesso.$planoGrupo[$chave]['0'].
 			'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoDisp.'</td></tr>';
 
 		}
@@ -275,7 +275,7 @@ print_r ($planoGrupo);
 		$saldoCtaDisp = '';
 	}
 
-	$nivelGrupo ='<tr class="active"><td class="text-right">'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
+	$nivelGrupo ='<tr class="success"><td class="text-right">'.$planoGrupo[$ctaAtual]['1'].'</td><td title="'.$title.'">'.$planoGrupo[$ctaAtual]['0'].'</td><td id="moeda">
 				'.number_format(abs($sldGrupoCta),2,',','.').$saldoCta.'</td><td id="moeda"> '
 				.number_format(abs($sldGrupoAtual),2,',','.').$saldoAtl.'</td><td id="moeda">
 				'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoCtaDisp.'</td></tr>';

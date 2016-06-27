@@ -78,7 +78,7 @@ switch ($rec) {
 		require_once 'forms/tes/filtroContas.php';
 		$titTabela = 'Plano de Contas em: '.date('d/m/Y');
 		require_once 'models/saldos.php';
-		$recLink = '15&tipo=1';
+		$recLink = '19&tipo=1';
 		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink;
 		require_once ('views/saldos.php');
 		break;
