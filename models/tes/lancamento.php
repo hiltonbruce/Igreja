@@ -17,6 +17,8 @@ controle ('tes');
 $provmissoes=0;
 $ultimolanc = 0;
 $roligreja =(int) $_POST['rolIgreja'];
+
+$igLanc = new DBRecord('igreja', $roligreja, 'rol');
 #$motivoComplemento = (empty($_POST['nome'])) ? $_POST['credor']:$_POST['nome'];
 if (!empty($_POST['nome'])) {
 	$motivoComplemento = ' ('.$_POST['nome'].')';

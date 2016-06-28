@@ -40,14 +40,13 @@ if ($dtlanc == '') {
 	$meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
 	$anolanc = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 }
-
-if (empty($idIgreja)) {
+/*if (empty($idIgreja)) {
 	$idIgreja = $rolIgreja;
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
-}
-	$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu;
-	$linkAcesso .= '&rec='.$rec.'&idDizOf='.$idDizOf.'&mes='.$meslanc.'&ano='.$anolanc.'&igreja=';
-	$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
+}*/
+$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu;
+$linkAcesso .= '&rec='.$rec.'&idDizOf='.$idDizOf.'&mes='.$meslanc.'&ano='.$anolanc.'&igreja=';
+$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 ?>
 <fieldset>
 	<legend>Fecha Caixa</legend>
@@ -71,7 +70,8 @@ if (empty($idIgreja)) {
 				<label>Alterar Igreja: </label>
 					<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 						<?php
-							$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$idIgreja);
+							$varCta = (empty($cta)) ? '' : 'cta='.$cta.'&';
+							$listaIgreja = $bsccredor->List_Selec_pop($varCta.$linkAcesso,$idIgreja);
 							//echo $listaIgreja;
 						?>
 				</select>

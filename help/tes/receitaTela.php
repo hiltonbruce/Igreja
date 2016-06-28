@@ -128,7 +128,8 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoCargos.php';
 		break;
 	case '24':
-		//require_once 'forms/concluirdiz.php';
+		$cta = (empty($_GET['cta'])) ? 5 : intval($_GET['cta']);
+		require_once 'forms/concluirdiz.php';
 		if (!empty($_POST['cad']) && $roligreja>'0') {
 			require_once ('views/tesouraria/oracao.php');
 		} else {

@@ -7,17 +7,18 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 		<!-- Desenvolvido por Wellington Ribeiro -->
 		<form method="post" name="autocompletar" action="">
 
-		<table style="border: 0; background-color: transparent;">
+		<table class='table' style="border: 0; background-color: transparent;">
 			<tbody>
 				<tr>
 					<td><label>Valor (R$)</label> <input name="valor" type="text" autofocus="autofocus"
 						id="valor" tabindex="<?PHP echo ++$ind; ?>" required = "required" class="form-control" />
 					</td>
-					<td><label>Igreja:</label> <?php
-					$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
-					$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'required="required" class="form-control" ');
-					echo $listaIgreja;
-					?>
+					<td><label>Igreja:</label>
+						<?php
+							$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
+							$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'required="required" class="form-control" ');
+							echo $listaIgreja;
+						?>
 					</td>
 				</tr>
 				<tr>

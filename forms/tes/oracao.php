@@ -12,7 +12,6 @@
 			<?PHP echo $foco;?> >
 				<?php
 					$recebimento = new tes_listDisponivel();
-					$cta = (empty($_GET['cta'])) ? 5 : intval($_GET['cta']);
 					$listaIgreja = $recebimento->List_Selec_pop($linkAcesso,$cta);
 					echo $listaIgreja;
 				?>
