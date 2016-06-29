@@ -1,7 +1,0 @@
-<IfModule mod_rewrite.c>
-RewriteEngine off
-</IfModule>
-AuthName "MySQLDumper"
-AuthType Basic
-AuthUserFile "/var/www/igrejas/GitHub/Igreja/backup/.htpasswd"
-require valid-user

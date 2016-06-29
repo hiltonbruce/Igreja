@@ -31,6 +31,3 @@
 		?>
 	</tfoot>
 </table>
-<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja=<?PHP echo $roligreja;?>&rec=2'>
-	<button class='btn btn-primary' autofocus='autofocus'>Fazer outro Lan&ccedil;amento!</button>
-</a>

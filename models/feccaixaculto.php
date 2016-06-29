@@ -206,24 +206,30 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	echo $mensagem;
 }
 ?>
-		<div class="col-xs-3">
-			<label>&nbsp;</label>
-			<a href="<?php echo $linkLancamento;?>&rec=1">
- 				<button type="button" class="btn btn-primary" tabindex="<?PHP echo ++$ind; ?>" >
- 					Próximo culto: <?php echo $igrejaSelecionada->razao();?></button>
- 			</a>
-		</div>
-		<div class="col-xs-1">
-		</div>
-		<div class="col-xs-3">
-			<label>Próxima Igreja: </label>
-				<select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
-					<?php
-						$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
-						$linkAcesso .= '&rec=1&igreja=';
-						$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
-						$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,'');
-						//echo $listaIgreja;
-					?>
-			</select>
-		</div>
+<div class="col-xs-3">
+	<label>Próxima Igreja: </label>
+		<select name="igreja" id="igreja" class="form-control"  autofocus='autofocus'
+			onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+			<?php
+				$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
+				$linkAcesso .= '&rec=1&igreja=';
+				$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
+				$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,'');
+				//echo $listaIgreja;
+			?>
+	</select>
+</div>
+<div class="col-xs-4">
+	<a href="<?php echo $linkLancamento;?>&rec=1">
+	<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<button type="button" class="btn btn-primary" tabindex="<?PHP echo ++$ind; ?>" >
+				Próximo culto: <?php echo $igrejaSelecionada->razao();?></button>
+		</a>
+</div>
+<div class="col-xs-3"><label>&nbsp;</label>
+	<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja=<?PHP echo $roligreja;?>&rec=2'>
+		<button class='btn btn-primary' autofocus='autofocus' tabindex="<?PHP echo ++$ind; ?>">
+			Fazer outro Lan&ccedil;amento!
+		</button>
+	</a>
+</div>

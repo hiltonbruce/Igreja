@@ -36,6 +36,7 @@ if (intval($_POST['rolIgreja'])>0) {
 }
 
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+$igLanc = $igrejaSelecionada;
 
 	// verifica se há valor a ser lançado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);
