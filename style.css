@@ -44,15 +44,15 @@ form span {
 }
 
 input:focus {
-	background-color:#FFFFB7;
+	background-color:#FFFFAA;
 }
 
 select:focus {
-	background-color:#FFFFB7;
+	background-color:#FFFFAA;
 }
 
 textarea:focus {
-    background-color:#FFFFB7;
+    background-color:#FFFFAA;
 }
 
 .text_area {

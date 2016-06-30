@@ -83,18 +83,18 @@
         <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
         <ul id="categories">
-          <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user" >&nbsp;</span>&nbsp;Membros</a></li>
-          <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt" >&nbsp;</span>&nbsp;Novo Cadastro</a></li>
-          <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB"><span class="glyphicon glyphicon-hand-right" >&nbsp;</span>&nbsp;Novos&nbsp;Convertidos</a></li>
-          <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span class="glyphicon glyphicon-fire">&nbsp;</span>&nbsp;Igrejas</a></li>
-          <li <?PHP id_left ("secretaria");?>><a href="./?escolha=controller/secretaria.php&mes=<?PHP echo date('m');?>"><span class="glyphicon glyphicon-time" >&nbsp;</span>&nbsp;Agenda</a></li>
-          <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture" >&nbsp;</span>&nbsp;Cadastrar Bairro</a></li>
-          <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt" >&nbsp;</span>&nbsp;Ficha, Recibo e Certid&otilde;es</a></li>
-          <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift" >&nbsp;</span>&nbsp;Aniversariantes</a></li>
+          <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user text-info" ></span>&nbsp;Membros</a></li>
+          <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt text-info" ></span>&nbsp;Novo Cadastro</a></li>
+          <li <?PHP id_left ("nv_convertido/");?>><a href="./?escolha=nv_convertido/cad_nv_convert.php&uf=PB"><span class="glyphicon glyphicon-hand-right text-info" ></span>&nbsp;Novos&nbsp;Convertidos</a></li>
+          <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span class="glyphicon glyphicon-fire text-info"></span>&nbsp;Igrejas</a></li>
+          <li <?PHP id_left ("secretaria");?>><a href="./?escolha=controller/secretaria.php&mes=<?PHP echo date('m');?>"><span class="glyphicon glyphicon-time text-info" ></span>&nbsp;Agenda</a></li>
+          <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture text-info" ></span>&nbsp;Cadastrar Bairro</a></li>
+          <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt text-info" ></span>&nbsp;Ficha, Recibo e Certid&otilde;es</a></li>
+          <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift text-info" ></span>&nbsp;Aniversariantes</a></li>
           <?php
           	if ($_SESSION['nivel']>'10') {
          	 ?>
-         		<li <?PHP id_left ("backup");?>><a href="./backup/"><span class="glyphicon glyphicon-export" >&nbsp;</span>&nbsp;Backup de Dados</a></li>
+         		<li <?PHP id_left ("backup");?>><a href="./models/bkpBanco.php"><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup de Dados</a></li>
 		   	 <?php
           	}
           ?>
@@ -119,7 +119,7 @@
           <?PHP  } ?>
           <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php"
           title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es"
-          ><span class="glyphicon glyphicon-tree-deciduous" >&nbsp;</span>&nbsp;Santa&nbsp;Ceia</a></li>
+          ><span class="glyphicon glyphicon-tree-deciduous text-info" ></span>&nbsp;Santa&nbsp;Ceia</a></li>
         </ul></ul>
         <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li>

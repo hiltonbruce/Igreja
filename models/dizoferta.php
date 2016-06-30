@@ -7,7 +7,8 @@ $dta = explode("/",$_POST["data"]);
 		$res = checkdate($m,$d,$y);
 
 $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
-$rolIgreja = (empty($_POST['rolIgreja'])) ? false:(int)$_POST['rolIgreja'];
+$rolIgreja = (empty($_POST["rolIgreja"])) ? false:intval($_POST['rolIgreja']);
+
 $ultregistro = mysql_query ('SELECT data FROM dizimooferta WHERE lancamento="0" AND igreja="'.$rolIgreja.'" ORDER BY id DESC LIMIT 1');
 $vlrregistro = mysql_fetch_row($ultregistro);
 
@@ -16,6 +17,7 @@ $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={
 		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' autofocus='autofocus' >Continuar...</button><a>";
 
 if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && $vlrregistro[0] =='') && $rolIgreja ) {
+	$igrejaSelecionada = new DBRecord('igreja', $rolIgreja, 'rol');
 	//Verifica se o caixa do ultimo culto foi encerrado e se há algum valor em dizimo, oferta ou oferta extra
 
 	$sem = semana($_POST["data"]);
@@ -25,30 +27,30 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 		case '1':
 			//Dizimos, ofertas, missões, orações
 			require_once 'help/tes/tipo1DizOferta.php'; //Aplica formatações e atualiza o banco
-			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$_POST["rolIgreja"]}";
+			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja=$rolIgreja";
 		break;
 		case '2':
 			require_once 'help/tes/tipo2DizOferta.php';
-			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja={$_POST["rolIgreja"]}";
+			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja=$rolIgreja";
 		break;
 		case '3':
 			require_once 'help/tes/tipo3DizOferta.php';
-			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=0&igreja={$_POST["rolIgreja"]}";
+			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=0&igreja=$rolIgreja";
 		break;
 		case '4':
 			//EBD
 			require_once 'help/tes/tipo4DizOferta.php';
-			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=3&igreja={$_POST["rolIgreja"]}";
+			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=3&igreja=$rolIgreja";
 		break;
 		default:
 			echo 'Não foi definidade o tipo do grupo de lançamento!';
-			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja={$_POST["rolIgreja"]}";
+			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja=$rolIgreja";
 		break;
 	}
 	echo $mostraLanc;
 	//echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
 		$linr = "./?escolha={$_POST['escolha']}&menu={$_POST['menu']}&";
-		$linr .= "rec={$_POST['rec']}&igreja={$_POST["rolIgreja"]}&";
+		$linr .= "rec={$_POST['rec']}&igreja=$rolIgreja&";
 		$linr .= "data={$_POST['data']}&mes={$_POST['mes']}&ano={$_POST['ano']}";
 		$linkreturn .= "&data=".$_POST["data"]."&mes=$m&ano=$y";
 		$linkreturn .= "&acescamp=".$_POST["acescamp"];

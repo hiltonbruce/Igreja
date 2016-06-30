@@ -21,7 +21,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 define ('DBPATH','localhost');
 define ('DBUSER','igreja');
-define ('DBPASS','G4Hd%VKC#yV5F!at8c');
+define ('DBPASS','G4Hd%VKC#yV5Fc[at8c');
 define ('DBNAME','assembleia');
 
 session_start();
