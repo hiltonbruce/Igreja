@@ -1,7 +1,7 @@
 *{ margin: 0; padding: 0; }
-body { margin: 0; padding: 0; width: 1075px;  font: 85% tahoma, sans-serif; color: #505367; background-color: #fff; background: url(../img/menina.jpg) no-repeat 0% 0%; }
+body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; color: #505367; background-color: #fff; background: url(../img/menina.jpg) no-repeat 0% 0%; }
 
-	#container { margin-top: 3em; width: 1000px; text-align: center; }
+	#container { width: 1000px; text-align: center; }
 
 	#header {height: 15em; }
 	h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
@@ -12,13 +12,14 @@ body { margin: 0; padding: 0; width: 1075px;  font: 85% tahoma, sans-serif; colo
 
 
 #added-div1 {
+	position:relative;
 	width: 750px;
 	z-index:1;
 	height: auto;
 	float: left;
-	margin-left: 1em;
-	padding: 40px 10px 10px 150px;
-	font-size:18px;
+	margin-left: 150px;
+	padding: 5px;
+	font-size:26px;
 	font-family:"Times New Roman", Times, serif;
 }
 
@@ -80,10 +81,11 @@ p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:ju
 	float:left;
 	left:207px;
 	top:200px;
+	font-size: 20px;
 	width:150px;
 	z-index:3;
 	margin-top: -10px;
-	margin-left: 10em;
+	margin-left: 5em;
 }
 #Tipo {
 	float:left;
