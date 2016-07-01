@@ -39,7 +39,7 @@ if ($totDebito>'1') {
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;
-	$dtlanc =  conv_valor_br ($dataLc);
+	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br ($dataLc):$_POST['dataLancamento'];
 	?>
 
 <form method="post" action="">

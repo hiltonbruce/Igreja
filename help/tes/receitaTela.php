@@ -129,15 +129,16 @@ switch ($rec) {
 		break;
 	case '24':
 		$cta = (empty($_GET['cta'])) ? 5 : intval($_GET['cta']);
-		require_once 'forms/concluirdiz.php';
 		if (!empty($_POST['cad']) && $roligreja>'0') {
 			require_once ('views/tesouraria/oracao.php');
+			require_once 'forms/concluirdiz.php';
 		} else {
 			if ($idIgreja<'1' && $_POST['conta']>'0') {
 				echo '<script> alert("Lan&ccedil;amento cancelado! N&atilde;o foi definida a igreja!");</script>';
 			}
-				$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&igreja='.$idIgreja;
-				$linkAcesso .= '&rec='.$rec.'&cta=';
+			$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&igreja='.$idIgreja;
+			$linkAcesso .= '&rec='.$rec.'&cta=';
+			require_once 'forms/concluirdiz.php';
 			require_once ('forms/tes/oracao.php');
 		}
 		break;

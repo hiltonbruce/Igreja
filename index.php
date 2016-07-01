@@ -94,7 +94,7 @@
           <?php
           	if ($_SESSION['nivel']>'10') {
          	 ?>
-         		<li <?PHP id_left ("backup");?>><a href="./models/bkpBanco.php"><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup de Dados</a></li>
+         		<li <?PHP id_left ("bkpBanco");?>><a href="./?escolha=models/bkpBanco.php&menu=top_tesouraria"><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup de Dados</a></li>
 		   	 <?php
           	}
           ?>
