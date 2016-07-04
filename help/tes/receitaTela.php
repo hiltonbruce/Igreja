@@ -136,9 +136,9 @@ switch ($rec) {
 			if ($idIgreja<'1' && $_POST['conta']>'0') {
 				echo '<script> alert("Lan&ccedil;amento cancelado! N&atilde;o foi definida a igreja!");</script>';
 			}
+			require_once 'forms/concluirdiz.php';
 			$linkAcesso  = 'escolha='.$escolha.'&menu='.$menu.'&igreja='.$idIgreja;
 			$linkAcesso .= '&rec='.$rec.'&cta=';
-			require_once 'forms/concluirdiz.php';
 			require_once ('forms/tes/oracao.php');
 		}
 		break;

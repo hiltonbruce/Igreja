@@ -165,9 +165,9 @@ for ($i = 0; $i < 13; $i++) {
 	}
 }
 $valorTotal = number_format($totalContr, 2, ',', ' ');
-$mostraLanc .= '<tr class="success"><td colspan="2">';
-$mostraLanc .= '<h4>Total da contribuição:<span class="navbar-right">'.$valorTotal.'</h4></div>';
-$mostraLanc .= '</td></tr>';
+$mostraLanc .= '<tr class="success"><td>';
+$mostraLanc .= '<h4>Total da contribuição:</h4></td><td><span class="text-right"><h4>'.$valorTotal.'&nbsp;&nbsp;</h4></span></td>';
+$mostraLanc .= '</tr>';
 $mostraLanc .= '</tbody></table>';
 $mostraLanc .= '</fieldset>';
 ?>
