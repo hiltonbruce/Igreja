@@ -28,7 +28,7 @@ while (false !== ($filename = readdir($dh))) {
 		// mostra o nome do arquivo e um link para ele - pode ser mudado para mostrar diretamente a imagem :)
 		$sizeFile = number_format(((stat($dir.$filename)['size'])/1024)/1024, 2, ',', '.');
 		$indice = stat($dir.$filename)['ctime'];
-		$arq[$indice] = array($dir.$filename,$filename,date ("d/F/Y H:i:s", stat($dir.$filename)['ctime']),$sizeFile, stat($dir.$filename)['ctime']);
+		$arq[$indice] = array($dir.$filename,$filename,date ("d/M/Y H:i:s", stat($dir.$filename)['ctime']),$sizeFile, stat($dir.$filename)['ctime']);
 	}else {
 	   	unlink($dir.$filename);
 	}
