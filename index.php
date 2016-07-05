@@ -93,8 +93,11 @@
           <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift text-info" ></span>&nbsp;Aniversariantes</a></li>
           <?php
           	if ($_SESSION['nivel']>'10') {
+              $selItem = ($_GET['rec']=='25') ?  'class="selected"': '' ;
          	 ?>
-         		<li <?PHP id_left ("bkpBanco");?>><a href="./?escolha=models/bkpBanco.php&menu=top_tesouraria"><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup de Dados</a></li>
+         		<li <?PHP echo $selItem;?>><a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25"
+               ><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup de Dados</a>
+            </li>
 		   	 <?php
           	}
           ?>

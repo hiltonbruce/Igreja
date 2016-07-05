@@ -142,6 +142,9 @@ switch ($rec) {
 			require_once ('forms/tes/oracao.php');
 		}
 		break;
+	case '25':
+		require_once ('models/bkpBanco.php');
+		break;
 	default:
 		require_once ('forms/tes/busca.php');
                 //require_once 'forms/tes/histResumo.php';
