@@ -237,12 +237,11 @@ $ind = 1;
                         </form>
                         ";
             }
-        ?></td><td><label>Classe:</label>
+        ?></td><td colspan="2"><label>Classe:</label>
         <?PHP
             $nome = new editar_form("matlimpeza",$igreja->matlimpeza(),$tab,$tab_edit);
             $nome->getMostrar();$nome->getEditar();
         ?></td>
-        <td></td>
       </tr>
       <tr class='primary'>
         <td colspan="3"><label>C&iacute;rculo de Ora&ccedil;&atilde;o:</label>
@@ -257,19 +256,22 @@ $ind = 1;
 		$ceia = new formceia($igreja->rol());
 		?>
 		<p><a href="./?escolha=<?PHP echo $tab_edit;?>ceia"><?PHP print $ceia->mostradiasemana();?></a></p>
-		</td></tr><td colspan="3">
-  Dias de Cultos
-        <table class='table'>
-            <tbody>
-            <tr class="primary">
-                <?PHP
-                    require_once 'forms/igreja/alterarDiaCulto.php'
-                ?>
-            </tr>
-            </tbody>
-        </table>
-        </td></tr>
-    </table>
+		</td></tr>
+    <tr class="primary">
+      <td colspan="4"><label>Dias de Cultos</label>
+        <?PHP
+            require_once 'forms/igreja/alterarDiaCulto.php';
+        ?>
+      </td>
+    </tr>
+    <tr class="primary">
+      <td colspan="4"><label>Demais Eventos</label>
+        <?PHP
+            require_once 'views/secretaria/eventosCad.php';
+        ?>
+      </td>
+    </tr>
+  </table>
 
     </fieldset>
 	        <?PHP
