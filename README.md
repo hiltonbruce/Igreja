@@ -30,7 +30,7 @@ __Desenvolvimento__
 #### Equipe técnica
 - Joseilton C Bruce - Bayeux - PB - Brasil
 
-###Pastas de armazenamento
+###Pastas de armazenamento de dados
    Deve ser criada a pasta /img_membros com privilegio para o Apache, usuário 'www-data' no Debian Linux, salvar e apagar as fotos dos membros
    A pasta /bkpbanco deve ser dado, também para o apache, o privilégio de salvar e apagar arquivos nela.
 
