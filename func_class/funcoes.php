@@ -61,12 +61,19 @@ function checadata ($dt){
 
 function conv_valor_br ($data) {
 		//O exemplo seguinte pega uma data no padrï¿½o ISO (AAAA-MM-DD) e retorna valor no formato DD/MM/YYYY
-		if (ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data, $registros)) {
-			$res="$registros[3]/$registros[2]/$registros[1]";
+		if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $data)) {
+			//ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data, $registros)
+			$registros = explode('-', $data);
+			$res="$registros[2]/$registros[1]/$registros[0]";
 			return $res;
 		} else {
-			echo "<blink><strong>Formato de data inv&aacute;lido: $data</strong></blink>";
+			echo "<blink><strong>Formato de data inv&aacute;lido: $data</strong> $num </blink>";
 		}
+}
+
+function eventoFrequencia ($tipo,$data) {
+		//Retorna a data adequda e a informação de periodo
+		
 }
 
 function sele_uf ($valor,$campo) {

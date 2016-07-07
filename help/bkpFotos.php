@@ -1,14 +1,6 @@
 <?PHP
-#	require_once '../func_class/constantes.php';
-if (!empty($_GET['gerar'])) {
-	# Caso tenha sido inicializado sera realizado o Backup
-	$nomeBanco = 'assembleia'.date('YmdHis').'.sql';
-	system('mysqldump -h '.$servidor.' -u'.$user.' -p'.$senha.' '.$bancoD.' > bkpbanco/'.$nomeBanco);
-	sleep(5);
-}
-
 // variável que define o diretório das imagens
-$gerarNovoBkp  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25&gerar=1"';
+$gerarNovoBkp  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=26&gerar=1"';
 $gerarNovoBkp .= '><button class="btn btn-primary active"> <span class="glyphicon glyphicon-save-file" >';
 $gerarNovoBkp .= '</span>&nbsp;Novo Backup</button></a>';
 $dir = "./bkpbanco/";
@@ -24,12 +16,12 @@ $dh = opendir($dir);
 $arq = array();
 while (false !== ($filename = readdir($dh))) {
 // verificando se o arquivo é .sql
-	if (substr($filename,-4) == ".sql") {
+	if (substr($filename,-4) == ".zip") {
 		// mostra o nome do arquivo e um link para ele - pode ser mudado para mostrar diretamente a imagem :)
 		$sizeFile = number_format(((stat($dir.$filename)['size'])/1024)/1024, 2, ',', '.');
 		$indice = stat($dir.$filename)['ctime'];
 		$arq[$indice] = array($dir.$filename,$filename,date ("d/M/Y H:i:s", stat($dir.$filename)['ctime']),$sizeFile, stat($dir.$filename)['ctime']);
-	}elseif (substr($filename,-4) != '.zip') {
+	}elseif (substr($filename,-4) != '.sql') {
 	   		unlink($dir.$filename);
 	}
 }
@@ -40,9 +32,9 @@ echo '<dl class="dl-horizontal">';
 foreach ($variable as $key => $value) {
 	if ($key=='0') {
 		echo '<dt>'.$gerarNovoBkp.'</dt>';
-		echo '<dd><div class="alert alert-success" role="alert"><a href='.$value['0'].' target="_blank"  class="alert-link"><img src="img/bkp.ico" ';
+		echo '<dd><div class="alert alert-success" role="alert"><a href='.$value['0'].' target="_blank"  class="alert-link"><img src="img/rosto.png" ';
 		echo 'width="32px" height="32px"/> ';
-		echo $value['1'].' <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> - DADOS <h6>';
+		echo $value['1'].' <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> - FOTOS <h6>';
 		echo '<div class="alert alert-success" role="alert">';
 		echo '<span class="sr-only">Error:</span> ';
 		echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
@@ -55,7 +47,7 @@ foreach ($variable as $key => $value) {
 	} elseif ($key<'15') {
 		$numArq = $key+1;
 		$filesEnd .= '<li><a href='.$value['0'].' target="_blank" title="Arquivo '.($key+1).' ('.$value['1'].') criado em: '.$value['2'].', com: '.$value['3'].' MBytes"';
-		$filesEnd .= '><small>'.($key+1).'</small><img src="img/bkp.ico" width="16px" height="16px"/></a>';
+		$filesEnd .= '><small>'.($key+1).'</small><img src="img/rosto.png" width="16px" height="16px"/></a>';
 		$filesEnd .= '</li>';
 	}else{
 		#Apagar backup's antigos

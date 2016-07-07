@@ -145,6 +145,9 @@ switch ($rec) {
 	case '25':
 		require_once ('models/bkpBanco.php');
 		break;
+	case '26':
+		require_once ('views/backup.php');
+		break;
 	default:
 		require_once ('forms/tes/busca.php');
                 //require_once 'forms/tes/histResumo.php';

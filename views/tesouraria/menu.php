@@ -69,4 +69,14 @@
 	<?PHP
 		require_once 'views/menus/planoCtaMenu.php';
 	?>
+	 <div class="btn-group">
+	  <a <?PHP $b=link_ativo($_GET["rec"], "25"); ?> href="<?php echo $linkLancamento;?>&rec=25">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>"
+	  	><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Dados</button></a>
+	</div>
+	 <div class="btn-group">
+	  <a <?PHP $b=link_ativo($_GET["rec"], "26"); ?> href="<?php echo $linkLancamento;?>&rec=26">
+	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>"
+		  ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Fotos</button></a>
+	</div>
 	</p>

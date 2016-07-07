@@ -1,7 +1,3 @@
-ALTER TABLE `eventos` ADD `nome` VARCHAR(50) NOT NULL AFTER `id`;
-ALTER TABLE `eventos` ADD `frequencia` INT(2) NOT NULL COMMENT '1-Mensal, 2-semanal, 3-quinzenal, 4-bimestral, 5-trimestral,6-semestral, 7-anul, ...' AFTER `descricao`, ADD UNIQUE (`frequencia`) ;
-ALTER TABLE `eventos` ADD `vinculo` INT(2) NOT NULL COMMENT 'id tabela setores - subodinação' AFTER `id`;
-
 # Tabela `assembleia`.`organica` movida para `assembleia`.`setores`
 
 
@@ -112,3 +108,7 @@ ALTER TABLE `eventos` ADD `datafim` DATE NOT NULL COMMENT 'data do ultimo evento
 ALTER TABLE `eventos` ADD `dataini` DATE NOT NULL AFTER `data`;
 ALTER TABLE `agsercretaria` CHANGE `hist` `cad` VARCHAR(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'Nome do cadastrador';
 ALTER TABLE `eventos` DROP `data`, DROP `cad`;
+
+ALTER TABLE `eventos` ADD `nome` VARCHAR(50) NOT NULL AFTER `id`;
+ALTER TABLE `eventos` ADD `frequencia` INT(2) NOT NULL COMMENT '1-Mensal, 2-semanal, 3-quinzenal, 4-bimestral, 5-trimestral,6-semestral, 7-anul, ...' AFTER `descricao`, ADD UNIQUE (`frequencia`) ;
+ALTER TABLE `eventos` ADD `vinculo` INT(2) NOT NULL COMMENT 'id tabela setores - subodinação' AFTER `id`;
