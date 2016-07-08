@@ -18,6 +18,10 @@ $provmissoes=0;
 $ultimolanc = 0;
 $roligreja =(int) $_POST['rolIgreja'];
 
+$novoLanc  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=2&igreja='.$roligreja.'"';
+$novoLanc .= '><button class="btn btn-primary active" autofocus="autofocus" > <span class="glyphicon glyphicon-save-file" >';
+$novoLanc .= '</span>&nbsp;Novo Lan&ccedil;amento</button></a>';
+
 $igLanc = new DBRecord('igreja', $roligreja, 'rol');
 #$motivoComplemento = (empty($_POST['nome'])) ? $_POST['credor']:$_POST['nome'];
 if (!empty($_POST['nome'])) {
@@ -302,3 +306,5 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	echo $mensagem;
 
 }
+
+echo $novoLanc;

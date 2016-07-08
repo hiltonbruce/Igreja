@@ -53,9 +53,13 @@ foreach ($variable as $key => $value) {
 		#Apagar backup's antigos
 	   	unlink($value['0']);
 	}
-
 }
 echo '</dl>';
+
+if (count($arq)=='0') {
+	#Exibir botão em caso de não exitir nenhum arquivo na pasta de backup
+	echo $gerarNovoBkp;
+}
 ?>
 <div class="bs-example bs-navbar-top-example" data-example-id="navbar-fixed-to-top">
  <nav class="navbar navbar-default navbar-fixed-top">
