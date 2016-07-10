@@ -147,10 +147,12 @@
 
 				echo '<br />';
 			}
+
+			list ($dataCarta,$horaCarta) = explode (' ',$carta->data());
 		?>
 
     <div id="data">
-        <h4><?PHP echo $origem.' - '.$igreja->uf().", ".data_extenso (conv_valor_br($carta->data()));?></h4>
+        <h4><?PHP echo $origem.' - '.$igreja->uf().", ".data_extenso (conv_valor_br($dataCarta));?></h4>
     </div>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
@@ -164,7 +166,7 @@
 	<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
 	  <div id="vencimento">Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
         <?PHP
-		echo data_venc(conv_valor_br($carta->data()));
+		echo data_venc(conv_valor_br($dataCarta));
 		?> (validade)
 	  </div>
 
