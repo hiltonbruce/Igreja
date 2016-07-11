@@ -4,7 +4,7 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; color: #505367; back
 	
 	#container { margin: -1em auto; width: 800px; text-align: left; background: url(../img/95anosJPtransp.jpg) no-repeat 50%; }
 	
-	#header { width:800px; height: 127px; background-image: url(../img/95anosJPLogoII.jpg); background-repeat: no-repeat;
+	#header { width:800px; height: 127px; background-image: url(../img/logo.png); background-repeat: no-repeat;
 	 background-position: left bottom; margin: 0; padding: 0 20px 0 80px;}
 	#header p { width:400px; height: 127px; padding: 50px 20px 0 300px; text-align:right;}
 	

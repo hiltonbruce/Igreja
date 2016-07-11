@@ -78,7 +78,7 @@
 	</thead>
     <tbody>
 		<tr>
-			<td colspan="2"><b>Cargo: </b><?php echo cargo($rol).' - '.situacao($ecles->situacao_espiritual(), $rol);?></td>
+			<td colspan="2"><b>Cargo: </b><?php echo cargo($rol)['0'].' - '.situacao($ecles->situacao_espiritual(), $rol);?></td>
         <td rowspan="3" width='75' ><?PHP printf ("Rol: %'04u <br />",$rol); echo mostra_foto($rol);?></td>
 		</tr>
       <tr>
