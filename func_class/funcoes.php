@@ -646,6 +646,29 @@ function arrayMeses () {
 	return $meses;
 }
 
+function arrayDia ($dia) {
+
+		switch	($dia){
+		case 0: $dia_extenso="Domingo";
+				break;
+		case 1: $dia_extenso="Segunda-feira";
+				break;
+		case 2: $dia_extenso="Ter&ccedil;a-feira";
+				break;
+		case 3: $dia_extenso="Quarta-feira";
+				break;
+		case 4: $dia_extenso="Quinta-feira";
+				break;
+		case 5: $dia_extenso="Sexta-feira";
+				break;
+		case 6: $dia_extenso="S&aacute;bado";
+				break;
+		default: echo $dia_extenso="Dia inv&aacute;lido";
+	}//fim do case para o dia
+
+	return $dia_extenso;
+}
+
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
 
 	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";

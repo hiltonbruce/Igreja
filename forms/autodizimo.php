@@ -11,7 +11,9 @@
 
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
-			<?php echo semana(date('d/m/Y'));?>
+			<?php
+				echo semana(date('d/m/Y'));;
+			?>
 			&ordf; Semana deste mês)</legend>
 	<table>
 		<tbody>
@@ -71,7 +73,35 @@
 						class="form-control" name="oferta3" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$" />
 					</td>
-					<td></td>
+					<td>
+						<?php
+						//Texto de alerta
+						$alerta = '<br  /><div class="alert alert-danger alert-dismissible fade in" role="alert"> ';
+						$alerta .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+						$alerta .='<span aria-hidden="true">&times;</span></button> <strong>Culto de Missões!</strong>';
+						$alerta .='<br />Ofertas para missões. '.arrayDia($diaSema).' - '.$dtlanc;
+						$alerta .= '</div>';
+						//Alerta para o culto de missões
+							$semLan = semana($dtlanc);
+							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
+							$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
+
+							$diaSema = $diaSem->format('w');
+
+							if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
+								//2º domingo do mês
+								echo $alerta;
+							} elseif ($diaSema=='0' && $semLan=='1'&& $roligreja!='1' ) {
+								//1º domingo do mês
+								echo $alerta;
+							} else {
+								echo arrayDia($diaSema).' - '.$dtlanc;
+							}
+
+						?>
+
+
+					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
 					type="submit" name="listar" value="Lançar..."></td>
 				</tr>
