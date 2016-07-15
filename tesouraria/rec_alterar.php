@@ -1,31 +1,31 @@
 <?PHP
-$ind=1; //Define o indice dos campos do formul·rio
+$ind=1; //Define o indice dos campos do formul√°rio
 $id = (int) $_GET["id"];
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 
 if ($_GET['recebeu']<1 && $_GET['tipo']<1) {
 
 $tab="sistema/atualizar_sistema.php";//link q informa o form quem chamar p atualizar os dados
-$tab_edit='tesouraria/rec_alterar.php&menu=top_tesouraria&tabela=tes_recibo&id='.$_GET["id"].'&pag_mostra='.$_GET["pag_mostra"].'&campo=';//Link de chamada da mesma p·gina para abrir o form de ediÁ„o do item
+$tab_edit='tesouraria/rec_alterar.php&menu=top_tesouraria&tabela=tes_recibo&id='.$_GET["id"].'&pag_mostra='.$_GET["pag_mostra"].'&campo=';//Link de chamada da mesma p√°gina para abrir o form de edi√ß√£o do item
 
 $rec_alterar = new DBRecord("tes_recibo", $id, "id");
 list($anov, $mesv, $diav) = explode("-", $rec_alterar->data());
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
-$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias apÛs a emiss„o do recibo
+$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias ap√≥s a emiss√£o do recibo
 
 if ($diasemissao>'2') {
 	echo '<h2><span style="color:#FF0000;font-size:150%;text-decoration: blink;">';
-	echo 'O prazo para alteraÁ„o deste recibo est· expirado!</span><br />';
-	echo 'Voc&ecirc; poder&aacute editar para um novo ou re-imprimir como est·.</h2>';
+	echo 'O prazo para altera√ß√£o deste recibo est√° expirado!</span><br />';
+	echo 'Voc&ecirc; poder&aacute editar para um novo ou re-imprimir como est√°.</h2>';
 }
 ?>
 <div id="tabs">
 	<ul>
 	  <li><a <?PHP link_ativo($_GET["rec"], "1");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=1"><span>Membros da Igreja</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "2");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=2"><span>Pessoa Jur&iacute;dica</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=3"><span>N„o Membros</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=3"><span>N√£o Membros</span></a></li>
 	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id-1;?>"><span>Recibo Anterior</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id+1;?>"><span>PrÛximo Recibo</span></a></li>
+	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id+1;?>"><span>Pr√≥ximo Recibo</span></a></li>
 	</ul>
 </div>
 <fieldset>
@@ -82,23 +82,29 @@ if ($diasemissao>'2') {
 			</td>
 		</tr>
 		<tr>
-	        <td>Motivo do pagamento:
+	        <td colspan='2'>Motivo do pagamento:
 			<?PHP
 			$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
 			$nome->getMostrar();$nome->getEditar();
 			?>
 			</td>
-	        <td>Fonte do Recurso:
+	      </tr>
+	      <tr>
+	      		<td>Fonte do Recurso:
 	          <?PHP
 				$nome = new editar_form("fonte",$rec_alterar->fonte(),$tab,$tab_edit);
-				$fonte = new DBRecord("fontes", $rec_alterar->fonte(), "id");
-				echo "<p><a href='./?escolha={$tab_edit}fonte&fonte={$rec_alterar->fonte()}'>".$fonte->discriminar()."</a></p>";
+				$fonte = new DBRecord("contas", $rec_alterar->fonte(), "acesso");
+				echo "<p><a href='./?escolha={$tab_edit}fonte&fonte={$rec_alterar->fonte()}'>".$fonte->titulo()."</a></p>";
 				if ($_GET["campo"]=="fonte"){
 					?>
 					<form name="fornec" id="fornec" action="" method="post">
 					<?php
-						$for_num = new List_sele ("fontes", "discriminar", "fonte");
-		 				echo $for_num->List_Selec ($ind++,$_GET['fonte'],'class="form-control"');
+						echo '<select name="fonte" id="caixa" class="form-control"';
+						echo 'tabindex="'.++$ind.'" >';
+								$bsccredor = new tes_listDisponivel();
+								$caixas = $bsccredor->List_Selec($rec_alterar->fonte());
+								echo $caixas;
+						echo '</select>';
 					?>
 					<input name="escolha" type="hidden" id="escolha" value="sistema/atualizar_sistema.php">
 					<input name="campo" id="campo" type="hidden" value="fonte">
@@ -109,7 +115,27 @@ if ($diasemissao>'2') {
 				<?php
 				}
 				?>
-			</td>
+				</td>
+	      		<td>
+	      			Despesa:
+	      			<?PHP
+					$conta = new DBRecord("contas", $rec_alterar->conta(), "acesso");
+					$nome = new editar_form("conta",$conta->titulo(),$tab,$tab_edit);
+					$nome->getMostrar();
+					if ($_GET["campo"]=="conta"){
+					$acesso = $rec_alterar->conta();
+					echo '<form name="fornec" id="fornec" action="" method="post">';
+					require_once 'forms/tes/autoCompletaDespesas.php';
+					echo '<input name="escolha" type="hidden" id="escolha" value="sistema/atualizar_sistema.php">';
+					echo '<input name="campo" id="campo" type="hidden" value="conta">';
+					echo '<input name="tabela" id="tabela" type="hidden" value="tes_recibo">';
+					echo '<input name="id" id="id" type="hidden" value="'.$id.'">';
+					echo '<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >';
+					echo '</form>';
+
+					}
+					?>
+	      		</td>
 	      </tr>
 	      <tr style="background-color: transparent;">
 	        <td>Data da emiss&atilde;o:
@@ -125,7 +151,6 @@ if ($diasemissao>'2') {
 			$nome->getEditar();
 			?>
 			</td>
-			<td></td>
 	      </tr>
 	      <tr style="background-color: transparent;">
 	        <td >Para Igreja:

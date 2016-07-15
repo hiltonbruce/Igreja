@@ -40,6 +40,7 @@ class tes_conta {
 	}
 
 	function ativosArray() {
+		#Contas de lançamento vinculada pelo código de acesso
 		return $this->arrayAtivos;
 	}
 

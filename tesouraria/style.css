@@ -7,7 +7,6 @@ body {
 	color: #505367;
 	background-color: #fff;
 	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
-	font-size: 90%;
 	background-repeat:no-repeat;
 	background-position:center;
 }
@@ -19,8 +18,8 @@ body {
 	#header p { position:relative;width:400px; height: 100%; padding: 0 0 0 10px; text-align:right;float: right;}
 	#mainnav {
 	height: 20px;
-	margin: 0;
-	padding: 10px 0 0;
+	margin: 10px;
+	padding: -10px 0 0;
 	text-align:left;
 	font-size: 20px;
 }

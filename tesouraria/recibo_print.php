@@ -39,16 +39,17 @@
 
 	if ($_POST["reimprimir"]==""){
 
-		$cad_igreja = (int) $_POST['igreja'];
+		$cad_igreja = intval($_POST['igreja']);
 		$valor = $_POST["valor"];
-		$rec_tipo = (int)$_POST["rec"];
-		$fonte_recurso = (int)$_POST["fonte"];
-		$rolmembro = (int)$_POST["rol"];
-		$lancamento = (int)$_POST["lancamento"];
+		$rec_tipo = intval($_POST["rec"]);
+		$fonte_recurso = intval($_POST["caixa"]);
+		$rolmembro = intval($_POST["rol"]);
+		$lancamento = intval($_POST["lancamento"]);
 		$referente = $_POST["referente"];
 		$nome = $_POST["nome"];
       	$cpf = $_POST["cpf"];
       	$rg = $_POST["rg"];
+      	$acessoDebitar = $_POST['acessoDebitar'];
 
 		$numero = ($_POST["numero"]=="") ? $_POST["razao"]:$_POST["numero"];
 
@@ -74,8 +75,8 @@
 		$referente = $reimprimir->motivo();
 	}
 
-
-		$fonte = new DBRecord ("fontes",$fonte_recurso,"id");
+		$conta = new tes_conta();
+		$dadosCta = $conta->ativosArray();
 
 	//Formata o valor e defini para exibição por texto por extenso
 		$valor_us =strtr("$valor", ',','.' );
@@ -170,7 +171,8 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pelo que firmamos o presente recibo em uma
 		via para os devidos fins.<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Referente: <?PHP echo $referente;?>.</p>
-		<h4><?php printf ("Fonte do recurso: %s - Cod. %03u.",$fonte->discriminar(),number_format($fonte->id(), 0, ',', '.'));
+		<h4 class='small'><?php printf ("Fonte: %s, Cod.: %03u.",$dadosCta[$credito]['titulo'],$credito);
+		printf ("<h4>Despesa: %s, Cod.: %03u.",$dadosCta[$debito]['titulo'],$debito);
 		if ($cad_igreja<2){
 			echo ' Templo Sede.';
 		}else {

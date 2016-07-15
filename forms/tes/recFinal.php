@@ -10,23 +10,7 @@
 </tr>
 <tr>
 	<td>
-		<label>Fonte para pgto:</label>
-		<?php
-			$congr = new List_sele ("fontes", "discriminar", "fonte");
-				echo $congr->List_Selec (++$ind,$_GET['fonte'],' class="form-control"');
-		?>
-	</td>
-	<td colspan="2">
-		<label>Igreja:</label>
-		<?php
-			$congr = new List_sele ("igreja","razao","igreja");
-				echo $congr->List_Selec (++$ind,$_GET['igreja'],' class="form-control"');
-		?>
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<label><strong>Pagamento realizado pela conta: </strong></label>
+		<label>Fonte para pgto:</label>		
 		<select name="credito" id="caixa" class="form-control"
 		tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 			<?php
@@ -35,6 +19,13 @@
 				echo $listaIgreja;
 			?>
 		</select>
+	</td>
+	<td colspan="2">
+		<label>Igreja:</label>
+		<?php
+			$congr = new List_sele ("igreja","razao","igreja");
+				echo $congr->List_Selec (++$ind,$_GET['igreja'],' class="form-control"');
+		?>
 	</td>
 </tr>
 <tr>

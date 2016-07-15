@@ -15,7 +15,9 @@
 		$referente = $reimprimir->motivo();
 	
 	
-		$fonte = new DBRecord ("fontes",$fonte_recurso,"id");
+		//$fonte = new DBRecord ("fontes",$fonte_recurso,"id");
+		$conta = new tes_conta();
+		$dadosCta = $conta->ativosArray();
 	
 	//Formata o valor e defini para exibição por texto por extenso
 		$valor_us =strtr("$valor", ',','.' );
@@ -104,13 +106,14 @@
 <div id="mainnav">
 		<div style="text-align: right;"><h4><?php printf ("N&uacute;mero: %'05u",$numRec);?></h4></div>
   </div>
-	<div id="content"><div id="Tipo">
-			Recibo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 Valor: R$ <?php echo $vlr;?> <br />
-  </div>
+	<div id="content">
+		<div id="Tipo">
+				Recibo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 Valor: R$ <?php echo $vlr;?> <br />
+	  </div>
     <div id="added-div1">
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -120,7 +123,9 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pelo que firmamos o presente recibo em uma
 		via para os devidos fins.<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Referente: <?PHP echo $referente;?>.</p>
-		<h4><?php printf ("Fonte do recurso: %s - Cod. %03u.",$fonte->discriminar(),number_format($fonte->id(), 0, ',', '.'));
+		<h4 class='small'><?php printf ("Fonte: %s, Cod.: %03u.",$dadosCta[$reimprimir->fonte()]['titulo'],$reimprimir->fonte());
+		$contaDesp = intval($reimprimir->conta());
+		printf ("<h4>Despesa: %s, Cod.: %03u.",$dadosCta[$contaDesp]['titulo'],$reimprimir->conta());
 		if ($cad_igreja<2){
 			echo ' Templo Sede.';
 		}else {
@@ -129,7 +134,7 @@
 		}
 		?></h4>
     </div>
-    <div id="added-div-2">
+    <div id="added-div-2" class='text-right'>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -144,4 +149,8 @@
   </div>
   <?php 
 	}
+	/*
+	echo '<h1>**'.$reimprimir->conta().'**</h1>';
+	print_r($dadosCta);
+	*/
   ?>

@@ -25,6 +25,9 @@ $result = mysql_query($query) or die (mysql_error());
 		$rec = new updatesist ("{$_POST["tabela"]}",$id,"id"); //Aqui será selecionado a informação do campo
 		print "<br \>Foi atualizado de:<h3>{$rec->$_POST["campo"]()}</h3>\n"; //Imprime o valor na tela
 		$valor =$_POST[$_POST["campo"]];
+		if ($_POST["campo"]=='conta' && !empty($_POST['acessoDebitar'])) {
+			$valor = intval($_POST['acessoDebitar']);
+		}
 		
 		//Faz a troca de "," por "." quando necessário
 		if ($_POST["campo"]=='valor') {
