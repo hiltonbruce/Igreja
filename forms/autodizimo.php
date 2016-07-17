@@ -78,9 +78,8 @@
 						//Texto de alerta
 						$alerta = '<br  /><div class="alert alert-danger alert-dismissible fade in" role="alert"> ';
 						$alerta .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
-						$alerta .='<span aria-hidden="true">&times;</span></button> <strong>Culto de Missões!</strong>';
-						$alerta .='<br />Ofertas para missões. '.arrayDia($diaSema).' - '.$dtlanc;
-						$alerta .= '</div>';
+						$alerta .='<span aria-hidden="true" >&times;</span></button> <strong>Culto de Miss&otilde;es!</strong>';
+						$alerta .='<br />Of. p/ miss&otilde;es. '.arrayDia($diaSema).' - ';
 						//Alerta para o culto de missões
 							$semLan = semana($dtlanc);
 							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
@@ -90,10 +89,10 @@
 
 							if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
 								//2º domingo do mês
-								echo $alerta;
+								echo $alerta.'Sede</div>';
 							} elseif ($diaSema=='0' && $semLan=='1'&& $roligreja!='1' ) {
 								//1º domingo do mês
-								echo $alerta;
+								echo $alerta.'Congrega&ccedil;&atilde;o</div>';
 							} else {
 								echo arrayDia($diaSema).' - '.$dtlanc;
 							}

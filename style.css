@@ -39,10 +39,6 @@ form label {
 	display:block;
 }
 
-form span {
-	padding-right:125px;
-}
-
 input:focus {
 	background-color:#FFFFAA;
 }
@@ -307,69 +303,6 @@ tr:hover#form {
 	font-weight: bold;
 	float:none !important;
 	padding:0 !important;
-}
-.alert {
-  display: block;
-  margin-bottom: 8px;
-  padding: 8px 35px 8px 14px;
-  margin-bottom: 20px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font-size: 130%;
-}
-.alert,
-.alert h4 {
-  color: #c09853;
-}
-.alert h4 {
-  margin: 0;
-}
-.alert .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  line-height: 20px;
-}
-.alert-success {
-  background-color: #ccefbd;
-  border-color: #c7eaa8;
-  color: #468847;
-}
-.alert-success h4 {
-  color: #468847;
-}
-.alert-danger,
-.alert-error {
-  background-color: #fccfcf;
-  border-color: #fbc1ca;
-  color: #d14836;
-}
-.alert-danger h4,
-.alert-error h4 {
-  color: #d14836;
-}
-.alert-info {
-  background-color: #c6e6f4;
-  border-color: #a8e5ee;
-  color: #3a87ad;
-}
-.alert-info h4 {
-  color: #3a87ad;
-}
-.alert-block {
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-.alert-block > p,
-.alert-block > ul {
-  margin-bottom: 0;
-}
-.alert-block p + p {
-  margin-top: 5px;
 }
 
 /* oculta e revelar campos */
