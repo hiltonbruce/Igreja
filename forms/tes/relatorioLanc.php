@@ -54,21 +54,32 @@
 		tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 		value="<?PHP echo $ref;?>" placeholder="Referente..." />
 	  </div>
-	  <div class="col-xs-4">
+	  <div class="col-xs-3">
+	  	<label>Conta c/ Lan&ccedil; de:</label>
+	  	<label class="checkbox-inline">
+		<input type="checkbox" name='deb' <?PHP echo $deb;?> id="debito" value="1"> D&eacute;bito
+			</label>
+		<label class="checkbox-inline">
+		<input type="checkbox" name='cred' <?PHP echo $cred;?>  id="credito" value="1"> Cr&eacute;dito
+		</label>
+	  </div>
+	  <div class="col-xs-2">
+	  	<label>Lan&ccedil;amento Nº:</label>
+		<input type="text" name="numLanc" value="<?php echo $numLanc ;?>"
+		tabindex="<?PHP echo ++$ind; ?>" class="form-control" placeholder="N&ordm; do lan&ccedil;amento" />
+	  </div>
+	  <div class="col-xs-3">
+	  	<label>Valor:</label>
+		<input type="text" name="vlrLanc" value="<?php echo number_format($vlrLanc, 2, ',', ' ') ;?>"
+		tabindex="<?PHP echo ++$ind; ?>" class="form-control" placeholder="Valor lan&ccedil;ado" />
+	  </div>
+	  <div class="col-xs-3">
 		<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
 		<input type="hidden" name="rec"	value="<?php echo $rec;?>" />
 		<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 		tabindex="<?PHP echo ++$ind; ?>" />
 		<input name="menu" type="hidden" value="top_tesouraria" />
 	  </div>
-	  <div class="col-xs-6">
-	  	<label class="checkbox-inline">
-		  <input type="checkbox" name='deb' <?PHP echo $deb;?> id="debito" value="1"> D&eacute;bito
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" name='cred' <?PHP echo $cred;?>  id="credito" value="1"> Cr&eacute;dito
-		</label>
-	</div>
 	</div>
 	</form>
 	</div>

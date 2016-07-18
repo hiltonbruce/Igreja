@@ -8,7 +8,7 @@
 	//tabela com a lista p confirmar lançamento
 
 	$lancContabil = new tes_relatLanc();
-	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer);
+	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer,$numLanc,$vlrLanc);
 
 	$tabLancamento = $resultado['0'];
 

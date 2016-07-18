@@ -18,8 +18,8 @@ if ($profis->cpf()<>"" && $profis->cpf()<>$_POST["cpf_atual"]) {
 <?PHP
 }
 
-if (validaCPF($_POST["cpf"]) && $_POST["submit"]=="Alterar CPF ..."){
-	echo "<script>alert('CPF: <?PHP echo {$_POST["cpf"]} já cadastrado para o Rol: {$profis->rol()}'...');</script>";
+if (!validaCPF($_POST["cpf"]) && $_POST["submit"]=="Alterar CPF ..."){
+	echo "<script>alert('CPF: {$_POST["cpf"]} - Número de CPF inválido');</script>";
 	echo "CPF inválido";
 }
 

@@ -6,6 +6,8 @@
     $mes = (empty($_GET['mes'])) ? '':sprintf("%'02u",$_GET['mes']) ;
     $roligreja = (empty($_GET['igreja'])) ? '0':intval($_GET['igreja']);
     $tituloColuna5 = 'Valor(R$)';
+    $numLanc = (empty($_GET['numLanc'])) ? '' : intval($_GET['numLanc']) ;
+    $vlrLanc = (empty($_GET['vlrLanc'])) ? '' : strtr( str_replace(array('.'),array(''),$_GET['vlrLanc']), ',.','.,' ) ;
 
     if (!empty($_GET['deb'])) {
         $deb =  'checked="checked"' ;

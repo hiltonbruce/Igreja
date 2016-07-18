@@ -15,7 +15,6 @@ class sec_Eventos
 		$this->ano = (empty($ano)) ? date('Y'):$ano;
 		$this->igreja = (empty($igreja)) ? 1:$igreja;
 
-	
 		$sql  = 'SELECT a.id,a.inicio,a.semana,a.dia,a.fim,a.cad,i.razao,i.setor,m.rol,m.nome,';
 		$sql .= 's.alias,s.descricao,e.nome AS nevento,e.frequencia,e.dataini,e.datafim,';
 		$sql .= 'r.rols,r.dataini AS iniresp,r.datafim AS fimresp ';
@@ -24,7 +23,6 @@ class sec_Eventos
 		$sql .= 'WHERE a.igreja = i.rol AND a.evento = e.id AND a.resp = r.id AND a.resp = r.id AND e.vinculo = s.id ';
 		$sql .= 'AND r.rol = m.rol AND a.igreja="'.$igreja.'" AND DATE_FORMAT(a.inicio,"%Y") = "'.$ano.'" ' ;
 		
-
 		$this->sql_lst = mysql_query($sql) or die (mysql_error());
 
 	}

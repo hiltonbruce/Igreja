@@ -289,58 +289,62 @@ function quem_entregou ($cpf){
 }
 
 
-function validaCPF($cpf) {
-	$soma = 0;
-
-	//verifica se cpf tem um formato valido (000.000.000-00)
-	if (ereg("^([0-9]){3}.([0-9]){3}.([0-9]){3}-([0-9]){2}",$cpf)){
-		//echo "<script> alert('CPF formato Verdadeiro!');</script>";
-
-		$cpf = str_replace(array(".","-"), "", $cpf);//remove caracteres para tratar a string como nï¿½mero
-
-
-		if (strlen($cpf) <> 11 || ($cpf == '11111111111') || ($cpf == '22222222222') ||
-			($cpf == '33333333333') || ($cpf == '44444444444') ||
-			($cpf == '55555555555') || ($cpf == '66666666666') ||
-			($cpf == '77777777777') || ($cpf == '88888888888') ||
-			($cpf == '99999999999') || ($cpf == '00000000000'))
-			return false;
-
-		// Verifica 1ï¿½ digito
-		for ($i = 0; $i < 9; $i++) {
-			$soma += (($i+1) * $cpf[$i]);
-		}
-
-		$d1 = ($soma % 11);
-
-		if ($d1 == 10) {
-			$d1 = 0;
-		}
-
-		$soma = 0;
-
-		// Verifica 2ï¿½ digito
-		for ($i = 9, $j = 0; $i > 0; $i--, $j++) {
-			$soma += ($i * $cpf[$j]);
-		}
-
-		$d2 = ($soma % 11);
-
-		if ($d2 == 10) {
-			$d2 = 0;
-		}
-
-		if ($d1 == $cpf[9] && $d2 == $cpf[10]) {
-			return true;
-		}
-		else {
-			return false;
-		}
-
-	}elseif ($_POST["submit"]=="Alterar CPF ..."){
-		echo "<script> alert('CPF com formato INVï¿½LIDO!');</script>";
-	}
-
+function validaCPF($cpf){
+  // determina um valor inicial para o digito $d1 e $d2
+  // pra manter o respeito ;)
+	$d1 = 0;
+	$d2 = 0;
+  // remove tudo que não seja número
+  $cpf = preg_replace("/[^0-9]/", "", $cpf);
+  // lista de cpf inválidos que serão ignorados
+  $ignore_list = array(
+    '00000000000',
+    '01234567890',
+    '11111111111',
+    '22222222222',
+    '33333333333',
+    '44444444444',
+    '55555555555',
+    '66666666666',
+    '77777777777',
+    '88888888888',
+    '99999999999'
+  );
+  // se o tamanho da string for dirente de 11 ou estiver
+  // na lista de cpf ignorados já retorna false
+  if(strlen($cpf) != 11 || in_array($cpf, $ignore_list)){
+      return false;
+  } else {
+    // inicia o processo para achar o primeiro
+    // número verificador usando os primeiros 9 dígitos
+    for($i = 0; $i < 9; $i++){
+      // inicialmente $d1 vale zero e é somando.
+      // O loop passa por todos os 9 dígitos iniciais
+      $d1 += $cpf[$i] * (10 - $i);
+    }
+    // acha o resto da divisão da soma acima por 11
+    $r1 = $d1 % 11;
+    // se $r1 maior que 1 retorna 11 menos $r1 se não
+    // retona o valor zero para $d1
+    $d1 = ($r1 > 1) ? (11 - $r1) : 0;
+    // inicia o processo para achar o segundo
+    // número verificador usando os primeiros 9 dígitos
+    for($i = 0; $i < 9; $i++) {
+      // inicialmente $d2 vale zero e é somando.
+      // O loop passa por todos os 9 dígitos iniciais
+      $d2 += $cpf[$i] * (11 - $i);
+    }
+    // $r2 será o resto da soma do cpf mais $d1 vezes 2
+    // dividido por 11
+    $r2 = ($d2 + ($d1 * 2)) % 11;
+    // se $r2 mair que 1 retorna 11 menos $r2 se não
+    // retorna o valor zeroa para $d2
+    $d2 = ($r2 > 1) ? (11 - $r2) : 0;
+    // retona true se os dois últimos dígitos do cpf
+    // forem igual a concatenação de $d1 e $d2 e se não
+    // deve retornar false.
+    return (substr($cpf, -2) == $d1 . $d2) ? true : false;
+  }
 }
 
 function semana ($data) {

@@ -30,19 +30,30 @@ ver_cad($bsc_rol);
 		if ($_GET["campo"]=="cpf") { ?>
 
 		<script language="JavaScript" type="text/javascript">
-		alert("Cuidado! O sistema atualizará o CPF, mesmo se número for considerado INVÁLIDO...");
+		alert("Cuidado! O sistema atualizará o CPF, mesmo se o número for considerado INVÁLIDO...");
 		</script>
+			<form method="post" action="" class="form-inline">
+	  			<div class="form-group">
+					<input type="text" name="cpf" id='cpf' class="form-control" autofocus="autofocus"
+						value="<?PHP echo $arr_dad["cpf"];?>" tabindex="<?PHP echo $ind++;?>" />
+					<input type="hidden" name="tabela" value="profissional" />
+					<input type="hidden" name="campo" value="cpf" />
+					<input type="hidden" name="cpf_atual" value="<?PHP echo $arr_dad["cpf"];?>" />
+					<input type="hidden" name="escolha" value="adm/atualizar_dados.php" />
+					<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
+					<input type="hidden" name="menu" value="top_dados" />
+					<input type="submit" class="btn btn-primary btn-sm" name="submit" 
+					value="Alterar CPF ..." tabindex="<?PHP echo $ind++;?>"/>
+					<div class="alert alert-danger alert-dismissible fade in" role="alert"> 
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span></button> 
+						<span class="glyphicon glyphicon-alert" aria-hidden="true"></span><strong> Cuidado!</strong>
+						<br /> Voc&ecirc; ser&aacute; avisado, porem, o sistema atualizar&aacute; o CPF,
+						 mesmo se o n&uacute;mero for considerado INV&Aacute;LIDO... 
+					</div>
+				</div>
+			</form>
 
-		<form method="post" action="" >
-			<input type="text" name="cpf" id='cpf' maxlength="14" value="<?PHP echo $arr_dad["cpf"];?>" tabindex="<?PHP echo $ind++;?>"/>
-			<input type="hidden" name="tabela" value="profissional" />
-			<input type="hidden" name="campo" value="cpf" />
-			<input type="hidden" name="cpf_atual" value="<?PHP echo $arr_dad["cpf"];?>" />
-			<input type="hidden" name="escolha" value="adm/atualizar_dados.php" />
-			<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
-			<input type="hidden" name="menu" value="top_dados" />
-			<input type="submit" name="submit" value="Alterar CPF ..." tabindex="<?PHP echo $ind++;?>"/>
-		</form>
 		<?PHP
 		}
 		?></td>
