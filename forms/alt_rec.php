@@ -49,7 +49,8 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 				break;
 			}
 			
-			list($deb,$cred)=explode( "@",$rec_alterar->conta());
+			$cred = $rec_alterar->conta();
+			$deb = $rec_alterar->fonte();
 			echo '<input type="hidden" name="deb" id="rec" value="'.$deb.'">';
 			echo '<input type="hidden" name="cred" id="rec" value="'.$cred.'">';
 			echo '<input type="hidden" name="escolha" id="escolha" value="controller/recibo.php">';

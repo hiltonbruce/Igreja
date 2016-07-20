@@ -15,7 +15,7 @@
 		tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 			<?php
 				$bsccredor = new tes_listDisponivel();
-				$listaIgreja = $bsccredor->List_Selec($_GET["cred"]);
+				$listaIgreja = $bsccredor->List_Selec($_GET["deb"]);
 				echo $listaIgreja;
 			?>
 		</select>
@@ -32,6 +32,16 @@
 	<td colspan="3">
 		<label>Despesa com,
 		<?php
+			$conta = intval($_GET['cred']);
+			if ($conta>0) {
+				$cta = new DBRecord ("contas", $conta, "acesso");
+				$cred = $cta->acesso();
+				$nomeCred = $cta->titulo();
+			} else {
+				$cred = '';
+				$nomeCred = '';
+			}
+
 			require_once 'forms/tes/autoCompletaContas.php';
 		?></label>
 	</td>
