@@ -1,4 +1,4 @@
-<table class='table table-hover table-bordered table-condensed table-striped'>
+<table class='table table-hover table-bordered table-striped'>
 		<caption>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
@@ -7,7 +7,7 @@
 			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
 			$imprimir = '';
 		}else {
-			$imprimir = '<script type="text/javascript">window.print();</script>';
+			//$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
 		echo $titTabela;
 		?>
@@ -41,8 +41,8 @@
 		<tfoot>
 			<?php
 				echo '<tr id="total">';
-				echo '<td colspan="3"id="moeda" >Débitos e Créditos do per&iacute;odo: </td>';
-				printf("<td colspan='2' id='moeda'>R$ %s C</td>",number_format($debito,2,',','.'));
+				printf("<td colspan='3' id='moeda'>Movimento do per&iacute;odo: R$ %s </td>",number_format($debito,2,',','.'));
+				echo '<td colspan="2" id="moeda" ></td>';
 			?>
 		</tfoot>
 	</table>

@@ -36,7 +36,7 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				error_reporting(E_ALL);
 				ini_set('display_errors', 'off');
 
-				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />';
+				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />';
 				$scriptCSS  .= '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
 				
 				$saltoPagina = '<div style="page-break-before: always;"> </div>';
