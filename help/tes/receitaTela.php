@@ -44,8 +44,7 @@ switch ($rec) {
 	    $form = 'forms/tes/autoLancarDespesas.php';
 
 		$ctaDespesa = new tes_despesas();
-		$arrayDespesas = $ctaDespesa->dadosArray();
-		
+		$arrayDespesas = $ctaDespesa->dadosArray();		
 		$bsccredor = new tes_listDisponivel();
 		$acesso = (empty($_GET['acesso'])) ? '' : $_GET['igreja'] ;
 		$listaFonte = $bsccredor->List_Selec($acesso);

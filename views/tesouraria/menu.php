@@ -36,8 +36,12 @@
 		  	$linkAtivo='class="active"';
 		  }else {
 		  	$linkAtivo='';
-		  }?>
-	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=21">Relatório</a></li>
+		  }
+
+		  $linkRelt = '&mes='.date('m').'&ano='.date('Y').'&rec=21';
+
+		  ?>
+	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relatório</a></li>
 
 		  <?php if ($_GET['rec']=='4' ) {
 		  	$linkAtivo='class="active"';
