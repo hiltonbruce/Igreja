@@ -98,7 +98,7 @@ foreach ($arrayDespesas as $chave => $valor) {
 	//Variéveis para montagem do form
 
 	$dataLan = '<label>Data do lan&ccedil;amento</label>'.
-			'<input name="data'.$chave.'" class="form-control dataclass" value="'.date('d/m/Y').'"';
+			'<input name="data'.$chave.'" class="form-control dataclass" ';
 	$campoHist = '<label>Hit&oacute;rico</label><textarea name="hist'.$chave.'" class="form-control"></textarea>';
 	$bscCredorList = new List_sele('igreja', 'razao','rolIgreja'.$chave);
 	$listaIgreja = $bscCredorList->List_Selec('',$igreja,'class="form-control" autofocus="autofocus" ');
