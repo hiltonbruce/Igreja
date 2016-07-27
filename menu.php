@@ -12,18 +12,25 @@
 	$link_admin ="<li><span class='hlavny_'><a href='./?escolha=forms/manutencao.php'>Administra&ccedil;&atilde;o</a></span></li>";
 	$link_tesour="<li><span class='hlavny_'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro
 	</a></span></li>";
+
+	$link_missoes = "<li><span class='hlavny_'><a href='./?escolha=controller/missoes.php";
+	$link_missoes .="&menu=top_missoes'>Miss&otilde;es</a></span></li>";
+
 	$link_home = "<li><span class='left'></span><span class='hlavny'>$hom</span><span class='right'></span></li>";
 	$link_suporte ="<li><span class='hlavny_'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span></li>";
 	
 	if ($_GET["escolha"]=="noticias/suporte.php"){
 	$link_suporte ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span><span class='right'></span></li>";
-				$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
+	$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	
 	if ((strstr($_GET["menu"],"tesouraria")) || (strstr($_POST["escolha"],"tesouraria"))){
 		$link_tesour ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro</a></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
-				
-				
+
+	if ((strstr($_GET["menu"],"missoes")) || (strstr($_POST["escolha"],"missoes"))){
+		$link_missoes ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=controller/missoes.php&menu=top_missoes'>Miss&otilde;es</a></span><span class='right'></span></li>";
+		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
+		
 	foreach ($admin as $esc) {
 		if (substr_count($_GET["escolha"], $esc)>0 || substr_count($_POST["escolha"], $esc)>0) {
 				$link_admin = "<li><span class='left'></span><span class='hlavny'><a href='./?escolha=forms/manutencao.php'>Administra&ccedil;&atilde;o</a></span><span class='right'></span></li>";
@@ -44,14 +51,17 @@
 	<?php
 	if (isset($_SESSION['valid_user']))
 	{
+
 		if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50) {
-			echo $link_tesour;?>
-	<li><img src="img/divider2.png" alt="" /></li>
-	<?php 
-		}
-	echo $link_admin;?>
-	<li><img src="img/divider2.png" alt="" /></li>
-	<?php 
+			echo $link_tesour.'<li><img src="img/divider2.png" alt="" /></li>';
+			}
+		if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50) {
+			echo $link_missoes.'<li><img src="img/divider2.png" alt="" /></li>';
+			}
+		echo $link_admin;?>
+		<li><img src="img/divider2.png" alt="" /></li>
+		<?php 
+
 	}
 	echo $link_suporte;?>
 </ul>

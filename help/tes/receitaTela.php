@@ -42,11 +42,10 @@ switch ($rec) {
 		break;
 	case '5':
 	    $form = 'forms/tes/autoLancarDespesas.php';
-
 		$ctaDespesa = new tes_despesas();
 		$arrayDespesas = $ctaDespesa->dadosArray();		
 		$bsccredor = new tes_listDisponivel();
-		$acesso = (empty($_GET['acesso'])) ? '' : $_GET['igreja'] ;
+		$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
 		$listaFonte = $bsccredor->List_Selec($acesso);
 		require_once ('forms/tes/lancarTipoPlan.php');#Form lançar despesas tipo planilha
 		break;
