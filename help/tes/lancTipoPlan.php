@@ -2,7 +2,7 @@
 //print_r($ctaDespesa->dadosArray());
 foreach ($arrayDespesas as $chave => $valor) {
 //Verifica se foi enviado dados para lançamento, testando e executando
-    if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>0) {
+    if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>'0') {
 
     	$rolIgreja = $_POST['rolIgreja'.$chave];
     	echo '<script> alert ('.$_POST['acesso'.$chave].')</script>';

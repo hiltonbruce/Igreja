@@ -32,7 +32,7 @@
       $bsc_rol = intval($_POST["bsc_rol"]);
     }
 
-		$campo_rol="Rol N�:"; //Quando a vari�vel de sess�o rol existir define 'Rol n�:' como legenda para o form listar dados do membro pelo rol
+		$campo_rol="Rol Nº:"; //Quando a variï¿½vel de sessão rol existir define 'Rol nº:' como legenda para o form listar dados do membro pelo rol
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -63,7 +63,7 @@
           <?php require_once 'menu.php';?>
     </div>
       <div class="info1">
-	  <?php //echo "Sess�o ".$_SESSION["setor"];?>
+	  <?php //echo "Sessï¿½o ".$_SESSION["setor"];?>
         <marquee direction="left" scrollamount="3" height="27"><strong>
           E n&atilde;o vos embriagueis com vinho, em que h&aacute; contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
        </strong></marquee>
