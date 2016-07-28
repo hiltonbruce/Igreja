@@ -93,10 +93,10 @@ body {
 #marca {
 	position:absolute;
   	background: url(../img/marca.png) no-repeat;
-  	background-size: 92px 128px;
-	left:56px;
-	top:30px;
-	width:111px;
+  	background-size: 165px 53px;
+	left:30px;
+	top:40px;
+	width:211px;
 	height:143px;
 	z-index:6;
 }
@@ -130,7 +130,7 @@ body {
 }
 #Nome {
 	position:absolute;
-	text-shadow: 1px 1px #FFFFFF;
+	text-shadow: 1px 1px 1px #FFFFFF;
 	left:39px;
 	top:249px;
 	width:354px;
@@ -152,7 +152,7 @@ body {
 }
 #Rol {
 	position:absolute;
-	text-shadow: 1px 1px #FFFFFF;
+	text-shadow: 1px 1px 1px #FFFFFF;
 	left:402px;
 	top:141px;
 	width:114px;
@@ -162,16 +162,20 @@ body {
 }
 #verso1 {
 	position:absolute;
+	text-shadow: 0px 0px 2px #FFFFFF;
 	left:573px;
 	top:22px;
 	width:216px;
 	height:86px;
 	z-index:11;
 	font-size: 80%;
+	color: #000000;
+	font:bold;
 }
 
 #verso2 {
 	position:absolute;
+	text-shadow: 0px 0px 2px #FFFFFF;
 	left:820px;
 	top:20px;
 	width:230px;
@@ -181,6 +185,7 @@ body {
 }
 #Pastor {
 	position:absolute;
+	text-shadow: 0px 0px 2px #FFFFFF;
 	left:643px;
 	top:305px;
 	width:376px;
@@ -198,7 +203,7 @@ body {
 
 <body>
 <div id="cartao"></div>
-<!-- <div id='marca'></div> Cartão com logo idependente do fundo da imagem-->
+<div id='marca'></div><!--  Cartão com logo idependente do fundo da imagem-->
 
 <div id="Endereco">
   <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>
