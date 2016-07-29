@@ -75,15 +75,13 @@
 		<div style="text-align: right;"><h4 style="font-size: 80%;">
 			<?php printf ("N&uacute;mero do recibo: %'05u",$numRec);?></h4></div>
   </div>
-	<div style="font-size: 80%;" id="content">
-	<?php echo $vlr;?>
+	<div id="content">
+	<h3><?php echo $vlr;?></h3>
   </div>
-    <div style="width: 340px;font-size: 80%; " id="added-div1">
-
+    <div style="width: 340px;" id="added-div1">
 	<?php
 		echo $texto.$referente;
-	?>
-		<?php 
+
 		if ($cad_igreja<2){
 			echo '<h4> Templo Sede.</h4>';
 		}else {
@@ -92,7 +90,7 @@
 		}
 		
 		echo $obs;
-		?>
+	?>
     </div>
     <div id="footer">
      Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
