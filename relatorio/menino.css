@@ -1,5 +1,5 @@
 *{ margin: 0; padding: 0; }
-body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; color: #505367; background-color: #fff; background: url(../img/menino.jpg) no-repeat 0% 0%; }
+body { margin: 0; padding: 0; width: 100%; font: 85% tahoma, sans-serif; color: #505367; background-color: #fff; background: url(../img/menino.jpg) no-repeat 0% 0%; }
 
 	#container { width:1000px; text-align: center; }
 
@@ -35,6 +35,7 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; color: #505367; back
 	position:relative;
 	width:250px;
 	margin-top: 40px;
+	margin-left: 40px;
 	padding: 0 0 0 100px;
 	text-align:center;
 	font-size:10px;

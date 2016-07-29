@@ -124,7 +124,6 @@ h1{
 	font-family:"Times New Roman", Times, serif;
 
 }
-h2 { font-size: 120%; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
 h3, legend { color: #3366FF; font-size: 150%; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 10px;}
 h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
 h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
@@ -140,7 +139,7 @@ legend {
 #Tipo {
 	float:center;
 	padding: 10px 10px  10px 10px;
-	font-size: 150%;
+	font-size: 300%;
 	text-align: center;
 	color: #000;
 	background-color: #E8E8E8;
