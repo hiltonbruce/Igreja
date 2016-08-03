@@ -139,7 +139,7 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?PHP  print $nomeCidIgreja." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
+    	<h3><?PHP  print $nomeCidIgreja." - ".$igreja->uf().", ".data_extenso ($data);?></h3><br /><br /><br />
     	<div id="polegar">Polegar</div><div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?></div>
 	 </div>
     </div>

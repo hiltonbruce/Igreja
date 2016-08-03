@@ -25,8 +25,8 @@
 			$vlr = sprintf($format,number_format("$valor_us",2,",","."));
 		}
 		
-		if ($conta==$_POST['grupo']) {
-			$obs = '<fieldset> <legend>Obs.:</legend>'.strip_tags($_POST['obs'].'</fieldset>');
+		if (!empty($_POST['obs'])) {
+			$obs = '<fieldset> <legend>Obs.:</legend>'.$_POST['obs'].'</fieldset>';
 		}else {
 			$obs='';
 		}
@@ -72,13 +72,13 @@
 ?>
 <div style="width: 340px;margin-left: 150px;">
 <div id="mainnav">
-		<div style="text-align: right;"><h4 style="font-size: 80%;">
+		<div style="text-align: right;font-size: 80%;"><h4>
 			<?php printf ("N&uacute;mero do recibo: %'05u",$numRec);?></h4></div>
   </div>
 	<div id="content">
-	<h3><?php echo $vlr;?></h3>
+	<?php echo $vlr;?>
   </div>
-    <div style="width: 340px;" id="added-div1">
+    <div style="width: 340px;font-size: 180%;">
 	<?php
 		echo $texto.$referente;
 

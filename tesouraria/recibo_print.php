@@ -40,11 +40,15 @@
 	if ($_POST["reimprimir"]==""){
 
 		$cad_igreja = intval($_POST['igreja']);
+		$cidIgreja = new DBRecord('cidade', $cad_igreja,'id');
+		$nomeCidIgreja = $cidIgreja->nome();
 		$valor = $_POST["valor"];
 		$rec_tipo = intval($_POST["rec"]);
 		$fonte_recurso = intval($_POST["caixa"]);
 		$rolmembro = intval($_POST["rol"]);
 		$lancamento = intval($_POST["lancamento"]);
+		$credito = intval($_POST["credito"]);
+		$debito = intval($_POST["acessoDebitar"]);
 		$referente = $_POST["referente"];
 		$nome = $_POST["nome"];
       	$cpf = $_POST["cpf"];
@@ -136,6 +140,7 @@
 <head>
 <title>Recibo Tesouraria Templo Sede</title>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <link rel="SHORTCUT ICON" href="../ad.ico"  type="image/vnd.microsoft.icon" />
 </head>
@@ -181,14 +186,13 @@
 		}
 		?></h4>
     </div>
-    <div id="added-div-2">
+    <div id="added-div-2" class='text-right'>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?PHP  print $origem." - ".$igreja->uf().", ".data_extenso ($data);?><br /><br /><br />
-    	<div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?><div id="polegar">Polegar</div></div>
-
+    	<h3><?PHP  print $nomeCidIgreja." - ".$igreja->uf().", ".data_extenso ($data);?></h3><br /><br /><br />
+    	<div id="polegar">Polegar</div><div id="assinatura">Assinatura: <?PHP echo strtoupper(toUpper($responsavel));?></div>
 	 </div>
     </div>
     <div id="footer">
