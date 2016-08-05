@@ -57,7 +57,7 @@
   <div id="Tipo">
 	  Certid&atilde;o de Apresenta&ccedil;&atilde;o
   </div>
-  <div id="foto"><?PHP printf ("<h5>Registro N&ordm;:</h5> %'03u",$most_certidao->rol());?></div>
+  <div id="foto"><?PHP printf ("<h5>Registro N&ordm;:</h5> %'05u",$most_certidao->rol());?></div>
   </div>
 	<div id="content">
     <div id="added-div1">
@@ -73,11 +73,13 @@
     </div>
     <div id="added-div-2">
 
-      <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (date("d/m/Y"));?></h3>
-    <br />
-		<div id="pastor"><?PHP echo strtoupper( toUpper($igreja->pastor()));?><br />
-	    Pastor da Igreja</div>
-	  <?PHP
+      <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->dt_apresent()));?></h3>
+    	<br />
+		<div id="pastor">
+			<?PHP echo strtoupper( toUpper($igreja->pastor()));?><br />
+			Pastor da Igreja
+	    </div>
+	 	 <?PHP
             $assinSecret  = '../imgAssin/'.$secretario->rol().'a.png';
             if (!file_exists($assinSecret)){
                     $assinSecret  = '../imgAssin/noAssin.png';
@@ -87,9 +89,9 @@
             <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
         </div>
       <div id="secretario">
-        <?PHP echo cargo($secretario->rol())['1'].' '.strtoupper( toUpper($secretario->nome()));?><br />
-      Secret&aacute;rio </span></div>
-
+	        <?PHP echo cargo($secretario->rol())['1'].' '.strtoupper( toUpper($secretario->nome()));?><br />
+	      Secret&aacute;rio
+      </div>
     </div>
 
 </div>
