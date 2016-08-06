@@ -40,7 +40,7 @@
 	if ($_POST["reimprimir"]==""){
 
 		$cad_igreja = intval($_POST['igreja']);
-		$cidIgreja = new DBRecord('cidade', $cad_igreja,'id');
+		$cidIgreja = new DBRecord('cidade', $igreja->cidade(),'id');
 		$nomeCidIgreja = $cidIgreja->nome();
 		$valor = $_POST["valor"];
 		$rec_tipo = intval($_POST["rec"]);
