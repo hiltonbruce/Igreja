@@ -32,7 +32,9 @@ class tes_conta {
 			$todasContas[$dados['id']]=
 				array('acesso'=>$dados['acesso'],'codigo'=>$dados['codigo'],
 						'titulo'=>$dados['titulo'],'descricao'=>$dados['descricao'],'tipo'=>$dados['tipo']
-						,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']);
+						,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']
+						,'nivel1'=>$dados['nivel1'],'nivel2'=>$dados['nivel2']
+						,'nivel3'=>$dados['nivel3'],'nivel4'=>$dados['nivel4']);
 		}
 		$this->arrayGrupos	= $grupos;
 		$this->arrayAtivos	= $ativos;

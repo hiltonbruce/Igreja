@@ -81,7 +81,7 @@
 						$alerta .='<span aria-hidden="true" >&times;</span></button> <strong>Culto de Miss&otilde;es!</strong>';
 						$alerta .='<br />Of. p/ miss&otilde;es. '.arrayDia($diaSema).' - ';
 						//Alerta para o culto de missões
-							$semLan = semana($dtlanc);
+							$semLan = diaSem($dtlanc);
 							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
 							$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
 

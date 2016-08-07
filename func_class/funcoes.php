@@ -348,7 +348,7 @@ function validaCPF($cpf){
 }
 
 function semana ($data) {
-
+//Semana pertence o lançamento
 	$dta = explode("/",$data);
 		$d=$dta[0];
 		$m=$dta[1];
@@ -375,6 +375,39 @@ function semana ($data) {
 		}
 	}
 	return $sem;
+}
+
+function diaSem ($data) {
+#Retorna a que ordem este dia pertence no mês
+#Ex.: 07/08/2016 -> retorna 1 que refere-se ao 1º dom do mês
+	$dta = explode("/",$data);
+		$d=$dta[0];
+		$m=$dta[1];
+		$y=$dta[2];
+		//$res = ;
+	if (checkdate($m,$d,$y)) {
+
+		$semana = 0;
+		$anoatual = date ('y');
+		$diafim = date ('d',mktime(1,0,0,$m+1,0,$y));
+
+		$dia = date ('w',mktime(0,0,1,$m,$d,$y));
+		#$dia refere-se a: 1-dom,2-seg,3-ter,4-qua,5-qui,6-sex e 7-sab
+
+		//echo '<h1>'.$d.'/'.$m.'<br/>'.date('w',mktime(0,0,1,$m,$i,$y)).'</h1>';
+
+		//echo '<h2>'.$semana.'</h2>';
+		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o dia
+			//echo $d.' ++++++++++ '.$i;
+			if (date('w',mktime(0,0,1,$m,$i,$y))==$dia) {
+				$semana++;
+
+			} elseif ($d<$i) {
+				break;
+			}
+		}
+	}
+	return $semana;
 }
 
 // VERFICA CNPJ

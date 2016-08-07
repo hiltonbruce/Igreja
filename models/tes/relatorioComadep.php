@@ -47,7 +47,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			//Contas creditadas
 			$saldo[$ctaCred] -= $contas['valor'];
 			$sldGrupo [$planoCta[$contas['creditar']]['4']] -= $contas['valor'];
-			$debito  += $contas['valor'];//Movimento do
+			//$debito  += $contas['valor'];//Movimento do
 		}else {
 			//saldo meses anteriores
 			//Contas debitadas
@@ -162,7 +162,7 @@ foreach ($saldo AS $chave => $valor){
 
 			
 			//echo ' - Conta -> '.$planoGrupo[$sldGrupoN3]['3'].'-'.$planoGrupo[$sldGrupoN3]['0'].' - '.$sldNivel3Atual[$sldGrupoN3];
-			$n3Grupo ='<tr class="primary"><td>'.$sldGrupoN4.'</td><td title="'.$title.'">'
+			$n3Grupo ='<tr class="danger"><td>'.$sldGrupoN4.'</td><td title="'.$title.'">'
 				.$planoGrupo[$sldGrupoN4]['0'].'</td><td id="moeda">'.number_format(abs($sldNivel3Mov[$sldGrupoN4]),2,',','.').$movSld
 				./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($sldNivel3Atual[$sldGrupoN4]),2,',','.').$saldoAtl.'</td>
 				<td id="moeda">'.number_format(abs($sldNivel3Ant[$sldGrupoN4]),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
@@ -199,9 +199,9 @@ foreach ($saldo AS $chave => $valor){
 				<td id="moeda">'.number_format(abs($sldGrupoCtaDisp),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
 			
 			if ($nivel2 == '') {
-				$nivel2 = /*$n3Grupo.*/$nivelGrupo.$nivel1;
+				$nivel2 = $n3Grupo.$nivelGrupo.$nivel1;
 				$nivelTipo .= $nivelGrupo; //Sem nível de codigo
-				$sldGrupoN4 = $planoGrupo[$chave]['4'];
+				//$sldGrupoN4 = $planoGrupo[$chave]['4'];
 			}elseif ($sldGrupoN4 != $planoGrupo[$chave]['4']) {
 				$nivel3 .= $nivel2./*$n3Grupo.*/$nivelGrupo.$nivel1;
 				$nivelTipo .= $nivelGrupo;//Sem nível de codigo
@@ -212,6 +212,13 @@ foreach ($saldo AS $chave => $valor){
 				$nivelTipo .= $nivel2;//Sem nível de codigo
 				$nivelGrupo ='';
 				$grpFim = FALSE;
+			}
+
+			if ($sldGrupoN4!='' && $sldGrupoN4!=$planoGrupo[$chave]['4']) {
+				$nivel4 = $n3Grupo.$nivel4;
+				//$sldGrupoN4 = $planoGrupo[$chave]['4'];
+			}else {
+				$nivel4 .= $nivel2;
 			}
 
 			$saldoAtual=0;
@@ -311,7 +318,7 @@ print_r ($planoGrupo);
 				./*$planoGrupo[$ctaAtual]['2'].*/'</td><td id="moeda">'.number_format(abs($sldNivel3Atual[$sldGrupoN4]),2,',','.').$saldoAtl.'</td>
 				<td id="moeda">'.number_format(abs($sldNivel3Ant[$sldGrupoN4]),2,',','.').$saldoAntr/*$planoGrupo[$ctaAtual]['2']*/.'</td></tr>';
 
-	$nivel3 .= /*$n3Grupo.*/$nivelGrupo.$nivel1;
+	$nivel3 .= $n3Grupo.$nivelGrupo.$nivel1;
 	$nivelTipo .= $nivelGrupo;//Sem nível de codigo
 
 
