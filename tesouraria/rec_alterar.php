@@ -15,8 +15,8 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 
 if ($diasemissao>'2') {
 	echo '<h2><span style="color:#FF0000;font-size:150%;text-decoration: blink;">';
-	echo 'O prazo para alteração deste recibo está expirado!</span><br />';
-	echo 'Voc&ecirc; poder&aacute editar para um novo ou re-imprimir como está.</h2>';
+	echo 'O prazo para altera&ccedil;&atilde;o deste recibo est&aacute; expirado!</span><br />';
+	echo 'Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</h2>';
 }
 ?>
 <div id="tabs">

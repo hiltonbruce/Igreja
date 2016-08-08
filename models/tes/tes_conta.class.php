@@ -35,10 +35,18 @@ class tes_conta {
 						,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']
 						,'nivel1'=>$dados['nivel1'],'nivel2'=>$dados['nivel2']
 						,'nivel3'=>$dados['nivel3'],'nivel4'=>$dados['nivel4']);
+
+			$ctaCod[$dados['codigo']]=
+				array('acesso'=>$dados['acesso'],'id'=>$dados['id'],
+						'titulo'=>$dados['titulo'],'descricao'=>$dados['descricao'],'tipo'=>$dados['tipo']
+						,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']
+						,'nivel1'=>$dados['nivel1'],'nivel2'=>$dados['nivel2']
+						,'nivel3'=>$dados['nivel3'],'nivel4'=>$dados['nivel4']);
 		}
 		$this->arrayGrupos	= $grupos;
 		$this->arrayAtivos	= $ativos;
 		$this->arrayTodos	= $todasContas;
+		$this->arrayCod		= $ctaCod;
 	}
 
 	function ativosArray() {
@@ -52,6 +60,10 @@ class tes_conta {
 
 	function contasGrupos() {
 		return $this->arrayGrupos;
+	}
+
+	function contasCod() {
+		return $this->arrayCod;
 	}
 
 }
