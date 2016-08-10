@@ -26,7 +26,7 @@
 				<th scope="col" style="text-align: center;">Movimento</th>
 				<th scope="col" style="text-align: center;">Sld Atual</th>
 				<th scope="col" style="text-align: center;">Sld Ant.</th>
-			</tr3
+			</tr>
 		</thead>
 		<tbody>
 			<?php

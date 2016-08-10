@@ -57,7 +57,9 @@ switch ($rec) {
 		$recLink = '16&dia='.$d.'&mes='.$m.'&ano='.$a;
 		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
 		$linkImpressao .='&tipo='.$_GET['tipo'];
+		//Busca do movimento no mês
 		require_once 'models/tes/relComadep.php';
+		require_once 'help/tes/relComadepLin.php';
 		require_once 'forms/tes/mesComadep.php';
 		require_once ('views/saldosComadep.php');
 		break;

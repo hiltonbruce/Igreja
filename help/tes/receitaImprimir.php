@@ -32,7 +32,8 @@ switch ($_GET['rec']) {
 		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informações da consulta
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
-		require_once '../models/tes/relatorioComadep.php';
+		require_once '../models/tes/relComadep.php';
+		require_once '../help/tes/relComadepLin.php';
 		$nomeArquivo='../views/saldosComadep.php';
 		$titTabela = $congRelatorio.' &bull; Fluxo das Contas - '.$dtRelatorio;
 		require_once '../views/modeloPrint.php';
