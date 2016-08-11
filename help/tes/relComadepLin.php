@@ -59,105 +59,45 @@ foreach ($saldo AS $chave => $valor){
 			$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
 			$nivel1 .='<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - '.$planoCod[$chave]['titulo'].
 				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoAnte.'</td></tr>';
+		}elseif ($rec=='16') {
+			//Contas Nivel 4, tipo: 1.1.1.001 - Impressão
+			require '../help/tes/relComadepG2.php';
 		}else {
-
-			//Contas Nivel 4, tipo: 1.1.1.001
-			$sldGrupoCta = $saldoGrp[$planoCod[$ctaAtualN4]['nivel4']];//Sld do movimento grupo nível 3
-			$movSld = number_format(abs($sldGrupoCta),2,',','.');
-			if ($sldGrupoCta > 0) {
-				$movSld .=  $dev;
-			} elseif ($sldGrupoCta < 0) {
-				$movSld .= $cred;
-			} else {
-				$movSld = '--o--';
-			}
-
-			$sldGrupoCtaAnte = $saldoAnteGrp[$planoCod[$ctaAtualN4]['nivel4']];//Sld anterior grupo nível 3
-			$saldoAntr = number_format(abs($sldGrupoCtaAnte),2,',','.');
-			if ($sldGrupoCtaAnte > 0) {
-				$saldoAntr .=  $dev;
-			} elseif ($sldGrupoCtaAnte < 0) {
-				$saldoAntr .= $cred;
-			} else {
-				$saldoAntr = '--o--';
-			}
-
-			$sldGrupoAtual = $sldGrupoCta+$sldGrupoCtaAnte;//Sld atual grupo nível 3
-			$saldoAtl = number_format(abs($sldGrupoAtual),2,',','.');
-			if ($sldGrupoCtaAnte > 0) {
-				$saldoAtl .=  $dev;
-			} elseif ($sldGrupoCtaAnte < 0) {
-				$saldoAtl .= $cred;
-			} else {
-				$saldoAtl = '--o--';
-			}
-
-			$nivelGrupo ='<tr class="primary"><td>'.$planoCod[$ctaAtualN4]['nivel4'].'</td><td title="'.$title.'">'
-				.$planoCod[$planoCod[$ctaAtualN4]['nivel4']]['titulo'].'</td><td id="moeda">'.$movSld
-				.'</td><td id="moeda">'.$saldoAtl.'</td>
-				<td id="moeda">'.$saldoAntr.'</td></tr>';
-			
-			$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
-			$nivel2 .= $nivelGrupo.$nivel1;
-
-			//Contas Nivel codigo, tipo: 1.1.1.001.001
-			$nivel1 = '<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - '.$planoCod[$chave]['titulo'].
-				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoAnte.'</td></tr>';
-
+			//Contas Nivel 4, tipo: 1.1.1.001 - Tela
+			require 'help/tes/relComadepG2.php';
 		}
 
-		if ($ctaAtualN3!=$planoCod[$chave]['nivel3'] && $nivel2!=''){
+		//Contas Nivel 3
+		if ($ctaAtualN3!=$planoCod[$chave]['nivel3'] && $nivel2!='' && $rec!='16'){
 
-			//Contas Nivel 3
-			$sldN3 = number_format(abs($saldoGrp[$planoCta[$ctaCred]['nivel3']]),2,',','.');
-			$sldGrupoCta = $saldoGrp[$planoCod[$ctaAtualN3]['nivel3']];//Sld do movimento grupo nível 3
-			$movSld = number_format(abs($sldGrupoCta),2,',','.');
-			if ($sldGrupoCta > 0) {
-				$movSld .=  $dev;
-			} elseif ($sldGrupoCta < 0) {
-				$movSld .= $cred;
-			} else {
-				$movSld = '--o--';
-			}
+			//Ixibir na tela
+			require 'help/tes/relComadepGrp.php';
 
-			$sldGrupoCtaAnte = $saldoAnteGrp[$planoCod[$ctaAtualN3]['nivel3']];//Sld anterior grupo nível 3
-			$saldoAntr = number_format(abs($sldGrupoCtaAnte),2,',','.');
-			if ($sldGrupoCtaAnte > 0) {
-				$saldoAntr .=  $dev;
-			} elseif ($sldGrupoCtaAnte < 0) {
-				$saldoAntr .= $cred;
-			} else {
-				$saldoAntr = '--o--';
-			}
+		}elseif ($ctaAtualN3!=$planoCod[$chave]['nivel3'] && $nivel2!='' && $rec=='16') {
+			//impressão
+			require '../help/tes/relComadepGrp.php';
 
-			$sldGrupoAtual = $sldGrupoCta+$sldGrupoCtaAnte;//Sld atual grupo nível 3
-			$saldoAtual = number_format(abs($sldGrupoAtual),2,',','.');
-			if ($sldGrupoCtaAnte > 0) {
-				$saldoAtual .=  $dev;
-			} elseif ($sldGrupoCtaAnte < 0) {
-				$saldoAtual .= $cred;
-			} else {
-				$saldoAtual = '--o--';
-			}
-
-			#$movSld = ($sldGrupoCta > '0') ? $dev : $cred ;
-			#$saldoAtual = ($sldGrupoAtual > '0') ? $dev : $cred ;
- 			#$saldoAntr = ($sldGrupoCtaAnte > '0') ? $dev: $cred;
-
-			$nivelN3  = '<tr class="primary"><td>'.$planoCod[$ctaAtualN4]['nivel3'].'</td>';
-			$nivelN3 .=	'<td title="'.$title.'">'.$planoCod[$planoCod[$ctaAtualN3]['nivel3']]['titulo'];
-			$nivelN3 .=	'</td><td class="text-right">'.$movSld;
-			$nivelN3 .=	'</td><td class="text-right">';
-			$nivelN3 .=	$saldoAtual.'</td>';
-			$nivelN3 .=	'<td class="text-right">';
-			$nivelN3 .=	$saldoAntr.'</td></tr>';
-			
-			$nivel3 .= $nivelN3.$nivel2;
-			$nivel2 = '';
 		}
 
 		$ctaAtualN4 = $planoCod[$chave]['nivel4'];
 		$ctaAtualN3 = $planoCod[$chave]['nivel3'];
+
+}
+
+#Inclui o final dos dados da tabela após o fim do array de dados
+//Contas Nivel 3
+if ($rec!='16'){
+
+	//Ixibir na tela
+	require 'help/tes/relComadepG2.php';
+	require 'help/tes/relComadepGrp.php';
+	$nivel3 .= $nivel2;
+
+}elseif ($rec=='16') {
+	//impressão
+	require '../help/tes/relComadepG2.php';
+	require '../help/tes/relComadepGrp.php';
+	$nivel3 .= $nivel2;
 
 }
 

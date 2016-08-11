@@ -1,6 +1,6 @@
 <?php
 //Opções de  impressões para o script /tesouraria/receita.php
-switch ($_GET['rec']) {
+switch ($rec) {
 	case '13':
 		//imprimir entradas de todas as congregações - mensal
 		require_once '../help/tes/saldoIgrejas.php';

@@ -64,7 +64,7 @@
 		</label>
 	  </div>
 	  <div class="col-xs-2">
-	  	<label>Lan&ccedil;amento Nº:</label>
+	  	<label>Lan&ccedil;amento N&ordm;:</label>
 		<input type="text" name="numLanc" value="<?php echo $numLanc ;?>"
 		tabindex="<?PHP echo ++$ind; ?>" class="form-control" placeholder="N&ordm; do lan&ccedil;amento" />
 	  </div>

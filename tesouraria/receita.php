@@ -2,7 +2,10 @@
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
 $tabela = (empty($_GET['tabela'])) ? '' : $_GET['tabela'];
 $idLanc = (empty($_GET['id'])) ? '' : $_GET['id'];
-if ($_GET['rec']>'12' && $_GET['rec']<'20') {
+
+$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
+
+if ($rec>'12' && $rec<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	require "../help/impressao.php";//Include de funcões, classes e conexões com o BD

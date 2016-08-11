@@ -41,8 +41,7 @@ $exibicred .= '<td class="text-center" colspan="4"><h5>'.$referente.'</h5></td><
 //$ctaDespesa = new tes_despesas();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
-$bgcolor = 'class="active"';
-$cor= true;
+
 $provmissoes=0;
 $ultimolanc = 0;
 
@@ -54,7 +53,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
 	$linkPagar .= '><small class="text-muted glyphicon glyphicon-new-window"></small</a>';
-	$bgcolor = $cor ? 'class="active"' : '';
+	//$bgcolor = $cor ? 'class="active"' : '';
 	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
 		$vencPgto  = '<small class="text-success glyphicon glyphicon-ok"></small> Pago em: '.$vlrDesp['dtpgto'];
 		$vencPgto .= ' -> Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar;
@@ -62,31 +61,29 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
 		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign"> </small>Venc.: '.$vlrDesp['vencimento'];
 		$vencPgto .= ' '.$linkPagar;
-		$bgcolor = 'class="danger"';
 		$titleMsg = ', ainda n&atilde;o paga!';
 	}
 	else {
 		$vencPgto = '';
 	}
 	if ($vencPgto=='') {
-		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].'"><td> Lan&ccedil;ado em: '.$vlrDesp['data'].'</td><td>';
+		$linhaTab  = '<tr><td> Lan&ccedil;. N&ordm: '.$vlrDesp['lancamento'].' em: '.$vlrDesp['data'].'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	} else {
-		$linhaTab  = '<tr '.$bgcolor.' title="'.$vlrDesp['titulo'].$titleMsg.'"><td>'.$vencPgto.'</td><td>';
+		$linhaTab  = '<tr title="'.$vlrDesp['titulo'].$titleMsg.'"><td>'.$vencPgto.'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}
-	$cor = !$cor;
 }
 
 $dia1 ='';$listDesp = '';
 $igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
-$cor=true;
+
 $lancar = '<br /><br /><button class="btn btn-primary">Lan&ccedil;ar!</button>';
 
 //print_r($ctaDespesa->dadosArray());
@@ -135,7 +132,6 @@ foreach ($arrayDespesas as $chave => $valor) {
 	}
 
 	if (strlen($valor['codigo'])=='13') {
-		$bgcolor = $cor ? 'class="odd"' : 'class="odd"';
 		//lista dos caixas disponíveis para pgto
 		$fontesPgto  = '<label>Caixas c/ Saldo:</label>';
 		$fontesPgto .= '<select name="disponivel'.$chave.'" class="form-control" >';
@@ -145,16 +141,15 @@ foreach ($arrayDespesas as $chave => $valor) {
 		$dia1 .='<tbody><tr class="sub bg-info">
 		<th colspan="4"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
 		</tr>';
-		$dia1 .='<tr '.$bgcolor.'><td rowspan="2">'.$valor['titulo'].$conta
-		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr '.$bgcolor.'><td>'.$dataLan.
+		$dia1 .='<tr><td rowspan="2">'.$valor['titulo'].$conta
+		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr><td>'.$dataLan.
 		'<br /><br /><label><strong>Igreja</strong></label>'.$listaIgreja.
 		'</td><td>'.$campoValor.$lancar.'</td></tr>';
 		$dia1 .= $linha[$valor['acesso']];
-		$cor = !$cor;
 	} elseif (strlen($valor['codigo'])=='9') {
 		$cabDespesa  = $blGrupo3Ini.'<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
 		$cabDespesa .= $valor['codigo'].'</strong> - '.$valor['titulo'].'</div><table id="horario" ';
-		$cabDespesa .= 'class="table">';
+		$cabDespesa .= 'class="table table-striped table-hover">';
 		$blGrupo3Ini = '';
 	}/*elseif (strlen($valor['codigo'])=='5') {
 		$codigo5 = $valor['codigo'];
