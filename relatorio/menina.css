@@ -19,7 +19,7 @@ body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color
 	float: left;
 	margin-left: 150px;
 	padding: 5px;
-	font-size:26px;
+	font-size:150%;
 	font-family:"Times New Roman", Times, serif;
 }
 
@@ -38,7 +38,6 @@ body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color
 	margin-left: 40px;
 	padding: 0 0 0 100px;
 	text-align:center;
-	font-size:10px;
 }
 
 #secretario {
@@ -48,7 +47,6 @@ body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color
 	text-align:center;
 	margin-right: 190px;
 	top: -125px;
-	font-size:11px;
 }
 
 #assinSec {
