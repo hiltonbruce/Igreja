@@ -54,11 +54,15 @@ require_once 'forms/autoCompletaMembro.php';
 				</select>
 		   </td>
 			<td>
-				<label>Fonte para pgto:</label>
-				<?php
-					$congr = new List_sele ("fontes", "discriminar", "fonte");
-						echo $congr->List_Selec ($ind++,$tipo,' required="required" class="form-control"');
-				?>
+				<label>Fonte para pgto:</label>		
+					<select name="fonte" id="caixa" class="form-control"
+					tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
+						<?php
+							$bsccredor = new tes_listDisponivel();
+							$listaIgreja = $bsccredor->List_Selec($tipo);
+							echo $listaIgreja;
+						?>
+					</select>
 			</td>
 		</tr>
 	<tr>

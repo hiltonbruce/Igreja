@@ -13,15 +13,22 @@ if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 		//Grava no banco codigo de autorização para o novo recibo
 		add_transid($_POST["transid"]);
 		//script que orienta a criação dos recibos
+
 		$gerar = 'help/tes/gerarRecGrupo.php';
+
 		require_once 'help/tes/definirRecGrupo.php';
 	}
 }
 $dia1 ='';$dia15 ='';$diaOutros ='';
 $cor=true;$cor1=true;$cor2=true;
+//print_r($listaPgto);
 foreach ($listaPgto as $chave => $valor) {
 
 	$referente = $_POST['referente'].' - '.$valor['nomeFunc'];
+	//$codAcessoDesp = $valor['coddespesa'];#Fonte do recurso
+	//$codFonte = $valor['tipo'];#Cod. de acesso da despesa
+
+	//echo($codFonte);
 	$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 	$bgcolor1 = $cor1 ? 'class="dados"' : 'class="odd"';
 	$bgcolor2 = $cor2 ? 'class="dados"' : 'class="odd"';
@@ -179,7 +186,7 @@ foreach ($listaPgto as $chave => $valor) {
 		//Cadastra o recibo
 		if ($demaisPgto!='') {
 			$codAcessoDesp = $valor['coddespesa'];
-			$debito = 1;
+			$debito = $valor['tipo'];
 			require $gerar;
 			require $demaisPgto;
 		}
