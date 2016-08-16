@@ -16,7 +16,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4"><label>Endereço:</label>
+			<td colspan="4"><label>Endere&ccedil;o:</label>
 			<input type="text" id="estado_val" class="form-control" name="estado"
 			disabled="disabled" value='<?PHP echo $end;?>' />
 			</td>

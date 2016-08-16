@@ -112,7 +112,7 @@
           <li class="list-group-item list-group-item-primary"><strong>Departamentos</strong></li>
          <br />
           <ul id="categories">
-          <li style="border-top:0;"  class='selected'><a href="./">Home - selecionado</a></li>
+          <li style="border-top:0;"  class='selected'><a href="./">Home</a></li>
           <li><a href="#">COMADEBY</a></li>
           <li><a href="infantil/">Infantil</a></li>
           <li><a href="#">Item 4 </a></li>

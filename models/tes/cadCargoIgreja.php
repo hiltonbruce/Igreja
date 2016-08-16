@@ -30,6 +30,7 @@ if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf'])
 		$atualCargo->diapgto = $_POST['diapgto'];
 		$atualCargo->tipo = $_POST['fonte'];
 		$atualCargo->coddespesa = $_POST['acesso'];
+		$atualCargo->tipo = $_POST['caixa'];
 		$atualCargo->Update();
 	} else {
 		$cadMembro = new tes_ativaCargo ($_POST['rolIgreja'],$_POST['idfunc'],$_POST['hierarquia']);

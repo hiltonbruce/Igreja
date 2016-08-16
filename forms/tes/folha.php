@@ -22,7 +22,7 @@ require_once 'forms/autoCompletaMembro.php';
 			<input type="text" name="rg" id="rg" class="form-control"
 			 value='<?PHP echo $rg;?>' tabindex="<?PHP echo $ind++;?>" ></td>
 
-			<td><label>Função:</label>
+			<td><label>Fun&ccedil;&atilde;o:</label>
 					<?php
 					$bsccredor = new List_sele('funcao', 'descricao', 'idfunc');
 					$listaIgreja = $bsccredor->List_Selec($ind++,$funcao,'class="form-control" required="required" ');
@@ -55,18 +55,18 @@ require_once 'forms/autoCompletaMembro.php';
 		   </td>
 			<td>
 				<label>Fonte para pgto:</label>		
-					<select name="fonte" id="caixa" class="form-control"
+					<select name="acesso" id="caixa" class="form-control"
 					tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 						<?php
 							$bsccredor = new tes_listDisponivel();
-							$listaIgreja = $bsccredor->List_Selec($tipo);
+							$listaIgreja = $bsccredor->List_Selec($codCta);
 							echo $listaIgreja;
 						?>
 					</select>
 			</td>
 		</tr>
 	<tr>
-		<td><label>Igreja onde presta o serviço:</label><?php
+		<td><label>Presta o servi&ccedil;o:</label><?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 		$listaIgreja = $bsccredor->List_Selec($ind++,$igreja,'class="form-control" required="required" autofocus="autofocus" ');
 		echo $listaIgreja;
@@ -85,10 +85,10 @@ require_once 'forms/autoCompletaMembro.php';
 			<input type="text" name="valor" tabindex="<?PHP echo $ind++;?>"
 			 value='<?PHP echo $vlrPago;?>' class="form-control" ></td>
 		<td>
-			<label>Código da Conta de Despesa:</label>
-			<input type="text" name="acesso" tabindex="<?PHP echo $ind++;?>"
-			value='<?PHP echo $codCta;?>' class="form-control"
-			required="required" placeholder="Cód de acesso da conta"></td>
+			<label>C&oacute;digo da Conta de Despesa:</label>
+			<input type="text" name="caixa" tabindex="<?PHP echo $ind++;?>"
+			value='<?PHP echo $tipo;?>' class="form-control"
+			required="required" placeholder="C&oacute;d. de acesso da conta"></td>
 	</tr>
 	<tr>
 		<td></td>
