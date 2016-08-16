@@ -56,9 +56,15 @@ foreach ($saldo AS $chave => $valor){
 		//echo $planoCta[$chave]['4'].' -- ';
 		if ($ctaAtualN4==$planoCod[$chave]['nivel4'] || $ctaAtualN4==''){
 			//Contas simples
-			$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
-			$nivel1 .='<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - '.$planoCod[$chave]['titulo'].
-				'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoAnte.'</td></tr>';
+			if ($vlrSaldo != '--o--' || $vlrSaldoAtual != '--o--' || $vlrSaldoAnte != '--o--') {
+				#Inclui linha se houver saldo em dos períodos
+				$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
+				$nivel1 .= '<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - ';
+				$nivel1 .= $planoCod[$chave]['titulo'].'</td><td id="moeda">';
+				$nivel1 .= $vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">';
+				$nivel1 .= $vlrSaldoAnte.'</td></tr>';
+			}
+
 		}elseif ($rec=='16') {
 			//Contas Nivel 4, tipo: 1.1.1.001 - Impressão
 			require '../help/tes/relComadepG2.php';

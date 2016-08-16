@@ -41,8 +41,10 @@
 		<tfoot>
 			<?php
 				echo '<tr id="total">';
-				printf("<td colspan='3' id='moeda'>Movimento do per&iacute;odo: R$ %s </td>",number_format($debito,2,',','.'));
-				echo '<td colspan="2" id="moeda" ></td>';
+				echo '<tdid="moeda" ></td>';
+				echo '<td colspan="2" id="moeda">Movimento do per&iacute;odo <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></td>';
+				echo '<td id="moeda" >R$ '.number_format($debito,2,',','.').'</td>';
+				echo '<td colspan="2" id="moeda" ></td></tr>';
 			?>
 		</tfoot>
 	</table>

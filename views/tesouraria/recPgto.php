@@ -15,17 +15,17 @@
 		</caption>
 		<colgroup>
 				<col id="Igreja">
-				<col id="Função">
+				<col id="Fun&ccedil;&atilde;o">
 				<col id="Nome">
-				<col id="Auxílio/Salário">
+				<col id="Aux&iacute;lio/Sal&aacute;rio">
 				<col id="Dia Pgto">
 			</colgroup>
 		<thead>
 			<tr>
 				<th scope="col">Nome</th>
-				<th scope="col">Função</th>
+				<th scope="col">Fun&ccedil;&atilde;o</th>
 				<th scope="col">Igreja</th>
-				<th scope="col">Auxílio/Salário</th>
+				<th scope="col">Aux&iacute;lio/Sal&aacute;rio</th>
 				<th scope="col">Dia Pgto</th>
 			</tr>
 		</thead>
@@ -35,7 +35,7 @@
 		<tfoot>
 			<?php 
 				echo '<tr id="total">'; 
-				echo '<td colspan="3" id="moeda" >Total Geral ---> </td>';
+				echo '<td colspan="3" id="moeda" >Total Geral <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> </td>';
 				printf("<td colspan='2' id='moeda'>R$ %s </td></tr>",number_format($debito,2,',','.'));
 			?>
 		</tfoot>
