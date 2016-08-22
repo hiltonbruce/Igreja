@@ -1,33 +1,54 @@
 <?php
+//Verifica click duplo no form de criar recibos
+if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
+	//houve click duplo no form
+	$gerarPgto = true;
+}else {
+	//Não houve click duplo no form
+	$gerarPgto = false;
+	//Grava no banco codigo de autorização para o novo recibo
+	add_transid($_POST["transid"]);
+}
+
 //print_r($ctaDespesa->dadosArray());
-foreach ($arrayDespesas as $chave => $valor) {
-//Verifica se foi enviado dados para lançamento, testando e executando
-    if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>'0') {
+if ($gerarPgto) {
+	    ?>
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">×</span></button> <strong>lançamento não Realizado!</strong>
+		<br />Foi realizado atualização da página ou um clique duplo. </div>
 
-    	$rolIgreja = $_POST['rolIgreja'.$chave];
-    	echo '<script> alert ('.$_POST['acesso'.$chave].')</script>';
-    	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor'.$chave]), ',.','.,' ):($valor_us);
-		$debitar = $_POST['acesso'.$chave];
-		$creditar =  $_POST['disponivel'.$chave];
-		//print_r($_POST);
+    <?PHP
+    }else {
+		foreach ($arrayDespesas as $chave => $valor) {
+		//Verifica se foi enviado dados para lançamento, testando e executando
+		    if ($_POST['acesso'.$chave]>0 && $_POST['disponivel'.$chave]>0 && checadata ($_POST['data'.$chave]) && $_POST['rolIgreja'.$chave]>0 && !empty($_POST['hist'.$chave]) && $_POST['valor'.$chave]>'0') {
 
-		$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a variável o histórico do lançamento
-		$data = br_data($_POST['data'.$chave]);
-		//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
-		//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
-		//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
-        # chama o script responsável pelo lançamento
-        if ($debitar == $creditar) {
-        	?>
-        	<div class="alert alert-danger alert-dismissible fade in" role="alert"> 
-        	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        	<span aria-hidden="true">×</span></button> <strong>lançamento não Realizado!</strong> 
-        	Crédito e Debito com mesma conta não é realizado o lançamento. </div>
-        	<?PHP
-        } else {
-        	require 'models/tes/lancModPlanilha.php';
-        }
-    }
+		    	$rolIgreja = $_POST['rolIgreja'.$chave];
+		    	echo '<script> alert ('.$_POST['acesso'.$chave].')</script>';
+		    	$valor = (empty($valor_us)) ? strtr( str_replace(array('.'),array(''),$_POST['valor'.$chave]), ',.','.,' ):($valor_us);
+				$debitar = $_POST['acesso'.$chave];
+				$creditar =  $_POST['disponivel'.$chave];
+				//print_r($_POST);
+
+				$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a variável o histórico do lançamento
+				$data = br_data($_POST['data'.$chave]);
+				//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
+				//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
+				//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
+		        # chama o script responsável pelo lançamento
+		        if ($debitar == $creditar) {
+		        	?>
+		        	<div class="alert alert-danger alert-dismissible fade in" role="alert">
+		        	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		        	<span aria-hidden="true">×</span></button> <strong>lançamento não Realizado!</strong>
+		        	Crédito e Debito com mesma conta não é realizado o lançamento. </div>
+		        	<?PHP
+		        }else{
+		        	require 'models/tes/lancModPlanilha.php';
+		        }
+		    }
+	}
 }
 
 if (!checadata($data)) {
@@ -48,7 +69,7 @@ $ultimolanc = 0;
 //inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
-//print_r($arrayDesp);
+#print_r($arrayDesp);
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
@@ -62,10 +83,11 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign"> </small>Venc.: '.$vlrDesp['vencimento'];
 		$vencPgto .= ' '.$linkPagar;
 		$titleMsg = ', ainda n&atilde;o paga!';
-	}
-	else {
+	}else {
 		$vencPgto = '';
 	}
+
+	//Exibi os pgtos das contas
 	if ($vencPgto=='') {
 		$linhaTab  = '<tr><td> Lan&ccedil;. N&ordm: '.$vlrDesp['lancamento'].' em: '.$vlrDesp['data'].'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
@@ -87,6 +109,7 @@ $igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 $lancar = '<br /><br /><button class="btn btn-primary">Lan&ccedil;ar!</button>';
 
 //print_r($ctaDespesa->dadosArray());
+$transid = get_transid();
 $ctaGrup3 = '';
 $blGrupo3Fim = '';
 $blGrupo3Ini = '';
@@ -100,7 +123,8 @@ foreach ($arrayDespesas as $chave => $valor) {
 	$bscCredorList = new List_sele('igreja', 'razao','rolIgreja'.$chave);
 	$listaIgreja = $bscCredorList->List_Selec('',$igreja,'class="form-control" autofocus="autofocus" ');
 	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control"/>';
-	$conta ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
+	$conta  ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
+	$conta .='<input name="transid" type="hidden" value="'.$transid.'">';
 
 //Contas do grupo 3
 	if (strlen($valor['codigo'])=='5') {
