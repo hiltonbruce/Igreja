@@ -11,13 +11,12 @@ if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
 }
 
 //print_r($ctaDespesa->dadosArray());
-if ($gerarPgto) {
+if ($gerarPgto && $_POST["transid"]!="") {
 	    ?>
 		<div class="alert alert-danger alert-dismissible fade in" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">×</span></button> <strong>lançamento não Realizado!</strong>
 		<br />Foi realizado atualização da página ou um clique duplo. </div>
-
     <?PHP
     }else {
 		foreach ($arrayDespesas as $chave => $valor) {

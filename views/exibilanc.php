@@ -1,5 +1,10 @@
 <table class="table table-hover table-condensed table-striped table-bordered">
-	<caption>Lançamento Concluído - Data: <?PHP echo $_POST['data'].' - '.$igLanc->razao();?></caption>
+	<caption>Lançamento Concluído - Data:
+	<?PHP
+		echo (empty($_POST['data'])) ? conv_valor_br ($data) : $_POST['data'];
+		echo ' - '.$igLanc->razao();
+	?>
+	</caption>
 		<colgroup>
 			<col id="Conta">
 			<col id="D&eacute;bito">

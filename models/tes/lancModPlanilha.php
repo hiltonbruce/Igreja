@@ -45,7 +45,9 @@ if ($msgErro=='') {
 	//Exibi lançamento
 	$caixa = new DBRecord('contas',$debitar,'acesso');
 	$totalDeb = $totalDeb + $valor;
-	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
+	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir[]
+
+	$igLanc = new DBRecord('igreja',$rolIgreja,'rol');//Exibi o nome da igreja no lanç.
 
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
 	//esta variável é levada p/ o script views/exibilanc.php
