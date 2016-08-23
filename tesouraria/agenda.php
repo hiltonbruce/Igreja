@@ -99,7 +99,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$total = number_format($atualizar->valor+$atualizar->multa,2,",",".");
 
 		if ($_POST['status']=='2'){
-			$pagamento = ($_POST['datapgto']=='') ? date('Y-m-d') : br_data($_POST['datapgto'],"Data do pagamento!");
+			$pagamento = ($_POST['data']=='') ? date('Y-m-d') : br_data($_POST['data'],"Data do pagamento!");
 			$atualizar->datapgto	=	$pagamento;
 			$mensagem = "<script> alert('Pagamento confirmado com sucesso! Em $pagamento, Total de: R$ $total');</script>";
 		}else {

@@ -5,7 +5,7 @@
 if (empty($_GET['ano'])) {
 	$ano = date('Y');
 	$anoForm = '';
-}elseif (!empty($_GET['ano']) && $_GET['ano']>'0' ) {
+}elseif (!empty($_GET['ano']) && $_GET['ano']>'2000' ) {
 	$ano = $_GET['ano'];
 	$anoForm = $ano;
 }else {
@@ -39,12 +39,7 @@ switch ($rec) {
 		require_once ('forms/ofertaEBD.php');#Form lançar ofertas Esc Bíblica
 		break;
 	case '5':
-	    $form = 'forms/tes/autoLancarDespesas.php';
-		$ctaDespesa = new tes_despesas();
-		$arrayDespesas = $ctaDespesa->dadosArray();		
-		$bsccredor = new tes_listDisponivel();
-		$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
-		$listaFonte = $bsccredor->List_Selec($acesso);
+	    //$form = 'forms/tes/autoLancarDespesas.php';
 		require_once ('forms/tes/lancarTipoPlan.php');#Form lançar despesas tipo planilha
 		break;
 	case '6'://Relatório COMADEP

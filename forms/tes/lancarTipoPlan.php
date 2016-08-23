@@ -1,6 +1,6 @@
 <?php
 	$ind = 0;
-	$ano = (empty($_GET['ano'])) ? date('Y') : $_GET['ano'] ;
+	//$ano = (empty($_GET['ano'])) ? date('Y') : $_GET['ano'] ;
 	$mesEstatisca = (empty($_GET['mes']) || $_GET['mes']>12) ? date('m') : $_GET['mes'] ;
 	$igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 ?>
@@ -23,12 +23,12 @@
 	  	</div>-->
 		<div class="col-xs-3">
 			<label>M&ecirc;s de refer&ecirc;ncia:</label>
-			<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
+			<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" required="required" >
 			      <?php
-			      	$linha1 = '<option value="0"></option>';
+			      	$linha1 = '<option value=""></option>';
 				      foreach(arrayMeses() as $mes => $meses) {
-						 $linha2 .= '<option value='.(int)$mes.'>'.$meses.'</options>';
-						 if ($mesEstatisca==$mes) {
+						 $linha2 .= '<option value='.intval($mes).'>'.$meses.'</options>';
+						 if ($mesEstatisca==$mes & !empty($_GET['mes'])) {
 						 	$linha1 = '<option value='.(int)$mes.'>'.$meses.'</options>'.$linha1;
 						 	$mesPesquisa = $meses;
 						 }
@@ -39,7 +39,7 @@
 	  	</div>
 		<div class="col-xs-3">
 			<label>Ano</label>
-					<input type="text" name="ano" value="<?php echo $anoForm;?>"
+					<input type="text" name="ano" value="<?php echo $anoForm;?>" required='required'
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="direita"	value="1" /><!-- tira a tabela lateral -->
 	  	</div>
@@ -55,10 +55,20 @@
   </div>
 <div class="panel panel-primary">
 	<?PHP
+	if (!empty($_GET['mes']) && !empty($_GET['ano'])) {
 		//Inicia o bloco com os forms de lançamentos
-		$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar de pagamentos - Per&iacute;odo: '.$mesEstatisca.'/'.$ano.'</h3></div>';
+
+		$ctaDespesa = new tes_despesas();
+		$arrayDespesas = $ctaDespesa->dadosArray();
+		$bsccredor = new tes_listDisponivel();
+		$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
+		$listaFonte = $bsccredor->List_Selec($acesso);
+
+		$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar de pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
 		require_once 'help/tes/lancTipoPlan.php';
 		require_once 'views/tesouraria/lancTipoPlan.php';
 		//print_r($arrayDesp);
+		# code...
+	}
 	?>
 </div>
