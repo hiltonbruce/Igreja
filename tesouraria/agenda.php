@@ -114,6 +114,8 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			# Atualiza agenda
 			$atualizar->Update();
 		}
+
+		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendência
 		require_once 'forms/tes/buscaAgenda.php';// Busca por Despesas Agendadas
 		echo $mensagem;
 
