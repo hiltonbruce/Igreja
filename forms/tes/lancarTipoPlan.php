@@ -5,12 +5,8 @@
 	$igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 ?>
 <div class="bs-callout bs-callout-danger" id="callout-alerts-no-default">
-    <h4>Lan&ccedil;amentos de pagamentos</h4>
-    <p>Indique no primeiro campo a conta utilizada para pagar a despesa.
-    E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
-     "Clicando" no sinal de "+" para que seja visualizado
-     os campos para preenchimento relativos a despesa!
- 	</p>
+    <h4>Lan&ccedil;amentos de pagamentos!<small> (Per&iacute;odo abaixo...)</small></h4>
+
 <form  method='get'>
 	<div class="row">
 		<!-- <div class="col-xs-3">
@@ -53,9 +49,16 @@
 	</div>
 </form>
   </div>
-<div class="panel panel-primary">
-	<?PHP
+<?PHP
 	if (!empty($_GET['mes']) && !empty($_GET['ano'])) {
+?>
+<p class="text-primary">Clique no primeiro campo a conta utilizada para pagar a despesa.
+E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
+ "Clicando" no sinal de "+" para que seja visualizado
+ os campos para preenchimento relativos a despesa!
+</p>
+<div class="panel panel-primary">
+<?PHP
 		//Inicia o bloco com os forms de lançamentos
 
 		$ctaDespesa = new tes_despesas();
@@ -64,11 +67,11 @@
 		$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
 		$listaFonte = $bsccredor->List_Selec($acesso);
 
-		$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar de pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
+		$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
+
 		require_once 'help/tes/lancTipoPlan.php';
 		require_once 'views/tesouraria/lancTipoPlan.php';
 		//print_r($arrayDesp);
-		# code...
-	}
-	?>
+?>
 </div>
+<?PHP } ?>

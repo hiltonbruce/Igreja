@@ -26,7 +26,7 @@
 
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
 		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
-			&nbsp;Mudar este compromisso para credor <strong>NÃO</strong>-Membro da Igreja!</label></p>
+			&nbsp;Mudar este compromisso para credor <strong>N&Aatilde;O</strong>-Membro da Igreja!</label></p>
 		  </div>';
 
 	}else {
@@ -77,7 +77,7 @@
 ?>
 
 <fieldset>
-	<legend>Lançar Pagamento</legend>
+	<legend>Lan&ccedil;ar Pagamento</legend>
 	<p style="background: white; color: blue; font-size: 14px;">
 	<form action="" method="post" name="cadastro_igreja">
 		<table style="text-align: left; width: 100%;">
@@ -133,7 +133,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Código/tipo:<br /> <input type="text" id="estado_val" class="form-control"
+					<td>C&oacute;digo/tipo:<br /> <input type="text" id="estado_val" class="form-control"
 						name="estado_val" disabled="disabled"
 						value="<?php echo $ctaDespesa->codigo().', Tipo: '.$ctaDespesa->tipo();?>" />
 					</td>
@@ -144,7 +144,7 @@
 						 <?PHP echo $desCampoCta; ?> tabindex="<?PHP echo ++$ind; ?>" /></td>
 				</tr>
 				<tr>
-					<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
+					<td colspan="3">Descri&ccedil;&aatilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
 						disabled="disabled" class="form-control" value="<?php echo $ctaDespesa->descricao();?>" /></td>
 				</tr>
 				<tr>
@@ -154,7 +154,7 @@
 				</tr>
 				<tr>
 					<td><label><input type="radio" id="status" <?php echo $pago;?>
-						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago (Efetua lan&ccedil;amento contabil)</label>
+						name="status" value="2" tabindex="<?php echo ++$ind; ?>"> Pago (Efetua lan&ccedil;amento cont&aacute;bil)</label>
 					</td>
 					<td><label> <input type="radio"
 						id="status" name="status" value="1" <?php echo $enviado;?>
@@ -226,7 +226,7 @@
 		?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      CONTA <strong>VENCIDA</strong>! Ainda não foi paga! <strong>Situação em: <?php echo $dataget;?></strong>
+	      CONTA <strong>VENCIDA</strong>! Ainda n&aatilde;o foi paga! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php
@@ -242,7 +242,7 @@
 		?>
 		<div class="alert alert-info alert-dismissible" role="alert">
 	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta PAGA, Obrigado! <strong>Situação em: <?php echo $dataget;?></strong>
+	      Conta PAGA, Obrigado! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php

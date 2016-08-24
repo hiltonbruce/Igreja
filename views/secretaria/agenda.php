@@ -1,7 +1,7 @@
 <div class="btn-group" role="group" aria-label="...">
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="badge">+</span>
+    <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
     </button>
     <ul class="dropdown-menu">
       <li><a href="#">Agendar culto</a></li>

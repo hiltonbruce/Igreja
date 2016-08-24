@@ -77,7 +77,7 @@ function conv_valor_br ($data) {
 
 function eventoFrequencia ($tipo,$data) {
 		//Retorna a data adequda e a informação de periodo
-		
+
 }
 
 function sele_uf ($valor,$campo) {
@@ -481,6 +481,16 @@ function link_ativo ($val_link,$variavel) {
 		}
 }
 
+function li_ativo ($val_link,$variavel) {
+	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
+	*	da cor de fundo. Isto deve ser definido no script de CSS
+	*/
+	if ($variavel==$val_link) {
+			return 'class="selected" style="border-top:0;"';
+		}else {
+			return '';
+		}
+}
 function id_corrente ($val_link) {
 	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
 	*	da cor de fundo. Isto deve ser definido no script de CSS
@@ -1164,7 +1174,7 @@ function calcDiaSemana($dia,$mes,$ano){
 			} else {
 				$diaAtual = $cnt_dias++;
 			}
-						
+
 			$temp_ln=$temp_ln."<td class='td_marcado0'>".$diaAtual.'<br />'.$marcaDia.'</td>';
 			$marcaDia = '';
 	        $daux++;
