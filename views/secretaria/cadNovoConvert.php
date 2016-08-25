@@ -1,6 +1,8 @@
 <?php
 if (empty($_SESSION['valid_user']))
 header("Location: ../");
+
+$uf_end = (empty($_GET['uf'])) ? 'PB' : $_GET['uf'] ;
 ?>
 
 <fieldset>
@@ -12,6 +14,9 @@ header("Location: ../");
           <select name="uf_end" class="form-control" id="uf_end"
            onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" autofocus='autofocus' >
           <?PHP
+            if (empty($_GET['uf'])) {
+              echo '<option>Estado Natal</option>';
+            }
             $estnatal = new List_UF('estado', 'nome','uf_end');
             echo $estnatal->List_Selec_pop($linkLancamento.'&sec=1&uf=',$uf_end);
           ?>

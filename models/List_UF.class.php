@@ -6,20 +6,20 @@ class List_UF extends List_sele {
 	  	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' required='required' class='form-control' tabindex='++$ind'>";
 		$linha1 =  "<option value=''>-->> Escolha <<--</option>";
 		$linhas .= '';
-		
+
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
 		       	if ($item==$this->col_lst["iduf"]) {
 		       		$linha1 =  "<option value='".$this->col_lst["iduf"]."'>".$this->col_lst[$this->campo_retorno]."</option>";
 		       	}
 			    $linhas .= "<option value='".$this->col_lst["iduf"]."'>".$this->col_lst[$this->campo_retorno]."</option>";
-	       	
+
 	       }
 	    $linhas .= "</select>";
-	    
+
 	  return $linha1.$linhas ;
 	}
-	
+
 	function List_Selec_pop ($valor,$uf){
 	//Lista Select para uso com javascrip popup
 	//Mostra as linhas de select
