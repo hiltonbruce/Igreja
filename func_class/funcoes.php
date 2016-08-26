@@ -1220,7 +1220,7 @@ function calcDiaSemana($dia,$mes,$ano){
  }
 
  function formataNumBanco ($numero) {
- 	//Fomata número retuirando a virgula e substituido por ponto
+ 	//Fomata número retirando a virgula e substituido por ponto
  	//Dando prioridade para a vírgula. Verificando no final da string
  	$numero = trim($numero);
 

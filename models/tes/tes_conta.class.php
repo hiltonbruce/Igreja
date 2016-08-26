@@ -50,19 +50,22 @@ class tes_conta {
 	}
 
 	function ativosArray() {
-		#Contas de lançamento vinculada pelo código de acesso
+		#Contas de lançamento vinculada pelo código de acesso e acesso != 0
 		return $this->arrayAtivos;
 	}
 
 	function contasTodas() {
+		#Contas de lançamento vinculada pelo ID
 		return $this->arrayTodos;
 	}
 
 	function contasGrupos() {
+		#Contas de lançamento vinculada pelo codigo e com acesso != zero
 		return $this->arrayGrupos;
 	}
 
 	function contasCod() {
+		#Contas de lançamento vinculada pelo codigo
 		return $this->arrayCod;
 	}
 

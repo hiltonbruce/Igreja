@@ -1,4 +1,4 @@
-<?php $ind=1; 
+<?php $ind=1;
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 
@@ -11,24 +11,29 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 		<input type="submit" class="btn btn-primary" value = "Re - Imprimir este recibo" >
 </form>
 </td><td>
- <?php 
+ <?php
   if ($rec_alterar->lancamento()<'1') {
    $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
-   $linkLancamento .= '&recibo='.$rec_alterar->id();
-   echo '<a href="'.$linkLancamento.'&rec=4"><button type="button" ';
-   echo 'class="btn btn-primary">Lançar esta despesa</button></a>';
+   $linkLancamento .= '&recebeu='.$recebeu.'&nIgr='.$rec_igreja->razao().'&recibo='.$rec_alterar->id();
+   echo '<a href="'.$linkLancamento.'&rec=4"><label>&nbsp;</label><br /><button type="button" ';
+   echo 'class="btn btn-primary">Lan&ccedil;ar esta despesa</button></a>';
   }else {
-   echo '&nbsp;';
+  		$lancConfirmado  = '<p><kbd>Lan&ccedil;amento N&ordm;: '.$rec_alterar->lancamento().' confirmado</kbd></p>';
+		$lancConfirmado .= '<p class="text-danger">Ap&oacute;s confirma&ccedil;&atilde;o do ';
+		$lancConfirmado .= 'lan&ccedil;amento as altera&ccedil;&otilde;es n&atilde;o ';
+		$lancConfirmado .= 'modificar&aacute; o lan&ccedil;amento do sistema! </p>';
+
+   echo $lancConfirmado;
   }
- ?>	
+ ?>
 </td>
 <td style="text-align: right;">
 	<form id = "form1" action="" method="get">
-		<input type="hidden" name="valor" id="valor" value="<?php echo  $rec_alterar->valor();?>">
-		<input type="hidden" name="referente" id="referente" value="<?php echo  $rec_alterar->motivo();?>">
-		<input type="hidden" name="igreja" id="igreja" value="<?php echo  $rec_alterar->igreja();?>">
-		<input type="hidden" name="fonte" id="fonte" value="<?php echo  $rec_alterar->fonte();?>">
-		<?php 
+		<input type="hidden" name="valor" id="valor" value="<?php echo $rec_alterar->valor();?>">
+		<input type="hidden" name="referente" id="referente" value="<?php echo $rec_alterar->motivo();?>">
+		<input type="hidden" name="igreja" id="igreja" value="<?php echo $rec_alterar->igreja();?>">
+		<input type="hidden" name="fonte" id="fonte" value="<?php echo $rec_alterar->fonte();?>">
+		<?php
 			switch ($rec_alterar->tipo()) {
 				case 3:
 				list($nome,$cpf,$rg)=explode( ",",$rec_alterar->recebeu());
@@ -42,13 +47,13 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 				case 2:
 				echo '<input type="hidden" name="recebeu" id="recebeu" value="'.$rec_alterar->recebeu().'">';
 				break;
-				
+
 				default:
 				echo '<input type="hidden" name="nome" id="nome" value="'.$recebeu.'">';
 				echo '<input type="hidden" name="rol" id="rol" value="'.$rec_alterar->recebeu().'">';
 				break;
 			}
-			
+
 			$cred = $rec_alterar->conta();
 			$deb = $rec_alterar->fonte();
 			echo '<input type="hidden" name="deb" id="rec" value="'.$deb.'">';
@@ -62,7 +67,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 	</form>
 </td>
 
-<?php 
+<?php
 } else {
 	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();

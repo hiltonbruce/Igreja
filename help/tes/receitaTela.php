@@ -38,6 +38,9 @@ switch ($rec) {
 		require_once 'forms/concluirdiz.php';
 		require_once ('forms/ofertaEBD.php');#Form lançar ofertas Esc Bíblica
 		break;
+	case '4':
+		require_once ('forms/tes/lancarRec.php');
+		break;
 	case '5':
 	    //$form = 'forms/tes/autoLancarDespesas.php';
 		require_once ('forms/tes/lancarTipoPlan.php');#Form lançar despesas tipo planilha

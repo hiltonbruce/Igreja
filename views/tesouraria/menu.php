@@ -43,13 +43,6 @@
 		  ?>
 	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relatório</a></li>
 
-		  <?php if ($_GET['rec']=='4' ) {
-		  	$linkAtivo='class="active"';
-		  }else {
-		  	$linkAtivo='';
-		  }?>
-	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento;?>&rec=4">Recibo</a></li>
-
 		  <?php if ($_GET['rec']=='5' ) {
 		  	$linkAtivo='class="active"';
 		  }else {
