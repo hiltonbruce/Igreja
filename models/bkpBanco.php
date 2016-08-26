@@ -5,6 +5,22 @@ if (!empty($_GET['gerar'])) {
 	$nomeBanco = 'assembleia'.date('YmdHis').'.sql';
 	system('mysqldump -h '.$servidor.' -u'.$user.' -p'.$senha.' '.$bancoD.' > bkpbanco/'.$nomeBanco);
 	sleep(5);
+
+	// Abre o arquivo Backup
+	$cabArqu  = "CREATE DATABASE  IF NOT EXISTS `assembleia`; \n";
+	$cabArqu .= "USE `assembleia`;\n \n";
+	$cabArqu .= "-- Sistema Administrativo e Financeiro para Igrejas Evangélicas \n";
+	$cabArqu .= "-- Criado por: Joseilton Costa Bruce (hiltonbruce@gmail.com) Database: assembleia \n";
+	$cabArqu .= "-- Em: ".date('d/m/Y H:i:s')."\n \n-- ";
+
+	$fp = fopen('bkpbanco/'.$nomeBanco, 'r+');
+
+	// Escreve $cabArqu no Arquivo de Backup
+	$escreve = fwrite($fp, $cabArqu);
+
+	// Fecha o arquivo
+	fclose($fp);
+
 }
 
 // variável que define o diretório das imagens
@@ -71,16 +87,16 @@ if (count($arq)=='0') {
 ?>
 <div class="bs-example bs-navbar-top-example" data-example-id="navbar-fixed-to-top">
  <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid"> 
+	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Anteriores</a> 
-		</div> 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"> 
-		<ul class="nav navbar-nav"> 
+			<a class="navbar-brand" href="#">Anteriores</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+		<ul class="nav navbar-nav">
 		  	<?PHP echo $filesEnd;
 		  	?>
-		</ul> 
-		</div> 
-	</div> 
- </nav> 
+		</ul>
+		</div>
+	</div>
+ </nav>
 </div>
