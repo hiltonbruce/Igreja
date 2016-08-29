@@ -9,13 +9,16 @@ $tab="sistema/atualizar_sistema.php";//link q informa o form quem chamar p atual
 $tab_edit='tesouraria/rec_alterar.php&menu=top_tesouraria&tabela=tes_recibo&id='.$_GET["id"].'&pag_mostra='.$_GET["pag_mostra"].'&campo=';//Link de chamada da mesma página para abrir o form de edição do item
 
 $rec_alterar = new DBRecord("tes_recibo", $id, "id");
-list($anov, $mesv, $diav) = explode("-", $rec_alterar->data());
+//list($anov, $mesv, $diav) = explode("-", $rec_alterar->data());
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
-$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias após a emissão do recibo
+//$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias após a emissão do recibo
 
-if ($diasemissao>'2') {
+#Verifica se o recibo já foi lançado e bloqueia para alteração
+$testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') ? true : false;
+
+if (!$testLanc) {
 	echo '<h2><span style="color:#FF0000;font-size:150%;text-decoration: blink;">';
-	echo 'O prazo para altera&ccedil;&atilde;o deste recibo est&aacute; expirado!</span><br />';
+	echo 'O recibo j&aacute; teve seu lan&ccedil;amento confirmado e n&atilde;o poder&aacute; ser alterado!!</span><br />';
 	echo 'Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</h2>';
 }
 ?>
@@ -32,7 +35,7 @@ if ($diasemissao>'2') {
 	<div id="lst_cad">
 		<table class='table table-condensed'>
 	      <tr>
-			<td>Nome do Beneficiado:
+			<td colspan='2'><label>Nome do Beneficiado:</label>
 				<?PHP
 					switch ($rec_alterar->tipo)
 					{
@@ -75,14 +78,14 @@ if ($diasemissao>'2') {
 					}
 				?>
 			</td>
-	        <td>Recibo N&uacute;mero:
+	        <td><label>Recibo N&uacute;mero:</label>
 			<?PHP
 			printf ("<p> %'05u</p>",$id);
 			?>
 			</td>
 		</tr>
 		<tr>
-	        <td colspan='2'>Motivo do pagamento:
+	        <td colspan='3'><label>Motivo do pagamento:</label>
 			<?PHP
 			$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
 			$nome->getMostrar();$nome->getEditar();
@@ -90,7 +93,7 @@ if ($diasemissao>'2') {
 			</td>
 	      </tr>
 	      <tr>
-	      		<td>Fonte do Recurso:
+	      		<td colspan='2'>Fonte do Recurso:
 	          <?PHP
 				$nome = new editar_form("fonte",$rec_alterar->fonte(),$tab,$tab_edit);
 				$fonte = new DBRecord("contas", $rec_alterar->fonte(), "acesso");
@@ -132,12 +135,17 @@ if ($diasemissao>'2') {
 					echo '<input name="id" id="id" type="hidden" value="'.$id.'">';
 					echo '<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >';
 					echo '</form>';
-
 					}
 					?>
 	      		</td>
 	      </tr>
-	      <tr style="background-color: transparent;">
+	      <tr>
+	        <td><label>Lan&ccedil;amento:</label>
+	        <?PHP
+			$nome = new editar_form("lancamento",$rec_alterar->lancamento(),$tab,$tab_edit);
+			$nome->getMostrar();$nome->getEditar();
+			?>
+			</td>
 	        <td>Data da emiss&atilde;o:
 	        <?PHP
 			$nome = new editar_form("data",$rec_alterar->data(),$tab,$tab_edit);
@@ -152,8 +160,8 @@ if ($diasemissao>'2') {
 			?>
 			</td>
 	      </tr>
-	      <tr style="background-color: transparent;">
-	        <td >Para Igreja:
+	      <tr>
+	        <td colspan='2'>Para Igreja:
 				<?PHP
 				if ($rec_alterar->igreja()<'1') {
 					echo "<p><a href='./?escolha={$tab_edit}igreja'>Templo Sede</a></p>";

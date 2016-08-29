@@ -86,11 +86,11 @@ if ($rec) {
 
 					<div class="row">
 					  <div class="col-xs-6">
-						<label>Data</label>
-						<input type="text" class="form-control" disabled value="<?php
+						<label>Data
+						(<?php
 						echo conv_valor_br ($recDados->data());
-						?>" />
-						<input name="data" type="hidden" value="<?php echo conv_valor_br ($recDados->data());?>" />
+						?>)</label>
+						<input name="data" type="text" class="form-control dataclass" value="<?php echo conv_valor_br ($recDados->data());?>" />
 					  </div>
 
 					<?php
