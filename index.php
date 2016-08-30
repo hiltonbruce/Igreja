@@ -68,7 +68,6 @@
           E n&atilde;o vos embriagueis com vinho, em que h&aacute; contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
        </strong></marquee>
       </div>
-      <div class="leftpanel">
 	  <?PHP
 	// echo '<h1> SESSION[valid_user]- '.$_SESSION['valid_user'].'--Session[setor]-- '.$_SESSION['setor'].' - '.$_SESSION['nome'].'--Session[cid_end]-- '.$_SESSION['cid_end'].'</h1>';
 
@@ -80,6 +79,7 @@
                $mainpanelFim = '';
             }
 		  ?>
+      <div class="leftpanel">
         <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
         <ul id="categories">
@@ -91,6 +91,11 @@
           <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture text-info" ></span>&nbsp;Cadastrar Bairro</a></li>
           <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt text-info" ></span>&nbsp;Ficha, Recibo e Certid&otilde;es</a></li>
           <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift text-info" ></span>&nbsp;Aniversariantes</a></li>
+
+          <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php"
+          title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es"
+          ><span class="glyphicon glyphicon-tree-deciduous text-info" ></span>&nbsp;Santa&nbsp;Ceia</a></li>
+        </ul></ul>
           <?php
           	if ($_SESSION['nivel']>'10') {
               $selItem = ($_GET['rec']=='25') ?  'class="selected"': '' ;
@@ -101,40 +106,21 @@
 		   	 <?php
           	}
           ?>
-		  <?PHP
-		  }
-		  	else
-		  {
-		  echo "<div class='header'></div>";
-       	  echo '';
-		  ?>
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-primary"><strong>Departamentos</strong></li>
-         <br />
-          <ul id="categories">
-          <li style="border-top:0;"  class='selected'><a href="./">Home</a></li>
-          <li><a href="#">COMADEBY</a></li>
-          <li><a href="infantil/">Infantil</a></li>
-          <li><a href="#">Item 4 </a></li>
-          <li><a href="#">USADEBY</a></li>
-          <li><a href="#">Item 6</a></li>
-          <li><a href="#">Item 7</a></li>
-          <?PHP  } ?>
-          <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php"
-          title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es"
-          ><span class="glyphicon glyphicon-tree-deciduous text-info" ></span>&nbsp;Santa&nbsp;Ceia</a></li>
-        </ul></ul>
-        <ul class="list-group">
+          <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li>
            <?PHP
-  				//echo "<h2>{$_SESSION["rol"]}</h2>";
-  				require_once ("autentica.php");
-    			?>
+          //echo "<h2>{$_SESSION["rol"]}</h2>";
+          require_once ("autentica.php");
+          ?>
         </ul>
-    </div>
- <div id="content">
-        <?PHP
-        echo $mainpanelIni;
+      </div>
+      <div id="content">
+		  <?PHP
+		  } else {
+        echo '<div id="main-content">';
+      }
+
+      echo $mainpanelIni;
 
 		if ($_SESSION["valid_user"]){
 			if (strstr($_GET["escolha"],"adm/")){

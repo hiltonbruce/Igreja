@@ -13,11 +13,7 @@ a, a:visited, a:link { color:#000000; text-decoration:underline; }
 
 a:hover { color: #666666; }
 
-h1 { font-size:18px; margin:0; color:#333333; border-bottom: 1px dashed #333333; text-shadow: 2px 5px 10px #999; }
-
 h2 { font-size:12px; margin:0; color:#333333; border-bottom: 1px dashed #333333; border-top:1px dotted #333333; }
-
-h1 a, h1 a:visited, h1 a:link { text-decoration:none; }
 
 h2 a, h2 a:visited, h2 a:link { text-decoration:none; padding:10px; line-height:25px; }
 
@@ -145,6 +141,23 @@ div .rightpanel {
 	float: left;
 }
 
+.main-content {
+    margin-top: 40px;
+    width: 60%;
+    float: left;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 2px #FFFFFF;
+    z-index:20;
+}
+
+.login {
+    margin-top: 40px;
+    width: 40%;
+    float: left;
+    padding: 10px 70px 0px 0px;
+    margin-bottom: 50px;
+}
+
 div .mainpanel {
 	width:76%;
 	float:left;
@@ -173,7 +186,7 @@ div.leftpanel .header, div.rightpanel .header {
 /* uplatnuje sa na left a right stlpec */
 .text img { margin-right:10px; margin-bottom: 10px; border:0;  float:left; }
 
-.text_ { padding:15px; text-align:justify; }
+.text_ { padding:15px; text-align:justify;}
 /* uplatnuje sa na hlavny stlpec */
 .text_ img { vertical-align:middle; border:0; }
 
@@ -212,23 +225,6 @@ legend {
 	font: 12px Arial;
 	background-color:#89DFF4; color:#000066;
 	}
-
-span#rodape{
-	font-weight:bold;
-	background:#00CCFF;
-	font-weight: bold;
-	}
-
-a#rodape{
-	text-decoration:underline;
-	font-size:16px;
-	}
-
-
-tr:hover#form {
-  background-color: transparent;
-  color: inherit;
-}
 
 .box {
   width: 100%;
