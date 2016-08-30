@@ -1,5 +1,5 @@
 <div class="main-content">
-<h1 class="text-center">Administra&ccedil;&atilde;o de Igreja Evang&eacute;licas</h1>
+<h1 class="text-center">Administra&ccedil;&atilde;o de Igreja Evang&eacute;lica</h1>
   <img src="img/marcaBkp.png" alt="" align="left"  hspace="10px"/>
 </div>
   <div class="login">
