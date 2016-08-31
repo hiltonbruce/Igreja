@@ -5,7 +5,10 @@
 	<p> &nbsp;&nbsp;O Senhor Jesus esteve presente durante todo desenvolvimento me dando o rumo em meio a tantos c&oacute;digos. Espero no Deus de Abra&atilde;o, Isaque e Jac&oacute; que o uso deste software ajude a aben&ccedil;oar sua igreja, facilitando trabalhos e lhe permitindo mais tempo e dedica&ccedil;&atilde;o nas outras &aacute;reas da obra de Deus.</p>
 	<p>&nbsp;&nbsp; Deus aben&ccedil;oe a igreja!</p>
 </div>
-<h1>Desenvolvedor: Joseilton Costa Bruce</h1>
-<h2>Email para contato: hiltonbruce@gmail.com</h2>
-<h2>Telefone de contato: 55 83 </h2>
-<h2>Brasil - Paraíba - Bayeux</h2>
+<h4>Desenvolvedor: Joseilton Costa Bruce</h4>
+<h5>Email para contato: hiltonbruce@gmail.com</h5>
+<h5>Telefone de contato: 55 83 9 8111-2286</h5>
+<h5>Brasil - Paraíba - Bayeux</h5>
+<?php
+require_once 'noticias/painel.php';
+?>

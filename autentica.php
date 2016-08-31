@@ -94,10 +94,10 @@
   <form name="" method="post" action="">
 	<label>CPF:</label>
 	<input name="cpf" type="text" id="cpf" autofocus="autofocus"
-	required='required' class="form-control" tabindex="<?php echo ++$ind;?>">
+	required='required' class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='CPF do Usu&aacute;rio' >
 	<label>Senha:</label>
 	<input name="senha" type="password" id="senha" required='required'
-	class="form-control" tabindex="<?php echo ++$ind;?>">
+	class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='Senha de acesso' >
 	<br>
   	<input type="submit" name="Submit" value="logar"
   	class='btn btn-primary' tabindex="<?php echo ++$ind;?>" />

@@ -1,12 +1,3 @@
-<?php
-/*
-	if (ver_nome ("tesouraria")){
-			echo "<link rel='stylesheet' type='text/css' media='screen, projection' href='tabs.css' />";
-		}else {
-			echo "<link rel='stylesheet' type='text/css' media='screen, projection' href='adm/tabs.css' />";
-		}
-		*/
-?>
 <div class="rightpanel">
  <div class="inquiry">
  	<?PHP

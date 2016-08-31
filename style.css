@@ -9,16 +9,6 @@ body{
 	margin:0 auto;
 }
 
-a, a:visited, a:link { color:#000000; text-decoration:underline; }
-
-a:hover { color: #666666; }
-
-h2 { font-size:12px; margin:0; color:#333333; border-bottom: 1px dashed #333333; border-top:1px dotted #333333; }
-
-h2 a, h2 a:visited, h2 a:link { text-decoration:none; padding:10px; line-height:25px; }
-
-h2 img { margin-right:5px; border:0; }
-
 #lanc{
 	padding:6px 5px; margin: 2;
 	font: Arial;
@@ -143,7 +133,9 @@ div .rightpanel {
 
 .main-content {
     margin-top: 40px;
-    width: 60%;
+    width: 55%;
+    min-height: 35em;
+    padding-left: 10px;
     float: left;
     margin-bottom: 50px;
     text-shadow: 2px 2px 2px #FFFFFF;
@@ -151,9 +143,9 @@ div .rightpanel {
 }
 
 .login {
-    margin-top: 40px;
+    margin-top: 90px;
     width: 40%;
-    float: left;
+    float: right;
     padding: 10px 70px 0px 0px;
     margin-bottom: 50px;
 }

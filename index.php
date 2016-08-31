@@ -58,10 +58,8 @@
 <body>
 <div class="wrap1">
   <div class="wrap2">
-    <div class="logo"></div>
-    <div id="menu">
-          <?php require_once 'menu.php';?>
-    </div>
+    <?php require_once 'menu.php';?>
+
       <div class="info1">
 	  <?php //echo "Sessï¿½o ".$_SESSION["setor"];?>
         <marquee direction="left" scrollamount="3" height="27"><strong>
@@ -145,22 +143,29 @@
 			require ($cent->get());
 
 		}else {
-				require_once ('noticias/painel.php');
+				require_once ('views/login.php');
 		}
        echo $mainpanelFim;
 	   ?>
 	  <!-- rightpanel -->
-	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='') {
+	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='' && !empty($_SESSION['valid_user'])) {
 		  require_once ("painel_direito.php");
 		}
+    //Infomação para o radapé
+    $igreja = new DBRecord ("igreja","1","rol");
     ?>
 		<!-- Fim do rightpanel -->
     </div>
 </div>
-
     <div class="info1">
-      <div style="display:inline; float:left;">&copy; 2010 <a href="http://www.adby.com.br/">www.adpb.com.br</a>. Design <a href="http:#">Joseilton Costa Bruce</a>.</div>
-      <div style="display:inline; float:right;"><a href="http://jigsaw.w3.org/css-validator/check/referer"></a><a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px" src="img/valid-xhtml11-blue.png" alt="Validar XHTML 1.1" /></a><img style="border:0;width:88px;height:31px" src="img/vcss.gif" alt="Validar CSS!" align="bottom"/> <a href="mailto:hiltonbruce@gmail.com">Joseilton</a></div>
+      <div style="display:inline; float:left;">&copy; 2016 <a href="http://<?php echo $igreja->site();?>/"><?php
+       echo $igreja->site();?></a>. Design <span class="text-muted">Joseilton Costa Bruce</span>.</div>
+      <div style="display:inline; float:right;"><a href="http://jigsaw.w3.org/css-validator/check/referer"></a>
+        <a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px"
+        src="img/valid-xhtml11-blue.png" alt="Validar XHTML 1.1" /></a><img style="border:0;width:88px;height:31px"
+        src="img/vcss.gif" alt="Validar CSS!" align="bottom"/> <a href="mailto:hiltonbruce@gmail.com">
+       &nbsp;<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Joseilton</a>
+      </div>
     </div>
   </div>
 </body>

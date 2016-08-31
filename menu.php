@@ -1,3 +1,4 @@
+
 <?php
 	/*	Define se este botão ou limk é o corrente e o define para tal com mudança
 	*	da cor de fundo. Isto deve ser definido no script de CSS
@@ -42,13 +43,16 @@
 		//return "teste";
 	}
 ?>
-
-<div class="menu">
-<ul>
 	<?php
 	if (isset($_SESSION['valid_user']))	{
-
-	echo $link_home;?>
+	?>
+	<div class="logo"></div>
+	<div id="menu">
+	<div class="menu">
+	<ul>
+	<?php
+		echo $link_home;
+	?>
 	<li><img src="img/divider2.png" alt="" /></li>
 	<?php
 		if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50) {
@@ -61,7 +65,9 @@
 		<li><img src="img/divider2.png" alt="" /></li>
 		<?php
 		echo $link_suporte;
-	}
-	;?>
+		?>
 </ul>
 </div>
+</div>
+	<?php }
+	;?>
