@@ -20,11 +20,12 @@ body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color
 	margin-left: 150px;
 	padding: 5px;
 	font-family:"Times New Roman", Times, serif;
+	font-size: 180%;
 }
 
 #added-div-2 {
 	position:relative;
-	width: 900px;
+	width: 100%;
 	float: left;
 	margin-top: 20px;
 	padding-left: 100px;
@@ -67,7 +68,7 @@ h1{
 
 }
 h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
-h3, legend { color: #3366FF; font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 2px; font-family:"Times New Roman", Times, serif;}
+h3, legend { font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 2px; font-family:"Times New Roman", Times, serif;}
 h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
 h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 15px 0 0;}
 
@@ -83,14 +84,14 @@ p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:ju
 	width:150px;
 	z-index:3;
 	margin-top: -10px;
-	margin-left: 5em;
+	margin-left: 2em;
 }
 #Tipo {
 	float:left;
 	width:400px;
-	padding: 5px 0 20px;
-	font-size: 200%;
+	padding: 5px 0 20px 0;
+	font-size: 250%;
 	text-align: right;
-	margin-left: 10em;
+	margin-left: 7em;
 	color: #3366FF;
 }

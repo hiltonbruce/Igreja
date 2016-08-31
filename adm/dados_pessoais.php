@@ -28,19 +28,19 @@ if (!empty($_GET['bsc_rol'])) {
           <div class="col-xs-6">
              <input type="hidden" name="MAX_FILE_SIZE" value="200000">
              <label>Salvar foto:</label>
-             <input name="userfile" type="file" size="40" class="btn btn-primary" >
+             <input name="userfile" type="file" class="btn btn-default btn-sm" >
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-2 text-center">
              <label>&nbsp;</label>
             <input name="bsc_rol" type="hidden" value='<?PHP echo $bsc_rol;?>'>
-            <input type="submit" class="btn btn-primary" name="Submit" value="Enviar...">
+            <input type="submit" class="btn btn-primary btn-sm" name="Submit" value="Enviar...">
           </div>
 	</form>
-          <div class="col-xs-2"><br />
+          <div class="col-xs-2 text-center"><br />
              <?PHP
                 if ($img!="ver_foto.jpg") {
                     ?>
-                     <button onclick="myFunction()" class="btn btn-danger">Apagar foto</button>
+                     <button onclick="myFunction()" class="btn btn-danger btn-sm">Apagar foto</button>
                       <script>
                         function myFunction() {
                             var x;
@@ -67,7 +67,7 @@ if (!empty($_GET['bsc_rol'])) {
 			$nome->getMostrar();
             $nome->getEditar('','',$bsc_rol);#<!-- Mostra form para nome -->
 		?></td>
-		<td rowspan="3" align="center"><?PHP
+		<td rowspan="3" class="text-center"><?PHP
 					//echo " - Idade: ";
 
 			$mes = date ('m') - date('m',$arr_dad["nasc"]);

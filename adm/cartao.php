@@ -2,12 +2,13 @@
 	$rolConsuta = (int)$_GET['bsc_rol'];
 ?>
 
-<div>
-  <h2><a href="relatorio/cartao_impr.php?bsc_rol=<?php echo $rolConsuta;?>">
-  Visualizar impress&atilde;o ?<img src="img/Bank-Check-48x48.png" width="41" height="45" align="absmiddle"/>
-  </a>*<br />
-  </h2>
-    </div>
+<div class="text-center">
+  <a href="relatorio/cartao_impr.php?bsc_rol=<?php echo $rolConsuta;?>" title='Clique aqui para imprimir o cart&atilde;o'>
+      <button class="btn btn-default btn-sm" type="submit">
+      Visualizar impress&atilde;o? <img src="img/Bank-Check-48x48.png" width="41" height="41" align="absmiddle"/>
+      </button>
+  </a><br />
+</div>
  <?PHP
 if ($_SESSION['nivel']>4){
 $tab="adm/atualizar_dados.php";//link q informa o script quem receberá os dados do form para atualizar
@@ -66,7 +67,7 @@ $arr_dad = mysql_fetch_array ($dad_cad);
 			echo $estilo;
 			$nome->getMostrar();$nome->getEditar();
 		?></td>
-		<td rowspan="4" align="center"><?PHP print mostra_foto($bsc_rol);?></td>
+		<td rowspan="4" class="text-center"><?PHP print mostra_foto($bsc_rol);?></td>
       </tr>
       <tr>
         <td colspan="2">Cargo:<strong>

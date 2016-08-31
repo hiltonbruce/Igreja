@@ -1,13 +1,21 @@
 <?php
-conectar();
-
 class tes_despesas {
 
-	function __construct () {
+	protected $ctaGrupo;
 
-		$sqlConsulta  = 'SELECT * ';
-		$sqlConsulta .= 'FROM contas WHERE nivel1="3" ';
-		$sqlConsulta .= 'OR nivel2="1.2" ORDER BY codigo';
+	function __construct ($ctaGrupo=null) {
+
+		$contas = (strlen($ctaGrupo)==5) ? true : false ;
+
+		$sqlConsulta  = 'SELECT * FROM contas WHERE ';
+		if ($contas) {
+			$sqlConsulta .= 'nivel3="'.$ctaGrupo.'" ';
+		} else {
+			$sqlConsulta .= 'nivel1="3" OR nivel2="1.2" ';
+		}
+
+		$sqlConsulta .= '';
+		$sqlConsulta .= 'ORDER BY codigo';
 		$this->query = $sqlConsulta;
 		$this->despesa = mysql_query($this->query) or die (mysql_error());
 

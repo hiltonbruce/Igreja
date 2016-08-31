@@ -97,8 +97,6 @@ $tabMembros = new membro();
 
 		}
 ?>
-<table class='table table-striped'>
-		<caption class="text-left">
 			<?php
 			$dirigenteIgreja = $igrejaSelecionada->pastor();
 
@@ -118,22 +116,26 @@ $tabMembros = new membro();
 			}
 
 			if ($_GET['escolha']=='') {
-				$fonIni = '<p style="font-size: 80%;padding: 0 0 0 0;margin-bottom: 0;">';
+				$fonIni = '<p>';
 				$fonFim = '</p>';
 			}else {
-				$fonIni = '<h2>';
-				$fonFim = '</h2>';
+				$fonIni = '<h5>';
+				$fonFim = '</h5>';
 			}
-				echo $fonIni.$statusLancamento.$fonFim.$fonIni.'Igreja: '.$igrejaSelecionada->razao().$fonFim.$fonIni
-						.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;
+
+			echo '<div class="alert alert-info">';
+			echo $fonIni.$statusLancamento.$fonFim.$fonIni.'<h3>Igreja: '.$igrejaSelecionada->razao().'</h3>'.$fonFim.$fonIni
+				.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;
 
 			$sldPendente = $dizmista->outrosdizimos($_GET['rolIgreja']);
 
 			if ($sldPendente>0) {
-				printf("$fonIni Lan&ccedil;amentos de outros respons&aacute;veis: R$: %'.45s
-			  $fonFim",number_format($sldPendente,2,',','.'));
+				printf("%'.s Lan&ccedil;amentos de outros respons&aacute;veis:
+					R$: %'.45s %'.s ",$fonIni,number_format($sldPendente,2,',','.'),$fonFim);
 			}
-			?></caption>
+			echo '</div>';
+			?>
+		<table class='table table-striped table-hover'>
 			<colgroup>
 				<col id="Data">
 				<col id="Rol/Nome">
@@ -166,7 +168,7 @@ $tabMembros = new membro();
 	$dados = $dadosMembros->nomes();
 ?>
 		<span id="text-right">Conferido por:</span>
-	<table class='table table-condensed table-striped'>
+	<table class='table table-condensed table-striped table-hover'>
 			<colgroup>
 				<col id="Data">
 				<col id="albumCol"/>

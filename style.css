@@ -9,6 +9,10 @@ body{
 	margin:0 auto;
 }
 
+a, a:visited, a:link { color:#000000; text-decoration:underline; }
+
+a:hover { color: #666666; }
+
 #lanc{
 	padding:6px 5px; margin: 2;
 	font: Arial;
@@ -25,16 +29,8 @@ form label {
 	display:block;
 }
 
-input:focus {
+input:focus, select:focus, textarea:focus {
 	background-color:#FFFFAA;
-}
-
-select:focus {
-	background-color:#FFFFAA;
-}
-
-textarea:focus {
-    background-color:#FFFFAA;
 }
 
 .text_area {

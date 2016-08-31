@@ -1,4 +1,8 @@
-<h1>Agenda Finaceira</h1>
+<div class="panel panel-primary">
+	<div class="panel-body">
+		<h3 class="panel-title text-right">Agenda Finaceira</h3>
+	</div>
+</div>
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dataget = ($_POST['data']!='') ? $_POST['data']:$_GET['data'];
@@ -129,7 +133,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 
 		require_once 'forms/tes/buscaAgenda.php'; // Busca por Despesas Agendadas
 	}
-
 
 	require_once 'tesouraria/periodo10dias.php';//Agenda com o período 5 dias a antes e após a data atual
 	if ($_GET['fixa']=='on') {

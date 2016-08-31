@@ -1,6 +1,4 @@
 <?php
-conectar();
-
 class tes_conta {
 
 	function __construct () {
@@ -29,6 +27,15 @@ class tes_conta {
 					,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']);
 			}
 
+			if (strlen($dados['codigo'])==5) {
+				$ctaN3[$dados['codigo']]=
+				array('id'=>$dados['id']
+					,'titulo'=>htmlentities($dados['titulo'],ENT_QUOTES,'iso-8859-1')
+					,'descricao'=>htmlentities($dados['descricao'],ENT_QUOTES,'iso-8859-1')
+					,'tipo'=>$dados['tipo']
+					,'saldo'=>$dados['saldo'],'tipo'=>$dados['tipo']);
+			}
+
 			$todasContas[$dados['id']]=
 				array('acesso'=>$dados['acesso'],'codigo'=>$dados['codigo'],
 						'titulo'=>$dados['titulo'],'descricao'=>$dados['descricao'],'tipo'=>$dados['tipo']
@@ -47,6 +54,7 @@ class tes_conta {
 		$this->arrayAtivos	= $ativos;
 		$this->arrayTodos	= $todasContas;
 		$this->arrayCod		= $ctaCod;
+		$this->arrayCtaN3	= $ctaN3;
 	}
 
 	function ativosArray() {
@@ -67,6 +75,11 @@ class tes_conta {
 	function contasCod() {
 		#Contas de lançamento vinculada pelo codigo
 		return $this->arrayCod;
+	}
+
+	function contasN3() {
+		#Contas de lançamento vinculada pelo codigo
+		return $this->arrayCtaN3;
 	}
 
 }

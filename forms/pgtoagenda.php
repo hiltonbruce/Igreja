@@ -39,9 +39,11 @@
 		&nbsp;Mudar este compromisso para credor Membro da Igreja!</label></p>
 		  </div>';
 	}
-	$datapgto = conv_valor_br ($itemagenda->datapgto());
-
-	$dtParaPgto = ($datapgto=='00/00/0000') ? $dtPgto:$datapgto;
+	if ($itemagenda->datapgto() != '0000-00-00') {
+		$datapgto = conv_valor_br ($itemagenda->datapgto());
+	} else {
+		$datapgto = '';
+	}
 
 	$pendende = '';
  	$pago= '';
@@ -184,7 +186,7 @@
 						value="<?php echo $itemagenda->multa();?>"></td>
 					<td><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
 						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
-						value="<?php echo $dtParaPgto;?>"></td>
+						value="<?php echo $datapgto;?>"></td>
 				</tr>
 				<tr>
 					<td><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
