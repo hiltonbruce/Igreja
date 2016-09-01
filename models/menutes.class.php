@@ -3,7 +3,12 @@ class menutes {
 
 	function mostra (){
 		//Lista todos os recibos
-		$_urlLi_pen="?escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&id={$_GET["id"]}";//Montando o Link para ser passada a classe
+		$this->escGET = (empty($_GET["escolha"])) ? '' : $_GET["escolha"];
+		$this->menuGET = (empty($_GET["menu"])) ? '' : $_GET["menu"];
+		$this->pag_mostra = (empty($_GET["pag_mostra"])) ? '' : $_GET["pag_mostra"];
+		$this->id = (empty($_GET["id"])) ? '' : $_GET["id"];
+
+		$_urlLi_pen="?escolha={$this->escGET}&menu={$this->menuGET}&id={$this->id}";//Montando o Link para ser passada a classe
 		$query_pen = "SELECT * FROM tes_recibo ORDER BY id DESC ";
 		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
@@ -14,13 +19,13 @@ class menutes {
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
 
-		if ($_GET["pag_mostra"]<1) {
-			$_GET["pag_mostra"] = 1;
-		} elseif ($_GET["pag_mostra"]>$paginas_pen) {
-			$_GET["pag_mostra"] = $paginas_pen;
+		if ($this->pag_mostra<1) {
+			$this->pag_mostra = 1;
+		} elseif ($this->pag_mostra>$paginas_pen) {
+			$this->pag_mostra = $paginas_pen;
 		}
 
-		$pagina_pen = $_GET["pag_mostra"]-1;
+		$pagina_pen = $this->pag_mostra-1;
 
 		if ($pagina_pen<0) {$pagina_pen=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_pen=$pagina_pen * $nmpp_pen; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
@@ -80,11 +85,11 @@ class menutes {
 					}else {
 						echo "<tr>";}
 
-					echo "<td><a title = '{$coluna_pen["id"]}' href='./?escolha=tesouraria/rec_alterar.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
-						&pag_mostra={$_GET["pag_mostra"]}'>";
+					echo "<td><a title = '{$coluna_pen["id"]}' href='./?escolha=tesouraria/rec_alterar.php&menu={$this->menuGET}&id={$coluna_pen["id"]}
+						&pag_mostra={$this->pag_mostra}'>";
 					printf ("%'03u<a></td>",$coluna_pen["id"]);
-					echo "<td><a title = '{$nome_rec}' href='./?escolha=tesouraria/rec_alterar.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
-						&pag_mostra={$_GET["pag_mostra"]}'>".substr($nome_rec,0,7)."<a></td>";
+					echo "<td><a title = '{$nome_rec}' href='./?escolha=tesouraria/rec_alterar.php&menu={$this->menuGET}&id={$coluna_pen["id"]}
+						&pag_mostra={$this->pag_mostra}'>".substr($nome_rec,0,7)."<a></td>";
 					echo "<td>".conv_valor_br ($coluna_pen["data"])."</td>";
 				echo "</tr>";
 
@@ -102,7 +107,7 @@ class menutes {
 
 	<?PHP
 	//Classe que monta o rodape
-	$_rod_pen = new rodape($paginas_pen,$_GET["pag_mostra"],"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+	$_rod_pen = new rodape($paginas_pen,$this->pag_mostra,"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
 
 	if ($total_pen>"1"){
@@ -195,7 +200,7 @@ function recibosmembros (){
 		//Lista os recibos de um determinado membro
 
 		$id =(int)$_GET ['recebeu'];
-		$_urlLi_pen="?escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&recebeu={$_GET["recebeu"]}";//Montando o Link para ser passada a classe
+		$_urlLi_pen="?escolha={this->escGET}&menu={$this->menuGET}&recebeu={$_GET["recebeu"]}";//Montando o Link para ser passada a classe
 
 		$extr  = 'SELECT MAX(valor) AS maximo, MIN(valor) AS minimo, AVG(valor)';
 		$extr .= ' AS media, SUM(valor) as total FROM tes_recibo WHERE recebeu='.$id ;
@@ -330,10 +335,10 @@ function recibosmembros (){
 					}else {
 						echo "<tr>";}
 
-					echo "<td><a title = '{$coluna_pen["id"]}' href='./?escolha=tesouraria/rec_alterar.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
+					echo "<td><a title = '{$coluna_pen["id"]}' href='./?escolha=tesouraria/rec_alterar.php&menu={$this->menuGET}&id={$coluna_pen["id"]}
 						&pag_rec={$_GET["pag_rec"]}'>";
 					printf ("%'03u<a></td>",$coluna_pen["id"]);
-					echo "<td><a title = '{$nome_rec}' href='./?escolha=tesouraria/rec_alterar.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
+					echo "<td><a title = '{$nome_rec}' href='./?escolha=tesouraria/rec_alterar.php&menu={$this->menuGET}&id={$coluna_pen["id"]}
 						&pag_rec={$_GET["pag_rec"]}'>".$nome_rec."<a></td>";
 					echo "<td>".$coluna_pen["motivo"]."</td>";
 					echo "<td style=' text-align: right;'>".number_format($coluna_pen["valor"],2,",",".")."</td>";

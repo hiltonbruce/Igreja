@@ -19,26 +19,26 @@
 	$link_home = "<li><span class='left'></span><span class='hlavny'>$hom</span><span class='right'></span></li>";
 	$link_suporte ="<li><span class='hlavny_'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span></li>";
 
-	if ($_GET["escolha"]=="noticias/suporte.php"){
+	if ($escGET=="noticias/suporte.php"){
 	$link_suporte ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span><span class='right'></span></li>";
 	$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 
-	if ((strstr($_GET["menu"],"tesouraria")) || (strstr($_POST["escolha"],"tesouraria"))){
+	if ((strstr($_GET["menu"],"tesouraria")) || (strstr($escPOST,"tesouraria"))){
 		$link_tesour ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro</a></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 
-	if ((strstr($_GET["menu"],"missoes")) || (strstr($_POST["escolha"],"missoes"))){
+	if ((strstr($_GET["menu"],"missoes")) || (strstr($escPOST,"missoes"))){
 		$link_missoes ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=controller/missoes.php&menu=top_missoes'>Miss&otilde;es</a></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 
 	foreach ($admin as $esc) {
-		if (substr_count($_GET["escolha"], $esc)>0 || substr_count($_POST["escolha"], $esc)>0) {
+		if (substr_count($escGET, $esc)>0 || substr_count($escPOST, $esc)>0) {
 				$link_admin = "<li><span class='left'></span><span class='hlavny'><a href='./?escolha=forms/manutencao.php'>Administra&ccedil;&atilde;o</a></span><span class='right'></span></li>";
 				$link_home = "<li><span class='hlavny_'>$hom</span></li>";
 				break;}
 	}
 
-	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
+	if ((strstr($escGET, $val_link) || strstr($escPOST,$val_link))) {
 		echo "class='selected' style='border-top:0;'";
 		//return "teste";
 	}

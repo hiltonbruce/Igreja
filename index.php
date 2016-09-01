@@ -4,17 +4,30 @@
 	require_once ("func_class/classes.php");
 	require_once ("func_class/funcoes.php");
 
+$escGET = (empty($_GET["escolha"])) ? '' : $_GET["escolha"];
+$escPOST = (empty($_POST["escolha"])) ? '' : $_POST["escolha"];
+$dirGET = (empty($_GET["direita"])) ? '' : $_GET["direita"];
+$dirPOST = (empty($_POST["direita"])) ? '' : $_POST["direita"];
+$menuGET = (empty($_GET["menu"])) ? '' : $_GET["menu"];
+$menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
+
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 
 	date_default_timezone_set('America/Recife');
 
 	function __autoload ($classe) {
-		list($dir,$nomeClasse) = explode('_', $classe);
+
+    $pos = strpos($classe, '_');
+    if ($pos === false) {
+      $nomeClasse = $classe;
+      $dir='';
+    } else {
+      list($dir,$nomeClasse) = explode('_', $classe);
+    }
 		//$dir = strtr( $classe, '_','/' );
 
 		if (file_exists("models/$dir/$classe.class.php")){
-
 			require_once ("models/$dir/$classe.class.php");
 		}elseif (file_exists("models/$classe.class.php")){
 			require_once ("models/$classe.class.php");
@@ -72,10 +85,12 @@
        $mainpanelIni = '<div class="mainpanel">';
        $mainpanelFim = '</div>';
       if (!empty($_SESSION['valid_user'])) {
-            if (!empty($_GET['direita']) && !empty($_POST['direita'])) {
+            if (!empty($dirGET) && !empty($dirPOST)) {
                $mainpanelIni = '';
                $mainpanelFim = '';
             }
+
+      $secGET = (empty($_GET["sec"])) ? '' : $_GET["sec"];
 		  ?>
       <div class="leftpanel">
         <ul class="list-group">
@@ -83,9 +98,9 @@
         <ul id="categories">
           <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php"><span class="glyphicon glyphicon-user text-info" ></span>&nbsp;Membros</a></li>
           <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB"><span class="glyphicon glyphicon-download-alt text-info" ></span>&nbsp;Novo Cadastro</a></li>
-          <li <?PHP echo li_ativo($_GET["sec"], "1"); ?>><a href="./?escolha=controller/secretaria.php&sec=1&uf=PB"><span class="glyphicon glyphicon-hand-right text-info" ></span>&nbsp;Novos&nbsp;Convertidos</a></li>
+          <li <?PHP echo li_ativo($secGET, "1"); ?>><a href="./?escolha=controller/secretaria.php&sec=1&uf=PB"><span class="glyphicon glyphicon-hand-right text-info" ></span>&nbsp;Novos&nbsp;Convertidos</a></li>
           <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja"><span class="glyphicon glyphicon-fire text-info"></span>&nbsp;Igrejas</a></li>
-          <li <?PHP echo li_ativo($_GET["sec"], "0");?>><a href="./?escolha=controller/secretaria.php&sec=0&mes=<?PHP echo date('m');?>"><span class="glyphicon glyphicon-time text-info" ></span>&nbsp;Agenda</a></li>
+          <li <?PHP echo li_ativo($secGET, "0");?>><a href="./?escolha=controller/secretaria.php&sec=0&mes=<?PHP echo date('m');?>"><span class="glyphicon glyphicon-time text-info" ></span>&nbsp;Agenda</a></li>
           <li <?PHP id_left ("tab_auxiliar/");?>><a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture text-info" ></span>&nbsp;Cadastrar Bairro</a></li>
           <li <?PHP id_left ("relatorio/");?>><a href="./?escolha=relatorio/formularios.php&menu=top_formulario"><span class="glyphicon glyphicon-list-alt text-info" ></span>&nbsp;Ficha, Recibo e Certid&otilde;es</a></li>
           <li <?PHP id_left ("aniv/");?>><a href="./?escolha=aniv/aniversario.php&menu=top_aniv"><span class="glyphicon glyphicon-gift text-info" ></span>&nbsp;Aniversariantes</a></li>
@@ -121,21 +136,21 @@
       echo $mainpanelIni;
 
 		if ($_SESSION["valid_user"]){
-			if (strstr($_GET["escolha"],"adm/")){
-				if (strstr($_GET["escolha"],"adm/dados_pessoais"))
+			if (strstr($escGET,"adm/")){
+				if (strstr($escGET,"adm/dados_pessoais"))
 					require_once ("top_dados.php");
 				else
 					require_once ("views/secretaria/menuTopDados.php");
-			}elseif (strstr($_POST["escolha"], "adm/")){
-				if (strstr($_POST["escolha"],"adm/dados_pessoais"))
+			}elseif (strstr($escPOST, "adm/")){
+				if (strstr($escPOST,"adm/dados_pessoais"))
 					require_once ("top_dados.php");
 				else
 					require_once ("views/secretaria/menuTopDados.php");
-			}elseif (isset ($_GET["menu"])) {
-				require_once ("{$_GET["menu"]}.php");
-			}elseif (!empty($_POST["menu"])){
-				require_once ("{$_POST["menu"]}.php");
-			}elseif (strstr($_GET["escolha"],"aniv/")){
+			}elseif ($menuGET!='') {
+				require_once ($menuGET.'.php');
+			}elseif (!empty($menuPOST)){
+				require_once ($menuPOST.'.php');
+			}elseif (strstr($escGET,"aniv/")){
 				require_once ("top_aniv.php");
 			}
 
@@ -145,10 +160,10 @@
 		}else {
 				require_once ('views/login.php');
 		}
-       echo $mainpanelFim;
-	   ?>
-	  <!-- rightpanel -->
-	 	<?PHP if ($_GET["escolha"]<>"cetad/caixa.php" && $_GET['direita']=='' && !empty($_SESSION['valid_user'])) {
+
+    echo $mainpanelFim;
+
+    if ($escGET<>"cetad/caixa.php" && $dirGET=='' && !empty($_SESSION['valid_user'])) {
 		  require_once ("painel_direito.php");
 		}
     //Infomação para o radapé

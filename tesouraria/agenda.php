@@ -8,7 +8,9 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dataget = ($_POST['data']!='') ? $_POST['data']:$_GET['data'];
 
 	$hora=date('H');
+
 	list($diaPgto,$mesPgto,$anoPgto) = explode ('-',date("d-m-Y"));
+
 	if ($hora<"13")
 	{
 		$sauda="Bom Dia! ";

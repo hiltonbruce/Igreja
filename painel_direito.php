@@ -3,6 +3,7 @@
  	<?PHP
  		$igreja = new DBRecord ("igreja","1","rol");
 		$pendencias = new pendencias ();
+		$disp_pend = '';
 		// Se n?o houver pend?ncia no cadasdtro ? mostrador os dados da igreja matriz
 		if (empty($_SESSION["valid_user"]) || $pendencias->quant_pendecias()<"0" && ( !ver_nome ("adm") || !ver_nome ("tesouraria"))) {
 
@@ -144,12 +145,14 @@
 		$total_disc = mysql_num_rows($sql2_disc) ; //Retorna o total de linha na tabela
 		$paginas_disc = ceil ($total_disc/$nmpp_disc); //Retorna o total de p?ginas
 
-		if ($_GET["pagina1_disc"]<1) {
-			$_GET["pagina1_disc"] = 1;
-		} elseif ($_GET["pagina1_disc"]>$paginas_disc) {
-			$_GET["pagina1_disc"] = $paginas_disc;
+		$pgDisc = (empty($_GET["pagina1_disc"])) ? '' : $_GET["pagina1_disc"] ;
+
+		if ($pgDisc<1) {
+			$pgDisc= 1;
+		} elseif ($pgDisc>$paginas_disc) {
+			$pgDisc = $paginas_disc;
 		}
-		$pagina_disc = $_GET["pagina1_disc"]-1;
+		$pagina_disc = $pgDisc-1;
 		if ($pagina_disc<0) {$pagina_disc=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_disc=$pagina_disc * $nmpp_disc; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
 		$sql3_disc = mysql_query ($query_disc." LIMIT $inicio_disc,$nmpp_disc") or die (mysql_error());
@@ -182,10 +185,10 @@
 			$array_exp = mysql_fetch_array($exp);
 			$membro_disc = $detMemb[$coluna_disc['rol']]['5'];
 			if ($array_exp["data_fim"]<date("Y-m-d") AND $array_exp["data_fim"]<>"0000-00-00") {
-				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc - Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc={$_GET["pagina1_disc"]}'><span style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
+				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc - Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=$pgDisc'><span style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
 				$disp_pend++;
 			}else {
-				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc={$_GET["pagina1_disc"]}'>{$coluna_disc["rol"]}<a></td>";
+				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=$pgDisc'>{$coluna_disc["rol"]}<a></td>";
 			}
 
 
@@ -201,7 +204,7 @@
 		<div class="box-titulo">
 	<?PHP
 		//Classe que monta o rodape
-		$_rod_disc = new rodape($paginas_disc,$_GET["pagina1_disc"],"pagina1_disc",$_urlLi_disc,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+		$_rod_disc = new rodape($paginas_disc,$pgDisc,"pagina1_disc",$_urlLi_disc,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 		$_rod_disc->getRodape(); $_rod_disc->form_rodape ("P&aacute;gina:");
 
 		if ($paginas_disc>1)

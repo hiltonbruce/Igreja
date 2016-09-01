@@ -1,4 +1,5 @@
 <?PHP
+
 function conectar() {
 	require_once("DB.php");
 	if (file_exists("func_class/constantes.php")){
@@ -559,13 +560,17 @@ function prox_ant_ano (){
 function ver_nome ($val_link) {
 	/*	retorna verdadeiro se link possui esta string em qualquer parte
 	*/
-	if (strstr($_GET["menu"], $val_link) || strstr($_POST["menu"], $val_link)) {
+	$menuGet = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
+	$menuPost = (empty($_POST["escolha"])) ? '' : $_POST["escolha"] ;
+	if (strstr($menuGet, $val_link) || strstr($menuPost, $val_link)) {
 	 	$tes = true;
 	}else {
 		$tes = false;
 	}
 
-	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link)) || $tes) {
+	$escGet = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
+	$escPost = (empty($_POST["escolha"])) ? '' : $_POST["escolha"] ;
+	if ((strstr($escGet, $val_link) || strstr($escPost,$val_link)) || $tes) {
 		return true;
 	}else{
 		return false;

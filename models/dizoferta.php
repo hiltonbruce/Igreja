@@ -66,9 +66,9 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 	<table>
 		<tbody>
 			<tr>
-				<td><?php echo '<H1>Data do último registo: '.conv_valor_br ($vlrregistro[0]).'</h1>';?></td>
+				<td><?php echo '<H4>Data do último registo: '.conv_valor_br ($vlrregistro[0]).'</h4>';?></td>
 				<td>
-				<?php echo '<H1>Data do lançamento: '.conv_valor_br ($datalanc).'</h1>';?>
+				<?php echo '<H4>Data do lançamento: '.conv_valor_br ($datalanc).'</h4>';?>
 				</td>
 				<td rowspan="2">
 						<?PHP
@@ -86,9 +86,9 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 					?>
 				</td>
 				<td>
-					<H1>Cong. de lanç.: <?PHP
+					<H4>Cong. de lanç.: <?PHP
 					echo $igreja->razao();
-					?></H1>
+					?></H4>
 				</td>
 			</tr>
 		</tbody>
@@ -98,7 +98,7 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 	require 'forms/concluirdiz.php';//Formulário para fecha o caixa
 
 	}elseif (!$rolIgreja) {//Se não foneceu o número da igreja
-		echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";		
+		echo "<script>alert('Você não informou a Igreja! Faça agora para continuar...');</script>";
 		$msgErro .= $msgAlert.'Voc&ecirc; n&atilde;o informou a Igreja!';
 		$msgErro .= ' <u>O lan&ccedil;mento <b>N&Atilde;O</b> foi confirmado!</u></div>';
 		echo $msgErro;

@@ -9,7 +9,7 @@
 	}elseif (file_exists('../../func_class/constantes.php')){
 		require('../../func_class/constantes.php');
 	}
-	$db = DB::Connect ($dns, array());
+	$db = DB::connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage());exit;}
 
 	/*
@@ -124,10 +124,9 @@
 		echo '';
 	}
 
-	public function getRodapefim(){
-		if ($pagina <= ($this->getPagina()))
-		{
-			$mais = $pagina + 1;
+	public function getRodapefim($mais=null){
+
+			$mais++;
 			$fim=$this->getPagina();
 			$proxima = $this->getUrl()+1;
 				if ($proxima<$this->getPagina()){
@@ -137,7 +136,6 @@
 					echo '</ul>';
 				}
 
-		}
 	}
 
 	public function getRodaperes() { //Total das páginas disponibilizadas
@@ -159,14 +157,22 @@
 
 	public function form_rodape ($texto) {
 
+    $nome = (empty($_GET["nome"])) ? '' : $_GET["nome"] ;
+    $direita = (empty($_GET["direita"])) ? '' : $_GET["direita"] ;
+    $rec = (empty($_GET["rec"])) ? '' : $_GET["rec"] ;
+    $id = (empty($_GET["id"])) ? '' : $_GET["id"] ;
+    $ord = (empty($_GET["ord"])) ? '' : $_GET["ord"] ;
+    $menu = (empty($_GET["menu"])) ? '' : $_GET["menu"] ;
+    $escolha = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
+
 	echo "<form id='form' name='form' method='get' action=''>".
-	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
-	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
-	"<input name='ord' type='hidden' value='{$_GET["ord"]}'>".
-	"<input name='id' type='hidden' value='{$_GET["id"]}'>".
-	"<input name='rec' type='hidden' value='{$_GET["rec"]}'>".
-	"<input name='direita' type='hidden' value='{$_GET["direita"]}'>".
-	"<input name='nome' type='hidden' value='{$_GET["nome"]}'><div class='row'>".
+	"<input name='escolha' type='hidden' id='escolha' value='$escolha'>".
+	"<input name='menu' type='hidden' value='$menu'>".
+	"<input name='ord' type='hidden' value='$ord'>".
+	"<input name='id' type='hidden' value='$id'>".
+	"<input name='rec' type='hidden' value='$rec'>".
+	"<input name='direita' type='hidden' value='$direita'>".
+	"<input name='nome' type='hidden' value='$nome'><div class='row'>".
 	"<div class='col-xs-4'><input name='{$this->_linkpagina}'class='form-control input-sm' type='text' size='3' /></div>".
 	"<div class='col-xs-3'><input class='btn btn-primary btn-sm' type='submit' name='Submit' value='$texto ...' /></div>".
 	"</div></form>";

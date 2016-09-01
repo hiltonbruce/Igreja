@@ -1,17 +1,26 @@
 <?php
-$dia = $_GET['dia'];
-$mes = $_GET['mes'];
-$ano = $_GET['ano'];
+$statusLancamento='';
+$debitoGet = (empty($_GET['debito'])) ? '' : $_GET['debito'] ;
+$creditoGet = (empty($_GET['credito'])) ? '' : $_GET['credito'] ;
+$recGet = (empty($_GET['rec'])) ? '' : $_GET['rec'] ;
+$rolGet = (empty($_GET['rol'])) ? '' : $_GET['rol'] ;
+$igrejaGet = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
+$ano = (empty($_GET['ano'])) ? '' : $_GET['ano'] ;
+$mes = (empty($_GET['mes'])) ? '' : $_GET['mes'] ;
+$nomeGet = (empty($_GET['nome'])) ? '' : $_GET['nome'] ;
+$dia= (empty($_GET['dia'])) ? '' : $_GET['dia'] ;
+$idDizOfGET = (empty($_GET['idDizOf'])) ? '' : $_GET['idDizOf'] ;
+
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id=';
 $alterarEntrada	= '?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=1&tabela=dizimooferta&id=';
-if ($_GET['idDizOf']>'0' && $_GET['rec']=='9') {
+if ($idDizOfGET>'0' && $recGet=='9') {
 ?>
 <table class='table table-condensed'>
 	<tbody>
 		<tr>
 			<td><label>Igreja: </label>
 				<select name="igreja" id="igreja" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" ><?php
-				$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$_GET['igreja']);
+				$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$igrejaGet );
 				//echo $listaIgreja;
 				?></select>
 			</td>
@@ -36,30 +45,32 @@ $tabMembros = new membro();
 			$tabLancamento = $dizmista->concluir($idIgreja);
 		} else {
 			//tabela com a lista p confirmar lan�amento
-			$roligreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
+			$roligreja = $igrejaGet;
 			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
-												$mes,$ano,$_GET['rec'],$_GET['credito'],
-												$_GET['debito'],$alterarEntrada);
+												$mes,$ano,$recGet,$creditoGet,
+												$debitoGet,$alterarEntrada);
 			$tabLancamento= $resultado['1'];
 
 			if ($resultado['2']) {
 				$statusLancamento = 'Lan&ccedil;amentos Confirmado';
 			}elseif ($resultado['0']!=0) {
-				$statusLancamento = 'Aguardando confima&ccedil;&atilde;o!';
+				$statusLancamento = '<span class="text-danger">Aguardando confima&ccedil;&atilde;o!</span>';
 			}else {
 				$statusLancamento = '';
 			}
 
-			$statusLancamento .= $msg;
+			$statusLancamento .= (empty($msg)) ? '':$msg;
 		}
 
 
+		$cabPrint = false;
+
 		if (!empty($_GET['escolha'])) {
 
-			$linkResumo  = '&rec='.$_GET['rec'].'&igreja='.$_GET['igreja'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
-			$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'].'&dia='.$_GET['dia'];
-			$linkResumo .= '&credito='.$_GET['credito'];
-			$linkResumo .= '&debito='.$_GET['debito'];
+			$linkResumo  = '&rec='.$recGet.'&igreja='.$igrejaGet.'&ano='.$ano .'&mes='.$mes;
+			$linkResumo .='&rol='.$rolGet.'&nome='.$nomeGet.'&dia='.$dia;
+			$linkResumo .= '&credito='.$creditoGet;
+			$linkResumo .= '&debito='.$debitoGet;
 			echo '<div class="row"><div class="col-xs-1">';
 			echo '<label>&nbsp;</label>';
 			echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.$linkLancamento.$linkResumo.'" >';
@@ -69,14 +80,14 @@ $tabMembros = new membro();
 			echo '<form target="_blank" action="controller/modeloPrint.php/" >';
 			echo '<div class="row">';
 			echo '<div class="col-xs-2">';
-			echo '<input name="rec" type="hidden" value="'.$_GET['rec'].'" />';
-			echo '<input name="igreja" type="hidden" value="'.$_GET['igreja'].'" />';
-			echo '<input name="ano" type="hidden" value="'.$_GET['ano'].'" />';
-			echo '<input name="mes" type="hidden" value="'.$_GET['mes'].'" />';
-			echo '<input name="nome" type="hidden" value="'.$_GET['nome'].'" />';
-			echo '<input name="dia" type="hidden" value="'.$_GET['dia'].'" />';
-			echo '<input name="credito" type="hidden" value="'.$_GET['credito'].'" />';
-			echo '<input name="debito" type="hidden" value="'.$_GET['debito'].'" />';
+			echo '<input name="rec" type="hidden" value="'.$recGet.'" />';
+			echo '<input name="igreja" type="hidden" value="'.$igrejaGet.'" />';
+			echo '<input name="ano" type="hidden" value="'.$ano .'" />';
+			echo '<input name="mes" type="hidden" value="'.$mes.'" />';
+			echo '<input name="nome" type="hidden" value="'.$nomeGet.'" />';
+			echo '<input name="dia" type="hidden" value="'.$dia.'" />';
+			echo '<input name="credito" type="hidden" value="'.$creditoGet.'" />';
+			echo '<input name="debito" type="hidden" value="'.$debitoGet.'" />';
 			echo '<input name="tipo" type="hidden" value="1" />';
 			echo '<label>Rol 1&ordf; Assin:</label>';
 			echo '<input name="r1" type="text" value="4037" class="form-control"/>';
@@ -95,6 +106,8 @@ $tabMembros = new membro();
 			echo '</div>';
 			echo '</form></div>';
 
+			$cabPrint = true;
+
 		}
 ?>
 			<?php
@@ -102,7 +115,7 @@ $tabMembros = new membro();
 
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
-				$dirigenteIgreja = 'Dirigente: '.$dirCong->nome();
+				$dirigenteIgreja = 'Dirigente: <ins>'.$dirCong->nome().'</ins>';
 				$cargoIgreja = new tes_cargo;
 				//print_r($cargoIgreja->dadosArray());
 
@@ -115,25 +128,23 @@ $tabMembros = new membro();
 				$tesIgreja = $tesSede ['4037']['0'];
 			}
 
-			if ($_GET['escolha']=='') {
-				$fonIni = '<p>';
-				$fonFim = '</p>';
-			}else {
-				$fonIni = '<h5>';
-				$fonFim = '</h5>';
+			if (!$cabPrint) {
+				echo '<h5 class="text-left">'.$statusLancamento.'<br />Igreja: <strong>'.$igrejaSelecionada->razao().' &bull; </strong>'
+					.$dirigenteIgreja.', 1&ordm; Tesoureiro: <ins>'.$tesIgreja.'</ins></h5>';
+			} else {
+				echo '<br /><div class="alert alert-info">';
+				echo '<h4>'.$statusLancamento.'<br />Igreja: '.$igrejaSelecionada->razao().'<br />'
+					.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.'</h4>';
+
+				$sldPendente = (empty($_GET['rolIgreja'])) ? '' : $dizmista->outrosdizimos($_GET['rolIgreja']);
+
+				if ($sldPendente>0) {
+					printf("<h4> Lan&ccedil;amentos de outros respons&aacute;veis:
+						R$: %'.45s </h4>",number_format($sldPendente,2,',','.'));
+				}
+				echo '</div>';
 			}
 
-			echo '<div class="alert alert-info">';
-			echo $fonIni.$statusLancamento.$fonFim.$fonIni.'<h3>Igreja: '.$igrejaSelecionada->razao().'</h3>'.$fonFim.$fonIni
-				.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;
-
-			$sldPendente = $dizmista->outrosdizimos($_GET['rolIgreja']);
-
-			if ($sldPendente>0) {
-				printf("%'.s Lan&ccedil;amentos de outros respons&aacute;veis:
-					R$: %'.45s %'.s ",$fonIni,number_format($sldPendente,2,',','.'),$fonFim);
-			}
-			echo '</div>';
 			?>
 		<table class='table table-striped table-hover'>
 			<colgroup>
