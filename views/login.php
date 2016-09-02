@@ -1,5 +1,5 @@
 <div class="main-content">
-<h1 class="text-center">Administra&ccedil;&atilde;o de Igreja Evang&eacute;lica</h1>
+<h2 class="text-center">Administra&ccedil;&atilde;o de Igreja - SisADBy</h2>
 
 <div class="carousel slide" id="carousel-example-captions" data-ride="carousel">
 <ol class="carousel-indicators"> <li data-target="#carousel-example-captions" data-slide-to="0"

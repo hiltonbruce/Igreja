@@ -40,10 +40,8 @@ class menutes {
 		<div class="box-outer">
 		<div class="box-inner">
 		<div class="box-titulo">
-
-		<table class='table table-bordered' cellspacing="0" >
-		<caption id="recibos">Recibos Recentes</caption>
-
+		<h4>Recibos Recentes</h4>
+		<table class='table table-bordered'>
 			<colgroup>
 				<col id="N&ordm;">
 				<col id="Nome">
@@ -132,7 +130,7 @@ class menutes {
 		<div class="box-outer">
 		<div class="box-inner">
 		<div class="box-titulo">
-		<h1>Busca de Recibos</h1>
+		<h4>Busca de Recibos</h4>
 		<fieldset>
 		<legend>Membros</legend>
 		<?php
@@ -143,7 +141,6 @@ class menutes {
 			$form->getMostrar();
 		?>
 		</fieldset>
-
 		<fieldset>
 		<legend>Credores</legend>
 		<form action="" method="get">

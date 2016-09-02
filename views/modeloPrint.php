@@ -14,10 +14,10 @@
 	<p>
 	<?PHP
 	//print_r($igreja);
-	echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} <br /> $origem - {$igreja->uf()} - CNPJ: {$igreja->cnpj()}<br />
-	CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?>
-	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
-    <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
+	echo "Templo SEDE: {$igSede->rua()}, N&ordm; {$igSede->numero()} <br /> $origem - {$igSede->uf()} - CNPJ: {$igSede->cnpj()}<br />
+	CEP: {$igSede->cep()} - Fone: {$igSede->fone()} - Fax: {$igSede->fax()}";?>
+	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igSede->site()}";?>/" title="Copyright information">Site&nbsp;</a>
+    <br />Email: <a href="mailto: <?PHP echo "{$igSede->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>
 </div>
 	<?php

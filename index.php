@@ -37,6 +37,8 @@ $menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
 		//echo "<h1>$classe ** $dir</h1>";
 	}
 
+$igSede = new DBRecord('igreja', '1', 'rol');
+
 	  if (!empty($_GET["bsc_rol"])){
 			$bsc_rol = intval($_GET["bsc_rol"]);
 			//$_SESSION["rol"]=(int)$_GET["bsc_rol"];
@@ -108,17 +110,17 @@ $menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
           <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php"
           title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es"
           ><span class="glyphicon glyphicon-tree-deciduous text-info" ></span>&nbsp;Santa&nbsp;Ceia</a></li>
-        </ul></ul>
+
           <?php
           	if ($_SESSION['nivel']>'10') {
-              $selItem = ($_GET['rec']=='25') ?  'class="selected"': '' ;
+              $selItem = ($_GET['rec']=='25' || $_GET['rec']=='26') ?  'class="selected"': '' ;
          	 ?>
          		<li <?PHP echo $selItem;?>><a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25"
-               ><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup de Dados</a>
+               ><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup</a>
             </li>
 		   	 <?php
           	}
-          ?>
+          ?></ul>
           <ul class="list-group">
           <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li>
            <?PHP
@@ -133,6 +135,7 @@ $menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
         echo '<div id="main-content">';
       }
 
+      //Painel direito
       echo $mainpanelIni;
 
 		if ($_SESSION["valid_user"]){
@@ -166,15 +169,13 @@ $menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
     if ($escGET<>"cetad/caixa.php" && $dirGET=='' && !empty($_SESSION['valid_user'])) {
 		  require_once ("painel_direito.php");
 		}
-    //Infomação para o radapé
-    $igreja = new DBRecord ("igreja","1","rol");
     ?>
 		<!-- Fim do rightpanel -->
     </div>
 </div>
     <div class="info1">
-      <div style="display:inline; float:left;">&copy; 2016 <a href="http://<?php echo $igreja->site();?>/"><?php
-       echo $igreja->site();?></a>. Design <span class="text-muted">Joseilton Costa Bruce</span>.</div>
+      <div style="display:inline; float:left;">&copy; 2016 <a href="http://<?php echo $igSede->site();?>/"><?php
+       echo $igSede->site();?></a>. Design <span class="text-muted">Joseilton Costa Bruce</span>.</div>
       <div style="display:inline; float:right;"><a href="http://jigsaw.w3.org/css-validator/check/referer"></a>
         <a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px"
         src="img/valid-xhtml11-blue.png" alt="Validar XHTML 1.1" /></a><img style="border:0;width:88px;height:31px"

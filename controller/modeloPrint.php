@@ -23,17 +23,18 @@ function __autoload ($classe) {
 }
 
 $dizmista = new dizresp($_SESSION['valid_user'],true/*impressao*/);
-$idIgreja = (empty($_GET['igreja'])) ? 1:$_GET['igreja'];
-if ((int)$_POST['rolIgreja']>0) {
+$idIgreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
+if (intval($_POST['rolIgreja']>0)) {
 	$idIgreja=$_POST['rolIgreja'];
 }
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
-$igreja = new DBRecord('igreja', '1', 'rol');
+$igSede = new DBRecord('igreja', '1', 'rol');
 
 $tipo = $_GET['tipo'];
 switch ($tipo) {
 	case '1':
 	$tituloColuna5 = ($idIgreja>'1') ? 'Congrega&ccedil;o':'Igreja';
+	$titTabela = 'Hist&oacute;rico Lan&ccedil;amentos - SisADBy';
 	$nomeArquivo = '../views/tesouraria/tabDizimosOfertas.php';
 	require_once '../views/modeloPrint.php';
 	break;

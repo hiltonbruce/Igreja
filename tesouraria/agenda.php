@@ -1,8 +1,3 @@
-<div class="panel panel-primary">
-	<div class="panel-body">
-		<h3 class="panel-title text-right">Agenda Finaceira</h3>
-	</div>
-</div>
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dataget = ($_POST['data']!='') ? $_POST['data']:$_GET['data'];

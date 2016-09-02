@@ -1,10 +1,10 @@
 <?php
 $statusLancamento='';
-$debitoGet = (empty($_GET['debito'])) ? '' : $_GET['debito'] ;
-$creditoGet = (empty($_GET['credito'])) ? '' : $_GET['credito'] ;
-$recGet = (empty($_GET['rec'])) ? '' : $_GET['rec'] ;
-$rolGet = (empty($_GET['rol'])) ? '' : $_GET['rol'] ;
-$igrejaGet = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
+$debitoGet = (empty($_GET['debito'])) ? false : $_GET['debito'] ;
+$creditoGet = (empty($_GET['credito'])) ? false : $_GET['credito'] ;
+$recGet = (empty($_GET['rec'])) ? false : $_GET['rec'] ;
+$rolGet = (empty($_GET['rol'])) ? false : $_GET['rol'] ;
+$igrejaGet = (empty($_GET['igreja'])) ? false : $_GET['igreja'] ;
 $ano = (empty($_GET['ano'])) ? '' : $_GET['ano'] ;
 $mes = (empty($_GET['mes'])) ? '' : $_GET['mes'] ;
 $nomeGet = (empty($_GET['nome'])) ? '' : $_GET['nome'] ;
@@ -13,6 +13,7 @@ $idDizOfGET = (empty($_GET['idDizOf'])) ? '' : $_GET['idDizOf'] ;
 
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id=';
 $alterarEntrada	= '?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=1&tabela=dizimooferta&id=';
+
 if ($idDizOfGET>'0' && $recGet=='9') {
 ?>
 <table class='table table-condensed'>
@@ -42,13 +43,14 @@ if ($idDizOfGET>'0' && $recGet=='9') {
 
 $tabMembros = new membro();
 	if ($_POST['concluir']=='1') {
-			$tabLancamento = $dizmista->concluir($idIgreja);
+			$tabLancamento = $dizmista->concluir($igrejaGet);
 		} else {
 			//tabela com a lista p confirmar lan�amento
 			$roligreja = $igrejaGet;
 			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
 												$mes,$ano,$recGet,$creditoGet,
-												$debitoGet,$alterarEntrada);
+												$_GET['debito'],$alterarEntrada);
+
 			$tabLancamento= $resultado['1'];
 
 			if ($resultado['2']) {
@@ -61,7 +63,7 @@ $tabMembros = new membro();
 
 			$statusLancamento .= (empty($msg)) ? '':$msg;
 		}
-
+		//print_r($tabLancamento);
 
 		$cabPrint = false;
 
@@ -109,34 +111,36 @@ $tabMembros = new membro();
 			$cabPrint = true;
 
 		}
-?>
-			<?php
-			$dirigenteIgreja = $igrejaSelecionada->pastor();
+
+			$dirigenteIgreja = $igSede->pastor();
+			$nomIgreja = '<br />Igreja: <strong>'.$igSede->razao();
+			$tesSede = $tabMembros->nomes();
+			$tesIgreja = ', 1&ordm; Tesoureiro Geral: <ins>'.$tesSede ['4037']['0'];
 
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
+				$nomIgreja = '<br />Igreja: <strong>'.$igrejaSelecionada->razao();
 				$dirigenteIgreja = 'Dirigente: <ins>'.$dirCong->nome().'</ins>';
 				$cargoIgreja = new tes_cargo;
 				//print_r($cargoIgreja->dadosArray());
 
 				$tesArray = $cargoIgreja->dadosArray();
-				$tesIgreja = $tesArray['8'][$idIgreja]['1']['nome'];
+				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins>'.$tesArray['8'][$idIgreja]['1']['nome'];
 				//reset($tesIgreja);
 				//print_r($tesArray );
-			}else {
-				$tesSede = $tabMembros->nomes();
-				$tesIgreja = $tesSede ['4037']['0'];
+			}elseif ($idIgreja=='0' || $idIgreja=='') {
+				$nomIgreja = '<br /><strong>Todas as Igrejas de Bayeux';
 			}
 
 			if (!$cabPrint) {
-				echo '<h5 class="text-left">'.$statusLancamento.'<br />Igreja: <strong>'.$igrejaSelecionada->razao().' &bull; </strong>'
-					.$dirigenteIgreja.', 1&ordm; Tesoureiro: <ins>'.$tesIgreja.'</ins></h5>';
+				echo '<h5 class="text-left">'.$statusLancamento.$nomIgreja.' &bull; </strong>'
+					.$dirigenteIgreja.$tesIgreja.'</ins></h5>';
 			} else {
 				echo '<br /><div class="alert alert-info">';
-				echo '<h4>'.$statusLancamento.'<br />Igreja: '.$igrejaSelecionada->razao().'<br />'
+				echo '<h4>'.$statusLancamento.' &bull; Igreja: '.$igrejaSelecionada->razao().'<br />'
 					.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.'</h4>';
 
-				$sldPendente = (empty($_GET['rolIgreja'])) ? '' : $dizmista->outrosdizimos($_GET['rolIgreja']);
+				$sldPendente = (empty($_GET['rolIgreja'])) ? '' : $dizmista->outrosdizimos($igrejaGet);
 
 				if ($sldPendente>0) {
 					printf("<h4> Lan&ccedil;amentos de outros respons&aacute;veis:

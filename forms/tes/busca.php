@@ -3,11 +3,11 @@
 
 	//Mensagem complementar para o cabeçalho da tabela
 	if ($ano=='0') {
-		$msg = ' - Todos os ANOS';
+		$msg = 'Todos os ANOS';
 	}elseif ($_GET['ano']=='') {
 		$msg = '';
 	} else {
-		$msg = ' - Ano de :'.$ano;
+		$msg = 'Ano de '.$ano;
 	}
 ?>
 <fieldset>

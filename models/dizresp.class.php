@@ -62,7 +62,7 @@ function dizimistas(
 		$acessos = explode(',', $cred);
 		$concatenar = ' ';
 		foreach ($acessos as $numAcesso) {
-			$queryCred .= $concatenar.'credito="'.(int)$numAcesso.'"';
+			$queryCred .= $concatenar.'credito="'.intval($numAcesso).'"';
 			$concatenar = ' OR ';
 		}
 		$queryCred = ' AND ('.$queryCred.')';
@@ -82,7 +82,6 @@ function dizimistas(
 	}
 
 	$queryAcesso = $queryCred.$queryDeb;
-
 	//Gera a query de busca
 	$incluiPessoa ='';
 
@@ -97,7 +96,6 @@ function dizimistas(
 		}elseif ($_GET['rol']=='0'){
 			$incluiPessoa =' AND d.nome = "" AND d.rol = "0" ';
 		}
-
 	}
 
 		if ($dataValid && $conTipos) {
@@ -124,7 +122,7 @@ function dizimistas(
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
-			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento>"0"'.$incluiPessoa.$queryAcesso.
+			$this->dquery = mysql_query($this->var_string.'WHERE '.$incluiPessoa.$queryAcesso.
 					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
 		}else {
@@ -348,5 +346,4 @@ function concluir($igreja) {
 			</tr></tfoot>';
 		return $tabLancamento;
 	}
-
 }
