@@ -1,8 +1,6 @@
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
-?><nav class="navbar navbar-default">
-	<div class="container-fluid">
-	<div class="navbar-form" id="bs-example-navbar-collapse-1">
+?>
 	<div class="form-group">
 	<a <?PHP $b=id_corrente ("receita");?> href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=1">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Contabilidade</button></a>
@@ -18,8 +16,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Agenda</button></a>
 	  <a <?PHP $b=id_corrente ("envelope");?> href="./?escolha=tesouraria/envelope.php&menu=top_tesouraria">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Envelope</button></a>
-	<div class="nav navbar-nav navbar-right"><h5>Finaceiro</h5></div>
-	</div></div></div>
+	</div>
 <?php
 }
 ?>
