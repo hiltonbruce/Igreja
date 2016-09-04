@@ -18,7 +18,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 </script>
 
 	<form action="" method="post" name="cadastro_igreja">
-	<fieldset><legend>Cadastrar Sede e Congrações</legend>
+	<fieldset><legend>Cadastrar Sede e Congraï¿½ï¿½es</legend>
 		<table class='table'>
 			<thead>
 				<tr>
@@ -75,9 +75,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 							?>
 				</tr>
 				<tr>
-					<td colspan="2"> <label>igreja:</label>
+					<td colspan="2"> <label>Igreja:</label>
     					<input name="razao" class="form-control" type="text" id="razao"
-    					required="required" tabindex = "<?php echo ++$ind; ?>" size="55">
+    					required="required" tabindex = "<?php echo ++$ind; ?>" >
     				</td>
 				</tr>
 				<tr>
@@ -90,7 +90,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</td>
 				</tr>
 				<tr>
-					<td><label>Endereço Web</label>
+					<td><label>Endere&ccedil;o Web</label>
 						<input name="site" class="form-control" type="text" id="site" tabindex = "<?php echo ++$ind; ?>" value='www.adpb.com.br'>
 					</td>
 					<td><label>Email:</label>
@@ -103,10 +103,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                   </td>
 			  </tr>
 				<tr>
-					<td><label>Endereço</label>
+					<td><label>Endere&ccedil;o</label>
 						<input name="rua" required="required" class="form-control" type="text" id="rua" tabindex = "<?php echo ++$ind; ?>" size="30" >
 					</td>
-					<td><label>Número</label>
+					<td><label>N&ordm;:</label>
 						<input name="numero" required="required" class="form-control" type="text" id="numero" tabindex = "<?php echo ++$ind; ?>" size="5">
 					</td>
 				</tr>
@@ -119,10 +119,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			</td>
 				</tr>
 				<tr>
-					<td><label>Rol do 1º Secretario</label>
+					<td><label>Rol do 1&ordm; Secret&aacute;rio</label>
 						<input name="secretario1" class="form-control" type="text" id="secretario1" tabindex = "<?php echo ++$ind; ?>">
 					</td>
-					<td><label>Rol do 2º Secretario</label>
+					<td><label>Rol do 2&ordm; Secret&aacute;rio</label>
 						<input name="secretario2" class="form-control" type="text" id="secretario2" tabindex = "<?php echo ++$ind; ?>">
 					</td>
 				</tr>
@@ -143,7 +143,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			<td><div class="radio"><label>
 	  		<input type="radio" id="dia" name="oracao" value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></div></td>
 	  		<td><div class="radio"><label>
-	  		<input type="radio" id="dia" name="oracao" value="3" tabindex = "<?php echo ++$ind; ?>" >Terça</label></div></td>
+	  		<input type="radio" id="dia" name="oracao" value="3" tabindex = "<?php echo ++$ind; ?>" >Terï¿½a</label></div></td>
 	  		<td><div class="radio"><label>
 	  		<input type="radio" id="dia" name="oracao" value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></div></td>
 	  		<td><div class="radio"><label>
@@ -151,7 +151,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	  		<td><div class="radio"><label>
 	  		<input type="radio" id="dia" name="oracao" value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></div></td>
 	  		<td><div class="radio"><label>
-	  		<input type="radio" id="dia" name="oracao" value="7" tabindex = "<?php echo ++$ind; ?>" >Sábado</label></div></td>
+	  		<input type="radio" id="dia" name="oracao" value="7" tabindex = "<?php echo ++$ind; ?>" >Sï¿½bado</label></div></td>
 	  		</tr>
 	  		</tbody>
 	  	</table>
@@ -185,7 +185,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     </label>
 </form>
 <?PHP
-}elseif ($_SESSION['nivel']>4)//Verifica se o usuário tem autorização para o cadastro e realiza inserção
+}elseif ($_SESSION['nivel']>4)//Verifica se o usuï¿½rio tem autorizaï¿½ï¿½o para o cadastro e realiza inserï¿½ï¿½o
 {
 
 	//Inserir dados na tadela igreja
@@ -196,7 +196,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 	$rec = new bairro($cidade, $igreja);
 
-	if (!$rec->exitecad()) { //verifica se o igreja já está cadastrado para esta cidade
+	if (!$rec->exitecad()) { //verifica se o igreja jï¿½ estï¿½ cadastrado para esta cidade
 
 	$value = "'','$igreja','$cidade',NULL,'$log'";
 	$carta = new insert ("$value","igreja");
@@ -210,13 +210,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 
 }else{
-	echo "Desculpe! Mas voc&ecirc; não te autoriza&ccedil;&atilde;o para esta terefa.";
+	echo "Desculpe! Mas voc&ecirc; nï¿½o te autoriza&ccedil;&atilde;o para esta terefa.";
 }
 /*
 require_once ("HTML/QuickForm.php");
 require_once ("HTML/QuickForm/Renderer/QuickHtml.php");
 
-$teams = array ('Brasil','Alemanha','Argentina','itália');
+$teams = array ('Brasil','Alemanha','Argentina','itï¿½lia');
 
 $form = new HTML_QuickForm();
 //$element =& $form->addElement('autocomplete','teams','Times favoritos: ');

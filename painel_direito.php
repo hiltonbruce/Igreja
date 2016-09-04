@@ -6,7 +6,6 @@
 		$disp_pend = '';
 		// Se n?o houver pend?ncia no cadasdtro ? mostrador os dados da igreja matriz
 		if (empty($_SESSION["valid_user"]) || $pendencias->quant_pendecias()<"0" && ( !ver_nome ("adm") || !ver_nome ("tesouraria"))) {
-
 		?>
 		<div class="box" align="center">
 		<div class="box-outer">
@@ -42,19 +41,19 @@
 			$menu->mostra();
 			$menu->buscarecibo();
 		}elseif (!empty($painelDireito) && file_exists($painelDireito)) {
-			//Verifica se há uma chamada a um painel específico
+			//Verifica se hï¿½ uma chamada a um painel especï¿½fico
 			require_once $painelDireito;
 		}else {
 
 		echo "</div>";
-		//Início da pendência
+		//Inï¿½cio da pendï¿½ncia
 		$_urlLi_pen="?escolha={$_GET["escolha"]}&bsc_rol={$_GET["bsc_rol"]}";//Montando o Link para ser passada a classe
 		$query_pen = "SELECT rol,nome,obs FROM membro WHERE OBS<>'' ";
 		$nmpp_pen="40"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
 
-		//Faz os calculos na paginação
+		//Faz os calculos na paginaï¿½ï¿½o
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
@@ -133,14 +132,14 @@
       </ul>
 	<?php
 		//Fim das informa??es das pendencias
-		//Início das pendencias de disciplinados
-		//Início Disciplinas Expiradas
+		//Inï¿½cio das pendencias de disciplinados
+		//Inï¿½cio Disciplinas Expiradas
 		$_urlLi_disc="?escolha={$_GET["escolha"]}&bsc_rol={$_GET["bsc_rol"]}";//Montando o Link para ser passada a classe
 		$query_disc = "SELECT * FROM eclesiastico WHERE situacao_espiritual='2' ";
 		$nmpp_disc="40"; //N?mero de mensagens por p?rginas
 		$paginacao_disc = Array();
 		$paginacao_disc['link'] = "?"; //Pagina??o na mesma p?gina
-		//Faz os calculos na paginação
+		//Faz os calculos na paginaï¿½ï¿½o
 		$sql2_disc = mysql_query ($query_disc) or die (mysql_error());
 		$total_disc = mysql_num_rows($sql2_disc) ; //Retorna o total de linha na tabela
 		$paginas_disc = ceil ($total_disc/$nmpp_disc); //Retorna o total de p?ginas

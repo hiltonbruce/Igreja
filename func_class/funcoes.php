@@ -22,15 +22,15 @@ function br_data ($dt,$cmp){
 			if ($res == 1 || $dt=="00/00/0000"){
 				return $y.'-'.$m.'-'.$d;
 			}else{
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
-				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
+				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
 				exit;
 			}
 }
 
 function condatabrus ($dt){
 	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd
-	//em caso de erro é informado o campo $cmp e retorna false
+	//em caso de erro ï¿½ informado o campo $cmp e retorna false
 	//Sem alerta de erro
 
 			list ($d,$m,$y) = explode('/',$dt);
@@ -52,10 +52,10 @@ function checadata ($dt){
 			$y = $dta[2];
 			$res = checkdate($m,$d,$y);
 			if ($res == 1 ){
-				//Data válida
+				//Data vï¿½lida
 				return true;
 			}else{
-				//Data inválida
+				//Data invï¿½lida
 				return false;
 			}
 }
@@ -77,7 +77,7 @@ function conv_valor_br ($data) {
 }
 
 function eventoFrequencia ($tipo,$data) {
-		//Retorna a data adequda e a informação de periodo
+		//Retorna a data adequda e a informaï¿½ï¿½o de periodo
 
 }
 
@@ -295,9 +295,9 @@ function validaCPF($cpf){
   // pra manter o respeito ;)
 	$d1 = 0;
 	$d2 = 0;
-  // remove tudo que não seja número
+  // remove tudo que nï¿½o seja nï¿½mero
   $cpf = preg_replace("/[^0-9]/", "", $cpf);
-  // lista de cpf inválidos que serão ignorados
+  // lista de cpf invï¿½lidos que serï¿½o ignorados
   $ignore_list = array(
     '00000000000',
     '01234567890',
@@ -312,44 +312,44 @@ function validaCPF($cpf){
     '99999999999'
   );
   // se o tamanho da string for dirente de 11 ou estiver
-  // na lista de cpf ignorados já retorna false
+  // na lista de cpf ignorados jï¿½ retorna false
   if(strlen($cpf) != 11 || in_array($cpf, $ignore_list)){
       return false;
   } else {
     // inicia o processo para achar o primeiro
-    // número verificador usando os primeiros 9 dígitos
+    // nï¿½mero verificador usando os primeiros 9 dï¿½gitos
     for($i = 0; $i < 9; $i++){
-      // inicialmente $d1 vale zero e é somando.
-      // O loop passa por todos os 9 dígitos iniciais
+      // inicialmente $d1 vale zero e ï¿½ somando.
+      // O loop passa por todos os 9 dï¿½gitos iniciais
       $d1 += $cpf[$i] * (10 - $i);
     }
-    // acha o resto da divisão da soma acima por 11
+    // acha o resto da divisï¿½o da soma acima por 11
     $r1 = $d1 % 11;
-    // se $r1 maior que 1 retorna 11 menos $r1 se não
+    // se $r1 maior que 1 retorna 11 menos $r1 se nï¿½o
     // retona o valor zero para $d1
     $d1 = ($r1 > 1) ? (11 - $r1) : 0;
     // inicia o processo para achar o segundo
-    // número verificador usando os primeiros 9 dígitos
+    // nï¿½mero verificador usando os primeiros 9 dï¿½gitos
     for($i = 0; $i < 9; $i++) {
-      // inicialmente $d2 vale zero e é somando.
-      // O loop passa por todos os 9 dígitos iniciais
+      // inicialmente $d2 vale zero e ï¿½ somando.
+      // O loop passa por todos os 9 dï¿½gitos iniciais
       $d2 += $cpf[$i] * (11 - $i);
     }
-    // $r2 será o resto da soma do cpf mais $d1 vezes 2
+    // $r2 serï¿½ o resto da soma do cpf mais $d1 vezes 2
     // dividido por 11
     $r2 = ($d2 + ($d1 * 2)) % 11;
-    // se $r2 mair que 1 retorna 11 menos $r2 se não
+    // se $r2 mair que 1 retorna 11 menos $r2 se nï¿½o
     // retorna o valor zeroa para $d2
     $d2 = ($r2 > 1) ? (11 - $r2) : 0;
-    // retona true se os dois últimos dígitos do cpf
-    // forem igual a concatenação de $d1 e $d2 e se não
+    // retona true se os dois ï¿½ltimos dï¿½gitos do cpf
+    // forem igual a concatenaï¿½ï¿½o de $d1 e $d2 e se nï¿½o
     // deve retornar false.
     return (substr($cpf, -2) == $d1 . $d2) ? true : false;
   }
 }
 
 function semana ($data) {
-//Semana pertence o lançamento
+//Semana pertence o lanï¿½amento
 	$dta = explode("/",$data);
 		$d=$dta[0];
 		$m=$dta[1];
@@ -379,8 +379,8 @@ function semana ($data) {
 }
 
 function diaSem ($data) {
-#Retorna a que ordem este dia pertence no mês
-#Ex.: 07/08/2016 -> retorna 1 que refere-se ao 1º dom do mês
+#Retorna a que ordem este dia pertence no mï¿½s
+#Ex.: 07/08/2016 -> retorna 1 que refere-se ao 1ï¿½ dom do mï¿½s
 	$dta = explode("/",$data);
 		$d=$dta[0];
 		$m=$dta[1];
@@ -515,7 +515,7 @@ function id_left ($val_link) {
 }
 
 function prox_ant_ano (){
-//cria link para o próximo ou o ano anterior
+//cria link para o prï¿½ximo ou o ano anterior
 
      if (empty($_GET["ano"]))
 	  $y = date("Y");
@@ -560,8 +560,8 @@ function prox_ant_ano (){
 function ver_nome ($val_link) {
 	/*	retorna verdadeiro se link possui esta string em qualquer parte
 	*/
-	$menuGet = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
-	$menuPost = (empty($_POST["escolha"])) ? '' : $_POST["escolha"] ;
+	$menuGet = (empty($_GET["menu"])) ? '' : $_GET["menu"] ;
+	$menuPost = (empty($_POST["menu"])) ? '' : $_POST["menu"] ;
 	if (strstr($menuGet, $val_link) || strstr($menuPost, $val_link)) {
 	 	$tes = true;
 	}else {
@@ -625,8 +625,8 @@ function data_extenso ($data) {
 			$ver_data = checkdate($m,$d,$y);
 
 	if (!$ver_data){
-				echo "<script> alert('data ou formato inválida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
-				echo "data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y'); window.history.go(-2);</script>";
+				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
 				break;
 			}
 
@@ -654,7 +654,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Março";
+		case 3: $mes_extenso="Marï¿½o";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -674,7 +674,7 @@ function data_extenso ($data) {
 				break;
 		case 12: $mes_extenso="Dezembro";
 				break;
-		default: echo $mes_extenso="Mês incorreto";
+		default: echo $mes_extenso="Mï¿½s incorreto";
 	}//fim do case para o mï¿½s
 
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
@@ -723,7 +723,7 @@ function arrayDia ($dia) {
 
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
 
-	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
+	$alerta = "<script> alert('Desculpe mas vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
 
@@ -842,7 +842,7 @@ function situacao ($situacao,$rol){
 
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
-    return (strtoupper(strtr($string, 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ' )));
+    return (strtoupper(strtr($string, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' )));
     };
 
 
@@ -983,12 +983,12 @@ function periodoLimp ($mesRef) {
 		$periodos = array($periodo.$aref,$anterio1,$anterio2);
 		return $periodos;
 	}else {
-		$periodos = array('Nenhum período definido!');
+		$periodos = array('Nenhum perï¿½odo definido!');
 		return $periodos;
 	}
 }
 
-#Formata número de telefones de 8 a acima de 11 dígitos
+#Formata nï¿½mero de telefones de 8 a acima de 11 dï¿½gitos
 function formatPhoneNumber($phoneNumber) {
     $phoneNumber = preg_replace('/[^0-9]/','',$phoneNumber);
 
@@ -1033,7 +1033,7 @@ function formatPhoneNumber($phoneNumber) {
     return $phoneNumber;
 }
 
-#Formata número de CPF para exibição
+#Formata nï¿½mero de CPF para exibiï¿½ï¿½o
 function formatCPFNumber ($cpfNumber){
 
    	$cpfNumber= wordwrap($cpfNumber, 3, '.', true);
@@ -1044,12 +1044,12 @@ function formatCPFNumber ($cpfNumber){
 }
 
 /***************************************************************************
- * Gerador de calendário em PHP
- * Última alteração: 28/02/2005 às 17:37                                   *
- * Autor: Raphael Araújo e Silva - khaotix_@hotmail.com                    *
+ * Gerador de calendï¿½rio em PHP
+ * ï¿½ltima alteraï¿½ï¿½o: 28/02/2005 ï¿½s 17:37                                   *
+ * Autor: Raphael Araï¿½jo e Silva - khaotix_@hotmail.com                    *
  *                                                                         *
- * ATENÇÃO: VOCÊ TEM A COMPLETA PERMISSÃO PARA ALTERAÇÃO E REDISTRIBUIÇÃO  *
- *          DO CÓDIGO NESTE E EM QUALQUER ARQUIVO ACOMPANHANTE DESDE QUE O *
+ * ATENï¿½ï¿½O: VOCï¿½ TEM A COMPLETA PERMISSï¿½O PARA ALTERAï¿½ï¿½O E REDISTRIBUIï¿½ï¿½O  *
+ *          DO Cï¿½DIGO NESTE E EM QUALQUER ARQUIVO ACOMPANHANTE DESDE QUE O *
  *          AUTOR ORIGINAL SEJA CITADO.                                    *
  ***************************************************************************/
 
@@ -1080,24 +1080,24 @@ function calcDiaSemana($dia,$mes,$ano){
   if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
   {
-   $tabela="Erro ao gerar calendário: [mês=".$mes."] [ano=".$ano.
-           "] [número de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
+   $tabela="Erro ao gerar calendï¿½rio: [mï¿½s=".$mes."] [ano=".$ano.
+           "] [nï¿½mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
   }
   else
   {
-   //Carrega o css do calendário e armazena em $dados
+   //Carrega o css do calendï¿½rio e armazena em $dados
    $arq=fopen("calendario.css","r");
    $tam=filesize("calendario.css");
    $dados=fread($arq,$tam);
    fclose($arq);
-   //Coloca o css carregado no código do calendário
+   //Coloca o css carregado no cï¿½digo do calendï¿½rio
    echo "<style type='text/css'>".$dados."</style>";
 
-   //Calcula em que dia da semana é o dia 1/$mes/$ano
+   //Calcula em que dia da semana ï¿½ o dia 1/$mes/$ano
    $dia_semana=calcDiaSemana(1,$mes,$ano);
-   $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano é bisexto
-   $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o número de dias de cada mês
-   $meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+   $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano ï¿½ bisexto
+   $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o nï¿½mero de dias de cada mï¿½s
+   $meses=array("Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho",
                 "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
    $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&aacute;b");
 
@@ -1110,7 +1110,7 @@ function calcDiaSemana($dia,$mes,$ano){
 
    $nq=count($qtd);
 
-   $tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportará as demais tabelas de meses)
+   $tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportarï¿½ as demais tabelas de meses)
 
    while($idx<$total)
    {
@@ -1119,47 +1119,47 @@ function calcDiaSemana($dia,$mes,$ano){
     {
      $temp_tb="<td valign='top'><table class='table'>
               <tr><td colspan=7  class='cabecalho'>".$meses[$idx].'/'.$ano.
-              "</td></tr><tr>"; //Cria uma tabela para o mês atual
+              "</td></tr><tr>"; //Cria uma tabela para o mï¿½s atual
 
-     for($idx2=0;$idx2<7;$idx2++) //Gera o cabeçalho da tabela do mês atual
+     for($idx2=0;$idx2<7;$idx2++) //Gera o cabeï¿½alho da tabela do mï¿½s atual
      $temp_tb=$temp_tb."<td class='td_semana'>".$dias[$idx2]."</td>";
 
-     $temp_tb=$temp_tb."</tr>"; //Fecha o cabeçalho
+     $temp_tb=$temp_tb."</tr>"; //Fecha o cabeï¿½alho
 
      $cnt_dias=1; //Inicializa o contador de dias
      $temp_ln="";
      $nl=0;
 
      while($cnt_dias<=$ndias[$idx]) {
-      $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mês atual
+      $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mï¿½s atual
       for($d=0;$d<7 && $cnt_dias<=$ndias[$idx];$d++) {
 		if($d>=$dia || $dia==0) {
 	        $classe="";
 			$maux=$idx+1;
 
-			//A rotina abaixo verifica se o dia atual é um feriado ou um dia marcado
-			//onde $datas contém os dois vetores $feriados e $marcados
+			//A rotina abaixo verifica se o dia atual ï¿½ um feriado ou um dia marcado
+			//onde $datas contï¿½m os dois vetores $feriados e $marcados
 			for($i=0;$i<$nq && $classe=="";$i++)
 			{
 				 for($i1=0;$i1<$qtd[$i] && $classe=="";$i1++)
 				 {
 					  //Caso seja um intervalo de dias
 					  if(strpos($datas[$i][$i1],"-")==2) {
-					   $d1=substr($datas[$i][$i1],0,2); //Obtém o primeiro dia
-					   $d2=substr($datas[$i][$i1],3,2); //Obtém o segundo dia
-					   $m=substr($datas[$i][$i1],6,2); //Obtém o mês do intervalo
+					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o primeiro dia
+					   $d2=substr($datas[$i][$i1],3,2); //Obtï¿½m o segundo dia
+					   $m=substr($datas[$i][$i1],6,2); //Obtï¿½m o mï¿½s do intervalo
 
 					  } else /*Caso seja um dia */ {
 
-					   $d1=substr($datas[$i][$i1],0,2); //Obtém o dia
+					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o dia
 				  	   $d2=0;
-					   $m=substr($datas[$i][$i1],3,2); //Obtém o mês
+					   $m=substr($datas[$i][$i1],3,2); //Obtï¿½m o mï¿½s
 					  }
 
-					  //Atribui uma classe CSS à célula (dia) atual da tabela caso
-					  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado
+					  //Atribui uma classe CSS ï¿½ cï¿½lula (dia) atual da tabela caso
+					  //o mï¿½s atual $maux seja igual ao mï¿½s obtido de um dos vetores $m ($feriado
 					  // ou $marcado)
-					  //Verifica se o dia atual $cnt_dias está no intervalo de dias ou se é igual
+					  //Verifica se o dia atual $cnt_dias estï¿½ no intervalo de dias ou se ï¿½ igual
 					  //ao dia obtido
 				   	  if($m==$maux && (($cnt_dias>=$d1 && $cnt_dias<=$d2) ||
 					    ($cnt_dias==$d1))) {
@@ -1170,10 +1170,10 @@ function calcDiaSemana($dia,$mes,$ano){
 				 }
 			}
 
-			if($classe=="") //Caso a classe ainda não esteja definida após o for acima
+			if($classe=="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 			 $classe=($d==0) ? "td_dia":"td_marcado0" ;
 
-			//Cria a célula referente ao dia atual
+			//Cria a cï¿½lula referente ao dia atual
 			if ($marcaDia!='') {
 				$diaAtual = '<a href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
 			} else {
@@ -1195,7 +1195,7 @@ function calcDiaSemana($dia,$mes,$ano){
      $temp_tb=$temp_tb.$temp_ln;
 
      $k=$idx-($mes-1);
-     if($rodapes[$k]!="") //Gera um rodapé para a tabela de mês
+     if($rodapes[$k]!="") //Gera um rodapï¿½ para a tabela de mï¿½s
      {
       $temp_tb=$temp_tb."<tr><td colspan=7 class='rodape'>".$rodapes[$k].
                "</td></tr></table><br></td>";
@@ -1204,7 +1204,7 @@ function calcDiaSemana($dia,$mes,$ano){
 
      $tabela=$tabela.$temp_tb;
      $dia=$daux;
-     $idx++; //Passa para o próximo mês
+     $idx++; //Passa para o prï¿½ximo mï¿½s
     }
     $tabela=$tabela."</tr>";
    }
@@ -1225,8 +1225,8 @@ function calcDiaSemana($dia,$mes,$ano){
  }
 
  function formataNumBanco ($numero) {
- 	//Fomata número retirando a virgula e substituido por ponto
- 	//Dando prioridade para a vírgula. Verificando no final da string
+ 	//Fomata nï¿½mero retirando a virgula e substituido por ponto
+ 	//Dando prioridade para a vï¿½rgula. Verificando no final da string
  	$numero = trim($numero);
 
 	$fileVirg  = substr(strrchr($numero, ","), 0);

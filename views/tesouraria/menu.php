@@ -1,25 +1,25 @@
 <p>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Busca</button></a>
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Busca</button></a>
 	</div>
 
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Entradas</button></a>
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Entradas</button></a>
 	</div>
 
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Esc. Bíblica</button></a>
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Esc. B&iacute;blica</button></a>
 	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "24"); ?> href="<?php echo $linkLancamento;?>&rec=24">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Lan&ccedil;. por Semanas</button></a>
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Lan&ccedil;. por Semanas</button></a>
 	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>">Resumo</button></a>
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Resumo</button></a>
 	</div>
 	  <?php if ($_GET['rec']=='4' || $_GET['rec']=='5' || $_GET['rec']=='21'  ||
 	  $_GET['rec']=='22'  || $_GET['rec']=='2') {
@@ -28,7 +28,7 @@
 	  	$linkAtivo='';
 	  }?>
 	 <div class="btn-group">
-	  <button type="button" class="btn btn-info btn-xs dropdown-toggle <?php echo $linkAtivo;?>" data-toggle="dropdown">
+	  <button type="button" class="btn btn-info btn-sm dropdown-toggle <?php echo $linkAtivo;?>" data-toggle="dropdown">
 	     Lan&ccedil;amento <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
@@ -41,7 +41,7 @@
 		  $linkRelt = '&mes='.date('m').'&ano='.date('Y').'&rec=21';
 
 		  ?>
-	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relatório</a></li>
+	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relatï¿½rio</a></li>
 
 		  <?php if ($_GET['rec']=='5' ) {
 		  	$linkAtivo='class="active"';
@@ -68,12 +68,12 @@
 	?>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "25"); ?> href="<?php echo $linkLancamento;?>&rec=25">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>"
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>"
 	  	><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Dados</button></a>
 	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "26"); ?> href="<?php echo $linkLancamento;?>&rec=26">
-	  <button type="button" class="btn btn-info btn-xs <?php echo $b;?>"
+	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>"
 		  ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Fotos</button></a>
 	</div>
 	</p>

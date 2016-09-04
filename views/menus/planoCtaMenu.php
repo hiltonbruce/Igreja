@@ -5,7 +5,7 @@
       $linkAtivo='';
     }?>
  <div class="btn-group">
-      <button type="button" class="btn btn-info btn-xs dropdown-toggle <?php echo $linkAtivo;?>" data-toggle="dropdown">
+      <button type="button" class="btn btn-info btn-sm dropdown-toggle <?php echo $linkAtivo;?>" data-toggle="dropdown">
         Contas <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
