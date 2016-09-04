@@ -139,9 +139,11 @@ div .rightpanel {
 }
 
 .login {
-    width: 50%;
+    width: 35%;
     float: right;
+    padding: 0 7px 10 100px;
     margin-bottom: 50px;
+		margin-right: 15%;
 }
 
 div .mainpanel {
