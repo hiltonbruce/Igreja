@@ -138,7 +138,7 @@ $igSede = new DBRecord('igreja', '1', 'rol');
       //Painel direito
       echo $mainpanelIni;
 
-		if ($_SESSION["valid_user"]){
+		if (!empty($_SESSION["valid_user"])){
 			if (strstr($escGET,"adm/")){
 				if (strstr($escGET,"adm/dados_pessoais"))
 					require_once ("top_dados.php");

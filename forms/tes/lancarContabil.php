@@ -5,20 +5,19 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script
 	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link
-	rel="stylesheet" type="text/css" href="css/autocomplete.css">
+<link	rel="stylesheet" type="text/css" href="css/autocomplete.css">
 
 <span style="text-align: left; font-weight: bold">Debitar Conta</span>
 <table style="background-color: #D3D3D3;">
 	<tbody>
 		<tr>
 			<td colspan="3">Despesas com:<br /> <input type="text" name="nome" class="form-control"
-				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
+				id="campo_estado" tabindex="<?PHP echo ++$ind; ?>"
 				placeholder="Qual a Despesa?"/>
 			</td>
 		</tr>
 		<tr>
-			<td>Código/tipo:<br /> <input type="text" id="estado_val" class="form-control"
+			<td>C&oacute;digo/tipo:<br /> <input type="text" id="estado_val" class="form-control"
 				name="estado_val" disabled="disabled" value="" />
 			</td>
 			<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
@@ -27,7 +26,7 @@
 				value="<?PHP echo $acessoDebitar; ?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
 		</tr>
 		<tr>
-			<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
+			<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
 				disabled="disabled" class="form-control" /></td>
 		</tr>
 		<tr>
@@ -45,7 +44,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Código/tipo:<br /> <input type="text" id="nome" name="codigo"
+			<td>Cï¿½digo/tipo:<br /> <input type="text" id="nome" name="codigo"
 				disabled="disabled" value="" class="form-control" />
 			</td>
 			<td>Saldo Atual: <br /> <input type="text" id="id_val2" name="id"
@@ -55,7 +54,7 @@
 				tabindex="<?PHP echo ++$ind; ?>" class="form-control" /></td>
 		</tr>
 		<tr>
-			<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe2" name="det"
+			<td colspan="3">Descriï¿½ï¿½o:<br />  <input type="text" size="78%" id="detalhe2" name="det"
 				disabled="disabled" class="form-control" /></td>
 		</tr>
 		<tr>

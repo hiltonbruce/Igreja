@@ -1,9 +1,7 @@
-<link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
-
-<fieldset><legend>Alteração e Inicializa&ccedil;&atilde;o de Senhas</legend>
+<fieldset><legend>Altera&ccedil;&atilde;o e Inicializa&ccedil;&atilde;o de Senhas</legend>
 <table id="Tabela de usuarios" summary="Lista de todos os usuarios com acesso ao sistema." style="text-align: left; width: 100%;">
     <colgroup>
-		<col id="Usuários">
+		<col id="Usuï¿½rios">
 		<col id="Inicializar/Excluir!">
 		<col id="">
 		<col id="!">
@@ -39,7 +37,7 @@
 					if ($usuario->situacao=='1' && $usuario->setor==$_SESSION["setor"]) {
 						echo '<button class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove"></span> Desativar...</button></a>';
 					} elseif ($usuario->setor==$_SESSION["setor"]) {
-						# Opção de ativa caso esteja desativado
+						# Opï¿½ï¿½o de ativa caso esteja desativado
 						echo '<button class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-ok"></span> Ativar...</button></a>';
 					}else {
 						//echo '<button class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-ok"></span> Ativar...</button></a>';
@@ -53,14 +51,14 @@
 						$options->Atualizar($_GET['id'],$situacao);
 					}elseif ($_GET['id']==$usuario->id) {
 						# code...
-						echo '<script> alert("Você não tem autorização para alterar esse usuário!")</script>';
+						echo '<script> alert("Vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para alterar esse usuï¿½rio!")</script>';
 						$errorIni = false;
 					}
 				?>
 				</td><td>
 				<?php
 					if ($errorIni) {
-						#Se tem autorização inicializa senha
+						#Se tem autorizaï¿½ï¿½o inicializa senha
 						$alterar->ini_senha($usuario->id, ++$ind);
 					}
 

@@ -3,7 +3,7 @@
     <div class="form-group">
 	<form method="get" name="" action="">
 	<div class="row">
-	  <div class="col-xs-1">
+	  <div class="col-xs-2">
 	  	<label>Dia</label>
 	    <input type="text" name='dia' class="form-control" placeholder="dia"
 	    tabindex="<?PHP echo ++$ind; ?>" value="<?PHP echo $dia;?>">
@@ -30,7 +30,7 @@
 		<input type="hidden" name="membro"	value="<?php echo true;?>" />
 		<input type="hidden" name="fin"	value="<?php echo $fin;?>" />
 	  </div>
-	  <div class="col-xs-5">
+	  <div class="col-xs-4">
 	  	<label>Congrega&ccedil;&atilde;o:</label>
 		<?php
 			$bsccredor = new List_sele('igreja', 'razao', 'igreja');
@@ -38,15 +38,33 @@
 			echo $listaIgreja;
 		?>
 	  </div>
-	  <div class="col-xs-6">
-	  	<label>Conta</label>
-		<select class='form-control' name="conta" id="conta" tabindex="<?PHP echo ++$ind; ?>" >
-		<?PHP
-			$campo = new tes_listCta ('titulo','contas');
-			$options = $campo->List_Selec($cta);
-			echo $options['0'];
-		?>
-		</select>
+	  <div class="col-xs-6"><br />
+			<table style="background-color: #D3D3D3;">
+				<tbody>
+					<tr>
+						<td colspan="3"><label>Conta</label><input type="text" name="nome"
+							class="form-control" id="campo_estado" tabindex="<?PHP echo ++$ind; ?>"
+							placeholder="Informe a conta" value="<?PHP echo $_GET['nome']; ?>" />
+						</td>
+					</tr>
+					<tr>
+						<td>C&oacute;digo/tipo:<br /> <input type="text" id="estado_val" class="form-control"
+							name="estado_val" disabled="disabled" value="" />
+						</td>
+						<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
+							disabled="disabled" value="" /></td>
+						<td>Acesso:<br /> <input type="text" id="acesso" name="conta" class="form-control"
+							value="<?PHP echo $cta; ?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+					</tr>
+					<tr>
+						<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
+							disabled="disabled" class="form-control" /></td>
+					</tr>
+					<tr>
+						<td colspan="3">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
 	  </div>
 	  <div class="col-xs-5">
 	  	<label>Referente:</label>
@@ -84,3 +102,24 @@
 	</form>
 	</div>
 </fieldset>
+
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script
+	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<link	rel="stylesheet" type="text/css" href="css/autocomplete.css">
+
+<script type="text/javascript">
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular,detalhe ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#acesso").val(celular);
+			$("#detalhe").val(detalhe);
+		}
+		if ( this.isModified )
+			this.setValue("");
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+		return "models/tes/autoContasId.php?q=" + this.value;
+	});
+</script>

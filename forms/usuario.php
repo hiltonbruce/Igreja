@@ -5,7 +5,7 @@
 	<tbody>
 		<tr>
 			<td colspan="2"><label>Nome:</label>
-	<input name="nome" type="text" id="nome" required="required" class="form-control" 
+	<input name="nome" type="text" id="nome" required="required" class="form-control"
 	value="<?PHP echo $_POST["nome"];?>" tabindex="<?PHP echo ++$ind; ?>" size="40" />
 	</td>
 			<td><label>CPF:</label>
@@ -31,7 +31,7 @@
 		  		</tr>
 		  		<tr>
 			  		<td><label><input type="radio" id="semana" name="nivel" value="9" tabindex = "<?php echo ++$ind; ?>" > N&iacute;vel 4 - Apagar Registros</label></td>
-			  		<td><label><input type="radio" id="semana" name="nivel" value="10" tabindex = "<?php echo ++$ind; ?>" > N&iacute;vel 5 - Administração</label></td>
+			  		<td><label><input type="radio" id="semana" name="nivel" value="10" tabindex = "<?php echo ++$ind; ?>" > N&iacute;vel 5 - Administraï¿½ï¿½o</label></td>
 			  		<td></td>
 		  		</tr>
 		  		<tr>
@@ -48,7 +48,7 @@
 		  		</tr>
 	  		</tbody>
 	</table>
-	
-	
+
+
 </form>
 </fieldset>

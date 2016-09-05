@@ -1,4 +1,5 @@
 <?PHP
+require_once 'forms/manutencao.php';
 if (!empty($_GET['idcidade'])){
 		$idcidade = (int)$_GET['idcidade'];}
 	else
@@ -24,7 +25,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				<tr>
 					<td>
 						<label>Estado:</label>
-							<select name="destino" class="form-control" id="destino" onchange="MM_jumpMenu('parent',this,0)">
+							<select name="destino" class="form-control" id="destino" onchange="MM_jumpMenu('parent',this,0)",
+							autofocus="autofocus">
 							<?PHP
 							if (empty($_GET["uf_end"]))
 							{?>
@@ -75,9 +77,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 							?>
 				</tr>
 				<tr>
-					<td colspan="2"> <label>Igreja:</label>
+					<td colspan="2"> <label>igreja:</label>
     					<input name="razao" class="form-control" type="text" id="razao"
-    					required="required" tabindex = "<?php echo ++$ind; ?>" >
+    					required="required" tabindex = "<?php echo ++$ind; ?>" size="55">
     				</td>
 				</tr>
 				<tr>
@@ -90,7 +92,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</td>
 				</tr>
 				<tr>
-					<td><label>Endere&ccedil;o Web</label>
+					<td><label>Endere�o Web</label>
 						<input name="site" class="form-control" type="text" id="site" tabindex = "<?php echo ++$ind; ?>" value='www.adpb.com.br'>
 					</td>
 					<td><label>Email:</label>
@@ -103,10 +105,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                   </td>
 			  </tr>
 				<tr>
-					<td><label>Endere&ccedil;o</label>
+					<td><label>Endere�o</label>
 						<input name="rua" required="required" class="form-control" type="text" id="rua" tabindex = "<?php echo ++$ind; ?>" size="30" >
 					</td>
-					<td><label>N&ordm;:</label>
+					<td><label>N�mero</label>
 						<input name="numero" required="required" class="form-control" type="text" id="numero" tabindex = "<?php echo ++$ind; ?>" size="5">
 					</td>
 				</tr>
@@ -119,10 +121,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			</td>
 				</tr>
 				<tr>
-					<td><label>Rol do 1&ordm; Secret&aacute;rio</label>
+					<td><label>Rol do 1&ordm; Secretario</label>
 						<input name="secretario1" class="form-control" type="text" id="secretario1" tabindex = "<?php echo ++$ind; ?>">
 					</td>
-					<td><label>Rol do 2&ordm; Secret&aacute;rio</label>
+					<td><label>Rol do 2&ordm; Secretario</label>
 						<input name="secretario2" class="form-control" type="text" id="secretario2" tabindex = "<?php echo ++$ind; ?>">
 					</td>
 				</tr>
@@ -158,26 +160,28 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </fieldset>
   <fieldset>
   <legend>Dias de Cultos</legend>
-		<table class='table'>
+	<div>
+		<table class="bg-primary">
 			<tbody>
-			<tr class="bg-primary">
-				<td><label class="checkbox">
+			<tr>
+				<td><label class="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  		<input type="checkbox" id="dia" name="culto1" value="1" tabindex = "<?php echo ++$ind; ?>" >Domingo</label></td>
-		  		<td><label class="checkbox">
+		  	<td><label class="checkbox">
 		  		<input type="checkbox" id="dia" name="culto2" value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></td>
-		  		<td><label class="checkbox">
+		  	<td><label class="checkbox">
 		  		<input type="checkbox" id="dia" name="culto3" value="3" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label></td>
-		  		<td><label class="checkbox">
+		  	<td><label class="checkbox">
 		  		<input type="checkbox" id="dia" name="culto4" value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></td>
-		  		<td><label class="checkbox">
+		  	<td><label class="checkbox">
 		  		<input type="checkbox" id="dia" name="culto5" value="5" tabindex = "<?php echo ++$ind; ?>" >Quinta</label></td>
-		  		<td><label class="checkbox">
+		  	<td><label class="checkbox">
 		  		<input type="checkbox" id="dia" name="culto6" value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></td>
-		  		<td><label class="checkbox">
+		  	<td><label class="checkbox">
 		  		<input type="checkbox" id="dia" name="culto7" value="7" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label></td>
 	  		</tr>
 	  		</tbody>
 	  	</table>
+		</div>
   </fieldset>
    <label>
     <input type="hidden" name="escolha" value="models/cad_igreja.php">

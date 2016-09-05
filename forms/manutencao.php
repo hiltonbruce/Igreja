@@ -1,18 +1,3 @@
-<link rel="stylesheet" type="text/css" media="screen, projection" href="tabs.css" />
- <table id="Adminitração" summary="Manutenção do sistema." style="text-align: left; width: 100%;">
-    <caption>
-      Manutenção - Cadastro, alteração e exclusão
-    </caption>
-    <thead>
-      <tr>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-    <tr><td class='odd'>Igreja - Tabela de manutenção para administração do sistema </td>
-      </tr>
-    </tbody>
-  </table>
   <ul class="list-inline">
   	<li>
 			<form method="get" class="form-horizontal" action="">
@@ -29,7 +14,7 @@
   	<li><form method="get" class="form-horizontal" action="">
 				<input name="escolha" type="hidden" value="controller/administracao.php" />
 				<input name="cad" type="hidden" value="1" />
-				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Funções..." tabindex="<?PHP echo ++$ind;?>" />
+				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Fun&ccedil;&otilde;es..." tabindex="<?PHP echo ++$ind;?>" />
 			</form></li>
   	<li><form method="get" class="form-horizontal" action="">
 				<input name="escolha" type="hidden" value="tab_auxiliar/cadastro_cidade.php" />
@@ -44,6 +29,6 @@
   	<li><form method="get" class="form-horizontal" action="">
 				<input name="escolha" type="hidden" value="tab_auxiliar/cad_usuario.php" />
 				<input name="menu" type="hidden" value="top_admusuario" />
-				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="usuários" tabindex="<?PHP echo ++$ind;?>" />
+				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="usu&aacute;rios" tabindex="<?PHP echo ++$ind;?>" />
 			</form></li>
 </ul>

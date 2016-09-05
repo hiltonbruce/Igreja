@@ -1,12 +1,12 @@
 
 <?php
-	/*	Define se este botão ou limk é o corrente e o define para tal com mudança
+	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if (!empty($_SESSION["valid_user"])) {
 			$hom = "<a href='./?escolha=adm/cadastro_membro.php&uf=PB'>Cadastro</a>";
 		}
-
+$hom = (empty($hom)) ? '' : $hom ;
 	$admin = array ("forms/manutencao.php","forms/editar_igreja.php","tab_auxiliar/cadastro_bairro.php","tab_auxiliar/cadastro_igreja.php","tab_auxiliar/altexclui_igreja.php","tab_auxiliar/cad_usuario.php");
 
 	$link_admin ="<li><span class='hlavny_'><a href='./?escolha=forms/manutencao.php'>Administra&ccedil;&atilde;o</a></span></li>";

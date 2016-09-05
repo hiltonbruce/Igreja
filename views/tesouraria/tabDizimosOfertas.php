@@ -34,10 +34,9 @@ if ($idDizOfGET>'0' && $recGet=='9') {
 </table>
 <?PHP
 }
-
 	//require_once 'forms/concluirdiz.php';
 	if ($_GET['idDizOf']>0) {
-	//Incluir form para alterar ou excluir pre-lançamento de Dízimos e Ofertas
+	//Incluir form para alterar ou excluir pre-lanï¿½amento de Dï¿½zimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
 		}
 

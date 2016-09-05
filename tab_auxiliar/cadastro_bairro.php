@@ -1,4 +1,5 @@
 <?PHP
+require_once 'forms/manutencao.php';
 $cidade = (empty($_POST["cidade"])) ? (int)$_GET["cidade"]:(int)$_POST["cidade"];
 
 $uf = (empty($_POST["uf"])) ? $_GET["uf"]:$_POST["uf"];
@@ -55,12 +56,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					<option value="./?escolha=tab_auxiliar/cadastro_bairro.php&amp;uf=SP">S&atilde;o Paulo</option>
 					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=SE'>Sergipe</option>
 					<option value='./?escolha=tab_auxiliar/cadastro_bairro.php&uf=TO'>Tocantins</option>
-				</select>		
+				</select>
  			</td>
  			<td>
 				<?PHP
 				if (!empty($_GET["uf"]))
-				{	
+				{
 					echo '<label for="disabledSelect">Cidade</label>';
 					if (empty($_GET['cidade'])) {
 						conectar();
@@ -69,12 +70,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 						$vlr_linha=$lst_cid->ListDados ("1");
 					}else {
 						echo('<span id="disabledTextInput" disabled="disabled" class="form-control">'.$_GET['nomeCid'].'</span>');
-						echo '<input name="cidade" type="hidden" value="'.$_GET['cidade'].'" >';	
-						
+						echo '<input name="cidade" type="hidden" value="'.$_GET['cidade'].'" >';
+
 					}
-					
-					
-				
+
+
+
 				?>
  			</td>
  		</tr>
@@ -82,7 +83,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
  			<td>
  				<label>Bairro:</label>
 			    <input name="bairro" type="text" id="bairro" class="form-control" placeholder="Nome do bairro para cadastrar">
-			    <input name="escolha" type="hidden" id="escolha" value="<?PHP 
+			    <input name="escolha" type="hidden" id="escolha" value="<?PHP
 			    	echo "tab_auxiliar/cadastro_bairro.php";?>">
 				<?PHP } ?>
 			</td>
@@ -93,18 +94,18 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
  		</tr>
  	</tbody>
  </table>
-    
+
 
 </form></fieldset>
 <?PHP
-}elseif ($_SESSION['nivel']>4)//Verifica se o usuário tem autorização para o cadastro e realiza inserção 
+}elseif ($_SESSION['nivel']>4)//Verifica se o usuï¿½rio tem autorizaï¿½ï¿½o para o cadastro e realiza inserï¿½ï¿½o
 {
 	//Inserir dados na tadela bairro
 	$bairros = new bairro($cidade,$_POST["bairro"]);
 	$linkRetorno = (empty($_SESSION["nome_cad"])) ? $_GET['escolha']:'adm/';
 	if ($bairros->exitecad()) {
 		echo $_GET['nomeCid'].'</div>';
-		echo('<script> alert("Bairro: '.$_POST['bairro'].', já cadastrado para esta cidade '.$_GET['nomeCid'].'!");</script>');
+		echo('<script> alert("Bairro: '.$_POST['bairro'].', jï¿½ cadastrado para esta cidade '.$_GET['nomeCid'].'!");</script>');
 		echo '<h3>Deseja voltar e continuar o cadastro ? <a href="./?escolha=';
 		echo $_GET['escolha'].'&cid_end=';
 		echo $cidade.'"><button class="btn btn-primary">Clique aqui...</button></a></h3>';
@@ -114,13 +115,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	$carta = new insert ("$value","bairro");
 	$idBairro = $carta->inserir();
 	}
-	if ($idBairro>'0'){//Se o usuário já vinha realizado o cadastro aqui dá opção de continuar
+	if ($idBairro>'0'){//Se o usuï¿½rio jï¿½ vinha realizado o cadastro aqui dï¿½ opï¿½ï¿½o de continuar
 		echo '<h3>Deseja voltar e continuar o cadastro ? <a href="./?escolha=';
 		echo $_GET['escolha'].'&cid_end=';
 		echo $cidade.'&bairro='.$idBairro.'"><button class="btn btn-primary">Clique aqui...</button></a></h3>';
 	}
-	
+
 }else{
-	echo "Desculpe! Mas voc&ecirc; não te autoriza&ccedil;&atilde;o para esta terefa.";
+	echo "Desculpe! Mas voc&ecirc; nï¿½o te autoriza&ccedil;&atilde;o para esta terefa.";
 }
 ?>

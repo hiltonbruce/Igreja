@@ -1,7 +1,7 @@
+<?php
+  require_once 'forms/manutencao.php';
+ ?>
 <table class='table table-condensed table-striped' summary="Lista de todos as igrejas da Cidade." >
-    <caption>
-      Alterar cadastro e/ou Destivar Igrejas
-    </caption>
     <colgroup>
 		<col id="Nome da atual">
 		<col id="Ativa/Desativar">
@@ -27,7 +27,7 @@
 		<tr>
 			<td><?php echo '<b>'.$lista[$chave]['0'].'</b><br />'.$lista[$chave]['3'].', N&ordm;: '.$lista[$chave]['4'];?></td>
 			<td>
-				<?php 
+				<?php
 					if ($lista[$chave]['1']=='1')/*Status ativo da igreja*/{
 						$status = '0';$scrStatus ='Desativar Igreja...';
 						$titleButton = 'Encerra o funcionamento desta Igreja!';
@@ -56,7 +56,7 @@
 				</td>
 				<td>
 				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&rol=<?php echo $chave;?>"
-				 title="Editar as informa&ccedil;&otilde;es gerais desta Igreja: Dirigente, secretário, tesoureiro, etc." >
+				 title="Editar as informa&ccedil;&otilde;es gerais desta Igreja: Dirigente, secretï¿½rio, tesoureiro, etc." >
 				 <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				&nbsp;Editar/Alterar dados... </button></a>
 			</td>
