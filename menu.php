@@ -23,11 +23,11 @@ $hom = (empty($hom)) ? '' : $hom ;
 	$link_suporte ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span><span class='right'></span></li>";
 	$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 
-	if ((strstr($_GET["menu"],"tesouraria")) || (strstr($escPOST,"tesouraria"))){
+	if ((strstr($menuGET,"tesouraria")) || (strstr($escPOST,"tesouraria"))){
 		$link_tesour ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro</a></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 
-	if ((strstr($_GET["menu"],"missoes")) || (strstr($escPOST,"missoes"))){
+	if ((strstr($menuGET,"missoes")) || (strstr($escPOST,"missoes"))){
 		$link_missoes ="<li><span class='left'></span><span class='hlavny'><a href='./?escolha=controller/missoes.php&menu=top_missoes'>Miss&otilde;es</a></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 
@@ -37,11 +37,12 @@ $hom = (empty($hom)) ? '' : $hom ;
 				$link_home = "<li><span class='hlavny_'>$hom</span></li>";
 				break;}
 	}
-
+/*
 	if ((strstr($escGET, $val_link) || strstr($escPOST,$val_link))) {
 		echo "class='selected' style='border-top:0;'";
 		//return "teste";
 	}
+	*/
 ?>
 	<?php
 	if (isset($_SESSION['valid_user']))	{
@@ -69,5 +70,4 @@ $hom = (empty($hom)) ? '' : $hom ;
 </ul>
 </div>
 </div>
-	<?php }
-	;?>
+	<?php } ?>

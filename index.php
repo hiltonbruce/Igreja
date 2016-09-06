@@ -213,7 +213,7 @@ jQuery(function($) {
 
 <?php
   #Chamada para o Chat
-  if ($_SESSION['valid_user']!=''){
+  if (!empty($_SESSION['valid_user'])){
     //Descomenta para o chat funcionar
     echo '<script type="text/javascript" src="chat/js/chat.js"></script>';
     $batepapo = new chat('');
