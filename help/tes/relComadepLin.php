@@ -87,6 +87,7 @@ foreach ($saldo AS $chave => $valor){
 
 		$ctaAtualN4 = $planoCod[$chave]['nivel4'];
 		$ctaAtualN3 = $planoCod[$chave]['nivel3'];
+		$ctaAtualN2 = $planoCod[$chave]['nivel2'];
 
 }
 

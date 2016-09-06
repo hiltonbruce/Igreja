@@ -13,12 +13,12 @@ $cred = '<strong> C</strong>';
 $dev = '<strong> D</strong>';
 
 
-#Monta array com informações das contas atualmente
+#Monta array com informaï¿½ï¿½es das contas atualmente
 $plano = new tes_conta();
 $planoCta = $plano->contasTodas();
 $planoCod = $plano->contasCod();
 
-//Busca do movimento no mês
+//Busca do movimento no mï¿½s
 $queryLanc  = 'SELECT l.*,DATE_FORMAT(l.data,"%Y%m") AS dt FROM lanc AS l';
 $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"';
 if ($idIgreja>'0' && $idIgreja!='-1') {
@@ -43,15 +43,17 @@ while ($contas = mysql_fetch_array($lista)) {
 #echo $ctaDeb." -- ";
 #echo $ctaCred."<br />";
 	if ($contas['dt']==$a.$m) {
-			//Movimento do mês atual
+			//Movimento do mï¿½s atual
 			//Contas debitadas
 			$saldo[$planoCta[$ctaDeb]['codigo']] += $vlrConta;
 			$saldoGrp[$planoCta[$ctaDeb]['nivel4']] += $vlrConta;
 			$saldoGrp[$planoCta[$ctaDeb]['nivel3']] += $vlrConta;
+			$saldoGrp[$planoCta[$ctaDeb]['nivel2']] += $vlrConta;
 			//Contas creditadas
 			$saldo[$planoCta[$ctaCred]['codigo']] -= $vlrConta;#Sld nivel de codigo
 			$saldoGrp[$planoCta[$ctaCred]['nivel4']] -= $vlrConta;
 			$saldoGrp[$planoCta[$ctaCred]['nivel3']] -= $vlrConta;
+			$saldoGrp[$planoCta[$ctaCred]['nivel2']] -= $vlrConta;
 			//$debito  += $vlrConta;//Movimento do
 
 			$debito  += $contas['valor'];
@@ -62,13 +64,15 @@ while ($contas = mysql_fetch_array($lista)) {
 			$saldoAnte[$planoCta[$ctaDeb]['codigo']] += $vlrConta;
 			$saldoAnteGrp[$planoCta[$ctaDeb]['nivel4']] += $vlrConta;
 			$saldoAnteGrp[$planoCta[$ctaDeb]['nivel3']] += $vlrConta;
+			$saldoAnteGrp[$planoCta[$ctaDeb]['nivel2']] += $vlrConta;
 			//Contas creditadas
 			$saldoAnte[$planoCta[$ctaCred]['codigo']] -= $vlrConta;
 			$saldoAnteGrp[$planoCta[$ctaCred]['nivel4']] -= $vlrConta;
 			$saldoAnteGrp[$planoCta[$ctaCred]['nivel3']] -= $vlrConta;
+			$saldoAnteGrp[$planoCta[$ctaCred]['nivel2']] -= $vlrConta;
 			//$sldGrupoAnte [$contas['creditar']] -= $vlrConta;
 
-			/*Quando houver saldo, mas sem movimento no mes, aqui é forçado
+			/*Quando houver saldo, mas sem movimento no mes, aqui ï¿½ forï¿½ado
 			 * a aparecer
 			*/
 			if ($saldo[$planoCta[$ctaCred]['codigo']]==0) {

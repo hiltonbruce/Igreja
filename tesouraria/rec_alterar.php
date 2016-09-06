@@ -15,23 +15,26 @@ $rec_alterar = new DBRecord("tes_recibo", $id, "id");
 
 #Verifica se o recibo já foi lançado e bloqueia para alteração
 $testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') ? true : false;
-
-if (!$testLanc) {
-	echo '<h2><span style="color:#FF0000;font-size:150%;text-decoration: blink;">';
-	echo 'O recibo j&aacute; teve seu lan&ccedil;amento confirmado e n&atilde;o poder&aacute; ser alterado!!</span><br />';
-	echo 'Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</h2>';
-}
 ?>
-<div id="tabs">
-	<ul>
-	  <li><a <?PHP link_ativo($_GET["rec"], "1");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=1"><span>Membros da Igreja</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "2");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=2"><span>Pessoa Jur&iacute;dica</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=3"><span>Não Membros</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id-1;?>"><span>Recibo Anterior</span></a></li>
-	  <li><a <?PHP link_ativo($_GET["rec"], "3");?> href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id+1;?>"><span>Próximo Recibo</span></a></li>
-	</ul>
-</div>
 <fieldset>
+	<div class="btn-group">
+		 <a href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id-1;?>">
+		 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">
+				<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Recibo Anterior</button>
+	 	 </a>
+		 	 <a href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id+1;?>">
+		 	 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Pr&oacute;ximo Recibo
+				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button>
+		 	</a>
+	</div>
+	<?php
+	if (!$testLanc) {
+		echo '<h4><p class="text-danger" >';
+		echo 'O recibo j&aacute; teve seu lan&ccedil;amento confirmado e n&atilde;o poder&aacute; ser alterado!!</p>';
+		echo '<span class="small">Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</span></h4>';
+	}
+	 ?>
+	 
 	<div id="lst_cad">
 		<table class='table table-condensed'>
 	      <tr>
