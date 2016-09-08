@@ -14,7 +14,7 @@
 		</caption>
 		<colgroup>
 				<col id="Conta">
-				<col id="Descrição">
+				<col id="Descriï¿½ï¿½o">
 				<col id="Movimento">
 				<col id="Saldo Anterior">
 				<col id="Saldo Atual">
@@ -32,9 +32,9 @@
 			<?php
 			if ($_GET['tipo']==1) {
 				//exibi plano de contas
-				echo $nivel1;//Valor veio do script /models/saldos.php
+				echo $nivel1;
 			}else {
-				echo $nivel2;//Valor veio do script /models/saldos.php
+				echo $nivel2;
 			}
 			?>
 		</tbody>

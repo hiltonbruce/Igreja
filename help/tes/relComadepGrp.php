@@ -1,4 +1,5 @@
 <?PHP
+//Contas Nivel 3, tipo: 1.1.1
 	$sldN3 = number_format(abs($saldoGrp[$planoCta[$ctaCred]['nivel3']]),2,',','.');
 	$sldGrupoCta = $saldoGrp[$planoCod[$ctaAtualN3]['nivel3']];//Sld do movimento grupo nível 3
 	$movSld = number_format(abs($sldGrupoCta),2,',','.');
@@ -42,6 +43,10 @@ if ($movSld !='--o--' || $saldoAtual !='--o--' || $saldoAntr !='--o--') {
 	$nivelN3 .=	'<td class="text-right">';
 	$nivelN3 .=	$saldoAntr.'</td></tr>';
 
-	$nivel3 .= $nivelN3.$nivel2;
+	$nivel3   .= $nivelN3.$nivel2;
+	$nivelNi2 .= $nivelN02.$nivelN3.$nivelN2;
+	$grpN3 .= $nivelN3.$nivel2;
 }
 	$nivel2 = '';
+	$nivelN2 = '';
+	$nivelN02 = '';

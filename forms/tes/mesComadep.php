@@ -1,6 +1,6 @@
 <!-- Desenvolvido por Wellington Ribeiro -->
 <fieldset>
-	<legend>Movimentação no mês</legend>
+	<legend>Movimentaï¿½ï¿½o no mï¿½s</legend>
     <div class="form-group">
 	<form method="get" name="" action="">
 		<table>
@@ -11,10 +11,10 @@
 					value="<?php echo $d;?>"tabindex="<?PHP echo ++$ind; ?>"
 					 class="form-control" placeholder="dia" />
 				</td>
-				<td><label>Mês:</label>
+				<td><label>Mï¿½s:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
-					      	$linha1 = '<option value="0">Selecione o mês...</option>';
+					      	$linha1 = '<option value="0">Selecione o mï¿½s...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($m==$mes) {
@@ -23,11 +23,11 @@
 						      }
 						      echo $linha1.$linha2;
 
-						      //Marca a opção atual para lista Com e Sem o nível mais baixo
+						      //Marca a opï¿½ï¿½o atual para lista Com e Sem o nï¿½vel mais baixo
 						      if ($_GET['tipo']=='1') {
 						      	$Completo = '';
 						      	$Simples = 'active';
-						      }elseif ($_GET['tipo']=='2') {
+						      }elseif (empty($_GET['tipo']) || $_GET['tipo']=='2') {
 						      	$Simples = '';
 						      	$Completo = 'active';
 						      }
@@ -43,10 +43,10 @@
 				<td>
 					<div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-primary <?php echo $Simples;?>">
-					    <input type="radio" name="tipo" value='1' > Simples
+					    <input type="radio" name="tipo" value='1' >3 N&iacute;veis
 					  </label>
 					  <label class="btn btn-primary <?php echo $Completo;?>">
-					    <input type="radio" name="tipo" value='2' > Completo
+					    <input type="radio" name="tipo" value='2' >2 N&iacute;veis
 					  </label>
 				  </div>
 				</td>

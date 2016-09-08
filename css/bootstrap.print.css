@@ -2090,7 +2090,7 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #428bca;
+  background-color: #418ac9;
   border-color: #357ebd;
 }
 .btn-primary .badge {

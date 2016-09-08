@@ -5,6 +5,7 @@
 
 $ctaAtualN4 = '';
 $ctaAtualN3 = '';
+$ctaAtualN2 = '';
 ////echo $planoCta['5']['4'];
 //$saldo = array_merge($saldoAnte,$saldo);
 #print_r($saldoAnteGrp);
@@ -85,6 +86,14 @@ foreach ($saldo AS $chave => $valor){
 
 		}
 
+		//add nivel 2 (tipo 1.1) no Comadep
+		if (($ctaAtualN2!=$planoCod[$chave]['nivel2']) && $rec!='16'){	//Contas Nivel 3
+					//Ixibir na tela
+					require 'help/tes/relComadepG3.php';
+				}elseif (($ctaAtualN2!=$planoCod[$chave]['nivel2'] || $ctaAtualN2=='') && $rec=='16') {
+					//impressão
+					require '../help/tes/relComadepG3.php';
+		}
 		$ctaAtualN4 = $planoCod[$chave]['nivel4'];
 		$ctaAtualN3 = $planoCod[$chave]['nivel3'];
 		$ctaAtualN2 = $planoCod[$chave]['nivel2'];
@@ -97,18 +106,20 @@ if ($rec!='16'){
 
 	//Ixibir na tela
 	require 'help/tes/relComadepG2.php';
+	require 'help/tes/relComadepG3.php';
 	require 'help/tes/relComadepGrp.php';
 	$nivel3 .= $nivel2;
 
 }elseif ($rec=='16') {
 	//impressão
 	require '../help/tes/relComadepG2.php';
+	require '../help/tes/relComadepG3.php';
 	require '../help/tes/relComadepGrp.php';
 	$nivel3 .= $nivel2;
 
 }
 
-//$nivel3 .= $nivel1;
-
 $nivel2 = $nivel3;
+$nivel1 = $nivelNi2;
+$nivel1 = $grpN2.$grpN3;
 ?>
