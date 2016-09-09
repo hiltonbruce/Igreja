@@ -1,12 +1,12 @@
     <div class="login">
       <figure class="highlight text-center">
-        <h3 class="text-center">SisADBy</h3>
+        <h3 class="text-center"><?php echo NOMESYS;?></h3>
         <pre>
         <h5>Fazer login para prosseguir</h5>
         <img data-holder-rendered="true"
         src="img/LOG_BAYEUX..jpg" style="width: 100px; height: 100px;" alt="Logo Igreja"
         data-src="holder.js/140x140" class="img-circle">
-        <h5>Assembleia de Deus - Bayeux - PB</h5>
+        <h5><?php echo NOMEIGR.' &bull; '.CIDADEIG.' &bull; '.UFIG;?></h5>
         <?php
           require_once ("autentica.php");
         ?>

@@ -120,6 +120,6 @@ if ($rec!='16'){
 }
 
 $nivel2 = $nivel3;
-$nivel1 = $nivelNi2;
+//$nivel1 = $nivelNi2;
 $nivel1 = $grpN2.$grpN3;
 ?>

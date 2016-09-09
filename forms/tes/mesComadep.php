@@ -1,6 +1,6 @@
 <!-- Desenvolvido por Wellington Ribeiro -->
 <fieldset>
-	<legend>Movimenta��o no m�s</legend>
+	<legend>Movimenta&ccedil;&atilde;o no m&ecirc;s</legend>
     <div class="form-group">
 	<form method="get" name="" action="">
 		<table>
@@ -11,7 +11,7 @@
 					value="<?php echo $d;?>"tabindex="<?PHP echo ++$ind; ?>"
 					 class="form-control" placeholder="dia" />
 				</td>
-				<td><label>M�s:</label>
+				<td><label>M&ecirc;s:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
 					      	$linha1 = '<option value="0">Selecione o m�s...</option>';

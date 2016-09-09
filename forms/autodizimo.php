@@ -1,7 +1,7 @@
 <!-- Desenvolvido por Wellington Ribeiro o autocompletar-->
-<!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
+<!-- O calculo da data do proximo lancamento caso nï¿½o seja passsado esta no script 'forms/concluirdiz.php' -->
 <fieldset>
-<legend>Dizimo e Ofertas</legend>
+<legend>D&iacute;zimo e Ofertas</legend>
 <form method="post" name="" action="">
 		<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
@@ -12,9 +12,9 @@
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
 			<?php
-				echo semana(date('d/m/Y'));;
+				echo semana(date('d/m/Y')).'&ordf;';
 			?>
-			&ordf; Semana deste mês)</legend>
+			 Semana deste m&ecirc;s)</legend>
 	<table>
 		<tbody>
 			<tr>
@@ -31,7 +31,7 @@
 				<td><label>Data: </label> <input type="text" id="data" name="data"
 					value="<?php echo $dtlanc;?>" class="form-control" required="required"/>
 				</td>
-				<td><label>Referente Mês:</label><input type="text" name="mes"
+				<td><label>Referente M&ecirc;s:</label><input type="text" name="mes"
 					size="2" value="<?php echo $meslanc;?>" class="form-control"
 					 tabindex="<?php
 					 	if ($_GET['igreja']=='1') {
@@ -80,7 +80,7 @@
 						$alerta .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
 						$alerta .='<span aria-hidden="true" >&times;</span></button> <strong>Culto de Miss&otilde;es!</strong>';
 						$alerta .='<br />Of. p/ miss&otilde;es. '.arrayDia($diaSema).' - ';
-						//Alerta para o culto de missões
+						//Alerta para o culto de missï¿½es
 							$semLan = diaSem($dtlanc);
 							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
 							$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
@@ -88,24 +88,21 @@
 							$diaSema = $diaSem->format('w');
 
 							if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
-								//2º domingo do mês
+								//2ï¿½ domingo do mï¿½s
 								echo $alerta.'Sede</div>';
 							} elseif ($diaSema=='0' && $semLan=='1'&& $roligreja!='1' ) {
-								//1º domingo do mês
+								//1ï¿½ domingo do mï¿½s
 								echo $alerta.'Congrega&ccedil;&atilde;o</div>';
 							} else {
 								echo arrayDia($diaSema).' - '.$dtlanc;
 							}
-
 						?>
-
-
 					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
-					type="submit" name="listar" value="Lançar..."></td>
+					type="submit" name="listar" value="Lan&ccedil;ar..."></td>
 				</tr>
 				<tr>
-					<td colspan="2"><label> Qual Campanha ?</label><?php
+					<td colspan="2"><label> Qual Campanha?</label><?php
 					$campanha = new List_campanha;
 					echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
 					?>
@@ -119,13 +116,13 @@
 		</table>
 	</fieldset>
 	<fieldset>
-		<legend>Missões</legend>
+		<legend>Miss&otilde;es</legend>
 		<table  class="table">
 			<tbody>
 				<tr>
-					<td><label>Carnês:</label><input type="text" id="oferta8" autocomplete="off"
+					<td><label>Carn&ecirc;s:</label><input type="text" id="oferta8" autocomplete="off"
 						class="form-control" name="oferta8" value="" tabindex="<?php echo ++$ind;?>"
-						placeholder="Valor em R$ ( Carnês )"  />
+						placeholder="Valor em R$ ( Carn&ecirc;s )"  />
 					</td>
 					<td><label>Oferta:</label><input type="text" id="oferta5" autocomplete="off"
 						class="form-control" name="oferta5" value="" tabindex="<?php echo ++$ind;?>"
@@ -143,13 +140,13 @@
 					</td>
 					<td></td>
 					<td> <label>&nbsp;</label> <input class="btn btn-primary"
-					type="submit" name="listar" value="Lançar..."></td>
+					type="submit" name="listar" value="Lan&ccedil;ar..."></td>
 				</tr>
 			</tbody>
 		</table>
 	</fieldset>
 	<fieldset>
-		<legend>Circulos de Oração</legend>
+		<legend>Circulos de Ora&ccedil;&otilde;o</legend>
 		<table class="table">
 			<tbody>
 				<tr>
@@ -173,13 +170,13 @@
 					</td>
 					<td></td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
-					type="submit" name="listar" value="Lançar..."></td>
+					type="submit" name="listar" value="Lan&ccedil;ar..."></td>
 				</tr>
 			</tbody>
 		</table>
 	</fieldset>
 	<fieldset>
-		<legend>Observação:</legend>
+		<legend>Observa&ccedil;&atilde;o:</legend>
 	<table class="table">
 		<tbody>
 			<tr>
@@ -188,7 +185,7 @@
 				</td>
 				<td><input type="hidden" name="tipo" id="tipo" value="1"> <input
 					type="hidden" name="escolha" value="models/dizoferta.php"> <input
-					type="submit" name="listar" value="Lançar..."
+					type="submit" name="listar" value="Lan&ccedil;ar..."
 					 class="btn btn-primary" tabindex="<?php echo ++$ind;?>">
 				</td>
 			</tr>

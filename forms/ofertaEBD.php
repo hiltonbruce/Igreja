@@ -9,7 +9,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 ?>
 <form method="post" name="" action="">
 <fieldset>
-	<legend>Escola Bíblica</legend>
+	<legend>Escola B&iacute;blica</legend>
 		<table style="background-color: #D3D3D3; border: 0;">
 			<tbody>
 				<tr>
@@ -35,10 +35,10 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					<td>
      					<div class="row">
      					   <div class="col-xs-6">
-					<label class="control-label">Mês:</label>
+					<label class="control-label">M&ecirc;s:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
-					      	$linha1 = '<option value="0">Selecione o mês...</option>';
+					      	$linha1 = '<option value="0">Selecione o m&ecirc;s...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($meslanc==$mes) {
@@ -57,7 +57,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 						</div>
 
 					</td>
-					<td> <label>Situação e Congreg.</label> <input type="text"
+					<td> <label>Situa&ccedil;&atilde;o e Congreg.</label> <input type="text"
 						disabled="disabled" value="" id="cong" class="form-control"
 						 />
 					</td>
@@ -68,7 +68,8 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 						placeholder="Valor" />
 					</td>
 					<td><label>Pgto de Revistas EBD:</label><input type="text"
-						id="oferta2" name="oferta2" value="" placeholder="Aqui não haverá provisão para COMADEP"
+						id="oferta2" name="oferta2" value="" placeholder=
+						"Aqui n&atilde;o haver&aacute; provis&atilde;o para COMADEP"
 						tabindex="<?php echo ++$ind;?>" class="form-control" />
 					</td>
 					<td><label>Corpo de Prof. da EBD:</label><input type="text"
@@ -78,20 +79,20 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 					</td>
 				</tr>
 		<tfoot><tr><td colspan="3" id='total'>
-							Ofertas da Escola Bíblica e do Dep de Ensino (Estamos na:
-							<?php echo semana(date('d/m/Y'));?>
-							&ordf; Semana deste mês)
+							Ofertas da Escola B&iacute;blica e do Dep de Ensino (Estamos na
+							<?php echo semana(date('d/m/Y')).'&ordf;';?>
+							Semana deste m&ecirc;s)
 					</td>
 				</tr>
 		</tfoot>
 			<tr>
 				<td colspan="2">
-		<label>Observação:</label><textarea name="obs" id="obs" class="form-control"
+		<label>Observa&ccedil;&atilde;o:</label><textarea name="obs" id="obs" class="form-control"
 						cols="50%" tabindex="<?php echo ++$ind;?>"></textarea>
 				</td>
 				<td><input type="hidden" name="tipo" id="tipo" value="4"> <input
 					type="hidden" name="escolha" value="models/dizoferta.php"> <input
-					type="submit" name="listar" value="Lançar..."
+					type="submit" name="listar" value="Lan&ccedil;ar..."
 					class="btn btn-primary btn-sm" tabindex="<?php echo ++$ind;?>">
 				</td>
 			</tr>

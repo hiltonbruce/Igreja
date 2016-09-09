@@ -9,7 +9,7 @@
 	}elseif (file_exists('../../func_class/constantes.php')){
 		require('../../func_class/constantes.php');
 	}
-	$db = DB::connect ($dns, array());
+	$db =& DB::connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage());exit;}
 
 	/*
@@ -22,11 +22,11 @@
 	*/
 
 	class rodape {
-		protected $_pagina; //Recebe a quantidade de Links de páginas disponíveis
-		protected $_url; //Recebe o número da página para direcionar as solicitações
-		protected $_linkpagina; //nome do link com a paginação
-		protected $_urlextra; //Recebe o link da página atual para enviar a url da página
-		protected $_linkppag; //Define a quantidade de links numéricos na página
+		protected $_pagina; //Recebe a quantidade de Links de pï¿½ginas disponï¿½veis
+		protected $_url; //Recebe o nï¿½mero da pï¿½gina para direcionar as solicitaï¿½ï¿½es
+		protected $_linkpagina; //nome do link com a paginaï¿½ï¿½o
+		protected $_urlextra; //Recebe o link da pï¿½gina atual para enviar a url da pï¿½gina
+		protected $_linkppag; //Define a quantidade de links numï¿½ricos na pï¿½gina
 
 		function __construct($_pagina=0,$_url=0,$_linkpagina="",$_urlextra="",$_linkppag=0) {
 			$this->_pagina = $_pagina;
@@ -37,15 +37,15 @@
 		}
 
 		public function getPagina(){
-			//Total de link de páginas
+			//Total de link de pï¿½ginas
 			return $this->_pagina;
 		}
 
-		public function getUrl(){ //Página atual para o PHP, ou seja, para o usuário ela é este valor + 1 - Visual
+		public function getUrl(){ //Pï¿½gina atual para o PHP, ou seja, para o usuï¿½rio ela ï¿½ este valor + 1 - Visual
 			return $this->_url;
 		}
 
-		public function getLinkpagina(){ //nome do link da página. Ex.
+		public function getLinkpagina(){ //nome do link da pï¿½gina. Ex.
 			return $this->_linkpagina;
 		}
 
@@ -53,7 +53,7 @@
 			return $this->_urlextra;
 		}
 
-		public function getLinkppag(){ //Se a quant de links por páginas for maior q a quant de paginas disponíveis ele retorna quant de páaginas
+		public function getLinkppag(){ //Se a quant de links por pï¿½ginas for maior q a quant de paginas disponï¿½veis ele retorna quant de pï¿½aginas
 			if ($this->_linkppag<=$this->_pagina)
 				return $this->_linkppag;
 			else
@@ -61,7 +61,7 @@
 		}
 
 		public function getQuantpg() {
-			//Total de páginas
+			//Total de pï¿½ginas
 			if ($this->getLinkppag()>0)
 				return ceil(($this->getUrl())/$this->getLinkppag());
 			else
@@ -69,7 +69,7 @@
 		}
 
 		public function getUltimapg(){
-			//limita o loop for ao valor da última página
+			//limita o loop for ao valor da ï¿½ltima pï¿½gina
 			if (($this->getQuantpg()*$this->getLinkppag())<=$this->getPagina())
 				return $this->getQuantpg()*$this->getLinkppag();
 			elseif (($this->getQuantpg()*$this->getLinkppag())>$this->getPagina())
@@ -77,10 +77,10 @@
 		}
 
 		public function getDados(){
-			echo 	"Links de Página: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
-					"linkPágina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
-					"url da página: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
-					"Link por Página: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
+			echo 	"Links de Pï¿½gina: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
+					"linkPï¿½gina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
+					"url da pï¿½gina: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
+					"Link por Pï¿½gina: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
 					"urlExtra: \$this->getUrlextra() : <span >".$this->getUrlextra()."</span><br/>".
 					"For final: \$this->getQuantpg()*\$this->getLinkppag(): <span>".$this->getQuantpg()*$this->getLinkppag()."</span><br/>".
 					"Total de paginas: getQuantpg() = ceil((\$this->getUrl()+1)/\$this->getLinkppag()) <span>".$this->getQuantpg()."</span><br/>";
@@ -91,7 +91,7 @@
 			{
 				$url = $this->_url-1;
 				echo 	"<ul class='pagination pagination-sm'><li><a href='./{$this->getUrlextra()}&{$this->_linkpagina}=1'>In&iacute;cio</a>";
-				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>&laquo;</a>"; //Vai p a página anterior
+				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>&laquo;</a>"; //Vai p a pï¿½gina anterior
 			}else {
 				echo '<ul class="pagination pagination-sm">';
 			}
@@ -102,12 +102,12 @@
 	{
 	$url = $this->_url-1;
 	echo 	"<a href='./{$this->getUrlextra()}'>In&iacute;cio</a> | ".
-	"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a página anterior
+	"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a pï¿½gina anterior
 	}
 	}
 	*/
 	public function getRodapemeio() {
-		//Define a parte central da paginação
+		//Define a parte central da paginaï¿½ï¿½o
 
 			for ($i=($this->getUltimapg()-$this->getLinkppag() ); $i<($this->getUltimapg()); $i++)
 			{
@@ -138,13 +138,13 @@
 
 	}
 
-	public function getRodaperes() { //Total das páginas disponibilizadas
+	public function getRodaperes() { //Total das pï¿½ginas disponibilizadas
 	if ($this->getPagina()>"1"){
 	return "<br/><span>Total de ".$this->getPagina()." p&aacute;ginas";
 		}elseif ($this->getPagina()=="1"){
 		return "<br/><span>Total de ".$this->getPagina()." p&aacute;gina";
 		}else {
-		return "Não há nenhuma informação para esta pesquisa!";
+		return "Nï¿½o hï¿½ nenhuma informaï¿½ï¿½o para esta pesquisa!";
 	}
 	}
 
@@ -193,15 +193,15 @@
 	}
 
 	function __destruct() {
-		//foi removido pois ao final da página aparecia informações do rodapé
+		//foi removido pois ao final da pï¿½gina aparecia informaï¿½ï¿½es do rodapï¿½
 	//echo $this->getRodaperes ();
 	}
 	/* Exemplo para chamada desta classe
 	$_urlLi="escolha=".$_GET["escolha"]."&menu=".$_GET["menu"]."&ord_m=".$_GET["ord_m"];
-	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de páginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por página)
+	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de pï¿½ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por pï¿½gina)
 	$_rod->getDados();
 	$_rod->getRodape();
-	Exemplo de CSS para o Radapé:
+	Exemplo de CSS para o Radapï¿½:
 
 	span#rodape{
 	font-weight:bold;
@@ -468,7 +468,7 @@ class insert {
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		if ($inserir){
 				$idCad = mysql_insert_id();
-				//echo "<script> alert('Inclusão ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
+				//echo "<script> alert('Inclusï¿½o ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
 				//echo "Inclusï¿½o realizada com sucesso!";
 		}else{
 			echo "<script> alert('Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!');window.history.go(-1);</script>";
@@ -523,7 +523,7 @@ class editar_form {
 	}
 	if ($this->campo==$this->vlr_get)
 		{
-			/* Formulário para edição por item. Neste form os campos sï¿½o recebidos de qualquer
+			/* Formulï¿½rio para ediï¿½ï¿½o por item. Neste form os campos sï¿½o recebidos de qualquer
 			campo para ediï¿½ï¿½o da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que ï¿½
 			passado, tambï¿½m ï¿½ responsï¿½vel pelo da tabela que serï¿½ alterada e o GET-tabela traz o nome da tabela
 			que sofrerï¿½ alteraï¿½ï¿½o. Em agumas ocasiï¿½es tambï¿½m ï¿½ passado o campo UF.*/
@@ -741,7 +741,7 @@ class sele_cidade {
 	$linhoOptions1 = '';
 	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
-					echo "<option value='{$_SESSION["cid_end"]}'>Cód. - {$_SESSION["cid_end"]}</option>";
+					echo "<option value='{$_SESSION["cid_end"]}'>Cï¿½d. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
 					echo "<option value='2585'>Bayeux</option>";
 				}else{
@@ -760,13 +760,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.</h2>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Não há nenhum bairro cadastrado para o endereço desta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado para o endereï¿½o desta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -806,7 +806,7 @@ class List_sele {
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
 
-                $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+                $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";

@@ -41,7 +41,7 @@
 		  $linkRelt = '&mes='.date('m').'&ano='.date('Y').'&rec=21';
 
 		  ?>
-	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relat�rio</a></li>
+	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relat&oacute;rio</a></li>
 
 		  <?php if ($_GET['rec']=='5' ) {
 		  	$linkAtivo='class="active"';

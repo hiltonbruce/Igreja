@@ -3,13 +3,13 @@
 function conectar() {
 	require_once("DB.php");
 	if (file_exists("func_class/constantes.php")){
-	 require('func_class/constantes.php');
+	 require_once('func_class/constantes.php');
 	}elseif (file_exists('../func_class/constantes.php')){
-	 require('../func_class/constantes.php');
+	 require_once('../func_class/constantes.php');
 	}elseif (file_exists('../../func_class/constantes.php')){
-	 require('../../func_class/constantes.php');
+	 require_once('../../func_class/constantes.php');
 	}
-	//$dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
+	$dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
 	$db =& DB::Connect ($dns, array());
 	//if (PEAR::isError($db)){ die ($db->getMessage()); }
 }

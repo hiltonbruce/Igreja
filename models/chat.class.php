@@ -12,7 +12,7 @@ class chat {
 	}
 
 	function incluir() {
-		//disponibiliza o usuário na lista
+		//disponibiliza o usuï¿½rio na lista
 
 		conectar();
 
@@ -22,7 +22,7 @@ class chat {
 			$dadresult = mysql_fetch_array($result);
 			//echo "<h1> {$dadresult['nome']}</h1>";
 				if ($dadresult['nome']!='') {
-					//Atualiza o login se já existir
+					//Atualiza o login se jï¿½ existir
 					$atualiza = "UPDATE login SET tempo='{$this->tempo}', status='' WHERE nome='".$this->login."' LIMIT 1";
 					$query = mysql_query($atualiza);
 				} else {
@@ -39,7 +39,6 @@ class chat {
 
 	function online() {
 
-		conectar();
 			$ativo = $this->tempo - 180;
 			$ausente = $ativo - 300;
 			$offline = $ausente - 240000;

@@ -1,5 +1,5 @@
 <!-- Desenvolvido por Wellington Ribeiro o autocompletar-->
-<!-- O calculo da data do proximo lancamento caso não seja passsado esta no script 'forms/concluirdiz.php' -->
+<!-- O calculo da data do proximo lancamento caso nï¿½o seja passsado esta no script 'forms/concluirdiz.php' -->
 <?PHP
 	$lancAltera = new DBRecord('dizimooferta',$_GET['id'],'id');
 	//$ctaDev = $lancAltera->devedora();//Conta devedora
@@ -32,7 +32,7 @@
 						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411005':
-						//Há varios caixas na Mocidade
+						//Hï¿½ varios caixas na Mocidade
 						if ($n5=='002') {
 							# Setor I - Rubem
 							$ctaDev = 9;
@@ -57,7 +57,7 @@
 						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '412001':
-					# Missões
+					# Missï¿½es
 						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					default:
@@ -66,7 +66,7 @@
 						break;
 				}
 			}
-			//conta atual do pré lançamento
+			//conta atual do prï¿½ lanï¿½amento
 			if ($lancAltera->credito()==$ctaAcesso) {
 					$lanContr = '<option value="'.$lancAltera->credito().','.$lancAltera->tipo().'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 				}
@@ -74,7 +74,7 @@
 		}
 ?>
 <fieldset>
-<legend>Dizimo e Ofertas</legend>
+<legend>D&iacute;zimo e Ofertas</legend>
 <form method="post" name="" action="">
 		<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
@@ -83,8 +83,8 @@
 		?>
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
-			<?php echo semana(date('d/m/Y'));?>
-			&ordf; Semana deste mês)</legend>
+			<?php echo semana(date('d/m/Y')).'&ordf;';?>
+			Semana deste m&ecirc;s)</legend>
 	<table>
 		<tbody>
 			<tr>
@@ -101,20 +101,20 @@
 				<td colspan = '4'>
 				<div class="row">
 				  <div class="col-xs-2">
-				    <label>Data: </label> <input type="text" id="data" name="data" tabindex="<?php echo ++$ind;?>" 
+				    <label>Data: </label> <input type="text" id="data" name="data" tabindex="<?php echo ++$ind;?>"
                      value="<?php echo conv_valor_br ($lancAltera->data());?>" class="form-control" required="required"/>
 				  </div>
 				  <div class="col-xs-2">
-				    <label>Semana: </label> <input type="text" id="semana" name="semana" tabindex="<?php echo ++$ind;?>" 
+				    <label>Semana: </label> <input type="text" id="semana" name="semana" tabindex="<?php echo ++$ind;?>"
                      value="<?php echo $lancAltera->semana();?>" class="form-control" required="required"/>
 				  </div>
 				  <div class="col-xs-2">
-				<label>Referente Mês:</label><input type="text" name="mes" maxlength="2" tabindex="<?php echo ++$ind;?>" 
+				<label>Referente M&ecirc;s:</label><input type="text" name="mes" maxlength="2" tabindex="<?php echo ++$ind;?>"
 					value="<?php echo $lancAltera->mesrefer();?>" class="form-control"  required="required" />
 				</div>
 				  <div class="col-xs-2">
 					 <label>Ano:</label> <input type="text" id="ano" name="ano"
-						value="<?php echo $lancAltera->anorefer();?>" tabindex="<?php echo ++$ind;?>" 
+						value="<?php echo $lancAltera->anorefer();?>" tabindex="<?php echo ++$ind;?>"
 					 	required="required" class="form-control" />
 				</div>
 				  <div class="col-xs-4">
@@ -160,7 +160,7 @@
 		</table>
 	</fieldset>
 	<fieldset>
-		<legend>Observação:</legend>
+		<legend>Observa&ccedil;&atilde;o:</legend>
 	<table class="table">
 		<tbody>
 			<tr>

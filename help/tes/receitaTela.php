@@ -1,5 +1,5 @@
 <?php
-//Opções de exibir na tela para o script /tesouraria/receita.php
+//Opï¿½ï¿½es de exibir na tela para o script /tesouraria/receita.php
 //$dtlanc = (empty($dtlanc)) ? date('d/m/Y'):$_GET['data'];
 
 if (empty($_GET['ano'])) {
@@ -25,9 +25,9 @@ switch ($rec) {
 	case '1':
 		require_once 'forms/concluirdiz.php';#Form fecha caixa
 		if (!empty($_GET['id'])) {
-			require_once ('forms/tes/alteraPreLanc.php');#Edita dizimo e ofertas pre-Lançamento
+			require_once ('forms/tes/alteraPreLanc.php');#Edita dizimo e ofertas pre-Lanï¿½amento
 		}else{
-			require_once ('forms/autodizimo.php');#Form lançar dizimos e ofertas
+			require_once ('forms/autodizimo.php');#Form lanï¿½ar dizimos e ofertas
 		}
 		break;
 	case '2':
@@ -36,16 +36,16 @@ switch ($rec) {
 		break;
 	case '3':
 		require_once 'forms/concluirdiz.php';
-		require_once ('forms/ofertaEBD.php');#Form lançar ofertas Esc Bíblica
+		require_once ('forms/ofertaEBD.php');#Form lanï¿½ar ofertas Esc Bï¿½blica
 		break;
 	case '4':
 		require_once ('forms/tes/lancarRec.php');
 		break;
 	case '5':
 	    //$form = 'forms/tes/autoLancarDespesas.php';
-		require_once ('forms/tes/lancarTipoPlan.php');#Form lançar despesas tipo planilha
+		require_once ('forms/tes/lancarTipoPlan.php');#Form lanï¿½ar despesas tipo planilha
 		break;
-	case '6'://Relatório COMADEP
+	case '6'://Relatï¿½rio COMADEP
 		require_once 'help/tes/relatorioComadep.php';
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
@@ -53,7 +53,7 @@ switch ($rec) {
 		$recLink = '16&dia='.$d.'&mes='.$m.'&ano='.$a;
 		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink.'&igreja='.$_GET['igreja'];
 		$linkImpressao .='&tipo='.$_GET['tipo'];
-		//Busca do movimento no mês
+		//Busca do movimento no mï¿½s
 		require_once 'models/tes/relComadep.php';
 		require_once 'help/tes/relComadepLin.php';
 		require_once 'forms/tes/mesComadep.php';
@@ -63,7 +63,7 @@ switch ($rec) {
 		$rec = 12;
 		require_once 'forms/tes/histFinanceiro.php';
 		require_once 'models/saldos.php';
-		$mes = date('m'); // Mês desejado, pode ser por ser obtido por POST, GET, etc.
+		$mes = date('m'); // Mï¿½s desejado, pode ser por ser obtido por POST, GET, etc.
 		$ano = date('Y'); // Ano atual
 		$ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano));
 		$recLink = '14&dtBalac='.$ultimo_dia.'/'.$mes.'/'.$ano;
@@ -92,16 +92,16 @@ switch ($rec) {
 	case '11':
 		require_once 'forms/tes/histFinanceiro.php';
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
-			//Lista financeira de todas as igreja com mês específico
+			//Lista financeira de todas as igreja com mï¿½s especï¿½fico
 			$colUm = 'Igrejas';//Primeira coluna do cabecalho
-			require_once 'views/tesouraria/cabTabFin.php';//Cabeçalho da tabela
+			require_once 'views/tesouraria/cabTabFin.php';//Cabeï¿½alho da tabela
 			require_once 'views/tesouraria/saldoMesFin.php';
 			$tabThead = $nivelSem;
 			//require_once 'views/tesouraria/saldoIgrejas.php';
 		} else {
 			//Lista financeira da igreja com todos os  meses
 			$colUm = 'Per&iacute;odo';//Primeira coluna do cabecalho
-			require_once 'views/tesouraria/cabTabFin.php';//Cabeçalho da tabela
+			require_once 'views/tesouraria/cabTabFin.php';//Cabeï¿½alho da tabela
 			require_once 'views/tesouraria/saldoMembros.php';
 		}
 		break;

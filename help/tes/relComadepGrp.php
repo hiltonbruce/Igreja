@@ -44,7 +44,7 @@ if ($movSld !='--o--' || $saldoAtual !='--o--' || $saldoAntr !='--o--') {
 	$nivelN3 .=	$saldoAntr.'</td></tr>';
 
 	$nivel3   .= $nivelN3.$nivel2;
-	$nivelNi2 .= $nivelN02.$nivelN3.$nivelN2;
+//	$nivelNi2 .= $nivelN02.$nivelN3.$nivelN2;
 	$grpN3 .= $nivelN3.$nivel2;
 }
 	$nivel2 = '';

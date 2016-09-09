@@ -54,7 +54,7 @@
 						<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
 							disabled="disabled" value="" /></td>
 						<td>Acesso:<br /> <input type="text" id="acesso" name="conta" class="form-control"
-							value="<?PHP echo $cta; ?>" required="required" tabindex="<?PHP echo ++$ind; ?>" /></td>
+							value="<?PHP echo $cta; ?>" tabindex="<?PHP echo ++$ind; ?>" /></td>
 					</tr>
 					<tr>
 						<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
