@@ -149,11 +149,11 @@ $tabMembros = new membro();
 			}
 
 			?>
-		<table class='table table-striped table-hover'>
+		<table class='table table-striped table-hover table-bordered'>
 			<colgroup>
 				<col id="Data">
 				<col id="Rol/Nome">
-				<col id="Tipo">
+				<col id="tipo">
 				<col id="Valor">
 				<col id="albumCol"/>
 			</colgroup>

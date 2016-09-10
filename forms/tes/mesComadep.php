@@ -14,7 +14,7 @@
 				<td><label>M&ecirc;s:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
-					      	$linha1 = '<option value="0">Selecione o m�s...</option>';
+					      	$linha1 = '<option value="0">Selecione o m&ecirc;s...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
 								 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 								 if ($m==$mes) {
@@ -41,6 +41,7 @@
 			</tr>
 			<tr>
 				<td>
+					<label>&nbsp;</label>
 					<div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-primary <?php echo $Simples;?>">
 					    <input type="radio" name="tipo" value='1' >3 N&iacute;veis
@@ -59,9 +60,10 @@
 					?>
 				</td>
 				<td>
+					<br /><br />
 				  <div class="form-group">
-					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
-					<input type="hidden" name="rec"	value="6" />
+					<input name="escolha" type="hidden" value="tesouraria/receita.php" />
+					<input type="hidden" name="rec"	value="6" class="form-control" />
 					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 					tabindex="<?PHP echo ++$ind; ?>" />
 					<input name="menu" type="hidden" value="top_tesouraria" />

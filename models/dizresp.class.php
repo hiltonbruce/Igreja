@@ -56,7 +56,7 @@ function dizimistas(
 		$consTipos =false;
 	}
 
-	//Monta a query para consulta de conta pelo nº de acesso
+	//Monta a query para consulta de conta pelo nï¿½ de acesso
 	$queryAcesso = '';
 	if (!empty($cred)) {
 		$acessos = explode(',', $cred);
@@ -149,7 +149,6 @@ function dizimistas(
 			}else {
 				$status = 'Confimado!';
 			}
-			$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
 
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
 
@@ -173,7 +172,7 @@ function dizimistas(
 				//$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
 				$nomeCongMembro = $this->arrayIgrejas[$linha['congcadastro']]['razao'];
 			}
-			#Formata exibição de ano e mÊs de referência
+			#Formata exibiï¿½ï¿½o de ano e mï¿½s de referï¿½ncia
 			$mesAno = sprintf (", ref.:  %'02u/%'04u",$linha['mesrefer'],$linha['anorefer']);
 			if ( $this->impressao) {
 				$linkMembro= $rol.' - '.$linha['nome'].$mesAno;
@@ -181,25 +180,24 @@ function dizimistas(
 				list($lancCPF,$lancNome) = explode(':', $linha['hist']);
 				$linkMembro  = '<a href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&id='.$linha['id'].'&bsc_rol='.$rol;
-				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lanç. por: '.$lancNome.')">';
+				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lanï¿½. por: '.$lancNome.')">';
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
 			}
 
-			$tabela .= '<tr '.$bgcolor.'><td>'.$linha['data'].'</td>
+			$tabela .= '<tr><td>'.$linha['data'].'</td>
 				<td>'.$linkMembro.'</td><td>'.$tipo.'</td>
-				<td id="moeda">'.$corrigir.'</td>
+				<td class="text-right">'.$corrigir.'</td>
 				 		<td class="text-center">'.$linha['razao'].'</td></tr>';
 						$total += $linha['valor'];
-			$cor = !$cor;
 		}
 		$total = number_format($total,2,',','.');
 		$tabela .=  '';
 		if ($total==0) {
-		$tabela .=  '<tfoot><tr id="total"><td colspan="5">Não há lançamentos para esta busca ou pendentes!</td></tr></tfoot>';
+		$tabela .=  '<tfoot><tr id="total"><td colspan="5">Nï¿½o hï¿½ lanï¿½amentos para esta busca ou pendentes!</td></tr></tfoot>';
 		}else {
-		$tabela .=  '<tfoot><tr id="total"><td colspan="3" id="moeda">Total:
-		 </td><td id="dados" colspan="2" >
-		 '.$total.'</td></tr></tfoot>';
+		$tabela .=  '<tfoot><tr id="total"><td colspan="4" class="text-right">';
+		$tabela .=  '	Total&nbsp;&nbsp;............ &nbsp;&nbsp;'.$total;
+		$tabela .=  '</td><td></td></tr></tfoot>';
 		}
 		$resultado = array($total,$tabela,$lancConfirmado);
 		return $resultado;
@@ -315,31 +313,29 @@ function concluir($igreja) {
 			}else {
 				$status = 'Confimado!';
 			}
-			$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
+
 			$rol = $linha['nome']<>'' ? $linha['rol'].' - '.$linha['nome'] : 'An&ocirc;nimo';
 
 			if ($tesoureiro!=$linha['tesoureiro']) {
 				if ($totaltes!='0') {
-				$tabLancamento .= sprintf("<tr style='background:#FFF68F; border-top: 1px solid #000;'><td></td><td colspan='2' style='text-aling:right;'>
-						Total: %'.150s </td><td style='text-align:right;'><b>%s</b></td><td></td></tr>"
+				$tabLancamento .= sprintf("<tr><td></td><td colspan='2' class='text-right'>
+						Total: %'.150s </td><td class='text-right'><b>%s</b></td><td></td></tr>"
 						,'.',number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
-				$tabLancamento .= sprintf('<tr style="background:#98f5ff;"><td colspan="5" style="aling:center;
-						 border-top: 2px solid #000; border-bottom: 2px solid #000;">
+				$tabLancamento .= sprintf('<tr><td colspan="5" class="text-right">
 						Tesoureiro: <b> %s </b></td></tr>',$dadostesoureiro->nome);
 				$totaltes = 0;
 				//echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.' - '.$linha['nome'].'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			}
 			$totaltes += $vlr;
 
-			$tabLancamento .= '<tr><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
+			$tabLancamento .= '<tr><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td class="text-right">'.$valor.'</td><td>'.$status.'</td></tr>';
 			$total += $linha['valor'];
-			$cor = !$cor;
 		}
 		$total = number_format($total,2,',','.');
 
-		$tabLancamento .= sprintf('<tr style="background:#FFF68F; border-top: 1px solid #000;"><td></td><td colspan="2">Total deste tesoureiro:</td><td id="moeda"><b>%s</b></td><td></td></tr>',number_format($totaltes,2,',','.'));
+		$tabLancamento .= sprintf('<tr><td></td><td colspan="2">Total deste tesoureiro:</td><td id="moeda"><b>%s</b></td><td></td></tr>',number_format($totaltes,2,',','.'));
 		$tabLancamento .=  '</tbody>';
 		$tabLancamento .=  '<tfoot><tr class="total"><td  colspan="3">Total Geral: R$</td>
 			<td id="moeda">'.$total.'</td><td></td>

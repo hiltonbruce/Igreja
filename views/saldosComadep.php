@@ -1,5 +1,5 @@
 <table class='table table-hover table-bordered table-striped'>
-		<caption>
+		<caption><h6>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
 			echo '<a href="'.$linkImpressao.'" ';
@@ -11,7 +11,7 @@
 		}
 		echo $titTabela;
 		?>
-		</caption>
+	</h6></caption>
 		<colgroup>
 				<col id="Conta">
 				<col id="Descri��o">
@@ -42,8 +42,8 @@
 			<?php
 				echo '<tr id="total">';
 				echo '<tdid="moeda" ></td>';
-				echo '<td colspan="2" id="moeda">Movimento do per&iacute;odo <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></td>';
-				echo '<td id="moeda" >R$ '.number_format($debito,2,',','.').'</td>';
+				echo '<td colspan="3" class="text-right">Movimento do per&iacute;odo <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>';
+				echo 'R$ '.number_format($debito,2,',','.').'</td>';
 				echo '<td colspan="2" id="moeda" ></td></tr>';
 			?>
 		</tfoot>
