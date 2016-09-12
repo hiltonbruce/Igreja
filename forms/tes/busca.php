@@ -17,14 +17,16 @@
 		<table class="table">
 		<tbody>
 			<tr id="form">
-				<td colspan="2"><label>Nome:</label>
+				<td colspan="3">
+					<label>Nome:</label>
 					<input type="text" name="nome" id="campo_estado" size="30%"
 					autofocus="autofocus" class="form-control" placeholder="Contribuinte"
 					tabindex="<?php echo ++$ind;?>" value="<?php if ($_GET['rol']<'1') echo $_GET['nome'];?>" />
 				</td>
-			     <td><label>Rol: (Zero p/ An&ocirc;nimo)<br /> <input type="text" id="rol" name="rol"
-						value="<?php echo $_GET['rol'];?>" tabindex="<?php echo ++$ind;?>" size="5"
-						 class="form-control" placeholder="Rol" /> </label>
+			     <td>
+						 <label>Rol: (Zero p/ An&ocirc;nimo)</label>
+						<input type="text" id="rol" name="rol" value="<?php echo $_GET['rol'];?>"
+						 tabindex="<?php echo ++$ind;?>" class="form-control" placeholder="Rol" />
 				</td>
 				<td>
 					<label>Congrega&ccedil;&atilde;o:</label>
@@ -36,17 +38,18 @@
 				</td>
                </tr>
             <tr>
+						<td colspan="2">
+							<label>Para Cr&eacute;dito na Conta:</label>
+							<input type="text" name="credito" value="<?php echo $_GET['credito'];?>"
+							tabindex="<?PHP echo ++$ind; ?>" class="form-control"
+							placeholder="Contas por C&oacute;digo. Separando por v&iacute;rgula. Ex.: 701,705,805" />
+						</td>
             	<td colspan="2">
             		<label>Para D&eacute;bito na Conta:</label>
-            		<input type="text" name="debito"
-					value="<?php echo $_GET['debito'];?>"tabindex="<?PHP echo ++$ind; ?>"
-					 class="form-control" placeholder="Contas por C&oacute;digo. Separando por v&iacute;rgula. Ex.: 701,705,805" />
-            	</td>
-            	<td colspan="2">
-            		<label>Para Cr&eacute;dito na Conta:</label>
-            		<input type="text" name="credito"
-					value="<?php echo $_GET['credito'];?>"tabindex="<?PHP echo ++$ind; ?>"
-					 class="form-control" placeholder="Contas por C&oacute;digo. Separando por v&iacute;rgula. Ex.: 701,705,805" />
+            		<input type="text" name="debito" value="<?php echo $_GET['debito'];?>"
+								tabindex="<?PHP echo ++$ind; ?>" class="form-control"
+								placeholder="Contas por C&oacute;digo. Separando por v&iacute;rgula. Ex.: 701,705,805"
+								/>
             	</td>
             </tr>
 			<tr id="form">
@@ -72,7 +75,7 @@
 				      </select>
 				</td>
 				<td>
-					<label>Ano:(Zero p/ todos os anos)</label>
+					<label>Ano<span class='small'>(Zero todos os anos)</span></label>
 					<input type="text" name="ano" value="<?php echo $anoForm;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="membro"	value="<?php echo true;?>" />

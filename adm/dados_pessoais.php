@@ -1,10 +1,9 @@
 <div id="lst_cad"><?PHP
 if ($_SESSION['nivel']>4){
-
 ver_cad($bsc_rol);
 $tabela = "membro";
-$tab="adm/atualizar_dados.php";//link q informa o script quem receberá os dados do form para atualizar
-$tab_edit="adm/dados_pessoais.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma página para abrir o form de edição do item
+$tab="adm/atualizar_dados.php";//link q informa o script quem receberï¿½ os dados do form para atualizar
+$tab_edit="adm/dados_pessoais.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma pï¿½gina para abrir o form de ediï¿½ï¿½o do item
 
 $dad_cad = mysql_query ("SELECT *,m.obs AS mobs, DATE_FORMAT(m.datanasc,'%d/%m/%Y') AS br_datanasc, m.datanasc AS nasc, DATE_FORMAT(m.datanasc,'%d') AS dia FROM membro AS m, eclesiastico AS e WHERE m.rol='".$bsc_rol."' AND m.rol=e.rol");
 
@@ -63,7 +62,7 @@ if (!empty($_GET['bsc_rol'])) {
 		<?PHP
 			$nome = new editar_form("nome",$arr_dad["nome"],$tab,$tab_edit);
 			//$_SESSION["membro"]=$arr_dad["nome"];
-			echo situacao ($arr_dad["situacao_espiritual"]);//Mostra o estado do membro: se Em comunhão, disciplinado, falecido...
+			echo situacao ($arr_dad["situacao_espiritual"]);//Mostra o estado do membro: se Em comunhï¿½o, disciplinado, falecido...
 			$nome->getMostrar();
             $nome->getEditar('','',$bsc_rol);#<!-- Mostra form para nome -->
 		?></td>
@@ -84,7 +83,6 @@ if (!empty($_GET['bsc_rol'])) {
 			//print_r($dataNasc);
 			//echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
 
-
 			if ($diferenca->y>1) {
 				echo $diferenca->y.' Anos, ';
 			}elseif ($diferenca->y>0){
@@ -101,7 +99,6 @@ if (!empty($_GET['bsc_rol'])) {
 				echo $diferenca->d.' dia<br/>';
 			}
 			//echo $dataNasc->format('Y-m').' FormatoNasc<br/>';
-
 
 		?><div><?PHP print mostra_foto($bsc_rol);?></div></td>
       </tr>
@@ -254,7 +251,6 @@ if (!empty($_GET['bsc_rol'])) {
           </form>
         <?PHP
 		}
-
 		//fim
 		?></td>
       </tr>

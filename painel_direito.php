@@ -37,14 +37,14 @@
 		}elseif (ver_nome ("tesouraria")){//Menu Tesouraria
 			echo "</div>";
 	?>
-			<?php $menu = new menutes();
+			<?php
+      $menu = new menutes();
 			$menu->mostra();
 			$menu->buscarecibo();
 		}elseif (!empty($painelDireito) && file_exists($painelDireito)) {
 			//Verifica se h� uma chamada a um painel espec�fico
 			require_once $painelDireito;
 		}else {
-
 		echo "</div>";
 		//In�cio da pend�ncia
 		$_urlLi_pen="?escolha={$_GET["escolha"]}&bsc_rol={$_GET["bsc_rol"]}";//Montando o Link para ser passada a classe

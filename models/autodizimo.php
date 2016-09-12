@@ -67,7 +67,7 @@ switch ($quantNomes) {
 $res = mysql_query( $sql."locate('$q',m.nome)" );
 $linhas = mysql_num_rows($res);
 
-# 1™linha em branco
+# 1ÔøΩlinha em branco
 echo "<li onselect=\" \">... </li>\n";
 
 while( $campo = mysql_fetch_array( $res ) )
@@ -97,8 +97,8 @@ while( $campo = mysql_fetch_array( $res ) )
 			break;
 	}
 	$exibiCong = strip_tags($nomecong);
-	$estado = strtoupper(strtr( $campo ['nome'], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco = strtoupper(strtr( $campo ['rol'],'·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado = strtoupper(strtr( $campo['nome'], '√°√†√£√¢√©√™√≠√≥√µ√¥√∫√º√ß√Å√Ä√É√Ç√â√ä√ç√ì√ï√î√ö√ú√á','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['endereco'], '√°√†√£√¢√©√™√≠√≥√µ√¥√∫√º√ß√Å√Ä√É√Ç√â√ä√ç√ì√ï√î√ö√ú√á','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	//$endereco .=', '.$campo['numero'];
 	//$estado = addslashes($estado);
 	$destaque = "<span style=\"font-weight:bold\">\$1</span>";
@@ -128,7 +128,15 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$endereco','$exibiCong');\">$html ($nomecong)</li>\n";
+	$img='../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
+	if (!file_exists($img)){
+		$img='img_membros/ver_foto.jpg';//Localiza√ß√£o p/ JavaScript
+	}else{
+		$img='img_membros/'.$campo['rol'].'.jpg';//Localiza√ß√£o p/ JavaScript
+	}
+
+	$html ='<img src="'.$img.'" title="Rol: '.$campo['rol'].'" style="width:24px;height:32px;"> '.$html;
+	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$rolMembro','$exibiCong');\">$html ($nomecong)</li>\n";
 
 	$quantExibir++;
 

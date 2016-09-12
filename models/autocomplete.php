@@ -10,7 +10,7 @@ $q = mysql_real_escape_string( $_GET['q'] );
 
 $quantNomes = substr_count(trim($q),' ');
 
-//critérios de fonética
+//critï¿½rios de fonï¿½tica
 $exp = new fonetica($q,'nome');
 
 
@@ -37,17 +37,18 @@ switch ($quantNomes) {
 $res = mysql_query( $sql );
 
 $linhas = mysql_num_rows($res);
-# 1ªlinha em branco
+# 1ï¿½linha em branco
 echo "<li onselect=\" \">... </li>\n";
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = $campo['fone_resid'];
 	//$estado = $campo['nome'];
-	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco = strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado = strtoupper(strtr( $campo['nome'], 'Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³ÃµÃ´ÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã•Ã”ÃšÃœÃ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['endereco'], 'Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³ÃµÃ´ÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã•Ã”ÃšÃœÃ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco .=', '.$campo['numero'];
 	$cargo = cargo($campo['rol']);
+	$rol = $campo['rol'];
 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
 	if ($igreja->razao()=='') {
 		$sigla = $cargo['0'].'- <code> Congrega&ccedil;&atilde;o&nbsp;n&atilde;o&nbsp;definida!</code> - '.$campo['celular'];
@@ -100,11 +101,18 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 
-	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla');\">$html ($sigla)</li>\n";
+$img='../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
+if (!file_exists($img)){
+	$img='img_membros/ver_foto.jpg';//LocalizaÃ§Ã£o p/ JavaScript
+}else{
+	$img='img_membros/'.$campo['rol'].'.jpg';//LocalizaÃ§Ã£o p/ JavaScript
+}
+$html ='<img src="'.$img.'" title="Rol: '.$rol.'" style="width:24px;height:32px;"> '.$html;
+echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$rol');\">$html ($sigla)</li>\n";
 
-	$quantExibir++;
+$quantExibir++;
 
-	if ($quantExibir>'9') {
+if ($quantExibir>'9') {
 		break;
 	}
 }

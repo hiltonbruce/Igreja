@@ -8,9 +8,9 @@
 ?>
 <!-- Desenvolvido por Wellington Ribeiro -->
 <form method="get" name="autocompletar" action="">
-<table style="background-color:#D3D3D3;" class="table">
+<table class="table">
 	<tbody>
-		<tr>
+		<tr class="info">
 			<td colspan="3"><label>Busca por nome:</label>
 				<input type="text" name="nome" id="campo_estado" size="40%" class="form-control"
 				placeholder="Nome, sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!" />
@@ -19,18 +19,14 @@
 			<input type="submit" class="btn btn-primary btn-sm" name="listar" value="Listar dados...">
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2"><label>Endereço:</label>
+		<tr class="info">
+			<td colspan="2"><label>Endere&ccedil;o:</label>
 			<input type="text" id="estado_val" class="form-control" name="estado" value="" size="30%" />
 			</td>
 			<td><label>Fone:</label>
 			<input type="text" id="id_val" name="id" class="form-control" value="" /></td>
 			<td><label>Celular:</label>
 			<input type="text" id="sigla_val" class="form-control" name="sigla" value="" /></td>
-		</tr>
-		<tr>
-			<td colspan="4">&nbsp;</td>
-
 		</tr>
 		<?php
 			echo $formCampos;
@@ -53,6 +49,3 @@
 		return "models/autocomplete.php?q=" + this.value;
 	});
 </script>
-
-
-

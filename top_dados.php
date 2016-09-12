@@ -1,5 +1,4 @@
 <?php
-	//Primeira fase para retirada da sess�o como indece de acesso para listar os dados do membro
 	require_once 'views/secretaria/menuTopDados.php';
 	$foco = (empty($_GET['bsc_rol'])) ? 'autofocus="autofocus"' : '';
 ?>

@@ -165,17 +165,19 @@
     $menu = (empty($_GET["menu"])) ? '' : $_GET["menu"] ;
     $escolha = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
 
-	echo "<form id='form' name='form' method='get' action=''>".
-	"<input name='escolha' type='hidden' id='escolha' value='$escolha'>".
-	"<input name='menu' type='hidden' value='$menu'>".
-	"<input name='ord' type='hidden' value='$ord'>".
-	"<input name='id' type='hidden' value='$id'>".
-	"<input name='rec' type='hidden' value='$rec'>".
-	"<input name='direita' type='hidden' value='$direita'>".
-	"<input name='nome' type='hidden' value='$nome'><div class='row'>".
-	"<div class='col-xs-4'><input name='{$this->_linkpagina}'class='form-control input-sm' type='text' size='3' /></div>".
-	"<div class='col-xs-3'><input class='btn btn-primary btn-sm' type='submit' name='Submit' value='$texto ...' /></div>".
-	"</div></form>";
+	echo '<form id="form" name="form" method="get" action="">';
+	echo '<input name="escolha" type="hidden" id="escolha" value="'.$escolha.'">';
+	echo '<input name="menu" type="hidden" value="'.$menu.'">';
+	echo '<input name="ord" type="hidden" value="'.$ord.'">';
+	echo '<input name="id" type="hidden" value="'.$id.'">';
+	echo '<input name="rec" type="hidden" value="'.$rec.'">';
+	echo '<input name="direita" type="hidden" value="'.$direita.'">';
+	echo '<input name="nome" type="hidden" value="'.$nome.'">';
+	echo '<div class="row"><div class="col-xs-4">';
+	echo '<input name="'.$this->_linkpagina.'" class="form-control input-sm" type="text" size="4" />';
+	echo '</div><div class="col-xs-3">';
+	echo '<input class="btn btn-primary btn-sm" type="submit" name="Submit" value="'.$texto.' ..." />';
+	echo '</div></div></form>';
 	}
 
 	public function form_rodape_get ($texto,$campo) {

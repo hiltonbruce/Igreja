@@ -122,8 +122,8 @@ function dizimistas(
 			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
-			$this->dquery = mysql_query($this->var_string.'WHERE '.$incluiPessoa.$queryAcesso.
-					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+			$consult = $this->var_string.'WHERE d.igreja = i.rol '.$incluiPessoa.$queryAcesso.$filtroIgreja;
+			$this->dquery  = mysql_query($consult.'ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
 		}else {
 			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
