@@ -13,7 +13,6 @@ $idDizOfGET = (empty($_GET['idDizOf'])) ? '' : $_GET['idDizOf'] ;
 
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id=';
 $alterarEntrada	= '?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=1&tabela=dizimooferta&id=';
-
 if ($idDizOfGET>'0' && $recGet=='9') {
 ?>
 <table class='table table-condensed'>
@@ -49,7 +48,6 @@ $tabMembros = new membro();
 			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
 												$mes,$ano,$recGet,$creditoGet,
 												$_GET['debito'],$alterarEntrada);
-
 			$tabLancamento= $resultado['1'];
 
 			if ($resultado['2']) {
@@ -59,15 +57,11 @@ $tabMembros = new membro();
 			}else {
 				$statusLancamento = '';
 			}
-
 			$statusLancamento .= (empty($msg)) ? '':$msg;
 		}
 		//print_r($tabLancamento);
-
 		$cabPrint = false;
-
 		if (!empty($_GET['escolha'])) {
-
 			$linkResumo  = '&rec='.$recGet.'&igreja='.$igrejaGet.'&ano='.$ano .'&mes='.$mes;
 			$linkResumo .='&rol='.$rolGet.'&nome='.$nomeGet.'&dia='.$dia;
 			$linkResumo .= '&credito='.$creditoGet;
@@ -106,11 +100,8 @@ $tabMembros = new membro();
 			echo '<input name="submit" type="submit" class="btn btn-primary btn-sm form-control" value="Imprimir a tabela"/>';
 			echo '</div>';
 			echo '</form></div>';
-
 			$cabPrint = true;
-
 		}
-
 			$dirigenteIgreja = $igSede->pastor();
 			$nomIgreja = '<br />Igreja: <strong>'.$igSede->razao();
 			$tesSede = $tabMembros->nomes();

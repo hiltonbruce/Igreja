@@ -15,7 +15,7 @@
 				echo semana(date('d/m/Y')).'&ordf;';
 			?>
 			 Semana deste m&ecirc;s)</legend>
-	<table>
+	<table class='table'>
 		<tbody>
 			<tr>
 				<td colspan="3"><label>Nome:</label> <input type="text" name="nome"
@@ -52,7 +52,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Cultos</legend>
-		<table>
+		<table class='table'>
 			<tbody>
 				<tr>
 					<td><label>D&iacute;zimo:</label><input type="text" id="oferta0" autocomplete="off"
@@ -111,13 +111,12 @@
 						 class="form-control" name="oferta4" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
-
 			</tbody>
 		</table>
 	</fieldset>
 	<fieldset>
 		<legend>Miss&otilde;es</legend>
-		<table  class="table">
+		<table class="table">
 			<tbody>
 				<tr>
 					<td><label>Carn&ecirc;s:</label><input type="text" id="oferta8" autocomplete="off"

@@ -3,9 +3,9 @@
 if (!empty($_GET['gerar'])) {
 	# Caso tenha sido inicializado sera realizado o Backup
 	$nomeBanco = 'assembleia'.date('YmdHis').'.sql';
-	system('mysqldump -h '.$servidor.' -u'.$user.' -p'.$senha.' '.$bancoD.' > bkpbanco/'.$nomeBanco);
+	mysql_query('TRUNCATE TABLE transcheck') or die(mysql_error());
+	system('mysqldump -h '.DBPATH.' -u'.DBUSER.' -p'.DBPASS.' '.DBNAME.' > bkpbanco/'.$nomeBanco);
 	sleep(5);
-
 	// Abre o arquivo Backup
 	$cabArqu  = "CREATE DATABASE  IF NOT EXISTS `assembleia`; \n";
 	$cabArqu .= "USE `assembleia`;\n \n";
@@ -14,15 +14,11 @@ if (!empty($_GET['gerar'])) {
 	$cabArqu .= "-- Em: ".date('d/m/Y H:i:s')."\n \n-- ";
 
 	$fp = fopen('bkpbanco/'.$nomeBanco, 'r+');
-
 	// Escreve $cabArqu no Arquivo de Backup
 	$escreve = fwrite($fp, $cabArqu);
-
 	// Fecha o arquivo
 	fclose($fp);
-
 }
-
 // variável que define o diretório das imagens
 $gerarNovoBkp  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25&gerar=1"';
 $gerarNovoBkp .= '><button class="btn btn-primary active"> <span class="glyphicon glyphicon-save-file" >';
@@ -30,12 +26,10 @@ $gerarNovoBkp .= '</span>&nbsp;Novo Backup</button></a>';
 $dir = "./bkpbanco/";
 $filesEnd = '';
 $ind = 0;
-
 // esse seria o "handler" do diretório
 $dh = opendir($dir);
 #print_r(array_reverse(scandir($dir)));
 #$arq = array();
-
 // loop que busca todos os arquivos até que não encontre mais nada
 $arq = array();
 while (false !== ($filename = readdir($dh))) {
@@ -51,7 +45,6 @@ while (false !== ($filename = readdir($dh))) {
 }
 ksort($arq);
 $variable = array_reverse($arq);
-
 echo '<dl class="dl-horizontal">';
 foreach ($variable as $key => $value) {
 	if ($key=='0') {
@@ -79,7 +72,6 @@ foreach ($variable as $key => $value) {
 	}
 }
 echo '</dl>';
-
 if (count($arq)=='0') {
 	#Exibir botão em caso de não exitir nenhum arquivo na pasta de backup
 	echo $gerarNovoBkp;

@@ -36,8 +36,8 @@
 						echo $listaIgreja;
 					?>
 				</td>
-               </tr>
-            <tr>
+        </tr>
+        <tr>
 						<td colspan="2">
 							<label>Para Cr&eacute;dito na Conta:</label>
 							<input type="text" name="credito" value="<?php echo $_GET['credito'];?>"
@@ -75,7 +75,7 @@
 				      </select>
 				</td>
 				<td>
-					<label>Ano<span class='small'>(Zero todos os anos)</span></label>
+					<label>Ano <span class='small'>(zero todos os anos)</span></label>
 					<input type="text" name="ano" value="<?php echo $anoForm;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="membro"	value="<?php echo true;?>" />
@@ -94,10 +94,8 @@
 	</form>
 	</div>
 </fieldset>
-
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript">
-
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular, congr ) {
 			$("#id_val").val(rol);
@@ -106,11 +104,9 @@
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value;
 	});
-
 </script>
 <!-- Desenvolvido por Wellington Ribeiro -->

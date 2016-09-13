@@ -11,13 +11,13 @@ Igreja
 __Desenvolvimento__
 
  Recomenda-se a implantação em Linux Debian Server, pela estabilidade e segurança oferecido por esta plataforma. Requer ainda servidor de Web Apache, banco de dados MySQL, modulo PHP5 ativo, pacote PEAR DB e remendamos ainda a instalação do PHPMyadmin e o MySQL Admin, este último, principalmente, para o backup dos dados. Lembrando, sem ser redundante, todas as ferramentas são de uso livre, sem custos com licenças ou limitação de uso. Todas essas ferramentas são instaladas neste mesmo servidor Web.
- A concepção do sistema dispensa a instalação de qualquer programa nas estações que faram uso dele e para tanto requer o uso de qualquer navegador de internet, embora remendamos o uso do firefox® versão 3.6 ou superior pelo respeito que este navegador tem aos padrões W3C, responsável este por ditar a padronização da WEB.
+ A concepção do sistema dispensa a instalação de qualquer programa nas estações que faram uso dele e para tanto requer o uso de qualquer navegador de internet, embora remendamos o uso do firefox® versão 40.0 ou superior pelo respeito que este navegador tem aos padrões W3C, responsável este por ditar a padronização da WEB.
  Já estamos realizando estudos e o sistema ira migrar 100% para o modelo MVC, simplificando, isto lhe dará independência quanto ao desenvolvedor, continuidade, adaptação as suas necessidades, não havendo necessidade de entrar em contato conosco para implantação ou personalização que você achar conveniente. Para tanto quem vier a implantar as alterações, que não nós, deverá obrigatoriamente ter conhecimento deste padrões.
 
   A total falta de um sistema personalizado, moderno, isento de pretensões exclusivamente financeiras, e pensado para facilitar e automatizar os trabalhos corriqueiros da secretária da igreja e auxiliar a direção nas tomadas de decisões.
 
   Atualmente os módulos estão concentrados no apoio aos serviços desenvolvidos na secretária executiva e Tesouraria da igreja e ainda notamos a ausência de alguns serviços importantes, tais como: cartas convites, circulares e alguns relatórios, os passos, após a conclusão das demais necessidades da secretária executiva, será sua integração a administração patrimonial, escola bíblica, financeira, agenda entre outros.
-  
+
   O desenvolvimento atual está concentrado na conclusão para um funcionamento mínimo da tesouraria e estamos testando para finalizar e assim criar os demais modulos acessórios, como por exemplo: a edição do plano de contas da igreja, espinha dorsal de qualquer administração contábil.
 
   Esperamos que os usuários deste sistema possa enviar sua opinião e sugestões para que seja analisada e talvez disponibilizado nas novas atualizações.
@@ -33,12 +33,13 @@ __Desenvolvimento__
 - Joseilton C Bruce - Bayeux - PB - Brasil
 
 ###Pastas de armazenamento de dados
-   Deve ser criada a pasta /img_membros com privilegio para o Apache, usuário 'www-data' no Debian Linux, salvar e apagar as fotos dos membros
+   Deve ser criada a pasta /img_membros com privilegio para o Apache, usuário 'www-data' no Debian Linux, salvar e apagar as fotos dos membros.
    A pasta /bkpbanco deve ser dado, também para o apache, o privilégio de salvar e apagar arquivos nela.
 
 ##Banco de Dados
  A biblioteca pear-DB deve está instalada no servidor onde estará o sistema, no caso das versões Debian o php-db, caso contrário a aplicação não irá autenticar.
  Utilizando o PHPMyadmin, você deve antes criar o banco de dados 'assembleia' e depois importar a estrutura do banco que está no diretório /Banco, nele existe alguns dados mínimos para a inicialização da aplicação.
+ Dá permissão de drop na tabela transcheck para o usuario igreja.
  O usuario de acesso ao banco está no script /func_class/constantes.php (user:'usuarioBanco' e password:'senha').
  O usuario da aplicação é: ''111.111.111-11'' e a senha:'admin'
 
@@ -64,5 +65,3 @@ __Desenvolvimento__
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
-
-

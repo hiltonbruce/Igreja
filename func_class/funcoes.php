@@ -9,7 +9,7 @@ function conectar() {
 	}elseif (file_exists('../../func_class/constantes.php')){
 	 require_once('../../func_class/constantes.php');
 	}
-	$dns = "mysql://igreja:G4Hd%VKC#yV5F!at8c@localhost/assembleia";
+	$dns = "mysql://DBUSER:DBPASS@DBPATH/DBNAME";
 	$db =& DB::Connect ($dns, array());
 	//if (PEAR::isError($db)){ die ($db->getMessage()); }
 }
