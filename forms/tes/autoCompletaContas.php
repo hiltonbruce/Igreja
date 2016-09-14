@@ -1,36 +1,35 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script
-	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link
-	rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
-<span style="text-align: left; font-weight: bold">Procurar Conta</span>
-<table style="background-color: #D3D3D3;">
+<table class='table'>
 	<tbody>
 		<tr>
-			<td colspan="3">Conta:<br /> <input type="text" name="conta" class="form-control"
+			<td colspan="3"><label>Conta:</label>
+				<input type="text" name="conta" class="form-control"
 				id="campo_estado" value="<?PHP echo $nomeCred;?>" tabindex="<?PHP echo ++$ind; ?>" />
 			</td>
 		</tr>
 		<tr>
-			<td>Código/tipo:<br /> <input type="text" id="estado_val" class="form-control"
+			<td>
+				<label>C&oacute;digo/tipo:</label>
+				<input type="text" id="estado_val" class="form-control"
 				name="estado_val" disabled="disabled" value="" />
 			</td>
-			<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
+			<td>
+				<label>Saldo Atual:</label>
+				<input type="text" id="id_val" name="id" class="form-control"
 				disabled="disabled" value="" /></td>
-			<td>Código de acesso:<br /> <input type="text" id="acesso" name="acessoDebitar" class="form-control"
-				value="<?PHP echo $cred;?>" tabindex="<?PHP echo ++$ind; ?>" /></td>
+			<td>
+				<label>C&oacute;digo de acesso:</label>
+				<input type="text" id="acesso" name="acessoDebitar" class="form-control"
+				value="<?PHP echo $cred;?>" tabindex="<?PHP echo ++$ind; ?>" />
+			</td>
 		</tr>
 		<tr>
-			<td colspan="3">Descrição:<br />  <input type="text" size="78%" id="detalhe" name="det"
+			<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
 				disabled="disabled" class="form-control" /></td>
-		</tr>
-		<tr>
-			<td colspan="3">&nbsp;</td>
 		</tr>
 	</tbody>
 </table>
-
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {

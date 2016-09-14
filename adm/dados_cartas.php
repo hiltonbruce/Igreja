@@ -5,39 +5,39 @@ $igreja = new DBRecord ("igreja","1","rol");
 $bsc_rol = intval($_GET['bsc_rol']);
 
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
-$tab_edit='adm/dados_cartas.php&tabela=carta&bsc_rol='.$bsc_rol.'&campo=';//Link de chamada da mesma página para abrir o form de edição do item
+$tab_edit='adm/dados_cartas.php&tabela=carta&bsc_rol='.$bsc_rol.'&campo=';//Link de chamada da mesma pï¿½gina para abrir o form de ediï¿½ï¿½o do item
 $query = "SELECT *,DATE_FORMAT(data,'%d/%m/%Y')AS data FROM carta WHERE rol='".$bsc_rol."' ORDER BY id DESC";
-$nmpp="5"; //Número de mensagens por párginas
+$nmpp="5"; //Nï¿½mero de mensagens por pï¿½rginas
 $paginacao = Array();
-$paginacao['link'] = "?"; //Paginação na mesma página
+$paginacao['link'] = "?"; //Paginaï¿½ï¿½o na mesma pï¿½gina
 
-//Faz os calculos na paginação
+//Faz os calculos na paginaï¿½ï¿½o
 $sql2 = mysql_query ("$query") or die (mysql_error());
 $total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
-$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
+$paginas = ceil ($total/$nmpp); //Retorna o total de pï¿½ginas
 $pagina = $HTTP_GET_VARS["pagina1"];
 
-if (!isset($pagina)) {$pagina=0;} //Especifica um valor p variável página caso ela esteja setada
-$inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no MySQL
+if (!isset($pagina)) {$pagina=0;} //Especifica um valor p variï¿½vel pï¿½gina caso ela esteja setada
+$inicio=$pagina * $nmpp; //Retorna qual serï¿½ a primeira linha a ser mostrada no MySQL
 $sql3 = mysql_query ("$query"." LIMIT $inicio,$nmpp") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 $arr_dad = mysql_fetch_array ($sql3);
 
 list($diav,$mesv,$anov) = explode("/", $arr_dad["data"]);
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
-$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias após a emissão do recibo
+$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias apï¿½s a emissï¿½o do recibo
 ?>
 <div id="lst_cad">
 	<?PHP
 	if (!empty($_GET["bsc_rol"]))
 	{
 	?>
-	<table>
+	<table class='table'>
       <tr>
         <td>Tipo:
           <?PHP
-			$nome = new editar_form("tipo",$arr_dad["tipo"],$tab,$tab_edit);
-			echo "Carta de ".carta($arr_dad["tipo"]);
+		//	$nome = new editar_form("tipo",$arr_dad["tipo"],$tab,$tab_edit);
+			echo "<h4>Carta de ".carta($arr_dad["tipo"]).'</h4>';
 			//$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 			?></td>
         <td>Data:
@@ -47,10 +47,9 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
           }elseif ($diasemissao<3){
             echo ' (Criada ontem!)';
           }elseif ($anov>'2000') {
-          	echo ' (Criada à: '.$diasemissao. ' dias)';
+          	echo ' (Criada ï¿½: '.$diasemissao. ' dias)';
           }
-
-       $nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
+     $nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
 	   $nome->getMostrar();
 
 		if ($diasemissao<='3') {
@@ -58,8 +57,8 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 		}elseif ($_GET['campo']=='data') {
 			?>
 			<div class="alert alert-danger alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			Prazo <strong>EXPIRADO</strong>! Você tem até <strong>3 dias</strong> para alterar esta data!
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
+			Prazo <strong>EXPIRADO</strong>! Vocï¿½ tem atï¿½ <strong>3 dias</strong> para alterar esta data!
 				    </div>
 			<?php
 		}
@@ -75,8 +74,8 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 		}elseif ($_GET['campo']=='igreja')  {
 			?>
 			<div class="alert alert-danger alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			Prazo <strong>EXPIRADO</strong>! Você tem até <strong>20 dias</strong> para alterar a Igreja de destino!
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
+			Prazo <strong>EXPIRADO</strong>! Vocï¿½ tem atï¿½ <strong>20 dias</strong> para alterar a Igreja de destino!
 			</div>
 			<?php
 		}
@@ -90,7 +89,7 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 
         if ($det_inteiro!=0)
         {
-        	$rec = new DBRecord ("cidade",$arr_dad["destino"],"id");// Aqui será selecionado a informação do campo autor com id=2
+        	$rec = new DBRecord ("cidade",$arr_dad["destino"],"id");// Aqui serï¿½ selecionado a informaï¿½ï¿½o do campo autor com id=2
 			$cidade=$rec->nome()." - ".$rec->coduf();
 
 		}else {
@@ -105,14 +104,14 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 				}elseif ($_GET['campo']=='destino')  {
 					?>
 					<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					Prazo <strong>EXPIRADO</strong>! Você tem até <strong>20 dias</strong> para alterar o destino!
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
+					Prazo <strong>EXPIRADO</strong>! Vocï¿½ tem atï¿½ <strong>20 dias</strong> para alterar o destino!
 					</div>
 					<?php
 				}
 			}else{
                 echo '<div class="alert alert-info alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
                     <h3>Sem registro</h3>
                      Nenhuma carta encontrada para este membro!
                     </div>';
@@ -130,8 +129,8 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 				}elseif ($_GET['campo']=='obs')  {
 					?>
 					<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					Prazo <strong>EXPIRADO</strong>! Você tem até <strong>20 dias</strong> para alterar a observação!
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
+					Prazo <strong>EXPIRADO</strong>! Vocï¿½ tem atï¿½ <strong>20 dias</strong> para alterar a observaï¿½ï¿½o!
 					</div>
 					<?php
 				}
@@ -154,12 +153,12 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
 	<?php
 	}else {
 		echo '<div class="bs-callout bs-callout-warning">';
-		echo '<h4>Esta pessoa não está com situação regular em nosso rol de membro! </h4>';
-		echo 'Para emissão de outra carta é necessário que esteja em comunhão com a igreja! ';
-		echo 'Se deseja emitir nova transferência, caso a anterior tenha perdido a validade, ';
-		echo 'ou qualquer outro tipo de carta, reintegre-o a comunhão da igreja e emita nova carta! ';
+		echo '<h4>Esta pessoa nï¿½o estï¿½ com situaï¿½ï¿½o regular em nosso rol de membro! </h4>';
+		echo 'Para emissï¿½o de outra carta ï¿½ necessï¿½rio que esteja em comunhï¿½o com a igreja! ';
+		echo 'Se deseja emitir nova transferï¿½ncia, caso a anterior tenha perdido a validade, ';
+		echo 'ou qualquer outro tipo de carta, reintegre-o a comunhï¿½o da igreja e emita nova carta! ';
 		echo 'Tendo, ainda, 3 dias para alterar a data e 20 para os demais dados! <br>';
-		echo '<strong>Você ainda poderá re-imprimir a última!</strong>';
+		echo '<strong>Vocï¿½ ainda poderï¿½ re-imprimir a ï¿½ltima!</strong>';
 		echo '</div>';
 	}
     $cargoIgreja = new tes_cargo();
@@ -176,12 +175,12 @@ $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //
     <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
   <div class="row">
   <div class="col-xs-5">
-  <label>Secretário que ir&aacute; assinar a carta:</label>
+  <label>Secretï¿½rio que ir&aacute; assinar a carta:</label>
   <select name="secretario" id="secretario" class='form-control'>
     <option value="1"><?PHP echo $dadosCargo['7']['1']['1']['nome'];?></option>
     <option value="2"><?PHP echo $dadosCargo['7']['1']['2']['nome'];?></option>
   </select></div>
-  <!-- Envia o id para a impressão da carta escolhida -->
+  <!-- Envia o id para a impressï¿½o da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o"/>
   </div>
 </form>

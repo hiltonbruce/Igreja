@@ -23,7 +23,7 @@ require_once 'models/tes/histFinMembro.php';
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
-				<col id="Dízimos">
+				<col id="Dï¿½zimos">
 				<col id="Ofertas Extras">
 				<col id="Ofertas">
 				<col id="Sub-Total">
@@ -33,7 +33,7 @@ require_once 'models/tes/histFinMembro.php';
 				<col id="Ensino">
 				<col id="Tot.&nbsp;Operac.">
 				<col id="Campanhas">
-				<col id="Missões">
+				<col id="Missï¿½es">
 				<col id="Total">
 			</colgroup>
 		<thead>
@@ -95,5 +95,5 @@ require_once 'models/tes/histFinMembro.php';
 			?>
 		</tfoot>
 	</table>
-	<h2>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h2>
-	Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribuição: '.$menorAno.' ** Ultimo ano de contribuição: '.$maiorAno;?>
+	<h4>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h4>
+	Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribui&ccedil;&atilde;o: '.$menorAno.' ** Ultimo ano de contribui&ccedil;&atilde;o: '.$maiorAno;?>

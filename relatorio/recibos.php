@@ -1,17 +1,17 @@
 <?php
- require_once("func.php"); 
+ require_once("func.php");
  $ind = 1;
 	switch ($_GET[tipo]) {
 		case "1":
-			$tipo = "Cartões de Membro";
+			$tipo = "Cart&atilde;es de Membro";
 			$rol = "Rol dos Cart&otilde;es: ";
 			$dica1 = "Para v&aacute;rios cart&otilde;es separe com v&iacute;rgula &quot;,&quot;";
 			break;
 		case "2":
-			$tipo = "Cartidões de Apresentação";
+			$tipo = "Cartid&otilde;es de Apresenta&ccedil;&atilde;o";
 			$rol = "Rol dos Pais: ";
 			$dica1 = "Indique o Rol dos Pais separados por v&iacute;rgula &quot;,&quot;";
-			break;		
+			break;
 		default:
 			break;
 	}
@@ -38,34 +38,34 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 </select>
      </div>
      </div>
-  <?PHP 
+  <?PHP
 
-  if (isset($_GET["tipo"])) { 
+  if (isset($_GET["tipo"])) {
   ?>
   <label><?PHP echo $rol;?></label>
-  <input name="rols" type="text" id="rols" tabindex="<?PHP echo $ind++;?>" 
+  <input name="rols" type="text" id="rols" tabindex="<?PHP echo $ind++;?>"
      class="form-control" value="<?PHP echo $_GET["rols"];?>">
   <input name="tipo" type="hidden" value="<?PHP echo $tipo;?>" />
   <?PHP echo $dica1;?><label>Observa&ccedil;&otilde;es:</label>
-   <textarea class="text_area form-control" name="obs" cols="25" wrap=physical id="obs" 
-   tabindex="<?PHP echo $ind++;?>" onKeyDown="textCounter(this.form.obs,this.form.remLen,255);" 
+   <textarea class="text_area form-control" name="obs" cols="25" wrap=physical id="obs"
+   tabindex="<?PHP echo $ind++;?>" onKeyDown="textCounter(this.form.obs,this.form.remLen,255);"
    onKeyUp="textCounter(this.form.obs,this.form.remLen,255);progreso_tecla(this,255);"  ></textarea>
    <div id="progreso"></div>
   <div class="form-horizontal">
-     <div class="form-group form-group-lg">
-      <label class="col-sm-2 control-label" for="formGroupInputLarge">(Max. 255 Carateres)</label>
-     <div class="col-xs-2">
-      <input readonly type=text name=remLen size=3 class="form-control" maxlength=3 value="255"> 
+     <div class="form-group">
+      <label class="col-sm-4 control-label" for="formGroupInputLarge"><h5>(Max. 255 Carateres)</h5></label>
+     <div class="col-sm-2">
+      <input readonly type=text name=remLen class="form-control" value="255">
      </div>
-     <div class="form-group form-group-lg">
-      <label class="col-sm-2 control-label" for="formGroupInputLarge">Caracteres restantes</label>
+     <div class="form-group">
+      <label class="col-sm-3 control-label" for="formGroupInputLarge"><h5>Caracteres restantes</h5></label>
      </div>
      </div>
    </div>
   <div class="row">
   <div class="col-xs-2">
   <label>Recebido por: (Rol) </label>
-  <input name="resp_recebeu" type="text" id="resp_recebeu" 
+  <input name="resp_recebeu" type="text" id="resp_recebeu"
      class="form-control" tabindex="<?PHP echo $ind++;?>" >
    </div>
   <div class="col-xs-2"><br />
@@ -73,6 +73,5 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <?PHP } ?>
    </div>
    </div>
-
 </form>
 </fieldset>

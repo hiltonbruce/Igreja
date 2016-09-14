@@ -1,13 +1,13 @@
-<?php 
+<?php
 $ind=1;
 $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 ?>
 <fieldset>
-	<legend>Lan&ccedil;amento Contábil</legend>
+	<legend>Lan&ccedil;amento Cont&aacute;bil</legend>
 		<!-- Desenvolvido por Wellington Ribeiro -->
 		<form method="post" name="autocompletar" action="">
 
-		<table class='table' style="border: 0; background-color: transparent;">
+		<table class='table'>
 			<tbody>
 				<tr>
 					<td><label>Valor (R$)</label> <input name="valor" type="text" autofocus="autofocus"
@@ -31,15 +31,14 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 				</tr>
 				<tr>
 					<td colspan="2">
-						<label>Histórico</label>
-						   <textarea class="text_area" name="referente" id="referente" tabindex="<?PHP
-						   echo $ind++;?>" onKeyDown="textCounter(this.form.referente,this.form.remLen,255);" 
+						<label>Hist&oacute;rico</label>
+						   <textarea class="text_area form-control" name="referente" id="referente" tabindex="<?PHP
+						   echo $ind++;?>" onKeyDown="textCounter(this.form.referente,this.form.remLen,255);"
 								onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"
 								 class="form-control"><?php echo $_GET["referente"];?></textarea>
-						   
 						   <div id="progreso"></div>
 						   (Max. 255 Carateres)
-						  <input readonly type=text name=remLen size=3 maxlength=3 value="255" class="form-control"> 
+						  <input readonly type=text name=remLen size=3 maxlength=3 value="255" class="form-control">
 						Caracteres restantes
 							<label></label>
 					</td>
@@ -48,7 +47,7 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 						tabindex="<?PHP echo ++$ind; ?> " class="form-control"
 						value="<?php echo date('d/m/Y');?>" />
 					</td>
-					<td><label>&nbsp;</label> <input type="submit" name="Submit" value="Lançar..." class="btn btn-primary btn-sm"
+					<td><label>&nbsp;</label> <input type="submit" name="Submit" value="Lanï¿½ar..." class="btn btn-primary btn-sm"
 						tabindex="<?PHP echo ++$ind; ?>" /> <input name="escolha"
 						type="hidden" value="models/tes/lancamento.php" />
 					</td>

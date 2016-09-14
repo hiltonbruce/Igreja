@@ -39,7 +39,7 @@
 		?>
 	  </div>
 	  <div class="col-xs-6"><br />
-			<table style="background-color: #D3D3D3;">
+			<table class='table' style="background-color: #D3D3D3;">
 				<tbody>
 					<tr>
 						<td colspan="3"><label>Conta</label><input type="text" name="nome"
@@ -59,9 +59,6 @@
 					<tr>
 						<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
 							disabled="disabled" class="form-control" /></td>
-					</tr>
-					<tr>
-						<td colspan="3">&nbsp;</td>
 					</tr>
 				</tbody>
 			</table>

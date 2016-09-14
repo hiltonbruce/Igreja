@@ -2,11 +2,11 @@
 if ($_SESSION['nivel']>4){
 
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
-$tab_edit="adm/dados_famil.php&bsc_rol=$bsc_rol&tabela=est_civil&campo=";//Link de chamada da mesma página para abrir o form de edição do item
+$tab_edit="adm/dados_famil.php&bsc_rol=$bsc_rol&tabela=est_civil&campo=";//Link de chamada da mesma pï¿½gina para abrir o form de ediï¿½ï¿½o do item
 $dad_cad = mysql_query ("SELECT *,DATE_FORMAT(data,'%d/%m/%Y') AS data  FROM est_civil WHERE rol='".$bsc_rol."'");
 $arr_dad = mysql_fetch_array ($dad_cad);
 
-$ind = 1; //Define o indice dos campos do formulário
+$ind = 1; //Define o indice dos campos do formulï¿½rio
 
 ver_cad($bsc_rol);
 ?>
@@ -16,7 +16,7 @@ ver_cad($bsc_rol);
 		if (!empty($arr_dad["rol"])) {
 	?>
 <div id="lst_cad">
-	<table>
+	<table class='table'>
       <tr>
         <td colspan="2">Conjugue:
 		<?PHP
@@ -53,14 +53,14 @@ ver_cad($bsc_rol);
 			?>
               <option value="Solteiro">Solteiro</option>
               <option value="Casado">Casado</option>
-              <option value="Viúvo">Vi&uacute;vo</option>
+              <option value="Viï¿½vo">Vi&uacute;vo</option>
               <option value="Divorciado">Divorciado</option>
 			<?PHP
 			}else {
 			?>
               <option value="Solteira">Solteira</option>
               <option value="Casada">Casada</option>
-              <option value="Viúva">Vi&uacute;va</option>
+              <option value="Viï¿½va">Vi&uacute;va</option>
               <option value="Divorciada">Divorciada</option>
 			<?PHP
 			}
@@ -113,7 +113,7 @@ ver_cad($bsc_rol);
     </table>
 </div>
 	<?PHP
-	}//Fim do if !empty($arr_dad["rol"]) quando não existe cadastro para este rol é aberto um form para preenchimento
+	}//Fim do if !empty($arr_dad["rol"]) quando nï¿½o existe cadastro para este rol ï¿½ aberto um form para preenchimento
 	else {
 		require_once ("adm/form_famil.php");
 	}

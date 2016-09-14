@@ -1,5 +1,5 @@
 <?php
-//Limpa as variáveis
+//Limpa as variï¿½veis
 $ministerio = '';$tesoureiro = '';$auxilio = '';$zeladores = '';$sexta = '';$demaisPgto = '';$rec_tipo=false;
 
 if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
@@ -8,11 +8,11 @@ if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 		//houve click duplo no form
 		$gerarPgto = true;
 	}else {
-		//Não houve click duplo no form
+		//Nï¿½o houve click duplo no form
 		$gerarPgto = false;
-		//Grava no banco codigo de autorização para o novo recibo
+		//Grava no banco codigo de autorizaï¿½ï¿½o para o novo recibo
 		add_transid($_POST["transid"]);
-		//script que orienta a criação dos recibos
+		//script que orienta a criaï¿½ï¿½o dos recibos
 
 		$gerar = 'help/tes/gerarRecGrupo.php';
 
@@ -44,7 +44,7 @@ foreach ($listaPgto as $chave => $valor) {
 		$vlrPgto = true;
 	}
 
-	$pgto	= ($valor['pgto']>'0') ? $valor['pgto']:'<span class="btn btn-success btn-xs">Voluntário</span>';
+	$pgto	= ($valor['pgto']>'0') ? $valor['pgto']:'<span class="btn btn-success btn-xs">Voluntï¿½rio</span>';
 
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
   	$nomeDiaPgto = $valor['diapgto'];
@@ -85,7 +85,7 @@ foreach ($listaPgto as $chave => $valor) {
 	$nomeMembro = sprintf ("%s %s %'05u - %s ",$remove,$alterar,$valor['rolMembro'],$nomeMembro);
 
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
-		//Lista do Ministério
+		//Lista do Ministï¿½rio
 		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.$estado.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
@@ -197,7 +197,7 @@ foreach ($listaPgto as $chave => $valor) {
 }
 
 if ($totMinisterio>'0') {
-	$dia1 = '<tbody><tr id="subtotal" class="sub"><th><strong>Ministério</strong></th><td></td><td></td><td id="moeda">'
+	$dia1 = '<tbody><tr id="subtotal" class="sub"><th><strong>Minist&eacute;rio</strong></th><td></td><td></td><td id="moeda">'
 		.number_format($totMinisterio,2,',','.').'</td><td></td></tr>'.$dia1.'</tbody>';
 }else {
 	$dia1='';
@@ -211,7 +211,7 @@ $dia15 = '<tbody><tr id="subtotal" class="sub"><th><strong>Tesoureiro</strong></
 }
 
 if ($totAuxilio>'0') {
-	$diaAux = '<tbody><tr id="subtotal" class="sub"><th><strong>Auxílio</strong></th><td></td><td></td><td id="moeda">'
+	$diaAux = '<tbody><tr id="subtotal" class="sub"><th><strong>Aux&iacute;lio</strong></th><td></td><td></td><td id="moeda">'
 	.number_format($totAuxilio,2,',','.').'</td><td></td></tr>'.$diaAux.'</tbody>';
 }else {
 	$diaAux='';

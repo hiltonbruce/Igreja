@@ -1,4 +1,4 @@
-<table class='table-hover'>
+<table class='table table-hover'>
 		<caption>
 		<?php
 		if (empty($recLink)) {
@@ -20,15 +20,15 @@
 		<colgroup>
 				<col id="Conta">
 				<col id="Acesso">
-				<col id="Descrição">
+				<col id="Descriï¿½ï¿½o">
 				<col id="Saldo Atual">
 			</colgroup>
 		<thead>
 			<tr>
 				<th scope="col">Conta</th>
-				<th scope="col">Cód.</th>
+				<th scope="col">C&oacute;d.</th>
 				<th scope="col">Descri&ccedil;&atilde;o</th>
-				<th scope="col" colspan="2" style="text-align: center;"> Saldo atual (R$) </th>
+				<th scope="col" colspan="2" class='text-center'> Saldo atual (R$) </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,8 +44,8 @@
 		<tfoot>
 			<?php
 				printf("<tr id='total'>");
-				printf("<td colspan='2' id='moeda' >Débitos: R$ %s D</td>",number_format($debito,2,',','.'));
-				printf("<td colspan='2' id='moeda'>Crédito: R$ %s C</td><td></td></tr>",number_format($credito,2,',','.'));
+				printf("<td colspan='2' id='moeda' >D&eacute;bitos: R$ %s D</td>",number_format($debito,2,',','.'));
+				printf("<td colspan='2' id='moeda'>Cr&eacute;dito: R$ %s C</td><td></td></tr>",number_format($credito,2,',','.'));
 			?>
 		</tfoot>
 	</table>

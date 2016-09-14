@@ -10,7 +10,7 @@
 </tr>
 <tr>
 	<td>
-		<label>Fonte para pgto:</label>		
+		<label>Fonte para pgto:</label>
 		<select name="credito" id="caixa" class="form-control"
 		tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 			<?php
@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td colspan="3">
-		<label>Despesa com,
+		Despesa com,
 		<?php
 			$conta = intval($_GET['cred']);
 			if ($conta>0) {
@@ -41,18 +41,17 @@
 				$cred = '';
 				$nomeCred = '';
 			}
-
 			require_once 'forms/tes/autoCompletaContas.php';
-		?></label>
+		?>
 	</td>
 </tr>
 <tr>
 	<td colspan="3">
 	<label>Referente a:</label>
-   <textarea class="text_area form-control" name="referente" cols="25" id="referente" tabindex="<?PHP
+   <textarea class="form-control" name="referente" id="referente" tabindex="<?PHP
    echo $ind++;?>" onKeyDown="textCounter(this.form.referente,this.form.remLen,255);"
 		onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"
-		placeholder="Informe de maneira curta o que motivou a emissão deste recibo"><?php echo $_GET["referente"];?></textarea>
+		placeholder="Informe de maneira curta o que motivou a emiss&atilde;o deste recibo"><?php echo $_GET["referente"];?></textarea>
 
    <div id="progreso"></div>
    (Max. 255 Carateres)

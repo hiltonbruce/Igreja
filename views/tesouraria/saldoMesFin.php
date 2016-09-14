@@ -7,9 +7,9 @@
 
 $mes = intval($_GET['mes']);
 require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
-$tabThead = $nivelSem; //Cabeçalho da tabela
+$tabThead = $nivelSem; //Cabeï¿½alho da tabela
 
-$mesPeriodo = sprintf('%02s',$mes);//Mês por extenso
+$mesPeriodo = sprintf('%02s',$mes);//Mï¿½s por extenso
 $mesExt = arrayMeses ();
 $mesPorExt = $mesExt[$mesPeriodo];
 $totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
@@ -44,11 +44,11 @@ $totalGeral .= '<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</
 $totalGeral .= '</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>';
 $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>';
 ?>
-<div class='text-center'><h5><strong>Histórico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
+<div class='text-center'><h5><strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
 		<?php printf('%s - Per&iacute;odo:&nbsp;&nbsp;%02s de %s',$cong,$mesPorExt,$ano);?></h5></div>
 <table id="horario" class='table table-bordered'>
 	<thead>
-		<?PHP 
+		<?PHP
 			echo $nivelSem;
 			echo $totalGeral;
 		?>
@@ -64,5 +64,5 @@ $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>'
 		?>
 	</tfoot>
 </table>
-<h2>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h2>
-Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribuição: '.$menorAno.' ** Ultimo ano de contribuição: '.$maiorAno;?>
+<h4>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h4>
+Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribui&ccedil;&atilde;o: '.$menorAno.' ** Ultimo ano de contribui&ccedil;&atilde;o: '.$maiorAno;?>

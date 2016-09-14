@@ -16,12 +16,12 @@
 	</td>
 	<td></td>
 </tr>
-<tr><td><label>Grupo p/ Observação: </label> <select name="grupo" id="grupo" 
+<tr><td><label>Grupo p/ Observa&ccedil;&atilde;o: </label> <select name="grupo" id="grupo"
 			tabindex="<?PHP echo ++$ind; ?>" class="form-control" autofocus="autofocus">
 						<option></option>
-						<option value="485">Ministério</option>
+						<option value="485">Minist&eacute;rio</option>
 						<option value="143">Tesoureiros</option>
-						<option value="103">Auxílio</option>
+						<option value="103">Aux&iacute;lio</option>
 						<option value="88">Zelador</option>
 						<option value="180">Todos</option>
 				</select>
@@ -32,7 +32,7 @@
 	</td>
 </tr>
 <tr>
-<td colspan="2"><p>Exemplos: 1,2,3->Imprimir recibos 1,2,3 | 1-5->Imprimir 
+<td colspan="2"><p>Exemplos: 1,2,3->Imprimir recibos 1,2,3 | 1-5->Imprimir
 todos do 1 ao 5 | 8 - ->apartir do cinco em diante</p><p>Obs.:As sequ&ecirc;ncias n&atilde;o devem ultrapassar 200 recibos</p>
 </td>
 	<td><input type="submit" class="btn btn-primary" name="Submit" value="Imprimir..." tabindex="<?PHP echo ++$ind; ?>"/></td>

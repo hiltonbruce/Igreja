@@ -30,7 +30,7 @@ require_once 'forms/autoCompletaMembro.php';
 
 					$pgto ='';
 					if ($diapgto=='1') {
-						$pgto ='<option value="1">Dia 1º</option>';
+						$pgto ='<option value="1">Dia 1&ordm;</option>';
 					}elseif ($diapgto=='15') {
 						$pgto ='<option value="15">Dia 15</option>';
 					}elseif ($diapgto=='661') {
@@ -54,7 +54,7 @@ require_once 'forms/autoCompletaMembro.php';
 				</select>
 		   </td>
 			<td>
-				<label>Fonte para pgto:</label>		
+				<label>Fonte para pgto:</label>
 					<select name="acesso" id="caixa" class="form-control"
 					tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 						<?php
@@ -92,7 +92,7 @@ require_once 'forms/autoCompletaMembro.php';
 	</tr>
 	<tr>
 		<td></td>
-		<td><label>&nbsp;</label> <input type="submit" name="Submit" value="Lançar..." class="btn btn-primary btn-sm"
+		<td><label>&nbsp;</label> <input type="submit" name="Submit" value="Lan&ccedil;ar..." class="btn btn-primary btn-sm"
 						tabindex="<?PHP echo ++$ind; ?>" /></td>
 	</tr>
 	</tbody>
