@@ -8,7 +8,7 @@ $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 if ($rec>'12' && $rec<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-	require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
+	require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
 
 	if ($igreja->cidade()>0) {
 		$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
@@ -17,7 +17,7 @@ if ($rec>'12' && $rec<'20') {
 		$origem = $igreja->cidade();
 	}
 
-	require_once '../help/tes/receitaImprimir.php';//Opções de  impressões para o script
+	require_once '../help/tes/receitaImprimir.php';//Opï¿½ï¿½es de  impressï¿½es para o script
 
 	}
 }else {
@@ -39,9 +39,9 @@ if (intval($_POST['rolIgreja'])>0) {
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 $igLanc = $igrejaSelecionada;
 
-	// verifica se há valor a ser lançado e libera os forms
+	// verifica se hï¿½ valor a ser lanï¿½ado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);
-	$tituloColuna5 = ($idIgreja > '1') ? 'Congregação' : 'Igreja';
+	$tituloColuna5 = ($idIgreja > '1') ? 'Congregaï¿½ï¿½o' : 'Igreja';
 	if ($_POST['concluir'] == '1') {
 			$tituloColuna5 = 'Status';
 			require_once 'forms/lancdizimo.php';
@@ -54,12 +54,12 @@ $igLanc = $igrejaSelecionada;
 			$fin = ($_GET['fin'] < '1') ? '2' : $_GET['fin'];
 					$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'];
 
-			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
+			require_once 'help/tes/receitaTela.php';//Opï¿½ï¿½es de exibiï¿½ï¿½o na tela a escolha
 	}
 
 
 } else {
-	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
+	echo "<script> alert('Sem permissï¿½o de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
 	session_destroy();
 	header("Location: ./");

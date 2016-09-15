@@ -16,7 +16,7 @@ if ($_GET['ano']=='') {
 
 switch ($hisFinanceiro) {
 	case 1:
-		//Listagem para historico finaceiro das contribuições dos membros
+		//Listagem para historico finaceiro das contribuiï¿½ï¿½es dos membros
 		$query  = 'SELECT *,mesrefer AS mes,anorefer ';
 		$query .= 'AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" ';
 		$query .= 'AND credito!="803" ORDER BY anorefer,mesrefer';
@@ -33,7 +33,7 @@ switch ($hisFinanceiro) {
 }
 
 $lista = mysql_query($query);
-//Logica para montar o conjunto de variáveis para compor a tabelar a seguir
+//Logica para montar o conjunto de variï¿½veis para compor a tabelar a seguir
 require_once 'help/tes/histFinanceiroMembro.php';
 
 	//echo "<h1> ** $ano **</h1>";
@@ -62,7 +62,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$totSubTotal +=$subTotal;
 		$totTotal += $totMes;
 		$totOp = $subTotal+$$ofs+$$ofmoc+$$ofi+$$ofe;//Total das entradas operacionais
-		//Formata mês para exibição
+		//Formata mï¿½s para exibiï¿½ï¿½o
 		$mesExibir = arrayMeses();
 		$verMes = $mesExibir [sprintf("%02u",$cont )];
 
@@ -106,19 +106,16 @@ require_once 'help/tes/histFinanceiroMembro.php';
 			$nivel1Sem .= '<td id="moeda">'.number_format($totOpSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
-			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').'</td></tr>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').'</td>';
 			$nivel1Sem .= '</tr>';
 		}
 		$nivel1 .= $nivelSem.$nivel1Sem;
-		$nivel1Sem = '';//Limpa a variável para o próximo mês
-
+		$nivel1Sem = '';//Limpa a variï¿½vel para o prï¿½ximo mï¿½s
 		$nivel1 .= '</tbody>';
 
 		$cor = !$cor;
 	}
-
-	?>
-
+?>
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[

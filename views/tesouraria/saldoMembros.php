@@ -19,7 +19,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 require_once 'models/tes/histFinMembro.php';
 ?>
 <table id="horario" class='table table-hover table-condensed'>
-		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
+		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro=== de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
@@ -73,7 +73,7 @@ require_once 'models/tes/histFinMembro.php';
 				echo '<td id="moeda">'.number_format($totEnsinoAno,2,',','.').'</td>'.
 					'<td id="moeda">'.number_format($totOpAno,2,',','.').'</td>'.
 					'<td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>'.
-					'</td><td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>';
+					'<td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totTotal,2,',','.').'</td></tr>';
 
 				printf("<tr id='total'>");
@@ -87,7 +87,7 @@ require_once 'models/tes/histFinMembro.php';
 					'<td id="moeda">'.number_format($totInfantil,2,',','.').'</td>'.
 					'<td id="moeda">'.number_format($totOp,2,',','.').'</td>'.
 					'<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</td>
-					</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>';
+					<td id="moeda">'.number_format($totMissoes,2,',','.').'</td>';
 				echo '<td id="moeda">'.number_format($totEnsino,2,',','.').'</td>';
 
 				$totGeral = $totDizimo+$totOfertaExtra+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;

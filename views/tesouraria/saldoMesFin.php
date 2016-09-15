@@ -28,9 +28,9 @@ $totalCong .= '<td id="moeda">'.number_format($totOperacAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totCampanhaAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totMissoesAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totTotal,2,',','.').'</td></tr></tbody>';
-$totalGeral =  '<tr id="total" class="sub" >';
 
 $totOperac = $totSubTotal+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
+$totalGeral =  '<tr id="total" class="sub" >';
 $totalGeral .= '<td>Total&nbsp;</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>';
 $totalGeral .= '<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>';
 $totalGeral .= '<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>';
@@ -44,9 +44,10 @@ $totalGeral .= '<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</
 $totalGeral .= '</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>';
 $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>';
 ?>
+<div class="bs-docs-sidebar">
 <div class='text-center'><h5><strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
 		<?php printf('%s - Per&iacute;odo:&nbsp;&nbsp;%02s de %s',$cong,$mesPorExt,$ano);?></h5></div>
-<table id="horario" class='table table-bordered'>
+<table id="horario" class='table table-bordered table-condensed'>
 	<thead>
 		<?PHP
 			echo $nivelSem;
@@ -66,3 +67,4 @@ $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>'
 </table>
 <h4>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h4>
 Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribui&ccedil;&atilde;o: '.$menorAno.' ** Ultimo ano de contribui&ccedil;&atilde;o: '.$maiorAno;?>
+</div>
