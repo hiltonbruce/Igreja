@@ -34,7 +34,7 @@ $testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') 
 		echo '<span class="small">Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</span></h4>';
 	}
 	 ?>
-	 
+
 	<div id="lst_cad">
 		<table class='table table-condensed'>
 	      <tr>
@@ -168,6 +168,7 @@ $testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') 
 				<?PHP
 				if ($rec_alterar->igreja()<'1') {
 					echo "<p><a href='./?escolha={$tab_edit}igreja'>Templo Sede</a></p>";
+						$rec_igreja = new DBRecord('igreja',1,'rol');
 				}else {
 					$rec_igreja = new DBRecord('igreja',$rec_alterar->igreja(),'rol');
 					echo "<p><a href='./?escolha={$tab_edit}igreja&igreja={$rec_igreja->rol()}'>".$rec_igreja->razao()."</a></p>";}

@@ -1,8 +1,8 @@
 <table class='table table-bordered table-hover table-condensed'>
 	<caption>
 		<?php
-		//Cabeçalho da tabela
-		//Oculta o botao imprimir para não sair na impressão
+		//Cabeï¿½alho da tabela
+		//Oculta o botao imprimir para nï¿½o sair na impressï¿½o
 		$linkImpressao ='tesouraria/receita.php/?rec=13';
 		if ($_GET['rec']!='13') {
 			echo '<a href="'.$linkImpressao.'" ';
@@ -12,7 +12,7 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-		echo $cong.'Histórico Financeiro - Ano de referência: '.$ano;
+		echo $cong.'Hist&oacute;rico Financeiro - Ano de refer&ecirc;ncia: '.$ano;
 		echo ' - Valores em Real (R$)';?>
 	</caption>
 	<colgroup>
