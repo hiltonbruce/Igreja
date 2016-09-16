@@ -13,8 +13,7 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-
-		echo $titTabela;
+		echo '<h5>'.$titTabela.'<h5>';
 		?>
 		</caption>
 		<colgroup>

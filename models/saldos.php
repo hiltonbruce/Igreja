@@ -33,14 +33,10 @@ while ($contas = mysql_fetch_array($lista)) {
 		$cor= true;
 	}else {
 		//Contas
-		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
-
 		$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').'<strong> '.$tipoCta.'</strong>':'-';
-
-		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.
+		$nivel1 .='<tr><td>'.$contas['codigo'].'</td><td>'.$acesso.
 				'</td><td title="'.$title.'">'.$contas['titulo'].'</td><td id="moeda">'
 				.$valorExibir.'</td><td></td></tr>';
-		$cor = !$cor;
 	}
 
 	//Balancete de todas as contas com saldo
@@ -57,12 +53,9 @@ while ($contas = mysql_fetch_array($lista)) {
 		}else {
 			//Contas
 			$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
-
-			$bgcolor2 = $cor2 ? 'style="background:#ffffff;color:#000;"' : 'style="background:#d0d0d0;color:#000;"';
-			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td>
+			$nivel2 .='<tr><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td>
 					<td title="'.$title.'">'.$contas['titulo'].'</td><td></td><td id="moeda">'
 					.$valorExibir.'</td></tr>';
-			$cor2 = !$cor2;
 		}
 	}
 	if ($contas['tipo']=='D' && $contas['acesso']>'0') {
