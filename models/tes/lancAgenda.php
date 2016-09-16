@@ -7,12 +7,12 @@
     if ($disponivel) {
        $saldoDisp = new DBRecord ('contas',$disponivel,'acesso');
     }else {
-        exit('A conta para pagamento não foi definida! Lançamento não confirmado...');
+        exit('A conta para pagamento n&atilde;o foi definida! Lançamento n&atilde;o confirmado...');
     }
 
     if ($saldoDisp->saldo()<($valor_us+$multaUS)) {
         # Verifica se a conta possui saldo para efetuar o pgto
-        exit('A conta para pagamento não possui saldo suficiente! Lançamento não confirmado...');
+        exit('A conta para pagamento n&atilde;o possui saldo suficiente! Lançamento n&atilde;o confirmado...');
     }
         $despesa    = $_POST['acessoDebitar'];
         require_once 'models/tes/lancamento.php';

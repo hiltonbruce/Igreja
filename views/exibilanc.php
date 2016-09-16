@@ -1,5 +1,5 @@
 <table class="table table-hover table-condensed table-striped table-bordered">
-	<caption>Lançamento Concluído - Data:
+	<caption>Lan&ccedil;amento Conclu&iacute;do - Data:
 	<?PHP
 		echo (empty($_POST['data'])) ? conv_valor_br ($data) : $_POST['data'];
 		echo ' - '.$igLanc->razao();

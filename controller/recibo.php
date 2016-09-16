@@ -4,7 +4,7 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 	session_start();
 
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-		require "../help/impressao.php";//Include de funcões, classes e conexões com o BD
+		require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
 		$igreja = new DBRecord ("igreja","1","rol");
 
 		if ($_GET['igreja']>'1') {
@@ -32,13 +32,13 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 			break;
 
 			case '21':
-				//Impressão de vários Reciboserror_reporting(E_ALL);
+				//Impressï¿½o de vï¿½rios Reciboserror_reporting(E_ALL);
 				error_reporting(E_ALL);
 				ini_set('display_errors', 'off');
 
 				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />';
 				$scriptCSS  .= '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
-				
+
 				$saltoPagina = '<div style="page-break-before: always;"> </div>';
 				if ($igreja->cidade()>0) {
 					$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -62,17 +62,17 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 
-$recMenu = (empty($_POST["rec"])) ? $_GET["rec"]:$_POST["rec"];
+$recMenu = (empty($_POST["rec"])) ? intval($_GET["rec"]):intval($_POST["rec"]);
 
 switch ($recMenu){
 	case 2:
-		//Recibos Pessoa Jurídica
+		//Recibos Pessoa Jurï¿½dica
 		require_once 'forms/tes/recInicio.php';
 		require_once 'forms/tes/recPesJuridica.php';
 		require_once 'forms/tes/recFinal.php';
 		break;
 	case 3:
-		//Recibos para não Membros
+		//Recibos para nï¿½o Membros
 		require_once 'forms/tes/recInicio.php';
 		require_once 'forms/tes/recNaoMembro.php';
 		require_once 'forms/tes/recFinal.php';
@@ -90,7 +90,7 @@ switch ($recMenu){
 		//print_r($listaPgto);
 		break;
 	case 5:
-		//Form para impressão de vários Recibos
+		//Form para impressï¿½o de vï¿½rios Recibos
 		require_once 'forms/tes/recImprVarios.php';
 		break;
 	default:
@@ -111,7 +111,7 @@ echo "R$ $valor ( $dim )";
 */
 
 } else {
-	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');";
+	echo "<script> alert('Sem permissï¿½o de acesso! Entre em contato com o Tesoureiro!');";
 	echo "location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
 	session_destroy();

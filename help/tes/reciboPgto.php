@@ -13,9 +13,7 @@ if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 		//Grava no banco codigo de autoriza��o para o novo recibo
 		add_transid($_POST["transid"]);
 		//script que orienta a cria��o dos recibos
-
 		$gerar = 'help/tes/gerarRecGrupo.php';
-
 		require_once 'help/tes/definirRecGrupo.php';
 	}
 }

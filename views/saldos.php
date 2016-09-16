@@ -1,4 +1,4 @@
-<table class='table table-hover'>
+<table class='table table-hover table-striped'>
 		<caption>
 		<?php
 		if (empty($recLink)) {

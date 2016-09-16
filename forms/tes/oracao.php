@@ -5,10 +5,10 @@
 <legend>Lan&ccedil;amentos por total da semana</legend>
 <form id="form1" name="form1" method="post" action="">
 	<div class="row">
-		<div class="col-xs-5">
+		<div class="col-xs-6">
 			<label><strong>Recebido parar:</strong></label>
 			<select name="acessoCreditar" id="caixa" class="form-control" required="required"
-			onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" 
+			onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>"
 			<?PHP echo $foco;?> >
 				<?php
 					$recebimento = new tes_listDisponivel();
@@ -17,7 +17,7 @@
 				?>
 			</select>
 		</div>
-	  <div class="col-xs-4">
+	  <div class="col-xs-6">
 			<label><strong>Igreja:</strong></label>
 		  	<?PHP
 				$bsccredor2 = new List_sele('igreja', 'razao', 'igreja');
@@ -37,19 +37,19 @@
 			    placeholder='<?PHP echo $i;?>&ordf; Semana' tabindex="<?PHP echo ++$ind; ?>"
 			     <?PHP echo $foco; ?> >
 			  </div>
-			  <div class="col-xs-3">
+			  <div class="col-xs-4">
 			  	<label>Semana</label>
 			  	<?php
 					require 'help/formTes/oracao.php';
 				  	echo $ent01;
 			  	?>
 			  </div>
-			  <div class="col-xs-2">
+			  <div class="col-xs-3">
 			  	<label>Data</label>
 			    <input type="text" name='data<?PHP echo $i; ?>' class="form-control dataclass"
 			     placeholder="data" tabindex="<?PHP echo ++$ind; ?>" >
 			  </div>
-			  <div class="col-xs-2">
+			  <div class="col-xs-3">
 			  	<label>Votos</label>
 			    <input type="text" name='voto<?PHP echo $i; ?>' class="form-control"
 			    placeholder="Votos" tabindex="<?PHP echo ++$ind; ?>" >

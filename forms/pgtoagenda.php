@@ -1,7 +1,15 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <?php
-	$itemagenda = new DBRecord('agenda',$_GET['id'], 'id');
+	if (!empty($_GET['id'])) {
+		$regID = intval($_GET['id']);
+	} elseif (!empty($_GET['atualizar'])) {
+		$regID = intval($_GET['atualizar']);
+	} else {
+		$regID = '';
+	}
+
+	$itemagenda = new DBRecord('agenda',$regID, 'id');
 
 	if ($itemagenda->idlanc()>'0') {
 		$lancConfirmado  = '<p><kbd>Lan&ccedil;amento confirmado, N&ordm;: '.$itemagenda->idlanc().'</kbd></p>';
@@ -20,8 +28,8 @@
 
 	if (strstr($itemagenda->credor(),'r')) {
 		$rolMembro = intval($itemagenda->credor());
-		$credorAgenda = new DBRecord('membro',$rolMembro, 'rol');
-		$nomeMembro = $credorAgenda->nome();
+		$credAgenda = new DBRecord('membro',$rolMembro, 'rol');
+		$nomeMembro = $credAgenda->nome();
 		$credorCompl = true;//Para o caso de membros da igreja
 
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
@@ -30,8 +38,8 @@
 		  </div>';
 
 	}else {
-		$credorAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
-		$nomecredor = $credorAgenda->alias();
+		$credAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
+		$nomecredor = $credAgenda->alias();
 		$credorCompl = false;
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
 		    <p><label><input type="checkbox" id="status" name="paraMembro"
@@ -49,7 +57,7 @@
  	$pago= '';
 	$enviado = '';
 	switch ($itemagenda->status()) {
-		//Marca o opção do status atual no formulário
+		//Marca o opï¿½ï¿½o do status atual no formulï¿½rio
 		case 3:
 			$quitado = 'checked="checked" autofocus="autofocus"';
 			break;
@@ -66,9 +74,9 @@
 			$pendende = 'checked="checked" autofocus="autofocus"';
 			break;
 	}
-	//concluir a migração dos dados da tabela fatura para a de fonecedores
-	//fazer verificação no campo credor da tabela agenda se refere a rol ou CPF e CNPJ
-	//No campo da tabela está definida da seguinte forma tabela@numero ou tabela@cnpj/cpf
+	//concluir a migraï¿½ï¿½o dos dados da tabela fatura para a de fonecedores
+	//fazer verificaï¿½ï¿½o no campo credor da tabela agenda se refere a rol ou CPF e CNPJ
+	//No campo da tabela estï¿½ definida da seguinte forma tabela@numero ou tabela@cnpj/cpf
 
 	if ($itemagenda->igreja()<'1') {
 		$igreja_pgto = 'Templo Sede';
@@ -219,15 +227,15 @@
 	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-success alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situação em: <?php echo $dataget;?></strong>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
+	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situaï¿½ï¿½o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php
 	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
 	      CONTA <strong>VENCIDA</strong>! Ainda n&aatilde;o foi paga! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
@@ -235,15 +243,15 @@
 	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-warning alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	      Conta ainda dentro do prazo para pagamento! <strong>Situação em: <?php echo $dataget;?></strong>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
+	      Conta ainda dentro do prazo para pagamento! <strong>Situaï¿½ï¿½o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php
 	}else {
 		?>
 		<div class="alert alert-info alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">ï¿½</span><span class="sr-only">Close</span></button>
 	      Conta PAGA, Obrigado! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>

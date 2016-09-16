@@ -27,8 +27,8 @@ while ($contas = mysql_fetch_array($lista)) {
 		//Grupo de contas
 		$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').'<strong> '.$tipoCta.'</strong> ':'-';
 
-		$bgcolor = 'style="background:#C9DBF2;color:#000;border-bottom: 1px dashed #1e90ff;"';
-		$nivel1 .='<tr '.$bgcolor.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
+	//	$bgcolor = 'style="background:#C9DBF2;color:#000;border-bottom: 1px dashed #1e90ff;"';
+		$nivel1 .='<tr class="primary"><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
 		'</td><td></td><td id="moeda">'.$valorExibir.'</td></tr>';
 		$cor= true;
 	}else {
@@ -50,7 +50,7 @@ while ($contas = mysql_fetch_array($lista)) {
 
 			$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
 
-			$bgcolor2 = 'style="background:#C9DBF2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
+			$bgcolor2 = 'style="background:#c9dbf2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
 			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
 			'</td><td id="moeda">'.$valorExibir.'</td><td></td></tr>';
 			$cor2 = true;

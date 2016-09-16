@@ -14,7 +14,7 @@
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
 		echo $cong.'Hist&oacute;rico Financeiro - Ano de refer&ecirc;ncia: '.$ano;
-		echo ' - Valores em Real (R$)=====';?>
+		echo ' - Valores em Real (R$)';?>
 	</caption>
 	<colgroup>
 		<?php echo $colgroup;?>

@@ -35,14 +35,14 @@
 					<input type="submit" class="form-control btn-primary" name="submit" value="Listar">
 				</form>
 			</td>
-			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $_GET["escolha"];?>&menu=top_tesouraria&igreja=
-			<?php echo $_GET['igreja'];?>&credor=<?php echo $credorAgenda;?>&altdias=
-			<?PHP echo $dias-1;?>" ><button type="button" class="form-control btn-primary">
+			<td>
+				<label>&nbsp;</label>
+				<a href="./?escolha=<?PHP echo $escGET;?>&menu=top_tesouraria&igreja=
+			<?php echo $_GET['igreja'];?>&credor=<?php echo $credorAgenda;?>&altdias=<?PHP echo $dias-1;?>" >
+			<button type="button" class="form-control btn-primary">
 			 <span class=" glyphicon glyphicon-arrow-left"> </span> Voltar 1 dia</button></a>
-
   </td>
-
-			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $_GET["escolha"];?>&menu=top_tesouraria&igreja=<?php echo $_GET['igreja'];?>&credor=
+			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $escGET;?>&menu=top_tesouraria&igreja=<?php echo $_GET['igreja'];?>&credor=
 			<?php echo $credorAgenda;?>&altdias=<?PHP echo $dias+1;?>" >
 	  	<button type="button" class="form-control btn-primary">
 	  	Adiantar 1 dia <span class="glyphicon glyphicon-arrow-right"> </span></button></a></td>

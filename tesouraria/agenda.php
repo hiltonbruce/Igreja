@@ -3,7 +3,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dataget = ($_POST['data']!='') ? $_POST['data']:$_GET['data'];
 
 	$hora=date('H');
-
 	list($diaPgto,$mesPgto,$anoPgto) = explode ('-',date("d-m-Y"));
 
 	if ($hora<"13")
@@ -26,8 +25,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 
 	$credor = $credorAgenda;
 	//echo date('d/m/Y',$currentPgto);
-
-
 	$lista = new agenda();
 	$despesasInserirdas = $lista->insdespmes();
 
@@ -36,15 +33,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	}
 
 	if ($_GET['id']>0 && empty($_POST['atualizar'])) {
-
-		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendência
-
+		require_once 'forms/pgtoagenda.php';//Form para atualizaï¿½ï¿½o, pagamento ou pendï¿½ncia
 	}elseif ($_POST['atualizar']>'0'){
-
 		$atualizar= new updatesist('agenda',$_POST['atualizar'],'id');
 		$atualizar->resppgto	=	$_POST['resppgto'];
 
-		//Verifica se o vencimento é uma data validade e atualiza
+		//Verifica se o vencimento Ã© uma data validade e atualiza
 		if (checadata($_POST['vencimento'])) {
 			$vencimento = br_data ($_POST['vencimento'],'Data de Vencimento');
 			$dataAtual = new DateTime($atualizar->vencimento());
@@ -54,8 +48,8 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			}else {
 				echo "<h1>".$dataVenc->format('Y-m')."</h1>";
 				echo "<h1>".$dataAtual->format('Y-m')."</h1>";
-				echo "<script> alert('O vencimento só poderá ser alterado o dia!');</script>";
-				echo 'O vencimento só poderá ser alterado o dia!';
+				echo "<script> alert('O vencimento sï¿½ poderï¿½ ser alterado o dia!');</script>";
+				echo 'O vencimento s&oacute; poder&aacute; ser alterado o dia!';
 			}
 
 		}else {
@@ -84,16 +78,16 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$atualizar->motivo		= 	$_POST['referente'];
 		$atualizar->status		= 	$_POST['status'];
 		if ($atualizar->idlanc()=='0') {
-			#Apos confirmação de lançamento as contas não podem ser alteradas
+			#Apos confirmaï¿½ï¿½o de lanï¿½amento as contas nï¿½o podem ser alteradas
 			$atualizar->creditar	= 	$_POST['acessoCreditar'];
 			$atualizar->debitar		= 	$_POST['acessoDebitar'];
 			$lancDespesa = true;
 		}else{
 			$lancDespesa = false;
 		}
-		$multaUS				=	formataNumBanco ($_POST['multa']);//Valor no padrão americano
+		$multaUS				=	formataNumBanco ($_POST['multa']);//Valor no padrï¿½o americano
 		$atualizar->multa		=	$multaUS;
-		$valor_us 				=	formataNumBanco ($_POST['valor']);//Valor no padrão americano
+		$valor_us 				=	formataNumBanco ($_POST['valor']);//Valor no padrï¿½o americano
 		$atualizar->valor		=	$valor_us;
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
 		$atualizar->hist	= 	$hist;
@@ -104,19 +98,19 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->datapgto	=	$pagamento;
 			$mensagem = "<script> alert('Pagamento confirmado com sucesso! Em $pagamento, Total de: R$ $total');</script>";
 		}else {
-			$mensagem = '<script> alert("Conta enviada para Pagamento! Responsável: '.$_POST['resppgto'].');</script>';
+			$mensagem = '<script> alert("Conta enviada para Pagamento! Responsï¿½vel: '.$_POST['resppgto'].');</script>';
 			$atualizar->datapgto	=	'';
 		}
 
 		if ($_POST['status']=='2' && $lancDespesa) {
-			# realiza lançamento da despesa e Atualiza agenda
+			# realiza lanï¿½amento da despesa e Atualiza agenda
 			require_once 'models/tes/lancAgenda.php';
 		}else {
 			# Atualiza agenda
 			$atualizar->Update();
 		}
 
-		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendência
+		require_once 'forms/pgtoagenda.php';//Form para atualizaï¿½ï¿½o, pagamento ou pendï¿½ncia
 		require_once 'forms/tes/buscaAgenda.php';// Busca por Despesas Agendadas
 		echo $mensagem;
 
@@ -125,13 +119,13 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$maior_idfat  = 'SELECT MAX(idfatura) AS maximo FROM agenda ';
 		$maior_idfat = mysql_query($maior_idfat);
 		$maior_idfat = mysql_fetch_array($maior_idfat);
-		$maior = $valores['maior_idfat'];//Última fatura lançada
+		$maior = $valores['maior_idfat'];//ï¿½ltima fatura lanï¿½ada
 	}else {
 
 		require_once 'forms/tes/buscaAgenda.php'; // Busca por Despesas Agendadas
 	}
 
-	require_once 'tesouraria/periodo10dias.php';//Agenda com o período 5 dias a antes e após a data atual
+	require_once 'tesouraria/periodo10dias.php';//Agenda com o perï¿½odo 5 dias a antes e apï¿½s a data atual
 	if ($_GET['fixa']=='on') {
 		?>
 <fieldset>

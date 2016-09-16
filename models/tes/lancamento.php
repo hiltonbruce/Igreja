@@ -75,18 +75,18 @@ $totalCred = 0;
 	}
 
 	if ($credora->tipo()=='D' && ($credora->saldo()-($valor+$multa))<'0') {
-	 $msgErro = 'Saldo não permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
+	 $msgErro = 'Saldo n&atilde;o permitido para Conta: '.$credora->titulo().' que ficaria com o valor de '.($credora->saldo()-$valor);
 	}elseif ($devedora->tipo()=='C' && ($devedora->saldo()-$valor)<'0'){
-	 $msgErro = 'Saldo não permitido para Conta: '.$devedora->titulo().' que ficaria com o valor de '.($devedora->saldo()-$valor);
+	 $msgErro = 'Saldo n&atilde;o permitido para Conta: '.$devedora->titulo().' que ficaria com o valor de '.($devedora->saldo()-$valor);
 	}elseif ($debitar==$creditar){
-	 $msgErro = 'Contas de Credito e Débito iguais, refaça o lançamento!';
+	 $msgErro = 'Contas de Cr&eacute;dito e D&eacute;bito iguais, refa&ccedil;a o lan&ccedil;amento!';
 	}else {
 	 $msgErro='';
 	}
 
 	if ($ctaMulta) {
 		if ($ctaMulta->tipo()=='C' && ($ctaMulta->saldo()-$multa<'0')){
-	 		$msgErro .= 'Saldo não permitido para Conta: '.$ctaMulta->titulo().' que ficaria com o valor de '.($ctaMulta->saldo()-$multa);
+	 		$msgErro .= 'Saldo n&atilde;o permitido para Conta: '.$ctaMulta->titulo().' que ficaria com o valor de '.($ctaMulta->saldo()-$multa);
 		}
 	}
 
@@ -145,7 +145,6 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 		$devedora = $ctaPagar;
 		$debitar = $devedora->acesso();
-
 		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$exibicred .= sprintf("<tr><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
 		$ctaPagar->codigo(),$ctaPagar->titulo(),number_format($valor,2,',','.'),number_format($ctaPagar->saldo(),2,',','.'),$ctaPagar->tipo()
@@ -153,14 +152,12 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$totalCred +=$valor;
 		//$corlinha = !$corlinha;
 		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-
 	}
 
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$histLac = $referente.$motivoComplemento;
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$ctaVencida = '';
-
 
 		$valorTotal += $valor;
 //print_r($credora);
@@ -192,10 +189,9 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$ctaMulta->codigo(),$ctaMulta->titulo(),number_format($multa,2,',','.'),number_format($ctaMulta->saldo(),2,',','.'),$ctaMulta->tipo()
 		,$ctaMulta->saldo());
 	}
-		$caixa = new DBRecord('contas',$debitar,'acesso');
-		$totalDeb = $totalDeb + $valor + $multa;
-		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
-
+	$caixa = new DBRecord('contas',$debitar,'acesso');
+	$totalDeb = $totalDeb + $valor + $multa;
+	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
 
    	//Lança provisões conta Despesa
@@ -219,9 +215,9 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento da provisão de Comadep - Despesa
 		$totalDeb += $provcomadep;
 		if ($histTextProv!='') {
-			$histTextProv = ', provisão para COMADEP e SEMAD sobre a receita';
+			$histTextProv = ', provis&atilde;o para COMADEP e SEMAD sobre a receita';
 		} else {
-			$histTextProv = ' e provisão para COMADEP sobre a receita';
+			$histTextProv = ' e provis&atilde;o para COMADEP sobre a receita';
 		}
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
