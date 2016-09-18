@@ -19,7 +19,7 @@
 		<colgroup>
 				<col id="Conta">
 				<col id="Acesso">
-				<col id="Descri��o">
+				<col id="descricao">
 				<col id="Saldo Atual">
 			</colgroup>
 		<thead>
@@ -39,7 +39,7 @@
 				echo $nivel2;//Valor veio do script /models/saldos.php
 			}
 			?>
-		</tbody>
+		</tbody>��
 		<tfoot>
 			<?php
 				printf("<tr id='total'>");

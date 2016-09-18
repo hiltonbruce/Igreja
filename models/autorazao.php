@@ -17,9 +17,7 @@ $linhas = mysql_num_rows($reslinhas);
 //Concluir a listagem para config do formulario de contas a pagar
 //***************************************************************
 $sql = "SELECT * FROM credores where razao LIKE '%$q%' order by locate('$q',razao) limit 10";
-
 $res = mysql_query( $sql );
-
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";

@@ -19,7 +19,6 @@ $sql  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0 AND acesso > "0"
 $sql .= 'AND tipo="D" AND nivel3="1.1.1" order by locate(codigo,"'.$q.'") limit 10';
 
 $res = mysql_query( $sql );
-
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";

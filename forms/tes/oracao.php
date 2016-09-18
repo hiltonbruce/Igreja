@@ -71,7 +71,6 @@
 	</div>
 </form>
 </fieldset>
-
 <?PHP
 	$linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 	$linkLancamento .= '&igreja='.$roligreja.'&rec=24';

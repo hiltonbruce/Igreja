@@ -13,7 +13,7 @@ $rec_alterar = new DBRecord("tes_recibo", $id, "id");
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
 //$diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias após a emissão do recibo
 
-#Verifica se o recibo já foi lançado e bloqueia para alteração
+#Verifica se o recibo já foi lan�ado e bloqueia para altera��o
 $testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') ? true : false;
 ?>
 <fieldset>
@@ -145,9 +145,9 @@ $testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') 
 	      <tr>
 	        <td><label>Lan&ccedil;amento:</label>
 	        <?PHP
-			$nome = new editar_form("lancamento",$rec_alterar->lancamento(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
-			?>
+						$nome = new editar_form("lancamento",$rec_alterar->lancamento(),$tab,$tab_edit);
+						$nome->getMostrar();$nome->getEditar();
+					?>
 			</td>
 	        <td>Data da emiss&atilde;o:
 	        <?PHP

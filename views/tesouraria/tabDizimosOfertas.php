@@ -40,25 +40,25 @@ if ($idDizOfGET>'0' && $recGet=='9') {
 		}
 
 $tabMembros = new membro();
-	if ($_POST['concluir']=='1') {
-			$tabLancamento = $dizmista->concluir($igrejaGet);
-		} else {
-			//tabela com a lista p confirmar lan�amento
-			$roligreja = $igrejaGet;
-			$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
-												$mes,$ano,$recGet,$creditoGet,
-												$_GET['debito'],$alterarEntrada);
-			$tabLancamento= $resultado['1'];
+if ($_POST['concluir']=='1') {
+	$tabLancamento = $dizmista->concluir($igrejaGet);
+} else {
+	//tabela com a lista p confirmar lan�amento
+	$roligreja = $igrejaGet;
+	$resultado = $dizmista->dizimistas($roligreja,$apagarEntrada,$dia,
+										$mes,$ano,$recGet,$creditoGet,
+										$_GET['debito'],$alterarEntrada);
+	$tabLancamento= $resultado['1'];
 
-			if ($resultado['2']) {
-				$statusLancamento = 'Lan&ccedil;amentos Confirmado';
-			}elseif ($resultado['0']!=0) {
-				$statusLancamento = '<span class="text-danger">Aguardando confima&ccedil;&atilde;o!</span>';
-			}else {
-				$statusLancamento = '';
-			}
-			$statusLancamento .= (empty($msg)) ? '':$msg;
-		}
+	if ($resultado['2']) {
+		$statusLancamento = 'Lan&ccedil;amentos Confirmado';
+	}elseif ($resultado['0']!=0) {
+		$statusLancamento = '<span class="text-danger">Aguardando confima&ccedil;&atilde;o!</span>';
+	}else {
+		$statusLancamento = '';
+	}
+	$statusLancamento .= (empty($msg)) ? '':$msg;
+}
 		//print_r($tabLancamento);
 		$cabPrint = false;
 		if (!empty($_GET['escolha'])) {

@@ -16,7 +16,7 @@ if ($_GET['ano']=='') {
 
 switch ($hisFinanceiro) {
 	case 1:
-		//Listagem para historico finaceiro das contribuiï¿½ï¿½es dos membros
+		//Listagem para historico finaceiro das contribuições dos membros
 		$query  = 'SELECT *,mesrefer AS mes,anorefer ';
 		$query .= 'AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" ';
 		$query .= 'AND credito!="803" ORDER BY anorefer,mesrefer';

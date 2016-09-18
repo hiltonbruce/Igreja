@@ -12,7 +12,6 @@ $q = mysql_real_escape_string( $_GET['q'] );
 $sqllinhas  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0  AND nivel1="3" ';
 $sqllinhas .= 'AND acesso > "0" ';
 //critérios de fonética
-
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows( $sqllinhas );
 

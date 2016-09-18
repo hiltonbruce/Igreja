@@ -24,7 +24,6 @@ $sql .= "situacao_espiritual='1' AND ";
 $sql .= "m.rol=e.rol AND i.rol=e.congregacao AND m.rol=p.rol order by locate('$q',nome) limit 10";
 
 $res = mysql_query( $sql );
-
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";

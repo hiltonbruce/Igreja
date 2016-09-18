@@ -18,10 +18,9 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
    echo '<a href="'.$linkLancamento.'&rec=4"><label>&nbsp;</label><br /><button type="button" ';
    echo 'class="btn btn-primary">Lan&ccedil;ar esta despesa</button></a>';
   }else {
-  		$lancConfirmado  = '<p><kbd>Lan&ccedil;amento N&ordm;: '.$rec_alterar->lancamento().' confirmado</kbd></p>';
-		$lancConfirmado .= '<p class="text-danger">Ap&oacute;s confirma&ccedil;&atilde;o do ';
-		$lancConfirmado .= 'lan&ccedil;amento as altera&ccedil;&otilde;es n&atilde;o ';
-		$lancConfirmado .= 'modificar&aacute; o lan&ccedil;amento do sistema! </p>';
+  	$lancConfirmado  = '<p><kbd>Lan&ccedil;amento N&ordm;: '.$rec_alterar->lancamento().' confirmado</kbd></p>';
+		$lancConfirmado .= '<p class="text-danger">Nenhuma altera&ccedil;&atilde;o ';
+		$lancConfirmado .= 'modificar&aacute; o lan&ccedil;amento no sistema! </p>';
 
    echo $lancConfirmado;
   }
@@ -69,7 +68,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 
 <?php
 } else {
-	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
+	echo "<script> alert('Sem permissï¿½o de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
 	session_destroy();
 	header("Location: ./");

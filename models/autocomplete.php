@@ -44,8 +44,8 @@ while( $campo = mysql_fetch_array( $res ) )
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = $campo['fone_resid'];
 	//$estado = $campo['nome'];
-	$estado = strtoupper(strtr( $campo['nome'], 'Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³ÃµÃ´ÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã•Ã”ÃšÃœÃ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco = strtoupper(strtr( $campo ['endereco'], 'Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³ÃµÃ´ÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã•Ã”ÃšÃœÃ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco .=', '.$campo['numero'];
 	$cargo = cargo($campo['rol']);
 	$rol = $campo['rol'];
@@ -81,7 +81,6 @@ while( $campo = mysql_fetch_array( $res ) )
 			$replacements = array($destaque,$destaque,$destaque,$destaque);
 			// preg_replace($patterns, $replacements, $string);
 			$html = preg_replace($patterns, $replacements, $estado);
-
 		break;
 		case '2':
 			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i","/(" . $q3 . ")/i");
@@ -95,7 +94,6 @@ while( $campo = mysql_fetch_array( $res ) )
 			// preg_replace($patterns, $replacements, $string);
 			$html = preg_replace($patterns, $replacements, $estado);
 		break;
-
 		default:
 			$html = preg_replace("/(" . $q . ")/i", "<span style=\"font-weight:bold\">\$1</span>", $estado);
 		break;
