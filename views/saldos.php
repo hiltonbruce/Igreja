@@ -1,5 +1,5 @@
 <table class='table table-hover table-striped'>
-		<caption>
+		<caption><h6>
 		<?php
 		if (empty($recLink)) {
 			$recLink = '';
@@ -13,8 +13,8 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-		echo '<h5>'.$titTabela.'<h5>';
-		?>
+		echo $titTabela;
+		?></h6>
 		</caption>
 		<colgroup>
 				<col id="Conta">
@@ -39,7 +39,7 @@
 				echo $nivel2;//Valor veio do script /models/saldos.php
 			}
 			?>
-		</tbody>��
+		</tbody>
 		<tfoot>
 			<?php
 				printf("<tr id='total'>");

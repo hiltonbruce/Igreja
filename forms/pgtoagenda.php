@@ -116,7 +116,6 @@
 								$congr = new tes_listCredor ("credores","alias","nome");
 								echo $congr->List_Selec (++$ind,$itemagenda->credor(),' class="form-control" required="required" ');
 						 	}
-
 						 ?>
 					</td>
 				</tr>
@@ -227,24 +226,24 @@
 	if (date ('Y-m-d') == $itemagenda->vencimento() && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-success alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">�</span><span class="sr-only">Close</span></button>
-	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situa��o em: <?php echo $dataget;?></strong>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	       <strong>HOJE!</strong> Conta com vencimento nesta data! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php
 	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">�</span><span class="sr-only">Close</span></button>
-	      CONTA <strong>VENCIDA</strong>! Ainda n&aatilde;o foi paga! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	      CONTA <strong>VENCIDA</strong>! Ainda n&atilde;o foi paga! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php
 	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-warning alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">�</span><span class="sr-only">Close</span></button>
-	      Conta ainda dentro do prazo para pagamento! <strong>Situa��o em: <?php echo $dataget;?></strong>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	      Conta ainda dentro do prazo para pagamento! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php

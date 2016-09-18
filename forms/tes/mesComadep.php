@@ -1,4 +1,3 @@
-<!-- Desenvolvido por Wellington Ribeiro -->
 <fieldset>
 	<legend>Movimenta&ccedil;&atilde;o no m&ecirc;s</legend>
     <div class="form-group">
@@ -69,7 +68,7 @@
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				  </div>
 				</td>
-               </tr>
+      </tr>
 		</tbody>
 	</table>
 	</form>

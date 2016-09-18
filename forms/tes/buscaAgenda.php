@@ -5,7 +5,7 @@
 		$dias=$_GET['altdias'];
 	}
 
-	#Marca a opÃ§Ã£o da despesa com prazo
+	#Marca a opção da despesa com prazo
 	if (empty($_GET['vencidas']) ) {
 		$vencida2 = 'checked="checked"';
 	} elseif ($_GET['vencidas']=='3') {
@@ -14,7 +14,6 @@
 		$vencida2 = 'checked="checked"';
 		$vencida3 ='';
 	}
-
 ?>
 <fieldset>
 <legend>Busca por Despesas Agendadas</legend>
@@ -42,20 +41,23 @@
 			<button type="button" class="form-control btn-primary">
 			 <span class=" glyphicon glyphicon-arrow-left"> </span> Voltar 1 dia</button></a>
   </td>
-			<td><label>&nbsp;</label><a href="./?escolha=<?PHP echo $escGET;?>&menu=top_tesouraria&igreja=<?php echo $_GET['igreja'];?>&credor=
-			<?php echo $credorAgenda;?>&altdias=<?PHP echo $dias+1;?>" >
-	  	<button type="button" class="form-control btn-primary">
-	  	Adiantar 1 dia <span class="glyphicon glyphicon-arrow-right"> </span></button></a></td>
+			<td>
+				<label>&nbsp;</label><a href="./?escolha=<?PHP echo $escGET;?>&menu=top_tesouraria&igreja=<?php echo $_GET['igreja'];?>&credor=
+				<?php echo $credorAgenda;?>&altdias=<?PHP echo $dias+1;?>" >
+		  	<button type="button" class="form-control btn-primary">
+		  	Adiantar 1 dia <span class="glyphicon glyphicon-arrow-right"> </span></button></a>
+			</td>
 		</tr>
 		<tr>
 			<td>Por fornecedor:
-	  <select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+	  	<select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 		  <?php
 		  	$bsccredor = new list_fornecedor('credores', 'alias', 'credor');
 		  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&altdias='.$dias.'&igreja='.$_GET['igreja'].'&credor=');
 		  ?>
-	  </select></td>
-			<td colspan="2">Por Igreja:
+	  </select>
+	</td>
+	<td colspan="2">Por Igreja:
 	  <select name="igreja" id="igreja" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
 		  <?php
 		  	$bsccredor = new List_sele('igreja', 'razao', 'igreja');

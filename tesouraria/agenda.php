@@ -48,12 +48,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			}else {
 				echo "<h1>".$dataVenc->format('Y-m')."</h1>";
 				echo "<h1>".$dataAtual->format('Y-m')."</h1>";
-				echo "<script> alert('O vencimento sï¿½ poderï¿½ ser alterado o dia!');</script>";
+				echo "<script> alert('O vencimento só poderá ser alterado o dia!');</script>";
 				echo 'O vencimento s&oacute; poder&aacute; ser alterado o dia!';
 			}
 
 		}else {
-			echo "<script> alert('O vencimento com data invalida! {$_POST['vencimento']}');</script>";
+			echo "<script> alert('O vencimento com data inválida! {$_POST['vencimento']}');</script>";
 		}
 
 		list($cnpj,$razao) = explode(' ',$_POST['nome'] );
@@ -72,7 +72,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		}elseif (!empty($_POST['credor']) ) {
 			$atualizar->credor		= 	intval($_POST['credor']);
 		}
-
 
 		$atualizar->igreja		= 	$_POST['rolIgreja'];
 		$atualizar->motivo		= 	$_POST['referente'];
@@ -98,7 +97,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->datapgto	=	$pagamento;
 			$mensagem = "<script> alert('Pagamento confirmado com sucesso! Em $pagamento, Total de: R$ $total');</script>";
 		}else {
-			$mensagem = '<script> alert("Conta enviada para Pagamento! Responsï¿½vel: '.$_POST['resppgto'].');</script>';
+			$mensagem = '<script> alert("Conta enviada para Pagamento! Responsável: '.$_POST['resppgto'].');</script>';
 			$atualizar->datapgto	=	'';
 		}
 

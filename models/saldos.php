@@ -10,7 +10,6 @@ if ($grupoCta!='') {
 
 //$lista = mysql_query('SELECT * FROM contas ORDER BY codigo ');
 while ($contas = mysql_fetch_array($lista)) {
-
 		if ($contas['saldo']<'0' && $contas['tipo']=='D') {
 		   $tipoCta = 'C';
 		}elseif ($contas['saldo']<'0' && $contas['tipo']=='C') {
@@ -18,8 +17,7 @@ while ($contas = mysql_fetch_array($lista)) {
 		}else {
 		 $tipoCta = $contas['tipo'];
 		}
-		$sldConta = (abs($contas['saldo']));
-
+	$sldConta = (abs($contas['saldo']));
 	$acesso = ($contas['acesso']>0) ? sprintf("[%04s]\n", $contas['acesso']):'';
 	//Balancete de todas as contas
 		$title = $contas['descricao'];
@@ -43,12 +41,9 @@ while ($contas = mysql_fetch_array($lista)) {
 	if ($contas['saldo']!=0) {
 		if (strlen($contas['codigo'])<10) {
 			//Grupo de contas
-
 			$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
-			$bgcolor2 = 'style="background:#c9dbf2; color:#000;border-bottom: 1px dashed #000;border-top: 1px dashed #000;"';
-			$nivel2 .='<tr '.$bgcolor2.'><td>'.$contas['codigo'].'</td><td>'.$acesso.'</td><td title="'.$title.'">'.$contas['titulo'].
-			'</td><td id="moeda">'.$valorExibir.'</td><td></td></tr>';
-			$cor2 = true;
+			$nivel2 .='<tr class="primary"><td>'.$contas['codigo'].'</td><td></td><td title="'.$title.'">'.$contas['titulo'].
+			'</td><td class="text-right">'.$valorExibir.'</td><td></td></tr>';
 		}else {
 			//Contas
 			$valorExibir = ($sldConta!='0') ? number_format($sldConta,2,',','.').$tipoCta:'-';
