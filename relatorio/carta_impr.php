@@ -10,8 +10,8 @@ $numero=$_GET["numero"];
 $usuario=$_GET["recebeu"];
 require "../func_class/funcoes.php";
 require "../func_class/classes.php";
-conectar();
-$query=mysql_query("SELECT p.numero,p.local,DATE_FORMAT(p.dt_liberado,'%d/%m/%Y às %H:%i') dt_lib,p.chefe, p.quant,p.obs, p.quant_atendida,p.usu_libera,pr.codbarras,pr.descricao,pr.id FROM pedido AS p, produtos AS pr WHERE p.numero='$numero' AND p.id_produto=pr.id");
+
+$query=mysql_query("SELECT p.numero,p.local,DATE_FORMAT(p.dt_liberado,'%d/%m/%Y ï¿½s %H:%i') dt_lib,p.chefe, p.quant,p.obs, p.quant_atendida,p.usu_libera,pr.codbarras,pr.descricao,pr.id FROM pedido AS p, produtos AS pr WHERE p.numero='$numero' AND p.id_produto=pr.id");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -142,7 +142,7 @@ CEP 58.307-150 - Fone: (0**83) 3232-1420 </div>
 </body>
 </html>
 <?PHP
-//fim do 1º if que verifica a autorização para NUPAT ou NUTEL
+//fim do 1ï¿½ if que verifica a autorizaï¿½ï¿½o para NUPAT ou NUTEL
 }else{
 echo "Dados incorretos!";
 }

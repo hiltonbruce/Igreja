@@ -29,11 +29,8 @@ class membro {
 			$mud_acent = strtoupper(strtr($dados["nome"], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC'));
 			$todos[$dados['rol']] = array($mud_acent,$dados['nacionalidade'],$dados['naturalidade'],
 				$dados['pai'],$dados['mae'],$dados["nome"],$cargo) ;
-
 		}
-
 		return $todos ;
 	}
-
 }
 ?>

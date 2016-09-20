@@ -7,7 +7,6 @@ require_once '../../func_class/funcoes.php';
 require_once "../../func_class/classes.php";
 require_once "../../models/tes/tes_conta.class.php";
 
-conectar();
 $grupoContas = new tes_conta ();
 $tituloCta = $grupoContas->contasGrupos();
 $q = mysql_real_escape_string( $_GET['q'] );
@@ -15,7 +14,7 @@ $q = mysql_real_escape_string( $_GET['q'] );
 
 $sqllinhas  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0  AND nivel1="3" ';
 $sqllinhas .= 'AND acesso > "0" ';
-//critérios de fonética
+//critï¿½rios de fonï¿½tica
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
@@ -28,9 +27,9 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = number_format($campo['saldo'],2,',','.');
-	$estado = strtr( $campo['titulo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+	$estado = strtr( $campo['titulo'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
-	$endereco = strtoupper(strtr( $campo ['codigo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['codigo'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	if ($campo['tipo']=='D') {
 		$tipo = 'Devedora';
 	}else {
@@ -46,7 +45,7 @@ while( $campo = mysql_fetch_array( $res ) )
 	$acesso = sprintf("%s - [%04s]\n", $campo['codigo'],$campo['acesso']);
 	$estado = addslashes($estado);
 	$html = preg_replace("/(" . $q . ")/i", "<U style='font-weight:bold'>\$1</U>", $estado);
-	$estado = strtoupper(strtr( $campo['titulo'], 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ'));
+	$estado = strtoupper(strtr( $campo['titulo'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'));
 	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$detalhe');\">$acesso &#9679; $html ($nomeGrp &#10148; $nomeGrp4)</li>\n";
 }

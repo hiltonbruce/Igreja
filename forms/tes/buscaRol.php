@@ -1,6 +1,3 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
 <?php
 	if (empty($formCampos)) {
 		$formCampos='';
@@ -27,6 +24,10 @@
 		  </div>
 			</div>
 </form>
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
+
 <script type="text/javascript">
 	new Autocomplete("campoNome", function() {
 		this.setValue = function( rol, nome, celular, rolmem ) {

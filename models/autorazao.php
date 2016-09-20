@@ -3,13 +3,13 @@
  * @author Wellington Ribeiro - IdealMind.com.br
  * @since 31/10/2009
  */
-//Auto completar para razão Social dos credores cadastrados
+//Auto completar para razï¿½o Social dos credores cadastrados
 require_once '../func_class/funcoes.php';
-conectar();
+
 $q = mysql_real_escape_string( $_GET['q'] );
 
 $sqllinhas = "SELECT * FROM credores where razao LIKE '%$q%'";
-//critérios de fonética
+//critï¿½rios de fonï¿½tica
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
@@ -22,8 +22,8 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id 		= $campo['id'];
-	$estado 	= strtoupper(strtr( $campo['razao'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco 	= strtoupper(strtr( $campo ['end'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado 	= strtoupper(strtr( $campo['razao'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco 	= strtoupper(strtr( $campo ['end'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$alias 		= htmlentities($campo['alias'], ENT_QUOTES,'ISO-8859-1');
 	$sigla 		= $campo['cnpj_cpf'];
 	$cpf 		= $campo['cpf'];

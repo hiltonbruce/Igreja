@@ -38,9 +38,9 @@
 			echo "</div>";
 	?>
 			<?php
-      $menu = new menutes();
-			$menu->mostra();
-			$menu->buscarecibo();
+      //$menu = new menutes();
+			$recBuscas->mostra();
+			$recBuscas->buscarecibo();
 		}elseif (!empty($painelDireito) && file_exists($painelDireito)) {
 			//Verifica se h� uma chamada a um painel espec�fico
 			require_once $painelDireito;

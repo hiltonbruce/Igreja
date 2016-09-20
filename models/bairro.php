@@ -1,7 +1,5 @@
 <?php
 
-conectar();
-
 class bairro {
 
 	function __construct ($cidade="",$bairro=""){
@@ -12,7 +10,7 @@ class bairro {
 	}
 
 	function exitecad (){
-		
+
 		if (mysql_num_rows( $this->result)>0){
 		 	echo "<h1>O bairro ' $this->bairro ' j&aacute; est&aacute; Cadastrado!</h1>";
 		 	return true;
@@ -21,6 +19,6 @@ class bairro {
 		 	return false;
 		 }
 	}
-	
+
 }
 ?>

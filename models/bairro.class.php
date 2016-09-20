@@ -1,7 +1,5 @@
 <?php
 
-conectar();
-
 class bairro {
 
 	function __construct ($cidade="",$bairro=""){
@@ -9,11 +7,11 @@ class bairro {
 		$this->result = mysql_query("SELECT * FROM bairro WHERE idcidade='$cidade' AND bairro='$bairro' ") or die (mysql_error());
 		$this->bairro = $bairro;
 		$this->cidade = $cidade;
-		
+
 	}
 
 	function exitecad (){
-		
+
 		if (mysql_num_rows( $this->result)>0){
 		 	echo '<div class="alert alert-error" >O bairro '.$this->bairro.' j&aacute; est&aacute; cadastrado para Cidade ';
 		 	return true;
@@ -22,7 +20,7 @@ class bairro {
 		 	return false;
 		 }
 	}
-	
+
 	function Arraybairro($idcidade){
 
 		$this->query = "SELECT id,bairro FROM bairro WHERE idcidade=$idcidade ";
@@ -34,11 +32,11 @@ class bairro {
 		    $bairr_array [$this->col_lst["id"]]=$this->col_lst["bairro"];
 	       }
 	  return $bairr_array;
-	
+
 	}
-	
+
 	function Deletar (){
-	
+
 		$ver = mysql_query("DELETE FROM bairro WHERE id='{$this->bairro}' LIMIT 1");
 
 		if($ver){
@@ -48,9 +46,9 @@ class bairro {
 				else
 				{
 				$erro=mysql_error();
-				echo "Não foi possível apagar, apresentou o seguite erro:  '$erro'";
+				echo "Nï¿½o foi possï¿½vel apagar, apresentou o seguite erro:  '$erro'";
 				}
 	}
-	
+
 }
 ?>

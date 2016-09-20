@@ -630,23 +630,23 @@ thead tr:hover {
   <td colspan="7"><div align="center">
     <form id="form1" method="post" action="">
 			<input type="checkbox" name="checkbox" value="checkbox" />
-			
+
 			<label>A</label>
 			<input type="checkbox" name="checkbox22" value="checkbox" />
             <label>B</label>
             <input type="checkbox" name="checkbox23" value="checkbox" />
-            
+
             <label>AB</label>
             <input type="checkbox" name="checkbox24" value="checkbox" />
             <label>O</label>
     </form></div></td>
-  
+
   <td bgcolor="#CCCCCC">&nbsp;</td>
   <td colspan="2">RH:</td>
   <td colspan="6"><div align="center">
   			<form id="form1" method="post" action="">
 			<input type="checkbox" name="checkbox" value="checkbox" />
-			
+
 			Positvo
 			<label></label>
 			<input type="checkbox" name="checkbox2" value="checkbox" />
@@ -663,10 +663,10 @@ thead tr:hover {
     <input type="checkbox" name="checkbox222" value="checkbox" />
     <label>Alfabetizado</label>
     <input type="checkbox" name="checkbox232" value="checkbox" />
-    
-	 <label>Fundamental Incompleto </label>  
+
+	 <label>Fundamental Incompleto </label>
 	 <input type="checkbox" name="checkbox242" value="checkbox" />
- 
+
  <label>Fundamental Completo </label>
     <input type="checkbox" name="checkbox2322" value="checkbox" />
     M&eacute;dio Incompleto
@@ -679,7 +679,11 @@ thead tr:hover {
       <label> Incompleto
       <input type="checkbox" name="checkbox24223" value="checkbox" />
       Superior
-    Completo </label></p></form>Qual a Gradua&ccedil;&atilde;o Superior (se tiver ?)__________________________________________________</td>
+    Completo </label></p></form>
+		Qual a Gradua&ccedil;&atilde;o Superior (se tiver ?):
+		<input class='form-control' size='55'>
+		<br />Email (se tiver ?): <input class='form-control' size='71'>
+	</td>
   </tr>
 <tr >
   <td colspan="30" class="sep"></td>
@@ -1107,12 +1111,12 @@ thead tr:hover {
   Circ. de Ora&ccedil;&atilde;o
   <label></label>
   <input type="checkbox" name="checkbox522" value="checkbox" />
-  Dep. Infantil 
+  Dep. Infantil
   <input type="checkbox" name="checkbox2622" value="checkbox" />
 Dep. Mocidade
   <input type="checkbox" name="checkbox5222" value="checkbox" />
 Miss&otilde;es
-   
+
   <input type="checkbox" name="checkbox26222" value="checkbox" />
 M&uacute;sica<p>
   <input type="checkbox" name="checkbox52222" value="checkbox" />
@@ -1121,7 +1125,7 @@ M&uacute;sica<p>
 Evangelismo
   <input type="checkbox" name="checkbox26222222" value="checkbox" />
 Outros, Qual?</p>
-  
+
   </form></td>
   </tr>
 <tr class="odd" >

@@ -6,14 +6,14 @@
 
 require_once '../func_class/funcoes.php';
 require_once '../func_class/classes.php';
-conectar();
+
 $q = mysql_real_escape_string( $_GET['q'] );
 
 $sqllinhas  = "SELECT m.*,e.congregacao AS igreja,p.cpf,p.rg,p.orgao_expedidor ";
 $sqllinhas .= "FROM membro AS m,eclesiastico AS e,  profissional AS p ";
 $sqllinhas .= " WHERE LOCATE('$q',nome) > 0 AND m.rol=e.rol AND m.rol=p.rol";
 $sqllinhas .= " AND situacao_espiritual='1'";
-//critérios de fonética
+//critï¿½rios de fonï¿½tica
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
@@ -29,8 +29,8 @@ while( $campo = mysql_fetch_array( $res ) )
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id			= $campo['fone_resid'];
 	//$estado = $campo['nome'];
-	$estado 	= strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco 	= strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado 	= strtoupper(strtr( $campo['nome'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco 	= strtoupper(strtr( $campo ['endereco'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco  .=', '.$campo['numero'];
 	$cargo 		= cargo($campo['rol'])['0'];
 	$rol		= $campo['rol'];

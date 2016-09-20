@@ -14,8 +14,6 @@ class chat {
 	function incluir() {
 		//disponibiliza o usu�rio na lista
 
-		conectar();
-
 		if ($this->login!=''){
 			$sql = "SELECT * FROM login WHERE nome='{$this->login}'";
 			$result = mysql_query($sql);

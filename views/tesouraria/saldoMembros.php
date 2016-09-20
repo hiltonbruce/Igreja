@@ -19,11 +19,11 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 require_once 'models/tes/histFinMembro.php';
 ?>
 <table id="horario" class='table table-hover table-condensed'>
-		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro=== de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
+		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
-				<col id="D�zimos">
+				<col id="D?zimos">
 				<col id="Ofertas Extras">
 				<col id="Ofertas">
 				<col id="Sub-Total">
@@ -33,7 +33,7 @@ require_once 'models/tes/histFinMembro.php';
 				<col id="Ensino">
 				<col id="Tot.&nbsp;Operac.">
 				<col id="Campanhas">
-				<col id="Miss�es">
+				<col id="Missoes">
 				<col id="Total">
 			</colgroup>
 		<thead>

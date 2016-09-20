@@ -6,8 +6,8 @@
 	<legend>Agendar Contas &agrave; Pagar</legend>
 	<!-- Desenvolvido por Wellington Ribeiro -->
 	<blink>
-		<h2>Criar buscas para alteração e eliminação de grupos de agendamento
-			ou individuais</h2>
+		<h5>Criar buscas para altera&ccedil;&atilde;o e elimina&cedil;&atilde;o de
+			grupos de agendamento ou individuais</h5>
 	</blink>
 	<form method="post" name="autocompletar" action="">
 		<table>
@@ -41,7 +41,7 @@
 					<td colspan="4" style="background-color: #F0E68C; font-size: 120%">Para
 						contas repetidas todos os meses como enegia el&eacute;trica e
 						&aacute;gua deixe a parcela em branco ou com 0(zero), que o
-						agendamento será automatizado!</td>
+						agendamento ser&aacute; automatizado!</td>
 				</tr>
 				<tr>
 					<td colspan="4">Referente a:<br />
@@ -59,7 +59,7 @@
 					<td><label>Rol do Credor</label>  <input
 			name="rol" id="rol" tabindex="<?php echo ++$ind;?>;" class="form-control"
 			value="<?php echo $_GET['rol'];?>" placeholder="Exclusivo para Membros" ></td>
-					<td colspan="2"> OU... Preencha o formulário abaixo!</td>
+					<td colspan="2"> OU... Preencha o formul&aacute;rio abaixo!</td>
 				</tr>
 			</tfoot>
 		</table>
@@ -71,10 +71,10 @@
 			<tbody>
 				<tr>
 					<td colspan='3'>
-						<label>Razão Social:</label>
+						<label>Raz&atilde;o Social:</label>
 						<input type="text"tabindex="<?PHP echo ++$ind;?>" name="nome" id="credor3"
 						size='80%' value='<?php echo $_GET['nome'];?>' class="form-control"
-						placeholder="Mínimo de 5 caracteres p/ novo Cadastro!" />
+						placeholder="M&iacute;nimo de 5 caracteres p/ novo Cadastro!" />
 					</td>
 				</tr>
 				<tr>
@@ -98,7 +98,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="2"><label>Endereço:</label>
+					<td colspan="2"><label>Endere&ccedil;o:</label>
 					<input type="text" id="estadorCredor" tabindex="<?php echo ++$ind;?>"
 						class="form-control" name="estado" value="" size="50">
 					</td>

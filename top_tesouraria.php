@@ -18,5 +18,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Envelope</button></a>
 	</div>
 <?php
+$recBuscas = new menutes();//Lista buscas de recibos
 }
 ?>

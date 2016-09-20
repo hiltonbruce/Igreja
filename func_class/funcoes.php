@@ -1,7 +1,7 @@
 <?PHP
-
-function conectar() {
+/*function conectar() {
 	require_once("DB.php");
+
 	if (file_exists("func_class/constantes.php")){
 	 require_once('func_class/constantes.php');
 	}elseif (file_exists('../func_class/constantes.php')){
@@ -9,10 +9,26 @@ function conectar() {
 	}elseif (file_exists('../../func_class/constantes.php')){
 	 require_once('../../func_class/constantes.php');
 	}
-	$dns = "mysql://DBUSER:DBPASS@DBPATH/DBNAME";
-	$db =& DB::Connect ($dns, array());
-	//if (PEAR::isError($db)){ die ($db->getMessage()); }
+//	$dns = "mysql://DBUSER:DBPASS@DBPATH/DBNAME";
+
+	$dsn = array(
+    'phptype'  => 'mysql',
+    'username' => DBUSER,
+    'password' => DBPASS,
+    'hostspec' => DBPATH,
+    'database' => DBNAME,
+);
+$options = array(
+    'debug'       => 2
+);
+
+$db =& DB::connect($dsn, $options);
+if (PEAR::isError($db)) {
+    die($db->getMessage());
 }
+	//$db =& DB::Connect ($dsn, array());
+	//if (PEAR::isError($db)){ die ($db->getMessage()); }
+}*/
 
 function br_data ($dt,$cmp){
 	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd e em caso de erro e informado o campo $cmp

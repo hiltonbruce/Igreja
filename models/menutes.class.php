@@ -14,7 +14,7 @@ class menutes {
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
 
-		//Faz os calculos na pagina��o
+		//Faz os calculos na pagina??o
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
@@ -111,11 +111,11 @@ class menutes {
 	</div></div></div></div>
 	<?php
 	//Fim das informa??es das pendencias
-	//In�cio das pendencias de disciplinados
+	//In?cio das pendencias de disciplinados
 	}
 
 	function buscarecibo() {
-		//formul�rios laterais de busca de recido da tesouraria
+		//formul?rios laterais de busca de recido da tesouraria
 		$ind =0;
 		?>
 		<div class="box">
@@ -141,7 +141,7 @@ class menutes {
 			echo $for_num->List_sel($ind++,'class="form-control"');
 		?>
 			<input type="hidden" name="tipo" id="tipo" value="2">
-			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber� os dados -->
+			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
 			<input type="hidden" name="menu" value="top_tesouraria" />
 			<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Listar Recibos..." />
 		</form>
@@ -155,7 +155,7 @@ class menutes {
 			<input type="text" name="cpf" class="form-control" id="cpf" size="20" >
 			<label>ou por RG</label>
 			<input type="text" name="rg" class="form-control" id="rg" size="20" >
-			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber� os dados -->
+			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
 			<input type="hidden" name="menu" value="top_tesouraria" />
 			<input type="hidden" name="tipo" id="tipo" value="3">
 			<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Procurar Recibos" />
@@ -170,7 +170,7 @@ class menutes {
 					<input type="text" class="form-control" name="id" id="id" size="10" >
 				</div>
 			<div class="col-xs-2">
-				<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber� os dados -->
+				<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
 				<input type="hidden" name="menu" value="top_tesouraria" />
 				<label>&nbsp;</label>
 				<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Mostrar!" />
@@ -183,7 +183,7 @@ class menutes {
 	}
 
 function recibosmembros (){
-		//Lista os valores m�ximo, m�nimo, m�dio e total de determinado beneficiado
+		//Lista os valores m?ximo, m?nimo, m?dio e total de determinado beneficiado
 		//Lista os recibos de um determinado membro
 
 		$id =(int)$_GET ['recebeu'];
@@ -198,7 +198,7 @@ function recibosmembros (){
 			$extr .= ' AND tipo="2"';
 
 		}elseif ($_GET['tipo']=='3') {
-			//Recibos de n�o Membros ou que n�o eram na epoca ou feitos como tal
+			//Recibos de n?o Membros ou que n?o eram na epoca ou feitos como tal
 			//Altera a string $extr
 			$nome = ($_GET['nome']!='') ? 'recebeu LIKE "%'.$_GET['nome'].'%" ':'';
 			$cpf = ($_GET['cpf']!='') ? 'recebeu LIKE "%'.$_GET['cpf'].'%" ':'';
@@ -218,7 +218,7 @@ function recibosmembros (){
 				$extr .= $nome.$cpf.$rg.')';
 			}
 			$_urlLi_pen .= '&nome='.$_GET['nome'].'&cpf='.$_GET['cpf'].'&rg='.$_GET['rg'].'&tipo='.$_GET['tipo'];
-			//Adicionar ao link do rodap� para o tipo 3
+			//Adicionar ao link do rodap? para o tipo 3
 		}
 
 		$extr_rec = mysql_query($extr);
@@ -234,7 +234,7 @@ function recibosmembros (){
 			$query_pen .= 'FROM tes_recibo AS t, credores AS f WHERE t.recebeu='.$id;
 			$query_pen .= ' AND t.tipo=2 AND t.recebeu = f.id ORDER BY t.id DESC ';
 		}elseif ($_GET['tipo']==3) {
-			//Recibos n�o membros
+			//Recibos n?o membros
 			if ($nome=='' && $cpf=='' && $rg=='') {
 					$query_pen  = 'SELECT * FROM tes_recibo AND tipo=3 ORDER BY recebeu ASC,id DESC ';
 			}else {
@@ -244,11 +244,11 @@ function recibosmembros (){
 		$query_pen = 'SELECT * FROM tes_recibo AS t, membro AS m WHERE t.recebeu="'.$id;
 		$query_pen .= '" AND t.recebeu = m.rol ORDER BY t.id DESC ';
 		}
-		$nmpp_pen="20"; //N�mero de mensagens por p�rginas
+		$nmpp_pen="20"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
-		$paginacao_pen['link'] = "?"; //Pagina��o na mesma p�gina
+		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
 
-		//Faz os calculos na pagina��o
+		//Faz os calculos na pagina??o
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
@@ -360,11 +360,38 @@ function recibosmembros (){
 	}elseif ($total_pen=="1"){
 		echo "Com apenas um recibo!</div>";
 	}else{
-		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!</div>";
+		echo "Com este crit&eacute;rio n&atilde;o obti t.recebeu='.$id t.recebeu='.$id t.recebeu='.$id t.recebeu='.$id t.recebeu='.$id t.recebeu='.$id t.recebeu='.$id t.recebeu='.$idvemos nenhum resultado, tente melhorar seu argumento de pesquisa!</div>";
 	}
 		//Fim das informa??es das pendencias
 	echo "</p>";
-		//In�cio das pendencias de disciplinados
+		//In?cio das pendencias de disciplinados
+	}
+
+	public function periodo ($dia=null,$mes=null,$ano=null)
+	{
+		$retorno = array();
+		if (checkdate($dia,$mes,$ano)) {
+			$op = 'DATE_FORMAT(t.data,"%Y%m%d")="'.$ano.$mes.$dia.'" ';
+		} elseif($mes>0 && $mes<13 && $ano>2000) {
+			$op = 'DATE_FORMAT(t.data,"%Y%m")="'.$ano.$mes.'" ';
+		}elseif ($ano>2000) {
+			$op = 'DATE_FORMAT(t.data,"%Y")="'.$ano.'" ';
+		}else {
+			$op = 'DATE_FORMAT(t.data,"%Y")="'.date('Y').'" ';
+		}
+
+		$sqlPer  = 'SELECT * FROM tes_recibo AS t WHERE '.$op;
+		$sqlPer .= 'ORDER BY t.data DESC';
+		$resQueryPer = mysql_query($sqlPer);
+		while ($resSql = mysql_fetch_array($resQueryPer)) {
+			$retorno [$resSql['id']] = array('igreja'=>$resSql['igreja'],'tipo'=>$resSql['tipo'],
+				'recebeu'=>$resSql['recebeu'],'valor'=>$resSql['valor'],'conta'=>$resSql['conta'],
+				'fonte'=>$resSql['fonte'],'lancamento'=>$resSql['lancamento'],'motivo'=>$resSql['motivo'],
+				'data'=>$resSql['data'],'hist'=>$resSql['hist']);
+		}
+		return $retorno;
+
+		// DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"'
 	}
 }
 ?>

@@ -6,13 +6,13 @@
 require_once '../../func_class/funcoes.php';
 require_once "../../func_class/classes.php";
 require_once "../../models/tes/tes_conta.class.php";
-conectar();
+
 $grupoContas = new tes_conta ();
 $tituloCta = $grupoContas->contasGrupos();
 $q = mysql_real_escape_string( $_GET['q'] );
 
 $sqllinhas = "SELECT * FROM contas where locate('$q',titulo) > 0  AND acesso > '0' ";
-//critérios de fonética
+//critï¿½rios de fonï¿½tica
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
@@ -25,9 +25,9 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = number_format($campo['saldo'],2,',','.');
-	$estado = strtr( $campo['titulo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+	$estado = strtr( $campo['titulo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC');
 	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
-	$endereco = strtoupper(strtr( $campo ['codigo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['codigo'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC'));
 	if ($campo['tipo']=='D') {
 		$tipo = 'Devedora';
 	}else {

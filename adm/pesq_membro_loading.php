@@ -67,10 +67,10 @@ addLoadEvent(function() {
 <fieldset>
 <legend>Procurar  por Nome</legend>
 <form id="form" name="form" method="get" action="">
-  <input name="nome" type="text" id="nome" size="10" /> 
+  <input name="nome" type="text" id="nome" size="10" />
   <input name="rol" type="hidden" id="rol" value="<?PHP echo $_GET["rol"];?>" />
   <input name="nome_pesp" type="hidden" id="nome_pesq" value="<?PHP echo $_GET["nome_pesq"];?>" />
-  <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />  
+  <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
   <input type="image" src="../img/lupa_32x32.png" height="16" width="16" name="Submit" value="submit" alt="procurar" title="Click aqui para fazer a pesquisa"/>
 </form>
 </fieldset>
@@ -79,36 +79,36 @@ require_once ("../func_class/funcoes.php");
 require_once ("../func_class/classes.php");
 if (!empty($_GET['nome']))
 	{
-		conectar();
+		
 		$query = "SELECT rol, nome FROM membro WHERE nome LIKE CONVERT(_utf8 '%".$_GET["nome"]."%' USING latin1) COLLATE latin1_swedish_ci";
-		$nmpp="800"; //Número de mensagens por párginas
+		$nmpp="800"; //Nï¿½mero de mensagens por pï¿½rginas
 		$paginacao = Array();
-		$paginacao['link'] = "?"; //Paginação na mesma página
-			
-		//Faz os calculos na paginação
+		$paginacao['link'] = "?"; //Paginaï¿½ï¿½o na mesma pï¿½gina
+
+		//Faz os calculos na paginaï¿½ï¿½o
 		$sql2 = mysql_query ("$query") or die (mysql_error());
 		$total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
-		$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
+		$paginas = ceil ($total/$nmpp); //Retorna o total de pï¿½ginas
 		$pagina = $HTTP_GET_VARS["pagina1"];
-			
-		if (!isset($pagina)) {$pagina=0;} //Especifica um valor p variável página caso ela esteja setada
-		$inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no MySQL
-		$sql3 = mysql_query ("$query"." LIMIT $inicio,$nmpp") or die (mysql_error()); 
+
+		if (!isset($pagina)) {$pagina=0;} //Especifica um valor p variï¿½vel pï¿½gina caso ela esteja setada
+		$inicio=$pagina * $nmpp; //Retorna qual serï¿½ a primeira linha a ser mostrada no MySQL
+		$sql3 = mysql_query ("$query"." LIMIT $inicio,$nmpp") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-						
-		 //inicia o cabeçalho de paginação
-		
+
+		 //inicia o cabeï¿½alho de paginaï¿½ï¿½o
+
 		{
 		?>
 		<table cellspacing="0" >
 			<caption>Lista de Membros</caption>
-			
+
 			<colgroup>
 				<col id="foto">
 				<col id="rol"/>
 				<col id="albumCol"/>
 			</colgroup>
-			
+
 			<thead>
 				<tr>
 					<th scope="col">Foto</th>
@@ -118,10 +118,10 @@ if (!empty($_GET['nome']))
 			</thead>
 			<tbody>
 		<?PHP
-			
+
 			while($coluna = mysql_fetch_array($sql3))
 			{
-			
+
 			 if (file_exists("img_membros/".$coluna["rol"].".jpg"))
 			 	{
 				$img=$coluna["rol"].".jpg";
@@ -131,14 +131,14 @@ if (!empty($_GET['nome']))
 				{
 				$img="ver_foto.jpg";
 				}
-				
+
 			$ls+=1;
-			if ($ls>1)	
+			if ($ls>1)
 					{
 					$cor="class='odd'";
 					$ls=0;
 					}
-					else 
+					else
 					{$cor="class='od2'";
 					}
 			?>
@@ -155,10 +155,10 @@ if (!empty($_GET['nome']))
 				<td><?php echo $coluna["nome"];?></td>
 			</tr>
 			<?PHP
-			
+
 			}//loop while produtos
-			
-	?>	
+
+	?>
 		</tbody>
 		</table>
 
@@ -167,14 +167,13 @@ if (!empty($_GET['nome']))
 
 	$_urlLi="nome=".$_GET["nome"]."&campo=".$_GET["campo"]."&rol=".$_GET["rol"];//Montando o Link para ser passada a classe
 	//Classe que monta o rodape
-	$_rod = new rodape($paginas,$_GET["pagina1"],"pagina1","$_urlLi",8);//(Quantidade de páginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por página)
+	$_rod = new rodape($paginas,$_GET["pagina1"],"pagina1","$_urlLi",8);//(Quantidade de pï¿½ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por pï¿½gina)
 	$_rod->getRodape();
 	//$_rod->getDados();
-	
+
 	}
 
 ?>
 
 </body>
 </html>
-

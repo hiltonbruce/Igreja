@@ -5,14 +5,13 @@
  */
 
 require_once '../help/impressao.php';
-conectar();
+
 $q = mysql_real_escape_string( $_GET['q'] );
 
 $quantNomes = substr_count(trim($q),' ');
 
 //critï¿½rios de fonï¿½tica
 $exp = new fonetica($q,'nome');
-
 
 switch ($quantNomes) {
 	case '3':
@@ -44,8 +43,8 @@ while( $campo = mysql_fetch_array( $res ) )
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = $campo['fone_resid'];
 	//$estado = $campo['nome'];
-	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco = strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado = strtoupper(strtr( $campo['nome'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['endereco'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco .=', '.$campo['numero'];
 	$cargo = cargo($campo['rol']);
 	$rol = $campo['rol'];

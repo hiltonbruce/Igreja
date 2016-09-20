@@ -64,7 +64,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				{
 					echo '<label for="disabledSelect">Cidade</label>';
 					if (empty($_GET['cidade'])) {
-						conectar();
+						
 						$vl_uf=$_GET["uf"];
 						$lst_cid = new sele_cidade("cidade","$vl_uf","codUf","nome","cidade");
 						$vlr_linha=$lst_cid->ListDados ("1");

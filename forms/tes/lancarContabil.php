@@ -74,7 +74,7 @@
 		</tr>
 		<tr>
 			<td colspan="3">
-				<label>Descri&cedil;&atilde;o:</label>
+				<label>Descri&ccedil;&atilde;o:</label>
 				<input type="text" size="78%" id="detalhe2" name="det"
 				disabled="disabled" class="form-control" />
 			</td>
