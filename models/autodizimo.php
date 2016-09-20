@@ -96,8 +96,8 @@ while( $campo = mysql_fetch_array( $res ) )
 			break;
 	}
 	$exibiCong = strip_tags($nomecong);
-	$estado = strtoupper(strtr( $campo['nome'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco = strtoupper(strtr( $campo ['endereco'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco = strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	//$endereco .=', '.$campo['numero'];
 	//$estado = addslashes($estado);
 	$destaque = "<span style=\"font-weight:bold\">\$1</span>";

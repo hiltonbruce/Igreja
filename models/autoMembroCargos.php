@@ -29,8 +29,8 @@ while( $campo = mysql_fetch_array( $res ) )
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id			= $campo['fone_resid'];
 	//$estado = $campo['nome'];
-	$estado 	= strtoupper(strtr( $campo['nome'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-	$endereco 	= strtoupper(strtr( $campo ['endereco'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$estado 	= strtoupper(strtr( $campo['nome'], 'багвйкнухфъьзБАГВЙКНУХФЪЬЗ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+	$endereco 	= strtoupper(strtr( $campo ['endereco'], 'багвйкнухфъьзБАГВЙКНУХФЪЬЗ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco  .=', '.$campo['numero'];
 	$cargo 		= cargo($campo['rol'])['0'];
 	$rol		= $campo['rol'];
