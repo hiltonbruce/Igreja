@@ -49,7 +49,7 @@
   Per&iacute;odo listado: <?php echo $perLista; ?>
 	</div>
 </fieldset>
-<table class='table table-striped table-hover'>
+<table class='table table-striped table-hover table-bordered'>
     <colgroup>
       <col id="N&ordm;">
       <col id="Nome">
@@ -73,4 +73,7 @@
       echo $nivel1;
      ?>
   </tbody>
+	<tfoot>
+		<?php echo $rodapeRec; ?>
+	</tfoot>
 </table>
