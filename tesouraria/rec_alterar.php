@@ -21,9 +21,4 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$recBuscas ->recibosmembros();
 	}
 }
-if (!empty($_GET['recPer'])) {
-	require_once 'help/tes/listaRecPeriodo.php';
-	require_once 'views/tesouraria/listaRecPeriodo.php';
-}
-
 ?>

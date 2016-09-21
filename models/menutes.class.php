@@ -1,10 +1,26 @@
 <?php
 class menutes {
 
+	protected $menuGET;
+	protected $escGET;
+
+	function __construct ($menuGET=null, $escGET=null)
+	{
+		if (empty($menuGET) && !empty($_GET['menu'])) {
+			$this->menuGET = $_GET['menu'];
+		} else {
+			$this->menuGET = null;
+		}
+		if (empty($escGET) && !empty($_GET['escolha'])) {
+			$this->escGET = $_GET['escolha'];
+		} else {
+			$this->escGET = null;
+		}
+
+	}
+
 	function mostra (){
 		//Lista todos os recibos
-		$this->escGET = (empty($_GET["escolha"])) ? '' : $_GET["escolha"];
-		$this->menuGET = (empty($_GET["menu"])) ? '' : $_GET["menu"];
 		$this->pag_mostra = (empty($_GET["pag_mostra"])) ? '' : $_GET["pag_mostra"];
 		$this->id = (empty($_GET["id"])) ? '' : $_GET["id"];
 
@@ -187,7 +203,7 @@ function recibosmembros (){
 		//Lista os recibos de um determinado membro
 
 		$id =(int)$_GET ['recebeu'];
-		$_urlLi_pen='./?escolha='.$_GET['escolha'].'&menu='.$this->menuGET.'&recebeu='.$_GET['recebeu'];//Montando o Link para ser passada a classe
+		$_urlLi_pen='./?escolha='.$this->escGET.'&menu='.$this->menuGET.'&recebeu='.$_GET['recebeu'];//Montando o Link para ser passada a classe
 
 		$extr  = 'SELECT MAX(valor) AS maximo, MIN(valor) AS minimo, AVG(valor)';
 		$extr .= ' AS media, SUM(valor) as total FROM tes_recibo WHERE recebeu='.$id ;
@@ -244,7 +260,7 @@ function recibosmembros (){
 		$query_pen = 'SELECT * FROM tes_recibo AS t, membro AS m WHERE t.recebeu="'.$id;
 		$query_pen .= '" AND t.recebeu = m.rol ORDER BY t.id DESC ';
 		}
-		$nmpp_pen="20"; //N?mero de mensagens por p?rginas
+		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
 
@@ -342,9 +358,9 @@ function recibosmembros (){
 	echo'<div class="alert alert-success"><p><strong>Maior valor:</strong> R$ '.number_format($maximo,2,",",".").' &bull; <strong>Menor valor:</strong> R$ '.number_format($minimo,2,",",".");
 	echo ' &bull; <strong>Valor m&eacute;dio:</strong> R$ '.number_format($media,2,",",".").' &bull; <strong>Total de:</strong> R$ '.number_format($total,2,",",".").'</p>';
 	//Classe que monta o rodape
-	$_rod_pen = new rodape($paginas_pen,$_GET["pag_rec"],"pag_rec",$_urlLi_pen,10);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+	$_rod_pen = new rodape($paginas_pen,$_GET["pag_rec"],"pag_rec",$_urlLi_pen,15);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape();
-	//$_rod_pen->form_rodape ("P&aacute;gina");
+	$_rod_pen->form_rodape('P&aacute;gina','recebeu');
 
 	//$_rod->getDados();
 	echo "<p>";
@@ -371,26 +387,25 @@ function recibosmembros (){
 	{
 		$retorno = array();
 		if (checkdate($dia,$mes,$ano)) {
-			$op = 'DATE_FORMAT(t.data,"%Y%m%d")="'.$ano.$mes.$dia.'" ';
+			$op = 'DATE_FORMAT(t.data,"%Y%m%d")="'.$ano.$mes.$dia.'" AND ';
 		} elseif($mes>0 && $mes<13 && $ano>2000) {
-			$op = 'DATE_FORMAT(t.data,"%Y%m")="'.$ano.$mes.'" ';
+			$op = 'DATE_FORMAT(t.data,"%Y%m")="'.$ano.$mes.'" AND ';
 		}elseif ($ano>2000) {
-			$op = 'DATE_FORMAT(t.data,"%Y")="'.$ano.'" ';
+			$op = 'DATE_FORMAT(t.data,"%Y")="'.$ano.'" AND ';
 		}else {
-			$op = 'DATE_FORMAT(t.data,"%Y")="'.date('Y').'" ';
+			$op = 'DATE_FORMAT(t.data,"%Y")="'.date('Y').'" AND ';
 		}
 
-		$sqlPer  = 'SELECT * FROM tes_recibo AS t WHERE '.$op;
-		$sqlPer .= 'ORDER BY t.data DESC';
+		$sqlPer  = 'SELECT t.*,i.razao FROM tes_recibo AS t, igreja AS i WHERE '.$op;
+		$sqlPer .= '(t.igreja=i.rol OR t.igreja="0") ORDER BY t.data DESC,t.id ASC';
 		$resQueryPer = mysql_query($sqlPer);
 		while ($resSql = mysql_fetch_array($resQueryPer)) {
 			$retorno [$resSql['id']] = array('igreja'=>$resSql['igreja'],'tipo'=>$resSql['tipo'],
 				'recebeu'=>$resSql['recebeu'],'valor'=>$resSql['valor'],'conta'=>$resSql['conta'],
 				'fonte'=>$resSql['fonte'],'lancamento'=>$resSql['lancamento'],'motivo'=>$resSql['motivo'],
-				'data'=>$resSql['data'],'hist'=>$resSql['hist']);
+				'data'=>$resSql['data'],'hist'=>$resSql['hist'],'nIgreja'=>$resSql['razao']);
 		}
 		return $retorno;
-
 		// DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"'
 	}
 }

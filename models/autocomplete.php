@@ -73,7 +73,7 @@ while( $campo = mysql_fetch_array( $res ) )
 			break;
 	}
 	$estado = addslashes($estado);
-	$destaque = "<span style=\"font-weight:bold\">\$1</span>";
+	$destaque = "<strong>\$1</strong>";
 	switch ($quantNomes) {
 		case '3':
 			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i","/(" . $q3 . ")/i","/(" . $q4 . ")/i");
@@ -94,7 +94,7 @@ while( $campo = mysql_fetch_array( $res ) )
 			$html = preg_replace($patterns, $replacements, $estado);
 		break;
 		default:
-			$html = preg_replace("/(" . $q . ")/i", "<span style=\"font-weight:bold\">\$1</span>", $estado);
+			$html = preg_replace("/(" . $q . ")/i", "<strong>\$1</strong>", $estado);
 		break;
 	}
 

@@ -94,6 +94,12 @@ switch ($recMenu){
 		require_once 'forms/tes/recImprVarios.php';
 		break;
 	default:
+	case 6:
+		//Lista recibos por periodo
+		require_once 'help/tes/listaRecPeriodo.php';
+		require_once 'views/tesouraria/listaRecPeriodo.php';
+		break;
+	default:
 		//Recibos de Membros
 		require_once 'forms/tes/recInicio.php';
 		require_once 'forms/tes/recMembro.php';
@@ -111,7 +117,7 @@ echo "R$ $valor ( $dim )";
 */
 
 } else {
-	echo "<script> alert('Sem permissï¿½o de acesso! Entre em contato com o Tesoureiro!');";
+	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');";
 	echo "location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
 	session_destroy();

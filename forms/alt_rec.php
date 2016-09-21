@@ -46,13 +46,11 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 				case 2:
 				echo '<input type="hidden" name="recebeu" id="recebeu" value="'.$rec_alterar->recebeu().'">';
 				break;
-
 				default:
 				echo '<input type="hidden" name="nome" id="nome" value="'.$recebeu.'">';
 				echo '<input type="hidden" name="rol" id="rol" value="'.$rec_alterar->recebeu().'">';
 				break;
 			}
-
 			$cred = $rec_alterar->conta();
 			$deb = $rec_alterar->fonte();
 			echo '<input type="hidden" name="deb" id="rec" value="'.$deb.'">';
@@ -68,7 +66,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 
 <?php
 } else {
-	echo "<script> alert('Sem permissï¿½o de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
+	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
 	session_destroy();
 	header("Location: ./");

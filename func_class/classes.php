@@ -155,7 +155,7 @@
 
 	}
 
-	public function form_rodape ($texto) {
+	public function form_rodape ($texto,$nInput) {
 
     $nome = (empty($_GET["nome"])) ? '' : $_GET["nome"] ;
     $direita = (empty($_GET["direita"])) ? '' : $_GET["direita"] ;
@@ -164,7 +164,11 @@
     $ord = (empty($_GET["ord"])) ? '' : $_GET["ord"] ;
     $menu = (empty($_GET["menu"])) ? '' : $_GET["menu"] ;
     $escolha = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
-
+		if (!empty($nInput)) {
+			$novaLinha = '<input name="'.$nInput.'" type="hidden" value="'.$_GET[$nInput].'">';
+		}else {
+			$novaLinha = '';
+		}
 	echo '<form id="form" name="form" method="get" action="">';
 	echo '<input name="escolha" type="hidden" id="escolha" value="'.$escolha.'">';
 	echo '<input name="menu" type="hidden" value="'.$menu.'">';
@@ -174,9 +178,10 @@
 	echo '<input name="direita" type="hidden" value="'.$direita.'">';
 	echo '<input name="nome" type="hidden" value="'.$nome.'">';
 	echo '<div class="row"><div class="col-xs-4">';
+	echo $novaLinha;
 	echo '<input name="'.$this->_linkpagina.'" class="form-control input-sm" type="text" size="4" />';
 	echo '</div><div class="col-xs-3">';
-	echo '<input class="btn btn-primary btn-sm" type="submit" name="Submit" value="'.$texto.' ..." />';
+	echo '<input class="btn btn-primary btn-sm" type="submit" name="Submit" value="'.$texto.'" />';
 	echo '</div></div></form>';
 	}
 

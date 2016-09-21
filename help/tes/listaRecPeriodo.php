@@ -10,12 +10,11 @@
   } else {
     $mesPer =$_GET['mes'];
   }
-  $perLista = $mesPer.'/'.$anoPer;
+
   if (empty($_GET['dia'])) {
     $diaPer = '';
   } else {
     $diaPer =$_GET['dia'];
-    $perLista = $diaPer.'/'.$mesPer.'/'.$anoPer;
   }
 
 $credorPer = new tes_credores();
@@ -46,14 +45,14 @@ $membroLista = $membroPer->nomes();
     $nivel1 .='<td>';
     $nivel1 .=$value['motivo'];
     $nivel1 .='</td>';
-    $nivel1 .='<td>';
-    $nivel1 .=$value['valor'];
+    $nivel1 .='<td class="text-right">';
+    $nivel1 .=number_format($value['valor'], 2, ",", ".");
     $nivel1 .='</td>';
     $nivel1 .='<td>';
-    $nivel1 .=$value['igreja'];
+    $nivel1 .=$value['nIgreja'];
     $nivel1 .='</td>';
     $nivel1 .='<td>';
-    $nivel1 .=$value['data'];
+    $nivel1 .=conv_valor_br ($value['data']);
     $nivel1 .='</td>';
     $nivel1 .='</tr>';
   }
