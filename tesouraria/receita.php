@@ -1,4 +1,14 @@
 <?php
+
+
+if (intval($_POST['rolIgreja'])>0) {
+	$idIgreja=intval($_POST['rolIgreja']);
+}elseif (!empty($_GET['igreja'])) {
+	$idIgreja = intval($_GET['igreja']);
+}else {
+	$idIgreja = 0;
+}
+
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
 $tabela = (empty($_GET['tabela'])) ? '' : $_GET['tabela'];
 $idLanc = (empty($_GET['id'])) ? '' : $_GET['id'];
@@ -9,6 +19,14 @@ if ($rec>'12' && $rec<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
+	if ($idIgreja==0) {
+			$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
+			//$igLanc = $igrejaSelecionada;
+			$cidSede = $igrejaSelecionada;
+	} else {
+		$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+		$igLanc = $igrejaSelecionada;
+	}
 
 	if ($igreja->cidade()>0) {
 		$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
@@ -31,13 +49,14 @@ $linkLancamento .= '&igreja='.$_GET['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 
 $dizmista = new dizresp($_SESSION['valid_user']);
-$idIgreja = (empty($_GET['igreja'])) ? 0:(int)$_GET['igreja'];
-if (intval($_POST['rolIgreja'])>0) {
-	$idIgreja=$_POST['rolIgreja'];
-}
 
-$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
-$igLanc = $igrejaSelecionada;
+if ($idIgreja==0) {
+		$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
+		//$igLanc = $igrejaSelecionada;
+} else {
+	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+	$igLanc = $igrejaSelecionada;
+}
 
 	// verifica se hï¿½ valor a ser lançado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);

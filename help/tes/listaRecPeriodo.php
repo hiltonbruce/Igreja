@@ -2,8 +2,10 @@
   $nivel1 ='';
   if (empty($_GET['ano'])) {
     $anoPer = date('Y');
+    $anoForm ='';
   } else {
     $anoPer =$_GET['ano'];
+    $anoForm =$anoPer;
   }
   if (empty($_GET['mes'])) {
     $mesPer = date('m');

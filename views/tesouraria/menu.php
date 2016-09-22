@@ -37,9 +37,7 @@
 		  }else {
 		  	$linkAtivo='';
 		  }
-
-		  $linkRelt = '&mes='.date('m').'&ano='.date('Y').'&rec=21';
-
+		  $linkRelt = '&rec=21';
 		  ?>
 	    <li <?php echo $linkAtivo;?>><a href="<?php echo $linkLancamento.$linkRelt;?>">Relat&oacute;rio</a></li>
 

@@ -19,7 +19,6 @@ switch ($rec) {
 		break;
 	case '15':
 		require_once '../help/tes/varRelatorio.php';
-		$igrejaSelecionada = new DBRecord('igreja', $roligreja, 'rol');
 		$titTabela = 'Relatório de Lançamentos';
 		$linkImpressao ='tesouraria/receita.php/?rec=15';
 		//require_once '../models/saldos.php';

@@ -5,15 +5,11 @@
 	$cargoIgreja = new tes_cargo;
 	$tesArray = $cargoIgreja->dadosArray();
 
-	//tabela com a lista p confirmar lançamento
-
+	//tabela com a lista p confirmar lançamento$idIgreja$idIgreja$idIgreja$idIgreja$idIgreja
 	$lancContabil = new tes_relatLanc();
 	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer,$numLanc,$vlrLanc);
-
 	$tabLancamento = $resultado['0'];
-
-	$statusLancamento = 'Lan&ccedil;amentos Contábeis';
-
+	$statusLancamento = '<h5><strong>Lan&ccedil;amentos Cont&aacute;beis</strong></h5>';
 	$linkResumo  = 'rec=15&igreja='.$_GET['igreja'].'&dia='.$_GET['dia'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 	$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'];
 	$linkResumo .= '&credito='.$_GET['credito'].'&conta='.$_GET['conta'];
@@ -38,31 +34,34 @@
 			$tesIgreja = $tesArray['22']['1']['1']['nome'];//Tesoureiro Geral - Central
 		}
 
-		if ($_GET['escolha']=='') {
-			$fonIni = '<p style="font-size: 80%;padding: 0 0 0 0;margin-bottom: 0;">';
-			$fonFim = '</p>';
-		}else {
-			$fonIni = '<h2>';
-			$fonFim = '</h2>';
+			$fonIni = '<h6>';
+			$fonFim = '</h6>';
+
+		$titulo  =  $statusLancamento;
+		if ($idIgreja==0) {
+			$campo = 'Campo da cidade de '.$origem;
+		} elseif ($idIgreja>1) {
+			$campo = 'Congreg.: '.$igrejaSelecionada->razao();
+		} else {
+				$campo = 'Igreja: '.$igrejaSelecionada->razao();
 		}
 
-		$titulo  =  $fonIni.$statusLancamento.$fonFim.$fonIni;
-		$titulo .=  'Igreja: '.$igrejaSelecionada->razao().$fonFim.$fonIni;
-		$titulo .=  'Direção Atual: '.$dirigenteIgreja;
-		$titulo .=  ', 1&ordm; Tesoureiro: '.$tesIgreja.$fonFim;//Tesoureiro
-		$titulo .=  'Data de Emiss&atilde;o: '.date('d/m/Y H:i:s');//Tesoureiro
+		$titulo .=  $fonIni.' &bull; '.$campo.' &bull; ';
+		$titulo .=  'Dire&ccedil;&atilde;o Atual: '.$dirigenteIgreja;
+		$titulo .=  ', 1&ordm; Tesoureiro: '.$tesIgreja;//Tesoureiro
+		$titulo .=  '&bull; Data de Emiss&atilde;o: '.date('d/m/Y H:i:s').$fonIni;//Tesoureiro
 
 	}
 
 if (empty($descricoo) && $tabLancamento!='') {
-	$descricao='Descrição';
+	$descricao='Descri&ccedil;&atilde;o';
 
 	echo($imprimir);
 
 ?>
 <table class='table table-hover table-bordered'>
-		<caption class="text-left">
-			<?php echo $titulo;?></caption>
+		<caption class="text-left"><h6>
+			<?php echo $titulo;?></h6></caption>
 			<colgroup>
 				<col id="albumCol">
 				<col id="valor"/>
