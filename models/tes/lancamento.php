@@ -6,7 +6,7 @@ require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 
 #Analisa se será lançado em contas a pagar e fazer o reconhecimento da despesas
 list($anoVenc,$mesVen,$diaVenc) = explode('-',$vencimento);
-$data = br_data($_POST['data'], 'Data do lançamento inválida!');
+$data = br_data($_POST['data'], 'Data do lan�amento inv�lida!');
 list($anoPgto,$mesPgto,$diaPgto) = explode('-', $data);
 if ((($mesPgto>$mesVen && $anoPgto==$anoVenc) ||$anoPgto>$anoVenc) && $vencimento!='') {
 	$ctaPagar = true;
@@ -295,6 +295,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 
 	//Lança o histórico do lançamento
 	$referente .= $histTextProv.$ctaVencida;
+	$referente = mysql_real_escape_string($referente);
 	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
@@ -309,26 +310,23 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 }else {
 	 //Fim do 1º if linha 7
 	if ($referente=='' && !$status) {
-		$mensagem = 'Não existe nada a ser lançado!';
+		$mensagem = 'N�o existe nada a ser lan�ado!';
 	}elseif ($referente=='') {
-		$mensagem = 'Você não informou o motivo do lançamento com um mínimo de 5 caracteres!' ;
+		$mensagem = 'Voc� n�o informou o motivo do lan�amento com um m��nimo de 5 caracteres!' ;
 	}elseif ($msgErro!='') {
 		$mensagem = $msgErro;
 	}else {
-		$mensagem = 'Não exite valores a ser lançado!';
+		$mensagem = 'N�o exite valores a ser lan�ado!';
 	}
-
 	echo '<script>alert("'.$mensagem.'");window.history.go(-1);</script>';
 	echo $mensagem;
-
 }
-
 echo $novoLanc;
 } else {
 	?>
 <div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button"
 	class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	 <strong>Atualização de página</strong><br /> Houve clique duplo ou Atualização de pagina e impedimos o
-	 lançamento duplicado. </div>
+	 <strong>Atualização de p&aacute;gina</strong><br /> Houve clique duplo ou Atualiza&ccedil;&atilde;o
+	  de p&aacute;gina e impedimos o lan&ccedil;amento duplicado. </div>
 	<?php
 }
