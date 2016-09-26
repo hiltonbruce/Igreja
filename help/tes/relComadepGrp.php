@@ -10,7 +10,6 @@
 	} else {
 		$movSld = '--o--';
 	}
-
 	$sldGrupoCtaAnte = $saldoAnteGrp[$planoCod[$ctaAtualN3]['nivel3']];//Sld anterior grupo nível 3
 	$saldoAntr = number_format(abs($sldGrupoCtaAnte),2,',','.');
 	if ($sldGrupoCtaAnte > 0) {
@@ -20,7 +19,6 @@
 	} else {
 		$saldoAntr = '--o--';
 	}
-
 	$sldGrupoAtual = $sldGrupoCta+$sldGrupoCtaAnte;//Sld atual grupo nível 3
 	$saldoAtual = number_format(abs($sldGrupoAtual),2,',','.');
 	if ($sldGrupoCtaAnte > 0) {
@@ -30,7 +28,6 @@
 	} else {
 		$saldoAtual = '--o--';
 	}
-
 	#$movSld = ($sldGrupoCta > '0') ? $dev : $cred ;
 	#$saldoAtual = ($sldGrupoAtual > '0') ? $dev : $cred ;
 	#$saldoAntr = ($sldGrupoCtaAnte > '0') ? $dev: $cred;
@@ -42,11 +39,13 @@ if ($movSld !='--o--' || $saldoAtual !='--o--' || $saldoAntr !='--o--') {
 	$nivelN3 .=	$saldoAtual.'</td>';
 	$nivelN3 .=	'<td class="text-right">';
 	$nivelN3 .=	$saldoAntr.'</td></tr>';
-
 	$nivel3   .= $nivelN3.$nivel2;
 //	$nivelNi2 .= $nivelN02.$nivelN3.$nivelN2;
 	$grpN3 .= $nivelN3.$nivel2;
 }
+	$nivelCom01 .= $nivelN3.$nivelCom02;
+	$nivelCom02 = '';
 	$nivel2 = '';
 	$nivelN2 = '';
 	$nivelN02 = '';
+	$nivelN3 = '';

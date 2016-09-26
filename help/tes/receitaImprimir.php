@@ -34,6 +34,13 @@ switch ($rec) {
 		require_once '../models/tes/relComadep.php';
 		require_once '../help/tes/relComadepLin.php';
 		$nomeArquivo='../views/saldosComadep.php';
+		$assinatura .= '<h5><div class="row">';
+		$assinatura .= '<div class="col-xs-6 col-sm-5">';
+		$assinatura .= 'Pr. Antônio Ferreira da Silva';
+		$assinatura .= '</div>';
+		$assinatura .= '<div class="col-xs-6 col-sm-5">';
+		$assinatura .= 'Tes. Joseilton C Bruce';
+		$assinatura .= '</div></div></h5>';
 		$titTabela = $congRelatorio.' &bull; Fluxo das Contas - '.$dtRelatorio;
 		require_once '../views/modeloPrint.php';
 		break;

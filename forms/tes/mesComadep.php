@@ -23,11 +23,14 @@
 						      echo $linha1.$linha2;
 
 						      //Marca a op��o atual para lista Com e Sem o n�vel mais baixo
-						      if ($_GET['tipo']=='1') {
 						      	$Completo = '';
-						      	$Simples = 'active';
-						      }elseif (empty($_GET['tipo']) || $_GET['tipo']=='2') {
 						      	$Simples = '';
+						      	$Comadep = '';
+						      if ($_GET['tipo']=='1') {
+						      	$Simples = 'active';
+						      }elseif ($_GET['tipo']=='4') {
+						      	$Comadep = 'active';
+						      }elseif (empty($_GET['tipo']) || $_GET['tipo']=='2') {
 						      	$Completo = 'active';
 						      }
 					      ?>
@@ -48,6 +51,9 @@
 					  <label class="btn btn-primary <?php echo $Completo;?>">
 					    <input type="radio" name="tipo" value='2' >2 N&iacute;veis
 					  </label>
+					  <label class="btn btn-primary <?php echo $Comadep;?>">
+					    <input type="radio" name="tipo" value='4' >COMADEP
+					  </label>
 				  </div>
 				</td>
 				<td>
@@ -59,12 +65,12 @@
 					?>
 				</td>
 				<td>
-					<br /><br />
 				  <div class="form-group">
 					<input name="escolha" type="hidden" value="tesouraria/receita.php" />
-					<input type="hidden" name="rec"	value="6" class="form-control" />
+					<label>&nbsp;</label>
 					<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 					tabindex="<?PHP echo ++$ind; ?>" />
+					<input type="hidden" name="rec"	value="6" class="form-control" />
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				  </div>
 				</td>

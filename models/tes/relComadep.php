@@ -3,7 +3,6 @@ $nivel1 = '';
 $nivel2 = '';
 $nivel3 = '';
 $planoCta=array();
-$cor=true;
 $saldoGrp=array();
 $saldoAnteGrp=array();
 
@@ -30,12 +29,10 @@ $queryLanc .= ' AND igreja!="1"';
 //$queryLanc .= ' ORDER BY ';
 $lista = mysql_query($queryLanc) or die(mysql_error());
 while ($contas = mysql_fetch_array($lista)) {
-
 	$ctaDeb   = $contas['debitar'];#id da cta
 	$tipoDeb  = $planoCta[$contas['debitar']]['tipo'];#Tipo da Cta -> D/C
 	$ctaCred  = $contas['creditar'];#id da cta
 	$tipoCred = $planoCta[$contas['creditar']]['tipo'];#Tipo da Cta -> D/C
-
 	$vlrConta = abs($contas['valor']);
 				//$credito += $vlrConta;
 	$dataLancDeb[] = array( 'Cod'=>$ctaDeb,'Data'=>$contas['data'], 'Vlr'=>$vlrConta);
@@ -55,9 +52,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			$saldoGrp[$planoCta[$ctaCred]['nivel3']] -= $vlrConta;
 			$saldoGrp[$planoCta[$ctaCred]['nivel2']] -= $vlrConta;
 			//$debito  += $vlrConta;//Movimento do
-
 			$debito  += $contas['valor'];
-
 		}else {
 			//saldo meses anteriores
 			//Contas debitadas
@@ -71,7 +66,6 @@ while ($contas = mysql_fetch_array($lista)) {
 			$saldoAnteGrp[$planoCta[$ctaCred]['nivel3']] -= $vlrConta;
 			$saldoAnteGrp[$planoCta[$ctaCred]['nivel2']] -= $vlrConta;
 			//$sldGrupoAnte [$contas['creditar']] -= $vlrConta;
-
 			/*Quando houver saldo, mas sem movimento no mes, aqui � for�ado
 			 * a aparecer
 			*/
@@ -81,7 +75,6 @@ while ($contas = mysql_fetch_array($lista)) {
 			if ($saldo[$planoCta[$ctaDeb]['codigo']]==0) {
 				$saldo[$planoCta[$ctaDeb]['codigo']] = 0;
 			}
-
 		}
 }
 ?>

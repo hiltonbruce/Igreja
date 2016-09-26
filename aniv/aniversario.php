@@ -5,15 +5,13 @@ $proximo=$_GET["proxima"]+1;
 
 if ($_GET["Submit"]=="Imprimir") {
 
-	session_start();
-	require_once ("../func_class/funcoes.php");
-	require_once ("../func_class/classes.php");
+session_start();
+require_once ("../func_class/funcoes.php");
+require_once ("../func_class/classes.php");
 
-	controle ("consulta");
+controle ("consulta");
 $igreja = new DBRecord ( 'igreja', '1', 'rol' );
-
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
@@ -70,7 +68,6 @@ if ($_GET["congregacao"]>"0" ) {
     $cong_sele = " - Todas as congrega&ccedil;&otilde;es";
 }
 ?>
-
 <table cellspacing="0" id="listTable" class='table' summary="Idade, Rol, Nome, Congregação e Cargo">
 <caption>
 Lista de Aniversariantes
@@ -84,9 +81,7 @@ if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
 }
 echo $cong_sele;
 ?>
-
 </caption>
-
 <colgroup>
 <col id="PlaylistCol" />
 <col id="Rol" />
@@ -94,7 +89,6 @@ echo $cong_sele;
 <col id="Congrega" />
 <col id="albumCol" />
 </colgroup>
-
 <thead>
 <tr>
 <th id="" scope="col">Idade</th>
@@ -115,16 +109,12 @@ echo $cong_sele;
 <th scope="col">Cargo</th>
 </tr>
 </thead>
-
 <tbody>
-
 <?PHP
 $aniv->nome_dia();
 ?>
 </tbody>
-
 </table>
-
 <?php
 	echo $fimPagina ;
 ?>

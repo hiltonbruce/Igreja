@@ -1,4 +1,4 @@
-<table class='table table-hover table-bordered table-striped'>
+<table class='table table-striped table-hover'>
 		<caption><h6>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
@@ -14,7 +14,7 @@
 	</h6></caption>
 		<colgroup>
 				<col id="Conta">
-				<col id="Descri��o">
+				<col id="Descricao">
 				<col id="Movimento">
 				<col id="Saldo Anterior">
 				<col id="Saldo Atual">
@@ -49,6 +49,7 @@
 		</tfoot>
 	</table>
 	<?php
+		echo $assinatura;
 				//echo $grupoFora.'<br />';
 				//echo $sldFora.' *** ';
 		echo $imprimir;

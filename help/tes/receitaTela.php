@@ -1,7 +1,7 @@
 <?php
 //Op��es de exibir na tela para o script /tesouraria/receita.php
 //$dtlanc = (empty($dtlanc)) ? date('d/m/Y'):$_GET['data'];
-
+$assinatura = '';
 if (empty($_GET['ano'])) {
 	$ano = date('Y');
 	$anoForm = '';
