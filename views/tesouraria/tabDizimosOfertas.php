@@ -150,7 +150,7 @@ if ($_POST['concluir']=='1') {
 			</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">Data Lan&ccedil;.</th>
+				<th scope="col">Data&nbsp;Lan&ccedil;.</th>
 				<th scope="col">Rol/Nome</th>
 				<th scope="col">Tipo</th>
 				<th scope="col">Valor(R$)</th>

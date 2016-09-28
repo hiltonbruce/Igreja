@@ -165,16 +165,16 @@ if (!empty($_GET['bsc_rol'])) {
 		<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
 		<?PHP
 			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_nasc"],"coduf","nome","naturalidade");
-			$vlr_linha=$lst_cid->ListDados ($ind++);
+			$vlr_linha=$lst_cid->ListDados ($ind++,'','autofocus="autofocus"');
 		?>
 		<input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
-		<input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
+		<input name="Submit" class='btn btn-primary btn-xs' type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
         </form>
 		<?PHP
 		}
 
 		//fim
-		?>		</td>
+		?></td>
         <td colspan="2">UF:
         <?PHP
         	$tab_edit='adm/dados_pessoais.php&tabela='.$tabela.'&bsc_rol='.$bsc_rol.'&uf_nasc='.$arr_dad["uf_nasc"].'&campo=';
@@ -217,10 +217,10 @@ if (!empty($_GET['bsc_rol'])) {
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
             <?PHP
 			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_resid"],"coduf","nome","cidade");
-			$vlr_linha=$lst_cid->ListDados ($ind++);
+			$vlr_linha=$lst_cid->ListDados ($ind++,'','autofocus="autofocus"');
 		?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
-            <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
+            <input name="Submit" class='btn btn-primary btn-xs' type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
           </form>
         <?PHP
 		}
@@ -244,10 +244,11 @@ if (!empty($_GET['bsc_rol'])) {
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
             <?PHP
 			$lst_bairro = new sele_cidade("bairro",$arr_dad["cidade"],"idcidade","bairro","bairro");
-			$vlr_bairro=$lst_bairro->ListDados ($ind++);
+			$vlr_bairro=$lst_bairro->ListDados ($ind++,'','autofocus="autofocus"');
 		?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
-            <input name="Submit" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
+            <input name="Submit" class='btn btn-primary btn-xs' type="submit"
+						 id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
           </form>
         <?PHP
 		}
@@ -307,7 +308,8 @@ if (!empty($_GET['bsc_rol'])) {
 		?>
 		<form id="form" name="form" method="post" action="">
 		  <label>
-		  <select name="escolaridade" size="1" class="AzulMedio" id="escolaridade" tabindex="1">
+		  <select name="escolaridade" size="1" id="escolaridade"
+			class='form-control' autofocus="autofocus" tabindex="1">
             <option value=""></option>
             <option value="N&atilde;o Estuda">N&atilde;o Estuda</option>
             <option value="N&atilde;o Sabe Informar!">N&atilde;o Sabe Informar!</option>
@@ -335,7 +337,7 @@ if (!empty($_GET['bsc_rol'])) {
 		  <input name="campo" type="hidden" id="campo" value="escolaridade" />
 		  <input name="escolha" type="hidden" id="escolha" value="<?PHP echo $tab;?>" />
 			<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
-		  <input type="submit" name="Submit2" value="Alterar" tabindex="<?PHP echo $ind++;?>" />
+		  <input type="submit" class='btn btn-primary btn-xs' name="Submit2" value="Alterar" tabindex="<?PHP echo $ind++;?>" />
 	      </label>
 		</form>
 		<?PHP

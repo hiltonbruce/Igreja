@@ -734,7 +734,7 @@ class sele_cidade {
 		}
 	}
 
-	function ListDados ($indice,$id){//indice da sequ�ncia do formul�rio
+	function ListDados ($indice,$id,$pers=null){//indice da sequ�ncia do formul�rio
 
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
@@ -746,7 +746,7 @@ class sele_cidade {
 	//Mostra as linhas de select
 	if ($num_linhas>0){
 	$linhoOptions1 = '';
-	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice'>";
+	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice' $pers >";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
 					echo "<option value='{$_SESSION["cid_end"]}'>C�d. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
@@ -1043,9 +1043,7 @@ class aniversario {
 	}
 
 	function casamento() {
-
 		$this->sql_d_dia = mysql_query ($this->query." DATE_FORMAT(c.data,'%d/%m')='{$this->dia_consulta}' ".$this->query_fim) or die (mysql_error());
-
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{
 			$inc++;

@@ -135,7 +135,6 @@ function dizimistas(
 		$tabela = '';
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
-
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a vari�vel
 
@@ -180,10 +179,9 @@ function dizimistas(
 				list($lancCPF,$lancNome) = explode(':', $linha['hist']);
 				$linkMembro  = '<a href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&id='.$linha['id'].'&bsc_rol='.$rol;
-				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lan�. por: '.$lancNome.')">';
+				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lan&ccedil;. por: '.$lancNome.')">';
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
 			}
-
 			$tabela .= '<tr><td>'.$linha['data'].'</td>
 				<td>'.$linkMembro.'</td><td>'.$tipo.'</td>
 				<td class="text-right">'.$corrigir.'</td>
@@ -193,7 +191,8 @@ function dizimistas(
 		$total = number_format($total,2,',','.');
 		$tabela .=  '';
 		if ($total==0) {
-		$tabela .=  '<tfoot><tr id="total"><td colspan="5">N�o h� lan�amentos para esta busca ou pendentes!</td></tr></tfoot>';
+		$tabela .=  '<tfoot><tr id="total"><td colspan="5">N&atilde;o h&aacute; ';
+		$tabela .=  'lan&ccedil;amentos para esta busca ou pendentes!</td></tr></tfoot>';
 		}else {
 		$tabela .=  '<tfoot><tr id="total"><td colspan="4" class="text-right">';
 		$tabela .=  '	Total&nbsp;&nbsp;............ &nbsp;&nbsp;'.$total;
@@ -204,7 +203,6 @@ function dizimistas(
 	}
 
 function outrosdizimos ($igreja) {
-
 	if ($igreja=='') {
 		$filtroIgreja = '';
 	} else {
@@ -220,7 +218,6 @@ function outrosdizimos ($igreja) {
 	}
 
 function totaldizimos () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE tipo = '1' AND lancamento='0' ") or die (mysql_error());
 		$outrosdiz = mysql_fetch_array($this->dquery);
 		$totoutros = $outrosdiz['valor'];
@@ -228,7 +225,6 @@ function totaldizimos () {
 	}
 
 function votos () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE tipo = '4' AND lancamento='0' ") or die (mysql_error());
 		$votos = mysql_fetch_array($this->dquery);
 		$totvotos = $votos['valor'];
@@ -236,7 +232,6 @@ function votos () {
 	}
 
 function ofertas () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE tipo = '2' AND lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
@@ -244,14 +239,12 @@ function ofertas () {
 	}
 
 function ofertaextra () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE tipo = '3' AND lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
 		return $totofertas;
 	}
 function ofertamissoes () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE tipo = '5' AND lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
@@ -259,7 +252,6 @@ function ofertamissoes () {
 	}
 
 function totalgeral () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
@@ -267,7 +259,6 @@ function totalgeral () {
 	}
 
 function caixageral () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE devedora = '1' AND lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
@@ -275,7 +266,6 @@ function caixageral () {
 	}
 
 function debitar ($devedora) {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE devedora = '$devedora' AND lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
@@ -283,7 +273,6 @@ function debitar ($devedora) {
 	}
 
 function caixamissoes () {
-
 		$this->dquery = mysql_query("SELECT SUM(valor) AS valor FROM dizimooferta WHERE devedora = '2' AND lancamento='0' ") or die (mysql_error());
 		$oferta = mysql_fetch_array($this->dquery);
 		$totofertas = $oferta['valor'];
@@ -291,7 +280,6 @@ function caixamissoes () {
 	}
 
 function concluir($igreja) {
-
 		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0" AND
 		 d.igreja="'.$igreja.'" AND d.igreja=i.rol ORDER BY tesoureiro,tipo,nome ') or die (mysql_error());
 		$totaltes=0;
@@ -300,12 +288,10 @@ function concluir($igreja) {
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 
-
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a vari�vel
 
 			//$tesoureiro = $linha['tesoureiro'];
-
 			$vlr = $linha['valor'];
 			$valor = number_format($vlr,2,',','.');
 			if ($linha['confirma']=='') {
