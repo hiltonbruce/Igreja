@@ -27,13 +27,13 @@ class tes_cargo {
 			}
 			if ($dados['igrejaStatus']!='0') { //Remove as igrejas desativadas
 				$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
-				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],'naoMembro'=>$dados['naomembro'],
-						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
+				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],'naoMembro'=>$dados['naomembro']
+						,'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
 						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']
 						,'memCPF'=>$dados['cpf'],'memRG'=>$dados['rg'],'end'=>$dados['endereco']
 						,'num'=>$dados['numero'],'coddespesa'=>$dados['coddespesa']
-						,'status'=>$dados['status']
-						,'hierarquia'=>$dados['hierarquia'],'id'=>$dados['id']);
+						,'status'=>$dados['status'],'hierarquia'=>$dados['hierarquia']
+						,'id'=>$dados['id']);
 			}
 		}
 		$this->arrayNomeIgreja = $todos;

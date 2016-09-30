@@ -1,7 +1,5 @@
 	<?PHP
-
 	require_once("DB.php");
-
 	if (file_exists("func_class/constantes.php")){
 		require('func_class/constantes.php');
 	}elseif (file_exists('../func_class/constantes.php')){
@@ -43,7 +41,7 @@
 
 		public function getUrl(){ //Pï¿½gina atual para o PHP, ou seja, para o usuï¿½rio ela ï¿½ este valor + 1 - Visual
 			return $this->_url;
-		}
+		}      //echo "<h1>$table</h1>";      //echo "<h1>$table</h1>";      //echo "<h1>$table</h1>";      //echo "<h1>$table</h1>";
 
 		public function getLinkpagina(){ //nome do link da pï¿½gina. Ex.
 			return $this->_linkpagina;
@@ -96,7 +94,6 @@
 				echo '<ul class="pagination pagination-sm">';
 			}
 	}
-
 	/*public function getRodapeinicPesq() {
 	if ($this->_url>0)
 	{
@@ -107,8 +104,7 @@
 	}
 	*/
 	public function getRodapemeio() {
-		//Define a parte central da paginaï¿½ï¿½o
-
+		//Define a parte central da paginaï¿½ï¿½
 			for ($i=($this->getUltimapg()-$this->getLinkppag() ); $i<($this->getUltimapg()); $i++)
 			{
 				$pg=$i+1;
@@ -116,7 +112,6 @@
 				if ($pg!=($this->getUrl()))
 					{
 					echo "<li><a href='./{$this->getUrlextra()}&$url'>$pg</a></li>";
-
 					}else{
 						echo '<li><a class="btn btn-primary active disabled">'.$pg.'</a></li>';
 					}
@@ -125,7 +120,6 @@
 	}
 
 	public function getRodapefim($mais=null){
-
 			$mais++;
 			$fim=$this->getPagina();
 			$proxima = $this->getUrl()+1;
@@ -135,7 +129,6 @@
 				}else {
 					echo '</ul>';
 				}
-
 	}
 
 	public function getRodaperes() { //Total das pï¿½ginas disponibilizadas
@@ -152,11 +145,9 @@
 	return 	"{$this->getRodapeinic()}".
 	"{$this->getRodapemeio()}".
 	"{$this->getRodapefim()}";
-
 	}
 
 	public function form_rodape ($texto,$nInput) {
-
     $nome = (empty($_GET["nome"])) ? '' : $_GET["nome"] ;
     $direita = (empty($_GET["direita"])) ? '' : $_GET["direita"] ;
     $rec = (empty($_GET["rec"])) ? '' : $_GET["rec"] ;
@@ -186,7 +177,6 @@
 	}
 
 	public function form_rodape_get ($texto,$campo) {
-
 	echo 	"<form id='form' name='form' method='get' action=''>".$texto.
 	"<input name='escolha' type='hidden' id='escolha' value='{$_GET["escolha"]}'>".
 	"<input name='menu' type='hidden' value='{$_GET["menu"]}'>".
@@ -222,7 +212,6 @@
 	}
 	*/}
 
-
 class DBRecord {
   /*Exemplo de funcionamento desta classe:
 	$rec = new DBRecord ("tabela","opï¿½ï¿½o","campo"); Aqui serï¿½ selecionado a informaï¿½ï¿½o do campo da tabela autor igual a opï¿½ao
@@ -230,7 +219,6 @@ class DBRecord {
 	$rec->Name = "Novo Nome"; Aqui ï¿½ atribuido a esta variï¿½vel um valor para UpDate
 	$rec->Update(); ï¿½ feita a chamada do mï¿½todo q realiza a atualizaï¿½ï¿½o no Banco
   */
-
   var $h;
   var $table;
   var $id;
@@ -238,7 +226,6 @@ class DBRecord {
 
   public function DBRecord( $table, $id, $campo )
   {
-      //echo "<h1>$table</h1>";
 	global $db;
 	if (empty($campo)){$campo="rol";}
 	$res = $db->query( "SELECT * from $table WHERE $campo=?", array( $id ) );
@@ -257,14 +244,10 @@ class DBRecord {
   public function cad_organica($ind) {
      //Lista subordinado ï¿½ do script igreja/cad_organica
      $lin = mysql_query("SELECT * from {$this->{'table'}} ORDER BY id_igreja,codigo ");
-
-
      $coluna = 0;
      $id_igreja = 0;
-
 	while ($line = mysql_fetch_array($lin))
 	  {
-
 	  if  (strlen ($line[2])==4)// Altera a cor de fundo nas contas
 	  $fd_tab = "bgcolor='#00CCFF'";
 	  elseif (strlen ($line[2])==1)
@@ -275,14 +258,11 @@ class DBRecord {
 	  $fd_tab = "bgcolor='#00FFFF'";
 	  else
 	  $fd_tab = "";
-
 	  if ($id_igreja > 1 && $id_igreja==$line[1]){
 // </tbody></table>
 	  ?>
-
 	  <table width="565" border = "1" summary="Lista Unidades Oranicas da Igreja." >
 	  <caption>
-
 	  </caption>
 	  <thead>
 	       <tr>
@@ -294,14 +274,12 @@ class DBRecord {
 	       <td colspan="2"><a href="#" >Ocultar/Exibir Unidades - Congre&ccedil;&atilde;o</a></td>
 	       </tr>
 	  </tfoot>
-
 	  <tbody>
 	  <?PHP }
 	  elseif ($line[1] == "1" && $id_igreja==0){
 	  ?>
 	  <table width="565" id="" border = "1" summary="Lista Unidades Oranicas da Igreja.">
 	  <caption>
-
 	  </caption>
 	  <thead>
 	       <tr>
@@ -313,31 +291,24 @@ class DBRecord {
 	       <td colspan="2"><a href="#">Ocultar/Exibir Unidades - SEDE <?php echo " - $id_igreja - line[1]".$line[1];?></a></td>
 	       </tr>
 	     </tfoot>
-
 	  <tbody>
 	  <?PHP
 	  }
 	  echo "<tr>";
 	  ++$coluna;
 	  ++$ind;
-
 	  if ((strlen ($line[1])<=13 && strlen ($line[1])<>7) || $line[1]=="1.09.00")
 	  print( "<td title= '$line[4]' $fd_tab >$line[2]</td><td $fd_tab ><input name='subordinado' type='radio' value='$line[2]' tabindex='++$ind;'/>$line[4]</td>");
 	  else
 	  print( "<td title= '$line[5]'> $line[4]</td><td>$line[4]</td>");
 	  echo "</tr>";
-
 	  if ($line[1]!=$id_igreja) {
 	       $id_igreja = $line[1];
 	  }
 	  //if ($coluna > 1)  {echo "</tr>";$coluna = 0;echo "<tr>";}
 	  }
      //echo "</tr>";
-
-
-
      echo "</tbody></table>";
-
      return $ind;
 	}
 
@@ -356,10 +327,8 @@ class DBRecord {
   public function Update()
   {
     global $db;
-
     $fields = array();
     $values = array();
-
     foreach( array_keys( $this->{'h'} ) as $key )
     {
       if ( $key != "id" )
@@ -370,26 +339,21 @@ class DBRecord {
     }
     $fields = join( ",", $fields );
     $values []= $this->{'id'};
-
     if ($this->campo!='') {
     	$sql = "UPDATE {$this->{'table'}} SET $fields WHERE {$this->campo} = ?";
     }else {
     	 $sql = "UPDATE {$this->{'table'}} SET $fields WHERE rol = ?";
     }
-
 	//echo "$sql";
-    $sth = $db->prepare( $sql );
-    //echo "$sth";
+  $sth = $db->prepare( $sql );
+  //echo "$sth";
 	$db->execute( $sth, $values );
   }
-
   public function UpdateID ()
   {
     global $db;
-
     $fields = array();
     $values = array();
-
     foreach( array_keys( $this->{'h'} ) as $key )
     {
       if ( $key != "id" )
@@ -400,42 +364,34 @@ class DBRecord {
     }
     $fields = join( ",", $fields );
     $values []= $this->{'id'};
-
     $sql = "UPDATE {$this->{'table'}} SET $fields WHERE id = ?";
 	//echo "$sql";
     $sth = $db->prepare( $sql );
     //echo "$sth";
 	$db->execute( $sth, $values );
   }
-
     public function Insert()
   {
     global $db;
-
     $fields = array();
     $values = array();
-
     foreach( array_keys( $this->{'h'} ) as $key )
     {
-
-        $fields []= " ?";
+    $fields []= " ?";
 		$chave [] = $key;
-        $values []= $this->{'h'}[$key];
+    $values []= $this->{'h'}[$key];
 		echo "$key = {$this->{'h'}[$key]}<br/>";
-
     }
 	$fields = join( ",", $fields );
 	$chave = join( ",", $chave );
 	$values []= $this->{'id'};
 	//echo "Valores= {$this->{'id'}}";
-
-    $sql = "INSERT INTO  {$this->{'table'}} $chave VALUES $fields";
+  $sql = "INSERT INTO  {$this->{'table'}} $chave VALUES $fields";
 	//echo "$sql";
-    $sth = $db->prepare( $sql );
-    //echo "$sth<br/>$fields";
-     $db->execute( $sth, $values );
+  $sth = $db->prepare( $sql );
+  //echo "$sth<br/>$fields";
+  $db->execute( $sth, $values );
   }
-
   	/*
      function __destruct() {
 	  echo "$sth \n";
@@ -471,7 +427,6 @@ class insert {
 	}
 
 	public function inserir() {
-
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		if ($inserir){
 				$idCad = mysql_insert_id();
@@ -490,7 +445,6 @@ class insert {
 		$dados_pessoais->inserir();
 	*/
 }
-
 class editar_form {
 
 	public $campo;
@@ -500,7 +454,6 @@ class editar_form {
 	public $ind;
 
 	function __construct ($vlr_get="",$valor="",$acao="",$link_form="") {
-
 		$this->campo 		= $_GET["campo"];       //Nome do campo para get
 		$this->vlr_get		= $vlr_get;             //Valor relacionado ao get
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
@@ -523,7 +476,6 @@ class editar_form {
 		if ($placeholder=='') {
 			$placeholder='Informe aqui para alterar!';
 		}
-
 	}elseif ($this->campo=='valor') {
 		$trans = array("." => ",", "," => ".");
 		$this->valor = strtr($this->valor,$trans);
@@ -539,9 +491,7 @@ class editar_form {
             if ($ident=='') {
                 $ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
             }
-
 			?>
-
 			<form id="form1" name="form1" method="post" action="">
 			<table><tbody><tr><td>
 			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receberï¿½ os dados -->
@@ -606,13 +556,9 @@ class editar_form {
 						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
 						maxlength="<?PHP echo $this->maxcaratere;?>"/>
 					</td></td>
-
 					<?PHP
 					break;
-
-
 			}
-
 			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")//Abre para ediï¿½ï¿½o 2 campos para Pai e Mï¿½e
 			{
 			//Nos campos Pai e Mï¿½e ï¿½ aberto um segundo campo do form para o rol e a opï¿½ï¿½o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
@@ -642,7 +588,6 @@ class editar_form {
 			<input type="submit" class='btn btn-primary btn-sm' name="Submit" value="Alterar..."  tabindex="<?PHP echo $ind++;?>" />
 			</tr></tbody></table></form>
 			<?PHP
-
 		}else{
 			//echo "<h3>{$this->vlr_get} - {$this->valor}</h3>";
 			switch ($this->vlr_get)
@@ -654,9 +599,7 @@ class editar_form {
 						$exibi_opcao="Mudan&ccedil;a";
 					else
 						$exibi_opcao="N&atilde;o Informado";
-
 					break;
-
 				case ("sexo")://tipo na 4a Pessoal
 					if ($this->valor=="M")
 						$exibi_opcao="Masculino";
@@ -665,11 +608,9 @@ class editar_form {
 					else
 						$exibi_opcao="N&atilde;o Informado";
 					break;
-
 				default:
 					$exibi_opcao=$this->valor;
 			}
-
 			//echo "<p><a title='Click aqui para alaterar este campo!' href='./?escolha={$this->link_form}'>{$exibi_opcao}</a></p>";
 		}
 	}
@@ -700,13 +641,11 @@ class editar_form {
                     echo $msgExibir.'</a></p>';
                 }
                 break;
-
             default:
                 echo $msgExibir.'</a></p>';
                 break;
         }
 	}
-
 }
 
 class sele_cidade {
@@ -718,15 +657,12 @@ class sele_cidade {
 	protected $texto_field;
 
 	function __construct ($tabela="", $valor="", $campo="", $campo_retorno= "", $texto_field=""){
-
 		$this->tabela = $tabela;//
 		$this->valor = $valor;//O valor do campo no banco de dados
 		$this->campo = $campo;//Campo para pesquisa no Banco
-
 		//Monta a parte o retorno html do formulï¿½rio
 		$this->campo_retorno = $campo_retorno;//Campo que serï¿½ retornado
 		$this->texto_field = $texto_field;//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
-
 		if (DB::isError($res))
 		{
 			echo $db->getMessage;
@@ -735,14 +671,11 @@ class sele_cidade {
 	}
 
 	function ListDados ($indice,$id,$pers=null){//indice da sequï¿½ncia do formulï¿½rio
-
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
 	$this->res = $db->query($sql_lst, array( $this->valor ));
-
 	//Obtï¿½m o nï¿½mero de linhas
 	$num_linhas = (int)$this->res->numRows();
-
 	//Mostra as linhas de select
 	if ($num_linhas>0){
 	$linhoOptions1 = '';
@@ -782,7 +715,6 @@ class sele_cidade {
 	}
 }
 
-
 class List_sele {
 
 	protected $tabela;
@@ -790,30 +722,24 @@ class List_sele {
 	protected $texto_field;//nome do campo
 
 	function __construct ($tabela="", $campo_retorno= "", $texto_field=""){
-
 		$this->tabela = $tabela;//
 		$this->campo_retorno = $campo_retorno;//Campo que serï¿½ retornado
 		$this->texto_field = $texto_field;//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
 		$this->query = "SELECT * from {$this->tabela} ";
-
 		$this->sql_lst = mysql_query($this->query.' ORDER BY '.$this->campo_retorno);
 	}
 
 	function List_Selec ($seq,$item,$required){
-
 	  	$linha1  =  "<select name='{$this->texto_field}' id='{$this->texto_field}' $required tabindex='$seq'>";
 	  	if ($item<1) {
 	  		$linha1 .=  "<option value=''>-->> Escolha <<--</option>";
 	  	}else {
 	  		$linhas =  "<option value='0'>-->> Todas <<--</option>";
 	  	}
-
 		$linhas .= '';
-
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-
-                $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -827,7 +753,6 @@ class List_sele {
 	       	}
 	       }
 	    $linha3 = "</select>";
-
 	  return $linha1.$linhas.$linha3 ;
 	}
 
@@ -836,7 +761,6 @@ class List_sele {
 	//Mostra as linhas de select
 	$linha1='';
 	$linhas .="<option value='./?$link{$this->col_lst["rol"]}'>Todas</option>";
-
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
 			if ($this->col_lst["rol"]==$rol) {
@@ -844,12 +768,10 @@ class List_sele {
 			}
 			 $linhas .="<option value='./?$link{$this->col_lst["rol"]}'>".$this->col_lst[$this->campo_retorno]."</option>";
 		}
-
 		echo $linha1.$linhas;
 	}
 
 	function List_sel ($ind,$req){
-
 	//Mostra as linhas de select
 	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' $req tabindex='++$ind'>";
 	echo "<option value=''>-->> Escolha <<--</option>";
@@ -860,11 +782,9 @@ class List_sele {
 	echo "</select>";
      }
 
-     function List_area_atua ($ind){
-
+  function List_area_atua ($ind){
 	//Mostra as linhas de select
 	$this->sql_area = mysql_query("{$this->query}"." WHERE codigo LIKE '_.__' AND codigo<>'1.09'");
-
 	echo "<select name='{$this->texto_field}' id='{$this->texto_field}' class='' tabindex='++$ind'>";
 	echo "<option value=''>-->> Escolha <<--</option>";
 	  while($this->col_lst = mysql_fetch_array($this->sql_area))
@@ -873,58 +793,45 @@ class List_sele {
 	  }
 	echo "</select>";
      }
-
 }
 
 class ultimo_registro {
 
      function __construct (){
-
 	  $this->tabela = $_POST["tabela"];//Define tabela a ser usada
 	  $this->query = "SELECT * from {$this->tabela} ";
-
      }
 
-     function ultimo_registro ($codigo,$campo){
-
+  function ultimo_registro ($codigo,$campo){
 	//seleciona o ultimo registro subordinado ao cï¿½digo escolhido
 	if (empty($codigo))
-	  $codigo .=".00";
-
+	$codigo .=".00";
 	//echo "<h1>".$codigo."</h1>";
 	$codigo = $codigo.".__";
 	//echo "<h1>".$codigo."</h1>";
 	$this->sql = mysql_query("{$this->query} WHERE $campo LIKE '{$codigo}' ORDER BY $campo DESC LIMIT 1") OR DIE (mysql_error());
 	$this->col_lst = mysql_fetch_array($this->sql);
 	$this->codigo = strlen ($this->col_lst[$campo]) - 2;
-
 	//echo "<h1> this->codigo - ".$this->codigo." -  </h1>";
 	//echo "<h1> - ".$this->col_lst[$campo]." - tes </h1>";
-
 	return Substr($this->col_lst["codigo"],$this->codigo,2);
      }
-
 }
 
 class List_congr {
 	//Classe para lista todos os dados de uma tabela
 	//para se melhorada deverei adcionar LIMIT
-
 	protected $tabela;
 	protected $campo_retorno;
 
 	function __construct ($tabela="", $campo_retorno= ""){
-
 		$this->tabela = $tabela;//Define tabela a ser usada
 		$this->campo_retorno = $campo_retorno;//Define tabela a ser usada
 	}
 
-
 	function get(){
-
 	//Mostra a lista
 	$sql_lst = mysql_query("SELECT * from {$this->tabela} ORDER BY {$this->campo_retorno}");
-
 	while($col_lst = mysql_fetch_array($sql_lst))
 		{
 			if ($col_lst["status"]=='1') {
@@ -939,29 +846,17 @@ class central {
 	//Define o script da pï¿½gina central
 
 	function get(){
-
 		if (!empty($_POST["escolha"]) && !(strstr($_POST["escolha"], "http")) ){
-
 			$perfil_usu = $_POST["escolha"];
-
 		}elseif (!empty($_GET["escolha"]) && !(strstr($_GET["escolha"], "http")) ){
-
 			$perfil_usu = $_GET["escolha"];
-
 		}elseif ($_GET["escolha"] == "igreja/mostrar.php"){
-
 			 $perfil_usu = ("igreja/mostrar.php");
-
 		}else{
-
 			$perfil_usu = "noticias/painel.php";
-
 		}
-
 		if (file_exists($perfil_usu)) {
-
 			return ($perfil_usu);
-
 		}
 	}
 }
@@ -969,16 +864,17 @@ class central {
 class aniversario {
 
 	function __construct (){
-
 		//$sql_lst = "SELECT * from membro WHERE DATE_FORMAT(datanasc,'%d/%m/%Y')=? ORDER BY {$this->campo_retorno}";
 		//$this->res = $db->query($sql_lst, array( $this->valor ));
-
 		$this->dia = date('d/m');//Recupera o dia e mï¿½s
 		$this->semana = date('w');//Recupera a semana
 		$this->mes = date('m');//Recupera o mï¿½s
 		$this->ano = date('Y');//Recupera o ano
-		$this->query = "SELECT m.rol, m.nome, DATE_FORMAT(m.datanasc,'%Y') AS idade, DATE_FORMAT(m.datanasc,'%m') AS mes,DATE_FORMAT(m.datanasc,'%d') AS dia, DATE_FORMAT(c.data,'%Y') AS casamento, DATE_FORMAT(e.batismo_em_aguas,'%Y') AS batismo, e.congregacao from membro AS m, eclesiastico AS e, est_civil AS c WHERE e.situacao_espiritual<2 AND m.rol=e.rol AND m.rol=c.rol AND ";
-
+		$this->query  = "SELECT m.rol, m.nome, DATE_FORMAT(m.datanasc,'%Y') AS idade, ";
+		$this->query .= "DATE_FORMAT(m.datanasc,'%m') AS mes,DATE_FORMAT(m.datanasc,'%d') AS dia, ";
+		$this->query .= "DATE_FORMAT(c.data,'%Y') AS casamento, DATE_FORMAT(e.batismo_em_aguas,'%Y') ";
+		$this->query .= "AS batismo, e.congregacao from membro AS m, eclesiastico AS e, est_civil AS c ";
+		$this->query .= "WHERE e.situacao_espiritual<2 AND m.rol=e.rol AND m.rol=c.rol AND ";
 
 		switch ($_GET["ord"]){
 		//Ordena a lista pelas seguintes tabelas conforme as opï¿½ï¿½es que define a tabela a ser escolhida
@@ -1003,13 +899,9 @@ class aniversario {
 		}
 
 		$this->query_fim = "{$this->congreg} ORDER BY {$this->ord} ASC";
-
 		$prox_dia = $_GET["proxima"]+date('d');
-
 		$this->dia_consulta = date("d/m",mktime(12,0,0,$this->mes,$prox_dia,$this->ano));//recupera o dia para consulta
-
 		$this->consulta = date("d/m/Y",mktime(12,0,0,$this->mes,$prox_dia,$this->ano));//recupera o dia para consulta
-
 		$this->semana_consulta = date("m",mktime(12,0,0,$this->mes,($_GET["proxima"]*7)+date('d'),$this->ano));//recupera a semana para consulta
 		$this->mes_consulta = date("m",mktime(12,0,0,$this->mes+$_GET["proxima"],$this->dia,$this->ano));//recupera a semana para consulta
 	}
@@ -1017,29 +909,27 @@ class aniversario {
 	function qt_dia() {
 		//quantidade de aniversariantes do dia
 		$this->sql_dia = mysql_query ($this->query." DATE_FORMAT(m.datanasc,'%d/%m')='{$this->dia}' ".$this->query_fim) or die (mysql_error());
-
 		$this->qt_dia = mysql_num_rows($this->sql_dia);
-
 		return $this->qt_dia;
 	}
 
 	function nome_dia() {
-
+		$dadosIg = new igreja();
+		$nomeIg = $dadosIg->Arrayigreja();
 		$this->sql_d_dia = mysql_query ($this->query." DATE_FORMAT(m.datanasc,'%d/%m')='{$this->dia_consulta}' ".$this->query_fim) or die (mysql_error());
-
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{
-			$inc++;
-
-			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
-
+			echo '<tr>';
 			if ($_GET["proxima"]<>"") {}
-
 			$this->idade = date('Y')-$this->dados['idade'];
-			$this->igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
-			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["nome"]}</a></td><td>{$this->igreja->razao()}</td><td>".cargo ($this->dados["rol"])['0']."</td></tr>";
+		//	$this->igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
+			echo "<td> $this->idade </td><td>";
+			echo "<a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a>";
+			echo "</td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["nome"]}</a>";
+			echo '</td><td>'.$nomeIg[$this->dados["congregacao"]]['0'].'</td>';
+			echo '<td class="text-center">'.$nomeIg[$this->dados["congregacao"]]['5']."</td>";
+			echo '<td>'.cargo ($this->dados["rol"])['0']."</td></tr>";
 		}
-
 	}
 
 	function casamento() {
@@ -1047,42 +937,29 @@ class aniversario {
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{
 			$inc++;
-
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
-
 			$this->idade = date('Y')-$this->dados['casamento'];
 			$this->igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
 			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_famil.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$this->igreja->razao()}</td><td>".cargo ($this->dados["rol"])['0']."</td></tr>";
 		}
-
 	}
 
 	function batismo() {
-
 		echo "Data da consulta atual {$prox_dia}/{$this->mes}/{$this->ano}";
-
 		$this->sql_d_dia = mysql_query ($this->query." DATE_FORMAT(e.batismo_em_aguas,'%d/%m')='{$this->dia_consulta}' ".$this->query_fim) or die (mysql_error());
-
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{
 			$inc++;
-
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
-
 			$this->idade = date('Y')-$this->dados['batismo'];
 			$this->igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
 			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_famil.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$this->igreja->razao()}</td><td>".cargo ($this->dados["rol"])['0']."</td></tr>";
 		}
-
 	}
 
 	function semana() {
-
-
 	$semana = date('W') + $_GET["proxima"];
-
 	if ($semana<10 && $semana>0) {$semana="0".$semana;}
-
 	if ($semana < "1"){
 		echo "<script> alert('Vocï¿½ jï¿½ atingiu o Ano anterior!');</script>";
 		echo "Vocï¿½ jï¿½ atingiu o Ano anterior!";
@@ -1090,12 +967,9 @@ class aniversario {
 		echo "<script> alert('Vocï¿½ jï¿½ atingiu o Ano seguinte!');</script>";
 		echo "Vocï¿½ jï¿½ atingiu o Ano seguinte!";
 	}
-
 		$sql_semana = mysql_query ($this->query." DATE_FORMAT(m.datanasc,'%m')='{$this->semana_consulta}'".$this->query_fim) or die (mysql_error());
-
 		while($this->dados=mysql_fetch_array($sql_semana))
 		{
-
 			$igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
 			$var_aniv = date('W',mktime (0,0,0,$this->dados["mes"],$this->dados["dia"],date ('Y')));
 
@@ -1103,9 +977,7 @@ class aniversario {
 			//Como o MySQL retornava o valor da semana do ano em que o membro nasceu e em muitos casos diferente da semana atual optei selecionar do banco o mï¿½s inteiro e impor esta condiï¿½ï¿½o e assim aparentemente nï¿½o houve erro na listagem.
 			$inc++;
 			$this->tot_aniv ++;
-
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
-
 			echo "<td>{$this->dados["dia"]}/{$this->dados["mes"]}</td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$igreja->razao()}</td><td>".cargo ($this->dados["rol"])['0']."</td></tr>";
 			} //else {echo $var_aniv; $ok = "Falha! Date W -> ".date('W')." <--Fim";}
 		}
@@ -1116,32 +988,22 @@ class aniversario {
 	}
 
 	function mes() {
-
 		$this->sql_d_dia = mysql_query ($this->query." DATE_FORMAT(m.datanasc,'%m')='{$this->mes_consulta}' ".$this->query_fim) or die (mysql_error());
-
 		//$nome_dia = mysql_num_rows($sql_d_dia);
-
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{
 			$inc++;
 			$inc_c++;
-
-			if ($inc_c=="1") { echo "<tr class='odd'>"; } elseif ($inc_c=="0")  {echo "<tr class='dados'>";}
-
+			echo '<tr>';
 			echo "<td>{$this->dados["dia"]}/{$this->dados["mes"]}</td>
 				<td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["nome"]}</a></td>";
-
 			if ($inc=="2") { echo "</tr>"; }
-
 			if ($inc_c>"3") { $inc_c=0; }
-
 			if ($inc>1) {$inc=0;}
 		}
-
 	}
 
 	function data_consulta () {
-
 		return $this->consulta;
 	}
 }
@@ -1149,7 +1011,6 @@ class aniversario {
 class disciplina {
 
 	function __construct (){
-
 		$this->query = "SELECT motivo, cad, DATE_FORMAT(data_ini,'%d/%m/%Y') AS dt_ini, DATE_FORMAT(data_fim,'%d/%m/%Y') AS data_fim FROM disciplina WHERE rol={$_SESSION["rol"]} ";
 
 		/*
@@ -1172,32 +1033,24 @@ class disciplina {
 	}
 
 	function tabela_disc () {
-
 	}
-
 }
 
 class situacao_espiritual {
-
 	protected $situacao;
 	protected $rol;
-
 	function __construct ($situacao="",$rol=""){
-
 		$this->valor = $situacao;
 		$this->rol 	 = ($rol>'0') ? $rol:$_SESSION["rol"];
 		$this->result = mysql_query("SELECT DATE_FORMAT(data_fim,'%d/%m/%Y') AS dt_fim FROM disciplina WHERE rol = '$rol' ORDER BY id DESC LIMIT 1");
 		$this->data = mysql_fetch_array($this->result);
 		$this->data_fim = $this->data ["dt_fim"];
-
 		switch ($this->valor){
 			case "1":
 				$this->situacao = "Membro";
 				break;
 			case "2":
-
 				$this->situacao = "Displinado";
-
 				break;
 			case "3":
 				$this->situacao = "Falecido";
@@ -1218,7 +1071,6 @@ class situacao_espiritual {
 	}
 
 	function situacao (){
-
 		switch ($this->situacao)
 		{
 			case "0":
@@ -1241,7 +1093,6 @@ class situacao_espiritual {
 class pendencias {
 
 	function __construct () {
-
 		$this->var_string = "SELECT rol,nome,obs FROM membro WHERE OBS<>''";
 		$this->sql_pendencia = mysql_query($this->var_string);
 		$this->qt_pend = mysql_num_rows($this->sql_pendencia);
@@ -1252,23 +1103,16 @@ class pendencias {
 	}
 
 	function lista_pendecia() {
-
 		$this->var_string .= "";
-
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{
 			$inc++;
 			$inc_c++;
-
 			if ($inc_c=="1") { echo "<tr class='odd'>"; } elseif ($inc_c=="0")  {echo "<tr class='dados'>";}
-
 			echo "<td>{$this->dados["dia"]}/{$this->dados["mes"]}</td>
 				<td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["nome"]}</a></td>";
-
 			if ($inc=="2") { echo "</tr>"; }
-
 			if ($inc_c>"3") { $inc_c=0; }
-
 			if ($inc>1) {$inc=0;}
 		}
 	}

@@ -1,6 +1,6 @@
 <?php
 
-$query = "SELECT * from igreja ORDER BY razao";
+$query = 'SELECT * from igreja WHERE status<>"0" ORDER BY setor,razao';
 
 $nmpp="20"; //Número de mensagens por párginas
 $paginacao = Array();
@@ -10,7 +10,6 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 		$sql2 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
 		$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
-
 		if ($_GET["pagina1"]<1) {
 			$_GET["pagina1"] = 1;
 		} elseif ($_GET["pagina1"]>$paginas) {
@@ -29,16 +28,14 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 		{
 		?>
 		<table class='table table-hover table-striped table-bordered'>
-
 		<caption>Lista de Dirigentes</caption>
-
 			<colgroup>
 				<col id="Rol">
 				<col id="Nome">
-				<col id="Dirigente Atual">
+				<col id="Congregacao">
+				<col id="Setor">
 				<col id="albumCol"/>
 			</colgroup>
-
 			<thead>
 				<tr>
 				<th scope="col"><a href="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=1&cargo=<?PHP echo $_GET["cargo"];?>&id=<?PHP echo $_GET["id"];?>&pagina1=<?PHP echo $_GET["pagina1"];?>" title="Ordenar por ROL">Rol
@@ -51,6 +48,7 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 				<?PHP } ?>
 				</a></th>
 				<th scope="col">Congre&ccedil;&atilde;o</th>
+				<th scope="col">Setor</th>
 				<th scope="col">Cargo</th>
 				</tr>
 			</thead>
@@ -60,10 +58,10 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 			{
 				$numRol = sprintf("%'04u", $coluna["pastor"]);
 			?>
-            <tr>
+      <tr>
 				<td><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo (int)$coluna["pastor"];?>"><?php echo $numRol;?></a></td>
 				<td><?php
-					$rol_dirigente = (int) $coluna["pastor"];
+					$rol_dirigente = intval($coluna["pastor"]);
 					if ($rol_dirigente>0){
 						$nome = new DBRecord ("membro",$coluna["pastor"],"rol");
 						$nome_dirigente = $nome->nome();}
@@ -72,14 +70,17 @@ $paginacao['link'] = "?"; //Paginação na mesma página
 					?>
 					<a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $coluna["pastor"];?>"><?php echo $nome_dirigente;?></a></td>
 				<td><?php echo $coluna["razao"];?></td>
-				<td><?php
-                    if (intval($coluna["pastor"])=='0') {
-                        $funIgreja = '-o-';
-                    } else {
-                        $funIgreja = cargo ($coluna["pastor"])['0'];
-                    }
-                 echo $funIgreja;
-                ?></td>
+				<td class='text-center'><?php echo nRomano($coluna["setor"]);?></td>
+				<td>
+					<?php
+              if (intval($coluna["pastor"])=='0') {
+                  $funIgreja = '-o-';
+              } else {
+                  $funIgreja = cargo ($coluna["pastor"])['0'];
+              }
+           echo $funIgreja;
+          ?>
+				</td>
 			<?PHP
 			}//loop while produtos
 	?>

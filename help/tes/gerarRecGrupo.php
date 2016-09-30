@@ -5,7 +5,7 @@
 	 * help/tes/reciboPgto.php
 	 */
 	//echo '<h1>gerarRecGrupo</h1>';
-	$igreja = new DBRecord ("igreja","1","rol");
+//	$igreja = new DBRecord ("igreja","1","rol");
 	//$referente = $_POST['referente'];
 	$valor_us = $valor['pgto'];
 	$cad_igreja = $valor['igreja'];

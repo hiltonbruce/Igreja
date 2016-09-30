@@ -336,9 +336,13 @@ a.list-group-item-primary:focus {
 a.list-group-item-primary.active,
 a.list-group-item-primary.active:hover,
 a.list-group-item-primary.active:focus {
-
   color: #fff;
   background-color: #3276b1;
   background-image: linear-gradient(to bottom, #04C, #08C);
   border-color: #31708f;
+}
+
+.thumb:hover { /* estado "OVER" do link */
+width: 300px; /* largura da imagem */
+height: 400px; /* altura da imagem */
 }

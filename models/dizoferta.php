@@ -16,7 +16,6 @@ $vlrregistro = mysql_fetch_row($ultregistro);
 $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&
 		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' autofocus='autofocus' >Continuar...</button><a>";
 
-
 $msgAlert  = '<div class="alert alert-danger" role="alert">';
 $msgAlert .= '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
 $msgAlert .= '<span class="sr-only">Error:</span> ';
@@ -24,9 +23,7 @@ $msgAlert .= '<span class="sr-only">Error:</span> ';
 if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && $vlrregistro[0] =='') && $rolIgreja ) {
 	$igrejaSelecionada = new DBRecord('igreja', $rolIgreja, 'rol');
 	//Verifica se o caixa do ultimo culto foi encerrado e se há algum valor em dizimo, oferta ou oferta extra
-
 	$sem = semana($_POST["data"]);
-
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 	switch ($_POST['tipo']) {
 		case '1':

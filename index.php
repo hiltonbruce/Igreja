@@ -72,7 +72,6 @@ $igSede = new DBRecord('igreja', '1', 'rol');
 <div class="wrap1">
   <div class="wrap2">
     <?php require_once 'menu.php';?>
-
       <div class="info1">
 	  <?php //echo "Sessï¿½o ".$_SESSION["setor"];?>
         <marquee direction="left" scrollamount="3" height="27"><strong>

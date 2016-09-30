@@ -7,7 +7,6 @@ switch ($rec_tipo){
 		$texto ="Eu, ".strtoupper( toUpper($membro->nome())).", ";
 		$texto .= "CPF: ".$prof->cpf();
 		//echo("<h1>{$prof->rg()}ttt</h1>");
-
 		if ($prof->rg()==(int)$prof->rg()){
 			$texto .= ", RG: ".$prof->rg();
 			if ($prof->orgao_expedidor()!=""){
@@ -27,13 +26,11 @@ switch ($rec_tipo){
 	case 2:
 		$nome = new DBRecord ("credores",$numero,"id");
 		$cidade = new DBRecord ("cidade",$nome->cidade(),"id");
-
 		if (strlen($nome->cnpj_cpf())==18){
 			$tipo = "CNPJ";
 		}elseif (strlen($nome->cnpj_cpf())==14){
 			$tipo = "CPF";
 		}
-
 		$texto =  "Pago a ".strtoupper( toUpper($nome->razao())).", ";
 		$texto .= "$tipo: ".$nome->cnpj_cpf().", situada &agrave;: ".$nome->end().", N&ordm; ".$nome->numero();
 		$texto .= ", ".$nome->bairro()." - ".$cidade->nome()." - ".$nome->uf();
@@ -50,18 +47,13 @@ switch ($rec_tipo){
 	default:
 		echo "<script> alert('Recibo indefinido!');location.href='../?escolha=tesouraria/recibo.php&menu=top_tesouraria&rec={$_POST["rec"]}';</script>";
 }
-
-
 if ($gerarPgto) {
 	//Verifica click duplo ou se é para gerar
 	echo "<script> alert('Este recibo já foi registrado!');</script>";
 }elseif ($erro != '1'){
-
 	$contas = new tes_conta();
 	$contasAtivas = $contas->ativosArray();
 	//print_r ($contasAtivas);
-
-
 	//print_r($contasAtivas);
 	//Cadastra o recibo na tabela
 	if (strstr($_POST['acessoDebitar'], ',')) {
@@ -79,7 +71,6 @@ if ($gerarPgto) {
 	}elseif (empty($debito)) {
 		$debito ='';
 	}
-
 	if (strstr($_POST['credito'], ',')) {
 		$creditoContas = explode(',',$_POST['credito']);
 		//print_r($debitoContas);
@@ -99,13 +90,12 @@ if ($gerarPgto) {
 	}
 	//echo("<h1>$debitoContas - $debito</h1>");
 	//echo("<h1> $creditoContas - $credito</h1>");
-
 	$dt = br_data($data,"Data do recibo invalida: $data");
-			$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','$debito','$credito',";
-			$value .= "'$lancamento','$referente','$dt','$hist'";
+	$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','$debito','$credito',";
+	$value .= "'$lancamento','$referente','$dt','$hist'";
 
-			$dados = new insert ($value,"tes_recibo");
-			$dados->inserir();
+	$dados = new insert ($value,"tes_recibo");
+	$dados->inserir();
 
 }
 ?>

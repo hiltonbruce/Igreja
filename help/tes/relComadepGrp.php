@@ -42,8 +42,8 @@ if ($movSld !='--o--' || $saldoAtual !='--o--' || $saldoAntr !='--o--') {
 	$nivel3   .= $nivelN3.$nivel2;
 //	$nivelNi2 .= $nivelN02.$nivelN3.$nivelN2;
 	$grpN3 .= $nivelN3.$nivel2;
-}
 	$nivelCom01 .= $nivelN3.$nivelCom02;
+}
 	$nivelCom02 = '';
 	$nivel2 = '';
 	$nivelN2 = '';

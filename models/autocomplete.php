@@ -97,18 +97,15 @@ while( $campo = mysql_fetch_array( $res ) )
 			$html = preg_replace("/(" . $q . ")/i", "<strong>\$1</strong>", $estado);
 		break;
 	}
-
 $img='../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
 if (!file_exists($img)){
 	$img='img_membros/ver_foto.jpg';//Localização p/ JavaScript
 }else{
 	$img='img_membros/'.$campo['rol'].'.jpg';//Localização p/ JavaScript
 }
-$html ='<img src="'.$img.'" title="Rol: '.$rol.'" style="width:24px;height:32px;"> '.$html;
+$html ='<img class="thumb" src="'.$img.'" title="Rol: '.$rol.'" style="width:24px;height:32px;"> '.$html;
 echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$rol');\">$html ($sigla)</li>\n";
-
 $quantExibir++;
-
 if ($quantExibir>'9') {
 		break;
 	}
@@ -118,9 +115,6 @@ if ($quantExibir>'9') {
 	} else {
 		$linhas .=' ocorr&ecirc;ncia';
 	}
-
 	echo '<p style="text-align: right;">Total de '.$linhas.'<br />';
-	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
-
-
+	echo 'S&atilde;o mostradas at&eacute; as 10... primeiras!</p>';
 ?>

@@ -18,7 +18,6 @@ $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $titTabela;?></title>
-<link rel="stylesheet" type="text/css" href="../tabs.css" />
 <link rel="icon" type="image/gif" href="../br_igreja.jpg">
 </head>
 <body>
@@ -32,9 +31,7 @@ $igreja = new DBRecord ( 'igreja', '1', 'rol' );
     <br />Email: <a href="mailto: <?PHP echo "{$igreja->email()}";?>">Secretaria Executiva&nbsp;</a>
 	</p>
 </div>
-
 <?php
-
 	$fimPagina = ' <div id="footer">
     Copyright &copy; 2016  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
     </div>
@@ -56,7 +53,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 }
 //-->
 </script>
-
 <?PHP
 	require_once ("aniv/navega.php");
 }
@@ -68,12 +64,11 @@ if ($_GET["congregacao"]>"0" ) {
     $cong_sele = " - Todas as congrega&ccedil;&otilde;es";
 }
 ?>
-<table cellspacing="0" id="listTable" class='table' summary="Idade, Rol, Nome, Congregação e Cargo">
+<table class='table table-striped table-hover' summary="Idade, Rol, Nome, Congregação e Cargo">
 <caption>
 Lista de Aniversariantes
 <?PHP
 $aniv = new aniversario;
-
 if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
 	echo " de hoje";
 }else {
@@ -87,6 +82,7 @@ echo $cong_sele;
 <col id="Rol" />
 <col id="Nome" />
 <col id="Congrega" />
+<col id="Setor" />
 <col id="albumCol" />
 </colgroup>
 <thead>
@@ -106,6 +102,7 @@ echo $cong_sele;
 <img src="img/s_desc.png" width="11" height="9" border="0" />
 <?PHP } ?>
 </a></th>
+<th scope="col">Setor</th>
 <th scope="col">Cargo</th>
 </tr>
 </thead>

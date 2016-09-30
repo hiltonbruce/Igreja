@@ -1,31 +1,39 @@
 <?php
-//Limpa as variï¿½veis
-$ministerio = '';$tesoureiro = '';$auxilio = '';$zeladores = '';$sexta = '';$demaisPgto = '';$rec_tipo=false;
+//Limpa as variáveis
+$ministerio = '';
+$tesoureiro = '';
+$auxilio = '';
+$zeladores = '';
+$sexta = '';
+$demaisPgto = '';
+//$rec_tipo=false;
 
 if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 	//Verifica click duplo no form de criar recibos
-	if ((check_transid($_POST["transid"]) || $_POST["transid"]<1)) {
+	if ((check_transid($_POST["transid"]) || $_POST["transid"]<'1')) {
 		//houve click duplo no form
 		$gerarPgto = true;
 	}else {
-		//Nï¿½o houve click duplo no form
+		//Não houve click duplo no form
 		$gerarPgto = false;
-		//Grava no banco codigo de autorizaï¿½ï¿½o para o novo recibo
+		//Grava no banco codigo de autorização para o novo recibo
 		add_transid($_POST["transid"]);
-		//script que orienta a criaï¿½ï¿½o dos recibos
+		//script que orienta a criação dos recibos
 		$gerar = 'help/tes/gerarRecGrupo.php';
 		require_once 'help/tes/definirRecGrupo.php';
 	}
 }
-$dia1 ='';$dia15 ='';$diaOutros ='';
-$cor=true;$cor1=true;$cor2=true;
+$dia1 ='';
+$dia15 ='';
+$diaOutros ='';
+$cor=true;
+$cor1=true;
+$cor2=true;
 //print_r($listaPgto);
 foreach ($listaPgto as $chave => $valor) {
-
 	$referente = $_POST['referente'].' - '.$valor['nomeFunc'];
 	//$codAcessoDesp = $valor['coddespesa'];#Fonte do recurso
 	//$codFonte = $valor['tipo'];#Cod. de acesso da despesa
-
 	//echo($codFonte);
 	$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 	$bgcolor1 = $cor1 ? 'class="dados"' : 'class="odd"';
@@ -35,18 +43,15 @@ foreach ($listaPgto as $chave => $valor) {
 	$bgcolor5 = $cor5 ? 'class="dados"' : 'class="odd"';
 	$bgcolor6 = $cor6 ? 'class="dados"' : 'class="odd"';
 	$bgcolor7 = $cor7 ? 'class="dados"' : 'class="odd"';
-
 	if (!empty($_POST['grupo']) && $valor['pgto']=='0') {
 		$vlrPgto = false;
 	}else {
 		$vlrPgto = true;
 	}
-
 	$pgto	= ($valor['pgto']>'0') ? $valor['pgto']:'<span class="btn btn-success btn-xs">Voluntï¿½rio</span>';
-
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
-  	$nomeDiaPgto = $valor['diapgto'];
-  	if ($_GET['id']==$valor['id']) {
+  $nomeDiaPgto = $valor['diapgto'];
+  if ($_GET['id']==$valor['id']) {
   		if ($valor['nome']=='') {
 	  		list($nome,$dcpf,$drg) = explode(',',$valor['naoMembro']);
 	  		list($tcpf,$cpf) = explode(':', $dcpf);
@@ -67,7 +72,6 @@ foreach ($listaPgto as $chave => $valor) {
   		$codCta = $valor['coddespesa'];
   		$tipo = $valor['tipo'];
   	}
-
   	if ($valor['status']=='0') {
   		$remove  = '<a href="./?'.$recLink.$valor['id'].'&remover=1&age=8" title="Ativar linha!"> <span class="glyphicon glyphicon-ok-sign text-success"> </span></a>';
   		$remove  .= ' <a title="Linha Desativada!" disabled> <span class="glyphicon glyphicon-ban-circle"> </span> <span class="glyphicon glyphicon-edit"></span></a>';
@@ -79,15 +83,13 @@ foreach ($listaPgto as $chave => $valor) {
   		$alterar = '<a href="./?'.$recLink.$valor['id'].'&age=7" title="Alterar dados!"> <span class="glyphicon glyphicon-edit text-info"> </span></a>';
   		$estado ='';
   	}
-
 	$nomeMembro = sprintf ("%s %s %'05u - %s ",$remove,$alterar,$valor['rolMembro'],$nomeMembro);
-
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
 		//Lista do Ministï¿½rio
 		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.$estado.'</td><td>'.$valor['nomeFunc'].
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
-				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
+		<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor = !$cor;
 		$totMinisterio += $valor['pgto'];
 		//Cadastra o recibo
