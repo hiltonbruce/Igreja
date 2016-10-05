@@ -3,18 +3,17 @@
     <colgroup>
 		<col id="Usuários">
 		<col id="Inicializar/Excluir!">
-		<col id="">
-		<col id="!">
+		<col id="Área">
+		<col id="albumCol">
 	</colgroup>
     <tbody>
     <?php
       $options = new usuarios();
       $lista = $options->Arrayusuario();
-  for ($item=0;$item<count($lista);$item++){
-  		foreach ($lista[$item] as $key => $result):
-    	   $usuario->$key = $result;
-  		endforeach;
-
+      for ($item=0;$item<count($lista);$item++){
+    		foreach ($lista[$item] as $key => $result):
+      	   $usuario->$key = $result;
+    		endforeach;
   $errorIni = true;
   if ($usuario->situacao=='1' && ($usuario->setor==$_SESSION["setor"] || $_SESSION["setor"]>='50')) {
     $botaoAtDes = '<p><button class="btn btn-danger btn-sm" ><span class="glyphicon ';

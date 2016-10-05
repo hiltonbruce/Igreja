@@ -1,4 +1,5 @@
 <?php
+	$altEdit = ($_SESSION["setor"]=='3' || $_SESSION["setor"]=='99') ? true:false;
 	require_once 'views/secretaria/menuTopDados.php';
 	$foco = (empty($_GET['bsc_rol'])) ? 'autofocus="autofocus"' : '';
 ?>
