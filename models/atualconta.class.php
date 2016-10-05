@@ -48,7 +48,8 @@ class atualconta {
 				//Nova versão de tabela
 				if ($this->creditar >'0' ) {
 				//$histLancamento = mysql_escape_string($histLanc);
-				$insertLancNova = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,$linha,$this->creditar,$valor,$igreja,$data,$_SESSION['valid_user']);
+				$cadResp = date('d/m/Y H:i:s').' '.$_SESSION['valid_user'];
+				$insertLancNova = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,$linha,$this->creditar,$valor,$igreja,$data,$cadResp);
 				$lancNovaVersao = new incluir($insertLancNova, 'lanc');
 				$lancNovaVersao->inserir();
 				}

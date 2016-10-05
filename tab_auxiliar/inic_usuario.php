@@ -1,67 +1,56 @@
 <fieldset><legend>Altera&ccedil;&atilde;o e Inicializa&ccedil;&atilde;o de Senhas</legend>
-<table id="Tabela de usuarios" summary="Lista de todos os usuarios com acesso ao sistema." style="text-align: left; width: 100%;">
+<table id="Tabela de usuarios" class='table table-striped table-hover'>
     <colgroup>
-		<col id="Usuï¿½rios">
+		<col id="Usuários">
 		<col id="Inicializar/Excluir!">
 		<col id="">
 		<col id="!">
 	</colgroup>
     <tbody>
     <?php
+      $options = new usuarios();
+      $lista = $options->Arrayusuario();
+  for ($item=0;$item<count($lista);$item++){
+  		foreach ($lista[$item] as $key => $result):
+    	   $usuario->$key = $result;
+  		endforeach;
 
-    $options = new usuarios();
-	$lista = $options->Arrayusuario();
-
-	for ($item=0;$item<count($lista);$item++){
-		foreach ($lista[$item] as $key => $result):
-	         $usuario->$key = $result;
-		endforeach;
-
-		++$contar;
-
-		$zebrar = ($contar % 2) == 0 ? "class='odd'" : "";
-		?>
-		<tr <?php echo $zebrar;?>>
-			<td width='50%'><?php
-				echo "CPF: ".$usuario->cpf." - Cargo:".$usuario->cargo;
-					$alterar = new formusuario();
-					$alterar->alt_nome($usuario->nome, $usuario->id, ++$ind);
+  $errorIni = true;
+  if ($usuario->situacao=='1' && ($usuario->setor==$_SESSION["setor"] || $_SESSION["setor"]>='50')) {
+    $botaoAtDes = '<p><button class="btn btn-danger btn-sm" ><span class="glyphicon ';
+    $botaoAtDes .= 'glyphicon-remove"></span> Desativar...</button></a></p>';
+  } elseif ($usuario->setor==$_SESSION["setor"] || $_SESSION["setor"]>='50') {
+    # Opção de ativa caso esteja desativado
+    $botaoAtDes = '<p><button class="btn btn-success btn-sm" ><span class="glyphicon ';
+    $botaoAtDes .= 'glyphicon-ok"></span> Ativar...</button></a></p>';
+  }else {
+    $errorIni = false;
+    $botaoAtDes = '';
+  }
+  $alterar = new formusuario($usuario->cpf,$usuario->cargo);
+  	?>
+		<tr>
+			<td width='40%'>
+        <?php
+					$alterar->alt_nome($usuario->nome, $usuario->id, ++$ind,$errorIni);
 				?>
-			</td>
-			<td>
-				<a href="./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario&id=<?php echo $usuario->id;?>">
+				<a href="./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario&id=<?php
+        echo $usuario->id;?>">
 				<?php
-
-					$colInicializar = '';
-
-					if ($usuario->situacao=='1' && $usuario->setor==$_SESSION["setor"]) {
-						echo '<button class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove"></span> Desativar...</button></a>';
-					} elseif ($usuario->setor==$_SESSION["setor"]) {
-						# Opï¿½ï¿½o de ativa caso esteja desativado
-						echo '<button class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-ok"></span> Ativar...</button></a>';
-					}else {
-						//echo '<button class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-ok"></span> Ativar...</button></a>';
-					}
-
+          echo $botaoAtDes;
 					$situacao = ($usuario->situacao=='0') ? 1 : 0 ;
-
-					$errorIni = true;
-
-					if ($_GET['id']==$usuario->id && ($usuario->setor==$_SESSION["setor"] || $usuario->nivel>'10')) {
+					if ($_GET['id']==$usuario->id && ($usuario->setor==$_SESSION["setor"] || $_SESSION['setor']>='50')) {
 						$options->Atualizar($_GET['id'],$situacao);
 					}elseif ($_GET['id']==$usuario->id) {
 						# code...
-						echo '<script> alert("Vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para alterar esse usuï¿½rio!")</script>';
-						$errorIni = false;
+						echo '<script> alert("Você não tem autorização para alterar esse usuário!")</script>';
 					}
-				?>
-				</td><td>
-				<?php
 					if ($errorIni) {
 						#Se tem autorizaï¿½ï¿½o inicializa senha
 						$alterar->ini_senha($usuario->id, ++$ind);
+					}else {
+					  echo '</td><td>';
 					}
-
 				?>
 			</td>
     	</tr>

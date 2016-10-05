@@ -739,14 +739,12 @@ function arrayDia ($dia) {
 
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
 
-	$alerta = "<script> alert('Desculpe mas vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para $tipo!');location.href='./';</script>";
+	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
-
 		$id = ($_POST["id"]=="") ? $_GET["id"]:$_POST["id"];
 		$dados = new DBRecord("usuario", $id, "id");
 		$autoriza = $_SESSION['nivel'] >= $dados->nivel ? 0 : 1;
-
 	}
 
 	switch ($tipo) {
@@ -755,43 +753,47 @@ function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o,
 				echo $alerta;
 				return exit;
 			}
-			break;
+		break;
 		case "atualizar":
 			if ($_SESSION["nivel"]<8 || $autoriza==1){
 				echo $alerta;
 				return exit;
 			}
-			break;
+		break;
 		case "inserir":
 			if ($_SESSION["nivel"]<7 ){
 				echo $alerta;
 				return exit;
 			}
-			break;
+		break;
 		case "deletar":
 			if ($_SESSION["nivel"]<9 || $autoriza==1){
 				echo $alerta;
 				return exit;
 			}
-			break;
+			case "sec":
+				if ($_SESSION["setor"]<9 || $autoriza==1){
+					echo $alerta;
+					return exit;
+				}
+		break;
 		case "admin_user":
 			if ($_SESSION["nivel"]<10){
 				echo $alerta;
 				return exit;
 			}
-			break;
+		break;
 		case "tes":
 			if ($_SESSION["setor"]<50 && $_SESSION["setor"]!=2){
 				echo $alerta;
 				echo "Ative o JavaScript em seu navegador!";
 				return exit;
 			}
-			break;
+		break;
 		default:
 			echo $alerta;
 			return exit;
 			break;
-
 	}
 }
 

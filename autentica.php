@@ -13,7 +13,6 @@
 	{
 		// se o usu�rio estiver no banco de dados, registra o id do usu�rio
 		$col = mysql_fetch_array($result);
-
 		$_SESSION['nivel'] = $col["nivel"];
 		$_SESSION['valid_user'] = $col["cpf"];
 		$_POST["rol"] = $col["cpf"];
@@ -34,13 +33,10 @@
 					{
 						$sauda = "Boa Noite! ";
 					}elseif ($hora>"12") {
-
 						$sauda="Boa Tarde! ";
-
 					}else{
 						$sauda="Bom Dia! ";
 					}
-
 		if ($_SESSION['setor']=='2') {
 			echo "<script> alert('".$sauda.$_SESSION['nome']." . $quant_aniv'); location.href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria';</script>";
 		}else {

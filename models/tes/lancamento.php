@@ -174,11 +174,10 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 				$ctaComadep = new DBRecord('contas','3.1.1.001.007','codigo');
 				$sldAntComadep = number_format($ctaComadep->saldo(),2,',','.');
 			}
-
 		}
 
 	//Exibi lançamento
-	//Faz lançameto de multa caso exista
+	//Faz lan�ameto de multa caso exista
 	if ($ctaMulta) {
 		$ctaMulta = new DBRecord('contas',$ctaMulta->codigo(),'codigo');
 		$multaAtraso = new atualconta($ctaMulta->codigo(),$ultimolanc,$credora->id());
@@ -198,7 +197,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
    	if ($provmissoes>0) {
 		$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
 		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
-		$histTextProv =' e provisão para SEMAD sobre a receita';
+		$histTextProv =' e provis�o para SEMAD sobre a receita';
 
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
@@ -244,18 +243,16 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$totalCred += $valor+$multa;
 		//$corlinha = !$corlinha;
 
-	//Lança provisões conta credora no Ativo
+	//Lan�a provis�es conta credora no Ativo
 	$lancprovmissoes=false;
 	if ($provmissoes>0) {
 		//Faz o lançamento da provisão de missões - Ativo
 		$ctaSemad = new DBRecord('contas','7','acesso');//Conta provisão SEMAD
 		$sldAntSemad = number_format($ctaSemad->saldo(),2,',','.');
-
 		$provsemad = new atualconta('1.1.1.001.007',$ultimolanc);
 		$provsemad->atualizar($provmissoes,'C',$roligreja,$data);
 		$totalCred += $provmissoes;
 		$lancprovmissoes=true;
-
 		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$conta = new DBRecord('contas','7','acesso');//Exibi lançamento da provisão SEMAD
 		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
@@ -263,7 +260,6 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 		$sldAntSemad);
 		//$corlinha 	= !$corlinha;
 	}
-
 
 	if ($provcomadep>0) {
 		$ctaProvcomad = new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
@@ -286,7 +282,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
 	//inserir o histórico do lançamento das provisões na tabela lanchist
 
-	//Lança o histórico do lançamento das provisões $provmissoes>0 $provcomadep>0
+	//Lança o histórico do lan�amento das provisões $provmissoes>0 $provcomadep>0
 	if ($lancprovmissoes) {
 	$HistProv = sprintf("'','%s','%s','%s'",$ultimolanc,$histTextProv,$roligreja);
 	//$lanchist = new incluir($HistProv, 'lanchist');
@@ -326,7 +322,7 @@ echo $novoLanc;
 	?>
 <div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button"
 	class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	 <strong>Atualização de p&aacute;gina</strong><br /> Houve clique duplo ou Atualiza&ccedil;&atilde;o
+	 <strong>Atualiza&ccedil;&atilde;o de p&aacute;gina</strong><br /> Houve clique duplo ou Atualiza&ccedil;&atilde;o
 	  de p&aacute;gina e impedimos o lan&ccedil;amento duplicado. </div>
 	<?php
 }
