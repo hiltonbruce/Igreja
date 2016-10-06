@@ -118,23 +118,18 @@ $igSede = new DBRecord('igreja', '1', 'rol');
 		   	 <?php
           	}
           ?></ul>
-          <ul class="list-group">
-          <li class="list-group-item list-group-item-primary"><strong>Usu&aacute;rio:</strong></li>
            <?PHP
           //echo "<h2>{$_SESSION["rol"]}</h2>";
           require_once ("autentica.php");
           ?>
-        </ul>
       </div>
       <div id="content">
 		  <?PHP
 		  } else {
         echo '<div id="main-content">';
       }
-
-      //Painel direito
-      echo $mainpanelIni;
-
+  //Painel direito
+    echo $mainpanelIni;
 		if (!empty($_SESSION["valid_user"])){
 			if (strstr($escGET,"adm/")){
 				if (strstr($escGET,"adm/dados_pessoais"))
@@ -156,13 +151,10 @@ $igSede = new DBRecord('igreja', '1', 'rol');
 
 			$cent = new central();//Chama o script da pagina de acordo com $_get ou $_post ["escolha"]
 			require ($cent->get());
-
 		}else {
 				require_once ('views/login.php');
 		}
-
     echo $mainpanelFim;
-
     if ($escGET<>"cetad/caixa.php" && $dirGET=='' && !empty($_SESSION['valid_user'])) {
 		  require_once ("painel_direito.php");
 		}

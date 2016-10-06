@@ -4876,11 +4876,11 @@ a.label:focus {
   background-color: #5e5e5e;
 }
 .label-primary {
-  background-color: #89b833;
+  background-color: #337bb8;
 }
 .label-primary[href]:hover,
 .label-primary[href]:focus {
-  background-color: #286090;
+  background-color: #6b9028;
 }
 .label-success {
   background-color: #5cb85c;
@@ -5702,7 +5702,7 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #ddd;
 }
 .panel-primary {
-  border-color: #337ab7;
+  border-color: #337bb8;
 }
 .panel-primary > .panel-heading {
   color: #fff;

@@ -5,7 +5,8 @@ $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 $profis = new DBRecord ("profissional",ltrim($_POST["cpf"]),"cpf");
 if ($profis->cpf()<>"" && $profis->cpf()<>$_POST["cpf_atual"]) {
 ?>
-	CPF: <?PHP echo "{$_POST["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> ! <a href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf">Voltar...</a>
+	CPF: <?PHP echo "{$_POST["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> !
+	 <a href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf">Voltar...</a>
 	<script language="JavaScript" type="text/javascript">
 		alert("CPF: <?PHP echo "{$_POST["cpf"]} já cadastrado para o Rol: {$profis->rol()}"?>...");
 		location.href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf";
@@ -84,6 +85,5 @@ if ($_POST['tabela'] == 'carta') {
 		$dados_pessoais = new insert ("$value","{$_POST["tabela"]}");//deve-se colocar todos valores para os campos da tabela a ser inserida
 		$dados_pessoais->inserir();
 	}
-}
-	echo mysql_error();
+}	echo mysql_error();
  ?>

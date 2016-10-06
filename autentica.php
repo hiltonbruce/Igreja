@@ -4,9 +4,8 @@
 	//se o usuï¿½rio acabou de tentar efetuar login
 	$cpf = $_POST['cpf'];
 	$senha = md5($_POST['senha']);
-
-	$query = 'select * from usuario '
-			.'where cpf="'.$cpf.'" '
+	$query = 'select u.*,s.alias from usuario AS u, setores AS s '
+			.'where cpf="'.$cpf.'" AND u.setor=s.id '
 			.'and senha="'.$senha.'" AND situacao="1"';
  $result = mysql_query($query) or die (mysql_error());
  if (mysql_num_rows($result)>0)
@@ -16,7 +15,7 @@
 		$_SESSION['nivel'] = $col["nivel"];
 		$_SESSION['valid_user'] = $col["cpf"];
 		$_POST["rol"] = $col["cpf"];
-		$_SESSION['cargo'] = $col["cargo"];
+		$_SESSION['cargo'] = $col["alias"];
 		$_SESSION['nome'] = $col["nome"];
 		$nomeUsuario = explode(' ', $col["nome"]);
 		$_SESSION['username'] = $nomeUsuario['0'].'_'.$nomeUsuario['1'];
@@ -46,19 +45,31 @@
 				}elseif ($aniv->qt_dia()==1) {
 					$quant_aniv = "Hoje temos apenas um aniversariante!";
 				}else {
-					$quant_aniv = "Hoje nï¿½o temos aniversariantes!";
+					$quant_aniv = "Hoje n&aatilde;o temos aniversariantes!";
 				}
 			echo "<script> alert('".$sauda.$_SESSION['nome']." . $quant_aniv'); location.href='./?escolha=aniv/aniversario.php&menu=top_aniv';</script>";
 		}
-
 	}
 }
 	if (isset($_SESSION['valid_user']))
 	{
-		echo "<h5> Nome: ".$_SESSION['nome']."<br/> Cargo: ".$_SESSION['cargo']."<br/> CPF: ".$_SESSION['valid_user'].
-				'<br/>Host: '.$_SESSION['computador'].'</h5>';
-		echo "<p><a class='btn btn-info' href='logout.php'>Sair</a>
-		<a class='btn btn-info' href='./?escolha=alt_senha.php'>Trocar Senha</a></p>";
+		?>
+		<br />
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+			 <span class="panel-title">
+ 		    <h6><?php echo $_SESSION['nome']; ?></h6>
+			</span>
+			</div>
+			<div class="panel-body">
+				CPF: <?php echo $_SESSION['valid_user'];?><br />
+				Setor: <?php echo $_SESSION['cargo'];?><br />
+				Host: <?php echo $_SESSION['computador'];?>
+		<?php
+		echo '<br /><br /><div class="btn-group" role="group" aria-label="...">';
+		echo '<a class="btn btn-info" href="logout.php">Sair</a>';
+		echo '<a class="btn btn-info" href="./?escolha=alt_senha.php">Trocar Senha</a>';
+		echo '</div></div></div>';
 		require_once 'chat/samplea.php';
 		//Verifica se a senha foi alterada apï¿½s inicializaï¿½ï¿½o caso contrï¿½rio chama pï¿½gina de aletraï¿½ï¿½o
 		$senha_crip = md5($_SESSION["valid_user"]);
@@ -66,24 +77,20 @@
 		."where cpf='{$_SESSION["valid_user"]}'"
 		." and senha='$senha_crip' ";
  		$result_senh = mysql_query($query_senha) or die (mysql_error());
-
  		if (mysql_num_rows($result_senh)>0){
-
- 			echo "Desculpe-nos, porï¿½m vocï¿½ sï¿½ poderï¿½ continuar no sistema apï¿½s alterar sua senha atual!";
+ 			echo "Desculpe-nos, por&eacute;m voc&ecirc; s&oacute; poder&aacute; continuar no sistema ap&oacute;s alterar sua senha atual!";
  			$_GET ["escolha"] = "alt_senha.php";
  		}
-
 	}
 	else
 	{
 		if (isset($cpf))
 		{
 			// se o usuï¿½rio tentar efetuar o login e falhar
-			echo "<script> alert('Usuï¿½rio desconhecido ou senha incorreta!');</script>";
+			echo "<script> alert('Usuário desconhecido ou senha incorreta!');</script>";
 		}
 	// o usuï¿½rio nï¿½o tentou efetuar o login ainda ou saiu
-
-		// fornece um formulï¿½rio para efetuar o login
+	// fornece um formulï¿½rio para efetuar o login
 	if (empty($ind)){ $ind = 0;}
 ?>
 <fieldset>

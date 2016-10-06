@@ -1,7 +1,5 @@
 <?php
-
 	ver_cad($bsc_rol);
-
 	$tabela = "membro";
 	$tab="adm/atualizar_dados.php";//link q informa o script quem receber� os dados do form para atualizar
 	$tab_edit="adm/dados_pessoais.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
@@ -12,17 +10,14 @@
 	}
 	$arr_dad = mysql_fetch_array ($dad_cad);
 	$ind = 1;
-
 	 if (file_exists("img_membros/".$bsc_rol.".jpg")) {
 	        $img=$bsc_rol.".jpg";
 	    } else {
 	        $img="ver_foto.jpg";
 	    }
-
 	if ($altEdit) {
 		require_once 'views/secretaria/editMembro.php';
 	} else {
 		require_once 'views/secretaria/verMembro.php';
 	}
-
 ?>
