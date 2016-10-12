@@ -14,5 +14,5 @@
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Impress&atilde;o</button>
 </a>
 <a <?PHP $b=link_ativo($_GET["rec"], "6");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=6">
-	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Por Ped&iacute;odo</button>
+	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Por Per&iacute;odo</button>
 </a>

@@ -1,11 +1,36 @@
 <?php
 class tes_conta {
 
-	function __construct () {
+	protected $cta;
+	function __construct ($cta=null) {
 
 		$sqlConsulta  = 'SELECT * ';
 		$sqlConsulta .= 'FROM contas ';
-		$sqlConsulta .= 'ORDER BY codigo,titulo';
+		//fitra por grupo de contas
+		if (strlen($_GET['gpconta'])<='13') {
+			$cta = trim($cta);
+			switch (strlen($cta)) {
+				case '13':
+					$sqlConsulta .= 'WHERE codigo="'.$cta.'"';
+					break;
+				case '9':
+					$sqlConsulta .= 'WHERE nivel4="'.$cta.'"';
+					break;
+				case '5':
+					$sqlConsulta .= 'WHERE nivel3="'.$cta.'"';
+					break;
+				case '3':
+					$sqlConsulta .= 'WHERE nivel2="'.$cta.'"';
+					break;
+					/*
+				case '1':
+					$sqlConsulta .= 'WHERE nivel1="'.$cta.'"';
+					break;
+					*/
+			}
+		}
+
+		$sqlConsulta .= ' ORDER BY codigo,titulo';
 		$this->query = $sqlConsulta;
 		$this->membros = mysql_query($this->query) or die (mysql_error());
 

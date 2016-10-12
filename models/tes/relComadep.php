@@ -12,19 +12,21 @@ $cred = '<strong> C</strong>';
 $dev = '<strong> D</strong>';
 
 
-#Monta array com informaï¿½ï¿½es das contas atualmente
-$plano = new tes_conta();
+#Monta array com informações das contas atualmente
+$plano = new tes_conta($_GET['gpconta']);
 $planoCta = $plano->contasTodas();
 $planoCod = $plano->contasCod();
 
-//Busca do movimento no mï¿½s
+//Busca do movimento no mês
 $queryLanc  = 'SELECT l.*,DATE_FORMAT(l.data,"%Y%m") AS dt FROM lanc AS l';
 $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"';
+//Filtra por igreja
 if ($idIgreja>'0' && $idIgreja!='-1') {
 $queryLanc .= ' AND igreja="'.$idIgreja.'"';
 }elseif ($idIgreja=='-1') {
 $queryLanc .= ' AND igreja!="1"';
 }
+
 //$queryLanc .= ' AND c.id=l.creditar';
 //$queryLanc .= ' ORDER BY ';
 $lista = mysql_query($queryLanc) or die(mysql_error());

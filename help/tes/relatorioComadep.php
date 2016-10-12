@@ -10,6 +10,7 @@ if (empty($_GET['ano'])) {
 $d = $_GET['dia'];
 $m=$_GET['mes'];
 $dataMov = $d.'/'.$m.'/'.$a;
+$gpconta = (empty($_GET['gpconta'])) ? '' : $_GET['gpconta'] ;
 
 	if (!empty($_GET['igreja']) && $_GET['igreja']>'0') {
 		$rolIgreja = ' AND igreja="'.intval($_GET['igreja']).'" ';
@@ -55,5 +56,4 @@ $dataMov = $d.'/'.$m.'/'.$a;
 		list($d,$m,$a) = explode('/',date('d/m/Y'));
 		$mesRelatorio = '"'.date('Ym').'"';
 	}
-
 ?>

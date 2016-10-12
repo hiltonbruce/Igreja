@@ -48,7 +48,8 @@ foreach ($saldo AS $chave => $valor){
 		//echo $planoCta[$chave]['4'].' -- ';
 		if ($ctaAtualN4==$planoCod[$chave]['nivel4'] || $ctaAtualN4==''){
 			//Contas simples
-			if ($vlrSaldo != '--o--' || $vlrSaldoAtual != '--o--' || $vlrSaldoAnte != '--o--') {
+			if (($vlrSaldo != '--o--' || $vlrSaldoAtual != '--o--' || $vlrSaldoAnte != '--o--') &&
+			$planoCod[$chave]['titulo']!='') {
 				#Inclui linha se houver saldo em dos períodos
 				$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
 				$nivel1 .= '<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - ';
@@ -57,7 +58,7 @@ foreach ($saldo AS $chave => $valor){
 				$nivel1 .= $vlrSaldoAnte.'</td></tr>';
 			}
 		}elseif ($rec=='16') {
-			//Contas Nivel 4, tipo: 1.1.1.001 - Impressão
+			//Contas Nivel 4, tipo: 1.1.1.001 - Impress�o
 			require '../help/tes/relComadepG2.php';
 		}else {
 			//Contas Nivel 4, tipo: 1.1.1.001 - Tela
