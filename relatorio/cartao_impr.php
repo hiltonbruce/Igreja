@@ -18,13 +18,13 @@ require "../func_class/classes.php";
 	$cidade = new DBRecord ("cidade",$rec_pessoais->naturalidade(),"id");
 
 	$rec_ecl->c_impresso  = date("Y-m-d"); //Aqui é atribuido a esta variável um valor para UpDate
-	$rec_ecl->Update();
+	//$rec_ecl->Update();
 
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
 	$atual = $rec_ecl -> hist ();
-	$rec_ecl ->hist="@Impresso em: ". date ('d/m/Y H:i:s') .", por: $hist" . $atual ; //Aqui é atribuido a esta variável um valor para UpDate
-	$rec_ecl ->quem_imprimiu = $_SESSION['valid_user'];
+	$rec_ecl->hist="@Impresso em: ". date ('d/m/Y H:i:s') .", por: $hist" . $atual ; //Aqui é atribuido a esta variável um valor para UpDate
+	$rec_ecl->quem_imprimiu = $_SESSION['valid_user'];
 	$rec_ecl->Update(); //É feita a chamada do método q realiza a atualização no Banco
 
 	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em águas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();

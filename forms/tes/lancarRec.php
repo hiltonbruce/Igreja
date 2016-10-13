@@ -90,7 +90,9 @@ if ($rec) {
 						(<?php
 						echo conv_valor_br ($recDados->data());
 						?>)</label>
-						<input name="data" type="text" class="form-control dataclass" value="<?php echo conv_valor_br ($recDados->data());?>" />
+						<input name="data" type="text" class="form-control dataclass"
+						value="<?php echo conv_valor_br ($recDados->data());?>"
+						tabindex='1'/>
 					  </div>
 
 					<?php

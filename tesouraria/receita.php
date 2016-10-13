@@ -1,6 +1,4 @@
 <?php
-
-
 if (intval($_POST['rolIgreja'])>0) {
 	$idIgreja=intval($_POST['rolIgreja']);
 }elseif (!empty($_GET['igreja'])) {
@@ -12,7 +10,6 @@ if (intval($_POST['rolIgreja'])>0) {
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
 $tabela = (empty($_GET['tabela'])) ? '' : $_GET['tabela'];
 $idLanc = (empty($_GET['id'])) ? '' : $_GET['id'];
-
 $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 
 if ($rec>'12' && $rec<'20') {
@@ -34,9 +31,7 @@ if ($rec>'12' && $rec<'20') {
 	}else {
 		$origem = $igreja->cidade();
 	}
-
 	require_once '../help/tes/receitaImprimir.php';//Opções de  impressï¿½es para o script
-
 	}
 }else {
 $ind=1;
@@ -45,9 +40,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 $_SESSION['lancar']=true;
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
-
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
-
 $dizmista = new dizresp($_SESSION['valid_user']);
 
 if ($idIgreja==0) {
@@ -57,7 +50,6 @@ if ($idIgreja==0) {
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 	$igLanc = $igrejaSelecionada;
 }
-
 	// verifica se hï¿½ valor a ser lançado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);
 	$tituloColuna5 = ($idIgreja > '1') ? 'Congrega&ccedil;&atilde;o' : 'Igreja';
@@ -69,10 +61,8 @@ if ($idIgreja==0) {
 		} else {
 			$linkAcesso  = 'escolha=tesouraria/receita.php&menu=top_tesouraria';
 			$linkAcesso .= '&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
-
 			$fin = ($_GET['fin'] < '1') ? '2' : $_GET['fin'];
 			$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'];
-
 			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
 	}
 
@@ -83,7 +73,6 @@ if ($idIgreja==0) {
 	header("Location: ./");
 }
 	unset($_SESSION['lancar']);
-
 	require_once $tabRelatorio;
 }
 ?>

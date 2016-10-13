@@ -279,32 +279,29 @@ function data_batismo($data,$link){
 		echo "bat -> $batismo  ** atual->".mktime();
 
 		if ($res != 1 ){
-			echo "<script> alert('Data invï¿½lida! Vocï¿½ digitou: $data');  location.href='$link';</script>";
+			echo "<script> alert('Data inválida! Você digitou: $data');  location.href='$link';</script>";
 			break;
 		}elseif ($batismo<mktime()){
-			echo "<script> alert('Data anterior a hoje! Vocï¿½ digitou: $data, e ï¿½ alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
+			echo "<script> alert('Data anterior a hoje! Você digitou: $data, e é alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
 			break;
 		}
-
 	}else{
-		echo "<script> alert('Data nï¿½o informada!');</script>";
-		echo "<h1> Data nï¿½o informada! </h1>";
-
+		echo "<script> alert('Data não informada!');</script>";
+		echo "<h1> Data n&aatilde;o informada! </h1>";
 	}
 }
 
 function fun_igreja ($rol){
 	//retorno o nome do membro de acordo com o rol
-	$membro = new DBRecord ("membro",$rol,"rol");
+	$membro = new DBRecord ('membro',$rol,'rol');
 	return  $membro->nome();
 }
 
 function quem_entregou ($cpf){
-	//retorno o nome do membro de acordo com o rol
-	$membro = new DBRecord ("usuario",$cpf,"cpf");
+	//retorno o nome do membro de acordo com o cpf
+	$membro = new DBRecord ('usuario',$cpf,'cpf');
 	return  $membro->nome();
 }
-
 
 function validaCPF($cpf){
   // determina um valor inicial para o digito $d1 e $d2

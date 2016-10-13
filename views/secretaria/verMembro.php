@@ -1,4 +1,4 @@
-<table class='table table-striped'>
+<table class='table table-striped table-condensed'>
     <tr>
       <td colspan="2">
 				<strong>Nome:</strong><h4><?PHP echo $arr_dad["nome"]; ?></h4>
