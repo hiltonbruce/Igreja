@@ -4,8 +4,17 @@ if ($rec) {
 	$recDados = new DBRecord('tes_recibo',$recibo,'id');
 	$contas = new tes_conta();
 	$ctaAces = $contas->ativosArray();
+	$ctaAcessos = false;
 	$sldPgto = ($recDados->valor()<=$ctaAces[$recDados->fonte()]['saldo']) ? true : false ;
-	$ctaAcessos = ($recDados->conta()>'0' && $recDados->fonte()>0) ? true : false ;
+	if ($recDados->conta()>0 && $recDados->fonte()>'0' && $recDados->lancamento()=='0') {
+		$ctaAcessos = true;
+	}elseif ($recDados->lancamento()!='0') {
+		$corpoMens = 'Recibo j&aacute; lan&ccedil;ado!';
+	}elseif ($recDados->fonte()=='0') {
+		$corpoMens = 'Informe qual caixa do pagamento ser&aacute; utilizado! E verifique se h&aacute; outras pend&ecirc;cias...';
+	}else {
+		$corpoMens = 'A conta de despesa deve ser informada!';
+	}
 ?>
 <fieldset>
 	<legend>Confirma Lan&ccedil;amento Cont&aacute;bil de Recibo</legend>
@@ -83,7 +92,6 @@ if ($rec) {
 							 required="required" />
 					</td>
 					<td>
-
 					<div class="row">
 					  <div class="col-xs-6">
 						<label>Data
@@ -94,11 +102,9 @@ if ($rec) {
 						value="<?php echo conv_valor_br ($recDados->data());?>"
 						tabindex='1'/>
 					  </div>
-
 					<?php
 						if ($sldPgto && $ctaAcessos) {
 					?>
-
 					  <div class="co$ctaAcessosl-xs-3">
 					    <label>&nbsp;</label>
 						<input type="submit" name="Submit" value="Confirmar..." class="btn btn-primary btn-sm"
@@ -107,13 +113,10 @@ if ($rec) {
 						<input type="hidden" name="transid" value="<?php echo (get_transid());?>">
 					  </div>
 					</div>
-
-
 					<?php
 					} else {
 						if (!$ctaAcessos) {
 							$titMens = 'Contas';
-							$corpoMens = 'Todas as Contas devem ser informadas, verifique se todas est&atilde;o preenchidas';
 							$btnMes = 'Erro Conta';
 						} else {
 							$titMens = 'Saldo insuficiente - '.$ctaAces[$recDados->fonte()]['titulo'];
@@ -122,15 +125,12 @@ if ($rec) {
 						    $corpoMens .= 'E s&oacute; ent&atilde;o poder&aacute; confirmar este pagamento...';
 							$btnMes = 'Caixa sem Saldo!';
 						}
-
 					?>
-
 						<!-- Button trigger modal -->
 						<label>&nbsp;</label>
 						<button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#myModal">
 						  <?php echo $btnMes;?>
 						</button>
-
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						  <div class="modal-dialog" role="document">
@@ -154,7 +154,6 @@ if ($rec) {
 					<?php
 					}
 					?>
-
 					</td>
 				</tr>
 			</tbody>

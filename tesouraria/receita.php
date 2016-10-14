@@ -31,7 +31,7 @@ if ($rec>'12' && $rec<'20') {
 	}else {
 		$origem = $igreja->cidade();
 	}
-	require_once '../help/tes/receitaImprimir.php';//Opções de  impressï¿½es para o script
+	require_once '../help/tes/receitaImprimir.php';//Opções de  impressões para o script
 	}
 }else {
 $ind=1;

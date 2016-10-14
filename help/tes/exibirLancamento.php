@@ -1,5 +1,4 @@
 <?php
-
 switch ($debitar) {
 	case '1':
 	 	$caixaCentral +=$valor;

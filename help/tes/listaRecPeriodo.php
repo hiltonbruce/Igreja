@@ -12,18 +12,15 @@
   } else {
     $mesPer =$_GET['mes'];
   }
-
   if (empty($_GET['dia'])) {
     $diaPer = '';
   } else {
     $diaPer =$_GET['dia'];
   }
-
 $credorPer = new tes_credores();
 $credorLista = $credorPer->dados();
 $membroPer = new membro();
 $membroLista = $membroPer->nomes();
-
 //print_r ($credorLista);
   foreach ($recBuscas->periodo($diaPer,$mesPer,$anoPer) as $key => $value) {
     $nivel1 .='<tr>';
@@ -42,7 +39,15 @@ $membroLista = $membroPer->nomes();
       $recebPer = $value['recebeu'];
     }
 
-    $nivel1 .=$recebPer;
+    if ($value['lancamento']>0) {
+      $status  = '<img src="img/yes.png" alt="Recibo lan&ccedil;ado!" width="16" ';
+      $status .= 'height="16" title="Recibo lan&ccedil;ado!"/>';
+    }else {
+      $status  = '<img src="img/exclamacao.png" alt="Recibo sem lan&ccedil;amento!" ';
+      $status .= 'width="16" height="16" title="Recibo sem lan&ccedil;amento!" />';
+    }
+
+    $nivel1 .='<a href="'.$linkPer.$key.'">'.$status.' '.$recebPer.'</a>';
     $nivel1 .='</td>';
     $nivel1 .='<td>';
     $nivel1 .=$value['motivo'];

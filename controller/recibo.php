@@ -2,11 +2,9 @@
 $ind=1;
 if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 	session_start();
-
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 		require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
 		$igreja = new DBRecord ("igreja","1","rol");
-
 		if ($_GET['igreja']>'1') {
 			$igrejaRelatorio = new DBRecord ("igreja",$_GET['igreja'],"rol");
 			$congRelatorio = $igrejaRelatorio->razao();
@@ -15,7 +13,6 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 		}else {
 			$congRelatorio = '';
 		}
-
 		$recMenu = (empty($_GET["rec"])) ? $_POST["rec"]:$_GET["rec"];
 		switch ($recMenu) {
 			case '20':
@@ -25,20 +22,15 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				$recLink='';
 				$titTabela = 'Listagem para Pagamento';
 				require_once '../help/tes/reciboPgto.php';
-
 				$nomeArquivo='../views/tesouraria/recPgto.php';
 				require_once '../views/modeloPrint.php';
-
 			break;
-
 			case '21':
-				//Impressï¿½o de vï¿½rios Reciboserror_reporting(E_ALL);
+				//Impressï¿½o de vários Reciboserror_reporting(E_ALL);
 				error_reporting(E_ALL);
 				ini_set('display_errors', 'off');
-
 				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />';
 				$scriptCSS  .= '<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />';
-
 				$saltoPagina = '<div style="page-break-before: always;"> </div>';
 				if ($igreja->cidade()>0) {
 					$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -52,18 +44,12 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				;
 			break;
 		}
-
-
 	}
-
 }else {
 	require_once 'help/tes/cabRecPgto.php';//Link's dos recibo
 }
-
 if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-
 $recMenu = (empty($_POST["rec"])) ? intval($_GET["rec"]):intval($_POST["rec"]);
-
 switch ($recMenu){
 	case 2:
 		//Recibos Pessoa Jurï¿½dica

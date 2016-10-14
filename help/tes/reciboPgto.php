@@ -7,7 +7,6 @@ $zeladores = '';
 $sexta = '';
 $demaisPgto = '';
 //$rec_tipo=false;
-
 if ($_POST['referente']!='' && $_POST['grupo']>'0' && $_POST['grupo']<'9') {
 	//Verifica click duplo no form de criar recibos
 	if ((check_transid($_POST["transid"]) || $_POST["transid"]<'1')) {
@@ -32,7 +31,8 @@ $cor2=true;
 //print_r($listaPgto);
 foreach ($listaPgto as $chave => $valor) {
 	$referente = $_POST['referente'].' - '.$valor['nomeFunc'];
-	//$codAcessoDesp = $valor['coddespesa'];#Fonte do recurso
+	$codAcessoDesp = $valor['coddespesa'];#Fonte do recurso
+	$codAcessoCred = $valor['tipo'];#Fonte do recurso
 	//$codFonte = $valor['tipo'];#Cod. de acesso da despesa
 	//echo($codFonte);
 	$bgcolor = $cor ? 'class="dados"' : 'class="odd"';

@@ -3,12 +3,10 @@
 	  <a <?PHP $b=link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0">
 	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Busca</button></a>
 	</div>
-
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "1"); ?> href="<?php echo $linkLancamento;?>&rec=1">
 	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Entradas</button></a>
 	</div>
-
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3">
 	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Esc. B&iacute;blica</button></a>

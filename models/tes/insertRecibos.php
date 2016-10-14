@@ -68,7 +68,9 @@ if ($gerarPgto) {
 		}
 	}elseif (!empty($_POST['acessoDebitar']) && intval($_POST['acessoDebitar'])==$_POST['acessoDebitar']) {
 		$debito = $_POST['acessoDebitar'];
-	}elseif (empty($debito)) {
+	}elseif (!empty($codAcessoCred)) {
+		$debito = $codAcessoCred;
+	}else {
 		$debito ='';
 	}
 	if (strstr($_POST['credito'], ',')) {
@@ -82,7 +84,7 @@ if ($gerarPgto) {
 			}
 		}
 	}elseif (!empty($_POST['credito']) && intval($_POST['credito'])==$_POST['credito']) {
-		$credito = (int)$_POST['credito'];
+		$credito = $_POST['credito'];
 	}elseif (!empty($codAcessoDesp)) {
 		$credito = $codAcessoDesp;
 	}else {
@@ -93,9 +95,7 @@ if ($gerarPgto) {
 	$dt = br_data($data,"Data do recibo invalida: $data");
 	$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','$debito','$credito',";
 	$value .= "'$lancamento','$referente','$dt','$hist'";
-
 	$dados = new insert ($value,"tes_recibo");
 	$dados->inserir();
-
 }
 ?>

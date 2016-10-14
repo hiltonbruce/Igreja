@@ -11,12 +11,9 @@ class agenda {
 		$ind = 0;
 		while($this->dados = mysql_fetch_array($this->agenda))
 		{
-			$mud_acent = strtoupper(strtr($this->dados["nome"], 'Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³ÃµÃ´ÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã•Ã”ÃšÃœÃ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-
+			$mud_acent = strtoupper(strtr($this->dados["nome"], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 			$todos[$ind++] = $mud_acent;
-
 		}
-
 		return $todos ;
 	}
 
@@ -141,18 +138,16 @@ class agenda {
 		}else {
 			$nome = $coluna_fix["nome"];
 		}
-
 		$status ='<a href = "./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$coluna_fix['id'].'" title = "Informar pagamento!" ><img src="img/editar.jpg" alt="Editar agenda!" width="16" height="16" />Pagar!</a>';
-
 		switch ($coluna_fix['status']) {
 			case 1:
 				$status .= '<img src="img/exclamacao.png" alt="Pagamento serÃ¡ realizado hoje!" width="16" height="16"/>Saiu p/ Pgto';
-				$titulo = 'Pagamento serÃ¡ realizado hoje!';
+				$titulo = 'Pagamento ser&aacute; realizado hoje!';
 				break;
 			case 2:
 				$status = '<img src="img/yes.png" alt="DÃ­vida Paga! Obrigado." width="16" height="16"/>Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
 				$status .= ' - '.$coluna_fix['resppgto'];
-				$titulo = 'DÃ­vida Paga! Obrigado.';
+				$titulo = 'D&iacute;­vida Paga! Obrigado.';
 				break;
 			case 3:
 				$status = 'Quitado';
@@ -160,14 +155,14 @@ class agenda {
 				break;
 			default:
 				if (date("Y-m-d")==$coluna_fix['vencimento']) {
-					$status .= '<img src="img/exclamacao.png" alt="DÃ­vida nÃ£o Paga!" width="16" height="16" />Pgto Hoje!';
-					$titulo = 'DÃ­vida nÃ£o Paga!';
+					$status .= '<img src="img/exclamacao.png" alt="D&iacute;­vida n&atilde;o Paga!" width="16" height="16" />Pgto Hoje!';
+					$titulo = 'D&iacute;­vida n&atilde;o Paga!';
 				}elseif (date("Y-m-d")>$coluna_fix['vencimento']){
-					$status .= '<img src="img/not.png" alt="DÃ­vida Vencida!" width="16" height="16" />Vencida!';
-					$titulo = 'DÃ­vida Vencida!';
+					$status .= '<img src="img/not.png" alt="D&iacute;­vida Vencida!" width="16" height="16" />Vencida!';
+					$titulo = 'D&iacute;­vida Vencida!';
 				}else {
-					$status .= '<img src="img/exclamacao.png" alt="DÃ­vida a Pagar!" width="16" height="16" />Ã€ Pagar';
-					$titulo = 'DÃ­vida a Pagar!';
+					$status .= '<img src="img/exclamacao.png" alt="D&iacute;­vida a Pagar!" width="16" height="16" />Falta€ Pagar';
+					$titulo = 'D&iacute;vida a Pagar!';
 				}
 				break;
 		}

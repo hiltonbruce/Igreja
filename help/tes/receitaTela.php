@@ -12,7 +12,6 @@ if (empty($_GET['ano'])) {
 	$ano = 0;
 	$anoForm = '';
 }
-
 if (!empty($_GET['igreja'])) {
 	$roligreja = $_GET['igreja'];
 } elseif (!empty($_POST['igreja'])) {
@@ -20,7 +19,6 @@ if (!empty($_GET['igreja'])) {
 }elseif (empty($roligreja))  {
 	$roligreja = '';
 }
-
 switch ($rec) {
 	case '1':
 		require_once 'forms/concluirdiz.php';#Form fecha caixa

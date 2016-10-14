@@ -18,7 +18,6 @@ if (!empty($_GET['data'])) {
 }else {
 	$dtlanc = '';
 }
-
 if (!empty($_GET['menu'])) {
         $rec = $_GET['rec'];
         $escolha = $_GET['escolha'];
@@ -28,7 +27,6 @@ if (!empty($_GET['menu'])) {
         $escolha = $_POST['escolha'];
         $menu = $_POST['menu'];
 }
-
 if ($dtlanc == '') {
 	$dataProxLanc = new tes_igreja($roligreja,$anolanc);
 	$periodoLanc = $dataProxLanc->dataEntrada();

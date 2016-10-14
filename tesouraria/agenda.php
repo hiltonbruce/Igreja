@@ -22,22 +22,18 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	}else {
 		$credorAgenda= '';
 	}
-
 	$credor = $credorAgenda;
 	//echo date('d/m/Y',$currentPgto);
 	$lista = new agenda();
 	$despesasInserirdas = $lista->insdespmes();
-
 	if (!empty($_GET['vencidas'])) {
 		require_once 'tesouraria/vencidas.php';//Faz a busca dos compromissos agendados
 	}
-
 	if ($_GET['id']>0 && empty($_POST['atualizar'])) {
 		require_once 'forms/pgtoagenda.php';//Form para atualizaï¿½ï¿½o, pagamento ou pendï¿½ncia
 	}elseif ($_POST['atualizar']>'0'){
 		$atualizar= new updatesist('agenda',$_POST['atualizar'],'id');
 		$atualizar->resppgto	=	$_POST['resppgto'];
-
 		//Verifica se o vencimento Ã© uma data validade e atualiza
 		if (checadata($_POST['vencimento'])) {
 			$vencimento = br_data ($_POST['vencimento'],'Data de Vencimento');
@@ -51,18 +47,15 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 				echo "<script> alert('O vencimento só poderá ser alterado o dia!');</script>";
 				echo 'O vencimento s&oacute; poder&aacute; ser alterado o dia!';
 			}
-
 		}else {
 			echo "<script> alert('O vencimento com data inválida! {$_POST['vencimento']}');</script>";
 		}
-
 		list($cnpj,$razao) = explode(' ',$_POST['nome'] );
 		//echo "<h1>$cnpj</h1>";
 		if ($cnpj!='') {
 			$nomeCredor = new DBRecord ('credores',$cnpj,'cnpj_cpf');
 			$atualizar->credor = $nomeCredor->id();
 		}
-
 		if ($_POST['paraMembro']=='1') {
 			 $atualizar->credor		= 	'r0';
 		}elseif ($_POST['paraCredor']=='1'){
@@ -72,7 +65,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		}elseif (!empty($_POST['credor']) ) {
 			$atualizar->credor		= 	intval($_POST['credor']);
 		}
-
 		$atualizar->igreja		= 	$_POST['rolIgreja'];
 		$atualizar->motivo		= 	$_POST['referente'];
 		$atualizar->status		= 	$_POST['status'];
@@ -91,7 +83,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
 		$atualizar->hist	= 	$hist;
 		$total = number_format($atualizar->valor+$atualizar->multa,2,",",".");
-
 		if ($_POST['status']=='2'){
 			$pagamento = ($_POST['data']=='') ? date('Y-m-d') : br_data($_POST['data'],"Data do pagamento!");
 			$atualizar->datapgto	=	$pagamento;
@@ -100,7 +91,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$mensagem = '<script> alert("Conta enviada para Pagamento! Responsável: '.$_POST['resppgto'].');</script>';
 			$atualizar->datapgto	=	'';
 		}
-
 		if ($_POST['status']=='2' && $lancDespesa) {
 			# realiza lanï¿½amento da despesa e Atualiza agenda
 			require_once 'models/tes/lancAgenda.php';
@@ -108,13 +98,10 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			# Atualiza agenda
 			$atualizar->Update();
 		}
-
 		require_once 'forms/pgtoagenda.php';//Form para atualizaï¿½ï¿½o, pagamento ou pendï¿½ncia
 		require_once 'forms/tes/buscaAgenda.php';// Busca por Despesas Agendadas
 		echo $mensagem;
-
 	}elseif ($_POST['Submit']=='Inserir...'){
-
 		$maior_idfat  = 'SELECT MAX(idfatura) AS maximo FROM agenda ';
 		$maior_idfat = mysql_query($maior_idfat);
 		$maior_idfat = mysql_fetch_array($maior_idfat);
@@ -123,7 +110,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 
 		require_once 'forms/tes/buscaAgenda.php'; // Busca por Despesas Agendadas
 	}
-
 	require_once 'tesouraria/periodo10dias.php';//Agenda com o perï¿½odo 5 dias a antes e apï¿½s a data atual
 	if ($_GET['fixa']=='on') {
 		?>

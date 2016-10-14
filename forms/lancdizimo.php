@@ -29,9 +29,7 @@ while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 	$exibirlanc .= $lanc['0'];
 	$histLanca[]=$lanc['1'];
 }
-
 require_once 'views/lancdizimo.php';//chama o view para montar
-
 if ($totDebito>'1') {
 	$hist = str_replace( "nesta data", 'neste m&ecirc;s', $hist );
 }
@@ -41,10 +39,9 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	$ind = 0;
 	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br ($dataLc):$_POST['dataLancamento'];
 	?>
-
 <form method="post" action="">
 	<div class="col-xs-12">
-		<label>Hist&oacute;rico do lan&ccedil;amento:</label> 
+		<label>Hist&oacute;rico do lan&ccedil;amento:</label>
 		<input type="text" name="hist" id="hist" size="60" autofocus="autofocus" class="form-control"
 			tabindex="<?PHP echo ++$ind;?>" value='<?PHP echo $hist;?>'>
 	</div>
@@ -56,7 +53,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	<div class="col-xs-2">
 			<label>&nbsp;</label>
   			<input type="submit" name="Submit" class='btn btn-primary btn-sm'
-			value="Lançar..." tabindex="<?PHP echo ++$ind;?>" />
+			value="Lan&ccedil;ar..." tabindex="<?PHP echo ++$ind;?>" />
 	</div>
 		<input name="escolha" type="hidden" value="<?php echo $_GET['escolha'];?>" />
 		<input name="lancar" type="hidden" value="1" />
@@ -65,7 +62,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 <?php
 	//echo '<h1> ***'.$dataLc.'</h1>';
 }elseif ($totDebito<1 && $totCredito<1) {
-	echo '<h3>Essa Igreja não possui lançamento a realizar!</h3>';
+	echo '<h3>Essa Igreja n&atilde;o possui lan&ccedil;amento a realizar!</h3>';
 }else {
 	echo '<h3>Voc&ecirc; deve corrigir a pend&ecirc;ncia do lan&ccedil;amento acima para finalizar!</h3>';
 }
