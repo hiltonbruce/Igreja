@@ -3,7 +3,6 @@
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_POST['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
-
 #Analisa se será lançado em contas a pagar e fazer o reconhecimento da despesas
 list($anoVenc,$mesVen,$diaVenc) = explode('-',$vencimento);
 $data = br_data($_POST['data'], 'Data do lan�amento inv�lida!');
@@ -141,7 +140,6 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 			if ($debitar=='2') {
 				//Provisão para Missões
 				$provmissoes += $valor*0.4;
-
 			}elseif ($devedora->nivel4()=='1.1.1.001' && $devedora->acesso()>0 && $devedora->tipo()=='D') {
 				//Para tipo 8 não há provisão para COMADEP ou Missões
 				$provcomadep += $valor*0.1;

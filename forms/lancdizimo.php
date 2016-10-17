@@ -1,7 +1,6 @@
 <?php
 $_SESSION['debito']=0;
 $_SESSION['credito']=0;
-
 //concluir lançamento final na tabela lançamento
 $roligreja =(int) $_POST['rolIgreja'];
 $lanigreja = new DBRecord('igreja',$roligreja, 'rol' );
@@ -33,7 +32,6 @@ require_once 'views/lancdizimo.php';//chama o view para montar
 if ($totDebito>'1') {
 	$hist = str_replace( "nesta data", 'neste m&ecirc;s', $hist );
 }
-
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;

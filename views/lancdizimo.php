@@ -25,9 +25,9 @@
 		</tbody>
 		<tfoot>
 			<?php
-				printf("<tr style='background:#000000;font-weight:bold;'><td style='color:#FFFFFF;text-align:right;' colspan='2'>");
-				printf("%s %'.40s R$</td><td style='color:#FFFFFF;text-align:right;'>",'Totais','.');
-				printf(" %s</td><td style='color:#FFFFFF;text-align:right;'> %s</td><td></td><td></td></tr>",number_format($_SESSION['debito'],2,',','.'),number_format($_SESSION['credito'],2,',','.'));
+				printf("<tr id='total'><td class='text-right' colspan='2'>");
+				printf("%s %'.40s R$</td><td class='text-right' >",'Totais','.');
+				printf(" %s</td><td class='text-right' > %s</td><td></td><td></td></tr>",number_format($_SESSION['debito'],2,',','.'),number_format($_SESSION['credito'],2,',','.'));
 				unset($_SESSION['debito']);
 				unset($_SESSION['credito']);
 			?>
@@ -35,7 +35,6 @@
 	</table><h1>
 	<?php
 	$histLancamento = array_keys(array_flip(array_unique($histLanca)));
-
 	for ($i=0; $i < count($histLancamento)-1; $i++) {
 		if ($i==0) {
 			$hist = $histLancamento[$i];

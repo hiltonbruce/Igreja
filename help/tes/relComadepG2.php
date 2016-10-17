@@ -33,7 +33,7 @@
 		<td id="moeda">'.$saldoAntr.'</td></tr>';
 	$nivelGrupoN2 = '<tr><td>'.$nivelGrupo;
 	$nivelCom02 .= '<tr><td>'.$nivelGrupo;
-	$nivelGrupo = '<tr class="success"><td>'.$nivelGrupo;
+	$nivelGrupo = '<tr class="danger"><td>'.$nivelGrupo;
 	$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
 	$nivel2 .= $nivelGrupo.$nivel1;
 	$nivelN2 .= $nivelGrupoN2;

@@ -38,15 +38,11 @@ $membroLista = $membroPer->nomes();
     } else {
       $recebPer = $value['recebeu'];
     }
-
     if ($value['lancamento']>0) {
-      $status  = '<img src="img/yes.png" alt="Recibo lan&ccedil;ado!" width="16" ';
-      $status .= 'height="16" title="Recibo lan&ccedil;ado!"/>';
+      $status  = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>';
     }else {
-      $status  = '<img src="img/exclamacao.png" alt="Recibo sem lan&ccedil;amento!" ';
-      $status .= 'width="16" height="16" title="Recibo sem lan&ccedil;amento!" />';
+      $status  = '<span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span>';
     }
-
     $nivel1 .='<a href="'.$linkPer.$key.'">'.$status.' '.$recebPer.'</a>';
     $nivel1 .='</td>';
     $nivel1 .='<td>';

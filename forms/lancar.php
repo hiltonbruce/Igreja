@@ -6,7 +6,6 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 	<legend>Lan&ccedil;amento Cont&aacute;bil</legend>
 		<!-- Desenvolvido por Wellington Ribeiro -->
 		<form method="post" name="autocompletar" action="">
-
 		<table class='table'>
 			<tbody>
 				<tr>
@@ -46,7 +45,7 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 						tabindex="<?PHP echo ++$ind; ?> " class="form-control"
 						value="<?php echo date('d/m/Y');?>" />
 					</td>
-					<td><label>&nbsp;</label> <input type="submit" name="Submit" value="Lan�ar..." class="btn btn-primary btn-sm"
+					<td><label>&nbsp;</label> <input type="submit" name="Submit" value="Lan&ccedil;ar..." class="btn btn-primary btn-sm"
 						tabindex="<?PHP echo ++$ind; ?>" /> <input name="escolha"
 						type="hidden" value="models/tes/lancamento.php" />
 					</td>

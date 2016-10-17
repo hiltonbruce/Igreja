@@ -28,7 +28,9 @@ $diaOutros ='';
 $cor=true;
 $cor1=true;
 $cor2=true;
-//print_r($listaPgto);
+$ctaDados = new tes_conta();
+$rrayCta = $ctaDados->ativosArray();
+ //print_r($rrayCta);
 foreach ($listaPgto as $chave => $valor) {
 	$referente = $_POST['referente'].' - '.$valor['nomeFunc'];
 	$codAcessoDesp = $valor['coddespesa'];#Fonte do recurso
@@ -84,9 +86,10 @@ foreach ($listaPgto as $chave => $valor) {
   		$estado ='';
   	}
 	$nomeMembro = sprintf ("%s %s %'05u - %s ",$remove,$alterar,$valor['rolMembro'],$nomeMembro);
+	$nomeCta = $rrayCta[$codAcessoCred]['titulo'];
 	if (($valor['descricao']=='1' || $valor['descricao']=='17' )&& $vlrPgto) {
 		//Lista do Minist�rio
-		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.$estado.'</td><td>'.$valor['nomeFunc'].
+		$dia1 .='<tr '.$bgcolor.'><td>'.$nomeMembro.$estado.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 		<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
@@ -99,7 +102,7 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['descricao']=='8' && $vlrPgto){
 		//Lista dos Tesoureiros
-		$dia15 .='<tr '.$bgcolor1.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$dia15 .='<tr '.$bgcolor1.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
@@ -112,10 +115,10 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['descricao']=='12' && $vlrPgto) {
 		//Lista dos Zeladores
-		$diaZelador .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaZelador .='<tr '.$bgcolor2.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
-				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
+		<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
 		$cor2 = !$cor2;
 		$totZelador += $valor['pgto'];
 		//Cadastra o recibo
@@ -125,7 +128,7 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['descricao']=='14' && $vlrPgto) {
 		//Lista dos Auxilios
-		$diaAux .='<tr '.$bgcolor3.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaAux .='<tr '.$bgcolor3.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
@@ -138,7 +141,7 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['diapgto']=='661' && $vlrPgto) {
 		//Pgto's as Sexta
-		$diaSexta .='<tr '.$bgcolor5.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaSexta .='<tr '.$bgcolor5.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">Sexta</td></tr>';
@@ -151,7 +154,7 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['diapgto']=='615' && $vlrPgto) {
 		//Pgto's da Quinzena
-		$diaQuinza .='<tr '.$bgcolor6.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaQuinza .='<tr '.$bgcolor6.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">Quinzenal</td></tr>';
@@ -164,7 +167,7 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($valor['diapgto']=='600' && $vlrPgto) {
 		//Pgto's da Sede
-		$diaSede .='<tr '.$bgcolor7.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaSede .='<tr '.$bgcolor7.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">15</td></tr>';
@@ -177,7 +180,7 @@ foreach ($listaPgto as $chave => $valor) {
 		}
 	}elseif ($vlrPgto) {
 		//Lista dos Demais Pgto
-		$diaOutros .='<tr '.$bgcolor4.'><td>'.$nomeMembro.'</td><td>'.$valor['nomeFunc'].
+		$diaOutros .='<tr '.$bgcolor4.'><td>'.$nomeMembro.'</td><td>'.$nomeCta.
 		'</td><td title="'.$title.'">'.$valor['razao'].
 		'</td><td id="moeda">'.$pgto.'</td>
 				<td class="text-center">'.$nomeDiaPgto.'</td></tr>';
@@ -191,25 +194,21 @@ foreach ($listaPgto as $chave => $valor) {
 			require $demaisPgto;
 		}
 	}
-
 //echo '<br />'.$indice.' -- > ';
 //print_r($valor);
 }
-
 if ($totMinisterio>'0') {
 	$dia1 = '<tbody><tr id="subtotal" class="sub"><th><strong>Minist&eacute;rio</strong></th><td></td><td></td><td id="moeda">'
 		.number_format($totMinisterio,2,',','.').'</td><td></td></tr>'.$dia1.'</tbody>';
 }else {
 	$dia1='';
 }
-
 if ($totTesoureiro>'0') {
 $dia15 = '<tbody><tr id="subtotal" class="sub"><th><strong>Tesoureiro</strong></th><td></td><td></td><td id="moeda">'
 		.number_format($totTesoureiro,2,',','.').'</td><td></td></tr>'.$dia15.'</tbody>';
 }else {
 	$dia15='';
 }
-
 if ($totAuxilio>'0') {
 	$diaAux = '<tbody><tr id="subtotal" class="sub"><th><strong>Aux&iacute;lio</strong></th><td></td><td></td><td id="moeda">'
 	.number_format($totAuxilio,2,',','.').'</td><td></td></tr>'.$diaAux.'</tbody>';

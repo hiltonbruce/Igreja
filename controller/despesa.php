@@ -35,7 +35,6 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			require_once 'models/tes/cadCargoIgreja.php';//Cadastrar Membro no Cargo despesa
 			break;
 		case '9':
-
 			//
 			$titTabela = 'Demonstrativo de Pgto do mês:';
 			$lista = new agenda();
@@ -45,7 +44,6 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			;
 			break;
 	}
-
 } else {
 	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();

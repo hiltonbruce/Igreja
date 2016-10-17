@@ -5,13 +5,10 @@ $nivel3 = '';
 $planoCta=array();
 $saldoGrp=array();
 $saldoAnteGrp=array();
-
 $sldNivel3 = array();
 $sldGrupoN4 = '';
 $cred = '<strong> C</strong>';
 $dev = '<strong> D</strong>';
-
-
 #Monta array com informações das contas atualmente
 $plano = new tes_conta($_GET['gpconta']);
 $planoCta = $plano->contasTodas();
@@ -26,7 +23,6 @@ $queryLanc .= ' AND igreja="'.$idIgreja.'"';
 }elseif ($idIgreja=='-1') {
 $queryLanc .= ' AND igreja!="1"';
 }
-
 //$queryLanc .= ' AND c.id=l.creditar';
 //$queryLanc .= ' ORDER BY ';
 $lista = mysql_query($queryLanc) or die(mysql_error());
@@ -36,7 +32,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ctaCred  = $contas['creditar'];#id da cta
 	$tipoCred = $planoCta[$contas['creditar']]['tipo'];#Tipo da Cta -> D/C
 	$vlrConta = abs($contas['valor']);
-				//$credito += $vlrConta;
+	//$credito += $vlrConta;
 	$dataLancDeb[] = array( 'Cod'=>$ctaDeb,'Data'=>$contas['data'], 'Vlr'=>$vlrConta);
 	$dataLancCred[] = array( $ctaCred,$contas['data'], $vlrConta);
 #echo $ctaDeb." -- ";

@@ -18,7 +18,7 @@ class tes_cargo {
 
 		while($dados = mysql_fetch_array($this->membros))
 		{
-			if ($dados['rol']!='0') {//Sï¿½ membros da igreja
+			if ($dados['rol']!='0') { //Só membros da igreja
 				$todos[$dados['descricao']][$dados['igreja']][$dados['hierarquia']]=
 				array('nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],
 						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']

@@ -7,7 +7,6 @@
 ?>
 <div class="bs-callout bs-callout-danger" id="callout-alerts-no-default">
     <h4>Lan&ccedil;amentos de pagamentos!<small> (Per&iacute;odo abaixo...)</small></h4>
-
 <form  method='get'>
 	<div class="row">
 		 <div class="col-xs-4">
@@ -42,15 +41,16 @@
 			      ?>
 		      </select>
 	  	</div>
-		<div class="col-xs-3">
+		<div class="col-xs-2">
 			<label>Ano</label>
 					<input type="text" name="ano" value="<?php echo $anoForm;?>" required='required'
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="direita"	value="1" /><!-- tira a tabela lateral -->
 	  	</div>
-		<div class="col-xs-3">
-			<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
+		<div class="col-xs-2">
+			<input name="escolha" type="hidden" value="tesouraria/receita.php" />
 			<input type="hidden" name="rec"	value="<?php echo $_GET['rec'];?>" />
+				<label>&nbsp;</label>
 			<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 			tabindex="<?PHP echo ++$ind; ?>" />
 			<input name="menu" type="hidden" value="top_tesouraria" />

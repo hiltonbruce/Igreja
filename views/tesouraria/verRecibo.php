@@ -9,7 +9,6 @@
 				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button>
 		 	</a>
 			<form>
-
 			</form>
 	</div>
 	<?php
@@ -40,7 +39,6 @@
 							$recebeu_CNPJ = $beneficiado->cnpj_cpf();
 							$nome = new editar_form("recebeu",$recebeu,$tab,$tab_edit);
 							$nome->getMostrar();
-
 							if ($_GET["campo"]=='recebeu'){
 								?>
 									<form name="fornec" id="fornec" action="" method="post">

@@ -3,11 +3,10 @@ class lancdizimo {
 	function __construct($igreja=''){
 		$this->igreja = $igreja;
 	}
-	function lancamento($valor,$id,$dc) {
 
+	function lancamento($valor,$id,$dc) {
 		$this->conta = new DBRecord('contas', $id, 'id');
 		if ($this->conta->tipo() != strtoupper($dc)){
-
 			if (($this->conta->saldo()-$valor)<'0') {
 					$status = 'N&atilde;o permitido';
 					$_SESSION['lancar']=false;
@@ -28,8 +27,8 @@ class lancdizimo {
 			$_SESSION['credito'] += $valor;
 			$fundo = 'style="background:#E6E6FA;"';
 		}
-		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td style='text-align:right;'> %s</td>",$fundo,$this->conta->codigo(),$this->conta->titulo(),$debitar);
-		$exibir.= sprintf("<td style='text-align:right;'>%s</td><td style='text-align:right;'>R$ %s</td><td>%s</td></tr>",$creditar,number_format($this->conta->saldo(),2,',','.'),$status);
+		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td class='text-right'> %s</td>",$fundo,$this->conta->codigo(),$this->conta->titulo(),$debitar);
+		$exibir.= sprintf("<td  class='text-right'>%s</td><td  class='text-right'>R$ %s</td><td>%s</td></tr>",$creditar,number_format($this->conta->saldo(),2,',','.'),$status);
 		return $exibir;
 	}
 

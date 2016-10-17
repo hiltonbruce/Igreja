@@ -6,8 +6,6 @@ class atualconta {
 		*$codigo -> Número do plano de Cta a ser debitada
 		*$creditar -> acesso da Cta a ser creditada
 		*/
-
-
 		$cod = explode(".",$codigo);
 			$this->cod1 = $cod[0];
 			$this->cod2 = $cod[0].'.'.$cod[1];
@@ -23,7 +21,6 @@ class atualconta {
 		if (empty($data)) {
 			$data = br_data($_POST['data'], 'Data do lançamento inválida!');
 		}
-
 		for ($i = 1; $i < 6; $i++) { //atualiza os dados da tabela contas
 			$acesso = "cod$i";
 			$result = mysql_query("SELECT id FROM contas WHERE codigo = '{$this->$acesso}'") or mysql_error(' - Em atualizar conta');
