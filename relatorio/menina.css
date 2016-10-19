@@ -1,15 +1,9 @@
 *{ margin: 0; padding: 0; }
 body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color: #505367; background-color: #fff; background: url(../img/menina.jpg) no-repeat 0% 0%; }
-
-	#container { width: 1000px; text-align: center; }
-
-	#header {height: 15em; }
-	h5 {padding: 0 0 0 0; font-size: 100%; text-align: left; margin-left: 30px;}
-
-	#mainnav {height: 20px; margin: 0; padding: 30px 0 0; text-align:center; font-family:"Times New Roman", Times, serif;}
-
-	#content { height: 600px; margin: 1px 0 0; padding: 0; }
-
+#container { width: 1000px; text-align: center; }
+#header {height: 15em; }
+#mainnav {height: 20px; margin: 0; padding: 30px 0 0; text-align:center; font-family:"Times New Roman", Times, serif;}
+#content { height: 600px; margin: 1px 0 0; padding: 0; }
 
 #added-div1 {
 	position:relative;
@@ -95,4 +89,19 @@ p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:ju
 	text-align: right;
 	margin-left: 7em;
 	color: #3366FF;
+}
+
+#footer {
+  position: absolute;
+  left: 10px;
+  top: 160px;
+	width: 100%;
+	color: #000000;
+	height: 50px;
+	padding-top: 25px;
+	background-repeat: no-repeat;
+	background-position: top;
+	margin: 10;
+	background-image: url(../img/horbar.png);
+	font-size: 80%;
 }

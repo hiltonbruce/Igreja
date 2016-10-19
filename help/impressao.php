@@ -11,7 +11,6 @@
 			require_once ("../models/$classe.class.php");
 		}
 	}
-
 	$igSede = new DBRecord('igreja', '1', 'rol');
 	$igreja=$igSede;
 ?>

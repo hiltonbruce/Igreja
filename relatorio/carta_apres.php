@@ -1,19 +1,13 @@
 <?PHP
 	session_start();
-
-	require_once ("../func_class/classes.php");
-	require_once ("../func_class/funcoes.php");
-
+		require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
 	controle ("inserir");
-
-	$igreja = new DBRecord ("igreja","1","rol");
-    $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
-    $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
-
+  $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
+  $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
+	$dadosIgreja = new igreja();
+	$listInfIgr = $dadosIgreja->Arrayigreja();
 	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
-
 	if (empty($_POST["id"]) && isset($_POST["nome"])) {
-
 		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
 		$dt_apresent = br_data ($_POST["dt_apresent"],"dt_apresent");
 		$value="'','{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
@@ -23,24 +17,17 @@
 		$cert_apresentacao = new insert ("$value","cart_apresentacao");
 		$cert_apresentacao->inserir();
 		$most_certidao = new DBRecord ("cart_apresentacao",mysql_insert_id(),"rol");
-
 	} else {
-
 		$most_certidao = new DBRecord ("cart_apresentacao",$_POST["rol"],"rol");
 	}
-
 	//echo "<h1>TESTE ".$most_certidao->nome()." - Post ".$_GET["id"]."</h1>";
-
 	//if (isset($most_certidao->nome())) {
-
 	$cidade = new DBRecord ("cidade",$most_certidao->cidade(),"id");
-
 	if ($most_certidao->sexo()=="F") {
 		$estilo = "menina";
 	}elseif ($most_certidao->sexo()=="M"){
 		$estilo = "menino";
 	}
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -72,7 +59,6 @@
 	</p>
     </div>
     <div id="added-div-2">
-
       <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->dt_apresent()));?></h3>
     	<br />
 		<div id="pastor">
@@ -80,20 +66,32 @@
 			Pastor da Igreja
 	    </div>
 	 	 <?PHP
-            $assinSecret  = '../imgAssin/'.$secretario->rol().'a.png';
-            if (!file_exists($assinSecret)){
-                    $assinSecret  = '../imgAssin/noAssin.png';
-            }
-        ?>
-        <div id='assinSec'>
-            <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
-        </div>
+		 		if ($most_certidao->id_cong()>'1') {
+		 			$congreg = 'Congrega&ccedil;&atilde;o: '.$listInfIgr[$most_certidao->id_cong()]['0'].' - ';
+		 		} else {
+		 			$congreg ='';
+		 		}
+        $assinSecret  = '../imgAssin/'.$secretario->rol().'a.png';
+        if (!file_exists($assinSecret)){
+          $assinSecret  = '../imgAssin/noAssin.png';
+        }
+    ?>
+      <div id='assinSec'>
+          <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
+      </div>
       <div id="secretario">
 	        <?PHP echo cargo($secretario->rol())['1'].' '.strtoupper( toUpper($secretario->nome()));?><br />
 	      Secret&aacute;rio
       </div>
+			<div id="footer">
+					<span class="text-center">
+					<?PHP echo $congreg.'Templo SEDE: '.$igreja->rua().', N&ordm; '.$igreja->numero().' - '.$cidOrigem->nome().' - '.$cidOrigem->coduf();?>
+					<?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()}<br />";?></span>
+					Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> - Email: <?PHP echo "{$igreja->email()}";?>
+					&bull; <small>Designed by <a rel="nofollow" target="_blank"
+					href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></small>
+			</div>
     </div>
-
 </div>
 </body>
 </html>

@@ -24,11 +24,8 @@ for ($i=1; $i<8; $i++) {
        $virgula = '-';
     }
 }
-
 $ceia = $_POST["semana"].$_POST["dia"];
-
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-
 $value  = "'','{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}'";
 $value .= ",'{$_POST["email"]}','$ceia','{$_POST["oracao"]}','$diasDeCulto','{$_POST["pastor"]}'";
 $value .= ",'{$_POST["secretario1"]}','{$_POST["secretario2"]}','1','{$_POST["rua"]}'";
@@ -38,23 +35,13 @@ echo "<h1> $value </h1>";
 $dados = new insert ($value,"igreja");
 $dados->inserir();
 echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
-
-
-		echo "<script>location.href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=PB'</script>";
-		echo "<a href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=PB'>Continuar...<a>";
-
-
-
-
+echo "<script>location.href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=PB'</script>";
+echo "<a href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=PB'>Continuar...<a>";
 /*
 $value="'{$_SESSION["rol"]}','','','','','','','','','','','','','','','','','','','','','','','',''";
 $eclesiastico = new insert ("$value","eclesiastico");
 $eclesiastico->inserir();
 */
-
-
-
 echo "<h1> - $rol - </h1>";
-
 ?>
 <p>&nbsp;</p>

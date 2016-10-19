@@ -1,50 +1,41 @@
 <?PHP
 	session_start();
-    require "../func_class/funcoes.php";
-    require "../func_class/classes.php";
-    function __autoload ($classe) {
-
-        list($dir,$nomeClasse) = explode('_', $classe);
-
-        if (file_exists("../models/$dir/$classe.class.php")){
-
-            require_once ("../models/$dir/$classe.class.php");
-        }elseif (file_exists("../models/$classe.class.php")){
-            require_once ("../models/$classe.class.php");
-        }
-
+  require "../func_class/funcoes.php";
+  require "../func_class/classes.php";
+  function __autoload ($classe) {
+    list($dir,$nomeClasse) = explode('_', $classe);
+    if (file_exists("../models/$dir/$classe.class.php")){
+        require_once ("../models/$dir/$classe.class.php");
+    }elseif (file_exists("../models/$classe.class.php")){
+        require_once ("../models/$classe.class.php");
     }
+  }
 	controle("consulta");
-  	$carta 			= new DBRecord ("carta",$_POST["id_carta"],"id");
+  $carta 			= new DBRecord ("carta",$_POST["id_carta"],"id");
 	$membro 		= new DBRecord ("membro",$_POST['bsc_rol'],"rol");
 	$est_civil 		= new DBRecord ("est_civil",$_POST['bsc_rol'],"rol");
 	$ecles 			= new DBRecord ("eclesiastico",$_POST['bsc_rol'],"rol");
 	$profissional	= new DBRecord ("profissional",$_POST['bsc_rol'],"rol");
 	$igreja 		= new DBRecord ("igreja","1","rol");
-
     if (is_numeric($membro->naturalidade())) {
         $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
         $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
     } else {
         $cidNatal = $membro->naturalidade();
     }
-
  //   $cidNatal = ($cidadeNatal->nome()=='') ? $membro->naturalidade() : $cidadeNatal->nome().' - '.$cidadeNatal->coduf() ;
-
 	$cid_batismo 	= new DBRecord ("cidade",$ecles->local_batismo(),"id");
-    $rol 			= $_POST["bsc_rol"];
-    $cpf = (strlen($profissional->cpf())=='14') ? $profissional->cpf() : '*********' ;
-
-    $cargoIgreja = new tes_cargo();
-    $dadosCargo = $cargoIgreja->dadosArray();
-   // print_r($dadosCargo);
-
-    if ($igreja->cidade()>0) {
-    		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
-			$origem=$cidOrigem->nome();
-		}else {
-		 	$origem = $igreja->cidade();
-		}
+  $rol 			= $_POST["bsc_rol"];
+  $cpf = (strlen($profissional->cpf())=='14') ? $profissional->cpf() : '*********' ;
+  $cargoIgreja = new tes_cargo();
+  $dadosCargo = $cargoIgreja->dadosArray();
+ // print_r($dadosCargo);
+  if ($igreja->cidade()>0) {
+  		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
+		$origem=$cidOrigem->nome();
+	}else {
+	 	$origem = $igreja->cidade();
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,7 +60,6 @@
   <div class='row'>
   <div class="col-md-4"></div>
   <div class="col-md-8 text-left">
-
    	</div>
   </div>
 <div id="mainnav">
@@ -79,9 +69,7 @@
 	  <h2 class="text-primary"><u><strong>
 	Carta <?PHP //Tipo de carta - Recomendação ou Mudança
 	print carta ("{$carta->tipo()}");
-
 	$destino = (int)$carta->destino();
-
 	 if ((int)$carta->destino() != 0) {
 			$cidade = new DBRecord ("cidade",$carta->destino(),"id");
 			$destino=$cidade->nome()." - ".$cidade->coduf();
@@ -95,7 +83,6 @@
 		$intr .= '	    DESTINO: '.$carta->igreja().', em '.$destino;
 		$intr .= '	</div>';
 		$intr .= '</div>';
-
 	}else {
 		$intr = "";
 	}
@@ -169,7 +156,6 @@
 		echo data_venc(conv_valor_br($dataCarta));
 		?> (validade)
 	  </div>
-
     <div id="footer">
         <h6><span class="text-center">
         <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?>

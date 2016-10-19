@@ -7,7 +7,6 @@ class igreja {
 		$this->result = mysql_query("SELECT * FROM igreja WHERE rol='$id' ") or die (mysql_error());
 		$this->id = $id;
 	}
-
 	function exitecad (){
 		if (mysql_num_rows( $this->result)>0){
 		 	echo "<h2>A Igreja ' $this->id ' j&aacute; est&aacute; cadastrado na Cidade de ";
@@ -32,7 +31,6 @@ class igreja {
 
 	function Deletar (){
 		$ver = mysql_query("DELETE FROM igreja WHERE rol='{$this->id}' LIMIT 1");
-
 		if($ver){
 				echo "<script> alert('Apagado com sucesso'); location.href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf=PB';</script></a>";
 				echo "Bairro apagado com sucesso<br><a href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf=PB'>Voltar...</a>";
@@ -56,7 +54,6 @@ class igreja {
 		}
 		return $linhas;
 	}
-
 	function ordenar($ordenar) {//ordena a listagem e seleciona por cargo
 	$ordenar = (empty($_GET["ord"])) ? $ordenar :  $_GET["ord"];
 	switch ($ordenar){//Ordena a listagem

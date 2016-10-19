@@ -17,7 +17,7 @@
           }elseif ($diasemissao<3){
             echo ' (Criada ontem!)';
           }elseif ($anov>'2000') {
-          	echo ' (Criada em: '.$diasemissao. ' dias)';
+          	echo ' (Criada a '.$diasemissao. ' dias)';
           }
      $nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
 	   $nome->getMostrar();
