@@ -34,7 +34,6 @@
 	</tbody>
 </table>
 </form>
-
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular ) {

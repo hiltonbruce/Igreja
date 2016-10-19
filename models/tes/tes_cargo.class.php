@@ -4,7 +4,6 @@ class tes_cargo {
 	protected $status;
 
 	function __construct ($status=0) {
-
 		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao, i.status AS igrejaStatus ';
 		$sqlConsulta .= ',m.endereco,m.numero,p.cpf,p.rg ';
 		$sqlConsulta .= 'FROM cargoigreja AS c,igreja AS i,membro AS m, funcao AS f ';
@@ -15,7 +14,6 @@ class tes_cargo {
 		$sqlConsulta .= $statusCta.'ORDER BY i.razao,m.nome,f.descricao';
 		$this->query = $sqlConsulta;
 		$this->membros = mysql_query($this->query) or die (mysql_error());
-
 		while($dados = mysql_fetch_array($this->membros))
 		{
 			if ($dados['rol']!='0') { //Só membros da igreja
@@ -57,6 +55,5 @@ class tes_cargo {
 		}
 		return $cargoAtivo;
 	}
-
 }
 ?>

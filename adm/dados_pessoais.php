@@ -1,5 +1,4 @@
 <?php
-	ver_cad($bsc_rol);
 	$tabela = "membro";
 	$tab="adm/atualizar_dados.php";//link q informa o script quem receber� os dados do form para atualizar
 	$tab_edit="adm/dados_pessoais.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
@@ -15,9 +14,9 @@
 	    } else {
 	        $img="ver_foto.jpg";
 	    }
-	if ($altEdit) {
+	if ($altEdit && $membro) {
 		require_once 'views/secretaria/editMembro.php';
-	} else {
+	} elseif ($membro) {
 		require_once 'views/secretaria/verMembro.php';
 	}
 ?>

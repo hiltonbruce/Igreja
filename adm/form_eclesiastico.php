@@ -1,24 +1,17 @@
 <?php
-
 if (empty($_SESSION['valid_user']))
 header("Location: ../");
-
-
 if (isset($_POST["nacionalidade"])){
-
 	$_SESSION["nacao"] = $_POST["nacionalidade"];
 	$_SESSION["cid_natal"] = $_POST["cid_nasc"];
 	$_SESSION["cpf"] = $_POST["cpf"];
-
 	if (validaCPF($_POST["cpf"]) xor (empty($_GET["conf_cpf_ruim"]))){
 			echo "<script>pergunta();</script>";
 			echo "CPF inválido";
 		}
-
 }
 	$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");// Aqui será selecionado a informação do campo autor com id=2
 	$nome_cidade = $rec->nome()." - ".$rec->coduf();
-  $bsc_rol = (!empty($_GET['bsc_rol'])) ? intval($_GET['bsc_rol']) : intval($_POST['bsc_rol']);
 ?>
 <script type="text/JavaScript">
 <!--
@@ -28,7 +21,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 }
 //-->
 </script>
-<div id="lst_cad">
+
 <fieldset>
 <legend>Dados Eclesi&aacute;sticos - Cadastro de Membro</legend>
 <form method="post" action="">
@@ -222,4 +215,3 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   <input name="bsc_rol" type="hidden" id="tabela" value="<?PHP echo $bsc_rol;?>" />
 </form>
 </fieldset>
-</div>

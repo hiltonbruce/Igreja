@@ -50,7 +50,7 @@ foreach ($listaPgto as $chave => $valor) {
 	}else {
 		$vlrPgto = true;
 	}
-	$pgto	= ($valor['pgto']>'0') ? $valor['pgto']:'<span class="btn btn-success btn-xs">Volunt�rio</span>';
+	$pgto	= ($valor['pgto']>'0') ? $valor['pgto']:'<span class="btn btn-success btn-xs">Volunt&aacute;rio</span>';
 	$nomeMembro = ($valor['nome']=='') ? $valor['naoMembro']:$valor['nome'];
   $nomeDiaPgto = $valor['diapgto'];
   if ($_GET['id']==$valor['id']) {

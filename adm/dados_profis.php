@@ -4,9 +4,7 @@ $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar o
 $tab_edit="adm/dados_profis.php&bsc_rol=$bsc_rol&tabela=profissional&campo=";//Link de chamada da mesma página para abrir o form de edição do item
 $dad_cad = mysql_query ("SELECT * FROM profissional WHERE rol='".$bsc_rol."'");
 $arr_dad = mysql_fetch_array ($dad_cad);
-
 $ind=1;
-
 ver_cad($bsc_rol);
 ?>
 <div id="lst_cad">
@@ -42,14 +40,14 @@ ver_cad($bsc_rol);
 					<input type="hidden" name="escolha" value="adm/atualizar_dados.php" />
 					<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
 					<input type="hidden" name="menu" value="top_dados" />
-					<input type="submit" class="btn btn-primary btn-sm" name="submit" 
+					<input type="submit" class="btn btn-primary btn-sm" name="submit"
 					value="Alterar CPF ..." tabindex="<?PHP echo $ind++;?>"/>
-					<div class="alert alert-danger alert-dismissible fade in" role="alert"> 
+					<div class="alert alert-danger alert-dismissible fade in" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span></button> 
+						<span aria-hidden="true">&times;</span></button>
 						<span class="glyphicon glyphicon-alert" aria-hidden="true"></span><strong> Cuidado!</strong>
 						<br /> Voc&ecirc; ser&aacute; avisado, porem, o sistema atualizar&aacute; o CPF,
-						 mesmo se o n&uacute;mero for considerado INV&Aacute;LIDO... 
+						 mesmo se o n&uacute;mero for considerado INV&Aacute;LIDO...
 					</div>
 				</div>
 			</form>

@@ -1,7 +1,9 @@
-<?php
-if (!empty($_GET["bsc_rol"])) {
-?>
+
 <div>
+<?php
+$altEdit = ($_SESSION["setor"]=='3' || $_SESSION["setor"]=='99') ? true:false;
+if ($membro) {
+?>
 <a <?PHP $b=id_corrente ("_pessoais"); ?> href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?php echo $bsc_rol;?>">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Pessoais</button>
 </a>
@@ -27,17 +29,17 @@ if (!empty($_GET["bsc_rol"])) {
 		if ($_SESSION["setor"]=='2' || $_SESSION["nivel"]>'10') {
 	?><!-- Verifica se é tesouraria -->
 		<a <?PHP $b=id_corrente ("saldoMembros");?>
-				href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol=<?php echo $bsc_rol;?>&ano=<?php echo $_GET['ano'];?>">
-				<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Financeiro</button>
-</a>
-</div>
-    <?php }
-	if (isset($_GET['bsc_rol']))
-		{
-			echo 'Dados atuais de: <b>'.$membro->nome().'</b> - ';
-		}
+		href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol=<?php
+		echo $bsc_rol;?>&ano=<?php echo $_GET['ano'];?>">
+		<button type="button" class="btn btn-info btn-sm <?php
+		echo $b;?>">Financeiro</button></a>
+  <?php
+	 }
+		echo '<p><strong>'.$membro->nome().'</strong> - ';
 		$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");
 		$igreja = new DBRecord ('igreja',$ecles->congregacao,'rol');
-		echo 'Cargo: '.cargo($bsc_rol)['0'].' - Congrega: '.$igreja->razao().', '.situacao($ecles->situacao_espiritual(),$bsc_rol);
+		echo 'Cargo: '.cargo($bsc_rol)['0'].' - Congrega: '.$igreja->razao();
+		echo ', '.situacao($ecles->situacao_espiritual(),$bsc_rol).'</p>';
 	}
 ?>
+</div>

@@ -3,16 +3,11 @@
  * @author Wellington Ribeiro - IdealMind.com.br
  * @since 31/10/2009
  */
-
 require_once '../help/impressao.php';
-
 $q = mysql_real_escape_string( $_GET['q'] );
-
 $quantNomes = substr_count(trim($q),' ');
-
 //crit�rios de fon�tica
 $exp = new fonetica($q,'nome');
-
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
@@ -32,9 +27,7 @@ switch ($quantNomes) {
 	break;
 }
 
-
 $res = mysql_query( $sql );
-
 $linhas = mysql_num_rows($res);
 # 1�linha em branco
 echo "<li onselect=\" \">... </li>\n";
@@ -54,7 +47,6 @@ while( $campo = mysql_fetch_array( $res ) )
 	} else {
 		$sigla = $cargo['0'].' - '.htmlentities($igreja->razao().' - '.$campo['celular'],ENT_QUOTES,'iso-8859-1');
 	}
-
 	switch ($campo['situacao_espiritual']) {
 		case '2':
 			$sigla .= '<mark>&nbsp;Disciplinado </mark>';

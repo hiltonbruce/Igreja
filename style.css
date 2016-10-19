@@ -5,8 +5,8 @@
 body{
 	color:#333333;
 	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
-	font-size:11px;
 	margin:0 auto;
+	font-size:11px;
 	width: 100%;
 }
 
@@ -109,8 +109,6 @@ div.info1 a, div.info1 a:link, div.info1 a:visited { color:#999; }
 div.info1 { color: #665; }
 
 div .leftpanel {
-	background-image:url(img/bgright.jpg);
-	background-repeat: repeat-y;
 	background-color: white;
 	width:16%;
 	display: inline;
@@ -512,4 +510,8 @@ button.list-group-item-alerta.active:focus {
 }
 .panel-alerta > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #eef1bc;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 0px;
 }

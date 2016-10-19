@@ -1,4 +1,4 @@
-<table id="horario"  class="table table-bordered">
+<table id="horario"  class="table table-bordered table-condensed">
 		<caption>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
@@ -43,6 +43,7 @@
 		echo $imprimir;
 	?>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {

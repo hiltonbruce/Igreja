@@ -68,16 +68,13 @@ E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
 </p>
 <div class="panel panel-primary">
 <?PHP
-
 	//Inicia o bloco com os forms de lançamentos
 	$ctaDespesa = new tes_despesas(addslashes($_GET['conta']));
 	$arrayDespesas = $ctaDespesa->dadosArray();
 	$bsccredor = new tes_listDisponivel();
 	$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
 	$listaFonte = $bsccredor->List_Selec($acesso);
-
 	$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
-
 	require_once 'help/tes/lancTipoPlan.php';
 	require_once 'views/tesouraria/lancTipoPlan.php';
 	//print_r($arrayDesp);

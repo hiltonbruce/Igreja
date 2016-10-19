@@ -263,19 +263,20 @@
 		$nome = new editar_form("sangue",$arr_dad["sangue"],$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
-      </tr>
-      <tr>
-        <td>Email:
-		<?PHP
-		$nome = new editar_form("email",$arr_dad["email"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-		?></td>
-        <td>Gradua&ccedil;&atilde;o:
-		<?PHP
-		$nome = new editar_form("graduacao",$arr_dad["graduacao"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-		?>		</td>
-        <td colspan="2">Escolaridade:
+    </tr>
+    <tr>
+      <td>Email:
+				<?PHP
+				$nome = new editar_form("email",$arr_dad["email"],$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+				?></td>
+		        <td>Gradua&ccedil;&atilde;o:
+				<?PHP
+				$nome = new editar_form("graduacao",$arr_dad["graduacao"],$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+				?>
+			</td>
+    	<td colspan="2">Escolaridade:
 		<?PHP
 		$nome = new editar_form("escolaridade",$arr_dad["escolaridade"],$tab,$tab_edit);
 		$nome->getMostrar();
@@ -317,17 +318,16 @@
 		</form>
 		<?PHP
 		}
-		?>		</td>
+		?>
+			</td>
+    </tr>
+    <tr>
+      <td colspan="4">Pend&ecirc;ncias:
+        <p><?PHP
+				$nome = new editar_form("obs",$arr_dad["mobs"],$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar('Pedencias do cadastro','',$bsc_rol);
+				?></p>
+			</td>
       </tr>
-
-      <tr>
-        <td colspan="4">Pend&ecirc;ncias:
-          <p>
-		<?PHP
-		$nome = new editar_form("obs",$arr_dad["mobs"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar('Pedencias do cadastro','',$bsc_rol);
-		?></p></td>
-      </tr>
-    </table>
-</div>
+  </table>
 </div>

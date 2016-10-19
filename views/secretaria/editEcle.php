@@ -1,5 +1,5 @@
 <div id="lst_cad">
-<table width="100%">
+<table class='table'>
     <tr>
       <td>Onde congrega:<p><a href="./?escolha=adm/dados_ecles.php&bsc_rol=<?php echo $bsc_rol;?>&campo=congregacao" ><?PHP print $arr_dad["congregacao"]." - ".$igreja->razao();?></a></p>
       <?PHP
@@ -67,12 +67,10 @@
         </form>
         <?PHP } ?></td>
   <td>Local de Batismo:
-        <?PHP
+  <?PHP
   echo $arr_dad["local_batismo"];
   $nome = new editar_form("local_batismo",$cidade->nome(),$tab,$tab_edit);
   $nome->getMostrar();
-
-
   if ($_GET["campo"]=="local_batismo"){
   ?>
         <form id="form3" name="form3" method="post" action="">
@@ -83,10 +81,10 @@
     $lst_cid = new sele_cidade("cidade",$arr_dad["uf"],"coduf","nome","local_batismo");
     $vlr_linha=$lst_cid->ListDados ($ind++);
   ?>
-          <input name="Submit" class="btn btn-primary btn-xs" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
-          <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "eclesiastico";?>" />
-        </form>
-        <?PHP
+    <input name="Submit" class="btn btn-primary btn-xs" type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
+    <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "eclesiastico";?>" />
+    </form>
+    <?PHP
   }
   ?></td>
       <td>Mudou da denomina&ccedil;&atilde;o:
@@ -147,14 +145,15 @@
   $nome = new editar_form("dt_muda_assembleia",$arr_dad["dt_muda_assembleia"],$tab,$tab_edit);
   $nome->getMostrar();$nome->getEditar('','',$bsc_rol);
   ?></td>
-      <td>Data da aclama&ccedil;&atilde;o:
-      <?PHP
-  $nome = new editar_form("dat_aclam",$arr_dad["dat_aclam"],$tab,$tab_edit);
-  $nome->getMostrar();
-  $nome->getEditar('','',$bsc_rol);
-  ?></td>
+      <td>
+        Data da aclama&ccedil;&atilde;o:
+        <?PHP
+        $nome = new editar_form("dat_aclam",$arr_dad["dat_aclam"],$tab,$tab_edit);
+        $nome->getMostrar();
+        $nome->getEditar('','',$bsc_rol);
+        ?>
+    </td>
     </tr>
-
     <tr>
       <td>Cart&atilde;o Impresso em:
       <?PHP
@@ -175,17 +174,11 @@
   ?></td>
       <td>Cartão Recebido por:
       <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_recebeu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_recebeu"];?> - Click aqui para dados completos">
-        <?PHP
-
-  echo substr (fun_igreja ($arr_dad["quem_recebeu"]),0,25);
-
-  ?>
+        <?PHP  echo substr (fun_igreja ($arr_dad["quem_recebeu"]),0,25);?>
       </a></p></td>
       <td>Cartão Entregue por:
   <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_entregou"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_entregou"];?> - Click aqui para dados completos">
-       <?PHP
-  echo substr (fun_igreja ($arr_dad["quem_entregou"]),0,25);
-  ?>
+       <?PHP  echo substr (fun_igreja ($arr_dad["quem_entregou"]),0,25); ?>
       </a></p>
       </td>
     </tr>
@@ -200,7 +193,6 @@
   <tr>
     <td>Recibo de entrega N&ordm;:	  </td>
     <td colspan="3"><p>
-
     <?PHP
       if ($arr_dad["rec_entrega"]>"0") {
         printf ("<a href='relatorio/recibo_print.php?recibo={$arr_dad["rec_entrega"]}'

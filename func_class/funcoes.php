@@ -134,7 +134,6 @@ function cargo ($rol) {
 
 function cargo_dt () {
 	//Devolve a data do ultimo cargo do Membro
-
 	$car_dt = new DBRecord ("eclesiastico",$_SESSION["rol"],"rol");
 		if ($car_dt->pastor()>"0000-00-00") {
 			$cargo_dt = $car_dt->pastor();
@@ -813,7 +812,6 @@ function form_preenchido($form_vars)
 			return false;
 	  }
 	  return true;
-
 	}
 
 function situacao ($situacao,$rol){
@@ -825,14 +823,11 @@ function situacao ($situacao,$rol){
 			break;
 		case "2":
 			$result = mysql_query("SELECT DATE_FORMAT(data_fim,'%d/%m/%Y') AS dt_fim FROM disciplina WHERE rol = '$rol' ORDER BY id DESC LIMIT 1");
-
 			$data = mysql_fetch_array($result);
-
 			if ($data ["dt_fim"]!="00/00/0000")
 				$estilo = "<span style='color:#FF0000'><blink>Disciplinado at&eacute;: </blink></span>".$data ["dt_fim"];
 			else
 				$estilo = "<span style='color:#FF0000'><blink>Disciplinado por prazo indeterminado </blink></span>";
-
 			break;
 		case "3":
 			$estilo="<h1><span style='color:#FF0000'><blink>Falecido</blink></span></h1>";
@@ -849,24 +844,19 @@ function situacao ($situacao,$rol){
 		default:
 			$estilo="<span style='color:#006633'><blink>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</blink></span>";
 			break;
-
 	}
-
 	return $estilo;
 	}
 
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
-    return (strtoupper(strtr($string, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' )));
-    };
-
+    return (strtoupper(strtr($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' )));
+    }
 
 function extenso($valor = 0, $maiusculas = false) {
-
 $singular = array("centavo", "real", "mil", "milh&atilde;o", "bilh&atilde;o", "trilh&atilde;o", "quatrilh&atilde;o");
 $plural = array("centavos", "reais", "mil", "milh&otilde;es", "bilh&otilde;es", "trilh&otilde;es",
 "quatrilh&otilde;es");
-
 $c = array("", "cem", "duzentos", "trezentos", "quatrocentos",
 "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos");
 $d = array("", "dez", "vinte", "trinta", "quarenta", "cinquenta",
@@ -875,23 +865,19 @@ $d10 = array("dez", "onze", "doze", "treze", "quatorze", "quinze",
 "dezesseis", "dezesete", "dezoito", "dezenove");
 $u = array("", "um", "dois", "tr&ecirc;s", "quatro", "cinco", "seis",
 "sete", "oito", "nove");
-
 $z = 0;
 $rt = "";
-
 $valor = number_format($valor, 2, ".", ".");
 $inteiro = explode(".", $valor);
 for($i=0;$i<count($inteiro);$i++)
 for($ii=strlen($inteiro[$i]);$ii<3;$ii++)
 $inteiro[$i] = "0".$inteiro[$i];
-
 $fim = count($inteiro) - ($inteiro[count($inteiro)-1] > 0 ? 1 : 2);
 for ($i=0;$i<count($inteiro);$i++) {
 $valor = $inteiro[$i];
 $rc = (($valor > 100) && ($valor < 200)) ? "cento" : $c[$valor[0]];
 $rd = ($valor[1] < 2) ? "" : $d[$valor[1]];
 $ru = ($valor > 0) ? (($valor[1] == 1) ? $d10[$valor[2]] : $u[$valor[2]]) : "";
-
 $r = $rc.(($rc && ($rd || $ru)) ? " e " : "").$rd.(($rd &&
 $ru) ? " e " : "").$ru;
 $t = count($inteiro)-1-$i;
@@ -901,15 +887,12 @@ if (($t==1) && ($z>0) && ($inteiro[0] > 0)) $r .= (($z>1) ? " de " : "").$plural
 if ($r) $rt = $rt . ((($i > 0) && ($i <= $fim) &&
 ($inteiro[0] > 0) && ($z < 1)) ? ( ($i < $fim) ? ", " : " e ") : " ") . $r;
 }
-
 if(!$maiusculas){
-return($rt ? $rt : "zero");
+	return($rt ? $rt : "zero");
 } else {
-
-if ($rt) $rt=ereg_replace(" E "," e ",ucwords($rt));
-return (($rt) ? ($rt) : "Zero");
-}
-
+	if ($rt) $rt=ereg_replace(" E "," e ",ucwords($rt));
+	return (($rt) ? ($rt) : "Zero");
+	}
 }
 
 function check_transid ($id)
@@ -941,20 +924,15 @@ function material ()
 				4=>"M&eacute;dico",5=>"Constru&ccedil;&atilde;o Civil",6=>"Eletr&ocirc;nico",
 				7=>"Som e V&iacute;deo",8=>"Inform&aacute;tica",9=>"Vestu&aacute;rio",
 				10=>"Eclesi&aacute;stico",11=>"Decora&ccedil;&aatilde;o");
-
 	return $material;
-
 }
 
 function periodoLimp ($mesRef) {
 	/*
 	 * Devolve o periodo da listagem do material de limpeza
 	 */
-
 	$mesref = ($mesRef!='') ? $mesRef:$_GET['mes'].'/'.$_GET['ano'];
-
 	//$data = (checadata($_GET['data'])) ? $_GET['data']:date('d/m/Y');
-
 	list($mref,$aref) = explode('/', $mesref);
 	$linkperido = 'mes='.$mref.'&ano='.$aref;
 	$anoAnterior = $aref-1;
@@ -993,12 +971,11 @@ function periodoLimp ($mesRef) {
 			$periodo = '';
 			break;
 	}
-
 	if ($periodo!='') {
 		$periodos = array($periodo.$aref,$anterio1,$anterio2);
 		return $periodos;
 	}else {
-		$periodos = array('Nenhum perï¿½odo definido!');
+		$periodos = array('Nenhum per&iacute;odo definido!');
 		return $periodos;
 	}
 }
@@ -1006,14 +983,12 @@ function periodoLimp ($mesRef) {
 #Formata nï¿½mero de telefones de 8 a acima de 11 dï¿½gitos
 function formatPhoneNumber($phoneNumber) {
     $phoneNumber = preg_replace('/[^0-9]/','',$phoneNumber);
-
     if(strlen($phoneNumber) > 11) {
         $countryCode = substr($phoneNumber, 0, strlen($phoneNumber)-11);
         $areaCode = substr($phoneNumber, -11, 2);
         $nonoDig = substr($phoneNumber, -9, 1);
         $nextThree = substr($phoneNumber, -8, 4);
         $lastFour = substr($phoneNumber, -4, 4);
-
         $phoneNumber = '+'.$countryCode.' ('.$areaCode.') '.$nonoDig.' '.$nextThree.'-'.$lastFour;
     }
     else if(strlen($phoneNumber) == 11) {
@@ -1021,40 +996,33 @@ function formatPhoneNumber($phoneNumber) {
         $nonoDig = substr($phoneNumber, 2, 1);
         $nextThree = substr($phoneNumber, 1, 4);
         $lastFour = substr($phoneNumber, 3, 4);
-
         $phoneNumber = ' ('.$areaCode.') '.$nonoDig.' '.$nextThree.'-'.$lastFour;
     }
     else if(strlen($phoneNumber) == 10) {
         $areaCode = substr($phoneNumber, 0, 2);
         $nextThree = substr($phoneNumber, 3, 4);
         $lastFour = substr($phoneNumber, 6, 4);
-
         $phoneNumber = '('.$areaCode.') '.$nextThree.'-'.$lastFour;
     }
     else if(strlen($phoneNumber) == 9) {
         $nonoDig = substr($phoneNumber, 0, 1);
         $nextThree = substr($phoneNumber, 1, 4);
         $lastFour = substr($phoneNumber, 3, 4);
-
         $phoneNumber = $nonoDig.' '.$nextThree.'-'.$lastFour;
     }
     else if(strlen($phoneNumber) == 8) {
         $nextThree = substr($phoneNumber, 0, 4);
         $lastFour = substr($phoneNumber, 3, 4);
-
         $phoneNumber = $nextThree.'-'.$lastFour;
     }
-
     return $phoneNumber;
 }
 
 #Formata nï¿½mero de CPF para exibiï¿½ï¿½o
 function formatCPFNumber ($cpfNumber){
-
-   	$cpfNumber= wordwrap($cpfNumber, 3, '.', true);
-    $numero = substr($cpfNumber, 0, -3);
-    $controle = substr($cpfNumber, 12, 2);
-
+ 	$cpfNumber= wordwrap($cpfNumber, 3, '.', true);
+  $numero = substr($cpfNumber, 0, -3);
+  $controle = substr($cpfNumber, 12, 2);
 	return $numero.'-'.$controle;
 }
 
@@ -1071,23 +1039,18 @@ function formatCPFNumber ($cpfNumber){
 function calcDiaSemana($dia,$mes,$ano){
   $s=(int)($ano / 100);
   $a=$ano % 100;
-
   if($mes<=2)
   {
    $mes+=10;
    $a--;
   }
   else $mes-=2;
-
   $ival=(int)(2.6*$mes-0.1);
   $q1=(int)($s / 4);
   $q2=(int)($a / 4);
-
   $dia_semana=($ival + $dia + $a + $q1 + $q2 - 2 * $s) % 7;
-
   if($dia_semana<0) $dia_semana+=7;
-
-  return($dia_semana);
+  	return($dia_semana);
  }
 
  function gerarCalend($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg)//$feriados,$marcados,$rodapes)
@@ -1095,11 +1058,9 @@ function calcDiaSemana($dia,$mes,$ano){
   if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
   {
-   $tabela="Erro ao gerar calendï¿½rio: [mï¿½s=".$mes."] [ano=".$ano.
-           "] [nï¿½mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
-  }
-  else
-  {
+   	$tabela="Erro ao gerar calendï¿½rio: [mï¿½s=".$mes."] [ano=".$ano.
+           "] [n&uacute;mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
+  }else {
    //Carrega o css do calendï¿½rio e armazena em $dados
    $arq=fopen("calendario.css","r");
    $tam=filesize("calendario.css");
@@ -1112,21 +1073,16 @@ function calcDiaSemana($dia,$mes,$ano){
    $dia_semana=calcDiaSemana(1,$mes,$ano);
    $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano ï¿½ bisexto
    $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o nï¿½mero de dias de cada mï¿½s
-   $meses=array("Janeiro","Fevereiro","Marï¿½o","Abril","Maio","Junho",
+   $meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
                 "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
    $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&aacute;b");
-
    $idx=$mes-1;
    $total=$idx+$nmeses; //Total de meses a serem considerados
    $dia=$daux=$dia_semana;
-
     for($i=0;$i<count($datas);$i++)
      $qtd[$i]=count($datas[$i]);
-
    $nq=count($qtd);
-
    $tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportarï¿½ as demais tabelas de meses)
-
    while($idx<$total)
    {
     $tabela=$tabela."<tr>";
@@ -1135,23 +1091,18 @@ function calcDiaSemana($dia,$mes,$ano){
      $temp_tb="<td valign='top'><table class='table'>
               <tr><td colspan=7  class='cabecalho'>".$meses[$idx].'/'.$ano.
               "</td></tr><tr>"; //Cria uma tabela para o mï¿½s atual
-
      for($idx2=0;$idx2<7;$idx2++) //Gera o cabeï¿½alho da tabela do mï¿½s atual
      $temp_tb=$temp_tb."<td class='td_semana'>".$dias[$idx2]."</td>";
-
      $temp_tb=$temp_tb."</tr>"; //Fecha o cabeï¿½alho
-
      $cnt_dias=1; //Inicializa o contador de dias
      $temp_ln="";
      $nl=0;
-
      while($cnt_dias<=$ndias[$idx]) {
       $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mï¿½s atual
       for($d=0;$d<7 && $cnt_dias<=$ndias[$idx];$d++) {
-		if($d>=$dia || $dia==0) {
-	        $classe="";
-			$maux=$idx+1;
-
+			if($d>=$dia || $dia==0) {
+		    $classe="";
+				$maux=$idx+1;
 			//A rotina abaixo verifica se o dia atual ï¿½ um feriado ou um dia marcado
 			//onde $datas contï¿½m os dois vetores $feriados e $marcados
 			for($i=0;$i<$nq && $classe=="";$i++)
@@ -1163,14 +1114,11 @@ function calcDiaSemana($dia,$mes,$ano){
 					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o primeiro dia
 					   $d2=substr($datas[$i][$i1],3,2); //Obtï¿½m o segundo dia
 					   $m=substr($datas[$i][$i1],6,2); //Obtï¿½m o mï¿½s do intervalo
-
 					  } else /*Caso seja um dia */ {
-
 					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o dia
 				  	   $d2=0;
 					   $m=substr($datas[$i][$i1],3,2); //Obtï¿½m o mï¿½s
 					  }
-
 					  //Atribui uma classe CSS ï¿½ cï¿½lula (dia) atual da tabela caso
 					  //o mï¿½s atual $maux seja igual ao mï¿½s obtido de um dos vetores $m ($feriado
 					  // ou $marcado)
@@ -1181,20 +1129,16 @@ function calcDiaSemana($dia,$mes,$ano){
 					    $classe="td_marcado".($i+1);//$valor[$i];
 						$marcaDia .= '<span class="'.$classe.'" >&bull;</span>';
 						}
-
 				 }
 			}
-
 			if($classe=="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 			 $classe=($d==0) ? "td_dia":"td_marcado0" ;
-
 			//Cria a cï¿½lula referente ao dia atual
 			if ($marcaDia!='') {
 				$diaAtual = '<a href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
 			} else {
 				$diaAtual = $cnt_dias++;
 			}
-
 			$temp_ln=$temp_ln."<td class='td_marcado0'>".$diaAtual.'<br />'.$marcaDia.'</td>';
 			$marcaDia = '';
 	        $daux++;
@@ -1208,7 +1152,6 @@ function calcDiaSemana($dia,$mes,$ano){
      }
      if($nl==5) $temp_ln=$temp_ln."<tr><td colspan=7>&nbsp;</td></tr>";
      $temp_tb=$temp_tb.$temp_ln;
-
      $k=$idx-($mes-1);
      if($rodapes[$k]!="") //Gera um rodapï¿½ para a tabela de mï¿½s
      {
@@ -1216,25 +1159,19 @@ function calcDiaSemana($dia,$mes,$ano){
                "</td></tr></table><br></td>";
      }
      else $temp_tb=$temp_tb."</table></td>";
-
      $tabela=$tabela.$temp_tb;
      $dia=$daux;
      $idx++; //Passa para o prï¿½ximo mï¿½s
     }
     $tabela=$tabela."</tr>";
    }
-
    #Legenda
   /* $legenda="<table class='table'><tr><td class='cabecalho' colspan=2>Legenda</td></tr>";
-
    for($i=1;$i<=$nq;$i++)
     $legenda  =$legenda."<tr><td class='td_marcado".$i."'>&nbsp;</td><td class='td_leg'>";
 	$legenda .=$leg[$i-1]."</td></tr>";
-
    $tabela=$tabela.$legenda."</table>";*/
    $tabela=$tabela."</table>";
-
-
   }
   return($tabela);
  }
@@ -1243,17 +1180,13 @@ function calcDiaSemana($dia,$mes,$ano){
  	//Fomata nï¿½mero retirando a virgula e substituido por ponto
  	//Dando prioridade para a vï¿½rgula. Verificando no final da string
  	$numero = trim($numero);
-
 	$fileVirg  = substr(strrchr($numero, ","), 0);
 		//echo $fileVirg . "  fileVirg <br>";
 	$virgula = strlen($fileVirg);
-
 	$filePonto  = substr(strrchr($numero, "."), 0);
 	//	echo $filename . "  filename <br>";
 	$ponto = strlen($filePonto);
 			//echo $quantRetira . " quantRetira <br>";
-
-
 	$listCar = array('.',',');
 	$texto = "programador";
 	if ($virgula <='3' && $virgula >'1') {
@@ -1264,9 +1197,7 @@ function calcDiaSemana($dia,$mes,$ano){
 		$listCar = array('.',',');
 		$file4 = str_replace($listCar, '', $file3);
 		//echo $filename2. " ** filename2  <br>";
-
 		return $file4.'.'.$filename2;
-
 	} elseif ($ponto<='3' && $ponto>'1') {
 		//echo substr($texto, 0,-$quantRetira) . " ** substr <br>";
 		$file3 = substr($numero, 0,-$ponto);
@@ -1274,16 +1205,12 @@ function calcDiaSemana($dia,$mes,$ano){
 		$filename2  = substr(strrchr($numero, "."), 1);
 		$file4 = str_replace($listCar, '', $file3);
 		//echo $filename2. " ** filename2  <br>";
-
 		return $file4.'.'.$filename2;
-
 	} else {
-
 		$file4 = str_replace($listCar, '', $numero );
 		return $file4;
 	}
 }
-
 /**
  * Converte de numero arabico para romano
  * @param int $numero numero arabico
@@ -1294,10 +1221,8 @@ function nRomano($numero) {
     if ($numero <= 0 || $numero > 3999) {
         return $numero;
     }
-
     $n = (int)$numero;
     $y = '';
-
     // Nivel 1
     while (($n / 1000) >= 1) {
         $y .= 'M';
@@ -1315,7 +1240,6 @@ function nRomano($numero) {
         $y .= 'CD';
         $n -= 400;
     }
-
     // Nivel 2
     while (($n / 100) >= 1) {
         $y .= 'C';
@@ -1333,7 +1257,6 @@ function nRomano($numero) {
         $y .= 'XL';
         $n -= 40;
     }
-
     // Nivel 3
     while (($n / 10) >= 1) {
         $y .= 'X';
@@ -1351,13 +1274,11 @@ function nRomano($numero) {
         $y .= 'IV';
         $n -= 4;
     }
-
     // Nivel 4
     while ($n >= 1) {
         $y .= 'I';
         $n -= 1;
     }
-
     return $y;
 }
 ?>

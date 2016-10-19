@@ -1,17 +1,16 @@
 <?PHP
-if ($_SESSION['nivel']>4){
 	require_once 'models/sec/dadosEcle.php';
-
-	if (!empty($bsc_rol)) {
-		if (!empty($arr_dad["rol"]) && $altEdit) {
+	if ($altEdit && $membro && $num_rows>'0') {
 		require_once 'views/secretaria/editEcle.php';
-		//Fim do if !empty($arr_dad["rol"]) quando não existe cadastro para este rol é aberto um form para preenchimento
-	}elseif (!$altEdit) {
+	}elseif ($altEdit && $membro ) {
+		require_once ("adm/form_eclesiastico.php");
+	}elseif ($membro) {
 		require_once 'views/secretaria/verEcle.php';
 	}else {
-			require_once ("adm/form_eclesiastico.php");
-		}
-	}//Fim do if de SESSION["rol"]
-	}//Fim do if de nível
-
-	?>
+	echo '<div class="alert alert-danger" role="alert">';
+	echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
+	echo ' <span class="sr-only">Error:</span>';
+	echo ' O Rol n&ordm;: '.$bsc_rol.' <strong> N&Atilde;O</strong> possui cadastro!';
+	echo '</div>';
+	}
+?>
