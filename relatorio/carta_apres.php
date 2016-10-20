@@ -1,6 +1,6 @@
 <?PHP
 	session_start();
-		require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
+	require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
 	controle ("inserir");
   $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
   $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");

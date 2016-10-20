@@ -116,7 +116,6 @@ div .leftpanel {
 }
 
 div .rightpanel {
-	background-color: #c9e9f8;
 	width:23%;
 	float:right;
 }
@@ -146,18 +145,19 @@ div .rightpanel {
 }
 
 div .mainpanel {
+	margin-left: 2px;
 	width:76%;
 	float:left;
 }
 
 div.wrap1  {
+	background-color: #c9e9f8;
 	/* only with left panel- background-image: url(img/bg1.gif); */
-	/* right and left panel */ background-image: url(img/bgcentro.jpg);
+	/* right and left panel  background-image: url(img/bgcentro.jpg);*/
 	/* only with right panel - background-image: url(img/bg3.gif); */
 }
 
 div.leftpanel .header, div.rightpanel .header {
-	background-image:url(img/header_.png);
 	background-repeat:no-repeat;
 	width:100%;
 	line-height:35px;
@@ -185,7 +185,6 @@ span.divider {
 }
 
 div.rightpanel .inquiry, div.leftpanel .inquiry {
-	padding:3px;
 	text-align:justify;
 }
 

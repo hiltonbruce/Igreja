@@ -5,7 +5,7 @@ $tab_edit='adm/dados_cartas.php&tabela=carta&bsc_rol='.$bsc_rol.'&campo=';//Link
 list($diav,$mesv,$anov) = explode("/", $arr_dad["data"]);
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
 $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias ap�s a emiss�o do recibo
-if ($altEdit && $membro && $total>'0') {
+if ($altEdit && $membro) {
 	require_once 'views/secretaria/editCarta.php';
 }elseif (!$altEdit && $membro) {
 	require_once 'views/secretaria/verCarta.php';

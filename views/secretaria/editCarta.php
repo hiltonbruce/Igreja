@@ -122,7 +122,7 @@
 	?>
 	<form id="form1" name="form1" method="get" action="">
 	  <label>
-	    <input type="submit" class='btn btn-primary' name="Submit" value="Cadastrar Carta" />
+	    <input type="submit" class='btn btn-primary' name="Submit" value="Cadastrar nova carta" />
       </label>
       <input name="escolha" type="hidden" id="escolha" value="adm/cria_carta.php" />
       <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
@@ -132,6 +132,8 @@
 	}else {
 		echo '<div class="bs-callout bs-callout-warning">';
 		echo '<h4>Esta pessoa n&atilde;o est&aacute; com situa&ccedil;&atilde;o regular em nosso rol de membro! </h4>';
+		echo '<h4>Verifique na ABA <strong>Eclesi&aacute;astico</strong> e na de <strong>';
+		echo 'Registros</strong> e veja o fazer para regularizar!</h4>';
 		echo 'Para emiss&atilde;o de outra carta, &eacute; necess&aacute;rio que esteja em comunh&atilde;o com a igreja! ';
 		echo 'Se deseja emitir nova transfer&ecirc;ncia, caso a anterior tenha perdido a validade, ';
 		echo 'ou qualquer outro tipo de carta, reintegre-o a comunh&atilde;o da igreja e emita nova carta! ';
