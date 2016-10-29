@@ -2,16 +2,18 @@
 controle ("atualizar");
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 // verifica se o cpf já está cadastrado
-$profis = new DBRecord ("profissional",ltrim($_POST["cpf"]),"cpf");
-if ($profis->cpf()<>"" && $profis->cpf()<>$_POST["cpf_atual"]) {
-?>
-	CPF: <?PHP echo "{$_POST["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> !
-	 <a href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf">Voltar...</a>
-	<script language="JavaScript" type="text/javascript">
-		alert("CPF: <?PHP echo "{$_POST["cpf"]} já cadastrado para o Rol: {$profis->rol()}"?>...");
-		location.href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf";
-	</script>
-<?PHP
+if (!empty($_POST["cpf"]) && strlen($_POST["cpf"])=='14') {
+	$profis = new DBRecord ("profissional",ltrim($_POST["cpf"]),"cpf");
+	if ($profis->cpf()<>"" && $profis->cpf()<>$_POST["cpf_atual"]) {
+	?>
+		CPF: <?PHP echo "{$_POST["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> !
+		 <a href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf">Voltar...</a>
+		<script language="JavaScript" type="text/javascript">
+			alert("CPF: <?PHP echo "{$_POST["cpf"]} já cadastrado para o Rol: {$profis->rol()}"?>...");
+			location.href="./?escolha=adm/dados_profis.php&tabela=profissional&campo=cpf";
+		</script>
+	<?PHP
+	}
 }
 if (!validaCPF($_POST["cpf"]) && $_POST["submit"]=="Alterar CPF ..."){
 	echo "<script>alert('CPF: {$_POST["cpf"]} - Número de CPF inválido');</script>";
@@ -28,9 +30,9 @@ if ($_POST['tabela'] == 'carta') {
 	$rec->Update();
 	echo "<script> alert('Alteração realizada com sucesso!');window.history.go(-1);</script>";
 }else {
-	$query = "select * from {$_POST["tabela"]} ";
-	$query .='WHERE rol="'.$id.'"';
 	$rol = (!empty($_POST['bsc_rol'])) ? intval($_POST['bsc_rol']) : $id;
+	$query = 'select * from '.$_POST['tabela'].' ';
+	$query .='WHERE rol = "'.$rol.'"';
 /*else {
 	$query .="where rol='{$_SESSION["rol"]}'";
 	$rol = $_SESSION["rol"];
@@ -38,9 +40,8 @@ if ($_POST['tabela'] == 'carta') {
 	//echo "<h1>te -{$_POST["id"]}- teste -{$_POST["tabela"]}</h1>";
 	$result = mysql_query($query) or die (mysql_error());
 	if (mysql_num_rows($result)>0){
-	$rec = new DBRecord ("{$_POST["tabela"]}",$rol,"rol"); //Aqui será selecionado a informação do campo
+	$rec = new DBRecord ($_POST["tabela"],$rol,'rol'); //Aqui será selecionado a informação do campo
 	print "<br \>O Campo foi atualizado de:<h3>{$rec->$_POST["campo"]()}</h3>\n"; //Imprime o valor na tela
-
 	if ($_POST["campo"]=="auxiliar" || $_POST["campo"]=="diaconato"
 	  || $_POST["campo"]=="presbitero" ||  $_POST["campo"]=="evangelista"
 	  || $_POST["campo"]=="pastor" ||  $_POST["campo"]=="datanasc"
@@ -53,7 +54,6 @@ if ($_POST['tabela'] == 'carta') {
 	}else{
 		$rec->$_POST["campo"] = ltrim($_POST[$_POST["campo"]]); //Aqui é atribuido a esta variável um valor para UpDate
 	}
-
 		if ($_POST["campo"]=="pai" || $_POST["campo"]=="mae" || $_POST["campo"]=="conjugue") {
 				$cam="rol_{$_POST["campo"]}";
 				$rec->$cam = ltrim($_POST["$cam"]); //Aqui é atribuido a esta variável um valor para UpDate
@@ -80,10 +80,11 @@ if ($_POST['tabela'] == 'carta') {
 					echo "<script> alert('Alteração realizada com sucesso!');window.history.go(-1);</script>";
 				/*echo "<script> alert('Alteração realizada com sucesso!');  location.href='./?escolha=tab_auxiliar/cadastro_bairro.php&uf={$_POST["uf_end"]}';</script>";*/
 			}
-	}else{
-		$value = "'{$rol}'";
-		$dados_pessoais = new insert ("$value","{$_POST["tabela"]}");//deve-se colocar todos valores para os campos da tabela a ser inserida
+	} else {
+		$value = $rol;
+		$dados_pessoais = new insert ($value,$_POST["tabela"]);//deve-se colocar todos valores para os campos da tabela a ser inserida
 		$dados_pessoais->inserir();
 	}
-}	echo mysql_error();
+}
+echo mysql_error();
  ?>
