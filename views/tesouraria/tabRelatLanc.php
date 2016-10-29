@@ -1,10 +1,8 @@
 <?php
 	$tabMembros = new membro();
 	$tesSede = $tabMembros->nomes();
-
 	$cargoIgreja = new tes_cargo;
 	$tesArray = $cargoIgreja->dadosArray();
-
 	//tabela com a lista p confirmar lançamento$idIgreja$idIgreja$idIgreja$idIgreja$idIgreja
 	$lancContabil = new tes_relatLanc();
 	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer,$numLanc,$vlrLanc);
@@ -18,14 +16,13 @@
 		$imprimir  = '<a href="tesouraria/receita.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 		$imprimir .= '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
 		$imprimir .= '</span> Imprimir ...</button> </a>';
-		$titulo='';
+		$titulo= (empty($titulo)) ? '':trim($titulo);
 		$rodape  = '<tfoot><tr class="info"><th>Total lan&ccedil;ado:</th><th class="text-right">';
 		$rodape .= number_format($resultado['2'],2,',','.').'</th></tr></tfoot>';
 	}else {
 		$imprimir='';
 		$rodape = '<tfoot><tr><th>Rubricar:</th><th>Data:</th></tr></tfoot>';
 		$dirigenteIgreja = $igrejaSelecionada->pastor();
-
 		if ($igrejaSelecionada->rol()>'1') {
 			$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
 			$dirigenteIgreja = $dirCong->nome();
@@ -33,10 +30,8 @@
 		}else {
 			$tesIgreja = $tesArray['22']['1']['1']['nome'];//Tesoureiro Geral - Central
 		}
-
 			$fonIni = '<h6>';
 			$fonFim = '</h6>';
-
 		$titulo  =  $statusLancamento;
 		if ($idIgreja==0) {
 			$campo = 'Campo da cidade de '.$origem;
@@ -45,19 +40,15 @@
 		} else {
 				$campo = 'Igreja: '.$igrejaSelecionada->razao();
 		}
-
 		$titulo .=  $fonIni.' &bull; '.$campo.' &bull; ';
 		$titulo .=  'Dire&ccedil;&atilde;o Atual: '.$dirigenteIgreja;
 		$titulo .=  ', 1&ordm; Tesoureiro: '.$tesIgreja;//Tesoureiro
 		$titulo .=  '&bull; Data de Emiss&atilde;o: '.date('d/m/Y H:i:s').$fonIni;//Tesoureiro
-
 	}
 
 if (empty($descricoo) && $tabLancamento!='') {
 	$descricao='Descri&ccedil;&atilde;o';
-
 	echo($imprimir);
-
 ?>
 <table class='table table-hover table-bordered'>
 		<caption class="text-left"><h6>
@@ -78,9 +69,7 @@ if (empty($descricoo) && $tabLancamento!='') {
 </table>
 <?php
 	//print_r($tabMembros->nomes());
-
 	//print_r ($resultado['1']);
-
 	echo($imprimir);
 }
 ?>

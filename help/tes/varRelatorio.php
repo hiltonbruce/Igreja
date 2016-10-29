@@ -3,7 +3,7 @@
     $ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
     $refer = (empty($_GET['refer'])) ? '' : $_GET['refer'] ;
     $cta = (empty($_GET['conta'])) ? '' : $_GET['conta'] ;
-    $mes = (empty($_GET['mes'])) ? '':sprintf("%'02u",$_GET['mes']) ;
+    $mes = (empty($_GET['mes'])) ? date('m'):sprintf("%'02u",$_GET['mes']) ;
     $roligreja = (empty($_GET['igreja'])) ? '0':intval($_GET['igreja']);
     $tituloColuna5 = 'Valor(R$)';
     $numLanc = (empty($_GET['numLanc'])) ? '' : intval($_GET['numLanc']) ;

@@ -6,11 +6,9 @@ function __construct() {
 		$this->var_string .= 'l.valor,l.hist,h.referente,l.debitar,l.creditar, i.razao ';
 		$this->var_string .= 'FROM lanc AS l, igreja AS i, lanchist AS h ';
 		$this->var_string .= 'WHERE l.igreja=i.rol AND l.lancamento=h.idlanca ';
-
 	}
 
 function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$vlrLanc) {
-
 	$queryContas = mysql_query('SELECT id,acesso,titulo,codigo FROM contas') or die (mysql_error());
 	while ($ctas = mysql_fetch_array($queryContas)) {
 		$conta[$ctas['id']] = array ('acesso'=>$ctas['acesso'],'titulo'=>$ctas['titulo'],'codigo'=>$ctas['codigo'],

@@ -30,8 +30,8 @@
               "06-07/05","13-14/05","20/05","28/05",
               "03-04/06","10-11/06","17-18/06","24-25/06",
               "01-02/07","08-09/07","22/07","30/07","05/08");
- $marc1=array("01-04/02","09-11/02","14-18/02","21-25/02","28/04");
- $marc2=array("08-17/03","03-05/04");
+ $marc1=array("01-04/02","11-13/02","14-18/02","21-25/02","28/04");
+ $marc2=array("08-10/02","08-17/03","03-05/04");
  $marc3=array("01-04/03","14-18/03","21-24/03","28-31/03");
  $marc4=array("21/05","27/05","23/07","29/07");
  $marc5=array("01/05","04/05","06/08");
@@ -43,7 +43,7 @@
 
  $mesAgenda = (empty($_GET['mes']) || $_GET['mes']>'12') ?  date('m'): $_GET['mes'] ;
  $anoAgenda = (empty($_GET['ano']) || $_GET['ano']<'2010') ?  date('Y'): $_GET['ano'] ;
-$agendaSec = new sec_Agenda;
+ $agendaSec = new sec_Agenda;
    echo $agendaSec->gerarCalend($mesAgenda,$anoAgenda,1,3,
                       array($marc0,$marc1,$marc2,$marc3,$marc4,$marc5,$marc6,$marc7),
                       $descDatas,

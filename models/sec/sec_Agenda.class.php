@@ -11,41 +11,33 @@
  ***************************************************************************/
 
 /**
-* 
+*
 */
 class sec_Agenda
 {
 
 	protected $ano;
-
 	function __construct($ano='') {
-
-		$this->meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+		$this->meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
 		                "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 		$this->dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&aacute;b");
 		$this->ano = (empty($ano)) ? date('Y'):$ano;
-
 	}
 
 	function calcDiaSemana($dia,$mes,$ano){
 	  $s=(int)($ano / 100);
 	  $a=$ano % 100;
-
 	  if($mes<=2)
 	  {
 	   $mes+=10;
 	   $a--;
 	  }
 	  else $mes-=2;
-
 	  $ival=(int)(2.6*$mes-0.1);
 	  $q1=(int)($s / 4);
 	  $q2=(int)($a / 4);
-
 	  $dia_semana=($ival + $dia + $a + $q1 + $q2 - 2 * $s) % 7;
-
 	  if($dia_semana<0) $dia_semana+=7;
-
 	  return($dia_semana);
 	 }
 
@@ -54,8 +46,8 @@ class sec_Agenda
 	  if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
 	      ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
 	  {
-	   $tabela="Erro ao gerar calendário: [mês=".$mes."] [ano=".$ano.
-	           "] [número de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
+	   $tabela="Erro ao gerar calend&aacute;rio: [m&ecirc;s=".$mes."] [ano=".$ano.
+	           "] [n&uacet;mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
 	  }
 	  else
 	  {
@@ -71,30 +63,24 @@ class sec_Agenda
 	   $dia_semana=calcDiaSemana(1,$mes,$ano);
 	   $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano é bisexto
 	   $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o número de dias de cada mês
-	   $meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+	   $meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
 	                "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
 	   $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&aacute;b");
-
 	   $idx=$mes-1;
 	   $total=$idx+$nmeses; //Total de meses a serem considerados
 	   $dia=$daux=$dia_semana;
-
 	    for($i=0;$i<count($datas);$i++)
 	     $qtd[$i]=count($datas[$i]);
-
-	   $nq=count($qtd);
-
-	   $tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportará as demais tabelas de meses)
-
-	   while($idx<$total)
-	   {
-	    $tabela=$tabela."<tr>";
-	    for($ms=0; $ms<$ncols && $idx<$total; $ms++)
-	    {
+	   	$nq=count($qtd);
+	   	$tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportará as demais tabelas de meses)
+		  while($idx<$total)
+		   {
+		    $tabela=$tabela."<tr>";
+		    for($ms=0; $ms<$ncols && $idx<$total; $ms++)
+		    {
 	     $temp_tb="<td valign='top'><table class='table'>
 	              <tr><td colspan=7  class='cabecalho'>".$meses[$idx].'/'.$ano.
 	              "</td></tr><tr>"; //Cria uma tabela para o mês atual
-
 	     for($idx2=0;$idx2<7;$idx2++) //Gera o cabeçalho da tabela do mês atual
 	     $temp_tb=$temp_tb."<td class='td_semana'>".$dias[$idx2]."</td>";
 
@@ -110,7 +96,6 @@ class sec_Agenda
 			if($d>=$dia || $dia==0) {
 		        $classe="";
 				$maux=$idx+1;
-
 				//A rotina abaixo verifica se o dia atual é um feriado ou um dia marcado
 				//onde $datas contém os dois vetores $feriados e $marcados
 				for($i=0;$i<$nq && $classe=="";$i++)
@@ -138,7 +123,7 @@ class sec_Agenda
 					   	  if($m==$maux && (($cnt_dias>=$d1 && $cnt_dias<=$d2) ||
 						    ($cnt_dias==$d1))) {
 						    $classe="td_marcado".($i+1);//$valor[$i];
-							$marcaDia .= '<span class="'.$classe.'" >&bull;</span>';
+								$marcaDia .= '<span class="'.$classe.'" >'.$title[$diaMc].'</span>';
 							}
 
 					 }
@@ -149,17 +134,22 @@ class sec_Agenda
 
 				//Cria a célula referente ao dia atual
 				$diaMc = $cnt_dias-1;
-				$title[$diaMc] .= $rodapes[$i-1];
+				$title[$diaMc] .= '<p class="evento" >'.$rodapes[$i-1].'</p>';
 				if (date('dmY')==$diaMc.$mes.$ano & $marcaDia!='') {
-					$diaAtual = '<a title = "'.$title[$diaMc].'"" href="data='.$cnt_dias.'"><strong>'.'<span class="text-success">'.$cnt_dias++.'</span></strong></a>';
+					$diaAtual = '<a title = "'.$rodapes[$i-1].'"" href="data='.$cnt_dias.'"><strong>'.'<span class="text-success">'.$cnt_dias++.'</span></strong></a>';
 				} elseif ($marcaDia!='') {
-					$diaAtual = '<a title = "'.$title[$diaMc].'" href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
+					$diaAtual = '<a title = "'.$rodapes[$i-1].'" href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
 				} else {
 					$diaAtual = $cnt_dias++;
 				}
+				if ($daux==0) {
+						$domingo = 'danger';
+				} elseif ($diaAtual.$mes==date('dm')) {
+					$domingo =  'info';
+				} else {
+					$domingo = '' ;
+				}
 
-				$domingo = ($daux==0) ? 'danger' : '' ;
-				
 				$temp_ln=$temp_ln."<td class='td_dia $domingo'>".$diaAtual.'<br />'.$marcaDia.'</td>';
 				$marcaDia = '';
 		        $daux++;
@@ -228,7 +218,7 @@ class sec_Agenda
 	 }
 
 	 function dia ($num) {
-	 	
+
 	 }
 }
 ?>

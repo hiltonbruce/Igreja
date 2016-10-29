@@ -60,6 +60,17 @@
  color: #000000;
 }
 
+.evento{
+ background: #ffffff;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-indent: 5;
+ font-family: verdana,"sans serif",monospace;
+ font-size: 65%;
+}
+
 .td_dia{
  background: #ffffff;
  border-top: 1px solid #f0f0f0;
@@ -85,16 +96,16 @@
  font-size: 8pt;
  color: #ff0000;
  width: 24px;
- height: 20px;
+ height: 20px;#098609
 }
 
 .td_marcado1{
- color: #FF0000;
+ color: #a900ff;
  font-size: 12pt;
 }
 
 .td_marcado2{
- color: #33ff33;
+ color: #9f1e1e;
  font-size: 12pt;
 }
 
@@ -104,17 +115,17 @@
 }
 
 .td_marcado4{
- color: #00FFFF;
+ color: #137979;
  font-size: 12pt;
 }
 
 .td_marcado5{
- color: #FFFF00;
+ color: #cfb613;
  font-size: 12pt;
 }
 
 .td_marcado6{
- color: #FF00FF;
+ color: #960796;
  font-size: 12pt;
 }
 

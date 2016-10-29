@@ -111,9 +111,7 @@ switch ($rec) {
 	case '21':
 		require_once 'help/tes/varRelatorio.php';
 		require_once ('forms/tes/relatorioLanc.php');
-		if (!empty($_GET['dia']) || !empty($_GET['ano']) || !empty($_GET['mes'])) {
-			$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
-		}
+		$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
 		break;
 	case '22':
 		require_once ('forms/tes/busca.php');
