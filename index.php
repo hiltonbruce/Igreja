@@ -49,12 +49,13 @@
 				$membro = false;
 			}
 	}
+	$titleIgreja = NOMEIGR.' &bull; '.CIDADEIG.'-'.UFIG;
 	$campo_rol="Rol N&ordm;:"; //Quando a variável de sessão rol existir define 'Rol nº:' como legenda para o form listar dados do membro pelo rol
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Assembleia de Deus - Bayeux - PB</title>
+<title><?php echo $titleIgreja; ?></title>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
