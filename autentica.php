@@ -53,23 +53,6 @@
 }
 	if (isset($_SESSION['valid_user']))
 	{
-		?>
-		<br />
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-			 <span class="panel-title">
- 		    <h6><?php echo $_SESSION['nome']; ?></h6>
-			</span>
-			</div>
-			<div class="panel-body">
-				CPF: <?php echo $_SESSION['valid_user'];?><br />
-				Setor: <?php echo $_SESSION['cargo'];?><br />
-				Host: <?php echo $_SESSION['computador'];?>
-		<?php
-		echo '<br /><br /><div class="btn-group" role="group" aria-label="...">';
-		echo '<a class="btn btn-info" href="logout.php">Sair</a>';
-		echo '<a class="btn btn-info" href="./?escolha=alt_senha.php">Trocar Senha</a>';
-		echo '</div></div></div>';
 		require_once 'chat/samplea.php';
 		//Verifica se a senha foi alterada ap�s inicializa��o caso contr�rio chama p�gina de aletra��o
 		$senha_crip = md5($_SESSION["valid_user"]);
@@ -77,7 +60,7 @@
 		."where cpf='{$_SESSION["valid_user"]}'"
 		." and senha='$senha_crip' ";
  		$result_senh = mysql_query($query_senha) or die (mysql_error());
- 		if (mysql_num_rows($result_senh)>0){
+ 		if (mysql_num_rows($result_senh)>'0'){
  			echo "Desculpe-nos, por&eacute;m voc&ecirc; s&oacute; poder&aacute; continuar no sistema ap&oacute;s alterar sua senha atual!";
  			$_GET ["escolha"] = "alt_senha.php";
  		}

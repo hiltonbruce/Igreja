@@ -72,7 +72,6 @@ div .logo {
 	width:100%;
 	height:75px;
 	background-color: white;
-	background-image: url(img/90_anos.jpg);
 	background-repeat:no-repeat;
 	background-size: 673px 75px;
 	background-position: top center;
@@ -83,6 +82,39 @@ div.logo .slogan {
 	font-size:9px;
 	font-weight:normal;
 	margin-top:3px;
+}
+
+.brasao {
+  display: block;
+	float: left;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url(img/brasao.png) no-repeat;
+	background-size: 75px 75px;
+  width: 75px; /* Width of new image */
+  height: 75px; /* Height of new image */
+	margin-top:-35px;
+}
+
+.banner {
+  display: block;
+	float: left;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url(img/bannerCentro.png) no-repeat;
+	background-size: 640px 78px;
+  width: 640px; /* Width of new image */
+  height: 78px; /* Height of new image */
+	margin-top:-35px;
+}
+
+
+.logar {
+  display: block;
+	float: right;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+	margin-top:-20px;
 }
 
 div.info, div.info1 {
