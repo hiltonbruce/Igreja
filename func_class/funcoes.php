@@ -637,8 +637,8 @@ function data_extenso ($data) {
 			$ver_data = checkdate($m,$d,$y);
 
 	if (!$ver_data){
-				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y'); window.history.go(-2);</script>";
-				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
+				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				break;
 			}
 
@@ -666,7 +666,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Marï¿½o";
+		case 3: $mes_extenso="Mar&ccedil;o";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -686,7 +686,7 @@ function data_extenso ($data) {
 				break;
 		case 12: $mes_extenso="Dezembro";
 				break;
-		default: echo $mes_extenso="Mï¿½s incorreto";
+		default: echo $mes_extenso="M&ecirc;s incorreto";
 	}//fim do case para o mï¿½s
 
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";

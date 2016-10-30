@@ -39,7 +39,7 @@ if ($_POST['tabela'] == 'carta') {
 	}*/
 	//echo "<h1>te -{$_POST["id"]}- teste -{$_POST["tabela"]}</h1>";
 	$result = mysql_query($query) or die (mysql_error());
-	if (mysql_num_rows($result)>0){
+	if (mysql_num_rows($result)>'0'){
 	$rec = new DBRecord ($_POST["tabela"],$rol,'rol'); //Aqui será selecionado a informação do campo
 	print "<br \>O Campo foi atualizado de:<h3>{$rec->$_POST["campo"]()}</h3>\n"; //Imprime o valor na tela
 	if ($_POST["campo"]=="auxiliar" || $_POST["campo"]=="diaconato"
