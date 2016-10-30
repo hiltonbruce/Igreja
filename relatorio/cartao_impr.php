@@ -168,7 +168,7 @@ body {
 	width:216px;
 	height:86px;
 	z-index:11;
-	font-size: 80%;
+	font-size: 90%;
 	color: #000000;
 	font:bold;
 }
@@ -181,7 +181,7 @@ body {
 	width:230px;
 	height:86px;
 	z-index:11;
-	font-size: 80%;
+	font-size: 90%;
 }
 #Pastor {
 	position:absolute;
