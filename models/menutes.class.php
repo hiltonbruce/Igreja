@@ -23,7 +23,7 @@ class menutes {
 		$this->pag_mostra = (empty($_GET["pag_mostra"])) ? '' : $_GET["pag_mostra"];
 		$this->id = (empty($_GET["id"])) ? '' : $_GET["id"];
 		$_urlLi_pen='?escolha='.$this->escGET.'&menu='.$this->menuGET.'&id='.$this->id;//Montando o Link para ser passada a classe
-		$query_pen = "SELECT * FROM tes_recibo ORDER BY id DESC ";
+		$query_pen = "SELECT * FROM tes_recibo ORDER BY data DESC,id DESC";
 		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
@@ -235,7 +235,7 @@ function recibosmembros (){
 		if ($_GET['tipo']==2) {
 			$query_pen  = 'SELECT t.id, t.recebeu, t.valor, t.data, t.motivo, t.tipo, f.razao ';
 			$query_pen .= 'FROM tes_recibo AS t, credores AS f WHERE t.recebeu='.$id;
-			$query_pen .= ' AND t.tipo=2 AND t.recebeu = f.id ORDER BY t.id DESC ';
+			$query_pen .= ' AND t.tipo=2 AND t.recebeu = f.id ORDER BY  t.data DESC,t.id DESC ';
 		}elseif ($_GET['tipo']==3) {
 			//Recibos n?o membros
 			if ($nome=='' && $cpf=='' && $rg=='') {
@@ -245,7 +245,7 @@ function recibosmembros (){
 				}
 		} else {
 		$query_pen = 'SELECT * FROM tes_recibo AS t, membro AS m WHERE t.recebeu="'.$id;
-		$query_pen .= '" AND t.recebeu = m.rol ORDER BY t.id DESC ';
+		$query_pen .= '" AND t.recebeu = m.rol ORDER BY t.data DESC,t.id DESC ';
 		}
 		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
@@ -388,7 +388,7 @@ function recibosmembros (){
 		}
 
 		$sqlPer  = 'SELECT t.*,i.razao FROM tes_recibo AS t, igreja AS i WHERE '.$op;
-		$sqlPer .= '(t.igreja=i.rol OR t.igreja="0") ORDER BY t.data DESC,t.id ASC';
+		$sqlPer .= '(t.igreja=i.rol OR t.igreja="0") ORDER BY t.data DESC,t.id DESC';
 		$resQueryPer = mysql_query($sqlPer);
 		while ($resSql = mysql_fetch_array($resQueryPer)) {
 			$retorno [$resSql['id']] = array('igreja'=>$resSql['igreja'],'tipo'=>$resSql['tipo'],

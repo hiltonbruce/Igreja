@@ -25,48 +25,46 @@ $ind = 1; //Define o indice dos campos do formulário
 	<?PHP
 	if (!empty($id)) {
 	?>
-	<table width="550">
-      <tr>
-        <td colspan="2">Nome da Crian&ccedil;a :
-        <?PHP
-		$nome = new editar_form("nome",$apresenta->nome(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?></td>
-		<td>Congrega&ccedil;&atilde;o:
-        <?PHP
-		$nome = new editar_form("id_cong",$igreja->razao(),$tab,$tab_edit);
-		$nome->getMostrar();
-
-
-		if ($_GET["campo"]=="id_cong"){
-			?>
-				  <form id="form1" name="form1" method="post" action="">
-				    <div class="row">
-				 	 <div class="col-xs-6">
-				         <?PHP
-						 	$congr = new List_sele ("igreja","razao","id_cong");
-						 	echo $congr->List_Selec (++$ind,$igreja->rol(),'class="form-control input-sm"');
-						 ?>
-					</div>
-				 	 <div class="col-xs-2">
-						 <input name="escolha" type="hidden" id="escolha" value="adm/atualizar_dados.php" />
-						  <input name="tabela" type="hidden" id="tabela" value="cart_apresentacao" />
-						  <input name="id" type="hidden" id="id" value="<?php echo $apresenta->rol();?>" />
-						  <input name="campo" type="hidden" id="campo" value="id_cong" />
-						  <input name="Alterar..." type="submit" class="btn btn-primary btn-sm" id="Alterar..." value="Alterar..." tabindex="2" />
-					</div></div>
-				  </form>
-				<?PHP
-				}
-				?>
+	<table class='table'>
+    <tr>
+      <td colspan="2">Nome da Crian&ccedil;a :
+      <?PHP
+			$nome = new editar_form("nome",$apresenta->nome(),$tab,$tab_edit);
+			$nome->getMostrar();$nome->getEditar();
+			?></td>
+			<td>Congrega&ccedil;&atilde;o:
+	    <?PHP
+			$nome = new editar_form("id_cong",$igreja->razao(),$tab,$tab_edit);
+			$nome->getMostrar();
+			if ($_GET["campo"]=="id_cong"){
+		?>
+		  <form id="form1" name="form1" method="post" action="">
+		    <div class="row">
+		 	 <div class="col-xs-6">
+		         <?PHP
+				 	$congr = new List_sele ("igreja","razao","id_cong");
+				 	echo $congr->List_Selec (++$ind,$igreja->rol(),'class="form-control input-sm"');
+				 ?>
+			</div>
+		 	 <div class="col-xs-2">
+				 <input name="escolha" type="hidden" id="escolha" value="adm/atualizar_dados.php" />
+				  <input name="tabela" type="hidden" id="tabela" value="cart_apresentacao" />
+				  <input name="id" type="hidden" id="id" value="<?php echo $apresenta->rol();?>" />
+				  <input name="campo" type="hidden" id="campo" value="id_cong" />
+				  <input name="Alterar..." type="submit" class="btn btn-primary btn-sm" id="Alterar..." value="Alterar..." tabindex="2" />
+			</div></div>
+		  </form>
+		<?PHP
+		}
+		?>
 		</td>
       </tr>
       <tr>
         <td colspan="2">Pai:
         <?PHP
-		$nome = new editar_form("pai",$apresenta->pai(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar('','0');
-		?></td>
+				$nome = new editar_form("pai",$apresenta->pai(),$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar('','0');
+				?></td>
         <td>Rol do Pai:
 			<?PHP
 				$_GET["rol_pai"]=$apresenta->rol_pai();
@@ -118,7 +116,6 @@ $ind = 1; //Define o indice dos campos do formulário
         <?PHP
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-
 		//$nome = new editar_form("cidade",$apresenta->cidade(),$tab,$tab_edit);
 		//$nome->getMostrar();$nome->getEditar();
 		?></td>
@@ -133,14 +130,15 @@ $ind = 1; //Define o indice dos campos do formulário
         <?PHP
 		$nome = new editar_form("livro",$apresenta->livro(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
-		?></td>
+		?>
+		</td>
 		<td>Folhas:
-	    <?PHP
+	  <?PHP
 		$nome = new editar_form("fl",$apresenta->fl(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
 		<td>Data:
-        <?PHP
+    <?PHP
 		$nome = new editar_form("data", conv_valor_br($apresenta->data()),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
@@ -173,7 +171,6 @@ $ind = 1; //Define o indice dos campos do formulário
     }else {
     	echo "Sem Cadastro para este id: {$_GET["id"]}";
     }
-
     ?>
 </div>
 </fieldset>

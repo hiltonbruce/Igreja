@@ -8,7 +8,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	//Array's para troca do dia da semana para portugês
 	$diaEn = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 	$diaBr   = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b');
-
  ?>
 <table id="Contas do per&iacute;odo" class='table table-condensed' >
 			<colgroup>

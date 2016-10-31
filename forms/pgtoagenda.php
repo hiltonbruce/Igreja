@@ -1,5 +1,3 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <?php
 	if (!empty($_GET['id'])) {
 		$regID = intval($_GET['id']);
@@ -8,9 +6,7 @@
 	} else {
 		$regID = '';
 	}
-
 	$itemagenda = new DBRecord('agenda',$regID, 'id');
-
 	if ($itemagenda->idlanc()>'0') {
 		$lancConfirmado  = '<p><kbd>Lan&ccedil;amento confirmado, N&ordm;: '.$itemagenda->idlanc().'</kbd></p>';
 		$lancConfirmado .= '<p class="text-danger">Ap&oacute;s confirma&ccedil;&atilde;o de ';
@@ -25,18 +21,15 @@
 	} else {
 		$desCampoCta = '';
 	}
-
 	if (strstr($itemagenda->credor(),'r')) {
 		$rolMembro = intval($itemagenda->credor());
 		$credAgenda = new DBRecord('membro',$rolMembro, 'rol');
 		$nomeMembro = $credAgenda->nome();
 		$credorCompl = true;//Para o caso de membros da igreja
-
 		$mudaTipo = '<div class="bs-callout bs-callout-warning">
 		    <p><label><input type="checkbox" id="status" name="paraCredor" value="1">
 			&nbsp;Mudar este compromisso para credor <strong>N&Aatilde;O</strong>-Membro da Igreja!</label></p>
 		  </div>';
-
 	}else {
 		$credAgenda = new DBRecord('credores', $itemagenda->credor(), 'id');
 		$nomecredor = $credAgenda->alias();
@@ -52,7 +45,6 @@
 	} else {
 		$datapgto = '';
 	}
-
 	$pendende = '';
  	$pago= '';
 	$enviado = '';
@@ -77,7 +69,6 @@
 	//concluir a migra��o dos dados da tabela fatura para a de fonecedores
 	//fazer verifica��o no campo credor da tabela agenda se refere a rol ou CPF e CNPJ
 	//No campo da tabela est� definida da seguinte forma tabela@numero ou tabela@cnpj/cpf
-
 	if ($itemagenda->igreja()<'1') {
 		$igreja_pgto = 'Templo Sede';
 	}else {
@@ -85,12 +76,10 @@
 		$igreja_pgto = $igreja_array->razao();
 	}
 ?>
-
 <fieldset>
 	<legend>Lan&ccedil;ar Pagamento</legend>
-	<p style="background: white; color: blue; font-size: 14px;">
 	<form action="" method="post" name="cadastro_igreja">
-		<table style="text-align: left; width: 100%;">
+		<table class='table'>
 			<tbody>
 				<tr>
 					<td><label>Igreja</label>
@@ -153,12 +142,11 @@
 						 <?PHP echo $desCampoCta; ?> tabindex="<?PHP echo ++$ind; ?>" /></td>
 				</tr>
 				<tr>
-					<td colspan="3">Descri&ccedil;&aatilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
+					<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
 						disabled="disabled" class="form-control" value="<?php echo $ctaDespesa->descricao();?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="4">
-						<?php echo $mudaTipo;?>
 					</td>
 				</tr>
 				<tr>
@@ -182,34 +170,43 @@
 				</tr>
 			</tbody>
 		</table>
-		<table style="text-align: left; width: 100%;">
-			<tbody>
-				<tr>
-					<td><label>Valor:</label> <input type="text" name="valor"
-						id="valor" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
-						required="required" value="<?php echo $itemagenda->valor();?>"></td>
-					<td><label>Juros e Multas:</label> <input type="text" name="multa"
-						id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
-						value="<?php echo $itemagenda->multa();?>"></td>
-					<td><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
-						id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
-						value="<?php echo $datapgto;?>"></td>
-				</tr>
-				<tr>
-					<td><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
-						id="venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
-						required="required" value="<?php echo conv_valor_br($itemagenda->vencimento());?>"></td>
-					<td><label>Resp.Pagamento:</label> <input type="text"
-						name="resppgto" id="resppgto" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
-						value="<?php echo $itemagenda->resppgto();?>"></td>
-					<td><label></label> <label>&nbsp;</label> <input type="hidden" name="atualizar"
-						value="<?php echo $_GET['id'];?>"> <input type="submit"
-						name="Submit" class="btn btn-primary" value="Atualizar..."
-						tabindex="<?php echo ++$ind; ?>"></td>
-				</tr>
-			</tbody>
-		</table>
-
+		<div class="row">
+	  <div class="col-xs-3"><label>Valor:</label> <input type="text" name="valor"
+			id="valor" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+			required="required" value="<?php echo $itemagenda->valor();?>">
+		  </div>
+		  <div class="col-xs-3"><label>Juros e Multas:</label> <input type="text" name="multa"
+				id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+				value="<?php echo $itemagenda->multa();?>">
+		  </div>
+		  <div class="col-xs-3"><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
+				id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
+				value="<?php echo $datapgto;?>">
+		  </div>
+		  <div class="col-xs-3"><label><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
+				id="venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+				required="required" value="<?php echo conv_valor_br($itemagenda->vencimento());?>">
+		  </div>
+		  <div class="col-xs-3"><label>Resp.Pagamento:</label> <input type="text"
+				name="resppgto" id="resppgto" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+				value="<?php echo $itemagenda->resppgto();?>">
+		  </div>
+		  <div class="col-xs-3"><label>&nbsp;</label> <input type="hidden" name="atualizar"
+				value="<?php echo $_GET['id'];?>"> <input type="submit"
+				name="Submit" class="btn btn-primary" value="Atualizar..."
+				tabindex="<?php echo ++$ind; ?>">
+		  </div>
+		  <div class="col-xs-3"><label>Id Lan&ccedil;amento</label>
+				<?php
+					$idlanc = ($itemagenda->idlanc()=='0') ? 'name="idlanc" ' : 'disabled' ;
+				?>
+				<input type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+				<?php echo 'value="'.$itemagenda->idlanc().'" '.$idlanc;?>>
+		  </div>
+		  <div class="col-xs-6">
+				<?php echo $mudaTipo;?>
+		  </div>
+		</div>
 	</form>
 	<?php
 	$vencimento = $itemagenda->vencimento();
@@ -234,7 +231,7 @@
 	}elseif ($dataAtual->format('U') > $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&otimes;</span><span class="sr-only">Close</span></button>
 	      CONTA <strong>VENCIDA</strong>! Ainda n&atilde;o foi paga! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
@@ -242,7 +239,7 @@
 	}elseif ($dataAtual->format('U') < $dataVenc->format('U') && $itemagenda->datapgto()=='0000-00-00') {
 		?>
 		<div class="alert alert-warning alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&otimes;</span><span class="sr-only">Close</span></button>
 	      Conta ainda dentro do prazo para pagamento! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
@@ -250,18 +247,16 @@
 	}else {
 		?>
 		<div class="alert alert-info alert-dismissible" role="alert">
-	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">�</span><span class="sr-only">Close</span></button>
+	      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&otimes;</span><span class="sr-only">Close</span></button>
 	      Conta PAGA, Obrigado! <strong>Situa&ccedil;&atilde;o em: <?php echo $dataget;?></strong>
 	      <?php echo $lancConfirmado;?>
 	    </div>
 		<?php
 	}
-
 	?>
-	</p>
-
 </fieldset>
-
+<script type="text/javascript" src="js/autocomplete.js"></script>
+<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {
@@ -276,20 +271,16 @@
 			return ;
 		return "models/tes/autoCompletaContas.php?q=" + this.value;
 	});
-
-
-    new Autocomplete("campo_nome", function() {
-        this.setValue = function( rol, nome, celular, congr ) {
-            $("#fone_membro").val(rol);
-            $("#rol_membro").val(nome);
-            $("#sigla_val").val(celular);
-            $("#rol").val(fone);
-            $("#cong").val(congr);
-        }
-
-        if ( this.value.length < 1 && this.isNotClick )
-            return ;
-        return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
-    });
-
+  new Autocomplete("campo_nome", function() {
+    this.setValue = function( rol, nome, celular, congr ) {
+        $("#fone_membro").val(rol);
+        $("#rol_membro").val(nome);
+        $("#sigla_val").val(celular);
+        $("#rol").val(fone);
+        $("#cong").val(congr);
+    }
+      if ( this.value.length < 1 && this.isNotClick )
+          return ;
+      return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
+  });
 </script>

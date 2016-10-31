@@ -58,13 +58,11 @@ class agenda {
 					}else {
 						$credor=(int)$id['credor'];
 					}
-
 					if ($tipo=='membro') {
 						$nomeMembro = new DBRecord('membro', $credor, 'rol');
 					}elseif ($tipo=='membro')
 					$despesaMes .= '<br /> Inserida a fatura: '.$id['idfatura'].'-'.$id['nome'].', vencimento para:'.date('d/m/Y',mktime(0,0,0,$mesv+$i,$diav,$anov));
 					$despesaMes .= ' - Motivo: '.$id['motivo'];
-
 				}
 			}
 		}
@@ -72,41 +70,32 @@ class agenda {
 	}
 
 	function despesasfixas (){
-
 		$_urlLi_fix="?escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&id={$_GET["id"]}";//Montando o Link para ser passada a classe
-		$query_fix  = 'SELECT a.vencimento, a.valor, a.id,a.credor,';
+		$query_fix  = 'SELECT a.vencimento, a.valor, a.id,a.credor,a.idlanc,';
 		$query_fix .= 'a.igreja, a.status, a.idfatura, a.motivo, a.datapgto, a.resppgto ';
 		$query_fix .= 'FROM agenda AS a WHERE  a.frequencia="1" ';
 		$query_fix .= 'AND TO_DAYS(a.vencimento) - TO_DAYS(NOW()) <= "15" ';
 		$query_fix .= 'ORDER BY a.status ASC,a.vencimento DESC ';
-
 		$nmpp_fix="10"; //N?mero de mensagens por p?rginas
 		$paginacao_fix = Array();
 		$paginacao_fix['link'] = "?"; //Pagina??o na mesma p?gina
-
 		//Faz os calculos na paginação
 		$sql2_fix = mysql_query ($query_fix) or die (mysql_error());
 		$total_fix = mysql_num_rows($sql2_fix) ; //Retorna o total de linha na tabela
 		$paginas_fix = ceil ($total_fix/$nmpp_fix); //Retorna o total de p?ginas
-
 		if ($_GET["pagina1_fix"]<1) {
 			$_GET["pagina1_fix"] = 1;
 		} elseif ($_GET["pagina1_fix"]>$paginas_fix) {
 			$_GET["pagina1_fix"] = $paginas_fix;
 		}
-
 		$pagina_fix = $_GET["pagina1_fix"]-1;
-
 		if ($pagina_fix<0) {$pagina_fix=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_fix=$pagina_fix * $nmpp_fix; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
 		$sql3_fix = mysql_query ($query_fix." LIMIT $inicio_fix,$nmpp_fix") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-
 		//inicia o cabe?alho de pagina??o
-
 		?>
 <table id="Agenda">
-
 	<colgroup>
 		<col id="Credor">
 		<col id="Igreja">
@@ -145,7 +134,10 @@ class agenda {
 				$titulo = 'Pagamento ser&aacute; realizado hoje!';
 				break;
 			case 2:
-				$status = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/>Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$evento = '<img src="img/yes.png" alt="D&iacute;�vida Paga!';
+				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$status = $evento.' Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
 				$status .= ' - '.$coluna_fix['resppgto'];
 				$titulo = 'D&iacute;�vida Paga! Obrigado.';
 				break;
@@ -166,9 +158,7 @@ class agenda {
 				}
 				break;
 		}
-
 		++$inc_fix;
-
 		if ($coluna_fix['credor']!=(int)$coluna_fix['credor']) {
 			$membro = new DBRecord('membro',(int)$coluna_fix['rol'],'rol' );
 			$evento = 'Membro: '.$membro->nome();
@@ -176,13 +166,11 @@ class agenda {
 			$credor= new DBRecord('credores',$coluna_fix['credor'],'id');
 			$evento = ($credor->alias()!='') ? $credor->alias():' *** ';
 		}
-
 		if ($inc_fix>1)	{
 			echo "<tr class='dados'>";
 			$inc_fix=0;
 		}else {
 			echo "<tr>";}
-
 			echo "<td><a title = '{$coluna_fix["nome"]}' href='./?escolha=tesouraria/agenda.php&menu={$_GET["menu"]}&id={$coluna_fix["id"]}
 							&pagina1_fix={$_GET["pagina1_fix"]}'>".substr($evento,0,40)."<a></td>";
 			echo '<td> <a title = "'.$titulo.'" href="./?escolha=tesouraria/agenda.php&menu='.$_GET['menu'].
@@ -192,58 +180,44 @@ class agenda {
 			echo '<td>'.$status.'</td>';
 			echo '<td>'.conv_valor_br ($coluna_fix['vencimento']).'</td>';
 			echo "</tr>";
-
-
 	}//loop while produtos
-
 	?>
 	</tbody>
 </table>
-
 	<?PHP
-
 	//Classe que monta o rodape
 	$_rod_fix = new rodape($paginas_fix,$_GET["pagina1_fix"],"pagina1_fix",$_urlLi_fix,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_fix->getRodape(); $_rod_fix->form_rodape ("P&aacute;gina:");
-
 	//Início das pendencias de disciplinados
 	}
 
 	function mostra10dias (){
-
 		$_urlLi_pen="?escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&id={$_GET["id"]}";//Montando o Link para ser passada a classe
-		$query_pen = 'SELECT a.vencimento, a.valor, a.id, a.credor,';
+		$query_pen = 'SELECT a.vencimento, a.valor, a.id, a.credor,a.idlanc,';
 		$query_pen .= 'a.igreja, a.status, a.idfatura, a.motivo, a.datapgto, a.resppgto ';
 		$query_pen .= 'FROM agenda AS a WHERE ((TO_DAYS(a.vencimento) - TO_DAYS(NOW()) <= 10 ';
 		$query_pen .= 'AND TO_DAYS(NOW()) - TO_DAYS(a.vencimento)<= 15 ) ';
 			echo "<tr>";
 		$query_pen .= 'OR (a.status < 2 AND TO_DAYS(a.vencimento) - TO_DAYS(NOW()) <= 5 )) AND a.frequencia = "2" ';
 		$query_pen .= 'ORDER BY a.status ASC,a.vencimento DESC';
-
 		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
-
 		//Faz os calculos na paginação
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
-
 		if ($_GET["pagina1_pen"]<1) {
 			$_GET["pagina1_pen"] = 1;
 		} elseif ($_GET["pagina1_pen"]>$paginas_pen) {
 			$_GET["pagina1_pen"] = $paginas_pen;
 		}
-
 		$pagina_pen = $_GET["pagina1_pen"]-1;
-
 		if ($pagina_pen<0) {$pagina_pen=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_pen=$pagina_pen * $nmpp_pen; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
 		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-
 		//inicia o cabe?alho de pagina??o
-
 	?>
 	<table cellspacing="0" id="Agenda">
 		<colgroup>
@@ -273,16 +247,17 @@ class agenda {
 		}else {
 			$nome = $coluna_pen["nome"];
 		}
-
 		$status ='<a href = "./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$coluna_pen['id'].'" title = "Informar pagamento!" >
 		<img src="img/editar.jpg" alt="Editar agenda!" width="16" height="16" /> Pagar!</a>';
-
 		switch ($coluna_pen['status']) {
 			case 1:
-				$status .= '<img src="img/exclamacao.png" alt="Pagamento será realizado hoje!" width="16" height="16"/> Saiu p/ Pgto';
+				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser&aacute; realizado hoje!" width="16" height="16"/> Saiu p/ Pgto';
 				break;
 			case 2:
-				$status = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/> Pago em: '.conv_valor_br ($coluna_pen['datapgto']);
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$evento = '<img src="img/yes.png" alt="D&iacute;�vida Paga!';
+				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$status = $evento.' Pago em: '.conv_valor_br ($coluna_pen['datapgto']);
 				$status .= ', por '.$coluna_pen['resppgto'];
 				break;
 			case 3:
@@ -290,17 +265,15 @@ class agenda {
 				break;
 			default:
 				if (date("Y-m-d")==$coluna_pen['vencimento']) {
-					$status .= '<img src="img/exclamacao.png" alt="Dívida não Paga!" width="16" height="16" /> Pgto Hoje!';
+					$status .= '<img src="img/exclamacao.png" alt="D&iacute;�vida n&atilde;o Paga!" width="16" height="16" /> Pgto Hoje!';
 				}elseif (date("Y-m-d")>$coluna_pen['vencimento']){
-					$status .= '<img src="img/not.png" alt="Dívida Vencida!" width="16" height="16" /> Vencida';
+					$status .= '<img src="img/not.png" alt="D&iacute;�vida Vencida!" width="16" height="16" /> Vencida';
 				}else {
-					$status .= '<img src="img/exclamacao.png" alt="Dívida a Pagar!" width="16" height="16" /> À Pagar';
+					$status .= '<img src="img/exclamacao.png" alt="D&iacute;�vida a Pagar!" width="16" height="16" /> &Agrave; Pagar';
 				}
 				break;
 		}
-
 		++$inc_pen;
-
 		if ($coluna_pen['credor']!=(int)$coluna_pen['credor']) {
 			$membro = new DBRecord('membro',(int)$coluna_pen['rol'],'rol' );
 			$evento = 'Membro: '.$membro->nome();
@@ -308,13 +281,11 @@ class agenda {
 			$credor= new DBRecord('credores',$coluna_pen['credor'],'id');
 			$evento = ($credor->alias()!='') ? $credor->alias():' *** ';
 		}
-
 		if ($inc_pen>1)	{
 			echo "<tr id='destac' class='dados'>";
 			$inc_pen=0;
 		}else {
 			echo "<tr id='destac'>";}
-
 			echo "<td><a title = '{$coluna_pen["nome"]}' href='./?escolha=tesouraria/agenda.php&menu={$_GET["menu"]}&id={$coluna_pen["id"]}
 							&pagina1_pen={$_GET["pagina1_pen"]}'>".substr($evento,0,40)."<a></td>";
 			echo '<td>'.$coluna_pen['motivo'].'</td>';
@@ -322,26 +293,20 @@ class agenda {
 			echo '<td>'.$status.'</td>';
 			echo '<td>'.conv_valor_br ($coluna_pen['vencimento']).'</td>';
 			echo "</tr>";
-
 	}//loop while produtos
-
 	?>
 	</tbody>
 </table>
-
 	<?PHP
-
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
-
 	//Início das pendencias de disciplinados
 	}
 
 	function periodo ($dia,$credor,$pagamento) {
-
 		$periodo  = 'SELECT a.vencimento, a.valor, a.id, a.credor,';
-		$periodo .= 'a.igreja, a.status, a.motivo ';
+		$periodo .= 'a.igreja, a.status, a.motivo, a.idlanc ';
 		$periodo .= 'FROM agenda AS a WHERE ';
 		if ($credor>'0') {
 			$periodo .= ' a.credor='.$credor.' AND ';
@@ -354,21 +319,18 @@ class agenda {
 			}
 		$periodo .= ' a.vencimento = "'.$dia.'"';
 		$periodo_array = mysql_query($periodo)  or die (mysql_error());
-
 		$numLinhas	= mysql_num_rows($periodo_array);
-
 		//echo "<h1>Linhas Afetadas $numLinhas</h1>";
-
 		if ($numLinhas>0) {
-
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
-
 			if ($periodo_dados['status']=='2') {//Marca os já pagos
-				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/> ';
-				$titulo = 'Dívida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$evento = '<img src="img/yes.png" alt="D&iacute;�vida Paga!';
+				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$titulo = 'D&iacute;�vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
 				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/> ';
-				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo: '.$periodo_dados['motivo'];
+				$titulo = 'Atualizado. Aguardado confirma&ccedil;&atilde;o de pgto! Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
 				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/> ';
 				$titulo = 'Dívida vencida! Motivo: '.$periodo_dados['motivo'];
@@ -376,14 +338,12 @@ class agenda {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];
 			}
-
 			if ($periodo_dados['igreja']<'1') {
 				$evento .= 'Templo Sede - ';
 			}else {
 				$igreja_ev = new DBRecord('igreja',$periodo_dados['igreja'], 'rol');
 				$evento .= $igreja_ev->razao();
 			}
-
 			if (strstr($periodo_dados['credor'],'r')) {
 				$rolCredor = str_replace('r', "", $periodo_dados['credor']);
 				$membro = new DBRecord('membro',$rolCredor,'rol' );
@@ -392,11 +352,9 @@ class agenda {
 				$credor= new DBRecord('credores',$periodo_dados['credor'],'id');
 				$evento .= ' &rarr; '.$credor->alias();
 			}
-
 			echo '<a title="'.$titulo.'" href="./?escolha=tesouraria/agenda.php&
 			menu=top_tesouraria&id='.$periodo_dados['id'].'&pagina1_fix='.$_GET['pagina1_fix'].$linkcredor.'">';
 			echo $evento;
-
 			echo ' &rarr; R$ '.number_format($periodo_dados['valor'],2,",",".").
 			'</a> (<span class="text-info">'.$periodo_dados['motivo'].'</span>)<br />';
 			$total += $periodo_dados['valor'];
@@ -417,8 +375,8 @@ class agenda {
 
 	function listavencidas($data) { //Contas vencidas
 		$listvenc  = 'SELECT f.razao, DATE_FORMAT(a.vencimento,"%d/%m/%Y") AS vencimento, a.valor, a.id, ';
-		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, f.alias AS nome ';
-		$listvenc .= 'FROM agenda AS a, credores AS f, igreja AS i  WHERE f.id=a.credor AND ';
+		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, f.alias AS nome, ';
+		$listvenc .= 'a.idlanc FROM agenda AS a, credores AS f, igreja AS i  WHERE f.id=a.credor AND ';
 		$listvenc .= 'i.rol=a.igreja AND a.status<"2" AND TO_DAYS(a.vencimento) < TO_DAYS(NOW())';
 		$listvenc_array = mysql_query($listvenc);
 
@@ -455,14 +413,16 @@ class agenda {
 		while ($contas = mysql_fetch_array($listvenc_array)) {
 
 			if ($contas['status']=='2') {//Marca os já pagos
-				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/>';
-				$titulo = 'Dívida Paga! Obrigado.';
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$evento = '<img src="img/yes.png" alt="D&iacute;�vida Paga!';
+				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$titulo = 'D&iacute;�vida Paga! Obrigado.';
 			}elseif ($contas['status']=='1'){
 				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/>';
 				$titulo = 'Atualizado. Aguardado confirmação de pgto!';
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/>';
-				$titulo = 'Dívida vencida!';
+				$evento = '<img src="img/not.png" alt="D&iacute;vida vencida!" width="16" height="16"/>';
+				$titulo = 'D&iacute;�vida vencida!';
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -503,22 +463,24 @@ class agenda {
 		}
 
 		$listvenc  = 'SELECT a.vencimento, a.valor, a.id, a.status, ';
-		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, a.status ';
-		$listvenc .= 'FROM agenda AS a, igreja AS i  WHERE '.$filtrarCredor;
+		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, a.status,';
+		$listvenc .= 'a.idlanc FROM agenda AS a, igreja AS i  WHERE '.$filtrarCredor;
 		$listvenc .= 'i.rol=a.igreja AND motivo LIKE "%'.$motivo.'%"';
 		$listvenc_array = mysql_query($listvenc);
 
 		while ($contas = mysql_fetch_array($listvenc_array)) {
 
 			if ($contas['status']=='2') {//Marca os já pagos
-				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/>';
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$evento = '<img src="img/yes.png" alt="D&iacute;�vida Paga!';
+				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
 				$titulo = 'Dívida Paga! Obrigado. Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']=='1'){
 				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/>';
-				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo:'.$contas['motivo'];
+				$titulo = 'Atualizado. Aguardado confirma&ccedil;o de pgto! Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/>';
-				$titulo = 'Dívida vencida! Motivo:'.$contas['motivo'];
+				$evento = '<img src="img/not.png" alt="D&iacute;�vida vencida!" width="16" height="16"/>';
+				$titulo = 'D&iacute;�vida vencida! Motivo:'.$contas['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -541,7 +503,7 @@ class agenda {
 	function demonstrativo ($dia,$credor,$pagamento) {
 
 		$periodo  = 'SELECT a.vencimento, a.valor, a.id, a.credor,';
-		$periodo .= 'a.igreja, a.status, a.motivo ';
+		$periodo .= 'a.igreja, a.status, a.motivo, a.idlanc ';
 		$periodo .= 'FROM agenda AS a WHERE ';
 		if ($credor>'0') {
 			$periodo .= ' a.credor='.$credor.' AND ';
@@ -554,24 +516,22 @@ class agenda {
 			}
 		$periodo .= ' a.vencimento = "'.$dia.'"';
 		$periodo_array = mysql_query($periodo)  or die (mysql_error());
-
 		$numLinhas	= mysql_num_rows($periodo_array);
-
 		//echo "<h1>Linhas Afetadas $numLinhas</h1>";
 
 		if ($numLinhas>0) {
-
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
-
 			if ($periodo_dados['status']=='2') {//Marca os já pagos
-				$evento = '<img src="img/yes.png" alt="Dívida Paga! Obrigado." width="16" height="16"/> ';
-				$titulo = 'Dívida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$evento = '<img src="img/yes.png" alt="D&iacute;�vida Paga!';
+				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$titulo = 'D&iacute;�vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
 				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirmação de pgto!" width="16" height="16"/> ';
 				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
 				$evento = '<img src="img/not.png" alt="Dívida vencida!" width="16" height="16"/> ';
-				$titulo = 'Dívida vencida! Motivo: '.$periodo_dados['motivo'];
+				$titulo = 'D&iacute;�vida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];

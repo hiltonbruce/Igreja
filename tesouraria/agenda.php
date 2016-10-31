@@ -1,10 +1,8 @@
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	$dataget = ($_POST['data']!='') ? $_POST['data']:$_GET['data'];
-
 	$hora=date('H');
 	list($diaPgto,$mesPgto,$anoPgto) = explode ('-',date("d-m-Y"));
-
 	if ($hora<"13")
 	{
 		$sauda="Bom Dia! ";
@@ -13,7 +11,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$sauda="Boa Noite! ";
 		$currentPgto  = mktime(0, 0, 0, $mesPgto  , $diaPgto+1, $anoPgto);
 	}
-
 	$dtPgto = date('d/m/Y',$currentPgto);
 	if (!empty($_POST['credor'])) {
 		$credorAgenda = $_POST['credor'];
@@ -30,9 +27,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		require_once 'tesouraria/vencidas.php';//Faz a busca dos compromissos agendados
 	}
 	if ($_GET['id']>0 && empty($_POST['atualizar'])) {
-		require_once 'forms/pgtoagenda.php';//Form para atualizaï¿½ï¿½o, pagamento ou pendï¿½ncia
+		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendï¿½ncia
 	}elseif ($_POST['atualizar']>'0'){
 		$atualizar= new updatesist('agenda',$_POST['atualizar'],'id');
+		if (!empty($_POST['idlanc'])) {
+			$atualizar->idlanc	=	$_POST['idlanc'];
+		}
 		$atualizar->resppgto	=	$_POST['resppgto'];
 		//Verifica se o vencimento Ã© uma data validade e atualiza
 		if (checadata($_POST['vencimento'])) {
@@ -107,7 +107,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		$maior_idfat = mysql_fetch_array($maior_idfat);
 		$maior = $valores['maior_idfat'];//ï¿½ltima fatura lanï¿½ada
 	}else {
-
 		require_once 'forms/tes/buscaAgenda.php'; // Busca por Despesas Agendadas
 	}
 	require_once 'tesouraria/periodo10dias.php';//Agenda com o perï¿½odo 5 dias a antes e apï¿½s a data atual
