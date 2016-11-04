@@ -44,26 +44,24 @@ class menutes {
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 		 //inicia o cabe?alho de pagina??o
 		?>
-		<br />
-		<div class="box">
-		<div class="box-outer">
-		<div class="box-inner">
-		<div class="box-titulo">
-		<h4>Recibos Recentes</h4>
-		<table class='table table-bordered'>
+	  <div class="list-group">
+	    <span class="list-group-item active">
+			<h5>Recibos Recentes</h5>
+	    </span>
+		<table class='table table-bordered table-striped table-condensed text-center'>
 			<colgroup>
 				<col id="N&ordm;">
 				<col id="Nome">
 				<col id="albumCol"/>
 			</colgroup>
 		<thead>
-			<tr>
+			<tr class="info">
 				<th scope="col">N&ordm;</th>
 				<th scope="col">Nome</th>
 				<th scope="col">Data</th>
 			</tr>
 		</thead>
-		<tbody id="recibos" >
+		<tbody>
 		<?PHP
 			$inc_pen=0;
 			while($coluna_pen = mysql_fetch_array($sql3_pen))
@@ -100,11 +98,6 @@ class menutes {
 	?>
 		</tbody>
 	</table>
-	</div></div></div></div>
-	<div class="box">
-	<div class="box-outer">
-	<div class="box-inner">
-	<div class="box-titulo">
 	<?PHP
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$this->pag_mostra,"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
@@ -117,7 +110,7 @@ class menutes {
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
 	}
 	?>
-	</div></div></div></div>
+</div>
 	<?php
 	//Fim das informa??es das pendencias
 	//In?cio das pendencias de disciplinados

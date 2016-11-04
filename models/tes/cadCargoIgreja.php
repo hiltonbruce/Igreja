@@ -16,8 +16,7 @@
  * Insere dados no banco do form cad_usuario.php na tabela:usuario
  */
 controle ("tes");
-
-if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf']) && !empty($_POST['rg']))))
+if (((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf']) && !empty($_POST['rg'])))
 	|| ($_POST['id']!='')) && $_GET['remover']=='' ) {
 	if ($_POST['id']!='') {
 		$atualCargo = new DBRecord ('cargoigreja',$_POST['id'],'id');
@@ -34,8 +33,7 @@ if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf'])
 		$atualCargo->Update();
 	} else {
 		$cadMembro = new tes_ativaCargo ($_POST['rolIgreja'],$_POST['idfunc'],$_POST['hierarquia']);
-		$ativarCad = $cadMembro->cadMembroCargo($_POST['rol'],$_POST['nome'].',CPF: '.$_POST['cpf'].',RG: '.$_POST['rg'],$_POST['valor'],$_POST['diapgto'],$_POST['fonte'],$_POST['acesso']);
-
+		$ativarCad = $cadMembro->cadMembroCargo($_POST['rol'],$_POST['nome'].',CPF: '.$_POST['cpf'].',RG: '.$_POST['rg'],$_POST['valor'],$_POST['diapgto'],$_POST['caixa'],$_POST['acesso']);
 	//print_r ($ativarCad);
 	if ($ativarCad['Desativado']=='1') {
 		$atualCad = 'uma atualização!';
@@ -44,7 +42,6 @@ if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf'])
 	}else {
 		$atualCad = '';
 	}
-
 	if ($ativarCad['Cadastro']>'0') {
 		$insertCad = ' Um cadastro!';
 	}else {
@@ -52,7 +49,6 @@ if ((((!empty($_POST['rol']) || (!empty($_POST['nome']) && !empty($_POST['cpf'])
 	}
 	}
 	}elseif (!empty($_GET['remover'])) {
-
 		$desativa = new DBRecord ('cargoigreja',$_GET['id'],'id');
 		if ($_GET['remover']=='2') {
 			$desativa->status = '0'; //Aqui é atribuido a esta variável um valor para UpDate

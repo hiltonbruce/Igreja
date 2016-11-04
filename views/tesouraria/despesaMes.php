@@ -13,7 +13,6 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	//Array's para troca do dia da semana para portugês
 	$diaEn = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 	$diaBr   = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b');
-
 	$iniDia = new datetime ("$y-$m-$d");
 	//print_r($iniDia);
 	$ultimoDia = new datetime ("$y-$m-$d");
@@ -24,21 +23,22 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
  	<div class="row">
   <div class="col-xs-4">
  	<label>Por fornecedor:</label>
-	<select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
+	<select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)"
+	 tabindex="<?PHP echo ++$ind; ?>" >
 	  <?php
 	  	$bsccredor = new list_fornecedor('credores', 'alias', 'credor');
-	  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&age=9&data='.$dt.'&credor=');
+	  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&age=9&data='.
+			$dt.'&credor=');
 	  ?>
 	</select>
-
   </div>
   <div class="col-xs-2">
-	<label>Período de:</label>
+	<label>Per&iacute;odo de:</label>
 	<input name="data" id="data" class="form-control"
 	value='<?php echo $dt;?>' tabindex="<?PHP echo ++$ind; ?>" >
   </div>
   <div class="col-xs-2">
-	<label>até:</label>
+	<label>at&eacute;:</label>
 	<input disabled='disabled' class="form-control"
 	value='<?php echo $fimDiaMes.$iniDia->format('/m/Y');?>' tabindex="<?PHP echo ++$ind; ?>" >
   </div>
@@ -96,11 +96,11 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		</tbody>
 		<tfoot>
 			<tr>
-				<th colspan="3" class="info"><h5>Exibi um trecho de 12 dias. Faixa em verde é o dia atual!
-		 Contas vencidas a mais de 5 dias:
-	<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&vencidas=1&data=<?php echo $dataget;?>" title="Clique aqui para Listar...">
-	<button class="btn btn-primary">Click aqui!</button> Atualmente são:<?php echo $lista->vencidas();?>
-	</a></h5>
+				<th colspan="3" class="info"><h5>Exibi um trecho de 12 dias. Faixa em verde &eacute; o dia atual!
+					Contas vencidas a mais de 5 dias:
+					<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&vencidas=1&data=<?php echo $dataget;?>" title="Clique aqui para Listar...">
+					<button class="btn btn-primary">Click aqui!</button> Atualmente s&atilde;o:<?php echo $lista->vencidas();?>
+					</a></h5>
 				</th>
 			</tr>
 		</tfoot>

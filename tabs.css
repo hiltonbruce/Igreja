@@ -35,15 +35,6 @@ thead {
   color:#000000;
 }
 
-th {
-  font-weight: normal;
-  text-align: left;
-}
-
-td {
-	text-align:left;
-}
-
 td#moeda, p#moeda  {
 	text-align:right;
 }
@@ -62,7 +53,6 @@ td a#bloco {
 th, td {
   padding: 0.1em 1em;
 }
-
 
 thead tr:hover {
   background-color: transparent;
@@ -94,7 +84,6 @@ thead tr:hover {
 	background-color: #FFFFFF;
 	color:#000;
 }
-
 
 .odd2 {
   background-color:#BFEFFF;

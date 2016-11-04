@@ -36,8 +36,6 @@
 
 		}elseif (ver_nome ("tesouraria")){//Menu Tesouraria
 			echo "</div>";
-	?>
-			<?php
       //$menu = new menutes();
 			$recBuscas->mostra();
 			$recBuscas->buscarecibo();

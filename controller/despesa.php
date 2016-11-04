@@ -26,7 +26,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			require_once 'views/tesouraria/recPgto.php';
 			break;
 		case '8':
-			//Recibos para de pgto
+			//Recibos para de pgto e cadastrar membro no cargo despesa
 			$pgtoDias = new tes_cargo();
 			$listaPgto = $pgtoDias->cargoIgreja($_POST['rolIgreja'],$_POST['idfunc'] );
 			$recLink='#';
@@ -36,7 +36,7 @@ if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 			break;
 		case '9':
 			//
-			$titTabela = 'Demonstrativo de Pgto do mês:';
+			$titTabela = 'Demonstrativo de Pgto do m&ecirc;s:';
 			$lista = new agenda();
 			require_once 'views/tesouraria/despesaMes.php';//Cadastrar Membro no Cargo despesa
 			break;

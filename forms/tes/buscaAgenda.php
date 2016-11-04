@@ -17,7 +17,7 @@
 ?>
 <fieldset>
 <legend>Busca por Despesas Agendadas</legend>
-<table>
+<table class='table'>
 	<tbody>
 		<tr>
 			<td>
@@ -69,7 +69,7 @@
 	</tbody>
 </table>
 	  <form method="get" action="" class="form-vertical" >
-<table>
+<table class='table'>
 	<tbody>
 		<tr>
 			<td><label>Despesas:</label>

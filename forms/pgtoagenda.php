@@ -109,7 +109,7 @@
 					</td>
 				</tr>
 					<td>
-						<label><strong>Pagamento realizado pela fonte: </strong></label>
+						<label><strong>Pagamento realizado pela fonte:</strong></label>
 						<select name="acessoCreditar" id="caixa" class="form-control"
 						tabindex="<?PHP echo ++$ind; ?>" <?PHP echo $desCampoCta; ?> >
 							<?php
@@ -179,11 +179,16 @@
 				id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 				value="<?php echo $itemagenda->multa();?>">
 		  </div>
-		  <div class="col-xs-3"><label>Pago em: (Atual -> <?php echo $datapgto;?>)</label> <input type="text" name="data"
+			<?php
+				$datapgto = ($datapgto=='') ? '' : '(Atual->'.$datapgto.')' ;
+				$detVenc = ($itemagenda->vencimento()=='') ? 'Data Venc.:' : 'Venc. Atual->
+				 '.conv_valor_br($itemagenda->vencimento());
+			?>
+		  <div class="col-xs-3"><label>Data Pgto:<?php echo $datapgto;?></label> <input type="text" name="data"
 				id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>" maxlength="10"
 				value="<?php echo $datapgto;?>">
 		  </div>
-		  <div class="col-xs-3"><label><label>Vencimento: ( Atual -> <?php echo conv_valor_br($itemagenda->vencimento());?>)</label> <input type="text" name="vencimento"
+		  <div class="col-xs-3"><label><?php echo $detVenc;?></label><input type="text" name="vencimento"
 				id="venc" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 				required="required" value="<?php echo conv_valor_br($itemagenda->vencimento());?>">
 		  </div>

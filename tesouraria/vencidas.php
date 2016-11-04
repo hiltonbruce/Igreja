@@ -33,11 +33,9 @@ switch ($_GET['vencidas']) {
 		</tr>
 	</thead>
 	<tbody id="periodo">
-
 	<?php
 	echo $corpoTabela;
 	?>
-
 	</tbody>
 </table>
 <br />

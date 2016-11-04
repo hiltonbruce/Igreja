@@ -15,7 +15,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <form id="form1" name="form1" method="post" action="relatorio/carta_apres.php">
     <div class="row">
  	 <div class="col-xs-4">
-	<label>Estado que nasceu:</label>	   
+	<label>Estado que nasceu:</label>
 	<select name="uf" id="uf" class="form-control input-sm" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo $ind++;?>" onselect="1">
             <option value="<?PHP echo $_GET['uf'];?>"><?PHP echo $_GET['uf'];?></option>
             <option value='./?escolha=relatorio/cert_apresent.php&uf=AC&menu=top_formulario'>Acre</option>
@@ -47,45 +47,44 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     </select>
     </div>
  	 <div class="col-xs-4">
-	<?PHP 
+	<?PHP
 		if (!empty($_GET["uf"])){
 			$vl_uf=$_GET["uf"];
 			$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cidade");
-			echo "<label>Na Cidade de:</label>";		
+			echo "<label>Na Cidade de:</label>";
 			$vlr_linha=$lst_cid->ListDados ($ind++);//"2" é o indice de tabulação do formulário
 			echo "";
 	?></div></div>
 	<label>Nome da Crian&ccedil;a:</label>
     <input name="nome" type="text" class="form-control" id="nome" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
-	
+
     <div class="row">
  	 <div class="col-xs-8">
 	<label>Pai:</label>
 	<input name="pai" type="text" class="form-control" id="pai" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
 	</div>
  	 <div class="col-xs-2">
-	<label>Rol:</label> 
+	<label>Rol:</label>
 	<input name="rol_pai" class="form-control" type="text" id="rol_pai" size="5" tabindex="<?PHP echo $ind++;?>"/>
 	</div>
- 	<div class="col-xs-2"><label>&nbsp;</label> 
+ 	<div class="col-xs-2"><label>&nbsp;</label>
     <a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=0')" tabindex="<?PHP echo $ind++;?>">
     <img border="0" src="img/lupa_32x32.png" width="18" height="18" title="Click aqui para pesquisar membros!" /></a>
     </div></div>
-	
+
 	<div class="row">
  	 <div class="col-xs-8">
 	<label>M&atilde;e:</label>
 	<input name="mae" type="text" id="mae" class="form-control" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
 	</div>
  	 <div class="col-xs-2">
-	<label>Rol:</label> 
+	<label>Rol:</label>
 	<input name="rol_mae" type="text" class="form-control" id="rol_mae" size="5" maxlength="5" tabindex="<?PHP echo $ind++;?>" />
 	</div>
  	<div class="col-xs-2"><label>&nbsp;</label>
     <a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=0')" tabindex="<?PHP echo $ind++;?>">
     <img border="0" src="img/lupa_32x32.png" width="18" height="18" title="Click aqui para pesquisar membros!" /></a>
 	</div></div>
-
     <table width="419" border="0">
       <tr>
         <td><label>Congregação dos Pais:</label>
@@ -106,8 +105,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				<option value="F" >Feminino</option>
 			</select>		</td>
         <td><label>Data de Nascimento:</label>
-            <input name="dt_nasc" type="text" class="form-control" id="dt_nasc" tabindex="<?PHP echo $ind++;?>" />
-</td>
+            <input name="dt_nasc" type="text" class="form-control dataclass" tabindex="<?PHP echo $ind++;?>" />
+        </td>
       </tr>
       <tr>
         <td><label>Folha:</label>
@@ -138,7 +137,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       </tr>
     </table>
 	    <div class="row">
-	 	 <div class="col-xs-8">	  
+	 	 <div class="col-xs-8">
 		  <label>Secretário que ir&aacute; assinar a carta:</label>
 		  <?PHP $igreja = new DBRecord ("igreja","1","rol");?>
 		  <select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
@@ -149,7 +148,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	 	 <div class="col-xs-4">
   <!-- Envia o id para a impressão da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o" tabindex="<?PHP echo $ind++;?>" />
- <?PHP 
+ <?PHP
  } //fim do if após selecionar a uf nascimento da criança
  ?> </div></div>
 </form>
@@ -161,7 +160,7 @@ controle ("consulta");
 	<legend>Busca certid&atilde;o...</legend>
 <form id="form1" name="form1" method="get" action="">
 <div class="row">
-<div class="col-xs-4">	
+<div class="col-xs-4">
  <label>Busca por:</label>
   <select name="campo" id="campo" class="form-control" tabindex="<?PHP echo $ind++;?>">
     <option value="nome">Crian&ccedil;a</option>
@@ -176,7 +175,7 @@ controle ("consulta");
 <div class="col-xs-6"><label>&nbsp;</label>
   <input name="menu" type="hidden" id="menu" value="top_formulario" />
   <input name="escolha" type="hidden" id="escolha" value="relatorio/busca_apresent.php" />
-  <input name="valor" type="text" class="form-control" id="valor" tabindex="<?PHP echo $ind++;?>" />  
+  <input name="valor" type="text" class="form-control" id="valor" tabindex="<?PHP echo $ind++;?>" />
   </div>
 <div class="col-xs-2">
   <label>&nbsp;</label>
@@ -185,11 +184,11 @@ controle ("consulta");
   </form>
 		<form id="form1" name="form1" method="get" action="">
 	    <div class="row">
-	 	 <div class="col-xs-4">	
+	 	 <div class="col-xs-4">
 		<label>Listar por Congrega&ccedil;&atilde;o:</label>
 		<select name="menu1" class="form-control" onchange="MM_jumpMenu('parent',this,0)">
 		  <option>--&gt;&gt; Escolha a Congrega&ccedil;&atilde;o&lt;&lt;-- </option>
-		  <option value="./?escolha=<?PHP echo $_GET["escolha"];?>&proxima=<?PHP 
+		  <option value="./?escolha=<?PHP echo $_GET["escolha"];?>&proxima=<?PHP
 		  	echo $_GET["proxima"];?>&ord=<?PHP echo $_GET["ord"];?>&amp;congregacao=0">Todas as Congregac&otilde;es</option>
 		  <?PHP
 			$congr = new List_sele ("igreja","razao","congregacao");

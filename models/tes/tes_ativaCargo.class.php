@@ -6,19 +6,15 @@ class tes_ativaCargo {
 	protected $hierarquia;
 
 	function tes_ativaCargo ($igreja=0,$descricao=0,$hierarquia=0) {
-
 		$this->igreja 	 = $igreja;
 		$this->descricao = $descricao;
 		$this->hierarquia = $hierarquia;
-
 	}
 
 	function cadMembroCargo($rol,$nome,$valor,$diapgto,$fonte,$codDespesa) {
 		//Cadastra e atualiza o cargo se já estive outro com a mesmo função exceto Ministério
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-
 		global $db;
-
 		//Se tiver alguem no mesmo cargo destiva
 		// Once you have a valid DB object named $db...
 		$table_name   = 'cargoigreja';
@@ -26,7 +22,6 @@ class tes_ativaCargo {
 		$table_values = array('0', $hist );
 		$table_where = 'descricao = '.$this->descricao.' AND igreja = '.$this->igreja.
 				' AND  hierarquia= '.$this->hierarquia.' AND descricao <> "17" ';
-
 		$sth = $db->autoPrepare($table_name, $table_fields,
 				DB_AUTOQUERY_UPDATE, $table_where);
 
@@ -41,8 +36,8 @@ class tes_ativaCargo {
 		$desativadoCad = $db->affectedRows();
 
 		//Insert o membro no cargo
-		$sth = $db->prepare('INSERT INTO  cargoigreja VALUES ("",?,"", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-		$data = array( $this->descricao,'1', $this->igreja, $rol, $nome, $this->hierarquia, $valor, $diapgto, $fonte,$codDespesa, $hist, date('Y-m-d H:i:s'));
+		$sth = $db->prepare('INSERT INTO  cargoigreja VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+		$data = array( '',$this->descricao,'0','1', $this->igreja, $rol, $nome, $this->hierarquia, $valor, $diapgto, $fonte,$codDespesa, $hist, date('Y-m-d H:i:s'));
 		$db->execute($sth, $data);// Always check that result is not an error
 		if (PEAR::isError($res)) {
 			die($res->getMessage());
