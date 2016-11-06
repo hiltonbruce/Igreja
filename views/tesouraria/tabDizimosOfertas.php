@@ -10,7 +10,6 @@ $mes = (empty($_GET['mes'])) ? '' : $_GET['mes'] ;
 $nomeGet = (empty($_GET['nome'])) ? '' : $_GET['nome'] ;
 $dia= (empty($_GET['dia'])) ? '' : $_GET['dia'] ;
 $idDizOfGET = (empty($_GET['idDizOf'])) ? '' : $_GET['idDizOf'] ;
-
 $apagarEntrada	= '?escolha=models/tes/excluir.php&tabela=dizimooferta&id=';
 $alterarEntrada	= '?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=1&tabela=dizimooferta&id=';
 if ($idDizOfGET>'0' && $recGet=='9') {
@@ -18,7 +17,7 @@ if ($idDizOfGET>'0' && $recGet=='9') {
 <table class='table table-condensed'>
 	<tbody>
 		<tr>
-			<td><label>Igreja: </label>
+			<td><label>Igreja:</label>
 				<select name="igreja" id="igreja" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" ><?php
 				$listaIgreja = $bsccredor->List_Selec_pop($linkAcesso,$igrejaGet );
 				//echo $listaIgreja;
@@ -38,7 +37,6 @@ if ($idDizOfGET>'0' && $recGet=='9') {
 	//Incluir form para alterar ou excluir pre-lan�amento de D�zimos e Ofertas
 	require_once 'forms/tes/editDizOferta.php';
 		}
-
 $tabMembros = new membro();
 if ($_POST['concluir']=='1') {
 	$tabLancamento = $dizmista->concluir($igrejaGet);
@@ -49,7 +47,6 @@ if ($_POST['concluir']=='1') {
 										$mes,$ano,$recGet,$creditoGet,
 										$_GET['debito'],$alterarEntrada);
 	$tabLancamento= $resultado['1'];
-
 	if ($resultado['2']) {
 		$statusLancamento = 'Lan&ccedil;amentos Confirmado';
 	}elseif ($resultado['0']!=0) {
@@ -88,10 +85,10 @@ if ($_POST['concluir']=='1') {
 			echo '<input name="r1" type="text" value="4037" class="form-control"/>';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 2&ordf; Assin:</label>';
-			echo '<input name="r2" type="text" class="form-control" />';
+			echo '<input name="r2" type="text" value="72"  class="form-control" />';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 3&ordf; Assin:</label>';
-			echo '<input name="r3" type="text" value="72" class="form-control" />';
+			echo '<input name="r3" type="text" value="266" class="form-control" />';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 4&ordf; Assin:</label>';
 			echo '<input name="r4" type="text" class="form-control" />';
@@ -121,7 +118,6 @@ if ($_POST['concluir']=='1') {
 			}elseif ($idIgreja=='0' || $idIgreja=='') {
 				$nomIgreja = '<br /><strong>Todas as Igrejas de Bayeux';
 			}
-
 			if (!$cabPrint) {
 				echo '<h5 class="text-left">'.$statusLancamento.$nomIgreja.' &bull; </strong>'
 					.$dirigenteIgreja.$tesIgreja.'</ins></h5>';
@@ -129,16 +125,13 @@ if ($_POST['concluir']=='1') {
 				echo '<br /><div class="alert alert-info">';
 				echo '<h4>'.$statusLancamento.' &bull; Igreja: '.$igrejaSelecionada->razao().'<br />'
 					.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.'</h4>';
-
 				$sldPendente = (empty($_GET['rolIgreja'])) ? '' : $dizmista->outrosdizimos($igrejaGet);
-
 				if ($sldPendente>0) {
 					printf("<h4> Lan&ccedil;amentos de outros respons&aacute;veis:
 						R$: %'.45s </h4>",number_format($sldPendente,2,',','.'));
 				}
 				echo '</div>';
 			}
-
 			?>
 		<table class='table table-striped table-hover table-bordered'>
 			<colgroup>

@@ -6,16 +6,14 @@ if (intval($_POST['rolIgreja'])>0) {
 }else {
 	$idIgreja = 0;
 }
-
 $titTabela = 'Balancete - Saldo em: '.date('d/m/Y');
 $tabela = (empty($_GET['tabela'])) ? '' : $_GET['tabela'];
 $idLanc = (empty($_GET['id'])) ? '' : $_GET['id'];
 $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
-
 if ($rec>'12' && $rec<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
-	require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
+	require "../help/impressao.php";//Include de funções, classes e conexões com o BD
 	if ($idIgreja==0) {
 			$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
 			//$igLanc = $igrejaSelecionada;
@@ -24,7 +22,6 @@ if ($rec>'12' && $rec<'20') {
 		$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 		$igLanc = $igrejaSelecionada;
 	}
-
 	if ($igreja->cidade()>0) {
 		$cidSede = new DBRecord('cidade', $igreja->cidade(), 'id');
 		$origem = $cidSede->nome();
@@ -42,15 +39,14 @@ $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
 $dizmista = new dizresp($_SESSION['valid_user']);
-
 if ($idIgreja==0) {
-		$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
+		$igrejaSelecionada = $igSede;
 		//$igLanc = $igrejaSelecionada;
 } else {
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 	$igLanc = $igrejaSelecionada;
 }
-	// verifica se hï¿½ valor a ser lançado e libera os forms
+	// verifica se há valor a ser lançado e libera os forms
 	//printf('<h1> teste %s</h1>',$teste);
 	$tituloColuna5 = ($idIgreja > '1') ? 'Congrega&ccedil;&atilde;o' : 'Igreja';
 	if ($_POST['concluir'] == '1') {
@@ -65,7 +61,6 @@ if ($idIgreja==0) {
 			$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'];
 			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
 	}
-
 } else {
 	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();

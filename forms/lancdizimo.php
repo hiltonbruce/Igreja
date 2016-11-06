@@ -2,7 +2,7 @@
 $_SESSION['debito']=0;
 $_SESSION['credito']=0;
 //concluir lançamento final na tabela lançamento
-$roligreja =(int) $_POST['rolIgreja'];
+$roligreja = intval($_POST['rolIgreja']);
 $lanigreja = new DBRecord('igreja',$roligreja, 'rol' );
 $exibir = new lancdizimo($roligreja);
 //Faz o leiaute do lançamento do débito da tabela dizimooferta
@@ -30,12 +30,12 @@ while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 }
 require_once 'views/lancdizimo.php';//chama o view para montar
 if ($totDebito>'1') {
-	$hist = str_replace( "nesta data", 'neste m&ecirc;s', $hist );
+	$hist = str_replace("nesta data", 'neste m&ecirc;s', $hist);
 }
 if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;
-	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br ($dataLc):$_POST['dataLancamento'];
+	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br($dataLc):$_POST['dataLancamento'];
 	?>
 <form method="post" action="">
 	<div class="col-xs-12">
@@ -43,10 +43,18 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 		<input type="text" name="hist" id="hist" size="60" autofocus="autofocus" class="form-control"
 			tabindex="<?PHP echo ++$ind;?>" value='<?PHP echo $hist;?>'>
 	</div>
+	<div class="col-xs-3"><br />
+      <div class="checkbox"><h5>
+        <label>
+          <input type="checkbox" required tabindex="<?PHP echo ++$ind;?>">
+					 &nbsp;Confirma lan&ccedil;amento?
+        </label></h5>
+      </div>
+	</div>
 	<div class="col-xs-2">
 		<label>Data:</label>
 		<input type="text" name="data" id="data" class="form-control"
-			value="<?php echo $dtlanc;?>" tabindex="<?PHP echo ++$ind;?>">
+			value="<?php echo $dtlanc;?>" required tabindex="<?PHP echo ++$ind;?>">
 	</div>
 	<div class="col-xs-2">
 			<label>&nbsp;</label>

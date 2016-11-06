@@ -6,7 +6,7 @@
 				<col id="Valor">
 				<col id="C/D">
 				<col id="Saldo Atual">
-				<col id="lancamento"/>
+				<col id="albumCol"/>
 			</colgroup>
 		<thead>
 			<tr>

@@ -7,7 +7,6 @@ function __construct($tesoureiro='',$print='') {
 		$this->var_string .= "d.confirma,i.rol AS rolIgreja,d.hist FROM dizimooferta AS d, igreja AS i ";
 		$this->tesoureiro = $tesoureiro;
 		$this->impressao = ($print==true) ? true:false;
-
 	// Array com os dados da tabela contas
 	$sqlcontas = mysql_query( 'SELECT * FROM contas WHERE acesso>"0" ORDER BY acesso' ) or die (mysql_error());
 	while ($linhaCta = mysql_fetch_array($sqlcontas)) {
@@ -15,7 +14,6 @@ function __construct($tesoureiro='',$print='') {
 			'saldo' => $linhaCta['saldo']
 			);
 	}
-
 	//Array com os dados da tabela igreja
 	$sqlIgreja = mysql_query( 'SELECT * FROM igreja' ) or die (mysql_error());
 	while ($linhaIgr = mysql_fetch_array($sqlIgreja)) {
@@ -35,18 +33,15 @@ function dizimistas(
 	$cred,
 	$deb,
 	$linkAlterar) {
-
 	$dataValid = (checadata($dia.'/'.$mes.'/'.$ano)) ? $ano.'-'.$mes.'-'.$dia:false;
 	if ($igreja == '') {
 		$filtroIgreja = '';
 	} else {
 		$filtroIgreja = ' AND d.igreja="'.$igreja.'"';
 	}
-
 	if ($mes>'0' && $mes<='12') {
 		$consMes = ' AND DATE_FORMAT(data, "%m") = '.$mes;
 	}
-
 	if ($dia>0 && $dia<=31) {
 		$consDia = ' AND DATE_FORMAT(data, "%d") = '.$dia;
 	}
@@ -55,7 +50,6 @@ function dizimistas(
 	}else {
 		$consTipos =false;
 	}
-
 	//Monta a query para consulta de conta pelo n� de acesso
 	$queryAcesso = '';
 	if (!empty($cred)) {
@@ -80,11 +74,9 @@ function dizimistas(
 	}else {
 		$queryDeb = '';
 	}
-
 	$queryAcesso = $queryCred.$queryDeb;
 	//Gera a query de busca
 	$incluiPessoa ='';
-
 	if (!empty($_GET['nome']) || $_GET['rol']>='0' ) {
 		$nome = trim($_GET['nome']);
 		if ($_GET['rol']>0) {
@@ -97,7 +89,6 @@ function dizimistas(
 			$incluiPessoa =' AND d.nome = "" AND d.rol = "0" ';
 		}
 	}
-
 		if ($dataValid && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
@@ -130,27 +121,22 @@ function dizimistas(
 					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ') or die (mysql_error());
 				$lancConfirmado = false;
 		}
-
 		$total = 0;
 		$tabela = '';
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a vari�vel
-
 			if ($linha['obs']!='') {
 				$tipo = '<span title="'.$linha['obs'].'"><span class="glyphicon glyphicon-paperclip"></span> '.$tipo.'</span>';
 			}
-
 			$valor = number_format($linha['valor'],2,',','.');
 			if ($linha['confirma']=='') {
 				$status = 'Pedente';
 			}else {
 				$status = 'Confimado!';
 			}
-
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
-
 			//Criar link para altera��o pelo cadastrador - Realizar critica tb qdo abrir
 			if ($_SESSION["valid_user"]==$linha['tesoureiro'] && !$lancConfirmado) {
 				if ($_GET['tipo']==1) {
@@ -161,11 +147,9 @@ function dizimistas(
 						title="Apagar!">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
 				}
-
 			}else {
 				$corrigir = $valor;
 			}
-
 			if ($congMembro!=$linha['congcadastro'] ) {
 				$congMembro = $linha['congcadastro'];
 				//$dadosCongMembro = new DBRecord ('igreja',$linha['congcadastro'],'rol');
@@ -195,7 +179,7 @@ function dizimistas(
 		$tabela .=  'lan&ccedil;amentos para esta busca ou pendentes!</td></tr></tfoot>';
 		}else {
 		$tabela .=  '<tfoot><tr id="total"><td colspan="4" class="text-right">';
-		$tabela .=  '	Total&nbsp;&nbsp;............ &nbsp;&nbsp;'.$total;
+		$tabela .=  'Total&nbsp;&nbsp;............ &nbsp;&nbsp;'.$total;
 		$tabela .=  '</td><td></td></tr></tfoot>';
 		}
 		$resultado = array($total,$tabela,$lancConfirmado);
@@ -284,13 +268,10 @@ function concluir($igreja) {
 		 d.igreja="'.$igreja.'" AND d.igreja=i.rol ORDER BY tesoureiro,tipo,nome ') or die (mysql_error());
 		$totaltes=0;
 		$tabLancamento =  '<tbody id="periodo" >';
-
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
-
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a vari�vel
-
 			//$tesoureiro = $linha['tesoureiro'];
 			$vlr = $linha['valor'];
 			$valor = number_format($vlr,2,',','.');
@@ -299,18 +280,17 @@ function concluir($igreja) {
 			}else {
 				$status = 'Confimado!';
 			}
-
 			$rol = $linha['nome']<>'' ? $linha['rol'].' - '.$linha['nome'] : 'An&ocirc;nimo';
-
 			if ($tesoureiro!=$linha['tesoureiro']) {
 				if ($totaltes!='0') {
-				$tabLancamento .= sprintf("<tr><td></td><td colspan='2' class='text-right'>
-						Total: %'.150s </td><td class='text-right'><b>%s</b></td><td></td></tr>"
-						,'.',number_format($totaltes,2,',','.'));}
+				$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
+				%s</td><td colspan='3' class='text-right'>
+						Total: %'.100s &nbsp;&nbsp;&nbsp;&nbsp;<b>%s</b></td></tr>"
+						,$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
 				$tabLancamento .= sprintf('<tr><td colspan="5" class="text-right">
-						Tesoureiro: <b> %s </b></td></tr>',$dadostesoureiro->nome);
+						Tesoureiro: <b> %s </b></td></tr>',$dadostesoureiro->nome());
 				$totaltes = 0;
 				//echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.' - '.$linha['nome'].'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			}
@@ -320,12 +300,13 @@ function concluir($igreja) {
 			$total += $linha['valor'];
 		}
 		$total = number_format($total,2,',','.');
-
-		$tabLancamento .= sprintf('<tr><td></td><td colspan="2">Total deste tesoureiro:</td><td id="moeda"><b>%s</b></td><td></td></tr>',number_format($totaltes,2,',','.'));
+		$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
+		%s</td><td colspan='3' class='text-right'>Total: %'.100s &nbsp;&nbsp;&nbsp;
+		&nbsp;<b>%s</b></td></tr>",$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));
 		$tabLancamento .=  '</tbody>';
-		$tabLancamento .=  '<tfoot><tr class="total"><td  colspan="3">Total Geral: R$</td>
-			<td id="moeda">'.$total.'</td><td></td>
-			</tr></tfoot>';
+		$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
+		class="text-right">Total Geral:</td><td colspan="2" class="text-right"
+		><strong> R$ '.$total.'</strong></td></tr></tfoot>';
 		return $tabLancamento;
 	}
 }

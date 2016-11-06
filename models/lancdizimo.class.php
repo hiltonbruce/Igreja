@@ -50,7 +50,7 @@ class lancdizimo {
 			$status = 'Permitido!';
 		}
 		if (strtoupper($dc)=='D') {
-			$fundo = 'style="background:#CDC9A5;"';
+			$fundo = 'class="primary"';
 			$debitar = sprintf('%s',number_format($valor,2,',','.'));
 			$_SESSION['debito'] += $valor;
 			$creditar = '';
@@ -58,7 +58,7 @@ class lancdizimo {
 			$debitar = '';
 			$creditar = sprintf('%s',number_format($valor,2,',','.'));
 			$_SESSION['credito'] += $valor;
-			$fundo = 'style="background:#E6E6FA;"';
+			$fundo = 'class="info"';
 		}
 		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td style='text-align:right;'> %s</td>",$fundo,$this->conta->codigo(),$contaNome,$debitar);
 		$exibir.= sprintf("<td style='text-align:right;'>%s</td><td style='text-align:right;'> %s</td><td>%s</td></tr>",$creditar,number_format($this->conta->saldo(),2,',','.'),$status);

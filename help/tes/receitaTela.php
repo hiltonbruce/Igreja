@@ -34,16 +34,16 @@ switch ($rec) {
 		break;
 	case '3':
 		require_once 'forms/concluirdiz.php';
-		require_once ('forms/ofertaEBD.php');#Form lanï¿½ar ofertas Esc Bï¿½blica
+		require_once ('forms/ofertaEBD.php');#Form lançaar ofertas Esc Bíblica
 		break;
 	case '4':
 		require_once ('forms/tes/lancarRec.php');
 		break;
 	case '5':
 	    //$form = 'forms/tes/autoLancarDespesas.php';
-		require_once ('forms/tes/lancarTipoPlan.php');#Form lanï¿½ar despesas tipo planilha
+		require_once ('forms/tes/lancarTipoPlan.php');#Form lançar despesas tipo planilha
 		break;
-	case '6'://Relatï¿½rio COMADEP
+	case '6'://Relatório COMADEP
 		require_once 'help/tes/relatorioComadep.php';
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
