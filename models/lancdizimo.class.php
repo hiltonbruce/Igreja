@@ -35,11 +35,9 @@ class lancdizimo {
 	function lancamacesso($valor,$acesso,$dc) {
 		$contaNome='';
 		if ($acesso>0) {
-
 		$this->conta = new DBRecord('contas', $acesso, 'acesso');
 		$contaNome=$this->conta->titulo();
 		if ($this->conta->tipo() != strtoupper($dc)){
-
 			if (($this->conta->saldo()-$valor)<'0') {
 					$status = 'N&atilde;o permitido';
 					$_SESSION['lancar']=false;
@@ -62,7 +60,6 @@ class lancdizimo {
 		}
 		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td style='text-align:right;'> %s</td>",$fundo,$this->conta->codigo(),$contaNome,$debitar);
 		$exibir.= sprintf("<td style='text-align:right;'>%s</td><td style='text-align:right;'> %s</td><td>%s</td></tr>",$creditar,number_format($this->conta->saldo(),2,',','.'),$status);
-
 		}else {
 		$mens = 'Conta Inválida';
 		$exibir = sprintf("<tr %s><td>%s</td><td>%s</td><td style='text-align:right;'> %s</td>",'style="background:#red;"',$mens,$mens,$mens);

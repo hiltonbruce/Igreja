@@ -289,8 +289,8 @@ function concluir($igreja) {
 						,$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
-				$tabLancamento .= sprintf('<tr><td colspan="5" class="text-right">
-						Tesoureiro: <b> %s </b></td></tr>',$dadostesoureiro->nome());
+				$tabLancamento .= sprintf('<tr class="danger"><td colspan="5" class="text-right">
+						<b> %s </b></td></tr>',$dadostesoureiro->nome());
 				$totaltes = 0;
 				//echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.' - '.$linha['nome'].'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			}
