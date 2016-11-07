@@ -46,7 +46,7 @@ class menutes {
 		?>
 	  <div class="list-group">
 	    <span class="list-group-item active">
-			<h5>Recibos Recentes</h5>
+			<h4 class="list-group-item-heading">Recibos Recentes</h4>
 	    </span>
 		<table class='table table-bordered table-striped table-condensed text-center'>
 			<colgroup>
@@ -54,13 +54,6 @@ class menutes {
 				<col id="Nome">
 				<col id="albumCol"/>
 			</colgroup>
-		<thead>
-			<tr class="info">
-				<th scope="col">N&ordm;</th>
-				<th scope="col">Nome</th>
-				<th scope="col">Data</th>
-			</tr>
-		</thead>
 		<tbody>
 		<?PHP
 			$inc_pen=0;
@@ -120,11 +113,11 @@ class menutes {
 		//formul?rios laterais de busca de recido da tesouraria
 		$ind =0;
 		?>
-		<div class="box">
-		<div class="box-outer">
-		<div class="box-inner">
-		<div class="box-titulo">
-		<h4>Busca de Recibos</h4>
+
+	  <div class="list-group">
+	    <span class="list-group-item active">
+			 <h4 class="list-group-item-heading">Busca de Recibos</h4>
+	    </span>
 		<fieldset>
 		<legend>Membros</legend>
 		<?php
@@ -180,7 +173,7 @@ class menutes {
 		</div>
 		</form>
 		</fieldset>
-		</div></div></div></div>
+		</div>
 		<?php
 	}
 

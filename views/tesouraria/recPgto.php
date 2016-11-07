@@ -1,4 +1,4 @@
-<table id="horario"  class="table table-bordered table-condensed">
+<table id="horario"  class="table table-bordered">
 		<caption>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {

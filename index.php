@@ -91,6 +91,13 @@
       $secGET = (empty($_GET["sec"])) ? '' : $_GET["sec"];
 		  ?>
 <div class="leftpanel">
+<div class="list-group">
+<a href="#" class="list-group-item active">
+<h4 class="list-group-item-heading">Administra&ccedil;&atilde;o</h4>
+<p class="list-group-item-text">...</p>
+</a>
+</div>
+
   <ul class="list-group">
     <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
   <ul id="categories">
