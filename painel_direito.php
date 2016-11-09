@@ -1,7 +1,7 @@
 <div class="rightpanel">
  <div class="inquiry">
  	<?PHP
- 		$igreja = new DBRecord ("igreja","1","rol");
+ 		$igreja = $igSede;
 		$pendencias = new pendencias ();
 		$disp_pend = '';
 		// Se n?o houver pend?ncia no cadasdtro ? mostrador os dados da igreja matriz
@@ -73,12 +73,11 @@
 		$dadosMembro = new membro();
 		$detMemb = $dadosMembro->nomes();
 		?>
-		<div class="box" align="center">
-		<div class="box-outer">
-		<div class="box-inner">
-		<div class="box-titulo">
-		<table class='table table-bordered' >
-		<caption>Rol's com Pend&ecirc;ncias</caption>
+	  <div class="list-group">
+	    <span class="list-group-item active">
+			<h4 class="list-group-item-heading">Rol's com Pend&ecirc;ncias</h4>
+    </span>
+		<table class='table table-bordered table-striped table-hover' >
 			<colgroup>
 				<col id="Rol">
 				<col id="Rol">
@@ -98,11 +97,6 @@
 	?>
 		</tbody>
 	</table>
-	</div></div></div></div>
-		<div class="box" >
-		<div class="box-outer">
-		<div class="box-inner">
-		<div class="box-titulo">
 	<?PHP
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
@@ -124,10 +118,11 @@
 		echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
 	}
 	?>
-	</div></div></div></div><br />
-	 	 <ul class="list-group">
-          <li class="list-group-item list-group-item-primary"><strong>Disciplinados</strong></li>
-      </ul>
+	</div>
+  <div class="list-group">
+    <span class="list-group-item active">
+    <h4 class="list-group-item-heading">Disciplinados</h4>
+  </span>
 	<?php
 		//Fim das informa??es das pendencias
 		//In�cio das pendencias de disciplinados
@@ -156,12 +151,7 @@
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 		 //inicia o cabe?alho de pagina??o
 		?>
-		<div class="box" align="center">
-		<div class="box-outer">
-		<div class="box-inner">
-		<div class="box-titulo">
-		<table class='table table-bordered' cellspacing="0" id="pendencia" >
-		<caption>Rol's</caption>
+		<table class='table table-bordered table-hover table-striped' id="pendencia" >
 			<colgroup>
 				<col id="Rol">
 				<col id="Rol">
@@ -194,11 +184,6 @@
 			?>
 		</tbody>
 	</table>
-	</div></div></div></div>
-		<div class="box" >
-		<div class="box-outer">
-		<div class="box-inner">
-		<div class="box-titulo">
 	<?PHP
 		//Classe que monta o rodape
 		$_rod_disc = new rodape($paginas_disc,$pgDisc,"pagina1_disc",$_urlLi_disc,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
@@ -227,8 +212,6 @@
 
 		}//Fim das pendencias de disciplinados
 		?>
-			</div></div></div></div>
-		<?php
-	?>
+		</div>
 	</div>
   </div>

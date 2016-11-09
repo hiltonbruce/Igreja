@@ -19,11 +19,9 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && 
 			require_once ("../models/$classe.class.php");
 		}
 	}
-
 		require_once "../help/tes/varLimpeza.php";
 		//montar um cabeçalho padrão e remover as chamadas a cima
-		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
-
+		$sede = $igSede;//Traz os dados da sede
 
 		//Dados para montar o cabeçalho do documento para imprimir
 		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
@@ -97,7 +95,7 @@ switch ($_GET['limpeza']) {
 		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
 
 		//montar um cabeçalho padrão e remover as chamadas a cima
-		$sede = new DBRecord ("igreja","1","rol");//Traz os dados da sede
+		$sede = $igSede;//Traz os dados da sede
 
 		//Dados para montar o cabeçalho do documento para imprimir
 		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
@@ -140,7 +138,7 @@ switch ($_GET['limpeza']) {
 			}
 			$GeraPedidos = new limplista($mesref);
 			$verRegistro->geraLista($ref);
-			$dadoscong	= new DBRecord('igreja','1', 'rol');//Traz os dados da congregação
+			$dadoscong	= $igSede;//Traz os dados da congregação
 			//Mostrar totalizador dentro da aplicação
 			echo '<a href="controller/limpeza.php?limpeza=1&'.$linkperido.'"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
 			$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações

@@ -10,7 +10,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Recibos</button></a>
 	  <a <?PHP $b=id_corrente ("prestacao");?> href="./?escolha=tesouraria/prestacao.php&menu=top_tesouraria">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Presta&ccedil;&atilde;o de Contas</button></a>
-	  <a <?PHP $b=id_corrente ("adiant");?> href="./?escolha=controller/limpeza.php&menu=top_tesouraria">
+	  <a <?PHP $b=id_corrente ("limpeza");?> href="./?escolha=controller/limpeza.php&menu=top_tesouraria">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Mat. de Limpeza</button></a>
 	  <a <?PHP $b= id_corrente ("agenda");?> href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Agenda</button></a>

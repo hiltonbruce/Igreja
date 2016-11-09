@@ -6,6 +6,7 @@
 
 	$escGET = (empty($_GET["escolha"])) ? '' : $_GET["escolha"];
 	$escPOST = (empty($_POST["escolha"])) ? '' : $_POST["escolha"];
+	$linkEsc = ($escPOST=='') ? $escGET:$escPOST;
 	$dirGET = (empty($_GET["direita"])) ? '' : $_GET["direita"];
 	$dirPOST = (empty($_POST["direita"])) ? '' : $_POST["direita"];
 	$menuGET = (empty($_GET["menu"])) ? '' : $_GET["menu"];
@@ -89,17 +90,12 @@
            $mainpanelFim = '';
         }
       $secGET = (empty($_GET["sec"])) ? '' : $_GET["sec"];
-		  ?>
+		?>
 <div class="leftpanel">
-<div class="list-group">
-<a href="#" class="list-group-item active">
-<h4 class="list-group-item-heading">Administra&ccedil;&atilde;o</h4>
-<p class="list-group-item-text">...</p>
-</a>
-</div>
-
   <ul class="list-group">
-    <li class="list-group-item list-group-item-primary"><strong>Administra&ccedil;&atilde;o</strong></li>
+	    <span class="list-group-item active">
+			<h4 class="list-group-item-heading">Administra&ccedil;&atilde;o</h4>
+	    </span>
   <ul id="categories">
     <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php">
 			<span class="glyphicon glyphicon-user text-info" ></span>&nbsp;Membros</a>

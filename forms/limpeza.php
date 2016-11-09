@@ -6,7 +6,8 @@
 	//Incluir tabela com resumo do pedido
 ?>
 <fieldset>
-<legend>Solicitação de Material de Limpeza, para: <?php echo $periodo['0'];?></legend>
+<legend>Solicita&ccedil;&atilde;o de Material de Limpeza, para:
+	<?php echo $periodo['0'];?></legend>
 <form method='post' name='limpeza' >
 	<table class='table'>
 			<tr>
@@ -29,13 +30,14 @@
 			<tr>
 				<td>
 					<label>Data:</label>
-					<input type="text" name="data" class="form-control" required='required' id='data'
-						tabindex="<?PHP echo ++$ind;?>" value="<?php echo $data;?>" maxlength="10" />
+					<input type="text" name="data" class="form-control dataclass" required='required'
+						tabindex="<?PHP echo ++$ind;?>" value="<?php echo $data;?>" />
 				</td>
 				<td>&nbsp;<br />
 				</td>
 				<td>&nbsp;<br />
-					<input type="submit"  class="btn btn-primary" name="Submit" value="Lançar..." tabindex="<?PHP echo ++$ind; ?>"/>
+					<input type="submit"  class="btn btn-primary" name="Submit"
+					 value="Lan&ccedil;ar..." tabindex="<?PHP echo ++$ind; ?>"/>
 					<input type="hidden" name="mes" value="<?PHP echo $mesPed;?>"/>
 					<input type="hidden" name="ano" value="<?PHP echo $anoPed;?>"/>
 					<input type="hidden" name="mesref" value="<?PHP echo $mesref;?>"/>
@@ -48,11 +50,11 @@
 <a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=2&<?php echo $linkperido;?>">
 <button type="button" class="btn btn-primary" >Mostrar totalizador</button></a>
 <a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'>
-<button type="button" class="btn btn-primary">Alterar Período...</button></a>
+<button type="button" class="btn btn-primary">Alterar Per&iacute;odo...</button></a>
 <a href='./controller/limpeza.php?limpeza=6' target="_blank">
-<button type="button" class="btn btn-primary">Material Disponível...</button></a>
+<button type="button" class="btn btn-primary">Material Dispon&iacute;vel...</button></a>
 <a href='./controller/limpeza.php?limpeza=7' target="_blank">
-<button type="button" class="btn btn-primary">Formulário de Pedido...</button></a>
+<button type="button" class="btn btn-primary">Formul&aacute;rio de Pedido...</button></a>
 <a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=12&<?php echo $linkperido;?>' target="_blank">
 <button type="button" class="btn btn-primary">Gerar Pedido</button></a>
 <?php

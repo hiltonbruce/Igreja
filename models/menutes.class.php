@@ -76,7 +76,7 @@ class menutes {
 				++$inc_pen;
 				if ($inc_pen>1)
 					{
-						echo "<tr class='odd2'>";
+						echo "<tr>";
 						$inc_pen=0;
 					}else {
 					echo "<tr>";}
@@ -93,7 +93,7 @@ class menutes {
 	</table>
 	<?PHP
 	//Classe que monta o rodape
-	$_rod_pen = new rodape($paginas_pen,$this->pag_mostra,"pag_mostra",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
+	$_rod_pen = new rodape($paginas_pen,$this->pag_mostra,"pag_mostra",$_urlLi_pen,3);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina");
 	if ($total_pen>"1"){
 		printf ("%s recibos!",number_format($total_pen, 0, ',', '.'));

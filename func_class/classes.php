@@ -75,10 +75,10 @@
 		}
 
 		public function getDados(){
-			echo 	"Links de P�gina: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
+			echo 	"Links de P&acute;gina: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
 					"linkP�gina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
-					"url da p�gina: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
-					"Link por P�gina: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
+					"url da p&acute;gina: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
+					"Link por P&acute;gina: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
 					"urlExtra: \$this->getUrlextra() : <span >".$this->getUrlextra()."</span><br/>".
 					"For final: \$this->getQuantpg()*\$this->getLinkppag(): <span>".$this->getQuantpg()*$this->getLinkppag()."</span><br/>".
 					"Total de paginas: getQuantpg() = ceil((\$this->getUrl()+1)/\$this->getLinkppag()) <span>".$this->getQuantpg()."</span><br/>";
@@ -113,7 +113,7 @@
 					{
 					echo "<li><a href='./{$this->getUrlextra()}&$url'>$pg</a></li>";
 					}else{
-						echo '<li><a class="btn btn-primary active disabled">'.$pg.'</a></li>';
+						echo '<li><a class="btn btn-primary active disabled">'.$pg.'*</a></li>';
 					}
 			}//Fim loop for
 		echo '';
