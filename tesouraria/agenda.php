@@ -57,7 +57,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 			$atualizar->credor = $nomeCredor->id();
 		}
 		if ($_POST['paraMembro']=='1') {
-			 $atualizar->credor		= 	'r0';
+			 $atualizar->credor		= 	intval($_POST['rol']).'r0';
 		}elseif ($_POST['paraCredor']=='1'){
 			$atualizar->credor		= 	'0';
 		}elseif (!empty($_POST['rol']) ){

@@ -37,12 +37,9 @@ class agenda {
 			$id = mysql_fetch_array($idfatura);
 			$fatura = $id['vencimento'];
 			list($anov, $mesv, $diav) = explode("-", $id['vencimento']);
-
 			//echo '<br /> Id Fatrura: '.$contas['idfatura'].' - Data atual - ultimo Vencimento: '.$id['ultvenc'].' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
 			//$query_prox = 'SELECT * FROM agenda  WHERE idfatura = "'.$contas['idfatura'].'" AND (TO_DAYS(vencimento) - TO_DAYS(NOW()) >= "10")';
-
 			if (ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24))>'15' && $id['status']<>'3') {
-
 				$mesvenc = (date('m',mktime() - mktime(0,0,0,$mesv,$diav,$anov)));
 				//corrigir os dados da tabela agenda para unificar os fornecedores
 				//adiciona campo vencimento na confirma√ß√£o de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
@@ -127,16 +124,20 @@ class agenda {
 		}else {
 			$nome = $coluna_fix["nome"];
 		}
-		$status ='<a href = "./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$coluna_fix['id'].'" title = "Informar pagamento!" ><img src="img/editar.jpg" alt="Editar agenda!" width="16" height="16" />Pagar!</a>';
+		$status ='<a href = "./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id';
+		$status = $coluna_fix['id'].'" title = "Informar pagamento!" >';
+		$status ='<span class="glyphicon glyphicon-pencil text-danger"/></span>';
+		$status ='Pagar!</a>';
 		switch ($coluna_fix['status']) {
 			case 1:
-				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser√° realizado hoje!" width="16" height="16"/>Saiu p/ Pgto';
+				$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
+				$status .= ' aria-hidden="true" ></span>Saiu p/ Pgto';
 				$titulo = 'Pagamento ser&aacute; realizado hoje!';
 				break;
 			case 2:
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
-				$evento = '<img src="img/yes.png" alt="D&iacute;≠vida Paga!';
-				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ';
+				$evento .= 'alt="D&iacute;≠vida Paga! Obrigado."></span>'.$idLanc;
 				$status = $evento.' Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
 				$status .= ' - '.$coluna_fix['resppgto'];
 				$titulo = 'D&iacute;≠vida Paga! Obrigado.';
@@ -147,13 +148,16 @@ class agenda {
 				break;
 			default:
 				if (date("Y-m-d")==$coluna_fix['vencimento']) {
-					$status .= '<img src="img/exclamacao.png" alt="D&iacute;≠vida n&atilde;o Paga!" width="16" height="16" />Pgto Hoje!';
+					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
+					$status .= ' aria-hidden="true" ></span>Pgto Hoje!';
 					$titulo = 'D&iacute;≠vida n&atilde;o Paga!';
 				}elseif (date("Y-m-d")>$coluna_fix['vencimento']){
-					$status .= '<img src="img/not.png" alt="D&iacute;≠vida Vencida!" width="16" height="16" />Vencida!';
+					$status .= '<span class="glyphicon glyphicon-remove-sign text-danger"';
+					$status .= ' aria-hidden="true" ></span>Vencida!';
 					$titulo = 'D&iacute;≠vida Vencida!';
 				}else {
-					$status .= '<img src="img/exclamacao.png" alt="D&iacute;≠vida a Pagar!" width="16" height="16" />FaltaÄ Pagar';
+					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
+					$status .= ' aria-hidden="true" ></span>FaltaÄ Pagar';
 					$titulo = 'D&iacute;vida a Pagar!';
 				}
 				break;
@@ -248,15 +252,15 @@ class agenda {
 			$nome = $coluna_pen["nome"];
 		}
 		$status ='<a href = "./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$coluna_pen['id'].'" title = "Informar pagamento!" >
-		<img src="img/editar.jpg" alt="Editar agenda!" width="16" height="16" /> Pagar!</a>';
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span>  Pagar!</a>';
 		switch ($coluna_pen['status']) {
 			case 1:
-				$status .= '<img src="img/exclamacao.png" alt="Pagamento ser&aacute; realizado hoje!" width="16" height="16"/> Saiu p/ Pgto';
+				$status .= '<span class="glyphicon glyphicon-warning-sign text-warning" aria-hidden="true" ></span> Saiu p/ Pgto';
 				break;
 			case 2:
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
-				$evento = '<img src="img/yes.png" alt="D&iacute;≠vida Paga!';
-				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$evento = '<span class="glyphicon glyphicon-ok text-success"';
+				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$status = $evento.' Pago em: '.conv_valor_br ($coluna_pen['datapgto']);
 				$status .= ', por '.$coluna_pen['resppgto'];
 				break;
@@ -265,11 +269,11 @@ class agenda {
 				break;
 			default:
 				if (date("Y-m-d")==$coluna_pen['vencimento']) {
-					$status .= '<img src="img/exclamacao.png" alt="D&iacute;≠vida n&atilde;o Paga!" width="16" height="16" /> Pgto Hoje!';
+					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning" aria-hidden="true" ></span> Pgto Hoje!';
 				}elseif (date("Y-m-d")>$coluna_pen['vencimento']){
-					$status .= '<img src="img/not.png" alt="D&iacute;≠vida Vencida!" width="16" height="16" /> Vencida';
+					$status .= '<span class="glyphicon glyphicon-remove-sign text-danger" aria-hidden="true" ></span>  Vencida';
 				}else {
-					$status .= '<img src="img/exclamacao.png" alt="D&iacute;≠vida a Pagar!" width="16" height="16" /> &Agrave; Pagar';
+					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning" aria-hidden="true" ></span>  &Agrave; Pagar';
 				}
 				break;
 		}
@@ -325,15 +329,16 @@ class agenda {
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 			if ($periodo_dados['status']=='2') {//Marca os j√° pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
-				$evento = '<img src="img/yes.png" alt="D&iacute;≠vida Paga!';
-				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
-				$titulo = 'D&iacute;≠vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ></span> '.$idLanc;
+				$titulo = 'D&iacute;≠vida Paga! Obrigado.';
 			}elseif ($periodo_dados['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/> ';
-				$titulo = 'Atualizado. Aguardado confirma&ccedil;&atilde;o de pgto! Motivo: '.$periodo_dados['motivo'];
+				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
+				$evento .= ' aria-hidden="true" ></span> ';
+				$titulo = 'Atualizado. Aguardado confirma&ccedil;&atilde;o de pgto!';
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="D√≠vida vencida!" width="16" height="16"/> ';
-				$titulo = 'D√≠vida vencida! Motivo: '.$periodo_dados['motivo'];
+				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
+				$evento .= ' aria-hidden="true" ></span> ';
+				$titulo = 'D&iacute;vida vencida!';
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];
@@ -414,14 +419,16 @@ class agenda {
 
 			if ($contas['status']=='2') {//Marca os j√° pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
-				$evento = '<img src="img/yes.png" alt="D&iacute;≠vida Paga!';
-				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$evento = '<span class="glyphicon glyphicon-ok text-success"';
+				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$titulo = 'D&iacute;≠vida Paga! Obrigado.';
 			}elseif ($contas['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/>';
-				$titulo = 'Atualizado. Aguardado confirma√ß√£o de pgto!';
+				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
+				$evento .= ' aria-hidden="true" ></span> ';
+				$titulo = 'Atualizado. Aguardado confirma&ccedil;&atilde;o de pgto!';
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="D&iacute;vida vencida!" width="16" height="16"/>';
+				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
+				$evento .= ' aria-hidden="true" ></span> ';
 				$titulo = 'D&iacute;≠vida vencida!';
 			}else {
 				$evento ='';
@@ -453,16 +460,19 @@ class agenda {
 	}
 
 	function motivo($motivo,$credor) { //Lista contas agendas por motivo
-		$filtrarCredor = ((int)$credor!='') ? ' a.credor = "'.$credor.'" AND ':'';
 
+		$dadosMembros	= $this->membro->nomes();
+		$dadosCredores	= $this->credor->dados();
+		$dadosIgreja	= $this->igreja->Arrayigreja();
+		
+		$filtrarCredor = ((int)$credor!='') ? ' a.credor = "'.$credor.'" AND ':'';
 		if (strstr($credor, 'r')) {
 			$credor = trim($credor,"membro@");
 			$opCredor = 'f.id=a.credor';
 		} else {
 			$opCredor = 'f.id=a.credor';
 		}
-
-		$listvenc  = 'SELECT a.vencimento, a.valor, a.id, a.status, ';
+		$listvenc  = 'SELECT a.vencimento, a.valor, a.id, a.status,a.credor, ';
 		$listvenc .= 'i.razao AS igreja, DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS pgto, a.motivo, a.status,';
 		$listvenc .= 'a.idlanc FROM agenda AS a, igreja AS i  WHERE '.$filtrarCredor;
 		$listvenc .= 'i.rol=a.igreja AND motivo LIKE "%'.$motivo.'%"';
@@ -472,26 +482,39 @@ class agenda {
 
 			if ($contas['status']=='2') {//Marca os j√° pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
-				$evento = '<img src="img/yes.png" alt="D&iacute;≠vida Paga!';
-				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
-				$titulo = 'D√≠vida Paga! Obrigado. Motivo:'.$contas['motivo'];
+				$evento = '<span class="glyphicon glyphicon-ok text-success"';
+				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
+				$titulo = 'D&acute;≠vida Paga! Obrigado. Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/>';
+				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
+				$evento .= ' aria-hidden="true" ></span> ';
 				$titulo = 'Atualizado. Aguardado confirma&ccedil;o de pgto! Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="D&iacute;≠vida vencida!" width="16" height="16"/>';
+				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
+				$evento .= ' aria-hidden="true" ></span> ';
 				$titulo = 'D&iacute;≠vida vencida! Motivo:'.$contas['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
 			}
+
+			if (strstr($contas['credor'], 'r')) {
+				$rolMembro = trim ($contas['credor'], 'r');
+				$nome = $dadosMembros[intval($rolMembro)]['0'];
+			}elseif (strstr($contas['credor'], '@')) {
+				list ($r,$rolMembro) = explode ('@',$contas['credor']);
+				$nome = $dadosMembros[intval($rolMembro)]['0'];
+			}else {
+				$nome = $dadosCredores[$contas['credor']]['0'];
+			}
+
 			$p++;
 			$trtab = ($p % 2) == 0 ? '<tr class="dados" >' : '<tr >';
 			$tabela .=  $trtab;
 			$tabela .=  '<td>'.conv_valor_br($contas ['vencimento']).'</td><td>';
 			$tabela .=  '<a href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&
 				id='.$contas['id'].'&pagina1_fix='.$_GET['pagina1_fix'].'" title="'.$titulo.'">';
-			$tabela .=  $contas['nome'].$evento.$contas ['igreja'];
+			$tabela .=  $contas['nome'].$evento.$nome.':'.$contas ['igreja'];
 			$tabela .=  ' &rarr; '.$contas['motivo'].'<a></td>';
 			$tabela .= '<td>'.$contas['pgto'].'<a></td>';
 			$tabela .=  '<td style="text-align: right;" >'.number_format($contas['valor'],2,",",".").'</td>';
@@ -523,14 +546,16 @@ class agenda {
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 			if ($periodo_dados['status']=='2') {//Marca os j√° pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
-				$evento = '<img src="img/yes.png" alt="D&iacute;≠vida Paga!';
-				$evento .= ' Obrigado." width="16" height="16"/> '.$idLanc;
+				$evento = '<span class="glyphicon glyphicon-ok text-success"';
+				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$titulo = 'D&iacute;≠vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
-				$evento = '<img src="img/exclamacao.png" alt="Aguardado confirma√ß√£o de pgto!" width="16" height="16"/> ';
-				$titulo = 'Atualizado. Aguardado confirma√ß√£o de pgto! Motivo: '.$periodo_dados['motivo'];
+				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
+				$evento .= ' aria-hidden="true" ></span> ';
+				$titulo = 'Atualizado. Aguardado confirma&ccedil;&atilde;o de pgto! Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
-				$evento = '<img src="img/not.png" alt="D√≠vida vencida!" width="16" height="16"/> ';
+				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
+				$evento .= ' aria-hidden="true" ></span> ';
 				$titulo = 'D&iacute;≠vida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
@@ -543,7 +568,6 @@ class agenda {
 				$igreja_ev = new DBRecord('igreja',$periodo_dados['igreja'], 'rol');
 				$evento .= $igreja_ev->razao();
 			}
-
 			if (strstr($periodo_dados['credor'],'r')) {
 				$rolCredor = str_replace('r', "", $periodo_dados['credor']);
 				$membro = new DBRecord('membro',$rolCredor,'rol' );
@@ -552,11 +576,9 @@ class agenda {
 				$credor= new DBRecord('credores',$periodo_dados['credor'],'id');
 				$evento .= ' &rarr; '.$credor->alias();
 			}
-
 			echo '<a title="'.$titulo.'" href="./?escolha=tesouraria/agenda.php&
 			menu=top_tesouraria&id='.$periodo_dados['id'].'&pagina1_fix='.$_GET['pagina1_fix'].$linkcredor.'">';
 			echo $evento;
-
 			echo ' &rarr; R$ '.number_format($periodo_dados['valor'],2,",",".").
 			'</a> (<span class="text-info">'.$periodo_dados['motivo'].'</span>)<br />';
 			$total += $periodo_dados['valor'];

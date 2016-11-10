@@ -14,7 +14,7 @@ switch ($_GET['vencidas']) {
 		break;
 }
 ?>
-<table id="Contas do per&iacute;odo" class='table table-condensed' >
+<table class='table' >
 	<caption>
 	<?php echo $titulo;?>
 	</caption>
@@ -26,10 +26,10 @@ switch ($_GET['vencidas']) {
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">Vencimento</th>
+			<th scope="col">Vencimentos</th>
 			<th scope="col">Fatura</th>
 			<th scope="col">Data&nbsp;Pgto</th>
-			<th scope="col"> -- R$ --</th>
+			<th scope="col">R$</th>
 		</tr>
 	</thead>
 	<tbody id="periodo">

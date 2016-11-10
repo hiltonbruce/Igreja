@@ -77,7 +77,7 @@
 	}
 ?>
 <fieldset>
-	<legend>Lan&ccedil;ar Pagamento</legend>
+	<legend>Lan&ccedil;ar Pagamentos</legend>
 	<form action="" method="post" name="cadastro_igreja">
 		<table class='table'>
 			<tbody>
