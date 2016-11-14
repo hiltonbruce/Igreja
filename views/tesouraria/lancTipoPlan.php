@@ -1,13 +1,10 @@
 <strong><?php echo $titTabela;?></strong>
-
-			<?php
-				echo $nivel1;
-			?>
-
+<?php
+	echo $nivel1;
+?>
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
-
 	$(document).ready(function() {
 		var mais = '<a href="#"><img src="img/mais.gif" alt="Revelar/ocultar" class="maismenos" /></a>'
 		$('table#horario tbody tr:not(.sub):even').addClass('impar');

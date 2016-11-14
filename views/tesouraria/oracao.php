@@ -1,4 +1,4 @@
-<?PHP 
+<?PHP
 /**
  * Joseilton Costa Bruce
  *
@@ -18,20 +18,14 @@ controle ("tes");
 
 $idIgreja = $roligreja;
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
-
 $vlr = false;
-
 //$igreja = ($_POST['igreja']>'0') ?  $_POST['igreja']: false ;
 $exibLancCab  = '<table class="table table-striped"><thead><tr><th colspan="3">';
 $exibLancCab .= 'Data do Registro: </th><th colspan="1">'.date('d/m/Y');
 $exibLancCab .= '</th></tr>';
 $exibLancCab .= '<tr><th>Data do Lan&ccedil;amento:</th><th>Oferta</th><th>';
 $exibLancCab .= 'Voto</th><th>Semana</th></tr></thead><tbody>';
-
-
-
 $ctaIdCaixa = $_POST['conta'];
-
 switch ($ctaIdCaixa) {
 	case '6':
 	#Missões
@@ -87,36 +81,28 @@ switch ($ctaIdCaixa) {
 		$votoLan = 904;
 		$ctaCaixa = 12;
 		break;
-	
-	default:
+		default:
 	#Caixa Central
 		$ofeLanc = 700;
 		$votoLan = 704;
 		$ctaCaixa = 1;
 		break;
 }
-
 for ($i=1; $i < 6; $i++) {
 	$ofOr = 'of'.$i;//Variável para o post of?
 	$votOr = 'voto'.$i;//Variável para o post voto?
 	$dataOr = 'data'.$i;//Variável para o post data?
 	$semOr = 'entra'.$i;//Variável para o post entra? (ref a semana)
-
 	//verificando se há valor e data que possibilite o lançamento
 	$ofertaOr = ($_POST[$ofOr]>'0') ?  $_POST[$ofOr]: false ;
 	$votoOr = ($_POST[$votOr]>'0') ?  $_POST[$votOr]: false ;
 	$datalanc = condatabrus ($_POST[$dataOr]);
 	list($ano,$mes,$dia) = explode('-', $datalanc);
-
-
 	//echo '<H1>Data do lançamento: '.$_POST[$dataOr].' *** </h1>';
-
 	if (($ofertaOr || $votoOr) && $datalanc) {
 		//Verifica se há valor em oferta ou voto e se data foi enviada
-
 		$sem = $_POST["$semOr"];
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-
 		$ofertaOr = formataNumBanco ($ofertaOr);
 		if ($ofertaOr>0) {
 			$conta = "'$ofeLanc','$ctaCaixa','7'";//Oração Adulto
@@ -126,7 +112,6 @@ for ($i=1; $i < 6; $i++) {
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 		}
-
 		$votoOr = formataNumBanco ($votoOr) ;
 		if ($votoOr>0) {
 			$conta = "'$votoLan','$ctaCaixa','7'";//Voto em Circ. de Oração
@@ -136,10 +121,8 @@ for ($i=1; $i < 6; $i++) {
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 		}
-
 		//echo "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$_POST["igreja"]}'; </script>";
 		//echo "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$_POST["igreja"]}'>Continuar0...<a>";
-
 	}
 		//echo  ' Oferta - '.$ofertaOr.' - Voto '.$votoOr.' -Data '.$datalanc.' -Semana '.$sem;
 		//echo  '<br /> Var_OFerta - '.$ofOr.' - Var_Voto '.$votOr.' -Var_Data '.$dataOr.' -Var_Semana '.$semOr;
@@ -149,20 +132,15 @@ for ($i=1; $i < 6; $i++) {
 		} elseif ($ofertaOr>'0' || $votoOr>'0') {
 			$exibLanc .= '<tr class="danger"><td class="text-left">Lan&ccedil;mento c/ data inv&aacute;lida!</td>';
 		}
-
 		if ($ofertaOr>'0' || $votoOr>'0') {
 			$exibLanc .= '<td class="text-center">'.number_format($ofertaOr,2,',','.').'</td>';
 			$exibLanc .= '<td class="text-center">'.number_format($votoOr,2,',','.').'</td>';
 			$exibLanc .= '<td class="text-center">'.$sem.'&ordf;</td></tr>';
-
 		}
-		
-
 }
 $exibLancFim .='</tbody></table>';
 echo $exibLancCab.$exibLanc.$exibLancFim;
 require_once 'forms/concluirdiz.php';
-
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$roligreja.'&rec=24';
 ?>

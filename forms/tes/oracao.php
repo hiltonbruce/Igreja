@@ -40,7 +40,7 @@
 			  <div class="col-xs-4">
 			  	<label>Semana</label>
 			  	<?php
-					require 'help/formTes/oracao.php';
+						require 'help/formTes/oracao.php';
 				  	echo $ent01;
 			  	?>
 			  </div>

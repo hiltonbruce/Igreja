@@ -2,7 +2,6 @@
 $nivel1 	= '';
 $nivel2 	= '';
 $comSaldo	= '';$menorAno = 2010;$maiorAno=2100;
-
 	if (empty($_GET['ano'])) {
 			$ano = date('Y');
 		}elseif ($_GET['ano']<$menorAno){
@@ -16,26 +15,21 @@ $queryLista  = 'SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS
 $queryLista .= 'FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%c%Y")';
 $queryLista .= '="'.$mes.$ano.'" ORDER BY igreja,anorefer,mesrefer ';
 $lista = mysql_query($queryLista);
-
 //Logica para montar o conjunto de variáveis para compor a tabelar a seguir
 require_once 'help/tes/histFinanceiroIgreja.php';
-
 	//echo "<h1> ** $ano **</h1>";
 	$ano = ($ano=='') ? date('Y'):$ano;
-
 	//$ano = 2013;
 	//echo "<h1> ** $ano **</h1>";
 	$cor= true;
 	$igrejas = new igreja();$linha='';
 	//print_r($igrejas->Arrayigreja());
 	foreach ($igrejas->Arrayigreja() as $cont => $igrejaDados) {
-
 		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
 		$dz = 'dizimos'."$cont$ano"; $of = 'ofertaCultos'."$cont$ano"; $ofm = 'ofertaMissoes'."$cont$ano";
 		$ofs = 'ofertaSenhoras'."$cont$ano"; $ofmoc = 'ofertaMocidade'."$cont$ano"; $ofi = 'ofertaInfantil'."$cont$ano";
 		$ofe = 'ofertaEnsino'."$cont$ano";$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
-
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		//Soma da coluna para linha Sub-total das congregações Sem a Sede
 		if ($cont!='1') {
@@ -44,14 +38,12 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
 		$totSubTotalAno +=$subTotal;
 		}
-
 		//Soma linha
 		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
 		$totSubTotal +=$subTotal;
-		$totOperac += 
+		$totOperac +=
 		$totTotal += $totMes;
 		$ofOp = $subTotal+$$ofs+$$ofmoc+$$ofi+$$ofe;
-
 		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th>'.$igrejaDados['0'].'</th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';

@@ -4,11 +4,9 @@
 	$hisFinanceiro = 3;
 	$cong = '<br />Todas as Igrejas';
 	//require_once 'forms/tes/histFinanceiro.php';
-
 $mes = intval($_GET['mes']);
 require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
 $tabThead = $nivelSem; //Cabe�alho da tabela
-
 $mesPeriodo = sprintf('%02s',$mes);//M�s por extenso
 $mesExt = arrayMeses ();
 $mesPorExt = $mesExt[$mesPeriodo];

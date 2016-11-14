@@ -50,7 +50,7 @@ function dizimistas(
 	}else {
 		$consTipos =false;
 	}
-	//Monta a query para consulta de conta pelo nï¿½ de acesso
+	//Monta a query para consulta de conta pelo nº de acesso
 	$queryAcesso = '';
 	if (!empty($cred)) {
 		$acessos = explode(',', $cred);
@@ -89,38 +89,53 @@ function dizimistas(
 			$incluiPessoa =' AND d.nome = "" AND d.rol = "0" ';
 		}
 	}
+		$ordenar ='';
 		if ($dataValid && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= $queryAcesso;
 			$consulta .= ' AND d.data = "'.$dataValid.'"';
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC ';
-			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
+			$consulta .= $filtroIgreja.' AND d.igreja = i.rol';
+			$ordenar = ' ORDER BY d.data DESC';
 			$lancConfirmado = true;
 		}elseif ($ano>'2000' && $ano<'2050' && $conTipos) {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= $queryAcesso;
 			$consulta .= $consMes.$consDia.' AND DATE_FORMAT(data, "%Y") ='.$ano;
-			$consulta .= $filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ';
-			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
+			$consulta .= $filtroIgreja.' AND d.igreja = i.rol';
+			$ordenar = ' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
+		//$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($ano=='0') {
 			$consulta  = $this->var_string.'WHERE d.lancamento>"0" ';
 			$consulta .= $incluiPessoa;
 			$consulta .= $queryAcesso;
-			$consulta .= $consMes.$consDia.$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.data DESC,d.igreja,d.id ';
-			$this->dquery = mysql_query( $consulta ) or die (mysql_error());
+			$consulta .= $consMes.$consDia.$filtroIgreja.' AND d.igreja = i.rol';
+			$ordenar = ' ORDER BY d.data DESC,d.igreja,d.id';
+			//$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
 			$consult = $this->var_string.'WHERE d.igreja = i.rol '.$incluiPessoa.$queryAcesso.$filtroIgreja;
-			$this->dquery  = mysql_query($consult.'ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
+		//	$this->dquery  = mysql_query($consult.'ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
 		}else {
-			$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
-					$filtroIgreja.' AND d.igreja = i.rol ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id ') or die (mysql_error());
-				$lancConfirmado = false;
+			$consulta  = $this->var_string.' WHERE d.lancamento="0" '.$queryAcesso;
+			$consulta .= $filtroIgreja.' AND d.igreja = i.rol';
+		//	$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
+		//			$filtroIgreja.' AND d.igreja = i.rol') or die (mysql_error());
+			$ordenar = ' ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id';
+			$lancConfirmado = false;
 		}
+		if ($_GET['semana']>'5' || $_GET['semana']<'1' ) {
+			$conSeman = '';
+		} else {
+			$semGet = intval($_GET['semana']);
+			$conSeman = ' AND semana="'.$semGet.'"';
+		}
+
+		$this->dquery = mysql_query( $consulta.$conSeman.$ordenar ) or die (mysql_error());
 		$total = 0;
 		$tabela = '';
 		while ($linha = mysql_fetch_array($this->dquery)) {

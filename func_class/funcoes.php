@@ -32,7 +32,6 @@ if (PEAR::isError($db)) {
 
 function br_data ($dt,$cmp){
 	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd e em caso de erro e informado o campo $cmp
-
 			list ($d,$m,$y) = explode('/',$dt);
 			$res = checkdate($m,$d,$y);
 			if ($res == 1 || $dt=="00/00/0000"){
@@ -48,7 +47,6 @@ function condatabrus ($dt){
 	//converte data no formato dd/mm/aaaa para aaaa-mmm-dd
 	//em caso de erro ï¿½ informado o campo $cmp e retorna false
 	//Sem alerta de erro
-
 			list ($d,$m,$y) = explode('/',$dt);
 			$res = checkdate($m,$d,$y);
 			if ($res == 1){
@@ -61,7 +59,6 @@ function condatabrus ($dt){
 
 function checadata ($dt){
 	//Valida a data no formato dd/mm/aaaa
-
 			$dta = explode("/","$dt");
 			$d = $dta[0];
 			$m = $dta[1];
@@ -81,7 +78,6 @@ function conv_valor_br ($data) {
 		if (strstr($data, ' ')) {
 			list($data,$dataHora) = explode(' ', $data);
 		}
-
 		if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $data)) {
 			//ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data, $registros)
 			$registros = explode('-', $data);
@@ -153,20 +149,16 @@ function cargo_dt () {
 
 function carta ($id){
 	//Devolve o tipo de carta se Apresentaï¿½ï¿½o ou Mudanï¿½a
-
 	switch ($id){
 		case "1":
 			return "de Recomenda&ccedil;&atilde;o";
 			break;
-
 		case "2":
 			return "de Mudan&ccedil;a";
 			break;
-
 		case "3":
 			return "em Tr&acirc;nsito";
 			break;
-
 		default:
 			return "N&atilde;o Definida no Banco";
 			break;
@@ -174,13 +166,10 @@ function carta ($id){
 }
 
 function mostra_foto ($rol,$height,$width) {
-
 	if (empty($width)) {$width = 114;}
 	if (empty($height)) {$height = 149;}
-
 	//Mostra a foto do membro
 		 if (!empty($rol)){
-
 		 if (file_exists("../img_membros/$rol.jpg")){
 				$img="../img_membros/$rol.jpg";
 			}elseif (file_exists("img_membros/$rol.jpg")){
@@ -212,9 +201,7 @@ function mostra_foto ($rol,$height,$width) {
 
 function foto ($rol) {
 	//Mostra a foto do membro
-
 	if (!empty($rol)){
-
 		 if (file_exists("../img_membros/$rol.jpg")){
 				$img="../img_membros/$rol.jpg";
 			}elseif (file_exists("img_membros/$rol.jpg")){
@@ -243,6 +230,7 @@ function foto ($rol) {
 			}
 		return $img;
 }
+
 function data_venc($data){
 	//acrescenta 30 dias apartir da data fornecida
 	if (isset ($data)){
@@ -259,9 +247,8 @@ function data_venc($data){
 				break;
 			}
 	}else{
-		echo "<script> alert('Data nï¿½o informada!');</script>";
-		echo "<h1> Data nï¿½o informada! </h1>";
-
+		echo "<script> alert('Data não informada!');</script>";
+		echo "<h1> Data n&atilde;o informada! </h1>";
 	}
 }
 
@@ -274,9 +261,7 @@ function data_batismo($data,$link){
 		$y=$dta[2];
 		$res = checkdate($m,$d,$y);
 		$batismo = mktime(23, 59, 59, $m, $d, $y);
-
 		echo "bat -> $batismo  ** atual->".mktime();
-
 		if ($res != 1 ){
 			echo "<script> alert('Data inválida! Você digitou: $data');  location.href='$link';</script>";
 			break;
@@ -368,13 +353,10 @@ function semana ($data) {
 		$y=$dta[2];
 		//$res = ;
 	if (checkdate($m,$d,$y)) {
-
 		$semana = 1;
 		$anoatual = date ('y');
 		$diafim = date ('d',mktime(1,0,0,$m+1,0,$y));
-
 		//echo '<h1>'.$d.'/'.$m.'<br/>'.date('w',mktime(1,0,0,$m,$i,$y)).'</h1>';
-
 		//echo '<h2>'.$semana.'</h2>';
 		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o lanï¿½amento
 			//echo $d.' ++++++++++ '.$i;
@@ -399,22 +381,17 @@ function diaSem ($data) {
 		$y=$dta[2];
 		//$res = ;
 	if (checkdate($m,$d,$y)) {
-
 		$semana = 0;
 		$anoatual = date ('y');
 		$diafim = date ('d',mktime(1,0,0,$m+1,0,$y));
-
 		$dia = date ('w',mktime(0,0,1,$m,$d,$y));
 		#$dia refere-se a: 1-dom,2-seg,3-ter,4-qua,5-qui,6-sex e 7-sab
-
 		//echo '<h1>'.$d.'/'.$m.'<br/>'.date('w',mktime(0,0,1,$m,$i,$y)).'</h1>';
-
 		//echo '<h2>'.$semana.'</h2>';
 		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o dia
 			//echo $d.' ++++++++++ '.$i;
 			if (date('w',mktime(0,0,1,$m,$i,$y))==$dia) {
 				$semana++;
-
 			} elseif ($d<$i) {
 				break;
 			}
@@ -425,10 +402,8 @@ function diaSem ($data) {
 
 // VERFICA CNPJ
 function validaCNPJ($cnpj) {
-
 	if (strlen($cnpj) <> 14)
-		return false;
-
+		{return false;}
 	$soma = 0;
 	$soma += ($cnpj[0] * 5);
 	$soma += ($cnpj[1] * 4);
@@ -442,10 +417,8 @@ function validaCNPJ($cnpj) {
 	$soma += ($cnpj[9] * 4);
 	$soma += ($cnpj[10] * 3);
 	$soma += ($cnpj[11] * 2);
-
 	$d1 = $soma % 11;
 	$d1 = $d1 < 2 ? 0 : 11 - $d1;
-
 	$soma = 0;
 	$soma += ($cnpj[0] * 6);
 	$soma += ($cnpj[1] * 5);
@@ -460,11 +433,8 @@ function validaCNPJ($cnpj) {
 	$soma += ($cnpj[10] * 4);
 	$soma += ($cnpj[11] * 3);
 	$soma += ($cnpj[12] * 2);
-
-
 	$d2 = $soma % 11;
 	$d2 = $d2 < 2 ? 0 : 11 - $d2;
-
 	if ($cnpj[12] == $d1 && $cnpj[13] == $d2) {
 		return true;
 	}
@@ -504,6 +474,7 @@ function li_ativo ($val_link,$variavel) {
 			return '';
 		}
 }
+
 function id_corrente ($val_link) {
 	/*	Define se este botï¿½o ou limk ï¿½ o corrente e o define para tal com mudanï¿½a
 	*	da cor de fundo. Isto deve ser definido no script de CSS
@@ -528,12 +499,10 @@ function id_left ($val_link) {
 
 function prox_ant_ano (){
 //cria link para o prï¿½ximo ou o ano anterior
-
      if (empty($_GET["ano"]))
 	  $y = date("Y");
 	  else
 	  $y = (int)$_GET["ano"];
-
      if (!empty($_GET["prox_ant"])){
      $prox_ant = (int) $_GET["prox_ant"];
      $y += $prox_ant;
@@ -543,7 +512,6 @@ function prox_ant_ano (){
      //echo "<a href='".$_GET["escolha"]."&ano=".$y+1."'>Prï¿½ximo Ano</a>";
      echo "<div  align='center' >";
      echo "<table class='tabela' >";
-
      echo "<tr>";
      echo '<td colspan="3">';
      echo '<label>Congrega&ccedil;&atilde;o: </label>';
@@ -566,7 +534,6 @@ function prox_ant_ano (){
      echo "</tr>";
      echo "</table>";
      echo "</div>";
-
 }
 
 function ver_nome ($val_link) {
@@ -579,7 +546,6 @@ function ver_nome ($val_link) {
 	}else {
 		$tes = false;
 	}
-
 	$escGet = (empty($_GET["escolha"])) ? '' : $_GET["escolha"] ;
 	$escPost = (empty($_POST["escolha"])) ? '' : $_POST["escolha"] ;
 	if ((strstr($escGet, $val_link) || strstr($escPost,$val_link)) || $tes) {
@@ -598,14 +564,14 @@ function sim_nao ($sn) {
 }
 
 function sit_espiritual ($se) {
-		  switch ($se){
-		  	case "1":
-				return "Em Comunh&atilde;o"; break;
-			case "2":
-				return "Disciplinado"; break;
-			default:
-				return "Situa&ccedil;&atilde;o n&atilde;o definida!"; break;
-		  }
+  switch ($se){
+  	case "1":
+		return "Em Comunh&atilde;o"; break;
+	case "2":
+		return "Disciplinado"; break;
+	default:
+		return "Situa&ccedil;&atilde;o n&atilde;o definida!"; break;
+  }
 }
 
 function sexo ($sexo) {
@@ -635,13 +601,11 @@ function data_extenso ($data) {
 			$m = $dta[1];
 			$y = $dta[2];
 			$ver_data = checkdate($m,$d,$y);
-
 	if (!$ver_data){
 				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
 				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				break;
 			}
-
 	$dia=date("w",mktime (0,0,0,$m,$d,$y));
 	switch	($dia){
 		case 0: $dia_extenso="Domingo";
@@ -660,7 +624,6 @@ function data_extenso ($data) {
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
-
 	switch	($m){
 		case 1: $mes_extenso="Janeiro";
 				break;
@@ -688,7 +651,6 @@ function data_extenso ($data) {
 				break;
 		default: echo $mes_extenso="M&ecirc;s incorreto";
 	}//fim do case para o mï¿½s
-
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
 }
 
@@ -711,7 +673,6 @@ function arrayMeses () {
 }
 
 function arrayDia ($dia) {
-
 		switch	($dia){
 		case 0: $dia_extenso="Domingo";
 				break;
@@ -729,12 +690,10 @@ function arrayDia ($dia) {
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
-
 	return $dia_extenso;
 }
 
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
-
 	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
@@ -742,7 +701,6 @@ function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o,
 		$dados = new DBRecord("usuario", $id, "id");
 		$autoriza = $_SESSION['nivel'] >= $dados->nivel ? 0 : 1;
 	}
-
 	switch ($tipo) {
 		case "consulta":
 			if ($_SESSION["nivel"]<5){

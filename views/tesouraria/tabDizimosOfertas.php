@@ -28,7 +28,6 @@ if ($idDizOfGET>'0' && $recGet=='9') {
 			</td>
 		</tr>
 	</tbody>
-
 </table>
 <?PHP
 }
@@ -82,16 +81,18 @@ if ($_POST['concluir']=='1') {
 			echo '<input name="debito" type="hidden" value="'.$debitoGet.'" />';
 			echo '<input name="tipo" type="hidden" value="1" />';
 			echo '<label>Rol 1&ordf; Assin:</label>';
-			echo '<input name="r1" type="text" value="4037" class="form-control"/>';
+			$tesSede = new cargoigreja();
+			$dadoCarg = $tesSede->Arrayusuario();
+			echo '<input name="r1" type="text" value="'.$dadoCarg[22][1]['rol'].'" class="form-control"/>';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 2&ordf; Assin:</label>';
-			echo '<input name="r2" type="text" value="72"  class="form-control" />';
+			echo '<input name="r2" type="text" value="'.$dadoCarg[22][2]['rol'].'"  class="form-control" />';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 3&ordf; Assin:</label>';
-			echo '<input name="r3" type="text" value="266" class="form-control" />';
+			echo '<input name="r3" type="text" value="'.$dadoCarg[22][3]['rol'].'" class="form-control" />';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>Rol 4&ordf; Assin:</label>';
-			echo '<input name="r4" type="text" class="form-control" />';
+			echo '<input name="r4" type="text" value="'.$dadoCarg[22][4]['rol'].'" class="form-control" />';
 			echo '</div>';
 			echo '<div class="col-xs-2"><label>&nbsp;</label>';
 			echo '<input name="submit" type="submit" class="btn btn-primary btn-sm form-control" value="Imprimir a tabela"/>';
@@ -103,14 +104,12 @@ if ($_POST['concluir']=='1') {
 			$nomIgreja = '<br />Igreja: <strong>'.$igSede->razao();
 			$tesSede = $tabMembros->nomes();
 			$tesIgreja = ', 1&ordm; Tesoureiro Geral: <ins>'.$tesSede ['4037']['0'];
-
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
 				$nomIgreja = '<br />Igreja: <strong>'.$igrejaSelecionada->razao();
 				$dirigenteIgreja = 'Dirigente: <ins>'.$dirCong->nome().'</ins>';
 				$cargoIgreja = new tes_cargo;
 				//print_r($cargoIgreja->dadosArray());
-
 				$tesArray = $cargoIgreja->dadosArray();
 				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins>'.$tesArray['8'][$idIgreja]['1']['nome'];
 				//reset($tesIgreja);

@@ -1,18 +1,15 @@
 <?php
 while ($contas = mysql_fetch_array($lista)) {
-
 	$mesr 		= $contas['mes'];
 	$anor 		= $contas['ano'];
 	$semana 	= $contas['semana'];
 	$igreja		= $contas['igreja'];
-
 	if ($menorAno>$anor || $menorAno == 0) {
 		$menorAno=$anor;
 	}
 	if ($maiorAno<$anor || $maiorAno ==0) {
 		$maiorAno=$anor;
 	}
-
 	$periodo	= "$igreja$anor";
 	$dz 		= 'dizimos'.$periodo;//dizimos do mês
 	$dizSem 	= $dz.$semana;//Dizimos do mês separando a semana
@@ -55,7 +52,7 @@ while ($contas = mysql_fetch_array($lista)) {
 				$$dz 		+= $valor;
 				$$dizSem 	+= $valor;
 				$totDizimo 	+= $valor;
-	  		}elseif ($contas['credito']>'729' && $contas['credito']<'800') {
+	  	}elseif ($contas['credito']>'729' && $contas['credito']<'800') {
 				$$ofCampanha += $valor;
 				$$ofCampSem   += $valor;
 				$totOfertaCampanha += $valor;

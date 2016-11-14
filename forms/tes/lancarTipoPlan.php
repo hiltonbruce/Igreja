@@ -28,18 +28,18 @@
 		<div class="col-xs-3">
 			<label>M&ecirc;s de refer&ecirc;ncia:</label>
 			<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" required="required" >
-			      <?php
-			      	$linha1 = '<option value=""></option>';
-				      foreach(arrayMeses() as $mes => $meses) {
-						 $linha2 .= '<option value='.intval($mes).'>'.$meses.'</options>';
-						 if ($mesEstatisca==$mes & !empty($_GET['mes'])) {
-						 	$linha1 = '<option value='.(int)$mes.'>'.$meses.'</options>'.$linha1;
-						 	$mesPesquisa = $meses;
-						 }
-				      }
-				      echo $linha1.$linha2;
-			      ?>
-		      </select>
+	      <?php
+	      	$linha1 = '<option value=""></option>';
+		      foreach(arrayMeses() as $mes => $meses) {
+				 $linha2 .= '<option value='.intval($mes).'>'.$meses.'</options>';
+				 if ($mesEstatisca==$mes & !empty($_GET['mes'])) {
+				 	$linha1 = '<option value='.(int)$mes.'>'.$meses.'</options>'.$linha1;
+				 	$mesPesquisa = $meses;
+				 }
+		      }
+		      echo $linha1.$linha2;
+	      ?>
+      </select>
 	  	</div>
 		<div class="col-xs-2">
 			<label>Ano</label>

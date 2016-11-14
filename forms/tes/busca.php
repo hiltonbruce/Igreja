@@ -1,6 +1,5 @@
 <?php
 //	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
-
 	//Mensagem complementar para o cabe�alho da tabela
 	if ($ano=='0') {
 		$msg = 'Todos os ANOS';
@@ -50,6 +49,14 @@
 								tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 								placeholder="Contas por C&oacute;digo. Separando por v&iacute;rgula. Ex.: 701,705,805"
 								/>
+            	</td>
+            	<td>
+            		<label>Semana:</label>
+						  	<?php
+									$i = (empty($_GET['semana'])) ? '' : intval($_GET['semana']);
+									require 'help/formTes/semana.php';
+								  echo $ent01;
+						  	?>
             	</td>
             </tr>
 			<tr id="form">

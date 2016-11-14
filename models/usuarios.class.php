@@ -1,5 +1,4 @@
 <?php
-
 class usuarios {
 
 	protected $id;
@@ -9,12 +8,12 @@ class usuarios {
 	}
 
 	function Arrayusuario(){
-	       while($this->col_lst = mysql_fetch_array($this->result))
-	       {
-		    $usuario_array [] = array ("nome"=>$this->col_lst["nome"],"id"=>$this->col_lst["id"],"cpf"=>$this->col_lst["cpf"]
-		    							, "cargo"=>$this->col_lst["cargo"], "situacao"=>$this->col_lst["situacao"]
-		    							, "setor"=>$this->col_lst["setor"],"nivel"=>$this->col_lst["nivel"]);
-	       }
+     while($this->col_lst = mysql_fetch_array($this->result))
+     {
+    $usuario_array [] = array ("nome"=>$this->col_lst["nome"],"id"=>$this->col_lst["id"],"cpf"=>$this->col_lst["cpf"]
+    							, "cargo"=>$this->col_lst["cargo"], "situacao"=>$this->col_lst["situacao"]
+    							, "setor"=>$this->col_lst["setor"],"nivel"=>$this->col_lst["nivel"]);
+     }
 	  return $usuario_array;
 	}
 

@@ -113,7 +113,7 @@
 					{
 					echo "<li><a href='./{$this->getUrlextra()}&$url'>$pg</a></li>";
 					}else{
-						echo '<li><a class="btn btn-primary active disabled">'.$pg.'*</a></li>';
+						echo '<li><a class="btn btn-primary active disabled">'.$pg.'</a></li>';
 					}
 			}//Fim loop for
 		echo '';

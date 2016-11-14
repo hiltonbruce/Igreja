@@ -4,34 +4,27 @@ controle ('tes');
 $ultimolanc = 0;
 $roligreja =(int) $_POST['igreja'];
 $dizimista = new dizresp($roligreja);
-
 //inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
 $corlinha = false;
-
-	$ultimolanc = mysql_query('SELECT max(lancamento) AS lanc FROM lancamento');//Traz o valor do ultimo lançamento
-	$lancmaior = mysql_fetch_array($ultimolanc);
-	$ultimolanc = (int)$lancmaior['lanc']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
-	$idlancmis = $ultimolanc + 1;//id do lançamento das provisões
-
+$ultimolanc = mysql_query('SELECT max(lancamento) AS lanc FROM lancamento');//Traz o valor do ultimo lançamento
+$lancmaior = mysql_fetch_array($ultimolanc);
+$ultimolanc = (int)$lancmaior['lanc']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
+$idlancmis = $ultimolanc + 1;//id do lançamento das provisões
 //Foi criado a tabela lanchist exclusivamente para o histórico dos lançamentos
 //Antes de começar os lançamentos verificar se há inconcistência nos saldo antes de continuar
 //Criar uma classe que retorne falso ou verdadeiro
-//Analizar os valores para lançar o dízimo para COMADEP e SEMAD
-
+//Analizar os valres para lançar o dízimo para COMADEP e SEMAD
 $referente = ($_POST['hist']<>'') ? $_POST['hist']:$_POST['histsug'];//Atribui a variável o histórico do lançamento
 $referente = mysql_escape_string($referente);
 $data = br_data($_POST['data'], 'Data do lançamento inválida!');
-
 if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) {
-
 	//Faz o lançamento do débito para tabela lancamento
 	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor,credito FROM dizimooferta
 			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito,tipo');
 	$exibideb = '<tr class="warning"><td colspan="5">Debito</td></tr>';
 	$exibicred = '<tr class="warning"><td colspan="5">Credito</td></tr>';
-
 	$caixaCentral ='';
 	$caixaEnsino = '';
 	$caixaInfantil ='';
@@ -41,7 +34,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$caixaSenhoras = '';
 	$sldAntDev = '';
 	$sldAntCred = '';
-
 	while ($tablancarr = mysql_fetch_array($tablanc)) {
 		$debitar = $tablancarr['devedora'];
 		$devedora 	= new DBRecord('contas',$debitar,'acesso');
@@ -49,18 +41,15 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			#Manter saldo inicial se houver novo lançamento na conta
 			$sldAntDev = number_format($devedora->saldo(),2,',','.');
 		}
-
 		$credora 	= new DBRecord('contas',$tablancarr['credito'],'acesso');
 		if ($sldAntCred =='') {
 			#Manter saldo inicial se houver novo lançamento na conta
 			$sldAntCred = number_format($credora->saldo(),2,',','.');
 		}
-		
 		$contcaixa 	= new atualconta($devedora->codigo(),$ultimolanc,$credora->id());
 		$valor 		= $tablancarr['valor'];
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$valorTotal += $valor;
-
 		//Para nivel2='4.2'(Receitas não Operacionais) não há provisão para COMADEP ou Missões
 		if ($tablancarr['devedora']=='2' && $credora->nivel2()!='4.2') {
 			//provisão para fundo de Missões de 40%
@@ -88,7 +77,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
 			,$sldAntSemad);
 	$totalDeb = $totalDeb + $provmissoes;
-
 	$corlinha = !$corlinha;
 	$provcomad = new atualconta('3.1.1.001.007',$idlancmis,10);
 	if ($provcomadep>0) {
@@ -105,17 +93,13 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$corlinha = !$corlinha;
 	$exibideb .= sprintf("<tr class='total'><td>Total debitado</td><td id='moeda'>R$ %s</td><td colspan='3'></td></tr>",number_format($totalDeb,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php
-
 	//Faz o leiaute do lançamento do crédito e lança para tabela lancamento
 	$tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
-
 	while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
-
 		$credora = new DBRecord('contas',$tablancarrc['credito'],'acesso');
 		$sldAntCrd = number_format($credora->saldo(),2,',','.');//Saldo anterior da conta
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc);
 		$contcaixa->atualizar($tablancarrc['valor'],'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
-
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
 		$caixa = new DBRecord('contas',$tablancarrc['credito'],'acesso');//Exibi lançamento
 		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
@@ -123,7 +107,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		,$sldAntCrd);
 		$totalCred = $totalCred + $tablancarrc['valor'];
 		$corlinha = !$corlinha;
-
 	}
 	//Lança provisões conta credora no Ativo
 	$histProvisao = '';
@@ -139,7 +122,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
 	,$antProvSemad);
 	$totalCred = $totalCred + $provmissoes;
-
 	$corlinha 	= !$corlinha;
 	$provcomad 	= new atualconta('1.1.1.001.006',$idlancmis); //Faz o lançamento da provisão de Comadep - Ativo
 	if ($provcomadep) {
@@ -150,7 +132,6 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			$histProvisao = 'Valor provisionado para SEMAD e COMADEP sobre a receita nesta data';
 		}
 	}
-
 	$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
 	$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
 	$antProvComadep = number_format($conta->saldo()-$provcomadep,2,',','.');//Saldo anterior da conta
@@ -158,10 +139,8 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$conta->codigo(),$conta->titulo(),number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
 	,$antProvComadep);
 	$totalCred 	= $totalCred + $provcomadep;
-
 	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",number_format($totalCred,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
-
 	//Atualiza a tabela dizimooferta de acordo com a igreja selecionada inserido o id do lançamento no campo lançamento
 	$atualdizoferta = mysql_query("SELECT id FROM dizimooferta WHERE lancamento='0' AND igreja='$roligreja' ") or die (mysql_error());
 	while ($lanc = mysql_fetch_array($atualdizoferta)) {
@@ -169,15 +148,12 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			$ofetdiz->lancamento = $ultimolanc;
 			$ofetdiz->UpdateID();
 		}
-
 	//Lança o histórico do lançamento
 	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
-
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
 	//inserir o histórico do lançamento das provisões na tabela lanchist
-
 	//Lança o histórico do lançamento das provisões
 	$HistProv = sprintf("'','%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');
@@ -186,13 +162,15 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$exibiRodape .= '<tr class="success"><td colspan="3">Data: '.$dtLanc->format('d/m/Y').'</td>';
 	$linkImpDia   = './controller/modeloPrint.php/?tipo=1&rec=0&igreja='.$roligreja;
 	$linkImpDia  .= '&ano='.$dtLanc->format('Y').'&mes='.$dtLanc->format('m').'&dia='.$dtLanc->format('d');
-	$linkImpDia  .= '&r1=4037&r3=72';
+	$tesSede = new cargoigreja();
+	$dadoCarg = $tesSede->Arrayusuario();
+	$linkImpDia  .= '&r1='.$dadoCarg[22][1]['rol'].'&r2='.$dadoCarg[22][2]['rol'];
+	$linkImpDia  .= '&r3='.$dadoCarg[22][3]['rol'].'&r4='.$dadoCarg[22][4]['rol'];
 	$exibiRodape .= '<td colspan="2"><a target=_blank href="'.$linkImpDia.'" >';
 	$exibiRodape .= '<button type="button" class="btn btn-primary btn-xs">';
 	$exibiRodape .= '<span class="glyphicon glyphicon-print"></span> Imprimir este dia...</button></a></td></tr>';
 	//Rodapé lo lançamento
 	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
-
 }else {
 	 //Fim do 1º if linha 7
 	if ($referente=='' && $dizmista->totalgeral()=='') {
