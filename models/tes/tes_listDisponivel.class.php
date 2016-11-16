@@ -5,17 +5,22 @@ class tes_listDisponivel extends List_sele {
 		$this->tabela = 'contas';//
 		$this->campo_retorno = 'acesso';//Campo que serï¿½ retornado
 		$this->texto_field = 'acesso';//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
-		$this->query = 'SELECT * from '.$this->tabela.' WHERE tipo="D" AND saldo > "0"';
-		$this->sql_lst = mysql_query($this->query.' AND nivel3="1.1.1" AND acesso>"0" ORDER BY codigo ');
+		$this->query = 'SELECT * from '.$this->tabela.' WHERE tipo="D"';
+		$nivelCta = ' AND (nivel4="1.1.1.001" OR nivel4="1.1.1.002" OR nivel4="1.1.1.003")';
+		//$nivelCta .= 'OR nivel4="1.1.1.005" OR nivel4="1.1.1.006")';
+		$this->sql_lst = mysql_query($this->query.$nivelCta.' AND acesso>"0" ORDER BY codigo ');
 	}
 
-	function List_Selec ($caixa){
+	function List_Selec ($caixa,$sld){
 	//Lista Select para uso com javascrip popup
 	//Mostra as linhas de select
 	$linha1='';
 	$linhas ="<option value=''>Escolha a fonte pagadora!</option>";
 		while($campoList = mysql_fetch_array($this->sql_lst))
 		{
+			if ($sld>$campoList['saldo']) {
+				continue;
+			}
 			if ($campoList["acesso"]==$caixa) {
 				$linha1  = '<option value='.$campoList["acesso"].'>'.$campoList['titulo'].
 				' -> Saldo : '.number_format($campoList['saldo'],2,',','.')."</option>";

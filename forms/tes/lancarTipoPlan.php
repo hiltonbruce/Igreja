@@ -73,7 +73,7 @@ E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
 	$arrayDespesas = $ctaDespesa->dadosArray();
 	$bsccredor = new tes_listDisponivel();
 	$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
-	$listaFonte = $bsccredor->List_Selec($acesso);
+	$listaFonte = $bsccredor->List_Selec($acesso,0.01);
 	$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
 	require_once 'help/tes/lancTipoPlan.php';
 	require_once 'views/tesouraria/lancTipoPlan.php';

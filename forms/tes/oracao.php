@@ -6,7 +6,7 @@
 <form id="form1" name="form1" method="post" action="">
 	<div class="row">
 		<div class="col-xs-6">
-			<label><strong>Recebido parar:</strong></label>
+			<label><strong>Entrada no Caixa...</strong></label>
 			<select name="acessoCreditar" id="caixa" class="form-control" required="required"
 			onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>"
 			<?PHP echo $foco;?> >

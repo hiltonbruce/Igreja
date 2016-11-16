@@ -15,7 +15,6 @@
  * Insere dados no banco do forms/autodizimo.php na tabela:usuario
  */
 controle ("tes");
-
 $idIgreja = $roligreja;
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 $vlr = false;
