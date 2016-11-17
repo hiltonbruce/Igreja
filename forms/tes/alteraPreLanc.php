@@ -4,16 +4,12 @@
 	$lancAltera = new DBRecord('dizimooferta',$_GET['id'],'id');
 	//$ctaDev = $lancAltera->devedora();//Conta devedora
 	if ($lancAltera->lancamento()=='0' || $_SESSION['nivel']>'10') {
-
 		$contaAtivas = new tes_conta();
 		$optionTipo = '';$lanContr = '';
-
 			//print_r($contaAtivas->ativosArray());
 		foreach ($contaAtivas->ativosArray()  as $ctaAcesso => $ctaArray) {
 			if ($ctaArray['nivel1']== '4') {
-
 				list($n1,$n2,$n3,$n4,$n5)=explode('.', $ctaArray['codigo']);
-
 				switch ($n1.$n2.$n3.$n4) {
 					case '411001':
 					# Caixa Geral
@@ -49,7 +45,6 @@
 							#Caixa geral da Mocidade
 							$ctaDev = 8;
 						}
-
 						$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 						break;
 					case '411006':
@@ -70,7 +65,6 @@
 			if ($lancAltera->credito()==$ctaAcesso) {
 					$lanContr = '<option value="'.$lancAltera->credito().','.$lancAltera->tipo().'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 				}
-
 		}
 ?>
 <fieldset>

@@ -2,11 +2,6 @@
 	$acessoDebitar = (!empty($_GET['deb']) && $_GET['deb']>0) ? $_GET['deb'] : '' ;
 	$acessoCreditar = (!empty($_GET['cred']) && $_GET['cred']>0) ? $_GET['cred'] : '' ;
 ?>
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script
-	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link	rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
 <span style="text-align: left; font-weight: bold">Debitar Conta</span>
 <table style="background-color: #D3D3D3;" class='table'>
 	<tbody>

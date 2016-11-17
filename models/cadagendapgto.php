@@ -7,9 +7,7 @@ $igreja 	= (int)$_POST['igreja'];
 $credor 	= (int)$_POST['id'];
 $numcredor 	= true;
 $datven 	= true;
-
 //Inserir a opção para novo Cadastro
-
 if ($credor=='' && $_POST['rol']>0) {
 	$credor=$_POST['rol'].'r';
 }elseif (strlen($_POST['nome'])>'5' && strlen($_POST['cnpj'])=='18') {
@@ -19,20 +17,14 @@ if ($credor=='' && $_POST['rol']>0) {
 	$dadosEmpresa .= '"'.$_POST['telefone'].'","'.$_POST['celular'].'","'.$_POST['estado'].'",';
 	$dadosEmpresa .= '"'.$_POST['bairro'].'","'.$_POST['cidade'].'","'.$_POST['uf'].'",';
 	$dadosEmpresa .= '"'.$_POST['resp'].'","'.$_POST['cpf'].'","'.date('Y-m-d H:i:s').'","'.$_SESSION['valid_user'].'"';
-
 	$cadastraCredor = new insert($dadosEmpresa,'credores');
 	$credor = $cadastraCredor->inserir();
-
 }elseif ($credor=='') {
 	//Lançar erro aqui não possui credor
 	$numcredor	= false;
 	$menerro 	= "<script> alert('Você não informou o credor!'); window.history.go(-1);</script>";
 }
-
-
 echo "<h1>** $credor ***</h1>";
-
-
 for ($j2 = 0; $j2 < $parc; $j2++) {
 	//verifica se data está ok
 	if (!checadata($_POST['vencimento'.$j2])) {

@@ -33,7 +33,6 @@
 		if (isset($_SESSION["valid_user"]) && $pendencias->quant_pendecias()<"0"){
 			echo "</div><h4>Parabens n&atilde;o h&aacute; Pend&ecirc;ncias no Cadasdtro!</h4>";
 		}
-
 		}elseif (ver_nome ("tesouraria")){//Menu Tesouraria
 			echo "</div>";
       //$menu = new menutes();
@@ -50,26 +49,21 @@
 		$nmpp_pen="40"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
-
 		//Faz os calculos na pagina��o
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
-
 		if ($_GET["pagina1_pen"]<1) {
 			$_GET["pagina1_pen"] = 1;
 		} elseif ($_GET["pagina1_pen"]>$paginas_pen) {
 			$_GET["pagina1_pen"] = $paginas_pen;
 		}
-
 		$pagina_pen = $_GET["pagina1_pen"]-1;
-
 		if ($pagina_pen<0) {$pagina_pen=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada
 		$inicio_pen=$pagina_pen * $nmpp_pen; //Retorna qual ser? a primeira linha a ser mostrada no MySQL
 		$sql3_pen = mysql_query ($query_pen." LIMIT $inicio_pen,$nmpp_pen") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 		 //inicia o cabe?alho de pagina??o
-
 		$dadosMembro = new membro();
 		$detMemb = $dadosMembro->nomes();
 		?>
@@ -91,7 +85,10 @@
 			{
 			if ($inc_pen=="0") { echo "<tr>"; }
 			$inc_pen++;
-			echo "<td class='text-center'><a title = '{$coluna_pen["nome"]}' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_pen["rol"]}&pagina1_pen={$_GET["pagina1_pen"]}'>{$coluna_pen["rol"]}<a></td>";
+			echo '<td class="text-center">';
+      echo "<a title='{$coluna_pen["nome"]}' data-toggle='tooltip' data-placement='left' ";
+      echo "href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_pen["rol"]}&";
+      echo "pagina1_pen={$_GET["pagina1_pen"]}'>{$coluna_pen["rol"]}<a></td>";
 			if ($inc_pen=="4") { echo "</tr>";$inc_pen=0; }
 			}//loop while produtos
 	?>
@@ -111,7 +108,6 @@
 	if ($total_pen>"1")
 	{
 		printf ("Com %s cadastros de membros, com algum tipo de pend&ecirc;ncia!",number_format($total_pen, 0, ',', '.'));
-
 	}elseif ($total_pen=="1"){
 		echo "Com apenas um cadastros de membro!";
 	}else{
@@ -172,13 +168,18 @@
 			$array_exp = mysql_fetch_array($exp);
 			$membro_disc = $detMemb[$coluna_disc['rol']]['5'];
 			if ($array_exp["data_fim"]<date("Y-m-d") AND $array_exp["data_fim"]<>"0000-00-00") {
-				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc - Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=$pgDisc'><span style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
+				echo "<td id='pendencia' class='text-center' >";
+        echo "<a data-toggle='tooltip' data-placement='left' title='$membro_disc - ";
+        echo "Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php";
+        echo "&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=$pgDisc'><span ";
+        echo "style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
 				$disp_pend++;
 			}else {
-				echo "<td id='pendencia' class='text-center' ><a title = '$membro_disc' href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=$pgDisc'>{$coluna_disc["rol"]}<a></td>";
+				echo "<td id='pendencia' class='text-center' >";
+        echo "<a data-toggle='tooltip' data-placement='left' title='$membro_disc' href='./?escolha=adm/";
+        echo "dados_pessoais.php&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=";
+        echo "$pgDisc'>{$coluna_disc["rol"]}<a></td>";
 			}
-
-
 			if ($inc_disc=="4") { echo "</tr>";$inc_disc=0; }
 			}//loop while produtos
 			?>
@@ -188,7 +189,6 @@
 		//Classe que monta o rodape
 		$_rod_disc = new rodape($paginas_disc,$pgDisc,"pagina1_disc",$_urlLi_disc,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 		$_rod_disc->getRodape(); $_rod_disc->form_rodape ("P&aacute;gina:");
-
 		if ($paginas_disc>1)
 			echo "<br><span class='style4'>Total de $paginas_disc p&aacute;ginas.";
 		else

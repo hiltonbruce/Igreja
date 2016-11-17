@@ -5,9 +5,8 @@
  */
 //Auto completar para raz�o Social dos credores cadastrados
 require_once '../func_class/funcoes.php';
-
+require_once "../func_class/classes.php";
 $q = mysql_real_escape_string( $_GET['q'] );
-
 $sqllinhas = "SELECT * FROM credores where razao LIKE '%$q%'";
 //crit�rios de fon�tica
 

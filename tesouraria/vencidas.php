@@ -38,4 +38,3 @@ switch ($_GET['vencidas']) {
 	?>
 	</tbody>
 </table>
-<br />

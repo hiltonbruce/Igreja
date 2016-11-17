@@ -57,9 +57,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo $titleIgreja; ?></title>
-<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/bootstrap.css" />
@@ -213,15 +213,22 @@ jQuery(function($) {
       $('#fone').mask('(99) 9999-9999');
       $('#celular').mask('(99) 99999-9999');
       $('#cpf').mask("999.999.999-99");
+      $('.cpf').mask("999.999.999-99");
       $('#cpf_val').mask("999.999.999-99");
       $('#br').mask("999");
       $('#cep').mask("99.999-999");
       $('#cnpj').mask("99.999.999/9999-99");
+      $('.cnpj').mask("99.999.999/9999-99");
       $('#sigla_val').mask("99.999.999/9999-99");
    });
 // ]]&gt;</script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script>
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 <?php
   #Chamada para o Chat
   if (!empty($_SESSION['valid_user'])){

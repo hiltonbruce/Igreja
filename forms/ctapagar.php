@@ -1,7 +1,6 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
 <fieldset>
 	<legend>Agendar Contas &agrave; Pagar</legend>
 	<!-- Desenvolvido por Wellington Ribeiro -->
@@ -85,7 +84,7 @@
 						class="form-control" size='50%' id="aliasCredor" /></td>
 					<td><label>CNPJ:</label>
 					<input type="text" id="siglaCredor" tabindex="<?php echo ++$ind;?>"
-						class="form-control" name="sigla" value="" /></td>
+						class="form-control cnpj" name="sigla" value="" /></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -94,7 +93,7 @@
 						class="form-control" name="resp" value="" size='50%' /></td>
 					<td><label>CPF:</label>
 					<input type="text" id="cpfCredor" name="cpf"
-						class="form-control" tabindex="<?php echo ++$ind;?>" value="" /></td>
+						class="form-control cpf" tabindex="<?php echo ++$ind;?>" value="" /></td>
 					<td></td>
 				</tr>
 				<tr>

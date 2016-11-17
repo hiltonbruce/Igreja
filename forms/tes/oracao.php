@@ -1,11 +1,73 @@
 <?PHP
 	$foco = (empty($_GET['cta'])) ? 'autofocus="autofocus"' : '' ;
+	$contaAtivas = new tes_conta();
+	$optionTipo = '';$lanContr = '';
+		//print_r($contaAtivas->ativosArray());
+	foreach ($contaAtivas->ativosArray()  as $ctaAcesso => $ctaArray) {
+		if ($ctaArray['nivel1']== '4') {
+			list($n1,$n2,$n3,$n4,$n5)=explode('.', $ctaArray['codigo']);
+			switch ($n1.$n2.$n3.$n4) {
+				case '411001':
+				# Caixa Geral
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				case '411002':
+				# Caixa de Senhoras
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				case '411003':
+				# Caixa Geral - Receita de Campanhas
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				case '411004':
+				# Caixa de Ensino
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				case '411005':
+					//H� varios caixas na Mocidade
+					if ($n5=='002') {
+						# Setor I - Rubem
+						$ctaDev = 9;
+					} elseif ($n5=='003') {
+						# Setor II - Zebulom
+						$ctaDev = 10;
+					} elseif ($n5=='004')  {
+						# Setor III - Azer
+						$ctaDev = 11;
+					} elseif ($n5=='005')  {
+						# Setor IV - Juda
+						$ctaDev = 12;
+					}else {
+						#Caixa geral da Mocidade
+						$ctaDev = 8;
+					}
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				case '411006':
+				# Caixa infantil
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				case '412001':
+				# Miss�es
+					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+				default:
+				# Todas as demais receitas
+					$optionTipo .= '<option value="'.$ctaAcesso.',2">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					break;
+			}
+		}
+		//conta atual do pr� lan�amento
+		if ($cta==$ctaAcesso) {
+				$lanContr = '<option value="'.$cta.'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+			}
+	}
 ?>
 <fieldset>
 <legend>Lan&ccedil;amentos por total da semana</legend>
 <form id="form1" name="form1" method="post" action="">
 	<div class="row">
-		<div class="col-xs-6">
+		<div class="col-xs-4">
 			<label><strong>Entrada no Caixa...</strong></label>
 			<select name="acessoCreditar" id="caixa" class="form-control" required="required"
 			onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>"
@@ -17,7 +79,16 @@
 				?>
 			</select>
 		</div>
-	  <div class="col-xs-6">
+	  <div class="col-xs-4">
+			<label>Receita:</label>
+				 <select name='acesso' class='form-control' tabindex="<?php echo ++$ind;?>" >
+						<?php
+							echo $lanContr;
+							echo $optionTipo;
+						 ?>
+				</select>
+	  </div>
+	  <div class="col-xs-4">
 			<label><strong>Igreja:</strong></label>
 		  	<?PHP
 				$bsccredor2 = new List_sele('igreja', 'razao', 'igreja');
