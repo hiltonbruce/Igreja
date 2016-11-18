@@ -66,31 +66,38 @@
 		case '6':
 		# Missões
 			$ctaReceita = ($roligreja=='1') ? 422 : 423;
+			$ctaVoto = 825;
 			break;
 		case '7':
 		# Caixa de Senhoras
 		$ctaReceita = 321;
+		$ctaVoto = 721;
 		break;
 		case '8':
 		# Caixa de Ensino
 			$ctaReceita = 401;
+			$ctaVoto = 802;
 			break;
 		case '9':
 		# Caixa infantil
 			$ctaReceita = 510;
+			$ctaVoto = 951;
 			break;
 		case '482':
 			//Há varios caixas na Mocidade
 			$ctaReceita = 491;//Código sem retenção da COMADEP
+			$ctaVoto = 906;
 			break;
 		case '504':
 		case '505':
 		case '506':
 		case '507':
-			$ctaReceita = 493;//Ofertas extras
+			$ctaReceita = 493;//Ofertas extras setores da mocidade
+			$ctaVoto = 906;
 			break;
 		default:
 			$ctaReceita = 306;//Ofertas extras
+			$ctaVoto = 704;
 			break;
 	}
 		$lanContr = '<option value="'.$ctaId[$ctaReceita]['acesso'].'">['.$ctaId[$ctaReceita]['codigo'].']-'.$ctaId[$ctaReceita]['titulo'].'</option>';
@@ -168,8 +175,9 @@
 		tabindex='<?PHP echo ++$ind; ?>'/>
 	  	<input name="escolha" type="hidden" value="tesouraria/receita.php" />
 	  	<input name="rec" type="hidden" value='24' />
+	  	<input name="ctaVoto" type="hidden" value='<?php echo $ctaVoto;?>' />
 	  	<input name="cad" type="hidden" value='1' />
-	  	<input name="conta" type="hidden" value='<?PHP echo $cta;?>' />
+	  	<input name="conta" type="hidden" value='<?PHP echo $ctaId[$cta]['acesso'];?>' />
 	  </div>
 	</div>
 </form>

@@ -26,58 +26,51 @@ $exibLancCab .= '<tr><th>Data do Lan&ccedil;amento:</th><th>Oferta</th><th>';
 $exibLancCab .= 'Voto</th><th>Semana</th></tr></thead><tbody>';
 $ctaIdCaixa = $_POST['conta'];
 $ofeLanc = intval($_POST['ctaReceita']);
+$votoLan = intval($_POST['ctaVoto']);
+$ctaCaixa = intval($_POST['conta']);
+/*
 switch ($ctaIdCaixa) {
 	case '6':
 	#Miss�es
-		$votoLan = 825;
 		$ctaCaixa = 2;
 		break;
 	case '7':
 	#Orações adulto
-		$votoLan = 721;
 		$ctaCaixa = 3;
 		break;
 	case '8':
 	#Ensino
-		$votoLan = 802;
 		$ctaCaixa = 4;
 		break;
 	case '9':
 	#Infantil
-		$votoLan = 951;
 		$ctaCaixa = 5;
 		break;
 	case '482':
 	#Mocidade
-		$votoLan = 905;
 		$ctaCaixa = 8;
 		break;
 	case '504':
 	#setor I
-		$votoLan = 901;
 		$ctaCaixa = 9;
 		break;
 	case '505':
 	#setor II
-		$votoLan = 902;
 		$ctaCaixa = 10;
 		break;
 	case '506':
 	#setor III
-		$votoLan = 903;
 		$ctaCaixa = 11;
 		break;
 	case '507':
 	#setor IV
-		$votoLan = 904;
 		$ctaCaixa = 12;
 		break;
 		default:
 	#Caixa Central
-		$votoLan = 704;
 		$ctaCaixa = 1;
 		break;
-}
+}*/
 for ($i=1; $i < 6; $i++) {
 	$ofOr = 'of'.$i;//Variável para o post of?
 	$votOr = 'voto'.$i;//Variável para o post voto?
