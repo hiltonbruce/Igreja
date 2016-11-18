@@ -1,30 +1,31 @@
 <?PHP
 	$foco = (empty($_GET['cta'])) ? 'autofocus="autofocus"' : '' ;
 	$contaAtivas = new tes_conta();
-	$optionTipo = '';$lanContr = '';
-		//print_r($contaAtivas->ativosArray());
-	foreach ($contaAtivas->ativosArray()  as $ctaAcesso => $ctaArray) {
+	$ctaId = $contaAtivas->contasTodas();
+	$optionTipo = '';
+	$lanContr = '';
+//	print_r($contaAtivas->contasTodas());
+	$ctaReceita = 306;//Ofertas extras
+	foreach ($contaAtivas->ativosArray() as $ctaAcesso => $ctaArray) {
 		if ($ctaArray['nivel1']== '4') {
 			list($n1,$n2,$n3,$n4,$n5)=explode('.', $ctaArray['codigo']);
 			switch ($n1.$n2.$n3.$n4) {
 				case '411001':
 				# Caixa Geral
-					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					$optionTipo .= '<option value="'.$ctaAcesso.'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 					break;
 				case '411002':
 				# Caixa de Senhoras
-					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					$optionTipo .= '<option value="'.$ctaAcesso.'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 					break;
 				case '411003':
-				# Caixa Geral - Receita de Campanhas
-					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
+					$optionTipo .= '<option value="'.$ctaAcesso.'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 					break;
 				case '411004':
-				# Caixa de Ensino
 					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 					break;
 				case '411005':
-					//Hï¿½ varios caixas na Mocidade
+					//Há varios caixas na Mocidade
 					if ($n5=='002') {
 						# Setor I - Rubem
 						$ctaDev = 9;
@@ -48,7 +49,8 @@
 					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 					break;
 				case '412001':
-				# Missï¿½es
+				# Missões
+					$ctaReceita = 821;
 					$optionTipo .= '<option value="'.$ctaAcesso.',1">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
 					break;
 				default:
@@ -57,19 +59,49 @@
 					break;
 			}
 		}
-		//conta atual do prï¿½ lanï¿½amento
-		if ($cta==$ctaAcesso) {
-				$lanContr = '<option value="'.$cta.'">['.$ctaArray['codigo'].']-'.$ctaArray['titulo'].'</option>';
-			}
 	}
+
+	//conta atual do prï¿½ lanï¿½amento
+	switch ($cta) {
+		case '6':
+		# Missões
+			$ctaReceita = ($roligreja=='1') ? 422 : 423;
+			break;
+		case '7':
+		# Caixa de Senhoras
+		$ctaReceita = 321;
+		break;
+		case '8':
+		# Caixa de Ensino
+			$ctaReceita = 401;
+			break;
+		case '9':
+		# Caixa infantil
+			$ctaReceita = 510;
+			break;
+		case '482':
+			//Há varios caixas na Mocidade
+			$ctaReceita = 491;//Código sem retenção da COMADEP
+			break;
+		case '504':
+		case '505':
+		case '506':
+		case '507':
+			$ctaReceita = 493;//Ofertas extras
+			break;
+		default:
+			$ctaReceita = 306;//Ofertas extras
+			break;
+	}
+		$lanContr = '<option value="'.$ctaId[$ctaReceita]['acesso'].'">['.$ctaId[$ctaReceita]['codigo'].']-'.$ctaId[$ctaReceita]['titulo'].'</option>';
 ?>
 <fieldset>
 <legend>Lan&ccedil;amentos por total da semana</legend>
 <form id="form1" name="form1" method="post" action="">
 	<div class="row">
-		<div class="col-xs-4">
-			<label><strong>Entrada no Caixa...</strong></label>
-			<select name="acessoCreditar" id="caixa" class="form-control" required="required"
+		<div class="col-xs-3">
+			<label><strong>Caixa...</strong></label>
+			<select name="acessoCreditar" id="caixa" class="form-control input-sm" required="required"
 			onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>"
 			<?PHP echo $foco;?> >
 				<?php
@@ -79,20 +111,20 @@
 				?>
 			</select>
 		</div>
-	  <div class="col-xs-4">
-			<label>Receita:</label>
-				 <select name='acesso' class='form-control' tabindex="<?php echo ++$ind;?>" >
+	  <div class="col-xs-6">
+			<label>Ref. Receita:</label>
+				 <select name='ctaReceita' class='form-control input-sm' tabindex="<?php echo ++$ind;?>" >
 						<?php
 							echo $lanContr;
 							echo $optionTipo;
 						 ?>
 				</select>
 	  </div>
-	  <div class="col-xs-4">
+	  <div class="col-xs-3">
 			<label><strong>Igreja:</strong></label>
 		  	<?PHP
 				$bsccredor2 = new List_sele('igreja', 'razao', 'igreja');
-				$LstIgreja = $bsccredor2->List_Selec(++$ind,$idIgreja, ' class="form-control" required="required"');
+				$LstIgreja = $bsccredor2->List_Selec(++$ind,$idIgreja, ' class="form-control input-sm" required="required"');
 				echo $LstIgreja;
 			?>
 	  </div>

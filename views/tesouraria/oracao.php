@@ -25,64 +25,55 @@ $exibLancCab .= '</th></tr>';
 $exibLancCab .= '<tr><th>Data do Lan&ccedil;amento:</th><th>Oferta</th><th>';
 $exibLancCab .= 'Voto</th><th>Semana</th></tr></thead><tbody>';
 $ctaIdCaixa = $_POST['conta'];
+$ofeLanc = intval($_POST['ctaReceita']);
 switch ($ctaIdCaixa) {
 	case '6':
-	#Missões
-		$ofeLanc = ($roligreja=='1') ? 820 : 821 ;
+	#Miss�es
 		$votoLan = 825;
 		$ctaCaixa = 2;
 		break;
 	case '7':
 	#Orações adulto
-		$ofeLanc = 720;
 		$votoLan = 721;
 		$ctaCaixa = 3;
 		break;
 	case '8':
 	#Ensino
-		$ofeLanc = 800;
 		$votoLan = 802;
 		$ctaCaixa = 4;
 		break;
 	case '9':
 	#Infantil
-		$ofeLanc = 950;
 		$votoLan = 951;
 		$ctaCaixa = 5;
 		break;
 	case '482':
 	#Mocidade
-		$ofeLanc = 900;
 		$votoLan = 905;
 		$ctaCaixa = 8;
 		break;
 	case '504':
 	#setor I
-		$ofeLanc = 901;
 		$votoLan = 901;
 		$ctaCaixa = 9;
 		break;
 	case '505':
 	#setor II
-		$ofeLanc = 902;
 		$votoLan = 902;
 		$ctaCaixa = 10;
 		break;
 	case '506':
 	#setor III
-		$ofeLanc = 903;
 		$votoLan = 903;
 		$ctaCaixa = 11;
 		break;
 	case '507':
 	#setor IV
-		$ofeLanc = 904;
 		$votoLan = 904;
 		$ctaCaixa = 12;
 		break;
 		default:
 	#Caixa Central
-		$ofeLanc = 700;
 		$votoLan = 704;
 		$ctaCaixa = 1;
 		break;
