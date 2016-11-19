@@ -59,6 +59,7 @@
 <title><?php echo $titleIgreja; ?></title>
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/maskedinput.js"></script>
+<script type="text/javascript" src="js/autocomplete.js"></script>
 <script src="js/jquery-3.1.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />

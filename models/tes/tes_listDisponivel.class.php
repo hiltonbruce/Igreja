@@ -11,7 +11,7 @@ class tes_listDisponivel extends List_sele {
 		$this->sql_lst = mysql_query($this->query.$nivelCta.' AND acesso>"0" ORDER BY codigo ');
 	}
 
-	function List_Selec ($caixa,$sld){
+	function List_Selec ($caixa,$sld=null){
 	//Lista Select para uso com javascrip popup
 	//Mostra as linhas de select
 	$linha1='';

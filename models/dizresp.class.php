@@ -128,7 +128,7 @@ function dizimistas(
 			$ordenar = ' ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id';
 			$lancConfirmado = false;
 		}
-		if ($_GET['semana']>'5' || $_GET['semana']<'1' ) {
+		if (!empty($_GET['semana']) && ($_GET['semana']>'5' || $_GET['semana']<'1') ) {
 			$conSeman = '';
 		} else {
 			$semGet = intval($_GET['semana']);
@@ -143,7 +143,8 @@ function dizimistas(
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a vari�vel
 			if ($linha['obs']!='') {
-				$tipo = '<span title="'.$linha['obs'].'"><span class="glyphicon glyphicon-paperclip"></span> '.$tipo.'</span>';
+				$tipo = '<span title="'.$linha['obs'].'" data-toggle="tooltip" data-placement="top">';
+				$tipo .= '<span class="glyphicon glyphicon-paperclip"></span> '.$tipo.'</span>';
 			}
 			$valor = number_format($linha['valor'],2,',','.');
 			if ($linha['confirma']=='') {
@@ -154,13 +155,16 @@ function dizimistas(
 			$rol = $linha['nome']<>'' ? $linha['rol'] : 'An&ocirc;nimo';
 			//Criar link para altera��o pelo cadastrador - Realizar critica tb qdo abrir
 			if ($_SESSION["valid_user"]==$linha['tesoureiro'] && !$lancConfirmado) {
-				if ($_GET['tipo']==1) {
+				if (!empty($_GET['tipo']) && $_GET['tipo']==1) {
 					$corrigir = $valor;
 				}else {
-					$corrigir = $valor.'&nbsp;&nbsp;<a href="'.$linkAlterar.$linha['id'].'&igreja='.$linha['rolIgreja'].'" title="Alterar!"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-						&nbsp;<a href="'.$linkLancamento.$linha['id'].'"
-						title="Apagar!">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
+					$corrigir = $valor.'&nbsp;&nbsp;<a href="'.$linkAlterar.$linha['id'];
+					$corrigir .= '&igreja='.$linha['rolIgreja'].'"';
+					$corrigir .= ' title="Alterar!" data-toggle="tooltip" data-placement="left">';
+					$corrigir .= '<span class="glyphicon glyphicon-edit" aria-hidden="true">';
+					$corrigir .= '</span></a>&nbsp;<a href="'.$linkLancamento.$linha['id'].'" ';
+					$corrigir .= 'title="Apagar!" data-toggle="tooltip" data-placement="right">';
+					$corrigir .= '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
 				}
 			}else {
 				$corrigir = $valor;
@@ -176,9 +180,9 @@ function dizimistas(
 				$linkMembro= $rol.' - '.$linha['nome'].$mesAno;
 			}else {
 				list($lancCPF,$lancNome) = explode(':', $linha['hist']);
-				$linkMembro  = '<a href="';
+				$linkMembro  = '<a  data-toggle="tooltip" data-placement="top" href="';
 				$linkMembro .= './?escolha=views/tesouraria/saldoMembros.php&id='.$linha['id'].'&bsc_rol='.$rol;
-				$linkMembro .= '" title="Detalhar!(Congrega: '.$nomeCongMembro.' - Lan&ccedil;. por: '.$lancNome.')">';
+				$linkMembro .= '" title="Congrega: '.$nomeCongMembro.' - Lan&ccedil;. por: '.$lancNome.'">';
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
 			}
 			$tabela .= '<tr><td>'.$linha['data'].'</td>

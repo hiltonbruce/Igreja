@@ -1,15 +1,12 @@
 <script type="text/javascript" src="js/autocomplete.js"></script>
-<script
-	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link
-	rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
+<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<link	rel="stylesheet" type="text/css" href="css/autocomplete.css">
 <span style="text-align: left; font-weight: bold">Debitar Conta</span>
 <table style="background-color: #D3D3D3;">
 	<tbody>
 		<tr>
 			<td colspan="3">Despesas com:<br /> <input type="text" name="nome" class="form-control"
-				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>" 
+				id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
 				placeholder="Qual a Despesa?"/>
 			</td>
 		</tr>

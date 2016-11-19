@@ -12,7 +12,7 @@ class cargoigreja {
 				,'status'=>$col['status'],'rol'=>$col['rol']
     		,'naomembro'=>$col['naomembro'],'igreja'=>$col['igreja']
 				,'pgto'=>$col['pgto'],'diapgto'=>$col['diapgto'],'tipo'=>$col['tipo']
-				,'coddespesa'=>$col['coddespesa'],'descFun'=>$col['descFun']);
+				,'coddespesa'=>$col['coddespesa'],'descFun'=>$col['hist'].'-'.$col['cad']);
      }
 	  return $usuario_array;
 	}

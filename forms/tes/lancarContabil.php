@@ -2,8 +2,8 @@
 	$acessoDebitar = (!empty($_GET['deb']) && $_GET['deb']>0) ? $_GET['deb'] : '' ;
 	$acessoCreditar = (!empty($_GET['cred']) && $_GET['cred']>0) ? $_GET['cred'] : '' ;
 ?>
-<span style="text-align: left; font-weight: bold">Debitar Conta</span>
-<table style="background-color: #D3D3D3;" class='table'>
+<strong>Debitar Conta</strong>
+<table class='table'>
 	<tbody>
 		<tr>
 			<td colspan="3">
@@ -39,8 +39,8 @@
 		</tr>
 	</tbody>
 </table>
-<span style="text-align: left; font-weight: bold">Creditar Conta</span>
-<table style="background-color: #D3D3D3;" class='table'>
+<strong>Creditar Conta</strong>
+<table class='table'>
 	<tbody>
 		<tr>
 			<td colspan="3">
@@ -90,7 +90,6 @@
 			return ;
 		return "models/tes/autoCompletaContas.php?q=" + this.value;
 	});
-
 	new Autocomplete("estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {
 			$("#id_val2").val(rol);

@@ -97,7 +97,7 @@ class menutes {
 	<?PHP
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$this->pag_mostra,"pag_mostra",$_urlLi_pen,3);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
-	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina");
+	$_rod_pen->getRodape();$_rod_pen->form_rodape("P&aacute;gina",'');
 	if ($total_pen>"1"){
 		printf ("%s recibos!",number_format($total_pen, 0, ',', '.'));
 	}elseif ($total_pen=="1"){

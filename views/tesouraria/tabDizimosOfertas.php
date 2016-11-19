@@ -145,7 +145,7 @@ if ($_POST['concluir']=='1') {
 				<th scope="col">Data&nbsp;Lan&ccedil;.</th>
 				<th scope="col">Rol/Nome</th>
 				<th scope="col">Tipo</th>
-				<th scope="col">Valor(R$)</th>
+				<th scope="col">Valores&nbsp;(R$)</th>
 				<th scope="col"><?php echo $tituloColuna5;?></th>
 			</tr>
 		</thead>
