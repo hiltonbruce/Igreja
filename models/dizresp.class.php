@@ -128,7 +128,7 @@ function dizimistas(
 			$ordenar = ' ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id';
 			$lancConfirmado = false;
 		}
-		if (!empty($_GET['semana']) && ($_GET['semana']>'5' || $_GET['semana']<'1') ) {
+		if (empty($_GET['semana']) || $_GET['semana']>'5' || $_GET['semana']<'1' ) {
 			$conSeman = '';
 		} else {
 			$semGet = intval($_GET['semana']);

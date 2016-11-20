@@ -205,6 +205,8 @@
 <script type="text/javascript">// <![CDATA[
 jQuery(function($) {
       $.mask.definitions['~']='[+-]';
+			$('.money').mask('000.000.000.000.000,00', {reverse: true});
+			$('.money2').mask("#.##9,99", {reverse: true});
       $('#data').mask('99/99/9999');
       $('.dataclass').mask('99/99/9999');
       $('#expedicao').mask('99/99/9999');
