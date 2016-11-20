@@ -376,7 +376,7 @@ height: 400px; /* altura da imagem */
 }
 /* Personalização Bootstrap para nova classe alerta */
 .text-alerta {
-  color: #faf700;
+  color: #faf000;
 }
 a.text-alerta:hover,
 a.text-alerta:focus {
@@ -387,7 +387,7 @@ a.text-alerta:focus {
 }
 a.bg-alerta:hover,
 a.bg-alerta:focus {
-  background-color: #edeeaf;
+  background-color: #ebeeaf;
 }
 .table > thead > tr > td.alerta,
 .table > tbody > tr > td.alerta,
@@ -412,27 +412,27 @@ a.bg-alerta:focus {
 }
 
 .btn-alerta {
-  color: #fff;
+  color: #625f15;
   background-color: #dedd5b;
-  border-color: #d7da46;
+  border-color: #babe1d;
 }
 .btn-alerta:focus,
 .btn-alerta.focus {
-  color: #fff;
+  color: #625f15;
   background-color: #d5d331;
-  border-color: #85801b;
+  border-color: #82851b;
 }
 .btn-alerta:hover {
-  color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+  color: #625f15;
+  background-color: #d5d331;
+  border-color: #a7aa1d;
 }
 .btn-alerta:active,
 .btn-alerta.active,
 .open > .dropdown-toggle.btn-alerta {
-  color: #fff;
-  background-color: #d5c931;
-  border-color: #b8bb25;
+  color: #625f15;
+  background-color: #d2d531;
+  border-color: #bbb725;
 }
 .btn-alerta:active:hover,
 .btn-alerta.active:hover,
@@ -443,9 +443,9 @@ a.bg-alerta:focus {
 .btn-alerta:active.focus,
 .btn-alerta.active.focus,
 .open > .dropdown-toggle.btn-alerta.focus {
-  color: #fff;
-  background-color: #bbba25;
-  border-color: #85841b;
+  color: #625f15;
+  background-color: #b4bb25;
+  border-color: #7f851b;
 }
 .btn-alerta:active,
 .btn-alerta.active,
@@ -453,7 +453,7 @@ a.bg-alerta:focus {
   background-image: none;
 }
 .btn-alerta.disabled:hover,
-.btn-info[disabled]:hover,
+.btn-alerta[disabled]:hover,
 fieldset[disabled] .btn-alerta:hover,
 .btn-alerta.disabled:focus,
 .btn-alerta[disabled]:focus,
@@ -462,11 +462,11 @@ fieldset[disabled] .btn-alerta:focus,
 .btn-alerta[disabled].focus,
 fieldset[disabled] .btn-alerta.focus {
   background-color: #dbde5b;
-  border-color: #d7da46;
+  border-color: #53510d;
 }
 .btn-alerta .badge {
   color: #dbde5b;
-  background-color: #fff;
+  background-color: #625f15;
 }
 .label-alerta {
   background-color: #dedd5b;
@@ -478,10 +478,10 @@ fieldset[disabled] .btn-alerta.focus {
 .alert-alerta {
   color: #8f8b31;
   background-color: #f7f7da;
-  border-color: #f1f0bc;
+  border-color: #f0f1bc;
 }
 .alert-alerta hr {
-  border-top-color: #ece9a6;
+  border-top-color: #eceba6;
 }
 .alert-alerta .alert-link {
   color: #676924;
@@ -495,7 +495,7 @@ fieldset[disabled] .btn-alerta.focus {
   background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
 }
 .list-group-item-alerta {
-  color: #8a8f31;
+  color: #8f8b31;
   background-color: #f7f7da;
 }
 a.list-group-item-alerta,
@@ -510,8 +510,8 @@ a.list-group-item-alerta:hover,
 button.list-group-item-alerta:hover,
 a.list-group-item-alerta:focus,
 button.list-group-item-alerta:focus {
-  color: #8f8b31;
-  background-color: #f1f4c4;
+  color: #8a8f31;
+  background-color: #f4f2c4;
 }
 a.list-group-item-alerta.active,
 button.list-group-item-alerta.active,
@@ -519,9 +519,9 @@ a.list-group-item-alerta.active:hover,
 button.list-group-item-alerta.active:hover,
 a.list-group-item-alerta.active:focus,
 button.list-group-item-alerta.active:focus {
-  color: #fff;
+  color: #625f15;
   background-color: #8d8f31;
-  border-color: #8f8e31;
+  border-color: #898f31;
 }
 .panel-alerta {
   border-color: #f0f1bc;
@@ -532,14 +532,14 @@ button.list-group-item-alerta.active:focus {
   border-color: #f1f0bc;
 }
 .panel-alerta > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #f0f1bc;
+  border-top-color: #f1f0bc;
 }
 .panel-alerta > .panel-heading .badge {
   color: #f7f7da;
   background-color: #8f8e31;
 }
 .panel-alerta > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #eef1bc;
+  border-bottom-color: #f0f1bc;
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {

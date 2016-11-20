@@ -133,33 +133,50 @@ class menutes {
 		<fieldset>
 		<legend>Credores</legend>
 		<form action="" method="get">
-		<?php
-			$for_num = new List_sele("credores", "alias", "recebeu");
-			echo $for_num->List_sel($ind++,'class="form-control"');
-		?>
-			<input type="hidden" name="tipo" id="tipo" value="2">
-			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
-			<input type="hidden" name="menu" value="top_tesouraria" />
-			<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Listar Recibos..." />
+			<div class="row">
+			  <div class="col-xs-8">
+				<?php
+					$for_num = new List_sele("credores", "alias", "recebeu");
+					echo $for_num->List_sel($ind++,'class="form-control input-sm"');
+				?>
+			  </div>
+			  <div class="col-xs-2">
+					<input type="hidden" name="tipo" id="tipo" value="2">
+					<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
+					<input type="hidden" name="menu" value="top_tesouraria" />
+					<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Listar" />
+			  </div>
+			</div>
 		</form>
 		</fieldset>
 		<fieldset>
 		<legend>N&atilde;o Membros</legend>
 		<form action="" method="get">
-			<label>Por Nome</label>
-			<input type="text" name="nome" class="form-control" id="nome" size="20" >
-			<label>ou por CPF</label>
-			<input type="text" name="cpf" class="form-control" id="cpf" size="20" >
-			<label>ou por RG</label>
-			<input type="text" name="rg" class="form-control" id="rg" size="20" >
-			<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
-			<input type="hidden" name="menu" value="top_tesouraria" />
-			<input type="hidden" name="tipo" id="tipo" value="3">
-			<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Procurar Recibos" />
+		<div class="row">
+			<div class="col-sm-12">
+					<label>Por Nome</label>
+					<input type="text" name="nome" class="form-control input-sm" id="nome" >
+			</div>
+			<div class="col-sm-7">
+				<label>ou por CPF</label>
+				<input type="text" name="cpf" class="form-control input-sm" id="cpf" >
+			</div>
+			<div class="col-sm-7">
+				<label>ou por RG</label>
+				<input type="text" name="rg" class="form-control input-sm" id="rg" >
+			</div>
+			<div class="col-sm-1">
+				<label>&nbsp;</label>
+				<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
+				<input type="hidden" name="menu" value="top_tesouraria" />
+				<input type="hidden" name="tipo" id="tipo" value="3">
+				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Listar" />
+			</div>
+		</div>
 		</form>
 		</fieldset>
 		<fieldset>
-		<legend>Por N&uacute;mero</legend>
+		<legend>Recibo por N&uacute;mero</legend>
 		<form action="" method="get">
 			<div class="row">
 				<div class="col-sm-7">
@@ -170,7 +187,7 @@ class menutes {
 				<input type="hidden" name="escolha" value="tesouraria/rec_alterar.php" /> <!-- indica o script que receber? os dados -->
 				<input type="hidden" name="menu" value="top_tesouraria" />
 				<label>&nbsp;</label>
-				<input type="submit" name="Submit" class="btn btn-primary btn-xs" value="Mostrar!" />
+				<input type="submit" name="Submit" class="btn btn-primary btn-sm" value="Mostrar!" />
 			</div>
 		</div>
 		</form>

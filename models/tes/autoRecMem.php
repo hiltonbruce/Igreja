@@ -3,7 +3,16 @@
  * @author Wellington Ribeiro - IdealMind.com.br
  * @since 31/10/2009
  */
-require_once '../help/impressao.php';
+ require "../../func_class/funcoes.php";
+ require "../../func_class/classes.php";
+ function __autoload ($classe) {
+ list($dir,$nomeClasse) = explode('_', $classe);
+	 if (file_exists("../../models/$dir/$classe.class.php")){
+		 require_once ("../../models/$dir/$classe.class.php");
+	 }elseif (file_exists("../../models/$classe.class.php")){
+		 require_once ("../../models/$classe.class.php");
+	 }
+ }
 $q = mysql_real_escape_string(trim($_GET['q']));
 $quantNomes = substr_count(trim($q),' ');
 //crit�rios de fon�tica
@@ -11,26 +20,37 @@ $exp = new fonetica($q,'nome');
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql = "SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' AND nome LIKE '%$q4%' order by locate('$q1',nome) ";
+	 $sql  = 'SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m,tes_recibo AS t,';
+	 $sql .= 'eclesiastico AS e WHERE t.recebeu=e.rol AND m.nome LIKE "%'.$q1.'%" AND ';
+	 $sql .= 'm.nome LIKE "%'.$q2.'%" AND m.nome LIKE "%'.$q3.'%" AND m.nome LIKE ';
+	 $sql .= '"%'.$q4.'%" AND m.rol=t.recebeu AND t.tipo=1 GROUP BY m.rol ORDER BY LOCATE("'.$q1.'",m.nome)';
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql = "SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' order by locate('$q1',nome) ";
+	 $sql  = 'SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m,tes_recibo AS t,';
+	 $sql .= 'eclesiastico AS e WHERE t.recebeu=e.rol AND m.nome LIKE "%'.$q1.'%" AND ';
+	 $sql .= 'm.nome LIKE "%'.$q2.'%" AND m.nome LIKE "%'.$q3.'%" ';
+	 $sql .= 'AND m.rol=t.recebeu AND t.tipo=1 GROUP BY m.rol ORDER BY LOCATE("'.$q1.'",m.nome)';
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
-	 $sql = "SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND nome LIKE '%$q1%' AND nome LIKE '%$q2%' order by locate('$q1',nome) ";
+	 $sql  = 'SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m,tes_recibo AS t,';
+	 $sql .= 'eclesiastico AS e WHERE t.recebeu=e.rol AND m.nome LIKE "%'.$q1.'%" AND ';
+	 $sql .= 'nome LIKE "%'.$q2.'%" ';
+	 $sql .= 'AND m.rol=t.recebeu AND t.tipo=1 GROUP BY m.rol ORDER BY LOCATE("'.$q1.'",m.nome)';
 	break;
-
 	default:
-	$sql = "SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND locate('$q',nome) > 0 order by locate('$q',nome) ";
+	$sql  = 'SELECT m.*,e.situacao_espiritual,e.congregacao FROM membro AS m,tes_recibo AS t,';
+	$sql .= 'eclesiastico AS e WHERE t.recebeu=e.rol AND locate("'.$q.'",m.nome) > 0 ';
+	$sql .= 'AND m.rol=t.recebeu AND t.tipo=1 GROUP BY m.rol ORDER BY LOCATE("'.$q.'",m.nome)';
 	break;
 }
-$res = mysql_query( $sql );
+
+$res = mysql_query($sql);
 $linhas = mysql_num_rows($res);
 # 1�linha em branco
 echo "<li onselect=\" \">... </li>\n";
-while( $campo = mysql_fetch_array( $res ) )
+while( $campo = mysql_fetch_array($res) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id = $campo['fone_resid'];
@@ -88,7 +108,7 @@ while( $campo = mysql_fetch_array( $res ) )
 			$html = preg_replace("/(" . $q . ")/i", "<strong>\$1</strong>", $estado);
 		break;
 	}
-$img='../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
+$img='../../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
 if (!file_exists($img)){
 	$img='img_membros/ver_foto.jpg';//Localização p/ JavaScript
 }else{

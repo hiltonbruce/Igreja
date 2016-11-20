@@ -2,7 +2,6 @@
 class formrecbusca extends formularioalterar {
 
 	public function getMostrar(){
-
 		switch ($_GET['escolha']) {
 			case 'tesouraria/receita.php':
 				if ($_GET['rec']=='1' || $_GET['rec']=='3') {
@@ -12,7 +11,6 @@ class formrecbusca extends formularioalterar {
 				}
 			break;
 			case 'tesouraria/rec_alterar.php':
-
 				 if ($_GET['recebeu']!='') {
 					$idformulario = 2;
 				}else {
