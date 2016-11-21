@@ -86,7 +86,7 @@
 	  <div class="col-xs-3">
 	  	<label>Valor:</label>
 		<input type="text" name="vlrLanc" value="<?php echo number_format($vlrLanc, 2, ',', ' ') ;?>"
-		tabindex="<?PHP echo ++$ind; ?>" class="form-control" placeholder="Valor lan&ccedil;ado" />
+		tabindex="<?PHP echo ++$ind; ?>" class="form-control money" placeholder="Valor lan&ccedil;ado" />
 	  </div>
 	  <div class="col-xs-3">
 		<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
@@ -99,12 +99,6 @@
 	</form>
 	</div>
 </fieldset>
-
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script
-	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link	rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {

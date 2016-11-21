@@ -58,7 +58,6 @@
 <head>
 <title><?php echo $titleIgreja; ?></title>
 <script type="text/javascript" src="js/funcoes.js"></script>
-<script type="text/javascript" src="js/maskedinput.js"></script>
 <script type="text/javascript" src="js/autocomplete.js"></script>
 <script src="js/jquery-3.1.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -202,11 +201,11 @@
 </body>
 <script type="text/javascript" src="js/alert.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput-1.3.1.min_.js"></script>
+<script type="text/javascript" src="js/jquery.maskMoney.js"></script>
 <script type="text/javascript">// <![CDATA[
 jQuery(function($) {
       $.mask.definitions['~']='[+-]';
-			$('.money').mask('000.000.000.000.000,00', {reverse: true});
-			$('.money2').mask("#.##9,99", {reverse: true});
+			$('.money2').mask("~9.99 ~9.99 999", {reverse: true});
       $('#data').mask('99/99/9999');
       $('.dataclass').mask('99/99/9999');
       $('#expedicao').mask('99/99/9999');
@@ -214,7 +213,9 @@ jQuery(function($) {
       $('#ano').mask('9999');
       $('#mesnum').mask('99');
       $('#fone').mask('(99) 9999-9999');
+      $('.fone').mask('(99) 9999-9999');
       $('#celular').mask('(99) 99999-9999');
+      $('.celular').mask('(99) 99999-9999');
       $('#cpf').mask("999.999.999-99");
       $('.cpf').mask("999.999.999-99");
       $('#cpf_val').mask("999.999.999-99");
@@ -222,7 +223,7 @@ jQuery(function($) {
       $('#cep').mask("99.999-999");
       $('#cnpj').mask("99.999.999/9999-99");
       $('.cnpj').mask("99.999.999/9999-99");
-      $('#sigla_val').mask("99.999.999/9999-99");
+   		$(".money").maskMoney({allowNegative: true, thousands:'.', decimal:',', affixesStay: false}); 
    });
 // ]]&gt;</script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>

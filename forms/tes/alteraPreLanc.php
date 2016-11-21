@@ -134,7 +134,7 @@
 						</select>
 					</td>
 					<td><label>Valor:</label><input type="text" id="oferta0" autocomplete="off"
-						class="form-control" name="oferta0" value="<?php echo number_format($lancAltera->valor(), 2, ",", "");?>" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta0" value="<?php echo number_format($lancAltera->valor(), 2, ",", "");?>" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 				</tr>
@@ -175,7 +175,6 @@
 	</fieldset>
 </form>
 </fieldset>
-<script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular, congr ) {
@@ -185,7 +184,6 @@
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;

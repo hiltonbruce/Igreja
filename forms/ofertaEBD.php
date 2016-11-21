@@ -1,7 +1,3 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
-
 <?php
 //$dtlanc = ($_GET['dtlanc']=='') ? date('d/m/Y'):$_GET['dtlanc'];
 $meslanc = ($_GET['mes']=='' || $_GET['mes']>12 || $_GET['mes']<1) ? date('m'):$_GET['mes'];
@@ -64,17 +60,17 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 				</tr>
 				<tr>
 					<td> <label>Ofertas:</label> <input type="text" id="oferta0" name="oferta0"
-						value="" tabindex="<?php echo ++$ind;?>" class="form-control"
+						value="" tabindex="<?php echo ++$ind;?>" class="form-control money"
 						placeholder="Valor" />
 					</td>
 					<td><label>Pgto de Revistas EBD:</label><input type="text"
 						id="oferta2" name="oferta2" value="" placeholder=
 						"Aqui n&atilde;o haver&aacute; provis&atilde;o para COMADEP"
-						tabindex="<?php echo ++$ind;?>" class="form-control" />
+						tabindex="<?php echo ++$ind;?>" class="form-control money" />
 					</td>
 					<td><label>Corpo de Prof. da EBD:</label><input type="text"
 						id="oferta1" name="oferta1" value=""
-						tabindex="<?php echo ++$ind;?>" class="form-control"
+						tabindex="<?php echo ++$ind;?>" class="form-control money"
 						placeholder="Valor" />
 					</td>
 				</tr>

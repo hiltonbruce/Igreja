@@ -108,7 +108,7 @@ foreach ($arrayDespesas as $chave => $valor) {
 	$campoHist = '<label>Hit&oacute;rico</label><textarea name="hist'.$chave.'" class="form-control"></textarea>';
 	$bscCredorList = new List_sele('igreja', 'razao','rolIgreja'.$chave);
 	$listaIgreja = $bscCredorList->List_Selec('',$igreja,'class="form-control" autofocus="autofocus" ');
-	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control"/>';
+	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control money"/>';
 	$conta  ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
 	$conta .='<input name="transid" type="hidden" value="'.$transid.'">';
 //Contas do grupo 3
@@ -171,10 +171,8 @@ echo($valor['codigo']).' **-> '.strlen($valor['codigo']).' === ';*/
 if ($cabDespesa!='') {
 	$listDesp .= $cabDespesa.$dia1.'</form></tbody></div></table>'.$blGrupo3Fim;
 }
-
 //esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 if ($exibideb!='') {
 	require_once 'views/exibilanc.php';//monta a tabela para exibir
 }
-
 $nivel1 = $blGrupo.$listDesp.'</div></div></div></div></div>';

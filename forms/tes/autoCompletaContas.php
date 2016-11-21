@@ -28,8 +28,6 @@
 		</tr>
 	</tbody>
 </table>
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {

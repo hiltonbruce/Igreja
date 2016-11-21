@@ -11,7 +11,7 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 				<tr>
 					<td><label>Valor (R$)</label> <input name="valor" type="text" autofocus="autofocus"
 						id="valor" tabindex="<?PHP echo ++$ind; ?>" required = "required"
-						class="form-control" />
+						class="form-control money" />
 					</td>
 					<td><label>Igreja:</label>
 						<?php

@@ -2,7 +2,6 @@
 <?php
 	echo $nivel1;
 ?>
-<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {

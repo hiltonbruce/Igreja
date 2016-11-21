@@ -127,11 +127,9 @@
           <?PHP
 		//inicio
 		$cidade = new DBRecord ("cidade",$arr_dad["naturalidade"],"id");
-
 		echo $arr_dad["naturalidade"];
 		$nome = new editar_form("naturalidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-
 		if ($_GET["campo"]=="naturalidade"){
 		?>
 		<form id="form3" name="form3" method="post" action="">
@@ -147,7 +145,6 @@
         </form>
 		<?PHP
 		}
-
 		//fim
 		?></td>
         <td colspan="2">UF:
@@ -179,38 +176,33 @@
           <?PHP
 		//inicio
 		$cidade = new DBRecord ("cidade",$arr_dad["cidade"],"id");
-
 		//echo $arr_dad["cidade"];
 		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
 		$nome->getMostrar();
-
 		if ($_GET["campo"]=="cidade"){
 		?>
-          <form id="form3" name="form3" method="post" action="">
-            <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "adm/atualizar_dados.php";?>" />
-            <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
+      <form id="form3" name="form3" method="post" action="">
+        <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "adm/atualizar_dados.php";?>" />
+        <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
 				<input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
-            <?PHP
+    <?PHP
 			$lst_cid = new sele_cidade("cidade",$arr_dad["uf_resid"],"coduf","nome","cidade");
 			$vlr_linha=$lst_cid->ListDados ($ind++,'','autofocus="autofocus"');
 		?>
-            <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
-            <input name="Submit" class='btn btn-primary btn-xs' type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
-          </form>
-        <?PHP
+        <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "membro";?>" />
+        <input name="Submit" class='btn btn-primary btn-xs' type="submit" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
+      </form>
+    <?PHP
 		}
-
 		//fim
 		?></td>
 		<td colspan="2">Bairro:
           <?PHP
 		//inicio
 		$bairro = new DBRecord ("bairro",$arr_dad["bairro"],"id");
-
 		echo $bairro->bairro();
 		$nome = new editar_form("bairro",$bairro->bairro(),$tab,$tab_edit);
 		$nome->getMostrar();
-
 		if ($_GET["campo"]=="bairro"){
 		?>
         <form id="form3" name="form3" method="post" action="">

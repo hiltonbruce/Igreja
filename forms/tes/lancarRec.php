@@ -32,7 +32,7 @@ if ($rec) {
 						<input name="rolIgreja" type="hidden" required = "required" value='<?PHP echo $recDados->igreja();?>'/>
 					</td>
 					<td><label>Valor (R$)</label>
-						<input class="form-control" disabled value='<?PHP echo number_format($recDados->valor(),2,",",".");?>'/>
+						<input class="form-control money" disabled value='<?PHP echo number_format($recDados->valor(),2,",",".");?>'/>
 						<input name="valor" type="hidden" required = "required" value='<?PHP echo number_format($recDados->valor(),2,",",".");?>'/>
 					</td>
 				</tr>

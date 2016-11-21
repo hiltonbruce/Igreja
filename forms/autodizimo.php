@@ -56,21 +56,21 @@
 			<tbody>
 				<tr>
 					<td><label>D&iacute;zimo:</label><input type="text" id="oferta0" autocomplete="off"
-						class="form-control" name="oferta0" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta0" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 					<td><label>Oferta:</label><input type="text" id="oferta1" autocomplete="off"
-						 class="form-control" name="oferta1" value="" tabindex="<?php echo ++$ind;?>"
+						 class="form-control money" name="oferta1" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 					<td><label>Oferta Extra:</label><input type="text" id="oferta2" autocomplete="off"
-						class="form-control" name="oferta2" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta2" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 				</tr>
 				<tr>
 					<td><label>Voto:</label><input type="text" id="oferta3" autocomplete="off"
-						class="form-control" name="oferta3" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta3" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$" />
 					</td>
 					<td>
@@ -84,9 +84,7 @@
 							$semLan = diaSem($dtlanc);
 							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
 							$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
-
 							$diaSema = $diaSem->format('w');
-
 							if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
 								//2� domingo do m�s
 								echo $alerta.'Sede</div>';
@@ -108,7 +106,7 @@
 					?>
 					</td>
 					<td><label>Oferta da Campanha:</label><input type="text" id="oferta4" autocomplete="off"
-						 class="form-control" name="oferta4" value="" tabindex="<?php echo ++$ind;?>"
+						 class="form-control money" name="oferta4" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 			</tbody>
@@ -120,21 +118,21 @@
 			<tbody>
 				<tr>
 					<td><label>Carn&ecirc;s:</label><input type="text" id="oferta8" autocomplete="off"
-						class="form-control" name="oferta8" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta8" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$ ( Carn&ecirc;s )"  />
 					</td>
 					<td><label>Oferta:</label><input type="text" id="oferta5" autocomplete="off"
-						class="form-control" name="oferta5" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta5" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$ ( Oferta )"  />
 					</td>
 					<td><label>Envelopes:</label><input type="text" id="oferta6" autocomplete="off"
-						class="form-control" name="oferta6" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta6" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$ ( Envelopes )"  />
 					</td>
 				</tr>
 				<tr>
 					<td><label>Cofres:</label><input type="text" id="oferta7" autocomplete="off"
-						class="form-control" name="oferta7" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta7" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$ ( Cofres )"  />
 					</td>
 					<td></td>
@@ -150,21 +148,21 @@
 			<tbody>
 				<tr>
 					<td><label>Adulto:</label><input type="text" id="oferta9" autocomplete="off"
-						class="form-control" name="oferta9" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta9" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 					<td><label>Mocidade:</label><input type="text" id="oferta10" autocomplete="off"
-						class="form-control" name="oferta10" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta10" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 					<td><label>Infantil:</label><input type="text" id="oferta11" autocomplete="off"
-						class="form-control" name="oferta11" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta11" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 				</tr>
 				<tr>
 					<td><label>Voto:</label><input type="text" id="oferta12" autocomplete="off"
-						class="form-control" name="oferta12" value="" tabindex="<?php echo ++$ind;?>"
+						class="form-control money" name="oferta12" value="" tabindex="<?php echo ++$ind;?>"
 						placeholder="Valor em R$"  />
 					</td>
 					<td></td>

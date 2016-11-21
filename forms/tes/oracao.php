@@ -143,7 +143,7 @@
 			<div class="row">
 			  <div class="col-xs-2">
 			  	<label>Ofertas</label>
-			    <input type='text' name='of<?PHP echo $i; ?>' class='form-control'
+			    <input type='text' name='of<?PHP echo $i; ?>' class='form-control money'
 			    placeholder='<?PHP echo $i;?>&ordf; Semana' tabindex="<?PHP echo ++$ind; ?>"
 			     <?PHP echo $foco; ?> >
 			  </div>
@@ -161,7 +161,7 @@
 			  </div>
 			  <div class="col-xs-3">
 			  	<label>Votos</label>
-			    <input type="text" name='voto<?PHP echo $i; ?>' class="form-control"
+			    <input type="text" name='voto<?PHP echo $i; ?>' class="form-control money"
 			    placeholder="Votos" tabindex="<?PHP echo ++$ind; ?>" >
 			  </div>
 			</div>
