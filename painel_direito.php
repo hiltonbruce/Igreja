@@ -86,7 +86,8 @@
 			if ($inc_pen=="0") { echo "<tr>"; }
 			$inc_pen++;
 			echo '<td class="text-center">';
-      echo "<a title='{$coluna_pen["nome"]}' data-toggle='tooltip' data-placement='left' ";
+      $titlePed = $coluna_pen["nome"].' &bull; '.$coluna_pen['obs'];
+      echo "<a title='$titlePed' data-toggle='tooltip' data-placement='left' ";
       echo "href='./?escolha=adm/dados_pessoais.php&bsc_rol={$coluna_pen["rol"]}&";
       echo "pagina1_pen={$_GET["pagina1_pen"]}'>{$coluna_pen["rol"]}<a></td>";
 			if ($inc_pen=="4") { echo "</tr>";$inc_pen=0; }
@@ -166,7 +167,7 @@
 			$inc_disc++;
 			$exp = mysql_query ("SELECT * FROM disciplina WHERE rol = '{$coluna_disc["rol"]}' ORDER BY id DESC LIMIT 1 ");
 			$array_exp = mysql_fetch_array($exp);
-			$membro_disc = $detMemb[$coluna_disc['rol']]['5'];
+			$membro_disc = $detMemb[$coluna_disc['rol']]['5'].' &rarr; '.$array_exp['motivo'];
 			if ($array_exp["data_fim"]<date("Y-m-d") AND $array_exp["data_fim"]<>"0000-00-00") {
 				echo "<td id='pendencia' class='text-center' >";
         echo "<a data-toggle='tooltip' data-placement='left' title='$membro_disc - ";

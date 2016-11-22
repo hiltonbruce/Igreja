@@ -67,7 +67,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	//$bgcolor = $cor ? 'class="active"' : '';
 	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
 		$vencPgto  = '<small class="text-success glyphicon glyphicon-ok"></small> Pago em: '.$vlrDesp['dtpgto'];
-		$vencPgto .= ' -> Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar;
+		$vencPgto .= ' -> lan&ccedil;.: '.$vlrDesp['data'].' '.$linkPagar;
 		$titleMsg = ', paga, obrigado!';
 	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
 		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign"> </small>Venc.: '.$vlrDesp['vencimento'];
@@ -84,7 +84,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	} else {
-		$linhaTab  = '<tr title="'.$vlrDesp['titulo'].$titleMsg.'"><td>'.$vencPgto.'</td><td>';
+		$linhaTab  = '<tr title="Venc.: '.$vlrDesp['vencimento'].$titleMsg.'" ><td>'.$vencPgto.'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';

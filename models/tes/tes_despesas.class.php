@@ -20,7 +20,7 @@ class tes_despesas {
 			if ($dados['id']!='0') {//Só das Despesas
 				$todos[$dados['id']] = array('titulo'=>$dados['titulo'],'codigo'=>$dados['codigo'],
 						'descricao'=>$dados['descricao'],'acesso'=>$dados['acesso'],'saldo'=>$dados['saldo']
-						,'status'=>$dados['status'],'status'=>$dados['status']);
+						,'status'=>$dados['status'],'tipo'=>$dados['tipo']);
 			}
 		}
 		$this->arrayacessoDespesas = $todos;
@@ -41,17 +41,24 @@ class tes_despesas {
 		$sqlAgenda .= ', contas AS c, igreja AS i ';
 		$sqlAgenda .= 'WHERE (DATE_FORMAT(a.datapgto,"%Y%m")="'.$mesRelatorio.'" ';
 		$sqlAgenda .= 'OR (DATE_FORMAT(a.vencimento,"%Y%m")="'.$mesRelatorio.'" AND a.idlanc="0") ) ';
-		$sqlAgenda .= 'AND a.igreja=i.rol ORDER BY a.vencimento,i.razao';
+		$sqlAgenda .= 'AND a.igreja=i.rol AND (c.acesso=a.debitar || c.acesso=a.creditar) ORDER BY a.datapgto,i.razao';
 		$agenda = mysql_query($sqlAgenda) or die (mysql_error());
 		while ($arrayAgenda = mysql_fetch_array($agenda)) {
-			if ($arrayAgenda['idlanc']>0) {
+			if ($arrayAgenda['debitar']==$arrayAgenda['acesso'] && $arrayAgenda['tipo']=='D') {
+				$sldLanc = 'D';
+			} elseif ($arrayAgenda['debitar']==$arrayAgenda['acesso'] && $arrayAgenda['tipo']=='C') {
+				$sldLanc = 'D';
+			}else {
+				$sldLanc = 'C';
+			}
+			if ($arrayAgenda['idlanc']>'0') {
 				//Com confirmação de lançamento (pagas)
 				$agendaLanc [$arrayAgenda['idlanc']] = array('venc' => $arrayAgenda['venc'],
-				'dtpgto' => $arrayAgenda['dtpgto'], 'idAgenda' => $arrayAgenda['id']);
+				'dtpgto' => $arrayAgenda['dtpgto'], 'idAgenda' => $arrayAgenda['id'],'sld' =>$sldLanc);
 			}else {
 				//Sem confirmação de pagamento
 				$agendaSemLanc = array('vencimento' => $arrayAgenda['venc'],
-				'dtpgto' => $arrayAgenda['dtpgto'] );
+				'dtpgto' => $arrayAgenda['dtpgto'],'sld'=>$sldLanc);
 			}
 			if ($arrayAgenda['idlanc']=='0') {
 				//Despesas agendadas e não pagas
@@ -60,7 +67,7 @@ class tes_despesas {
 				,'creditar'=>$arrayAgenda['creditar'],'valor'=>$arrayAgenda['valor']
 				,'igreja'=>$arrayAgenda['razao'],'referente'=>$arrayAgenda['motivo']
 				,'data'=>$arrayAgenda['dtLanc'],'hist'=>$arrayAgenda['hist'],'acesso'=>$arrayAgenda['acesso']
-				,'dtpgto'=>$arrayAgenda['dtpgto'],'vencimento'=>$arrayAgenda['venc']);
+				,'dtpgto'=>$arrayAgenda['dtpgto'],'vencimento'=>$arrayAgenda['venc'],'sld' =>$sldLanc);
 			}
 		}
 		//print_r($agendaNaoPago);
@@ -70,37 +77,31 @@ class tes_despesas {
 		$sqlLancDesp .= 'FROM lanc AS l, igreja AS i, lanchist AS h ';
 		$sqlLancDesp .= 'WHERE DATE_FORMAT(l.data,"%Y%m")="'.$mesRelatorio.'" ';
 		$sqlLancDesp .= 'AND h.idlanca=l.lancamento ';
-		$sqlLancDesp .= 'AND l.igreja=i.rol ORDER BY i.razao,l.data ';
+		$sqlLancDesp .= 'AND l.igreja=i.rol ORDER BY l.data,i.razao ';
 		$despesa = mysql_query($sqlLancDesp) or die (mysql_error());
 		while($dados = mysql_fetch_array($despesa)) {
 			//Lançamento da Despesas
-			$ctaDebito = $dadosCta[$dados['debitar']]['codigo'];
+			$ctaDebito  = $dadosCta[$dados['debitar']]['codigo'];
 			$ctaCredito = $dadosCta[$dados['creditar']]['codigo'];
-			if (substr($ctaDebito, 0, 3)=='1.2' || substr($ctaDebito, 0, 2)=='3.' ) {
+			if ($dadosCta[$dados['debitar']]['tipo']=='D' ) {
 			//Lançamento da Despesas e Imobilizado debitadas
-			$arrayDespesas[] = array('id'=>$agendaLanc [$dados['lancamento']]['idAgenda']
+				$sldLan ='D';
+			}
+			if ($dadosCta[$dados['creditar']]['tipo']=='D' ) {
+		//lançamentos realizados com despesas e Imobilizado creditadas
+				$sldLan ='C';
+			}
+		#	echo "....".$dadosCta[$dados['creditar']]['tipo'].' *** '.$ctaCredito.' == '.$dados['lancamento'];
+
+			$arrayDespesas[] = array('id'=>$agendaLanc[$dados['lancamento']]['idAgenda']
 				,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
 				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
 				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
 				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist']
 				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto']
-				,'vencimento'=>$agendaLanc [$dados['lancamento']]['venc'],'sld'=>'D'
+				,'vencimento'=>$agendaLanc [$dados['lancamento']]['venc'],'sld'=>$sldLan
 				,'acesso'=>$dadosCta[$dados['debitar']]['acesso'],'titulo=>'.$dadosCta[$dados['debitar']]['titulo']
 				,'codigo=>'.$ctaDebito);
-			}
-
-			if (substr($ctaCredito, 0, 3)=='1.2' || substr($ctaCredito, 0, 2)=='3.' ) {
-		//lançamentos realizados com despesas e Imobilizado creditadas
-			$arrayDespesas[] = array('id'=>$agendaLanc [$dados['lancamento']]['idAgenda']
-				,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
-				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
-				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
-				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist']
-				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto']
-				,'vencimento'=>$agendaLanc [$dados['lancamento']]['venc'],'sld'=>'C'
-				,'acesso=>'.$dadosCta[$dados['creditar']]['acesso'],'titulo=>'.$dadosCta[$dados['creditar']]['titulo']
-				,'codigo=>'.$ctaCredito);
-			}
 		//echo '*****'. $dados['debitar'].' +++';
 	//	echo ' ||'. substr($ctaDebito, 0, 2).' ---';
 		//print_r($dadosCta);

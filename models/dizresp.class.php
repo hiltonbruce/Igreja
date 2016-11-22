@@ -41,9 +41,13 @@ function dizimistas(
 	}
 	if ($mes>'0' && $mes<='12') {
 		$consMes = ' AND DATE_FORMAT(data, "%m") = '.$mes;
+	}else {
+			$consMes = '';
 	}
 	if ($dia>0 && $dia<=31) {
 		$consDia = ' AND DATE_FORMAT(data, "%d") = '.$dia;
+	}else {
+		$consDia = '';
 	}
 	if ($tipo=='9' || $tipo =='0') {
 		$conTipos = true;
@@ -116,16 +120,20 @@ function dizimistas(
 			//$this->dquery = mysql_query( $consulta ) or die (mysql_error());
 			$lancConfirmado = true;
 		}elseif ($incluiPessoa!='') {
-			$consult = $this->var_string.'WHERE d.igreja = i.rol '.$incluiPessoa.$queryAcesso.$filtroIgreja;
+			$consulta = $this->var_string.'WHERE d.igreja = i.rol '.$consMes.$consDia.$incluiPessoa.$queryAcesso.$filtroIgreja;
 			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
 		//	$this->dquery  = mysql_query($consult.'ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
+			$lancConfirmado = true;
+		} elseif ($consMes!='' || $consDia!='') {
+			$consulta = $this->var_string.'WHERE d.igreja = i.rol '.$consMes.$consDia.$filtroIgreja;
+			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
 			$lancConfirmado = true;
 		}else {
 			$consulta  = $this->var_string.' WHERE d.lancamento="0" '.$queryAcesso;
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol';
 		//	$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
-		//			$filtroIgreja.' AND d.igreja = i.rol') or die (mysql_error());
-			$ordenar = ' ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id';
+		//	$filtroIgreja.' AND d.igreja = i.rol') or die (mysql_error());
+			$ordenar = ' ORDER BY d.tesoureiro, d.data DESC,d.igreja,d.id';
 			$lancConfirmado = false;
 		}
 		if (empty($_GET['semana']) || $_GET['semana']>'5' || $_GET['semana']<'1' ) {

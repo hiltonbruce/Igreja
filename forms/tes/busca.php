@@ -1,7 +1,7 @@
 <?php
 //	$ano = (empty($_GET['ano'])) ? date('Y'):$_GET['ano'];
 	//Mensagem complementar para o cabe�alho da tabela
-	if ($ano=='0') {
+	if (empty($_GET['ano']) || $_GET['ano']<'2000' ) {
 		$msg = 'Todos os ANOS';
 	}elseif ($_GET['ano']=='') {
 		$msg = '';
@@ -101,7 +101,6 @@
 	</form>
 	</div>
 </fieldset>
-<script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular, congr ) {

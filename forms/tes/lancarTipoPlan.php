@@ -50,6 +50,7 @@
 		<div class="col-xs-2">
 			<input name="escolha" type="hidden" value="tesouraria/receita.php" />
 			<input type="hidden" name="rec"	value="<?php echo $_GET['rec'];?>" />
+			<input type="hidden" name="direita"	value="1" />
 				<label>&nbsp;</label>
 			<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."
 			tabindex="<?PHP echo ++$ind; ?>" />
