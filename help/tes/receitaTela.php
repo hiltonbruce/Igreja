@@ -29,8 +29,8 @@ switch ($rec) {
 		}
 		break;
 	case '2':
-	    $form = 'forms/tes/lancarContabil.php';
-		require_once ('forms/lancar.php');
+	  $form = 'forms/tes/lancarContabil.php';
+		$tabRelatorio='forms/lancar.php';
 		break;
 	case '3':
 		require_once 'forms/concluirdiz.php';

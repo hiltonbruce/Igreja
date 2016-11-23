@@ -32,9 +32,10 @@ echo '<dl class="dl-horizontal">';
 foreach ($variable as $key => $value) {
 	if ($key=='0') {
 		echo '<dt>'.$gerarNovoBkp.'</dt>';
-		echo '<dd><div class="alert alert-success" role="alert"><a href='.$value['0'].' target="_blank"  class="alert-link"><img src="img/rosto.png" ';
-		echo 'width="32px" height="32px"/> ';
-		echo $value['1'].' <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> - FOTOS <h6>';
+		echo '<dd><div class="alert alert-success" role="alert"><a href='.$value['0'].' target="_blank" class="alert-link"> ';
+		echo '<span class="foto_download_link" aria-hidden="true"></span> ';
+		echo $value['1'].' <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> - FOTOS ';
+		#echo '<img src="img/rosto.png"width="32px" height="32px"/><h6>';
 		echo '<div class="alert alert-success" role="alert">';
 		echo '<span class="sr-only">Error:</span> ';
 		echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
@@ -63,16 +64,16 @@ if (count($arq)=='0') {
 ?>
 <div class="bs-example bs-navbar-top-example" data-example-id="navbar-fixed-to-top">
  <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid"> 
+	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Anteriores</a> 
-		</div> 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"> 
-		<ul class="nav navbar-nav"> 
+			<a class="navbar-brand" href="#">Anteriores</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+		<ul class="nav navbar-nav">
 		  	<?PHP echo $filesEnd;
 		  	?>
-		</ul> 
-		</div> 
-	</div> 
- </nav> 
+		</ul>
+		</div>
+	</div>
+ </nav>
 </div>

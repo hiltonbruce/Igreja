@@ -6,7 +6,8 @@
 	  <div class="col-xs-2">
 	  	<label>Dia</label>
 	    <input type="text" name='dia' class="form-control" placeholder="dia"
-	    tabindex="<?PHP echo ++$ind; ?>" value="<?PHP echo $dia;?>">
+	    tabindex="<?PHP echo ++$ind; ?>" value="<?PHP echo $dia;?>"
+			autofocus='autofocus'>
 	  </div>
 	  <div class="col-xs-3">
 	  	<label>M&ecirc;s:</label>
@@ -30,7 +31,7 @@
 		<input type="hidden" name="membro"	value="<?php echo true;?>" />
 		<input type="hidden" name="fin"	value="<?php echo $fin;?>" />
 	  </div>
-	  <div class="col-xs-4">
+	  <div class="col-xs-5">
 	  	<label>Congrega&ccedil;&atilde;o:</label>
 		<?php
 			$bsccredor = new List_sele('igreja', 'razao', 'igreja');
@@ -38,57 +39,54 @@
 			echo $listaIgreja;
 		?>
 	  </div>
-	  <div class="col-xs-6"><br />
-			<table class='table' style="background-color: #D3D3D3;">
-				<tbody>
-					<tr>
-						<td colspan="3"><label>Conta</label><input type="text" name="nome"
-							class="form-control" id="campo_estado" tabindex="<?PHP echo ++$ind; ?>"
-							placeholder="Informe a conta" value="<?PHP echo $_GET['nome']; ?>" />
-						</td>
-					</tr>
-					<tr>
-						<td>C&oacute;digo/tipo:<br /> <input type="text" id="estado_val" class="form-control"
-							name="estado_val" disabled="disabled" value="" />
-						</td>
-						<td>Saldo Atual: <br /> <input type="text" id="id_val" name="id" class="form-control"
-							disabled="disabled" value="" /></td>
-						<td>Acesso:<br /> <input type="text" id="acesso" name="conta" class="form-control"
-							value="<?PHP echo $cta; ?>" tabindex="<?PHP echo ++$ind; ?>" /></td>
-					</tr>
-					<tr>
-						<td colspan="3">Descri&ccedil;&atilde;o:<br />  <input type="text" size="78%" id="detalhe" name="det"
-							disabled="disabled" class="form-control" /></td>
-					</tr>
-				</tbody>
-			</table>
+	  <div class="col-xs-7">
+			<label>Conta</label><input type="text" name="nome"
+			class="form-control" id="campo_estado" tabindex="<?PHP echo ++$ind; ?>"
+			placeholder="Informe a conta" value="<?PHP echo $_GET['nome']; ?>" />
 	  </div>
-	  <div class="col-xs-5">
+	  <div class="col-xs-3">
+	  	<label>Conta c/ Lan&ccedil;amentos de:</label>
+		<div class="btn-group" data-toggle="buttons">
+		  <label class="btn btn-primary <?PHP echo $debA;?>  ">
+		    <input type="checkbox" name="deb" value="1" <?PHP echo $deb;?> > D&eacute;bito
+		  </label>
+		  <label class="btn btn-primary <?PHP echo $credA;?>">
+		    <input type="checkbox" name="cred" value="1" <?PHP echo $cred;?>> Cr&eacute;dito
+		  </label>
+		</div>
+	  </div>
+	  <div class="col-xs-2">
+			<label>Acesso:</label> <input type="text" id="acesso" name="conta" class="form-control"
+							value="<?PHP echo $cta; ?>" tabindex="<?PHP echo ++$ind; ?>" />
+	  </div>
+	  <div class="col-xs-6"><label>Descri&ccedil;&atilde;o:</label>  <input type="text" size="78%" id="detalhe" name="det"
+							disabled="disabled" class="form-control" />
+	  </div>
+	  <div class="col-xs-3">
+			<label>C&oacute;digo/tipo:</label><input type="text" id="estado_val" class="form-control"
+			name="estado_val" disabled="disabled" value="" />
+	  </div>
+	  <div class="col-xs-3">
+			<label>Saldo Atual: </label> <input type="text" id="id_val" name="id" class="form-control"
+							disabled="disabled" value="" />
+	  </div>
+	  <div class="col-xs-6">
 	  	<label>Referente:</label>
 		<input type="text" name="refer" value="<?php echo $refer;?>"
 		tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 		value="<?PHP echo $ref;?>" placeholder="Referente..." />
-	  </div>
-	  <div class="col-xs-3">
-	  	<label>Conta c/ Lan&ccedil; de:</label>
-	  	<label class="checkbox-inline">
-		<input type="checkbox" name='deb' <?PHP echo $deb;?> id="debito" value="1"> D&eacute;bito
-			</label>
-		<label class="checkbox-inline">
-		<input type="checkbox" name='cred' <?PHP echo $cred;?>  id="credito" value="1"> Cr&eacute;dito
-		</label>
 	  </div>
 	  <div class="col-xs-2">
 	  	<label>Lan&ccedil;amento N&ordm;:</label>
 		<input type="text" name="numLanc" value="<?php echo $numLanc ;?>"
 		tabindex="<?PHP echo ++$ind; ?>" class="form-control" placeholder="N&ordm; do lan&ccedil;amento" />
 	  </div>
-	  <div class="col-xs-3">
+	  <div class="col-xs-2">
 	  	<label>Valor:</label>
 		<input type="text" name="vlrLanc" value="<?php echo number_format($vlrLanc, 2, ',', ' ') ;?>"
 		tabindex="<?PHP echo ++$ind; ?>" class="form-control money" placeholder="Valor lan&ccedil;ado" />
 	  </div>
-	  <div class="col-xs-3">
+	  <div class="col-xs-1">
 		<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
 		<input type="hidden" name="rec"	value="<?php echo $rec;?>" />
 		<input type="submit" class="btn btn-primary" name="Submit" value="Listar..."

@@ -8,20 +8,22 @@
     $tituloColuna5 = 'Valor(R$)';
     $numLanc = (empty($_GET['numLanc'])) ? '' : intval($_GET['numLanc']) ;
     $vlrLanc = (empty($_GET['vlrLanc'])) ? '' : strtr( str_replace(array('.'),array(''),$_GET['vlrLanc']), ',.','.,' ) ;
-
     if (!empty($_GET['deb'])) {
-        $deb =  'checked="checked"' ;
-        $debValor =  $_GET['deb'] ;
+        $deb = 'checked="checked"' ;
+        $debA = 'active' ;
+        $debValor = $_GET['deb'] ;
     }else {
-        $deb =  '' ;
-        $debValor =  '' ;
+        $deb =  '';
+        $debA =  '';
+        $debValor =  '';
     }
-
     if (!empty($_GET['cred'])) {
-        $cred =  'checked="checked"' ;
-        $credValor =  '1' ;
+        $cred = 'checked="checked"' ;
+        $credA = 'active';
+        $credValor = '1';
     }else {
-        $cred =  '' ;
-        $credValor =  $_GET['cred'];
+        $cred = '';
+        $credA = '';
+        $credValor = $_GET['cred'];
     }
 ?>

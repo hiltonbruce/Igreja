@@ -199,9 +199,6 @@
     </div>
   </div>
 </body>
-<script type="text/javascript" src="js/alert.js"></script>
-<script type="text/javascript" src="js/jquery.maskedinput-1.3.1.min_.js"></script>
-<script type="text/javascript" src="js/jquery.maskMoney.js"></script>
 <script type="text/javascript">// <![CDATA[
 jQuery(function($) {
       $.mask.definitions['~']='[+-]';
@@ -223,11 +220,14 @@ jQuery(function($) {
       $('#cep').mask("99.999-999");
       $('#cnpj').mask("99.999.999/9999-99");
       $('.cnpj').mask("99.999.999/9999-99");
-   		$(".money").maskMoney({allowNegative: true, thousands:'.', decimal:',', affixesStay: false}); 
+   		$(".money").maskMoney({prefix:'R$ ', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
    });
 // ]]&gt;</script>
+<script type="text/javascript" src="js/jquery.maskedinput-1.4.1.js"></script>
+<script type="text/javascript" src="js/jquery.maskMoney.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/alert.js"></script>
 <script>
 $(function () {
 $('[data-toggle="tooltip"]').tooltip()

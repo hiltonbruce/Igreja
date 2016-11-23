@@ -1,4 +1,7 @@
 <?php
+if (!empty($_GET['dia']) || !empty($_GET['mes']) || !empty($_GET['ano']) || !empty($_GET['acesso'])
+|| !empty($_GET['refer']) || !empty($_GET['numLanc']) || !empty($_GET['vlrLanc']) ) {
+
 	$tabMembros = new membro();
 	$tesSede = $tabMembros->nomes();
 	$cargoIgreja = new tes_cargo;
@@ -11,7 +14,6 @@
 	$linkResumo  = 'rec=15&igreja='.$_GET['igreja'].'&dia='.$_GET['dia'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
 	$linkResumo .='&rol='.$_GET['rol'].'&nome='.$_GET['nome'];
 	$linkResumo .= '&credito='.$_GET['credito'].'&conta='.$_GET['conta'];
-
 	if (!empty($_GET['escolha'])) {
 		$imprimir  = '<a href="tesouraria/receita.php/?tipo=1&'.$linkResumo.' " target="_blank" >';
 		$imprimir .= '<button class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-print">';
@@ -45,7 +47,6 @@
 		$titulo .=  ', 1&ordm; Tesoureiro: '.$tesIgreja;//Tesoureiro
 		$titulo .=  '&bull; Data de Emiss&atilde;o: '.date('d/m/Y H:i:s').$fonIni;//Tesoureiro
 	}
-
 if (empty($descricoo) && $tabLancamento!='') {
 	$descricao='Descri&ccedil;&atilde;o';
 	echo($imprimir);
@@ -71,5 +72,7 @@ if (empty($descricoo) && $tabLancamento!='') {
 	//print_r($tabMembros->nomes());
 	//print_r ($resultado['1']);
 	echo($imprimir);
+}
+
 }
 ?>

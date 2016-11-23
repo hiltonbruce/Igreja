@@ -9,7 +9,8 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 		<table class='table'>
 			<tbody>
 				<tr>
-					<td><label>Valor (R$)</label> <input name="valor" type="text" autofocus="autofocus"
+					<td>
+						<label>Valor (R$)</label> <input name="valor" type="text" autofocus="autofocus"
 						id="valor" tabindex="<?PHP echo ++$ind; ?>" required = "required"
 						class="form-control money" />
 					</td>

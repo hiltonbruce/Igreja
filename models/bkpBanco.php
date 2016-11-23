@@ -49,9 +49,10 @@ echo '<dl class="dl-horizontal">';
 foreach ($variable as $key => $value) {
 	if ($key=='0') {
 		echo '<dt>'.$gerarNovoBkp.'</dt>';
-		echo '<dd><div class="alert alert-success" role="alert"><a href='.$value['0'].' target="_blank"  class="alert-link"><img src="img/bkp.ico" ';
-		echo 'width="32px" height="32px"/> ';
-		echo $value['1'].' <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> - DADOS <h6>';
+		echo '<dd><div class="alert alert-success" role="alert">';
+		echo '<a href='.$value['0'].' target="_blank"  class="alert-link">';
+		echo '<span class="sql_download_link" aria-hidden="true"></span> ';
+		echo $value['1'].'- DADOS <h6>';
 		echo '<div class="alert alert-success" role="alert">';
 		echo '<span class="sr-only">Error:</span> ';
 		echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';

@@ -320,6 +320,34 @@ legend {
 
 /* oculta e revelar campos */
 
+.sql_download_link {
+	display: block;
+  float: left;
+  width: 63px;
+  height:49px;
+  text-indent: -5000px;
+  overflow: hidden;
+  background: url(img/sprite_download.png) no-repeat bottom right;
+  margin-left: 10px;
+}
+
+.foto_download_link {
+	display: block;
+	  float: left;
+	  width: 63px;
+	  height:49px;
+	  text-indent: -5000px;
+	  overflow: hidden;
+	  background: url(img/sprite_download.png) no-repeat bottom left;
+}
+
+.foto_download_link:hover {
+  background: url(img/sprite_download.png) no-repeat top left;
+}
+.sql_download_link:hover {
+  background: url(img/sprite_download.png) no-repeat top right;
+}
+
 /* CSS para efeitos jQuery
 .impar {background:#d6e2e5;} */
 img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inline;}
