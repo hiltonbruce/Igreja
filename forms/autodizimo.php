@@ -8,7 +8,6 @@
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" ');
 		echo $listaIgreja;
 		?>
-
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
 			<?php
@@ -191,7 +190,6 @@
 	</fieldset>
 </form>
 </fieldset>
-<script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular, congr ) {

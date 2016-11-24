@@ -70,14 +70,6 @@
       <label>N&ordm;</label>
       <input type="text" name='num' class="form-control" placeholder="">
     </div>
-    <div class="col-xs-2">
-      <label>Ap/Lo/Sa/Cv/Qd</label>
-      <input type="text" name='aplo' class="form-control" placeholder="">
-    </div>
-    <div class="col-xs-2">
-      <label>Bloco</label>
-      <input type="text" name='bloco' class="form-control" placeholder="">
-    </div>
     <div class="col-xs-8">
       <label>Bairro</label>
       <input type="text" name='bairro' class="form-control" placeholder="">
@@ -90,14 +82,6 @@
     <div class="col-xs-3">
       <label>Situ&ccedil;&atilde;o Relativa do Lote</label>
       <input type="text" name='sitdolote' class="form-control" placeholder="Ex.: Esquina">
-    </div>
-    <div class="col-xs-3">
-      <label>Topografia:</label>
-      <input type="text" name='topo' class="form-control" placeholder="">
-    </div>
-    <div class="col-xs-2">
-      <label>Pedologia</label>
-      <input type="text" name='pedo' class="form-control" placeholder="">
     </div>
     <div class="col-xs-2">
       <label>Frentes</label>

@@ -1,7 +1,7 @@
 <?php
 class dizresp {
 
-function __construct($tesoureiro='',$print='') {
+function __construct($tesoureiro='',$print='',$tipoCons='') {
 		$this->var_string  = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,d.congcadastro,";
 		$this->var_string .= "d.nome,d.mesrefer,d.anorefer,d.tipo,d.valor,d.obs,i.razao,d.credito,d.tesoureiro, ";
 		$this->var_string .= "d.confirma,i.rol AS rolIgreja,d.hist FROM dizimooferta AS d, igreja AS i ";
@@ -21,6 +21,8 @@ function __construct($tesoureiro='',$print='') {
 			'rua' => $linhaIgr['rua']
 			);
 	}
+
+	$this->rec = $tipoCons;
 }
 
 function dizimistas(
@@ -124,7 +126,7 @@ function dizimistas(
 			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
 		//	$this->dquery  = mysql_query($consult.'ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
-		} elseif ($consMes!='' || $consDia!='') {
+		} elseif (($consMes!='' || $consDia!='') && $rec!='1' && $rec!='') {
 			$consulta = $this->var_string.'WHERE d.igreja = i.rol '.$consMes.$consDia.$filtroIgreja;
 			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
 			$lancConfirmado = true;
@@ -133,7 +135,7 @@ function dizimistas(
 			$consulta .= $filtroIgreja.' AND d.igreja = i.rol';
 		//	$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0"'.$queryAcesso.
 		//	$filtroIgreja.' AND d.igreja = i.rol') or die (mysql_error());
-			$ordenar = ' ORDER BY d.tesoureiro, d.data DESC,d.igreja,d.id';
+			$ordenar = ' ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id';
 			$lancConfirmado = false;
 		}
 		if (empty($_GET['semana']) || $_GET['semana']>'5' || $_GET['semana']<'1' ) {
@@ -142,7 +144,6 @@ function dizimistas(
 			$semGet = intval($_GET['semana']);
 			$conSeman = ' AND semana="'.$semGet.'"';
 		}
-
 		$this->dquery = mysql_query( $consulta.$conSeman.$ordenar ) or die (mysql_error());
 		$total = 0;
 		$tabela = '';
