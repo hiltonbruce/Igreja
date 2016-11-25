@@ -220,7 +220,7 @@ jQuery(function($) {
       $('#cep').mask("99.999-999");
       $('#cnpj').mask("99.999.999/9999-99");
       $('.cnpj').mask("99.999.999/9999-99");
-   		$(".money").maskMoney({prefix:'R$ ', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+   		$(".money").maskMoney({allowNegative: false, thousands:'.', decimal:','});
    });
 // ]]&gt;</script>
 <script type="text/javascript" src="js/jquery.maskedinput-1.4.1.js"></script>

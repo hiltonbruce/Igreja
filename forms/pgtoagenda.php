@@ -260,8 +260,6 @@
 	}
 	?>
 </fieldset>
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script	type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
 		this.setValue = function( rol, nome, celular,detalhe ) {
@@ -272,7 +270,7 @@
 		}
 		if ( this.isModified )
 			this.setValue("");
-		if ( this.value.length < 1 && this.isNotClick )
+		if ( this.value.length < 2 && this.isNotClick )
 			return ;
 		return "models/tes/autoCompletaContas.php?q=" + this.value;
 	});
@@ -284,7 +282,7 @@
         $("#rol").val(fone);
         $("#cong").val(congr);
     }
-      if ( this.value.length < 1 && this.isNotClick )
+      if ( this.value.length < 2 && this.isNotClick )
           return ;
       return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
   });
