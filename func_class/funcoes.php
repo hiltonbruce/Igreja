@@ -921,9 +921,9 @@ function periodoLimp ($mesRef) {
 			$anterio2 = '06/'.$aref;
 			break;
 		case 12:
-			$periodo = 'Dez e Jan/';
-			$anterio1 = '10/'.$aref;
-			$anterio2 = '08/'.$aref;
+			$periodo = 'Dez/'.$anoAnterior.' e Jan/';
+			$anterio1 = '10/'.$anoAnterior;
+			$anterio2 = '08/'.$anoAnterior;
 			break;
 		default:
 			$periodo = '';

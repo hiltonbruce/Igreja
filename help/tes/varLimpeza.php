@@ -1,7 +1,6 @@
 <?PHP
 $igreja = ($_GET['igreja']>0) ? $_GET['igreja']:$_POST['igreja'];
 $linkperido = '';
-
 if (!empty($_POST['ano'])) {
     $anoPed = intval($_POST['ano']) ;
 } elseif (!empty($_GET['ano'])) {
@@ -9,8 +8,6 @@ if (!empty($_POST['ano'])) {
 } else{
     $anoPed = date('Y');
 }
-
-
 if ($_GET['mes']>0 && $_GET['mes']<13 && !empty($anoPed)) {
      $mesref = $_GET['mes'].'/'.$anoPed;
     $linkperido = 'mes='.$_GET['mes'].'&ano='.$anoPed.'&mesref='.$mesref;

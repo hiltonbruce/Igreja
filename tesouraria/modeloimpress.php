@@ -8,16 +8,15 @@
 </head>
 <body>
 <div id="container">
-
 <div id="header">
 	<p>
-		<?PHP echo $dadosjgreja;?> 
+		<?PHP echo $dadosjgreja;?>
 		<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo $siteigreja;?>/" title="Copyright information">Site&nbsp;</a>
 		<br />Email: <a href="mailto: <?PHP echo $emailigreja;?>">Secretaria Executiva&nbsp;</a>
 	</p>
 </div>
 	<div id="content">
-		<?php 
+		<?php
 			require_once $arquivo;
 		?>
     </div>
@@ -25,7 +24,7 @@
      Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
     </div>
   </div>
-	<?PHP 
+	<?PHP
 		echo $saltoPagina;
 	?>
 </body>

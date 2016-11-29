@@ -1,9 +1,9 @@
 <?php
 if ($_GET['limpeza']!='4') {
 ?>
-<table id="listTable" >
+<table class="table table-striped" >
 	<caption>Material de limpeza: <?php echo $nomeIgreja;?> - Período: </caption>
-	
+
 		<colgroup>
 			<col id="item">
 			<col id="Quant">
@@ -19,7 +19,7 @@ if ($_GET['limpeza']!='4') {
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 			echo $tabMaterial;
 		?>
 	</tbody>

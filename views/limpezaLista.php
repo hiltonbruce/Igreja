@@ -2,7 +2,7 @@
 $tbodytab = new limplista($mesref);
 if ($_GET['limpeza']!='4') {
 ?>
-<table id="listTable" >
+<table class='table table-striped'>
 	<caption>Relação de Material de  Limpeza <u>PARA</u> pedido</caption>
 		<colgroup>
 			<col id="item">

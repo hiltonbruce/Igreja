@@ -3,7 +3,6 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 ?>
 <table class='table table-striped table-hover' >
 	<caption>Material de Limpeza - <?php echo $congregcao->razao().', para: '.$periodo['0'];?></caption>
-
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
@@ -18,7 +17,7 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 			<th scope="col"><?php echo $periodo['2'];?></th>
 			<th scope="col"><?php echo $periodo['1'];?></th>
 			<th scope="col">Unidade</th>
-			<th scope="col">Discriminação</th>
+			<th scope="col">Discrimina&ccedil;&atilde;o</th>
 			<th scope="col">Atual</th>
 		</tr>
 	</thead>

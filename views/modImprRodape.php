@@ -9,13 +9,12 @@
 <body>
 <div id="container">
 	<div id="content">
-		<?php 
+		<?php
 			require $arquivo;
 		?>
-    </div>
+	</div>
     <div id="footer">
 	<?PHP echo "Templo SEDE: {$sede->rua()}, N&ordm; {$sede->numero()} - $origem - {$sede->uf()}";?><br />
-
 	  Copyright &copy; <a href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>
       Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$sede->email()}";?>"><?PHP echo "{$sede->email()}";?></a> <br />
 	   <?PHP echo "CNPJ: {$sede->cnpj()}";?><br />
@@ -23,7 +22,7 @@
 	  <p>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
     </div>
   </div>
-	<?PHP 
+	<?PHP
 		echo $saltoPagina;
 	?>
 </body>

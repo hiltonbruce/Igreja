@@ -4,6 +4,7 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && 
  	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 	$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
+  $scriptCSS .= '<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />';
 	require "../func_class/funcoes.php";
 	require "../func_class/classes.php";
 	function __autoload ($classe) {
@@ -38,7 +39,7 @@ if (empty($_GET['mes']) && empty($_GET['ano'])) {
 }
 switch ($_GET['limpeza']) {
 	case '1':
-		$dadoscong	= new DBRecord('igreja','1', 'rol');//Traz os dados da congregação
+		$dadoscong	= $igSede;//Traz os dados da Sede
 		//Mostrar totalizador geral para impressão
 		$titulo		  = 'Totalizador material de limpeza - Todas as Congregações';
 		$arquivo	  = '../views/limpezatot.php';
@@ -46,7 +47,7 @@ switch ($_GET['limpeza']) {
 		require_once '../tesouraria/modeloimpress.php';
 	break;
 	case '2':
-		$dadoscong	= new DBRecord('igreja','1', 'rol');//Traz os dados da congregação
+		$dadoscong	= $igSede;//Traz os dados da Sede
 		//Mostrar totalizador dentro da aplicação
 		echo '<a href="controller/limpeza.php?limpeza=1&'.$linkperido.'"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
 		$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações
@@ -75,15 +76,14 @@ switch ($_GET['limpeza']) {
 	break;
 	case '6':
 		//Mostrar Lista de todos os materiais disponíveis
-		$titulo		  = 'Material de limpeza Disponibilizado';
+		$titulo		  = 'Material de limpeza Disponibilizado!';
 		$arquivo	  = '../views/limpezaLista.php';
-
 		require_once '../tesouraria/modeloimpress.php';
 	break;
 	case '7':
 		//Mostrar Lista de todos os materiais disponíveis$ref = new ultimoid('limpezpedid');
 		//$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
-		$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
+	 //	$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
 		//montar um cabeçalho padrão e remover as chamadas a cima
 		//$sede = $igSede;//Traz os dados da sede
 		//Dados para montar o cabeçalho do documento para imprimir
