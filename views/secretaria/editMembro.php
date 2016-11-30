@@ -33,7 +33,7 @@
             ?>
           </div>
    </div>
-	<table width="100%">
+	<table class='table table-condensed'>
       <tr>
         <td colspan="2">Nome:
 				<?PHP
@@ -58,7 +58,6 @@
 			$diferenca = $dataNasc->diff($dataAtual);
 			//print_r($dataNasc);
 			//echo '<br/>'.$dataAtual->format('Y-m').' FormatoAtual<br/>';
-
 			if ($diferenca->y>1) {
 				echo $diferenca->y.' Anos, ';
 			}elseif ($diferenca->y>0){
@@ -322,4 +321,8 @@
 			</td>
       </tr>
   </table>
+</div>
+<div class="alert alert-info" role="alert">
+<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+Cadastro realizado por: <?php echo $arr_dad['hist'].' em: '.$arr_dad['dt_cadastro']; ?>
 </div>

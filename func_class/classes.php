@@ -730,13 +730,13 @@ class List_sele {
 	}
 
 	function List_Selec ($seq,$item,$required){
+			$linhas = '';
 	  	$linha1  =  "<select name='{$this->texto_field}' id='{$this->texto_field}' $required tabindex='$seq'>";
 	  	if ($item<1) {
 	  		$linha1 .=  "<option value=''>-->> Escolha <<--</option>";
 	  	}else {
 	  		$linhas =  "<option value='0'>-->> Todas <<--</option>";
 	  	}
-		$linhas .= '';
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
           $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );

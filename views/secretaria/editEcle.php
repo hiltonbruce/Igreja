@@ -191,7 +191,8 @@
   ?></p></td>
   </tr>
   <tr>
-    <td>Recibo de entrega N&ordm;:	  </td>
+    <td>Recibo de entrega N&ordm;:
+    </td>
     <td colspan="3"><p>
     <?PHP
       if ($arr_dad["rec_entrega"]>"0") {
@@ -204,4 +205,8 @@
   </td>
   </tr>
   </table>
+</div>
+<div class="alert alert-info" role="alert">
+<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+Registros recentes: <?php echo $arr_dad['hist'].' em: '.$arr_dad['dt_cadastro']; ?>
 </div>

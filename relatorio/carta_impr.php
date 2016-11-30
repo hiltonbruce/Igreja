@@ -21,7 +21,6 @@ $query=mysql_query("SELECT p.numero,p.local,DATE_FORMAT(p.dt_liberado,'%d/%m/%Y 
 <link rel="stylesheet" type="text/css" href="../reset.css" />
 <link rel="stylesheet" type="text/css" href="print.css" />
 <link rel="icon" type="image/gif" href="../img/br_igreja_n.gif">
-
 <style type="text/css">
 <!--
 #Razao {
@@ -120,11 +119,9 @@ $query=mysql_query("SELECT p.numero,p.local,DATE_FORMAT(p.dt_liberado,'%d/%m/%Y 
 -->
 </style>
 </head>
-
 <body>
 <div id="Razao">Igreja Assembleia de Deus</div>
 <div id="Layer1"><img src="../img/br_igreja.jpg" width="91" height="120" align="baseline" /></div>
-
 <div id="Endereco">Av. Eng. de Carvalho, 410 - Bayeux - PB<br />
 CEP 58.307-150 - Fone: (0**83) 3232-1420 </div>
 <div id="Layer5">CARTA DE </div>

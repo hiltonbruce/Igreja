@@ -108,6 +108,11 @@
 		?></td>
       </tr>
     </table>
+
+    <div class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Registrada por: <?php echo $arr_dad['hist'].' em: '.$arr_dad['data']; ?>
+    </div>
 	<?PHP
 }else {
 			echo '<div class="alert alert-alerta alert-dismissible" role="alert">

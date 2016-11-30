@@ -1,4 +1,5 @@
 <?php
+controle ("tes");
 if ($_GET['fin']=='' || $_GET['fin']<2) {
 	require_once ("views/secretaria/menuTopDados.php");
 	$hisFinanceiro = 1;
@@ -15,7 +16,6 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 	$hisFinanceiro = 2;
 	require_once 'forms/tes/histFinanceiro.php';
 }
-
 require_once 'models/tes/histFinMembro.php';
 ?>
 <table id="horario" class='table table-hover table-condensed'>

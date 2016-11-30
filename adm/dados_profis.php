@@ -82,6 +82,10 @@ ver_cad($bsc_rol);
 		?>		</td>
       </tr>
     </table>
+		<div class="alert alert-info" role="alert">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Cadastro realizado por: <?php echo $arr_dad['hist'].' em: '.$arr_dad['dt_cadastro']; ?>
+		</div>
 	<?PHP
 	}//Fim do if !empty($arr_dad["rol"]) quando não existe cadastro para este rol é aberto um form para preenchimento
 	else {

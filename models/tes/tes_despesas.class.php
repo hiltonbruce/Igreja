@@ -57,7 +57,8 @@ class tes_despesas {
 				'dtpgto' => $arrayAgenda['dtpgto'], 'idAgenda' => $arrayAgenda['id'],'sld' =>$sldLanc);
 			}else {
 				//Sem confirmação de pagamento
-				$agendaSemLanc = array('vencimento' => $arrayAgenda['venc'],
+				#Verifica o array acima não esta com lógica
+				$agendaSemLanc = array('venc' => $arrayAgenda['venc'],
 				'dtpgto' => $arrayAgenda['dtpgto'],'sld'=>$sldLanc);
 			}
 			if ($arrayAgenda['idlanc']=='0') {
@@ -98,10 +99,10 @@ class tes_despesas {
 				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
 				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
 				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist']
-				,'dtpgto'=>$agendaLanc [$dados['lancamento']]['dtpgto']
-				,'vencimento'=>$agendaLanc [$dados['lancamento']]['venc'],'sld'=>$sldLan
-				,'acesso'=>$dadosCta[$dados['debitar']]['acesso'],'titulo=>'.$dadosCta[$dados['debitar']]['titulo']
-				,'codigo=>'.$ctaDebito);
+				,'dtpgto'=>$agendaLanc[$dados['lancamento']]['dtpgto']
+				,'vencimento'=>$agendaLanc[$dados['lancamento']]['venc'],'sld'=>$sldLan
+				,'acesso'=>$dadosCta[$dados['debitar']]['acesso'],'titulo'=>$dadosCta[$dados['debitar']]['titulo']
+				,'codigo'=>$ctaDebito);
 		//echo '*****'. $dados['debitar'].' +++';
 	//	echo ' ||'. substr($ctaDebito, 0, 2).' ---';
 		//print_r($dadosCta);

@@ -1,14 +1,11 @@
 <?PHP
 session_start();
 ob_start ();
-
 $rolConsuta = $_GET['bsc_rol'];
-
 if ($_SESSION['nivel']>4)
 {
 require "../func_class/funcoes.php";
 require "../func_class/classes.php";
-
 	$rec_pessoais = new DBRecord ("membro",$rolConsuta,"rol");
 	$rec_ecl = new DBRecord ("eclesiastico",$rolConsuta,"rol");
 	$rec_prof = new DBRecord ("profissional",$rolConsuta,"rol");
@@ -16,19 +13,14 @@ require "../func_class/classes.php";
 	$igreja = new DBRecord ("igreja","1","rol");
 	$cong = new DBRecord ("igreja",$rec_ecl->congregacao(),"rol");
 	$cidade = new DBRecord ("cidade",$rec_pessoais->naturalidade(),"id");
-
 	$rec_ecl->c_impresso  = date("Y-m-d"); //Aqui é atribuido a esta variável um valor para UpDate
 	//$rec_ecl->Update();
-
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-
 	$atual = $rec_ecl -> hist ();
 	$rec_ecl->hist="@Impresso em: ". date ('d/m/Y H:i:s') .", por: $hist" . $atual ; //Aqui é atribuido a esta variável um valor para UpDate
 	$rec_ecl->quem_imprimiu = $_SESSION['valid_user'];
 	$rec_ecl->Update(); //É feita a chamada do método q realiza a atualização no Banco
-
 	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em águas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();
-
 	if ($rec_ecl->situacao_espiritual()<>"1"){
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
@@ -47,16 +39,14 @@ require "../func_class/classes.php";
 	}else {
 		$background_cartao = "membro";
 	}
-
-	 if (file_exists("../img_membros/".$rolConsuta.".jpg"))//Verifica se a imagem esta arquivada
-		{
-			$img=$rolConsuta.".jpg";
-		}
-		else
-		{
-			$img="ver_foto.jpg";
-		}
-
+ if (file_exists("../img_membros/".$rolConsuta.".jpg"))//Verifica se a imagem esta arquivada
+	{
+		$img=$rolConsuta.".jpg";
+	}
+	else
+	{
+		$img="ver_foto.jpg";
+	}
 //echo "<h1> -- $background_cartao -- </h1>";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -66,7 +56,6 @@ require "../func_class/classes.php";
 <title>impress&atilde;o de requisi&ccedil;&atilde;o</title>
 <link rel="stylesheet" type="text/css" href="../reset.css" />
 <link rel="icon" type="image/gif" href="../img/br_igreja.gif">
-
 <style type="text/css">
 <!--
 body {
@@ -172,7 +161,6 @@ body {
 	color: #000000;
 	font:bold;
 }
-
 #verso2 {
 	position:absolute;
 	text-shadow: 0px 0px 2px #FFFFFF;
@@ -196,15 +184,12 @@ body {
 	font-family:"Courier New", Courier, monospace;
 	font-size: 80%;
 }
-
 -->
 </style>
 </head>
-
 <body>
 <div id="cartao"></div>
 <div id='marca'></div><!--  Cartão com logo idependente do fundo da imagem-->
-
 <div id="Endereco">
   <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>
    <?PHP echo "CEP: {$igreja->cep()} <br /> Fone: {$igreja->fone()} - CNPJ: ".$igreja->cnpj();?>
@@ -238,8 +223,8 @@ body {
 ?>
 </div>
 <div id="Pastor"><strong><?PHP echo strtoupper(toUpper($igreja->pastor()));?></strong></div>
-
 </body>
+<script type="text/javascript">window.print();</script>
 </html>
 <?PHP
 //fim do

@@ -82,13 +82,13 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
-		$linha[$vlrDesp['acesso']] .= $linhaTab;
+		//$linha[$vlrDesp['acesso']] .= $linhaTab;
 	} else {
 		$linhaTab  = '<tr title="Venc.: '.$vlrDesp['vencimento'].$titleMsg.'" ><td>'.$vencPgto.'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
-		$linha[$vlrDesp['acesso']] .= $linhaTab;
+		//$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}
 }
 $dia1 ='';
@@ -136,7 +136,8 @@ foreach ($arrayDespesas as $chave => $valor) {
 	//Fecha a tabela se mudou de grupo de conta
 	if (strlen($valor['codigo'])=='9' && isset($cabDespesa)) {
 		$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>'.$blGrupo3Fim;
-		$dia1='';$cabDespesa='';
+		$dia1='';
+		$cabDespesa='';
 		$blGrupo3Fim = '';
 	}
 
@@ -154,7 +155,7 @@ foreach ($arrayDespesas as $chave => $valor) {
 		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr><td>'.$dataLan.
 		'<br /><br /><label><strong>Igreja</strong></label>'.$listaIgreja.
 		'</td><td>'.$campoValor.$lancar.'</td></tr>';
-		$dia1 .= $linha[$valor['acesso']];
+		//$dia1 .= $linha[$valor['acesso']];
 	} elseif (strlen($valor['codigo'])=='9') {
 		$cabDespesa  = $blGrupo3Ini.'<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
 		$cabDespesa .= $valor['codigo'].'</strong> - '.$valor['titulo'].'</div><table id="horario" ';
@@ -172,7 +173,7 @@ if ($cabDespesa!='') {
 	$listDesp .= $cabDespesa.$dia1.'</form></tbody></div></table>'.$blGrupo3Fim;
 }
 //esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
-if ($exibideb!='') {
+if (!empty($exibideb) && $exibideb!='') {
 	require_once 'views/exibilanc.php';//monta a tabela para exibir
 }
 $nivel1 = $blGrupo.$listDesp.'</div></div></div></div></div>';

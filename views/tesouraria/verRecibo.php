@@ -31,7 +31,6 @@
 							$form = new formmembro("recebeu",$recebeu,$tab,$tab_edit);
 							$form->formcab();
 							$form->getMostrar($rec_alterar->recebeu());
-
 							break;
 						case 2:
 							$beneficiado = new DBRecord("credores", $rec_alterar->recebeu(), "id");
