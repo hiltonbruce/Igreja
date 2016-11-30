@@ -71,7 +71,7 @@ E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
 <?PHP
 	//Inicia o bloco com os forms de lançamentos
 	$ctaDespesa = new tes_despesas(addslashes($_GET['conta']));
-	$arrayDespesas = $ctaDespesa->dadosArray();
+	$arrayDespesas = $ctaDespesa->listPlan();
 	$bsccredor = new tes_listDisponivel();
 	$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
 	$listaFonte = $bsccredor->List_Selec($acesso,0.01);

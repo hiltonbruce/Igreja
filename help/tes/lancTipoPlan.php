@@ -29,6 +29,7 @@ if ($gerarPgto && $_POST["transid"]!="") {
 				//print_r($_POST);
 				$referente = (strlen($_POST['hist'.$chave])>'4') ? $_POST['hist'.$chave]:false;//Atribui a variável o histórico do lançamento
 				$data = br_data($_POST['data'.$chave]);
+				$datasLanc = $_POST['data'.$chave];
 				//echo '<br />chave : '.$chave.' - data-> '.$_POST['data'.$chave].' - dt_US:-> '.$data;
 				//echo '<br />hist ->'.$_POST['hist'.$chave].' -acesso-> '.$_POST['acesso'.$chave];
 				//echo '<br />rolIgreja ->'.$_POST['rolIgreja'.$chave].' -valor ->'.$_POST['valor'.$chave].'<br />';
@@ -49,9 +50,10 @@ if ($gerarPgto && $_POST["transid"]!="") {
 if (!checadata($data)) {
 	$data = date('Y-m-d');
 }
-$exibicred .= sprintf("<tr  class='info'><td>Em: %s </td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",conv_valor_br($data),number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
+print_r($datas);
+$exibicred .= sprintf("<tr  class='info'><td>Em: %s </td><td id='moeda'>R$ %s</td><td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",$datasLanc,number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
 $exibicred .= '<tr class="warning"><td><strong>Hist&oacute;rico:</strong></td>';
-$exibicred .= '<td class="text-center" colspan="4"><h5>'.$referente.'</h5></td></tr>';
+$exibicred .= '<td class="text-center" colspan="4"><h5>***'.$referente.'</h5></td></tr>';
 //$ctaDespesa = new tes_despesas();
 $arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
@@ -82,13 +84,13 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
-		//$linha[$vlrDesp['acesso']] .= $linhaTab;
+		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	} else {
 		$linhaTab  = '<tr title="Venc.: '.$vlrDesp['vencimento'].$titleMsg.'" ><td>'.$vencPgto.'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
-		//$linha[$vlrDesp['acesso']] .= $linhaTab;
+		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}
 }
 $dia1 ='';
@@ -101,13 +103,19 @@ $ctaGrup3 = '';
 $blGrupo3Fim = '';
 $blGrupo3Ini = '';
 $blGrupo = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+$selIg = new List_Igreja('igreja', 'razao','rolIgreja');
+$selIgOpt = $selIg->corpoSelec();
+//$linha1  =  "<select name='{$this->texto_field}' id='{$this->texto_field}' $required tabindex='$seq'>";
+//print_r($arrayDespesas);
 foreach ($arrayDespesas as $chave => $valor) {
 	//Variéveis para montagem do form
 	$dataLan = '<label>Data do lan&ccedil;amento</label>'.
 			'<input name="data'.$chave.'" class="form-control dataclass" ';
 	$campoHist = '<label>Hit&oacute;rico</label><textarea name="hist'.$chave.'" class="form-control"></textarea>';
-	$bscCredorList = new List_sele('igreja', 'razao','rolIgreja'.$chave);
-	$listaIgreja = $bscCredorList->List_Selec('',$igreja,'class="form-control" autofocus="autofocus" ');
+	//$bscCredorList = new List_sele('igreja', 'razao','rolIgreja'.$chave);
+	$listaIgreja  = '<select name="rolIgreja'.$chave.'" class="form-control" >';
+	$listaIgreja .= $selIgOpt;
+	$listaIgreja .= '</select>';
 	$campoValor = '<label>Valor</label><input name="valor'.$chave.'" class="form-control money"/>';
 	$conta  ='<input name="acesso'.$chave.'" type="hidden" value="'.$valor['acesso'].'">';
 	$conta .='<input name="transid" type="hidden" value="'.$transid.'">';
@@ -123,16 +131,13 @@ foreach ($arrayDespesas as $chave => $valor) {
 			$blGrupo3Ini .= '</div>';
 			$blGrupo3Ini .= '<div id="collapse'.$chave.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">';
 			$blGrupo3Ini .= '<div class="panel-body">';
-
 		if ($ctaGrup3!=$valor['codigo'] && $listDesp!='') {
 			$blGrupo3Fim  = '</div>';
 			$blGrupo3Fim .= '</div>';
 			$blGrupo3Fim .= '</div>';
 		}
-
 		$ctaGrup3 = $valor['codigo'];
 	}
-
 	//Fecha a tabela se mudou de grupo de conta
 	if (strlen($valor['codigo'])=='9' && isset($cabDespesa)) {
 		$listDesp .= $cabDespesa.$dia1.'</tbody></table></div></form>'.$blGrupo3Fim;
@@ -140,9 +145,8 @@ foreach ($arrayDespesas as $chave => $valor) {
 		$cabDespesa='';
 		$blGrupo3Fim = '';
 	}
-
 	if (strlen($valor['codigo'])=='13') {
-		//lista dos caixas disponíveis para pgto
+		//lista dos caixas dispon��veis para pgto
 		$fontesPgto  = '<label>Caixas c/ Saldo:</label>';
 		$fontesPgto .= '<select name="disponivel'.$chave.'" class="form-control" >';
 		$fontesPgto .= $listaFonte;
@@ -155,7 +159,7 @@ foreach ($arrayDespesas as $chave => $valor) {
 		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr><td>'.$dataLan.
 		'<br /><br /><label><strong>Igreja</strong></label>'.$listaIgreja.
 		'</td><td>'.$campoValor.$lancar.'</td></tr>';
-		//$dia1 .= $linha[$valor['acesso']];
+		$dia1 .= $linha[$valor['acesso']];
 	} elseif (strlen($valor['codigo'])=='9') {
 		$cabDespesa  = $blGrupo3Ini.'<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
 		$cabDespesa .= $valor['codigo'].'</strong> - '.$valor['titulo'].'</div><table id="horario" ';
@@ -165,9 +169,7 @@ foreach ($arrayDespesas as $chave => $valor) {
 		$codigo5 = $valor['codigo'];
 	}
 echo($valor['codigo']).' **-> '.strlen($valor['codigo']).' === ';*/
-
 }
-
 //Último grupo do array, completando a tabela
 if ($cabDespesa!='') {
 	$listDesp .= $cabDespesa.$dia1.'</form></tbody></div></table>'.$blGrupo3Fim;

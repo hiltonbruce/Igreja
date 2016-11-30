@@ -5,29 +5,38 @@ class tes_despesas {
 
 	function __construct ($ctaGrupo=null) {
 		$contas = (strlen($ctaGrupo)==5) ? true : false ;
-		$sqlConsulta  = 'SELECT * FROM contas WHERE ';
+		$sqlConsulta  = 'SELECT * FROM contas ';
 		if ($contas) {
-			$sqlConsulta .= 'nivel3="'.$ctaGrupo.'" ';
-		} else {
-			$sqlConsulta .= 'nivel1="3" OR nivel2="1.2" ';
-		}
+			$sqlConsulta .= 'WHERE nivel3="'.$ctaGrupo.'" ';
+		} /*else {
+			$sqlConsulta .= 'WHERE WHERE nivel1="3" OR nivel2="1.2" ';
+		}*/
 		$sqlConsulta .= '';
 		$sqlConsulta .= 'ORDER BY codigo';
 		$this->query = $sqlConsulta;
 		$this->despesa = mysql_query($this->query) or die (mysql_error());
 		while($dados = mysql_fetch_array($this->despesa))
 		{
-			if ($dados['id']!='0') {//Só das Despesas
 				$todos[$dados['id']] = array('titulo'=>$dados['titulo'],'codigo'=>$dados['codigo'],
 						'descricao'=>$dados['descricao'],'acesso'=>$dados['acesso'],'saldo'=>$dados['saldo']
 						,'status'=>$dados['status'],'tipo'=>$dados['tipo']);
-			}
+						
+				if ($dados['nivel1']=='3' || $dados['nivel2']=='1.2') {
+					$dispDesp[$dados['id']] = array('titulo'=>$dados['titulo'],'codigo'=>$dados['codigo'],
+						'descricao'=>$dados['descricao'],'acesso'=>$dados['acesso'],'saldo'=>$dados['saldo']
+						,'status'=>$dados['status'],'tipo'=>$dados['tipo']);
+				}
 		}
 		$this->arrayacessoDespesas = $todos;
+		$this->arrayDespDisp = $dispDesp;
 	}
 
 	function dadosArray () {
 		return $this->arrayacessoDespesas;
+	}
+
+	function listPlan () {
+		return $this->arrayDespDisp;
 	}
 
 	function despesasArray ($mes,$ano) {
@@ -36,7 +45,7 @@ class tes_despesas {
 		$mesRelatorio = $ano.$mes;
 		//SQL das despesas agendadas
 		$sqlAgenda  = 'SELECT a.*,DATE_FORMAT(a.datapgto,"%d/%m/%Y") AS dtpgto, ';
-		$sqlAgenda .= 'c.acesso, c.titulo, c.codigo,c.tipo,i.razao, ';
+		$sqlAgenda .= 'c.acesso, c.titulo, c.codigo,c.tipo,i.razao,c.nivel1, ';
 		$sqlAgenda .= 'DATE_FORMAT(a.vencimento,"%d/%m/%Y") AS venc FROM agenda AS a ';
 		$sqlAgenda .= ', contas AS c, igreja AS i ';
 		$sqlAgenda .= 'WHERE (DATE_FORMAT(a.datapgto,"%Y%m")="'.$mesRelatorio.'" ';
@@ -51,16 +60,8 @@ class tes_despesas {
 			}else {
 				$sldLanc = 'C';
 			}
-			if ($arrayAgenda['idlanc']>'0') {
-				//Com confirmação de lançamento (pagas)
-				$agendaLanc [$arrayAgenda['idlanc']] = array('venc' => $arrayAgenda['venc'],
-				'dtpgto' => $arrayAgenda['dtpgto'], 'idAgenda' => $arrayAgenda['id'],'sld' =>$sldLanc);
-			}else {
-				//Sem confirmação de pagamento
-				#Verifica o array acima não esta com lógica
-				$agendaSemLanc = array('venc' => $arrayAgenda['venc'],
-				'dtpgto' => $arrayAgenda['dtpgto'],'sld'=>$sldLanc);
-			}
+			$agendaLanc [$arrayAgenda['idlanc']] = array('venc' => $arrayAgenda['venc'],
+			'dtpgto' => $arrayAgenda['dtpgto'], 'idAgenda' => $arrayAgenda['id'],'sld' =>$sldLanc);
 			if ($arrayAgenda['idlanc']=='0') {
 				//Despesas agendadas e não pagas
 				$arrayDespesas[] = array('id'=>$arrayAgenda['id'],'titulo'=>$arrayAgenda['titulo'],'codigo'=>$arrayAgenda['codigo']
@@ -93,7 +94,6 @@ class tes_despesas {
 				$sldLan ='C';
 			}
 		#	echo "....".$dadosCta[$dados['creditar']]['tipo'].' *** '.$ctaCredito.' == '.$dados['lancamento'];
-
 			$arrayDespesas[] = array('id'=>$agendaLanc[$dados['lancamento']]['idAgenda']
 				,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
 				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']

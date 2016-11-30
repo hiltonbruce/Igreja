@@ -1,5 +1,4 @@
 <?php
-
 controle ('tes');
 $ultimolanc = 0;
 $roligreja =(int) $_POST['igreja'];

@@ -796,8 +796,8 @@ class List_sele {
 }
 
 class ultimo_registro {
-
-     function __construct (){
+	
+   function __construct (){
 	  $this->tabela = $_POST["tabela"];//Define tabela a ser usada
 	  $this->query = "SELECT * from {$this->tabela} ";
      }
