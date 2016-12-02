@@ -3,9 +3,10 @@
 	$tab="adm/atualizar_dados.php";//link q informa o script quem receber� os dados do form para atualizar
 	$tab_edit="adm/dados_pessoais.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
 	$conMem  = 'SELECT *,m.obs AS mobs, DATE_FORMAT(m.datanasc,"%d/%m/%Y") ';
-	$conMem .= 'AS br_datanasc, m.datanasc AS nasc, DATE_FORMAT(m.datanasc,"%d" ';
-	$conMem .= 'AS dia FROM membro AS m, cidade AS c,eclesiastico AS e ';
-	$conMem .= 'WHERE m.rol="'.$bsc_rol.'" AND m.rol=e.rol';
+	$conMem .= 'AS br_datanasc, m.datanasc AS nasc, DATE_FORMAT(m.datanasc,"%d") AS dia, ';
+	$conMem .= 'm.nome AS nome, c.nome AS nomeCid ';
+	$conMem .= 'FROM membro AS m, cidade AS c,eclesiastico AS e ';
+	$conMem .= 'WHERE m.rol="'.$bsc_rol.'" AND m.rol=e.rol AND m.naturalidade=c.id ';
 	$dad_cad = mysql_query ($conMem);
 	if (mysql_num_rows($dad_cad)<1)//Lista independente de outras tabelas
 	{

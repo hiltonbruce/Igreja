@@ -783,24 +783,24 @@ function situacao ($situacao,$rol){
 			$result = mysql_query("SELECT DATE_FORMAT(data_fim,'%d/%m/%Y') AS dt_fim FROM disciplina WHERE rol = '$rol' ORDER BY id DESC LIMIT 1");
 			$data = mysql_fetch_array($result);
 			if ($data ["dt_fim"]!="00/00/0000")
-				$estilo = "<span style='color:#FF0000'><blink>Disciplinado at&eacute;: </blink></span>".$data ["dt_fim"];
+				$estilo = '<span class="text-danger"><blink>Disciplinado at&eacute;: </blink></span>'.$data ["dt_fim"];
 			else
-				$estilo = "<span style='color:#FF0000'><blink>Disciplinado por prazo indeterminado </blink></span>";
+				$estilo = '<span class="text-danger"><blink>Disciplinado por prazo indeterminado </blink></span>';
 			break;
 		case "3":
-			$estilo="<h1><span style='color:#FF0000'><blink>Falecido</blink></span></h1>";
+			$estilo='<h1><span class="text-danger"><blink>Falecido</blink></span></h1>';
 			break;
 		case "4":
-			$estilo="<span style='color:#FF0000'><blink>Mudou de Igreja</blink></span>";
+			$estilo='<span class="text-danger"><blink>Mudou de Igreja</blink></span>';
 			break;
 		case "5":
-			$estilo="<span style='color:#FF0000'><blink>Afastou-se</blink></span>";
+			$estilo='<span class="text-danger"><blink>Afastou-se</blink></span>';
 			break;
 		case "6":
-			$estilo="<span style='color:#FF0000'><blink>Transferido</blink></span>";
+			$estilo='<span class="text-danger"><blink>Transferido</blink></span>';
 			break;
 		default:
-			$estilo="<span style='color:#006633'><blink>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</blink></span>";
+			$estilo='<span  class="text-success"><blink>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</blink></span>';
 			break;
 	}
 	return $estilo;

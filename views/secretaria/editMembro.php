@@ -125,9 +125,8 @@
         <td colspan="2">Naturalidade:
           <?PHP
 		//inicio
-		$cidade = new DBRecord ("cidade",$arr_dad["naturalidade"],"id");
 		echo $arr_dad["naturalidade"];
-		$nome = new editar_form("naturalidade",$cidade->nome(),$tab,$tab_edit);
+		$nome = new editar_form("naturalidade",$arr_dad["nomeCid"],$tab,$tab_edit);
 		$nome->getMostrar();
 		if ($_GET["campo"]=="naturalidade"){
 		?>
@@ -149,11 +148,12 @@
         <td colspan="2">UF:
         <?PHP
         	$tab_edit='adm/dados_pessoais.php&tabela='.$tabela.'&bsc_rol='.$bsc_rol.'&uf_nasc='.$arr_dad["uf_nasc"].'&campo=';
-			$nome = new editar_form("uf_nasc",$arr_dad["uf_nasc"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-		?></td>
-      </tr>
-      <tr>
+					$nome = new editar_form("uf_nasc",$arr_dad["uf_nasc"],$tab,$tab_edit);
+					$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+				?>
+			</td>
+    </tr>
+    <tr>
         <td colspan="2">Endere&ccedil;o:
 		<?PHP
 		$nome = new editar_form("endereco",$arr_dad["endereco"],$tab,$tab_edit);

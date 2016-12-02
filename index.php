@@ -75,10 +75,10 @@
   <div class="wrap2">
     <?php require_once 'menu.php';?>
       <div class="info1">
-	  <?php //echo "Sessão ".$_SESSION["setor"];?>
-        <marquee direction="left" scrollamount="3" height="27"><strong>
-          E n&atilde;o vos embriagueis com vinho, em que h&aacute; contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
-       </strong></marquee>
+        <span class='text-blink text-primary'>
+          	E n&atilde;o vos embriagueis com vinho, em que h&aacute;
+						contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
+		 		</span>
       </div>
 	  <?PHP
 	// echo '<h1> SESSION[valid_user]- '.$_SESSION['valid_user'].'--Session[setor]-- '.$_SESSION['setor'].' - '.$_SESSION['nome'].'--Session[cid_end]-- '.$_SESSION['cid_end'].'</h1>';
@@ -145,7 +145,6 @@
     	}
     ?></ul>
      <?PHP
-    //echo "<h2>{$_SESSION["rol"]}</h2>";
     require_once ("autentica.php");
     ?>
 </div>

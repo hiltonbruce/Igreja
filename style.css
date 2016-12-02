@@ -353,6 +353,25 @@ legend {
 img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inline;}
 /* Fim CSS para efeitos jQuery */
 
+.text-blink {
+  animation-duration: 15s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+}
+@keyframes slidein {
+  from {
+    margin-left: 50%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+/* Personalização para BootStrap*/
+
 .table > thead > tr > td.primary,
 .table > tbody > tr > td.primary,
 .table > tfoot > tr > td.primary,
