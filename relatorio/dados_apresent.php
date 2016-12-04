@@ -1,24 +1,16 @@
 <?PHP
 controle ("consulta");
-
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
 $tab_edit="relatorio/dados_apresent.php&menu=top_formulario&tabela=cart_apresentacao&rol={$_GET["rol"]}&campo=";//Link de chamada da mesma página para abrir o form de edição do item
-
 $apresenta = new DBRecord ("cart_apresentacao",$_GET["rol"],"rol");
-
 $igreja = new DBRecord ("igreja",$apresenta->id_cong(),"rol");
-$igreja_sede = new DBRecord ("igreja","1","rol");
-
+$igreja_sede = $igSede;
 $cidade = new DBRecord ("cidade",$apresenta->cidade(),"id");
 $id = $apresenta -> rol();
-
 //echo "<h1>{$apresenta -> nome()}</h1>";
-
 //$dad_cad = mysql_query ("SELECT *,DATE_FORMAT(data,'%d/%m/%Y') AS data  FROM est_civil WHERE rol='".$_SESSION["rol"]."'");
 //$arr_dad = mysql_fetch_array ($dad_cad);
-
 $ind = 1; //Define o indice dos campos do formulário
-
 ?>
 <fieldset>
 <div id="lst_cad">
@@ -92,33 +84,38 @@ $ind = 1; //Define o indice dos campos do formulário
       <tr>
         <td>Data Nascimento:
         <?PHP
-		$nome = new editar_form("dt_nasc",conv_valor_br($apresenta->dt_nasc()),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?></td>
+				$nome = new editar_form("dt_nasc",conv_valor_br($apresenta->dt_nasc()),$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar();
+				?>
+				</td>
         <td>Hospital:
           <?PHP
-		$nome = new editar_form("maternidade",$apresenta->maternidade(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?></td>
-		<td>Sexo:
+					$nome = new editar_form("maternidade",$apresenta->maternidade(),$tab,$tab_edit);
+					$nome->getMostrar();$nome->getEditar();
+					?>
+				</td>
+				<td>Sexo:
+		    <?PHP
+				$nome = new editar_form("sexo",$apresenta->sexo(),$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar();
+				?>
+			</td>
+    </tr>
+    <tr>
+      <td>UF Nascimento:
+      <?PHP
+			$nome = new editar_form("uf",$apresenta->uf(),$tab,$tab_edit);
+			$nome->getMostrar();$nome->getEditar();
+			?>
+		</td>
+    <td>Naturalidade:
 	    <?PHP
-		$nome = new editar_form("sexo",$apresenta->sexo(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?></td>
-      </tr>
-      <tr>
-        <td>UF Nascimento:
-        <?PHP
-		$nome = new editar_form("uf",$apresenta->uf(),$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar();
-		?></td>
-        <td>Naturalidade:
-        <?PHP
-		$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
-		$nome->getMostrar();
-		//$nome = new editar_form("cidade",$apresenta->cidade(),$tab,$tab_edit);
-		//$nome->getMostrar();$nome->getEditar();
-		?></td>
+			$nome = new editar_form("cidade",$cidade->nome(),$tab,$tab_edit);
+			$nome->getMostrar();
+			//$nome = new editar_form("cidade",$apresenta->cidade(),$tab,$tab_edit);
+			//$nome->getMostrar();$nome->getEditar();
+			?>
+		</td>
         <td>N&ordm; Certid&atilde;o :
         <?PHP
 		$nome = new editar_form("num_cert",$apresenta->num_cert(),$tab,$tab_edit);

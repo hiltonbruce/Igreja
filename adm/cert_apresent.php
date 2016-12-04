@@ -7,8 +7,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 //-->
 </script>
 <?PHP
-	if ($_SESSION['nivel']>4){
-	
+	if ($_SESSION['nivel']>4){	
 ?>
 <fieldset>
 	<legend> Certid&atilde;o de Apresenta&ccedil;&atilde;o</legend>
@@ -44,11 +43,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <option value='./?escolha=adm/cert_apresent.php&uf=SE&menu=top_formulario'>Sergipe</option>
             <option value='./?escolha=adm/cert_apresent.php&uf=TO&menu=top_formulario'>Tocantins</option>
     </select></label>
-	<?PHP 
+	<?PHP
 		if (!empty($_GET["uf"])){
 			$vl_uf=$_GET["uf"];
 			$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cidade");
-			echo "Na Cidade de:<label>";		
+			echo "Na Cidade de:<label>";
 			$vlr_linha=$lst_cid->ListDados ("2");//"2" é o indice de tabulação do formulário
 			echo "</label>";
 	?>
@@ -118,7 +117,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <td><label></label></td>
         <td>&nbsp;</td>
       </tr>
-    </table>	  
+    </table>
   Secretário que ir&aacute; assinar a carta:
   <?PHP $igreja = new DBRecord ("igreja","1","id");?>
   <select name="secretario" id="secretario" tabindex="19">
@@ -127,9 +126,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </select>
   <!-- Envia o id para a impressão da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o" tabindex="20" />
- <?PHP 
+ <?PHP
  } //fim do if após selecionar a uf nascimento da criança
- ?> 
+ ?>
 </form>
 </fieldset>
 <?PHP

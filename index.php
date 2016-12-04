@@ -34,7 +34,6 @@
 		//echo "<h1>$classe ** $dir</h1>";
 	}
 	$igSede = new DBRecord('igreja', '1', 'rol');
-
   if (!empty($_GET["bsc_rol"])){
 		$bsc_rol = intval($_GET["bsc_rol"]);
 		//$_SESSION["rol"]=(int)$_GET["bsc_rol"];
