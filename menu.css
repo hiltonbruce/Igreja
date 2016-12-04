@@ -124,11 +124,11 @@ div#menu .menu {
 
 ul#categories {
 	width:100%;
-        position: relative;
+  position: relative;
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
-	font-size: 11px;
+	font-size: 12px;
 }
 
 ul#categories li {

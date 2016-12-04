@@ -10,10 +10,6 @@ body{
 	width: 100%;
 }
 
-a, a:visited, a:link { color:#000000; text-decoration:underline; }
-
-a:hover { color: #666666; }
-
 #lanc{
 	padding:6px 5px; margin: 2;
 	font: Arial;
@@ -142,9 +138,12 @@ div.info1 { color: #665; }
 
 div .leftpanel {
 	width:16%;
+	background-color: #FFFFFF;
 	display: inline;
 	float:left;
 }
+
+a, a:visited, a:link { color:#000000; text-decoration:underline; }
 
 div .rightpanel {
 	width:23%;

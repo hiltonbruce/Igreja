@@ -142,7 +142,7 @@
       </li>
  	 <?php
     	}
-    ?></ul>
+    ?></ul></ul>
      <?PHP
     require_once ("autentica.php");
     ?>
