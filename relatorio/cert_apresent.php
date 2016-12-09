@@ -17,33 +17,33 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
  	 <div class="col-xs-4">
 	<label>Estado que nasceu:</label>
 	<select name="uf" id="uf" class="form-control input-sm" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo $ind++;?>" onselect="1">
-            <option value="<?PHP echo $_GET['uf'];?>"><?PHP echo $_GET['uf'];?></option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=AC&menu=top_formulario'>Acre</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=AL&menu=top_formulario'>Alagoas</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=AP&menu=top_formulario'>Amapá</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=AM&menu=top_formulario'>Amazonas</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=BA&menu=top_formulario'>Bahia</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=CE&menu=top_formulario'>Ceará</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=DF&menu=top_formulario'>Distrito Federal</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=GO&menu=top_formulario'>Goiás</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=MA&menu=top_formulario'>Maranhão</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=MT&menu=top_formulario'>Mato Grosso</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=MS&menu=top_formulario'>Mato Grosso do Sul</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=MG&menu=top_formulario'>Minas Gerais</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=PA&menu=top_formulario'>Pará</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=PB&menu=top_formulario'>Paraíba</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=PR&menu=top_formulario'>Paraná</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=PE&menu=top_formulario'>Pernambuco</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=PI&menu=top_formulario'>Piauí</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=RJ&menu=top_formulario'>Rio de Janeiro</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=RN&menu=top_formulario'>Rio Grande do Norte</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=RS&menu=top_formulario'>Rio Grande do Sul</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=RO&menu=top_formulario'>Rondônia</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=RR&menu=top_formulario'>Roraima</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=SC&menu=top_formulario'>Santa Catarina</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=SP&menu=top_formulario'>São Paulo</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=SE&menu=top_formulario'>Sergipe</option>
-            <option value='./?escolha=relatorio/cert_apresent.php&uf=TO&menu=top_formulario'>Tocantins</option>
+      <option value="<?PHP echo $_GET['uf'];?>"><?PHP echo $_GET['uf'];?></option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=AC&menu=top_formulario'>Acre</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=AL&menu=top_formulario'>Alagoas</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=AP&menu=top_formulario'>Amapá</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=AM&menu=top_formulario'>Amazonas</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=BA&menu=top_formulario'>Bahia</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=CE&menu=top_formulario'>Ceará</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=DF&menu=top_formulario'>Distrito Federal</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=GO&menu=top_formulario'>Goiás</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=MA&menu=top_formulario'>Maranhão</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=MT&menu=top_formulario'>Mato Grosso</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=MS&menu=top_formulario'>Mato Grosso do Sul</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=MG&menu=top_formulario'>Minas Gerais</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PA&menu=top_formulario'>Pará</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PB&menu=top_formulario'>Paraíba</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PR&menu=top_formulario'>Paraná</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PE&menu=top_formulario'>Pernambuco</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PI&menu=top_formulario'>Piauí</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RJ&menu=top_formulario'>Rio de Janeiro</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RN&menu=top_formulario'>Rio Grande do Norte</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RS&menu=top_formulario'>Rio Grande do Sul</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RO&menu=top_formulario'>Rondônia</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RR&menu=top_formulario'>Roraima</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=SC&menu=top_formulario'>Santa Catarina</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=SP&menu=top_formulario'>São Paulo</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=SE&menu=top_formulario'>Sergipe</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=TO&menu=top_formulario'>Tocantins</option>
     </select>
     </div>
  	 <div class="col-xs-4">
@@ -57,7 +57,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	?></div></div>
 	<label>Nome da Crian&ccedil;a:</label>
     <input name="nome" type="text" class="form-control" id="nome" size="50" maxlength="40" tabindex="<?PHP echo $ind++;?>">
-
     <div class="row">
  	 <div class="col-xs-8">
 	<label>Pai:</label>
@@ -71,7 +70,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=0')" tabindex="<?PHP echo $ind++;?>">
     <img border="0" src="img/lupa_32x32.png" width="18" height="18" title="Click aqui para pesquisar membros!" /></a>
     </div></div>
-
 	<div class="row">
  	 <div class="col-xs-8">
 	<label>M&atilde;e:</label>
@@ -139,10 +137,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	    <div class="row">
 	 	 <div class="col-xs-8">
 		  <label>Secretário que ir&aacute; assinar a carta:</label>
-		  <?PHP $igreja = new DBRecord ("igreja","1","rol");?>
 		  <select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
-		    <option value="<?PHP echo fun_igreja ($igreja->secretario1());?>"><?PHP echo fun_igreja ($igreja->secretario1());?></option>
-		    <option value="<?PHP echo fun_igreja ($igreja->secretario2());?>"><?PHP echo fun_igreja ($igreja->secretario2());?></option>
+		    <option value="<?PHP echo $igSede->secretario1();?>"><?PHP echo fun_igreja ($igSede->secretario1());?></option>
+		    <option value="<?PHP echo $igSede->secretario2();?>"><?PHP echo fun_igreja ($igSede->secretario2());?></option>
 		  </select>
 		  </div>
 	 	 <div class="col-xs-4">
@@ -197,5 +194,4 @@ controle ("consulta");
 		</select>
 		</div></div>
 		</form>
-
 </fieldset>

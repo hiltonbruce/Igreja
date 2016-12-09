@@ -4,7 +4,6 @@ $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar o
 $tab_edit="relatorio/dados_apresent.php&menu=top_formulario&tabela=cart_apresentacao&rol={$_GET["rol"]}&campo=";//Link de chamada da mesma página para abrir o form de edição do item
 $apresenta = new DBRecord ("cart_apresentacao",$_GET["rol"],"rol");
 $igreja = new DBRecord ("igreja",$apresenta->id_cong(),"rol");
-$igreja_sede = $igSede;
 $cidade = new DBRecord ("cidade",$apresenta->cidade(),"id");
 $id = $apresenta -> rol();
 //echo "<h1>{$apresenta -> nome()}</h1>";
@@ -154,8 +153,8 @@ $ind = 1; //Define o indice dos campos do formulário
       <input name="rol" type="hidden" id="rol" value="<?PHP echo $apresenta->rol();?>" />
       <label>Secret&aacute;rio:</label>
 		<select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
-			<option value="<?PHP echo $igreja_sede->secretario1();?>"><?PHP echo fun_igreja ($igreja_sede->secretario1());?></option>
-			<option value="<?PHP echo $igreja_sede->secretario2();?>"><?PHP echo fun_igreja ($igreja_sede->secretario2());?></option>
+			<option value="<?PHP echo $igSede->secretario1();?>"><?PHP echo fun_igreja ($igSede->secretario1());?></option>
+			<option value="<?PHP echo $igSede->secretario2();?>"><?PHP echo fun_igreja ($igSede->secretario2());?></option>
 		</select>
 		</div>
  	 	<div class="col-xs-2">

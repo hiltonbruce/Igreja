@@ -3,7 +3,6 @@
 	$tab_edit="adm/dados_profis.php&bsc_rol=$bsc_rol&tabela=profissional&campo=";//Link de chamada da mesma página para abrir o form de edição do item
 	$arr_dad = new DBRecord ('profissional',$bsc_rol,'rol');
 	$ind=1;
-	ver_cad($bsc_rol);
 	if ($altEdit && $membro) {
 	 require_once 'views/secretaria/editProf.php';
 	} elseif ($membro) {

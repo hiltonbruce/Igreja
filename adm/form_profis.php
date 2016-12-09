@@ -1,24 +1,16 @@
 <script language="javascript">
-<!--
 	function pergunta() {
 		var p=window.confirm("O CPF não é válido, mesmo assim deseja ultiliza-lo:  <?php echo $_POST["cpf"];?>");
 		window.location=(p) ? "./?conf_cpf_ruim=ok&escolha=adm/dados_profis.php" : "./?escolha=adm/dados_pessoais.php";}
-
 </script>
 <?php
-
-controle ("inserir");
-
+	controle ("inserir");
 	$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");// Aqui será selecionado a informação do campo autor com id=2
 	$nome_cidade = $rec->nome()." - ".$rec->coduf();
-
-    $bsc_rol = (!empty($_GET['bsc_rol'])) ? intval($_GET['bsc_rol']) : intval($_POST['bsc_rol']);
+  $bsc_rol = (!empty($_GET['bsc_rol'])) ? intval($_GET['bsc_rol']) : intval($_POST['bsc_rol']);
 	//echo "<h1>Teste $uf_natal $cid_natal</h1>";
-
 	$prof = new DBRecord ("profissional",$bsc_rol,"rol");
-
 	$link = "atualizar_array";//define para q página direcionará o form para atualizar
-
 	if ($prof->cpf()<>"") {
 		$cpf = 	$prof->cpf();
 	}elseif ($_GET["cpf"]<>""){
@@ -28,10 +20,8 @@ controle ("inserir");
 		$cpf = $_SESSION["cpf"];
 		$link = "cad_dados_pess";//define para q página direcionará o form para atualizar
 	}
-
 	$profis = new DBRecord ("profissional",ltrim($cpf),"cpf");
-
-		if ($profis->cpf()<>"") {//Recusa se o CPF já estiver cadastrado
+	if ($profis->cpf()<>"") {//Recusa se o CPF já estiver cadastrado
 	?>
 		<h2>CPF j&aacute; cadastrado! <a href="./?escolha=adm/cadastro_membro.php&uf=<?PHP echo $_POST["uf_nasc"];?>">Voltar.else..</a>
             <script language="JavaScript" type="text/javascript">

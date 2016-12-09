@@ -53,6 +53,7 @@
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
+    $_GET["pagina1_pen"] = (empty($_GET["pagina1_pen"])) ? 0 : intval($_GET["pagina1_pen"]);
 		if ($_GET["pagina1_pen"]<1) {
 			$_GET["pagina1_pen"] = 1;
 		} elseif ($_GET["pagina1_pen"]>$paginas_pen) {
@@ -98,16 +99,14 @@
 	<?PHP
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
-	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
-
-	if ($paginas_pen>1)
+	$_rod_pen->getRodape(); $_rod_pen->form_rodape('P&aacute;gina:','');
+	if ($paginas_pen>1){
 		echo "<br><span class='style4'>Total de $paginas_pen p&aacute;ginas";
-		else
+		}else{
 		echo "<br><span class='style4'>Total de $paginas_pen p&aacute;gina";
-
-	echo "<br />";
-	if ($total_pen>"1")
-	{
+  }
+  echo "<br />";
+	if ($total_pen>"1"){
 		printf ("Com %s cadastros de membros, com algum tipo de pend&ecirc;ncia!",number_format($total_pen, 0, ',', '.'));
 	}elseif ($total_pen=="1"){
 		echo "Com apenas um cadastros de membro!";
@@ -124,7 +123,7 @@
 		//Fim das informa??es das pendencias
 		//In�cio das pendencias de disciplinados
 		//In�cio Disciplinas Expiradas
-		$_urlLi_disc="?escolha={$_GET["escolha"]}&bsc_rol={$_GET["bsc_rol"]}";//Montando o Link para ser passada a classe
+		$_urlLi_disc='?escolha='.$escGET.'&bsc_rol='.$bsc_rol;//Montando o Link para ser passada a classe
 		$query_disc = "SELECT * FROM eclesiastico WHERE situacao_espiritual='2' ";
 		$nmpp_disc="40"; //N?mero de mensagens por p?rginas
 		$paginacao_disc = Array();
@@ -133,9 +132,7 @@
 		$sql2_disc = mysql_query ($query_disc) or die (mysql_error());
 		$total_disc = mysql_num_rows($sql2_disc) ; //Retorna o total de linha na tabela
 		$paginas_disc = ceil ($total_disc/$nmpp_disc); //Retorna o total de p?ginas
-
 		$pgDisc = (empty($_GET["pagina1_disc"])) ? '' : $_GET["pagina1_disc"] ;
-
 		if ($pgDisc<1) {
 			$pgDisc= 1;
 		} elseif ($pgDisc>$paginas_disc) {
@@ -189,7 +186,7 @@
 	<?PHP
 		//Classe que monta o rodape
 		$_rod_disc = new rodape($paginas_disc,$pgDisc,"pagina1_disc",$_urlLi_disc,4);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
-		$_rod_disc->getRodape(); $_rod_disc->form_rodape ("P&aacute;gina:");
+		$_rod_disc->getRodape(); $_rod_disc->form_rodape ('P&aacute;gina:','');
 		if ($paginas_disc>1)
 			echo "<br><span class='style4'>Total de $paginas_disc p&aacute;ginas.";
 		else
