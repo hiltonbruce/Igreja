@@ -173,7 +173,7 @@
         echo "<a data-toggle='tooltip' data-placement='left' title='$membro_disc - ";
         echo "Disciplina Conclu&iacute;da' href='./?escolha=adm/dados_pessoais.php";
         echo "&bsc_rol={$coluna_disc["rol"]}&pagina1_disc=$pgDisc'><span ";
-        echo "style='color:#009900'><blink>{$coluna_disc["rol"]}</blink></span><a></td>";
+        echo "class='text-success text-blink'>{$coluna_disc["rol"]}</span><a></td>";
 				$disp_pend++;
 			}else {
 				echo "<td id='pendencia' class='text-center' >";

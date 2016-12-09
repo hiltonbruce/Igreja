@@ -83,7 +83,7 @@ while( $campo = mysql_fetch_array( $res ) )
 			$nomecong .= '&nbsp;<mark>Disciplinado</mark> ';
 			break;
 		case '3':
-			$nomecong .= '&nbsp;<mark>Falecio</mark> ';
+			$nomecong .= '&nbsp;<mark>Falecido</mark> ';
 			break;
 		case '4':
 			$nomecong .= '&nbsp;<mark>Mudou de Igreja</mark> ';

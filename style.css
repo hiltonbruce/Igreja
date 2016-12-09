@@ -126,10 +126,9 @@ div.info, div.info1 {
 div.info1 {
 	background-image:url(img/info1.gif);
 	float:left;
-	border-top:1px solid #fff;
 	background-color:#e4e4e4;
 	color:#999;
-	font-size:120%;
+	font-size:130%;
 }
 
 div.info1 a, div.info1 a:link, div.info1 a:visited { color:#999; }
@@ -352,7 +351,7 @@ legend {
 img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inline;}
 /* Fim CSS para efeitos jQuery */
 
-.text-blink {
+.text-marquee {
   animation-duration: 15s;
   animation-name: slidein;
   animation-iteration-count: infinite;
@@ -369,6 +368,21 @@ img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inli
   }
 }
 
+.text-blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
 /* Personalização para BootStrap*/
 
 .table > thead > tr > td.primary,
@@ -433,7 +447,7 @@ a.text-alerta:focus {
 }
 a.bg-alerta:hover,
 a.bg-alerta:focus {
-  background-color: #ebeeaf;
+  background-color: #eeeeaf;
 }
 .table > thead > tr > td.alerta,
 .table > tbody > tr > td.alerta,
@@ -447,7 +461,7 @@ a.bg-alerta:focus {
 .table > thead > tr.alerta > th,
 .table > tbody > tr.alerta > th,
 .table > tfoot > tr.alerta > th {
-  background-color: #f7f7da;
+  background-color: #f6f7db;
 }
 .table-hover > tbody > tr > td.alerta:hover,
 .table-hover > tbody > tr > th.alerta:hover,

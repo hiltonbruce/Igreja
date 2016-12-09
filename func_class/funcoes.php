@@ -84,7 +84,7 @@ function conv_valor_br ($data) {
 			$res="$registros[2]/$registros[1]/$registros[0]";
 			return $res;
 		} else {
-			echo "<blink><strong>Formato de data inv&aacute;lido: $data</strong> $num </blink>";
+			echo "<span class='text-blink'><strong>Formato de data inv&aacute;lido: $data</strong> $num </span>";
 		}
 }
 
@@ -783,24 +783,25 @@ function situacao ($situacao,$rol){
 			$result = mysql_query("SELECT DATE_FORMAT(data_fim,'%d/%m/%Y') AS dt_fim FROM disciplina WHERE rol = '$rol' ORDER BY id DESC LIMIT 1");
 			$data = mysql_fetch_array($result);
 			if ($data ["dt_fim"]!="00/00/0000")
-				$estilo = '<span class="text-danger"><blink>Disciplinado at&eacute;: </blink></span>'.$data ["dt_fim"];
+				$estilo = '<span class="text-danger text-blink">Disciplinado at&eacute;:</span>'.$data ["dt_fim"];
 			else
-				$estilo = '<span class="text-danger"><blink>Disciplinado por prazo indeterminado </blink></span>';
+				$estilo = '<span class="text-danger text-blink">Disciplinado por prazo indeterminado</span>';
 			break;
 		case "3":
-			$estilo='<h1><span class="text-danger"><blink>Falecido</blink></span></h1>';
+			$estilo='<h1><span class="text-danger text-blink">Falecido</span></h1>';
 			break;
 		case "4":
-			$estilo='<span class="text-danger"><blink>Mudou de Igreja</blink></span>';
+			$estilo='<span class="text-danger text-blink">Mudou de Igreja</span>';
 			break;
 		case "5":
-			$estilo='<span class="text-danger"><blink>Afastou-se</blink></span>';
+			$estilo='<span class="text-danger text-blink">Afastou-se</span>';
 			break;
 		case "6":
-			$estilo='<span class="text-danger"><blink>Transferido</blink></span>';
+			$estilo='<span class="text-danger text-blink">Transferido</span>';
 			break;
 		default:
-			$estilo='<span  class="text-success"><blink>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</blink></span>';
+			$estilo  ='<h4><span class="text-warning text-blink">Corrija a comunh&atilde;o ';
+			$estilo .='com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</span></h4>';
 			break;
 	}
 	return $estilo;

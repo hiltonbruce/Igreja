@@ -1,53 +1,44 @@
-<h3>
-	<a
-		href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>&novo=novo">
-		<button class='btn btn-primary'>Novo Registro</button>, Clique aqui! ...</a>
-</h3>
-
+<?php
+if ($altEdit && $membro) {
+	echo '<h3><a ';
+	echo 'href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>';
+	echo '&novo=novo"><button class="btn btn-primary">Novo Registro</button>';
+	echo ', Clique aqui! ...</a></h3>';
+	echo '';
+}
+ ?>
 <fieldset>
-	<legend>Registros - Cadastro</legend>
-	<link rel="stylesheet" type="text/css" media="screen, projection"
-		href="tabs.css" />
+	<legend>Hist&oacute;rico de registros</legend>
 	<?PHP
 	controle ("consulta");
 	if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
 		//Mostra tabela com lista de registro
 		$_urlLi="?escolha=adm/dados_disciplina.php&bsc_rol=$bsc_rol&ord={$_GET["ord"]}&cargo={$_GET["cargo"]}&id=".($_GET["id"]);//Montando o Link para ser passada a classe
-
 		$query = "SELECT id,situacao,motivo,cad,DATE_FORMAT(data_ini,'%d/%m/%Y')
 		AS data_ini, DATE_FORMAT(data_fim,'%d/%m/%Y') AS data_fim
 		from disciplina WHERE rol = '".$bsc_rol."' " or die (mysql_error());
-
 		$nmpp="2000"; //Número de mensagens por párginas
 		$paginacao = Array();
 		$paginacao['link'] = "?"; //Paginação na mesma página
-
 		//Faz os calculos na paginação
 		$sql2 = mysql_query ($query) or die (mysql_error());
 		$total = mysql_num_rows($sql2) ; //Retorna o total de linha na tabela
 		$paginas = ceil ($total/$nmpp); //Retorna o total de páginas
-
 		if ($_GET["pagina1"]<1) {
 			$_GET["pagina1"] = 1;
 		} elseif ($_GET["pagina1"]>$paginas) {
 			$_GET["pagina1"] = $paginas;
 		}
-
 		$pagina = $_GET["pagina1"]-1;
-
 		if ($pagina<0) {
 			$pagina=0;
 		} //Especifica um valor p variável página caso ela esteja setada
 		$inicio=$pagina * $nmpp; //Retorna qual será a primeira linha a ser mostrada no MySQL
 		$sql3 = mysql_query ($query." LIMIT $inicio,$nmpp") or die (mysql_error());
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
-
 		//inicia o cabeçalho de paginação
-
 		?>
-	<table cellspacing="0" width="100%">
-		<caption>Hist&oacute;rico</caption>
-
+	<table class='table table-striped'>
 		<colgroup>
 			<col id="">
 			<col id="Tipo">
@@ -56,7 +47,6 @@
 			<col id="At&eacute; o dia">
 			<col id="albumCol" />
 		</colgroup>
-
 		<thead>
 			<tr>
 				<th scope="col"></th>
@@ -74,17 +64,8 @@
 			{
 				$motivoDisciplina = strip_tags($coluna["motivo"]);
 				$Tipo = new situacao_espiritual ($coluna['situacao'],$_GET['rol']);
-				$ls+=1;
-				if ($ls>1)
-				{
-					$cor="class='odd'";
-					$ls=0;
-				}
-				else
-				{$cor="class='od2'";
-				}
 				?>
-			<tr <?php echo "$cor";?>>
+			<tr>
 				<td><?php echo ++$indece;?></td>
 				<td><?php
 				if ($Tipo->situacao_confirma()=='Membro') {
@@ -94,7 +75,7 @@
 				}
 				?>
 				</td>
-				<td><a
+				<td><a data-toggle="tooltip" data-placement="top"
 					href="./?escolha=adm/dados_disciplina.php&lista=<?php echo $coluna["id"];?>&bsc_rol=<?php echo $_GET['bsc_rol'];?>"
 					title="<?php echo $motivoDisciplina;?>"><?php echo substr($motivoDisciplina,0,35)."...";?>
 				</a></td>

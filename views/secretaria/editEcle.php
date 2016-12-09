@@ -54,14 +54,14 @@
   ?>
         </p>
         <form id="form2" name="form2" method="post" action="">
-          <?PHP
-      echo sele_uf ($arr_dad["uf"],"uf");
-    ?>
+        <?PHP
+          echo sele_uf ($arr_dad["uf"],"uf");
+        ?>
           <label>
           <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "adm/atualizar_dados.php";?>" />
           <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
           <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "eclesiastico";?>" />
-      <input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
+          <input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
           <input name="Submit" type="submit" class="btn btn-primary btn-xs" id="Submit" value="Alterar..." tabindex="2"/>
           </label>
         </form>

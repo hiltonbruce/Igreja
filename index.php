@@ -74,7 +74,7 @@
   <div class="wrap2">
     <?php require_once 'menu.php';?>
       <div class="info1">
-        <span class='text-blink text-primary'>
+        <span class='text-marquee text-primary'>
           	E n&atilde;o vos embriagueis com vinho, em que h&aacute;
 						contenda, mas enchei-vos do Esp&iacute;rito (Ef 5.18)
 		 		</span>

@@ -51,7 +51,7 @@ while( $campo = mysql_fetch_array( $res ) )
 			$sigla .= '<mark>&nbsp;Disciplinado </mark>';
 			break;
 		case '3':
-			$sigla .= '<mark>&nbsp;Falecio </mark>';
+			$sigla .= '<mark>&nbsp;Falecido</mark>';
 			break;
 		case '4':
 			$sigla .= '<mark>&nbsp;Mudou de Igreja </mark>';
