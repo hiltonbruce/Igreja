@@ -1,6 +1,6 @@
 <div id="lst_cad">
 	<?PHP
-		if (!empty($arr_dad->rol())) {
+		if ($arr_dad->rol()!='') {
 	?>
 	<table class='table'>
 	  <tr>
