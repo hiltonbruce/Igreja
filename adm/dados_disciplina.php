@@ -1,7 +1,7 @@
 <?php
 if ($altEdit && $membro) {
 	echo '<h3><a ';
-	echo 'href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>';
+	echo 'href="./?escolha=adm/dados_disciplina.php&bsc_rol='.$bsc_rol;
 	echo '&novo=novo"><button class="btn btn-primary">Novo Registro</button>';
 	echo ', Clique aqui! ...</a></h3>';
 	echo '';
@@ -59,7 +59,6 @@ if ($altEdit && $membro) {
 		</thead>
 		<tbody>
 			<?PHP
-
 			while($coluna = mysql_fetch_array($sql3))
 			{
 				$motivoDisciplina = strip_tags($coluna["motivo"]);
@@ -84,16 +83,12 @@ if ($altEdit && $membro) {
 				<td><?php echo substr($coluna["cad"],0,15);?></td>
 			</tr>
 			<?PHP
-
 			}//loop while
-
 			?>
 		</tbody>
 	</table>
-
 	<?PHP
 	}
-
 	//Classe que monta o rodape
 	/*$_rod = new rodape($paginas,$_GET["pagina1"],"pagina1",$_urlLi,8);//(Quantidade de páginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por página)
 		$_rod->getRodape(); $_rod->form_rodape ("Ir para P&aacute;gina: ");
@@ -109,18 +104,20 @@ if ($altEdit && $membro) {
 		printf("Com %s ocorr&ecirc;ncias!",number_format($total, 0, ',', '.'));
 	}elseif ($total=="1"){
 		echo "Com apenas uma ocorr&ecirc;ncia!";
-	}elseif ($_GET['lista']<1){
-		echo "N&atilde;o h&aacute; ocorr&ecirc;ncias para este Membro!";
+	}elseif ($total<1 && empty($_GET["novo"]) ){
+		echo '<div class="alert alert-danger" role="alert">';
+		echo '  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
+		echo '  <span class="sr-only">Error:</span>';
+		echo '  N&atilde;o h&aacute; ocorr&ecirc;ncias para este Membro!';
+		echo '</div>';
 	}
-
 	//Fim da lista de mostrar tabela de registro
-
 	if (!empty($_GET["lista"])) {
 		$disc_completa = new DBRecord  ("disciplina","{$_GET["lista"]}","id");
 		$Tipo = new situacao_espiritual ($disc_completa->situacao());
 		//Mostrar texto completo da discipla escolhida
 		?>
-	<table border="1" width="100%">
+	<table class='table table-striped'>
 		<tr>
 			<td><p>Cadastrador por:</p> <?PHP echo $disc_completa->cad();?></td>
 			<td><p>Em:</p> <?PHP echo conv_valor_br ($disc_completa->hist());?></td>
@@ -133,7 +130,8 @@ if ($altEdit && $membro) {
 			?></td>
 		</tr>
 		<tr>
-			<td colspan="3" bgcolor="#E9E9E9"><p>Descri&ccedil;&atilde;o:</p> <?PHP echo $disc_completa->motivo();?>
+			<td colspan="3"><p>Descri&ccedil;&atilde;o:</p>
+				<h4><?PHP echo $disc_completa->motivo();?></h4>
 			</td>
 		</tr>
 		<tr>
@@ -146,23 +144,21 @@ if ($altEdit && $membro) {
 	<?PHP
 	//Final do texto completo da disciplina
 	} elseif ($_GET["novo"]=="novo" && empty($_POST["Submit"])) {
-
-		?>
-	Registros:
+	?>
+	<h4>Adicionar Registro:</h4>
 	<form id="form1" name="form1" method="post" action="">
-		<table width="100%">
+		<table  class='table table-striped'>
 			<thead>
 				<tr>
-					<td width="327" rowspan="5" id="form"><label>Detalhamento: <textarea
-								name="motivo" cols="30" rows="6" required="required" id="motivo"
-								tabindex="<?php echo ++$ind;?>" class="form-control" ></textarea>
-					</label></td>
-					<td>Dirigente do Culto: <input name="dirigente" type="text"
+					<td rowspan="2" colspan="2" id="form">
+						<label>Detalhamento: </label><textarea name="motivo" cols="30" rows="6"
+							required="required" id="motivo" class="form-control"
+							tabindex="<?php echo ++$ind;?>" autofocus="autofocus"></textarea>
+				</td>
+					<td><label>Dirigente do Culto: </label>
+						<input name="dirigente" type="text"
 						tabindex="<?php echo ++$ind;?>" class="form-control"  />
 					</td>
-				</tr>
-				<tr>
-					<td></td>
 				</tr>
 				<tr>
 					<td><label>Situacao Espiritual</label> <select name="situacao"
@@ -174,47 +170,44 @@ if ($altEdit && $membro) {
 							<option value="5">Afastou-se da Igreja</option>
 							<option value="6">Transferido</option>
 					</select>
-					</td>
+				</td>
 				</tr>
 				<tr>
-					<td width="229">Data do Registro: <label><input type="text"
-							name="data_ini" id='data' tabindex="<?php echo ++$ind;?>" class="form-control"  /> </label>(Em
+					<td><label>Data do Registro: </label><input type="text"
+							name="data_ini" id='data' tabindex="<?php echo ++$ind;?>"
+							class="form-control"  /> (Em
 						branco para data atual)
 					</td>
-				</tr>
-
-				<tr>
-					<td>Tempo em dias (para disciplina): <label><input type="text"
-							name="prazo" tabindex="<?php echo ++$ind;?>"  class="form-control" /> </label> (Em
+					<td><label>Tempo em dias (para disciplina): </label><input type="text"
+							name="prazo" tabindex="<?php echo ++$ind;?>"  class="form-control" /> (Em
 						branco para INDETERMINDO)
+					</td>
+					<td>
+					<input name="tabela" type="hidden" id="tabela" value="disciplina" /> <input
+						name="escolha" type="hidden" id="escolha"
+						value="adm/dados_disciplina.php" /> <input name="bsc_rol"
+						type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" /> <br />
+						<input type="submit" class='btn btn-primary' name="Submit"
+						value="Cadastrar..." tabindex="<?php echo ++$ind;?>" />
 					</td>
 				</tr>
 			</thead>
 		</table>
-		<input name="tabela" type="hidden" id="tabela" value="disciplina" /> <input
-			name="escolha" type="hidden" id="escolha"
-			value="adm/dados_disciplina.php" /> <input name="bsc_rol"
-			type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" /> <label> <input
-			type="submit" class='btn btn-primary' name="Submit" value="Cadastrar..."
-			tabindex="<?php echo ++$ind;?>" />
-		</label>
 	</form>
-
-	<?PHP
-
-	} elseif ($_POST["Submit"]=="Cadastrar..."){
-
-		$situacao = new situacao_espiritual ($_POST["situacao"]);
-		?>
+<?PHP
+} elseif ($_POST["Submit"]=="Cadastrar..."){
+	$situacao = new situacao_espiritual ($_POST["situacao"]);
+?>
 	<script language="javascript">
 		alert('Você deve confirmar este cadastro usando sua senha de acesso. Faça-o para cadastrar a disciplina!');
 	</script>
 	<form id="form1" name="form1" method="post" action="">
-		Descri&ccedil;&atilde;o:
-		<?php echo $_POST["motivo"]."<h5>Culto dirigido por: ".$_POST[dirigente]."</h5>";?>
+		<strong>Motivo:</strong>
+		<?php echo '<h4>'.$_POST["motivo"]."</h4><h5>Culto dirigido por: ".$_POST[dirigente]."</h5>";?>
 		<label> <input type="hidden" name="motivo"
 			value="<?php echo $_POST["motivo"]."<h5>Culto dirigido por: {$_POST[dirigente]}</h5>";?>">
-		</label> Registro:
+		</label>
+		Registro:
 		<?PHP echo $situacao->situacao_confirma();?>
 		<label><input type="hidden" name="situacao"
 			value="<?PHP echo $_POST["situacao"];?>"> </label> <label>Data: <?php
@@ -225,11 +218,8 @@ if ($altEdit && $membro) {
 			}
 			?> <input type="hidden" name="data_ini"
 			value="<?php echo $_POST["data_ini"];?>" />
-		</label>
-		<table width="100%">
-			<thead>
-				<tr>
-					<td><?php
+		</label><h4>
+		<?php
 		  	if ($_POST["situacao"]=="2") {
 		  		echo "Tempo de disciplina:";
 		  		if ((int)$_POST["prazo"]>0) {
@@ -238,20 +228,26 @@ if ($altEdit && $membro) {
 		  			echo "INDETERMINADO";
 		  		}
 		  	}
-		  	?> <label><input type="hidden" name="prazo"
-					value="<?php echo (int)$_POST["prazo"];?>" /> </label></td>
-				</tr>
-			</thead>
-		</table>
-		<label>Sua senha: <input name="senha" type="password" id="senha"
-			tabindex="1" class="form-control"  autofocus='autofocus' />
-		</label> <input name="tabela" type="hidden" id="tabela"
-			value="disciplina" /> <input name="bsc_rol" type="hidden" id="campo"
-			value="<?PHP echo $bsc_rol;?>" /> <input name="escolha" type="hidden"
-			id="escolha" value="adm/cad_dados_pess.php" /> <label> <input
-			type="submit" class='btn btn-primary' name="Submit" value="Confimar..."
+		  ?></h4>
+				<input type="hidden" name="prazo"
+					value="<?php echo intval($_POST["prazo"]);?>" />
+		<div class="row">
+		  <div class="col-xs-3">
+			<label>Confirme sua senha: </label><input name="senha" type="password" id="senha"
+				tabindex="1" class="form-control"  autofocus='autofocus' />
+			</div>
+		  <div class="col-xs-3">
+				<label>&nbsp;</label>
+				<input type="submit" class='btn btn-primary' name="Submit" value="Confimar..."
 			tabindex="<?php echo ++$ind;?>" />
-		</label>
+		</div>
+		</div>
+		<input name="tabela" type="hidden" id="tabela"
+			value="disciplina" />
+			<input name="bsc_rol" type="hidden" id="campo"
+			value="<?PHP echo $bsc_rol;?>" />
+			<input name="escolha" type="hidden"
+			id="escolha" value="adm/cad_dados_pess.php" />
 	</form>
 	<?PHP
 	} //fim form confirmar cadastro $_POST["submit"]=="Cadastrar..."
