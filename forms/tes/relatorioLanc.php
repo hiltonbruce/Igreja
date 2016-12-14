@@ -82,9 +82,12 @@
 		tabindex="<?PHP echo ++$ind; ?>" class="form-control" placeholder="N&ordm; do lan&ccedil;amento" />
 	  </div>
 	  <div class="col-xs-2">
+			<?php
+				$vlrLan = (empty($vlrLanc)) ? '' : number_format($vlrLanc,2,',',' ') ;
+			?>
 	  	<label>Valor:</label>
-		<input type="text" name="vlrLanc" value="<?php echo number_format($vlrLanc, 2, ',', ' ') ;?>"
-		tabindex="<?PHP echo ++$ind; ?>" class="form-control money" placeholder="Valor lan&ccedil;ado" />
+			<input type="text" name="vlrLanc" value="<?php echo $vlrLan;?>"
+			tabindex="<?PHP echo ++$ind; ?>" class="form-control money" placeholder="Valor lan&ccedil;ado" />
 	  </div>
 	  <div class="col-xs-1">
 		<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
@@ -109,6 +112,6 @@
 			this.setValue("");
 		if ( this.value.length < 1 && this.isNotClick )
 			return ;
-		return "models/tes/autoContasId.php?q=" + this.value;
+		return "models/tes/autoCompletaContas.php?q=" + this.value;
 	});
 </script>

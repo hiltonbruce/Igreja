@@ -10,17 +10,12 @@ require_once "../../models/tes/tes_conta.class.php";
 $grupoContas = new tes_conta ();
 $tituloCta = $grupoContas->contasGrupos();
 $q = mysql_real_escape_string( $_GET['q'] );
-
 $sqllinhas = "SELECT * FROM contas where locate('$q',titulo) > 0  AND acesso > '0' ";
 //crit�rios de fon�tica
-
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
-
 $sql = "SELECT * FROM contas where locate('$q',titulo) > 0 AND acesso > '0' order by codigo limit 10";
-
 $res = mysql_query( $sql );
-
 while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";

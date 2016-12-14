@@ -27,7 +27,6 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 	}else {
 		$opIgreja = $this->var_string;
 	}
-
 	#Filtro por data
 	$dataFiltro = $dia.'/'.$mes.'/'.$ano;
 	if (checadata ($dataFiltro)) {
@@ -41,7 +40,6 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 	}else {
 		$opIgreja .= 'AND DATE_FORMAT(l.data,"%Y")="'.$ano.'" ';
 	}
-
 	#filtro por conta
 	if ($cta!='') {
 		if ($deb=='1' && $cred=='') {
@@ -51,42 +49,33 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 		}else {
 			$opIgreja .= 'AND (creditar="'.$cta.'" OR debitar="'.$cta.'") ';
 		}
-
 		//$opIgreja .= 'AND DATE_FORMAT(l.data,"%m%Y")="'.$mes.$ano.'" ';
 	}
-
 	#Filtro para campo referente
 	if ($ref!='') {
 		$opIgreja .= 'AND h.referente LIKE "%'.$ref.'%" ';
 	}
-
 	#Filtro por valor
 	if ($vlrLanc != '') {
 		$opIgreja .= 'AND l.valor = "'.$vlrLanc.'" ';
 	}
-
 	#Filtro por número de lançamento
 	if ($numLanc!='') {
 		$opIgreja = $this->var_string.' AND l.lancamento = "'.$numLanc.'" ';
 	}
-
 	$opIgreja .= 'ORDER BY l.data,l.lancamento,l.debitar ';
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
-
 	$tabela = '';
 	$tabModeloExt = '';
 	$lancAtual = '';  $lancamento = $lancAtual;$valorCaixaDeb=0;$CaixaCentral='';
 	$CaixaMissoes ='';$CaixaOutros='';$vlrTotal =0;
-
 	while ($linha = mysql_fetch_array($dquery)) {
 		//$bgcolor = 'class="odd"';
 		$lancAtual = $linha['lancamento'];
-
 		if ($lancAtual!=$lancamento && $lancamento!='') { //Verificar se ainda estar no mesmo lançamento
 			if ($valorCaixaDeb<=0) {
 				$CaixaDep='';
 			}
-
 			//$bgcolor = $cor ? 'class="odd"' : 'class="odd3"';
 			$valores='';
 			$valorCaixaDeb = number_format($valorCaixaDeb,2,',','.');
@@ -98,42 +87,33 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 			$historico  = '<tr class=""><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 			//Modelo extrato bamcário
-
 			$histExtr = '<p>'.$linha['referente'].', '.$linha['razao'].'</p>';
-
 			if ($conta[$linha['debitar']]['tipo']=='D') {
 				if ($conta[$linha['creditar']]['tipo']=='C') {
 					$sld = 'C';
 				} else {
 					$sld = 'D';
 				}
-
 			} else {
 				if ($conta[$linha['creditar']]['tipo']=='C') {
 					$sld = 'D';
 				} else {
 					$sld = 'C';
 				}
-
 			}
-
 			$ctaDupla = $conta[$linha['debitar']]['titulo'].'<br /> à <br />';
 			$ctaDupla .= $conta[$linha['creditar']]['titulo'].$histExtr;
-
 			if (empty($cabData) || $cabData!=$dtLanc) {
 				$viewCabTr = '<tr class="active"><td colspan="2">'.$dtLanc.'</td>';
 				$cabData = $dtLanc;
 			}
-
 			$tabModeloExt .= $viewCabTr.'<tr><td>'.$ctaDupla.'</td>';
 			$viewCabTr = '';
 			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].$sld.'</td></tr>';
 			//$cor = !$cor;
 			$referente  = '';$CaixaMissoes ='';$CaixaOutros='';$valorMissoes=0;
 			$titulo1  = '';$lancValor = '';$valorCentral=0;$historico='';$CaixaCentral='';
-
 		}
-
 		$dtLanc = $linha['data'];
 		//Texto do histórico de cada lançamento
 		if ($lancamento != $lancAtual) {
@@ -141,7 +121,6 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 		}
 		$lancamento = $lancAtual;
 		$histAnterior = $linha['referente'];
-
 			if ($conta[$linha['debitar']]['codigo']=='1.1.1.001.001') {
 				# Acumula o total para o Caixa Central
 				$valorCentral += $linha['valor'];
@@ -154,28 +133,22 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 				$CaixaMissoes  = '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
 					.$conta[$linha['debitar']]['titulo']
 					.'</td><td class="text-right">'.number_format($valorMissoes,2,',','.').'D</td></tr>';
-
 			}else {
 				# Cria a linha dos demais débitos
 				$valorOutros = $linha['valor'];
 				$CaixaOutros  .= '<tr><td>'.$conta[$linha['debitar']]['codigo'].' &bull; '
 					.$conta[$linha['debitar']]['titulo']
 					.'</td><td class="text-right">'.number_format($valorOutros,2,',','.').'D</td></tr>';
-
 			}
-
 			$titulo1  .= '<tr><td>'.$conta[$linha['creditar']]['codigo'].' &bull; '
 							.$conta[$linha['creditar']]['titulo']
 							.'</td><td class="text-right">'.number_format($linha['valor'],2,',','.').'C</td></tr>';
 			$valor = number_format($linha['valor'],2,',','.');
 			//$valores ='<p id="moeda">'.$valor.' D</p>';//Valores das demais cta's que não sejam do caixa
 			//$lancValor .= $valores;
-
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
 		$vlrTotal +=$linha['valor'];
-
 		}
-
 		if ($titulo1 != '') {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
 			$dataLanc  .= $dtLanc.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$numLanc.'</span></p>';
@@ -185,11 +158,8 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 			//Modelo Extrato Bancario
 			$tabModeloExt .= $viewCabTr.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].'</td></tr>';
-
 			$vlrTotal +=$linha['valor'];
-
 		}
-
 	$resultado = array($tabela,$tabModeloExt,$vlrTotal);
 	return $resultado;
 	}

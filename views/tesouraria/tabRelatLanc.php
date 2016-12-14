@@ -1,14 +1,13 @@
 <?php
 if (!empty($_GET['dia']) || !empty($_GET['mes']) || !empty($_GET['ano']) || !empty($_GET['acesso'])
 || !empty($_GET['refer']) || !empty($_GET['numLanc']) || !empty($_GET['vlrLanc']) ) {
-
 	$tabMembros = new membro();
 	$tesSede = $tabMembros->nomes();
 	$cargoIgreja = new tes_cargo;
 	$tesArray = $cargoIgreja->dadosArray();
 	//tabela com a lista p confirmar lançamento$idIgreja$idIgreja$idIgreja$idIgreja$idIgreja
 	$lancContabil = new tes_relatLanc();
-	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$cta,$debValor,$credValor,$refer,$numLanc,$vlrLanc);
+	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$ctaId,$debValor,$credValor,$refer,$numLanc,$vlrLanc);
 	$tabLancamento = $resultado['0'];
 	$statusLancamento = '<h5><strong>Lan&ccedil;amentos Cont&aacute;beis</strong></h5>';
 	$linkResumo  = 'rec=15&igreja='.$_GET['igreja'].'&dia='.$_GET['dia'].'&ano='.$_GET['ano'].'&mes='.$_GET['mes'];
