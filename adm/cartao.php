@@ -1,5 +1,5 @@
 <?php
-$rolConsuta = (int)$_GET['bsc_rol'];
+$rolConsuta = intval($_GET['bsc_rol']);
 if ($_SESSION['nivel']>4){
 $tab="adm/atualizar_dados.php";//link q informa o script quem receberá os dados do form para atualizar
 $tab_edit="adm/dados_pessoais.php&tabela=membro&campo=";//Link de chamada da mesma página para abrir o form de edição do item
@@ -24,6 +24,18 @@ if (mysql_num_rows($dad_cad)<1)//Informa que o rol não possui niguem registrado
 	exit;
 }
 $arr_dad = mysql_fetch_array ($dad_cad);
+$num_rows = mysql_num_rows($dad_cad);
+
+$printCartao  = '<a href="relatorio/cartao_impr.php?bsc_rol='.$rolConsuta.'"';
+$printCartao .= 'target="_blanck"	title="Clique aqui para imprimir o cart&atilde;o">';
+$printCartao .= '<button class="btn btn-primary btn-xs" type="submit">';
+$printCartao .= 'Visualizar impress&atilde;o? <img src="img/Bank-Check-48x48.png"';
+$printCartao .= '	width="32" height="32" align="absmiddle"/>';
+$printCartao .= '</button></a>';
+if (!$altEdit) {
+	$printCartao ='';
+}
+
 //print_r($arr_dad);
 ?>
 <div id="lst_cad">
@@ -54,13 +66,10 @@ $arr_dad = mysql_fetch_array ($dad_cad);
     <tr>
       <td colspan="2">
 				<strong>Nome:</strong><h6><?PHP echo $arr_dad['nome'];?> &nbsp;
-				<a href="relatorio/cartao_impr.php?bsc_rol=<?php echo $rolConsuta;?>"
-				target='_blanck'	title='Clique aqui para imprimir o cart&atilde;o'>
-			      <button class="btn btn-primary btn-xs" type="submit">
-			      Visualizar impress&atilde;o? <img src="img/Bank-Check-48x48.png"
-						width="32" height="32" align="absmiddle"/>
-			      </button>
-			  </a></h6>
+				<?php
+					echo $printCartao;
+				?>
+				</h6>
 			</td>
 			<td rowspan="2" class="text-center"><?PHP print mostra_foto($bsc_rol);?></td>
     </tr>
