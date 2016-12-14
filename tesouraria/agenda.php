@@ -76,12 +76,12 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 		}else{
 			$lancDespesa = false;
 		}
-		$multaUS				=	formataNumBanco ($_POST['multa']);//Valor no padr�o americano
-		$atualizar->multa		=	$multaUS;
-		$valor_us 				=	formataNumBanco ($_POST['valor']);//Valor no padr�o americano
-		$atualizar->valor		=	$valor_us;
+		$multaUS	=	formataNumBanco ($_POST['multa']);//Valor no padr�o americano
+		$atualizar->multa	=	$multaUS;
+		$valor_us	=	formataNumBanco ($_POST['valor']);//Valor no padr�o americano
+		$atualizar->valor	=	$valor_us;
 		$hist = $_SESSION['valid_user'].": ".date('d/m/Y H:i:s');
-		$atualizar->hist	= 	$hist;
+		$atualizar->hist	=	$hist;
 		$total = number_format($atualizar->valor+$atualizar->multa,2,",",".");
 		if ($_POST['status']=='2'){
 			$pagamento = ($_POST['data']=='') ? date('Y-m-d') : br_data($_POST['data'],"Data do pagamento!");
