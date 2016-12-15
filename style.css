@@ -358,7 +358,7 @@ img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inli
 }
 @keyframes slidein {
   from {
-    margin-left: 50%;
+    margin-left: 35%;
     width: 300%;
   }
 
