@@ -471,6 +471,7 @@ class editar_form {
 
 	public function getEditar($placeholder,$fJScript,$ident){
 	$ind = 1;
+	$classCompl = '';
 	if ($this->valor=="" || $this->valor=='N&atilde;o Informado!'){
 		$this->valor='';
 		if ($placeholder=='') {
@@ -479,6 +480,7 @@ class editar_form {
 	}elseif ($this->campo=='valor') {
 		$trans = array("." => ",", "," => ".");
 		$this->valor = strtr($this->valor,$trans);
+		$classCompl = 'money';
 	}
 	if ($this->campo==$this->vlr_get)
 		{
@@ -551,7 +553,8 @@ class editar_form {
 					?>
 					</td><td>
 					<label>&nbsp;</label>
-			      		<input type="text" class="form-control" autofocus="autofocus" placeholder="<?php echo $placeholder;?>"
+			      		<input type="text" class="form-control <?php echo $classCompl;?>" 
+								autofocus="autofocus" placeholder="<?php echo $placeholder;?>"
 						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>"
 						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
 						maxlength="<?PHP echo $this->maxcaratere;?>"/>
@@ -796,7 +799,7 @@ class List_sele {
 }
 
 class ultimo_registro {
-	
+
    function __construct (){
 	  $this->tabela = $_POST["tabela"];//Define tabela a ser usada
 	  $this->query = "SELECT * from {$this->tabela} ";
