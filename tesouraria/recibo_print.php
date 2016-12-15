@@ -2,47 +2,36 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 	session_start();
-
 	if ($_SESSION["setor"]<50 && $_SESSION["setor"]!=2){
 		echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 		$_SESSION = array();
 		session_destroy();
 		header("Location: ./");
 	}
-
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
-
 		function __autoload ($classe) {
-
 		list($dir,$nomeClasse) = explode('_', $classe);
 		//$dir = strtr( $classe, '_','/' );
-
 		if (file_exists("../models/$dir/$classe.class.php")){
-
 			require_once ("../models/$dir/$classe.class.php");
 		}elseif (file_exists("../models/$classe.class.php")){
 			require_once ("../models/$classe.class.php");
 		}
-
-
 	}
-
 	$igreja = new DBRecord ("igreja","1","rol");
-
 	if ($igreja->cidade()>0) {
 		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 		$origem=$cidOrigem->nome().' - '.$cidOrigem->coduf();
 	}else {
 		$origem = $igreja->cidade().' - '.$igreja->uf();
 	}
-
 	if ($_POST["reimprimir"]==""){
-
 		$cad_igreja = intval($_POST['igreja']);
 		$cidIgreja = new DBRecord('cidade', $igreja->cidade(),'id');
 		$nomeCidIgreja = $cidIgreja->nome();
-		$valor = $_POST["valor"];
+		$valor = strtr( str_replace(array('.'),array(''),$_POST["valor"]), ',.','.,' );
+		$valorBR = number_format($valor, 2, ',', ' ');
 		$rec_tipo = intval($_POST["rec"]);
 		$fonte_recurso = intval($_POST["caixa"]);
 		$rolmembro = intval($_POST["rol"]);
@@ -51,18 +40,15 @@
 		$debito = intval($_POST["acessoDebitar"]);
 		$referente = $_POST["referente"];
 		$nome = $_POST["nome"];
-      	$cpf = $_POST["cpf"];
-      	$rg = $_POST["rg"];
-      	$acessoDebitar = $_POST['acessoDebitar'];
-
+    $cpf = $_POST["cpf"];
+    $rg = $_POST["rg"];
+    $acessoDebitar = $_POST['acessoDebitar'];
 		$numero = ($_POST["numero"]=="") ? $_POST["razao"]:$_POST["numero"];
-
 		if (empty($_POST["data"])) {
 			$data = date("d/m/Y");
 		}else {
 			$data = $_POST["data"];
 		}
-
 	}else {
 		$reimprimir = new DBRecord("tes_recibo", intval($_POST["reimprimir"]), "id");
 		$cad_igreja = $reimprimir->igreja();
@@ -78,20 +64,16 @@
 		$rg = trim( $rg, 'RG: ' );
 		$referente = $reimprimir->motivo();
 	}
-
-		$conta = new tes_conta();
-		$dadosCta = $conta->ativosArray();
-
+	$conta = new tes_conta();
+	$dadosCta = $conta->ativosArray();
 	//Formata o valor e defini para exibição por texto por extenso
-		$valor_us =strtr("$valor", ',','.' );
-		$vlr = number_format("$valor_us",2,",",".");
-		$dim = extenso($valor_us);
-		$dim = ereg_replace(" E "," e ",ucwords($dim));
+	$valor_us =strtr("$valor", ',','.' );
 
-
+	$vlr = number_format("$valor_us",2,",",".");
+	$dim = extenso($valor_us);
+	$dim = ereg_replace(" E "," e ",ucwords($dim));
 	$link = "../?escolha=tesouraria/recibo.php&menu=top_tesouraria&valor=$valor&referente={$_POST["referente"]}&data={$_POST["data"]}";
 	$link .= "&nome=".$_POST["nome"]."&rol=".$_POST["rol"]."&rec=".$_POST["rec"];
-
 	if (empty($valor)){
 		echo "<script> alert('Você não definiu o valor do recibo!');location.href='".$link."';</script>";
 		$erro=1;
@@ -110,30 +92,25 @@
 	}elseif ($rec_tipo=='' || $rec_tipo>'3'){
 		$erro =1;
 	}
-
-		$hist = $_SESSION['valid_user'].": ".date("d/m/Y h:i:s");
-
-		//Verifica click duplo no form de criar recibos
-		if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
-			//houve click duplo no form
-			$gerarPgto = true;
-		}else {
-			//Não houve click duplo no form
-			$gerarPgto = false;
-			//Grava no banco codigo de autorização para o novo recibo
-			add_transid($_POST["transid"]);
-		}
-
-		//Verifica o tipo de recibo no formato apropriado
-		require_once '../models/tes/insertRecibos.php';
-
+	$hist = $_SESSION['valid_user'].": ".date("d/m/Y h:i:s");
+	//Verifica click duplo no form de criar recibos
+	if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
+		//houve click duplo no form
+		$gerarPgto = true;
+	}else {
+		//Não houve click duplo no form
+		$gerarPgto = false;
+		//Grava no banco codigo de autorização para o novo recibo
+		add_transid($_POST["transid"]);
+	}
+	//Verifica o tipo de recibo no formato apropriado
+	require_once '../models/tes/insertRecibos.php';
 	if (empty($_POST['reimprimir'])){
 	$rec_num = new ultimoid('tes_recibo');//recupera o id do último insert no mysql (número do recibo)
-	$numrecibo = $rec_num->ultimo();}
-	else {
+	$numrecibo = $rec_num->ultimo();
+	}else {
 		$numrecibo = $_POST['reimprimir'];
 	}
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -201,4 +178,3 @@
   </div>
 </body>
 </html>
-

@@ -15,7 +15,6 @@
  * Insere dados no banco do forms/autodizimo.php na tabela:usuario
  */
 controle ("tes");
-
 $igreja = new DBRecord('igreja', $_POST['rolIgreja'], 'rol');
 if ($_POST["rol"]>'0' ) {
 	if (!empty($_POST["nome"])) {
@@ -38,7 +37,6 @@ if ($_POST["rol"]>'0' ) {
 	$nome = 'Anônimo';
 	$mostrarNome =  'An&ocirc;nimo'.$nome;
 }
-
 $nome = trim($nome);
 $mostrarNome .=' - lan&ccedil;. para: '.$igreja->razao();
 $vlr = false;
@@ -46,7 +44,6 @@ $mostraLanc  =  '<fieldset><legend>Pre-Lançamento</legend>';
 $mostraLanc .=  '<table class="table">';
 $mostraLanc .=  '<thead><tr><th colspan="2">Contribuinte: <span class="badge">'.$mostrarNome.'</span></th></tr>';
 $mostraLanc .=  '</thead><tbody><tr id="total"><td>Tipo de Entrada</td><td id="moeda">Valor</td></tr>';
-
 if ($_POST['tipo']=='4') {
 for ($i = 0; $i < 3; $i++) {
 	//verifica se há algum campo algum campo com valor
@@ -54,7 +51,6 @@ for ($i = 0; $i < 3; $i++) {
 		$vlrPost = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );
 		$valorBR = number_format($vlrPost, 2, ',', ' ');
 		$totalContr += $vlrPost;
-
 		switch ($i) {
 			case '0':
 				if ($vlrPost>0)
