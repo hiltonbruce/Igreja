@@ -107,13 +107,14 @@ class agenda {
 			<th scope="col">Igreja</th>
 			<th scope="col">Motivo</th>
 			<th scope="col">Valor (R$)</th>
-			<th scope="col">Situa√ß√£o</th>
+			<th scope="col">Situa&ccedil;&atilde;o</th>
 			<th scope="col">Vencimento</th>
 		</tr>
 	</thead>
 	<tbody id="recibos">
 	<?PHP
 	$inc_fix=0;
+	$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 	while($coluna_fix = mysql_fetch_array($sql3_fix))
 	{
 		$roligreja = ($coluna_fix['igreja']<1) ? 1:$coluna_fix['igreja'];
@@ -135,7 +136,7 @@ class agenda {
 				$titulo = 'Pagamento ser&aacute; realizado hoje!';
 				break;
 			case 2:
-				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$idLanc = ($coluna_fix['idlanc']>0) ? '(Reg. '.$coluna_fix['idlanc'].') ' : $semLanc ;
 				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ';
 				$evento .= 'alt="D&iacute;≠vida Paga! Obrigado."></span>'.$idLanc;
 				$status = $evento.' Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
@@ -243,6 +244,7 @@ class agenda {
 		<tbody id="recibos">
 	<?PHP
 	$inc_pen=0;
+	$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 	while($coluna_pen = mysql_fetch_array($sql3_pen))
 	{
 		if ($coluna_pen["rol"]>"0") {
@@ -258,7 +260,7 @@ class agenda {
 				$status .= '<span class="glyphicon glyphicon-warning-sign text-warning" aria-hidden="true" ></span> Saiu p/ Pgto';
 				break;
 			case 2:
-				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$idLanc = ($coluna_pen['idlanc']>0) ? '(Reg. '.$coluna_pen['idlanc'].') ' : $semLanc ;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$status = $evento.' Pago em: '.conv_valor_br ($coluna_pen['datapgto']);
@@ -325,10 +327,11 @@ class agenda {
 		$periodo_array = mysql_query($periodo)  or die (mysql_error());
 		$numLinhas	= mysql_num_rows($periodo_array);
 		//echo "<h1>Linhas Afetadas $numLinhas</h1>";
+		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		if ($numLinhas>0) {
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 			if ($periodo_dados['status']=='2') {//Marca os j√° pagos
-				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ></span> '.$idLanc;
 				$titulo = 'D&iacute;≠vida Paga! Obrigado.';
 			}elseif ($periodo_dados['status']=='1'){
@@ -414,11 +417,10 @@ class agenda {
 		$listvenc .= ' status<"2" AND TO_DAYS(vencimento) < TO_DAYS(NOW())';
 		$listvenc .= 'AND motivo LIKE "%'.$motivo.'%" ORDER BY vencimento ';
 		$listvenc_array = mysql_query($listvenc);
-
+		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		while ($contas = mysql_fetch_array($listvenc_array)) {
-
 			if ($contas['status']=='2') {//Marca os j√° pagos
-				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$idLanc = ($contas['idlanc']>0) ? '(Reg. '.$contas['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$titulo = 'D&iacute;≠vida Paga! Obrigado.';
@@ -443,7 +445,6 @@ class agenda {
 			}else {
 				$nome = $dadosCredores[$contas['credor']]['0'];
 			}
-
 			$p++;
 			$trtab = ($p % 2) == 0 ? '<tr class="dados" >' : '<tr >';
 			$tabela .=  $trtab;
@@ -464,7 +465,7 @@ class agenda {
 		$dadosMembros	= $this->membro->nomes();
 		$dadosCredores	= $this->credor->dados();
 		$dadosIgreja	= $this->igreja->Arrayigreja();
-		
+
 		$filtrarCredor = ((int)$credor!='') ? ' a.credor = "'.$credor.'" AND ':'';
 		if (strstr($credor, 'r')) {
 			$credor = trim($credor,"membro@");
@@ -477,11 +478,10 @@ class agenda {
 		$listvenc .= 'a.idlanc FROM agenda AS a, igreja AS i  WHERE '.$filtrarCredor;
 		$listvenc .= 'i.rol=a.igreja AND motivo LIKE "%'.$motivo.'%"';
 		$listvenc_array = mysql_query($listvenc);
-
+		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		while ($contas = mysql_fetch_array($listvenc_array)) {
-
 			if ($contas['status']=='2') {//Marca os j√° pagos
-				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$idLanc = ($contas['idlanc']>0) ? '(Reg. '.$contas['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$titulo = 'D&acute;≠vida Paga! Obrigado. Motivo:'.$contas['motivo'];
@@ -497,7 +497,6 @@ class agenda {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
 			}
-
 			if (strstr($contas['credor'], 'r')) {
 				$rolMembro = trim ($contas['credor'], 'r');
 				$nome = $dadosMembros[intval($rolMembro)]['0'];
@@ -541,11 +540,11 @@ class agenda {
 		$periodo_array = mysql_query($periodo)  or die (mysql_error());
 		$numLinhas	= mysql_num_rows($periodo_array);
 		//echo "<h1>Linhas Afetadas $numLinhas</h1>";
-
+		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		if ($numLinhas>0) {
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
 			if ($periodo_dados['status']=='2') {//Marca os j√° pagos
-				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : '(Sem Lan&ccedil;.)' ;
+				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
 				$titulo = 'D&iacute;≠vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
