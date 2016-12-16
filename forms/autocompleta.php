@@ -1,5 +1,3 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
 <?php
 	if (empty($formCampos)) {

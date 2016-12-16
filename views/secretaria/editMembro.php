@@ -196,7 +196,7 @@
 		//fim
 		?></td>
 		<td colspan="2">Bairro:
-          <?PHP
+    <?PHP
 		//inicio
 		$bairro = new DBRecord ("bairro",$arr_dad["bairro"],"id");
 		echo $bairro->bairro();
@@ -232,18 +232,20 @@
 		$nome = new editar_form("celular",$arr_dad["celular"],$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
 		?></td>
-		<td>Telefone:
-        <?PHP
-		$nome = new editar_form("fone_resid",$arr_dad["fone_resid"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-		?></td>
+			<td>Telefone:
+	        <?PHP
+					$nome = new editar_form("fone_resid",$arr_dad["fone_resid"],$tab,$tab_edit);
+					$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+					?>
+				</td>
       </tr>
       <tr>
         <td>CEP:
           <?PHP
-		$nome = new editar_form("cep",$arr_dad["cep"],$tab,$tab_edit);
-		$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-		?></td>
+					$nome = new editar_form("cep",$arr_dad["cep"],$tab,$tab_edit);
+					$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+					?>
+				</td>
         <td>Doador de Sangue:
           <?PHP
 		$nome = new editar_form("doador",$arr_dad["doador"],$tab,$tab_edit);

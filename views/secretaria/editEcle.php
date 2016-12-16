@@ -49,9 +49,9 @@
     <tr>
       <td>UF:
         <p><a href="./?escolha=adm/dados_ecles.php&bsc_rol=<?php echo $bsc_rol;?>&campo=uf"><?PHP print " > {$arr_dad["uf"]} < ";?></a>
-            <?PHP
-  if ($_GET["campo"]=="uf"){
-  ?>
+        <?PHP
+        if ($_GET["campo"]=="uf"){
+        ?>
         </p>
         <form id="form2" name="form2" method="post" action="">
         <?PHP
@@ -73,11 +73,11 @@
   $nome->getMostrar();
   if ($_GET["campo"]=="local_batismo"){
   ?>
-        <form id="form3" name="form3" method="post" action="">
-          <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "adm/atualizar_dados.php";?>" />
-          <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
+    <form id="form3" name="form3" method="post" action="">
+    <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "adm/atualizar_dados.php";?>" />
+    <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
     <input name="bsc_rol" type="hidden" id="campo" value="<?PHP echo $bsc_rol;?>" />
-          <?PHP
+  <?PHP
     $lst_cid = new sele_cidade("cidade",$arr_dad["uf"],"coduf","nome","local_batismo");
     $vlr_linha=$lst_cid->ListDados ($ind++);
   ?>
@@ -101,13 +101,13 @@
   $nome->getMostrar();
   $nome->getEditar('','',$bsc_rol);
   ?></td>
-      <td>Diácono em:
+      <td>Di&aacute;cono em:
       <?PHP
   $nome = new editar_form("diaconato",$arr_dad["diaconato"],$tab,$tab_edit);
   $nome->getMostrar();
   $nome->getEditar('','',$bsc_rol);
   ?></td>
-  <td >Presbitéro em:
+  <td >Presbit&eacute;ro em:
       <?PHP
   $nome = new editar_form("presbitero",$arr_dad["presbitero"],$tab,$tab_edit);
   $nome->getMostrar();

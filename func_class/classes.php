@@ -463,15 +463,15 @@ class editar_form {
 					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
 					|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
 					$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="data"
-					|| $this->campo=="dat_aclam") {
-			$this->formato = "id='data'";
-			$this->maxcaratere = 10;
-		}
+					|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao") {
+						$this->classCompl = 'dataclass';
+					}else {
+						$this->classCompl = '';
+					}
 	}
 
 	public function getEditar($placeholder,$fJScript,$ident){
 	$ind = 1;
-	$classCompl = '';
 	if ($this->valor=="" || $this->valor=='N&atilde;o Informado!'){
 		$this->valor='';
 		if ($placeholder=='') {
@@ -480,7 +480,7 @@ class editar_form {
 	}elseif ($this->campo=='valor') {
 		$trans = array("." => ",", "," => ".");
 		$this->valor = strtr($this->valor,$trans);
-		$classCompl = 'money';
+		$this->classCompl = 'money';
 	}
 	if ($this->campo==$this->vlr_get)
 		{
@@ -553,11 +553,10 @@ class editar_form {
 					?>
 					</td><td>
 					<label>&nbsp;</label>
-			      		<input type="text" class="form-control <?php echo $classCompl;?>" 
+			      		<input type="text" class="form-control <?php echo $this->classCompl;?>"
 								autofocus="autofocus" placeholder="<?php echo $placeholder;?>"
-						name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>"
-						size="30" tabindex="<?PHP echo $ind++;?>" <?PHP echo "{$this->formato}";?>
-						maxlength="<?PHP echo $this->maxcaratere;?>"/>
+								name="<?PHP echo $this->campo;?>" value="<?PHP echo $this->valor;?>"
+								size="30" tabindex="<?PHP echo $ind++;?>" />
 					</td></td>
 					<?PHP
 					break;
