@@ -1,39 +1,15 @@
 <?php
-function auth($login = '', $passwd = '')
+function auth()
 {
 	session_start();
-	$authdata = $_SESSION['authdata'];
+	$authdata = $_SESSION['valid_user'];
 
-	if (!empty($login)) {
-		$username = $login;
-		$pw = $passwd;
-		$register = true;
-	} elseif (!empty($authdata['login'])) {
-		$username = $authdata['login'];
-		$pw = $authdata['password'];
-		$register = false;
-	} else {
-		$auth = 0;
-	}
 
-	if (!empty($username)) {
-		mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-		mysql_select_db(DB_NAME) or die(mysql_error());
+	if (!empty($_SESSION['valid_user'])) {
 
-		$sql = "SELECT * FROM " . DB_TABLE_PREFIX . "users WHERE username = '" . $username . "'";
-		$result = mysql_query($sql) or die(mysql_error());
-		$row = mysql_fetch_assoc($result);
+				$_SESSION['authdata'] = array('login'=>$_SESSION['valid_user'], 'userlevel'=>$_SESSION['setor'], 'uid'=>$_SESSION['valid_user']);
 
-		if ( $row["password"] == $pw ) {
-			if ($register) {
-				$_SESSION['authdata'] = array('login'=>$row['username'], 'password'=>$row['password'], 'userlevel'=>$row['user_level'], 'uid'=>$row['uid']);
-			}
-			$auth = $row['userlevel'];
-		} else {
-			unset($_SESSION['authdata']);
-			$auth = 0;
 		}
-	}
 
    	return $auth;
 }
@@ -138,15 +114,15 @@ function javaScript()
 	}
 
 	function postMessage(day, month, year) {
-		eval("page" + day + " = window.open('./eventform.php?d=" + day + "&m=" + month + "&y=" + year + "', 'postScreen', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("page" + day + " = window.open('./agendaSec/eventform.php?d=" + day + "&m=" + month + "&y=" + year + "', 'postScreen', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 
 	function openPosting(pId) {
-		eval("page" + pId + " = window.open('./eventdisplay.php?id=" + pId + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("page" + pId + " = window.open('./agendaSec/eventdisplay.php?id=" + pId + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 
 	function loginPop(month, year) {
-		eval("logpage = window.open('./login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("logpage = window.open('./?login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 	</script>
 <?php
@@ -161,13 +137,13 @@ function footprint($auth, $m, $y)
 	echo "Calendário desenvolvido por WESPA Digital &bull; Adapta&ccedil;&atilde;o Joseilton C Bruce<br>\n[ ";
 
 	if ( $auth == 2 ) {
-		echo "<a href=\"./useradmin.php\">" . $lang['adminlnk'] . "</a> | ";
-		echo " <a href=\"./login.php?action=logout&month=$m&year=$y\">" . $lang['logout'] . "</a>";
+		echo "<a href=\"./?useradmin.php\">" . $lang['adminlnk'] . "</a> | ";
+		echo " <a href=\"./?login.php&action=logout&month=$m&year=$y\">" . $lang['logout'] . "</a>";
 	} elseif ( $auth == 1 ) {
-		echo "<a href=\"./useradmin.php?flag=changepw\">" . $lang['changepw'] . "</a> | ";
-		echo "<a href=\"./login.php?action=logout&month=$m&year=$y\">" . $lang['logout'] . " </a>";
+		echo "<a href=\"./?useradmin.php&flag=changepw\">" . $lang['changepw'] . "</a> | ";
+		echo "<a href=\"./?login.php&action=logout&month=$m&year=$y\">" . $lang['logout'] . " </a>";
 	} else {
-		echo "<a href=\"javascript:./loginPop($m, $y)\">" . $lang['login'] . "</a>";
+		echo "<a href=\"javascript:./?loginPop($m, $y)\">" . $lang['login'] . "</a>";
 	}
 
 	echo " ]</span>";
@@ -182,10 +158,10 @@ function scrollArrows($m, $y)
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
 
-	$s = "<a href=\"./agendaSec/index.php?month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
-	$s .= "<img src=\"./agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
-	$s .= "<a href=\"./agendaSec/index.php?month=" . $nextmonth . "&year=" . $nextyear . "\">";
-	$s .= "<img src=\"./agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
+	$s = "<a href=\"./?agendaSec/index.php&month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
+	$s .= "<img src=\"./?agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
+	$s .= "<a href=\"./?agendaSec/index.ph&month=" . $nextmonth . "&year=" . $nextyear . "\">";
+	$s .= "<img src=\"./?agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
 
 	return $s;
 }
@@ -274,7 +250,7 @@ function getDayNameHeader()
 		}
 	}
 
-	$s = "<table cellpadding=\"1\" cellspacing=\"1\" border=\"0\" class='table' >\n<tr>\n";
+	$s = "<table class='table' >\n<tr>\n";
 
 	foreach($lang['abrvdays'] as $day) {
 		$s .= "\t<td class=\"column_header\">&nbsp;$day</td>\n";
@@ -286,8 +262,6 @@ function getDayNameHeader()
 
 function getEventDataArray($month, $year)
 {
-	mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-	mysql_select_db(DB_NAME) or die(mysql_error());
 
 	$sql = "SELECT id, d, title, start_time, end_time, ";
 

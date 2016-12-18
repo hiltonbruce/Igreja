@@ -1,14 +1,12 @@
 <?php
 session_start();
-require("./agendaSec/config.php");
-require("./agendaSec/lang/lang." . LANGUAGE_CODE . ".php");
-require("./agendaSec/functions.php");
+require("./config.php");
+require("./lang/lang." . LANGUAGE_CODE . ".php");
+require("./functions.php");
+require "../func_class/funcoes.php";
+require "../func_class/classes.php";
 
 $id 	= (int) $_GET['id'];
-$auth	= auth();
-
-mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-mysql_select_db(DB_NAME) or die(mysql_error());
 
 $sql = "SELECT d, m, y FROM " . DB_TABLE_PREFIX . "mssgs WHERE id=" . $id;
 $result = mysql_query($sql) or die(mysql_error());
@@ -37,7 +35,7 @@ $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result)) {
 	echo '<span class="display_header">' . $lang['otheritems'] . '</span>';
-	echo '<br clear="all"><img src="./agendaSec/images/clear.gif" width="1" height="3" border="0"><br clear="all">';
+	echo '<br clear="all"><img src="./images/clear.gif" width="1" height="3" border="0"><br clear="all">';
 
 	// display rest of this day's postings
 	while ($row = mysql_fetch_array($result)) {
@@ -57,14 +55,14 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <html>
 <head>
 	<title>Eventos</title>
-	<link rel="stylesheet" type="text/css" href="./agendaSeccss/popwin.css">
+	<link rel="stylesheet" type="text/css" href="./css/popwin.css">
 <?php 	if ($auth) { ?>
 	<script language="JavaScript">
 		function deleteConfirm(eid) {
 			var msg = "<?php echo $lang['deleteconfirm'];?>";
 
 			if (confirm(msg)) {
-				opener.location = "./agendaSec/eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
+				opener.location = "./eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
 				window.setTimeout('window.close()', 1000);
 			} else {
 				return;
@@ -83,7 +81,7 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 </tr>
 </table>
 
-<img src="agendaSec/images/clear.gif" width="1" height="3" border="0"><br clear="all">
+<img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">
 <?php
 }
 
@@ -91,11 +89,8 @@ function writePosting($id, $auth)
 {
 	global $lang;
 
-	mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-	mysql_select_db(DB_NAME) or die(mysql_error());
-
 	$sql = "SELECT y, m, d, title, text, start_time, end_time, ";
-	$sql .= DB_TABLE_PREFIX . "users.uid, fname, lname, ";
+	$sql .= "u.cpf, ";
 
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(start_time, '%l:%i%p') AS stime, ";
@@ -108,8 +103,8 @@ function writePosting($id, $auth)
 	}
 
 	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs ";
-	$sql .= "LEFT JOIN " . DB_TABLE_PREFIX . "users ";
-	$sql .= "ON (" . DB_TABLE_PREFIX . "mssgs.uid = " . DB_TABLE_PREFIX . "users.uid) ";
+	$sql .= "LEFT JOIN usuario AS u ";
+	$sql .= "ON (" . DB_TABLE_PREFIX . "mssgs.uid = u.cpf ) ";
 	$sql .= "WHERE id = " . $id;
 
 	$result = mysql_query($sql) or die(mysql_error());
@@ -144,7 +139,7 @@ function writePosting($id, $auth)
 	}
 ?>
 	<table cellspacing="0" cellpadding="0" border="0" width="300" class='table' >
-		<tr><td bgcolor="#000000"> 
+		<tr><td bgcolor="#000000">
 			<table cellspacing="1" cellpadding="1" border="0" width="100%">
 				<tr>
 					<td class="display_title_bg"><table cellspacing="0" cellpadding="0" border="0" width="100%"><tr>

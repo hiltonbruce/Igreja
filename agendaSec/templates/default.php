@@ -6,10 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="agendaSec/css/default.css">
 </head>
 <body>
-<table cellpadding="0" cellspacing="0" border="0" align="center" class='table'>
+<table class='table'>
 <tr>
 	<td>
-		<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=1 class='table'>
+		<table class='table'>
 <tr>
 <td><img SRC="agendaSec/images/tit-calendario.gif" height=59 width=310></td>
 </tr>
@@ -41,8 +41,6 @@
 	</td>
 </tr>
 </table>
-
-
 
 </body>
 </html>

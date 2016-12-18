@@ -15,7 +15,7 @@ if ($rec>'12' && $rec<'20') {
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
 	require "../help/impressao.php";//Include de funções, classes e conexões com o BD
 	if ($idIgreja==0) {
-			$igrejaSelecionada = new DBRecord('igreja', '1', 'rol');
+			$igrejaSelecionada = $igSede;
 			//$igLanc = $igrejaSelecionada;
 			$cidSede = $igrejaSelecionada;
 	} else {

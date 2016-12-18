@@ -1,25 +1,25 @@
 <?php
 /*******************************************************
-* config.php -											
-* 	Arquivo de configuração para o WESPA Calendário v0.2		
-* 	Autor: WESPA Digital <info@wespa.com.br>			
-*														
-* 	Configuration directives set with php's define()	
-* 	function.  Usage: define("CONSTANT-ID", 			
-*	"scalar_value")										
-* 														
-* Para perguntas ou comentários, visite:						
+* config.php -
+* 	Arquivo de configuração para o WESPA Calendário v0.2
+* 	Autor: WESPA Digital <info@wespa.com.br>
+*
+* 	Configuration directives set with php's define()
+* 	function.  Usage: define("CONSTANT-ID",
+*	"scalar_value")
+*
+* Para perguntas ou comentários, visite:
 * 	http://www.wespa.com.br
 *******************************************************/
 
 /*******************************************************
 ***** Configurações do Banco de Dados MySQL ***********
-*******************************************************/
 
 define("DB_NAME", "assembleia");				// nome do banco de dados
 define("DB_USER", "root");				// nome de usuário no banco de dados
 define("DB_PASS", "x9735pla");				// senha do banco de dados
 define("DB_HOST", "localhost");			// servidor de banco de dados
+*******************************************************/
 
 // Prefixo adicionado aos nomes de tabelas. Não autere após
 // a instalação inicial.
@@ -35,7 +35,7 @@ define("LANGUAGE_CODE", "pt");
 ********* Opções Visuais do WESPA Calendário ************
 *******************************************************/
 
-// Define o número máximo de eventos a serem visualizados 
+// Define o número máximo de eventos a serem visualizados
 // no dia, na tabela do mês.
 define("MAX_TITLES_DISPLAYED", 10);
 
@@ -44,7 +44,7 @@ define("MAX_TITLES_DISPLAYED", 10);
 // mais espaço para exibilos no calendário.
 define("TITLE_CHAR_LIMIT", 100);
 
-// Nome do modelo.  e.g. "default" se o arquivo 
+// Nome do modelo.  e.g. "default" se o arquivo
 // que contém o modelo visual for "default.php".
 define("TEMPLATE_NAME", "default");
 

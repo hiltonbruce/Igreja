@@ -12,7 +12,7 @@ $m = (!$month) ? date("n") : $month;
 $y = (!$year) ? date("Y") : $year;
 
 $scrollarrows	= scrollArrows($m, $y);
-$auth 			= auth($_POST['username'],$_POST['password']);
+$auth 			= auth();
 
 require("./agendaSec/templates/" . TEMPLATE_NAME . ".php");
 ?>
