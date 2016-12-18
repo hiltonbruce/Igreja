@@ -1012,12 +1012,13 @@ function calcDiaSemana($dia,$mes,$ano){
   	return($dia_semana);
  }
 
- function gerarCalend($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg)//$feriados,$marcados,$rodapes)
+ function gerarCalend($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg)
+ //$feriados,$marcados,$rodapes
  {
   if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
   {
-   	$tabela="Erro ao gerar calendï¿½rio: [mï¿½s=".$mes."] [ano=".$ano.
+   	$tabela="Erro ao gerar calend&aacute;rio: [m&ecirc;s=".$mes."] [ano=".$ano.
            "] [n&uacute;mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
   }else {
    //Carrega o css do calendï¿½rio e armazena em $dados
@@ -1025,9 +1026,8 @@ function calcDiaSemana($dia,$mes,$ano){
    $tam=filesize("calendario.css");
    $dados=fread($arq,$tam);
    fclose($arq);
-   //Coloca o css carregado no cï¿½digo do calendï¿½rio
+   //Coloca o css carregado no código do calendário
    echo "<style type='text/css'>".$dados."</style>";
-
    //Calcula em que dia da semana ï¿½ o dia 1/$mes/$ano
    $dia_semana=calcDiaSemana(1,$mes,$ano);
    $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano ï¿½ bisexto
@@ -1070,35 +1070,35 @@ function calcDiaSemana($dia,$mes,$ano){
 				 {
 					  //Caso seja um intervalo de dias
 					  if(strpos($datas[$i][$i1],"-")==2) {
-					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o primeiro dia
-					   $d2=substr($datas[$i][$i1],3,2); //Obtï¿½m o segundo dia
-					   $m=substr($datas[$i][$i1],6,2); //Obtï¿½m o mï¿½s do intervalo
+					   $d1=substr($datas[$i][$i1],0,2); //Obtém o primeiro dia
+					   $d2=substr($datas[$i][$i1],3,2); //Obtém o segundo dia
+					   $m=substr($datas[$i][$i1],6,2); //Obtém o mï¿½s do intervalo
 					  } else /*Caso seja um dia */ {
-					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o dia
+					   $d1=substr($datas[$i][$i1],0,2); //Obtém o dia
 				  	   $d2=0;
-					   $m=substr($datas[$i][$i1],3,2); //Obtï¿½m o mï¿½s
+					   $m=substr($datas[$i][$i1],3,2); //Obtém o mês
 					  }
-					  //Atribui uma classe CSS ï¿½ cï¿½lula (dia) atual da tabela caso
-					  //o mï¿½s atual $maux seja igual ao mï¿½s obtido de um dos vetores $m ($feriado
+					  //Atribui uma classe CSS à célula (dia) atual da tabela caso
+					  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado
 					  // ou $marcado)
-					  //Verifica se o dia atual $cnt_dias estï¿½ no intervalo de dias ou se ï¿½ igual
+					  //Verifica se o dia atual $cnt_dias estï¿½ no intervalo de dias ou se é igual
 					  //ao dia obtido
 				   	  if($m==$maux && (($cnt_dias>=$d1 && $cnt_dias<=$d2) ||
 					    ($cnt_dias==$d1))) {
-					    $classe="td_marcado".($i+1);//$valor[$i];
-						$marcaDia .= '<span class="'.$classe.'" >&bull;</span>';
-						}
+						    $classe = "td_marcado".($i+1);//$valor[$i];
+								$marcaDia .= '<span class="'.$classe.'" >&bull;</span>';
+							}
 				 }
 			}
 			if($classe=="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 			 $classe=($d==0) ? "td_dia":"td_marcado0" ;
-			//Cria a cï¿½lula referente ao dia atual
+			//Cria a célula referente ao dia atual
 			if ($marcaDia!='') {
 				$diaAtual = '<a href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
 			} else {
 				$diaAtual = $cnt_dias++;
 			}
-			$temp_ln=$temp_ln."<td class='td_marcado0'>".$diaAtual.'<br />'.$marcaDia.'</td>';
+			$temp_ln = $temp_ln."<td class='td_marcado0'>".$diaAtual.'<br />'.$marcaDia.'</td>';
 			$marcaDia = '';
 	        $daux++;
 	        if($daux>6) $daux=0;
@@ -1112,7 +1112,7 @@ function calcDiaSemana($dia,$mes,$ano){
      if($nl==5) $temp_ln=$temp_ln."<tr><td colspan=7>&nbsp;</td></tr>";
      $temp_tb=$temp_tb.$temp_ln;
      $k=$idx-($mes-1);
-     if($rodapes[$k]!="") //Gera um rodapï¿½ para a tabela de mï¿½s
+     if($rodapes[$k]!="") //Gera um rodapé para a tabela de mês
      {
       $temp_tb=$temp_tb."<tr><td colspan=7 class='rodape'>".$rodapes[$k].
                "</td></tr></table><br></td>";

@@ -1,0 +1,34 @@
+<STYLE TYPE="text/css">
+<!--
+
+A	     	{ font-family:arial, helvetica; color:#953010; text-decoration:none }
+A:link		{ color:#953010; text-decoration:none }
+A:active	{ color:#953010; text-decoration:none }
+A:visited	{ color:#953010; text-decoration:none }
+A:hover	   	{ color:#953010; text-decoration:underline }
+
+BODY	{ background-color:#AAA }
+SPAN 	{ font-family:arial, helvetica }
+TD     	{ font-family:arial, helvetica }
+
+.login_header		{ font-size:16; font-family:arial, helvetica; font-weight:bold }
+.login_label		{ font-size:13; font-family:arial, helvetica }
+.login_auth_fail	{ font-size:15; font-family:arial, helvetica; color:#F00 }
+
+.edit_user_header 	{ font-size:16; font-family:arial, helvetica; font-weight:bold }
+.edit_user_label	{ font-size:12; font-family:arial, helvetica  }
+.bad_user_name		{ font-size:15; font-family:arial, helvetica; color:#F00 }
+
+.user_table_col_label	{ font-size:10; font-family:verdana, helvetica, arial; color:#FFF; font-weight:bold }
+.user_table_txt			{ font-size:14; font-family:arial, helvetica, sans-serif; color:#000; }
+
+.user_list_header	{ font-size:16; font-family:arial, helvetica; font-weight:bold }
+
+.user_list_options				{ font-size:10; font-family:verdana; color:#000; font-weight:bold }
+.user_list_options A:link		{ font-family:verdana; color:#953010 }
+.user_list_options A:active		{ font-family:verdana; color:#953010 }
+.user_list_options A:visited	{ font-family:verdana; color:#953010 }
+.user_list_options A:hover		{ font-family:verdana; color:#953010 }
+
+// end hiding -->
+</STYLE>

@@ -2,7 +2,6 @@
 ///require("calendario/funcs.php");
 $sec = (empty($_GET['sec'])) ? 0 : intval($_GET['sec']) ;
 $linkLancamento = 'escolha=controller/secretaria.php&';
-
     switch ($sec) {
         case 1:
             # Novos convertidos

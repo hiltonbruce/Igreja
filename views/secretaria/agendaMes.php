@@ -28,8 +28,7 @@ echo "<h2>";
 echo $sem->format('N');
 echo "</h2>";
  $agendaSec = new sec_Agenda;
-
-   echo $agendaSec->gerarCalend(date('m'),date('Y'),1,3,
+ echo $agendaSec->gerarCalend(date('m'),date('Y'),1,3,
                       array($marc0,$marc1,$marc2,$marc3,$marc4,$marc5,$marc6),
                       array("5 dias","7 dias","10 dias Cong. Usadeby","8 dias Cong. de Missões","4 dias Cong. Umadeby","8 dias EBAJ","2 dias EBD"),
                       array("Dias Congressos","Pesquisas e Estudos","Feriados",

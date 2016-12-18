@@ -26,7 +26,7 @@
   Podem ser criadas marcaÃ§Ãµes de datas indefinidamente, basta adicionÃ¡-las no arquivo
   'calendario.css', usando o nome de classe td_marcadoX, onde X Ã© o nÃºmero da marcaÃ§Ã£o.
   */
- $marc0=array("12/04","06/04","08-09/04","15-16/04","22-23/04","29-30/04",
+ $marc0=array("01/02","12/04","06/04","08-09/04","15-16/04","22-23/04","29-30/04",
               "06-07/05","13-14/05","20/05","28/05",
               "03-04/06","10-11/06","17-18/06","24-25/06",
               "01-02/07","08-09/07","22/07","30/07","05/08");
@@ -38,23 +38,21 @@
  $marc6=array("10-19/01");
  $marc7=array("23-25/05");
  #Descreve o evento das datas
- $descDatas = array("Agenda 01","Agenda 02","10 dias Cong. Usadeby","8 dias Cong. de MissÃµes",
+ $descDatas = array("Agenda 01","Agenda 002","10 dias Cong. Usadeby","8 dias Cong. de Missões",
                         "4 dias Cong. Umadeby","7 dias EBAJ","2 dias EBD","teste dias");
-
  $mesAgenda = (empty($_GET['mes']) || $_GET['mes']>'12') ?  date('m'): $_GET['mes'] ;
  $anoAgenda = (empty($_GET['ano']) || $_GET['ano']<'2010') ?  date('Y'): $_GET['ano'] ;
  $agendaSec = new sec_Agenda;
-   echo $agendaSec->gerarCalend($mesAgenda,$anoAgenda,1,3,
-                      array($marc0,$marc1,$marc2,$marc3,$marc4,$marc5,$marc6,$marc7),
-                      $descDatas,
-                      array("Dias Congressos","Pesquisas e Estudos","Feriados",
-                            "Planejamento AcadÃªmico","Casamentos","InÃ­cio e tÃ©rmino do perÃ­odo da Campanha",
-                            "Recesso"));
-
-  echo $agendaSec->gerarCalend(1,2016,12,3,
+ echo $agendaSec->gerarCalend($mesAgenda,$anoAgenda,1,3,
+                    array($marc0,$marc1,$marc2,$marc3,$marc4,$marc5,$marc6,$marc7),
+                    $descDatas,
+                    array("Dias Congressos","Pesquisas e Estudos","Feriados",
+                          "Planejamento Acadêmico","Casamentos","Iní­cio e término do período da Campanha",
+                          "Recesso"));
+echo $agendaSec->gerarCalend(1,2016,12,3,
                       array($marc0,$marc1,$marc2,$marc3,$marc4,$marc5,$marc6),
                       array("teste 1","teste 2","10 dias Cong. Usadeby","8 dias Cong. de MissÃµes","8 dias Cong. Umadeby","8 dias EBAJ","2 dias EBD","teste dias"),
                       array("Dias Congressos","Pesquisas e Estudos","Feriados",
-                            "Planejamento AcadÃªmico","Casamentos","InÃ­cio e tÃ©rmino do perÃ­odo da Campanha",
+                            "Planejamento Acadêmico","Casamentos","Iní­cio e término do perí­odo da Campanha",
                             "Recesso"));
      ?>

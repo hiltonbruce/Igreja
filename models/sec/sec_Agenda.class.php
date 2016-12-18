@@ -1,21 +1,18 @@
 <?PHP
-
 /***************************************************************************
- * Gerador de calendário em PHP
- * Última alteração: 28/02/2005 às 17:37                                   *
- * Autor: Raphael Araújo e Silva - khaotix_@hotmail.com                    *
+ * Gerador de calendário em PHP																					 *
+ * Última alteração: 28/02/2005 às 17:37                                *
+ * Autor: Raphael Araújo e Silva - khaotix_@hotmail.com                   *
  *                                                                         *
  * ATENÇÃO: VOCÊ TEM A COMPLETA PERMISSÃO PARA ALTERAÇÃO E REDISTRIBUIÇÃO  *
  *          DO CÓDIGO NESTE E EM QUALQUER ARQUIVO ACOMPANHANTE DESDE QUE O *
  *          AUTOR ORIGINAL SEJA CITADO.                                    *
  ***************************************************************************/
-
 /**
 *
 */
 class sec_Agenda
 {
-
 	protected $ano;
 	function __construct($ano='') {
 		$this->meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
@@ -41,16 +38,14 @@ class sec_Agenda
 	  return($dia_semana);
 	 }
 
-	 function gerarCalend($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg)//$feriados,$marcados,$rodapes)
+	 function gerarCalend($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg)
+	 //$feriados,$marcados,$rodapes
 	 {
 	  if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
-	      ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
-	  {
+	      ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13))) {
 	   $tabela="Erro ao gerar calend&aacute;rio: [m&ecirc;s=".$mes."] [ano=".$ano.
 	           "] [n&uacet;mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
-	  }
-	  else
-	  {
+	  } else {
 	   //Carrega o css do calendário e armazena em $dados
 	   $arq=fopen("calendario.css","r");
 	   $tam=filesize("calendario.css");
@@ -58,7 +53,6 @@ class sec_Agenda
 	   fclose($arq);
 	   //Coloca o css carregado no código do calendário
 	   echo "<style type='text/css'>".$dados."</style>";
-
 	   //Calcula em que dia da semana é o dia 1/$mes/$ano
 	   $dia_semana=calcDiaSemana(1,$mes,$ano);
 	   $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano é bisexto
@@ -70,53 +64,45 @@ class sec_Agenda
 	   $total=$idx+$nmeses; //Total de meses a serem considerados
 	   $dia=$daux=$dia_semana;
 	    for($i=0;$i<count($datas);$i++)
-	     $qtd[$i]=count($datas[$i]);
-	   	$nq=count($qtd);
-	   	$tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportará as demais tabelas de meses)
-		  while($idx<$total)
-		   {
+	    	$qtd[$i]=count($datas[$i]);
+		   	$nq=count($qtd);
+		   	$tabela="<table class='table table-bordered'>"; //Inicia a tabela geral (que suportará as demais tabelas de meses)
+		  while($idx<$total) {
 		    $tabela=$tabela."<tr>";
-		    for($ms=0; $ms<$ncols && $idx<$total; $ms++)
-		    {
-	     $temp_tb="<td valign='top'><table class='table'>
+		    for($ms=0; $ms<$ncols && $idx<$total; $ms++) {
+	     		$temp_tb="<td valign='top'><table class='table'>
 	              <tr><td colspan=7  class='cabecalho'>".$meses[$idx].'/'.$ano.
-	              "</td></tr><tr>"; //Cria uma tabela para o mês atual
-	     for($idx2=0;$idx2<7;$idx2++) //Gera o cabeçalho da tabela do mês atual
-	     $temp_tb=$temp_tb."<td class='td_semana'>".$dias[$idx2]."</td>";
-
-	     $temp_tb=$temp_tb."</tr>"; //Fecha o cabeçalho
-
-	     $cnt_dias=1; //Inicializa o contador de dias
-	     $temp_ln="";
-	     $nl=0;
-
-	     while($cnt_dias<=$ndias[$idx]) {
-	      $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mês atual
-	      for($d=0;$d<7 && $cnt_dias<=$ndias[$idx];$d++) {
-			if($d>=$dia || $dia==0) {
-		        $classe="";
-				$maux=$idx+1;
-				//A rotina abaixo verifica se o dia atual é um feriado ou um dia marcado
-				//onde $datas contém os dois vetores $feriados e $marcados
-				for($i=0;$i<$nq && $classe=="";$i++)
-				{
+	              "</td></tr><tr>"; //Cria uma tabela para o m�s atual
+		     for($idx2=0;$idx2<7;$idx2++) //Gera o cabe�alho da tabela do m�s atual
+		     $temp_tb=$temp_tb."<td class='td_semana'>".$dias[$idx2]."</td>";
+		     $temp_tb=$temp_tb."</tr>"; //Fecha o cabe�alho
+		     $cnt_dias=1; //Inicializa o contador de dias
+		     $temp_ln="";
+		     $nl=0;
+		     while($cnt_dias<=$ndias[$idx]) {
+		      $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mês atual
+		      for($d=0;$d<7 && $cnt_dias<=$ndias[$idx];$d++) {
+						if($d>=$dia || $dia==0) {
+			        $classe="";
+							$maux=$idx+1;
+					//A rotina abaixo verifica se o dia atual é um feriado ou um dia marcado
+					//onde $datas contém os dois vetores $feriados e $marcados
+					for($i=0;$i<$nq && $classe=="";$i++)
+					{
 					 for($i1=0;$i1<$qtd[$i] && $classe=="";$i1++)
 					 {
 						  //Caso seja um intervalo de dias
 						  if(strpos($datas[$i][$i1],"-")==2) {
-						   $d1=substr($datas[$i][$i1],0,2); //Obtém o primeiro dia
-						   $d2=substr($datas[$i][$i1],3,2); //Obtém o segundo dia
-						   $m=substr($datas[$i][$i1],6,2); //Obtém o mês do intervalo
-
+						   $d1=substr($datas[$i][$i1],0,2); //Obt�m o primeiro dia
+						   $d2=substr($datas[$i][$i1],3,2); //Obt�m o segundo dia
+						   $m=substr($datas[$i][$i1],6,2); //Obt�m o m�s do intervalo
 						  } else /*Caso seja um dia */ {
-
-						   $d1=substr($datas[$i][$i1],0,2); //Obtém o dia
+						   $d1=substr($datas[$i][$i1],0,2); //Obt�m o dia
 					  	   $d2=0;
-						   $m=substr($datas[$i][$i1],3,2); //Obtém o mês
+						   $m=substr($datas[$i][$i1],3,2); //Obt�m o m�s
 						  }
-
-						  //Atribui uma classe CSS à célula (dia) atual da tabela caso
-						  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado
+						  //Atribui uma classe CSS � c�lula (dia) atual da tabela caso
+						  //o m�s atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado
 						  // ou $marcado)
 						  //Verifica se o dia atual $cnt_dias está no intervalo de dias ou se é igual
 						  //ao dia obtido
@@ -128,10 +114,8 @@ class sec_Agenda
 
 					 }
 				}
-
 				if($classe=="") //Caso a classe ainda não esteja definida após o for acima
 				 $classe=($d==0) ? "td_marcado0": "td_dia";
-
 				//Cria a célula referente ao dia atual
 				$diaMc = $cnt_dias-1;
 				$title[$diaMc] .= '<p class="evento" >'.$rodapes[$i-1].'</p>';
@@ -150,7 +134,7 @@ class sec_Agenda
 					$domingo = '' ;
 				}
 
-				$temp_ln=$temp_ln."<td class='td_dia $domingo'>".$diaAtual.'<br />'.$marcaDia.'</td>';
+				$temp_ln=$temp_ln."<td class='td_dia $domingo'>".$diaAtual.'<br />---'.$marcaDia.'</td>';
 				$marcaDia = '';
 		        $daux++;
 		        if($daux>6) $daux=0;
