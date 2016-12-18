@@ -16,14 +16,14 @@
 ***** Configurações do Banco de Dados MySQL ***********
 *******************************************************/
 
-define("DB_NAME", "agenda");				// nome do banco de dados
+define("DB_NAME", "assembleia");				// nome do banco de dados
 define("DB_USER", "root");				// nome de usuário no banco de dados
-define("DB_PASS", "x9735pla2");				// senha do banco de dados
+define("DB_PASS", "x9735pla");				// senha do banco de dados
 define("DB_HOST", "localhost");			// servidor de banco de dados
 
 // Prefixo adicionado aos nomes de tabelas. Não autere após
 // a instalação inicial.
-define("DB_TABLE_PREFIX", "calendario_");
+define("DB_TABLE_PREFIX", "agenda");
 
 /*******************************************************
 ************** Opções Idiomáticas *********************

@@ -1,8 +1,8 @@
 <?php
 session_start();
-require("config.php");
-require("./lang/lang." . LANGUAGE_CODE . ".php");
-require("functions.php");
+require("./agendaSec/config.php");
+require("./agendaSec/lang/lang." . LANGUAGE_CODE . ".php");
+require("./agendaSec/functions.php");
 
 $id 	= (int) $_GET['id'];
 $auth	= auth();
@@ -26,7 +26,7 @@ writeHeader($m, $y, $dateline, $wday, $auth);
 writePosting($id, $auth);
 
 // give some space
-echo '<img src="images/clear.gif" width="1" height="25" border="0"><br clear="all">';
+echo '<img src="./agendaSecimages/clear.gif" width="1" height="25" border="0"><br clear="all">';
 
 // query for rest of this day's postings
 $sql = "SELECT id, start_time FROM " . DB_TABLE_PREFIX . "mssgs ";
@@ -37,7 +37,7 @@ $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result)) {
 	echo '<span class="display_header">' . $lang['otheritems'] . '</span>';
-	echo '<br clear="all"><img src="/images/clear.gif" width="1" height="3" border="0"><br clear="all">';
+	echo '<br clear="all"><img src="./agendaSec/images/clear.gif" width="1" height="3" border="0"><br clear="all">';
 
 	// display rest of this day's postings
 	while ($row = mysql_fetch_array($result)) {
@@ -57,14 +57,14 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <html>
 <head>
 	<title>Eventos</title>
-	<link rel="stylesheet" type="text/css" href="css/popwin.css">
+	<link rel="stylesheet" type="text/css" href="./agendaSeccss/popwin.css">
 <?php 	if ($auth) { ?>
 	<script language="JavaScript">
 		function deleteConfirm(eid) {
 			var msg = "<?php echo $lang['deleteconfirm'];?>";
 
 			if (confirm(msg)) {
-				opener.location = "eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
+				opener.location = "./agendaSec/eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
 				window.setTimeout('window.close()', 1000);
 			} else {
 				return;
@@ -83,7 +83,7 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 </tr>
 </table>
 
-<img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">
+<img src="agendaSec/images/clear.gif" width="1" height="3" border="0"><br clear="all">
 <?php
 }
 
@@ -135,7 +135,7 @@ function writePosting($id, $auth)
 		$timestr = "";
 	}
 
-	if ($_SESSION['authdata']['uid'] == $row['uid']) {
+	if ($_SESSION['valid_user']['uid'] == $row['uid']) {
 		$editstr = "<span class=\"display_edit\">";
 		$editstr .= "[<a href=\"eventform.php?id=" . $id . "\">editar</a>]&nbsp;";
 		$editstr .= "[<a href=\"#\" onClick=\"deleteConfirm(" . $id . ");\">apagar</a>]&nbsp;</span>";
@@ -143,8 +143,8 @@ function writePosting($id, $auth)
 		$editstr = "";
 	}
 ?>
-	<table cellspacing="0" cellpadding="0" border="0" width="300">
-		<tr><td bgcolor="#000000">
+	<table cellspacing="0" cellpadding="0" border="0" width="300" class='table' >
+		<tr><td bgcolor="#000000"> 
 			<table cellspacing="1" cellpadding="1" border="0" width="100%">
 				<tr>
 					<td class="display_title_bg"><table cellspacing="0" cellpadding="0" border="0" width="100%"><tr>
@@ -154,7 +154,7 @@ function writePosting($id, $auth)
 					</tr></table></td>
 				</tr>
 				<tr><td class="display_txt_bg">
-					<table cellspacing="1" cellpadding="1" border="0" width="100%">
+					<table cellspacing="1" cellpadding="1" border="0" width="100%" class='table' >
 						<tr>
 							<td><span class="display_txt"><?php echo $body;?></span></td>
 						</tr>

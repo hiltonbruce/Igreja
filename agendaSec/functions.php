@@ -133,20 +133,20 @@ function javaScript()
 	<script language="JavaScript">
 	function submitMonthYear() {
 		document.monthYear.method = "post";
-		document.monthYear.action = "index.php?month=" + document.monthYear.month.value + "&year=" + document.monthYear.year.value;
+		document.monthYear.action = "./index.php?month=" + document.monthYear.month.value + "&year=" + document.monthYear.year.value;
 		document.monthYear.submit();
 	}
 
 	function postMessage(day, month, year) {
-		eval("page" + day + " = window.open('eventform.php?d=" + day + "&m=" + month + "&y=" + year + "', 'postScreen', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("page" + day + " = window.open('./eventform.php?d=" + day + "&m=" + month + "&y=" + year + "', 'postScreen', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 
 	function openPosting(pId) {
-		eval("page" + pId + " = window.open('eventdisplay.php?id=" + pId + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("page" + pId + " = window.open('./eventdisplay.php?id=" + pId + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 
 	function loginPop(month, year) {
-		eval("logpage = window.open('login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("logpage = window.open('./login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 	</script>
 <?php
@@ -158,16 +158,16 @@ function footprint($auth, $m, $y)
 	global $lang;
 
 	echo "<br><br><span class=\"footprint\">\n";
-	echo "WESPA Calendário desenvolvido por <a href=\"http://www.wespa.com.br\" target=\"new\">WESPA Digital</a><br>\n[ ";
+	echo "Calendário desenvolvido por WESPA Digital &bull; Adapta&ccedil;&atilde;o Joseilton C Bruce<br>\n[ ";
 
 	if ( $auth == 2 ) {
-		echo "<a href=\"useradmin.php\">" . $lang['adminlnk'] . "</a> | ";
-		echo " <a href=\"login.php?action=logout&month=$m&year=$y\">" . $lang['logout'] . "</a>";
+		echo "<a href=\"./useradmin.php\">" . $lang['adminlnk'] . "</a> | ";
+		echo " <a href=\"./login.php?action=logout&month=$m&year=$y\">" . $lang['logout'] . "</a>";
 	} elseif ( $auth == 1 ) {
-		echo "<a href=\"useradmin.php?flag=changepw\">" . $lang['changepw'] . "</a> | ";
-		echo "<a href=\"login.php?action=logout&month=$m&year=$y\">" . $lang['logout'] . " </a>";
+		echo "<a href=\"./useradmin.php?flag=changepw\">" . $lang['changepw'] . "</a> | ";
+		echo "<a href=\"./login.php?action=logout&month=$m&year=$y\">" . $lang['logout'] . " </a>";
 	} else {
-		echo "<a href=\"javascript:loginPop($m, $y)\">" . $lang['login'] . "</a>";
+		echo "<a href=\"javascript:./loginPop($m, $y)\">" . $lang['login'] . "</a>";
 	}
 
 	echo " ]</span>";
@@ -182,10 +182,10 @@ function scrollArrows($m, $y)
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
 
-	$s = "<a href=\"agendaSec/index.php?month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
-	$s .= "<img src=\"agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
-	$s .= "<a href=\"agendaSec/index.php?month=" . $nextmonth . "&year=" . $nextyear . "\">";
-	$s .= "<img src=\"agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
+	$s = "<a href=\"./agendaSec/index.php?month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
+	$s .= "<img src=\"./agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
+	$s .= "<a href=\"./agendaSec/index.php?month=" . $nextmonth . "&year=" . $nextyear . "\">";
+	$s .= "<img src=\"./agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
 
 	return $s;
 }
@@ -274,7 +274,7 @@ function getDayNameHeader()
 		}
 	}
 
-	$s = "<table cellpadding=\"1\" cellspacing=\"1\" border=\"0\">\n<tr>\n";
+	$s = "<table cellpadding=\"1\" cellspacing=\"1\" border=\"0\" class='table' >\n<tr>\n";
 
 	foreach($lang['abrvdays'] as $day) {
 		$s .= "\t<td class=\"column_header\">&nbsp;$day</td>\n";
