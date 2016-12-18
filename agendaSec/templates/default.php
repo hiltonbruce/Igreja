@@ -3,7 +3,7 @@
 <head>
 	<title>Calendário de Eventos</title>
 	<?php javaScript();?>
-	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link rel="stylesheet" type="agendaSec/text/css" href="css/default.css">
 </head>
 <body>
 <table cellpadding="0" cellspacing="0" border="0" align="center">
@@ -11,7 +11,7 @@
 	<td>
 		<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=1 >
 <tr>
-<td><img SRC="images/tit-calendario.gif" height=59 width=310></td>
+<td><img SRC="agendaSec/images/tit-calendario.gif" height=59 width=310></td>
 </tr>
 </table>
 		<?php echo $scrollarrows;?><span class="date_header">&nbsp;<?php echo $lang['months'][$m-1];?>&nbsp;

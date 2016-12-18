@@ -11,9 +11,10 @@ $linkLancamento = 'escolha=controller/secretaria.php&';
             break;
         default:
             #Agenda da secretaria executiva
-            $painelDireito = 'views/secretaria/agendaMes.php';
-            $linkLancamento .='sec=2&';
-            require_once 'views/secretaria/agenda.php';
+            #$painelDireito = 'views/secretaria/agendaMes.php';
+            #$linkLancamento .='sec=2&';
+            #require_once 'views/secretaria/agenda.php';
+            require_once 'agendaSec/index.php';
             break;
     }
 ?>

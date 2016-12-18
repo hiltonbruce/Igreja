@@ -1,8 +1,7 @@
 <?php
-session_start();
-require("config.php");
-require("./lang/lang." . LANGUAGE_CODE . ".php");
-require("functions.php");
+require("./agendaSec/config.php");
+require("./agendaSec/lang/lang." . LANGUAGE_CODE . ".php");
+require("./agendaSec/functions.php");
 
 $m = intval($_GET['month']);
 $y = intval($_GET['year']);
@@ -15,5 +14,5 @@ $y = (!$year) ? date("Y") : $year;
 $scrollarrows	= scrollArrows($m, $y);
 $auth 			= auth($_POST['username'],$_POST['password']);
 
-require("./templates/" . TEMPLATE_NAME . ".php");
+require("./agendaSec/templates/" . TEMPLATE_NAME . ".php");
 ?>

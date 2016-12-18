@@ -182,10 +182,10 @@ function scrollArrows($m, $y)
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
 
-	$s = "<a href=\"index.php?month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
-	$s .= "<img src=\"images/leftArrow.gif\" border=\"0\"></a> ";
-	$s .= "<a href=\"index.php?month=" . $nextmonth . "&year=" . $nextyear . "\">";
-	$s .= "<img src=\"images/rightArrow.gif\" border=\"0\"></a>";
+	$s = "<a href=\"agendaSec/index.php?month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
+	$s .= "<img src=\"agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
+	$s .= "<a href=\"agendaSec/index.php?month=" . $nextmonth . "&year=" . $nextyear . "\">";
+	$s .= "<img src=\"agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
 
 	return $s;
 }
