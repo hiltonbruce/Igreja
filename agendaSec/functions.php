@@ -109,7 +109,7 @@ function javaScript()
 	<script language="JavaScript">
 	function submitMonthYear() {
 		document.monthYear.method = "post";
-		document.monthYear.action = "./index.php?month=" + document.monthYear.month.value + "&year=" + document.monthYear.year.value;
+		document.monthYear.action = "./agendaSec/index.php?month=" + document.monthYear.month.value + "&year=" + document.monthYear.year.value;
 		document.monthYear.submit();
 	}
 
@@ -122,7 +122,7 @@ function javaScript()
 	}
 
 	function loginPop(month, year) {
-		eval("logpage = window.open('./?login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("logpage = window.open('./agendaSec/login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 	</script>
 <?php
@@ -143,7 +143,7 @@ function footprint($auth, $m, $y)
 		echo "<a href=\"./?useradmin.php&flag=changepw\">" . $lang['changepw'] . "</a> | ";
 		echo "<a href=\"./?login.php&action=logout&month=$m&year=$y\">" . $lang['logout'] . " </a>";
 	} else {
-		echo "<a href=\"javascript:./?loginPop($m, $y)\">" . $lang['login'] . "</a>";
+		echo "<a href=\"javascript:loginPop($m, $y)\">" . $lang['login'] . "</a>";
 	}
 
 	echo " ]</span>";
@@ -159,9 +159,9 @@ function scrollArrows($m, $y)
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
 
 	$s = "<a href=\"./?agendaSec/index.php&month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
-	$s .= "<img src=\"./?agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
+	$s .= "<img src=\"agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
 	$s .= "<a href=\"./?agendaSec/index.ph&month=" . $nextmonth . "&year=" . $nextyear . "\">";
-	$s .= "<img src=\"./?agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
+	$s .= "<img src=\"agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
 
 	return $s;
 }

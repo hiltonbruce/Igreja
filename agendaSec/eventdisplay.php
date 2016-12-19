@@ -24,7 +24,7 @@ writeHeader($m, $y, $dateline, $wday, $auth);
 writePosting($id, $auth);
 
 // give some space
-echo '<img src="./agendaSecimages/clear.gif" width="1" height="25" border="0"><br clear="all">';
+echo '<img src="images/clear.gif" width="1" height="25" border="0"><br clear="all">';
 
 // query for rest of this day's postings
 $sql = "SELECT id, start_time FROM " . DB_TABLE_PREFIX . "mssgs ";
@@ -35,7 +35,7 @@ $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result)) {
 	echo '<span class="display_header">' . $lang['otheritems'] . '</span>';
-	echo '<br clear="all"><img src="./images/clear.gif" width="1" height="3" border="0"><br clear="all">';
+	echo '<br clear="all"><img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">';
 
 	// display rest of this day's postings
 	while ($row = mysql_fetch_array($result)) {
