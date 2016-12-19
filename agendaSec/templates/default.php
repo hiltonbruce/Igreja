@@ -13,34 +13,27 @@
 <tr>
 <td><img SRC="agendaSec/images/tit-calendario.gif" height=59 width=310></td>
 </tr>
-</table>
+</table><!-- Navegação e exibição do mês -->
 		<?php echo $scrollarrows;?><span class="date_header">&nbsp;<?php echo $lang['months'][$m-1];?>&nbsp;
 		<?php echo $y;?></span>
 	</td>
-
 	<!-- form tags must be outside of <td> tags -->
-	<form name="monthYear">
 	<td align="right">
+	<form name="monthYear" class="form-inline">
+  <div class="form-group">
 	<?php echo monthPullDown($m, $lang['months']).yearPullDown($y); ?>
-	<input type="button" value="Exibir" onClick="submitMonthYear()">
-	</td>
+	<input type="button" class='btn btn-primary btn-xs' value="Exibir" onClick="submitMonthYear()">
+	</div>
 	</form>
 
-</tr>
+	</td>
 
+</tr>
 <tr>
 	<td colspan="2" bgcolor="#000000">
 	<?php echo writeCalendar($m, $y);?>
 	</td>
 </tr>
-
-<tr>
-	<td colspan="2" align="center">
-	<?php echo footprint($auth, $m, $y); ?>
-
-	</td>
-</tr>
 </table>
-
 </body>
 </html>

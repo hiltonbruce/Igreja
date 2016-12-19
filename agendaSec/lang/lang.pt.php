@@ -11,7 +11,7 @@ $lang['abrvdays'] = array("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab");
 // eventdisplay.php
 $lang['otheritems'] = "Também neste dia:";
 $lang['deleteconfirm'] = "Tem a certeza que deseja apagar este item?";
-$lang['postedby'] = "Enviado por";
+$lang['postedby'] = "Agendado por";
 
 // index.php
 $lang['login'] = "Entrar";

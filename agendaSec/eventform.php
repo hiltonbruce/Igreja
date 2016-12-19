@@ -3,19 +3,17 @@ session_start();
 require("config.php");
 require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
 require("functions.php");
+require "../func_class/classes.php";
 
 //$auth 	= auth();
-$id 	= $GET_['id'];
+$id 	= intval($_GET['id']);
 $uid	= $_SESSION['authdata']['uid'];
 //print_r($_SESSION);
 
-if (!$auth) {
+if ($_SESSION['setor']=='3') {
 	if (empty($id)) {
 		displayEditForm('Add', $uid);
 	} else {
-		mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-		mysql_select_db(DB_NAME) or die(mysql_error());
-
 		$sql = "SELECT uid FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
 
 		$result = mysql_query($sql) or die(mysql_error());
@@ -31,13 +29,10 @@ if (!$auth) {
 	echo $lang['accessdenied'];
 }
 
-
 function displayEditForm($mode, $uid, $id="")
 {
 	global $lang;
-
 	if ($mode == "Add") {
-
 		//global $HTTP_GET_VARS;
 		$d 			= $_GET['d'];
 		$m 			= $_GET['m'];
@@ -49,18 +44,11 @@ function displayEditForm($mode, $uid, $id="")
 		$buttonstr 	= $lang['addbutton'];
 		$pgtitle 	= $lang['addeventtitle'];
 		$qstr 		= "?flag=add";
-
 	} elseif ($mode == "Edit") {
-
-		mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-		mysql_select_db(DB_NAME) or die(mysql_error());
-
 		$sql = "SELECT uid, y, m, d, start_time, end_time, title, text ";
 		$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
-
 		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_assoc($result);
-
 		if (!empty($row)) {
 			$qstr 		= "?flag=edit&id=$id";
 			$headerstr 	= $lang['editheader'];
@@ -96,7 +84,6 @@ function displayEditForm($mode, $uid, $id="")
 			}
 		}
 		</script>
-
 	</head>
 	<body>
 	<span class="add_new_header"><?php echo $headerstr;?></span>
@@ -149,7 +136,6 @@ function getPullDownTimeValues($time, &$hour, &$minute, &$pm)
 {
 	$hour	= (int) substr($time, 0, 2);
 	$minute = (int) substr($time, 3, 2);
-
 	if ($hour == 55) {
 		$hour	= 0;
 		$minute	= 0;

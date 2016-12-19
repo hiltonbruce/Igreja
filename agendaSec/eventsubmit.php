@@ -2,6 +2,7 @@
 require("config.php");
 require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
 require("functions.php");
+require "../func_class/classes.php";
 
 if (!$_SESSION['authdata']) {
 	switch ($_GET['flag']) {
@@ -78,9 +79,6 @@ function submitEventData ($id="")
 		$result = $lang['added'];
 	}
 
-	mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-	mysql_select_db(DB_NAME) or die(mysql_error());
-
 	mysql_query($sql) or die(mysql_error());
 ?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -88,7 +86,7 @@ function submitEventData ($id="")
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/popwin.css">
 		<script language="JavaScript">
-			opener.location = "index.php?month=<?= $month ?>&year=<?= $year ?>";
+			opener.location = "../?escolha=controller/secretaria.php&sec=2&month=<?= $month ?>&year=<?= $year ?>";
 			window.setTimeout('window.close()', 1000);
 		</script>
 	</head>
@@ -103,12 +101,8 @@ function submitEventData ($id="")
 
 function deleteEvent($id, $m, $y)
 {
-	mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
-	mysql_select_db(DB_NAME) or die(mysql_error());
-
 	$sql = "DELETE FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
 	$result = mysql_query($sql) or die(mysql_error());
-
-	header("Location: index.php?month=$m&year=$y");
+	header("Location: ../?escolha=controller/secretaria.php&sec=2&month=$m&year=$y");
 }
 ?>

@@ -6,7 +6,7 @@ require("./functions.php");
 require "../func_class/funcoes.php";
 require "../func_class/classes.php";
 
-$id 	= (int) $_GET['id'];
+$id 	= intval($_GET['id']);
 
 $sql = "SELECT d, m, y FROM " . DB_TABLE_PREFIX . "mssgs WHERE id=" . $id;
 $result = mysql_query($sql) or die(mysql_error());
@@ -43,9 +43,7 @@ if (mysql_num_rows($result)) {
 		echo '<img src="images/clear.gif" width="1" height="12" border="0"><br clear="all">';
 	}
 }
-
 echo "</body></html>";
-
 
 function writeHeader($m, $y, $dateline, $wday, $auth)
 {
@@ -56,11 +54,10 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <head>
 	<title>Eventos</title>
 	<link rel="stylesheet" type="text/css" href="./css/popwin.css">
-<?php 	if ($auth) { ?>
+<?php 	if ($_SESSION['setor']=='3') { ?>
 	<script language="JavaScript">
 		function deleteConfirm(eid) {
 			var msg = "<?php echo $lang['deleteconfirm'];?>";
-
 			if (confirm(msg)) {
 				opener.location = "./eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
 				window.setTimeout('window.close()', 1000);
@@ -80,7 +77,6 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 	<td align="right"><span class="display_header"><?php echo $lang['days'][$wday] ?></span></td>
 </tr>
 </table>
-
 <img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">
 <?php
 }
@@ -89,31 +85,26 @@ function writePosting($id, $auth)
 {
 	global $lang;
 
-	$sql = "SELECT y, m, d, title, text, start_time, end_time, ";
-	$sql .= "u.cpf, ";
-
+	$sql = "SELECT a.y, a.m, a.d, a.title, a.text, a.start_time, a.end_time, ";
+	$sql .= "a.uid, u.cpf, u.nome, u.cargo, ";
 	if (TIME_DISPLAY_FORMAT == "12hr") {
-		$sql .= "TIME_FORMAT(start_time, '%l:%i%p') AS stime, ";
-		$sql .= "TIME_FORMAT(end_time, '%l:%i%p') AS etime ";
+		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
+		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
 	} elseif (TIME_DISPLAY_FORMAT == "24hr") {
-		$sql .= "TIME_FORMAT(start_time, '%H:%i') AS stime, ";
-		$sql .= "TIME_FORMAT(end_time, '%H:%i') AS etime ";
+		$sql .= "TIME_FORMAT(a.start_time, '%H:%i') AS stime, ";
+		$sql .= "TIME_FORMAT(a.end_time, '%H:%i') AS etime ";
 	} else {
 		echo "Bad time display format, check your configuration file.";
 	}
-
-	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs ";
+	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs AS a ";
 	$sql .= "LEFT JOIN usuario AS u ";
-	$sql .= "ON (" . DB_TABLE_PREFIX . "mssgs.uid = u.cpf ) ";
-	$sql .= "WHERE id = " . $id;
-
+	$sql .= "ON (a.uid = u.cpf ) ";
+	$sql .= "WHERE a.id = " . $id;
 	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($result);
-
 	$title		= stripslashes($row["title"]);
 	$body		= stripslashes(str_replace("\n", "<br />", $row["text"]));
-	$postedby 	= $lang['postedby'] . ": " . $row['fname'] . " " . $row['lname'];
-
+	$postedby 	= $lang['postedby'] . ": " . $row['nome'] . " " . $row['cargo'];
 	if (!($row["start_time"] == "55:55:55" && $row["end_time"] == "55:55:55")) {
 		if ($row["start_time"] == "55:55:55")
 			$starttime = "- -";
@@ -129,8 +120,7 @@ function writePosting($id, $auth)
 	} else {
 		$timestr = "";
 	}
-
-	if ($_SESSION['valid_user']['uid'] == $row['uid']) {
+	if ($_SESSION['authdata']['uid'] == $row['uid']) {
 		$editstr = "<span class=\"display_edit\">";
 		$editstr .= "[<a href=\"eventform.php?id=" . $id . "\">editar</a>]&nbsp;";
 		$editstr .= "[<a href=\"#\" onClick=\"deleteConfirm(" . $id . ");\">apagar</a>]&nbsp;</span>";
@@ -149,7 +139,7 @@ function writePosting($id, $auth)
 					</tr></table></td>
 				</tr>
 				<tr><td class="display_txt_bg">
-					<table cellspacing="1" cellpadding="1" border="0" width="100%" class='table' >
+					<table class='table' >
 						<tr>
 							<td><span class="display_txt"><?php echo $body;?></span></td>
 						</tr>

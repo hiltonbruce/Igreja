@@ -2,35 +2,27 @@
 function auth()
 {
 	session_start();
-	$authdata = $_SESSION['valid_user'];
-
-
-	if (!empty($_SESSION['valid_user'])) {
-
+	if (!empty($_SESSION['valid_user']) && !empty($_SESSION['authdata'])) {
 				$_SESSION['authdata'] = array('login'=>$_SESSION['valid_user'], 'userlevel'=>$_SESSION['setor'], 'uid'=>$_SESSION['valid_user']);
-
 		}
-
-   	return $auth;
+   	return ;
 }
 
 function monthPullDown($month, $montharray)
 {
-	echo "\n<select name=\"month\">\n";
-
+	echo "\n<select name=\"month\" class='form-control input-sm'>\n";
 	for($i=0;$i < 12; $i++) {
 		if ($i != ($month - 1))
 			echo "	<option value=\"" . ($i + 1) . "\">$montharray[$i]</option>\n";
 		else
 			echo "	<option value=\"" . ($i + 1) . "\" selected>$montharray[$i]</option>\n";
 	}
-
 	echo "</select>\n\n";
 }
 
 function yearPullDown($year)
 {
-	echo "<select name=\"year\">\n";
+	echo "<select name=\"year\" class='form-control input-sm'>\n";
 
 	$z = 3;
 	for($i=1;$i < 8; $i++) {
@@ -109,7 +101,7 @@ function javaScript()
 	<script language="JavaScript">
 	function submitMonthYear() {
 		document.monthYear.method = "post";
-		document.monthYear.action = "./agendaSec/index.php?month=" + document.monthYear.month.value + "&year=" + document.monthYear.year.value;
+		document.monthYear.action = "./?escolha=controller/secretaria.php&sec=2&month=" + document.monthYear.month.value + "&year=" + document.monthYear.year.value;
 		document.monthYear.submit();
 	}
 
@@ -129,17 +121,17 @@ function javaScript()
 }
 
 
-function footprint($auth, $m, $y)
+/*function footprint(, $m, $y)
 {
 	global $lang;
 
 	echo "<br><br><span class=\"footprint\">\n";
 	echo "Calendário desenvolvido por WESPA Digital &bull; Adapta&ccedil;&atilde;o Joseilton C Bruce<br>\n[ ";
 
-	if ( $auth == 2 ) {
+	if ($_SESSION['setor'] == 3 ) {
 		echo "<a href=\"./?useradmin.php\">" . $lang['adminlnk'] . "</a> | ";
 		echo " <a href=\"./?login.php&action=logout&month=$m&year=$y\">" . $lang['logout'] . "</a>";
-	} elseif ( $auth == 1 ) {
+	} else (  == 1 ) {
 		echo "<a href=\"./?useradmin.php&flag=changepw\">" . $lang['changepw'] . "</a> | ";
 		echo "<a href=\"./?login.php&action=logout&month=$m&year=$y\">" . $lang['logout'] . " </a>";
 	} else {
@@ -148,7 +140,7 @@ function footprint($auth, $m, $y)
 
 	echo " ]</span>";
 }
-
+*/
 
 function scrollArrows($m, $y)
 {
@@ -158,9 +150,9 @@ function scrollArrows($m, $y)
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
 
-	$s = "<a href=\"./?agendaSec/index.php&month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
+	$s = "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
 	$s .= "<img src=\"agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
-	$s .= "<a href=\"./?agendaSec/index.ph&month=" . $nextmonth . "&year=" . $nextyear . "\">";
+	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $nextmonth . "&year=" . $nextyear . "\">";
 	$s .= "<img src=\"agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
 
 	return $s;
@@ -173,7 +165,7 @@ function writeCalendar($month, $year)
 	// get week position of first day of month.
 	$weekpos = getFirstDayOfMonthPosition($month, $year);
 	// get user permission level
-	$auth = auth();
+//	$auth = auth();
 	// get number of days in month
 	$days = 31-((($month-(($month<8)?1:0))%2)+(($month==2)?((!($year%((!($year%100))?400:4)))?1:2):0));
 
@@ -187,40 +179,32 @@ function writeCalendar($month, $year)
 	// loop writes empty cells until it reaches position of 1st day of month ($wPos)
 	// it writes the days, then fills the last row with empty cells after last day
 	while($day <= $days) {
-
 		$str .="<tr>\n";
-
 		for($i=0;$i < 7; $i++) {
-
 			if($day > 0 && $day <= $days) {
-
 				$str .= "	<td class=\"";
-
 				if (($day == $d) && ($month == $m) && ($year == $y))
 					$str .= "today";
 				else
 					$str .= "day";
 
 				$str .= "_cell\" valign=\"top\"><span class=\"day_number\">";
-
-				if ($auth)
+		//	if ()
 					$str .= "<a href=\"javascript: postMessage($day, $month, $year)\">$day</a>";
-				else
-					$str .= "$day";
+	//			else
+	//				$str .= "$day";
 
 				$str .= "</span><br>";
 
 				// enforce title limit
 				$eventcount = count($eventdata[$day]["title"]);
 				if (MAX_TITLES_DISPLAYED < $eventcount) $eventcount = MAX_TITLES_DISPLAYED;
-
 				// write title link if posting exists for day
 				for($j=0;$j < $eventcount;$j++) {
 					$str .= "<span class=\"title_txt\">-";
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
 					$str .= $eventdata[$day]["title"][$j] . "</a></span>" . $eventdata[$day]["timestr"][$j];
 				}
-
 				$str .= "</td>\n";
 				$day++;
 			} elseif($day == 0)  {
@@ -233,7 +217,6 @@ function writeCalendar($month, $year)
      	}
 		$str .= "</tr>\n\n";
 	}
-
 	$str .= "</table>\n\n";
 	return $str;
 }
@@ -250,7 +233,7 @@ function getDayNameHeader()
 		}
 	}
 
-	$s = "<table class='table' >\n<tr>\n";
+	$s = "<table class='table table-bordered' >\n<tr>\n";
 
 	foreach($lang['abrvdays'] as $day) {
 		$s .= "\t<td class=\"column_header\">&nbsp;$day</td>\n";
