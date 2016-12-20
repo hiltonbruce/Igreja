@@ -22,10 +22,14 @@ if ($membro) {
 <a <?PHP $b=id_corrente ("cartao");?> href="./?escolha=adm/cartao.php&bsc_rol=<?php echo $bsc_rol;?>">
 	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Cart&atilde;o</button>
 </a>
-<a <?PHP $b=id_corrente ("disciplina");?> href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>">
-	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Registros</button>
-</a>
-	<?php
+		<?php
+				if ($_SESSION["setor"]=='3' || $_SESSION["setor"]=='2' || $_SESSION["nivel"]>'10') {
+			?><!-- Verifica se é tesouraria -->
+		<a <?PHP $b=id_corrente ("disciplina");?> href="./?escolha=adm/dados_disciplina.php&bsc_rol=<?php echo $bsc_rol;?>">
+			<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Registros</button>
+		</a>
+		<?php
+		}
 		if ($_SESSION["setor"]=='2' || $_SESSION["nivel"]>'10') {
 	?><!-- Verifica se é tesouraria -->
 		<a <?PHP $b=id_corrente ("saldoMembros");?>

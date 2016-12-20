@@ -1,4 +1,7 @@
 <?php
+if ($_SESSION["setor"]!='3' && $_SESSION["setor"]!='2' && $_SESSION["setor"]!='1' && $_SESSION["setor"]!='99') {
+	exit;
+}
 if ($altEdit && $membro) {
 	echo '<h3><a ';
 	echo 'href="./?escolha=adm/dados_disciplina.php&bsc_rol='.$bsc_rol;
@@ -10,7 +13,6 @@ if ($altEdit && $membro) {
 <fieldset>
 	<legend>Hist&oacute;rico de registros</legend>
 	<?PHP
-	controle ("consulta");
 	if ($_GET["lista"]<1 && empty ($_GET["novo"]) && empty($_POST["Submit"]) ) {
 		//Mostra tabela com lista de registro
 		$_urlLi="?escolha=adm/dados_disciplina.php&bsc_rol=$bsc_rol&ord={$_GET["ord"]}&cargo={$_GET["cargo"]}&id=".($_GET["id"]);//Montando o Link para ser passada a classe
