@@ -116,8 +116,8 @@ function displayEditForm($mode, $uid, $id="")
         dayPullDown($d);
       echo '</div><div class="col-xs-5">';
         monthPullDown($m, $lang['months']);
-      echo '</div><div class="col-xs-3">';
-        yearPullDown('2016');
+      echo '</div><div class="col-xs-4">';
+        yearPullDown($y);
       echo '</div>';
       ?>
       </div>

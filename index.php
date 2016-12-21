@@ -112,7 +112,7 @@
 		</li>
     <li <?PHP echo li_ativo($secGET, '2');?>>
 			<a href="./?escolha=controller/secretaria.php&sec=2&mes=<?PHP echo date('m');?>">
-				<span class="glyphicon glyphicon-time text-info" ></span>&nbsp;Agenda</a>
+				<span class="glyphicon glyphicon-calendar text-info" ></span>&nbsp;Agenda</a>
 		</li>
     <li <?PHP id_left ("tab_auxiliar/");?>>
 			<a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture text-info" >

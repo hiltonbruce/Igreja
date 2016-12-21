@@ -10,7 +10,7 @@ function auth()
 
 function monthPullDown($month, $montharray)
 {
-	echo "\n<select name=\"month\" class='form-control input-sm'>\n";
+	echo "\n<select name=\"month\" class='form-control'>\n";
 	for($i=0;$i < 12; $i++) {
 		if ($i != ($month - 1))
 			echo "	<option value=\"" . ($i + 1) . "\">$montharray[$i]</option>\n";
@@ -22,7 +22,7 @@ function monthPullDown($month, $montharray)
 
 function yearPullDown($year)
 {
-	echo "<select name=\"year\" class='form-control input-sm'>\n";
+	echo "<select name=\"year\" class='form-control'>\n";
 	$z = 3;
 	for($i=1;$i < 8; $i++) {
 		if ($z == 0)
@@ -148,11 +148,11 @@ function scrollArrows($m, $y,$mes,$mesAnt,$mesPos)
 	$yAnt = ($mes=='Janeiro') ? 'Dezembro/'.($y-1) : $mesAnt.'/'.$y ;
 
 	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=";
-	$s .= $prevmonth . "&year=" . $prevyear . "\"><button class='btn btn-default btn-xs' >\n";
-	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> $yAnt </button></a> &nbsp;";
-	$s .=	' <strong>'.$mes.' '.$y.'</strong> &nbsp;';
+	$s .= $prevmonth . "&year=" . $prevyear . "\"><button class='btn btn-xs' >\n";
+	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>Voltar p/ $yAnt </button></a> &nbsp;";
+	$s .=	'<button class="btn btn-default btn-lg" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
 	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $nextmonth;
-	$s .= "&year=" . $nextyear . "\" ><button class='btn btn-default btn-xs' >";
+	$s .= "&year=" . $nextyear . "\" ><button class='btn btn-xs' >Seguir p/ ";
 	$s .= $yPos." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
 
 	return $s;
