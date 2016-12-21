@@ -183,9 +183,11 @@ function writeCalendar($month, $year)
 				else
 					$str .= "day";
 
-				$str .= "_cell\" valign=\"top\"><span class=\"day_number\">";
+					$str .= "_cell\" valign=\"top\"><span class=\"day_number\">";
 		//	if ()
-					$str .= "<a href=\"javascript: postMessage($day, $month, $year)\">$day</a>";
+					$str .= "<a href=\"javascript: postMessage($day, $month, $year)\" ";
+					$str .= 'class="btn btn-default btn-xs" type="button">';
+					$str .= '<b>'.sprintf("%02d", $day).'</b></a>';
 	//			else
 	//				$str .= "$day";
 
@@ -196,7 +198,7 @@ function writeCalendar($month, $year)
 				if (MAX_TITLES_DISPLAYED < $eventcount) $eventcount = MAX_TITLES_DISPLAYED;
 				// write title link if posting exists for day
 				for($j=0;$j < $eventcount;$j++) {
-					$titLink = 'data-toggle="tooltip" data-placement="left" title="'.$eventdata[$day]["text"][$j].'"';
+					$titLink = 'data-toggle="tooltip" data-placement="right" title="'.$eventdata[$day]["text"][$j].'"';
 					$str .= "<span class=\"title_txt\" $titLink >&bull; ";
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
 					$str .= $eventdata[$day]["title"][$j] . "</a></span> - " . $eventdata[$day]["setor"][$j];

@@ -17,7 +17,7 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="2" bgcolor="#000000">
+	<td colspan="2">
 	<?php echo writeCalendar($m, $y);?>
 	</td>
 </tr>
