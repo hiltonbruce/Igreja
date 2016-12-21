@@ -137,18 +137,23 @@ function javaScript()
 }
 */
 
-function scrollArrows($m, $y)
+function scrollArrows($m, $y,$mes,$mesAnt,$mesPos)
 {
 	// set variables for month scrolling
 	$nextyear = ($m != 12) ? $y : $y + 1;
 	$prevyear = ($m != 1) ? $y : $y - 1;
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
+	$yPos = ($mes=='Dezembro') ? 'Janeiro/'.($y+1) : $mesPos.'/'.$y ;
+	$yAnt = ($mes=='Janeiro') ? 'Dezembro/'.($y-1) : $mesAnt.'/'.$y ;
 
-	$s = "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $prevmonth . "&year=" . $prevyear . "\">\n";
-	$s .= "<img src=\"agendaSec/images/leftArrow.gif\" border=\"0\"></a> ";
-	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $nextmonth . "&year=" . $nextyear . "\">";
-	$s .= "<img src=\"agendaSec/images/rightArrow.gif\" border=\"0\"></a>";
+	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=";
+	$s .= $prevmonth . "&year=" . $prevyear . "\"><button class='btn btn-default btn-xs' >\n";
+	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> $yAnt </button></a> &nbsp;";
+	$s .=	' <strong>'.$mes.' '.$y.'</strong> &nbsp;';
+	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $nextmonth;
+	$s .= "&year=" . $nextyear . "\" ><button class='btn btn-default btn-xs' >";
+	$s .= $yPos." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
 
 	return $s;
 }
@@ -186,7 +191,8 @@ function writeCalendar($month, $year)
 					$str .= "_cell\" valign=\"top\"><span class=\"day_number\">";
 		//	if ()
 					$str .= "<a href=\"javascript: postMessage($day, $month, $year)\" ";
-					$str .= 'class="btn btn-default btn-xs" type="button">';
+					$str .= 'class="btn btn-default btn-xs" type="button" ';
+					$str .= 'data-toggle="tooltip" data-placement="top" title="Click para novo evento">';
 					$str .= '<b>'.sprintf("%02d", $day).'</b></a>';
 	//			else
 	//				$str .= "$day";
@@ -235,7 +241,7 @@ function getDayNameHeader()
 	$s = "<table class='table table-bordered' >\n<tr>\n";
 
 	foreach($lang['abrvdays'] as $day) {
-		$s .= "\t<td class='column_header text-center'>&nbsp;$day</td>\n";
+		$s .= "\t<td class='primary text-center'><strong>$day</strong></td>\n";
 	}
 
 	$s .= "</tr>\n\n";

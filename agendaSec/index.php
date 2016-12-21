@@ -11,6 +11,6 @@ $igreja = intval($_GET['i']);
 $m = (!$month) ? date("n") : $month;
 $y = (!$year) ? date("Y") : $year;
 $i = (!$igreja) ? 1 : $igreja;
-$scrollarrows	= scrollArrows($m, $y);
+$scrollarrows	= scrollArrows($m, $y,$lang['months'][$m-1],$lang['months'][$m-2],$lang['months'][$m]);
 require("./agendaSec/templates/" . TEMPLATE_NAME . ".php");
 ?>

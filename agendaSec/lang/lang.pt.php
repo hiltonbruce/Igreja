@@ -5,8 +5,8 @@ info@wespa.com.br
 */
 
 $lang['months'] = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
-$lang['days'] = array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado");
-$lang['abrvdays'] = array("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab");
+$lang['days'] = array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "S&aacute;bado");
+$lang['abrvdays'] = array("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "S&aacute;b");
 
 // eventdisplay.php
 $lang['otheritems'] = "Também neste dia:";

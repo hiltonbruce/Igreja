@@ -78,7 +78,6 @@ $lang['lname'] = "Sobrenome";
 
 $lang['pwchanged'] = "Senha alterada para o usuário:";
 
-
 $lang['unameinuse'] = "O nome de usuário que escolheu já está em uso. Por favor escolha outro.";
 $lang['edituser'] = "Editar usuário do calendário";
 $lang['adduser'] = "Adicionar usuário do calendário";
