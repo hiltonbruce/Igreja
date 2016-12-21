@@ -1,19 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-	<title>Calendário de Eventos</title>
-	<?php javaScript();?>
+<?php javaScript();?>
 	<link rel="stylesheet" type="text/css" href="agendaSec/css/default.css">
-</head>
-<body>
 <table class='table'>
 <tr>
 	<td>
-		<table class='table'>
-<tr>
-<td><img SRC="agendaSec/images/tit-calendario.gif" height=59 width=310></td>
-</tr>
-</table><!-- Navegação e exibição do mês -->
 		<?php echo $scrollarrows;?><span class="date_header">&nbsp;<?php echo $lang['months'][$m-1];?>&nbsp;
 		<?php echo $y;?></span>
 	</td>
@@ -34,5 +23,3 @@
 </tr>
 </tr>
 </table>
-</body>
-</html>

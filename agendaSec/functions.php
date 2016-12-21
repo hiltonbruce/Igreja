@@ -37,7 +37,7 @@ function yearPullDown($year)
 
 function dayPullDown($day)
 {
-	echo "<select name=\"day\">\n";
+	echo "<select name=\"day\" class='form-control input-sm'>\n";
 
 	for($i=1;$i <= 31; $i++) {
 		if ($i == $day)
@@ -51,13 +51,13 @@ function dayPullDown($day)
 
 function hourPullDown($hour, $namepre)
 {
-	echo "\n<select name=\"" . $namepre . "_hour\">\n";
+	echo "<select name=\"" . $namepre . "_hour\" class='form-control input-sm'>\n";
 
 	for($i=0;$i <= 12; $i++) {
 		if ($i == $hour)
-			echo "	<option value=\"$i\" selected>$i</option>\n";
+			echo "<option value=\"$i\" selected>$i</option>\n";
 		else
-			echo "	<option value=\"$i\">$i</option>\n";
+			echo "<option value=\"$i\">$i</option>\n";
 	}
 
 	echo "</select>\n\n";
@@ -65,7 +65,7 @@ function hourPullDown($hour, $namepre)
 
 function minPullDown($min, $namepre)
 {
-	echo "\n<select name=\"" . $namepre . "_min\">\n";
+	echo "\n<select name=\"" . $namepre . "_min\" class='form-control input-sm'>\n";
 
 	for($i=0;$i <= 55; $i+=5) {
 
@@ -87,9 +87,9 @@ function amPmPullDown($pm, $namepre)
 {
 	if ($pm) { $pm = " selected"; } else { $am = " selected"; }
 
-	echo "\n<select name=\"" . $namepre . "_am_pm\">\n";
-	echo "	<option value=\"0\"$am>am</option>\n";
+	echo "\n<select name=\"" . $namepre . "_am_pm\" class='form-control input-sm'>\n";
 	echo "	<option value=\"1\"$pm>pm</option>\n";
+	echo "	<option value=\"0\"$am>am</option>\n";
 	echo "</select>\n\n";
 }
 
@@ -104,15 +104,15 @@ function javaScript()
 	}
 
 	function postMessage(day, month, year) {
-		eval("page" + day + " = window.open('./agendaSec/eventform.php?d=" + day + "&m=" + month + "&y=" + year + "', 'postScreen', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("page" + day + " = window.open('./agendaSec/eventform.php?d=" + day + "&m=" + month + "&y=" + year + "', 'postScreen', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=400,height=500');");
 	}
 
 	function openPosting(pId) {
-		eval("page" + pId + " = window.open('./agendaSec/eventdisplay.php?id=" + pId + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("page" + pId + " = window.open('./agendaSec/eventdisplay.php?id=" + pId + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=400,height=500');");
 	}
 
 	function loginPop(month, year) {
-		eval("logpage = window.open('./agendaSec/login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
+		eval("logpage = window.open('./agendaSec/login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=400,height=500');");
 	}
 	</script>
 	<?php
@@ -233,7 +233,7 @@ function getDayNameHeader()
 	$s = "<table class='table table-bordered' >\n<tr>\n";
 
 	foreach($lang['abrvdays'] as $day) {
-		$s .= "\t<td class=\"column_header\">&nbsp;$day</td>\n";
+		$s .= "\t<td class='column_header text-center'>&nbsp;$day</td>\n";
 	}
 
 	$s .= "</tr>\n\n";

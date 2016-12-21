@@ -5,7 +5,7 @@ require("./agendaSec/functions.php");
 $month = intval($_GET['month']);
 $year = intval($_GET['year']);
 $igreja = intval($_GET['i']);
-print_r($_SESSION);
+//print_r($_SESSION);
 // set month and year to present if month
 // and year not received from query string
 $m = (!$month) ? date("n") : $month;

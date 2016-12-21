@@ -91,7 +91,6 @@ function displayEditForm($mode, $uid, $id="")
 	<html>
 	<head>
 		<title><?php echo $pgtitle;?></title>
-		<link rel="stylesheet" type="text/css" href="css/popwin.css">
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 		<script language="JavaScript">
 		function formSubmit() {
@@ -105,55 +104,71 @@ function displayEditForm($mode, $uid, $id="")
 		}
 		</script>
 	</head>
-	<body>
-	<span class="add_new_header"><?php echo $headerstr;?></span>
-	<br><img src="images/clear.gif" width="1" height="5"><br>
-		<table border=0 cellspacing=7 cellpadding=0>
-		<form name="eventForm">
-		<input type="hidden" name="uid" value="<?=$uid?>">
-			<tr>
-				<td nowrap valign="top" align="right" nowrap><span class="form_labels">
-				<?php echo $lang['date'];?></span></td>
-				<td><?php dayPullDown($d);
-				monthPullDown($m, $lang['months']);
-				yearPullDown('2016'); ?>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap valign="top" align="right" nowrap>
-				<span class="form_labels"><?php echo $lang['title'];?></span></td>
-				<td><input type="text" name="title" size="29" value="<?php echo $title ?>"
-				maxlength="50"></td>
-			</tr>
-			<tr>
-				<td nowrap valign="top" align="right" nowrap>
-				<span class="form_labels"><?php echo $lang['text'];?></span></td>
-				<td><textarea cols=22 rows=6 name="text"><?php echo $text;?></textarea></td>
-			</tr>
-			<tr>
-				<td nowrap valign="top" align="right" nowrap><span class="form_labels">
-				<?php echo $lang['start'];?></span></td>
-				<td><?php hourPullDown($shour, "start"); ?><b>:</b><?php minPullDown($sminute, "start");
-				 amPmPullDown($spm, "start"); ?></td>
-			</tr>
-			<tr>
-				<td nowrap valign="top" align="right" nowrap><span class="form_labels">
-				<?php echo $lang['end'];?></span></td>
-				<td><?php hourPullDown($ehour, "end"); ?><b>:</b><?php minPullDown($eminute, "end");
-				amPmPullDown($epm, "end"); ?></td>
-			</tr>
-			<tr><td></td><td><br>
-				<input type="button" value="<?php echo $buttonstr;?>"
-			onClick="formSubmit()">&nbsp;
-			<?php
- //  $lst_cid = new sele_cidade("cidade","$vl_uf","{$arr_dad["uf"]}","nome","cid_nasc");
-	 $congr = new List_sele ("igreja","razao","igreja");
-	 echo $congr->List_Selec (++$ind,$i,' class="form-control" ');
-			?>
-			<input type="button" value="<?php echo $lang['cancel'];?>"
-			onClick="window.close();"></td></tr>
-		</form>
-		</table>
+	<body class="text-left" style="margin:10px auto; width: 90%;" >
+	<h3><?php echo $headerstr;?></h3>
+  <form name="eventForm" >
+    <label>
+    <?php echo $lang['date'];?>
+    </label>
+    <div class="row">
+      <?php
+      echo '<div class="col-xs-3">';
+        dayPullDown($d);
+      echo '</div><div class="col-xs-5">';
+        monthPullDown($m, $lang['months']);
+      echo '</div><div class="col-xs-3">';
+        yearPullDown('2016');
+      echo '</div>';
+      ?>
+      </div>
+      <label><?php echo $lang['title'];?></label>
+      <input type="text" name="title" class='form-control input-sm'
+      value="<?php echo $title ?>" >
+  		<input type="hidden" name="uid" value="<?=$uid?>">
+      <label><?php echo $lang['text'];?></label>
+      <textarea rows=3 name="text" class='form-control input-sm'
+      ><?php echo $text;?></textarea>
+      <strong>Hor&aacute;rio:</strong>
+    <div class="row">
+      <?php
+      echo '<div class="col-xs-3">';
+      hourPullDown($shour, "start");
+      echo '</div><div class="col-xs-1">';
+      echo '<b>:</b>';
+      echo '</div><div class="col-xs-3">';
+      minPullDown($sminute, "start");
+      echo '</div><div class="col-xs-3">';
+      amPmPullDown($spm, "start");
+      echo '</div>';
+      ?>
+    </div>
+    <div class="row">
+      <?php
+      echo '<div class="col-xs-3">';
+      hourPullDown($ehour, "end");
+      echo '</div><div class="col-xs-1">';
+      echo '<b>:</b>';
+      echo '</div><div class="col-xs-3">';
+      minPullDown($eminute, "end");
+      echo '</div><div class="col-xs-3">';
+      amPmPullDown($epm, "end");
+      echo '</div>';
+       ?>
+       <br />
+    </div>
+   <label>Igreja:</label>
+        <?php
+         $congr = new List_sele ("igreja","razao","igreja");
+         echo $congr->List_Selec (++$ind,$i,' class="form-control" ');
+        ?>
+      </div><br />
+      <div class="btn-group" role="group" aria-label="...">
+        <input type="button" class="btn btn-primary" value="<?php echo $buttonstr;?>"
+        onClick="formSubmit()">
+        <input type="button" class='btn btn-primary' value="<?php echo $lang['cancel'];?>"
+        onClick="window.close();">
+    </div>
+  </form>
 	</body>
 	</html>
 <?php

@@ -69,13 +69,13 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <body>
 
 <!-- selected date -->
-<table cellspadding="0" cellspacing="0" border="0" width="300">
+<table class='table'>
 <tr>
 	<td><span class="display_header"><?php echo $dateline ?></span></td>
 	<td align="right"><span class="display_header"><?php echo $lang['days'][$wday] ?></span></td>
 </tr>
 </table>
-<img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">
+<img src="../images/clear.gif" width="1" height="3" border="0"><br clear="all">
 <?php
 }
 
@@ -126,9 +126,9 @@ function writePosting($id, $auth)
 		$editstr = "";
 	}
 ?>
-	<table cellspacing="0" cellpadding="0" border="0" width="300" class='table' >
+	<table class='table' >
 		<tr><td bgcolor="#000000">
-			<table cellspacing="1" cellpadding="1" border="0" width="100%">
+			<table class="table">
 				<tr>
 					<td class="display_title_bg"><table cellspacing="0" cellpadding="0" border="0" width="100%"><tr>
 							<td width="100%"><span class="display_title">&nbsp;<?php echo $title;?></span></td>

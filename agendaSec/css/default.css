@@ -1,7 +1,7 @@
 <STYLE TYPE="text/css">
 <!--
 /**************************************************************
-********* Formatação para Tabela do Mês e Textos **************
+********* Formatação para Tabela do M#c7e7f6ês e Textos **************
 **************************************************************/
 
 A		{ font-family:arial, helvetica; color:#953010; text-decoration:underline }
@@ -14,8 +14,8 @@ BODY	{ background-color:#FFF }
 
 /**** cor e tamanho das células do calendário.  ****/
 .day_cell				{ background-color:#EDECD8; height:80; width: 95; }
-.empty_day_cell			{ background-color:#EEEEEE; height:80; width: 95; }
-.today_cell				{ background-color:#F2E2DE; height:80; width: 95; }
+.empty_day_cell			{ background-color:#fff; height:80; width: 95; }
+.today_cell				{ background-color:#abd7fb; height:80; width: 95; }
 
 /**** day number in upper left corner of each cell ****/
 .day_number				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
