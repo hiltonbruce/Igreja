@@ -19,20 +19,19 @@
 	</td>
 	<!-- form tags must be outside of <td> tags -->
 	<td align="right">
-	<form name="monthYear" class="form-inline">
-  <div class="form-group">
-	<?php echo monthPullDown($m, $lang['months']).yearPullDown($y); ?>
-	<input type="button" class='btn btn-primary btn-xs' value="Exibir" onClick="submitMonthYear()">
-	</div>
-	</form>
-
+		<form name="monthYear" class="form-inline">
+			<div class="form-group">
+				<?php echo monthPullDown($m, $lang['months']).yearPullDown($y); ?>
+				<input type="button" value="Exibir" onClick="submitMonthYear()">
+			</div>
+		</form>
 	</td>
-
 </tr>
 <tr>
 	<td colspan="2" bgcolor="#000000">
 	<?php echo writeCalendar($m, $y);?>
 	</td>
+</tr>
 </tr>
 </table>
 </body>

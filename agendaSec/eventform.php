@@ -5,21 +5,39 @@ require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
 require("functions.php");
 require "../func_class/classes.php";
 
+function __autoload ($classe) {
+    $pos = strpos($classe, '_');
+    if ($pos === false) {
+      $nomeClasse = $classe;
+      $dir='';
+    } else {
+      list($dir,$nomeClasse) = explode('_', $classe);
+    }
+		//$dir = strtr( $classe, '_','/' );
+		if (file_exists("../models/$dir/$classe.class.php")){
+			require_once ("../models/$dir/$classe.class.php");
+		}elseif (file_exists("models/$classe.class.php")){
+			require_once ("../models/$classe.class.php");
+		}
+		//echo "<h1>$classe ** $dir</h1>";
+		//echo "<h1>$classe ** $dir</h1>";
+	}
+
 //$auth 	= auth();
 $id 	= intval($_GET['id']);
 $uid	= $_SESSION['authdata']['uid'];
 //print_r($_SESSION);
 
-if ($_SESSION['setor']=='3') {
+if (!empty($_SESSION['valid_user'])) {
 	if (empty($id)) {
 		displayEditForm('Add', $uid);
 	} else {
-		$sql = "SELECT uid FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
+		$sql = "SELECT * FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
 
 		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_assoc($result);
 
-		if ( $auth == 2 || $uid == $row['uid'] ) {
+		if ( $_SESSION['setor'] == $row['setor'] ) {
 			displayEditForm('Edit', $uid, $id);
 		} else {
 			echo $lang['accessdenied'];
@@ -37,6 +55,7 @@ function displayEditForm($mode, $uid, $id="")
 		$d 			= $_GET['d'];
 		$m 			= $_GET['m'];
 		$y 			= $_GET['y'];
+		$i 			= 1;
 		$text 		= $title = "";
 		$shour 		= $sminute = 0;
 		$ehour 		= $eminute = 0;
@@ -45,7 +64,7 @@ function displayEditForm($mode, $uid, $id="")
 		$pgtitle 	= $lang['addeventtitle'];
 		$qstr 		= "?flag=add";
 	} elseif ($mode == "Edit") {
-		$sql = "SELECT uid, y, m, d, start_time, end_time, title, text ";
+		$sql = "SELECT * ";
 		$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
 		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_assoc($result);
@@ -59,6 +78,7 @@ function displayEditForm($mode, $uid, $id="")
 			$m 			= $row["m"];
 			$d 			= $row["d"];
 			$y 			= $row["y"];
+			$i 			= $row["igreja"];
 		}
 
 		getPullDownTimeValues($row["start_time"], $shour, $sminute, $spm);
@@ -72,7 +92,7 @@ function displayEditForm($mode, $uid, $id="")
 	<head>
 		<title><?php echo $pgtitle;?></title>
 		<link rel="stylesheet" type="text/css" href="css/popwin.css">
-
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 		<script language="JavaScript">
 		function formSubmit() {
 			if (document.eventForm.title.value != "") {
@@ -122,8 +142,15 @@ function displayEditForm($mode, $uid, $id="")
 				<td><?php hourPullDown($ehour, "end"); ?><b>:</b><?php minPullDown($eminute, "end");
 				amPmPullDown($epm, "end"); ?></td>
 			</tr>
-			<tr><td></td><td><br><input type="button" value="<?php echo $buttonstr;?>"
-			onClick="formSubmit()">&nbsp;<input type="button" value="<?php echo $lang['cancel'];?>"
+			<tr><td></td><td><br>
+				<input type="button" value="<?php echo $buttonstr;?>"
+			onClick="formSubmit()">&nbsp;
+			<?php
+ //  $lst_cid = new sele_cidade("cidade","$vl_uf","{$arr_dad["uf"]}","nome","cid_nasc");
+	 $congr = new List_sele ("igreja","razao","igreja");
+	 echo $congr->List_Selec (++$ind,$i,' class="form-control" ');
+			?>
+			<input type="button" value="<?php echo $lang['cancel'];?>"
 			onClick="window.close();"></td></tr>
 		</form>
 		</table>

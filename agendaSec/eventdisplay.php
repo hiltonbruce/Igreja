@@ -54,19 +54,17 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <head>
 	<title>Eventos</title>
 	<link rel="stylesheet" type="text/css" href="./css/popwin.css">
-<?php 	if ($_SESSION['setor']=='3') { ?>
 	<script language="JavaScript">
 		function deleteConfirm(eid) {
 			var msg = "<?php echo $lang['deleteconfirm'];?>";
 			if (confirm(msg)) {
-				opener.location = "./eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
+				opener.location = "eventsubmit.php?flag=delete&id=" + eid + "&month=<?php echo $m;?>&year=<?php echo $y;?>";
 				window.setTimeout('window.close()', 1000);
 			} else {
 				return;
 			}
 		}
 	</script>
-<?php	} ?>
 </head>
 <body>
 
@@ -86,7 +84,7 @@ function writePosting($id, $auth)
 	global $lang;
 
 	$sql = "SELECT a.y, a.m, a.d, a.title, a.text, a.start_time, a.end_time, ";
-	$sql .= "a.uid, u.cpf, u.nome, u.cargo, ";
+	$sql .= "a.uid, a.setor, a.igreja, u.cpf, u.nome, u.cargo,  ";
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
 		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
@@ -120,7 +118,7 @@ function writePosting($id, $auth)
 	} else {
 		$timestr = "";
 	}
-	if ($_SESSION['authdata']['uid'] == $row['uid']) {
+	if ($_SESSION['setor'] == $row['setor']) {
 		$editstr = "<span class=\"display_edit\">";
 		$editstr .= "[<a href=\"eventform.php?id=" . $id . "\">editar</a>]&nbsp;";
 		$editstr .= "[<a href=\"#\" onClick=\"deleteConfirm(" . $id . ");\">apagar</a>]&nbsp;</span>";

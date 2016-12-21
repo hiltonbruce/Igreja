@@ -1,26 +1,26 @@
 <?php
+session_start();
 require("config.php");
 require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
 require("functions.php");
 require "../func_class/classes.php";
 
-if (!$_SESSION['authdata']) {
+if ($_SESSION['valid_user']) {
 	switch ($_GET['flag']) {
 		case "add" :
 			submitEventData();
 			break;
 		case "edit":
-			$id = (int) $_GET['id'];
-
+			$id = intval($_GET['id']);
 			if (!empty($id))
 				submitEventData($id);
 			else
 				$lang['accesswarning'];
 			break;
 		case "delete":
-			$month 	= (int) $_GET['month'];
-			$year	= (int) $_GET['year'];
-			$id 	= (int) $_GET['id'];
+			$month 	= intval($_GET['month']);
+			$year	= intval($_GET['year']);
+			$id 	= intval($_GET['id']);
 
 			if (!(empty($id) && empty($month) && empty($year)))
 				deleteEvent($id, $month, $year);
@@ -31,19 +31,19 @@ if (!$_SESSION['authdata']) {
 			$lang['accesswarning'];
 	}
 } else {
-	echo $lang['accessdenied'];
+	echo $lang['accessdenied'].' ***** ';
 }
-
 
 function submitEventData ($id="")
 {
-	global $lang, $_POST;
-
-	$uid 		= $_POST['uid'];
+	global $lang;
+	$uid 		= $_SESSION['valid_user'];
 	$title 		= addslashes($_POST['title']);
 	$text 		= addslashes($_POST['text']);
+	$igreja		= $_POST['igreja'];
+	$setor 		= $_SESSION['setor'];
 	$month 		= $_POST['month'];
-	$day 		= $_POST['day'];
+	$day 			= $_POST['day'];
 	$year 		= $_POST['year'];
 	$shour 		= $_POST['start_hour'];
 	$sminute 	= $_POST['start_min'];
@@ -51,7 +51,6 @@ function submitEventData ($id="")
 	$ehour 		= $_POST['end_hour'];
 	$eminute 	= $_POST['end_min'];
 	$e_ampm 	= $_POST['end_am_pm'];
-
 	if ($shour == 0 && $sminute == 0 && $s_ampm == 0) {
 		$starttime = "55:55:55";
 	} else {
@@ -59,7 +58,6 @@ function submitEventData ($id="")
 		if ($s_ampm == 0 && $shour == 12) $shour = 0;
 		$starttime = "$shour:$sminute:00";
 	}
-
 	if ($ehour == 0 && $eminute == 0 && $e_ampm == 0) {
 		$endtime = "55:55:55";
 	} else {
@@ -67,18 +65,18 @@ function submitEventData ($id="")
 		if ($e_ampm == 0 && $ehour == 12) $ehour = 0;
 		$endtime = "$ehour:$eminute:00";
 	}
-
 	if ($id) {
 		$sql = "UPDATE " . DB_TABLE_PREFIX . "mssgs SET uid='$uid', m='$month', d='$day', y='$year', ";
-		$sql .= "start_time='$starttime', end_time='$endtime', title='$title', text='$text' ";
+		$sql .= "start_time='$starttime', end_time='$endtime', title='$title', text='$text', ";
+		$sql .= "setor='$setor', igreja='$igreja' ";
 		$sql .= "WHERE id=$id";
 		$result = $lang['updated'];
 	} else {
 		$sql = "INSERT INTO " . DB_TABLE_PREFIX . "mssgs SET uid='$uid', m='$month', d='$day', y='$year', ";
-		$sql .= "start_time='$starttime', end_time='$endtime', title='$title', text='$text'";
+		$sql .= "start_time='$starttime', end_time='$endtime', title='$title', text='$text', ";
+		$sql .= "setor='$setor', igreja='$igreja'";
 		$result = $lang['added'];
 	}
-
 	mysql_query($sql) or die(mysql_error());
 ?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -91,9 +89,7 @@ function submitEventData ($id="")
 		</script>
 	</head>
 	<body>
-
 	<div align=\"center\" class=\"display_txt\"><?php echo stripslashes($title).$result;?></div>
-
 	</body>
 	</html>
 <?php

@@ -23,7 +23,6 @@ function monthPullDown($month, $montharray)
 function yearPullDown($year)
 {
 	echo "<select name=\"year\" class='form-control input-sm'>\n";
-
 	$z = 3;
 	for($i=1;$i < 8; $i++) {
 		if ($z == 0)
@@ -33,7 +32,6 @@ function yearPullDown($year)
 
 		$z--;
 	}
-
 	echo "</select>\n\n";
 }
 
@@ -117,14 +115,11 @@ function javaScript()
 		eval("logpage = window.open('./agendaSec/login.php?month=" + month + "&year=" + year + "', 'mssgDisplay', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=340,height=400');");
 	}
 	</script>
-<?php
-}
-
-
-/*function footprint(, $m, $y)
-{
+	<?php
+	}
+	/*function footprint(, $m, $y)
+	{
 	global $lang;
-
 	echo "<br><br><span class=\"footprint\">\n";
 	echo "Calendário desenvolvido por WESPA Digital &bull; Adapta&ccedil;&atilde;o Joseilton C Bruce<br>\n[ ";
 
@@ -201,9 +196,11 @@ function writeCalendar($month, $year)
 				if (MAX_TITLES_DISPLAYED < $eventcount) $eventcount = MAX_TITLES_DISPLAYED;
 				// write title link if posting exists for day
 				for($j=0;$j < $eventcount;$j++) {
-					$str .= "<span class=\"title_txt\">-";
+					$titLink = 'data-toggle="tooltip" data-placement="left" title="'.$eventdata[$day]["text"][$j].'"';
+					$str .= "<span class=\"title_txt\" $titLink >&bull; ";
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
-					$str .= $eventdata[$day]["title"][$j] . "</a></span>" . $eventdata[$day]["timestr"][$j];
+					$str .= $eventdata[$day]["title"][$j] . "</a></span> - " . $eventdata[$day]["setor"][$j];
+					$str .= '<br />'.$eventdata[$day]["igreja"][$j].$eventdata[$day]["timestr"][$j];
 				}
 				$str .= "</td>\n";
 				$day++;
@@ -219,7 +216,7 @@ function writeCalendar($month, $year)
 	}
 	$str .= "</table>\n\n";
 	return $str;
-}
+	}
 
 function getDayNameHeader()
 {
@@ -246,25 +243,30 @@ function getDayNameHeader()
 function getEventDataArray($month, $year)
 {
 
-	$sql = "SELECT id, d, title, start_time, end_time, ";
+	$sql = "SELECT a.id, a.d, a.title, a.start_time, a.end_time, a.setor, a.text, i.razao, s.alias, ";
 
 	if (TIME_DISPLAY_FORMAT == "12hr") {
-		$sql .= "TIME_FORMAT(start_time, '%l:%i%p') AS stime, ";
-		$sql .= "TIME_FORMAT(end_time, '%l:%i%p') AS etime ";
+		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
+		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
 	} elseif (TIME_DISPLAY_FORMAT == "24hr") {
-		$sql .= "TIME_FORMAT(start_time, '%H:%i') AS stime, ";
-		$sql .= "TIME_FORMAT(end_time, '%H:%i') AS etime ";
+		$sql .= "TIME_FORMAT(a.start_time, '%H:%i') AS stime, ";
+		$sql .= "TIME_FORMAT(a.end_time, '%H:%i') AS etime ";
 	} else {
 		echo "Bad time display format, check your configuration file.";
 	}
 
-	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs WHERE m = $month AND y = $year ";
+	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs AS a, igreja AS i, setores AS s ";
+	$sql .= "WHERE m = $month AND y = $year AND a.igreja = i.rol ";
+	$sql .= "AND a.setor = s.id ";
 	$sql .= "ORDER BY start_time";
 
 	$result = mysql_query($sql) or die(mysql_error());
 
 	while($row = mysql_fetch_assoc($result)) {
 		$eventdata[$row["d"]]["id"][] = $row["id"];
+		$eventdata[$row["d"]]["igreja"][] = $row["razao"];
+		$eventdata[$row["d"]]["setor"][] = $row["alias"];
+		$eventdata[$row["d"]]["text"][] = $row["text"];
 
 		if (strlen($row["title"]) > TITLE_CHAR_LIMIT)
 			$eventdata[$row["d"]]["title"][] = substr(stripslashes($row["title"]), 0, TITLE_CHAR_LIMIT) . "...";

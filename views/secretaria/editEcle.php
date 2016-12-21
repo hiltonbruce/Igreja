@@ -7,7 +7,7 @@
   ?>
     <form id="form1" name="form1" method="post" action="">
        <?PHP
-    $lst_cid = new sele_cidade("cidade","$vl_uf","{$arr_dad["uf"]}","nome","cid_nasc");
+  //  $lst_cid = new sele_cidade("cidade","$vl_uf","{$arr_dad["uf"]}","nome","cid_nasc");
     $congr = new List_sele ("igreja","razao","congregacao");
     echo $congr->List_Selec (++$ind,$igreja->rol(),' class="form-control" ');
    ?>

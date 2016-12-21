@@ -37,7 +37,7 @@ $lang['loginheader'] = "WESPA Calendário Login";
 $lang['wronglogin'] = "Nome de usuário ou Senha errada";
 $lang['username'] = "Nome de Usuário";
 $lang['password'] = "Senha";
-$lang['accesswarning'] = "Na-na-ni-na-nã!! Você não pode fazer isto.";
+$lang['accesswarning'] = "Na-na-ni-na-não!! Você não pode fazer isto.";
 
 // useradmin.php
 $lang['pwblank'] = "A senha está em branco. Insira a senha";
