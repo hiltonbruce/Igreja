@@ -152,8 +152,8 @@ function dizimistas(
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
 			$tipo = $this->arrayContas[$linha['credito']]['titulo'];//Define o titulo para a vari�vel
 			if ($linha['obs']!='') {
-				$tipo = '<span title="'.$linha['obs'].'" data-toggle="tooltip" data-placement="top">';
-				$tipo .= '<span class="glyphicon glyphicon-paperclip"></span> '.$tipo.'</span>';
+				$tipo1 = '<span title="'.$linha['obs'].'" data-toggle="tooltip" data-placement="top">';
+				$tipo = $tipo1.$tipo.' <span class="glyphicon glyphicon-paperclip"></span> </span></span>';
 			}
 			$valor = number_format($linha['valor'],2,',','.');
 			if ($linha['confirma']=='') {
