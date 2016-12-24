@@ -61,12 +61,6 @@ switch ($rec) {
 		$rec = 12;
 		require_once 'forms/tes/histFinanceiro.php';
 		require_once 'models/saldos.php';
-		$mes = date('m'); // M�s desejado, pode ser por ser obtido por POST, GET, etc.
-		$ano = date('Y'); // Ano atual
-		$ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano));
-		$recLink = '14&dtBalac='.$ultimo_dia.'/'.$mes.'/'.$ano;
-		$linkImpressao ='tesouraria/receita.php/?rec='.$recLink;
-		require_once ('views/saldos.php');
 		break;
 	case '8':
 		require_once 'forms/tes/filtroContas.php';
@@ -89,17 +83,16 @@ switch ($rec) {
 		break;
 	case '11':
 		require_once 'forms/tes/histFinanceiro.php';
+		require_once 'views/tesouraria/cabTabFin.php';//Cabe�alho da tabela
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
 			//Lista financeira de todas as igreja com m�s espec�fico
 			$colUm = 'Igrejas';//Primeira coluna do cabecalho
-			require_once 'views/tesouraria/cabTabFin.php';//Cabe�alho da tabela
 			require_once 'views/tesouraria/saldoMesFin.php';
 			$tabThead = $nivelSem;
 			//require_once 'views/tesouraria/saldoIgrejas.php';
 		} else {
 			//Lista financeira da igreja com todos os  meses
 			$colUm = 'Per&iacute;odo';//Primeira coluna do cabecalho
-			require_once 'views/tesouraria/cabTabFin.php';//Cabe�alho da tabela
 			require_once 'views/tesouraria/saldoMembros.php';
 		}
 		break;

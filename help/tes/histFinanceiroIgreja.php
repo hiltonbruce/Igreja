@@ -13,38 +13,27 @@ while ($contas = mysql_fetch_array($lista)) {
 	$periodo	= "$igreja$anor";
 	$dz 		= 'dizimos'.$periodo;//dizimos do mês
 	$dizSem 	= $dz.$semana;//Dizimos do mês separando a semana
-
 	$ofExtra	= 'ofertaExtra'.$periodo;//Ofertas do mês
 	$ofExtraSem	= $ofExtra.$semana;//Ofertas do mês separando a semana
-
 	$ofc 		= 'ofertaCultos'.$periodo;//Ofertas do mês
 	$ofcSem 	= $ofc.$semana;//Ofertas do mês separando a semana
-
 	$ofCampanha = 'ofertaCampanha'.$periodo;//Ofertas das Campanhas do mês
 	$ofCampSem  = $ofCampanha.$semana;//Ofertas das Campanhas do mês separando a semana
-
 	$ofm 		= 'ofertaMissoes'.$periodo;//Ofertas de missões do mês
 	$ofmSem 	= $ofm.$semana;//Ofertas de missões do mês separando a semana
-
 	$ofs 		= 'ofertaSenhoras'.$periodo;//Ofertas de Senhoras do mês
 	$ofsSem		= $ofs.$semana;//Ofertas de Senhoras do mês separando a semana
-
 	$ofe 		= 'ofertaEnsino'.$periodo;//Ofertas de Escola Bíblica do mês
 	$ofeSem 	= $ofe.$semana;
-
 	$ofmoc 		= 'ofertaMocidade'.$periodo;
 	$ofmocSem 	= $ofmoc.$semana;
-
 	$ofi 		= 'ofertaInfantil'.$periodo;
 	$ofiSem 	= $ofi.$semana;
-
 	$demEntr	= 'outrasEntr'.$periodo;
 	$demEntrSem	= $demEntr.$semana;
-
 	$dev 		= intval($contas['devedora']);
 	$cre 		= intval($contas['credora']);//Fazer a remoção da parte credora
 	$valor 		= $contas['valor'];
-
 	  switch ($dev) {
 	  	case 1:
 	  		//Dizimos e ofertas
@@ -90,7 +79,6 @@ while ($contas = mysql_fetch_array($lista)) {
 			$$ofi			+= $valor;
 			$$ofiSem		+= $valor;
 			$totInfantil 	+= $valor;
-
 	  	break;
 	  	default:
 	  		if ($dev>7 && $dev<13) {
@@ -106,7 +94,6 @@ while ($contas = mysql_fetch_array($lista)) {
 			}
 	  	break;
 	  }
-
 				//echo '<h2> contas[valor] = R$ '.$contas['valor'].'<h2>';
 				//echo $dz.'   ** '.$$dz.'   ** '.$dev.' -->';
 }

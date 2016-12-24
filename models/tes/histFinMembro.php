@@ -1,7 +1,9 @@
 <?php
 $nivel1 	= '';
 $nivel2 	= '';
-$comSaldo	= '';$menorAno = 2010;$maiorAno=2050;
+$comSaldo	= '';
+$menorAno = 2010;
+$maiorAno=2050;
 
 if ($_GET['ano']=='') {
 		$ano = date('Y');
@@ -13,7 +15,6 @@ if ($_GET['ano']=='') {
 		$ano = $_GET['ano'];
 	}
 //$ano = 2014;
-
 switch ($hisFinanceiro) {
 	case 1:
 		//Listagem para historico finaceiro das contribuições dos membros
@@ -35,11 +36,8 @@ switch ($hisFinanceiro) {
 $lista = mysql_query($query);
 //Logica para montar o conjunto de variï¿½veis para compor a tabelar a seguir
 require_once 'help/tes/histFinanceiroMembro.php';
-
 	//echo "<h1> ** $ano **</h1>";
-
 	$ano = ($ano=='') ? date('Y'):$ano;
-
 	//$ano = 2013;
 	//echo "<h1> ** $ano **</h1>";
 	$cor= true;
@@ -50,12 +48,10 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$ofmoc = 'ofertaMocidade'."$cont$ano";$ofi = 'ofertaInfantil'."$cont$ano";
 		$ofe = 'ofertaEnsino'."$cont$ano";$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
-
 		//Soma da coluna para linha do sub-total
 		$totDizAno  += $$dz;$totOfertaExtraAno  += $$ofExtra;$totOfertaAno  += $$of;
 		$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;$totMocidadeAno  += $$ofmoc;
 		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
-
 		//Soma linha
 		$totMes = $$dz+$$ofExtra+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
@@ -65,7 +61,6 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		//Formata mï¿½s para exibiï¿½ï¿½o
 		$mesExibir = arrayMeses();
 		$verMes = $mesExibir [sprintf("%02u",$cont )];
-
 		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.$verMes.'/'.$ano.'</strong></th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
@@ -79,7 +74,6 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofCampanha,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').'</td></tr>';
-
 		for ($i=1; $i < 6; $i++) {
 			$dizSem = $dz.$i;
 			$ofSem = $of.$i;
@@ -89,11 +83,9 @@ require_once 'help/tes/histFinanceiroMembro.php';
 			$ofmocSem = $ofmoc.$i;
 			$ofiSem = $ofi.$i;
 			$ofeSem = $ofe.$i;
-
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
 			$totOpSem = $subTotalSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem;//Total das entradas operacionais semanal
 			$totMesSem = $totOpSem+$$ofmSem+$$ofCampanhaSem;//Total da Semana (linha)
-
 			$nivel1Sem .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
@@ -112,14 +104,12 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$nivel1 .= $nivelSem.$nivel1Sem;
 		$nivel1Sem = '';//Limpa a variï¿½vel para o prï¿½ximo mï¿½s
 		$nivel1 .= '</tbody>';
-
 		$cor = !$cor;
 	}
 ?>
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
-
 	$(document).ready(function() {
 		var mais = '<a href="#"><img src="img/mais.gif" alt="Revelar/ocultar cidades" class="maismenos" /></a>'
 			$('table#horario tbody tr:not(.sub):even').addClass('impar');

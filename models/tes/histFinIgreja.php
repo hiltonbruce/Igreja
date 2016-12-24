@@ -22,13 +22,19 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 	//$ano = 2013;
 	//echo "<h1> ** $ano **</h1>";
 	$cor= true;
-	$igrejas = new igreja();$linha='';
+	$igrejas = new igreja();
+	$linha='';
 	//print_r($igrejas->Arrayigreja());
 	foreach ($igrejas->Arrayigreja() as $cont => $igrejaDados) {
 		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
-		$dz = 'dizimos'."$cont$ano"; $of = 'ofertaCultos'."$cont$ano"; $ofm = 'ofertaMissoes'."$cont$ano";
-		$ofs = 'ofertaSenhoras'."$cont$ano"; $ofmoc = 'ofertaMocidade'."$cont$ano"; $ofi = 'ofertaInfantil'."$cont$ano";
-		$ofe = 'ofertaEnsino'."$cont$ano";$ofCampanha = 'ofertaCampanha'."$cont$ano";
+		$dz = 'dizimos'."$cont$ano";
+		$of = 'ofertaCultos'."$cont$ano";
+		$ofm = 'ofertaMissoes'."$cont$ano";
+		$ofs = 'ofertaSenhoras'."$cont$ano";
+		$ofmoc = 'ofertaMocidade'."$cont$ano";
+		$ofi = 'ofertaInfantil'."$cont$ano";
+		$ofe = 'ofertaEnsino'."$cont$ano";
+		$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		//Soma da coluna para linha Sub-total das congregações Sem a Sede
@@ -39,10 +45,9 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$totSubTotalAno +=$subTotal;
 		}
 		//Soma linha
-		$totMes = $$dz+$$of+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
+		$totMes = $subTotal+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
 		$totSubTotal +=$subTotal;
-		$totOperac +=
-		$totTotal += $totMes;
+		$totOperac +=$$dz+$$of+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofExtra;
 		$ofOp = $subTotal+$$ofs+$$ofmoc+$$ofi+$$ofe;
 		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th>'.$igrejaDados['0'].'</th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
@@ -83,18 +88,13 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		}
 		$nivel1 .= $nivelSem.$nivel1Sem;
 		$nivel1Sem = '';//Limpa a variável para o próximo mês
-
 		$nivel1 .= '</tbody>';
-
 		$cor = !$cor;
 	}
-
 	?>
-
 <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
-
 	$(document).ready(function() {
 		var mais = '<a href="#"><img src="img/mais.gif" alt="Revelar/ocultar cidades" class="maismenos" /></a>'
 			$('table#horario tbody tr:not(.sub):even').addClass('impar');

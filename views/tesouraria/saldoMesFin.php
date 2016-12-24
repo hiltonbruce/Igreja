@@ -2,7 +2,7 @@
 //	require_once ("views/secretaria/menuTopDados.php");
 	$igreja = '';
 	$hisFinanceiro = 3;
-	$cong = '<br />Todas as Igrejas';
+	$cong = 'Todas as Igrejas';
 	//require_once 'forms/tes/histFinanceiro.php';
 $mes = intval($_GET['mes']);
 require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
@@ -13,6 +13,7 @@ $mesPorExt = $mesExt[$mesPeriodo];
 $totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
 $totGeral = $totDizimo+$totOfertaExtra+$totOfertaCultos+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino;
 $totOperacAno = $totSubTotalAno+$totEnsinoAno+$totInfantilAno+$totMocidadeAno+$totSenhorasAno;
+$totTotal = $totOperacAno + $totCampanhaAno + $totMissoesAno;
 $totalCong = '<tbody><tr id="subtotal" class="sub" >';
 $totalCong .= '<td>Total&nbsp;nas&nbsp;Congrega&ccedil;&otilde;es:</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'</td>';

@@ -53,6 +53,7 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <html>
 <head>
 	<title>Eventos</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="./css/popwin.css">
 	<script language="JavaScript">
 		function deleteConfirm(eid) {
@@ -71,11 +72,11 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <!-- selected date -->
 <table class='table'>
 <tr>
-	<td><span class="display_header"><?php echo $dateline ?></span></td>
+	<td><span class="display_header"><?php echo $dateline; ?></span></td>
 	<td align="right"><span class="display_header"><?php echo $lang['days'][$wday] ?></span></td>
 </tr>
 </table>
-<img src="../images/clear.gif" width="1" height="3" border="0"><br clear="all">
+<img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">
 <?php
 }
 
@@ -83,26 +84,28 @@ function writePosting($id, $auth)
 {
 	global $lang;
 
-	$sql = "SELECT a.y, a.m, a.d, a.title, a.text, a.start_time, a.end_time, ";
-	$sql .= "a.uid, a.setor, a.igreja, u.cpf, u.nome, u.cargo,  ";
-	if (TIME_DISPLAY_FORMAT == "12hr") {
-		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
-		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
+	$sql = 'SELECT a.y, a.m, a.d, a.title, a.text, a.start_time, a.end_time, ';
+	$sql .= 'a.uid, a.setor, a.igreja, u.cpf, u.nome, u.cargo, i.razao, ';
+	$sql .= 's.alias, ';
+	if (TIME_DISPLAY_FORMAT == '12hr') {
+		$sql .= 'TIME_FORMAT(a.start_time, "%l:%i%p") AS stime, ';
+		$sql .= 'TIME_FORMAT(a.end_time, "%l:%i%p") AS etime ';
 	} elseif (TIME_DISPLAY_FORMAT == "24hr") {
-		$sql .= "TIME_FORMAT(a.start_time, '%H:%i') AS stime, ";
-		$sql .= "TIME_FORMAT(a.end_time, '%H:%i') AS etime ";
+		$sql .= 'TIME_FORMAT(a.start_time, "%H:%i") AS stime, ';
+		$sql .= 'TIME_FORMAT(a.end_time, "%H:%i") AS etime ';
 	} else {
-		echo "Bad time display format, check your configuration file.";
+		echo 'Formato de exibição de data incorreto, verifique o arquivo de configuração.';
 	}
-	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs AS a ";
-	$sql .= "LEFT JOIN usuario AS u ";
-	$sql .= "ON (a.uid = u.cpf ) ";
-	$sql .= "WHERE a.id = " . $id;
+	$sql .= 'FROM ' . DB_TABLE_PREFIX . 'mssgs AS a ';
+	$sql .= 'LEFT JOIN usuario AS u ';
+	$sql .= 'ON (a.uid = u.cpf ) , igreja AS i, setores AS s ';
+	$sql .= 'WHERE a.id = "'.$id.'" AND a.igreja = i.rol AND a.setor=s.id ';
 	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($result);
 	$title		= stripslashes($row["title"]);
 	$body		= stripslashes(str_replace("\n", "<br />", $row["text"]));
-	$postedby 	= $lang['postedby'] . ": " . $row['nome'] . " " . $row['cargo'];
+	$postedby 	= $lang['postedby'] . ": " . $row['nome'] . "<br />" . $row['cargo'];
+	$setorIgrea 	= 'Local do evento: '  . $row["razao"] . '<br />Cadastro pela: '.$row["alias"];
 	if (!($row["start_time"] == "55:55:55" && $row["end_time"] == "55:55:55")) {
 		if ($row["start_time"] == "55:55:55")
 			$starttime = "- -";
@@ -126,31 +129,30 @@ function writePosting($id, $auth)
 		$editstr = "";
 	}
 ?>
-	<table class='table' >
-		<tr><td bgcolor="#000000">
-			<table class="table">
-				<tr>
-					<td class="display_title_bg"><table cellspacing="0" cellpadding="0" border="0" width="100%"><tr>
-							<td width="100%"><span class="display_title">&nbsp;<?php echo $title;?></span></td>
-							<td><img src="images/clear.gif" width="20" height="1" border="0"></td>
-							<td align="right" nowrap="yes"><span class="display_title"><?php echo $timestr;?>&nbsp;</span></td>
-					</tr></table></td>
-				</tr>
-				<tr><td class="display_txt_bg">
-					<table class='table' >
-						<tr>
-							<td><span class="display_txt"><?php echo $body;?></span></td>
-						</tr>
-						<tr>
-							<td align="right"><span class="display_user"><?php echo $postedby;?></td>
-						</tr>
-						<tr>
-							<td align="right"><?php echo $editstr;?></td>
-						</tr>
-					</table>
-				</td></tr>
-			</table>
-	</td></tr></table>
+<table class="table" style="width:100%">
+	<tr>
+		<td  class='primary'><table class='table'><tr>
+				<td width="100%"><span class="display_title">&nbsp;<?php echo $title;?></span></td>
+				<td align="right" nowrap="yes"><span class="display_title"><?php echo $timestr;?>&nbsp;</span></td>
+		</tr></table></td>
+	</tr>
+	<tr><td class="display_txt_bg">
+		<table class='table' style="width:100%" >
+			<tr>
+				<td><span class="display_txt"><?php echo $body;?></span></td>
+			</tr>
+			<tr>
+				<td align="right"><span class="display_txt"><?php echo $setorIgrea;?></td>
+			</tr>
+			<tr>
+				<td align="right"><span class="display_user"><?php echo $postedby;?></td>
+			</tr>
+			<tr>
+				<td align="right"><?php echo $editstr;?></td>
+			</tr>
+		</table>
+	</td></tr>
+</table>
 <?php
 }
 ?>

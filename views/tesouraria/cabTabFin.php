@@ -17,7 +17,7 @@ $nivelSem = '
             </tr>';
 $colgroup = '
             <col id="'.$colUm.'">
-            <col id="DÃ­zimos">
+            <col id="Dí­zimos">
             <col id="Ofertas Extras">
             <col id="Ofertas">
             <col id="Sub-Total">
@@ -27,7 +27,7 @@ $colgroup = '
             <col id="Ensino">
             <col id="Operacional">
             <col id="Campanhas">
-            <col id="MissÃµes">
+            <col id="Missões">
             <col id="Total">
             ';
 ?>
