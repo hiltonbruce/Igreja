@@ -2,7 +2,7 @@
 	<link rel="stylesheet" type="text/css" href="agendaSec/css/default.css">
 <table class='table'>
 <tr>
-	<td colspan="2">
+	<td width='40%'>
 		<?php echo $scrollarrows;?>
 	</td>
 	<!-- form tags must be outside of <td> tags -->

@@ -149,12 +149,12 @@ function scrollArrows($m, $y,$mes,$mesAnt,$mesPos,$igreja)
 	$ig = (empty($igreja)) ? '' : $igreja;
 
 	$s = '<a href="./?escolha=controller/secretaria.php&sec=2&igreja='.$ig.'&month=';
-	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-xs" >';
-	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>Ir p/ $yAnt </button></a> &nbsp;";
-	$s .=	'<button class="btn btn-default" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
+	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-primary btn-xs" >';
+	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>$yAnt</button></a> &nbsp;";
+	$s .=	'<button class="btn btn-primary" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
 	$s .= '<a href="./?escolha=controller/secretaria.php&sec=2&month=' . $nextmonth;
-	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-xs" >Ir p/ ';
-	$s .= $yPos." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
+	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-primary btn-xs" >';
+	$s .= $yPos."<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
 
 	return $s;
 }
@@ -181,10 +181,12 @@ function writeCalendar($month, $year,$igreja)
 		for($i=0;$i < 7; $i++) {
 			if($day > 0 && $day <= $days) {
 				$str .= "	<td class=\"";
-				if (($day == $d) && ($month == $m) && ($year == $y))
+				if (($day == $d) && ($month == $m) && ($year == $y)){
 					$str .= "today";
-				else
-					$str .= "day";
+				}elseif ($i==0) {
+					$str .= "dom";
+				}else {
+					$str .= "day";}
 
 					$str .= "_cell\" valign=\"top\"><span class=\"day_number\">";
 		//	if ()
@@ -211,11 +213,11 @@ function writeCalendar($month, $year,$igreja)
 				$str .= "</td>\n";
 				$day++;
 			} elseif($day == 0)  {
-     			$str .= "	<td class=\"empty_day_cell\" valign=\"top\">&nbsp;</td>\n";
+     			$str .= "	<td class='info' valign=\"top\">&nbsp;</td>\n";
 				$weekpos--;
 				if ($weekpos == 0) $day++;
      		} else {
-				$str .= "	<td class=\"empty_day_cell\" valign=\"top\">&nbsp;</td>\n";
+				$str .= "	<td class='info' valign=\"top\">&nbsp;</td>\n";
 			}
      	}
 		$str .= "</tr>\n\n";
@@ -236,10 +238,15 @@ function getDayNameHeader()
 		}
 	}
 
-	$s = "<table class='table table-bordered' >\n<tr>\n";
+	$s = "<table class='table table-bordered some_style' >\n<tr>\n";
 
 	foreach($lang['abrvdays'] as $day) {
-		$s .= "\t<td class='primary text-center'><strong>$day</strong></td>\n";
+		if ($day!='Dom') {
+			$s .= "\t<td class='primary text-center'><strong>$day</strong></td>\n";
+		} else {
+			$s .= "\t<td class='danger text-center'><strong>$day</strong></td>\n";
+		}
+
 	}
 
 	$s .= "</tr>\n\n";

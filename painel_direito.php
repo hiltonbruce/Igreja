@@ -72,7 +72,7 @@
 	    <span class="list-group-item active">
 			<h4 class="list-group-item-heading">Rol's com Pend&ecirc;ncias</h4>
     </span>
-		<table class='table table-bordered table-striped table-hover' >
+		<table class='table table-bordered table-striped table-hover some_style' >
 			<colgroup>
 				<col id="Rol">
 				<col id="Rol">
@@ -145,7 +145,7 @@
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 		 //inicia o cabe?alho de pagina??o
 		?>
-		<table class='table table-bordered table-hover table-striped' id="pendencia" >
+		<table class='table table-bordered table-hover table-striped some_style' id="pendencia" >
 			<colgroup>
 				<col id="Rol">
 				<col id="Rol">

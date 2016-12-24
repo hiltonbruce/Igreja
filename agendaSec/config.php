@@ -15,10 +15,10 @@
 /*******************************************************
 ***** Configurações do Banco de Dados MySQL ***********
 
-define("DB_NAME", "assembleia");				// nome do banco de dados
-define("DB_USER", "root");				// nome de usuário no banco de dados
-define("DB_PASS", "x9735pla");				// senha do banco de dados
-define("DB_HOST", "localhost");			// servidor de banco de dados
+define("DB_NAME", "");				// nome do banco de dados
+define("DB_USER", "");				// nome de usuário no banco de dados
+define("DB_PASS", "");				// senha do banco de dados
+define("DB_HOST", "");			// servidor de banco de dados
 *******************************************************/
 
 // Prefixo adicionado aos nomes de tabelas. Não autere após
@@ -54,7 +54,7 @@ define("TEMPLATE_NAME", "default");
 // começa no Domingo, 1 indica que é na Segunda-feira,
 // 2 Terça-feira, 3 Quarta-feira... Para a maioria dos
 // usuários se utiliza zero.
-define("WEEK_START", 1);
+define("WEEK_START", 0);
 
 // Especifica o formato de exibição da hora.
 // Está disponível dois formatos: "12hr" exibe

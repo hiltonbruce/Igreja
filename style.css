@@ -383,6 +383,11 @@ img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inli
         opacity: 0;
     }
 }
+
+table.some_style td:hover {
+background-color: #93bfeb;
+}
+
 /* Personalização para BootStrap*/
 
 .table > thead > tr > td.primary,
@@ -399,7 +404,7 @@ img.maismenos {border:none;margin-right:10px;vertical-align:middle;display: inli
 .table > tfoot > tr.primary > th {
   color: #fff;
   background-color: #337ab7;
-  border-color: #2e6da4;	
+  border-color: #2e6da4;
 }
 .table-hover > tbody > tr > td.primary:hover,
 .table-hover > tbody > tr > th.primary:hover,

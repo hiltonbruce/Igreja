@@ -16,11 +16,12 @@ BODY	{ background-color:#FFF }
 .day_cell				{ background-color:#EDECD8; height:80; width: 95; }
 .empty_day_cell			{ background-color:#fff; height:80; width: 95; }
 .today_cell				{ background-color:#abd7fb; height:80; width: 95; }
+.dom_cell				{ background-color:#F2DEDE; height:80; width: 95; border: 2px solid #0021ff; }
 
 /**** day number in upper left corner of each cell ****/
 .day_number				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
 
-/**** title_txt is the text for each post on main page ****/
+/**** title_txt is the text for ea#fecdc0ch post on main page ****/#094cf9
 .title_txt				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
 .title_txt A:link		{ color:#953010; text-decoration:underline }
 .title_txt A:active		{ color:#953010; text-decoration:underline }
