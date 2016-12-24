@@ -33,10 +33,8 @@ if (!empty($_SESSION['valid_user'])) {
 		displayEditForm('Add', $uid);
 	} else {
 		$sql = "SELECT * FROM " . DB_TABLE_PREFIX . "mssgs WHERE id = $id";
-
 		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_assoc($result);
-
 		if ( $_SESSION['setor'] == $row['setor'] ) {
 			displayEditForm('Edit', $uid, $id);
 		} else {
@@ -80,7 +78,6 @@ function displayEditForm($mode, $uid, $id="")
 			$y 			= $row["y"];
 			$i 			= $row["igreja"];
 		}
-
 		getPullDownTimeValues($row["start_time"], $shour, $sminute, $spm);
 		getPullDownTimeValues($row["end_time"], $ehour, $eminute, $epm);
 	} else {

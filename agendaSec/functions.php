@@ -137,45 +137,43 @@ function javaScript()
 }
 */
 
-function scrollArrows($m, $y,$mes,$mesAnt,$mesPos)
+function scrollArrows($m, $y,$mes,$mesAnt,$mesPos,$igreja)
 {
 	// set variables for month scrolling
 	$nextyear = ($m != 12) ? $y : $y + 1;
 	$prevyear = ($m != 1) ? $y : $y - 1;
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
-	$yPos = ($mes=='Dezembro') ? 'Janeiro/'.($y+1) : $mesPos.'/'.$y ;
-	$yAnt = ($mes=='Janeiro') ? 'Dezembro/'.($y-1) : $mesAnt.'/'.$y ;
+	$yPos = ($mes=='Dezembro') ? 'Jan/'.($y+1) : substr($mesPos, 0,3).'/'.$y ;
+	$yAnt = ($mes=='Janeiro') ? 'Dez/'.($y-1) : substr($mesAnt, 0,3).'/'.$y ;
+	$ig = (empty($igreja)) ? '' : $igreja;
 
-	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=";
-	$s .= $prevmonth . "&year=" . $prevyear . "\"><button class='btn btn-xs' >\n";
-	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>Voltar p/ $yAnt </button></a> &nbsp;";
-	$s .=	'<button class="btn btn-default btn-lg" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
-	$s .= "<a href=\"./?escolha=controller/secretaria.php&sec=2&month=" . $nextmonth;
-	$s .= "&year=" . $nextyear . "\" ><button class='btn btn-xs' >Seguir p/ ";
+	$s = '<a href="./?escolha=controller/secretaria.php&sec=2&igreja='.$ig.'&month=';
+	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-xs" >';
+	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>Ir p/ $yAnt </button></a> &nbsp;";
+	$s .=	'<button class="btn btn-default" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
+	$s .= '<a href="./?escolha=controller/secretaria.php&sec=2&month=' . $nextmonth;
+	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-xs" >Ir p/ ';
 	$s .= $yPos." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
 
 	return $s;
 }
 
-function writeCalendar($month, $year)
+function writeCalendar($month, $year,$igreja)
 {
 	$str = getDayNameHeader();
-	$eventdata = getEventDataArray($month, $year);
+	$eventdata = getEventDataArray($month, $year,$igreja);
 	// get week position of first day of month.
 	$weekpos = getFirstDayOfMonthPosition($month, $year);
 	// get user permission level
 //	$auth = auth();
 	// get number of days in month
 	$days = 31-((($month-(($month<8)?1:0))%2)+(($month==2)?((!($year%((!($year%100))?400:4)))?1:2):0));
-
 	// initialize day variable to zero, unless $weekpos is zero
 	if ($weekpos == 0) $day = 1; else $day = 0;
-
 	// initialize today's date variables for color change
 	$timestamp = mktime() + CURR_TIME_OFFSET * 3600;
 	$d = date(j, $timestamp); $m = date(n, $timestamp); $y = date(Y, $timestamp);
-
 	// loop writes empty cells until it reaches position of 1st day of month ($wPos)
 	// it writes the days, then fills the last row with empty cells after last day
 	while($day <= $days) {
@@ -248,11 +246,10 @@ function getDayNameHeader()
 	return $s;
 }
 
-function getEventDataArray($month, $year)
+function getEventDataArray($month, $year,$igreja)
 {
 
 	$sql = "SELECT a.id, a.d, a.title, a.start_time, a.end_time, a.setor, a.text, i.razao, s.alias, ";
-
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
 		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
@@ -266,6 +263,9 @@ function getEventDataArray($month, $year)
 	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs AS a, igreja AS i, setores AS s ";
 	$sql .= "WHERE m = $month AND y = $year AND a.igreja = i.rol ";
 	$sql .= "AND a.setor = s.id ";
+	if ($igreja>'0') {
+		$sql .= 'AND i.rol  ='.$igreja.' ';
+	}
 	$sql .= "ORDER BY start_time";
 
 	$result = mysql_query($sql) or die(mysql_error());
