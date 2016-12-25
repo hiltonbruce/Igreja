@@ -149,11 +149,11 @@ function scrollArrows($m, $y,$mes,$mesAnt,$mesPos,$igreja)
 	$ig = (empty($igreja)) ? '' : $igreja;
 
 	$s = '<a href="./?escolha=controller/secretaria.php&sec=2&igreja='.$ig.'&month=';
-	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-primary btn-xs" >';
+	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-default btn-xs" >';
 	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>$yAnt</button></a> &nbsp;";
 	$s .=	'<button class="btn btn-primary" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
 	$s .= '<a href="./?escolha=controller/secretaria.php&sec=2&month=' . $nextmonth;
-	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-primary btn-xs" >';
+	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-default btn-xs" >';
 	$s .= $yPos."<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
 
 	return $s;
@@ -213,11 +213,11 @@ function writeCalendar($month, $year,$igreja)
 				$str .= "</td>\n";
 				$day++;
 			} elseif($day == 0)  {
-     			$str .= "	<td class='info' valign=\"top\">&nbsp;</td>\n";
+     			$str .= "	<td class='active' valign=\"top\">&nbsp;</td>\n";
 				$weekpos--;
 				if ($weekpos == 0) $day++;
      		} else {
-				$str .= "	<td class='info' valign=\"top\">&nbsp;</td>\n";
+				$str .= "	<td class='active' valign=\"top\">&nbsp;</td>\n";
 			}
      	}
 		$str .= "</tr>\n\n";

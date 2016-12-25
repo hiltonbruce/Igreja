@@ -5,38 +5,28 @@ require("./lang/lang." . LANGUAGE_CODE . ".php");
 require("./functions.php");
 require "../func_class/funcoes.php";
 require "../func_class/classes.php";
-
 $id 	= intval($_GET['id']);
-
 $sql = "SELECT d, m, y FROM " . DB_TABLE_PREFIX . "mssgs WHERE id=" . $id;
 $result = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_array($result);
-
 $d 			= $row["d"];
 $m 			= $row["m"];
 $y 			= $row["y"];
-$dateline 	= "$d de "  . $lang['months'][$m-1] . " de $y";
+$dateline	= sprintf("%02d de %s  de  %s", $d,$lang['months'][$m-1],$y);
 $wday 		= date("w", mktime(0,0,0,$m,$d,$y));
-
 writeHeader($m, $y, $dateline, $wday, $auth);
-
 // display selected posting first
 writePosting($id, $auth);
-
 // give some space
 echo '<img src="images/clear.gif" width="1" height="25" border="0"><br clear="all">';
-
 // query for rest of this day's postings
 $sql = "SELECT id, start_time FROM " . DB_TABLE_PREFIX . "mssgs ";
 $sql .= "WHERE y = " . $y . " AND m = " . $m . " AND d = " . $d . " AND id != $id ";
 $sql .= "ORDER BY start_time ASC";
-
 $result = mysql_query($sql) or die(mysql_error());
-
 if (mysql_num_rows($result)) {
-	echo '<span class="display_header">' . $lang['otheritems'] . '</span>';
+	echo '<span class="display_otheritems">' . $lang['otheritems'] . '</span>';
 	echo '<br clear="all"><img src="images/clear.gif" width="1" height="3" border="0"><br clear="all">';
-
 	// display rest of this day's postings
 	while ($row = mysql_fetch_array($result)) {
 		writePosting($row[0], $auth);
@@ -44,8 +34,7 @@ if (mysql_num_rows($result)) {
 	}
 }
 echo "</body></html>";
-
-function writeHeader($m, $y, $dateline, $wday, $auth)
+function writeHeader($m, $y, $dateline, $wday)
 {
 	global $lang;
 ?>
@@ -72,7 +61,7 @@ function writeHeader($m, $y, $dateline, $wday, $auth)
 <!-- selected date -->
 <table class='table'>
 <tr>
-	<td><span class="display_header"><?php echo $dateline; ?></span></td>
+	<td><span class="display_header"><?php echo $dateline; ?>, </span></td>
 	<td align="right"><span class="display_header"><?php echo $lang['days'][$wday] ?></span></td>
 </tr>
 </table>

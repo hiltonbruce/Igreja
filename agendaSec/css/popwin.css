@@ -9,12 +9,13 @@ TD     	{ font-family:arial, helvetica }
 .delete_pg_txt		{ font-size:14px; font-family:arial, helvetica }
 
 .display_header		{ font-size:16px; font-family:arial, helvetica; font-weight:bold }
+.display_otheritems		{ font-size:16px; font-family:arial, helvetica; font-weight:bold; color:#9f000b }
 .display_title		{ font-size:12px; font-family:arial, helvetica; color:#FFFFFF; font-weight:bold }
 .display_txt		{ font-size:12px; font-family:arial, helvetica; color:#000000 }
 .display_user		{ font-size:10px; font-family:verdana, helvetica, arial; color:#999999; font-weight:bold }
 .display_edit		{ font-size:10px; font-family:verdana, arial, helvetica }
 .display_title_bg	{ background-color:#953010 }
-.display_txt_bg		{ background-color:#EDECD8 }
+.display_txt_bg		{ background-color:#EDECD8 }#db1420
 
 // end hiding -->
 </STYLE>
