@@ -1,5 +1,5 @@
+<link rel="stylesheet" type="text/css" href="agendaSec/css/default.css">
 <?php javaScript();?>
-	<link rel="stylesheet" type="text/css" href="agendaSec/css/default.css">
 <table class='table'>
 <tr>
 	<td width='40%'>

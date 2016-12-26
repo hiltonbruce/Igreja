@@ -9,7 +9,7 @@ $lang['days'] = array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
 $lang['abrvdays'] = array("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "S&aacute;b");
 
 // eventdisplay.php
-$lang['otheritems'] = "Também neste dia:";
+$lang['otheritems'] = "Tamb&eacute;m neste dia:";
 $lang['deleteconfirm'] = "Tem a certeza que deseja apagar este item?";
 $lang['postedby'] = "Agendado por";
 

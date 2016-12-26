@@ -244,7 +244,7 @@ function getDayNameHeader()
 		if ($day!='Dom') {
 			$s .= "\t<td class='primary text-center'><strong>$day</strong></td>\n";
 		} else {
-			$s .= "\t<td class='danger text-center'><strong>$day</strong></td>\n";
+			$s .= "\t<td class='info text-center'><strong>$day</strong></td>\n";
 		}
 
 	}

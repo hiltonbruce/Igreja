@@ -7,7 +7,7 @@
 A		{ font-family:arial, helvetica; color:#953010; text-decoration:underline }
 SPAN	{ font-family:arial, helvetica }
 TD     	{ font-family:arial, helvetica }
-BODY	{ background-color:#FFF }
+BODY	{ background-color:#FFF }#def2ee
 
 /**** mês and ano no cabeçalho do topo do calendário ****/
 .date_header			{ font-size:16px; font-family:arial, helvetica; font-weight:bold }
@@ -16,7 +16,7 @@ BODY	{ background-color:#FFF }
 .day_cell				{ background-color:#EDECD8; height:80; width: 95; }
 .empty_day_cell			{ background-color:#fff; height:80; width: 95; }
 .today_cell				{ background-color:#abd7fb; height:80; width: 95; }
-.dom_cell				{ background-color:#F2DEDE; height:80; width: 95; border: 2px solid #0021ff; }
+.dom_cell				{ background-color:#b6e4fa; height:80; width: 95; }
 
 /**** day number in upper left corner of each cell ****/
 .day_number				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }

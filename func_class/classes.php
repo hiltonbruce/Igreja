@@ -490,9 +490,9 @@ class editar_form {
 			que sofrer� altera��o. Em agumas ocasi�es tamb�m � passado o campo UF.*/
 
 			//echo $this->campo." = ".$this->vlr_get;
-            if ($ident=='') {
-                $ident = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
-            }
+      if ($ident=='') {
+          $ident = (empty($_GET["bsc_rol"])) ? intval($_GET['id']):intval($_GET['bsc_rol']);
+      }
 			?>
 			<form id="form1" name="form1" method="post" action="">
 			<table><tbody><tr><td>

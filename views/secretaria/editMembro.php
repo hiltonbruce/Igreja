@@ -39,7 +39,7 @@
 				<?PHP
 					$nome = new editar_form("nome",$arr_dad["nome"],$tab,$tab_edit);
 					//$_SESSION["membro"]=$arr_dad["nome"];
-					echo situacao ($arr_dad["situacao_espiritual"]);//Mostra o estado do membro: se Em comunh�o, disciplinado, falecido...
+					echo situacao ($arr_dad["situacao_espiritual"],$bsc_rol);//Mostra o estado do membro: se Em comunh�o, disciplinado, falecido...
 					$nome->getMostrar();
 		      $nome->getEditar('','',$bsc_rol);#<!-- Mostra form para nome -->
 				?>
@@ -112,10 +112,12 @@
 		 ?></td>
         <td>Data Nascimento:
         <?PHP
-			$nome = new editar_form("datanasc",$arr_dad["br_datanasc"],$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-		?></td>
-        <td colspan="2">Nacionalidade:
+					$nome = new editar_form("datanasc",$arr_dad["br_datanasc"],$tab,$tab_edit);
+					$nome->getMostrar();
+					$nome->getEditar('','',$bsc_rol);
+				?>
+			</td>
+      <td colspan="2">Nacionalidade:
         <?PHP
 			$nome = new editar_form("nacionalidade",$arr_dad["nacionalidade"],$tab,$tab_edit);
 			$nome->getMostrar();$nome->getEditar('','',$bsc_rol);
