@@ -9,28 +9,23 @@ if (empty($_SESSION['valid_user'])) {
 }
 require_once ("../func_class/funcoes.php");
 require_once ("../func_class/classes.php");
-
 date_default_timezone_set('America/Recife');
-
 function __autoload ($classe) {
 
 	list($dir,$nomeClasse) = explode('_', $classe);
 	//$dir = strtr( $classe, '_','/' );
-
 	if (file_exists("../models/$dir/$classe.class.php")){
 		require_once ("../models/$dir/$classe.class.php");
 	}elseif (file_exists("../models/$classe.class.php")){
 		require_once ("../models/$classe.class.php");
 	}
 }
-
 $idIgreja = (empty($_GET['igreja'])) ? '':$_GET['igreja'];
 if (intval($_POST['rolIgreja']>0)) {
 	$idIgreja=$_POST['rolIgreja'];
 }
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 $igSede = new DBRecord('igreja', '1', 'rol');
-
 $tipo = $_GET['tipo'];
 switch ($tipo) {
 	case '1':
@@ -46,6 +41,11 @@ switch ($tipo) {
 	require_once '../agendaSec/lang/lang.admin.pt.php';
 	require_once '../agendaSec/lang/lang.pt.php';
 	$nomeArquivo = '../views/secretaria/agendaPrint.php';
+	break;
+	case '3':
+		# Novos convertidos
+		$titTabela = 'Lista de Dirigentes';
+		$nomeArquivo = '../views/secretaria/dirigentes.php';
 	break;
 	default:
 		;

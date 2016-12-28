@@ -131,8 +131,7 @@ if ($_GET["cargo"]<"6"){
 		}else{
 			echo "Com este crit&eacute;rio n&atilde;o obtivemos nenhum resultado, tente melhorar seu argumento de pesquisa!";
 		}
-	}
-	else {
-		require_once 'igreja/lst_dirigente.php';
+	}else {
+		require_once 'views/secretaria/dirigentes.php';
 	}
 ?>

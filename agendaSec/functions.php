@@ -204,7 +204,7 @@ function writeCalendar($month, $year,$igreja)
 				if (MAX_TITLES_DISPLAYED < $eventcount) $eventcount = MAX_TITLES_DISPLAYED;
 				// write title link if posting exists for day
 				for($j=0;$j < $eventcount;$j++) {
-					$titLink = 'data-toggle="tooltip" data-placement="right" title="'.$eventdata[$day]["text"][$j].'"';
+					$titLink = 'data-toggle="tooltip" data-placement="top" title="'.strip_tags($eventdata[$day]["text"][$j]).'"';
 					$str .= "<span class=\"title_txt\" $titLink >&bull; ";
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
 					$str .= $eventdata[$day]["title"][$j] . "</a></span> - " . $eventdata[$day]["setor"][$j];

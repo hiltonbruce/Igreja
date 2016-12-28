@@ -99,13 +99,13 @@
 	  <?php echo $linhaCargo;?>
 	    <option>--&gt;&gt;Lista por cargo&lt;&lt;-- </option>
 	    <option value="<?PHP echo $link;?>0">--&gt;&gt;Listar todos&lt;&lt;--</option>
-		<option value="<?PHP echo $link;?>1">Auxiliar de Trabalho</option>
-		<option value="<?PHP echo $link;?>2">Di&aacute;cono</option>
-		<option value="<?PHP echo $link;?>3">Presb&iacute;tero</option>
-		<option value="<?PHP echo $link;?>4">Evangelista</option>
-		<option value="<?PHP echo $link;?>5">Pastor</option>
-		<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
-	  </select>
+			<option value="<?PHP echo $link;?>1">Auxiliar de Trabalho</option>
+			<option value="<?PHP echo $link;?>2">Di&aacute;cono</option>
+			<option value="<?PHP echo $link;?>3">Presb&iacute;tero</option>
+			<option value="<?PHP echo $link;?>4">Evangelista</option>
+			<option value="<?PHP echo $link;?>5">Pastor</option>
+			<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
+		  </select>
 	  </td>
 	  </tr>
 	  <tr>
@@ -127,12 +127,11 @@
 	  ?>
 	  <label>Membros com ou sem foto</label>
 	 <select name="foto" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
-	 <?php echo $linha1;?>
-	    <option value="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=<?php echo $_GET["ord"].'&cargo='.$_GET["cargo"];?>">--&gt;&gt;Listar todos&lt;&lt;--</option>
-		<option value="<?PHP echo $link_foto;?>1">Listar com fotos</option>
-		<option value="<?PHP echo $link_foto;?>2">Listar sem fotos</option>
+		 	<?php echo $linha1;?>
+		  <option value="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=<?php echo $_GET["ord"].'&cargo='.$_GET["cargo"];?>">--&gt;&gt;Listar todos&lt;&lt;--</option>
+			<option value="<?PHP echo $link_foto;?>1">Listar com fotos</option>
+			<option value="<?PHP echo $link_foto;?>2">Listar sem fotos</option>
 	  </select>
-
     </form>
     </td>
     <td>
@@ -151,20 +150,21 @@
     elseif ($_GET["cargo"]>"5"){
     ?>
     <fieldset>
-    <legend> Impressão com dados pessoais:</legend>
-	<form id="form1" name="form1" method="get" action="igreja/dirigente_print.php" target="_blank">
-
-	<div class="radio-inline">
-	<label>
-     <input type="radio" name="ext" value="1" />Sim </label>
-    </div>
-	<div class="radio-inline">
-	<label>
+    <legend>Impressão com dados pessoais:</legend>
+		<form id="form1" name="form1" method="get" action="controller/modeloPrint.php/" target="_blank">
+		<div class="radio-inline">
+		<label>
+	     <input type="radio" name="ext" value="1" />Sim </label>
+	  </div>
+		<div class="radio-inline">
+		<label>
       <input type="radio" name="ext" value="0" />Não </label>
      </div>
       <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
       <input name="titTabela" type="hidden" value="<?PHP echo $titTabela;?>" />
-    </form></fieldset>
+      <input name='tipo' type='hidden' value='3' />
+    </form>
+		</fieldset>
     <?php
     } else{
     ?>
