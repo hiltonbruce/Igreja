@@ -47,7 +47,7 @@
 				}else {
 					$quant_aniv = "Hoje n&aatilde;o temos aniversariantes!";
 				}
-			echo "<script> alert('".$sauda.$_SESSION['nome']." . $quant_aniv'); location.href='./?escolha=aniv/aniversario.php&menu=top_aniv';</script>";
+			echo "<script> alert('".$sauda.$_SESSION['nome']." . $quant_aniv'); location.href='./?escolha=controller/secretaria.php&sec=2';</script>";
 		}
 	}
 }

@@ -57,7 +57,6 @@ function writeHeader($m, $y, $dateline, $wday)
 	</script>
 </head>
 <body>
-
 <!-- selected date -->
 <table class='table'>
 <tr>
@@ -72,7 +71,6 @@ function writeHeader($m, $y, $dateline, $wday)
 function writePosting($id, $auth)
 {
 	global $lang;
-
 	$sql = 'SELECT a.y, a.m, a.d, a.title, a.text, a.start_time, a.end_time, ';
 	$sql .= 'a.uid, a.setor, a.igreja, u.cpf, u.nome, u.cargo, i.razao, ';
 	$sql .= 's.alias, ';

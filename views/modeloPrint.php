@@ -24,7 +24,7 @@
 		require_once $nomeArquivo;
 	?><h5>
     <div id="footer">
-    Copyright &copy; 2015  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
+    Copyright &copy; 2016  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
   </div></h5>
 </body>
 </html>

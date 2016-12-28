@@ -144,14 +144,14 @@ function scrollArrows($m, $y,$mes,$mesAnt,$mesPos,$igreja)
 	$prevyear = ($m != 1) ? $y : $y - 1;
 	$prevmonth = ($m == 1) ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1 : $m + 1;
-	$yPos = ($mes=='Dezembro') ? 'Jan/'.($y+1) : substr($mesPos, 0,3).'/'.$y ;
-	$yAnt = ($mes=='Janeiro') ? 'Dez/'.($y-1) : substr($mesAnt, 0,3).'/'.$y ;
+	$yPos = ($mes=='Dezembro') ? 'Jan/'.substr(($y+1), 2) : substr($mesPos, 0,3).'/'.substr($y, 2) ;
+	$yAnt = ($mes=='Janeiro') ? 'Dez/'.substr(($y-1), 2) : substr($mesAnt, 0,3).'/'.substr($y, 2) ;
 	$ig = (empty($igreja)) ? '' : $igreja;
 
 	$s = '<a href="./?escolha=controller/secretaria.php&sec=2&igreja='.$ig.'&month=';
 	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-default btn-xs" >';
-	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>$yAnt</button></a> &nbsp;";
-	$s .=	'<button class="btn btn-primary" disabled="disabled" > <strong>'.$mes.' '.$y.'</strong></button> &nbsp;';
+	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>$yAnt</button></a>&nbsp;";
+	$s .=	'<button class="btn btn-primary btn-sm active" disabled="disabled" >'.$mes.' '.$y.'</button>&nbsp;';
 	$s .= '<a href="./?escolha=controller/secretaria.php&sec=2&month=' . $nextmonth;
 	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-default btn-xs" >';
 	$s .= $yPos."<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
