@@ -96,7 +96,7 @@
  font-size: 8pt;
  color: #ff0000;
  width: 24px;
- height: 20px;#098609
+ height: 20px;
 }
 
 .td_marcado1{
@@ -125,7 +125,7 @@
 }
 
 .td_marcado6{
- color: #960796;
+ color: #960707;
  font-size: 12pt;
 }
 
@@ -135,6 +135,12 @@
 }
 
 .td_marcado8{
- color: #9932CD;
- font-size: 12pt;
+ background: #CCCCCC;
+ border-top: 1px solid #f0f0f0;
+ border-bottom: 1px solid #c0c0c0;
+ border-left: 1px solid #f0f0f0;
+ border-right: 1px solid #c0c0c0;
+ text-align: center;
+ border: 2px solid #555;
+ font: bold;
 }

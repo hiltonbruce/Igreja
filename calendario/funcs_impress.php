@@ -44,8 +44,8 @@ function calcularDiaSemana($dia,$mes,$ano)
   {
 
    //Carrega o css do calendário e armazena em $dados
-   $arq=fopen("../css/calendario.css","r");
-   $tam=filesize("../css/calendario.css");
+   $arq=fopen("../css/calendarioCeia.css","r");
+   $tam=filesize("../css/calendarioCeia.css");
    $dados=fread($arq,$tam);
    fclose($arq);
    //Coloca o css carregado no código do calendário
@@ -55,9 +55,9 @@ function calcularDiaSemana($dia,$mes,$ano)
    $dia_semana=calcularDiaSemana(1,$mes,$ano);
    $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano é bisexto
    $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o número de dias de cada mês
-   $meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+   $meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
                 "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
-   $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","Sáb");
+   $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&aacute;b");
 
    $idx=$mes-1;
    $total=$idx+$nmeses; //Total de meses a serem considerados
@@ -75,7 +75,7 @@ function calcularDiaSemana($dia,$mes,$ano)
     $tabela=$tabela."<tr>";
     for($ms=0; $ms<$ncols && $idx<$total; $ms++)
     {
-     $temp_tb="<td valign='top'><table class='tabela' width=100 height=220>
+     $temp_tb="<td valign='top'><table class='tabela' width='100%' height='220'>
               <tr><td colspan=7 class='cabecalho'>".$meses[$idx]."/".$ano.
               "</td></tr><tr>"; //Cria uma tabela para o mês atual
 
@@ -128,17 +128,13 @@ function calcularDiaSemana($dia,$mes,$ano)
 	    ($cnt_dias==$d1))) $classe="td_marcado".($i+1);//$valor[$i];
 	 }
 	}
-
 	$cultos = $classe;
-
 	if($classe=="") //Caso a classe ainda não esteja definida após o for acima
 	 $classe=($d==0 ? "td_marcado0" : "td_dia");
-
      /*
      if($d==0 || $cultos =="") //Caso a classe ainda não esteja definida após o for acima
 	 $classe=($d==1 || $d==3 || $d==5 ? "td_marcado3" : $classe);//Define os dias de culto
      */
-
     if ($d==$dia_ceia)  ++$semana;
 
      if ($ceia=="" &&  $d==$dia_ceia && $semana==$semana_ceia) //Se 1ª Sexta marca santa ceia
@@ -146,7 +142,6 @@ function calcularDiaSemana($dia,$mes,$ano)
 	 $classe=( $d==$dia_ceia ? "td_marcado8" : "td_dia");
 	 $ceia = $classe;
 	 }
-
 	//Cria a célula referente ao dia atual
 	$temp_ln=$temp_ln."<td class='".$classe."'>".$cnt_dias++."</td>";
         $daux++;
@@ -160,13 +155,10 @@ function calcularDiaSemana($dia,$mes,$ano)
      }
      if($nl==5) $temp_ln=$temp_ln."<tr><td colspan=7>&nbsp;</td></tr>";
      $temp_tb=$temp_tb.$temp_ln;
-
      $k=$idx-($mes-1);
-
      //Gera um rodapé para a tabela de mês
       $temp_tb=$temp_tb."<tr><td colspan=7 class='rodape'>".$rodapes.
                "</td></tr></table><br></td>";
-
      $tabela=$tabela.$temp_tb;
      $dia=$daux;
      $ceia = "";$culto="";
@@ -176,13 +168,11 @@ function calcularDiaSemana($dia,$mes,$ano)
     }
     $tabela=$tabela."</tr>";
    }
-   $legenda="<table class=table><tr><td class='cabecalho' colspan=2>Legenda eee</td></tr>";
-
-   $i=1;//define a cor para idenficar a legenda no calendário
-    $legenda=$legenda."<tr><td class='td_marcado".$i."'>&nbsp;</td><td class='td_leg'>".$leg."</td></tr>";
-
-   $tabela=$tabela.$legenda."</table>";
-   $tabela=$tabela."</table>";
+    $legenda="<table class='tabela'>";
+    $i=1;//define a cor para idenficar a legenda no calendário
+    $legenda=$legenda."<tr><td class='td_marcado8'>&nbsp;&nbsp;&nbsp;&nbsp;</td><td class='td_leg'>".$leg."</td></tr>";
+    $tabela=$tabela.$legenda."</table>";
+    $tabela=$tabela."</table>";
   }
   return($tabela);
  }

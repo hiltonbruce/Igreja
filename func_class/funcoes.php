@@ -510,30 +510,27 @@ function prox_ant_ano (){
      $pro = $y+1;
      $ant = $y-1;
      //echo "<a href='".$_GET["escolha"]."&ano=".$y+1."'>Pr�ximo Ano</a>";
-     echo "<div  align='center' >";
-     echo "<table class='tabela' >";
-     echo "<tr>";
-     echo '<td colspan="3">';
+     echo "<table class='table' >";
+     echo '<tr><td>';
      echo '<label>Congrega&ccedil;&atilde;o: </label>';
      $estnatal = new List_Igreja('igreja', 'razao','id');
      $estnatal->igreja_pop('',$_GET["id"],'escolha='.$_GET["escolha"].'&ano='.$_GET['ano'].'&id=');
      echo '</td><td><label>&nbsp;</label>';
-     echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=2'>";
+     echo "<br /><a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=2' target='_blank'>";
      echo '<button type="button" class="btn btn-primary btn-sm"> Imprimir Todas ';
-     echo 'as Igrejas&nbsp;&nbsp;&nbsp;</button></a></td></td></tr></tr><td class="td_marcado7">';
-     echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$ant."&id={$_GET["id"]}'>";
-     echo "<<&nbsp;&nbsp;Ano Anterior</a>";
-     echo "<td class='cabecalho'>";
-     echo "Santa Ceia</td><td class='td_marcado7' >";
-     echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$pro."&id={$_GET["id"]}'>";
-     echo "Proximo&nbsp;Ano&nbsp;&nbsp;>></a></td>";
-     echo '<td>';
-     echo "<a href='".$_GET["escolha"]."?ano=".$_GET['ano']."&id={$_GET["id"]}&imp=1'>";
+     echo 'as Igrejas</button></a></td>';
+		 echo '<td><br /><a href="'.$_GET['escolha'].'?ano='.$_GET['ano'].'&id='.$_GET["id"].'&imp=1" target="_blank">';
      echo '<button type="button" class="btn btn-primary btn-sm">Imprimir Calend&aacute;rio';
-     echo '&nbsp;&nbsp;&nbsp;</button></a></td></td>';
+     echo '</button></a></td>';
+     echo "</tr><tr class='primary'><td class='text-left'>";
+		 echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$ant."&id={$_GET["id"]}' >";
+     echo "<button type='button' class='btn btn-default btn-sm'><<&nbsp;&nbsp;Ano Anterior</button></a>";
+     echo "<td><h4>";
+     echo "Santa Ceia</h4></td><td class='text-right' >";
+     echo "<a href='./?escolha=".$_GET["escolha"]."&ano=".$pro."&id={$_GET["id"]}'>";
+     echo "<button type='button' class='btn btn-default btn-sm'>Proximo&nbsp;Ano&nbsp;&nbsp;>></button></a></td>";
      echo "</tr>";
      echo "</table>";
-     echo "</div>";
 }
 
 function ver_nome ($val_link) {

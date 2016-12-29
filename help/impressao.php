@@ -1,4 +1,7 @@
 <?php
+	date_default_timezone_set('America/Recife');
+	error_reporting(E_ALL);
+	ini_set('display_errors', 'off');
 	//imprimir entradas de todas as congrega��es - mensal
 	require "../func_class/funcoes.php";
 	require "../func_class/classes.php";

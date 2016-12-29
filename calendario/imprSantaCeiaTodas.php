@@ -34,15 +34,14 @@ function calcularDiaSemana($dia,$mes,$ano)
 
  function gerarCalendario($mes,$ano,$nmeses,$ncols,$datas,$rodapes,$leg,$dia_ceia,$semana_ceia,$classDias)//$feriados,$marcados,$rodapes)
  {
+  $ceiaTodos = '';
+  $temp_tb = '';
   if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
   {
    $tabela="Erro ao gerar calendário: [mês=".$mes."] [ano=".$ano.
            "] [número de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
-  }
-  else
-  {
-
+  }else {
    //Carrega o css do calendário e armazena em $dados
    $arq=fopen("../css/calendarioCeia.css","r");
    $tam=filesize("../css/calendarioCeia.css");
@@ -55,9 +54,9 @@ function calcularDiaSemana($dia,$mes,$ano)
    $dia_semana=calcularDiaSemana(1,$mes,$ano);
    $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano é bisexto
    $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o número de dias de cada mês
-   $meses=array("Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+   $meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
                 "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
-   $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","Sáb");
+   $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&acute;b");
 
    $idx=$mes-1;
    $total=$idx+$nmeses; //Total de meses a serem considerados
@@ -155,9 +154,7 @@ function calcularDiaSemana($dia,$mes,$ano)
      }
      if($nl==5) $temp_ln=$temp_ln."<tr><td colspan=7>&nbsp;</td></tr>";
      $temp_tb=$temp_tb.$temp_ln;
-
      $k=$idx-($mes-1);
-
      $tabela=$tabela.$temp_tb;
      $dia=$daux;
      $ceia = "";$culto="";
@@ -178,7 +175,4 @@ function calcularDiaSemana($dia,$mes,$ano)
   $tabDias = $tabDias.'</tr>';
   return($tabDias);
  }
-
-
-
 ?>

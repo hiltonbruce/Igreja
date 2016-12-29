@@ -45,8 +45,8 @@
  font-family: verdana,"sans serif",monospace;
  font-size: 9pt;
  color: #000000;
- width: 18px;
- height: 15px;
+ width: 24px;
+ height: 20px;
 }
 
 .td_leg{
@@ -69,6 +69,8 @@
  border-left: 1px solid #f0f0f0;
  border-right: 1px solid #c0c0c0;
  text-align: center;
+ width: 24px;
+ height: 20px;
 }
 
 .td_marcado0{
@@ -137,110 +139,6 @@
 
 .td_marcado8{
 
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
- background: url('../img/nx25.jpg') #DDF0FC  no-repeat;
- border-top: 1px solid #f0f0f0;
- border-bottom: 1px solid #c0c0c0;
- border-left: 1px solid #f0f0f0;
- border-right: 1px solid #c0c0c0;
- text-align: center;
- font: bold;
-
  background: #CCCCCC;
  border-top: 1px solid #f0f0f0;
  border-bottom: 1px solid #c0c0c0;
@@ -284,4 +182,3 @@
 #footer a:link       { color: #636466; text-decoration: underline }
 #footer a:visited { }
 #footer a:hover      { color: #e7790e }
-
