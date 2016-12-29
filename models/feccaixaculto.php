@@ -1,15 +1,15 @@
 <?php
 controle ('tes');
 $ultimolanc = 0;
-$roligreja =(int) $_POST['igreja'];
+$roligreja =intval($_POST['igreja']);
 $dizimista = new dizresp($roligreja);
 //inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
 $corlinha = false;
-$ultimolanc = mysql_query('SELECT max(lancamento) AS lanc FROM lancamento');//Traz o valor do ultimo lançamento
+$ultimolanc = mysql_query('SELECT max(lancamento) AS lanc FROM lanc');//Traz o valor do ultimo lançamento
 $lancmaior = mysql_fetch_array($ultimolanc);
-$ultimolanc = (int)$lancmaior['lanc']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
+$ultimolanc = $lancmaior['lanc']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
 $idlancmis = $ultimolanc + 1;//id do lançamento das provisões
 //Foi criado a tabela lanchist exclusivamente para o histórico dos lançamentos
 //Antes de começar os lançamentos verificar se há inconcistência nos saldo antes de continuar
@@ -65,12 +65,12 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
    	//Lança provisões conta Despesa
-	$semaddesp = new atualconta('3.1.6.001.005',$idlancmis,11);
+	$semaddesp = new atualconta('3.2.1.001.005',$idlancmis,11);
    	if ($provmissoes>0) {
    		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de missões - Despesa
    	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
+	$conta = new DBRecord('contas','3.2.1.001.005','codigo');//Exibi lançamento da provisão SEMAD
 	$sldAntSemad = number_format($conta->saldo()-$provmissoes,2,',','.');//Saldo anterior da conta
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
 			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
