@@ -1,11 +1,12 @@
 <?php
 session_start();
-require("config.php");
-require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
-require("functions.php");
-require "../func_class/classes.php";
+  require("config.php");
+  require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
+  require("functions.php");
 
-function __autoload ($classe) {
+if (!empty($_SESSION['valid_user'])) {
+  require "../func_class/classes.php";
+  function __autoload ($classe) {
     $pos = strpos($classe, '_');
     if ($pos === false) {
       $nomeClasse = $classe;
@@ -28,7 +29,6 @@ $id 	= intval($_GET['id']);
 $uid	= $_SESSION['authdata']['uid'];
 //print_r($_SESSION);
 
-if (!empty($_SESSION['valid_user'])) {
 	if (empty($id)) {
 		displayEditForm('Add', $uid);
 	} else {
@@ -43,6 +43,7 @@ if (!empty($_SESSION['valid_user'])) {
 	}
 } else {
 	echo $lang['accessdenied'];
+  exit;
 }
 
 function displayEditForm($mode, $uid, $id="")
@@ -135,6 +136,7 @@ function displayEditForm($mode, $uid, $id="")
       echo '</div><div class="col-xs-3">';
       minPullDown($sminute, "start");
       echo '</div><div class="col-xs-3">';
+      $spm = ' selected';
       amPmPullDown($spm, "start");
       echo '</div>';
       ?>
@@ -148,17 +150,17 @@ function displayEditForm($mode, $uid, $id="")
       echo '</div><div class="col-xs-3">';
       minPullDown($eminute, "end");
       echo '</div><div class="col-xs-3">';
+      $epm = ' selected';
       amPmPullDown($epm, "end");
       echo '</div>';
        ?>
-       <br />
     </div>
    <label>Igreja:</label>
         <?php
          $congr = new List_sele ("igreja","razao","igreja");
          echo $congr->List_Selec (++$ind,$i,' class="form-control" ');
         ?>
-      </div><br />
+      </div>
       <div class="btn-group" role="group" aria-label="...">
         <input type="button" class="btn btn-primary" value="<?php echo $buttonstr;?>"
         onClick="formSubmit()">

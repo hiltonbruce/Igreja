@@ -205,10 +205,10 @@ function writeCalendar($month, $year,$igreja)
 				// write title link if posting exists for day
 				for($j=0;$j < $eventcount;$j++) {
 					$titLink = 'data-toggle="tooltip" data-placement="top" title="'.strip_tags($eventdata[$day]["text"][$j]).'"';
-					$str .= "<span class=\"title_txt\" $titLink >&bull; ";
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
-					$str .= $eventdata[$day]["title"][$j] . "</a></span> - " . $eventdata[$day]["setor"][$j];
-					$str .= '<br />'.$eventdata[$day]["igreja"][$j].$eventdata[$day]["timestr"][$j];
+					$str .= "<span class='text-danger' $titLink >&bull; ";
+					$str .= $eventdata[$day]["title"][$j] . "</span></a>, ".$eventdata[$day]['igreja'][$j];
+					$str .= '&nbsp;('.$eventdata[$day]['setor'][$j].')<br />'.$eventdata[$day]["timestr"][$j].'<br />';
 				}
 				$str .= "</td>\n";
 				$day++;
@@ -255,8 +255,7 @@ function getDayNameHeader()
 
 function getEventDataArray($month, $year,$igreja)
 {
-
-	$sql = "SELECT a.id, a.d, a.title, a.start_time, a.end_time, a.setor, a.text, i.razao, s.alias, ";
+	$sql = "SELECT a.id,a.d,a.title,a.start_time,a.end_time,a.setor,a.text,a.igreja,i.razao,s.alias, ";
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
 		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
@@ -266,23 +265,24 @@ function getEventDataArray($month, $year,$igreja)
 	} else {
 		echo "Bad time display format, check your configuration file.";
 	}
-
 	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs AS a, igreja AS i, setores AS s ";
-	$sql .= "WHERE m = $month AND y = $year AND a.igreja = i.rol ";
+	$sql .= "WHERE m = $month AND y = $year AND (a.igreja = i.rol || a.igreja = '0') ";
 	$sql .= "AND a.setor = s.id ";
 	if ($igreja>'0') {
 		$sql .= 'AND i.rol  ='.$igreja.' ';
 	}
-	$sql .= "ORDER BY start_time";
-
+	$sql .= "GROUP BY a.id ORDER BY start_time";
 	$result = mysql_query($sql) or die(mysql_error());
-
 	while($row = mysql_fetch_assoc($result)) {
 		$eventdata[$row["d"]]["id"][] = $row["id"];
-		$eventdata[$row["d"]]["igreja"][] = $row["razao"];
+		if ($row["igreja"]=='0') {
+			$eventdata[$row["d"]]["igreja"][] = '<strong>Todas as igrejas</strong>';
+		} else {
+			$eventdata[$row["d"]]["igreja"][] = $row["razao"];
+		}
+	//$eventdata[$row["d"]]["igreja"][] = $row["razao"];
 		$eventdata[$row["d"]]["setor"][] = $row["alias"];
 		$eventdata[$row["d"]]["text"][] = $row["text"];
-
 		if (strlen($row["title"]) > TITLE_CHAR_LIMIT)
 			$eventdata[$row["d"]]["title"][] = substr(stripslashes($row["title"]), 0, TITLE_CHAR_LIMIT) . "...";
 		else
@@ -299,11 +299,10 @@ function getEventDataArray($month, $year,$igreja)
 			else
 				$endtime = $row["etime"];
 
-			$timestr = "<div align=\"right\" class=\"time_str\">($starttime - $endtime)&nbsp;</div>";
+			$timestr = '<p class="text-primary text-right small">'.$starttime.'&nbsp;-&nbsp;'.$endtime.'</p>';
 		} else {
 			$timestr = "<br>";
 		}
-
 		$eventdata[$row["d"]]["timestr"][] = $timestr;
 	}
 	return $eventdata;
@@ -312,7 +311,6 @@ function getEventDataArray($month, $year,$igreja)
 function getFirstDayOfMonthPosition($month, $year)
 {
 	$weekpos = date("w",mktime(0,0,0,$month,1,$year));
-
 	// adjust position if weekstart not Sunday
 	if (WEEK_START != 0)
 		if ($weekpos < WEEK_START)

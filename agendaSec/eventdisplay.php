@@ -71,7 +71,7 @@ function writeHeader($m, $y, $dateline, $wday)
 function writePosting($id, $auth)
 {
 	global $lang;
-	$sql = 'SELECT a.y, a.m, a.d, a.title, a.text, a.start_time, a.end_time, ';
+	$sql = 'SELECT a.y,a.m,a.d,a.title,a.text,a.start_time,a.end_time, ';
 	$sql .= 'a.uid, a.setor, a.igreja, u.cpf, u.nome, u.cargo, i.razao, ';
 	$sql .= 's.alias, ';
 	if (TIME_DISPLAY_FORMAT == '12hr') {
@@ -86,13 +86,20 @@ function writePosting($id, $auth)
 	$sql .= 'FROM ' . DB_TABLE_PREFIX . 'mssgs AS a ';
 	$sql .= 'LEFT JOIN usuario AS u ';
 	$sql .= 'ON (a.uid = u.cpf ) , igreja AS i, setores AS s ';
-	$sql .= 'WHERE a.id = "'.$id.'" AND a.igreja = i.rol AND a.setor=s.id ';
+	$sql .= 'WHERE a.id = "'.$id.'" AND (a.igreja = i.rol || a.igreja = "0") AND a.setor=s.id ';
+	$sql .= "GROUP BY a.id ORDER BY start_time";
 	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($result);
 	$title		= stripslashes($row["title"]);
 	$body		= stripslashes(str_replace("\n", "<br />", $row["text"]));
+	if ($row["igreja"]=='0') {
+		$razao = 'Todas as igrejas';
+	} else {
+		$razao = $row["razao"];
+	}
+//$eventdata[
 	$postedby 	= $lang['postedby'] . ": " . $row['nome'] . "<br />" . $row['cargo'];
-	$setorIgrea 	= 'Local do evento: '  . $row["razao"] . '<br />Cadastro pela: '.$row["alias"];
+	$setorIgrea 	= 'Local do evento: '  . $razao . '<br />Cadastro pela: '.$row["alias"];
 	if (!($row["start_time"] == "55:55:55" && $row["end_time"] == "55:55:55")) {
 		if ($row["start_time"] == "55:55:55")
 			$starttime = "- -";
