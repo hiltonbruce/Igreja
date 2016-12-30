@@ -4,7 +4,7 @@
           <div class="col-xs-6">
              <input type="hidden" name="MAX_FILE_SIZE" value="200000">
              <label>Salvar foto:</label>
-             <input name="userfile" type="file" class="btn btn-default btn-sm" >
+             <input name="userfile" type="file" class="btn btn-info" >
           </div>
           <div class="col-xs-2 text-center">
             <label>&nbsp;</label>

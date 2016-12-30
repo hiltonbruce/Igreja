@@ -15,6 +15,7 @@ class sec_AgendaSec
 		$sql  = 'SELECT a.*,i.razao,s.alias,u.nome,u.cargo ';
 		$sql .= 'FROM agendamssgs AS a, igreja AS i, setores AS s, usuario AS u ';
 		$sql .= 'WHERE a.igreja = i.rol AND a.uid = u.cpf AND a.setor = s.id ';
+		$this->sqlRasc = $sql.'ORDER BY i.razao,a.title';
 		if ($i!='') {
 			$sql .= 'AND i.rol="'.$i.'" ';
 		}
@@ -29,5 +30,9 @@ class sec_AgendaSec
 		return mysql_fetch_assoc($this->sql_lst);
 	}
 
+	function listaRascunho(){
+		$sql_lst = mysql_query($this->sqlRasc) or die (mysql_error());
+		return mysql_fetch_assoc($sql_lst);
+	}
 }
 ?>

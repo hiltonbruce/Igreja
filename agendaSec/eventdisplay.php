@@ -117,8 +117,10 @@ function writePosting($id, $auth)
 	}
 	if ($_SESSION['setor'] == $row['setor']) {
 		$editstr = "<span class=\"display_edit\">";
-		$editstr .= "[<a href=\"eventform.php?id=" . $id . "\">editar</a>]&nbsp;";
-		$editstr .= "[<a href=\"#\" onClick=\"deleteConfirm(" . $id . ");\">apagar</a>]&nbsp;</span>";
+		$editstr .= "<a href=\"eventform.php?id=" . $id . "\"><button class='btn btn-primary btn-xs'>";
+		$editstr .= "editar</button></a>&nbsp;";
+		$editstr .= "<a href=\"#\" onClick=\"deleteConfirm(" . $id . ");\">";
+		$editstr .= "<button class='btn btn-danger btn-xs'>apagar</button></a>&nbsp;</span>";
 	} else {
 		$editstr = "";
 	}

@@ -161,6 +161,7 @@ function displayEditForm($mode, $uid, $id="")
          echo $congr->List_Selec (++$ind,$i,' class="form-control" ');
         ?>
       </div>
+      <br />
       <div class="btn-group" role="group" aria-label="...">
         <input type="button" class="btn btn-primary" value="<?php echo $buttonstr;?>"
         onClick="formSubmit()">

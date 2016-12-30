@@ -147,7 +147,6 @@ function scrollArrows($m, $y,$mes,$mesAnt,$mesPos,$igreja)
 	$yPos = ($mes=='Dezembro') ? 'Jan/'.substr(($y+1), 2) : substr($mesPos, 0,3).'/'.substr($y, 2) ;
 	$yAnt = ($mes=='Janeiro') ? 'Dez/'.substr(($y-1), 2) : substr($mesAnt, 0,3).'/'.substr($y, 2) ;
 	$ig = (empty($igreja)) ? '' : $igreja;
-
 	$s = '<a href="./?escolha=controller/secretaria.php&sec=2&igreja='.$ig.'&month=';
 	$s .= $prevmonth . '&year=' . $prevyear . '"><button class="btn btn-default btn-xs" >';
 	$s .= "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>$yAnt</button></a>&nbsp;";
@@ -155,7 +154,6 @@ function scrollArrows($m, $y,$mes,$mesAnt,$mesPos,$igreja)
 	$s .= '<a href="./?escolha=controller/secretaria.php&sec=2&month=' . $nextmonth;
 	$s .= '&igreja='.$ig.'&year=' . $nextyear . '" ><button class="btn btn-default btn-xs" >';
 	$s .= $yPos."<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button></a>";
-
 	return $s;
 }
 
@@ -187,7 +185,6 @@ function writeCalendar($month, $year,$igreja)
 					$str .= "dom";
 				}else {
 					$str .= "day";}
-
 					$str .= "_cell\" valign=\"top\"><span class=\"day_number\">";
 		//	if ()
 					$str .= "<a href=\"javascript: postMessage($day, $month, $year)\" ";
@@ -196,9 +193,7 @@ function writeCalendar($month, $year,$igreja)
 					$str .= '<b>'.sprintf("%02d", $day).'</b></a>';
 	//			else
 	//				$str .= "$day";
-
 				$str .= "</span><br>";
-
 				// enforce title limit
 				$eventcount = count($eventdata[$day]["title"]);
 				if (MAX_TITLES_DISPLAYED < $eventcount) $eventcount = MAX_TITLES_DISPLAYED;
@@ -222,14 +217,12 @@ function writeCalendar($month, $year,$igreja)
      	}
 		$str .= "</tr>\n\n";
 	}
-	$str .= "</table>\n\n";
 	return $str;
 	}
 
 function getDayNameHeader()
 {
 	global $lang;
-
 	// adjust day name order if weekstart not Sunday
 	if (WEEK_START != 0) {
 		for($i=0; $i < WEEK_START; $i++) {
@@ -237,18 +230,14 @@ function getDayNameHeader()
 			array_push($lang['abrvdays'], $tempday);
 		}
 	}
-
 	$s = "<table class='table table-bordered some_style' >\n<tr>\n";
-
 	foreach($lang['abrvdays'] as $day) {
 		if ($day!='Dom') {
 			$s .= "\t<td class='primary text-center'><strong>$day</strong></td>\n";
 		} else {
 			$s .= "\t<td class='info text-center'><strong>$day</strong></td>\n";
 		}
-
 	}
-
 	$s .= "</tr>\n\n";
 	return $s;
 }
