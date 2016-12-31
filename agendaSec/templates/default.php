@@ -33,28 +33,3 @@
 </tr>
 	<?php echo writeCalendar($m, $y,$i);?>
 </table>
-<!--
-<fieldset>
-	<legend>Rascunho</legend>
-<form action="_GET" class="form-horizontal">
-  <div class="form-group col-xs-6">
-    <label>T&iacute;tulo</label>
-    <input type="title" class="form-control" placeholder="T&iacute;tulo">
-  </div>&nbsp;&nbsp;
-  <div class="form-group col-xs-4">
-    <label>Setor</label>
-		<?php
-		//	$setor = new List_setores();
-		//	echo $setor->List_Setor(++$ind,'class="form-control"',50);
-		 ?>
-  </div>
-  <div class="form-group col-xs-2 text-right"><br />
-  <button type="submit" class="btn btn-primary" disabled>Cadastrar</button>
-  </div>
-  <div class="form-group has-error col-xs-12">
-    <label>Texto</label>
-    <textarea name="text" class='form-control'></textarea>
-  </div>
-</form>
-</fiedset>
--->

@@ -1,41 +1,16 @@
 <STYLE TYPE="text/css">
 <!--
 /**************************************************************
-********* Formatação para Tabela do M#c7e7f6ês e Textos **************
+********* Formatação para Tabela do Mês e Textos **************
 **************************************************************/
-
-A		{ font-family:arial, helvetica; color:#953010; text-decoration:underline }
-SPAN	{ font-family:arial, helvetica }
-TD     	{ font-family:arial, helvetica }
-BODY	{ background-color:#FFF }#def2ee
-
 /**** mês and ano no cabeçalho do topo do calendário ****/
-.date_header			{ font-size:16px; font-family:arial, helvetica; font-weight:bold }
+.date_header { font-size:16px; font-family:arial, helvetica; font-weight:bold }
 
 /**** cor e tamanho das células do calendário.  ****/
-.day_cell				{ background-color:#EDECD8; height:80; width: 95; }
-.empty_day_cell			{ background-color:#fff; height:80; width: 95; }
-.today_cell				{ background-color:#abd7fb; height:80; width: 95; }
-.dom_cell				{ background-color:#b6e4fa; height:80; width: 95; }
+.day_cell	{ background-color:#d8dfed;max-width: 5em;}
+.empty_day_cell	{ background-color:#fff;max-width: 5em;}
+.today_cell	{ background-color:#fbbeab;max-width: 5em; }
+.dom_cell	{ background-color:#b9d7e6;max-width: 5em; }
 
-/**** day number in upper left corner of each cell ****/
-.day_number				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
-
-/**** title_txt is the text for ea#fecdc0ch post on main page ****/#094cf9
-.title_txt				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
-.title_txt A:link		{ color:#953010; text-decoration:underline }
-.title_txt A:active		{ color:#953010; text-decoration:underline }
-.title_txt A:visited	{ color:#953010; text-decoration:underline }
-.title_txt A:hover		{ color:#953010; text-decoration:underline }
-
-/**** time line under title text when event time given ****/
-.time_str				{ font-size:9px; font-family:arial, helvetica }
-
-/**** column headers or days of the week ****/
-.column_header			{ background-color:#953010; font-size:12px; font-family:arial, helvetica; color:#FFFFFF; font-weight:bold }
-
-/**** footprint text ****/
-.footprint				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000; font-weight:bold; }
-.footprint A			{ font-size:10px; font-family:verdana, arial, helvetica; color:#953010; font-weight:bold; }
 // end hiding -->
 </STYLE>

@@ -202,8 +202,8 @@ function writeCalendar($month, $year,$igreja)
 					$titLink = 'data-toggle="tooltip" data-placement="top" title="'.strip_tags($eventdata[$day]["text"][$j]).'"';
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
 					$str .= "<span class='text-danger' $titLink >&bull; ";
-					$str .= $eventdata[$day]["title"][$j] . "</span></a>, ".$eventdata[$day]['igreja'][$j];
-					$str .= '&nbsp;('.$eventdata[$day]['setor'][$j].')<br />'.$eventdata[$day]["timestr"][$j].'<br />';
+					$str .= $eventdata[$day]["title"][$j] . "</span></a><p>".$eventdata[$day]['igreja'][$j];
+					$str .= ' ('.$eventdata[$day]['setor'][$j].')</p>'.$eventdata[$day]["timestr"][$j].'<br />';
 				}
 				$str .= "</td>\n";
 				$day++;
@@ -260,7 +260,7 @@ function getEventDataArray($month, $year,$igreja)
 	if ($igreja>'0') {
 		$sql .= 'AND i.rol  ='.$igreja.' ';
 	}
-	$sql .= "GROUP BY a.id ORDER BY start_time";
+	$sql .= "GROUP BY a.id ORDER BY a.start_time,a.end_time";
 	$result = mysql_query($sql) or die(mysql_error());
 	while($row = mysql_fetch_assoc($result)) {
 		$eventdata[$row["d"]]["id"][] = $row["id"];

@@ -6,7 +6,7 @@ if ($rec) {
 	$ctaAces = $contas->ativosArray();
 	$ctaAcessos = false;
 	$sldPgto = ($recDados->valor()<=$ctaAces[$recDados->fonte()]['saldo']) ? true : false ;
-	if ($recDados->conta()>0 && $recDados->fonte()>'0' && $recDados->lancamento()=='0') {
+	if ($recDados->conta()>0 && $recDados->fonte()>'0' && intval($recDados->lancamento())=='0') {
 		$ctaAcessos = true;
 	}elseif ($recDados->lancamento()!='0') {
 		$corpoMens = 'Recibo j&aacute; lan&ccedil;ado!';
