@@ -158,7 +158,7 @@ function displayEditForm($mode, $uid, $id="")
    <label>Igreja:</label>
         <?php
          $congr = new List_sele ("igreja","razao","igreja");
-         echo $congr->List_Selec (++$ind,$i,' class="form-control" ');
+         echo $congr->listSedeCong (++$ind,$i,' class="form-control" ');
         ?>
       </div>
       <br />

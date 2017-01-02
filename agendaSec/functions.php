@@ -255,8 +255,8 @@ function getEventDataArray($month, $year,$igreja)
 		echo "Bad time display format, check your configuration file.";
 	}
 	$sql .= "FROM " . DB_TABLE_PREFIX . "mssgs AS a, igreja AS i, setores AS s ";
-	$sql .= "WHERE m = $month AND y = $year AND (a.igreja = i.rol || a.igreja = '0') ";
-	$sql .= "AND a.setor = s.id ";
+	$sql .= "WHERE m = $month AND y = $year AND (a.igreja = i.rol || a.igreja = '0' ";
+	$sql .= "|| a.igreja = '-1') AND a.setor = s.id ";
 	if ($igreja>'0') {
 		$sql .= 'AND i.rol  ='.$igreja.' ';
 	}
@@ -265,7 +265,9 @@ function getEventDataArray($month, $year,$igreja)
 	while($row = mysql_fetch_assoc($result)) {
 		$eventdata[$row["d"]]["id"][] = $row["id"];
 		if ($row["igreja"]=='0') {
-			$eventdata[$row["d"]]["igreja"][] = '<strong>Todas as igrejas</strong>';
+			$eventdata[$row["d"]]["igreja"][] = '<strong>Sede e Congrega&ccedil;&otilde;es</strong>';
+		}elseif ($row["igreja"]=='-1') {
+			$eventdata[$row["d"]]["igreja"][] = '<strong>Congrega&ccedil;&otilde;es</strong>';
 		} else {
 			$eventdata[$row["d"]]["igreja"][] = $row["razao"];
 		}

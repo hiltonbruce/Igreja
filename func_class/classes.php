@@ -757,6 +757,33 @@ class List_sele {
 	    $linha3 = "</select>";
 	  return $linha1.$linhas.$linha3 ;
 	}
+	
+	function listSedeCong ($seq,$item,$required){
+			$linhas = '';
+	  	$linha1  =  "<select name='{$this->texto_field}' id='{$this->texto_field}' $required tabindex='$seq'>";
+	  	if ($item<1) {
+	  		$linha1 .=  "<option value=''>-->> Escolha <<--</option>";
+	  	}
+	  	$linhas .=  "<option value='0'>-->> Sede e Congrega&ccedil;&otilde;es <<--</option>";
+	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
+	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
+	       {
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+	       	if ($this->col_lst["rol"]=='') {
+	       		if ($item==$this->col_lst["id"]) {
+		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
+		       	}
+			    $linhas .= "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
+	       	}else {
+		       	if ($item==$this->col_lst["rol"]) {
+		       		$linha1 .=  "<option value='".$this->col_lst["rol"]."'>".$retorLinha."</option>";
+		       	}
+			    $linhas .= "<option value='".$this->col_lst["rol"]."'>".$retorLinha."</option>";
+	       	}
+	       }
+	    $linha3 = "</select>";
+	  return $linha1.$linhas.$linha3 ;
+	}
 
 	function List_Selec_pop ($link,$rol){
 	//Lista Select para uso com javascrip popup

@@ -20,7 +20,15 @@ while ($campo = $eventos->listaEventos() ) {
   echo $campo['start_time'].' - '.$campo['end_time'].'&nbsp;</span></td>';
   echo '</tr><tr>';
   echo '<td colspan="4">'.$campo['text'];
-  echo '<p class="text-right">Local do evento: '.$campo['razao'].'<br/>';
+
+  if ($campo["igreja"]=='0') {
+    $nomeIgreja = '<strong>Sede e Congrega&ccedil;&otilde;es</strong>';
+  }elseif ($campo["igreja"]=='-1') {
+    $nomeIgreja = '<strong>Congrega&ccedil;&otilde;es</strong>';
+  } else {
+    $nomeIgreja = $campo["razao"];
+  }
+  echo '<p class="text-right">Local do evento: '.$nomeIgreja.'<br/>';
   echo '<span class="small">Setor de Cadastro: '.$campo['alias'].'<br/>';
   echo 'Registrado por: '.$campo['nome'].' - '.$campo['cargo'].'</span></p></td>';
   echo '</tr>';

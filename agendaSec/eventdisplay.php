@@ -86,14 +86,16 @@ function writePosting($id, $auth)
 	$sql .= 'FROM ' . DB_TABLE_PREFIX . 'mssgs AS a ';
 	$sql .= 'LEFT JOIN usuario AS u ';
 	$sql .= 'ON (a.uid = u.cpf ) , igreja AS i, setores AS s ';
-	$sql .= 'WHERE a.id = "'.$id.'" AND (a.igreja = i.rol || a.igreja = "0") AND a.setor=s.id ';
-	$sql .= "GROUP BY a.id ORDER BY start_time";
+	$sql .= 'WHERE a.id = "'.$id.'" AND (a.igreja = i.rol || a.igreja = "0" || a.igreja = "-1") ';
+	$sql .= "AND a.setor=s.id GROUP BY a.id ORDER BY start_time";
 	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($result);
 	$title		= stripslashes($row["title"]);
 	$body		= stripslashes(str_replace("\n", "<br />", $row["text"]));
 	if ($row["igreja"]=='0') {
-		$razao = 'Todas as igrejas';
+		$razao = '<strong>Sede e Congrega&ccedil;&otilde;es</strong>';
+	}elseif ($row["igreja"]=='-1') {
+		$razao = '<strong>Congrega&ccedil;&otilde;es</strong>';
 	} else {
 		$razao = $row["razao"];
 	}

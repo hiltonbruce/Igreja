@@ -14,15 +14,15 @@ class sec_AgendaSec
     $i = (empty($_GET['igreja'])) ? '' : intval($_GET['igreja']) ;
 		$sql  = 'SELECT a.*,i.razao,s.alias,u.nome,u.cargo ';
 		$sql .= 'FROM agendamssgs AS a, igreja AS i, setores AS s, usuario AS u ';
-		$sql .= 'WHERE a.igreja = i.rol AND a.uid = u.cpf AND a.setor = s.id ';
-		$this->sqlRasc = $sql.'ORDER BY i.razao,a.title';
+		$sql .= 'WHERE (a.igreja = i.rol || a.igreja = "0" || a.igreja = "-1") AND a.uid = u.cpf AND a.setor = s.id ';
+		$this->sqlRasc = $sql.'GROUP BY a.id ORDER BY i.razao,a.title';
 		if ($i!='') {
 			$sql .= 'AND i.rol="'.$i.'" ';
 		}
 		if ($d!='') {
 			$sql .= 'AND a.d="'.$d.'" ';
 		}
-		$sql .= 'AND a.y = "'.$y.'" AND a.m = "'.$m.'" ORDER BY a.d,a.start_time,i.razao' ;
+		$sql .= 'AND a.y = "'.$y.'" AND a.m = "'.$m.'" GROUP BY a.id ORDER BY a.d,a.start_time,i.razao' ;
 		$this->sql_lst = mysql_query($sql) or die (mysql_error());
 	}
 
