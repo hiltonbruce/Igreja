@@ -55,29 +55,29 @@ class formceia {
   		<legend>Santa Ceia</legend>
 		<table class='table' >
 			<tbody>
-				<tr  class="bg-primary">
+				<tr class="primary">
 				<td><div class="radio"><label>
 		  		<input type="radio" id="semana" autofocus='autofocus' <?php echo $s1;?> name="semana" value="1"
-		  			tabindex="<?php echo ++$ind; ?>" >1ª Semana</label></div></td>
+		  			tabindex="<?php echo ++$ind; ?>" >1&ordf; Semana</label></div></td>
 		  		<td><div class="radio"><label>
 		  		<input type="radio" id="semana" <?php echo $s2;?> name="semana" value="2"
-		  			tabindex="<?php echo ++$ind; ?>" >2ª Semana</label></div></td>
+		  			tabindex="<?php echo ++$ind; ?>" >2&ordf; Semana</label></div></td>
 		  		<td><div class="radio"><label>
 		  		<input type="radio" id="semana" <?php echo $s3;?> name="semana" value="3"
-		  			tabindex="<?php echo ++$ind; ?>" >3ª Semana</label></div></td>
+		  			tabindex="<?php echo ++$ind; ?>" >3&ordf; Semana</label></div></td>
 		  		<td><div class="radio"><label>
 		  		<input type="radio" id="semana" <?php echo $s4;?> name="semana" value="4"
-		  			tabindex="<?php echo ++$ind; ?>" >4ª Semana</label></div></td>
+		  			tabindex="<?php echo ++$ind; ?>" >4&ordf; Semana</label></div></td>
 		  		</tr>
 	  		</tbody>
 	  	</table>
 		<table class='table' >
 			<tbody>
-				<tr class="bg-primary">
+				<tr class="primary">
 				<td><div class="radio"><label>
 		  		<input type="radio" id="dia" <?php echo $d2;?> name="dia" value="1" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></div></td>
 		  		<td><div class="radio"><label>
-		  		<input type="radio" id="dia" <?php echo $d3;?> name="dia" value="2" tabindex = "<?php echo ++$ind; ?>" >Terça</label></div></td>
+		  		<input type="radio" id="dia" <?php echo $d3;?> name="dia" value="2" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label></div></td>
 		  		<td><div class="radio"><label>
 		  		<input type="radio" id="dia" <?php echo $d4;?> name="dia" value="3" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></div></td>
 		  		<td><div class="radio"><label>
@@ -85,7 +85,8 @@ class formceia {
 		  		<td><div class="radio"><label>
 		  		<input type="radio" id="dia" <?php echo $d6;?> name="dia" value="5" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></div></td>
 		  		<td><div class="radio"><label>
-		  		<input type="radio" id="dia" <?php echo $d7;?> name="dia" value="6" tabindex = "<?php echo ++$ind; ?>" >Sábado</label></div></td>
+		  		<input type="radio" id="dia" <?php echo $d7;?> name="dia" value="6" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label></div>
+				</td>
 		  		</tr>
 	  		</tbody>
 	  	</table>

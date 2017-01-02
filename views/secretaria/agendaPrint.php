@@ -1,10 +1,8 @@
 <?php
-
 $m = (empty($_GET['month'])) ? date('n') : intval($_GET['month']) ;
 $y = (empty($_GET['year'])) ? date('Y') : intval($_GET['year']) ;
 $d = (empty($_GET['day'])) ? '' : intval($_GET['day']) ;
 $i = (empty($_GET['igreja'])) ? '' : intval($_GET['igreja']) ;
-
 $eventos = new sec_AgendaSec($y,$m,$d,$i);
 $dia = '';
 while ($campo = $eventos->listaEventos() ) {
@@ -20,7 +18,6 @@ while ($campo = $eventos->listaEventos() ) {
   echo $campo['start_time'].' - '.$campo['end_time'].'&nbsp;</span></td>';
   echo '</tr><tr>';
   echo '<td colspan="4">'.$campo['text'];
-
   if ($campo["igreja"]=='0') {
     $nomeIgreja = '<strong>Sede e Congrega&ccedil;&otilde;es</strong>';
   }elseif ($campo["igreja"]=='-1') {

@@ -1,6 +1,5 @@
      <?php
           if ($_GET['campo']!='oracao') {
-
                $frase  = $igreja->oracao();
                $numDias = array(1, 2, 3, 4, 5, 6, 7);
                $nomeDias   = array('Todos os Domingos','Todas as Segundas','Todas as Ter&ccedil;as',
@@ -9,7 +8,6 @@
                $diasDeOracao = ($diasDeOracao=='') ? 'Adicione o dia do Circulo de Ora&ccedil;&atilde;o... Aqui!':$diasDeOracao;
               echo '<p><a href="./?escolha='.$tab_edit.'oracao">&nbsp;'.$diasDeOracao.'&nbsp;</a></p>';
           }else {
-
           list($Oracao1,$Oracao2,$Oracao3,$Oracao4) = explode('-', $igreja->oracao());
           $mak ='mak'.$Oracao1;
           $$mak = ($Oracao1>0) ? 'checked="checked"' : '' ;

@@ -1,7 +1,6 @@
 <?php
 class sec_AgendaSec
 {
-
 	protected $y;
 	protected $m;
 	protected $d;
