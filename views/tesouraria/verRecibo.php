@@ -81,7 +81,8 @@
 	          <?PHP
 				$nome = new editar_form("fonte",$rec_alterar->fonte(),$tab,$tab_edit);
 				$fonte = new DBRecord("contas", $rec_alterar->fonte(), "acesso");
-				echo "<p><a href='./?escolha={$tab_edit}fonte&fonte={$rec_alterar->fonte()}'>".$fonte->titulo()."</a></p>";
+				$exibCta = ($fonte->acesso()=='0') ? 'N&atilde;o informado!' : $fonte->titulo() ;
+				echo "<p><a href='./?escolha={$tab_edit}fonte&fonte={$rec_alterar->fonte()}'>".$exibCta."</a></p>";
 				if ($_GET["campo"]=="fonte"){
 					?>
 					<form name="fornec" id="fornec" action="" method="post">

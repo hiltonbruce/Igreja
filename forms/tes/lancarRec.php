@@ -6,15 +6,23 @@ if ($rec) {
 	$ctaAces = $contas->ativosArray();
 	$ctaAcessos = false;
 	$sldPgto = ($recDados->valor()<=$ctaAces[$recDados->fonte()]['saldo']) ? true : false ;
-	if ($recDados->conta()>0 && $recDados->fonte()>'0' && intval($recDados->lancamento())=='0') {
+	if ($ctaAces[$recDados->conta()]['id']>0 && $ctaAces[$recDados->fonte()]['id']>'0' && intval($recDados->lancamento())=='0') {
 		$ctaAcessos = true;
 	}elseif ($recDados->lancamento()!='0') {
 		$corpoMens = 'Recibo j&aacute; lan&ccedil;ado!';
-	}elseif ($recDados->fonte()=='0') {
-		$corpoMens = 'Informe qual caixa do pagamento ser&aacute; utilizado! E verifique se h&aacute; outras pend&ecirc;cias...';
+	}elseif ($ctaAces[$recDados->fonte()]['id']=='' && $ctaAces[$recDados->conta()]['id']=='') {
+		$corpoMens = 'N&atilde;o foi identicado o <strong>CAIXA</strong> nem a <strong>CONTA DE DESPESA</strong>!';
+	}elseif ($ctaAces[$recDados->fonte()]['id']=='') {
+		$corpoMens = 'N&atilde;o foi identicado qual caixa ser&aacute; utilizado!';
+	}elseif ($ctaAces[$recDados->conta()]['id']=='') {
+		$corpoMens = 'N&atilde;o foi identicado a conta de despesa!';
 	}else {
-		$corpoMens = 'A conta de despesa deve ser informada!';
+		$corpoMens  = 'Falha N&atilde;o indentificada de lançamento. Informe ao  ';
+		$corpoMens .= 'admnistrador do sistema!';
 	}
+
+	echo "+++++".$ctaAces[$recDados->fonte()]['id'].'#####'.$recDados->fonte();
+//	print_r ($ctaAces);
 ?>
 <fieldset>
 	<legend>Confirma Lan&ccedil;amento Cont&aacute;bil de Recibo</legend>
