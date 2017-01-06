@@ -1,9 +1,15 @@
+<?php
+	require_once 'forms/concluirdiz.php';#Form fecha caixa
+	if ($idIgreja>0) {
+?>
 <fieldset>
-	<legend>Miss&otilde;es (Estamos na:			<?php
-  				echo semana(date('d/m/Y')).'&ordf;';
-  			?>
-  			 Semana deste m&ecirc;s)
-  </legend><table class='table'>
+	<legend>Miss&otilde;es (Estamos na:
+		<?php
+			echo semana(date('d/m/Y')).'&ordf;';
+		?>
+		 Semana deste m&ecirc;s)
+  </legend>
+	<table class='table'>
 		<tbody>
 			<tr>
 				<td colspan="3"><label>Nome:</label> <input type="text" name="nome"
@@ -80,3 +86,6 @@
 		return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
 	});
 </script>
+<?php
+}
+?>

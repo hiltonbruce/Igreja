@@ -62,7 +62,7 @@
 		    </button>
 		    <ul class="dropdown-menu">
 		      <li>&nbsp;&nbsp;CPF: <?php echo $_SESSION['valid_user'];?></li>
-		      <li>&nbsp;&nbsp;Fun&ccedil;&atilde;o: <?php echo $_SESSION['cargo'];?></li>
+		      <li>&nbsp;&nbsp;Dept&ordm;: <?php echo $_SESSION['cargo'];?></li>
 		      <li>&nbsp;&nbsp;Host: <?php echo $_SESSION['computador'];?></li>
     			<li role="separator" class="divider"></li>
 		      <li>&nbsp;&nbsp;
@@ -87,9 +87,6 @@
 		}
 		?>
 		</div>
-
-
-
 	</div>
 	<div id="menu">
 	<div class="menu">
@@ -102,7 +99,7 @@
 		if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1) {
 			echo $link_tesour.'<li><img src="img/divider2.png" alt="" /></li>';
 			}
-		if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50) {
+		if ($_SESSION["setor"]==4 || $_SESSION["setor"]>50) {
 			echo $link_missoes.'<li><img src="img/divider2.png" alt="" /></li>';
 			}
 		echo $link_admin;?>

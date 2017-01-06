@@ -21,7 +21,7 @@ function __construct($tesoureiro='',$print='',$tipoCons='',$setor='') {
 			'rua' => $linhaIgr['rua']
 			);
 	}
-
+	$this->setor = $setor;
 	$this->rec = $tipoCons;
 }
 
@@ -137,6 +137,9 @@ function dizimistas(
 		//	$filtroIgreja.' AND d.igreja = i.rol') or die (mysql_error());
 			$ordenar = ' ORDER BY d.tesoureiro,d.data DESC,d.igreja,d.id';
 			$lancConfirmado = false;
+		}
+		if ($this->setor!='') {
+			$consulta .=' AND d.confirma='.$this->setor;
 		}
 		if (empty($_GET['semana']) || $_GET['semana']>'5' || $_GET['semana']<'1' ) {
 			$conSeman = '';
@@ -328,7 +331,6 @@ function concluir($igreja) {
 				//echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.' - '.$linha['nome'].'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			}
 			$totaltes += $vlr;
-
 			$tabLancamento .= '<tr><td>'.$linha['data'].'</td>';
 			$tabLancamento .= '<td>'.$rol.'</td>';
 			$tabLancamento .= '<td>'.$tipo.'</td>';
