@@ -1,6 +1,6 @@
 <?php
 $ind=1;
-if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
 
 	require_once 'views/menus/subDespesas.php';//Sub-Menu das despesas
 

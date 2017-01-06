@@ -14,7 +14,7 @@
 	<?php
 	if (!$testLanc) {
 		echo '<h4><p class="text-danger" >';
-		echo 'O recibo j&aacute; teve seu lan&ccedil;amento confirmado e n&atilde;o poder&aacute; ser alterado!!</p>';
+		echo 'O recibo n&atilde;o poder&aacute; ser alterado!!</p>';
 		echo '<span class="small">Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</span></h4>';
 	}
 	 ?>

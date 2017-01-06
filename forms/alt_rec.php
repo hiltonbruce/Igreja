@@ -1,5 +1,5 @@
 <?php $ind=1;
-if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
+if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 
 ?>

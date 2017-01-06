@@ -20,9 +20,8 @@ if ($rec) {
 		$corpoMens  = 'Falha N&atilde;o indentificada de lançamento. Informe ao  ';
 		$corpoMens .= 'admnistrador do sistema!';
 	}
-
-	echo "+++++".$ctaAces[$recDados->fonte()]['id'].'#####'.$recDados->fonte();
-//	print_r ($ctaAces);
+//	echo "+++++".$ctaAces[$recDados->fonte()]['id'].'#####'.$recDados->fonte();
+//	print_r ($_SESSION);
 ?>
 <fieldset>
 	<legend>Confirma Lan&ccedil;amento Cont&aacute;bil de Recibo</legend>
@@ -129,8 +128,8 @@ if ($rec) {
 						} else {
 							$titMens = 'Saldo insuficiente - '.$ctaAces[$recDados->fonte()]['titulo'];
 							$corpoMens  = 'Voc&ecirc; deve alterar o caixa do pagamento deste recibo, ou refor&ccedil;a o ';
-						    $corpoMens .= $ctaAces[$recDados->fonte()]['titulo'].' transferido de outro com saldo para ele! ';
-						    $corpoMens .= 'E s&oacute; ent&atilde;o poder&aacute; confirmar este pagamento...';
+						  $corpoMens .= $ctaAces[$recDados->fonte()]['titulo'].' transferido de outro com saldo para ele! ';
+						  $corpoMens .= 'E s&oacute; ent&atilde;o poder&aacute; confirmar este pagamento...';
 							$btnMes = 'Caixa sem Saldo!';
 						}
 					?>

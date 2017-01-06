@@ -1,7 +1,7 @@
 <?PHP
 $ind=1; //Define o indice dos campos do formulário
 $id = (int) $_GET["id"];
-if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
+if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	if ($_GET['recebeu']<1 && $_GET['tipo']<1) {
 	$tab="sistema/atualizar_sistema.php";//link q informa o form quem chamar p atualizar os dados
 	$tab_edit='tesouraria/rec_alterar.php&menu=top_tesouraria&tabela=tes_recibo&id='.$_GET["id"].'&pag_mostra='.$_GET["pag_mostra"].'&campo=';//Link de chamada da mesma página para abrir o form de edição do item
@@ -12,6 +12,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
 
 	#Verifica se o recibo j� foi lan�ado e bloqueia para altera��o
 	$testLanc = ($rec_alterar->lancamento()=='' || $rec_alterar->lancamento()=='0') ? true : false;
+	$testLanc = ($_SESSION["setor"]==2 || $_SESSION["setor"]>50) ? $testLanc : false;
 		//Mostra informa��o do recibo n�mero n
 		require_once 'views/tesouraria/verRecibo.php';
 	}else {

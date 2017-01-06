@@ -12,7 +12,7 @@ $idLanc = (empty($_GET['id'])) ? '' : $_GET['id'];
 $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 if ($rec>'12' && $rec<'20') {
 	session_start();
-	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
 	require "../help/impressao.php";//Include de funções, classes e conexões com o BD
 	if ($idIgreja==0) {
 			$igrejaSelecionada = $igSede;
@@ -33,7 +33,7 @@ if ($rec>'12' && $rec<'20') {
 }else {
 $ind=1;
 $tabRelatorio = 'views/tesouraria/tabDizimosOfertas.php';
-if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
 $_SESSION['lancar']=true;
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];

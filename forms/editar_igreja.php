@@ -256,10 +256,10 @@ $ind = 1;
       </tr>
       <tr>
         <td colspan="3"><label>C&iacute;rculo de Ora&ccedil;&atilde;o:</label>
-            <?PHP
-                require_once 'forms/igreja/alterarDiaOracao.php'
-            ?>
-        </td>
+	        <?PHP
+	            require_once 'forms/igreja/alterarDiaOracao.php'
+	        ?>
+	    	</td>
       </tr>
       <tr>
       	<td colspan="3"><label>Santa Ceia:</label>

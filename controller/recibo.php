@@ -2,7 +2,7 @@
 $ind=1;
 if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 	session_start();
-	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50"){
+	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
 		require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
 		$igreja = new DBRecord ("igreja","1","rol");
 		if ($_GET['igreja']>'1') {

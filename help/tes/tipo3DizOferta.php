@@ -15,7 +15,7 @@ for ($i = 0; $i < 13; $i++) {
 
 	$campo = 'oferta'.$i;
 	//printf ("$campo: %s",$_POST["$campo"]);
-		
+
 	$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );//Captura o valor e vonverte p o padrão americano
 
 	if ($valor>0) {
@@ -71,11 +71,11 @@ for ($i = 0; $i < 13; $i++) {
 		}
 
 		$congcontrib = ($congcontrib=='') ? $_POST["igreja"]:$congcontrib;
-			
+
 		//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
 		$value  = "'','',$conta,'".$congregacao."','{$_POST["rol"]}','$nome','$valor',";
 		$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
-		$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
+		$value .= "'".$_SESSION['setor']."','{$_POST["obs"]}',NOW(),'$hist'";
 		$dados = new insert ($value,"dizimooferta");
 		$dados->inserir();
 	}

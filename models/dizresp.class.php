@@ -1,7 +1,7 @@
 <?php
 class dizresp {
 
-function __construct($tesoureiro='',$print='',$tipoCons='') {
+function __construct($tesoureiro='',$print='',$tipoCons='',$setor='') {
 		$this->var_string  = "SELECT d.id,d.rol,DATE_FORMAT(d.data,'%d/%m/%Y') AS data,d.congcadastro,";
 		$this->var_string .= "d.nome,d.mesrefer,d.anorefer,d.tipo,d.valor,d.obs,i.razao,d.credito,d.tesoureiro, ";
 		$this->var_string .= "d.confirma,i.rol AS rolIgreja,d.hist FROM dizimooferta AS d, igreja AS i ";
@@ -147,6 +147,8 @@ function dizimistas(
 		$this->dquery = mysql_query( $consulta.$conSeman.$ordenar ) or die (mysql_error());
 		$total = 0;
 		$tabela = '';
+		$depto = new setores();
+		$dadoDepto = $depto->arrayDepto();
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
 			//$mostracta = new DBRecord ('contas',$linha['credito'],'acesso');//Traz os da conta p/ mostrar coluna tipo
@@ -194,19 +196,21 @@ function dizimistas(
 				$linkMembro .= '" title="Congrega: '.$nomeCongMembro.' - Lan&ccedil;. por: '.$lancNome.'">';
 				$linkMembro .= $rol.' - '.$linha['nome'].$mesAno.'</a>';
 			}
-			$tabela .= '<tr><td>'.$linha['data'].'</td>
-				<td>'.$linkMembro.'</td><td>'.$tipo.'</td>
-				<td class="text-right">'.$corrigir.'</td>
-				 		<td class="text-center">'.$linha['razao'].'</td></tr>';
+			$tabela .= '<tr><td>'.$linha['data'].'</td>';
+			$tabela .= '<td>'.$linkMembro.'</td>';
+			$tabela .= '<td>'.$tipo.'</td>';
+			$tabela .= '<td class="text-center small">'.$dadoDepto[$linha['confirma']]['alias'].'</td>';
+			$tabela .= '<td class="text-right">'.$corrigir.'</td>';
+			$tabela .= '<td class="text-center">'.$linha['razao'].'</td></tr>';
 						$total += $linha['valor'];
 		}
 		$total = number_format($total,2,',','.');
 		$tabela .=  '';
 		if ($total==0) {
-		$tabela .=  '<tfoot><tr id="total"><td colspan="5">N&atilde;o h&aacute; ';
+		$tabela .=  '<tfoot><tr id="total"><td colspan="6">N&atilde;o h&aacute; ';
 		$tabela .=  'lan&ccedil;amentos para esta busca ou pendentes!</td></tr></tfoot>';
 		}else {
-		$tabela .=  '<tfoot><tr id="total"><td colspan="4" class="text-right">';
+		$tabela .=  '<tfoot><tr id="total"><td colspan="5" class="text-right">';
 		$tabela .=  'Total&nbsp;&nbsp;............ &nbsp;&nbsp;'.$total;
 		$tabela .=  '</td><td></td></tr></tfoot>';
 		}
@@ -220,7 +224,6 @@ function outrosdizimos ($igreja) {
 	} else {
 		$filtroIgreja = 'AND igreja="'.$igreja.'"';
 	}
-
 	$queryCons  = 'SELECT SUM(valor) AS valor FROM dizimooferta ';
 	$queryCons .= 'WHERE tesoureiro<>"'.$this->tesoureiro.'" AND lancamento="0" '.$filtroIgreja;
 	$this->dquery = mysql_query($queryCons ) or die (mysql_error());
@@ -292,9 +295,11 @@ function caixamissoes () {
 	}
 
 function concluir($igreja) {
-		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0" AND
+		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0" AND confirma="2" AND
 		 d.igreja="'.$igreja.'" AND d.igreja=i.rol ORDER BY tesoureiro,tipo,nome ') or die (mysql_error());
 		$totaltes=0;
+		$depto = new setores();
+		$dadoDepto = $depto->arrayDepto();
 		$tabLancamento =  '<tbody id="periodo" >';
 		while ($linha = mysql_fetch_array($this->dquery)) {
 			//echo $linha['id'].'===='..' -> Valor: R$ '.$linha['valor'].'<br />';
@@ -317,24 +322,29 @@ function concluir($igreja) {
 						,$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
-				$tabLancamento .= sprintf('<tr class="danger"><td colspan="5" class="text-right">
+				$tabLancamento .= sprintf('<tr class="danger"><td colspan="6" class="text-right">
 						<b> %s </b></td></tr>',$dadostesoureiro->nome());
 				$totaltes = 0;
 				//echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.' - '.$linha['nome'].'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			}
 			$totaltes += $vlr;
 
-			$tabLancamento .= '<tr><td>'.$linha['data'].'</td><td>'.$rol.'</td><td>'.$tipo.'</td><td class="text-right">'.$valor.'</td><td>'.$status.'</td></tr>';
+			$tabLancamento .= '<tr><td>'.$linha['data'].'</td>';
+			$tabLancamento .= '<td>'.$rol.'</td>';
+			$tabLancamento .= '<td>'.$tipo.'</td>';
+			$tabLancamento .= '<td class="small">'.$dadoDepto[$linha['confirma']]['alias'].'</td>';
+			$tabLancamento .= '<td class="text-right">'.$valor.'</td>';
+			$tabLancamento .= '<td>'.$status.'</td></tr>';
 			$total += $linha['valor'];
 		}
 		$total = number_format($total,2,',','.');
 		$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
 		%s</td><td colspan='3' class='text-right'>Total: %'.100s &nbsp;&nbsp;&nbsp;
-		&nbsp;<b>%s</b></td></tr>",$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));
+		&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));
 		$tabLancamento .=  '</tbody>';
 		$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
 		class="text-right">Total Geral:</td><td colspan="2" class="text-right"
-		><strong> R$ '.$total.'</strong></td></tr></tfoot>';
+		><strong> R$ '.$total.'</strong></td><td></td></tr></tfoot>';
 		return $tabLancamento;
 	}
 }

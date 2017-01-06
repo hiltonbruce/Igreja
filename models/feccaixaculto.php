@@ -20,8 +20,11 @@ $referente = mysql_escape_string($referente);
 $data = br_data($_POST['data'], 'Data do lançamento inválida!');
 if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) {
 	//Faz o lançamento do débito para tabela lancamento
-	$tablanc = mysql_query('SELECT devedora,tipo,SUM(valor) AS valor,credito FROM dizimooferta
-			WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito,tipo');
+	$sqlFecha  = 'SELECT devedora,tipo,SUM(valor) AS valor,credito ';
+	$sqlFecha .= 'FROM dizimooferta WHERE lancamento="0" AND ';
+	$sqlFecha .= 'igreja = "'.$roligreja.'" AND (confrima="" || confrima="2")';
+	$sqlFecha .= 'GROUP BY credito,tipo';
+	$tablanc = mysql_query($sqlFecha);
 	$exibideb = '<tr class="warning"><td colspan="5">Debito</td></tr>';
 	$exibicred = '<tr class="warning"><td colspan="5">Credito</td></tr>';
 	$caixaCentral ='';

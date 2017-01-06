@@ -737,7 +737,7 @@ function controle ($tipo){ //O tipo � definido como consulta, atualiza��o,
 		case "tes":
 			if ($_SESSION["setor"]<50 && $_SESSION["setor"]!=2){
 				echo $alerta;
-				echo "Ative o JavaScript em seu navegador!";
+				echo "&Aacute;rea para membros da tesouraria!";
 				return exit;
 			}
 		break;

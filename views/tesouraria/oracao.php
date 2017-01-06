@@ -91,7 +91,7 @@ for ($i=1; $i < 6; $i++) {
 			$conta = "'$ofeLanc','$ctaCaixa','7'";//Oração Adulto
 			$value  = "'','',$conta,'".$roligreja."','','','$ofertaOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
-			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
+			$value .= "'".$_SESSION['setor']."','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 		}
@@ -100,7 +100,7 @@ for ($i=1; $i < 6; $i++) {
 			$conta = "'$votoLan','$ctaCaixa','7'";//Voto em Circ. de Oração
 			$value  = "'','',$conta,'".$roligreja."','','','$votoOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
-			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
+			$value .= "'".$_SESSION['setor']."','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 		}

@@ -3,7 +3,7 @@ class List_setores {
 	//Lista para formulário
 
 	function __construct (){
-		$this->sql_lst = mysql_query('SELECT * FROM setores WHERE hier="1" ORDER BY alias');
+		$this->sql_lst = mysql_query('SELECT * FROM setores WHERE hier<=1 ORDER BY alias');
 	}
 
 	function List_Setor($ind,$req=null,$setor=null) {

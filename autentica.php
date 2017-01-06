@@ -15,7 +15,7 @@
 		$_SESSION['nivel'] = $col["nivel"];
 		$_SESSION['valid_user'] = $col["cpf"];
 		$_POST["rol"] = $col["cpf"];
-		$_SESSION['cargo'] = $col["alias"];
+		$_SESSION['cargo'] = $col["cargo"];
 		$_SESSION['nome'] = $col["nome"];
 		$nomeUsuario = explode(' ', $col["nome"]);
 		$_SESSION['username'] = $nomeUsuario['0'].'_'.$nomeUsuario['1'];

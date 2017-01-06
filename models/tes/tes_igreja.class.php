@@ -17,18 +17,16 @@ class tes_igreja {
 		    $valores_array [$resultado['mes']]=$resultado['valor'];
 	       }
 	  return $valores_array;
-
 	}
 
 	function dataEntrada () {
 
 		$ultimaEntrada  = 'SELECT d.lancamento,d.data,d.mesrefer,d.anorefer,i.cultos ';
 		$ultimaEntrada .= 'FROM dizimooferta AS d,igreja AS i WHERE igreja="'.$this->igreja.'" ';
-		$ultimaEntrada .= 'AND i.rol = d.igreja ';
-		$verSemLanc .= $ultimaEntrada.' AND d.lancamento="0" ORDER BY d.data DESC LIMIT 1';
+		$ultimaEntrada .= 'AND i.rol = d.igreja AND confirma="2" ';
+		$verSemLanc .= $ultimaEntrada.'AND d.lancamento="0" ORDER BY d.data DESC LIMIT 1';
 		$ultimaEntrada .= 'ORDER BY d.data DESC,d.lancamento ASC LIMIT 1';
 		$dadosSemLanc = mysql_query($verSemLanc);
-
 		if ( mysql_fetch_row($dadosSemLanc)>0) {
 			#Se possui lançamentos pendentes
 			$dados = mysql_query($verSemLanc);
@@ -36,11 +34,9 @@ class tes_igreja {
 			#ultima data de lançamento
 			$dados = mysql_query($ultimaEntrada);
 		}
-		
 		$resUltimoDia = mysql_fetch_array($dados);
 		//print_r($resUltimoDia);
 		$dtUltLanc = new DateTime($resUltimoDia['data']);
-
 		if ($resUltimoDia['lancamento']=='0' || $resUltimoDia['cultos']=='') {
 //print_r($dtUltLanc);
 			//Culto na data lançamento em aberto
@@ -52,7 +48,6 @@ class tes_igreja {
 			$proxCulto = $dtUltLanc->format('d/m/Y');
 			$mesLanc = $dtUltLanc->format('m');
 			$anoLanc = $dtUltLanc->format('Y');
-
 			return array('mesrefer' => $mesLanc,
 				'anorefer' => $anoLanc,'proxCulto'=>$proxCulto
 				,'igreja'=>$this->igreja );

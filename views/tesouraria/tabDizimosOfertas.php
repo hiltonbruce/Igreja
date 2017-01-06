@@ -137,16 +137,18 @@ if ($_POST['concluir']=='1') {
 				<col id="Data">
 				<col id="Rol/Nome">
 				<col id="tipo">
+				<col id="Dept&ordm;">
 				<col id="Valor">
 				<col id="albumCol"/>
 			</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">Data&nbsp;Lan&ccedil;.</th>
+				<th scope="col">Data&nbsp;</th>
 				<th scope="col">Rol/Nome</th>
 				<th scope="col">Tipo</th>
+				<th scope="col" class='text-center'>Dept&ordm;</th>
 				<th scope="col">Valores&nbsp;(R$)</th>
-				<th scope="col"><?php echo $tituloColuna5;?></th>
+				<th scope="col" class='text-center'><?php echo $tituloColuna5;?></th>
 			</tr>
 		</thead>
 			<?php

@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
+if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	$credor = (empty($_GET['credor'])) ? 0 : $_GET['credor'] ;
 	if (!empty($_GET['data']) && checadata($_GET['data'])) {
 		list($d,$m,$y) = explode('/', $_GET['data']);

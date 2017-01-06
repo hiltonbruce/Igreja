@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
+if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 ?>
 	<p>
 	<a <?PHP $b=id_corrente ("receita");?> href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=1">

@@ -18,8 +18,9 @@
 controle ("admin_user");
 if ($_SESSION["setor"]==$_POST["setor"] || $_SESSION["setor"]=='99') {
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-	$value = "'','{$_POST["nome"]}','{$_POST["cpf"]}','{$_POST["nivel"]}','{$_POST["setor"]}','{$_POST["cargo"]}',
-	md5({$_POST["senha"]}),'1','$hist',NOW()";
+	$value  = '"","'.$_POST["nome"].'","'.$_POST["cpf"].'","'.$_POST["nivel"].'",';
+	$value .='"'.$_POST["setor"].'","'.$_POST["cargo"].'","'.md5($_POST["senha"]).'",';
+	$value .='"1","$hist",NOW()';
 	$dados = new insert ($value,"usuario");
 	$dados->inserir();
 	echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql

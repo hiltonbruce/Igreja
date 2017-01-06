@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50){
+if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	$dias = $_GET['altdias'];
 	$d = ((int)$dias=='0' ) ? date("d"): $dias;
 	$m = date("m");

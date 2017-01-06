@@ -71,7 +71,7 @@ for ($i = 0; $i < 13; $i++) {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
 			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
-			$value .= "'$tesoureiro2','{$_POST["obs"]}',NOW(),'$hist'";
+			$value .= "'".$_SESSION['setor']."','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 			}
