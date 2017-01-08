@@ -1,13 +1,15 @@
 <?php
 controle ('tes');
 $ultimolanc = 0;
+//$confirma é a variável para filtrar o sql por setor
+$confirma = (empty($_POST['confirma'])) ? $_SESSION['setor'] : intval($_POST['confirma']) ;
 $roligreja =intval($_POST['igreja']);
 $dizimista = new dizresp($roligreja);
 //inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
 $corlinha = false;
-$ultimolanc = mysql_query('SELECT max(lancamento) AS lanc FROM lanc');//Traz o valor do ultimo lançamento
+$ultimolanc = mysql_query('SELECT max(idlanca) AS lanc FROM lanchist');//Traz o valor do ultimo lançamento
 $lancmaior = mysql_fetch_array($ultimolanc);
 $ultimolanc = $lancmaior['lanc']+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
 $idlancmis = $ultimolanc + 1;//id do lançamento das provisões
@@ -17,16 +19,16 @@ $idlancmis = $ultimolanc + 1;//id do lançamento das provisões
 //Analizar os valres para lançar o dízimo para COMADEP e SEMAD
 $referente = ($_POST['hist']<>'') ? $_POST['hist']:$_POST['histsug'];//Atribui a variável o histórico do lançamento
 $referente = mysql_escape_string($referente);
-$data = br_data($_POST['data'], 'Data do lançamento inválida!');
+$data = br_data($_POST['data'], 'Data do lançamento inv&aacute;lida!');
 if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) {
 	//Faz o lançamento do débito para tabela lancamento
 	$sqlFecha  = 'SELECT devedora,tipo,SUM(valor) AS valor,credito ';
 	$sqlFecha .= 'FROM dizimooferta WHERE lancamento="0" AND ';
-	$sqlFecha .= 'igreja = "'.$roligreja.'" AND (confrima="" || confrima="2")';
-	$sqlFecha .= 'GROUP BY credito,tipo';
+	$sqlFecha .= 'igreja = "'.$roligreja.'" AND (confirma="" || ';
+	$sqlFecha .= 'confirma="'.$confirma.'") GROUP BY credito,tipo';
 	$tablanc = mysql_query($sqlFecha);
-	$exibideb = '<tr class="warning"><td colspan="5">Debito</td></tr>';
-	$exibicred = '<tr class="warning"><td colspan="5">Credito</td></tr>';
+	$exibideb = '<tr class="warning"><td colspan="5">D&eacute;bito</td></tr>';
+	$exibicred = '<tr class="warning"><td colspan="5">Cr&eacute;dito</td></tr>';
 	$caixaCentral ='';
 	$caixaEnsino = '';
 	$caixaInfantil ='';
@@ -96,17 +98,26 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$exibideb .= sprintf("<tr class='total'><td>Total debitado</td><td id='moeda'>R$ %s</td><td colspan='3'></td></tr>",number_format($totalDeb,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php
 	//Faz o leiaute do lançamento do crédito e lança para tabela lancamento
-	$tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
+	$sqlLanCred  = 'SELECT SUM(valor) AS valor,credito FROM dizimooferta ';
+	$sqlLanCred .= 'WHERE lancamento="0" AND igreja =';
+	$sqlLanCred .= '"'.$roligreja.'" AND (confirma="" || confirma="'.$confirma.'") ';
+	$sqlLanCred .= 'GROUP BY credito';
+	$tablanc_c = mysql_query($sqlLanCred);
 	while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
 		$credora = new DBRecord('contas',$tablancarrc['credito'],'acesso');
+		$caixa = $credora;//Para exibir o lançamento
 		$sldAntCrd = number_format($credora->saldo(),2,',','.');//Saldo anterior da conta
 		$contcaixa = new atualconta($credora->codigo(),$ultimolanc);
 		$contcaixa->atualizar($tablancarrc['valor'],'C',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$caixa = new DBRecord('contas',$tablancarrc['credito'],'acesso');//Exibi lançamento
-		$exibicred .= sprintf("<tr $cor ><td>%s - %s</td><td>&nbsp;</td><td id='moeda'>%s</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
-		$caixa->codigo(),$caixa->titulo(),number_format($tablancarrc['valor'],2,',','.'),number_format($caixa->saldo(),2,',','.'),$caixa->tipo()
-		,$sldAntCrd);
+		$exibicred .= '<tr '.$cor.' >';
+		$exibicred .= '<td>'.$caixa->codigo().' - '.$caixa->titulo().'</td>';
+		$exibicred .= '<td>&nbsp;</td>';
+		$exibicred .= '<td id="moeda">'.number_format($tablancarrc['valor'],2,',','.').'</td>';
+		$exibicred .= '<td id="moeda">'.number_format($caixa->saldo(),2,',','.');
+		$exibicred .= '&nbsp;'.$caixa->tipo().'</td>';
+		$exibicred .= '<td class="text-right">'.$sldAntCrd.'</td>';
+		$exibicred .= '</tr>';
 		$totalCred = $totalCred + $tablancarrc['valor'];
 		$corlinha = !$corlinha;
 	}
@@ -144,7 +155,11 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 	$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",number_format($totalCred,2,',','.'));
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 	//Atualiza a tabela dizimooferta de acordo com a igreja selecionada inserido o id do lançamento no campo lançamento
-	$atualdizoferta = mysql_query("SELECT id FROM dizimooferta WHERE lancamento='0' AND igreja='$roligreja' ") or die (mysql_error());
+	$sqlAtuaTad  = 'SELECT id FROM dizimooferta WHERE lancamento="0" AND igreja = "';
+	$sqlAtuaTad .= $roligreja.'" AND (confirma="" || confirma="'.$confirma.'") ';
+	$sqlAtuaTad .= '';
+	$sqlAtuaTad .= '';
+	$atualdizoferta = mysql_query($sqlAtuaTad) or die (mysql_error());
 	while ($lanc = mysql_fetch_array($atualdizoferta)) {
 			$ofetdiz = new DBRecord('dizimooferta',$lanc['id'],'id');
 			$ofetdiz->lancamento = $ultimolanc;

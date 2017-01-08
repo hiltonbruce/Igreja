@@ -7,7 +7,11 @@ $y=$dta[2];
 $res = checkdate($m,$d,$y);
 $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
 $rolIgreja = (empty($_POST["rolIgreja"])) ? false:intval($_POST['rolIgreja']);
-$ultregistro = mysql_query ('SELECT data FROM dizimooferta WHERE lancamento="0" AND igreja="'.$rolIgreja.'" ORDER BY id DESC LIMIT 1');
+$sqlUltiReg  = 'SELECT data FROM dizimooferta WHERE ';
+$sqlUltiReg .= 'lancamento="0" AND igreja="'.$rolIgreja.'" ';
+$sqlUltiReg .= 'AND (confirma="" || confirma="'.$_SESSION['setor'].'") ';
+$sqlUltiReg .= 'ORDER BY id DESC LIMIT 1';
+$ultregistro = mysql_query ($sqlUltiReg);
 $vlrregistro = mysql_fetch_row($ultregistro);
 //$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
 $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&

@@ -1,18 +1,20 @@
 <?php
 $_SESSION['debito']=0;
 $_SESSION['credito']=0;
+//$confirma é a variável para filtrar o sql por setor
+$confirma = (empty($_POST['confirma'])) ? $_SESSION['setor'] : intval($_POST['confirma']);
 //concluir lançamento final na tabela lançamento
 $roligreja = intval($_POST['rolIgreja']);
-$lanigreja = new DBRecord('igreja',$roligreja, 'rol' );
+$lanigreja = ($roligreja=='1') ? $igSede : new DBRecord('igreja',$roligreja, 'rol' );
 $exibir = new lancdizimo($roligreja);
 //Faz o leiaute do lançamento do débito da tabela dizimooferta
 $exibirlanc = '';
 $queryBusc  = 'devedora,data FROM ';
 $queryBusc .= 'dizimooferta WHERE lancamento="0" AND igreja = "';
-$queryBusc .= $roligreja;
-$tablanc = mysql_query('SELECT SUM(valor) AS valor,'.$queryBusc.'" GROUP BY devedora');
-$totDebito = mysql_num_rows(mysql_query('SELECT valor,'.$queryBusc.'" GROUP BY data'));
-while ($tablancarr = mysql_fetch_array($tablanc)) {
+$queryBusc .= $roligreja.'" AND (confirma="" || confirma="'.$confirma.'") ';
+$tablanc = mysql_query('SELECT SUM(valor) AS valor,'.$queryBusc.' GROUP BY devedora');
+$totDebito = mysql_num_rows(mysql_query('SELECT valor,'.$queryBusc.' GROUP BY data'));
+while ($tablancarr = mysql_fetch_assoc($tablanc)) {
 	$lanc  = $exibir->lancamacesso ($tablancarr['valor'],$tablancarr['devedora'],'D');
 	$exibirlanc .= $lanc['0'];
 	if (empty($dataLc) || $dataLc > $tablancarr['data']) {
@@ -20,10 +22,13 @@ while ($tablancarr = mysql_fetch_array($tablanc)) {
 	}
 }
 //Faz o leiaute do lançamento do crédito da tabela dizimooferta
-$tablanc_c = mysql_query('SELECT SUM(valor) AS valor,credito FROM dizimooferta WHERE lancamento="0" AND igreja = "'.$roligreja.'" GROUP BY credito');
+$sqlTabLanc  = 'SELECT SUM(valor) AS valor,credito FROM dizimooferta ';
+$sqlTabLanc .= 'WHERE lancamento="0" AND igreja =';
+$sqlTabLanc .= '"'.$roligreja.'" AND (confirma="" || confirma="'.$confirma.'") GROUP BY credito';
+$tablanc_c = mysql_query($sqlTabLanc);
 $totCredito = mysql_num_rows($tablanc_c);
 $histLanca = array();
-while ($tablancarrc = mysql_fetch_array($tablanc_c)) {
+while ($tablancarrc = mysql_fetch_assoc($tablanc_c)) {
 	$lanc = $exibir->lancamacesso ($tablancarrc['valor'],$tablancarrc['credito'],'C');
 	$exibirlanc .= $lanc['0'];
 	$histLanca[]=$lanc['1'];
