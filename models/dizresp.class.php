@@ -73,7 +73,7 @@ function dizimistas(
 		$acessos = explode(',', $deb);
 		$concatenar = ' ';
 		foreach ($acessos as $numAcesso) {
-			$queryDeb .= $concatenar.'devedora="'.(int)$numAcesso.'"';
+			$queryDeb .= $concatenar.'devedora="'.intval($numAcesso).'"';
 			$concatenar = ' OR ';
 		}
 		$queryDeb = ' AND ('.$queryDeb.')';
@@ -311,7 +311,7 @@ function concluir($igreja) {
 			//$tesoureiro = $linha['tesoureiro'];
 			$vlr = $linha['valor'];
 			$valor = number_format($vlr,2,',','.');
-			if ($linha['confirma']=='') {
+			if ($linha['lancamento']=='' || $linha['lancamento']=='0') {
 				$status = 'Pedente';
 			}else {
 				$status = 'Confimado!';
@@ -321,8 +321,8 @@ function concluir($igreja) {
 				if ($totaltes!='0') {
 				$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
 				%s</td><td colspan='3' class='text-right'>
-						Total: %'.100s &nbsp;&nbsp;&nbsp;&nbsp;<b>%s</b></td></tr>"
-						,$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));}
+						Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span> &nbsp;&nbsp;<b>%s</b></td><td></td></tr>"
+						,$dadostesoureiro->nome(),number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
 				$tabLancamento .= sprintf('<tr class="danger"><td colspan="6" class="text-right">
@@ -341,8 +341,8 @@ function concluir($igreja) {
 		}
 		$total = number_format($total,2,',','.');
 		$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
-		%s</td><td colspan='3' class='text-right'>Total: %'.100s &nbsp;&nbsp;&nbsp;
-		&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),'.',number_format($totaltes,2,',','.'));
+		%s</td><td colspan='3' class='text-right'>Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
+		&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),number_format($totaltes,2,',','.'));
 		$tabLancamento .=  '</tbody>';
 		$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
 		class="text-right">Total Geral:</td><td colspan="2" class="text-right"
