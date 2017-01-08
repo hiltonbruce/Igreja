@@ -1,4 +1,11 @@
 <?PHP
+if (empty($_POST['confirma']) && ($_SESSION['setor']=='2' || $_SESSION['setor']=='99' )) {
+	$confirma='2';// O 99 é desenvolvedor, super usuário
+} elseif (empty($_POST['confirma'])) {
+	$confirma=$_SESSION['setor'];
+} else {
+	$confirma = intval($_POST['confirma']);
+}
 require_once 'views/tesouraria/dizoferta.php';
 $dta = explode("/",$_POST["data"]);
 $d=$dta[0];
@@ -9,7 +16,7 @@ $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
 $rolIgreja = (empty($_POST["rolIgreja"])) ? false:intval($_POST['rolIgreja']);
 $sqlUltiReg  = 'SELECT data FROM dizimooferta WHERE ';
 $sqlUltiReg .= 'lancamento="0" AND igreja="'.$rolIgreja.'" ';
-$sqlUltiReg .= 'AND (confirma="" || confirma="'.$_SESSION['setor'].'") ';
+$sqlUltiReg .= 'AND (confirma="" || confirma="'.$confirma.'") ';
 $sqlUltiReg .= 'ORDER BY id DESC LIMIT 1';
 $ultregistro = mysql_query ($sqlUltiReg);
 $vlrregistro = mysql_fetch_row($ultregistro);

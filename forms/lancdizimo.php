@@ -2,7 +2,13 @@
 $_SESSION['debito']=0;
 $_SESSION['credito']=0;
 //$confirma é a variável para filtrar o sql por setor
-$confirma = (empty($_POST['confirma'])) ? $_SESSION['setor'] : intval($_POST['confirma']);
+if (empty($_POST['confirma']) && ($_SESSION['setor']=='2' || $_SESSION['setor']=='99' )) {
+	$confirma='2';// O 99 é desenvolvedor, super usuário
+} elseif (empty($_POST['confirma'])) {
+	$confirma=$_SESSION['setor'];
+} else {
+	$confirma = intval($_POST['confirma']);
+}
 //concluir lançamento final na tabela lançamento
 $roligreja = intval($_POST['rolIgreja']);
 $lanigreja = ($roligreja=='1') ? $igSede : new DBRecord('igreja',$roligreja, 'rol' );

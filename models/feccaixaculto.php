@@ -2,7 +2,13 @@
 controle ('tes');
 $ultimolanc = 0;
 //$confirma é a variável para filtrar o sql por setor
-$confirma = (empty($_POST['confirma'])) ? $_SESSION['setor'] : intval($_POST['confirma']) ;
+if (empty($_POST['confirma']) && ($_SESSION['setor']=='2' || $_SESSION['setor']=='99' )) {
+	$confirma='2';// O 99 é desenvolvedor, super usuário
+} elseif (empty($_POST['confirma'])) {
+	$confirma=$_SESSION['setor'];
+} else {
+	$confirma = intval($_POST['confirma']);
+}
 $roligreja =intval($_POST['igreja']);
 $dizimista = new dizresp($roligreja);
 //inicializa variáveis
