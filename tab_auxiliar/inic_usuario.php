@@ -15,10 +15,10 @@
       	   $usuario->$key = $result;
     		endforeach;
   $errorIni = true;
-  if ($usuario->situacao=='1' && ($usuario->setor==$_SESSION["setor"] || $_SESSION["setor"]>='50')) {
+  if ($usuario->situacao=='1' && (($usuario->setor==$_SESSION["setor"] && $_SESSION["nivel"]>'10') || $_SESSION['nivel']>='15')) {
     $botaoAtDes = '<p><button class="btn btn-danger btn-sm" ><span class="glyphicon ';
     $botaoAtDes .= 'glyphicon-remove"></span> Desativar...</button></a></p>';
-  } elseif ($usuario->setor==$_SESSION["setor"] || $_SESSION["setor"]>='50') {
+  } elseif ($usuario->situacao=='0' && (($usuario->setor==$_SESSION["setor"] && $_SESSION['nivel']>'10') || $_SESSION['nivel']>='15')) {
     # Opção de ativa caso esteja desativado
     $botaoAtDes = '<p><button class="btn btn-success btn-sm" ><span class="glyphicon ';
     $botaoAtDes .= 'glyphicon-ok"></span> Ativar...</button></a></p>';

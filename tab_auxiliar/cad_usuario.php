@@ -1,4 +1,5 @@
 <?php
+controle('admin_user');
 if (empty($_SESSION['valid_user']))
 header("Location: ../");
 //echo strlen($_POST["nome"]);
