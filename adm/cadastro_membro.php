@@ -43,7 +43,7 @@ unset($_SESSION["cpf"]);
 	id="nome_cad" tabindex="<?PHP echo ++$ind; ?>" size="40" /></td>
 		<td>
 	<label>CPF:</label>
-	<input name="cpf" type="text" id="cpf" tabindex="<?PHP echo ++$ind; ?>" class="form-control"
+	<input name="cpf" type="text" id="cpf_val" tabindex="<?PHP echo ++$ind; ?>" class="form-control"
 	placeholder="CPF em branco ser&aacute; utilizado o n&ordm; do rol" value="<?PHP echo $_SESSION["cpf"];?>"/>
 		</td>
 		</tr>
@@ -331,7 +331,6 @@ unset($_SESSION["cpf"]);
   <input name="escolha" type="hidden" value="adm/cad_membro_end.php" />
 </form>
 </fieldset>
-<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {
