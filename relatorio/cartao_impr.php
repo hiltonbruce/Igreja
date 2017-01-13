@@ -242,7 +242,13 @@ body {
 	printf ("<br />Identidade:  %s - %s",$rec_prof->rg(),$rec_prof->orgao_expedidor());
 	print "<br />Estado Civil: ".$rec_civil->estado_civil();
 	print "<br />Data do Batismo: ".conv_valor_br ($rec_ecl->batismo_em_aguas());
-	print "<br />Congrega&ccedil;&atilde;o: ".$cong->razao();
+	if ($cong->rol()=='1') {
+		$nomeCong = 'Templo '.$cong->razao();
+	} else {
+		$nomeCong = 'Congrega&ccedil;&atilde;o: '.$cong->razao();
+	}
+
+	echo '<br />'.$nomeCong;
 ?>
 </div>
 <div id="Pastor"><strong><?PHP echo strtoupper(toUpper($igreja->pastor()));?></strong></div>
