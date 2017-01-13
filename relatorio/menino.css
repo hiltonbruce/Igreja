@@ -28,7 +28,7 @@ body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color
 #pastor {
 	position:relative;
 	width:250px;
-	margin-top: 40px;
+	margin-top: 50px;
 	margin-left: 40px;
 	padding: 0 0 0 100px;
 	text-align:center;
@@ -40,13 +40,13 @@ body { margin: 0; padding: 0; width: 1075px; font: 85% tahoma, sans-serif; color
 	width:280px;
 	text-align:center;
 	margin-right: 190px;
-	top: -125px;
+	top: -135px;
 }
 
 #assinSec {
 	position:relative;
 	width:115px;
-	margin-left: 440px;
+	margin-left: 530px;
 	top: -100px;
 }
 

@@ -8,6 +8,7 @@ define ('DBUSER','igreja');
 define ('DBPASS','suaSenha');
 define ('DBNAME','assembleia');
 define ('SECTOR_QUANT','5');#Quantidade de setores da Igreja na cidade
+define ('MSGCARTAO','&quot;Este cart&atilde;o s&oacute; ter&aacute; validade com apresenta&ccedil;&atilde;o da carta&quot');#Mensagem do cartão de membro
 $dns = 'mysql://'.DBUSER.':'.DBPASS.'@'.DBPATH.'/'.DBNAME;
 /*
  * Usuário e senha de Backup:

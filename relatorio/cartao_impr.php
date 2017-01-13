@@ -72,32 +72,33 @@ body {
 }
 #Endereco {
 	position:absolute;
-	left:151px;
-	top:69px;
-	width:360px;
+	left:240px;
+	top:60px;
+	width:260px;
 	height:45px;
 	z-index:4;
 	font-size: 80%;
+	text-align: right;
+}
+#Razao {
+	position:absolute;
+	left:140px;
+	top:25px;
+	width:360px;
+	height:36px;
+	z-index:5;
+	font-size: 200%;
+	text-align:right;
 }
 #marca {
 	position:absolute;
   	background: url(../img/marca.png) no-repeat;
-  	background-size: 165px 53px;
+  	background-size: 203px 71px;
 	left:30px;
 	top:40px;
 	width:211px;
 	height:143px;
 	z-index:6;
-}
-#Razao {
-	position:absolute;
-	left:153px;
-	top:35px;
-	width:360px;
-	height:36px;
-	z-index:5;
-	font-size: 200%;
-	text-align:center;
 }
 #foto {
 	position:absolute;
@@ -134,6 +135,17 @@ body {
 	left:155px;
 	top:116px;
 	width:353px;
+	height:29px;
+	z-index:9;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 75%;
+}
+#mensargem {
+	position:absolute;
+	text-align: right;
+	left:100px;
+	top:116px;
+	width:400px;
 	height:29px;
 	z-index:9;
 	font-family:Arial, Helvetica, sans-serif;
@@ -184,25 +196,35 @@ body {
 	font-family:"Courier New", Courier, monospace;
 	font-size: 80%;
 }
+#LogoAD {
+	position:absolute;
+	left:38px;
+	top:37px;
+	z-index:13;
+}
 -->
 </style>
 </head>
 <body>
+<?php
+	if (file_exists("../img/logo.png")){
+		echo '<div id="LogoAD"><img src="../img/logo.png" width="200" height="75" /></div>';
+	}else {
+		echo '<div id="Razao">Igreja Assembleia de Deus</div>';
+	}
+?>
 <div id="cartao"></div>
 <div id='marca'></div><!--  Cartão com logo idependente do fundo da imagem-->
-<div id="Endereco">
-  <div align="center"><?PHP echo "{$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>
-   <?PHP echo "CEP: {$igreja->cep()} <br /> Fone: {$igreja->fone()} - CNPJ: ".$igreja->cnpj();?>
+<div id='Endereco'>
+  <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
+   <?PHP echo ' CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().' CNPJ:&nbsp;'.$igreja->cnpj();?>
   </div>
-</div>
-<div id="Razao">
-  Igreja Assembleia de Deus
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
 <div id="cargo">Carteira de Identidade de <?PHP echo cargo($rolConsuta)['0'];?></div>
 <div id="Nome">
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?></div>
-<div id="Layer7"> &quot;Este cart&atilde;o s&oacute; ter&aacute; validade com apresenta&ccedil;&atilde;o da carta&quot;</div>
+ <div id="mensargem"><?php echo MSGCARTAO;?></div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
 <div id="verso1">
 <?PHP
@@ -215,8 +237,9 @@ body {
 </div>
 <div id="verso2">
 <?PHP
-	print "CPF: ".$rec_prof->cpf();
-	printf ("<br />Identidade:  %s - {$rec_prof->orgao_expedidor()}",number_format($rec_prof->rg(), 0, ',', '.'));
+	print "<b>Membro desde:</b> ".conv_valor_br ($rec_ecl->dat_aclam());
+	print "<br />CPF: ".$rec_prof->cpf();
+	printf ("<br />Identidade:  %s - %s",$rec_prof->rg(),$rec_prof->orgao_expedidor());
 	print "<br />Estado Civil: ".$rec_civil->estado_civil();
 	print "<br />Data do Batismo: ".conv_valor_br ($rec_ecl->batismo_em_aguas());
 	print "<br />Congrega&ccedil;&atilde;o: ".$cong->razao();

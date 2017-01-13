@@ -1,7 +1,8 @@
 <tr>
 	<td>
 		<label>Valor (R$):</label>
-		<input name="valor" type="text" class="form-control money" size="14" tabindex="<?PHP echo ++$ind; ?>" value="<?php echo $_GET["valor"];?>" />
+		<input name="valor" type="text" class="form-control money" tabindex="<?PHP echo ++$ind;?>"
+		 value="<?php echo $_GET["valor"];?>" />
 	</td><td colspan="2">
 		<label>Data</label>
 		<input name="data" type="text" id="data" class="form-control" tabindex="<?PHP echo ++$ind; ?>"

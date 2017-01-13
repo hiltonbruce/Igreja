@@ -30,7 +30,7 @@
 		$cad_igreja = intval($_POST['igreja']);
 		$cidIgreja = new DBRecord('cidade', $igreja->cidade(),'id');
 		$nomeCidIgreja = $cidIgreja->nome();
-		$valor = strtr( str_replace(array('.'),array(''),$_POST["valor"]), ',.','.,' );
+		$valor = formataNumBanco ($_POST["valor"]);
 		$valorBR = number_format($valor, 2, ',', ' ');
 		$rec_tipo = intval($_POST["rec"]);
 		$fonte_recurso = intval($_POST["caixa"]);

@@ -152,7 +152,7 @@
 
 if ($cidade!=''){
 ?>
-<form id="form2" name="form2" method="post" action="relatorio/carta_print.php">
+<form id="form2" name="form2" method="post" target='_blank' action="relatorio/carta_print.php">
   <input type="hidden" name="id_carta" value="<?PHP echo $arr_dad["id"];?>" />
   <input name="bsc_rol" type="hidden" id="bsc_rol" value="<?php echo $_GET['bsc_rol'];?>" />
   <div class="row">

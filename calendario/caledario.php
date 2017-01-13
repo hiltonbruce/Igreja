@@ -3,7 +3,7 @@ $imprimir = false;
 if ($_GET['imp']>'0') {
 	require_once ("../help/impressao.php");
 	$sede	= $igSede;
-	if (empty($_GET['id'])) {
+	if (empty($_GET['id']) || ($_GET['id'])=='1') {
 		$roligreja = 1;
 		$igreja 	= $sede;
 	} else {
@@ -155,13 +155,16 @@ $imprimir = true; //permite o impressão do rodapé
 		$diasCeias .= '</table>';
 		echo $cabMes.$diasCeias;
 	}
-     if ($_GET["id"]<2 || $_GET["imp"]<2)
-	  echo "<div >Cultos: Todas as Segunda, Quartas, Sextas e Domingos. Das 19h &agrave;s 21h</div>";
-     else
-	  echo "<div >Cultos: Todas as Ter&ccedil;as, Quintas e Domingos e na SEDE: as Segundas, Quartas, Sextas e Domingos. Das 19h às 21h</div>";
 
-     if (isset($_GET['imp']) && $_GET['imp']>'0') {
-     	echo '</body></html>';
+	$frase  = $igreja->cultos();
+	$numDias = array(1, 2, 3, 4, 5, 6, 7);
+	$nomeDias   = array('Segundas','Ter&ccedil;as','Quartas','Quintas','Sextas','S&aacute;bados','Domingos' );
+	$diasDeCulto = str_replace($numDias, $nomeDias, $frase);
+	$diasDeCulto = ($diasDeCulto=='') ? 'Adicione os dias de culto pela Administra&ccedil;&atilde;o...':$diasDeCulto;
+	echo '<div>&nbsp;'.$diasDeCulto.'.&nbsp;Das 19h &agrave;s 21h</div>';
+
+   if (isset($_GET['imp']) && $_GET['imp']>'0') {
+   	echo '</body></html>';
 	?>
  <div id="footer">
 	<?PHP

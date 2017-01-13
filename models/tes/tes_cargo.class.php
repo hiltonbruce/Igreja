@@ -3,9 +3,9 @@ class tes_cargo {
 
 	protected $status;
 
-	function __construct ($status=0) {
-		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao, i.status AS igrejaStatus ';
-		$sqlConsulta .= ',m.endereco,m.numero,p.cpf,p.rg ';
+	function __construct ($status='') {
+		$sqlConsulta  = 'SELECT c.*,i.razao,m.nome,f.descricao AS nomeFuncao, i.status ';
+		$sqlConsulta .= 'AS igrejaStatus,m.endereco,m.numero,p.cpf,p.rg ';
 		$sqlConsulta .= 'FROM cargoigreja AS c,igreja AS i,membro AS m, funcao AS f ';
 		$sqlConsulta .= ',profissional AS p ';
 		$sqlConsulta .= 'WHERE c.igreja=i.rol AND c.rol=m.rol AND ';
@@ -18,10 +18,10 @@ class tes_cargo {
 		{
 			if ($dados['rol']!='0') { //Só membros da igreja
 				$todos[$dados['descricao']][$dados['igreja']][$dados['hierarquia']]=
-				array('nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],
-						'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
-						,'status'=>$dados['status']
-						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']);
+				array('nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao']
+					,'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
+					,'status'=>$dados['status'],'diapgto'=>$dados['diapgto'],
+					'tipo'=>$dados['tipo']);
 			}
 			if ($dados['igrejaStatus']!='0') { //Remove as igrejas desativadas
 				$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']

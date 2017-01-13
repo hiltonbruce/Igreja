@@ -1,6 +1,5 @@
 <?php
      if ($_GET['campo']!='cultos') {
-
           $frase  = $igreja->cultos();
           $numDias = array(1, 2, 3, 4, 5, 6, 7);
           $nomeDias   = array('Segundas','Ter&ccedil;as','Quartas','Quintas','Sextas','S&aacute;bados','Domingos' );
@@ -9,7 +8,7 @@
          echo '<p><a href="./?escolha='.$tab_edit.'cultos">&nbsp;'.$diasDeCulto.'&nbsp;</a></p>';
      }else {
 
-     list($culto1,$culto2,$culto3,$culto4) = explode('-', $igreja->cultos());
+     list($culto1,$culto2,$culto3,$culto4,$culto5,$culto6,$culto7) = explode('-', $igreja->cultos());
      $mak ='mak'.$culto1;
      $$mak = ($culto1>0) ? 'checked="checked"' : '' ;
      $mak ='mak'.$culto2;
@@ -18,6 +17,12 @@
      $$mak = ($culto3>0) ? 'checked="checked"' : '' ;
      $mak ='mak'.$culto4;
      $$mak = ($culto4>0) ? 'checked="checked"' : '' ;
+     $mak ='mak'.$culto5;
+     $$mak = ($culto5>0) ? 'checked="checked"' : '' ;
+     $mak ='mak'.$culto6;
+     $$mak = ($culto6>0) ? 'checked="checked"' : '' ;
+     $mak ='mak'.$culto7;
+     $$mak = ($culto7>0) ? 'checked="checked"' : '' ;
 ?><p>
 <form method='post' action='' id='culto'>&nbsp;&nbsp;&nbsp;
      <label class="checkbox-inline">
@@ -34,7 +39,7 @@
      <input type="checkbox" id="dia" name="culto6" <?php echo $mak5;?> value="5" tabindex = "<?php echo ++$ind; ?>" >Sexta</label>
      <label class="checkbox-inline">
      <input type="checkbox" id="dia" name="culto7" <?php echo $mak6;?> value="6" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label>
-     
+
      <input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
      <input name='tabela' type='hidden' value='igreja' />
      <input name='id' type='hidden' value='<?php echo $igreja->rol();?>' />

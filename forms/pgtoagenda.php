@@ -78,7 +78,7 @@
 ?>
 <fieldset>
 	<legend>Lan&ccedil;ar Pagamentos</legend>
-	<form action="" method="post" name="cadastro_igreja">
+	<form action="" method="post" name="recibos">
 		<table class='table'>
 			<tbody>
 				<tr>
@@ -172,11 +172,11 @@
 		</table>
 		<div class="row">
 	  <div class="col-xs-3"><label>Valor:</label> <input type="text" name="valor"
-			id="valor" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+			class="form-control money" tabindex="<?PHP echo ++$ind; ?>"
 			required="required" value="<?php echo $itemagenda->valor();?>">
 		  </div>
 		  <div class="col-xs-3"><label>Juros e Multas:</label> <input type="text" name="multa"
-				id="multa" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
+				class="form-control money" tabindex="<?PHP echo ++$ind; ?>"
 				value="<?php echo $itemagenda->multa();?>">
 		  </div>
 			<?php
