@@ -15,15 +15,12 @@
 	$ecles 		= new DBRecord ("eclesiastico",$rol,"rol");
 	$prof 		= new DBRecord ("profissional",$rol,"rol");
 	$igreja 	= new DBRecord ("igreja",$ecles->congregacao(),"rol");
-
-
     if (is_numeric($membro->naturalidade())) {
         $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
         $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
     } else {
         $cidNatal = $membro->naturalidade();
     }
-
 	//$cidade 	= new DBRecord ("cidade",$membro->naturalidade(),"id");
 	$cidend 	= new DBRecord ("cidade",$membro->cidade(),"id");
 	$bairro 	= new DBRecord ("bairro",$membro->bairro(),"id");
@@ -42,14 +39,11 @@
 	}
 	if ($numreg->totlinhas()>1) {
 		$reg = $numreg->totlinhas().' registros, sendo: '.$numreg->registros();
-
 	}elseif ($numreg->totlinhas()==1){
-
 		$reg = '1 (um) registro, sendo: '.$numreg->registros();
 	}else {
 		$reg = 'Sem registro neste cadastro!';
 	}
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
