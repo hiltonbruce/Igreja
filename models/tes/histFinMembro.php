@@ -61,7 +61,7 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		//Formata m�s para exibi��o
 		$mesExibir = arrayMeses();
 		$verMes = $mesExibir [sprintf("%02u",$cont )];
-		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th><strong>'.$verMes.'/'.$ano.'</strong></th>';
+		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th>'.$verMes.'/'.substr($ano, -2).'</th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';
@@ -107,7 +107,6 @@ require_once 'help/tes/histFinanceiroMembro.php';
 		$cor = !$cor;
 	}
 ?>
-<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {

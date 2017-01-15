@@ -10,8 +10,12 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 	$cong = 'Todas as Igrejas<br />';
 	require_once 'forms/tes/histFinanceiro.php';
 }else {
-	$igreja = (int)$_GET['igreja'];
-	$ingSeleciona = new DBRecord('igreja', $igreja, 'rol');
+	$igreja = intval($_GET['igreja']);
+	if ($igreja=='1') {
+		$ingSeleciona	= $igSede;
+	} else {
+		$ingSeleciona = new DBRecord('igreja', $igreja, 'rol');
+	}
 	$cong = 'Igreja - '.$ingSeleciona->razao().'<br />';
 	$hisFinanceiro = 2;
 	require_once 'forms/tes/histFinanceiro.php';

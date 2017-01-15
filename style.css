@@ -3,8 +3,6 @@
 */
 
 body{
-	color:#333333;
-	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	margin:0 auto;
 	font-size:11px;
 	width: 100%;
@@ -19,7 +17,7 @@ body{
 	}
 
 input {
-	text-align:center;
+	text-align:left;
 }
 
 form label {

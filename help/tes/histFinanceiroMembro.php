@@ -15,7 +15,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	$periodo	= "$mesr$anor";
 	$dz 		= 'dizimos'.$periodo;//dizimos do mês
 	$dizSem 	= $dz.$semana;//Dizimos do mês separando a semana
-	
+
 	$ofExtra	= 'ofertaExtra'.$periodo;//Ofertas do mês
 	$ofExtraSem	= $ofExtra.$semana;//Ofertas do mês separando a semana
 
@@ -40,7 +40,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ofi 		= 'ofertaInfantil'.$periodo;
 	$ofiSem 	= $ofi.$semana;
 
-	$dev 		= (int)$contas['devedora'];
+	$dev 		= intval($contas['devedora']);
 	$valor 		= $contas['valor'];
 
 	  switch ($dev) {
@@ -48,7 +48,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	  		//Dizimos e ofertas
 	  	if ($contas['credito']=='700') {
 				$$dz 		+= $valor;
-				$$dizSem 	+= $valor; 
+				$$dizSem 	+= $valor;
 				$totDizimo 	+= $valor;
 	  		}elseif ($contas['credito']>'729' && $contas['credito']<'800') {
 				$$ofCampanha += $valor;
@@ -88,13 +88,13 @@ while ($contas = mysql_fetch_array($lista)) {
 			$$ofi			+= $valor;
 			$$ofiSem		+= $valor;
 			$totInfantil 	+= $valor;
-	  		
+
 	  	break;
 	  	case 8:
 	  		//Oferta Mocidade
 			$$ofmoc 		+= $valor;
 			$$ofmocSem 		+= $valor;
-			$totMocidade 	+= $valor;	  		
+			$totMocidade 	+= $valor;
 	  	break;
 	  	default:
 	  		$linhaCargo = 'Falha';

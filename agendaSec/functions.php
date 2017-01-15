@@ -199,23 +199,37 @@ function writeCalendar($month, $year,$igreja)
 				if (MAX_TITLES_DISPLAYED < $eventcount) $eventcount = MAX_TITLES_DISPLAYED;
 				// write title link if posting exists for day
 				for($j=0;$j < $eventcount;$j++) {
-					$titLink = 'data-toggle="tooltip" data-placement="top" title="'.strip_tags($eventdata[$day]["text"][$j]).'"';
+					$setorCad = 'Cadastrado pela: '.$eventdata[$day]['setor'][$j];
+					$igrejaEven = 'Local do evento: '.$eventdata[$day]['igreja'][$j];
+					$textEven = $eventdata[$day]["text"][$j];
+					$textTitle = strip_tags($textEven.' - '.$igrejaEven.' ('.$setorCad.')');
+					$titLink = 'data-toggle="tooltip" data-placement="top" title="'.$textTitle.'"';
 					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
-					$str .= "<span class='text-danger' $titLink >&bull; ";
-					$str .= $eventdata[$day]["title"][$j] . "</span></a><p>".$eventdata[$day]['igreja'][$j];
-					$str .= ' ('.$eventdata[$day]['setor'][$j].')</p>'.$eventdata[$day]["timestr"][$j].'<br />';
+					if ($eventdata[$day]['rol'][$j]=='1') {
+						$classDest = 'text-danger';
+					} elseif ($eventdata[$day]['rol'][$j]=='0') {
+						$classDest = 'text-warning';
+					}elseif ($eventdata[$day]['rol'][$j]=='-1') {
+						$classDest = 'text-primary';
+					} else {
+						$classDest = 'text-success';
+					}
+
+					$str .= '<span class="'.$classDest.'" '.$titLink.' >&bull; ';
+					$str .= $eventdata[$day]['title'][$j] . '</span></a>'.$igreja;
+					$str .= $eventdata[$day]['timestr'][$j];
 				}
 				$str .= "</td>\n";
 				$day++;
 			} elseif($day == 0)  {
-     			$str .= "	<td class='active' valign=\"top\">&nbsp;</td>\n";
+     			$str .= "	<td class='active' valign='top'>&nbsp;</td>\n";
 				$weekpos--;
 				if ($weekpos == 0) $day++;
      		} else {
-				$str .= "	<td class='active' valign=\"top\">&nbsp;</td>\n";
+				$str .= "	<td class='active' valign='top'>&nbsp;</td>\n";
 			}
      	}
-		$str .= "</tr>\n\n";
+		$str .= '</tr>';
 	}
 	return $str;
 	}
@@ -274,6 +288,7 @@ function getEventDataArray($month, $year,$igreja)
 	//$eventdata[$row["d"]]["igreja"][] = $row["razao"];
 		$eventdata[$row["d"]]["setor"][] = $row["alias"];
 		$eventdata[$row["d"]]["text"][] = $row["text"];
+		$eventdata[$row["d"]]["rol"][] = $row["igreja"];
 		if (strlen($row["title"]) > TITLE_CHAR_LIMIT)
 			$eventdata[$row["d"]]["title"][] = substr(stripslashes($row["title"]), 0, TITLE_CHAR_LIMIT) . "...";
 		else
@@ -290,7 +305,7 @@ function getEventDataArray($month, $year,$igreja)
 			else
 				$endtime = $row["etime"];
 
-			$timestr = '<p class="text-primary text-right small">'.$starttime.'&nbsp;-&nbsp;'.$endtime.'</p>';
+			$timestr = '<br /><div class="text-info text-right small"><ins>'.$starttime.'&nbsp;-&nbsp;'.$endtime.'</ins></div>';
 		} else {
 			$timestr = "<br>";
 		}
