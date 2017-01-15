@@ -51,7 +51,7 @@
 <div id="container">
 	<table>
 		<tr>
-			<td><img src="../img/logo.png" alt="Brasão Assembleia de Deus" width='387' height='125' ></td>
+			<td><img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" width='387' height='125' ></td>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td>
 			</td>
