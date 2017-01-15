@@ -35,11 +35,18 @@
 <title>Certid&atilde;o de Apresenta&ccedil;&atilde;o</title>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" type="text/css" href="<?php echo $estilo;?>.css" />
+<link rel="stylesheet" type="text/css" href="../css/apresenta.css" />
 <link rel="shortcut icon" type="image/ico" href="../ad.ico" />
 </head>
 <body>
 <div id="container">
-  <div id="header"></div>
+  <div id="header">
+		<div id='headerApres'>
+			<div id="nomeIgreja">
+			  <?php echo NOMEIGR; ?>
+		  </div>
+		</div>
+	</div>
 <div id="mainnav">
   <div id="Tipo">
 	  Certid&atilde;o de Apresenta&ccedil;&atilde;o
@@ -59,6 +66,7 @@
 	</p>
     </div>
     <div id="added-div-2">
+		<div id='comadep'></div>
       <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->dt_apresent()));?></h3>
     	<br />
 		<div id="pastor">

@@ -1,14 +1,7 @@
 /func_class/constantes.php
-/fotos_igreja
-/flash
 /docs
-/img_igrejas
-/img_membros
+/img_membros/*.*
 /teste
 /tmp
-/.settings
-/imgAssin
-/bkpbanco
-.directory
-.buildpath
-.project
+/bkpbanco/*.sql
+/bkpbanco/*.zip
