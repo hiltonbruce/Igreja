@@ -11,12 +11,11 @@ class sec_membro {
 		$sqlConsulta .= 'WHERE e.congregacao=i.rol AND m.rol=c.rol AND ';
 		$sqlConsulta .= 'm.rol=p.rol AND m.rol=c.rol AND m.rol="'.$rolMembro.'" ';
 		$sqlConsulta .= 'ORDER BY m.nome,i.razao';
-		$query = $sqlConsulta;
-		$this->membros = mysql_query($query) or die (mysql_error());
-
+		$this->query = $sqlConsulta;
 	}
 
 	function dadosMembro () {
+		$membros = mysql_query($this->query) or die (mysql_error());
 		while($dados = mysql_fetch_assoc($membros))
 		{
 				$arrayMembro[$dados['rol']]= array('nome'=>$dados['nome'],'bairro'=>$dados['bairro']
@@ -37,7 +36,6 @@ class sec_membro {
 						,'livro'=>$dados['livro'],'rol_conjugue'=>$dados['rol_conjugue'],'obsCivl'=>$dados['obsCivil']
 						,'cpf'=>$dados['cpf'],'obsProf'=>$dados['obsProf'],'onde_trabalha'=>$dados['onde_trabalha']
 						,'orgao_expedidor'=>$dados['orgao_expedidor'],'profissao'=>$dados['profissao'],'rg'=>$dados['rg']);
-
 		}
 		return $arrayMembro;
 	}

@@ -30,7 +30,7 @@ if ($membro) {
 		</a>
 		<?php
 		}
-		if ($_SESSION["setor"]=='2' || $_SESSION["nivel"]>'10') {
+		if ($_SESSION["setor"]=='2' || $_SESSION["setor"]=='1' || $_SESSION["nivel"]>'50') {
 	?><!-- Verifica se é tesouraria -->
 		<a <?PHP $b=id_corrente ("saldoMembros");?>
 		href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol=<?php

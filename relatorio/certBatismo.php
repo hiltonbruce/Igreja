@@ -2,32 +2,8 @@
 	session_start();
 	require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
 	controle ("inserir");
-  $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
-  $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 	$dadosIgreja = new igreja();
 	$listInfIgr = $dadosIgreja->Arrayigreja();
-	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
-	if (empty($_POST["id"]) && isset($_POST["nome"])) {
-		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
-		$dt_apresent = br_data ($_POST["dt_apresent"],"dt_apresent");
-		$value="'','{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
-				'{$_POST["mae"]}','{$_POST["rol_mae"]}','$dt_nasc','{$_POST["maternidade"]}',
-				'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',
-				'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}',NOW(),'{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
-		$cert_apresentacao = new insert ("$value","cart_apresentacao");
-		$cert_apresentacao->inserir();
-		$most_certidao = new DBRecord ("cart_apresentacao",mysql_insert_id(),"rol");
-	} else {
-		$most_certidao = new DBRecord ("cart_apresentacao",$_POST["rol"],"rol");
-	}
-	//echo "<h1>TESTE ".$most_certidao->nome()." - Post ".$_GET["id"]."</h1>";
-	//if (isset($most_certidao->nome())) {
-	$cidade = new DBRecord ("cidade",$most_certidao->cidade(),"id");
-	if ($most_certidao->sexo()=="F") {
-		$estilo = "menina";
-	}elseif ($most_certidao->sexo()=="M"){
-		$estilo = "menino";
-	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
