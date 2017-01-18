@@ -15,7 +15,7 @@ ksort($saldo); #Ordena o array pela chave
 echo "<br/><br/><br/>";
 print_r($dataLancCred);
 */
-print_r($planoCod['1.1.1']);
+//print_r($planoCod['1.1.1']);
 $grpFim = FALSE;
 foreach ($saldo AS $chave => $valor){
 		//$acesso = sprintf("[%04s]\n", $planoCta[$chave]['1']);
