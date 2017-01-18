@@ -15,20 +15,20 @@ ksort($saldo); #Ordena o array pela chave
 echo "<br/><br/><br/>";
 print_r($dataLancCred);
 */
-#print_r($saldo);
+print_r($planoCod['1.1.1']);
 $grpFim = FALSE;
 foreach ($saldo AS $chave => $valor){
 		//$acesso = sprintf("[%04s]\n", $planoCta[$chave]['1']);
 		$acesso = '';
 		$vlrSaldo = abs($saldo[$chave]);
 		$vlrSaldo = number_format($vlrSaldo,2,',','.');
-		if ($saldo[$chave]<0) {
-				$vlrSaldo .= $cred;
-			}elseif ($saldo[$chave]>0) {
-				$vlrSaldo .= $dev;
-			} else {
-				$vlrSaldo = '--o--';
-			}
+		if ($saldo[$chave]<0.00) {
+			$vlrSaldo .= ($planoCod[$chave]['tipo']=='C') ? $cred : $dev;
+		}elseif ($saldo[$chave]>0.001) {
+			$vlrSaldo .= ($planoCod[$chave]['tipo']=='D') ? $dev : $cred ;
+		} else {
+			$vlrSaldo = '--o--';
+		}
 		$vlrSaldoAnte = number_format(abs($saldoAnte[$chave]),2,',','.');
 		if ($saldoAnte[$chave]<0) {
 				 $vlrSaldoAnte .= $cred;
@@ -38,9 +38,9 @@ foreach ($saldo AS $chave => $valor){
 				$vlrSaldoAnte = '--o--';
 			}
 		$vlrSaldoAtual = number_format(abs($saldo[$chave]+$saldoAnte[$chave]),2,',','.');
-		if (($saldo[$chave]+$saldoAnte[$chave])<0) {
+		if (($saldo[$chave]+$saldoAnte[$chave])<0.00) {
 				$vlrSaldoAtual  .= $cred;
-			}elseif (($saldo[$chave]+$saldoAnte[$chave])>0) {
+			}elseif (($saldo[$chave]+$saldoAnte[$chave])>0.001) {
 				$vlrSaldoAtual .= $dev;
 			} else {
 				$vlrSaldoAtual = '--o--';
