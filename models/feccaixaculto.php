@@ -63,10 +63,10 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		//Para nivel2='4.2'(Receitas não Operacionais) não há provisão para COMADEP ou Missões
 		if ($tablancarr['devedora']=='2' && $credora->nivel2()!='4.2') {
 			//provisão para fundo de Missões de 40%
-			$provmissoes += round(($valor*0.4),2);
+			$provmissoes += round(($valor*PROVMISSOES),2);
 		}elseif ($credora->nivel2()!='4.2' && $credora->nivel4()!='4.1.1.003') {
 			//provisão para Convenção de 10%
-			$provcomadep += round(($valor*0.1),2);
+			$provcomadep += round(($valor*PROVCONVENCAO),2);
 		}
 		//Exibi lançamento
 		$caixa = new DBRecord('contas',$tablancarr['devedora'],'acesso');
@@ -76,24 +76,24 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
    	//Lança provisões conta Despesa
-	$semaddesp = new atualconta('3.2.1.001.005',$idlancmis,11);
+	$semaddesp = new atualconta(DESPMISSOES,$idlancmis,11);
    	if ($provmissoes>0) {
    		$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de missões - Despesa
    	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.2.1.001.005','codigo');//Exibi lançamento da provisão SEMAD
+	$conta = new DBRecord('contas',DESPMISSOES,'codigo');//Exibi lançamento da provisão SEMAD
 	$sldAntSemad = number_format($conta->saldo()-$provmissoes,2,',','.');//Saldo anterior da conta
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
 			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()
 			,$sldAntSemad);
 	$totalDeb = $totalDeb + $provmissoes;
 	$corlinha = !$corlinha;
-	$provcomad = new atualconta('3.1.1.001.007',$idlancmis,10);
+	$provcomad = new atualconta(DESPCONVENCAO,$idlancmis,10);
 	if ($provcomadep>0) {
 		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento, se possuir valor, da provisão de Comadep - Despesa
 	}
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão COMADEP
+	$conta = new DBRecord('contas',DESPCONVENCAO,'codigo');//Exibi lançamento da provisão COMADEP
 	$sldAntComadep = number_format($conta->saldo()-$provcomadep,2,',','.');//Saldo anterior da conta
 	$exibideb .= sprintf("<tr $cor ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
 					</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",$conta->codigo(),$conta->titulo()

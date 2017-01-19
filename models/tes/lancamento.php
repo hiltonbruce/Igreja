@@ -139,11 +139,11 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 			//exceto lançamento direto para despesas não operacionais
 			if ($debitar=='2') {
 				//Provisão para Missões
-				$provmissoes += $valor*0.4;
+				$provmissoes += $valor*PROVMISSOES;
 			}elseif ($devedora->nivel4()=='1.1.1.001' && $devedora->acesso()>0 && $devedora->tipo()=='D') {
 				//Para tipo 8 não há provisão para COMADEP ou Missões
-				$provcomadep += $valor*0.1;
-				$ctaComadep = new DBRecord('contas','3.1.1.001.007','codigo');
+				$provcomadep += $valor*PROVCONVENCAO;
+				$ctaComadep = new DBRecord('contas',DESPCONVENCAO,'codigo');
 				$sldAntComadep = number_format($ctaComadep->saldo(),2,',','.');
 			}
 		}
@@ -165,12 +165,12 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino.$exibi;
  	//Lança provisões conta Despesa
  	if ($provmissoes>0) {
-	$semaddesp = new atualconta('3.1.6.001.005',$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
+	$semaddesp = new atualconta(DESPMISSOES,$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
 	$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
 	$histTextProv =' e provis�o para SEMAD sobre a receita';
 
 	$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-	$conta = new DBRecord('contas','3.1.6.001.005','codigo');//Exibi lançamento da provisão SEMAD
+	$conta = new DBRecord('contas',DESPMISSOES,'codigo');//Exibi lançamento da provisão SEMAD
 	$antProvSemad = number_format($conta->saldo()-$provmissoes,2,',','.');
 	$exibideb .= sprintf("<tr><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
 			$conta->codigo(),$conta->titulo(),number_format($provmissoes,2,',','.'),
@@ -178,7 +178,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$totalDeb += $provmissoes;
 	$corlinha = !$corlinha;
  	}
-	$provcomad = new atualconta('3.1.1.001.007',$ultimolanc,'10');//Convenção estadual COMADEP
+	$provcomad = new atualconta(DESPCONVENCAO,$ultimolanc,'10');//Convenção estadual COMADEP
 	if ($provcomadep>0) {
 		$provcomad->atualizar($provcomadep,'D',$roligreja,$data); //Faz o lançamento da provisão de Comadep - Despesa
 		$totalDeb += $provcomadep;
@@ -188,7 +188,7 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 			$histTextProv = ' e provis&atilde;o para COMADEP sobre a receita';
 		}
 		$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$conta = new DBRecord('contas','3.1.1.001.007','codigo');//Exibi lançamento da provisão SEMAD
+		$conta = new DBRecord('contas',DESPCONVENCAO,'codigo');//Exibi lançamento da provisão SEMAD
 		$exibideb .= sprintf("<tr><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;
 						</td><td id='moeda'>%s&nbsp;%s</td></td><td class='text-right'>%s</td></tr>",$conta->codigo(),$conta->titulo()
 						,number_format($provcomadep,2,',','.'),number_format($conta->saldo(),2,',','.'),$conta->tipo()

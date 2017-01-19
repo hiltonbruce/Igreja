@@ -20,6 +20,7 @@ $sqlUltiReg .= 'AND (confirma="" || confirma="'.$confirma.'") ';
 $sqlUltiReg .= 'ORDER BY id DESC LIMIT 1';
 $ultregistro = mysql_query ($sqlUltiReg);
 $vlrregistro = mysql_fetch_row($ultregistro);
+print_r($vlrregistro);
 //$msgErro  = "<script>location.href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&igreja={$rolIgreja}'; </script>";
 $msgErro = "<a href='./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec={$_POST["tipo"]}&
 		igreja={$rolIgreja}'><button class='btn btn-primary' tabindex='1' autofocus='autofocus' >Continuar...</button><a>";
@@ -68,7 +69,13 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 	<table>
 		<tbody>
 			<tr>
-				<td><?php echo '<H4>Data do último registo: '.conv_valor_br ($vlrregistro[0]).'</h4>';?></td>
+				<td>
+					<?php
+					if ($vlrregistro[0]!='') {
+					echo '<H4>Data do último registo: '.conv_valor_br ($vlrregistro[0]).'</h4>';
+					}
+					?>
+				</td>
 				<td>
 				<?php echo '<H4>Data do lançamento: '.conv_valor_br ($datalanc).'</h4>';?>
 				</td>
