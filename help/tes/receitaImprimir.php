@@ -12,7 +12,6 @@ switch ($rec) {
 		if (!empty($_GET['dtBalac'])) {
 			$titTabela = 'Balancete - Saldo em: '.$_GET['dtBalac'];
 		}
-
 		require_once '../models/saldos.php';
 		$nomeArquivo='../views/saldos.php';
 		require_once '../views/modeloPrint.php';

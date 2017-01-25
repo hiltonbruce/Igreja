@@ -10,7 +10,6 @@
 			<col id="D&eacute;bito">
 			<col id="Cr&eacute;dito">
 			<col id="Valor (R$)">
-			<col id="Saldo Atual">
 			<col id="albumCol"/>
 		</colgroup>
 	<thead>
