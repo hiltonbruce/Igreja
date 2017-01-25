@@ -22,9 +22,9 @@
 </div>
 	<?php
 		require_once $nomeArquivo;
-	?><h5>
+	?>
     <div id="footer">
     Copyright &copy; 2016  Designed by <a rel="nofollow" href="mailto: hiltonbruce@gmail.com">Joseilton Costa Bruce </a>
-  </div></h5>
+  </div>
 </body>
 </html>

@@ -1,5 +1,15 @@
+<?php
+if ($_GET['rec']=='16' && $_GET['tipo']=='4') {
+	$fontIniCom = '<div style="font-size:112%;">';
+	$fontFimCom = '</div>';
+} else {
+	$fontIniCom = '';
+	$fontFimCom = '';
+}
+echo $fontIniCom;
+ ?>
 <table class='table table-striped table-hover'>
-		<caption><h6>
+		<caption><h5>
 		<?php
 		if ($recLink!='' && !empty($recLink)) {
 			echo '<a href="'.$linkImpressao.'" ';
@@ -11,7 +21,7 @@
 		}
 		echo $titTabela;
 		?>
-	</h6></caption>
+	</h5></caption>
 		<colgroup>
 				<col id="Conta">
 				<col id="Descricao">
@@ -52,5 +62,7 @@
 		echo $assinatura;
 				//echo $grupoFora.'<br />';
 				//echo $sldFora.' *** ';
+
+		echo $fontFimCom;
 		echo $imprimir;
 	?>
