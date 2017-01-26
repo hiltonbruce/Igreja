@@ -59,7 +59,7 @@ function condatabrus ($dt){
 
 function checadata ($dt){
 	//Valida a data no formato dd/mm/aaaa
-			$dta = explode("/","$dt");
+			$dta = explode('/',$dt);
 			$d = $dta[0];
 			$m = $dta[1];
 			$y = $dta[2];

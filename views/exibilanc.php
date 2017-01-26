@@ -1,9 +1,5 @@
 <table class="table table-hover table-condensed table-striped table-bordered">
-	<caption>Lan&ccedil;amento Conclu&iacute;do - Em:
-	<?PHP
-		echo (empty($_POST['data'])) ? conv_valor_br ($data) : $_POST['data'];
-		echo ' - '.$igLanc->razao();
-	?>
+	<caption class='text-left'>Lan&ccedil;amento Realizado!
 	</caption>
 		<colgroup>
 			<col id="Conta">

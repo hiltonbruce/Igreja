@@ -4,6 +4,7 @@
 	$mesEstatisca = (empty($_GET['mes']) || $_GET['mes']>12) ? date('m') : $_GET['mes'] ;
 	$igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 	$lstCta = new tes_conta();
+	$contaDC = $lstCta->ativosArray();
 ?>
 <div class="bs-callout bs-callout-danger" id="callout-alerts-no-default">
     <h4>Lan&ccedil;amentos de pagamentos!<small> (Per&iacute;odo abaixo...)</small></h4>
@@ -75,7 +76,8 @@ E mais abaixo: informe o grupo relativo ao gasto, com valor e hist&oacute;rico.
 	$bsccredor = new tes_listDisponivel();
 	$acesso = (empty($_GET['acesso'])) ? '' : $_GET['acesso'] ;
 	$listaFonte = $bsccredor->List_Selec($acesso,0.01);
-	$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
+	$titTabela = '<div class="panel-heading"><h3 class="panel-title">Lan&ccedil;ar ';
+	$titTabela .= '	pagamentos - Per&iacute;odo: '.$mesPesquisa.'/'.$ano.'</h3></div>';
 	require_once 'help/tes/lancTipoPlan.php';
 	require_once 'views/tesouraria/lancTipoPlan.php';
 	//print_r($arrayDesp);

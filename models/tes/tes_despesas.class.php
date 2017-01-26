@@ -20,7 +20,7 @@ class tes_despesas {
 				$todos[$dados['id']] = array('titulo'=>$dados['titulo'],'codigo'=>$dados['codigo'],
 						'descricao'=>$dados['descricao'],'acesso'=>$dados['acesso'],'saldo'=>$dados['saldo']
 						,'status'=>$dados['status'],'tipo'=>$dados['tipo']);
-						
+
 				if ($dados['nivel1']=='3' || $dados['nivel2']=='1.2') {
 					$dispDesp[$dados['id']] = array('titulo'=>$dados['titulo'],'codigo'=>$dados['codigo'],
 						'descricao'=>$dados['descricao'],'acesso'=>$dados['acesso'],'saldo'=>$dados['saldo']
@@ -68,7 +68,7 @@ class tes_despesas {
 				,'lancamento'=>$arrayAgenda['idlanc'],'debitar'=>$arrayAgenda['debitar']
 				,'creditar'=>$arrayAgenda['creditar'],'valor'=>$arrayAgenda['valor']
 				,'igreja'=>$arrayAgenda['razao'],'referente'=>$arrayAgenda['motivo']
-				,'data'=>$arrayAgenda['dtLanc'],'hist'=>$arrayAgenda['hist'],'acesso'=>$arrayAgenda['acesso']
+				,'hist'=>$arrayAgenda['hist'],'acesso'=>$arrayAgenda['acesso']
 				,'dtpgto'=>$arrayAgenda['dtpgto'],'vencimento'=>$arrayAgenda['venc'],'sld' =>$sldLanc);
 			}
 		}
@@ -94,15 +94,18 @@ class tes_despesas {
 				$sldLan ='C';
 			}
 		#	echo "....".$dadosCta[$dados['creditar']]['tipo'].' *** '.$ctaCredito.' == '.$dados['lancamento'];
-			$arrayDespesas[] = array('id'=>$agendaLanc[$dados['lancamento']]['idAgenda']
-				,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
-				,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
-				,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
-				,'data'=>$dados['dtLanc'],'hist'=>$dados['hist']
-				,'dtpgto'=>$agendaLanc[$dados['lancamento']]['dtpgto']
-				,'vencimento'=>$agendaLanc[$dados['lancamento']]['venc'],'sld'=>$sldLan
-				,'acesso'=>$dadosCta[$dados['debitar']]['acesso'],'titulo'=>$dadosCta[$dados['debitar']]['titulo']
-				,'codigo'=>$ctaDebito);
+		$vencAg = (!empty($agendaLanc[$dados['lancamento']]['venc'])) ? $agendaLanc[$dados['lancamento']]['venc'] : '' ;
+		$dtPgtoAg = (!empty($agendaLanc[$dados['lancamento']]['dtpgto'])) ? $agendaLanc[$dados['lancamento']]['dtpgto'] : '' ;
+		$dtIdAg = (!empty($agendaLanc[$dados['lancamento']]['idAgenda'])) ? $agendaLanc[$dados['lancamento']]['idAgenda'] : '0' ;
+		//echo "<h4>".$agendaLanc[$dados['lancamento']]['idAgenda'].'===</h4>';
+		$arrayDespesas[] = array('id'=>$dtIdAg
+			,'lancamento'=>$dados['lancamento'],'debitar'=>$dados['debitar']
+			,'creditar'=>$dados['creditar'],'valor'=>$dados['valor']
+			,'igreja'=>$dados['razao'],'referente'=>$dados['referente']
+			,'data'=>$dados['dtLanc'],'hist'=>$dados['hist']
+			,'dtpgto'=>$dtPgtoAg,'vencimento'=>$vencAg,'sld'=>$sldLan
+			,'acesso'=>$dadosCta[$dados['debitar']]['acesso'],'titulo'=>$dadosCta[$dados['debitar']]['titulo']
+			,'codigo'=>$ctaDebito);
 		//echo '*****'. $dados['debitar'].' +++';
 	//	echo ' ||'. substr($ctaDebito, 0, 2).' ---';
 		//print_r($dadosCta);
