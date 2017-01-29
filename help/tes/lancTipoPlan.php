@@ -62,14 +62,15 @@ if (!empty($exibicred)) {
 		$datasLanc,number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
 }
 //$ctaDespesa = new tes_despesas();
-$arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
+//$arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
 $provmissoes=0;
 $ultimolanc = 0;
 //inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
-//print_r($arrayDesp);
+ $arrayDesp = $lstCta->contasTodas();
+print_r($arrayDesp[$contaDC['911']['id']]);
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
 	$linkPagar .= '><small class="text-muted glyphicon glyphicon-new-window"></small</a>';
@@ -79,12 +80,13 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$dtVlrDesp = (empty($vlrDesp['data'])) ? '' : $vlrDesp['data'] ;
 		$vencPgto .= ' -> lan&ccedil;.: '.$dtVlrDesp.' '.$linkPagar;
 		$titleMsg = ', paga, obrigado!';
-	}elseif ($vlrDesp['dtpgto']=='00/00/0000') {
-		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign"> </small>Venc.: '.$vlrDesp['vencimento'];
-		$vencPgto .= ' '.$linkPagar;
+	}elseif ($vlrDesp['lancamento']=='0') {
+		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign">';
+		$vencPgto .= '</small>Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar.' - chave: '.$keyDesp;
 		$titleMsg = ', ainda n&atilde;o paga!';
 	}else {
-		$vencPgto = '';
+		$vencPgto = $contaDC[$arrayDesp['codigo']['titulo']];
+		//	print_r($vlrDesp); $contaDC
 	}
 	//Exibi os pgtos das contas
 	if ($vencPgto=='') {
@@ -99,7 +101,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 	}
 	if (empty($linha[$vlrDesp['acesso']])) {
-		$linha[$vlrDesp['acesso']] = $linhaTab;
+		$linha[$vlrDesp['acesso']]  = $linhaTab;
 	}else {
 		$linha[$vlrDesp['acesso']] .= $linhaTab;
 	}

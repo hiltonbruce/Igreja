@@ -138,7 +138,7 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 		$exibicred .= '<td>'.$caixa->codigo().' - '.$caixa->titulo().'</td>';
 		$exibicred .= '<td>&nbsp;</td>';
 		$exibicred .= '<td id="moeda">'.number_format($tablancarrc['valor'],2,',','.').'</td>';
-		$exibicred .= '<td id="moeda">'.number_format($caixa->saldo(),2,',','.');
+		$exibicred .= '<td id="moeda">'.number_format(($caixa->saldo()+$tablancarrc['valor']),2,',','.');
 		$exibicred .= '&nbsp;'.$caixa->tipo().'</td>';
 		$exibicred .= '<td class="text-right">'.$sldAntCrd.'</td>';
 		$exibicred .= '</tr>';
