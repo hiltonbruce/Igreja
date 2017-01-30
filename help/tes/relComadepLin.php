@@ -22,17 +22,21 @@ foreach ($saldo AS $chave => $valor){
 		$acesso = '';
 		$vlrSaldo = abs($saldo[$chave]);
 		$vlrSaldo = number_format($vlrSaldo,2,',','.');
-		if ($saldo[$chave]<0.00) {
-			$vlrSaldo .= ($planoCod[$chave]['tipo']=='C') ? $cred : $dev;
-		}elseif ($saldo[$chave]>0.001) {
-			$vlrSaldo .= ($planoCod[$chave]['tipo']=='D') ? $dev : $cred ;
+		if ($saldo[$chave]<0 && $planoCod[$chave]['tipo']=='D') {
+			$vlrSaldo .= $cred;
+		}elseif ($saldo[$chave]<0 && $planoCod[$chave]['tipo']=='C' ) {
+			$vlrSaldo .= $cred;
+		}elseif ($saldo[$chave]>=0.01 && $planoCod[$chave]['tipo']=='D') {
+			$vlrSaldo .= $dev;
+		}elseif ($saldo[$chave]>=0.01 && $planoCod[$chave]['tipo']=='C') {
+			$vlrSaldo .= $dev ;
 		} else {
 			$vlrSaldo = '--o--';
 		}
 		$vlrSaldoAnte = number_format(abs($saldoAnte[$chave]),2,',','.');
-		if ($saldoAnte[$chave]<0) {
+		if ($saldoAnte[$chave]<0.00) {
 				 $vlrSaldoAnte .= $cred;
-			}elseif ($saldoAnte[$chave]>0) {
+			}elseif ($saldoAnte[$chave]>0.001) {
 				$vlrSaldoAnte .= $dev;
 			} else {
 				$vlrSaldoAnte = '--o--';
