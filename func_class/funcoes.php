@@ -178,10 +178,10 @@ function mostra_foto ($rol,$height,$width) {
 				$img="../img_membros/$rol.JPG";
 			}elseif (file_exists("img_membros/$rol.JPG")){
 				$img="img_membros/$rol.JPG";
-			}elseif (file_exists("img_membros/ver_foto.jpg")){
-				$img="img_membros/ver_foto.jpg";
+			}elseif (file_exists("img_membros/ver_foto.JPG")){
+				$img="img_membros/ver_foto.JPG";
 			}else{
-				$img="../img_membros/ver_foto.jpg";
+				$img="../img_membros/ver_foto.JPG";
 			}
 	} elseif (file_exists("../img_membros/".$_SESSION["rol"].".jpg")){
 				$img="../img_membros/".$_SESSION["rol"].".jpg";
@@ -191,10 +191,10 @@ function mostra_foto ($rol,$height,$width) {
 				$img="../img_membros/".$_SESSION["rol"].".JPG";
 			}elseif (file_exists("img_membros/".$_SESSION["rol"].".JPG")){
 				$img="img_membros/".$_SESSION["rol"].".JPG";
-			}elseif (file_exists("img_membros/ver_foto.jpg")){
-				$img="img_membros/ver_foto.jpg";
+			}elseif (file_exists("img_membros/ver_foto.JPG")){
+				$img="img_membros/ver_foto.JPG";
 			}else{
-				$img="../img_membros/ver_foto.jpg";
+				$img="../img_membros/ver_foto.JPG";
 			}
 		return "<img src='$img' class='img-thumbnail thumb' alt='Foto do Membro' width='$width' height='$height' align='absmiddle' />";
 }
@@ -210,10 +210,10 @@ function foto ($rol) {
 				$img="../img_membros/$rol.JPG";
 			}elseif (file_exists("img_membros/$rol.JPG")){
 				$img="img_membros/$rol.JPG";
-			}elseif (file_exists("img_membros/ver_foto.jpg")){
-				$img="img_membros/ver_foto.jpg";
+			}elseif (file_exists("img_membros/ver_foto.JPG")){
+				$img="img_membros/ver_foto.JPG";
 			}else{
-				$img="../img_membros/ver_foto.jpg";
+				$img="../img_membros/ver_foto.JPG";
 			}
 	} elseif (file_exists("../img_membros/".$_SESSION["rol"].".jpg")){
 				$img="../img_membros/".$_SESSION["rol"].".jpg";
@@ -223,10 +223,10 @@ function foto ($rol) {
 				$img="../img_membros/".$_SESSION["rol"].".JPG";
 			}elseif (file_exists("img_membros/".$_SESSION["rol"].".JPG")){
 				$img="img_membros/".$_SESSION["rol"].".JPG";
-			}elseif (file_exists("img_membros/ver_foto.jpg")){
-				$img="img_membros/ver_foto.jpg";
+			}elseif (file_exists("img_membros/ver_foto.JPG")){
+				$img="img_membros/ver_foto.JPG";
 			}else{
-				$img="../img_membros/ver_foto.jpg";
+				$img="../img_membros/ver_foto.JPG";
 			}
 		return $img;
 }
