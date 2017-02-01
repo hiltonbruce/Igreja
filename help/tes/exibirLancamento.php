@@ -9,7 +9,7 @@
 		$exibi  ='<tr><td>'.$caixa['codigo'].' - '.$caixa['titulo'].'</td>';
 		$exibi .='<td class="text-right">'.$valorDeb.'</td>';
 		$exibi .='<td class="text-right">'.$valorCred.'</td>';
-		$exibi .='<td class="text-right">&nbsp;'.$caixaOutros.'&nbsp;'.$tipoDC;
-		$exibi .='</td><td class="text-right">'.$sldAntDev.'&nbsp;'.$tipoDC;
-		$exibi .='</td></tr>';
+		$exibi .='<td class="text-right">&nbsp;'.$caixaOutros.'&nbsp;<strong>'.$tipoDC;
+		$exibi .='</strong></td><td class="text-right">'.$sldAntDev.'&nbsp;<strong>'.$tipoDC;
+		$exibi .='</strong></td></tr>';
 //$corlinha = !$corlinha;

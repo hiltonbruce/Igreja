@@ -1,5 +1,9 @@
 <table class="table table-hover table-condensed table-striped table-bordered">
 	<caption class='text-left'>Lan&ccedil;amento Realizado!
+		<?php
+			$reg = (empty($reg)) ? '' : ' Reg. N&ordm; '.$reg  ;
+			echo $reg;
+		?>
 	</caption>
 		<colgroup>
 			<col id="Conta">

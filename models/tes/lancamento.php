@@ -1,4 +1,5 @@
 <?php
+$reg = '';
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_POST['igreja'];
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
@@ -8,7 +9,7 @@ $data = br_data($_POST['data'], 'Data do lan�amento inv�lida!');
 list($anoPgto,$mesPgto,$diaPgto) = explode('-', $data);
 $dtLanc = $diaPgto.'/'.$mesPgto.'/'.$anoPgto;
 $dtCtaPagar = $dtLanc;
-if ((($mesPgto>$mesVen && $anoPgto==$anoVenc) ||$anoPgto>$anoVenc) && $vencimento!='') {
+if ((($mesPgto>$mesVen && $anoPgto==$anoVenc) || $anoPgto>$anoVenc) && $vencimento!='') {
 	$ctaPagar = true;
 } else {
 	$ctaPagar = false;
@@ -27,7 +28,7 @@ if ((check_transid($_POST["transid"]) || $_POST["transid"]=="")) {
 if ((!empty($_POST['recibo']) && !$gerarPgto) || empty($_POST['recibo'])){
 $provmissoes=0;
 $ultimolanc = 0;
-$roligreja =(int) $_POST['rolIgreja'];
+$roligreja =intval($_POST['rolIgreja']);
 $novoLanc  = '<a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=2&igreja='.$roligreja.'"';
 $novoLanc .= '><button class="btn btn-primary active" autofocus="autofocus" > <span class="glyphicon glyphicon-save-file" >';
 $novoLanc .= '</span>&nbsp;Novo Lan&ccedil;amento</button></a>';
@@ -111,11 +112,71 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
 	$caixaSenhoras = '';
+
+if ($ctaPagar) {
+	//$ctaPagar = new DBRecord ('contas','2.1.1.001.099','codigo');
+	//$contaDC['350'][''] -> Contas a pagar
+	//$sldAntPagar = number_format($contaDC['350']['saldo'],2,',','.');
+//	$valor += $multa;
+	$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc+1,$contaDC['350']['id']);#devedora a Contas a pagar
+	$contApgtoAprop->atualizar($valor,'D',$roligreja,$vencimento);
+	$reg .= ' e ' . ($ultimolanc+1);
+
+	$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolanc+1,'');
+	$contcaixa->atualizar($valor,'C',$roligreja,$data);
+	//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
+	//$contApgtoAprop->atualizar($valor,'C',$roligreja,$vencimento);
+	//Lança o histórico do lançamento
+	$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
+	$histAPagar .= ', conf. reg. '.$ultimolanc;
+	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc+1,$histAPagar,$roligreja);
+	$lanchist = new incluir($InsertHist, 'lanchist');
+	$lanchist->inserir();
+
+	$caixa = $contaDC[$debitar];
+	$valorCred = '';
+	if ($caixa['tipo']=='C') {
+		$valorDeb = -$valor;
+	} else {
+		$valorDeb = $valor;
+	}
+	$tipoDC = $contaDC[$debitar]['tipo'];
+	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
+	$exibideb .= $exibi;
+
+	$totalDeb +=$valor;
+	//$devedora = $ctaPagar;
+//	$creditar = 350;#Contas a pagar
+	//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+
+	$debitar = 350;
+	$caixa = $contaDC[$debitar];
+	if ($caixa['tipo']=='C') {
+			$valorCred = -$valor;
+		} else {
+			$valorCred = $valor;
+		}
+	$valorDeb = '';
+	$valorDeb = '';
+	$tipoDC = $contaDC[$debitar]['tipo'];
+	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
+	$exibideb .= $exibi;
+	$totalCred +=$valor;
+	//$corlinha = !$corlinha;
+	//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
+	$dtCtaPagar = $diaVenc.'/'.$mesVen.'/'.$anoVenc;
+	$exibicred .= '<tr  class="primary"><td>Em: '.$dtCtaPagar.'</td>';
+	$exibicred .= '<td colspan="4">'.$histAPagar.'</tr>';
+//	$debitar = 350; //Na baixa do pgto ser� feita agora nesta conta
+}
+
 //Faz lan�ameto de multa caso exista
 if ($ctaMulta) {
 //	$ctaMulta = new DBRecord('contas',$ctaMulta->codigo(),'codigo');
+
 	$multaAtraso = new atualconta($contaDC['571']['codigo'],$ultimolanc,$contaDC[$creditar]['id']);
-	$multaAtraso->atualizar($multa,'D',$roligreja,$data);
+
+	$multaAtraso->atualizar($multa,'D',$roligreja,$vencimento);
 	$totalMulta += $multa;
 	$lancMulta=true;
 	$caixa = $contaDC['571'];
@@ -123,7 +184,7 @@ if ($ctaMulta) {
 	$valorDeb = $multa;
 	$tipoDC = $contaDC['571']['tipo'];
 	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
-	$exibideb .= $exibi;
+	$exibicred .= $exibi;
 	/*
 	$exibideb .= sprintf("<tr class='odd' ><td>%s - %s</td><td id='moeda'>%s</td><td>&nbsp;</td><td id='moeda'>%s&nbsp;%s</td><td class='text-right'>%s</td></tr>",
 	$contaDC['571']['codigo'],$contaDC['571']['titulo'],number_format($multa,2,',','.'),number_format($contaDC['571']['saldo'],2,',','.'),$contaDC['571']['tipo']
@@ -162,58 +223,8 @@ if ($ctaMulta) {
 
 	$tipoDC = $contaDC[$debitar]['tipo'];
 	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
-	$exibideb .= $exibi;
-	if ($ctaPagar) {
-		//$ctaPagar = new DBRecord ('contas','2.1.1.001.099','codigo');
-		//$contaDC['350'][''] -> Contas a pagar
-		//$sldAntPagar = number_format($contaDC['350']['saldo'],2,',','.');
-		$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc+1,$contaDC['350']['id']);#devedora a Contas a pagar
-		$contApgtoAprop->atualizar($valor,'D',$roligreja,$vencimento);
+	$exibicred .= $exibi;
 
-		$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolanc+1,$contaDC[$debitar]['id']);
-		$contcaixa->atualizar($valor,'C',$roligreja,$data);
-		//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
-		//$contApgtoAprop->atualizar($valor,'C',$roligreja,$vencimento);
-		//Lança o histórico do lançamento
-		$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
-		$histAPagar .= ', conf. reg. '.$ultimolanc;
-		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc+1,$histAPagar,$roligreja);
-		$lanchist = new incluir($InsertHist, 'lanchist');
-		$lanchist->inserir();
-
-		$caixa = $contaDC['350'];
-		$valorCred = '';
-		if ($caixa['tipo']=='C') {
-			$valorDeb = -$valor;
-		} else {
-			$valorDeb = $valor;
-		}
-		$tipoDC = $contaDC['350']['tipo'];
-		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
-		$exibicred .= $exibi;
-
-		$totalDeb +=$valor;
-		$devedora = $ctaPagar;
-	//	$creditar = 350;#Contas a pagar
-		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$caixa = $contaDC['350'];
-		if ($caixa['tipo']=='C') {
-				$valorCred = -($valor+$multa);
-			} else {
-				$valorCred = $valor+$multa;
-			}
-		$valorDeb = '';
-		$valorDeb = '';
-		$tipoDC = $contaDC['350']['tipo'];
-		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
-		$exibideb .= $exibi;
-		$totalCred +=$valor;
-		//$corlinha = !$corlinha;
-		//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-		$dtCtaPagar = $diaVenc.'/'.$mesVen.'/'.$anoVenc;
-		$exibideb .= '<tr  class="primary"><td colspan="5">Em: '.$dtCtaPagar.'</td>';
-		$exibideb .= '</tr>';
-	}
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino/*.$exibi*/;
  	//Lança provisões conta Despesa
 
@@ -336,8 +347,8 @@ if ($ctaMulta) {
 	}
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 
-	$exibicred .= '<tr  class="primary"><td colspan="5">Em: '.$dtLanc.'</td>';
-	$exibicred .= '</tr>';
+	$exibicred .= '<tr  class="primary"><td>Em: '.$dtLanc.'</td>';
+	$exibicred .= '<td colspan="4"> '.$referente.'</tr>';
 	$exibicred .= sprintf("<tr class='success'><td>Totais</td><td id='moeda'>R$ %s</td>
 	<td id='moeda'>R$ %s</td><td colspan='2'></td></tr>",number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
@@ -360,7 +371,8 @@ if ($ctaMulta) {
 		$upRec->lancamento = $ultimolanc;
 		$upRec->UpdateID();
 	}
-	require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
+$reg = $ultimolanc.$reg; //Exibi os n�meros dos lan�amentos
+require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 }else {
 	 //Fim do 1º if linha 7
 	if ($referente=='' && !$status) {

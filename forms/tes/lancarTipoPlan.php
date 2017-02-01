@@ -5,6 +5,7 @@
 	$igreja = (empty($_GET['igreja'])) ? '' : $_GET['igreja'] ;
 	$lstCta = new tes_conta();
 	$contaDC = $lstCta->ativosArray();
+//	$arrayDesp = $lstCta->contasTodas();
 ?>
 <div class="bs-callout bs-callout-danger" id="callout-alerts-no-default">
     <h4>Lan&ccedil;amentos de pagamentos!<small> (Per&iacute;odo abaixo...)</small></h4>

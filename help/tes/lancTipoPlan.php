@@ -1,5 +1,9 @@
 <?php
 //Verifica click duplo no form de criar recibos
+
+//print_r($contaDC['900']);
+
+//print_r($contaDC['400']['titulo']);
 $clkDuplo = (empty($_POST["transid"])) ? true : check_transid($_POST["transid"]) ;
 if ($clkDuplo) {
 	//houve click duplo no form
@@ -62,15 +66,14 @@ if (!empty($exibicred)) {
 		$datasLanc,number_format($totalDeb,2,',','.'),number_format($totalCred,2,',','.'));
 }
 //$ctaDespesa = new tes_despesas();
-//$arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
+$arrayDesp = $ctaDespesa->despesasArray($mesEstatisca,$ano);
 //Monta as linhas da tabela responsável pelas despesas ja lançadas no mês
 $provmissoes=0;
 $ultimolanc = 0;
 //inicializa variáveis
 $totalDeb = 0;
 $totalCred = 0;
- $arrayDesp = $lstCta->contasTodas();
-print_r($arrayDesp[$contaDC['911']['id']]);
+//print_r($arrayDesp);
 foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
 	$linkPagar .= '><small class="text-muted glyphicon glyphicon-new-window"></small</a>';
@@ -82,10 +85,10 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$titleMsg = ', paga, obrigado!';
 	}elseif ($vlrDesp['lancamento']=='0') {
 		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign">';
-		$vencPgto .= '</small>Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar.' - chave: '.$keyDesp;
+		$vencPgto .= '</small>Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar;
 		$titleMsg = ', ainda n&atilde;o paga!';
 	}else {
-		$vencPgto = $contaDC[$arrayDesp['codigo']['titulo']];
+		$vencPgto = $contaDC[$vlrDesp['acesso']]['titulo'];
 		//	print_r($vlrDesp); $contaDC
 	}
 	//Exibi os pgtos das contas
