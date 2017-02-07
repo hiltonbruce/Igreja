@@ -5,7 +5,21 @@
 	$igreja = new DBRecord ("igreja",$_GET["id"],"rol");
 ?>
 <div>
-<a <?PHP $b=id_corrente ("_membro");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja">
+	  <a <?PHP $b=id_corrente ("cadastro_igreja");?> href="./?escolha=tab_auxiliar/cadastro_igreja.php
+			&menu=top_igreja&uf='PB'">
+	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Cadastrar Igreja</button></a>
+
+	  <a <?PHP $b=id_corrente ("altexclui_igreja");?> href="./?escolha=tab_auxiliar/altexclui_igreja.php
+			&menu=top_igreja&uf='PB'">
+	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Alterar Excluir Igreja</button></a>
+<?PHP
+	if (id_corrente ("_membro") && empty($_GET['cargo'])) {
+			$b='active';
+	}else {
+			$b='';
+	}
+?>
+<a href="./?escolha=igreja/list_membro.php&menu=top_igreja">
 	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Membros</button>
 </a>
 <a <?PHP $b=link_ativo($_GET["cargo"], "6");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja&cargo=6">
@@ -27,32 +41,25 @@
 <table class="table">
 <tbody>
   <tr>
-
 	<?PHP
-	if (!ver_nome("cad_organica")) {
+	if (!ver_nome("cad_organica") && !ver_nome("altexclui") && !ver_nome("cadastro")) {
 	?>
 	<form id="form2" name="form2" method="post" action="" >
-
 	<td>
 	 <?PHP
-	  if (empty($_GET["id"]))
-		{
+	  if (empty($_GET["id"])) {
 			$id_ig=1;
 		}else{
 			$id_ig=$_GET["id"];
 		}
-
 	//valor recebido do script index.php
 	  $anterior=$id_ig-1;
 	  $proximo=$id_ig+1;
-	  if ($anterior<=0)
-	  {
+	  if ($anterior<=0){
 	  	$anterior=0;
 	  }
-
 	  $link = "./?escolha={$_GET["escolha"]}&menu=top_igreja&id={$_GET["id"]}&ord={$_GET["ord"]}&cargo=";
 	  $link_foto = "./?escolha=igreja/lst_memfoto.php&menu=top_igreja&ord={$_GET["ord"]}&id={$_GET["id"]}&cargo={$_GET["cargo"]}&foto=";
-
 	  ?><label>Escolha a Congrega&ccedil;&atilde;o:</label>
 	  <select name="menu1" onchange="MM_jumpMenu('parent',this,0)"  class="form-control" >
 			<?PHP

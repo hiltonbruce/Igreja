@@ -220,7 +220,11 @@ if ($ctaMulta) {
 	$totalDeb = $totalDeb + $valor + $multa;
 	$valorCred = '';
 	$valorDeb = $valor;
-
+	if ($caixa['tipo']=='C') {
+		$valorDeb = -$valor;
+	} else {
+		$valorDeb = $valor;
+	}
 	$tipoDC = $contaDC[$debitar]['tipo'];
 	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
 	$exibicred .= $exibi;

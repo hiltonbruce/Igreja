@@ -480,7 +480,7 @@ function id_corrente ($val_link) {
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
-		echo "id='current'";
+		//echo "id='current'";
 		return 'active';
 	}else {
 		return '';
