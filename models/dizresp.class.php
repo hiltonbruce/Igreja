@@ -126,7 +126,7 @@ function dizimistas(
 			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
 		//	$this->dquery  = mysql_query($consult.'ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id ') or die (mysql_error());
 			$lancConfirmado = true;
-		} elseif (($consMes!='' || $consDia!='') && $rec!='1' && $rec!='') {
+		} elseif (($consMes!='' || $consDia!='') && !empty($rec) && $rec!='1' && $rec!='') {
 			$consulta = $this->var_string.'WHERE d.igreja = i.rol '.$consMes.$consDia.$filtroIgreja;
 			$ordenar =' ORDER BY d.data DESC,d.tesoureiro,d.igreja,d.id';
 			$lancConfirmado = true;

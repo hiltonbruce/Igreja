@@ -9,7 +9,7 @@ class setores {
      while($this->col_lst = mysql_fetch_assoc($this->result))
      {
     $setores [$this->col_lst["id"]] = array ("hier"=>$this->col_lst["hier"],"conta"=>$this->col_lst["conta"]
-    							, "alias"=>$this->col_lst["alias"], "descricacao"=>$this->col_lst["descricacao"]
+    							, "alias"=>$this->col_lst["alias"], "descricao"=>$this->col_lst["descricao"]
     							, "codigo"=>$this->col_lst["codigo"]);
      }
 	  return $setores;

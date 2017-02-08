@@ -14,6 +14,12 @@ $plano = new tes_conta($_GET['gpconta']);
 $planoCta = $plano->contasTodas();
 $planoCod = $plano->contasCod();
 
+if (!empty($_GET['gpconta'])) {
+	$lstCta = new tes_contas();
+	$contaDC = $lstCta->contasTodas();
+}else {
+	$contaDC = $planoCta;
+}
 //Busca do movimento no mês
 $queryLanc  = 'SELECT l.*,DATE_FORMAT(l.data,"%Y%m") AS dt FROM lanc AS l';
 $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"';
@@ -28,9 +34,9 @@ $queryLanc .= ' AND igreja!="1"';
 $lista = mysql_query($queryLanc) or die(mysql_error());
 while ($contas = mysql_fetch_array($lista)) {
 	$ctaDeb   = $contas['debitar'];#id da cta
-	$tipoDeb  = $planoCta[$contas['debitar']]['tipo'];#Tipo da Cta -> D/C
+	$tipoDeb  = $contaDC[$contas['debitar']]['tipo'];#Tipo da Cta -> D/C
 	$ctaCred  = $contas['creditar'];#id da cta
-	$tipoCred = $planoCta[$contas['creditar']]['tipo'];#Tipo da Cta -> D/C
+	$tipoCred = $contaDC[$contas['creditar']]['tipo'];#Tipo da Cta -> D/C
 	$vlrConta = abs($contas['valor']);
 	//$credito += $vlrConta;
 	$dataLancDeb[] = array( 'Cod'=>$ctaDeb,'Data'=>$contas['data'], 'Vlr'=>$vlrConta);
@@ -40,38 +46,38 @@ while ($contas = mysql_fetch_array($lista)) {
 	if ($contas['dt']==$a.$m) {
 			//Movimento do mï¿½s atual
 			//Contas debitadas
-			$saldo[$planoCta[$ctaDeb]['codigo']] += $vlrConta;
-			$saldoGrp[$planoCta[$ctaDeb]['nivel4']] += $vlrConta;
-			$saldoGrp[$planoCta[$ctaDeb]['nivel3']] += $vlrConta;
-			$saldoGrp[$planoCta[$ctaDeb]['nivel2']] += $vlrConta;
+			$saldo[$contaDC[$ctaDeb]['codigo']] += $vlrConta;
+			$saldoGrp[$contaDC[$ctaDeb]['nivel4']] += $vlrConta;
+			$saldoGrp[$contaDC[$ctaDeb]['nivel3']] += $vlrConta;
+			$saldoGrp[$contaDC[$ctaDeb]['nivel2']] += $vlrConta;
 			//Contas creditadas
-			$saldo[$planoCta[$ctaCred]['codigo']] -= $vlrConta;#Sld nivel de codigo
-			$saldoGrp[$planoCta[$ctaCred]['nivel4']] -= $vlrConta;
-			$saldoGrp[$planoCta[$ctaCred]['nivel3']] -= $vlrConta;
-			$saldoGrp[$planoCta[$ctaCred]['nivel2']] -= $vlrConta;
+			$saldo[$contaDC[$ctaCred]['codigo']] -= $vlrConta;#Sld nivel de codigo
+			$saldoGrp[$contaDC[$ctaCred]['nivel4']] -= $vlrConta;
+			$saldoGrp[$contaDC[$ctaCred]['nivel3']] -= $vlrConta;
+			$saldoGrp[$contaDC[$ctaCred]['nivel2']] -= $vlrConta;
 			//$debito  += $vlrConta;//Movimento do
 			$debito  += $contas['valor'];
 		}else {
 			//saldo meses anteriores
 			//Contas debitadas
-			$saldoAnte[$planoCta[$ctaDeb]['codigo']] += $vlrConta;
-			$saldoAnteGrp[$planoCta[$ctaDeb]['nivel4']] += $vlrConta;
-			$saldoAnteGrp[$planoCta[$ctaDeb]['nivel3']] += $vlrConta;
-			$saldoAnteGrp[$planoCta[$ctaDeb]['nivel2']] += $vlrConta;
+			$saldoAnte[$contaDC[$ctaDeb]['codigo']] += $vlrConta;
+			$saldoAnteGrp[$contaDC[$ctaDeb]['nivel4']] += $vlrConta;
+			$saldoAnteGrp[$contaDC[$ctaDeb]['nivel3']] += $vlrConta;
+			$saldoAnteGrp[$contaDC[$ctaDeb]['nivel2']] += $vlrConta;
 			//Contas creditadas
-			$saldoAnte[$planoCta[$ctaCred]['codigo']] -= $vlrConta;
-			$saldoAnteGrp[$planoCta[$ctaCred]['nivel4']] -= $vlrConta;
-			$saldoAnteGrp[$planoCta[$ctaCred]['nivel3']] -= $vlrConta;
-			$saldoAnteGrp[$planoCta[$ctaCred]['nivel2']] -= $vlrConta;
+			$saldoAnte[$contaDC[$ctaCred]['codigo']] -= $vlrConta;
+			$saldoAnteGrp[$contaDC[$ctaCred]['nivel4']] -= $vlrConta;
+			$saldoAnteGrp[$contaDC[$ctaCred]['nivel3']] -= $vlrConta;
+			$saldoAnteGrp[$contaDC[$ctaCred]['nivel2']] -= $vlrConta;
 			//$sldGrupoAnte [$contas['creditar']] -= $vlrConta;
 			/*Quando houver saldo, mas sem movimento no mes, aqui ï¿½ forï¿½ado
 			 * a aparecer
 			*/
-			if ($saldo[$planoCta[$ctaCred]['codigo']]==0) {
-				$saldo[$planoCta[$ctaCred]['codigo']] = 0;
+			if ($saldo[$contaDC[$ctaCred]['codigo']]==0) {
+				$saldo[$contaDC[$ctaCred]['codigo']] = 0;
 			}
-			if ($saldo[$planoCta[$ctaDeb]['codigo']]==0) {
-				$saldo[$planoCta[$ctaDeb]['codigo']] = 0;
+			if ($saldo[$contaDC[$ctaDeb]['codigo']]==0) {
+				$saldo[$contaDC[$ctaDeb]['codigo']] = 0;
 			}
 		}
 }
