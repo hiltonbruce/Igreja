@@ -34,18 +34,26 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$ofmoc = 'ofertaMocidade'."$cont$ano";
 		$ofi = 'ofertaInfantil'."$cont$ano";
 		$ofe = 'ofertaEnsino'."$cont$ano";
+		$ofNaoOp = 'ofertaNaoOp'."$cont$ano";
 		$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		//Soma da coluna para linha Sub-total das congregações Sem a Sede
 		if ($cont!='1') {
-		$totDizAno  += $$dz;$totOfertaExtraAno  += $$ofExtra;$totOfertaAno  += $$of;
-		$totMissoesAno  += $$ofm;$totSenhorasAno  += $$ofs;$totMocidadeAno  += $$ofmoc;
-		$totInfantilAno  += $$ofi;$totEnsinoAno  += $$ofe;$totCampanhaAno += $$ofCampanha;
+		$totDizAno  += $$dz;
+		$totOfertaExtraAno  += $$ofExtra;
+		$totOfertaAno  += $$of;
+		$totMissoesAno  += $$ofm;
+		$totSenhorasAno  += $$ofs;
+		$totMocidadeAno  += $$ofmoc;
+		$totInfantilAno  += $$ofi;
+		$totEnsinoAno  += $$ofe;
+		$totNaoOpAno += $$ofNaoOp;
+		$totCampanhaAno += $$ofCampanha;
 		$totSubTotalAno +=$subTotal;
 		}
 		//Soma linha
-		$totMes = $subTotal+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha;//Total do mes (linha)
+		$totMes = $subTotal+$$ofm+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofCampanha+$$ofNaoOp;//Total do mes (linha)
 		$totSubTotal +=$subTotal;
 		$totOperac +=$$dz+$$of+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofExtra;
 		$ofOp = $subTotal+$$ofs+$$ofmoc+$$ofi+$$ofe;
@@ -59,15 +67,23 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofi,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofe,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($ofOp,2,',','.').'</td>';
+		$nivel1 .= '<td id="moeda">'.number_format($$ofNaoOp,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofCampanha,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofm,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($totMes,2,',','.').' </td></tr>';
 
 		for ($i=1; $i < 6; $i++) {
-			$dizSem = $dz.$i;$ofSem = $of.$i;$ofExtraSem = $ofExtra.$i;
-			$ofCampanhaSem	= $ofCampanha.$i;$ofmSem = $ofm.$i;$ofsSem = $ofs.$i;
-			$ofmocSem = $ofmoc.$i;$ofiSem = $ofi.$i;$ofeSem = $ofe.$i;
-			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem;//Total da Semana (linha)
+			$dizSem = $dz.$i;
+			$ofSem = $of.$i;
+			$ofExtraSem = $ofExtra.$i;
+			$ofCampanhaSem	= $ofCampanha.$i;
+			$ofmSem = $ofm.$i;
+			$ofsSem = $ofs.$i;
+			$ofmocSem = $ofmoc.$i;
+			$ofiSem = $ofi.$i;
+			$ofeSem = $ofe.$i;
+			$ofNaoOpSem = $ofNaoOp.$i;
+			$totMesSem = $$dizSem+$$ofSem+$$ofmSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem+$$ofCampanhaSem+$$ofNaoOpSem;//Total da Semana (linha)
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
 			$ofOpSem = $subTotalSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem;
 
@@ -81,6 +97,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofiSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofeSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($ofOpSem,2,',','.').'</td>';
+			$nivel1Sem .= '<td id="moeda">'.number_format($$ofNaoOpSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofCampanhaSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofmSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($totMesSem,2,',','.').' </td></tr>';

@@ -17,6 +17,8 @@ while ($contas = mysql_fetch_array($lista)) {
 	$ofExtraSem	= $ofExtra.$semana;//Ofertas do mês separando a semana
 	$ofc 		= 'ofertaCultos'.$periodo;//Ofertas do mês
 	$ofcSem 	= $ofc.$semana;//Ofertas do mês separando a semana
+	$ofNaoOp 		= 'ofertaNaoOp'.$periodo;//Ofertas do mês
+	$ofNaoOpSem 	= $ofNaoOp.$semana;//Ofertas do mês separando a semana
 	$ofCampanha = 'ofertaCampanha'.$periodo;//Ofertas das Campanhas do mês
 	$ofCampSem  = $ofCampanha.$semana;//Ofertas das Campanhas do mês separando a semana
 	$ofm 		= 'ofertaMissoes'.$periodo;//Ofertas de missões do mês
@@ -37,7 +39,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	  switch ($dev) {
 	  	case 1:
 	  		//Dizimos e ofertas
-	  	if ($contas['credito']=='700') {
+	  	if ($contas['credito']=='700' || $contas['credito']=='704') {
 				$$dz 		+= $valor;
 				$$dizSem 	+= $valor;
 				$totDizimo 	+= $valor;
@@ -50,10 +52,14 @@ while ($contas = mysql_fetch_array($lista)) {
 				$$ofExtra 		+= $valor;
 				$$ofExtraSem   	+= $valor;
 				$totOfertaExtra += $valor;
-			}else {
+			}elseif ($contas['credito']=='701') {
 				$$ofc += $valor;
 				$$ofcSem += $valor;
 				$totOfertaCultos += $valor;
+			}else {
+				$$ofNaoOp += $valor;
+				$$ofNaoOpSem += $valor;
+				$totOfertaNaoOpAno += $valor;
 			}
 	  	break;
 	  	case 2:
@@ -89,6 +95,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	  		} else {
 	  		$linhaCargo = 'definir cta script histFinaceiroIgreja.php';
 		  		//Ooutras entradas não classificadas
+				$$demEntr	+= $valor;
 				$$demEntrSem	+= $valor;
 				$totDemEntr 	+= $valor;
 			}
