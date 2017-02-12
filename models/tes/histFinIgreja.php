@@ -57,7 +57,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$totSubTotal +=$subTotal;
 		$totOperac +=$$dz+$$of+$$ofs+$$ofmoc+$$ofi+$$ofe+$$ofExtra;
 		$ofOp = $subTotal+$$ofs+$$ofmoc+$$ofi+$$ofe;
-		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th>'.$igrejaDados['0'].'</th>';
+		$nivel1 .= '<tbody><tr '.$bgcolor.' class="sub"><th>'.htmlentities($igrejaDados['0'],ENT_QUOTES,'iso-8859-1').'</th>';
 		$nivel1 .= '<td id="moeda">'.number_format($$dz,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$ofExtra,2,',','.').'</td>';
 		$nivel1 .= '<td id="moeda">'.number_format($$of,2,',','.').'</td>';

@@ -83,10 +83,10 @@ switch ($rec) {
 		break;
 	case '11':
 		require_once 'forms/tes/histFinanceiro.php';
+		$colUm = '';//Primeira coluna do cabecalho
 		require_once 'views/tesouraria/cabTabFin.php';//Cabe�alho da tabela
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
 			//Lista financeira de todas as igreja com m�s espec�fico
-			$colUm = 'Igrejas';//Primeira coluna do cabecalho
 			require_once 'views/tesouraria/saldoMesFin.php';
 			$tabThead = $nivelSem;
 			//require_once 'views/tesouraria/saldoIgrejas.php';

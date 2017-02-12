@@ -47,8 +47,6 @@
 		//return "teste";
 	}
 	*/
-?>
-	<?php
 	if (isset($_SESSION['valid_user']))	{
 	?>
 	<div class="logo">

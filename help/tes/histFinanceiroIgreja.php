@@ -57,6 +57,7 @@ while ($contas = mysql_fetch_array($lista)) {
 				$$ofcSem += $valor;
 				$totOfertaCultos += $valor;
 			}else {
+				#Receitas n„o operacionais
 				$$ofNaoOp += $valor;
 				$$ofNaoOpSem += $valor;
 				$totOfertaNaoOpAno += $valor;
@@ -95,9 +96,10 @@ while ($contas = mysql_fetch_array($lista)) {
 	  		} else {
 	  		$linhaCargo = 'definir cta script histFinaceiroIgreja.php';
 		  		//Ooutras entradas n√£o classificadas
-				$$demEntr	+= $valor;
-				$$demEntrSem	+= $valor;
-				$totDemEntr 	+= $valor;
+					#Receitas n„o operacionais
+					$$ofNaoOp += $valor;
+					$$ofNaoOpSem += $valor;
+					$totOfertaNaoOpAno += $valor;
 			}
 	  	break;
 	  }

@@ -9,6 +9,7 @@
 		?>
 		 Semana deste m&ecirc;s)
   </legend>
+<form method="post" action="">
 <div class="row">
   <div class="col-xs-6">
 			<label>Nome:</label> <input type="text" name="nome"
@@ -47,18 +48,17 @@
   <div class="col-xs-3">
 		<label>Data:</label>
 					<input type="text" id="data" name="data"  tabindex="<?php echo ++$ind;?>"
-					value="<?php echo $dtlanc;?>" class="form-control" required="required"/>
+					class="form-control" required="required"/>
   </div>
   <div class="col-xs-2">
 		<label>Referente M&ecirc;s:</label><input type="text" name="mes"
-					size="2" value="<?php echo $meslanc;?>" class="form-control"
-					 tabindex="<?php echo ++$ind;?>" required="required" />
+					class="form-control" tabindex="<?php echo ++$ind;?>"
+					required="required" />
   </div>
   <div class="col-xs-3">
 		 <label>Ano:</label>
 		 <input type="text" tabindex="<?php echo ++$ind;?>"
-		id="ano" name="ano" size="4" value="<?php echo $anolanc;?>"
-		 required="required" class="form-control" />
+		id="ano" name="ano" required="required" class="form-control" />
   </div>
   <div class="col-xs-4 text-right">
 		<label>&nbsp;</label><br />
@@ -66,6 +66,7 @@
         type="submit" name="listar" value="Lan&ccedil;ar...">
   </div>
 </div>
+</form>
 </fieldset>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
