@@ -1,11 +1,11 @@
 <?PHP
 controle ("consulta");
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
-$tab_edit="relatorio/dados_apresent.php&menu=top_formulario&tabela=cart_apresentacao&rol={$_GET["rol"]}&campo=";//Link de chamada da mesma página para abrir o form de edição do item
-$apresenta = new DBRecord ("cart_apresentacao",$_GET["rol"],"rol");
+$tab_edit="relatorio/dados_apresent.php&menu=top_formulario&tabela=cart_apresentacao&id={$_GET["id"]}&campo=";//Link de chamada da mesma página para abrir o form de edição do item
+$apresenta = new DBRecord ("cart_apresentacao",$_GET["id"],"rol");
 $igreja = new DBRecord ("igreja",$apresenta->id_cong(),"rol");
 $cidade = new DBRecord ("cidade",$apresenta->cidade(),"id");
-$id = $apresenta -> rol();
+$id = $apresenta->rol();
 //echo "<h1>{$apresenta -> nome()}</h1>";
 //$dad_cad = mysql_query ("SELECT *,DATE_FORMAT(data,'%d/%m/%Y') AS data  FROM est_civil WHERE rol='".$_SESSION["rol"]."'");
 //$arr_dad = mysql_fetch_array ($dad_cad);

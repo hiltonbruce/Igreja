@@ -43,6 +43,9 @@ if (!empty($_GET['campo']))
 		//Executa a query no MySQL com limite de linhas para ser usado pelo while e montar a array
 		 //inicia o cabe�alho de pagina��o
 		{
+		$dadIgrej = new igreja();
+	//print_r($dadIgrej->Arrayigreja());
+		$detIgreja = $dadIgrej->Arrayigreja();
 		?>
 		<table class='table table-striped table-bordered'>
 			<colgroup>
@@ -65,7 +68,6 @@ if (!empty($_GET['campo']))
 		<?PHP
 			while($coluna = mysql_fetch_array($sql3))
 			{
-			$congrega = new DBRecord ("igreja",$coluna["id_cong"],"rol");
 			$ls+=1;
 			if ($ls>1)
 					{
@@ -80,10 +82,10 @@ if (!empty($_GET['campo']))
 				<td><?php printf ("%'04u",$coluna["rol"]);?></td>
 				<td><?php echo conv_valor_br ($coluna["dt_apresent"]);?></td>
 				<td><a href="./?escolha=relatorio/dados_apresent.php&menu=top_formulario
-					&rol=<?php echo $coluna["rol"];?>" target="_blank"><?php echo $coluna["nome"];?>
+					&id=<?php echo $coluna["rol"];?>" target="_blank"><?php echo $coluna["nome"];?>
 				<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
 				</td>
-				<td><?php echo $congrega->razao();?></td>
+				<td><?php echo $detIgreja[$coluna["id_cong"]]['0'];?></td>
 				<td><?php echo $coluna["mae"];?></td>
 			</tr>
 			<?PHP
