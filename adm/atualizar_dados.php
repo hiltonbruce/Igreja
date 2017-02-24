@@ -48,7 +48,8 @@ if ($_POST['tabela'] == 'carta') {
 	  || $_POST["campo"]=="dt_nasc" ||  $_POST["campo"]=="dt_apresent"
 	  || $_POST["campo"]=="data" ||  $_POST["campo"]=="dat_aclam"
 	  || $_POST["campo"]=="batismo_em_aguas" || $_POST["campo"]=="c_entregue"
-	  || $_POST["campo"]=="c_impresso"  || $_POST["campo"]=="dt_mudanca_denominacao" ) {
+	  || $_POST["campo"]=="c_impresso"  || $_POST["campo"]=="dt_mudanca_denominacao"
+		   || $_POST["campo"]=="dt_muda_assembleia") {
 		//Aqui é colocado os campo do tipo date e então é feita a validação da data e alteração para o formato 0000-00-00 (AAAA-MM-DD), função br_data()
 		$rec->$_POST["campo"] = br_data($_POST[$_POST["campo"]],$_POST["campo"]); //Aqui é atribuido a esta variável um valor para UpDate
 	}else{
