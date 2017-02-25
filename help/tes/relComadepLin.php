@@ -110,5 +110,4 @@ if ($_GET['tipo']=='4') {
 } else {
 	$nivel2 = $nivel3;
 }
-
 ?>

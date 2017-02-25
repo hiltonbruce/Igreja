@@ -83,6 +83,8 @@ switch ($rec) {
 		break;
 	case '11':
 		require_once 'forms/tes/histFinanceiro.php';
+		$dContas = new tes_contas();
+		$descCta = $dContas->ativosArray();
 		$colUm = '';//Primeira coluna do cabecalho
 		require_once 'views/tesouraria/cabTabFin.php';//Cabe�alho da tabela
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {

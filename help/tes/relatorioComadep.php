@@ -6,12 +6,10 @@ if (empty($_GET['ano'])) {
 	$a = $_GET['ano'];
 	$ano = $a;
 }
-
 $d = $_GET['dia'];
 $m=$_GET['mes'];
 $dataMov = $d.'/'.$m.'/'.$a;
 $gpconta = (empty($_GET['gpconta'])) ? '' : $_GET['gpconta'] ;
-
 	if (!empty($_GET['igreja']) && $_GET['igreja']>'0') {
 		$rolIgreja = ' AND igreja="'.intval($_GET['igreja']).'" ';
 	}else {

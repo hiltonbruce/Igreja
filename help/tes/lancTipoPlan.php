@@ -78,17 +78,19 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	$linkPagar  = '<a target="_blanck" href="./?escolha=tesouraria/agenda.php&menu=top_tesouraria&id='.$vlrDesp['id'].'"';
 	$linkPagar .= '><small class="text-muted glyphicon glyphicon-new-window"></small</a>';
 	//$bgcolor = $cor ? 'class="active"' : '';
+	$titleMsg = 'Venc.: '.$vlrDesp['vencimento'];
 	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
 		$vencPgto  = '<small class="text-success glyphicon glyphicon-ok"></small> Pago em: '.$vlrDesp['dtpgto'];
 		$dtVlrDesp = (empty($vlrDesp['data'])) ? '' : $vlrDesp['data'] ;
-		$vencPgto .= ' -> lan&ccedil;.: '.$dtVlrDesp.' '.$linkPagar;
-		$titleMsg = ', paga, obrigado!';
+		$vencPgto .= ' -> lan&ccedil;.: '.$dtVlrDesp.' ('.$vlrDesp['lancamento'].') '.$linkPagar;
+		$titleMsg .= ', pago, obrigado!';
 	}elseif ($vlrDesp['lancamento']=='0') {
 		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign">';
 		$vencPgto .= '</small>Venc.: '.$vlrDesp['vencimento'].' '.$linkPagar;
-		$titleMsg = ', ainda n&atilde;o paga!';
+		$titleMsg = 'Ainda n&atilde;o pago!';
 	}else {
-		$vencPgto = $contaDC[$vlrDesp['acesso']]['titulo'];
+		$vencPgto ='('.$vlrDesp['lancamento'].')'.$contaDC[$vlrDesp['acesso']]['titulo'];
+		$titleMsg = '';
 		//	print_r($vlrDesp); $contaDC
 	}
 	//Exibi os pgtos das contas
@@ -98,7 +100,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';
 	} else {
-		$linhaTab  = '<tr title="Venc.: '.$vlrDesp['vencimento'].$titleMsg.'" ><td>'.$vencPgto.'</td><td>';
+		$linhaTab  = '<tr title="'.$titleMsg.'" ><td>'.$vencPgto.'</td><td>';
 		$linhaTab .= '<kbd>'.$vlrDesp['igreja'].'</kbd> -> '.$vlrDesp['referente'];
 		$linhaTab .= '</td><td class="text-right">'.number_format($vlrDesp['valor'],2,',','.');
 		$linhaTab .= ' '.$vlrDesp['sld'].'</td><tr>';

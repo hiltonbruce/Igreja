@@ -1,4 +1,5 @@
 <?php
+//print_r($descCta);
 while ($contas = mysql_fetch_array($lista)) {
 	$mesr 		= $contas['mes'];
 	$anor 		= $contas['ano'];
@@ -34,9 +35,18 @@ while ($contas = mysql_fetch_array($lista)) {
 	$demEntr	= 'outrasEntr'.$periodo;
 	$demEntrSem	= $demEntr.$semana;
 	$dev 		= intval($contas['devedora']);
-	$cre 		= intval($contas['credora']);//Fazer a remoção da parte credora
-	$valor 		= $contas['valor'];
-	  switch ($dev) {
+	$cre 		= intval($contas['credito']);//Fazer a remoção da parte credora
+	$valor 	= $contas['valor'];
+
+//	echo $descCta['840']['nivel2'].' -- '.$cre.' ++ ';
+
+	if ($descCta[$cre]['nivel2']=='4.2') {
+		#Receitas n�o operacionais
+		$$ofNaoOp += $valor;
+		$$ofNaoOpSem += $valor;
+		$totOfertaNaoOpAno += $valor;
+	} else {
+	switch ($dev) {
 	  	case 1:
 	  		//Dizimos e ofertas
 	  	if ($contas['credito']=='700' || $contas['credito']=='704') {
@@ -95,7 +105,7 @@ while ($contas = mysql_fetch_array($lista)) {
 				$totMocidade 	+= $valor;
 	  		} else {
 	  		$linhaCargo = 'definir cta script histFinaceiroIgreja.php';
-		  		//Ooutras entradas não classificadas
+		  		//Outras entradas não classificadas
 					#Receitas n�o operacionais
 					$$ofNaoOp += $valor;
 					$$ofNaoOpSem += $valor;
@@ -103,6 +113,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			}
 	  	break;
 	  }
+	}
 				//echo '<h2> contas[valor] = R$ '.$contas['valor'].'<h2>';
 				//echo $dz.'   ** '.$$dz.'   ** '.$dev.' -->';
 }
