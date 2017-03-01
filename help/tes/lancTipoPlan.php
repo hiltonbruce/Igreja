@@ -82,7 +82,7 @@ foreach ($arrayDesp as $keyDesp => $vlrDesp) {
 	if ($vlrDesp['vencimento']!='' && $vlrDesp['dtpgto']!='00/00/0000') {
 		$vencPgto  = '<small class="text-success glyphicon glyphicon-ok"></small> Pago em: '.$vlrDesp['dtpgto'];
 		$dtVlrDesp = (empty($vlrDesp['data'])) ? '' : $vlrDesp['data'] ;
-		$vencPgto .= ' -> lan&ccedil;.: '.$dtVlrDesp.' ('.$vlrDesp['lancamento'].') '.$linkPagar;
+		$vencPgto .= ' &rarr; ('.$vlrDesp['lancamento'].') lan&ccedil;.: '.$dtVlrDesp.$linkPagar;
 		$titleMsg .= ', pago, obrigado!';
 	}elseif ($vlrDesp['lancamento']=='0') {
 		$vencPgto  = '<small class="text-danger btn-xs glyphicon glyphicon-warning-sign">';

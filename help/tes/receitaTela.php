@@ -23,7 +23,7 @@ switch ($rec) {
 	case '1':
 		require_once 'forms/concluirdiz.php';#Form fecha caixa
 		if (!empty($_GET['id'])) {
-			require_once ('forms/tes/alteraPreLanc.php');#Edita dizimo e ofertas pre-Lanï¿½amento
+			require_once ('forms/tes/alteraPreLanc.php');#Edita dizimo e ofertas pre-Lançamento
 		}else{
 			require_once ('forms/autodizimo.php');#Form lanï¿½ar dizimos e ofertas
 		}

@@ -18,7 +18,7 @@ if (empty($_POST['id'])) {
 	if ($_POST['semana']>0 && $_POST['semana']<6) {
 		$preLanc->semana = $_POST['semana'];
 	}
-	$vlrPost = strtr(str_replace(array('.',','),array(',','.'),$_POST["oferta0"]), ',','.' );
+	$vlrPost = formataNumBanco($_POST["oferta0"]);
 	//$vlrPost = strtr( str_replace(array('.',','),array('','.'),$_POST["oferta0"]), ',.','.,' );
 	$valorBR = number_format($vlrPost, 2, ',', '.');
 	$preLanc->valor = $vlrPost;
