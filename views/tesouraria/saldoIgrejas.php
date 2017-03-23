@@ -6,7 +6,7 @@
 		//Oculta o botao imprimir para n�o sair na impress�o
 		$linkImpressao ='tesouraria/receita.php/?rec=13';
 		if ($_GET['rec']!='13') {
-			echo '<a href="'.$linkImpressao.'" ';
+			echo '<a href="'.$linkImpressao.'&ano='.$ano.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
 			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
 			$imprimir = '';

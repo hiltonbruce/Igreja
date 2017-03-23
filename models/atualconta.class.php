@@ -7,13 +7,13 @@ class atualconta {
 		*$creditar -> acesso da Cta a ser creditada
 		*/
 		$cod = explode(".",$codigo);
-			$this->cod1 = $cod[0];
-			$this->cod2 = $cod[0].'.'.$cod[1];
-			$this->cod3 = $cod[0].'.'.$cod[1].'.'.$cod[2];
-			$this->cod4 = $cod[0].'.'.$cod[1].'.'.$cod[2].'.'.$cod[3];
-			$this->cod5 = $cod[0].'.'.$cod[1].'.'.$cod[2].'.'.$cod[3].'.'.$cod[4];
-	$this->ultimolanc = $ultimolanc;//id deste lançamento
-	$this->creditar = $creditar;
+		$this->cod1 = $cod[0];
+		$this->cod2 = $cod[0].'.'.$cod[1];
+		$this->cod3 = $cod[0].'.'.$cod[1].'.'.$cod[2];
+		$this->cod4 = $cod[0].'.'.$cod[1].'.'.$cod[2].'.'.$cod[3];
+		$this->cod5 = $cod[0].'.'.$cod[1].'.'.$cod[2].'.'.$cod[3].'.'.$cod[4];
+		$this->ultimolanc = $ultimolanc;//id deste lançamento
+		$this->creditar = $creditar;
 	}
 
 	function atualizar($valor,$dc,$igreja,$data) {

@@ -2,7 +2,7 @@
 	if (empty($_GET['ano'])) {
 		$ano = date ('Y	');
 	}else {
-		$ano = (int)$_GET['ano'];
+		$ano = intval($_GET['ano']);
 	}
 
 	//Loops para o corpo da tabela

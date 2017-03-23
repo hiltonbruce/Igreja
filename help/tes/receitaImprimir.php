@@ -1,4 +1,7 @@
 <?php
+if ($_SESSION["setor"]!='2' && $_SESSION["setor"]!='99' ) {
+	exit;//Não exibe em setor sem autorização 
+}
 //Opções de  impressões para o script /tesouraria/receita.php
 switch ($rec) {
 	case '13':

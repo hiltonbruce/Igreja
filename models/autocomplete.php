@@ -89,10 +89,13 @@ while( $campo = mysql_fetch_array( $res ) )
 		break;
 	}
 $img='../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
-if (!file_exists($img)){
-	$img='img_membros/ver_foto.jpg';//Localização p/ JavaScript
-}else{
+$IMG='../img_membros/'.$campo['rol'].'.JPG';//PHP verifica se existe
+if (file_exists($img)){
 	$img='img_membros/'.$campo['rol'].'.jpg';//Localização p/ JavaScript
+}elseif (file_exists($IMG)){
+	$img='img_membros/'.$campo['rol'].'.JPG';//Localização p/ JavaScript
+}else{
+	$img='img_membros/ver_foto.jpg';//Localização p/ JavaScript
 }
 $html ='<img class="thumb" src="'.$img.'" title="Rol: '.$rol.'" style="width:24px;height:32px;"> '.$html;
 echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$rol');\">$html ($sigla)</li>\n";

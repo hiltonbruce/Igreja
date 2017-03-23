@@ -24,6 +24,7 @@
 	// o usuário não tentou efetuar o login ainda ou saiu
 	// fornece um formulário para efetuar o login
 ?>
+
 <fieldset>
     <legend>Atualize Senha Agora!</legend>
     <form id="form1" name="form1" method="post" action="">
