@@ -173,15 +173,13 @@ foreach ($arrayDespesas as $chave => $valor) {
 		$dia1 .='<tbody><tr class="sub bg-info">
 		<th colspan="4"><strong>'.$valor['codigo'].'</strong> - '.$valor['titulo'].'</th>
 		</tr>';
-		$dia1 .='<tr><td rowspan="2">'.$valor['titulo'].$conta
-		.'</abbr><p>'.$fontesPgto.'</p>'.$campoHist.'</td></tr><tr><td>'.$dataLan.
-		'<br /><br /><label><strong>Igreja</strong></label>'.$listaIgreja.
-		'</td><td>'.$campoValor.$lancar.'</td></tr>';
-
+		$dia1 .='<tr><td rowspan="2">'.$conta
+		.'</abbr>'.$fontesPgto.'<label><strong>Igreja</strong></label>'
+		.$listaIgreja.'</td></tr><tr><td style="min-width:40%;">'.$campoValor.$campoHist.
+		'</td><td>'.$dataLan.$lancar.'</td></tr>';
 		if (!empty($linha[$valor['acesso']])) {
 			$dia1 .= $linha[$valor['acesso']];
 		}
-
 	} elseif (strlen($valor['codigo'])=='9') {
 		$cabDespesa  = $blGrupo3Ini.'<form  method="post"><div class="panel panel-info" ><div class="panel-body"><strong>';
 		$cabDespesa .= $valor['codigo'].'</strong> - '.$valor['titulo'].'</div><table id="horario" ';

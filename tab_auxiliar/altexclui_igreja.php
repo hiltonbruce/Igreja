@@ -14,15 +14,11 @@
         <th scope="col">Editar igreja!</th>
       </tr>
     </thead>
-
     <tbody>
     <?php
-
     $options = new igreja();
 	$lista = $options->Arrayigreja();
-
 	while ($chave=key($lista)) {
-
 		?>
 		<tr>
 			<td><?php echo '<b>'.$lista[$chave]['0'].'</b><br />'.$lista[$chave]['3'].', N&ordm;: '.$lista[$chave]['4'];?></td>
@@ -44,7 +40,7 @@
 								<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">
 								<input type="hidden" name="campo" value="status">
 								<input type="hidden" name="tabela" value="igreja">
-								<input type="hidden" name="id" value="<?php echo $chave.'&igreja='.$lista[$chave];?>">
+								<input type="hidden" name="id" value="<?php echo $chave;?>">
 								<input type="hidden" name="status" value="<?php echo $status;?>">
 								<?php echo $butao;?>
 							</form>
@@ -55,7 +51,7 @@
 				?>
 				</td>
 				<td>
-				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&rol=<?php echo $chave;?>"
+				<a href="./?escolha=forms/editar_igreja.php&tabela=igreja&bsc_rol=<?php echo $chave;?>"
 				 title="Editar as informa&ccedil;&otilde;es gerais desta Igreja: Dirigente, secret�rio, tesoureiro, etc." >
 				 <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				&nbsp;Editar/Alterar dados... </button></a>

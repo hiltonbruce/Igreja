@@ -10,13 +10,14 @@
           }else {
           list($Oracao1,$Oracao2,$Oracao3,$Oracao4) = explode('-', $igreja->oracao());
           $mak ='mak'.$Oracao1;
-          $$mak = ($Oracao1>0) ? 'checked="checked"' : '' ;
+          $foco = 'checked="checked" autofocus="autofocus"';
+          $$mak = ($Oracao1>0) ? $foco : '' ;
           $mak ='mak'.$Oracao2;
-          $$mak = ($Oracao2>0) ? 'checked="checked"' : '' ;
+          $$mak = ($Oracao2>0) ? $foco : '' ;
           $mak ='mak'.$Oracao3;
-          $$mak = ($Oracao3>0) ? 'checked="checked"' : '' ;
+          $$mak = ($Oracao3>0) ? $foco : '' ;
           $mak ='mak'.$Oracao4;
-          $$mak = ($Oracao4>0) ? 'checked="checked"' : '' ;
+          $$mak = ($Oracao4>0) ? $foco : '' ;
      ?>
      <form method='post' action='' id='Oracao' class=''><p>
           <label class="radio-inline">

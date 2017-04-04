@@ -1,8 +1,11 @@
 <div id="lst_cad"><?PHP
 if ($_SESSION['nivel']>4){
-
 //ver_cad();
-	$igreja = new DBRecord('igreja',$_GET['rol'], 'rol');
+if ($bsc_rol=='1') {
+		$igreja = $igSede;
+} else {
+		$igreja = new DBRecord('igreja',$bsc_rol, 'rol');
+}
 
 	if ($igreja->pastor()>0) {
 		$congregacao = new DBRecord('membro',$igreja->pastor(),'rol');
@@ -12,14 +15,11 @@ if ($_SESSION['nivel']>4){
 	}else {
 		$dirigente = 'Informe o Rol do dirigente';
 	}
-
 $tabela = "igreja";
 $tab="sistema/atualizar_rol.php";//link q informa o script quem receber� os dados do form para atualizar
-$tab_edit="forms/editar_igreja.php&tabela=$tabela&rol={$igreja->rol()}&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
-
+$tab_edit="forms/editar_igreja.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
 $ind = 1;
-
-	if (!empty($_GET["rol"]))
+	if (!empty($_GET["bsc_rol"]))
 	{
 		?>
 	<fieldset>
@@ -32,8 +32,8 @@ $ind = 1;
 		     <select name='id' id='id' onchange="MM_jumpMenu('parent',this,0)" tabindex='++$ind' class="form-control" >
 		     <?php
 			     $estnatal = new List_sele('igreja', 'razao','id');
-           $primLinha = (empty($_GET["rol"])) ? 1 : $_GET["rol"] ;
-			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&rol=',$primLinha);
+           $primLinha = (empty($_GET["bsc_rol"])) ? 1 : $_GET["bsc_rol"] ;
+			     echo $estnatal->List_Selec_pop('escolha='.$_GET["escolha"].'&tabela='.$_GET['tabela'].'&bsc_rol=',$primLinha);
 		     ?>
 		     </select>
 		     </form>
@@ -61,7 +61,7 @@ $ind = 1;
 		<?php
 			if (!empty($_GET['campo']) && $_GET['campo']=='pastor') {
 
-				$cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
+				$cong = $bsc_rol;
 
 				echo '<form id="form1" name="form1" method="post" action="">';
 				echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
@@ -85,12 +85,11 @@ $ind = 1;
   			$nome->getMostrar();//$nome->getEditar();
       //  echo '<h1>'.$igreja->secretario2().' -------<h1>';
         if (!empty($_GET['campo']) && ($_GET['campo']=='secretario1' || $_GET['campo']=='secretario2')) {
-            $cong = (empty($_GET["rol"])) ? (INT)$_GET['id']:(int)$_GET['rol'];
             echo '<form id="form1" name="form1" method="post" action="">';
             echo '<input type="hidden" name="escolha" value="sistema/atualizar_rol.php">';
             echo '<input type="hidden" name="campo" value="'.$_GET['campo'].'">';
             echo '<input type="hidden" name="tabela" value="igreja">';
-            echo '<input type="hidden" name="id" value="'.$cong.'">';
+            echo '<input type="hidden" name="id" value="'.$bsc_rol.'">';
             require_once 'forms/igreja/dirigenteAuto.php';
             echo '</form>';
         }
@@ -176,7 +175,7 @@ $ind = 1;
 				$vlr_linha=$lst_cid->ListDados ($ind++);
 			?>
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "igreja";?>" />
-            <input name="id" type="hidden" id="id" value="<?PHP echo $_GET["rol"];?>" />
+            <input name="id" type="hidden" id="id" value="<?PHP echo $bsc_rol;?>" />
             <input name="Submit" type="submit" class="btn btn-primary btn-sm" id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>" />
           </form>
         <?PHP
@@ -198,7 +197,7 @@ $ind = 1;
             <input name="escolha" type="hidden" id="escolha" value="<?PHP echo "sistema/atualizar_rol.php";?>" />
             <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />
             <input name="tabela" type="hidden" id="tabela" value="<?PHP echo "igreja";?>" />
-            <input name="id" type="hidden" id="id" value="<?PHP echo $_GET["rol"];?>" />
+            <input name="id" type="hidden" id="id" value="<?PHP echo $bsc_rol;?>" />
             <input name="Submit" type="submit" class='btn btn-primary btn-sm' id="Submit" value="Alterar..." tabindex="<?PHP echo $ind++;?>"/>
             </label>
           </form>
@@ -217,14 +216,6 @@ $ind = 1;
         		$nome->getMostrar();$nome->getEditar();
         	?>
         </td>
-        <td colspan="2"><label>Fax:</label>
-        <?PHP
-      		$nome = new editar_form("fax",$igreja->fax,$tab,$tab_edit);
-      		$nome->getMostrar();$nome->getEditar();
-      	?>
-      </td>
-      </tr>
-      <tr>
         <td><label>Setor:</label>
         <?PHP
             $nome = new editar_form("setor",$igreja->setor(),$tab,$tab_edit);
@@ -234,8 +225,7 @@ $ind = 1;
 							echo '<div class="row">';
 							echo '<div class="col-xs-8">';
 							echo '<input name="escolha" type="hidden" value="sistema/atualizar_rol.php" />';
-							echo '<input name="id" type="hidden" id="id" value="'.$igreja->rol().'" />';
-							echo '<input name="id" type="hidden" id="id" value="'.$igreja->rol().'" />';
+							echo '<input name="id" type="hidden" id="id" value="'.$bsc_rol.'" />';
 							echo '<input name="tabela" type="hidden" value="igreja" />';
 							echo '<input name="campo" type="hidden" value="setor" />';
               $setor = new setor(++$ind,'autofocus="autofocus"');
@@ -248,7 +238,8 @@ $ind = 1;
             }
         ?>
 			</td>
-			<td colspan="2"><label>Classe:</label>
+			<tr>
+			<td><label>Classe:</label>
         <?PHP
             $nome = new editar_form("matlimpeza",$igreja->matlimpeza(),$tab,$tab_edit);
             $nome->getMostrar();$nome->getEditar();
@@ -264,7 +255,7 @@ $ind = 1;
       <tr>
       	<td colspan="3"><label>Santa Ceia:</label>
    	  <?PHP
-		$ceia = new formceia($igreja->rol());
+		$ceia = new formceia($bsc_rol);
 		?>
 		<p><a href="./?escolha=<?PHP echo $tab_edit;?>ceia"><?PHP print $ceia->mostradiasemana();?></a></p>
 		</td></tr>
@@ -284,7 +275,7 @@ $ind = 1;
 				?>
 			  	<input name='escolha' type='hidden' value='sistema/atualizar_rol.php' />
 			  	<input name='tabela' type='hidden' value='igreja' />
-			  	<input name='id' type='hidden' value='<?php echo $igreja->rol();?>' />
+			  	<input name='id' type='hidden' value='<?php echo $bsc_rol;?>' />
 			  	<input name='campo' type='hidden' value='ceia' />
 			  	<input type='submit' class='btn btn-primary btn-sm' name='Submit' value='Alterar' tabindex='{++$ind}' />
 		<?PHP
