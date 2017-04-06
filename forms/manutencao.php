@@ -32,3 +32,6 @@
 			<input type="submit" name="Submit" class="btn btn-info btn-sm" value="usu&aacute;rios" tabindex="<?PHP echo ++$ind;?>" />
 		</form></li>
 </ul>
+<?php
+	require_once 'relatorio/formularios.php';
+ ?>
