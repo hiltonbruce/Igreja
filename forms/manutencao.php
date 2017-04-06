@@ -33,5 +33,8 @@
 		</form></li>
 </ul>
 <?php
-	require_once 'relatorio/formularios.php';
+if ($linkEsc=='forms/manutencao.php') {
+
+		require_once 'relatorio/formularios.php';
+}
  ?>
