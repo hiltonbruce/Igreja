@@ -1,24 +1,27 @@
 <?php
-
-if (empty($_SESSION['valid_user']))
-	header("Location: ../");
-
+if ($_SESSION["setor"]!='3' && $_SESSION["setor"]!='99'){
+	?>
+	<div class="alert alert-danger alert-dismissible" role="alert">
+	<h4>&Aacute;rea restrita &agrave; <strong>Secretaria Executiva!</strong></h4>
+	<h5>Uso exclusivo deste setor!</h5>
+	</div>
+	<?php
+	exit;
+}
 //$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");
 //$nome_cidade = $rec->nome()." - ".$rec->coduf();
-
-list($nome_cidade,$uf_nasc) = explode('-',$_SESSION["cid_natal"] );
-$recCidNatal = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");
-
+$recCidNatal = new DBRecord ("cidade",$_POST["cid_natal"],"id");
+$nome_cidade=$recCidNatal->nome();
+$uf_nasc=$recCidNatal->coduf();
 if (isset($_POST["cid_end"])) {
 	$id_cid = intval($_POST["cid_end"]);
-} else { $id_cid = intval ($_GET["cid_end"]);
+} else {
+	$id_cid = intval ($_GET["cid_end"]);
 }
-
 $rec_end = new DBRecord ("cidade",$id_cid,"id");//Faz a busca do cidade pelo id e traz o nome
 $cid_end = $rec_end->nome()." - ".$rec_end->coduf();
-
+$cpf = $_POST['cpf'];
 $ind = 1; //Define o ï¿½ndece dos campos do formulï¿½rio
-
 ?>
 <script type="text/JavaScript">
 <!--
@@ -28,7 +31,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 }
 //-->
 </script>
-
 <fieldset>
 	<legend>Dados Pessoais - Cadastro</legend>
 	<form method="post" action="">
@@ -37,38 +39,32 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				<tr>
 					<td colspan="3"><label>Nome:</label>
 						<span class="form-control" disabled="disabled"
-							title="Para alterar nome use o botão voltar do navegador!"><?PHP echo $_SESSION["nome_cad"];?>
-						</span> <input name="nome" type="hidden" id="nome"
-						value="<?PHP echo $_SESSION["nome_cad"];?>" />
+							title="Para alterar nome use o botão voltar do navegador!"><?PHP echo $_POST["nome_cad"].' - CPF:'.$cpf;?>
+						</span>
+						<input name="nome" type="hidden" value="<?PHP echo $_POST["nome_cad"];?>" />
+						<input name="cpf" type="hidden" value="<?PHP echo $cpf;?>" />
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><label>Pai:</label> <input name="pai" type="text"
-						id="pai" class="form-control" size="50" maxlength="40"
-						tabindex="<?PHP echo $ind++;?>">
+					<td colspan="2"><label>Pai:</label>
+						<input type="text" name="pai" id="campo_estado" size="50%" class="form-control"
+						placeholder="Busca no cadastro da Igreja!"
+						autofocus="autofocus" tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>
-						<a href="javascript:lancarSubmenu('campo=pai&rol=rol_pai&form=0')"
-							title="Click aqui para pesquisar membros!"
-							tabindex="<?PHP echo $ind++;?>">Rol: <img border="0"
-								src="img/lupa_32x32.png" width="18" height="18"
-								align="absbottom" /> Pesquisar...
-						</a> </label>
-						<input name="rol_pai" type="text" class="form-control" tabindex="<?PHP echo $ind++;?>" />
+					<td><label>Rol do Pai (Se membro):</label>
+						<input type="text" id="rol" name="rol_pai" tabindex="<?php echo ++$ind;?>"
+								class="form-control" placeholder="N&ordm; do membro na igreja" />
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><label>M&atilde;e:</label> <input name="mae"
-						type="text" id="mae" class="form-control" maxlength="40"
-						tabindex="<?PHP echo $ind++;?>">
+					<td colspan="2"><label>M&atilde;e:</label>
+							<input type="text" name="mae" id="estado" class="form-control"
+							placeholder="Busca no cadastro da Igreja!"
+							tabindex="<?php echo ++$ind;?>" />
 					</td>
-					<td><label>
-						<a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=0')"
-							tabindex="<?PHP echo $ind++;?>">Rol: <img border="0"
-								src="img/lupa_32x32.png" width="18" height="18"
-								align="absbottom" title="Click aqui para pesquisar membros!" />Pesquisar...
-						</a>  </label>
-						<input name="rol_mae" type="text" class="form-control" tabindex="<?PHP echo $ind++;?>" />
+					<td><label>Rol do M&atilde;e(Se membro):</label>
+							<input type="text" id="rol2" name="rol_mae" tabindex="<?php echo ++$ind;?>"
+									class="form-control" placeholder="N&ordm; do membro na igreja" />
 					</td>
 				</tr>
 				<tr>
@@ -86,18 +82,16 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					<td>
 						<label>Bairro:</label>
 						<?php
-						$lst_cid = new sele_cidade("bairro",$id_cid,"idcidade","bairro","bairro");
-
-						$vlr_linha=$lst_cid->ListDados ($ind++,$_GET['bairro']);
-
-						if (isset($id_cid)){
-							$_SESSION["cid_end"] = $id_cid;
-						}
+							if (isset($id_cid)){
+								$_POST["cid_end"] = $id_cid;
+							}
+							$lst_cid = new sele_cidade("bairro",$id_cid,"idcidade","bairro","bairro");
+							$vlr_linha=$lst_cid->ListDados ($ind++,$_GET['bairro']);
 						?>
 					<td>
-						<label>Complementos:</label> <input name="uf_resid"
-						type="hidden" value="<?PHP echo $rec_end->coduf();?>" /> <input
-						name="cidade" type="hidden" value="<?PHP echo $rec_end->id();?>" />
+						<label>Complementos:</label>
+						<input name="uf_resid" type="hidden" value="<?PHP echo $rec_end->coduf();?>" />
+						<input name="cidade" type="hidden" value="<?PHP echo $rec_end->id();?>" />
 						<input name="complemento" class="form-control" type="text"
 						id="complemento" tabindex="<?PHP echo $ind++;?>" placeholder="Casa, apto ..." />
 					</td>
@@ -129,16 +123,20 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</td>
 					<td>
 						<label>Nacionalidade: </label>
-						<input class="form-control" value='<?PHP echo $_SESSION["nacao"];?>'
+						<input class="form-control" value='<?PHP echo $_POST["nacao"];?>'
 						disabled='disabled' />
+						<input type='hidden' value='<?PHP echo $_POST["nacao"];?>'
+						nome='nacao' />
 					</td>
 				</tr>
 				<tr>
 					<td><label>Natural de:</label>
-						<input class='form-control' value='<?PHP echo $recCidNatal->nome();?>'
+						<input class='form-control' value='<?PHP echo $nome_cidade.'-'.$uf_nasc;?>'
 							 disabled='disabled' />
 						<input name="uf_nasc" class="form-control" type="hidden"
 						value="<?PHP echo $uf_nasc;?>" />
+						<input name="cid_natal" class="form-control" type="hidden"
+						value="<?PHP echo $recCidNatal->id();?>" />
 					</td>
 						<td>
 							<label>Data&nbsp;de&nbsp;Nascimento:</label>
@@ -243,3 +241,33 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		</table>
 	</form>
 </fieldset>
+
+<script type="text/javascript">
+	new Autocomplete("campo_estado", function() {
+		this.setValue = function( rol, nome, celular, congr ) {
+			$("#id_val").val(rol);
+			$("#estado_val").val(nome);
+			$("#sigla_val").val(celular);
+			$("#rol").val(celular);
+			$("#cong").val(congr);
+		}
+
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+			return "models/autoMembrosSexo.php?s=M&q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
+	});
+	new Autocomplete("estado", function() {
+		this.setValue = function( rol, nome, celular,detalhe ) {
+			$("#id_val2").val(rol);
+			$("#nome2").val(nome);
+			$("#acesso2").val(celular);
+			$("#rol2").val(celular);
+			$("#detalhe2").val(detalhe);
+		}
+		if ( this.isModified )
+			this.setValue("");
+		if ( this.value.length < 1 && this.isNotClick )
+			return ;
+			return "models/autoMembrosSexo.php?s=F&q=" + this.value;
+	});
+</script>

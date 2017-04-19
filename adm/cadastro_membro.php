@@ -1,40 +1,47 @@
 <?php
+if ($_SESSION["setor"]!='3' && $_SESSION["setor"]!='99'){
+	?>
+	<div class="alert alert-danger alert-dismissible" role="alert">
+	<h4>&Aacute;rea restrita &agrave; <strong>Secretaria Executiva!</strong></h4>
+	<h5>Uso exclusivo deste setor!</h5>
+	</div>
+	<?php
+	exit;
+}
 
-if (empty($_SESSION['valid_user']))
-header("Location: ../");
-
-//unset($_SESSION["nacao"]);//Limpa estas variáveis
-//unset($_SESSION["cid_natal"]);
-unset($_SESSION["cid_end"]);
-unset($_SESSION["cpf"]);
+	if (empty($_GET['uf_nasc']) && empty($_POST['uf_nasc'])){
+		$ufNasc = "PB";
+	}elseif (!empty($_POST['uf_nasc'])) {
+		$ufNasc = $_POST['uf_nasc'];
+	}else{
+		$ufNasc = $_GET['uf_nasc'];
+	}
+	$cpf_val = (empty($_GET['cpf_val'])) ? '' : $_GET['cpf_val'] ;
 ?>
-
 <fieldset>
 <legend>Dados Pessoais - Cadastro de Membro </legend>
-<form method="post" action="" >
+<form method="get" action="" >
 <table>
 	<tbody>
 		<tr>
 			<td colspan="2"><label>Estado Natal: </label>
 	   	<select name="uf_nasc" id="uf_nasc" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>"
 	   	class="form-control" >
-	  <?PHP
-			$estnatal = new List_UF('estado', 'nome','uf_nasc');
-			echo $estnatal->List_Selec_pop('escolha=adm/cadastro_membro.php&uf=',$_GET['uf']);
-		?>
-	  </select>
-			<input name="uf" type="hidden" required="required"
-			value="<?php echo $_GET['uf'];?>" /></td>
+		  <?PHP
+				$estnatal = new List_UF('estado', 'nome','uf_nasc');
+				echo $estnatal->List_Selec_pop('escolha=adm/cadastro_membro.php&uf_nasc=',$ufNasc);
+			?>
+		  </select>
+				<input name="ufNasc" type="hidden" required="required"
+				value="<?php echo $ufNasc;?>" />
+		</td>
 			<td>
-
-	  <?PHP
-		if (!empty($_GET["uf"])){
-		$vl_uf=$_GET["uf"];
-		$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cid_nasc");
-		echo "<label>Cidade Natal:</label>";
-		$vlr_linha=$lst_cid->ListDados (++$ind);//3 é o indice do formulário
-		}
-		?></td>
+			  <?PHP
+					$lst_cid = new sele_cidade("cidade",$ufNasc,"coduf","nome","cid_nasc");
+					echo "<label>Cidade Natal:</label>";
+					$vlr_linha=$lst_cid->ListDados (++$ind);//3 é o indice do formulário
+				?>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -44,7 +51,7 @@ unset($_SESSION["cpf"]);
 		<td>
 	<label>CPF:</label>
 	<input name="cpf" type="text" id="cpf_val" tabindex="<?PHP echo ++$ind; ?>" class="form-control"
-	placeholder="CPF em branco ser&aacute; utilizado o n&ordm; do rol" value="<?PHP echo $_SESSION["cpf"];?>"/>
+	placeholder="CPF em branco ser&aacute; utilizado o n&ordm; do rol" value="<?PHP echo $cpf_val;?>"/>
 		</td>
 		</tr>
 		<tr>
@@ -312,7 +319,7 @@ unset($_SESSION["cpf"]);
 	</tbody>
 </table>
 <dl>
-	<dt id="css">Se o membro cadastrado não for brasileiro use o link abaixo?</dt>
+	<dt id="css">Se o membro cadastrado n&atilde;o for brasileiro use o "Bot&atilde;o" abaixo?</dt>
 	<dd>
 		<div class="row">
 		  <div class="col-xs-4">
@@ -334,7 +341,7 @@ unset($_SESSION["cpf"]);
 <script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {
-		var textoVer = '<a href="#" class="btn btn-primary" style="color:#fff;text-decoration:none;">É estrangeiro?</a>';
+		var textoVer = '<a href="#" class="btn btn-primary" style="color:#fff;text-decoration:none;">&Eacute; estrangeiro?</a>';
 		$('dd').css('display', 'none');
 		$('dt').after(textoVer);
 

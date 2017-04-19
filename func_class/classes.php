@@ -672,7 +672,7 @@ class sele_cidade {
 		}
 	}
 
-	function ListDados ($indice,$id,$pers=null){//indice da sequ�ncia do formul�rio
+	function ListDados ($indice,$id=null,$pers=null){//indice da sequ�ncia do formul�rio
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
 	$this->res = $db->query($sql_lst, array( $this->valor ));
@@ -757,7 +757,7 @@ class List_sele {
 	    $linha3 = "</select>";
 	  return $linha1.$linhas.$linha3 ;
 	}
-	
+
 	function listSedeCong ($seq,$item,$required){
 			$linhas = '';
 	  	$linha1  =  "<select name='{$this->texto_field}' id='{$this->texto_field}' $required tabindex='$seq'>";

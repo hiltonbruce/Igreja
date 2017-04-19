@@ -1,27 +1,6 @@
 <?php
-if (empty($_SESSION['valid_user']))
-header("Location: ../");
-if (isset($_POST["nacionalidade"])){
-	$_SESSION["nacao"] = $_POST["nacionalidade"];
-	$_SESSION["cid_natal"] = $_POST["cid_nasc"];
-	$_SESSION["cpf"] = $_POST["cpf"];
-	if (validaCPF($_POST["cpf"]) xor (empty($_GET["conf_cpf_ruim"]))){
-			echo "<script>pergunta();</script>";
-			echo "CPF inválido";
-		}
-}
-	$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");// Aqui será selecionado a informação do campo autor com id=2
-	$nome_cidade = $rec->nome()." - ".$rec->coduf();
+$cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
 ?>
-<script type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-</script>
-
 <fieldset>
 <legend>Dados Eclesi&aacute;sticos - Cadastro de Membro</legend>
 <form method="post" action="">
@@ -37,10 +16,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <select name="uf_nasc" id="uf_nasc" class="form-control" onchange="MM_jumpMenu('parent',this,0)" tabindex="<?PHP echo ++$ind; ?>" >
               <?PHP
                 $estnatal = new List_UF('estado', 'nome','uf_end');
-                echo $estnatal->List_Selec_pop('escolha=adm/form_eclesiastico.php&bsc_rol='.$bsc_rol.'&uf_end=',$_GET['uf_end']);
+                echo $estnatal->List_Selec_pop('escolha=adm/form_eclesiastico.php&cpf='.$cpf.'&bsc_rol='.$bsc_rol.'&uf_end=',$_GET['uf_end']);
               ?>
             </select>
             <input name="uf" type="hidden" id="uf" value="<?PHP echo $_GET['uf_end'];?>" />
+						<input name="cpf" type="hidden" value="<?PHP echo $cpf;?>" />
           </div>
           <div class="col-xs-4">
           <?PHP
@@ -63,19 +43,19 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <td colspan='2'>
           <div class="row">
           <div class="col-xs-4">
-          <label>Situação espiritual:</label>
+          <label>Situa&ccedil;&atilde;o espiritual:</label>
           <select name="situacao_espiritual" class="form-control" tabindex="<?PHP echo ++$ind;?>">
             <option value="1">Em comunh&atilde;o</option>
             <option value="2">Disciplinado</option>
           </select>
           </div>
           <div class="col-xs-4">
-            <label>Data Batismo Águas:</label>
+            <label>Data Batismo &Aacute;guas:</label>
             <input name="batismo_em_aguas" type="text" tabindex="<?PHP echo ++$ind;?>"
              value="<?php echo $_SESSION['dtbatismo'];?>" class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
-          <label>Ano Batismo com Espirito Santo:</label>
+          <label>Ano Batismo com Esp&iacute;rito Santo:</label>
           <input name="batismo_espirito_santo" type="text" id="batismo_espirito_santo"
           tabindex="<?PHP echo ++$ind;?>" maxlength="4" class="form-control" />
           </div></div>
@@ -85,7 +65,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <td colspan='2'>
           <div class="row">
           <div class="col-xs-8">
-          <label>Denominação que veio:</label>
+          <label>Denomina&ccedil;&atilde;o que veio:</label>
           <input name="veio_qual_denominacao" type="text" id="veio_qual_denominacao"
           tabindex="<?PHP echo ++$ind;?>" class="form-control" />
         </div>
@@ -105,12 +85,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
-            <label>Diácono em:</label>
+            <label>Di&aacute;cono em:</label>
             <input name="diaconato" type="text" id="diaconato" tabindex="<?PHP echo ++$ind;?>"
              class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
-            <label>Presbitéro em:</label>
+            <label>Presb&iacute;tero em:</label>
             <input name="presbitero" type="text" id="presbitero" tabindex="<?PHP echo ++$ind;?>"
              class="form-control dataclass" />
           </div></div>
@@ -140,7 +120,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
               tabindex="<?PHP echo ++$ind;?>" class="form-control" />
             </div>
             <div class="col-xs-4">
-              <label>Data da mudança:</label>
+              <label>Data da mudan&ccedil;a:</label>
               <input name="dt_muda_assembleia" type="text" id="dt_muda_assembleia" tabindex="<?PHP echo ++$ind;?>"
                class="form-control dataclass"
                placeholder="Mudança da Assembleia:"/>
@@ -156,7 +136,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             class="form-control" />
           </div>
           <div class="col-xs-4">
-            <label>Data da mudança:</label>
+            <label>Data da mudan&ccedil;a:</label>
             <input name="dt_mudanca" type="text" tabindex="<?PHP echo ++$ind;?>"
             class="form-control dataclass" />
           </div></div>
@@ -166,17 +146,17 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <td colspan='2'>
           <div class="row">
           <div class="col-xs-4">
-            <label>Cartão Impresso em:</label>
+            <label>Cart&atilde;o Impresso em:</label>
             <input name="c_impresso" type="text" tabindex="<?PHP echo ++$ind;?>"
             class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
-          <label>Cartão Entregue em:</label>
+          <label>Cart&atilde;o Entregue em:</label>
             <input name="c_entregue" type="text" id="c_entregue"
             tabindex="<?PHP echo ++$ind;?>" class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
-          <label>Data da aclamação:</label>
+          <label>Data da aclama&ccedil;&atilde;o:</label>
             <input name="dat_aclam" type="text" id="dat"
             value="<?php echo $_SESSION['dtaclam'];?>" tabindex="<?PHP echo ++$ind;?>"
             class="form-control dataclass" />

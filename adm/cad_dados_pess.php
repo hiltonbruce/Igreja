@@ -25,8 +25,8 @@ switch ($_POST["tabela"]) {
 	case "eclesiastico":
 		if (!empty ($_POST["batismo_em_aguas"])) {
 			echo $_POST["batismo_em_aguas"];
-			$batismo_em_aguas		= br_data($_POST["batismo_em_aguas"],"batismo_em_aguas");
-			$_SESSION['dtbatismo']	= $_POST["batismo_em_aguas"];
+			$batismo_em_aguas	= br_data($_POST["batismo_em_aguas"],"batismo_em_aguas");
+			$_SESSION['dtbatismo'] = $_POST["batismo_em_aguas"];
 		}
 		if (!empty ($_POST["dt_mudanca_denominacao"])) {
 			echo $_POST["dt_mudanca_denominacao"];
@@ -80,17 +80,17 @@ switch ($_POST["tabela"]) {
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
 
-		echo "<script>location.href='./?escolha=adm/dados_profis.php&bsc_rol={$rolMembro}'</script>";
-		echo "<a href='./?escolha=adm/dados_profis.php&bsc_rol={$rolMembro}'>Continuar...<a>";
+		$cpf = $_GET["cpf"];
+		echo "<script>location.href='./?escolha=adm/dados_profis.php&cpf=$cpf&bsc_rol=$rolMembro'</script>";
+		echo "<a href='./?escolha=adm/dados_profis.php&cpf=$cpf&bsc_rol=$rolMembro'>Continuar...<a>";
 
 		break;
 
 	case "membro"://cadastro de membro
 		$dt_nasc=br_data($_POST["datanasc"],"dt_nasc");
 		echo $dt_nasc;
-
-		$value = "'','{$_POST["nome"]}','{$_SESSION["nacao"]}',
-			'{$_SESSION["cid_natal"]}','{$_POST["uf_nasc"]}','{$_POST["sexo"]}','{$_POST["endereco"]}',
+		$value = "'','{$_POST["nome"]}','{$_POST["nacao"]}',
+			'{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','{$_POST["sexo"]}','{$_POST["endereco"]}',
 			'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',
 			'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',
 			'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',
@@ -100,7 +100,6 @@ switch ($_POST["tabela"]) {
 		$dados_pessoais = new insert ("$value","membro");
 		$dados_pessoais->inserir();
 		$rolMembro = mysql_insert_id();//recupera o id do último insert no mysql
-
 		// Salta para não permitir registro 666
 		$test_rol = $rolMembro+1;
 		if ((substr_count($test_rol, '666'))>0){
@@ -108,20 +107,14 @@ switch ($_POST["tabela"]) {
 			echo "<h1>Incrementado $aut_inc</h1>";
 			$inc = mysql_query( "ALTER TABLE  membro auto_increment = $aut_inc");
 		}
-
-		if (empty($_SESSION["cpf"])) {
-			$_SESSION["cpf"]=$rolMembro;
+		if (empty($_POST["cpf"])) {
+			$cpf=$rolMembro;
+		}else {
+			$cpf = $_POST["cpf"];
 		}
-
-		echo "<script>location.href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$rolMembro}'</script>";
-		echo "<a href='./?escolha=adm/dados_ecles.php&uf_end=PB&bsc_rol={$rolMembro}'>Continuar...<a>";
-
-		unset($_SESSION["nacao"]);//Limpa estas variáveis
-		unset($_SESSION["cid_natal"]);
-		unset($_SESSION["cid_end"]);
-		unset($_SESSION["nome_cad"]);
+		echo "<script>location.href='./?escolha=adm/dados_ecles.php&cpf=$cpf&uf_end=PB&bsc_rol=$rolMembro'</script>";
+		echo "<a href='./?escolha=adm/dados_ecles.php&cpf=$cpf&uf_end=PB&bsc_rol=$rolMembro'>Continuar...<a>";
 		break;
-
 	case "profissional";
 		//insere na tabela profissional
 		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
@@ -251,14 +244,11 @@ switch ($_POST["tabela"]) {
 				$dt_ini = br_data ($_POST["data_ini"],"Data inicial");
 				echo $dt_ini."--- <> ---".$_POST["data_ini"];
 			}
-
 			$dta = explode("-",$dt_ini);
 			$y = $dta[0];
 			$m = $dta[1];
 			$d = $dta[2];
-
 			echo $d."/".$m."/".$y;
-
 			if (empty($_POST["prazo"])) {
 				//Se prazo for deixado em branco será atribuido prazo indeterminado (0000-00-00)
 				$dt_fim = "0000-00-00";
@@ -281,7 +271,6 @@ switch ($_POST["tabela"]) {
 				echo "<script> alert('Rol do membro não foi informado!');</script>";
 			}
 		break;
-
 	case "organica";
 		//insere na tabela
 
@@ -296,7 +285,6 @@ switch ($_POST["tabela"]) {
 			echo "<script>location.href='./?escolha=igreja/cad_organica.php&menu=top_igreja'</script>";
 			echo "<a href='./?escolha=igreja/cad_organica.php&menu=top_igreja'>Continuar...<a>";*/
 		break;
-
 	case "cargo_igreja";
 		//insere na tabela
 		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
@@ -306,9 +294,8 @@ switch ($_POST["tabela"]) {
 					echo "<script>location.href='./?escolha=igreja/cad_cargos.php&menu=top_igreja'</script>";
 					echo "<a href='./?escolha=igreja/cad_cargos.php&menu=top_igreja'>Continuar...<a>";
 		break;
-
 	default:
-		echo "Tabela não definida!";
+		echo "Tabela n&atilde;o definida!";
 		break;
 
 }

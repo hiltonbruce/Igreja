@@ -127,7 +127,7 @@
         <td colspan="2">Naturalidade:
           <?PHP
 		//inicio
-		echo $arr_dad["naturalidade"];
+		//echo $arr_dad["naturalidade"];
 		$nome = new editar_form("naturalidade",$arr_dad["nomeCid"],$tab,$tab_edit);
 		$nome->getMostrar();
 		if ($_GET["campo"]=="naturalidade"){

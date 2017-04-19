@@ -39,7 +39,7 @@
 ?>
 <div id="lst_cad">
 <fieldset>
-<legend>Dados Eclesi&aacute;sticos - Cadastro de Membro</legend>
+<legend>Dados Profissionais - Cadastro de Membro</legend>
 <form method="post" action="">
 	<div id="lst_cad">
 	<table class='table'>
