@@ -47,7 +47,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				</tr>
 				<tr>
 					<td colspan="2"><label>Pai:</label>
-						<input type="text" name="pai" id="campo_estado" size="50%" class="form-control"
+						<input type="text" name="pai" id="campo_estado" class="form-control"
 						placeholder="Busca no cadastro da Igreja!"
 						autofocus="autofocus" tabindex="<?php echo ++$ind;?>" />
 					</td>

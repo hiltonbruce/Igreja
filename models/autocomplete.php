@@ -100,7 +100,7 @@ if (file_exists($img)){
 $html ='<img class="thumb" src="'.$img.'" title="Rol: '.$rol.'" style="width:24px;height:32px;"> '.$html;
 echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$rol');\">$html ($sigla)</li>\n";
 $quantExibir++;
-if ($quantExibir>'9') {
+if ($quantExibir>'14') {
 		break;
 	}
 }
@@ -110,5 +110,5 @@ if ($quantExibir>'9') {
 		$linhas .=' ocorr&ecirc;ncia';
 	}
 	echo '<p style="text-align: right;">Total de '.$linhas.'<br />';
-	echo 'S&atilde;o mostradas at&eacute; as 10... primeiras!</p>';
+	echo 'S&atilde;o mostradas at&eacute; as 15 primeiras ocorr&ecirc;ncias!</p>';
 ?>

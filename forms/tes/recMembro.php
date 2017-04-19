@@ -1,15 +1,14 @@
 <tr>
-	<td><label>Nome</label> <input type="text" name="nome"
-		class="form-control" autofocus="autofocus" 
-		tabindex="<?PHP echo $ind++;?>" value="<?php echo $_GET["nome"];?>" />
+	<td><label>Nome</label>
+			<input type='text' name='nome' id='estado' class='form-control'
+			placeholder='Busca no cadastro da Igreja!' value='<?php echo $_GET['nome'];?>'
+			autofocus='autofocus' tabindex="<?php echo ++$ind;?>" />
 	</td>
-	<td><a href="javascript:lancarSubmenu('campo=nome&rol=rol&form=0')"> <img
-			border="0" src="img/lupa_32x32.png" width="18" height="18"
-			title="Click aqui para pesquisar membros!" /> Pesquisar&nbsp;Membro
-	</a></td>
-	<td><label>Rol:</label> <input name="rol" type="text"
-		class="form-control" value="<?php echo $_GET["rol"];?>" size="10"
-		tabindex="<?PHP echo $ind++;?>" /></td>
+	<td><label>Rol:</label>
+			<input type='text' id='detalhe2' name='rol' tabindex='<?php echo ++$ind;?>'
+					class='form-control' placeholder='N&ordm; do membro na igreja'
+					value='<?php echo $_GET['rol'];?>' required='required' />
+	</td>
 </tr>
 <?php
 $rec = 1;
