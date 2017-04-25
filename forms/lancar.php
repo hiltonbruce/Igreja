@@ -48,9 +48,9 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
  						    <br /><br />Caracteres restantes
  						  </div>
  						  <div class="col-xs-3">
-								<label>Data</label> <input name="data" type="text" id="data"
-									tabindex="<?PHP echo ++$ind; ?> " class="form-control"
-									value="<?php echo date('d/m/Y');?>" />
+								<label>Data</label>
+								<input name="data" type="text" id="data" required="required"
+									tabindex="<?PHP echo ++$ind; ?> " class="form-control" />
  						  </div>
  						  <div class="col-xs-2">
 								<label>&nbsp;</label> <input type="submit" name="Submit" value="Lan&ccedil;ar..." class="btn btn-primary btn-sm"
