@@ -16,7 +16,11 @@
  */
 controle ("tes");
 $idIgreja = $roligreja;
-$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+if ($idIgreja=='1') {
+	$igrejaSelecionada = $igSede;
+} else {
+	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
+}
 $vlr = false;
 //$igreja = ($_POST['igreja']>'0') ?  $_POST['igreja']: false ;
 $exibLancCab  = '<table class="table table-striped"><thead><tr><th colspan="3">';
@@ -84,6 +88,7 @@ for ($i=1; $i < 6; $i++) {
 	//echo '<H1>Data do lançamento: '.$_POST[$dataOr].' *** </h1>';
 	if (($ofertaOr || $votoOr) && $datalanc) {
 		//Verifica se há valor em oferta ou voto e se data foi enviada
+		$setor = ($_SESSION['setor']=='99') ? 2 : $_SESSION['setor'] ;
 		$sem = $_POST["$semOr"];
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 		$ofertaOr = formataNumBanco ($ofertaOr);
@@ -91,7 +96,7 @@ for ($i=1; $i < 6; $i++) {
 			$conta = "'$ofeLanc','$ctaCaixa','7'";//Oração Adulto
 			$value  = "'','',$conta,'".$roligreja."','','','$ofertaOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
-			$value .= "'".$_SESSION['setor']."','{$_POST["obs"]}',NOW(),'$hist'";
+			$value .= "'$setor','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 		}
@@ -100,7 +105,7 @@ for ($i=1; $i < 6; $i++) {
 			$conta = "'$votoLan','$ctaCaixa','7'";//Voto em Circ. de Oração
 			$value  = "'','',$conta,'".$roligreja."','','','$votoOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
-			$value .= "'".$_SESSION['setor']."','{$_POST["obs"]}',NOW(),'$hist'";
+			$value .= "'$setor','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 		}

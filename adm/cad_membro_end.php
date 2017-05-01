@@ -100,7 +100,7 @@ if (empty($_POST["nacionalidade1"]) && empty($_GET["nacionalidade1"])) {
   </div>
   <div class="col-xs-4">
 		<label>Nacionalidade:</label>
-			<input class="form-control" disabled='disabled' value = '<?PHP echo $nacao;?>'>
+			<input class="form-control" disabled='disabled' value = '<?PHP echo $nacao;?>' >
 			<input name='nacao' type='hidden' value = '<?PHP echo $nacao;?>'>
   </div>
   <div class="col-xs-8">

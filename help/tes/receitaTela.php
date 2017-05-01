@@ -29,7 +29,7 @@ switch ($rec) {
 		}
 		break;
 	case '2':
-	  $form = 'forms/tes/lancarContabil.php';
+  $form = 'forms/tes/lancarContabil.php';
 		$tabRelatorio='forms/lancar.php';
 		break;
 	case '3':

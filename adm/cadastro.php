@@ -123,10 +123,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</td>
 					<td>
 						<label>Nacionalidade: </label>
-						<input class="form-control" value='<?PHP echo $_POST["nacao"];?>'
-						disabled='disabled' />
-						<input type='hidden' value='<?PHP echo $_POST["nacao"];?>'
-						nome='nacao' />
+						<input class="form-control" value='<?PHP echo $_POST["nacao"];?>'	disabled='disabled' />
+						<input	name='nacao' type='hidden' value='<?PHP echo $_POST["nacao"];?>' />
 					</td>
 				</tr>
 				<tr>
