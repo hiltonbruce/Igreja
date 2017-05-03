@@ -94,7 +94,7 @@
 		<label>&nbsp;</label>
 		<a href='<?php echo $linkPrint;?>'
 		target="_blank">
-			<button type="button" class="btn btn-primary btn-sm">
+			<button type="button" class="btn btn-default btn-sm">
 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir...
 			</button>
 		</a>
