@@ -26,7 +26,7 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				require_once '../views/modeloPrint.php';
 			break;
 			case '21':
-				//Impressï¿½o de vários Reciboserror_reporting(E_ALL);
+				//Impressão de vários Reciboserror_reporting(E_ALL);
 				error_reporting(E_ALL);
 				ini_set('display_errors', 'off');
 				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />';

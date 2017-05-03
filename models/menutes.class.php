@@ -373,15 +373,21 @@ function recibosmembros (){
 	public function periodo ($dia=null,$mes=null,$ano=null)
 	{
 		$retorno = array();
-		if (checkdate($dia,$mes,$ano)) {
+		if (checkdate($mes,$dia,$ano)) {
 			$op = 'DATE_FORMAT(t.data,"%Y%m%d")="'.$ano.$mes.$dia.'" AND ';
 		} elseif($mes>0 && $mes<13 && $ano>2000) {
 			$op = 'DATE_FORMAT(t.data,"%Y%m")="'.$ano.$mes.'" AND ';
+		}elseif($mes>0 && $mes<13 ) {
+			$op = 'DATE_FORMAT(t.data,"%m")="'.$mes.'" AND ';
+		}elseif ($dia>0 AND $dia<32 AND $ano>2000) {
+			$op = 'DATE_FORMAT(t.data,"%Y%d")="'.$ano.$dia.'" AND ';
 		}elseif ($ano>2000) {
 			$op = 'DATE_FORMAT(t.data,"%Y")="'.$ano.'" AND ';
-		}else {
+		}elseif ($dia>0 AND $dia<32) {
+			$op = 'DATE_FORMAT(t.data,"%d")="'.$dia.'" AND ';
+		}/*else {
 			$op = 'DATE_FORMAT(t.data,"%Y")="'.date('Y').'" AND ';
-		}
+		}*/
 		$sqlPer  = 'SELECT t.*,i.razao FROM tes_recibo AS t, igreja AS i WHERE '.$op;
 		$sqlPer .= '(t.igreja=i.rol OR t.igreja="0") ORDER BY t.data DESC,t.id DESC';
 		$resQueryPer = mysql_query($sqlPer);

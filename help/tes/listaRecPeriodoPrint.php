@@ -7,6 +7,9 @@
     $anoPer =$_GET['ano'];
     $anoForm =$anoPer;
   }
+
+  $rol = (empty($_GET['rol'])) ? null : intval($_GET['rol']) ;
+
   if (!empty($_GET['mes'])) {
     $mesPer = sprintf("%02s",intval($_GET['mes']));
   } else {
@@ -42,9 +45,7 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
     }
     $nivel1 .='<tr>';
     $nivel1 .='<td>';
-    $linkPer = './?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&pag_rec=1';
-    $linkPer .= '&recPer=1&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoPer.'&id=';
-    $nivel1 .='<a href="'.$linkPer.$key.'">'.$key.'</a>';
+    $nivel1 .= $key;
     $nivel1 .='</td>';
     $nivel1 .='<td>';
 
@@ -59,10 +60,10 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
       $status  = '&nbsp;<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>&nbsp;';
       $aviso = 'Lan&ccedil;amento Confirmado!';
     }else {
-      $status  = '&nbsp;<span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span>&nbsp;';
+      $status  = '&nbsp;<span class="glyphicon glyphicon-question-sign text-danger" aria-hidden="true"></span>&nbsp;';
       $aviso = 'Lan&ccedil;amento Pendente!';
     }
-    $nivel1 .='<a href="'.$linkPer.$key.'" title="'.$aviso.'">'.$status.$recebPer.'</a> ';
+    $nivel1 .= $status.$recebPer;
     $nivel1 .='</td>';
     $nivel1 .='<td>';
     $nivel1 .=$value['motivo'];
@@ -77,7 +78,6 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
     $nivel1 .=conv_valor_br ($value['data']);
     $nivel1 .='</td>';
     $nivel1 .='</tr>';
-
     $vlrTotal += $value['valor'];
   }
 

@@ -47,6 +47,14 @@ switch ($tipo) {
 		$titTabela = 'Lista de Dirigentes';
 		$nomeArquivo = '../views/secretaria/dirigentes.php';
 	break;
+case '4':
+	//Lista recibos por periodo
+	$recBuscas = new menutes();//Lista buscas de recibos
+	require_once '../help/tes/listaRecPeriodoPrint.php';
+	//Recibos para pgto
+	$nomeArquivo='../help/tes/listRec.php';
+	require_once '../views/modeloPrint.php';
+break;
 	default:
 		;
 	break;
