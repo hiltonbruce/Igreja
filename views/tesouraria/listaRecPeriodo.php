@@ -40,30 +40,30 @@
 			<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control  input-sm" >
 						<?php
 						$mesSel = arrayMeses();
-						$mesPer = $mesSel[$mesPer];
+						$mesPerido = $mesSel[$mesPer];
 						$linha1 = '<option value="0">Selecione o m&ecirc;s...</option>';
 						foreach($mesSel as $mes => $meses) {
 						 $linha2 .= '<option value='.$mes.'>'.$meses.'</options>';
 							 if ($_GET['mes']==$mes) {
 								$linha1 = '<option value='.$mes.'>'.$meses.'</options>'.$linha1;
-								$mesPer = $meses;
+								$mesPerido = $meses;
 							 }
 							}
 							echo $linha1.$linha2;
-							if ($diaPer=='' && $mesPer=='' && $anoPer<'2000') {
+							if ($diaPer=='' && $mesPerido=='' && $anoPer<'2000') {
 								$perLista = 'Todos os anos';
-							} elseif ($diaPer!='' && $mesPer=='' && $anoPer<'2000') {
+							} elseif ($diaPer!='' && $mesPerido=='' && $anoPer<'2000') {
 								$perLista = 'Todos do dia '.$diaPer;
-							} elseif ($diaPer=='' && $mesPer=='' && $anoPer!=''){
+							} elseif ($diaPer=='' && $mesPerido=='' && $anoPer!=''){
 								$perLista = 'Todos ano de '.$anoPer;
-							} elseif ($diaPer=='' && $mesPer!='' && $anoPer<'2000') {
-								$perLista = 'Todos do m&ecirc;s de '.$mesPer;
-							}elseif ($diaPer=='' && $mesPer!='' && $anoPer!='') {
-								$perLista = 'Todos de '.$mesPer.' de '.$anoPer;
-							} elseif ($diaPer!='' && $mesPer=='' && $anoPer!='') {
+							} elseif ($diaPer=='' && $mesPerido!='' && $anoPer<'2000') {
+								$perLista = 'Todos do m&ecirc;s de '.$mesPerido;
+							}elseif ($diaPer=='' && $mesPerido!='' && $anoPer!='') {
+								$perLista = 'Todos de '.$mesPerido.' de '.$anoPer;
+							} elseif ($diaPer!='' && $mesPerido=='' && $anoPer!='') {
 								$perLista = 'Todos do dia '.$diaPer.' e do ano '.$anoPer;
 							} else {
-								$perLista = 'Todos da data: '.$diaPer.' de '.$mesPer.' de '.$anoPer ;
+								$perLista = 'Todos da data: '.$diaPer.' de '.$mesPerido.' de '.$anoPer ;
 							}
 						?>
 					</select>
@@ -79,7 +79,7 @@
 		$bsccredor = new List_sele('igreja', 'razao', 'igreja');
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control  input-sm"');
 		echo $listaIgreja;
-		$linkPrint = './controller/modeloPrint.php/?nome='.$nome.'&rol='.$rol.'&cpf='.$cpf.'&rg='.$rg.'&recebeu='.$recebeu.'&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoPer.'&igreja='.$igr.'&rec='.$rec.'&tipo=4';
+		$linkPrint = './controller/modeloPrint.php/?nome='.$nome.'&rol='.$rol.'&cpf='.$cpf.'&rg='.$rg.'&recebeu='.$recebeu.'&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoPer.'&igreja='.$igr.'&tipo=4';
 	?>
 </div>
   <div class="col-xs-2">
@@ -101,10 +101,11 @@
 	  </div>
 </div>
 	</form>
-  <h5 class="text-primary">Per&iacute;odo listado: <strong><?php echo $perLista; ?></strong></h5>
 	</div>
 </fieldset>
 <?php
+$titTable = '<div class="bs-example-bg-classes"><h5><p class="bg-info">'.$perLista.'</p><h5></div><h6>';
+$tagFimTable = '</h6>';
 	require_once 'help/tes/listRec.php';
 ?>
 <script type="text/javascript">

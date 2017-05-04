@@ -1,15 +1,20 @@
 <?php $ind=1;
+$linkCancela = 'escolha=models/tes/cancRec.php&menu=top_tesouraria';
+$linkCancela .= '&id='.$rec_alterar->id();
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 $campos = array ("rol","valor","data","fonte","referente","rec","transid");
-
 ?>
 <td>
+	<?php
+	if ($rec_alterar->lancamento()!='Canceldo') {
+	 ?>
 	<form id = "2" action="controller/recibo.php" method="post" target="_black">
 		<input type="hidden" name="numeros" id="reimprimir" value="<?php echo $rec_alterar->id();?>">
 		<label>&nbsp;</label>
 		<input type="hidden" name="rec" value = "21" >
-		<input type="submit" class="btn btn-primary" value = "Re - Imprimir este recibo" >
+		<input type="submit" class="btn btn-primary" value = "Re-Imprimir este recibo" >
 </form>
+<?php } ?>
 </td><td>
  <?php
   if ($rec_alterar->lancamento()<'1') {
@@ -17,11 +22,14 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
    $linkLancamento .= '&recebeu='.$recebeu.'&nIgr='.$rec_igreja->razao().'&recibo='.$rec_alterar->id();
    echo '<a href="'.$linkLancamento.'&rec=4"><label>&nbsp;</label><br /><button type="button" ';
    echo 'class="btn btn-primary">Lan&ccedil;ar esta despesa</button></a>';
-  }else {
+ }elseif ($rec_alterar->lancamento()=='Canceldo') {
+  	$lancConfirmado  = '<div class="alert alert-warning" role="alert"><h4>Recibo N&ordm;: '.$rec_alterar->id().'</h4>';
+		$lancConfirmado .= 'Est&aacute; Canceldo!</div>';
+   echo $lancConfirmado;
+ }else {
   	$lancConfirmado  = '<p><kbd>Lan&ccedil;amento N&ordm;: '.$rec_alterar->lancamento().' confirmado</kbd></p>';
 		$lancConfirmado .= '<p class="text-danger">Nenhuma altera&ccedil;&atilde;o ';
 		$lancConfirmado .= 'modificar&aacute; o lan&ccedil;amento no sistema! </p>';
-
    echo $lancConfirmado;
   }
  ?>
@@ -62,6 +70,14 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 		<label>&nbsp;</label>
 		<input type="submit" class="btn btn-primary" value = "Editar como novo...">
 	</form>
+</td>
+<td>
+	<?php
+	if ($rec_alterar->lancamento()=='') {
+	 ?>
+	<br />
+	<a href='./?<?php echo $linkCancela;?>'><button class='btn btn-danger'>Cancelar</button></a>
+	<?php } ?>
 </td>
 
 <?php

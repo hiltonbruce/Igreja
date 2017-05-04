@@ -1,4 +1,4 @@
-<h6>
+<?php echo $titTable; ?>
   <table class='table table-striped table-hover table-bordered'>
     <colgroup>
       <col id="N&ordm;">
@@ -27,4 +27,4 @@
 		<?php echo $rodapeRec; ?>
 	</tfoot>
 </table>
-</h6>
+<<?php echo $tagTmnhoFim;?>

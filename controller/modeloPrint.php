@@ -49,7 +49,29 @@ switch ($tipo) {
 	break;
 case '4':
 	//Lista recibos por periodo
+
+	require_once '../help/tes/getRec.php';
 	$recBuscas = new menutes();//Lista buscas de recibos
+	$mesSel = arrayMeses();
+	$mesPerido = $mesSel[$mesPer];
+		if ($diaPer=='' && $mesPerido=='' && $anoPer<'2000') {
+			$perLista = 'Todos os Recibos';
+		} elseif ($diaPer!='' && $mesPerido=='' && $anoPer<'2000') {
+			$perLista = 'Recibos do dia '.$diaPer;
+		} elseif ($diaPer=='' && $mesPerido=='' && $anoPer!=''){
+			$perLista = 'Recibos ano de '.$anoPer;
+		} elseif ($diaPer=='' && $mesPerido!='' && $anoPer<'2000') {
+			$perLista = 'Recibos do m&ecirc;s de '.$mesPerido;
+		}elseif ($diaPer=='' && $mesPerido!='' && $anoPer!='') {
+			$perLista = 'Recibos de '.$mesPerido.' de '.$anoPer;
+		} elseif ($diaPer!='' && $mesPerido=='' && $anoPer!='') {
+			$perLista = 'Recibos do dia '.$diaPer.' e do ano '.$anoPer;
+		} else {
+			$perLista = 'Recibos da data: '.$diaPer.' de '.$mesPerido.' de '.$anoPer ;
+		}
+	$igNome = (empty($_GET['igreja'])) ? null : ', '.$igrejaSelecionada->razao();
+	$titTable = '<h4>'.$perLista.$igNome.'<h4><h5>';
+	$tagFimTable = '</h5>';
 	require_once '../help/tes/listaRecPeriodoPrint.php';
 	//Recibos para pgto
 	$nomeArquivo='../help/tes/listRec.php';
