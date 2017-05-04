@@ -9,10 +9,10 @@ echo $atualiza->lancamento().' *** '.$_SESSION["setor"].' *** ';
 		echo '<p>';
 		echo 'Cancelado recibo: '.$idRec;
 		//print $atualiza->$key()." ++++ ";
-		$atualiza->lancamento = 'Canceldo'; //Aqui é atribuido a esta variável um valor para UpDate
+		$atualiza->lancamento = 'Cancelado'; //Aqui é atribuido a esta variável um valor para UpDate
 	 echo '</p>';
 	  $atualiza->Update();	  //Atualizar dados
-	}elseif ($atualiza->lancamento()=='Canceldo') {
+	}elseif ($atualiza->lancamento()=='Cancelado') {
 		echo  'Recibo já CANCELADO!';
 	}elseif ($atualiza->lancamento()!='0') {
 		echo  'Após lançado recibo não será permitido o CANCELAMENTO!';

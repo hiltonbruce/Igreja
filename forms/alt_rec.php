@@ -6,7 +6,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 ?>
 <td>
 	<?php
-	if ($rec_alterar->lancamento()!='Canceldo') {
+	if ($rec_alterar->lancamento()!='Cancelado') {
 	 ?>
 	<form id = "2" action="controller/recibo.php" method="post" target="_black">
 		<input type="hidden" name="numeros" id="reimprimir" value="<?php echo $rec_alterar->id();?>">
@@ -22,7 +22,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
    $linkLancamento .= '&recebeu='.$recebeu.'&nIgr='.$rec_igreja->razao().'&recibo='.$rec_alterar->id();
    echo '<a href="'.$linkLancamento.'&rec=4"><label>&nbsp;</label><br /><button type="button" ';
    echo 'class="btn btn-primary">Lan&ccedil;ar esta despesa</button></a>';
- }elseif ($rec_alterar->lancamento()=='Canceldo') {
+ }elseif ($rec_alterar->lancamento()=='Cancelado') {
   	$lancConfirmado  = '<div class="alert alert-warning" role="alert"><h4>Recibo N&ordm;: '.$rec_alterar->id().'</h4>';
 		$lancConfirmado .= 'Est&aacute; Canceldo!</div>';
    echo $lancConfirmado;
@@ -73,7 +73,7 @@ $campos = array ("rol","valor","data","fonte","referente","rec","transid");
 </td>
 <td>
 	<?php
-	if ($rec_alterar->lancamento()=='') {
+	if ($rec_alterar->lancamento()<='0') {
 	 ?>
 	<br />
 	<a href='./?<?php echo $linkCancela;?>'><button class='btn btn-danger'>Cancelar</button></a>
