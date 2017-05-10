@@ -13,6 +13,7 @@
 <a <?PHP $b=link_ativo($_GET["rec"], "5");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=5">
 	<button type="button" class="btn btn-success btn-sm <?php echo $b;?>">Impress&atilde;o</button>
 </a>
-<a <?PHP $b=link_ativo($_GET["rec"], "6");?> href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=6">
+<a <?PHP $b=link_ativo($_GET["rec"], "6");?>
+	href="./?escolha=controller/recibo.php&menu=top_tesouraria&rec=6&mes=<?php echo date('m');?>">
 	<button type="button" class="btn btn-success btn-sm <?php echo $b;?>">Filtrar</button>
 </a>
