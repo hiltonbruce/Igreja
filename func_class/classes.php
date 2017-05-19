@@ -715,6 +715,50 @@ class sele_cidade {
 		echo "</select>";
 	}
 	}
+
+	function cidadePopup ($indice,$id=null,$link=null){//indice da sequ�ncia do formul�rio
+	global $db;
+	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
+	$this->res = $db->query($sql_lst, array( $this->valor ));
+	//Obt�m o n�mero de linhas
+	$num_linhas = (int)$this->res->numRows();
+	//Mostra as linhas de select
+	if ($num_linhas>0){
+	$linhoOptions1 = '';
+				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
+					echo "<option value='{$_SESSION["cid_end"]}'>C�d. - {$_SESSION["cid_end"]}</option>";
+				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
+					echo "<option value='$link'>Bayeux</option>";
+				}else{
+// 					echo "<option value=''>-->> Escolha  <<--</option>";
+				}
+		for ($i=0; $i<$num_linhas; $i++)
+		{
+			$linhas = $this->res->fetchRow(DB_FETCHMODE_ASSOC);
+			if ($id == $linhas["id"]) {
+				$linhoOptions1 = "<option value='$link".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+			}
+			$linhoOptions .= "<option value='$link".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+		}
+	echo $linhoOptions1.$linhoOptions;
+	//Disconecta do Banco
+	//$db->disconnect();
+	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
+		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
+		echo "<script> alert('Voc� n�o informou o estado de batismo! Fa�a-o antes de continuar.'); window.history.go(-1);</script>";
+		exit;
+	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
+		echo "Voc� n�o informou a cidade ou falta atualizar! Fa�a-o antes de continuar.</h2>";
+		echo "<script> alert('Voc� n�o informou a cidade ou falta atualizar! Fa�a-o antes de continuar.'); window.history.go(-1);</script>";
+	}else{
+		echo "<script> alert('N�o h� nenhum bairro cadastrado para o endere�o desta cidade! Recomendamos que voc� fa�a-o antes de continuar.');</script>";
+		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
+		echo "<option value=''>-->> Escolha <<--</option>";
+		echo "<option value='Centro'>Centro</option>";
+		echo "</select>";
+	}
+	}
+
 }
 
 class List_sele {

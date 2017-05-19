@@ -2,7 +2,7 @@
   $nivel1 ='';
   if (empty($_GET['ano'])) {
     $anoForm = date('Y');
-    $anoPer = $anoForm ;
+    $anoPer ='' ;
   } else {
     $anoPer =$_GET['ano'];
     $anoForm =$anoPer;

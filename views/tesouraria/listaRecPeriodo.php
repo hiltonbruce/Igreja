@@ -70,8 +70,8 @@
   </div>
   <div class="col-xs-2">
 		<label>Ano</label>
-		<input type="text" name="ano" tabindex="<?PHP echo ++$ind; ?>"
-		class="form-control  input-sm" placeholder="Ano" />
+		<input type="text" name="ano" tabindex="<?PHP echo ++$ind;?>"
+		class="form-control  input-sm" placeholder="Ano" value="<?PHP echo $anoPer;?>" />
   </div>
   <div class="col-xs-5">
 	<label>Congrega&ccedil;&atilde;o:</label>
