@@ -77,10 +77,8 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
     $nivel1 .=conv_valor_br ($value['data']);
     $nivel1 .='</td>';
     $nivel1 .='</tr>';
-
     $vlrTotal += $value['valor'];
   }
-
 $rodapeRec  = '<tr id="total"><td colspan="3" class="text-right">Total</td>';
 $rodapeRec .= '<td colspan="3" class="text-right">'.number_format($vlrTotal, 2, ",", ".").'</td></tr>';
 ?>

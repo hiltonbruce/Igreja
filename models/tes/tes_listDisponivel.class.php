@@ -45,5 +45,16 @@ class tes_listDisponivel extends List_sele {
 		}
 		echo $linha1.$linhas;
 	}
+
+	function listaCaixas ($id){
+	//Lista Select para uso com javascrip popup
+	//Mostra as linhas de select
+	$result = array();
+		while($campoList = mysql_fetch_array($this->sql_lst))
+		{
+				$result [$campoList["id"]] = $campoList['titulo'];
+		}
+		return $result;
+	}
 }
 ?>

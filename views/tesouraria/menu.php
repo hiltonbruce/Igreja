@@ -11,9 +11,25 @@
 	  <a <?PHP $b=link_ativo($_GET["rec"], "3"); ?> href="<?php echo $linkLancamento;?>&rec=3">
 	  <button type="button" class="btn btn-warning btn-sm <?php echo $b;?>">Esc. B&iacute;blica</button></a>
 	</div>
-	 <div class="btn-group">
-	  <a <?PHP $b=link_ativo($_GET["rec"], "24"); ?> href="<?php echo $linkLancamento;?>&rec=24">
-	  <button type="button" class="btn btn-warning btn-sm <?php echo $b;?>">Lan&ccedil;. por Semanas</button></a>
+<?php
+	$consCx = new tes_listDisponivel();
+	$caixas = $consCx->listaCaixas($cta);
+//	print_r($caixas);
+ ?>
+	<div class="btn-group">
+	 <?PHP $b=link_ativo($_GET["rec"], "24"); ?>
+	  <button type="button" class="btn btn-warning btn-sm dropdown-toggle <?php echo $b;?>"
+			data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	    Lan&ccedil; p/Sem
+			<span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+			<?php
+				foreach ($caixas as $key => $value) {
+					echo '<li><a href="'.$linkLancamento.'&rec=24&cta='.$key.'">'.$value.'</a></li>';
+				}
+			 ?>
+	  </ul>
 	</div>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "9"); ?> href="<?php echo $linkLancamento;?>&rec=9">
