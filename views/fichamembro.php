@@ -15,14 +15,17 @@
 	$ecles 		= new DBRecord ("eclesiastico",$rol,"rol");
 	$prof 		= new DBRecord ("profissional",$rol,"rol");
 	$igreja 	= new DBRecord ("igreja",$ecles->congregacao(),"rol");
+	$cidade = new cidade ();
+	$cidCad = $cidade->arrayCidade();
+
     if (is_numeric($membro->naturalidade())) {
-        $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
-        $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
+      //  $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
+        $cidNatal =  $cidCad[$membro->naturalidade()]['cidade'].' - '.$cidCad[$membro->naturalidade()]['uf'];
     } else {
         $cidNatal = $membro->naturalidade();
     }
 	//$cidade 	= new DBRecord ("cidade",$membro->naturalidade(),"id");
-	$cidend 	= new DBRecord ("cidade",$membro->cidade(),"id");
+	$cidend 	= $membro->cidade();
 	$bairro 	= new DBRecord ("bairro",$membro->bairro(),"id");
 	$numreg		= new registro ('disciplina', 'rol', $rol);
 	$sede 		= new DBRecord ("igreja",'1',"rol");
@@ -56,7 +59,7 @@
 <body>
   <div id="header">
 	<p>
-	<?PHP echo "Templo SEDE: {$sede->rua()}, N&ordm; {$sede->numero()} <br /> {$sede->cidade()} - {$sede->uf()} - CNPJ: {$sede->cnpj()}<br />
+	<?PHP echo "Templo SEDE: {$sede->rua()}, N&ordm; {$sede->numero()} <br /> {$cidCad[$sede->cidade()]['cidade']} - {$cidCad[$sede->cidade()]['uf']} - CNPJ: {$sede->cnpj()}<br />
 	CEP: {$sede->cep()} - Fone: {$sede->fone()} - Fax: {$sede->fax()}";?>
 	<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information">Site&nbsp;</a>
     <br />Email: <a href="mailto: <?PHP echo "{$sede->email()}";?>">Secretaria Executiva&nbsp;</a>
@@ -108,7 +111,7 @@
         <td colspan="3"><b>Bairro: </b><?php echo $bairro->bairro();?></td>
       </tr>
       <tr>
-        <td colspan="3"><b>Cidade: </b><?php echo $cidend->nome().' - '.$cidend->coduf();?></td>
+        <td colspan="3"><b>Cidade: </b><?php echo $cidCad[$cidend]['cidade'].' - '.$cidCad[$cidend]['uf'];?></td>
       </tr>
       <?php
       	if ($membro->sexo()=='F') {
@@ -136,7 +139,7 @@
     </div>
     <div id="footer">
 	<?PHP
-	echo "Templo: {$sede->razao()}: {$sede->rua()}, N&ordm; {$sede->numero()} - {$sede->cidade()} - {$sede->uf()}";
+	echo "Templo: {$sede->razao()}: {$sede->rua()}, N&ordm; {$sede->numero()} - {$cidCad[$sede->cidade()]['cidade']} - {$sede->uf()}";
 
 	?><br />
 	  Copyright &copy; <a onclick='target="_blank"' href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information"></a>
