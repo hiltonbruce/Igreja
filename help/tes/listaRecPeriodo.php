@@ -58,6 +58,11 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
     if ($value['lancamento']>0) {
       $status  = '&nbsp;<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>&nbsp;';
       $aviso = 'Lan&ccedil;amento Confirmado!';
+      $vlrTotal += $value['valor'];
+    }elseif ($value['lancamento']=='Cancelado') {
+      $status  = '&nbsp;<span class="glyphicon glyphicon-ok text-info" aria-hidden="true"></span>';
+      $status .= '<span class="text-danger">&nbsp;Recibo Cancelado&nbsp;</span>';
+      $aviso = 'Recibo cancelado!';
     }else {
       $status  = '&nbsp;<span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span>&nbsp;';
       $aviso = 'Lan&ccedil;amento Pendente!';

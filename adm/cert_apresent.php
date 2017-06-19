@@ -7,7 +7,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 //-->
 </script>
 <?PHP
-	if ($_SESSION['nivel']>4){	
+	if ($_SESSION['nivel']>4){
 ?>
 <fieldset>
 	<legend> Certid&atilde;o de Apresenta&ccedil;&atilde;o</legend>
@@ -66,7 +66,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	<input name="rol_mae" type="text" id="rol_mae" size="5" maxlength="5" tabindex="8" />
     <a href="javascript:lancarSubmenu('campo=mae&rol=rol_mae&form=2')" tabindex="9"><img border="0" src="img/lupa_32x32.png" width="18" height="18" align="absbottom" title="Click aqui para pesquisar membros!" /></a>
 	</p>
-
     <table width="419" border="0">
       <tr>
         <td>Congregação dos Pais:<label>

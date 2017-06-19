@@ -77,12 +77,12 @@ class tes_conta {
 	}
 
 	function ativosArray() {
-		#Contas de lançamento vinculada pelo código de acesso e acesso != 0
+		#Contas de lanï¿½amento vinculada pelo cï¿½digo de acesso e acesso != 0
 		return $this->arrayAtivos;
 	}
 
 	function contasTodas() {
-		#Contas de lançamento vinculada pelo ID
+		#Contas de lanï¿½amento vinculada pelo ID
 		return $this->arrayTodos;
 	}
 

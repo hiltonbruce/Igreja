@@ -1,5 +1,5 @@
 <tr>
-	<td><label>Nome</label>
+	<td><label>Nome:</label>
 			<input type='text' name='nome' id='estado' class='form-control'
 			placeholder='Busca no cadastro da Igreja!' value='<?php echo $_GET['nome'];?>'
 			autofocus='autofocus' tabindex="<?php echo ++$ind;?>" />

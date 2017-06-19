@@ -203,7 +203,7 @@ function recibosmembros (){
 		$_urlLi_pen='./?escolha='.$this->escGET.'&menu='.$this->menuGET.'&recebeu='.$_GET['recebeu'];//Montando o Link para ser passada a classe
 		$extr  = 'SELECT MAX(valor) AS maximo, MIN(valor) AS minimo, AVG(valor)';
 		$extr .= ' AS media, SUM(valor) as total FROM tes_recibo WHERE recebeu='.$id ;
-		$extr .= ' AND recebeu>0';
+		$extr .= ' AND recebeu>0 AND lancamento>0';
 		if ($_GET['tipo']=='2') {
 			//Recibos Credores - altera a string $extr
 			$extr .= ' AND tipo="2"';
@@ -298,6 +298,10 @@ function recibosmembros (){
 		    if ($coluna_pen['lancamento']>0) {
 		      $status  = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> ';
 					$msgLanc ='lan&ccedil;amento confirmado!';
+		    }elseif ($coluna_pen['lancamento']=='Cancelado') {
+		      $status  = '&nbsp;<span class="glyphicon glyphicon-ok text-info" aria-hidden="true"></span>';
+		      $status .= '<span class="text-danger">&nbsp;Recibo Cancelado&nbsp;</span>';
+		      $aviso = 'Recibo cancelado!';
 		    }else {
 		      $status  = '<span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span> ';
 					$msgLanc ='lan&ccedil;amento pendente!';
@@ -346,7 +350,8 @@ function recibosmembros (){
 	</table>
 	<?PHP
 	echo'<div class="alert alert-success"><p><strong>Maior valor:</strong> R$ '.number_format($maximo,2,",",".").' &bull; <strong>Menor valor:</strong> R$ '.number_format($minimo,2,",",".");
-	echo ' &bull; <strong>Valor m&eacute;dio:</strong> R$ '.number_format($media,2,",",".").' &bull; <strong>Total de:</strong> R$ '.number_format($total,2,",",".").'</p>';
+	echo ' &bull; <strong>Valor m&eacute;dio:</strong> R$ '.number_format($media,2,",",".");
+	echo ' &bull; <strong>Total de:</strong> R$ '.number_format($total,2,",",".").' confirmados!</p>';
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pag_rec"],"pag_rec",$_urlLi_pen,15);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape();

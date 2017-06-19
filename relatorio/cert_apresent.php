@@ -20,28 +20,28 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       <option value="<?PHP echo $_GET['uf'];?>"><?PHP echo $_GET['uf'];?></option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=AC&menu=top_formulario'>Acre</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=AL&menu=top_formulario'>Alagoas</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=AP&menu=top_formulario'>Amapá</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=AP&menu=top_formulario'>Amapï¿½</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=AM&menu=top_formulario'>Amazonas</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=BA&menu=top_formulario'>Bahia</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=CE&menu=top_formulario'>Ceará</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=CE&menu=top_formulario'>Cearï¿½</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=DF&menu=top_formulario'>Distrito Federal</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=GO&menu=top_formulario'>Goiás</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=MA&menu=top_formulario'>Maranhão</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=GO&menu=top_formulario'>Goiï¿½s</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=MA&menu=top_formulario'>Maranhï¿½o</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=MT&menu=top_formulario'>Mato Grosso</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=MS&menu=top_formulario'>Mato Grosso do Sul</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=MG&menu=top_formulario'>Minas Gerais</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PA&menu=top_formulario'>Pará</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PB&menu=top_formulario'>Paraíba</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PR&menu=top_formulario'>Paraná</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PA&menu=top_formulario'>Parï¿½</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PB&menu=top_formulario'>Paraï¿½ba</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PR&menu=top_formulario'>Paranï¿½</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=PE&menu=top_formulario'>Pernambuco</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PI&menu=top_formulario'>Piauí</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PI&menu=top_formulario'>Piauï¿½</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RJ&menu=top_formulario'>Rio de Janeiro</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RN&menu=top_formulario'>Rio Grande do Norte</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RS&menu=top_formulario'>Rio Grande do Sul</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=RO&menu=top_formulario'>Rondônia</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RO&menu=top_formulario'>Rondï¿½nia</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RR&menu=top_formulario'>Roraima</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=SC&menu=top_formulario'>Santa Catarina</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=SP&menu=top_formulario'>São Paulo</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=SP&menu=top_formulario'>Sï¿½o Paulo</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=SE&menu=top_formulario'>Sergipe</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=TO&menu=top_formulario'>Tocantins</option>
     </select>
@@ -52,7 +52,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			$vl_uf=$_GET["uf"];
 			$lst_cid = new sele_cidade("cidade","$vl_uf","coduf","nome","cidade");
 			echo "<label>Na Cidade de:</label>";
-			$vlr_linha=$lst_cid->ListDados ($ind++);//"2" é o indice de tabulação do formulário
+			$vlr_linha=$lst_cid->ListDados ($ind++);//"2" ï¿½ o indice de tabulaï¿½ï¿½o do formulï¿½rio
 			echo "";
 	?></div></div>
 	<label>Nome da Crian&ccedil;a:</label>
@@ -85,7 +85,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	</div></div>
     <table width="419" border="0">
       <tr>
-        <td><label>Congregação dos Pais:</label>
+        <td><label>Congregaï¿½ï¿½o dos Pais:</label>
 			<?PHP
 		 	$congr = new List_sele ("igreja","razao","id_cong");
 		 	echo $congr->List_Selec ($ind++,'','class="form-control"');
@@ -119,7 +119,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <label>Data da Apresenta&ccedil;&atilde;o:</label>
           <input name="dt_apresent" type="text" id="data" class="form-control" tabindex="<?PHP echo $ind++;?>"/>
           </td>
-        <td><label>Número da Certidão:</label>
+        <td><label>Nï¿½mero da Certidï¿½o:</label>
             <input name="num_cert" type="text" class="form-control" id="num_cert" tabindex="<?PHP echo $ind++;?>" />
         </td>
       </tr>
@@ -136,17 +136,17 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     </table>
 	    <div class="row">
 	 	 <div class="col-xs-8">
-		  <label>Secretário que ir&aacute; assinar a carta:</label>
+		  <label>Secret&aacute;rio que ir&aacute; assinar a carta:</label>
 		  <select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
 		    <option value="<?PHP echo $igSede->secretario1();?>"><?PHP echo fun_igreja ($igSede->secretario1());?></option>
 		    <option value="<?PHP echo $igSede->secretario2();?>"><?PHP echo fun_igreja ($igSede->secretario2());?></option>
 		  </select>
 		  </div>
 	 	 <div class="col-xs-4">
-  <!-- Envia o id para a impressão da carta escolhida -->
+  <!-- Envia o id para a impressï¿½o da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o" tabindex="<?PHP echo $ind++;?>" />
  <?PHP
- } //fim do if após selecionar a uf nascimento da criança
+ } //fim do if apï¿½s selecionar a uf nascimento da crianï¿½a
  ?> </div></div>
 </form>
 </fieldset>
