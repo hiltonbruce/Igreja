@@ -24,7 +24,7 @@
   </div>
   <div class="col-xs-3">
     <label>&nbsp;</label>
-    <button type="button" class="btn btn-primary">Exibir...</button>
+    <button type="submit" class="btn btn-primary">Exibir...</button>
   </div>
 </div>
 </p>

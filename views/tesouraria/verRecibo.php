@@ -1,3 +1,8 @@
+<?php
+	$contas = new tes_conta();
+	$ctaCodigo = $contas->contasCod();
+	$ctaAcesso = $contas->ativosArray();
+ ?>
 <fieldset>
 	<div class="btn-group">
 		 <a href="./?escolha=tesouraria/rec_alterar.php&menu=top_tesouraria&id=<?php echo $id-1;?>">
@@ -13,15 +18,30 @@
 	</div>
 	<?php
 	if (!$testLanc) {
-		echo '<h4><p class="text-danger" >';
-		echo 'O recibo n&atilde;o poder&aacute; ser alterado!!</p>';
-		echo '<span class="small">Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.</span></h4>';
+		if ($rec_alterar->lancamento()=='Cancelado') {
+			$textMsg = '<h4><strong>Recibo cancelado!</strong></h4>';
+			$textMsg .= 'Voc&ecirc; n&atilde;o poder&aacute; realizar qualquer opera&ccedil;&atilde;o.';
+			$alertCor = 'alert-danger';
+		}else {
+			$textMsg = '<h4><strong>O recibo n&atilde;o poder&aacute; ser alterado!</strong></h4>';
+			$textMsg .= 'Voc&ecirc; poder&aacute criar um novo ou re-imprimir como est&aacute;.';
+			$alertCor = 'alert-success';
+		}
+	 ?>
+		<div class="alert <?php echo $alertCor;?> alert-dismissible fade in" role="alert">
+		 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			 <span aria-hidden="true">&times;</span></button>
+			 <?php
+			 	echo $textMsg;
+			 ?>
+		</div>
+		<?php
 	}
 	 ?>
 	<div id="lst_cad">
 		<table class='table table-condensed'>
 	      <tr>
-			<td colspan='2'><label>Nome do Beneficiado:</label>
+			<td><label>Nome do Beneficiado:</label>
 				<?PHP
 					switch ($rec_alterar->tipo)
 					{
@@ -67,18 +87,8 @@
 			printf ("<p> %'05u</p>",$id);
 			?>
 			</td>
-		</tr>
-		<tr>
-	        <td colspan='3'><label>Motivo do pagamento:</label>
-			<?PHP
-			$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
-			?>
-			</td>
-	      </tr>
-	      <tr>
-	      		<td colspan='2'>Fonte do Recurso:
-	          <?PHP
+    		<td><label>Fonte do Recurso:</label>
+        <?PHP
 				$nome = new editar_form("fonte",$rec_alterar->fonte(),$tab,$tab_edit);
 				$fonte = new DBRecord("contas", $rec_alterar->fonte(), "acesso");
 				$exibCta = ($fonte->acesso()=='0') ? 'N&atilde;o informado!' : $fonte->titulo() ;
@@ -103,27 +113,43 @@
 				<?php
 				}
 				?>
+			</tr>
+			<tr>
 				</td>
-	      		<td>
-	      			Despesa:
+	      		<td colspan="3">Despesa:
 	      			<?PHP
-					$conta = new DBRecord("contas", $rec_alterar->conta(), "acesso");
-					$nome = new editar_form("conta",$conta->titulo(),$tab,$tab_edit);
-					$nome->getMostrar();
-					if ($_GET["campo"]=="conta"){
-					$acesso = $rec_alterar->conta();
-					echo '<form name="fornec" id="fornec" action="" method="post">';
-					require_once 'forms/tes/autoCompletaDespesas.php';
-					echo '<input name="escolha" type="hidden" id="escolha" value="sistema/atualizar_sistema.php">';
-					echo '<input name="campo" id="campo" type="hidden" value="conta">';
-					echo '<input name="tabela" id="tabela" type="hidden" value="tes_recibo">';
-					echo '<input name="id" id="id" type="hidden" value="'.$id.'">';
-					echo '<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >';
-					echo '</form>';
-					}
-					?>
+								//$ctaCodigo = $contas->contasCod();
+								//$ctaAcesso = $contas->ativosArray();
+
+								$ctaDep = $ctaAcesso [$rec_alterar->conta()];
+								$ctaExibir  = $ctaCodigo[$ctaDep['nivel2']]['titulo'].'->'.$ctaCodigo[$ctaDep['nivel3']]['titulo'];
+								$ctaExibir .= '->'.$ctaCodigo[$ctaDep['nivel4']]['titulo'];
+								$ctaExibir .= ' &bull; '.$ctaCodigo[$ctaDep['codigo']]['acesso'].' - '.$ctaCodigo[$ctaDep['codigo']]['titulo'];
+								//$conta = new DBRecord("contas", $rec_alterar->conta(),"acesso");
+								$nome = new editar_form("conta",$ctaExibir,$tab,$tab_edit);
+								$nome->getMostrar();
+								if ($_GET["campo"]=="conta"){
+								$acesso = $rec_alterar->conta();
+								echo '<form name="fornec" id="fornec" action="" method="post">';
+								require_once 'forms/tes/autoCompletaDespesas.php';
+								echo '<input name="escolha" type="hidden" id="escolha" value="sistema/atualizar_sistema.php">';
+								echo '<input name="campo" id="campo" type="hidden" value="conta">';
+								echo '<input name="tabela" id="tabela" type="hidden" value="tes_recibo">';
+								echo '<input name="id" id="id" type="hidden" value="'.$id.'">';
+								echo '<input name="Submit" type="submit" class="btn btn-primary" value="Alterar..." >';
+								echo '</form>';
+								}
+								?>
 	      		</td>
 	      </tr>
+				<tr>
+			        <td colspan='3'><label>Motivo do pagamento:</label>
+					<?PHP
+					$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
+					$nome->getMostrar();$nome->getEditar();
+					?>
+					</td>
+			   </tr>
 	      <tr>
 	        <td><label>Lan&ccedil;amento:</label>
 	        <?PHP
