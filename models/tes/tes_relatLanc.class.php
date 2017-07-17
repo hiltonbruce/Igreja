@@ -63,7 +63,7 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 	if ($numLanc!='') {
 		$opIgreja = $this->var_string.' AND l.lancamento = "'.$numLanc.'" ';
 	}
-	$opIgreja .= 'ORDER BY l.data,l.lancamento,l.debitar ';
+	$opIgreja .= 'ORDER BY l.data,l.igreja,l.lancamento,l.valor,l.debitar ';
 	$dquery = mysql_query($opIgreja) or die (mysql_error());
 	$tabela = '';
 	$tabModeloExt = '';
@@ -147,7 +147,11 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 			//$valores ='<p id="moeda">'.$valor.' D</p>';//Valores das demais cta's que não sejam do caixa
 			//$lancValor .= $valores;
 		$numLanc = sprintf ("N&ordm;: %'05u",$lancamento);
-		$vlrTotal +=$linha['valor'];
+		if (!empty($cta) && $linha['debitar']==$cta) {
+			$vlrTotal -=$linha['valor'];
+		}else {
+			$vlrTotal +=$linha['valor'];
+		}
 		}
 		if ($titulo1 != '') {
 			$dataLanc  = '<p><span class="badge">Data do Lan&ccedil;amento: ';
@@ -158,8 +162,13 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 			//Modelo Extrato Bancario
 			$tabModeloExt .= $viewCabTr.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$tabModeloExt .= '<td class="text-right" >'.$linha['valor'].'</td></tr>';
-			$vlrTotal +=$linha['valor'];
+			if (!empty($cta) && $linha['debitar']==$cta) {
+				$vlrTotal -=$linha['valor'];
+			}else {
+				$vlrTotal +=$linha['valor'];
+			}
 		}
+	$vlrTotal = abs($vlrTotal);
 	$resultado = array($tabela,$tabModeloExt,$vlrTotal);
 	return $resultado;
 	}
