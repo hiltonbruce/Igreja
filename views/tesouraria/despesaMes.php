@@ -1,6 +1,7 @@
 <?php
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
-	$credor = (empty($_GET['credor'])) ? 0 : $_GET['credor'] ;
+	$credor = (empty($_GET['credor'])) ? 0 : $_GET['credor'];
+	$igRol = (empty($_GET['igreja'])) ? 0 : $_GET['igreja'];
 	if (!empty($_GET['data']) && checadata($_GET['data'])) {
 		list($d,$m,$y) = explode('/', $_GET['data']);
 	}else {
@@ -21,16 +22,24 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
  ?>
  <form action="" method="get">
  	<div class="row">
-  <div class="col-xs-4">
+  <div class="col-xs-3">
  	<label>Por fornecedor:</label>
 	<select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)"
 	 tabindex="<?PHP echo ++$ind; ?>" >
 	  <?php
 	  	$bsccredor = new list_fornecedor('credores', 'alias', 'credor');
 	  	echo $bsccredor->List_Selec_pop('escolha='.$_GET["escolha"].'&menu=top_tesouraria&age=9&data='.
-			$dt.'&credor=');
+			$dt.'&igreja='.$igRol.'&credor=');
 	  ?>
 	</select>
+</div>
+  <div class="col-xs-3">
+ 	<label>Por Igreja:</label>
+	<?php
+ $bsccredor = new List_sele('igreja', 'razao', 'igreja');
+ $listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" ');
+ echo $listaIgreja;
+	 ?>
   </div>
   <div class="col-xs-2">
 	<label>Per&iacute;odo de:</label>
@@ -42,7 +51,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	<input disabled='disabled' class="form-control"
 	value='<?php echo $fimDiaMes.$iniDia->format('/m/Y');?>' tabindex="<?PHP echo ++$ind; ?>" >
   </div>
-  <div class="col-xs-2">
+  <div class="col-xs-1">
 	<input type="hidden" name="menu" value="top_tesouraria">
 	<input type="hidden" name="age" value="<?PHP echo $_GET["age"];?>">
 	<input type="hidden" name="escolha" value="<?PHP echo $_GET["escolha"];?>">
@@ -79,7 +88,8 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 				$diaSemana = $iniDia->format('D');
 				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
 				echo '<td>'.$iniDia->format('d/m').'&nbsp;-&nbsp;'.$diaSemana.'</td><td>';
-				$evento = $lista->demonstrativo(date('Y-m-d',$iniDia->getTimestamp()),$credor,$dataget);//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
+				$evento = $lista->demonstrativo(date('Y-m-d',$iniDia->getTimestamp()),$credor,$dataget);
+				//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
 				$iniDia->modify( '+1 day' );
 				//$dia_periodo = strtotime("$dia_periodo +1 day");
