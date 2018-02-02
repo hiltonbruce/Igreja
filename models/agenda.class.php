@@ -321,7 +321,8 @@ class agenda {
 			$linkcredor = '&data='.$pagamento;
 		}
 		if (!empty($_GET['igreja'])){
-			$periodo .= ' a.igreja='.$_GET['igreja'].' AND ';
+			$igRol = intval($_GET['igreja']);
+			$periodo .= ' a.igreja='.$igRol.' AND ';
 			}
 		$periodo .= ' a.vencimento = "'.$dia.'"';
 		$periodo_array = mysql_query($periodo)  or die (mysql_error());
@@ -534,7 +535,8 @@ class agenda {
 			$linkcredor = '&data='.$pagamento;
 		}
 		if (!empty($_GET['igreja'])){
-			$periodo .= ' a.igreja='.$_GET['igreja'].' AND ';
+			$igRol = intval($_GET['igreja']);
+			$periodo .= ' a.igreja='.$igRol.' AND ';
 			}
 		$periodo .= ' a.vencimento = "'.$dia.'"';
 		$periodo_array = mysql_query($periodo)  or die (mysql_error());

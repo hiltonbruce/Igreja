@@ -105,6 +105,13 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 		?>
 		</tbody>
 		<tfoot>
+			<tr class="active">
+				<th colspan="2" class="text-right">
+					Total:
+				</th>
+				<th>
+				</th>
+			</tr>
 			<tr>
 				<th colspan="3" class="info"><h5>Exibi um trecho de 12 dias. Faixa em verde &eacute; o dia atual!
 					Contas vencidas a mais de 5 dias:

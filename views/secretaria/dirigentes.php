@@ -2,7 +2,7 @@
 $query  = 'SELECT i.razao,i.setor,m.rol,m.nome,m.celular,m.fone_resid ';
 $query .= 'FROM igreja AS i, membro AS m ';
 $query .= 'WHERE i.status="1" AND i.pastor=m.rol ';
-$query .= 'ORDER BY i.setor,i.razao';
+$query .= 'ORDER BY i.setor,m.nome,i.razao';
 $sql3 = mysql_query ($query) or die (mysql_error());
 $total = mysql_num_rows($sql3);
 if (!empty($_GET['ext']) && $_GET['ext']=='1') {
