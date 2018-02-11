@@ -37,7 +37,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
  	<label>Por Igreja:</label>
 	<?php
  $bsccredor = new List_sele('igreja', 'razao', 'igreja');
- $listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" ');
+ $listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" ');
  echo $listaIgreja;
 	 ?>
   </div>
