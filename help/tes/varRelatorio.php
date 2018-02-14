@@ -11,7 +11,7 @@
       $ctaId = $ctaAcesso[intval($_GET['conta'])]['id'];
     }
 
-    $mes = (empty($_GET['mes'])) ? date('m'):sprintf("%'02u",$_GET['mes']) ;
+    $mes = (empty($_GET['mes'])) ? '':sprintf("%'02u",$_GET['mes']) ;
     $roligreja = (empty($_GET['igreja'])) ? '0':intval($_GET['igreja']);
     $tituloColuna5 = 'Valor(R$)';
     $numLanc = (empty($_GET['numLanc'])) ? '' : intval($_GET['numLanc']) ;
