@@ -27,12 +27,23 @@
   } else {
     $recebeu = intval($_GET['recebeu']);
   }
+  if ($_GET['motivo']) {
+    $motivo = $_GET['motivo'];
+  }
+
+  if (isset($_GET['rol']) && $_GET['rol']>'0' ) {
+    $nome = intval($_GET['rol']);
+  }elseif (isset($_GET['nome'])) {
+    $nome = $_GET['nome'];
+  }else {
+    $nome ='';
+  }
 $credorPer = new tes_credores();
 $credorLista = $credorPer->dados();
 $membroPer = new membro();
 $membroLista = $membroPer->nomes();
 //print_r ($credorLista);
-$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
+$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome);
   foreach ($recLista as $key => $value) {
     if ($igr && $igr!=$value['igreja']) {
       continue;

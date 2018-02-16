@@ -65,15 +65,30 @@
 							} else {
 								$perLista = 'Todos da data: '.$diaPer.' de '.$mesPerido.' de '.$anoPer ;
 							}
+
+							if ((isset($_GET['motivo']))) {
+								$selecImput = 'form-group has-success';
+								$exibirMotivo = $_GET['motivo'];
+							} else {
+								$selecImput = '';
+								$exibirMotivo = '';
+							}
+
 						?>
 					</select>
   </div>
   <div class="col-xs-2">
 		<label>Ano</label>
 		<input type="text" name="ano" tabindex="<?PHP echo ++$ind;?>"
-		class="form-control  input-sm" placeholder="Ano" value="<?PHP echo $anoPer;?>" />
+		class="form-control input-sm" placeholder="Ano" value="<?PHP echo $anoPer;?>" />
   </div>
-  <div class="col-xs-5">
+  <div class="col-xs-5 <?php echo $selecImput; ?>">
+	<label>Motivo:</label>
+		<input type="text" class="form-control input-sm" name="motivo"
+		 placeholder="Referente a/ou que pagou?" tabindex="<?PHP echo ++$ind; ?>"
+		 value='<?php echo $exibirMotivo; ?>'/>
+  </div>
+  <div class="col-xs-3">
 	<label>Congrega&ccedil;&atilde;o:</label>
 	<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'igreja');

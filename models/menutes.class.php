@@ -375,7 +375,7 @@ function recibosmembros (){
 	echo "</p>";
 		//In?cio das pendencias de disciplinados
 	}
-	public function periodo ($dia=null,$mes=null,$ano=null)
+	public function periodo ($dia=NULL,$mes=NULL,$ano=NULL,$motivo=NULL,$nome=NULL)
 	{
 		$retorno = array();
 		if (checkdate($mes,$dia,$ano)) {
@@ -393,6 +393,20 @@ function recibosmembros (){
 		}/*else {
 			$op = 'DATE_FORMAT(t.data,"%Y")="'.date('Y').'" AND ';
 		}*/
+		//Inclui o na consulta o motivo
+		if (isset($motivo)) {
+		$escMotivo = mysql_escape_string($motivo);
+		$op .= 't.motivo LIKE "%'.$escMotivo.'%" AND ';
+		}
+
+	if ($nome===intval($nome)) {
+		$escRol = mysql_escape_string($nome);
+		$op .= 't.recebeu = "'.$escRol.'" AND ';
+	} elseif ($nome!='') {
+		$escNome  = mysql_escape_string($nome);
+		$op .= 't.recebeu LIKE "%'.$escNome.'%" AND ';
+	}
+
 		$sqlPer  = 'SELECT t.*,i.razao FROM tes_recibo AS t, igreja AS i WHERE '.$op;
 		$sqlPer .= '(t.igreja=i.rol OR t.igreja="0") ORDER BY t.data DESC,t.id DESC';
 		$resQueryPer = mysql_query($sqlPer);
