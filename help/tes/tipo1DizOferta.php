@@ -67,7 +67,7 @@ for ($i = 0; $i < 13; $i++) {
 
 		if ($conta=='') {
 			echo $msg;
-		}else {
+		}	else {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
 			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";

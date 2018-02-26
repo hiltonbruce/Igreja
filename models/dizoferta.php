@@ -12,6 +12,13 @@ $d=$dta[0];
 $m=$dta[1];
 $y=$dta[2];
 $res = checkdate($m,$d,$y);
+
+$dataHoje = new DateTime("now");
+$dataLanc = new DateTime("$y-$m-$d");
+
+echo $dataHoje->format('Y-m-d\TH:i:s.u');
+echo '<br> Lanç.'.$dataLanc->format('Y-m-d\TH:i:s.u');
+
 $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
 $rolIgreja = (empty($_POST["rolIgreja"])) ? false:intval($_POST['rolIgreja']);
 $sqlUltiReg  = 'SELECT data FROM dizimooferta WHERE ';
@@ -52,7 +59,7 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=3&igreja=$rolIgreja";
 		break;
 		default:
-			echo 'Não foi definidade o tipo do grupo de lançamento!';
+			echo 'Não foi definido o tipo do grupo de lançamento!';
 			$linkreturn  = "./?escolha=tesouraria/receita.php&menu=top_tesouraria&igreja=$rolIgreja";
 		break;
 	}

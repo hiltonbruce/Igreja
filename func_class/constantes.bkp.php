@@ -13,6 +13,7 @@ define ('PROVMISSOES',0.4);#Percentual da provisão de missões
 define ('DESPMISSOES','3.2.1.001.005');#Conta da Despesa da provisão de missões
 define ('PROVCONVENCAO',0.1);#Percentual da provisão para convenção estadual
 define ('DESPCONVENCAO','3.1.1.001.007');#Conta da Despesa da provisão para convenção estadual
+define ('MESBLOQUEA','2017-05-01');#Não é permitido lançamento de dízimos e ofertas anterior ou igaula a esta data
 $dns = 'mysql://'.DBUSER.':'.DBPASS.'@'.DBPATH.'/'.DBNAME;
 /*
  * Usuário e senha de Backup:

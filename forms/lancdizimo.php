@@ -47,6 +47,26 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 	//Inicializado as variáveis
 	$ind = 0;
 	$dtlanc = (empty($_POST['dataLancamento']) ) ? conv_valor_br($dataLc):$_POST['dataLancamento'];
+	$dataHoje = new DateTime("now");
+	$dataLanc = new DateTime($dataLc);
+	$dataBloqueada = new DateTime(MESBLOQUEA);
+
+	/*echo $dataHoje->format('Y-m-d\TH:i:s.u');
+	echo '<br> Lanç.'.$dataLanc->format('Y-m-d\TH:i:s.u').'<br>';
+	echo $dataLanc->format('Y-m-d').'<br>';
+	echo $dataBloqueada->format('Y-m-d').'<br>';*/
+
+	if ($dataLanc->format('Y-m-d')>$dataHoje->format('Y-m-d')) {
+		echo '<div class="alert alert-danger" role="alert"><h3>Erro na Data - ';
+		echo ' hoje: '.$dataHoje->format('d/m/Y').' &eacute; menor que Lan&ccedil;: '.$dataLanc->format('d/m/Y');
+		echo '</h3>Lan&ccedil;amento n&atilde;o permitido reveja a data e corrija para um dia anterior ao de hoje!</div>';
+	}elseif ($dataLanc->format('Y-m') < $dataBloqueada->format('Y-m')) {
+		echo '<div class="alert alert-danger" role="alert"><h3>M&ecirc;s bloquedo </h3><b>';
+		echo $dataBloqueada->format('m/Y').'</b> e anteriores est&atilde;o fechados para ';
+		echo 'lan&ccedil;amento, reveja a data e corrija';
+		echo ' para per&iacute;odo posterior a este!</div>';
+	} else {
+
 	?>
 <form method="post" action="">
 	<div class="col-xs-12">
@@ -77,6 +97,7 @@ if ($_SESSION['lancar'] && ($totDebito>0 || $totCredito>0)) {
 		<input name="igreja" type="hidden" value="<?php echo $roligreja;?>" />
 </form>
 <?php
+}
 	//echo '<h1> ***'.$dataLc.'</h1>';
 }elseif ($totDebito<1 && $totCredito<1) {
 	echo '<h3>Essa Igreja n&atilde;o possui lan&ccedil;amento a realizar!</h3>';
