@@ -58,19 +58,33 @@ function condatabrus ($dt){
 }
 
 function checadata ($dt){
+	//echo substr_count($dt, '-')." ****";
+	if (substr_count($dt, '-')==2) {
+	//Valida a data no formato aaaa-mmm-dd
+		$dta = explode('-',$dt);
+		$d = $dta[2];
+		$m = $dta[1];
+		$y = $dta[1];
+	} elseif (substr_count($dt, '/')==2) {
 	//Valida a data no formato dd/mm/aaaa
-			$dta = explode('/',$dt);
-			$d = $dta[0];
-			$m = $dta[1];
-			$y = $dta[2];
-			$res = checkdate($m,$d,$y);
-			if ($res == 1 ){
-				//Data vï¿½lida
-				return true;
-			}else{
-				//Data invï¿½lida
-				return false;
-			}
+		$dta = explode('/',$dt);
+		$d = $dta[0];
+		$m = $dta[1];
+		$y = $dta[2];
+	}else {
+		$d = 0;
+		$m = 0;
+		$y = 0;
+	}
+
+	$res = checkdate($m,$d,$y);
+	if ($res == 1 ){
+		//Data válida
+		return true;
+	}else{
+		//Data inválida
+		return false;
+	}
 }
 
 function conv_valor_br ($data) {

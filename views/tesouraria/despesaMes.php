@@ -3,13 +3,13 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	$credor = (empty($_GET['credor'])) ? 0 : $_GET['credor'];
 	$igRol = (empty($_GET['igreja'])) ? 0 : $_GET['igreja'];
 	if (!empty($_GET['data']) && checadata($_GET['data'])) {
-		list($d,$m,$y) = explode('/', $_GET['data']);
+		list($y,$m,$d) = explode('-', $_GET['data']);
 	}else {
 		$d =  '01' ;
 		$m = date("m");
 		$y = date("Y");
 	}
-	$dt = $d.'/'.$m.'/'.$y;
+	$dt = $y.'-'.$m.'-'.$d;
 	//$credor = ($_GET['credor']>'0') ? $_GET['credor']:'0';
 	//Array's para troca do dia da semana para portugês
 	$diaEn = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
@@ -22,7 +22,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
  ?>
  <form action="" method="get">
  	<div class="row">
-  <div class="col-xs-3">
+  <div class="col-xs-2">
  	<label>Por fornecedor:</label>
 	<select name="credor" id="credor" class="form-control" onchange="MM_jumpMenu('parent',this,0)"
 	 tabindex="<?PHP echo ++$ind; ?>" >
@@ -41,9 +41,9 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
  echo $listaIgreja;
 	 ?>
   </div>
-  <div class="col-xs-2">
+  <div class="col-xs-3">
 	<label>Per&iacute;odo de:</label>
-	<input name="data" id="data" class="form-control"
+	<input type="date" name="data" class="form-control"
 	value='<?php echo $dt;?>' tabindex="<?PHP echo ++$ind; ?>" >
   </div>
   <div class="col-xs-2">
