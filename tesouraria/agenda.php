@@ -27,7 +27,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 		require_once 'tesouraria/vencidas.php';//Faz a busca dos compromissos agendados
 	}
 	if ($_GET['id']>0 && empty($_POST['atualizar'])) {
-		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendï¿½ncia
+		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendência
 	}elseif ($_POST['atualizar']>'0'){
 		$atualizar= new updatesist('agenda',$_POST['atualizar'],'id');
 		if (!empty($_POST['idlanc'])) {
@@ -131,7 +131,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 
 	<?php
 }}
-if (strlen($despesasInserirdas)>'10') {
+if (strlen($despesasInserirdas)>'7') {
 ?>
 <fieldset>
 	<legend>Despesas Mensais Inseridas</legend>

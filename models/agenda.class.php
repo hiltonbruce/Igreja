@@ -21,7 +21,7 @@ class agenda {
 
 		//verifica o mês da ultima conta e inseri as atuais e as que estiverem com
 		//vencimento até o dia 10 de cada mês será inserida já para o próximo mês
-		$ins_conta = 'SELECT * FROM agenda WHERE frequencia = "1" AND status <> "3" GROUP BY idfatura';
+		$ins_conta = 'SELECT * FROM agenda WHERE frequencia = "1" AND status <> "3" GROUP BY idfatura' ;
 		$lista = mysql_query($ins_conta);
 
 		while ($contas = mysql_fetch_array($lista)) {
@@ -39,7 +39,7 @@ class agenda {
 			list($anov, $mesv, $diav) = explode("-", $id['vencimento']);
 			//echo '<br /> Id Fatrura: '.$contas['idfatura'].' - Data atual - ultimo Vencimento: '.$id['ultvenc'].' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
 			//$query_prox = 'SELECT * FROM agenda  WHERE idfatura = "'.$contas['idfatura'].'" AND (TO_DAYS(vencimento) - TO_DAYS(NOW()) >= "10")';
-			if (ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24))>'15' && $id['status']<>'3') {
+			if (ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24))>'0' && $id['status']<>'3') {
 				$mesvenc = (date('m',mktime() - mktime(0,0,0,$mesv,$diav,$anov)));
 				//corrigir os dados da tabela agenda para unificar os fornecedores
 				//adiciona campo vencimento na confirmação de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
