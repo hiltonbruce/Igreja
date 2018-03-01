@@ -524,7 +524,8 @@ class agenda {
 	}
 
 	function demonstrativo ($dia,$credor,$pagamento) {
-
+		
+		$linhaResult='';
 		$periodo  = 'SELECT a.vencimento, a.valor, a.id, a.credor,';
 		$periodo .= 'a.igreja, a.status, a.motivo, a.idlanc ';
 		$periodo .= 'FROM agenda AS a WHERE ';
@@ -577,17 +578,18 @@ class agenda {
 				$credor= new DBRecord('credores',$periodo_dados['credor'],'id');
 				$evento .= ' &rarr; '.$credor->alias();
 			}
-			echo '<a title="'.$titulo.'" href="./?escolha=tesouraria/agenda.php&
+			$linhaResult .= '<a title="'.$titulo.'" href="./?escolha=tesouraria/agenda.php&
 			menu=top_tesouraria&id='.$periodo_dados['id'].'&pagina1_fix='.$_GET['pagina1_fix'].$linkcredor.'">';
-			echo $evento;
-			echo ' &rarr; R$ '.number_format($periodo_dados['valor'],2,",",".").
+			$linhaResult .= $evento;
+			$linhaResult .= ' &rarr; R$ '.number_format($periodo_dados['valor'],2,",",".").
 			'</a> (<span class="text-info">'.$periodo_dados['motivo'].'</span>)<br />';
 			$total += $periodo_dados['valor'];
 		}
 	}else {
 		$total=0;
 	}
-		echo '</td><td  class="text-right" >'.number_format($total,2,",",".").'</td>';
+		$linhaResult .= '</td><td  class="text-right" >'.number_format($total,2,",",".").'</td>';
+		return array($linhaResult,$total);
 	}
 }
 ?>

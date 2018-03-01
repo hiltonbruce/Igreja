@@ -89,6 +89,8 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 				$diaSemana = str_replace($diaEn, $diaBr, $diaSemana);
 				echo '<td>'.$iniDia->format('d/m').'&nbsp;-&nbsp;'.$diaSemana.'</td><td>';
 				$evento = $lista->demonstrativo(date('Y-m-d',$iniDia->getTimestamp()),$credor,$dataget);
+				echo $evento[0];
+				$totalDem += $evento[1];
 				//usa o objeto do script tesouraria/agenda.php com $lista = new agenda();
 				echo '</tr>';
 				$iniDia->modify( '+1 day' );
@@ -109,7 +111,8 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 				<th colspan="2" class="text-right">
 					Total:
 				</th>
-				<th>
+				<th class="text-right">
+					<?php echo number_format($totalDem,2,",","."); ?>
 				</th>
 			</tr>
 			<tr>
