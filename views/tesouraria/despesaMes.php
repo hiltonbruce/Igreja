@@ -4,6 +4,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	$igRol = (empty($_GET['igreja'])) ? 0 : $_GET['igreja'];
 	if (!empty($_GET['data']) && checadata($_GET['data'])) {
 		list($y,$m,$d) = explode('-', $_GET['data']);
+		//teste
 	}else {
 		$d =  '01' ;
 		$m = date("m");
