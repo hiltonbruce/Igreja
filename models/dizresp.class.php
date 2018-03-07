@@ -339,14 +339,17 @@ function concluir($igreja) {
 			$tabLancamento .= '<td>'.$status.'</td></tr>';
 			$total += $linha['valor'];
 		}
-		$total = number_format($total,2,',','.');
-		$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
-		%s</td><td colspan='3' class='text-right'>Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
-		&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),number_format($totaltes,2,',','.'));
-		$tabLancamento .=  '</tbody>';
-		$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
-		class="text-right">Total Geral:</td><td colspan="2" class="text-right"
-		><strong> R$ '.$total.'</strong></td><td></td></tr></tfoot>';
+		if ($igreja>'0') {
+			$total = number_format($total,2,',','.');
+			$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
+			%s</td><td colspan='3' class='text-right'>Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
+			&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),number_format($totaltes,2,',','.'));
+			$tabLancamento .=  '</tbody>';
+			$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
+			class="text-right">Total Geral:</td><td colspan="2" class="text-right"
+			><strong> R$ '.$total.'</strong></td><td></td></tr></tfoot>';
+		}
+
 		return $tabLancamento;
 	}
 }

@@ -47,18 +47,26 @@ $linkAcesso .= '&rec='.$rec.'&idDizOf='.$idDizOf.'&mes='.$meslanc.'&ano='.$anola
 $bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 ?>
 <fieldset>
-	<legend>Fecha Caixa &bull; Igreja: <?php echo $igrejaSelecionada->razao();//do script forms/autodizimo.php
+	<legend>Fecha Caixa &bull; Igreja: <?php echo ($roligreja>'0') ? $igrejaSelecionada->razao() : 'N&atilde;o definida!' ;;//do script forms/autodizimo.php
 	?> </legend>
 	<div class="row">
 	<div class="col-xs-4">
-	<form method="post" action="">
-	<input name="escolha" type="hidden" value="<?php echo $_GET['escolha'];?>" />
-	<input name="concluir" type="hidden" value="1" />
-	<input name="dataLancamento" type="hidden" value="<?php echo $dtlanc;?>" />
-	<input name="rolIgreja" type="hidden" value="<?php echo $igrejaSelecionada->rol();?>" />
-	<label>&nbsp;</label>
-	<input type="submit" class="btn btn-primary" name="Submit" value="Fecha Caixa" tabindex="<?PHP echo ++$ind;?>" />
-	</form>
+		<?php
+			if ($roligreja > '0') {
+				?>
+				<form method="post" action="">
+				<input name="escolha" type="hidden" value="<?php echo $_GET['escolha'];?>" />
+				<input name="concluir" type="hidden" value="1" />
+				<input name="dataLancamento" type="hidden" value="<?php echo $dtlanc;?>" />
+				<input name="rolIgreja" type="hidden" value="<?php echo $igrejaSelecionada->rol();?>" />
+				<label>&nbsp;</label>
+				<input type="submit" class="btn btn-primary" name="Submit" value="Fecha Caixa" tabindex="<?PHP echo ++$ind;?>" />
+				</form>
+				<?php
+			} else {
+				echo '<div class="alert alert-danger" role="alert"><h3>Fechar caixa</h3> Voc&ecirc; dever&aacute; definir igreja aqui!</div>';
+			}
+		 ?>
 	</div>
 	<div class="col-xs-8">
 	<label>Alterar Igreja: </label>
