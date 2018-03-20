@@ -818,6 +818,50 @@ function situacao ($situacao,$rol){
 	return $estilo;
 	}
 
+	function periodoMembro ($rol,$mes,$ano){
+		//Retorna a data se deixou de ser membro true no mês/ano indicado
+		/********************************
+		* situacao_espiritual
+		*		1 Em Comunhão
+		*		3 Faleceu
+		*		4 Modou de Denominação
+		*		5 Afastou-se da Igreja
+		*		6 Transferido
+		*********************************/
+		$rol = ($rol>'0') ? intval($rol):$_SESSION["rol"];
+		$result = mysql_query("SELECT DATE_FORMAT(data_fim,'%d/%m/%Y') AS dt_fim, FROM disciplina WHERE rol = '$rol' ORDER BY id ");
+		$data = mysql_fetch_array($result);
+		switch ($situacao)
+		{
+			case "1":
+				$estilo="Em Comunh&atilde;o";
+				break;
+			case "2":
+				if ($data ["dt_fim"]!="00/00/0000")
+					$estilo = '<span class="text-danger text-blink">Disciplinado at&eacute;:</span>'.$data ["dt_fim"];
+				else
+					$estilo = '<span class="text-danger text-blink">Disciplinado por prazo indeterminado</span>';
+				break;
+			case "3":
+				$estilo='<h1><span class="text-danger text-blink">Falecido</span></h1>';
+				break;
+			case "4":
+				$estilo='<span class="text-danger text-blink">Mudou de Igreja</span>';
+				break;
+			case "5":
+				$estilo='<span class="text-danger text-blink">Afastou-se</span>';
+				break;
+			case "6":
+				$estilo='<span class="text-danger text-blink">Transferido</span>';
+				break;
+			default:
+				$estilo  ='<h4><span class="text-warning text-blink">Corrija a comunh&atilde;o ';
+				$estilo .='com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</span></h4>';
+				break;
+		}
+		return $estilo;
+		}
+
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
     return (strtoupper(strtr($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' )));

@@ -3,18 +3,14 @@
 <table>
 	<tr>
 	<?PHP
-
 		$_urlLi  ='?escolha=tesouraria/receita.php&menu=top_tesouraria&direita=1&';
 		$_urlLi .='rec=23&ano='.$_GET['ano'].'&id='.$_GET['id'].'&mes='.$_GET['mes'].'&ord=';
 		$link 	 = $_urlLi;
 		$_urlLi .= $_GET["ord"].'&id='.$_GET["id"];//Montando o Link para ser passada a classe
-
 		$idIgreja = (empty($_GET['id']) || $_GET['id']<0 ) ? 0 : $_GET['id'] ;
-
-					//Cabeçalho da tabela
-					//Oculta o botao imprimir para não sair na impressão
-					$linkImpressao ='tesouraria/receita.php/?rec=23';
-
+		//Cabeçalho da tabela
+		//Oculta o botao imprimir para não sair na impressão
+			$linkImpressao ='tesouraria/receita.php/?rec=23';
 			if (empty($titulo)) {
 				echo '<td>'.$cong.'Histórico Financeiro - Ano de referência: '.$ano.'</td>';
 			} else {
