@@ -36,6 +36,7 @@ switch ($tipo) {
 	$nomeArquivo = '../views/tesouraria/tabDizimosOfertas.php';
 	break;
 	case '2':
+	//Imprime agenda
 	$tituloColuna5 = ($idIgreja>'1') ? 'Congrega&ccedil;o':'Igreja';
 	$titTabela = 'Agenda de Eventos - '.NOMESYS;
 	require_once '../agendaSec/lang/lang.admin.pt.php';

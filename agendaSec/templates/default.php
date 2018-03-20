@@ -2,6 +2,8 @@
 <?php
 	javaScript();
 	$link = './controller/modeloPrint.php/?igreja='.$i.'&month='.$m.'&year='.$y.'&day='.$d.'&tipo=2';
+	//Link p/ imprimir o ano inteiro
+	$linkImpAno = './controller/modeloPrint.php/?igreja='.$i.'&year='.$y.'&day='.$d.'&tipo=2';
 ?>
 <table class='table' style='margin-bottom: 0px'>
 <tr>
@@ -27,7 +29,11 @@
 	<td>
 		<a href='<?php echo $link;?>' target="_blank">
 			<button class='btn btn-primary' data-toggle="tooltip" data-placement="top"
-			 title="Imprimir agenda"><span class="glyphicon glyphicon-print"
+			 title="Imprimir este m&ecirc;s"><span class="glyphicon glyphicon-print"
+			aria-hidden="true"></span></button></a>
+		<a href='<?php echo $linkImpAno;?>' target="_blank">
+			<button class='btn btn-warning' data-toggle="tooltip" data-placement="top"
+			 title="Imprimir ano de <?php echo $y;?>"><span class="glyphicon glyphicon-print"
 			aria-hidden="true"></span></button></a>
 	</td>
 </tr>

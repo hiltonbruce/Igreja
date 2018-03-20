@@ -7,7 +7,7 @@ class sec_AgendaSec
 	protected $igreja;
 
 	function __construct($y = '',$m = '',$d = '',$ano = '',$igreja = '') {
-    $m = (empty($_GET['month'])) ? date('n') : intval($_GET['month']) ;
+    $m = (empty($_GET['month'])) ? '' : intval($_GET['month']) ;
     $y = (empty($_GET['year'])) ? date('Y') : intval($_GET['year']) ;
     $d = (empty($_GET['day'])) ? '' : intval($_GET['day']) ;
     $i = (empty($_GET['igreja'])) ? '' : intval($_GET['igreja']) ;
@@ -21,7 +21,10 @@ class sec_AgendaSec
 		if ($d!='') {
 			$sql .= 'AND a.d="'.$d.'" ';
 		}
-		$sql .= 'AND a.y = "'.$y.'" AND a.m = "'.$m.'" GROUP BY a.id ORDER BY a.d,a.start_time,i.razao' ;
+		if ($m!='') {
+			$sql .= 'AND a.m="'.$m.'" ';
+		}
+		$sql .= 'AND a.y = "'.$y.'" GROUP BY a.id ORDER BY a.m,a.d,a.start_time,i.razao' ;
 		$this->sql_lst = mysql_query($sql) or die (mysql_error());
 	}
 
