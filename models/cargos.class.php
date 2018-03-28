@@ -12,15 +12,13 @@ class cargos {
 		} else {
 			$this->opIgreja = ' AND i.rol ="'.$igreja.'" ' ;
 		}
-			//$this->opIgreja = ' AND i.rol ="2"' ;
+		//$this->opIgreja = ' AND i.rol ="2"' ;
 		//$linhasPorPag =  $pagina-1 ;
 		$this->linhasPorPagina = ($linhasPorPag==0) ?  300:$linhasPorPag;
 		$this->linhaInicial = ($pagina=='1') ?  0:($pagina-1)*$linhasPorPag;
-
 		$this->query  = 'SELECT m.*,i.razao from membro AS m, eclesiastico AS e, igreja AS i WHERE m.rol=e.rol AND';
 		$this->query .= ' i.rol=e.congregacao AND e.situacao_espiritual<="2" '.$this->opIgreja;
 		$this->query2 = '';
-
 		$this->congreg  = "";
 		$this->congreg0 = "";
 		$this->congreg1 = " AND DATE_FORMAT(e.auxiliar,'%d') <> '00'  AND DATE_FORMAT(e.diaconato,'%d') = '00' AND DATE_FORMAT(e.presbitero,'%d') = '00' AND DATE_FORMAT(e.evangelista,'%d') = '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
@@ -33,16 +31,12 @@ class cargos {
 	function ArrayCargosDados($cargo,$mes,$ano) {
 
 		//$opCargo = (!empty($_GET["id"])) ? $_GET["id"] : $cargo;
-
 		$opcCargo = 'congreg'.$cargo;
 		$congreg = $this->$opcCargo;
-
 		global $db;
-
 		//$querys  = "SELECT m.*,i.razao from membro AS m, eclesiastico AS e, igreja AS i WHERE m.rol=e.rol AND";
 		$querys  = $this->query.$congreg.' AND e.congregacao=i.rol AND DATE_FORMAT(e.dat_aclam,"%Y%m") <= "'.$ano.$mes.'" ';
 		$querys .= ' ORDER BY i.razao,m.nome LIMIT '.$this->linhaInicial.','.$this->linhasPorPagina;
-
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		$res = & $db->query($querys) ;
 		//print_r($res);
@@ -51,7 +45,6 @@ class cargos {
 			$linhas[] = $row;
 		}
 		return $linhas;
-
 	}
 
 	function linhas($cargo,$mes,$ano) {
@@ -71,7 +64,6 @@ class cargos {
 
 		$opcCargo = 'congreg'.$opCargo;
 		$congreg = $this->$opcCargo;
-
 		global $db;
 		$ano = intval($ano);
 		$mes = intval($mes);
@@ -79,11 +71,9 @@ class cargos {
 		$query  = 'SELECT m.rol from membro AS m, eclesiastico AS e, igreja AS i, dizimooferta AS d WHERE m.rol=e.rol AND';
 		$query .= ' DATE_FORMAT(e.dat_aclam,"%Y%m")<="'.$ano.$mes.'" '.$this->opIgreja.$congreg.' AND e.congregacao=i.rol AND m.rol=d.rol';
 		$query .= ' AND d.valor>"0" AND d.anorefer ="'.$ano.'" AND d.mesrefer = "'.$mes.'" AND d.credito = "700" GROUP BY d.rol ';
-
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		$res = & $db->query($query) ;
 		return $res->numRows();
-
 	}
 }
 ?>

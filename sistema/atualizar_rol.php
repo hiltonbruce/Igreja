@@ -4,7 +4,7 @@ controle ("atualizar");
 
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
-$id = (int)$_POST["id"];
+$id = intval($_POST["id"]);
 $query = 'SELECT * FROM '.$_POST["tabela"];
 //echo "ID: ".$_POST["id"]." Campo: ".$_POST["campo"]." Tabela: ".$_POST["tabela"]." Post[Post[campo]]: ".ltrim($_POST[$_POST["campo"]]);
 $query .=' WHERE rol="'.$id.'"';
@@ -32,11 +32,11 @@ $result = mysql_query($query) or die (mysql_error());
 				}
 				break;
 			case 'ceia':
-				$atualizador =(int)($_POST["semana"].$_POST["dia"]);
+				$atualizador =intval($_POST["semana"]).$_POST["dia"]);
 				break;
 			case 'pastor':
 				$hist = $_SESSION['valid_user']."@".$_SESSION['nome'].'@'.date('d/m/Y H:i:s');
-				//$atualizador =(int)($_POST["semana"].$_POST["dia"]);
+				//$atualizador =intval($_POST["semana"].$_POST["dia"]);
 				if ($id=='1' && $_POST["pastor"]=='') {
 					$atualizador = ltrim($_POST["nome"]);
 				} else {
@@ -62,7 +62,7 @@ $result = mysql_query($query) or die (mysql_error());
 				}
 				break;
 			case 'razao':
-				//$atualizador =(int)($_POST["semana"].$_POST["dia"]);
+				//$atualizador =intval($_POST["semana"].$_POST["dia"]);
 					if ($id=='1') {
 						$atualizador = ' '.$_POST["razao"];
 					} else {

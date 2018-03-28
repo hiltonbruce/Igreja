@@ -147,6 +147,20 @@
 	}
     $cargoIgreja = new tes_cargo();
     $dadosCargo = $cargoIgreja->dadosArray();
+    if ($dadosCargo['7']['1']['1']['nome']=='') {
+      $sec1 = new DBRecord ('membro',$igSede->secretario1(),"rol");
+      $primSecretario = $sec1->nome();
+    } else {
+      $primSecretario = $dadosCargo['7']['1']['1']['nome'];
+    }
+    
+    if ($dadosCargo['7']['1']['2']['nome']=='') {
+      $sec1 = new DBRecord ('membro',$igSede->secretario2(),"rol");
+      $segSecretario = $sec1->nome();
+    } else {
+      $segSecretario = $dadosCargo['7']['1']['2']['nome'];
+    }
+  //  echo var_dump($igSede);
   //  print_r($dadosCargo['7']);
   //  echo $dadosCargo['7']['1']['2']['nome'].' *** ';
 
@@ -159,8 +173,8 @@ if ($cidade!=''){
   <div class="col-xs-5">
   <label>Secret&aacute;rio que ir&aacute; assinar a carta:</label>
   <select name="secretario" id="secretario" class='form-control'>
-    <option value="1"><?PHP echo $dadosCargo['7']['1']['1']['nome'];?></option>
-    <option value="2"><?PHP echo $dadosCargo['7']['1']['2']['nome'];?></option>
+    <option value="1"><?PHP echo $primSecretario;?></option>
+    <option value="2"><?PHP echo $segSecretario;?></option>
   </select></div>
   <div class="col-xs-2">
   <!-- Envia o id para a impress�o da carta escolhida -->

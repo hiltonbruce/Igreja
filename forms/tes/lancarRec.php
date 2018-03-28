@@ -6,7 +6,8 @@ if ($rec) {
 	$ctaAces = $contas->ativosArray();
 	$ctaAcessos = false;
 	$sldPgto = ($recDados->valor()<=$ctaAces[$recDados->fonte()]['saldo']) ? true : false ;
-	if ($ctaAces[$recDados->conta()]['id']>0 && $ctaAces[$recDados->fonte()]['id']>'0' && intval($recDados->lancamento())=='0') {
+	if ($ctaAces[$recDados->conta()]['id']>0 && $ctaAces[$recDados->fonte()]['id']>'0'
+	 && intval($recDados->lancamento())=='0' && intval($recDados->igreja())>0) {
 		$ctaAcessos = true;
 	}elseif ($recDados->lancamento()!='0') {
 		$corpoMens = 'Recibo j&aacute; lan&ccedil;ado!';
@@ -16,6 +17,8 @@ if ($rec) {
 		$corpoMens = 'N&atilde;o foi identicado qual caixa ser&aacute; utilizado!';
 	}elseif ($ctaAces[$recDados->conta()]['id']=='') {
 		$corpoMens = 'N&atilde;o foi identicado a conta de despesa!';
+	}elseif ($ctaAces[$recDados->igreja()]['id']<'1') {
+		$corpoMens = 'N&atilde;o foi identicado a Igreja/Congreção!';
 	}else {
 		$corpoMens  = 'Falha N&atilde;o indentificada de lançamento. Informe ao  ';
 		$corpoMens .= 'admnistrador do sistema!';

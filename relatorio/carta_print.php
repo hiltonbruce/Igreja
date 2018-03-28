@@ -29,6 +29,21 @@
   $cpf = (strlen($profissional->cpf())=='14') ? $profissional->cpf() : '*********' ;
   $cargoIgreja = new tes_cargo();
   $dadosCargo = $cargoIgreja->dadosArray();
+	if ($dadosCargo['7']['1'][$_POST["secretario"]]['nome']=='') {
+
+		if ($_POST["secretario"]=='1' ) {
+			$sec1 = new DBRecord ('membro',$igreja->secretario1(),"rol") ;
+			$secretario = $sec1->nome();
+		} elseif ($_POST["secretario"]=='2') {
+			$sec1 = new DBRecord ('membro',$igreja->secretario2(),"rol") ;
+			$secretario = $sec1->nome();
+		} else {
+			$secretario ='';
+		}
+	} else {
+		$secretario = $dadosCargo['7']['1'][$_POST["secretario"]]['nome'];
+	}
+
  // print_r($dadosCargo);
   if ($igreja->cidade()>0) {
   		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -145,8 +160,8 @@
 	    <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
-	  <div id="secretario"><?PHP echo  strtoupper($dadosCargo['7']['1'][$_POST["secretario"]]['nome']);?><br />
-      <?php echo $_POST["secretario"].'&ordm; '.$dadosCargo['7']['1']['1']['nomeFunc'];?> </div>
+	  <div id="secretario"><?PHP echo  strtoupper($secretario);?><br />
+      <?php echo $_POST["secretario"].'&ordm; Secret&aacute;rio';?> </div>
 <br>
 
     </div>
