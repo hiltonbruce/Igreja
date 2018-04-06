@@ -3,15 +3,15 @@ Igreja
 
 ###Controle administrativo e financeiro para Igrejas Evangélicas
 
- O sistema está em franca expansão e atualmente conta com os módulos de cadastro de membros, controle de disciplinados, cartas de: recomendação, em transito e mudança, controle de entrega de cartão de membro, emissão de cartão de membros, não cadastra rol's com a sequência de três seis (666), para evitar a duplicidade de cadastro critica a existência de nomes já cadastrados e dar a possibilidade de usá-lo ou não, exige o uso de CPF para o cadastro permitindo apenas o uso de um número por pessoa e na ausência deste número ainda dá a possibilidade, embora não recomendada, do número do rol em substituição bastando deixar em branco o espaço para o CPF, listagem de membros: totais, por congregações, cargo eclesiástico, ...
+ O sistema está em franca expansão e atualmente conta com os módulos de cadastro de membros, controle de disciplinados, cartas de: recomendação, em trânsito e mudança, controle de entrega de cartão de membro, emissão de cartão de membros, não cadastra rol's com a sequência de três seis (666), para evitar a duplicidade de cadastro critica a existência de nomes já cadastrados e dar a possibilidade de usá-lo ou não, exige o uso de CPF para o cadastro permitindo apenas o uso de um número por pessoa e na ausência deste número ainda dá a possibilidade, embora não recomendada, do número do rol em substituição bastando deixar em branco o espaço para o CPF, listagem de membros: totais, por congregações, cargo eclesiástico, ...
 
-  O programa tem uma estrutura coesa totalmente baseado em Soft Livre, com uso de linguagens de programação isentas de cobranças de quaisquer tipo de licença e sem nenhuma restrição de uso. Visando a implantação de intranet's para acesso locais ou externos o detentor do sistema tem total liberdade para expandi-lo.
+  O programa tem uma estrutura coesa totalmente baseado em Software Livre, com uso de linguagens de programação isentas de cobranças de quaisquer tipo de licença e sem nenhuma restrição de uso. Visando a implantação de intranet's para acesso locais ou externos o detentor do sistema tem total liberdade para expandi-lo.
 
 
 __Desenvolvimento__
 
- Recomenda-se a implantação em Linux Debian Server, pela estabilidade e segurança oferecido por esta plataforma. Requer ainda servidor de Web Apache, banco de dados MySQL, modulo PHP5 ativo, pacote PEAR DB e remendamos ainda a instalação do PHPMyadmin e o MySQL Admin, este último, principalmente, para o backup dos dados. Lembrando, sem ser redundante, todas as ferramentas são de uso livre, sem custos com licenças ou limitação de uso. Todas essas ferramentas são instaladas neste mesmo servidor Web.
- A concepção do sistema dispensa a instalação de qualquer programa nas estações que faram uso dele e para tanto requer o uso de qualquer navegador de internet, embora remendamos o uso do firefox® versão 40.0 ou superior pelo respeito que este navegador tem aos padrões W3C, responsável este por ditar a padronização da WEB.
+ Recomenda-se a implantação em Linux Debian Server, pela estabilidade e segurança oferecido por esta plataforma. Requer ainda servidor de Web Apache, banco de dados MySQL, módulo PHP5 ativo, pacote PEAR DB e recomendamos ainda a instalação do PHPMyadmin e o MySQL Admin, este último, principalmente, para o backup dos dados. Lembrando, sem ser redundante, todas as ferramentas são de uso livre, sem custos com licenças ou limitação de uso. Todas essas ferramentas são instaladas neste mesmo servidor Web.
+ A concepção do sistema dispensa a instalação de qualquer programa nas estações que farão uso dele e para tanto requer o uso de qualquer navegador de internet, embora remendamos o uso do firefox® versão 40.0 ou superior pelo respeito que este navegador tem aos padrões W3C, responsável este por ditar a padronização da WEB.
  Já estamos realizando estudos e o sistema ira migrar 100% para o modelo MVC, simplificando, isto lhe dará independência quanto ao desenvolvedor, continuidade, adaptação as suas necessidades, não havendo necessidade de entrar em contato conosco para implantação ou personalização que você achar conveniente. Para tanto quem vier a implantar as alterações, que não nós, deverá obrigatoriamente ter conhecimento deste padrões.
 
   A total falta de um sistema personalizado, moderno, isento de pretensões exclusivamente financeiras, e pensado para facilitar e automatizar os trabalhos corriqueiros da secretária da igreja e auxiliar a direção nas tomadas de decisões.
@@ -33,7 +33,7 @@ __Desenvolvimento__
 - Joseilton C Bruce - Bayeux - PB - Brasil
 
 ###Pastas de armazenamento de dados
-   Deve ser criada a pasta /img_membros com privilegio para o Apache, usuário 'www-data' no Debian Linux, salvar e apagar as fotos dos membros.
+   Deve ser criada a pasta /img_membros com privilégio para o Apache, usuário 'www-data' no Debian Linux, salvar e apagar as fotos dos membros.
    A pasta /bkpbanco deve ser dado, também para o apache, o privilégio de salvar e apagar arquivos nela.
 
 ##Banco de Dados
