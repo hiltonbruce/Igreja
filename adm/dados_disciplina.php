@@ -101,17 +101,22 @@ if ($altEdit && $membro) {
 		echo "<br><span class='style4'>Total de $paginas p&aacute;gina";
 
 	echo "<br />";*/
-	if ($total>"1")
-	{
+	if ($total>"1") {
+
 		printf("Com %s ocorr&ecirc;ncias!",number_format($total, 0, ',', '.'));
+
 	}elseif ($total=="1"){
+
 		echo "Com apenas uma ocorr&ecirc;ncia!";
-	}elseif ($total<1 && empty($_GET["novo"]) ){
+
+	}elseif ( $total<'1' && empty($_GET["novo"]) && empty($_GET["lista"]) ){
+
 		echo '<div class="alert alert-danger" role="alert">';
 		echo '  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
 		echo '  <span class="sr-only">Error:</span>';
 		echo '  N&atilde;o h&aacute; ocorr&ecirc;ncias para este Membro!';
 		echo '</div>';
+
 	}
 	//Fim da lista de mostrar tabela de registro
 	if (!empty($_GET["lista"])) {
