@@ -34,14 +34,18 @@
 		if ($_POST["secretario"]=='1' ) {
 			$sec1 = new DBRecord ('membro',$igreja->secretario1(),"rol") ;
 			$secretario = $sec1->nome();
+			$cargo = ($sec1->sexo()=='M') ? '&ordm; Secret&aacute;rio' : '&ordf; Secret&aacute;ria' ;
 		} elseif ($_POST["secretario"]=='2') {
 			$sec1 = new DBRecord ('membro',$igreja->secretario2(),"rol") ;
 			$secretario = $sec1->nome();
+			$cargo = ($sec1->sexo()=='M') ? '&ordm; Secret&aacute;rio' : '&ordf; Secret&aacute;ria' ;
 		} else {
 			$secretario ='';
+			$cargo = '&ordm; Secret&aacute;rio(a)';
 		}
 	} else {
 		$secretario = $dadosCargo['7']['1'][$_POST["secretario"]]['nome'];
+		$cargo = ($dadosCargo['7']['1'][$_POST["secretario"]]['sexo']=='M') ? '&ordm; Secret&aacute;rio' : '&ordf; Secret&aacute;ria' ;
 	}
 
  // print_r($dadosCargo);
@@ -161,7 +165,7 @@
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 	    Pastor da Igreja</div>
 	  <div id="secretario"><?PHP echo  strtoupper($secretario);?><br />
-      <?php echo $_POST["secretario"].'&ordm; Secret&aacute;rio';?> </div>
+      <?php echo $_POST["secretario"].$cargo;?> </div>
 <br>
 
     </div>

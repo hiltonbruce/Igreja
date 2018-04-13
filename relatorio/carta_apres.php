@@ -88,8 +88,20 @@
           <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
       </div>
       <div id="secretario">
-	        <?PHP echo cargo($secretario->rol())['1'].' '.strtoupper( toUpper($secretario->nome()));?><br />
-	      Secret&aacute;rio
+	        <?PHP
+						$cargo = (cargo($secretario->rol())['1']=='Mb') ? '' : cargo($secretario->rol())['1'] ;
+						echo $cargo.' '.strtoupper( toUpper($secretario->nome()));
+					?>
+					<br />
+					<?php
+						if ($secretario->nome()=='M') {
+							echo 'Secret&aacute;rio';
+						} else {
+							echo 'Secret&aacute;ria';
+						}
+
+					 ?>
+
       </div>
 			<div id="footer">
 					<span class="text-center">

@@ -32,7 +32,7 @@ $result = mysql_query($query) or die (mysql_error());
 				}
 				break;
 			case 'ceia':
-				$atualizador =intval($_POST["semana"]).$_POST["dia"]);
+				$atualizador =intval($_POST["semana"].$_POST["dia"]);
 				break;
 			case 'pastor':
 				$hist = $_SESSION['valid_user']."@".$_SESSION['nome'].'@'.date('d/m/Y H:i:s');
