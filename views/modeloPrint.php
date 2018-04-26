@@ -8,9 +8,21 @@
 <link rel="stylesheet" type="text/css" href="../../css/print.css" />
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.print.css" />
 <link rel="icon" type="image/gif" href="../../br_igreja.jpg">
+<?php
+  if (isset($_GET['rec']) && $_GET['rec']>'0') {
+    ?>
+    <style type="text/css">
+    body {
+      font-size: 12px;
+    }
+    </style>
+    <?php
+  }
+
+ ?>
 </head>
 <body>
-<div id="header">
+<div id="header" style="font-size : 10px;">
 	<p>
 	<?PHP
 	//print_r($igreja);
