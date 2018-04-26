@@ -16,8 +16,8 @@ $res = checkdate($m,$d,$y);
 $dataHoje = new DateTime("now");
 $dataLanc = new DateTime("$y-$m-$d");
 
-echo $dataHoje->format('Y-m-d\TH:i:s.u');
-echo '<br> Lanç.'.$dataLanc->format('Y-m-d\TH:i:s.u');
+//echo $dataHoje->format('Y-m-d\TH:i:s.u');
+//echo '<br> Lanç.'.$dataLanc->format('Y-m-d\TH:i:s.u');
 
 $datalanc = sprintf("%s-%s-%s",$y,$m,$d);
 $rolIgreja = (empty($_POST["rolIgreja"])) ? false:intval($_POST['rolIgreja']);
