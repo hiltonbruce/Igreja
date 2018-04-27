@@ -17,7 +17,8 @@ if (MESBLOQUEA >= $data) {
 	$msgAlert .= '<h4>Solicite ajuda do Administrador...</h4>';
 	$msgAlert .= '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span>';
 	$msgErro .= $msgAlert.' Lan&ccedil;amentos com data igual ou anterior &agrave; '.conv_valor_br (MESBLOQUEA);
-	$msgErro .= ' est&atilde;o bloqueados! <u>O lan&ccedil;mento <b>N&Atilde;O</b> foi confirmado!</u> por&eacute;m na agenda foi confirmado o encerramento</div>';
+	$msgErro .= ' est&atilde;o bloqueados! <u>O lan&ccedil;mento <b>N&Atilde;O</b> ';
+	$msgErro .= 'foi confirmado!</u> por&eacute;m na agenda foi confirmado o encerramento</div>';
 	echo $msgErro;
 } else {
 	require_once 'models/tes/lancamento_confirma.php';//Confirma lançamento
