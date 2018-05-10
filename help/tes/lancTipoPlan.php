@@ -53,8 +53,8 @@ if ($gerarPgto && !empty($_POST["transid"])) {
 						$msgAlert .= '<h3>Lan&ccedil;amento n&atilde;o permitido!</h3>';
 						$msgAlert .= '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span>';
 						$msgErro .= $msgAlert.' Seu Lan&ccedil;amento referente a '.$referente;
-						$msgErro .= ' com data igual ou anterior &agrave; '.conv_valor_br (MESBLOQUEA);
-						$msgErro .= ' est&atilde;o bloqueados!</div>';
+						$msgErro .= ' n&atilde foi realizado pois as datas iguais ou anterior &agrave; '.conv_valor_br (MESBLOQUEA);
+						$msgErro .= ' est&atilde;o bloqueados p/ lan&ddedil;amento!</div>';
 						echo $msgErro;
 	        }else{
 	        	require 'models/tes/lancModPlanilha.php';

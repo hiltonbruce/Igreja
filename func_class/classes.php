@@ -620,7 +620,7 @@ class editar_form {
 		if (empty($this->valor)){
 			$this->valor = "N&atilde;o Informado!";
 		}
-        $msgExibir = '<p><a title="Click aqui para alaterar este campo!" href="./?escolha='.$this->link_form.'" tabindex="$ind++" >'.$this->valor;
+        $msgExibir = '<p><a title="Click aqui para alterar este campo!" href="./?escolha='.$this->link_form.'" tabindex="$ind++" >'.$this->valor;
         switch ($this->vlr_get) {
             case 'situacao_espiritual':
                 echo '<p><a title="Click aqui para alterar este registro!"'

@@ -131,7 +131,7 @@ $ind = 1;
           <?PHP
 		//inicio
 		$bairro = new DBRecord('bairro',$igreja->bairro(), 'id');
-		echo '<p><a title="Click aqui para alaterar este campo!"';
+		echo '<p><a title="Click aqui para alterar este campo!"';
 		echo 'href="./?escolha='.$tab_edit.'bairro" autofocus="autofocus" >* '.$bairro->bairro().' *</a></p>';
 		if ($_GET["campo"]=="bairro"){
 		?>
