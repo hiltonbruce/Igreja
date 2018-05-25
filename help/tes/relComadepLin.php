@@ -34,17 +34,17 @@ foreach ($saldo AS $chave => $valor){
 			$vlrSaldo = '--o--';
 		}
 		$vlrSaldoAnte = number_format(abs($saldoAnte[$chave]),2,',','.');
-		if ($saldoAnte[$chave]<0.00) {
+		if ($saldoAnte[$chave]<0.001 && $vlrSaldoAnte != '0,00' ) {
 				 $vlrSaldoAnte .= $cred;
-			}elseif ($saldoAnte[$chave]>0.001) {
+			}elseif ($saldoAnte[$chave]>0.001 && $vlrSaldoAnte != '0,00' ) {
 				$vlrSaldoAnte .= $dev;
 			} else {
 				$vlrSaldoAnte = '--o--';
 			}
 		$vlrSaldoAtual = number_format(abs($saldo[$chave]+$saldoAnte[$chave]),2,',','.');
-		if (($saldo[$chave]+$saldoAnte[$chave])<0.00) {
+		if (($saldo[$chave]+$saldoAnte[$chave])<0.00 && $vlrSaldoAtual != '0,00' ) {
 				$vlrSaldoAtual  .= $cred;
-			}elseif (($saldo[$chave]+$saldoAnte[$chave])>0.001) {
+			}elseif (($saldo[$chave]+$saldoAnte[$chave])>0.001 && $vlrSaldoAtual != '0,00' ) {
 				$vlrSaldoAtual .= $dev;
 			} else {
 				$vlrSaldoAtual = '--o--';

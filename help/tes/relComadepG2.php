@@ -11,13 +11,14 @@
 	}
 	$sldGrupoCtaAnte = $saldoAnteGrp[$planoCod[$ctaAtualN4]['nivel4']];//Sld anterior grupo nível 4
 	$saldoAntr = number_format(abs($sldGrupoCtaAnte),2,',','.');
-	if ($sldGrupoCtaAnte > 0) {
+	if ($sldGrupoCtaAnte > 0 && $saldoAntr != '0,00' ) {
 		$saldoAntr .=  $dev;
-	} elseif ($sldGrupoCtaAnte < 0) {
+	} elseif ($sldGrupoCtaAnte < 0 && $saldoAntr != '0,00' ) {
 		$saldoAntr .= $cred;
 	} else {
 		$saldoAntr = '--o--';
 	}
+
 	$sldGrupoAtual = $sldGrupoCta+$sldGrupoCtaAnte;//Sld atual grupo nível 4
 	$saldoAtl = number_format(abs($sldGrupoAtual),2,',','.');
 	if ($sldGrupoCtaAnte > 0) {
@@ -25,7 +26,7 @@
 	} elseif ($sldGrupoCtaAnte < 0) {
 		$saldoAtl .= $cred;
 	} else {
-		$saldoAtl = '--o--';
+		$saldoAtl = $movSld;
 	}
 	$nivelGrupo =$planoCod[$ctaAtualN4]['nivel4'].'</td><td title="'.$title.'">'
 		.$planoCod[$planoCod[$ctaAtualN4]['nivel4']]['titulo'].'</td><td id="moeda">'.$movSld

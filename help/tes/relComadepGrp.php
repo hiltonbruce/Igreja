@@ -12,21 +12,21 @@
 	}
 	$sldGrupoCtaAnte = $saldoAnteGrp[$planoCod[$ctaAtualN3]['nivel3']];//Sld anterior grupo nível 3
 	$saldoAntr = number_format(abs($sldGrupoCtaAnte),2,',','.');
-	if ($sldGrupoCtaAnte > 0) {
+	if ($sldGrupoCtaAnte > 0 && $saldoAntr != '0,00' ) {
 		$saldoAntr .=  $dev;
-	} elseif ($sldGrupoCtaAnte < 0) {
+	} elseif ($sldGrupoCtaAnte < 0 && $saldoAntr != '0,00' ) {
 		$saldoAntr .= $cred;
 	} else {
 		$saldoAntr = '--o--';
 	}
 	$sldGrupoAtual = $sldGrupoCta+$sldGrupoCtaAnte;//Sld atual grupo nível 3
 	$saldoAtual = number_format(abs($sldGrupoAtual),2,',','.');
-	if ($sldGrupoCtaAnte > 0) {
+	if ($sldGrupoCtaAnte > 0 && $saldoAtual != '0,00' ) {
 		$saldoAtual .=  $dev;
-	} elseif ($sldGrupoCtaAnte < 0) {
+	} elseif ($sldGrupoCtaAnte < 0 && $saldoAtual != '0,00' ) {
 		$saldoAtual .= $cred;
 	} else {
-		$saldoAtual = '--o--';
+		$saldoAtual = $movSld;
 	}
 	#$movSld = ($sldGrupoCta > '0') ? $dev : $cred ;
 	#$saldoAtual = ($sldGrupoAtual > '0') ? $dev : $cred ;
