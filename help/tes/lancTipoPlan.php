@@ -174,7 +174,7 @@ foreach ($arrayDespesas as $chave => $valor) {
 	}
 	if (strlen($valor['codigo'])=='13') {
 		//lista dos caixas disponí­veis para pgto
-		$fontesPgto  = '<label>Caixas c/ Saldo:</label>';
+		$fontesPgto  = '<label>Caixas c/ Saldo e Contas &agrave; Pagar:</label>';
 		$fontesPgto .= '<select name="disponivel'.$chave.'" class="form-control" >';
 		$fontesPgto .= $listaFonte;
 		$fontesPgto .= '</select>';

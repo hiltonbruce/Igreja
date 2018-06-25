@@ -23,7 +23,7 @@ $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 //critÃ©rios de fonÃ©tica
 //$exp = new fonetica($q,'nome');
 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
-$sql .= " eclesiastico AS e WHERE (m.sexo='$sexo' OR m.sexo='')AND m.rol=e.rol AND";
+$sql .= " eclesiastico AS e WHERE (m.sexo='$sexo' OR m.sexo='') AND m.rol=e.rol AND";
 
 switch ($quantNomes) {
 	case '3':

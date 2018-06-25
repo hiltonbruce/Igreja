@@ -5,9 +5,10 @@ class tes_listDisponivel extends List_sele {
 		$this->tabela = 'contas';//
 		$this->campo_retorno = 'acesso';//Campo que serï¿½ retornado
 		$this->texto_field = 'acesso';//O nome que serï¿½ relaciondo ao campo de retorno para envio pelo form
-		$this->query = 'SELECT * from '.$this->tabela.' WHERE tipo="D"';
-		$nivelCta = ' AND (nivel4="1.1.1.001" OR nivel4="1.1.1.002" OR nivel4="1.1.1.003")';
-		//$nivelCta .= 'OR nivel4="1.1.1.005" OR nivel4="1.1.1.006")';
+		$this->query = 'SELECT * from '.$this->tabela.' WHERE ';
+		$nivelCta = '((tipo="D" AND (nivel4="1.1.1.001" OR nivel4="1.1.1.002" ';
+		$nivelCta .= 'OR nivel4="1.1.1.003"))';
+		$nivelCta .= ' OR nivel2="2.1")';
 		$this->sql_lst = mysql_query($this->query.$nivelCta.' AND acesso>"0" ORDER BY codigo ');
 	}
 
@@ -18,14 +19,21 @@ class tes_listDisponivel extends List_sele {
 	$linhas ="<option value=''>Escolha a fonte pagadora!</option>";
 		while($campoList = mysql_fetch_array($this->sql_lst))
 		{
-			if ($sld>$campoList['saldo']) {
+			if ($sld>$campoList['saldo'] AND $campoList['nivel2'] != '2.1') {
 				continue;
 			}
+
+			if ($campoList['nivel2'] == '2.1') {
+				$passivo =' &bull; Passivo &agrave pagar '.$campoList['codigo'];
+			}else {
+				$passivo = ' &bull; '.$campoList['codigo'];
+			}
+
 			if ($campoList["acesso"]==$caixa) {
-				$linha1  = '<option value='.$campoList["acesso"].'>'.$campoList['titulo'].
+				$linha1  = '<option value='.$campoList["acesso"].'>'.$campoList['titulo'].$passivo.
 				' -> Saldo : '.number_format($campoList['saldo'],2,',','.')."</option>";
 			}
-			 $linhas .='<option value='.$campoList["acesso"].'>'.$campoList['titulo'].
+			 $linhas .='<option value='.$campoList["acesso"].'>'.$campoList['titulo'].$passivo.
 			 ' -> Saldo : '.number_format($campoList['saldo'],2,',','.').'</option>';
 		}
 		return $linha1.$linhas;
