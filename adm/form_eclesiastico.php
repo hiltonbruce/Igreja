@@ -70,7 +70,7 @@ $cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
           tabindex="<?PHP echo ++$ind;?>" class="form-control" />
         </div>
           <div class="col-xs-4">
-          <label>Mudou da denomina&ccedil;&atilde;o em:</label>
+          <label>Veio em:</label>
             <input name="dt_mudanca_denominacao" type="text" id="dt_mudanca_denominacao"
             tabindex="<?PHP echo ++$ind;?>" class="form-control dataclass" />
         </div></div>
@@ -117,13 +117,14 @@ $cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
             <div class="col-xs-8">
               <label>Veio de outra Assembleia de Deus:</label>
               <input name="veio_outra_assemb_deus" type="text" id="veio_outra_assemb_deus"
-              tabindex="<?PHP echo ++$ind;?>" class="form-control" />
+              tabindex="<?PHP echo ++$ind;?>" class="form-control"
+               placeholder="Informe de qual Assembleia" />
             </div>
             <div class="col-xs-4">
-              <label>Data da mudan&ccedil;a:</label>
+              <label>Data da carta:</label>
               <input name="dt_muda_assembleia" type="text" id="dt_muda_assembleia" tabindex="<?PHP echo ++$ind;?>"
                class="form-control dataclass"
-               placeholder="Mudança da Assembleia:"/>
+               placeholder="Mudan&ccedil;a da Assembleia:"/>
             </div></div>
         </td>
       </tr>
@@ -136,9 +137,9 @@ $cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
             class="form-control" />
           </div>
           <div class="col-xs-4">
-            <label>Data da mudan&ccedil;a:</label>
+            <label>Cadastro recebido em:</label>
             <input name="dt_mudanca" type="text" tabindex="<?PHP echo ++$ind;?>"
-            class="form-control dataclass" />
+            class="form-control dataclass" value="<?php echo date('d/m/Y');?>"/>
           </div></div>
         </td>
       </tr>

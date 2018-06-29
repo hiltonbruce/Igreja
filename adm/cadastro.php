@@ -213,7 +213,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</td>
 						<td colspan="2">
 							<label>Email:</label>
-							<input name="email" type="text"	class="form-control" tabindex="<?PHP echo $ind++;?>" />
+							<input name="email" type="email"	class="form-control" tabindex="<?PHP echo $ind++;?>" />
 						</td>
 				</tr>
 				<tr>
