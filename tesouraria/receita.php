@@ -33,7 +33,7 @@ if ($rec>'12' && $rec<'20') {
 }else {
 $ind=1;
 $tabRelatorio = 'views/tesouraria/tabDizimosOfertas.php';
-if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
+if ($_SESSION["setor"]=="2" || $_SESSION["nivel"]>="50" || $_SESSION["setor"]==1){
 $_SESSION['lancar']=true;
 $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
@@ -68,6 +68,9 @@ if ($idIgreja==0) {
 	header("Location: ./");
 }
 	unset($_SESSION['lancar']);
-	require_once $tabRelatorio;
+	if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1) {
+		require_once $tabRelatorio;
+		# code...
+	}
 }
 ?>

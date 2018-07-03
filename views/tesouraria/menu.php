@@ -1,4 +1,7 @@
 <p>
+	<?php
+	if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
+	 ?>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "0"); ?> href="<?php echo $linkLancamento;?>&rec=0">
 	  <button type="button" class="btn btn-warning btn-sm <?php echo $b;?>">Busca</button></a>
@@ -76,6 +79,8 @@
 	</div>
 	<?PHP
 		require_once 'views/menus/planoCtaMenu.php';
+
+	}
 	?>
 	 <div class="btn-group">
 	  <a <?PHP $b=link_ativo($_GET["rec"], "25"); ?> href="<?php echo $linkLancamento;?>&rec=25">
