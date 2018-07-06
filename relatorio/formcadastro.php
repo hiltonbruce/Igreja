@@ -38,7 +38,7 @@ th {
 
 
 th, td {
-  padding: 0.1em 1em;
+  padding: 0.23em 1em;
    border: 1px solid #000000;
 }
 
@@ -66,18 +66,19 @@ thead tr:hover {
 	margin: 0; padding: 0 10px 0 50px; text-align:center;
 	font-family:"Times New Roman", Times, serif;}
 
-#footer {	color: #636466;
+#footer {
+	color: #636466;
 	font-size:65%;
-	height: 50px;
 	background-repeat: no-repeat;
 	background-position: top;
 	text-align: left;
 	clear: both;
 	margin: 0;
 	padding-top: 25px;
-	padding: 20px 0 0 0;
+	padding:10px 0 0 0;
 	background-image: url(horbar.jpg);
-	width: 1100px;
+	background-size: 100% 50px;
+	width: auto;
 }
 #Layer1 {
 	position:absolute;
@@ -103,8 +104,8 @@ thead tr:hover {
 <tbody>
 <tr>
   <td colspan="13"><h4>
-	Ficha s&oacute; aceita se acompanhada de c&oacute;pia do RG, CPF, certid&atilde;o de casamento ou certid&atilde;o de
-	nascimento e comprovante de resid&ecirc;ncia
+	Ficha s&oacute; ser&aacute; aceita se acompanhada das c&oacute;pias do RG, CPF, certid&atilde;o de casamento ou certid&atilde;o de
+	nascimento e do comprovante de resid&ecirc;ncia
 	</h4>
 	</td>
   <td colspan="17">
@@ -677,8 +678,8 @@ thead tr:hover {
 		      Superior
 		    Completo </label></p></form>
 				Qual a Gradua&ccedil;&atilde;o Superior (se tiver ?):
-				<input class='form-control' size='55'>
-				<br />Email (se tiver ?): <input class='form-control' size='71'>
+				<input class='form-control' size='79'>
+				<br />Email (se tiver ?): &nbsp;<input class='form-control' size='100%'>
 			</td>
 		  </tr>
 <tr >
@@ -1118,11 +1119,12 @@ Outros, Qual?</p>
   </tr>
 </tbody>
 </table>
-
-<div id="footer"> <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?><br />
-  Copyright &copy; <a href="http://<?PHP echo "{$igreja->site()}";?>/" title="Copyright information"></a> Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a> <?PHP echo "CNPJ: {$igreja->cnpj()}";?><br />
-  <?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()} - Fax: {$igreja->fax()}";?><br />
-  <p>Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a></p>
+<div id="footer"> <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>&nbsp; &bull;
+  Copyright &copy; <a href="http://<?PHP echo $igreja->site();?>/" title="Copyright information"><?PHP echo $igreja->site();?></a> &nbsp; &bull;
+	Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a>
+	&nbsp; &bull; <?PHP echo "CNPJ: {$igreja->cnpj()}";?> &nbsp; &bull;
+  <?PHP echo "CEP: {$igreja->cep()} - Fone: {$igreja->fone()}";?><br />
+  Designed by <a rel="nofollow" target="_blank" href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce.</a>
 </div>
 </body>
 </html>
