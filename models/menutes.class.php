@@ -237,7 +237,7 @@ function recibosmembros (){
 		$total = $valores['total'];
 		/**/
 		if ($_GET['tipo']==2) {
-			$query_pen  = 'SELECT t.id, t.recebeu, t.valor, t.data, t.motivo, t.tipo, f.razao ';
+			$query_pen  = 'SELECT t.id, t.recebeu, t.valor, t.data, t.motivo, t.tipo, f.razao, t.igreja ';
 			$query_pen .= 'FROM tes_recibo AS t, credores AS f WHERE t.recebeu='.$id;
 			$query_pen .= ' AND t.tipo=2 AND t.recebeu = f.id ORDER BY  t.data DESC,t.id DESC ';
 		}elseif ($_GET['tipo']==3) {
