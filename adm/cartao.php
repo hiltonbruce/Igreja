@@ -26,10 +26,11 @@ if (mysql_num_rows($dad_cad)<1)//Informa que o rol não possui niguem registrado
 $arr_dad = mysql_fetch_array ($dad_cad);
 if (trim($arr_dad['mobs'])!='')//Informa que o rol não possui niguem registrado
 {
-	echo '<div class="alert alert-danger" role="alert"><h3>
-	<span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
-	Pend&ecirc;ncia Dados Pessoais!	<span class="small"><p>Conclua a pend&ecirc;ncia
-	na aba Pessoais e poder&aacute; ser impresso o cart&atilde;o!<p/></span></h3></div>';
+	echo '<div class="alert alert-danger" role="alert"><h3>';
+	echo '<span class="glyphicon glyphicon-alert" aria-hidden="true"></span>';
+	echo ' Pend&ecirc;ncia Dados Pessoais!	<span class="small"><br /><p><br />Resolva a pend&ecirc;ncia';
+	echo ' que est&aacute; aba Pessoais e poder&aacute; ser impresso o cart&atilde;o!<p/>';
+	echo '<p>Verifique o campo Pend&ecirc;ncia, fa&ccedil;a os ajustes necess&aacute;rios, altere deixando-o em branco!<p/></span></h3></div>';
 	exit;
 }
 $num_rows = mysql_num_rows($dad_cad);
