@@ -71,7 +71,7 @@ class igreja {
 	}
 
 	function cargo ($opCargo){
-		$opCargo = (!empty($_GET["id"])) ? $_GET["id"] : $opCargo ;
+		$opCargo = (!empty($_GET["id"])) ? intval($_GET["id"]) : $opCargo ;
 		if ($opCargo>0) {
 			$congreg = "AND e.congregacao=".$opCargo;
 		}
@@ -90,6 +90,18 @@ class igreja {
 					break;
 				case "5"://verifica se é Pastor
 					$congreg .= " AND DATE_FORMAT(e.pastor,'%d') <> '00' ";
+					break;
+				case "7"://Lista apenas mulheres
+					$congreg = " AND m.sexo = 'F' ";
+					break;
+				case "8"://Lista apenas Homens
+					$congreg = " AND m.sexo = 'M' ";
+					break;
+				case "9"://Lista apenas Homens
+					$congreg = " AND m.sexo <> 'M' AND m.sexo <> 'F'";
+					break;
+				case "10"://Lista apenas Doadores de Sangue
+					$congreg = " AND m.doador = 'SIM'";
 					break;
 				default:
 					break;

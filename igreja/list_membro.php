@@ -4,7 +4,7 @@ $ordenar = new igreja ();
 $arrayIg =$ordenar->Arrayigreja();
 
 $_urlLi="?escolha=igreja/list_membro.php&menu=top_igreja&ord={$_GET["ord"]}&foto={$_GET["foto"]}&cargo={$_GET["cargo"]}&id=".($_GET["id"]);//Montando o Link para ser passada a classe
-if ($_GET["cargo"]<"6"){
+if ($_GET["cargo"] != "6"){
 	$query  = 'SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND ';
 	$query .= 'e.situacao_espiritual<=2 '.$ordenar->cargo().' ORDER BY '.$ordenar->ordenar();
 
@@ -36,6 +36,7 @@ if ($_GET["cargo"]<"6"){
 		<caption>
 		Lista de Membros
 			<?PHP
+			echo $titTabela;
 			if ($_GET["id"]>0) {
 				echo ' - Igreja: '.$arrayIg[$_GET["id"]]['0'];
 			}
