@@ -60,7 +60,7 @@
 	  }
 	  $link = "./?escolha={$_GET["escolha"]}&menu=top_igreja&id={$_GET["id"]}&ord={$_GET["ord"]}&cargo=";
 	  $link_foto = "./?escolha=igreja/lst_memfoto.php&menu=top_igreja&ord={$_GET["ord"]}&id={$_GET["id"]}&cargo={$_GET["cargo"]}&foto=";
-	  ?><label>Escolha a Congrega&ccedil;&atilde;o:</label>
+	  ?><label>Congrega&ccedil;&atilde;o:</label>
 	  <select name="menu1" onchange="MM_jumpMenu('parent',this,0)"  class="form-control" >
 			<?PHP
 				$congr = new List_sele ("igreja","razao","congregacao");
@@ -105,13 +105,16 @@
 	  <select name="cargo" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
 	  <?php echo $linhaCargo;?>
 	    <option>--&gt;&gt;Lista por cargo&lt;&lt;-- </option>
-	    <option value="<?PHP echo $link;?>0">--&gt;&gt;Listar todos&lt;&lt;--</option>
+	    <option value="<?PHP echo $link;?>0">--&gt;&gt;Listar todos os Membros&lt;&lt;--</option>
 			<option value="<?PHP echo $link;?>1">Auxiliar de Trabalho</option>
 			<option value="<?PHP echo $link;?>2">Di&aacute;cono</option>
 			<option value="<?PHP echo $link;?>3">Presb&iacute;tero</option>
 			<option value="<?PHP echo $link;?>4">Evangelista</option>
 			<option value="<?PHP echo $link;?>5">Pastor</option>
 			<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
+			<option value="<?PHP echo $link;?>7">Mulheres</option>
+			<option value="<?PHP echo $link;?>8">Homens</option>
+			<option value="<?PHP echo $link;?>9">Sem defini&ccedil;&atilde;o de sexo</option>
 		  </select>
 	  </td>
 	  </tr>
@@ -157,7 +160,7 @@
     elseif ($_GET["cargo"]>"5"){
     ?>
     <fieldset>
-    <legend>Impressão com dados pessoais:</legend>
+    <legend>Impress&atilde;o com dados pessoais:</legend>
 		<form id="form1" name="form1" method="get" action="controller/modeloPrint.php/" target="_blank">
 		<div class="radio-inline">
 		<label>
@@ -165,7 +168,7 @@
 	  </div>
 		<div class="radio-inline">
 		<label>
-      <input type="radio" name="ext" value="0" />Não </label>
+      <input type="radio" name="ext" value="0" />N&atilde;o </label>
      </div>
       <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
       <input name="titTabela" type="hidden" value="<?PHP echo $titTabela;?>" />
@@ -177,7 +180,7 @@
     ?>
 	<form id="form1" name="form1" method="get" action="igreja/membro_print.php" target="_blank">
     <fieldset>
-    <legend> Impressão com dados pessoais:</legend>
+    <legend> Impress&atilde;o com dados pessoais:</legend>
       <input name="id" type="hidden" value="<?PHP echo $_GET["id"];?>" />
       <input name="ord" type="hidden" value="<?PHP echo $_GET["ord"];?>" />
       <input type="hidden" name="cargo" value="<?PHP echo $_GET["cargo"];?>" />
@@ -187,7 +190,7 @@
     </div>
 	<div class="radio-inline">
 	<label>
-      <input type="radio" name="ext" value="0" />Não </label>
+      <input type="radio" name="ext" value="0" />N&atilde;o </label>
      </div>
       <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
       <input name="titTabela" type="hidden" value="<?PHP echo $titTabela;?>" />
