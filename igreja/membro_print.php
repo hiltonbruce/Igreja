@@ -3,9 +3,22 @@ $cont_lin=0;
 if ($_GET["Submit"]=="Imprimir") {
 
 	session_start();
+	if (empty($_SESSION['valid_user'])) {
+		exit;
+	}
 	require_once ("../func_class/funcoes.php");
 	require_once ("../func_class/classes.php");
-	require_once ("classes.php");
+	date_default_timezone_set('America/Recife');
+	function __autoload ($classe) {
+
+		list($dir,$nomeClasse) = explode('_', $classe);
+		//$dir = strtr( $classe, '_','/' );
+		if (file_exists("../models/$dir/$classe.class.php")){
+			require_once ("../models/$dir/$classe.class.php");
+		}elseif (file_exists("../models/$classe.class.php")){
+			require_once ("../models/$classe.class.php");
+		}
+	}
 	$igreja = new DBRecord ("igreja",$_GET["id"],"rol");
 	?>
 
@@ -28,8 +41,10 @@ if ($_GET["Submit"]=="Imprimir") {
 
 controle ("consulta");
 $ordenar = new igreja ();
-
-$query = "SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol AND e.situacao_espiritual<2 ".$ordenar->cargo()." ORDER BY ".$ordenar->ordenar();
+$opCargo = (!empty($_GET["cargo"])) ? intval($_GET["cargo"]) : 0 ;
+$query  = 'SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol ';
+$query .= 'AND e.situacao_espiritual<=2 '.$ordenar->cargo($opCargo);
+$query .= ' ORDER BY '.$ordenar->ordenar();
 
 $sql3 = mysql_query ($query) or die (mysql_error());
 $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
@@ -38,7 +53,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 	?>
 	<table>
 		<caption>
-			Lista de
+
 			<?PHP
 			echo $_GET['titTabela'];
 
@@ -70,7 +85,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				}else {
 
 					?>
-				<th scope="col">Congregação</th>
+				<th scope="col">Congrega&ccedil;&atilde;o</th>
 				<th scope="col">Cargo</th>
 				<?php
 				}?>
@@ -79,13 +94,25 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 		<tbody>
 			<?PHP
 
+			if (!empty($_GET['tamanho'])) {
+				$tamW = intval($_GET ['tamanho']);
+				$tamH = ($tamW/2)*3;
+			}else {
+				$tamW = 24;
+				$tamH = 36;
+			}
+
 			while($coluna = mysql_fetch_array($sql3))
 			{
 
 				$ls++;
+				if (!empty($_GET['foto'])) {
+					$foto = '<img src='.foto($coluna["rol"]).' class="thumb" width="'.$tamW.'" height="'.$tamH.'" />';
+				}else {
+					$foto = '';
+				}
 
-				if ($ls>1)
-				{
+				if ($ls>1){
 					$cor="class='dados'";
 					$ls=0;
 				}
@@ -99,7 +126,9 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 					?>
 			<tr <?php echo "$cor";?>>
 				<td rowspan="2"><?php echo $coluna["rol"];?></td>
-				<td><?php echo $coluna["nome"];
+				<td><?php
+				echo $foto;
+				echo $coluna["nome"];
 				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
 				echo ' - Cong.: '.$congregacao->razao();
 				echo ', '.cargo ($coluna["rol"])['0'];
@@ -125,8 +154,12 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 					?>
 			<tr <?php echo "$cor";?>>
 				<td><?php echo $coluna["rol"];?></td>
-				<td><?php echo $coluna["nome"];
-				?></td>
+				<td>
+					<?php
+					echo $foto;
+				 	echo $coluna["nome"];
+					?>
+				</td>
 				<td><?php
 				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
 				echo $congregacao->razao();
@@ -148,11 +181,11 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 echo "<br />";
 
 if ($total>"1"){
-	printf("Com %s membros!",number_format($total, 0, ',', '.'));
+	printf("Com %s registros!",number_format($total, 0, ',', '.'));
 }elseif ($total=="1") {
-	print "Apenas um membro!";
+	print "Apenas um registro!";
 }else {
-	print "N&atilde;o h&aacute; membros para esta pesquisa!";
+	print "N&atilde;o h&aacute; registros para esta pesquisa!";
 }
 
 if ($_GET["Submit"]=="Imprimir") {

@@ -96,9 +96,33 @@
 	  		$linhaCargo = '<option value="'.$link.'6">Dirigente de Congrega&ccedil;&atilde;o</option>';
 	  		$titTabela = 'Dirigentes de Congrega&ccedil;&atilde;o';
 	  	break;
+	  	case 7:
+	  		$linhaCargo = '<option value="'.$link.'7">Mulheres</option>';
+	  		$titTabela = 'Apenas Mulheres';
+	  	break;
+	  	case 8:
+	  		$linhaCargo = '<option value="'.$link.'8">Homens</option>';
+	  		$titTabela = '&bull; Apenas Homens';
+	  	break;
+	  	case 9:
+	  		$linhaCargo = '<option value="'.$link.'9">Falta identificar o sexo</option>';
+	  		$titTabela = '&bull; Falta identificar o sexo';
+	  	break;
+	  	case 10:
+	  		$linhaCargo = '<option value="'.$link.'10">Doadores de Sangue</option>';
+	  		$titTabela = '&bull; Apenas Doadores de Sangue';
+	  	break;
+	  	case 11:
+	  		$linhaCargo = '<option value="'.$link.'10">Em Comunh&atilde;o</option>';
+	  		$titTabela = '&bull; Em Comunh&atilde;o';
+	  	break;
+	  	case 12:
+	  		$linhaCargo = '<option value="'.$link.'10">Com Disciplina em Aberto</option>';
+	  		$titTabela = '&bull; Disciplinados';
+	  	break;
 	  	default:
 	  		$linhaCargo = '';
-	  		$titTabela = 'Membros';
+	  		$titTabela = '&bull; Ativos e Disciplinados';
 	  	break;
 	  }
 	  ?><label>Cargo</label>
@@ -114,7 +138,8 @@
 			<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
 			<option value="<?PHP echo $link;?>7">Mulheres</option>
 			<option value="<?PHP echo $link;?>8">Homens</option>
-			<option value="<?PHP echo $link;?>9">Sem defini&ccedil;&atilde;o de sexo</option>
+			<option value="<?PHP echo $link;?>9">Falta identificar o sexoo</option>
+			<option value="<?PHP echo $link;?>10">Doadores de Sangue</option>
 		  </select>
 	  </td>
 	  </tr>
@@ -157,7 +182,7 @@
     </form>
 
     <?php }
-    elseif ($_GET["cargo"]>"5"){
+    elseif ($_GET["cargo"]=='6'){
     ?>
     <fieldset>
     <legend>Impress&atilde;o com dados pessoais:</legend>
@@ -180,19 +205,32 @@
     ?>
 	<form id="form1" name="form1" method="get" action="igreja/membro_print.php" target="_blank">
     <fieldset>
-    <legend> Impress&atilde;o com dados pessoais:</legend>
+    <legend> Impress&atilde;o:</legend>
       <input name="id" type="hidden" value="<?PHP echo $_GET["id"];?>" />
       <input name="ord" type="hidden" value="<?PHP echo $_GET["ord"];?>" />
       <input type="hidden" name="cargo" value="<?PHP echo $_GET["cargo"];?>" />
-
-	<div class="radio-inline">
-	<label><input type="radio" name="ext" value="1" />Sim</label>
-    </div>
-	<div class="radio-inline">
-	<label>
-      <input type="radio" name="ext" value="0" />N&atilde;o </label>
-     </div>
-      <input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
+			<div class="row">
+  			<div class="col-xs-2">
+			<label class="checkbox-inline"><input type="checkbox" name="ext" value="1" />
+					Com endere&ccedil;o</label>
+				</div>
+  			<div class="col-xs-2">
+		  <label class="checkbox-inline">
+		    <input type="checkbox" value="1" name="foto" >
+		    Com Foto
+		  </label>
+					</div>
+  			<div class="col-xs-2">
+				<label>Tamanho da foto (pixels)
+				</label>
+				</div>
+  			<div class="col-xs-2">
+					<input type="number" name="tamanho" class="form-control input-sm"/>
+				</div>
+  			<div class="col-xs-1">
+      		<input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
+				</div>
+		</div>
       <input name="titTabela" type="hidden" value="<?PHP echo $titTabela;?>" />
     </form></fieldset>
     <?php

@@ -26,7 +26,7 @@ if (intval($_POST['rolIgreja']>0)) {
 }
 $igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 $igSede = new DBRecord('igreja', '1', 'rol');
-$tipo = $_GET['tipo'];
+$tipo = intval($_GET['tipo']);
 switch ($tipo) {
 	case '1':
 	controle('tes');
