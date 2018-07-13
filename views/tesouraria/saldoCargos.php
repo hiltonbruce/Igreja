@@ -12,7 +12,7 @@
 		//Oculta o botao imprimir para não sair na impressão
 			$linkImpressao ='tesouraria/receita.php/?rec=23';
 			if (empty($titulo)) {
-				echo '<td>'.$cong.'Histórico Financeiro - Ano de referência: '.$ano.'</td>';
+				echo '<td>'.$cong.'Histórico Financeiro - Ano de refer&ecirc;ncia: '.$ano.'</td>';
 			} else {
 			  switch ($_GET['ord']) {
 			  	//Define a 1ª linha do proximo form
@@ -34,6 +34,12 @@
 			  	case 6:
 			  		$linhaCargo = '<option value="'.$link.'6">Dirigente de Congrega&ccedil;&atilde;o</option>';
 			  	break;
+			  	case 7:
+			  		$linhaCargo = '<option value="'.$link.'7">Mulheres</option>';
+			  	break;
+			  	case 8:
+			  		$linhaCargo = '<option value="'.$link.'8">Homens</option>';
+			  	break;
 			  	default:
 			  		$linhaCargo = '';
 			  		$titulo = 'Membros';
@@ -51,11 +57,13 @@
 					<option value="<?PHP echo $link;?>4">Evangelista</option>
 					<option value="<?PHP echo $link;?>5">Pastor</option>
 					<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
+					<option value="<?PHP echo $link;?>7">Mulheres</option>
+					<option value="<?PHP echo $link;?>8">Homens</option>
 				</select>
 			</td>
 			<form action='' method='get'>
 			<td>
-					<label>Mês para estatistica:</label>
+					<label>M&ecirc;s para estatistica:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
 					      $mesEstatisca = (empty($_GET['mes']) || $_GET['mes']>12) ? 1 : $_GET['mes'] ;
