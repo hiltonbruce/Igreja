@@ -75,6 +75,15 @@
 				case "5"://verifica se é Pastor
 					$titulo = 'Pastor';
 					break;
+				case "6"://verifica se é Pastor
+					$titulo = 'Dirigente de Congrega&ccedil;&atilde;o';
+					break;
+				case "7"://verifica se é Pastor
+					$titulo = 'Mulheres';
+					break;
+				case "8"://verifica se é Pastor
+					$titulo = 'Homens';
+					break;
 				default:
 					$titulo = 'Todos os Membros';
 					break;

@@ -16,7 +16,7 @@ class cargos {
 		//$linhasPorPag =  $pagina-1 ;
 		$this->linhasPorPagina = ($linhasPorPag==0) ?  300:$linhasPorPag;
 		$this->linhaInicial = ($pagina=='1') ?  0:($pagina-1)*$linhasPorPag;
-		$this->query  = 'SELECT m.*,i.razao from membro AS m, eclesiastico AS e, igreja AS i WHERE m.rol=e.rol AND';
+		$this->query  = 'SELECT m.*, i.razao from membro AS m, eclesiastico AS e, igreja AS i WHERE m.rol=e.rol AND';
 		$this->query .= ' i.rol=e.congregacao AND e.situacao_espiritual<="2" '.$this->opIgreja;
 		$this->query2 = '';
 		$this->congreg  = "";
@@ -26,6 +26,10 @@ class cargos {
 		$this->congreg3 = " AND DATE_FORMAT(e.presbitero,'%d') <> '00' AND DATE_FORMAT(e.evangelista,'%d') = '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
 		$this->congreg4 = " AND DATE_FORMAT(e.evangelista,'%d') <> '00' AND DATE_FORMAT(e.pastor,'%d') = '00' ";
 		$this->congreg5 = " AND DATE_FORMAT(e.pastor,'%d') <> '00' ";
+		$this->congreg6 =  'SELECT m.*, i.razao from membro AS m, eclesiastico AS e, igreja AS i ';
+		$this->congreg6 .= 'WHERE m.rol=e.rol AND e.situacao_espiritual<="2" '.$this->opIgreja.' AND i.status="1" AND i.pastor=m.rol ';
+		$this->congreg7 = " AND m.sexo = 'F' ";
+		$this->congreg8 = " AND m.sexo = 'M'  ";
 	}
 
 	function ArrayCargosDados($cargo,$mes,$ano) {
@@ -35,8 +39,14 @@ class cargos {
 		$congreg = $this->$opcCargo;
 		global $db;
 		//$querys  = "SELECT m.*,i.razao from membro AS m, eclesiastico AS e, igreja AS i WHERE m.rol=e.rol AND";
-		$querys  = $this->query.$congreg.' AND e.congregacao=i.rol AND DATE_FORMAT(e.dat_aclam,"%Y%m") <= "'.$ano.$mes.'" ';
-		$querys .= ' ORDER BY i.razao,m.nome LIMIT '.$this->linhaInicial.','.$this->linhasPorPagina;
+
+		if ($cargo=='6') {
+			$querys  = $this->congreg6.' AND DATE_FORMAT(e.dat_aclam,"%Y%m") <= "'.$ano.$mes.'" ' ;
+			$querys .= ' ORDER BY i.razao,m.nome LIMIT '.$this->linhaInicial.','.$this->linhasPorPagina;
+		} else {
+			$querys  = $this->query.$congreg.' AND e.congregacao=i.rol AND DATE_FORMAT(e.dat_aclam,"%Y%m") <= "'.$ano.$mes.'" ';
+			$querys .= ' ORDER BY i.razao,m.nome LIMIT '.$this->linhaInicial.','.$this->linhasPorPagina;
+		}
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		$res = & $db->query($querys) ;
 		//print_r($res);
@@ -52,7 +62,11 @@ class cargos {
 		$opcCargo = 'congreg'.$cargo;
 		$congreg = $this->$opcCargo;
 		global $db;
-		$querys  = $this->query.$congreg.' AND e.congregacao=i.rol';
+		if ($cargo=='6') {
+			$querys  = $this->congreg6;
+		} else {
+			$querys  = $this->query.$congreg.' AND e.congregacao=i.rol';
+		}
 		$querys .= ' AND DATE_FORMAT(e.dat_aclam,"%Y%m") <= "'.$ano.$mes.'" ORDER BY i.razao,m.nome ';
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		$res = & $db->query($querys) ;
@@ -68,9 +82,13 @@ class cargos {
 		$ano = intval($ano);
 		$mes = intval($mes);
 		//$opcCargo = 'congreg'.$cargo;
-		$query  = 'SELECT m.rol from membro AS m, eclesiastico AS e, igreja AS i, dizimooferta AS d WHERE m.rol=e.rol AND';
-		$query .= ' DATE_FORMAT(e.dat_aclam,"%Y%m")<="'.$ano.$mes.'" '.$this->opIgreja.$congreg.' AND e.congregacao=i.rol AND m.rol=d.rol';
-		$query .= ' AND d.valor>"0" AND d.anorefer ="'.$ano.'" AND d.mesrefer = "'.$mes.'" AND d.credito = "700" GROUP BY d.rol ';
+		if ($opCargo=='6') {
+			$query  = $this->congreg6;
+		} else {
+			$query  = 'SELECT m.rol from membro AS m , eclesiastico AS e, igreja AS i, dizimooferta AS d WHERE m.rol=e.rol AND';
+			$query .= ' DATE_FORMAT(e.dat_aclam,"%Y%m")<="'.$ano.$mes.'" '.$this->opIgreja.$congreg.' AND e.congregacao=i.rol AND m.rol=d.rol';
+			$query .= ' AND d.valor>"0" AND d.anorefer ="'.$ano.'" AND d.mesrefer = "'.$mes.'" AND d.credito = "700" GROUP BY d.rol ';
+		}
 		$db->setFetchMode(DB_FETCHMODE_ASSOC);
 		$res = & $db->query($query) ;
 		return $res->numRows();
