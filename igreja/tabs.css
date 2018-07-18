@@ -6,7 +6,7 @@ body {
 
 #header { width:90%; height: 75px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
 	 background-position: left bottom; margin: 0; padding: 0 10px 0 10px;}
-	#header p { width:auto; height: auto; float: right; padding: 5px 50px 0 3px; text-align:right;}
+#header p { width:auto; height: auto; float: right; padding: 5px 50px 0 3px; text-align:right;}
 
 .clear {
   clear: both;
@@ -47,6 +47,7 @@ th {
 .centro {
   text-align: center;
 }
+
 #playlistPosHead {
   text-indent: -1000em;
 }

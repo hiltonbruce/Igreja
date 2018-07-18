@@ -103,6 +103,11 @@ switch ($rec) {
 		require_once 'help/tes/saldoIgrejas.php';
 		require_once 'views/tesouraria/saldoIgrejas.php';
 		break;
+	case '13':
+		//Exibi lista de dizimistas
+		require_once 'help/tes/saldoCargos.php';
+		require_once 'views/tesouraria/saldoCargos.php';
+		break;
 	case '21':
 		require_once 'help/tes/varRelatorio.php';
 		require_once ('forms/tes/relatorioLanc.php');
@@ -112,7 +117,7 @@ switch ($rec) {
 		require_once ('forms/tes/busca.php');
 		break;
 	case '23':
-		//require_once 'forms/tes/histFinanceiro.php';
+		//Exibi lista de dizimistas
 		require_once 'help/tes/saldoCargos.php';
 		require_once 'views/tesouraria/saldoCargos.php';
 		break;
