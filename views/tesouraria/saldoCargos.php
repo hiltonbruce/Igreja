@@ -1,20 +1,21 @@
-
-
 <table>
 	<tr>
 	<?PHP
+		$mes = (empty($_GET['mes'])) ? '' : $_GET['mes'];
+		$ano = (empty($_GET['ano'])) ? '' : $_GET['ano'];
+		$ord = (empty($_GET['ord'])) ? '' : intval($_GET['ord']);
 		$_urlLi  ='?escolha=tesouraria/receita.php&menu=top_tesouraria&direita=1&';
-		$_urlLi .='rec=23&ano='.$_GET['ano'].'&id='.$_GET['id'].'&mes='.$_GET['mes'].'&ord=';
+		$_urlLi .='rec=23&ano='.$ano.'&id='.$_GET['id'].'&mes='.$mes.'&ord=';
 		$link 	 = $_urlLi;
 		$_urlLi .= $_GET["ord"].'&id='.$_GET["id"];//Montando o Link para ser passada a classe
 		$idIgreja = (empty($_GET['id']) || $_GET['id']<0 ) ? 0 : $_GET['id'] ;
 		//Cabeçalho da tabela
 		//Oculta o botao imprimir para não sair na impressão
-			$linkImpressao ='tesouraria/receita.php/?rec=23';
+			$linkImpressao ='tesouraria/receita.php/?rec=17&mes='.$mes.'&ano='.$ano.'&id='.$idIgreja.'&ord='.$ord ;
 			if (empty($titulo)) {
 				echo '<td>'.$cong.'Histórico Financeiro - Ano de refer&ecirc;ncia: '.$ano.'</td>';
 			} else {
-			  switch ($_GET['ord']) {
+			  switch ($ord) {
 			  	//Define a 1ª linha do proximo form
 			  	case 1:
 			  		$linhaCargo = '<option value="'.$link.'1">Auxiliar de Trabalho</option>';
@@ -83,7 +84,7 @@
 					<label>Igreja</label>
 					<?php
 					$bsccredor = new List_sele('igreja', 'razao', 'id');
-					$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['id'],'class="form-control" ');
+					$listaIgreja = $bsccredor->List_Selec(++$ind,$idIgreja,'class="form-control" ');
 					echo $listaIgreja;
 					?>
 				</td>
@@ -92,7 +93,7 @@
 					<input type="text" name="ano" value="<?php echo $anoForm;?>"
 					tabindex="<?PHP echo ++$ind; ?>" size="5"  class="form-control" placeholder="Ano" />
 					<input type="hidden" name="direita"	value="1" />
-					<input type="hidden" name="ord" value="<?php echo $_GET['ord'];?>" />
+					<input type="hidden" name="ord" value="<?php echo $ord;?>" />
 				</td><td>
 					<input name="escolha" type="hidden" value="tesouraria/receita.php" /><br />
 					<input type="hidden" name="rec"	value="<?php echo $rec;?>" />
@@ -100,12 +101,9 @@
 					tabindex="<?PHP echo ++$ind; ?>" />
 					<input name="menu" type="hidden" value="top_tesouraria" />
 				</td>
-
 	</tr>
-
 </form>
 </table>
-
 <table>
 	<tr>
 		<td>
@@ -137,11 +135,8 @@
 	</td>
 	</tr>
 </table>
-
-
     <p class="bg-success">
  <?PHP
-
 					}
 					if ($_GET['rec']!='13') {
 						echo '<a href="'.$linkImpressao.'" ';
@@ -159,12 +154,12 @@
 					printf("( %s ).",$titulo);
 
 				}elseif ($totalLinhas=="1"){
-					echo "Com apenas um $titulo,";
+					echo " com apenas um $titulo,";
 				}else{
-					echo "Nenhum resultado";
+					echo " nenhum resultado";
 				}
 				$percentual = ($totDizimistas*100)/$totalLinhas;
-				echo ' Tendo '.$totDizimistas.' dizimistas no mês de: '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
+				echo ' Tendo '.$totDizimistas.' dizimistas no m&ecirc;s de '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
 		?>
 		</p>
 
@@ -198,7 +193,7 @@
 					echo "Nenhum resultado";
 				}
 				$percentual = ($totDizimistas*100)/$totalLinhas;
-				echo ' Tendo '.$totDizimistas.' dizimistas no mês de: '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
+				echo ' Tendo '.$totDizimistas.' dizimistas no m&ecirc;s de '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
 		?>
 		</p>
   </div>

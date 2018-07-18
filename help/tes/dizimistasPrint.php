@@ -24,10 +24,10 @@
 			$linkIgreja = $igrejaDados['razao'];
 		}else {
 			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
-			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
-			$linkIgreja  = '<div class="text-center"><a '.$linkMemb.' >';
+			$linkMemb = '<div class="text-center">Rol: '.$igrejaDados['rol'];
+			$linkIgreja  = $linkMemb.'</div><div class="text-center">';
 			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol'])['0'].'</kbd></div></a></td><td>';
-			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a><br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
+			$linkIgreja .= $igrejaDados['nome'].'<br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 
 		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
