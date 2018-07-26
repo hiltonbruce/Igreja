@@ -146,7 +146,7 @@
   $nome->getMostrar();$nome->getEditar('','',$bsc_rol);
   ?></td>
       <td>
-        Data da aclama&ccedil;&atilde;o:
+        Data da aclama&ccedil;&atilde;o: (Membro desde)
         <?PHP
         $nome = new editar_form("dat_aclam",$arr_dad["dat_aclam"],$tab,$tab_edit);
         $nome->getMostrar();

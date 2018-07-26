@@ -59,7 +59,7 @@
       <td><strong>Data da mudan&ccedil;a da outra Assembleia:</strong>
         <h6><?PHP echo $arr_dad["dt_muda_assembleia"];?></h6>
       </td>
-      <td><strong>Data da aclama&ccedil;&atilde;o:</strong>
+      <td><strong>Data da aclama&ccedil;&atilde;o:</strong>(Membro desde)
         <h6><?PHP echo $arr_dad["dat_aclam"];?></h6>
       </td>
     </tr>

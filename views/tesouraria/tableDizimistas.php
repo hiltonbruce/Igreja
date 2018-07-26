@@ -4,29 +4,19 @@ $sede	= new DBRecord ("igreja",'1',"rol");
 $dircon		= 'Pastor: '.$sede->pastor();
 $templo		= '<b>Templo Sede </b> ';
 ?>
-<table>
+<table class="table">
 	<tr>
-		<td>
+		<td><h3>
 			<?PHP
         echo $igrejaDados['razao'];
-				//Classe que monta o rodape
-				$nmpp=$linhas; //Número de mensagens por párginas
-				$paginas = ceil ($totalLinhas/$nmpp); //Retorna o total de páginas
-					if ($_GET["pagina"]<1) {
-						$_GET["pagina"] = 1;
-					} elseif ($_GET["pagina"]>$paginas) {
-						$_GET["pagina"] = $paginas;
-					}
-
-					$pagina = $_GET["pagina"]-1;
-
-					if ($pagina<0) {$pagina=0;} //Especifica um valor p variável página caso ela esteja setada
 			?>
+		</h3>
 		</td>
-		<td>
+		<td><h3>
 			<?php
 			 	echo $titulo.' - Valores em Real (R$)';
 			?>
+		</h3>
 	</td>
 	</tr>
 </table>
@@ -45,7 +35,8 @@ $templo		= '<b>Templo Sede </b> ';
 					echo " nenhum resultado";
 				}
 				$percentual = ($totDizimistas*100)/$totalLinhas;
-				echo ' Tendo '.$totDizimistas.' dizimistas no m&ecirc;s de '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
+
+				echo ' Tendo '.$totDizimistas.' dizimistas no m&ecirc;s de '.ucwords(strftime("%B/%G",strtotime("$mesDiz/01/$ano"))).' ( <u>'.round($percentual,2).'%</u> )';
 		?>
 		</p>
 
@@ -79,15 +70,9 @@ $templo		= '<b>Templo Sede </b> ';
 					echo "Nenhum resultado";
 				}
 				$percentual = ($totDizimistas*100)/$totalLinhas;
-				echo ' Tendo '.$totDizimistas.' dizimistas no m&ecirc;s de '.$mesPesquisa.'/'.$ano.' ( <u>'.round($percentual,2).'%</u> )';
-		?>
-  </div>
-		</p>
-	<p>
-	<?PHP
-		echo $dircon.' -'.$templo;
-		echo " : {$sede->rua()}, N&ordm; {$sede->numero()} <br /> {$sede->cidade()} - {$sede->uf()} - CNPJ: {$sede->cnpj()} -
-	CEP: {$sede->cep()} - Fone: {$sede->fone()}";?>
-	 <a rel="nofollow" href="http://<?PHP echo "{$sede->site()}";?>/" title="Copyright information">Site&nbsp;</a>
-     - Email: <a href="mailto: <?PHP echo "{$sede->email()}";?>">Secretaria Executiva&nbsp;</a>
+				echo ' Tendo '.$totDizimistas.' dizimistas no m&ecirc;s de '.ucwords(strftime("%B/%G",strtotime("$mesDiz/01/$ano"))).' ( <u>'.round($percentual,2).'%</u> )';
+
+		echo '<br />'.$dircon;
+	?>
 	</p>
+</div>

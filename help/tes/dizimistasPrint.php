@@ -1,16 +1,14 @@
 <?php
-	if (empty($_GET['ano'])) {
-		$ano = date ('Y	');
-	}else {
-		$ano = intval($_GET['ano']);
-	}
+
+	$ano = (empty($_GET['ano'])) ? date ('Y') : intval($_GET['ano']) ;
 
 	//Loops para o corpo da tabela
-	$linhas = ($linhas=='') ? 10 : $linhas ;
+	// $linhas = ($linhas=='') ? 50 : $linhas ;
 	$filtrarIgreja = (empty($_GET['id'])) ? '' :intval( $_GET['id']);
-	$igrejas = new cargos($_GET['pagina'],$linhas,$filtrarIgreja);$linha='';
+	$igrejas = new cargos('','',$filtrarIgreja);
+
 	$cargoMembro = (empty($_GET['ord'])) ? 0 : intval($_GET['ord']) ;
-	$mesDiz = (empty($_GET['mes'])) ? 1 : intval($_GET['mes']);
+	$mesDiz = (empty($_GET['mes'])) ? date('m') : intval($_GET['mes']);
 	$totDizimistas = $igrejas->totDizimMembro($mesDiz,$cargoMembro,$ano);
 	//print_r($totDizimistas);
 	$cor= true;
@@ -26,7 +24,7 @@
 			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
 			$linkMemb = '<div class="text-center">Rol: '.$igrejaDados['rol'];
 			$linkIgreja  = $linkMemb.'</div><div class="text-center">';
-			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol'])['0'].'</kbd></div></a></td><td>';
+			$linkIgreja .= '</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol'])['0'].'</kbd></div></a></td><td>';
 			$linkIgreja .= $igrejaDados['nome'].'<br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 
