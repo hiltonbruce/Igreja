@@ -1,8 +1,8 @@
 <table>
 	<tr>
 	<?PHP
-		$mes = (empty($_GET['mes'])) ? '' : $_GET['mes'];
-		$ano = (empty($_GET['ano'])) ? '' : $_GET['ano'];
+		$mes = (empty($_GET['mes'])) ? date('m') : $_GET['mes'];
+		$ano = (empty($_GET['ano'])) ? date('Y') : $_GET['ano'];
 		$ord = (empty($_GET['ord'])) ? '' : intval($_GET['ord']);
 		$_urlLi  ='?escolha=tesouraria/receita.php&menu=top_tesouraria&direita=1&';
 		$_urlLi .='rec=23&ano='.$ano.'&id='.$_GET['id'].'&mes='.$mes.'&ord=';
@@ -48,7 +48,7 @@
 		  }
 		  ?>
 			<td>
-				<label>Cargo</label>
+				<label>Membro</label>
 				<select name="cargo" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
 				  <?php echo $linhaCargo;?>
 				    <option value="<?PHP echo $link;?>0">Membros Cadastrados</option>
@@ -67,12 +67,12 @@
 					<label>M&ecirc;s para estatistica:</label>
 					<select name="mes" tabindex="<?PHP echo ++$ind; ?>" class="form-control" >
 					      <?php
-					      $mesEstatisca = (empty($_GET['mes']) || $_GET['mes']>12) ? 1 : $_GET['mes'] ;
+					      $mesEstatisca = (empty($_GET['mes']) || $_GET['mes']>12) ? 1 : $mes ;
 					      	$linha1 = '<option value="0">Selecione o mês...</option>';
 						      foreach(arrayMeses() as $mes => $meses) {
-								 $linha2 .= '<option value='.(int)$mes.'>'.$meses.'</options>';
+								 $linha2 .= '<option value='.intval($mes).'>'.$meses.'</options>';
 								 if ($mesEstatisca==$mes) {
-								 	$linha1 = '<option value='.(int)$mes.'>'.$meses.'</options>'.$linha1;
+								 	$linha1 = '<option value='.intval($mes).'>'.$meses.'</options>'.$linha1;
 								 	$mesPesquisa = $meses;
 								 }
 						      }

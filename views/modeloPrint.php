@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.print.css" />
 <link rel="icon" type="image/gif" href="../../br_igreja.jpg">
 <?php
+  setlocale(LC_ALL, "pt_BR","pt_BR.UTF-8","portuguese");
   if (isset($_GET['rec']) && $_GET['rec']>'0') {
     ?>
     <style type="text/css">

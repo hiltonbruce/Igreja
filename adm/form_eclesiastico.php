@@ -157,10 +157,12 @@ $cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
             tabindex="<?PHP echo ++$ind;?>" class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
-          <label>Data da aclama&ccedil;&atilde;o:</label>
+          <label>Data da aclama&ccedil;&atilde;o:(membro desde)</label>
             <input name="dat_aclam" type="text" id="dat"
             value="<?php echo $_SESSION['dtaclam'];?>" tabindex="<?PHP echo ++$ind;?>"
-            class="form-control dataclass" />
+            class="form-control dataclass" data-toggle="tooltip" data-placement="bottom"
+						title='Ser&aacute; exibida no cart&atilde;o com membro desde esta data!'
+						placeholder="Membro desde!"/>
           </div></div>
         </td>
       </tr>
