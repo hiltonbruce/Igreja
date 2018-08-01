@@ -21,6 +21,35 @@ if (MESBLOQUEA >= $data) {
 	$msgErro .= 'foi confirmado!</u> por&eacute;m na agenda foi confirmado o encerramento</div>';
 	echo $msgErro;
 } else {
-	require_once 'models/tes/lancamento_confirma.php';//Confirma lançamento
+	$msg ='';
+	$debitar = intval($_POST['acessoDebitar']);
+	$creditar =  intval($_POST['acessoCreditar']);
+	$ctaDebito = new DBRecord('contas', $debitar, 'acesso');
+	$ctaCredito = new DBRecord('contas', $creditar, 'acesso');
+	if ($ctaDebito->acesso()<1) {
+		$msg .= '<h4>Conta de <strong>d&eacute;bito</strong> inv&aacute;lida!</h4>';
+		$msg .= '<p>Foi utilizado c&oacute;digo de acesso n&ordm;: '.$debitar.'</p>';
+		$error = true;
+	}
+	if ($ctaCredito->acesso()<1) {
+		$msg .= '<h4>Conta de <strong>cr&eacute;dito</strong> inv&aacute;lida!</h4>';
+		$msg .= '<p>Foi utilizado c&oacute;digo de acesso n&ordm;: '.$creditar.'</p>';
+		$error = true;
+	}
+
+	if ($error) {
+		$msgAlert  = '<div class="alert alert-danger" role="alert">';
+		$msgAlert .= '<h3>Lan&ccedil;amento n&atilde;o permitido!</h3>';
+		$msgAlert .= $msg;
+		$msgAlert .= '<br /> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span>';
+		$msgErro .= $msgAlert.' Lan&ccedil;amentos com n&Uacute;mero de conta inexistente';
+		$msgErro .= '! <u>O lan&ccedil;mento <b>N&Atilde;O</b> ';
+		$msgErro .= 'foi confirmado!</u></div>';
+		echo $msgErro;
+
+	} else {
+		require_once 'models/tes/lancamento_confirma.php';//Confirma lançamento
+	}
+
 }
 ?>
