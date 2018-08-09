@@ -1,5 +1,3 @@
-<script type="text/javascript" src="js/autocomplete.js"></script>
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
 <fieldset>
 	<legend>Agendar Contas &agrave; Pagar</legend>
@@ -24,9 +22,8 @@
 					$congr = new List_sele ("igreja","razao","congregacao");
 					echo $congr->List_Selec (++$ind,$_GET['congregacao'],'autofocus="autofocus" required="required" class="form-control"');
 					?></td>
-					<td><input name="venc" type="text" id="venc" size='10'
-						tabindex="<?PHP echo ++$ind;?>" id='data' required='required'
-						value='<?php echo $_GET['venc'];?>' class="form-control" /></td>
+					<td><input name="venc" type="text" tabindex="<?PHP echo ++$ind;?>" required='required'
+						value='<?php echo $_GET['venc'];?>' class="form-control dataclass" /></td>
 					<td><input name="valor" type="text" id="valor" size='10'
 						" class="form-control" tabindex="<?PHP echo ++$ind;?>"
 						required='required' value='<?php echo $_GET['valor'];?>' /></td>
