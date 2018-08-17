@@ -38,16 +38,16 @@
 		$lancamento = intval($_POST["lancamento"]);
 		$credito = intval($_POST["credito"]);
 		$debito = intval($_POST["acessoDebitar"]);
-		$referente = $_POST["referente"];
-		$nome = $_POST["nome"];
-    $cpf = $_POST["cpf"];
-    $rg = $_POST["rg"];
-    $acessoDebitar = $_POST['acessoDebitar'];
-		$numero = ($_POST["numero"]=="") ? $_POST["razao"]:$_POST["numero"];
+		$referente = addslashes($_POST["referente"]);
+		$nome = addslashes($_POST["nome"]);
+    $cpf = addslashes($_POST["cpf"]);
+    $rg = addslashes($_POST["rg"]);
+    $acessoDebitar = addslashes($_POST['acessoDebitar']);
+		$numero = ($_POST["numero"]=="") ? addslashes($_POST["razao"]):addslashes($_POST["numero"]);
 		if (empty($_POST["data"])) {
 			$data = date("d/m/Y");
 		}else {
-			$data = $_POST["data"];
+			$data = addslashes($_POST["data"]);
 		}
 	}else {
 		$reimprimir = new DBRecord("tes_recibo", intval($_POST["reimprimir"]), "id");
