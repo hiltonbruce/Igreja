@@ -255,7 +255,10 @@ switch ($_POST["tabela"]) {
 			}else{
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
 			}
-			$value = "'','{$rolMembro}','{$_POST["situacao"]}','{$_POST["motivo"]}','$dt_ini','$dt_fim','$hist',NOW()";
+
+			$motivo = addslashes($_POST['motivo']);
+			$situacao = addslashes($_POST['situacao']);
+			$value = "'','{$rolMembro}','$motivo','$motivo','$dt_ini','$dt_fim','$hist',NOW()";
 			$disciplina = new insert ("$value","disciplina");
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
