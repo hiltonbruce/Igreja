@@ -85,6 +85,14 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 			$referente .= $dataLanc;
 			$referente .= $CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico  = '<tr class=""><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
+			if (!isset($_GET['tipo'])) {
+				list($dtLog,$horaLog,$cpfLog) = explode(' ', $linha['hist']);
+				list($dd,$mm,$YY) = explode('/', $dtLog);
+				$d = new DateTime("$YY-$mm-$dd $horaLog");
+				$dtLog = strftime(", (%A) %d de %B de %Y &agrave;s %T",$d->getTimestamp());
+				$lancLog = ' Lan&ccedil;amento usando CPF n&ordm; '.$cpfLog.$dtLog;
+				$historico .='<tr class="bg-danger"><td colspan="2"><strong>Log:</strong>'.$lancLog.'</td></tr>';
+			}
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 			//Modelo extrato bamcário
 			$histExtr = '<p>'.$linha['referente'].', '.$linha['razao'].'</p>';
