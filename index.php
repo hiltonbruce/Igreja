@@ -15,7 +15,7 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 	date_default_timezone_set('America/Recife');
-	setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
+	setlocale( LC_ALL, 'pt_BR.iso-8859-1', 'pt_BR', 'Portuguese_Brazil');
 
 	function __autoload ($classe) {
     $pos = strpos($classe, '_');
