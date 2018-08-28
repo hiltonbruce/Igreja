@@ -18,7 +18,7 @@ __Desenvolvimento__
 
   Atualmente os módulos estão concentrados no apoio aos serviços desenvolvidos na secretária executiva e Tesouraria da igreja e ainda notamos a ausência de alguns serviços importantes, tais como: cartas convites, circulares e alguns relatórios, os passos, após a conclusão das demais necessidades da secretária executiva, será sua integração a administração patrimonial, escola bíblica, financeira, agenda entre outros.
 
-  O desenvolvimento atual está concentrado na conclusão para um funcionamento mínimo da tesouraria e estamos testando para finalizar e assim criar os demais modulos acessórios, como por exemplo: a edição do plano de contas da igreja, espinha dorsal de qualquer administração contábil.
+  O desenvolvimento atual está concentrado na conclusão para um funcionamento mínimo da tesouraria e estamos testando para finalizar e assim criar os demais módulos acessórios, como por exemplo: a edição do plano de contas da igreja, espinha dorsal de qualquer administração contábil.
 
   Esperamos que os usuários deste sistema possa enviar sua opinião e sugestões para que seja analisada e talvez disponibilizado nas novas atualizações.
 
