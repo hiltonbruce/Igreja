@@ -30,6 +30,7 @@ $variable = array_reverse($arq);
 
 echo '<dl class="dl-horizontal">';
 foreach ($variable as $key => $value) {
+	$dtBrazil = strftime(", (%A) %d de %B de %Y &agrave;s %T",$value['4']);
 	if ($key=='0') {
 		echo '<dt>'.$gerarNovoBkp.'</dt>';
 		echo '<dd><div class="alert alert-success" role="alert"><a href='.$value['0'].' target="_blank" class="alert-link"> ';
@@ -39,12 +40,12 @@ foreach ($variable as $key => $value) {
 		echo '<div class="alert alert-success" role="alert">';
 		echo '<span class="sr-only">Error:</span> ';
 		echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
-		echo ' Arquivo mais recente, criado em:  '.$value['2'].', com: '.$value['3']. ' MBytes</div></h6></a></div></dd>';
+		echo ' Arquivo mais recente, criado:  '.$dtBrazil.', com: '.$value['3']. ' MBytes</div></h6></a></div></dd>';
 	} elseif ($key<'3') {
 		echo '<dt><a href='.$value['0'].' target="_blank"> ';
 		echo '<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> ';
 		echo $value['1'].'</a></dt>';
-		echo '<dd>'."Arquivo criado em: " .$value['2'].', com: '.$value['3']. ' MBytes</dd>';
+		echo '<dd>'."Arquivo criado em: " .$dtBrazil.', com: '.$value['3']. ' MBytes</dd>';
 	} elseif ($key<'15') {
 		$numArq = $key+1;
 		$filesEnd .= '<li><a href='.$value['0'].' target="_blank" title="Arquivo '.($key+1).' ('.$value['1'].') criado em: '.$value['2'].', com: '.$value['3'].' MBytes"';
