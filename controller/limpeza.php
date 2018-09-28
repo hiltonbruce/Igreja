@@ -49,7 +49,8 @@ switch ($_GET['limpeza']) {
 	case '2':
 		$dadoscong	= $igSede;//Traz os dados da Sede
 		//Mostrar totalizador dentro da aplicação
-		echo '<a href="controller/limpeza.php?limpeza=1&'.$linkperido.'"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
+		// echo '<a href="controller/limpeza.php?limpeza=1&'.$linkperido.'"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
+    require_once 'views/tesouraria/buttonLimpTot.php';
 		$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações
 		require_once 'views/limpezatot.php';
 	break;

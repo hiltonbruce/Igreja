@@ -3,7 +3,7 @@ $tbodytab = new limplista($mesref);
 if ($_GET['limpeza']!='4') {
 ?>
 <table class='table table-striped table-hover' >
-	<caption>Relação do Material de Limpeza Total - <?php echo $periodo['0'];?></caption>
+	<caption>Rela&ccedil;&atilde;o do Material de Limpeza Total - <?php echo $periodo['0'];?></caption>
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
