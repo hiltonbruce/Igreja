@@ -9,7 +9,7 @@
 <body>
 <div id="container">
 <div id="header">
-	<p>
+	<p class="text-right">
 		<?PHP echo $dadosjgreja;?>
 		<br />Copyright &copy; <a rel="nofollow" href="http://<?PHP echo $siteigreja;?>/" title="Copyright information">Site&nbsp;</a>
 		<br />Email: <a href="mailto: <?PHP echo $emailigreja;?>">Secretaria Executiva&nbsp;</a>

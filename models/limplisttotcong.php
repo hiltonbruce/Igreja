@@ -16,6 +16,20 @@
 	}else{
 		$tabtodas = '';
 	}
+
+	if (!empty($_GET['div'])) {
+		// Acrescenta rodape e salto de página
+		$tabtodas .= $saltoPagina;
+		$rodResp = '<tfoot><tr>';
+		$rodResp .= '<th colspan="5" class="primary text-center">';
+		$rodResp .= '<h4>Respons&aacute;vel pela entrega: Irm&atilde;o Berg, Fone: 83 9 8691-2170</h4>';
+		$rodResp .= '</th>';
+		$rodResp .= '</tr></tfoot>';
+	} else {
+		$saltoPagina = '';
+		$rodResp = '';
+	}
+
 	while($roligreja = mysql_fetch_array($todacongrLimp)){
 	$tabtodas .= '<table class="table table-striped table-hover" >
 		<caption>Material de Limpeza - '.$roligreja['razao'].',  para os meses de '.$periodo['0'].'</caption>
@@ -37,7 +51,7 @@
 		</thead>
 		<tbody>';
 		$tabtodas .= $tbodytab->tabLimp ($roligreja['rol']);//$tbodytab->tabelaLimp($roligreja['rol']) -> vem do script que o chama /views/limpezatot.php
-		$tabtodas .= '</tbody></table>';
+		$tabtodas .= '</tbody>'.$rodResp.'</table>';
 		if ($roligreja['matlimpeza']=='1') {
 			$endEntrega ='Situada: '.$roligreja['rua'].', N&ordm;: '.$roligreja['numero'].
 									', bairro: '.$roligreja['bairro'].', '.$roligreja['cidade'].'-'.$roligreja['uf'];
@@ -46,7 +60,10 @@
 			$tabtodas .= 'no pr&ocute;ximo bimestre n&atilde;o ser&atilde;o relacionadas para entrega!</fieldset>';
 			$tabtodas .= '<fieldset><legend>Enderço para entrega.:</legend>'.$endEntrega.'</fieldset>';
 		}
-		//$tabtodas .= $saltoPagina;
+
+
+			$tabtodas .= $saltoPagina;
+
 	}
 	echo  $tabtodas;
 ?>

@@ -14,13 +14,13 @@ body {
 	background-repeat:no-repeat;
 	background-position:center;
 }
-	
-#container { margin: 1em auto; width: 95%; text-align: left;}
 
-#header { width:800px; height: 127px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
- background-position: left bottom; margin: 0; padding: 0 20px 0 100px; text-align:right;}
- 
-#header p { width:800px; height: 127px; padding: 30px 20px 0 300px; text-align:right;}
+#container { margin-top: -8em; width: 95%; text-align: left;}
+
+#header { width:auto; height: 127px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat; background-position: center bottom;
+ background-position: left bottom; margin: 0; text-align:right;}
+
+#header p { height: 127px; padding: 70px 20px 0 0; text-align:right; margin: 2em; }
 #mainnav {
 height: 20px;
 margin: 0;
@@ -28,13 +28,13 @@ padding: 10px 0 0;
 text-align:left;
 font-size: 20px;
 }
-	
+
 #content { height: auto; margin: 1px 0 0; padding: 0; }
-	
+
 #footer {
 	color: #636466;
 	width: 95%;
-	font-size: 0.8em; 
+	font-size: 0.8em;
 	text-align: right;
 	clear: both;
 }
@@ -106,7 +106,7 @@ th, td {
 }
 
 .odd {
-  background-color:#E8E8E8; 
+  background-color:#E8E8E8;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
 }
@@ -120,4 +120,3 @@ thead tr:hover {
   background-color: transparent;
   color: inherit;
 }
-
