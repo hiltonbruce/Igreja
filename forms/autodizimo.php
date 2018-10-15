@@ -29,6 +29,14 @@
 			<tr>
 				<td><label>Data: </label> <input type="text" id="data" name="data"
 					value="<?php echo $dtlanc;?>" class="form-control" required="required"/>
+					<?php
+					//
+					// echo semana($dtlanc).' Semana ';
+					// list($i,$m,$y) = explode('/', $dtlanc);
+					// echo date('w',mktime(1,0,0,$m,$i,$y)).' #### dia da semana ';
+					// echo date ('w',mktime(1,0,0,$m,0,$y)).' ****ultimo dia do mês';
+
+					?>
 				</td>
 				<td><label>Referente M&ecirc;s:</label><input type="text" name="mes"
 					size="2" value="<?php echo $meslanc;?>" class="form-control"
