@@ -367,23 +367,27 @@ function semana ($data) {
 		$y=$dta[2];
 		//$res = ;
 		$semana = 1;
-	if (checkdate($m,$d,$y)) {
-		$anoatual = date ('y');
 		$diafim = date ('d',mktime(1,0,0,$m+1,0,$y));
+	if (checkdate($m,$d,$y)) {
 		//echo '<h1>'.$d.'/'.$m.'<br/>'.date('w',mktime(1,0,0,$m,$i,$y)).'</h1>';
 		//echo '<h2>'.$semana.'</h2>';
+		
+            
 		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o lan�amento
 			//echo $d.' ++++++++++ '.$i;
-			if (date('w',mktime(1,0,0,$m,$i,$y))=='1' && $semana<5 && date('w',mktime(1,0,0,$m,0,$y))!='0') {
+			
+			if ($d==$i) {
+            return $semana;
+            }
+            
+			if (date('N',mktime(1,0,0,$m,$i,$y))=='6' && $semana<5) {
 				$semana++;
 				//echo '<h2>'.$semana.'</h2>';
 			}
-				if ($d==$i) {
-				$sem=$semana;}
 			//echo(date('d/M/Y',mktime(1,0,0,$m,$i,$y)).' <--> '.date('w',mktime(1,0,0,$m,$i,y)).' ********** ');
 		}
 	}
-	return $sem;
+	
 }
 
 function diaSem ($data) {
