@@ -374,7 +374,7 @@ function semana ($data) {
 		//echo '<h2>'.$semana.'</h2>';
 		for ($i = 1; $i <= $diafim; $i++) {//Verifica a q semana pertence o lan�amento
 			//echo $d.' ++++++++++ '.$i;
-			if (date('w',mktime(1,0,0,$m,$i,$y))=='1' && $semana<5 && date('w',mktime(1,0,0,$m,0,$y))!='0') {
+			if (date('N',mktime(1,0,0,$m,$i,$y))=='1' && $semana<5 && date('N',mktime(1,0,0,$m,0,$y))!='0') {
 				$semana++;
 				//echo '<h2>'.$semana.'</h2>';
 			}
