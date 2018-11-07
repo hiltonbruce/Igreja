@@ -6,5 +6,7 @@
 	  <a <?PHP $b=id_corrente ("batismo");?> href="./?escolha=relatorio/batismo.php&menu=top_formulario">
 	  	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Batismo</button></a>
 	  <a <?PHP $b=id_corrente ("recibos");?> href="./?escolha=relatorio/recibos.php&menu=top_formulario&tipo=1">
+	  	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Consagra&ccedil;&atilde;o</button></a>
+	  <a <?PHP $b=id_corrente ("consagracao");?> href="./?escolha=relatorio/consagracao.php&menu=top_formulario">
 	  	<button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Recibos</button></a>
 </div>
