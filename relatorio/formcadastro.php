@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Ficha de Membro</title>
-<link rel="stylesheet" type="text/css" href="reset.css" />
+<!-- <link rel="stylesheet" type="text/css" href="../reset.css" /> -->
 <link rel="icon" type="image/gif" href="../img/br_igreja.gif" />
 <style type="text/css">
 <!--
@@ -40,6 +40,7 @@ th {
 th, td {
   padding: 0.23em 1em;
    border: 1px solid #000000;
+  text-align: left;
 }
 
 .odd {
@@ -47,14 +48,10 @@ th, td {
 }
 
 .sep {
-  background-color:#FFFFFF;
-  height: 1em;
-   border: 0px;
-}
-
-tr:hover {
-  background-color:#3d80df;
-  color: #fff;
+	background-color:#FFFFFF;
+	height: 1em;
+	border: 0px;
+	text-align: left;
 }
 
 thead tr:hover {
@@ -256,7 +253,7 @@ thead tr:hover {
 	  <td>&nbsp;</td>
 	</tr>
 <tr >
-  <td colspan="26" class="sep"><b>Endere&ccedil;o</b></td>
+  <td colspan="26" class="sep"><b>Resid&ecirc;ncia</b></td>
   </tr>
 	<td colspan="3">UF:</td>
 	  <td>&nbsp;</td>
@@ -820,7 +817,7 @@ Outros, Qual?</p>
   <td colspan="24">&nbsp;</td>
  </tr>
  <tr >
-   <td colspan="30" class="sep"><div align="center"><strong>Dados Profissionais </strong></div></td>
+   <td colspan="30" class="sep"><strong>Dados Profissionais </strong></td>
  </tr>
  <tr>
    <td colspan="2">RG:</td>
@@ -1028,15 +1025,28 @@ Outros, Qual?</p>
    <td>&nbsp;</td>
  </tr>
 <tr >
-  <td colspan="30" class="sep"><div align="center"><strong>Preencher se casado</strong></div></td>
+  <td colspan="30" class="sep"><strong>Estado Civil</strong>
+	<input type="radio" name="r232" />
+	<label>Casado(a)</label>
+
+	<input type="radio" name="r232" />
+	<label>Solteiro(a)</label>
+
+	<input type="radio" name="r232" />
+ <label>Vi&uacute;vo(a) </label>
+
+ <input type="radio" name="r232" />
+<label>Separado(a)</label>
+
+	<input type="radio" name="r232" />
+	Divorciado(a)
+
+	<input type="radio" name="r232" />
+	Outros
+	</td>
 </tr>
 <tr>
-  <td colspan="3">Conjugue:</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
+  <td colspan="8">Preencher se Casado, Conjugue:</td>
   <td>&nbsp;</td>
   <td>&nbsp;</td>
   <td>&nbsp;</td>

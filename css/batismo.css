@@ -1,0 +1,150 @@
+*{ margin: 0; padding: 0; }
+body {
+	margin: 0;
+	padding: 0;
+	width: 1075px;
+	font: 85% tahoma, sans-serif;
+	color: #505367;
+	background-color: #fff;
+	background: url(../img/354.png) no-repeat 0% 0%;
+	background-size: 1200px 900px;}
+#container { width: 1000px; text-align: center; }
+#header {height: 15em; }
+#mainnav {
+	height: 20px;
+	margin: 0;
+	padding: 30px 0 0;
+	text-align:center;
+	font-family:"Times New Roman", Times, serif;
+}
+#content { height: 600px; margin: 1px 0 0; padding: 0; }
+
+#added-div1 {
+	position:relative;
+	width: 750px;
+	z-index:1;
+	height: auto;
+	float: left;
+	margin-left: 150px;
+	padding: 5px;
+	font-size:150%;
+	font-family:"Times New Roman", Times, serif;
+	font-size: 180%;
+}
+
+#headerApres {
+	position:absolute;
+	/*background: url(../img/header_apresen.png) no-repeat;*/
+	left:9em;
+	top:8em;
+	width:80em;
+	height:15em;
+	z-index:6;
+}
+
+#comadep {
+	position:absolute;
+	background: url(../img/comadep.jpg) no-repeat;
+	background-size: 120px 90px;
+	left:130px;
+	top:-10px;
+	width:211px;
+	height:143px;
+	z-index:6;
+}
+
+#added-div-2 {
+	position:relative;
+	width: 100%;
+	float: left;
+	margin-top: 20px;
+	padding-left: 100px;
+}
+
+#pastor {
+	position:relative;
+	width:250px;
+	margin-top: 50px;
+	margin-left: 40px;
+	padding: 0 0 0 100px;
+	text-align:center;
+}
+
+#secretario {
+	float:right;
+	position:relative;
+	width:280px;
+	text-align:center;
+	margin-right: 190px;
+	top: -135px;
+}
+
+#assinSec {
+	position:relative;
+	width:115px;
+	margin-left: 530px;
+	top: -100px;
+}
+
+h1{
+	color: #0000FF;
+	font-size: 280%;
+	font-family: Forte;
+	font-weight: normal;
+	text-align: center;
+	height: 40px;
+	padding-top: 25px;
+	font-family:"Times New Roman", Times, serif;
+
+}
+h2 { font-size: 120%; font-family: Forte; font-weight: bold; width: auto; height: 40px; margin: 0; padding: 10px 0 0 20px; text-align:right; margin-right: 30px;  }
+h3, legend { font-weight: normal; text-align: center; width: auto; height: auto; margin: 0; padding-top: 2px; font-family:"Times New Roman", Times, serif;}
+h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
+h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 15px 0 0;}
+
+p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
+#navcontainer  { float: right ; margin: 0; padding: 5px 20px 0 0; }
+
+#foto {
+	float:left;
+	left:207px;
+	top:200px;
+	font-size: 20px;
+	width:150px;
+	z-index:3;
+	margin-top: -10px;
+	margin-left: 2em;
+}
+#nomeIgreja {
+	width:25em;
+	margin-left: 3em;
+	padding: 25px 0 20px 0;
+	font-size: 250%;
+	text-align: left;
+	color: #3366FF;
+	font-family:"Times New Roman", Times, serif;
+}
+#Tipo {
+	float:left;
+	width:400px;
+	padding: 5px 0 20px 0;
+	font-size: 250%;
+	text-align: right;
+	margin-left: 7em;
+	color: #3366FF;
+}
+
+#footer {
+  position: absolute;
+  left: 10px;
+  top: 150px;
+	width: 100%;
+	color: #000000;
+	height: 50px;
+	padding-top: 25px;
+	background-repeat: no-repeat;
+	background-position: top;
+	margin: 10;
+	background-image: url(../img/horbar.png);
+	font-size: 80%;
+}
