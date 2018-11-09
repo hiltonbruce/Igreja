@@ -16,12 +16,16 @@
 	  </div>
     <div class="col-xs-6">
       <label>Fun&ccedil;&atilde;o e Congrega&ccedil;&atilde;o</label>
-      <input type="text" class="form-control" id='acesso2' placeholder="acesso2">
+      <input type="text" class="form-control" id='acesso2'>
     </div>
-  <div class="col-xs-4">
+  <div class="col-xs-3">
     <label>Data do Batismo</label>
-    <input type="text" class="form-control dataclass" id='id_val2' placeholder="Data do Batismo" disabled='disabled'>
+    <input type="date" name="dtbatismo" class="form-control dataclass" id='id_val2' placeholder="Data do Batismo" >
     <input type="hidden" name="pastor" value="<?PHP echo strtr( $igSede->pastor(), 'áàãâéêíóõôúüç','aaaaeeiooouuc');?>" >
+  </div>
+  <div class="col-xs-1">
+    <label>Sexo</label>
+    <input type="text" name="sexo" class="form-control" id='sexo' placeholder="M ou F" >
   </div>
  	<div class="col-xs-6">
 		<label>Secret&aacute;rio:..</label>
@@ -40,11 +44,12 @@
 </div>
  <script type="text/javascript">
  	new Autocomplete("estado", function() {
- 		this.setValue = function( rol, nome, celular,detalhe ) {
+ 		this.setValue = function( rol,nome,celular,detalhe,sexo ) {
  			$("#id_val2").val(rol);
  			$("#nome2").val(nome);
  			$("#acesso2").val(celular);
  			$("#detalhe2").val(detalhe);
+ 			$("#sexo").val(sexo);
  		}
  		if ( this.isModified )
  			this.setValue("");
