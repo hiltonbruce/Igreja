@@ -11,11 +11,18 @@ $exp = new fonetica($q,'nome');
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql = "SELECT m.*,e.situacao_espiritual,e.congregacao,e.batismo_em_aguas AS dtbatismo FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' AND nome LIKE '%$q4%' order by locate('$q1',nome) ";
+	 $sql  = "SELECT m.*,e.situacao_espiritual,e.congregacao,e.batismo_em_aguas AS ";
+	 $sql .= "dtbatismo FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND ";
+	 $sql .= "nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' AND ";
+	 $sql .= "nome LIKE '%$q4%' AND (veio_outra_assemb_deus=='N√O' OR veio_outra_assemb_deus=='')";
+	 $sql .= " order by locate('$q1',nome) ";
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql = "SELECT m.*,e.situacao_espiritual,e.congregacao,e.batismo_em_aguas AS dtbatismo FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' order by locate('$q1',nome) ";
+	 $sql = "SELECT m.*,e.situacao_espiritual,e.congregacao,e.batismo_em_aguas AS ";
+	 $sql .= "dtbatismo FROM membro AS m, eclesiastico AS e where m.rol=e.rol AND ";
+	 $sql .= "nome LIKE '%$q1%' AND nome LIKE '%$q2%' AND nome LIKE '%$q3%' ";
+	 $sql .= "AND (veio_outra_assemb_deus=='N√O' OR veio_outra_assemb_deus=='') order by locate('$q1',nome) ";
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
@@ -34,7 +41,8 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
-	$id = conv_valor_br ($campo['dtbatismo']);
+	$id = $campo['dtbatismo'];
+	$sexo = $campo['sexo'];
 	//$estado = $campo['nome'];
 	$estado = strtoupper(strtr( $campo['nome'], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco = strtoupper(strtr( $campo ['endereco'], '·‡„‚ÈÍÌÛıÙ˙¸Á¡¿√¬… Õ”’‘⁄‹«','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
@@ -103,7 +111,7 @@ if (file_exists($img)){
 	$img='img_membros/ver_foto.jpg';//Localiza√ß√£o p/ JavaScript
 }
 $html ='<img class="thumb" src="'.$img.'" title="Rol: '.$rol.'" style="width:24px;height:32px;"> '.$html.$siglas;
-echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$rol');\">$html ($sigla)</li>\n";
+echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$rol','$sexo');\">$html ($sigla)</li>\n";
 $quantExibir++;
 if ($quantExibir>'14') {
 		break;
