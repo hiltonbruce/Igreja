@@ -46,7 +46,7 @@ if (!empty($_GET['dia']) || !empty($_GET['mes']) || !empty($_GET['ano']) || !emp
 		$titulo .=  ', 1&ordm; Tesoureiro: '.$tesIgreja;//Tesoureiro
 		$titulo .=  '&bull; Data de Emiss&atilde;o: '.date('d/m/Y H:i:s').$fonIni;//Tesoureiro
 	}
-if (empty($descricoo) && $tabLancamento!='') {
+if (empty($descricao) && $tabLancamento!='') {
 	$descricao='Descri&ccedil;&atilde;o';
 	echo($imprimir);
 ?>

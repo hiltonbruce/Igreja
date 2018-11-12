@@ -170,6 +170,9 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 			$dataLanc  .= $dtLanc.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$numLanc.'</span></p>';
 			$referente .= $dataLanc.$CaixaCentral.$CaixaMissoes.$CaixaOutros.$titulo1;
 			$historico = '<tr><td colspan="2"><strong>Hist&oacute;rico:</strong>'.$historico.'</td></tr>';
+			if (!isset($_GET['tipo'])) {
+				$historico .='<tr class="bg-danger"><td colspan="2"><strong>Log:</strong>'.$lancLog.'</td></tr>';
+			}
 			$tabela .= '<tr class="active"><td colspan="2">'.$referente.'</td></tr>'.$historico;
 			//Modelo Extrato Bancario
 			$tabModeloExt .= $viewCabTr.$CaixaMissoes.$CaixaOutros.$titulo1;
