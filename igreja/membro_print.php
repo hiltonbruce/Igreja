@@ -43,7 +43,7 @@ controle ("consulta");
 $ordenar = new igreja ();
 $opCargo = (!empty($_GET["cargo"])) ? intval($_GET["cargo"]) : 0 ;
 $query  = 'SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol ';
-$query .= 'AND e.situacao_espiritual<=2 '.$ordenar->cargo($opCargo);
+$query .= 'AND e.situacao_espiritual <= 2 '.$ordenar->cargo();
 $query .= ' ORDER BY '.$ordenar->ordenar();
 
 $sql3 = mysql_query ($query) or die (mysql_error());
