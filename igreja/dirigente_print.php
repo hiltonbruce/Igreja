@@ -75,7 +75,7 @@ $query = "SELECT * from igreja WHERE status='1' ORDER BY razao";
                     if (intval($coluna["pastor"])=='0') {
                         $funIgreja = '-o-';
                     } else {
-                        $funIgreja = cargo ($coluna["pastor"])['0'];
+                        $funIgreja = cargo ($coluna["pastor"]);
                     }
 
                  echo $funIgreja;

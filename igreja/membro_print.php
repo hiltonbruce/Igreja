@@ -131,7 +131,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				echo $coluna["nome"];
 				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
 				echo ' - Cong.: '.$congregacao->razao();
-				echo ', '.cargo ($coluna["rol"])['0'];
+				echo ', '.cargo ($coluna["rol"]);
 
 				?>
 				</td>
@@ -165,7 +165,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				echo $congregacao->razao();
 				?></td>
 				<td><?php
-				echo cargo ($coluna["rol"])['0'];
+				echo cargo ($coluna["rol"]);
 				?></td>
 			</tr>
 			<?PHP	}

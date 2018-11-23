@@ -76,7 +76,7 @@ $paginacao['link'] = "?"; //Paginação na mesma página
               if (intval($coluna["pastor"])=='0') {
                   $funIgreja = '-o-';
               } else {
-                  $funIgreja = cargo ($coluna["pastor"])['0'];
+                  $funIgreja = cargo ($coluna["pastor"]);
               }
            echo $funIgreja;
           ?>

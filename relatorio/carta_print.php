@@ -125,7 +125,7 @@
 				<td colspan='3'><h4><small>Nome:</small><br><?php print strtoupper( toUpper($membro->nome())); ?></h4></td>
 				<td><h4><small>Rol</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
 				<td><h4><small>Est. Civil</small><br><?php print $est_civil->estado_civil(); ?></h4></td>
-				<td><h4><small>Func. Eclesiast&iacute;ca:</small><br><?php print cargo($_POST['bsc_rol'])['0']; ?></h4></td>
+				<td><h4><small>Func. Eclesiast&iacute;ca:</small><br><?php print cargo($_POST['bsc_rol']); ?></h4></td>
 			</tr>
 			<tr>
 				<td><h4><small>RG:</small><br><?php print $profissional->rg(); ?></h4></td>

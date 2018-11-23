@@ -83,7 +83,7 @@
       </div>
       <div id="secretario">
 	        <?PHP
-						$cargo = (cargo($secretario->rol())['1']=='Mb') ? '' : cargo($secretario->rol())['1'] ;
+						$cargo = (cargo($secretario->rol())=='Mb') ? '' : cargo($secretario->rol()) ;
 						echo $cargo.' '.strtoupper( toUpper($secretario->nome()));
 					?>
 					<br />

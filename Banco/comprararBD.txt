@@ -1,0 +1,1 @@
+mysqldiff --server1=root:senha@localhost --server2=root:senha@localhost --difftype=sql --changes-for=server2 --force assembleia:assembleiaPianco > mysqldiff_Pianco.txt

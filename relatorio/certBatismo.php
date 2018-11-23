@@ -64,7 +64,7 @@
           <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
       </div>
       <div id="secretario">
-	        <?PHP echo cargo($secretario->rol())['1'].' '.strtoupper( toUpper($secretario->nome()));?><br />
+	        <?PHP echo cargo($secretario->rol()).' '.strtoupper( toUpper($secretario->nome()));?><br />
 	      Secret&aacute;rio
       </div>
 			<div id="footer">

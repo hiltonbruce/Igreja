@@ -42,7 +42,7 @@ if ($membro) {
 		echo '<p><strong>'.$membro->nome().'</strong> - ';
 		$ecles = new DBRecord ('eclesiastico',$bsc_rol,"rol");
 		$igreja = new DBRecord ('igreja',$ecles->congregacao,'rol');
-		echo 'Cargo: '.cargo($bsc_rol)['0'].' - Congrega: '.$igreja->razao();
+		echo 'Cargo: '.cargo($bsc_rol).' - Congrega: '.$igreja->razao();
 		echo ', '.situacao($ecles->situacao_espiritual(),$bsc_rol).'</p>';
 	}
 ?>
