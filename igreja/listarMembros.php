@@ -82,7 +82,7 @@ $arrayIg =$ordenar->Arrayigreja();
 				</td>
 				<td>
 					<?php
-						echo cargo ($coluna["rol"])['0'];
+						echo cargo ($coluna["rol"]);
 					?>
 				</td>
 			</tr>

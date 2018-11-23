@@ -24,7 +24,7 @@
 			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
 			$linkMemb = '<div class="text-center">Rol: '.$igrejaDados['rol'];
 			$linkIgreja  = $linkMemb.'</div><div class="text-center">';
-			$linkIgreja .= '</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol'])['0'].'</kbd></div></a></td><td>';
+			$linkIgreja .= '</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol']).'</kbd></div></a></td><td>';
 			$linkIgreja .= $igrejaDados['nome'].'<br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 

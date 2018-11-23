@@ -49,7 +49,7 @@ if (!empty($_GET['ext']) && $_GET['ext']=='1') {
 				<td><?php printf("%'05u",intval($coluna["rol"]));?></td>
 				<td>
 					<?php
-				 		echo cargo ($coluna["rol"])['1'].' '.$coluna["nome"];
+				 		echo cargo ($coluna["rol"]).' '.$coluna["nome"];
 				 	?>
 				</td>
 				<td><?php echo $coluna["razao"];?></td>

@@ -53,7 +53,7 @@
 		require_once 'forms/autocompleta.php';
 		if (!(strstr($_GET["escolha"], "dados_pessoais.php") || strstr($_GET["escolha"], "cartao.php")) && isset($_SESSION["membro"]))
 		{
-			echo 'Membro: '.$membro->nome().' - Cargo: '.cargo($bsc_rol)['0'].' - Congrega: '.$igreja->razao();
+			echo 'Membro: '.$membro->nome().' - Cargo: '.cargo($bsc_rol).' - Congrega: '.$igreja->razao();
 		}
 	?>
 </div>
