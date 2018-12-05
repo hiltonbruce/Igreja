@@ -72,6 +72,17 @@ function histLancamentos ($igreja,$mes,$ano,$dia,$cta,$deb,$cred,$ref,$numLanc,$
 	while ($linha = mysql_fetch_array($dquery)) {
 		//$bgcolor = 'class="odd"';
 		$lancAtual = $linha['lancamento'];
+		if ($lancLog=='') {
+			list($dtLog,$horaLog,$cpfLog) = explode(' ', $linha['hist']);
+			if (checadata ($dtLog)) {
+				list($dd,$mm,$YY) = explode('/', $dtLog);
+				$d = new DateTime("$YY-$mm-$dd $horaLog");
+				$dtLog = strftime(", (%A) %d de %B de %Y &agrave;s %T",$d->getTimestamp());
+				$lancLog = ' Lan&ccedil;amento usando CPF n&ordm; '.$cpfLog.$dtLog;
+			} else {
+				$lancLog = ' '.$linha['hist'];
+			}
+		}
 		if ($lancAtual!=$lancamento && $lancamento!='') { //Verificar se ainda estar no mesmo lançamento
 			if ($valorCaixaDeb<=0) {
 				$CaixaDep='';

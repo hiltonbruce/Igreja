@@ -36,9 +36,10 @@ while (false !== ($filename = readdir($dh))) {
 // verificando se o arquivo é .sql
 	if (substr($filename,-4) == ".sql") {
 		// mostra o nome do arquivo e um link para ele - pode ser mudado para mostrar diretamente a imagem :)
-		$sizeFile = number_format(((stat($dir.$filename)['size'])/1024)/1024, 2, ',', '.');
-		$indice = stat($dir.$filename)['ctime'];
-		$arq[$indice] = array($dir.$filename,$filename,date ("d/M/Y H:i:s", stat($dir.$filename)['ctime']),$sizeFile, stat($dir.$filename)['ctime']);
+		$stat = stat($dir.$filename);
+		$sizeFile = number_format((($stat['size'])/1024)/1024, 2, ',', '.');
+		$indice = $stat['ctime'];
+		$arq[$indice] = array($dir.$filename,$filename,date ("d/M/Y H:i:s", $stat['ctime']),$sizeFile, $stat['ctime']);
 	}elseif (substr($filename,-4) != '.zip') {
 	   		unlink($dir.$filename);
 	}

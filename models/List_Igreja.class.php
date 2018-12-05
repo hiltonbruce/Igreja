@@ -54,9 +54,9 @@ class List_Igreja extends List_sele {
 		{
 			//echo "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst[$this->campo_retorno]."</option>";
      	if ($igreja==$this->col_lst["rol"]) {
-     		$linha1 = "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst["razao"]."</option>";
+     		$linha1 = "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst["razao"]."****</option>";
      	}else {
-    	$linst .= "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst["razao"]."</option>";
+    	$linst .= "<option value='./?$valor{$this->col_lst["rol"]}'>".$this->col_lst["razao"]."****</option>";
      	}
 		}
 		echo $linha1.$linst;
