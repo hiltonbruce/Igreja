@@ -89,18 +89,19 @@
       </div>
       <div id="secretario">
 	        <?PHP
-						$cargo = (cargo($secretario->rol())=='Mb') ? '' : cargo($secretario->rol());
-						echo $cargo.' '.strtoupper( toUpper($secretario->nome()));
-					?>
-					<br />
-					<?php
-						if ($secretario->nome()=='M') {
-							echo 'Secret&aacute;rio';
-						} else {
-							echo 'Secret&aacute;ria';
-						}
+                $cargo = cargo($secretario->rol());
+                $cargo = ($cargo[1]=='Mb') ? '' : $cargo[1];
+                echo $cargo.' '.strtoupper( toUpper($secretario->nome()));
+            ?>
+            <br />
+            <?php
+                if ($secretario->sexo()=='M') {
+                    echo 'Secret&aacute;rio';
+                } else {
+                    echo 'Secret&aacute;ria';
+                }
 
-					 ?>
+            ?>
 
       </div>
 			<div id="footer">
