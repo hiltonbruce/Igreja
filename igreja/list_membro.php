@@ -100,7 +100,7 @@ if ($_GET["cargo"] != "6"){
 				</td>
 				<td>
 					<?php
-						echo cargo ($coluna["rol"]);
+						echo cargo ($coluna["rol"])['0'];
 					?>
 				</td>
 			</tr>

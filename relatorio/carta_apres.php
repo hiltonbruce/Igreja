@@ -25,7 +25,7 @@
 	$cidade = new DBRecord ("cidade",$most_certidao->cidade(),"id");
 	if ($most_certidao->sexo()=="F") {
 		$estilo = "menina";
-	}elseif ($most_certidao->sexo()=="M"){
+	}else {
 		$estilo = "menino";
 	}
 ?>
