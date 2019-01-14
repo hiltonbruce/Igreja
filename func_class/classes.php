@@ -1001,7 +1001,7 @@ class aniversario {
 			echo "</td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["nome"]}</a>";
 			echo '</td><td>'.$nomeIg[$this->dados["congregacao"]]['0'].'</td>';
 			echo '<td class="text-center">'.$nomeIg[$this->dados["congregacao"]]['5']."</td>";
-			echo '<td>'.cargo($this->dados["rol"])."</td></tr>";
+			echo '<td>'.cargo($this->dados["rol"])['0']."</td></tr>";
 		}
 	}
 
@@ -1013,7 +1013,7 @@ class aniversario {
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
 			$this->idade = date('Y')-$this->dados['casamento'];
 			$this->igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
-			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_famil.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$this->igreja->razao()}</td><td>".cargo($this->dados["rol"])."</td></tr>";
+			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_famil.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$this->igreja->razao()}</td><td>".cargo($this->dados["rol"])['0']."</td></tr>";
 		}
 	}
 
@@ -1026,7 +1026,7 @@ class aniversario {
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
 			$this->idade = date('Y')-$this->dados['batismo'];
 			$this->igreja = new DBRecord ("igreja",$this->dados["congregacao"],"rol");
-			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_famil.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$this->igreja->razao()}</td><td>".cargo($this->dados["rol"])."</td></tr>";
+			echo "<td> $this->idade </td><td><a href='./?escolha=adm/dados_famil.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$this->igreja->razao()}</td><td>".cargo($this->dados["rol"])['0']."</td></tr>";
 		}
 	}
 
@@ -1051,7 +1051,7 @@ class aniversario {
 			$inc++;
 			$this->tot_aniv ++;
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
-			echo "<td>{$this->dados["dia"]}/{$this->dados["mes"]}</td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$igreja->razao()}</td><td>".cargo ($this->dados["rol"])."</td></tr>";
+			echo "<td>{$this->dados["dia"]}/{$this->dados["mes"]}</td><td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["rol"]}</a></td><td>{$this->dados["nome"]}</td><td>{$igreja->razao()}</td><td>".cargo ($this->dados["rol"])['0']."</td></tr>";
 			} //else {echo $var_aniv; $ok = "Falha! Date W -> ".date('W')." <--Fim";}
 		}
 	}

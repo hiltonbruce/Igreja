@@ -142,9 +142,9 @@ function cargo ($rol) {
 	return $cargo;
 }
 
-function cargo_dt () {
+function cargo_dt ($rol) {
 	//Devolve a data do ultimo cargo do Membro
-	$car_dt = new DBRecord ("eclesiastico",$_SESSION["rol"],"rol");
+	$car_dt = new DBRecord ("eclesiastico",$rol,"rol");
 		if ($car_dt->pastor()>"0000-00-00") {
 			$cargo_dt = $car_dt->pastor();
 		}elseif ($car_dt->evangelista()>"0000-00-00") {
@@ -224,10 +224,10 @@ function foto ($rol) {
 				$img="../img_membros/$rol.JPG";
 			}elseif (file_exists("img_membros/$rol.JPG")){
 				$img="img_membros/$rol.JPG";
-			}elseif (file_exists("img_membros/ver_foto.JPG")){
-				$img="img_membros/ver_foto.JPG";
+			}elseif (file_exists("img_membros/ver_foto.jpg")){
+				$img="img_membros/ver_foto.jpg";
 			}else{
-				$img="../img_membros/ver_foto.JPG";
+				$img="../img_membros/ver_foto.jpg";
 			}
 	} elseif (file_exists("../img_membros/".$_SESSION["rol"].".jpg")){
 				$img="../img_membros/".$_SESSION["rol"].".jpg";
@@ -237,10 +237,10 @@ function foto ($rol) {
 				$img="../img_membros/".$_SESSION["rol"].".JPG";
 			}elseif (file_exists("img_membros/".$_SESSION["rol"].".JPG")){
 				$img="img_membros/".$_SESSION["rol"].".JPG";
-			}elseif (file_exists("img_membros/ver_foto.JPG")){
-				$img="img_membros/ver_foto.JPG";
+			}elseif (file_exists("img_membros/ver_foto.jpg")){
+				$img="img_membros/ver_foto.jpg";
 			}else{
-				$img="../img_membros/ver_foto.JPG";
+				$img="../img_membros/ver_foto.jpg";
 			}
 		return $img;
 }
