@@ -32,9 +32,9 @@ require "../func_class/classes.php";
 		$background_cartao = "evangelista";
 	}elseif (cargo($rolConsuta)['0']=="Presb&iacute;tero") {
 		$background_cartao = "presbitero";
-	}elseif (cargo($rolConsuta)=="Di&aacute;cono") {
+	}elseif (cargo($rolConsuta)['0']=="Di&aacute;cono") {
 		$background_cartao = "diacono";
-	}elseif (cargo($rolConsuta)=="Auxiliar"){
+	}elseif (cargo($rolConsuta)['0']=="Auxiliar"){
 		$background_cartao = "auxiliar"; //Define a imagem de fundo do cartão
 	}else {
 		$background_cartao = "membro";
@@ -93,12 +93,22 @@ body {
 #marca {
 	position:absolute;
   	background: url(../img/marca.png) no-repeat;
-  	background-size: 203px 71px;
-	left:30px;
-	top:40px;
-	width:211px;
-	height:143px;
+  	background-size: 92px 134px;
+	left:47px;
+	top:34px;
+	width:214px;
+	height:145px;
 	z-index:6;
+}
+
+#centenario {
+	position:absolute;
+  	background: url(../img/Centenario2.png) no-repeat;
+  	background-size: 150px 102px;
+	left: 115px;
+	top:130px;
+	width:214px;
+	height:145px;
 }
 #foto {
 	position:absolute;
@@ -143,13 +153,13 @@ body {
 #mensargem {
 	position:absolute;
 	text-align: right;
-	left:100px;
+	left:110px;
 	top:116px;
 	width:400px;
 	height:29px;
 	z-index:9;
 	font-family:Arial, Helvetica, sans-serif;
-	font-size: 75%;
+	font-size: 105%;
 }
 #Rol {
 	position:absolute;
@@ -249,11 +259,15 @@ body {
 	}
 
 	echo '<br />'.$nomeCong;
+	list($anoCg,$mesCg,$dCg) = explode('-',cargo_dt($rolConsuta));
+	if ($anoCg=='2017') {
+		echo '<div id="centenario"></div>';
+	}
 ?>
 </div>
 <div id="Pastor"><strong><?PHP echo strtoupper(toUpper($igreja->pastor()));?></strong></div>
 </body>
-<script type="text/javascript">window.print();</script>
+
 </html>
 <?PHP
 //fim do
