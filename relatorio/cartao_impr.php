@@ -260,7 +260,7 @@ body {
 
 	echo '<br />'.$nomeCong;
 	list($anoCg,$mesCg,$dCg) = explode('-',cargo_dt($rolConsuta));
-	if ($anoCg=='2017') {
+	if ($anoCg=='2018') {
 		echo '<div id="centenario"></div>';
 	}
 ?>
