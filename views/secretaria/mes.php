@@ -1,16 +1,5 @@
 <?PHP
 
-$anterior=$_GET["proxima"]-1;
-$proximo=$_GET["proxima"]+1;
-
-if ($_GET["Submit"]=="Imprimir") {
-
-	session_start();
-	require_once ("../func_class/funcoes.php");
-	require_once ("../func_class/classes.php");
-	$igSede = new DBRecord('igreja', '1', 'rol');
-
-  // require_once '../views/modeloPrint.php';
 
 	controle ("consulta");
 	echo "<style type='text/css'> <!--";

@@ -952,16 +952,22 @@ class aniversario {
 		switch ($_GET["ord"]){
 		//Ordena a lista pelas seguintes tabelas conforme as op��es que define a tabela a ser escolhida
 			case "2";
-				$this->ord = "e.congregacao";
+				$this->ord = "e.congregacao ASC";
 				break;
 			case "1";
 				$this->ord = "m.rol";
 				break;
 			case "3";
-				$this->ord = " MONTH(m.datanasc), DAYOFMONTH(m.datanasc) ";
+				$this->ord = " MONTH(m.datanasc), DAYOFMONTH(m.datanasc) ASC";
+				break;
+			case "4";
+				$this->ord = " MONTH(m.datanasc), DAYOFMONTH(m.datanasc) DESC";
+				break;
+			case "5";
+				$this->ord = " m.nome DESC";
 				break;
 			default ;
-				$this->ord = "m.nome";
+				$this->ord = "m.nome ASC";
 				break;
 		}
 
@@ -971,7 +977,7 @@ class aniversario {
 			$this->congreg = "";
 		}
 
-		$this->query_fim = "{$this->congreg} ORDER BY {$this->ord} ASC";
+		$this->query_fim = "{$this->congreg} ORDER BY {$this->ord}";
 		$prox_dia = $_GET["proxima"]+date('d');
 		$this->dia_consulta = date("d/m",mktime(12,0,0,$this->mes,$prox_dia,$this->ano));//recupera o dia para consulta
 		$this->consulta = date("d/m/Y",mktime(12,0,0,$this->mes,$prox_dia,$this->ano));//recupera o dia para consulta
@@ -1067,12 +1073,17 @@ class aniversario {
 		{
 			$inc++;
 			$inc_c++;
-			echo '<tr>';
+			if ($inc%2!=0) {
+				echo '<tr>';
+			}
 			echo "<td>{$this->dados["dia"]}/{$this->dados["mes"]}</td>
 				<td><a href='./?escolha=adm/dados_pessoais.php&bsc_rol={$this->dados["rol"]}'>{$this->dados["nome"]}</a></td>";
-			if ($inc=="2") { echo "</tr>"; }
-			if ($inc_c>"3") { $inc_c=0; }
-			if ($inc>1) {$inc=0;}
+			if ($inc%2==0 && $inc>0) {
+				echo '</tr>';
+			}
+			// if ($inc=="2") { echo "</tr>"; }
+			// if ($inc_c>"3") { $inc_c=0; }
+			// if ($inc>1) {$inc=0;}
 		}
 	}
 

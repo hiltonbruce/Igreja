@@ -4,6 +4,7 @@
  * @since 31/10/2009
  */
 require_once '../help/impressao.php';
+$quantExibir=0;
 $q = mysql_real_escape_string(trim($_GET['q']));
 $quantNomes = substr_count(trim($q),' ');
 //crit�rios de fon�tica

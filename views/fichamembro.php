@@ -37,7 +37,7 @@
 		//Congregações
 		$dadocong 	= new DBRecord ("igreja",$ecles->congregacao(),"rol");
 		$dirigente 	= new DBRecord ("membro",$dadocong->pastor(),"rol");
-		$dircon		= '<b>Dirig. </b>'.cargo($dadocong->pastor()).': '.$dirigente->nome();
+		$dircon		= '<b>Dirig. </b>'.cargo($dadocong->pastor())['0'].': '.$dirigente->nome();
 		$templo		= '<b>Congreg.: </b>'.$igreja->razao();
 	}
 	if ($numreg->totlinhas()>1) {
@@ -75,7 +75,7 @@
 	</thead>
     <tbody>
 		<tr>
-			<td colspan="2"><b>Cargo: </b><?php echo cargo($rol).' - '.situacao($ecles->situacao_espiritual(), $rol);?></td>
+			<td colspan="2"><b>Cargo: </b><?php echo cargo($rol)['0'].' - '.situacao($ecles->situacao_espiritual(), $rol);?></td>
         <td rowspan="3" width='75' ><?PHP printf ("Rol: %'04u <br />",$rol); echo mostra_foto($rol);?></td>
 		</tr>
       <tr>
@@ -119,14 +119,49 @@
       	}else {
       ?>
       <tr>
-        <td><b>Batismo:</b><?php echo conv_valor_br($ecles->batismo_em_aguas());?></td>
-        <td><b>Auxiliar:</b><?php echo conv_valor_br($ecles->auxiliar());?></td>
-        <td><b>Diacono:</b><?php echo conv_valor_br($ecles->diaconato());?></td>
+        <td><b>Batismo:</b>
+					<?php
+					if ($ecles->batismo_em_aguas()!='0000-00-00') {
+					echo conv_valor_br($ecles->batismo_em_aguas());
+					}
+					?>
+				</td>
+        <td><b>Auxiliar:</b>
+					<?php
+					if ($ecles->auxiliar()!='0000-00-00') {
+						echo conv_valor_br($ecles->auxiliar());
+					}
+					?>
+				</td>
+        <td><b>Diacono:</b>
+					<?php
+						if ($ecles->diaconato()!='0000-00-00') {
+							echo conv_valor_br($ecles->diaconato());
+						}
+					?>
+				</td>
       </tr>
       <tr>
-        <td><b>Presb.:</b> <?php echo conv_valor_br($ecles->presbitero());?></td>
-        <td><b>Evangel.:</b> <?php echo conv_valor_br($ecles->evangelista());?></td>
-        <td><b>Pastor:</b> <?php echo conv_valor_br($ecles->pastor());?></td>
+        <td><b>Presb.:</b>
+					<?php
+					if ($ecles->presbitero()!='0000-00-00') {
+					echo conv_valor_br($ecles->presbitero());
+				}
+					?>
+				</td>
+        <td><b>Evangel.:</b>
+					<?php
+					if ($ecles->evangelista()!='0000-00-00') {
+						echo conv_valor_br($ecles->evangelista());
+					}
+					?>
+				</td>
+        <td><b>Pastor:</b>
+					<?php
+					if ($ecles->pastor()!='0000-00-00') {
+					 echo conv_valor_br($ecles->pastor());}
+					 ?>
+				 </td>
       </tr>
       <?php } ?>
       </tbody>

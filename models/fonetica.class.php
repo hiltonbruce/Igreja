@@ -1,4 +1,4 @@
-<?php 
+<?php
 class fonetica {
 	var $nome;
 	var $campo;
@@ -6,10 +6,12 @@ class fonetica {
 		if ($campo=='') {
 			$campo='nome';
 		}
+
+		$query='';
 		//remoção de s e r triplo
 		$sss =  str_replace('sss', 'ss', $nome);
 		$sss =  str_replace('rrr', 'rr', $sss);
-		
+
 		//Expassão de busca para nome Kassia ou Cassia
 		if (substr_count($sss, 'kassia')==1) {
 			$ks =  str_replace('k', 'c', $sss);
@@ -18,7 +20,7 @@ class fonetica {
 			$ks =  str_replace('c', 'k', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		if (substr_count($sss, 'ss')==1) {
 			$ks =  str_replace('ss', 'c', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
@@ -26,7 +28,7 @@ class fonetica {
 			$ks =  str_replace('c', 'ss', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		//Expassão de busca para nome souza ou sousa
 		if (substr_count($sss, 'sousa')==1){
 			$ks =  str_replace('sousa', 'souza', $sss);
@@ -35,7 +37,7 @@ class fonetica {
 			$ks =  str_replace('souza', 'sousa', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		//Expassão de busca para ch e x
 		if (substr_count($sss, 'ch')==1){
 			$ks =  str_replace('ch', 'x', $sss);
@@ -44,7 +46,7 @@ class fonetica {
 			$ks =  str_replace('x', 'ch', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		//Expassão de busca para y
 		if (substr_count($sss, 'li')==1){
 			$ks =  str_replace('li', 'ly', $sss);
@@ -53,7 +55,7 @@ class fonetica {
 			$ks =  str_replace('y', 'li', $sss);
 			$query .= $campo." LIKE '%".trim($ks)."%' OR ";
 		}
-		
+
 		//Expassão de busca para keli
 		if (substr_count($sss, 'keli')==1){
 			$ks =  str_replace('keli', 'kely', $sss);
@@ -62,7 +64,7 @@ class fonetica {
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 			$ks =  str_replace('keli', 'kelli', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
-		
+
 		}elseif (substr_count($sss, 'kely')==1){
 			$ks =  str_replace('kely', 'keli', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
@@ -70,7 +72,7 @@ class fonetica {
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 			$ks =  str_replace('kely', 'kelli', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
-		
+
 		}elseif (substr_count($sss, 'kelly')==1){
 			$ks =  str_replace('kelly', 'keli', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
@@ -78,7 +80,7 @@ class fonetica {
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 			$ks =  str_replace('kelly', 'kely', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
-		
+
 		}elseif (substr_count($sss, 'kelli')==1){
 			$ks =  str_replace('kelli', 'keli', $sss);
 			$query .= $campo."  LIKE '%".$ks."%' OR ";
@@ -87,7 +89,7 @@ class fonetica {
 			$ks =  str_replace('kelli', 'kely', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		//Expassão de busca para tais
 		if (substr_count($sss, 'tais')==1){
 			$ks =  str_replace('tais', 'thais', $sss);
@@ -105,7 +107,7 @@ class fonetica {
 			$ks =  str_replace('thays', 'tais', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		if (substr_count($sss, 'l')==1){
 			$ks =  str_replace('l', 'll', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
@@ -113,7 +115,7 @@ class fonetica {
 			$ks =  str_replace('n', 'nn', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		if (substr_count($sss, 'll')==1){
 			$ks =  str_replace('ll', 'l', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
@@ -137,7 +139,7 @@ class fonetica {
 			$ks =  str_replace('valter', 'walter', $sss);
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
-		
+
 		//Expassão de busca para diana
 		if (substr_count($sss, 'diana')==1){
 			$ks =  str_replace('dianna', 'dyanna', $sss);
@@ -169,9 +171,9 @@ class fonetica {
 			$query .= $campo." LIKE '%".$ks."%' OR ";
 		}
 		$this->querys = $query;
-		
+
 	}
-	
+
 	function expansao () {
 		return $this->querys;
 	}

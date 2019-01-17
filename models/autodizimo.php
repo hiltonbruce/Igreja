@@ -6,13 +6,15 @@
  * @since 29/12/2011
  */
 require_once '../help/impressao.php';
-$linha1='';$linha2='';
+$quantExibir=0;
+$linha1='';
+$linha2='';
 $q = mysql_real_escape_string( $_GET['q'] );
 $igrejaRol = mysql_real_escape_string( $_GET['igreja'] );
 if (empty($_GET['igreja'])) {
 	$igrejaRol = 0;
 } else {
-	$igrejaRol =(int)$_GET['igreja'];
+	$igrejaRol =intval($_GET['igreja']);
 }
 
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
