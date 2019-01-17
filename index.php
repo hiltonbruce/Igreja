@@ -57,9 +57,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo $titleIgreja; ?></title>
-<script type="text/javascript" src="js/funcoes.js"></script>
-<script type="text/javascript" src="js/autocomplete.js"></script>
 <script src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/autocomplete.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/bootstrap.css" />
@@ -68,6 +67,7 @@
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/calendario.css" />
 <link type="text/css" rel="stylesheet" media="all" href="chat/css/chat.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
 <link rel="icon" type="image/gif" href="br_igreja.jpg">
 </head>
 <body>
@@ -222,6 +222,7 @@ jQuery(function($) {
    		$(".money").maskMoney({allowNegative: false, thousands:'.', decimal:','});
    });
 // ]]&gt;</script>
+<script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput-1.4.1.js"></script>
 <script type="text/javascript" src="js/jquery.maskMoney.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>

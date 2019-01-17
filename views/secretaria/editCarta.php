@@ -145,23 +145,15 @@
 		echo 'Tendo, ainda, 3 dias para alterar a data e 20 para os demais dados! <br>';
 		echo '</div>';
 	}
-    $cargoIgreja = new tes_cargo();
-    $dadosCargo = $cargoIgreja->dadosArray();
-    if ($dadosCargo['7']['1']['1']['nome']=='') {
+      //Primeiro Secretário
       $sec1 = new DBRecord ('membro',$igSede->secretario1(),"rol");
       $primSecretario = $sec1->nome();
-    } else {
-      $primSecretario = $dadosCargo['7']['1']['1']['nome'];
-    }
-    
-    if ($dadosCargo['7']['1']['2']['nome']=='') {
+    //Segundo Secretário
       $sec1 = new DBRecord ('membro',$igSede->secretario2(),"rol");
       $segSecretario = $sec1->nome();
-    } else {
-      $segSecretario = $dadosCargo['7']['1']['2']['nome'];
-    }
+
   //  echo var_dump($igSede);
-  //  print_r($dadosCargo['7']);
+  print_r($dadosCargo['7']);
   //  echo $dadosCargo['7']['1']['2']['nome'].' *** ';
 
 if ($cidade!=''){

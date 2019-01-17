@@ -1,40 +1,40 @@
 .autocomplete_list * {
-	font: 10px Arial, Helvetica, Verdana, sans-serif;
+	font: 14px Arial, Helvetica, Verdana, sans-serif;
 	color: blue;
 }
 
-.autocomplete_list { 
+.autocomplete_list {
 	background: #FEFEFE;
 	display: block;
 	border: 1px solid #7C7C7C;
-	text-align: left; z-index: 200; 
+	text-align: left; z-index: 200;
 }
 
-.autocomplete_list, .autocomplete_list ol, .autocomplete_list li { 
-	list-style-type: none; 
-	margin: 0; 
-	padding: 0; 
+.autocomplete_list, .autocomplete_list ol, .autocomplete_list li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
-.autocomplete_list li { 
-	margin: 0; 
+.autocomplete_list li {
+	margin: 0;
 	text-align: left;
-	cursor: pointer; 
+	cursor: pointer;
 	padding: .3em .5em;
-	border: none;		
+	border: none;
 }
 
-.autocomplete_list .current_item { 
+.autocomplete_list .current_item {
 	background: #B4D5FE;
 	color: black;
 }
 
-.autocomplete_list li { 
+.autocomplete_list li {
 	color: #696969;
 }
 
-.autocomplete_icon { 
-	background-image: url(autocomplete.gif);	
+.autocomplete_icon {
+	background-image: url(autocomplete.gif);
 	cursor: pointer;
 	cursor: hand;
 	display:none;
