@@ -15,7 +15,7 @@ body {
 	background-position:center;
 }
 
-#container { margin-top: -8em; width: 95%; text-align: left;}
+#container { margin-top: 0em; width: 95%; text-align: left;}
 
 #header { width:auto; height: 127px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat; background-position: center bottom;
  background-position: left bottom; margin: 0; text-align:right;}

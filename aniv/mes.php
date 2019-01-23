@@ -16,11 +16,23 @@ if ($_GET["Submit"]=="Imprimir") {
 	echo "<style type='text/css'> <!--";
 	require_once ("style.css");
 	echo "</style>";
+	?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<title><?php echo $titTabela;?></title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+	<link rel="icon" type="image/gif" href="../br_igreja.jpg">
+
+	<?php
 }else {
 echo "<style type='text/css'> <!--";
 	require_once ("aniv/style.css");
 ?>
 </style>
+
 <script type="text/JavaScript">
 <!--
 function MM_jumpMenu(targ,selObj,restore){ //v3.0
