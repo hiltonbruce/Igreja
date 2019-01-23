@@ -20,28 +20,28 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       <option value="<?PHP echo $_GET['uf'];?>"><?PHP echo $_GET['uf'];?></option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=AC&menu=top_formulario'>Acre</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=AL&menu=top_formulario'>Alagoas</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=AP&menu=top_formulario'>Amap�</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=AP&menu=top_formulario'>Amap&aacute;</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=AM&menu=top_formulario'>Amazonas</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=BA&menu=top_formulario'>Bahia</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=CE&menu=top_formulario'>Cear�</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=CE&menu=top_formulario'>Cear&aacute;</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=DF&menu=top_formulario'>Distrito Federal</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=GO&menu=top_formulario'>Goi�s</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=MA&menu=top_formulario'>Maranh�o</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=GO&menu=top_formulario'>Goi&aacute;s</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=MA&menu=top_formulario'>Maranh&atilde;o</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=MT&menu=top_formulario'>Mato Grosso</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=MS&menu=top_formulario'>Mato Grosso do Sul</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=MG&menu=top_formulario'>Minas Gerais</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PA&menu=top_formulario'>Par�</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PB&menu=top_formulario'>Para�ba</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PR&menu=top_formulario'>Paran�</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PA&menu=top_formulario'>Par&aacute;</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PB&menu=top_formulario'>Para&iacute;ba</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PR&menu=top_formulario'>Paran&aacute;</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=PE&menu=top_formulario'>Pernambuco</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=PI&menu=top_formulario'>Piau�</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=PI&menu=top_formulario'>Piau&iacute;</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RJ&menu=top_formulario'>Rio de Janeiro</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RN&menu=top_formulario'>Rio Grande do Norte</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RS&menu=top_formulario'>Rio Grande do Sul</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=RO&menu=top_formulario'>Rond�nia</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=RO&menu=top_formulario'>Rond&ocirc;nia</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=RR&menu=top_formulario'>Roraima</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=SC&menu=top_formulario'>Santa Catarina</option>
-      <option value='./?escolha=relatorio/cert_apresent.php&uf=SP&menu=top_formulario'>S�o Paulo</option>
+      <option value='./?escolha=relatorio/cert_apresent.php&uf=SP&menu=top_formulario'>S&atilde;o Paulo</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=SE&menu=top_formulario'>Sergipe</option>
       <option value='./?escolha=relatorio/cert_apresent.php&uf=TO&menu=top_formulario'>Tocantins</option>
     </select>
