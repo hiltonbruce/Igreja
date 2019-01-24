@@ -215,7 +215,7 @@ class limplista {
   public function materialFormPed() {
 		//Select mysql na tabela limpeza para listar o total para o período
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid  ';
-		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
+		$tot 	.= 'FROM limpeza AS p WHERE p.authorized="1" ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
 		$tabtbody = ''; //Limpa variável para receber os dados da tabela
