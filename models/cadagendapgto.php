@@ -1,10 +1,10 @@
 <?php
 
-$parc 		= (int)$_POST['parc'];
+$parc 		= intval($_POST['parc']);
 $hist 		= $_SESSION['valid_user'].": ".date("Y-m-d h:i:s");
 $frequencia	= ($parc=='0')? 1:0;
-$igreja 	= (int)$_POST['igreja'];
-$credor 	= (int)$_POST['id'];
+$igreja 	= intval($_POST['igreja']);
+$credor 	= intval($_POST['id']);
 $numcredor 	= true;
 $datven 	= true;
 //Inserir a opção para novo Cadastro

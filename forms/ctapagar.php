@@ -23,13 +23,18 @@
 					echo $congr->List_Selec (++$ind,$_GET['congregacao'],'autofocus="autofocus" required="required" class="form-control"');
 					?></td>
 					<td><input name="venc" type="text" tabindex="<?PHP echo ++$ind;?>" required='required'
-						value='<?php echo $_GET['venc'];?>' class="form-control dataclass" /></td>
-					<td><input name="valor" type="text" id="valor" size='10'
-						" class="form-control" tabindex="<?PHP echo ++$ind;?>"
-						required='required' value='<?php echo $_GET['valor'];?>' /></td>
-					<td><input name="parc" type="text" id="parc" size='3' maxlength="3"
+						value='<?php echo $_GET['venc'];?>' class="form-control dataclass" />
+					</td>
+					<td>
+						<input name="valor" type="text" id="valor" size='10'
+						 class="form-control money" tabindex="<?PHP echo ++$ind;?>"
+						required='required' value='<?php echo $_GET['valor'];?>' />
+					</td>
+					<td>
+						<input name="parc" type="text" id="parc" size='3' maxlength="3"
 						tabindex="<?PHP echo ++$ind;?>" required='required'
-						class="form-control" value='<?php echo $_GET['parc'];?>' /></td>
+						class="form-control" value='<?php echo $_GET['parc'];?>' />
+					</td>
 				</tr>
 			</tbody>
 			<tfoot>
@@ -68,9 +73,9 @@
 				<tr>
 					<td colspan='3'>
 						<label>Raz&atilde;o Social:</label>
-						<input type="text"tabindex="<?PHP echo ++$ind;?>" name="nome" id="credor3"
+						<input type="text" tabindex="<?PHP echo ++$ind;?>" name="nome" id="credor3"
 						size='80%' value='<?php echo $_GET['nome'];?>' class="form-control"
-						placeholder="M&iacute;nimo de 5 caracteres p/ novo Cadastro!" />
+						placeholder="M&iacute;nimo de 6 caracteres p/ novo Cadastro!" minlength='6' />
 					</td>
 				</tr>
 				<tr>
