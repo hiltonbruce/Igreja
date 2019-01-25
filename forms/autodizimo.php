@@ -3,16 +3,10 @@
 <fieldset>
 <legend>D&iacute;zimo e Ofertas</legend>
 <form method="post" name="" action="">
-		<?php
-		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
-		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" ');
-		echo $listaIgreja;
-		?>
+
 <fieldset>
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
-			<?php
-				echo semana(date('d/m/Y')).'&ordf;';
-			?>
+
 			 Semana deste m&ecirc;s)</legend>
 	<table class='table'>
 		<tbody>
@@ -29,12 +23,7 @@
 			<tr>
 				<td><label>Data: </label> <input type="text" id="data" name="data"
 					value="<?php echo $dtlanc;?>" class="form-control" required="required"/>
-					<?php
-					echo semana($dtlanc).' Semana ';
-	 					list($i,$m,$y) = explode('/', $dtlanc);
-	 					echo date('w',mktime(1,0,0,$m,$i,$y)).' #### dia da semana ';
-						// 	echo date ('w',mktime(1,0,0,$m,0,$y)).' ****ultimo dia do mês';
-					?>
+
 				</td>
 				<td><label>Referente M&ecirc;s:</label><input type="text" name="mes"
 					size="2" value="<?php echo $meslanc;?>" class="form-control"
@@ -84,31 +73,16 @@
 						$alerta = '<br  /><div class="alert alert-danger alert-dismissible fade in" role="alert"> ';
 						$alerta .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
 						$alerta .='<span aria-hidden="true" >&times;</span></button> <strong>Culto de Miss&otilde;es!</strong>';
-						$alerta .='<br />Of. p/ miss&otilde;es. '.arrayDia($diaSema).' - ';
+						$alerta .='<br />Of. p/ miss&otilde;es.  - ';
 						//Alerta para o culto de missï¿½es
-							$semLan = diaSem($dtlanc);
-							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
-							$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
-							$diaSema = $diaSem->format('w');
-							if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
-								//2ï¿½ domingo do mï¿½s
-								echo $alerta.'Sede</div>';
-							} elseif ($diaSema=='0' && $semLan=='1'&& $roligreja!='1' ) {
-								//1ï¿½ domingo do mï¿½s
-								echo $alerta.'Congrega&ccedil;&atilde;o</div>';
-							} else {
-								echo arrayDia($diaSema).' - '.$dtlanc;
-							}
+
 						?>
 					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
 					type="submit" name="listar" value="Lan&ccedil;ar..."></td>
 				</tr>
 				<tr>
-					<td colspan="2"><label> Qual Campanha?</label><?php
-					$campanha = new List_campanha;
-					echo $campanha -> List_Selec(++$ind,(int)$_GET['acescamp']);
-					?>
+					<td colspan="2"><label> Qual Campanha?</label>
 					</td>
 					<td><label>Oferta da Campanha:</label><input type="text" id="oferta4" autocomplete="off"
 						 class="form-control money" name="oferta4" value="" tabindex="<?php echo ++$ind;?>"
