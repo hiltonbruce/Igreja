@@ -132,11 +132,25 @@ body {
 	position:absolute;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	left:39px;
-	top:249px;
+	top:230px;
 	width:354px;
 	height:33px;
 	z-index:8;
 	text-align:center;
+	font-size: 120%;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#Valid {
+	position:absolute;
+	text-shadow: 1px 1px 1px #FFFFFF;
+	left:39px;
+	top:270px;
+	width:354px;
+	height:33px;
+	z-index:8;
+	text-align:center;
+	font-weight: bold;
+	color: red;
 	font-size: 120%;
 	font-family:Arial, Helvetica, sans-serif;
 }
@@ -233,8 +247,10 @@ body {
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
 <div id="cargo">Carteira de Identidade de <?PHP echo cargo($rolConsuta)['0'];?></div>
 <div id="Nome">
- <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?></div>
+ <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?>
+</div>
  <div id="mensargem"><?php echo MSGCARTAO;?></div>
+ <div id="Valid"><?php echo MSGVALID;?></div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
 <div id="verso1">
 <?PHP

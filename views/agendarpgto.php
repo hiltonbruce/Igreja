@@ -15,12 +15,13 @@ if (checkdate($m,$d,$y)) {
 		$congr 		= new DBRecord ("igreja",(int)$_POST['congregacao'],"rol");
 		?>
 
+		<div class="bs-callout bs-callout-danger" id="callout-tables-context-accessibility">
+    <h4>Confirmar Agenda de Pagamento:</h4>
+    <p><h5><?php echo $congr->razao();?></h5></p>
+  </div>
+
 <form method="post" name="agendar" action="">
-	<caption>
-		Confirmar Agenda de Pagamento:jjj
-		<?php echo $congr->razao();?>
-	</caption>
-	<table style="background-color: #F3F3F3;">
+	<table class='table table-striped'>
 		<colgroup>
 			<col id="Igreja" />
 			<col id="Vencimento" />
@@ -37,13 +38,13 @@ if (checkdate($m,$d,$y)) {
 		</thead>
 		<tbody>
 		<?php
-		$parc 		= (int)$_POST['parc'];
+		$parc 		= intval($_POST['parc']);
 		$loopTab 	= $parc;
 		$valoint100 =  ($valor/$parc)*100;
 		list($inte,$decim) = explode('.',"$valoint100");
 		list($valortrun,$dvlrt) = explode('.',$valor*100);
 		$valortrun 	= $valortrun/100;
-		$mot 		= $_POST['motivo'];
+		$mot 	= $_POST['motivo'];
 		if ($parc>1) {
 			//Agendamento com quantidade definida
 			$parctrun = $inte/100;
@@ -72,16 +73,10 @@ if (checkdate($m,$d,$y)) {
 				$dia = $d;
 			}
 			$vencimento = date("d/m/Y",(mktime(0, 1, 0, $m+$j, $dia, $y)));
-
-			if ($j%2=='0') {
-			 ?>
-			<tr style='text-align: center;'>
-			<?php
-			} else{
-				echo '<tr class="odd" style="text-align: center;">';
-			}
 			?>
-				<td><?PHP
+			<tr>
+				<td>
+					<?PHP
 				echo $congr->razao();
 				?>
 				</td>
@@ -95,27 +90,26 @@ if (checkdate($m,$d,$y)) {
 					id='data' required='required' class="form-control"
 					value='<?php echo $vencimento;?>' /></div></div>
 				</td>
-				<td style='text-align: right;'><?php
+				<td class="text-right"><?php
 
 				// <select name="$this->campo;" tabindex=$ind++>
 				$par = $j+1;
 				$ajustparc .= " <option value='$j'>Percela com valor ajustado no: $par &ordm; m&ecirc;s</option>";
-
 				if ($parc==$par) {
 					$diferenca = $parctrun;
 					$parctrun = $valortrun - $parctotal;
 					$ajustparc = "<option value='$j'>Percela com valor ajustado no: $par &ordm; m&ecirc;s</option>".$ajustparc;
 				}
 
-
 				$parctotal += $parctrun;
 				$diferenca1 = $parctotal - $valor;
 				echo number_format($parctrun,2,',', '.');
 
-				?> <input name='valor<?php echo $j;?>' type='hidden'
+				?>
+				<input name='valor<?php echo $j;?>' type='hidden'
 					id='valor<?php echo $j;?>' value='<?php echo $parctrun;?>' />
 				</td>
-				<td style='text-align: right;'><?php
+				<td  class="text-right"><?php
 				if ($parc==($j+1)) {
 					if ($_POST['parc']=='0' || $_POST['parc']=='') {
 						$motparc = 'Agendamento mensal e automático';
@@ -139,11 +133,10 @@ if (checkdate($m,$d,$y)) {
 		?>
 		</tbody>
 		<tfoot>
-			<tr>
-				<td colspan="4" style="background-color: #F0E68C; font-size: 120%">
+			<tr class="warning">
+				<td colspan="4">
 					Beneficiado: <?php
-					$dadosEmpresa  = '<input type="submit" name="submit"
-				tabindex="<?PHP echo $ind++;?>" class="btn btn-primary btn-sm" value="Agendar..." />';
+					$dadosEmpresa  = '<input type="submit" name="submit" tabindex="<?PHP echo $ind++;?>" class="btn btn-primary btn-sm" value="Agendar..." />';
 					if ($_POST['rol']!='') {
 						$memb = new DBRecord('membro',$_POST['rol'] ,'rol');
 						echo $memb->rol().' - '.$memb->nome().' - Valor Total: ---> R$ '.number_format($valortrun,2,',','.');
