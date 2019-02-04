@@ -379,7 +379,7 @@ function semana ($data) {
 			if (date('N',mktime(1,0,0,$m,$i,$y))=='1' && $semana<5 && date('N',mktime(1,0,0,$m,0,$y))!='0') {
 
 				$semana++;
-				//echo '<h2>'.$semana.'</h2>';
+				// echo '<h2>'.$semana.'</h2>';
 			}
 			//echo(date('d/M/Y',mktime(1,0,0,$m,$i,$y)).' <--> '.date('w',mktime(1,0,0,$m,$i,y)).' ********** ');
 		}
