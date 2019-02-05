@@ -93,7 +93,7 @@ body {
 #marca {
 	position:absolute;
   	background: url(../img/marca.png) no-repeat;
-  	background-size: 92px 134px;
+  	background-size: 125px 130px;
 	left:47px;
 	top:34px;
 	width:214px;
