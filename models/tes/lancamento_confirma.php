@@ -87,7 +87,8 @@ $contaDC = $arrayCta->ativosArray();
 	}
 	$ultimoLancNumero = mysql_query('SELECT max(lancamento) AS lanca FROM lanc');//Traz o valor do ultimo lançamento
 	$lancmaior = mysql_fetch_array($ultimoLancNumero);
-	$ultimolanc = intval($lancmaior['lanca'])+1;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
+	$ultimolanc = intval($lancmaior['lanca']);
+	$ultimolanc++;//Acrescenta uma unidade no ultimo lançamento p usar no lançamento
 //Foi criado a tabela lanchist exclusivamente para o histórico dos lançamentos
 //Antes de começar os lançamentos verificar se há inconcistência nos saldo antes de continuar
 //Criar uma classe que retorne falso ou verdadeiro
@@ -108,18 +109,18 @@ if ($ctaPagar) {
 	//$contaDC['350'][''] -> Contas a pagar
 	//$sldAntPagar = number_format($contaDC['350']['saldo'],2,',','.');
 //	$valor += $multa;
-	$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc+1,$contaDC['350']['id']);#devedora a Contas a pagar
+	$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc,$contaDC['350']['id']);#devedora a Contas a pagar
 	$contApgtoAprop->atualizar($valor,'D',$roligreja,$vencimento);
-	$reg .= ' e ' . ($ultimolanc+1);
+	$reg .= ' e ' . ($ultimolanc);
 
-	$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolanc+1,'');
+	$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolanc,'');
 	$contcaixa->atualizar($valor,'C',$roligreja,$data);
 	//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
 	//$contApgtoAprop->atualizar($valor,'C',$roligreja,$vencimento);
 	//Lança o histórico do lançamento
 	$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
 	$histAPagar .= ', conf. reg. '.$ultimolanc;
-	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc+1,$histAPagar,$roligreja);
+	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$histAPagar,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
 
