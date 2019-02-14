@@ -1,3 +1,29 @@
+<?php
+//Texto de alerta
+$alerta = '<br  /><div class="alert alert-danger alert-dismissible fade in" role="alert"> ';
+$alerta .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+$alerta .='<span aria-hidden="true" >&times;</span></button> <strong>Culto de Miss&otilde;es!</strong>';
+$alerta .='<br />Of. p/ miss&otilde;es. '.arrayDia($diaSema).' - ';
+$alertaFild = ' &bull; <span class="text-danger text-blink"><span class="glyphicon glyphicon-exclamation-sign" ';
+$alertaFild .= 'aria-hidden="true"></span> <strong>Culto de Miss&otilde;es</strong> ';
+$alertaFild .= '<span class="glyphicon glyphicon-bell"aria-hidden="true"></span></span>';
+//Alerta para o culto de miss�es
+	$semLan = diaSem($dtlanc);
+	list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
+	$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
+	$diaSema = $diaSem->format('w');
+	if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
+		//2� domingo do m�s
+		$alerta .='Sede</div>';
+	} elseif ($diaSema=='0' && $semLan=='1'&& $roligreja!='1' ) {
+		//1� domingo do m�s
+		$alerta .='Congrega&ccedil;&atilde;o</div>';
+	} else {
+		$alertaFild = '';
+		$alerta = arrayDia($diaSema).' - '.$dtlanc;
+	}
+
+ ?>
 <!-- Desenvolvido por Wellington Ribeiro o autocompletar-->
 <!-- O calculo da data do proximo lancamento caso n�o seja passsado esta no script 'forms/concluirdiz.php' -->
 <fieldset>
@@ -9,11 +35,11 @@
 		echo $listaIgreja;
 		?>
 <fieldset>
-<legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
-			<?php
-				echo semana(date('d/m/Y')).'&ordf;';
-			?>
-			 Semana deste m&ecirc;s)</legend>
+	<legend>D&iacute;zimos, Votos e Ofertas
+				<?php
+					echo $alertaFild;
+				?>
+	</legend>
 	<table class='table'>
 		<tbody>
 			<tr>
@@ -82,25 +108,7 @@
 					</td>
 					<td>
 						<?php
-						//Texto de alerta
-						$alerta = '<br  /><div class="alert alert-danger alert-dismissible fade in" role="alert"> ';
-						$alerta .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
-						$alerta .='<span aria-hidden="true" >&times;</span></button> <strong>Culto de Miss&otilde;es!</strong>';
-						$alerta .='<br />Of. p/ miss&otilde;es. '.arrayDia($diaSema).' - ';
-						//Alerta para o culto de miss�es
-							$semLan = diaSem($dtlanc);
-							list($diaLan,$mesLan,$anoLanc) = explode('/', $dtlanc);
-							$diaSem = new DateTime("$anolanc-$mesLan-$diaLan 11:14:15.638276");
-							$diaSema = $diaSem->format('w');
-							if ($roligreja=='1' && $diaSema=='0' && $semLan=='2' ) {
-								//2� domingo do m�s
-								echo $alerta.'Sede</div>';
-							} elseif ($diaSema=='0' && $semLan=='1'&& $roligreja!='1' ) {
-								//1� domingo do m�s
-								echo $alerta.'Congrega&ccedil;&atilde;o</div>';
-							} else {
-								echo arrayDia($diaSema).' - '.$dtlanc;
-							}
+							echo $alerta;
 						?>
 					</td>
 					<td><label>&nbsp;</label> <input class="btn btn-primary"
