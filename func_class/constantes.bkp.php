@@ -1,6 +1,6 @@
 <?PHP
 define ('NOMESYS','NomeDaAplicação');
-define ('NOMEIGR','DenominaçãoDaIgreja');
+define ('NOMEIGR','Igreja Evang&eacute;lica DenominaçãoDaIgreja');
 define ('CIDADEIG','CidadeDaIgreja');
 define ('UFIG','UfDaCidadeDaIgreja');
 define ('DBPATH','localhost');

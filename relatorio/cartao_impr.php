@@ -59,7 +59,7 @@ require "../func_class/classes.php";
 <style type="text/css">
 <!--
 body {
-	font-family:"Times New Roman", Times, serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 #cartao {
 	background:url(../img/cartao_<?PHP echo "$background_cartao";?>.jpg) no-repeat;
@@ -72,9 +72,9 @@ body {
 }
 #Endereco {
 	position:absolute;
-	left:240px;
-	top:60px;
-	width:260px;
+	left:110px;
+	top:45px;
+	width:400px;
 	height:45px;
 	z-index:4;
 	font-size: 80%;
@@ -82,20 +82,20 @@ body {
 }
 #Razao {
 	position:absolute;
-	left:140px;
+	left:110px;
 	top:25px;
-	width:360px;
+	width:400px;
 	height:36px;
 	z-index:5;
-	font-size: 200%;
+	/*font-size: 200%;*/
+	font-weight: bold;
 	text-align:right;
 }
 #marca {
 	position:absolute;
-  	background: url(../img/marca.png) no-repeat;
-  	background-size: 125px 130px;
-	left:47px;
-	top:34px;
+	background: url(../img/marca.png) no-repeat;
+	left:40px;
+	top:30px;
 	width:214px;
 	height:145px;
 	z-index:6;
@@ -103,10 +103,10 @@ body {
 
 #centenario {
 	position:absolute;
-  	background: url(../img/Centenario2.png) no-repeat;
-  	background-size: 150px 102px;
-	left: 115px;
-	top:130px;
+	background: url(../img/Centenario2.png) no-repeat;
+	background-size: 128px 87px;
+	left: -250px;
+	top:55px;
 	width:214px;
 	height:145px;
 }
@@ -121,7 +121,7 @@ body {
 #cargo {
 	position:absolute;
 	left:50px;
-	top:171px;
+	top:161px;
 	width:341px;
 	height:35px;
 	z-index:7;
@@ -132,13 +132,14 @@ body {
 	position:absolute;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	left:39px;
-	top:230px;
+	top:200px;
 	width:354px;
 	height:33px;
 	z-index:8;
 	text-align:center;
 	font-size: 120%;
 	font-family:Arial, Helvetica, sans-serif;
+	font-weight: bold;
 }
 #Valid {
 	position:absolute;
@@ -184,12 +185,25 @@ body {
 	height:23px;
 	z-index:10;
 	text-align:center;
+	font-weight: bold;
+}
+#versoFiliacao {
+	position:absolute;
+	text-shadow: 0px 0px 2px #FFFFFF;
+	left:573px;
+	top:22px;
+	width:500px;
+	height:5px;
+	z-index:11;
+	font-size: 90%;
+	color: #000000;
+	font:bold;
 }
 #verso1 {
 	position:absolute;
 	text-shadow: 0px 0px 2px #FFFFFF;
 	left:573px;
-	top:22px;
+	top:65px;
 	width:216px;
 	height:86px;
 	z-index:11;
@@ -201,7 +215,7 @@ body {
 	position:absolute;
 	text-shadow: 0px 0px 2px #FFFFFF;
 	left:820px;
-	top:20px;
+	top:65px;
 	width:230px;
 	height:86px;
 	z-index:11;
@@ -234,14 +248,14 @@ body {
 	if (file_exists("../img/logo.png")){
 		echo '<div id="LogoAD"><img src="../img/logo.png" width="200" height="75" /></div>';
 	}else {
-		echo '<div id="Razao">Igreja Assembleia de Deus</div>';
+		echo '<div id="Razao">'.NOMEIGR.'</div>';
 	}
 ?>
 <div id="cartao"></div>
 <div id='marca'></div><!--  Cartão com logo idependente do fundo da imagem-->
 <div id='Endereco'>
   <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
-   <?PHP echo ' CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().' CNPJ:&nbsp;'.$igreja->cnpj();?>
+   <?PHP echo '<br /> CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().'<br /> CNPJ:&nbsp;'.$igreja->cnpj();?>
   </div>
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
@@ -252,29 +266,33 @@ body {
  <div id="mensargem"><?php echo MSGCARTAO;?></div>
  <div id="Valid"><?php echo MSGVALID;?></div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
+<div id="versoFiliacao">
+<?PHP
+	print "<b>Filia&ccedil;&atilde;o:</b> {$rec_pessoais->pai()} e {$rec_pessoais->mae()}<hr>";
+?>
+</div>
 <div id="verso1">
 <?PHP
-	print "Filia&ccedil;&atilde;o: <br />{$rec_pessoais->pai()}<br /> e {$rec_pessoais->mae()}<hr>";
-	print "Data de Nascimento: ".conv_valor_br ($rec_pessoais->datanasc());
-	print "<br />Nacionalidade: ".$rec_pessoais->nacionalidade();
+	print "<b>Membro desde:</b>".conv_valor_br ($rec_ecl->dat_aclam());
+	print " <br /><b>Data de Nascimento:</b> ".conv_valor_br ($rec_pessoais->datanasc());
+	print "<br /><b>Nacionalidade:</b> ".$rec_pessoais->nacionalidade();
 	$cidNatal = ($cidade->nome()=='') ? $rec_pessoais->naturalidade() : $cidade->nome().' - '.$cidade->coduf() ;
-	print '<br />Natural de: '.$cidNatal;
+	print '<br /><b>Natural de:</b> '.$cidNatal;
 ?>
 </div>
 <div id="verso2">
 <?PHP
-	print "<b>Membro desde:</b> ".conv_valor_br ($rec_ecl->dat_aclam());
-	print "<br />CPF: ".$rec_prof->cpf();
-	printf ("<br />Identidade:  %s - %s",$rec_prof->rg(),$rec_prof->orgao_expedidor());
-	print "<br />Estado Civil: ".$rec_civil->estado_civil();
-	print "<br />Data do Batismo: ".conv_valor_br ($rec_ecl->batismo_em_aguas());
+	print "<b>CPF: </b>".$rec_prof->cpf();
+	printf ("<br /><b>Identidade:</b>  %s - %s",$rec_prof->rg(),$rec_prof->orgao_expedidor());
+	print "<br /><b>Estado Civil:</b> ".$rec_civil->estado_civil();
+	print "<br /><b>Data do Batismo:</b> ".conv_valor_br ($rec_ecl->batismo_em_aguas());
 	if ($cong->rol()=='1') {
 		$nomeCong = 'Templo '.$cong->razao();
 	} else {
 		$nomeCong = 'Congrega&ccedil;&atilde;o: '.$cong->razao();
 	}
 
-	echo '<br />'.$nomeCong;
+	echo '<br /><br /><b>'.$nomeCong.'</b><br />';
 	list($anoCg,$mesCg,$dCg) = explode('-',cargo_dt($rolConsuta));
 	if ($anoCg=='2018') {
 		echo '<div id="centenario"></div>';
