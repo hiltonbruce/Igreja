@@ -6,7 +6,12 @@ $secretario = titleCase($_POST['secretario']);
 $nome = titleCase($_POST['nome']);
 $pastor = titleCase($_POST['pastor']);
 list($y,$m,$d) = explode('-', $_POST['dtbatismo']);
-$image = imagecreatefrompng('../../img/354.png');
+if ($y==2018) {
+  $image = imagecreatefrompng('../../img/354Cent.png');
+} else {
+  $image = imagecreatefrompng('../../img/354.png');
+}
+
 
 $certifico = 'Certificamos que: ';
 $sexo = ($_POST['sexo']=='M' || $_POST['sexo']=='m') ? 'batizado' : 'batizada' ;
@@ -19,6 +24,7 @@ $grey = imagecolorallocate($image, 100, 100, 100);
 imagettftext($image, 40, 0, 770, 80, $certifColor, '../../fonts/Catamaran/Catamaran-Bold.ttf','CERTIFICADO');
 imagettftext($image, 20, 0, 940, 110, $batismoColor, '../../fonts/Catamaran/Catamaran-Bold.ttf','DE BATISMO');
 imagettftext($image, 32, 0, 410, 410, $titleColor, '../../fonts/Pinyon_Script/PinyonScript-Regular.ttf', $nome);
+// imagepng($imgage, "../../img/Centenario2.png");
 
 imagettftext($image, 14, 0, 500, 340, $titleColor, '../../fonts/Playfair_Display/PlayfairDisplay-Regular.ttf',$certifico);
 
