@@ -83,7 +83,7 @@ body {
 #Razao {
 	position:absolute;
 	left:110px;
-	top:25px;
+	top:26px;
 	width:400px;
 	height:36px;
 	z-index:5;
@@ -143,12 +143,12 @@ body {
 }
 #Valid {
 	position:absolute;
-	text-shadow: 1px 1px 1px #FFFFFF;
+	text-shadow: 2px 2px 1px #FFFFFF;
 	left:39px;
 	top:270px;
 	width:354px;
 	height:33px;
-	z-index:8;
+	z-index:15;
 	text-align:center;
 	font-weight: bold;
 	color: red;
@@ -223,16 +223,14 @@ body {
 }
 #Pastor {
 	position:absolute;
-	text-shadow: 0px 0px 2px #FFFFFF;
+	text-shadow: 2px 02px 2px #FFFFFF;
 	left:643px;
 	top:305px;
 	width:376px;
 	height:24px;
-	z-index:12;
+	z-index:5;
 	text-align:center;
-	font:bold;
-	font-family:"Courier New", Courier, monospace;
-	font-size: 80%;
+	font-size: 90%;
 }
 #LogoAD {
 	position:absolute;
@@ -299,7 +297,7 @@ body {
 	}
 ?>
 </div>
-<div id="Pastor"><strong><?PHP echo strtoupper(toUpper($igreja->pastor()));?></strong></div>
+<div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor()));?></b></div>
 </body>
 
 </html>
