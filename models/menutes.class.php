@@ -399,9 +399,9 @@ function recibosmembros (){
 		$op .= 't.motivo LIKE "%'.$escMotivo.'%" AND ';
 		}
 
-	if ($nome===intval($nome)) {
-		$escRol = mysql_escape_string($nome);
-		$op .= 't.recebeu = "'.$escRol.'" AND ';
+	if (intval($nome)!='0') {
+		// $escRol = mysql_escape_string($nome);
+		$op .= 't.recebeu = "'.$nome.'" AND ';
 	} elseif ($nome!='') {
 		$escNome  = mysql_escape_string($nome);
 		$op .= 't.recebeu LIKE "%'.$escNome.'%" AND ';

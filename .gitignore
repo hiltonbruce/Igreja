@@ -2,6 +2,7 @@
 /docs
 /img_membros/*.jpg
 /img_membros/*.JPG
+/img/cartao_*
 /teste
 /tmp
 /bkpbanco/*.sql

@@ -27,4 +27,4 @@
 		<?php echo $rodapeRec; ?>
 	</tfoot>
 </table>
-<<?php echo $tagTmnhoFim;?>
+<?php echo $tagTmnhoFim;?>

@@ -1,3 +1,7 @@
+<?php
+$rol = (empty($_GET['rol'])) ? '' : intval($_GET['rol']) ;
+
+ ?>
 <fieldset>
 	<legend>Filtrar recibos</legend>
 	<div class="form-group">
@@ -51,6 +55,7 @@
 							}
 							echo $linha1.$linha2;
 							if ($diaPer=='' && $mesPerido=='' && $anoPer<'2000') {
+                $anoPer = 0;
 								$perLista = 'Todos os anos';
 							} elseif ($diaPer!='' && $mesPerido=='' && $anoPer<'2000') {
 								$perLista = 'Todos do dia '.$diaPer;
@@ -91,10 +96,17 @@
   <div class="col-xs-3">
 	<label>Congrega&ccedil;&atilde;o:</label>
 	<?php
+
+    if ($anoPer=='' || $anoPer<2000) {
+      $anoLink = 1999;
+    } else {
+      $anoLink = $anoPer;
+    }
+
 		$bsccredor = new List_sele('igreja', 'razao', 'igreja');
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control  input-sm"');
 		echo $listaIgreja;
-		$linkPrint = './controller/modeloPrint.php/?nome='.$nome.'&rol='.$rol.'&cpf='.$cpf.'&rg='.$rg.'&recebeu='.$recebeu.'&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoPer.'&igreja='.$igr.'&tipo=4';
+		$linkPrint = './controller/modeloPrint.php/?nome='.$nome.'&rol='.$rol.'&cpf='.$cpf.'&rg='.$rg.'&recebeu='.$recebeu.'&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoLink.'&igreja='.$igr.'&tipo=4';
 	?>
 </div>
   <div class="col-xs-2">
@@ -107,8 +119,7 @@
   </div>
 	  <div class="col-xs-2">
 		<label>&nbsp;</label>
-		<a href='<?php echo $linkPrint;?>'
-		target="_blank">
+		<a href='<?php echo $linkPrint;?>' target="_blank">
 			<button type="button" class="btn btn-default btn-sm">
 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir...
 			</button>

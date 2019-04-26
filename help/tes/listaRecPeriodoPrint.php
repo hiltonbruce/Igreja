@@ -6,7 +6,7 @@ $credorLista = $credorPer->dados();
 $membroPer = new membro();
 $membroLista = $membroPer->nomes();
 //print_r ($credorLista);
-$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer);
+$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$_GET['nome']);
   foreach ($recLista as $key => $value) {
     if ($igr && $igr!=$value['igreja']) {
       continue;
