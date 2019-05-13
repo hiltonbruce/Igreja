@@ -27,7 +27,7 @@ class tes_cargo {
 				$arrayCargos[]= array('descricao'=>$dados['descricao'],'igreja'=>$dados['igreja']
 				,'nomeFunc'=>$dados['nomeFuncao'],'razao'=>$dados['razao'],'naoMembro'=>$dados['naomembro']
 						,'rolMembro'=>$dados['rol'],'nome'=>$dados['nome'],'pgto'=>$dados['pgto']
-						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo']
+						,'diapgto'=>$dados['diapgto'],'tipo'=>$dados['tipo'],'cargo'=>$dados['cargo']
 						,'memCPF'=>$dados['cpf'],'memRG'=>$dados['rg'],'end'=>$dados['endereco']
 						,'num'=>$dados['numero'],'coddespesa'=>$dados['coddespesa']
 						,'status'=>$dados['status'],'hierarquia'=>$dados['hierarquia']

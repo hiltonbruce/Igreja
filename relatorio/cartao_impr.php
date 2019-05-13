@@ -21,20 +21,21 @@ require "../func_class/classes.php";
 	$rec_ecl->quem_imprimiu = $_SESSION['valid_user'];
 	$rec_ecl->Update(); //É feita a chamada do método q realiza a atualização no Banco
 	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em águas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();
+	$cargoEclec = cargo($rolConsuta);
 	if ($rec_ecl->situacao_espiritual()<>"1"){
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
 	}elseif ($rec_pessoais->sexo()=='F' && file_exists("../img/cartao_feminino.jpg")) {
 		$background_cartao = "feminino"; //Define a imagem de fundo do cartão
-	}elseif (cargo($rolConsuta)['0']=="Pastor") {
+	}elseif ($cargoEclec['0']=="Pastor") {
 		$background_cartao = "pastor"; //Define a imagem de fundo do cartão
-	}elseif (cargo($rolConsuta)['0']=="Evangelista") {
+	}elseif ($cargoEclec['0']=="Evangelista") {
 		$background_cartao = "evangelista";
-	}elseif (cargo($rolConsuta)['0']=="Presb&iacute;tero") {
+	}elseif ($cargoEclec['0']=="Presb&iacute;tero") {
 		$background_cartao = "presbitero";
-	}elseif (cargo($rolConsuta)['0']=="Di&aacute;cono") {
+	}elseif ($cargoEclec['0']=="Di&aacute;cono") {
 		$background_cartao = "diacono";
-	}elseif (cargo($rolConsuta)['0']=="Auxiliar"){
+	}elseif ($cargoEclec['0']=="Auxiliar"){
 		$background_cartao = "auxiliar"; //Define a imagem de fundo do cartão
 	}else {
 		$background_cartao = "membro";
@@ -42,6 +43,9 @@ require "../func_class/classes.php";
  if (file_exists("../img_membros/".$rolConsuta.".jpg"))//Verifica se a imagem esta arquivada
 	{
 		$img=$rolConsuta.".jpg";
+	} elseif (file_exists("../img_membros/".$rolConsuta.".JPG"))//Verifica se a imagem esta arquivada
+	{
+		$img=$rolConsuta.".JPG";
 	}
 	else
 	{
@@ -53,7 +57,7 @@ require "../func_class/classes.php";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>impress&atilde;o de requisi&ccedil;&atilde;o</title>
+<title>Impress&atilde;o de Cart&atilde;o de Membro</title>
 <link rel="stylesheet" type="text/css" href="../reset.css" />
 <link rel="icon" type="image/gif" href="../img/br_igreja.gif">
 <style type="text/css">
@@ -167,10 +171,10 @@ body {
 }
 #mensargem {
 	position:absolute;
-	text-align: right;
-	left:110px;
-	top:116px;
-	width:400px;
+	text-align: justify;
+	left: 40px;
+	top:95px;
+	width:470px;
 	height:29px;
 	z-index:9;
 	font-family:Arial, Helvetica, sans-serif;
@@ -257,7 +261,7 @@ body {
   </div>
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
-<div id="cargo">Carteira de Identidade de <?PHP echo cargo($rolConsuta)['0'];?></div>
+<div id="cargo">Carteira de Identidade de <?PHP echo $cargoEclec['0'];?></div>
 <div id="Nome">
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?>
 </div>
@@ -271,7 +275,7 @@ body {
 </div>
 <div id="verso1">
 <?PHP
-	print "<b>Membro desde:</b>".conv_valor_br ($rec_ecl->dat_aclam());
+	print "<b>Membro desde:</b> ".conv_valor_br ($rec_ecl->dat_aclam());
 	print " <br /><b>Data de Nascimento:</b> ".conv_valor_br ($rec_pessoais->datanasc());
 	print "<br /><b>Nacionalidade:</b> ".$rec_pessoais->nacionalidade();
 	$cidNatal = ($cidade->nome()=='') ? $rec_pessoais->naturalidade() : $cidade->nome().' - '.$cidade->coduf() ;

@@ -1,5 +1,5 @@
 <div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">
-	<h4>Certid&atilde;o de Batismo</h4>
+	<h4>Certificado de Batismo</h4>
 <form method="post" action="views/secretaria/batismoCertificado.php" target="_blank">
 	<p>
 	<div class="row">
@@ -20,7 +20,7 @@
     </div>
   <div class="col-xs-3">
     <label>Data do Batismo</label>
-    <input type="date" name="dtbatismo" class="form-control dataclass" id='id_val2' placeholder="Data do Batismo" >
+    <input type="date" name="dtbatismo" class="form-control" id='id_val2' >
     <input type="hidden" name="pastor" value="<?PHP echo strtr( $igSede->pastor(), 'áàãâéêíóõôúüç','aaaaeeiooouuc');?>" >
   </div>
   <div class="col-xs-1">

@@ -1,3 +1,4 @@
+
 <?PHP
 	session_start();
 	require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
