@@ -1,11 +1,7 @@
-<?php
-$rol = (empty($_GET['rol'])) ? '' : intval($_GET['rol']) ;
-
- ?>
 <fieldset>
 	<legend>Filtrar recibos</legend>
 	<div class="form-group">
-	<form method="get" name="" action="">
+	<form method="get" name="" action="" >
 	<div class="row">
   <div class="col-xs-5">
 		<label>Nome:</label>
@@ -55,7 +51,6 @@ $rol = (empty($_GET['rol'])) ? '' : intval($_GET['rol']) ;
 							}
 							echo $linha1.$linha2;
 							if ($diaPer=='' && $mesPerido=='' && $anoPer<'2000') {
-                $anoPer = 0;
 								$perLista = 'Todos os anos';
 							} elseif ($diaPer!='' && $mesPerido=='' && $anoPer<'2000') {
 								$perLista = 'Todos do dia '.$diaPer;
@@ -96,17 +91,10 @@ $rol = (empty($_GET['rol'])) ? '' : intval($_GET['rol']) ;
   <div class="col-xs-3">
 	<label>Congrega&ccedil;&atilde;o:</label>
 	<?php
-
-    if ($anoPer=='' || $anoPer<2000) {
-      $anoLink = 1999;
-    } else {
-      $anoLink = $anoPer;
-    }
-
 		$bsccredor = new List_sele('igreja', 'razao', 'igreja');
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control  input-sm"');
 		echo $listaIgreja;
-		$linkPrint = './controller/modeloPrint.php/?nome='.$nome.'&rol='.$rol.'&cpf='.$cpf.'&rg='.$rg.'&recebeu='.$recebeu.'&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoLink.'&igreja='.$igr.'&tipo=4';
+		$linkPrint = './controller/modeloPrint.php/?nome='.$nome.'&rol='.$rol.'&cpf='.$cpf.'&rg='.$rg.'&recebeu='.$recebeu.'&dia='.$diaPer.'&mes='.$mesPer.'&ano='.$anoPer.'&igreja='.$igr.'&tipo=4';
 	?>
 </div>
   <div class="col-xs-2">
@@ -119,7 +107,8 @@ $rol = (empty($_GET['rol'])) ? '' : intval($_GET['rol']) ;
   </div>
 	  <div class="col-xs-2">
 		<label>&nbsp;</label>
-		<a href='<?php echo $linkPrint;?>' target="_blank">
+		<a href='<?php echo $linkPrint;?>'
+		target="_blank">
 			<button type="button" class="btn btn-default btn-sm">
 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir...
 			</button>
@@ -133,6 +122,8 @@ $rol = (empty($_GET['rol'])) ? '' : intval($_GET['rol']) ;
 $titTable = '<div class="bs-example-bg-classes"><h5><p class="bg-info">'.$perLista.'</p><h5></div><h6>';
 $tagFimTable = '</h6>';
 	require_once 'help/tes/listRec.php';
+	require_once 'testes/autoCompleteTst.php';
+
 ?>
 <script type="text/javascript">
 	new Autocomplete("campo_estado", function() {
@@ -143,7 +134,7 @@ $tagFimTable = '</h6>';
 			$("#rol").val(celular);
 			$("#cong").val(congr);
 		}
-		if ( this.value.length < 1 && this.isNotClick )
+		if ( this.value.length < 3 && this.isNotClick )
 			return ;
 		return "models/autodizimo.php?q=" + this.value;
 	});

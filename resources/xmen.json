@@ -1,0 +1,9 @@
+  [
+      {"character": "Cyclops", "realName": "Scott Summers", "icon": "http://lorempixel.com/100/50/transport/2"},
+      {"character": "Professor X", "realName": "Charles Francis Xavier", "icon": "http://lorempixel.com/100/50/transport/8"},
+      {"character": "Mystique", "realName": "Raven Darkholme", "icon": "http://lorempixel.com/100/50/transport/10"},
+      {"character": "MagnetoAg", "realName": "Max Eisenhardt", "icon": "http://lorempixel.com/100/50/transport/1"},
+      {"character": "Storm", "realName": "Ororo Monroe", "icon": "http://lorempixel.com/100/50/transport/6"},
+      {"character": "Hílton", "realName": "Joseilton C Bruce", "icon": "http://lorempixel.com/100/50/transport/10"},
+      {"character": "Wolverineag", "realName": "James Howlett", "icon": "http://lorempixel.com/100/50/transport/8"}
+  ]

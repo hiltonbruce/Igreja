@@ -7,7 +7,8 @@
 	background: #FEFEFE;
 	display: block;
 	border: 1px solid #7C7C7C;
-	text-align: left; z-index: 200;
+	text-align: left;
+	z-index: 200;
 }
 
 .autocomplete_list, .autocomplete_list ol, .autocomplete_list li {
@@ -37,11 +38,18 @@
 	background-image: url(autocomplete.gif);
 	cursor: pointer;
 	cursor: hand;
-	display:none;
+	display: none;
 }
 
 .query-text{
 	font-weight: bold;
 	float:none !important;
-	padding:0 !important;
+	padding: !important;
+}
+
+/* typeahead.js jQuery plugin Multiple Datasets */
+#multiple-datasets .league-name {
+  margin: 0 20px 5px 20px;
+  padding: 3px 0;
+  border-bottom: 1px solid #ccc;
 }
