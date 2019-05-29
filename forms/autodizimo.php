@@ -213,18 +213,3 @@ $alertaFild .= '<span class="glyphicon glyphicon-bell"aria-hidden="true"></span>
 	</fieldset>
 </form>
 </fieldset>
-<script type="text/javascript">
-	new Autocomplete("campo_estado", function() {
-		this.setValue = function( rol, nome, celular, congr ) {
-			$("#id_val").val(rol);
-			$("#estado_val").val(nome);
-			$("#sigla_val").val(celular);
-			$("#rol").val(celular);
-			$("#cong").val(congr);
-		}
-
-		if ( this.value.length < 1 && this.isNotClick )
-			return ;
-		return "models/autodizimo.php?q=" + this.value + "&igreja=<?php echo $_GET['igreja'];?>" ;
-	});
-</script>

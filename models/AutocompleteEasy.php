@@ -1,18 +1,19 @@
 <?php
-require_once '../func_class/constantes.php';
+// require_once '../func_class/constantes.php';
 /**
  * @author Wellington Ribeiro - IdealMind.com.br
  * @since 31/10/2009
  * @final Joseilton Costa Bruce
  * @since 29/12/2011
  */
-// require_once '../help/impressao.php';
-// $quantExibir=0;
+require_once '../help/impressao.php';
+$quantExibir=0;
 // $linha1='';
 // $linha2='';
 $q =  $_GET['q'];
+$item = 0;
 // $q = 'jos';
-$igrejaRol = mysql_real_escape_string( $_GET['igreja'] );
+// $igrejaRol = mysql_real_escape_string( $_GET['igreja'] );
 if (empty($_GET['igreja'])) {
 	$igrejaRol = 0;
 } else {
@@ -44,30 +45,55 @@ switch ($quantNomes) {
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
-	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND";
-	 $sql .= " m.nome LIKE '%$q3%' AND m.nome LIKE '%$q4%' ORDER BY ";
+	 $sql .= " m.nome LIKE :NOME1 AND m.nome LIKE :NOME2 AND";
+	 $sql .= " m.nome LIKE :NOME3 AND m.nome LIKE :NOME4 ORDER BY ";
 	 if ($igrejaRol>0) {
-	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
-	 }
+	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
+	}
+
+   $stmt = $conn->prepare($sql);
+	 $q1 = "%$q1%";
+	 $q2 = "%$q2%";
+	 $q3 = "%$q3%";
+	 $q4 = "%$q4%";
+   $stmt ->bindParam(":NOME1", $q1);
+   $stmt ->bindParam(":NOME2", $q2);
+   $stmt ->bindParam(":NOME3", $q3);
+   $stmt ->bindParam(":NOME4", $q4);
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
-	 $sql .= " m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%' AND";
-	 $sql .= " m.nome LIKE '%$q3%' ORDER BY ";
+	 $sql .= " m.nome LIKE :NOME1 AND m.nome LIKE :NOME2 AND";
+	 $sql .= " m.nome LIKE :NOME3 ORDER BY ";
 	 if ($igrejaRol>0) {
-	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
-	 }
+	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
+	}
+
+   $stmt = $conn->prepare($sql);
+	 $q1 = "%$q1%";
+	 $q2 = "%$q2%";
+	 $q3 = "%$q3%";
+   $stmt ->bindParam(":NOME1", $q1);
+   $stmt ->bindParam(":NOME2", $q2);
+   $stmt ->bindParam(":NOME3", $q3);
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol";
-	 $sql .= " AND (m.nome LIKE '%$q1%' AND m.nome LIKE '%$q2%') ORDER BY ";
+	 $sql .= " AND (m.nome LIKE :NOME1 AND m.nome LIKE :NOME2) ORDER BY ";
 	 if ($igrejaRol>0) {
-		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC,";
+		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	 }
+
+   $stmt = $conn->prepare($sql);
+	 $q1 = "%$q1%";
+	 $q2 = "%$q2%";
+   $stmt ->bindParam(":NOME1", $q1);
+   $stmt ->bindParam(":NOME2", $q2);
+
 	break;
 	default:
 	 $q=trim($q);
@@ -79,11 +105,7 @@ switch ($quantNomes) {
 	 }
 
    $stmt = $conn->prepare($sql);
-
-   $nome = $q;
-
-   $stmt ->bindParam(":NOME", $nome);
-
+   $stmt ->bindParam(":NOME", $q);
 	break;
 }
 //
@@ -207,7 +229,7 @@ switch ($quantNomes) {
 
 
 	$json = '[';
-	$data = '';
+	// $data = '';
 
 	function endKey($value){
 		end($value);
@@ -215,30 +237,21 @@ switch ($quantNomes) {
 	}
 
 $totElement = count($results);
-// var_dump(current($results));
 
 	foreach ($results as $key => $value) {
-			// echo "<strong>".$key.":</strong> ";
-			// echo $value['nome'];
-			// echo "<br/>";
-
 
 			$json .= '{';
 
 			array_push($data2,$value);
 
-				$data .= '{"nome": "' . $value['nome']. '"}';
-
-
-				// echo "string-> ".endKey($value);
 				foreach ($value as $chave => $dados) {
-					# code...
+
 					$json .= '"'.$chave.'": "'. $dados.'"';
 
           if ($chave=='rol') {
             $rol = $dados;
             $img="img_membros/$rol.jpg";
-            $icon = "<img src='$img' class='img-thumbnail thumb' alt='SemFoto' width='50' height='38' align='absmiddle' />";
+            $icon = "<img src='$img' class='img-thumbnail thumb' alt=' ' width='35' height='27' align='absmiddle' />";
 						$json .= ',"icon": "'.$icon .'"';
           }
 
@@ -253,7 +266,7 @@ $totElement = count($results);
 
 				}
 
-				if ($item++==15) {
+				if (++$item==10) {
 					break;
 				}
 
@@ -261,12 +274,11 @@ $totElement = count($results);
 					$json .= '},';
 				}
 
-
 		}
 
 		$json .= '}]';
 
-	header('Content-Type: application/json');
+	// header('Content-Type: application/json');
 
 	echo $json;
 	// echo ' "Toal de '.$stmt->rowCount().'"';
