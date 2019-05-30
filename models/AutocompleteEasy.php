@@ -1,33 +1,22 @@
 <?php
-// require_once '../func_class/constantes.php';
 /**
- * @author Wellington Ribeiro - IdealMind.com.br
- * @since 31/10/2009
+ * @author  http://easyautocomplete.com/
+ * @since Copyright (c) 2015
  * @final Joseilton Costa Bruce
- * @since 29/12/2011
+ * @since 30/05/2019
  */
 require_once '../help/impressao.php';
 $quantExibir=0;
-// $linha1='';
-// $linha2='';
 $q =  $_GET['q'];
 $item = 0;
-// $q = 'jos';
-// $igrejaRol = mysql_real_escape_string( $_GET['igreja'] );
 if (empty($_GET['igreja'])) {
 	$igrejaRol = 0;
 } else {
 	$igrejaRol =intval($_GET['igreja']);
 }
-//
+
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 
-//
-// //echo '<h1>Teste: '.$_GET['teste'].'</h1>';
-//
-// //critÃ©rios de fonÃ©tica
-// //$exp = new fonetica($q,'nome');
-//
 
 $igrejaArr = "SELECT * FROM igreja ORDER BY razao";
 $stmtIgr = $conn->prepare($igrejaArr);
@@ -45,17 +34,13 @@ switch ($quantNomes) {
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
-	 $sql .= " m.nome LIKE :NOME1 AND m.nome LIKE :NOME2 AND";
-	 $sql .= " m.nome LIKE :NOME3 AND m.nome LIKE :NOME4 ORDER BY ";
+	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
+	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome) ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	}
 
    $stmt = $conn->prepare($sql);
-	 $q1 = "%$q1%";
-	 $q2 = "%$q2%";
-	 $q3 = "%$q3%";
-	 $q4 = "%$q4%";
    $stmt ->bindParam(":NOME1", $q1);
    $stmt ->bindParam(":NOME2", $q2);
    $stmt ->bindParam(":NOME3", $q3);
@@ -65,16 +50,13 @@ switch ($quantNomes) {
 	 list($q1,$q2,$q3) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
-	 $sql .= " m.nome LIKE :NOME1 AND m.nome LIKE :NOME2 AND";
-	 $sql .= " m.nome LIKE :NOME3 ORDER BY ";
+	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
+	 $sql .= " LOCATE(:NOME3,m.nome) ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	}
 
    $stmt = $conn->prepare($sql);
-	 $q1 = "%$q1%";
-	 $q2 = "%$q2%";
-	 $q3 = "%$q3%";
    $stmt ->bindParam(":NOME1", $q1);
    $stmt ->bindParam(":NOME2", $q2);
    $stmt ->bindParam(":NOME3", $q3);
@@ -83,17 +65,14 @@ switch ($quantNomes) {
 	 list($q1,$q2) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol";
-	 $sql .= " AND (m.nome LIKE :NOME1 AND m.nome LIKE :NOME2) ORDER BY ";
+	 $sql .= " AND LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) ORDER BY ";
 	 if ($igrejaRol>0) {
 		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	 }
 
    $stmt = $conn->prepare($sql);
-	 $q1 = "%$q1%";
-	 $q2 = "%$q2%";
    $stmt ->bindParam(":NOME1", $q1);
    $stmt ->bindParam(":NOME2", $q2);
-
 	break;
 	default:
 	 $q=trim($q);
@@ -108,125 +87,17 @@ switch ($quantNomes) {
    $stmt ->bindParam(":NOME", $q);
 	break;
 }
-//
-// $res = mysql_query( $sql."locate('$q',m.nome)" );
-// $linhas = mysql_num_rows($res);
-//
-// # 1�linha em branco
-// echo "<li onselect=\" \">... </li>\n";
-//
-// while( $campo = mysql_fetch_array( $res ) )
-// {
-// 	//echo "Id: {$campo['id']}\t{$campo['nomecong']}\t{$campo['estado']}<br />";
-// 	$id = $campo['celular'];
-// 	$rolMembro = $campo['rol'];
-// 	//$ecles = new DBRecord ('eclesiastico',$campo ['rol'],'rol');
-// 	$igreja = new DBRecord ('igreja',$campo ['congregacao'],'rol');
-// 	$cargo = cargo($rolMembro);
-// 	$nomecong = $cargo['0'].' - '.htmlentities($igreja->razao(),ENT_QUOTES,'iso-8859-1');
-// 	switch ($campo['situacao_espiritual']) {
-// 		case '2':
-// 			$nomecong .= '&nbsp;<mark>Disciplinado</mark> ';
-// 			break;
-// 		case '3':
-// 			$nomecong .= '&nbsp;<mark>Falecido</mark> ';
-// 			break;
-// 		case '4':
-// 			$nomecong .= '&nbsp;<mark>Mudou de Igreja</mark> ';
-// 			break;
-// 		case '5':
-// 			$nomecong .= '&nbsp;<mark>Afastou-se da Igreja</mark> ';
-// 			break;
-// 		case '6':
-// 			$nomecong .= '&nbsp;<mark>Transferido</mark> ';
-// 			break;
-// 	}
+
 // 	$exibiCong = strip_tags($nomecong);
 // 	$estado = strtoupper(strtr( $campo['nome'], '��������������������������','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 // 	$endereco = strtoupper(strtr( $campo ['endereco'], '��������������������������','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 // 	//$endereco .=', '.$campo['numero'];
-// 	//$estado = addslashes($estado);
-// 	$destaque = "<span style=\"font-weight:bold\">\$1</span>";
-// 	switch ($quantNomes) {
-// 		case '3':
-// 			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i","/(" . $q3 . ")/i","/(" . $q4 . ")/i");
-// 			$replacements = array($destaque,$destaque,$destaque,$destaque);
-// 			preg_replace($patterns, $replacements, $string);
-// 			$html = preg_replace($patterns, $replacements, $estado);
-//
-// 		break;
-// 		case '2':
-// 			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i","/(" . $q3 . ")/i");
-// 			$replacements = array($destaque,$destaque,$destaque);
-// 			 preg_replace($patterns, $replacements, $string);
-// 			$html = preg_replace($patterns, $replacements, $estado);
-// 		break;
-// 		case '1':
-// 			$patterns = array("/(" . $q1 . ")/i","/(" . $q2 . ")/i");
-// 			$replacements = array($destaque,$destaque);
-// 			preg_replace($patterns, $replacements, $string);
-// 			$html = preg_replace($patterns, $replacements, $estado);
-// 		break;
-//
-// 		default:
-// 			$html = preg_replace("/(" . $q . ")/i", $destaque, $estado);
-// 		break;
-// 	}
-//
-// 	$img='../img_membros/'.$campo['rol'].'.jpg';//PHP verifica se existe
-// 	$IMG='../img_membros/'.$campo['rol'].'.JPG';//PHP verifica se existe
-// 	if (file_exists($img)){
-// 		$img='img_membros/'.$campo['rol'].'.jpg';//Localização p/ JavaScript
-// 	}elseif (file_exists($IMG)){
-// 		$img='img_membros/'.$campo['rol'].'.JPG';//Localização p/ JavaScript
-// 	}else{
-// 		$img='img_membros/ver_foto.jpg';//Localização p/ JavaScript
-// 	}
-//
-// 	$html ='<img src="'.$img.'" title="Rol: '.$campo['rol'].'" style="width:24px;height:32px;"> '.$html;
-// 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$nomecong','$rolMembro','$exibiCong');\">$html ($nomecong)</li>\n";
-//
-// 	$quantExibir++;
-//
-// 	if ($quantExibir>'9') {
-// 		break;
-// 	}
-// }
-//
-// if ($linhas>10) {
-// 	echo '<p style="text-align: right;">Total de '.$linhas.' ocorr&ecirc;ncias<br />';
-// 	echo 'S&atilde;o mostradas at&eacute; as 10 primeiras!</p>';
-// }
-
-
-
-  // $stmt = $conn->prepare("SELECT * FROM membro WHERE nome LIKE :NOME ORDER BY rol LIMIT 15");
-
-  // $nome = "%$q%";
-  //
-  // $stmt ->bindParam(":NOME", $nome);
 
   $stmt->execute();
 
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-	// print_r($resultsIgrej);
-
-	// echo "<br/>print_r================================================<br/>";
-	//
-	// print_r($results);
-
 	$data2 = array();
-
-		// while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-		//   array_push($data2, $row);
-		// }
-	//
-	// var_dump($results);
-
-  // echo "<br/>foreach================================================<br/>";
-
 
 	$json = '[';
 	// $data = '';
@@ -243,8 +114,41 @@ $totElement = count($results);
 			$json .= '{';
 
 			array_push($data2,$value);
+			$destaque = "<code>\$1</code>";
 
-				foreach ($value as $chave => $dados) {
+			foreach ($value as $chave => $dados) {
+
+					if ($chave=='nome') {
+
+						$json .= '"name": "'.$dados .'",';
+						$estado = $dados;
+						require ('../help/destaqueNome.php');
+
+					}
+
+					if ($chave=='situacao_espiritual') {
+						 switch ($dados) {
+							 case '2':
+								 $dados = " -&nbsp;<span class='text-danger'>Disciplinado</span> ";
+								 break;
+							 case '3':
+								 $dados = " -&nbsp;<span class='text-danger'>Falecido</span> ";
+								 break;
+							 case '4':
+								 $dados = " -&nbsp;<span class='text-danger'>Mudou de Igreja</span> ";
+								 break;
+							 case '5':
+								 $dados = " -&nbsp;<span class='text-danger'>Afastou-se da Igreja</span> ";
+								 break;
+							 case '6':
+								 $dados = " -&nbsp;<span class='text-danger'>Transferido</span> ";
+								 break;
+						 	default:
+								 $dados = '';
+						 		# code...
+						 		break;
+						 }
+					}
 
 					$json .= '"'.$chave.'": "'. $dados.'"';
 
@@ -256,8 +160,8 @@ $totElement = count($results);
           }
 
 					 if ($chave=='congregacao') {
-						 $razao = ($IgArray[$dados]['razao']=='') ? 'Falta informar igreja no cadastro' : $IgArray[$dados]['razao'] ;
-							$json .= ',"razao": "'.$razao.'"';
+						 $razao = ($IgArray[$dados]['razao']=='') ? 'Falta informar igreja no cadastro' : "<span class='text-warning'>".$IgArray[$dados]['razao']."</span>" ;
+							$json .= ',"razao": " - '.$razao.'"';
            }
 
 					if (endKey($value) !== $chave) {

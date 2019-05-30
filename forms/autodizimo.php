@@ -29,18 +29,16 @@ $alertaFild .= '<span class="glyphicon glyphicon-bell"aria-hidden="true"></span>
 <fieldset>
 <legend>D&iacute;zimo e Ofertas</legend>
 <form method="post" name="" action="">
-		<?php
+	<?php
 		$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
 		$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'class="form-control" required="required" ');
 		echo $listaIgreja;
-
-
-		?>
+	?>
 <fieldset>
 	<legend>D&iacute;zimos, Votos e Ofertas
-				<?php
-					echo $alertaFild;
-				?>
+		<?php
+			echo $alertaFild;
+		?>
 	</legend>
 	<?php
 
@@ -49,16 +47,6 @@ $alertaFild .= '<span class="glyphicon glyphicon-bell"aria-hidden="true"></span>
 	 ?>
 	<table class='table'>
 		<tbody>
-			<!-- <tr>
-				<td colspan="3"><label>Nome:</label> <input type="text" name="nome"
-				id="campo_estado" size="50%" class="form-control"
-				placeholder="Nome do dizimista para iniciarmos a busca no cadastro da Igreja!"
-				autofocus="autofocus" tabindex="<?php echo ++$ind;?>" />
-				</td>
-				<td><label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?php echo ++$ind;?>"
-						value="" class="form-control" placeholder="N&ordm; do membro na igreja" />
-				</td>
-			</tr> -->
 			<tr>
 				<td><label>Data: </label> <input type="text" id="data" name="data"
 					value="<?php echo $dtlanc;?>" class="form-control" required="required"/>

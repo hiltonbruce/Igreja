@@ -25,7 +25,7 @@
 				return "models/AutocompleteEasy.php?q=" + phrase + "&igreja=" + "<?php echo $igreja;?>";
 			},
 
-    getValue: "nome",
+    getValue: "name",
 
     list: {
 
@@ -53,7 +53,7 @@
 		 template: {
 				 type: "custom",
 				 method: function(value, item) {
-					 return  item.icon + " &bull; " + value + " - " + item.rol + " - " + item.razao;
+					 return  item.icon + " &bull; " + item.nome + item.razao + item.situacao_espiritual;
 				 }
 			 },
 		 theme: "round"
