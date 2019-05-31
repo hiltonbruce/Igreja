@@ -17,46 +17,48 @@
 		 name="rol" placeholder="N&ordm; do Rol de membro">
   </div>
 </div>
-<script>
-  var options = {
+		<script>
 
-  url: function(phrase) {
-  		return "models/AutocompleteEasy.php?q=" + phrase + "&igreja=" + "<?php echo $igreja;?>";
-  	},
+		var options = {
 
-  getValue: "name",
+		url: function(phrase) {
+				return "models/AutocompleteEasy.php?q=" + phrase + "&igreja=" + "<?php echo $igreja;?>";
+			},
 
-  list: {
+    getValue: "name",
 
-      onSelectItemEvent: function() {
-          var selectedItemValue = $("#inputOne").getSelectedItemData().rol;
-          $("#inputTwo").val(selectedItemValue).trigger("change");
-      },
-      onHideListEvent: function() {
-      	$("#inputTwo").val(selectedItemValue).trigger("change");
-    	},
-  		showAnimation: {
-  			type: "fade", //normal|slide|fade
-  			time: 200,
-  			callback: function() {}
-  		},
+    list: {
 
-  		hideAnimation: {
-  			type: "slide", //normal|slide|fade
-  			time: 200,
-  			callback: function() {}
-  		},
-  		maxNumberOfElements: 10,
-    },
+        onSelectItemEvent: function() {
+            var selectedItemValue = $("#inputOne").getSelectedItemData().rol;
+            $("#inputTwo").val(selectedItemValue).trigger("change");
+        },
+        onHideListEvent: function() {
+        	$("#inputTwo").val(selectedItemValue).trigger("change");
+	    	},
+				showAnimation: {
+					type: "fade", //normal|slide|fade
+					time: 200,
+					callback: function() {}
+				},
 
-   template: {
-  		 type: "custom",
-  		 method: function(value, item) {
-  			 return  item.icon + " &bull; " + item.nome + item.razao + item.situacao_espiritual;
-  		 }
-  	 },
-   theme: "round"
-  };
+				hideAnimation: {
+					type: "slide", //normal|slide|fade
+					time: 200,
+					callback: function() {}
+				},
+				maxNumberOfElements: 10,
+	    },
 
-  $("#inputOne").easyAutocomplete(options);
-</script>
+		 template: {
+				 type: "custom",
+				 method: function(value, item) {
+					 return  item.icon + " &bull; " + item.nome + item.razao + item.situacao_espiritual;
+				 }
+			 },
+		 theme: "round"
+	};
+
+	$("#inputOne").easyAutocomplete(options);
+
+		</script>
