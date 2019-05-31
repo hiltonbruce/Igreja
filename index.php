@@ -72,6 +72,10 @@
 <link type="text/css" rel="stylesheet" media="all" href="chat/css/chat.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="style.css" />
 <link rel="stylesheet" type="text/css" href="css/autocomplete.css">
+
+<link href="css/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+<link href="css/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
+
 <link rel="icon" type="image/gif" href="br_igreja.jpg">
 </head>
 <body>

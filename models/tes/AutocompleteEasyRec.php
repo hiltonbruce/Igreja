@@ -5,7 +5,7 @@
  * @final Joseilton Costa Bruce
  * @since 30/05/2019
  */
-require_once '../help/impressao.php';
+require_once '../../help/impressao.php';
 $quantExibir=0;
 $q =  $_GET['q'];
 $item = 0;
@@ -22,6 +22,9 @@ $igrejaArr = "SELECT * FROM igreja ORDER BY razao";
 $stmtIgr = $conn->prepare($igrejaArr);
 $stmtIgr->execute();
 $resultsIgrej = $stmtIgr->fetchAll(PDO::FETCH_ASSOC);
+$sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+$sql .= " tes_recibo AS t,eclesiastico AS e WHERE m.rol=e.rol AND m.rol=t.recebeu AND";
+$sql .= " t.tipo=1 AND e.rol=t.recebeu AND";
 
 foreach ($resultsIgrej as $key => $value) {
 	$IgArray [$value['rol']]=array ('razao'=>$value['razao']);
@@ -32,10 +35,8 @@ foreach ($resultsIgrej as $key => $value) {
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
-	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
 	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
-	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome) ORDER BY ";
+	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome) GROUP BY t.recebeu ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	}
@@ -48,10 +49,10 @@ switch ($quantNomes) {
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
-	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
+	//  $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	//  $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
 	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
-	 $sql .= " LOCATE(:NOME3,m.nome) ORDER BY ";
+	 $sql .= " LOCATE(:NOME3,m.nome) GROUP BY t.recebeu ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	}
@@ -63,9 +64,9 @@ switch ($quantNomes) {
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
-	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol";
-	 $sql .= " AND LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) ORDER BY ";
+	//  $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	//  $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
+	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) GROUP BY t.recebeu ORDER BY ";
 	 if ($igrejaRol>0) {
 		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	 }
@@ -76,9 +77,9 @@ switch ($quantNomes) {
 	break;
 	default:
 	 $q=trim($q);
-	 $sql = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
-	 $sql .= " eclesiastico AS e WHERE";
-	 $sql .= " m.rol=e.rol AND LOCATE(:NOME,m.nome) > 0 ORDER BY ";
+	//  $sql = "SELECT e.congregacao,e.situacao_espiritual,m.* FROM membro AS m,";
+	//  $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
+	 $sql .= " LOCATE(:NOME,m.nome) > 0 GROUP BY t.recebeu ORDER BY ";
 	 if ($igrejaRol>0) {
 	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
 	 }
@@ -126,7 +127,7 @@ $totElement = count($results);
 
 						$json .= '"name": "'.$dados .'",';
 						$estado = $dados;
-						require ('../help/destaqueNome.php');
+						require ('../../help/destaqueNome.php');
 
 					}
 

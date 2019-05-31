@@ -1,4 +1,5 @@
 <?php
+$totInfantil = 0;
 //print_r($descCta);
 while ($contas = mysql_fetch_array($lista)) {
 	$mesr 		= $contas['mes'];

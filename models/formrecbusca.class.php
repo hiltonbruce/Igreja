@@ -43,7 +43,8 @@ class formrecbusca extends formularioalterar {
 
 		}
 		//echo $_GET['escolha'].' ** '.$idformulario;
-		require_once 'forms/tes/buscaRol.php';
+		// require_once 'forms/tes/buscaRol.php';
+		require_once "forms/tes/EasyAutocRec.php";
 	}
 }
 ?>
