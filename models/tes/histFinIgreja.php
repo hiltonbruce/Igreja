@@ -109,7 +109,6 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$cor = !$cor;
 	}
 	?>
-<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 //<![CDATA[
 	$(document).ready(function() {
