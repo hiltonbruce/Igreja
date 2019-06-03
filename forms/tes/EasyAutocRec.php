@@ -1,16 +1,15 @@
 <?php
   $igreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']) ;
  ?>
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+
 <form method="get" name="autocompletar" action="">
 <div class="row">
   <div class="col-xs-12"><label>Nome:</label>
-    <input type="text" id="inputThree" class="form-control input-sm" autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
+    <input type="text" id="inputThree" class="form-control input-sm"
 		 name="nome" placeholder="Partes dos nomesde membros para procurarmos">
   </div>
   <div class="col-xs-3"><label>Rol:</label>
-    <input type="text" id="inputFour" class="form-control input-sm" tabindex="<?php echo ++$ind;?>"
+    <input type="text" id="inputFour" class="form-control input-sm"
 		 name="recebeu" placeholder="N&ordm; do Rol" required="required" >
   </div>
   <div class="col-xs-2">
