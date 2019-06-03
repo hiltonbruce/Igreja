@@ -4,10 +4,6 @@
 
 <form method="get" name="autocompletar" action="">
 <div class="row">
-  <div class="col-xs-12"><label>Nome:</label>
-    <input type="text" id="inputThree" class="form-control input-sm"
-		 name="nome" placeholder="Partes dos nomesde membros para procurarmos">
-  </div>
   <div class="col-xs-3"><label>Rol:</label>
     <input type="text" id="inputFour" class="form-control input-sm"
 		 name="recebeu" placeholder="N&ordm; do Rol" required="required" >
@@ -17,6 +13,10 @@
 		<input type="hidden" name="menu" value="top_tesouraria" />
 		<label>&nbsp;</label>
 	<input type="submit" class="btn btn-primary btn-sm" name="listar" value="Listar dados...">
+  </div>
+  <div class="col-xs-12"><label>Nome:</label>
+    <input type="text" id="inputThree" class="form-control input-sm"
+    name="nome" placeholder="Partes dos nomesde membros para procurarmos">
   </div>
 </div>
 </form>
