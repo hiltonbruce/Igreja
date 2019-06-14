@@ -164,7 +164,7 @@
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
-      <?php print_r($cargoIgrejas['0']['cargo']);?>
+      <?php print_r($cargoIgrejas['0']['nomeFunc']);?>
 	    </div>
 	  <div id="secretario"><?PHP echo  strtoupper($secretario);?><br />
       <?php echo $_POST["secretario"].$cargo;?> </div>

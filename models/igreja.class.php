@@ -18,13 +18,20 @@ class igreja {
 	}
 
 	function Arrayigreja(){
-	$this->query = "SELECT rol,razao,status,rua,numero,setor FROM igreja ";
+	$this->query = "SELECT * FROM igreja ";
 	$this->sql_lst = mysql_query("{$this->query} ORDER BY razao") or die (mysql_error());
 	//echo "<h1>Teste</h1>";
    while($this->col_lst = mysql_fetch_array($this->sql_lst))
    {
-  $bairr_array [$this->col_lst['rol']]=array ($this->col_lst['razao'],$this->col_lst['status']
-  	,$this->col_lst['rol'],$this->col_lst['rua'],$this->col_lst['numero'],$this->col_lst['setor']);
+		 if ($this->col_lst['pastor']>0) {
+		 	$memmbr = new DBRecord ("membro",$this->col_lst['pastor'],"rol");
+			$nomeMembro = $memmbr->nome();
+		}else {
+			$nomeMembro = $this->col_lst['pastor'];
+		}
+		  $bairr_array [$this->col_lst['rol']]=array ($this->col_lst['razao'],$this->col_lst['status']
+		  	,$this->col_lst['rol'],$this->col_lst['rua'],$this->col_lst['numero'],$this->col_lst['setor']
+				,$nomeMembro);
    }
 	  return $bairr_array;
 	}

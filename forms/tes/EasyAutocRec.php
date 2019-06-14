@@ -4,7 +4,7 @@
 
 <form method="get" name="autocompletar" action="">
 <div class="row">
-  <div class="col-xs-3"><label>Rol:</label>
+  <div class="col-xs-4"><label>Rol:</label>
     <input type="text" id="inputFour" class="form-control input-sm"
 		 name="recebeu" placeholder="N&ordm; do Rol" required="required" >
   </div>

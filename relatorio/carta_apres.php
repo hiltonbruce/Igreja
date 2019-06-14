@@ -6,7 +6,24 @@
   $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
   $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 	$dadosIgreja = new igreja();
+	$cargoIgreja = new tes_cargo();
+  // $dadosCargo = $cargoIgreja->dadosArray();
+	$cargoIgrejas = $cargoIgreja->dadosCargo();
 	$listInfIgr = $dadosIgreja->Arrayigreja();
+
+	// print_r($listInfIgr['1']);exit;
+	// echo "string".intval($listInfIgr['1']['6']).$listInfIgr['1']['6'];
+
+	$rolPr = intval($listInfIgr['1']['6']);
+
+	if ($rolPr>0) {
+		$prIgreja = $cargoIgrejas[$listInfIgr['1']['6']]['nome'].'<br />'.$cargoIgrejas['0']['nomeFunc'];
+	} else {
+		$prIgreja = $listInfIgr['1']['6'].'<br />'.$cargoIgrejas['0']['nomeFunc'];
+	}
+
+ // 	print_r($cargoIgrejas['1']);
+
 	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
 	if (empty($_POST["id"]) && isset($_POST["nome"])) {
 		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
@@ -70,11 +87,10 @@
 		<div id='comadep'></div>
       <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->data()));?></h3>
     	<br />
-		<div id="pastor">
-			<?PHP echo strtoupper( toUpper($igreja->pastor()));?><br />
-			Pastor da Igreja
-	    </div>
+			<div id="pastor"><?PHP echo $prIgreja;?>
+			</div>
 	 	 <?PHP
+
 		 		if ($most_certidao->id_cong()>'1') {
 		 			$congreg = 'Congrega&ccedil;&atilde;o: '.$listInfIgr[$most_certidao->id_cong()]['0'].' - ';
 		 		} else {

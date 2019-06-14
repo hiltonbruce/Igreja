@@ -6,9 +6,7 @@ $proximo=$_GET["proxima"]+1;
 if ($_GET["Submit"]=="Imprimir") {
 
 session_start();
-require_once ("../func_class/funcoes.php");
-require_once ("../func_class/classes.php");
-
+require "../help/impressao.php";//Include de func�es, classes e conex�es com o BD
 controle ("consulta");
 $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 ?>
@@ -19,6 +17,9 @@ $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $titTabela;?></title>
 <link rel="icon" type="image/gif" href="../br_igreja.jpg">
+<!-- <link rel="stylesheet" type="text/css" href="../tesouraria/style.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="../css/print.css" /> -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 </head>
 <body>
 <div id="header">

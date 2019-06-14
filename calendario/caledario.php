@@ -17,7 +17,7 @@ if ($_GET['imp']>'0') {
 		$dircon		= $sede->pastor();
 		$templo		= '<b>Templo Sede </b> ';
 	}else {
-		//Congregações
+		//Congregaï¿½ï¿½es
 		$dadocong 	= $igreja;
 		$igreja_rodape = $dadocong;
 		$dirigente 	= new DBRecord ('membro',$dadocong->pastor(),'rol');
@@ -26,7 +26,7 @@ if ($_GET['imp']>'0') {
 	}
 $ano = (empty($_GET['ano'])) ? date ('Y'):$_GET['ano'];
 $templo = '<div style="background:#CCC;width:100%; text-align:left;">'.$templo.' - Santa Ceia - Calend&aacute;rio '.$ano.'</div> ';
-$imprimir = true; //permite o impressão do rodapé
+$imprimir = true; //permite o impressï¿½o do rodapï¿½
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,32 +58,32 @@ $imprimir = true; //permite o impressão do rodapé
 	$colunas = 2;
 }
 	/*
-	Função geradora de calendário.
-	Parâmetros:
+	Funï¿½ï¿½o geradora de calendï¿½rio.
+	Parï¿½metros:
 
 	string
-	gerarCalendario([MÊS],[ANO],[NÚMERO_DE_MÊSES],[NÚMERO_DE_TABELAS_POR_LINHA],
+	gerarCalendario([Mï¿½S],[ANO],[Nï¿½MERO_DE_Mï¿½SES],[Nï¿½MERO_DE_TABELAS_POR_LINHA],
 																	[CONJUTO DE DATAS1]...[CONJUTO DE DATASn],
-																	[RODAPÉS],
-																	[DESCRIÇÕES DA LEGENDA])
+																	[RODAPï¿½S],
+																	[DESCRIï¿½ï¿½ES DA LEGENDA])
 
-	Os três últimos parâmetros são arrays.
-	A marcação dos dias é feita da seguinte forma:
-	dd/mm, para um dia específico ou dd-dd/mm para um intervalo de dias.
+	Os trï¿½s ï¿½ltimos parï¿½metros sï¿½o arrays.
+	A marcaï¿½ï¿½o dos dias ï¿½ feita da seguinte forma:
+	dd/mm, para um dia especï¿½fico ou dd-dd/mm para um intervalo de dias.
 
-	Podem ser criadas marcações de datas indefinidamente, basta adicioná-las no arquivo
-	'calendario.css', usando o nome de classe td_marcadoX, onde X é o número da marcação.
+	Podem ser criadas marcaï¿½ï¿½es de datas indefinidamente, basta adicionï¿½-las no arquivo
+	'calendario.css', usando o nome de classe td_marcadoX, onde X ï¿½ o nï¿½mero da marcaï¿½ï¿½o.
 
 	*/
 	  $marc0=array();//Santa ceia
-	  $marc1=array();//Circulo de Oração
+	  $marc1=array();//Circulo de Oraï¿½ï¿½o
 	  $marc2=array();//dias de culto
-	  $marc3=array();//Escola Bíblica
+	  $marc3=array();//Escola Bï¿½blica
 	  $marc4=array();
 	  $marc5=array();
 	  $marc6=array();
-	  //Define a Igreja do rodapé dos calendarios
-	  $id_igreja = (int) $_GET ["id"];
+	  //Define a Igreja do rodapï¿½ dos calendarios
+	  $id_igreja = intval( $_GET ["id"]);
 	  if (empty($id_igreja)){$id_igreja =1;}
 	  $ceia = $igreja->ceia();
 	  $nome_igreja = $igreja->razao();
@@ -96,7 +96,7 @@ $imprimir = true; //permite o impressão do rodapé
 	  $dia_ceia = substr ($ceia,-1);
 	  $semana_ceia = substr ($ceia,-2,1);
 	//  $todos = "1";
-	 if($_GET["mes"]=="") //Caso a classe ainda não esteja definida após o for acima
+	 if($_GET["mes"]=="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 	 $mes= "1"; else $mes=(int)$_GET["mes"];
 	 //$mes= "1";
 	 $todos ="12";
@@ -107,13 +107,13 @@ $imprimir = true; //permite o impressão do rodapé
 	  $y = (int)$_GET["ano"];
 
 	  if ($_GET['imp']=='') {
-	  	prox_ant_ano ();//Gera cabelho de alteração de ano e a lista de congregações
+	  	prox_ant_ano ();//Gera cabelho de alteraï¿½ï¿½o de ano e a lista de congregaï¿½ï¿½es
 	  }
 
 	  if ($_GET['imp']!='2') {
 		 echo gerarCalendario($mes,$y,$todos,$colunas,
 		                 array(array()),
-	                     $nome_igreja,/*Define o texto do Rodapé do calendário*/
+	                     $nome_igreja,/*Define o texto do Rodapï¿½ do calendï¿½rio*/
 	                    "Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
 	  }
 
@@ -125,7 +125,7 @@ $imprimir = true; //permite o impressão do rodapé
 				"Jul","Ago","Set","Out","Nov","Dez");
 		$cabMes = '<table class="tabela" height=220><tr><td width=300></td>';
 		for($ms=0; $ms<12; $ms++){
-		$cabMes .='<td class="cabecalho">'.$meses[$ms].'</td>'; //Cria uma tabela para o mês atual
+		$cabMes .='<td class="cabecalho">'.$meses[$ms].'</td>'; //Cria uma tabela para o mï¿½s atual
 		}
 		$cabMes .= '</tr>';
 		//Monta as linhas
@@ -148,7 +148,7 @@ $imprimir = true; //permite o impressão do rodapé
 		$semana_ceia = substr ($dadosCong['ceia'],-2,1);
 		 $todCeias .= gerarCalendario($mes,$y,$todos,$colunas,
 				array(array()),
-				$dadosCong['razao'],/*Define o texto do Rodapé do calendário*/
+				$dadosCong['razao'],/*Define o texto do Rodapï¿½ do calendï¿½rio*/
 				"Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia,$classDias);
 		 $diasCeias .= $todCeias.'</tr>';
 		}
