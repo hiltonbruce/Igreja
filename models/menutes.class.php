@@ -375,7 +375,7 @@ function recibosmembros (){
 	echo "</p>";
 		//In?cio das pendencias de disciplinados
 	}
-	public function periodo ($dia=NULL,$mes=NULL,$ano=NULL,$motivo=NULL,$nome=NULL)
+	public function periodo ($dia=NULL,$mes=NULL,$ano=NULL,$motivo=NULL,$nome=NUL,$lanc=NULLL)
 	{
 		$retorno = array();
 		if (checkdate($mes,$dia,$ano)) {
@@ -397,8 +397,14 @@ function recibosmembros (){
 		if (isset($motivo)) {
 		$escMotivo = mysql_escape_string($motivo);
 		$op .= 't.motivo LIKE "%'.$escMotivo.'%" AND ';
+	}
+		if ($lanc!=NULL && $lanc==1) {
+			//Lista apenas recibos pendentes de lançamentos
+			$op .= 't.lancamento="0" AND';
+		}elseif ($lanc==2) {
+			//Lista apenas recibos com lançamentos
+			$op .= 't.lancamento>"0" AND t.lancamento<>"Cancelado" AND ';
 		}
-
 	if (intval($nome)!='0') {
 		// $escRol = mysql_escape_string($nome);
 		$op .= 't.recebeu = "'.$nome.'" AND ';

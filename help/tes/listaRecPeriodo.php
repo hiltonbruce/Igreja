@@ -33,6 +33,10 @@
     $motivo = $_GET['motivo'];
   }
 
+  if (!empty($_GET['lanc'])) {
+    $lanc = intval($_GET['lanc']);
+  }
+
   if (isset($_GET['rol']) && $_GET['rol']>'0' ) {
     $nome = intval($_GET['rol']);
   }elseif (isset($_GET['nome'])) {
@@ -45,7 +49,8 @@ $credorLista = $credorPer->dados();
 $membroPer = new membro();
 $membroLista = $membroPer->nomes();
 //print_r ($credorLista);
-$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome);
+
+$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome,$lanc);
   foreach ($recLista as $key => $value) {
     if ($igr && $igr!=$value['igreja']) {
       continue;
@@ -73,8 +78,8 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome);
       $aviso = 'Lan&ccedil;amento Confirmado!';
       $vlrTotal += $value['valor'];
     }elseif ($value['lancamento']=='Cancelado') {
-      $status  = '&nbsp;<span class="glyphicon glyphicon-ok text-info" aria-hidden="true"></span>';
-      $status .= '<span class="text-danger">&nbsp;Recibo Cancelado&nbsp;</span>';
+      $status  = '&nbsp;<span class="glyphicon glyphicon-ban-circle text-danger" aria-hidden="true"></span>';
+      $status .= '<span class="text-danger">&nbsp;</span>';
       $aviso = 'Recibo cancelado!';
     }else {
       $status  = '&nbsp;<span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span>&nbsp;';

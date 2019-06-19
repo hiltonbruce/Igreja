@@ -50,7 +50,6 @@ switch ($tipo) {
 	break;
 case '4':
 	//Lista recibos por periodo
-
 	require_once '../help/tes/getRec.php';
 	$recBuscas = new menutes();//Lista buscas de recibos
 	$mesSel = arrayMeses();

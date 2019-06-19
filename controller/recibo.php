@@ -41,8 +41,8 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				require_once '../help/tes/reciboImpr.php';
 				break;
 			default:
-				;
-			break;
+					;
+				break;
 		}
 	}
 }else {
@@ -79,7 +79,6 @@ switch ($recMenu){
 		//Form para impress�o de v�rios Recibos
 		require_once 'forms/tes/recImprVarios.php';
 		break;
-	default:
 	case 6:
 		//Lista recibos por periodo
 		require_once 'help/tes/listaRecPeriodo.php';
