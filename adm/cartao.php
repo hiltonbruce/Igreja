@@ -87,17 +87,7 @@ if (!$altEdit) {
 				<strong>Cargo:</strong><h6>
 		    <?PHP
 				//echo $rec->diacono()." - ".$rec->presbiterio()." - ".$rec->evangelista()." - ".$rec->pastor();
-				if ($arr_dad['pastor']>"0000-00-00") {
-					echo "Pastor";
-				}elseif ($arr_dad['evangelista']>"0000-00-00") {
-					echo "Evangelista";
-				}elseif ($arr_dad['presbiterio']>"0000-00-00") {
-					echo "Presb&iacute;tero";
-				}elseif ($arr_dad['diaconato']>"0000-00-00") {
-					echo "Di&aacute;cono";
-				}else {
-					echo "Membro";
-				}
+				echo cargo ($rolConsuta)['0'];
 				?></h6>
 			</td>
       <td>
