@@ -1,5 +1,5 @@
 <?PHP
-  
+
 $anterior=$_GET["proxima"]-1;
 $proximo=$_GET["proxima"]+1;
 
@@ -7,17 +7,15 @@ if ($_GET["Submit"]=="Imprimir") {
 
 	session_start();
 	require_once ("../func_class/funcoes.php");
-	require_once ("../func_class/classes.php"); 
-	
+	require_once ("../func_class/classes.php");
+
 	controle ("consulta");
-	echo "<style type='text/css'> <!--";
-	require_once ("style.css");
-	echo "</style>";
-}else {
-echo "<style type='text/css'> <!--";
-	require_once ("aniv/style.css");
 ?>
-</style>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />
+<link rel="icon" type="image/gif" href="../br_igreja.jpg">
+<?php
+}else {
+?>
 <script type="text/JavaScript">
 <!--
 function MM_jumpMenu(targ,selObj,restore){ //v3.0
@@ -26,33 +24,27 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 }
 //-->
 </script>
-
-<?PHP 
+<?PHP
 	require_once ("aniv/navega.php");
-} 
+}
 //Código para exibir de qual congregação é a lista de aniversariantes
 $congrega = new DBRecord ("igreja","{$_GET["congregacao"]}","rol");
 if ($_GET["congregacao"]>"0" ) {
 	$cong_sele = " - Congrega&ccedil;&atilde;o: ".$congrega->razao();
 }
 ?>
-
-
-<table cellspacing="0" class='table' id="playlistTable" summary="Top 15 songs played. Top artitst include Coldplay, Yeah Yeah Yeahs, Snow Patrol, Deeper Water, Kings of Leon, Embrace, Oasis, Franz Ferdinand, Jet, The Bees, Blue States, Kaiser Chiefs and Athlete.">
+<table class='table table-bordered table-striped' >
 <caption>
 Aniversariantes de Casamento
-<?PHP 
+<?PHP
 $aniv = new aniversario;
 
 if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
 	echo " de Hoje";
 }else {
 	echo "do Dia: ".$aniv->data_consulta ();}
-
 ?>
- 
 </caption>
-
 <colgroup>
 <col id="PlaylistCol" />
 <col id="Anos" />
@@ -60,7 +52,6 @@ if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
 <col id="Congrega" />
 <col id="albumCol" />
 </colgroup>
-
 <thead>
 <tr>
 <th id="" scope="col">Ano(s)</th>
@@ -81,13 +72,10 @@ if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
 <th scope="col">Cargo</th>
 </tr>
 </thead>
-
 <tbody>
-
 <?PHP
 $aniv->casamento();
 ?>
 </tbody>
-
 </table>
-Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro. 
+Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro.

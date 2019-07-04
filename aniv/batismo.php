@@ -1,5 +1,5 @@
 <?PHP
-  
+
 $anterior=$_GET["proxima"]-1;
 $proximo=$_GET["proxima"]+1;
 
@@ -7,8 +7,8 @@ if ($_GET["Submit"]=="Imprimir") {
 
 	session_start();
 	require_once ("../func_class/funcoes.php");
-	require_once ("../func_class/classes.php"); 
-	
+	require_once ("../func_class/classes.php");
+
 	controle ("consulta");
 	echo "<style type='text/css'> <!--";
 	require_once ("style.css");
@@ -26,10 +26,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 }
 //-->
 </script>
-
-<?PHP 
+<?PHP
 	require_once ("aniv/navega.php");
-} 
+}
 //Código para exibir de qual congregação é a lista de aniversariantes
 $congrega = new DBRecord ("igreja","{$_GET["congregacao"]}","rol");
 if ($_GET["congregacao"]>"0" ) {
@@ -42,7 +41,7 @@ if ($_GET["congregacao"]>"0" ) {
 <caption>
 Aniversariantes de Batismo em Águas
 
-<?PHP 
+<?PHP
 $aniv = new aniversario;
 
 if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
@@ -51,7 +50,7 @@ if ($_GET["proxima"]=="" || $_GET["proxima"]=="0"){
 	echo "do Dia: ".$aniv->data_consulta ();}
 
 ?>
- 
+
 </caption>
 
 <colgroup>
@@ -91,4 +90,4 @@ $aniv->batismo();
 </tbody>
 
 </table>
-Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro. 
+Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro.

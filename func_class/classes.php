@@ -1024,7 +1024,7 @@ class aniversario {
 	}
 
 	function batismo() {
-		echo "Data da consulta atual {$prox_dia}/{$this->mes}/{$this->ano}";
+		// echo "Data da consulta atual {$prox_dia}/{$this->mes}/{$this->ano}";
 		$this->sql_d_dia = mysql_query ($this->query." DATE_FORMAT(e.batismo_em_aguas,'%d/%m')='{$this->dia_consulta}' ".$this->query_fim) or die (mysql_error());
 		while($this->dados = mysql_fetch_array($this->sql_d_dia))
 		{

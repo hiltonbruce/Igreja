@@ -42,10 +42,7 @@ $igreja = new DBRecord ( 'igreja', '1', 'rol' );
 }else {
 	$fimPagina = 'Voc&ecirc; pode ordenar por Rol, Nome e Congrega&ccedil;&atilde;o &quot;click&quot; no cabe&ccedil;alho. Por padr&atilde;o ele ordena pelo nome do membro.
 ';
-echo "<style type='text/css'> <!--";
-	require_once ("aniv/style.css");
 ?>
-</style>
 <script type="text/JavaScript">
 <!--
 function MM_jumpMenu(targ,selObj,restore){ //v3.0
