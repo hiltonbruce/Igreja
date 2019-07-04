@@ -82,7 +82,7 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome,$lanc);
       $status .= '<span class="text-danger">&nbsp;</span>';
       $aviso = 'Recibo cancelado!';
     }else {
-      $status  = '&nbsp;<span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span>&nbsp;';
+      $status  = '&nbsp;<span class="glyphicon glyphicon-alert text-warning" aria-hidden="true"></span>&nbsp;';
       $aviso = 'Lan&ccedil;amento Pendente!';
       $vlrTotPendete += $value['valor'];
     }

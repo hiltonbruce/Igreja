@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-xs-9"><label>Nome:</label>
     <input type="text" id="inputOne" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
-		 name="nome" placeholder="Nome, sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!">
+		 name="nome" placeholder="Nome, ...sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!">
   </div>
   <div class="col-xs-3"><label>Rol:</label>
     <input type="text" id="inputTwo" class="form-control" tabindex="<?php echo ++$ind;?>"
@@ -52,7 +52,7 @@
   			 return  item.icon + " &bull; " + item.nome+' Rol: '+item.rol + item.razao + item.situacao_espiritual;
   		 }
   	 },
-   theme: "round"
+   // theme: "round"
   };
 
   $("#inputOne").easyAutocomplete(options);
