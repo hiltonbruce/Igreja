@@ -109,6 +109,7 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoCargos.php';
 		break;
 	case '21':
+		//Exibi lista de lançamentos
 		require_once 'help/tes/varRelatorio.php';
 		require_once ('forms/tes/relatorioLanc.php');
 		$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
