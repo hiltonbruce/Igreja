@@ -103,7 +103,6 @@ if ($status && $referente && checadata($_POST['data']) && $msgErro=='') {
 	$caixaCentral ='';$caixaEnsino = '';$caixaInfantil ='';
 	$caixaMissoes = '';$caixaMocidade = '';$caixaOutros = '';
 	$caixaSenhoras = '';
-
 if ($ctaPagar) {
 	//$ctaPagar = new DBRecord ('contas','2.1.1.001.099','codigo');
 	//$contaDC['350'][''] -> Contas a pagar
@@ -112,7 +111,6 @@ if ($ctaPagar) {
 	$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc,$contaDC['350']['id']);#devedora a Contas a pagar
 	$contApgtoAprop->atualizar($valor,'D',$roligreja,$vencimento);
 	$reg .= ' e ' . ($ultimolanc);
-
 	$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolanc,'');
 	$contcaixa->atualizar($valor,'C',$roligreja,$data);
 	//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
@@ -123,7 +121,6 @@ if ($ctaPagar) {
 	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$histAPagar,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
-
 	$caixa = $contaDC[$debitar];
 	$valorCred = '';
 	if ($caixa['tipo']=='C') {
@@ -134,12 +131,10 @@ if ($ctaPagar) {
 	$tipoDC = $contaDC[$debitar]['tipo'];
 	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
 	$exibideb .= $exibi;
-
 	$totalDeb +=$valor;
 	//$devedora = $ctaPagar;
-//	$creditar = 350;#Contas a pagar
+	//$creditar = 350;#Contas a pagar
 	//$cor = $corlinha ? 'class="odd"' : 'class="dados"';
-
 	$debitar = 350;
 	$caixa = $contaDC[$debitar];
 	if ($caixa['tipo']=='C') {
@@ -160,13 +155,10 @@ if ($ctaPagar) {
 	$exibicred .= '<td colspan="4">'.$histAPagar.'</tr>';
 //	$debitar = 350; //Na baixa do pgto ser� feita agora nesta conta
 }
-
 //Faz lan�ameto de multa caso exista
 if ($ctaMulta) {
 //	$ctaMulta = new DBRecord('contas',$ctaMulta->codigo(),'codigo');
-
 	$multaAtraso = new atualconta($contaDC['571']['codigo'],$ultimolanc,$contaDC[$creditar]['id']);
-
 	$multaAtraso->atualizar($multa,'D',$roligreja,$vencimento);
 	$totalMulta += $multa;
 	$lancMulta=true;
@@ -219,10 +211,8 @@ if ($ctaMulta) {
 	$tipoDC = $contaDC[$debitar]['tipo'];
 	require 'help/tes/exibirLancamento.php';//monta a tabela para exibir
 	$exibicred .= $exibi;
-
 	$exibideb .= $exibiCentral.$exibiMissoes.$exibiSenhoras.$exibiMocidade.$exibiInfantil.$exibiEnsino/*.$exibi*/;
  	//Lança provisões conta Despesa
-
  	if ($provmissoes>0) {
 	$semaddesp = new atualconta(DESPMISSOES,$ultimolanc,'11');//SEMAD (Sec de Missões) provisão e despesa
 	$semaddesp->atualizar($provmissoes,'D',$roligreja,$data); //Faz o lançamento da provisão de missões - Despesa
@@ -321,6 +311,7 @@ if ($ctaMulta) {
 		//$corlinha 	= !$corlinha;*/
 	}
 	if ($provcomadep>0) {
+		// echo "string-- ".$provcomadep ;
 		//$ctaProvcomad = new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
 		//$sldAntProv = number_format($ctaProvcomad->saldo(),2,',','.');
 		$provcomad 	= new atualconta('1.1.1.001.006',$ultimolanc); //Faz o lançamento da provisão de Comadep - Ativo
@@ -329,7 +320,7 @@ if ($ctaMulta) {
 		//$cor 		= $corlinha ? 'class="odd"' : 'class="dados"';
 		//$conta 		= new DBRecord('contas','6','acesso');//Exibi lançamento da provisão COMADEP
 		$caixa = $contaDC['6'];
-		$valorCred = $provmissoes;
+		$valorCred = $provcomadep;
 		$valorDeb = '';
 		$tipoDC = $contaDC['6']['tipo'];
 		require 'help/tes/exibirLancamento.php';//monta a tabela para exibir		$caixa = $contaDC[$conta->acesso()];
