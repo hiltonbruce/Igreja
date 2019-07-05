@@ -21,7 +21,7 @@ if ($_GET['imp']>'0') {
 		$dadocong 	= $igreja;
 		$igreja_rodape = $dadocong;
 		$dirigente 	= new DBRecord ('membro',$dadocong->pastor(),'rol');
-		$dircon		= '<b>Dirig. </b>'.cargo($dadocong->pastor()).' '.$dirigente->nome();
+		$dircon		= '<b>Dirig. </b>'.cargo($dadocong->pastor())['1'].' '.$dirigente->nome();
 		$templo		= '<b>Congreg.: </b>'.$igreja->razao();
 	}
 $ano = (empty($_GET['ano'])) ? date ('Y'):$_GET['ano'];

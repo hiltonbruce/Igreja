@@ -27,9 +27,12 @@
 	$cid_batismo 	= new DBRecord ("cidade",$ecles->local_batismo(),"id");
   $rol 			= $_POST["bsc_rol"];
   $cpf = (strlen($profissional->cpf())=='14') ? $profissional->cpf() : '*********' ;
-  $cargoIgreja = new tes_cargo();
-  $dadosCargo = $cargoIgreja->dadosArray();
-  $cargoIgrejas = $cargoIgreja->dadosCargo();
+  // $cargoIgreja = new tes_cargo();
+  // $dadosCargo = $cargoIgreja->dadosArray();
+	// var_dump($cargoIgreja);
+  // $cargoIgrejas = $cargoIgreja->dadosCargo();
+	$cargosPR = new DBRecord ("funcao",'13',"id");
+
 	if ($dadosCargo['7']['1'][$_POST["secretario"]]['nome']=='') {
 
 		if ($_POST["secretario"]=='1' ) {
@@ -164,7 +167,7 @@
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
-      <?php print_r($cargoIgrejas['0']['nomeFunc']);?>
+      <?php echo $cargosPR->descricao();?>
 	    </div>
 	  <div id="secretario"><?PHP echo  strtoupper($secretario);?><br />
       <?php echo $_POST["secretario"].$cargo;?> </div>

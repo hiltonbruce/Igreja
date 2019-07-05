@@ -13,6 +13,7 @@ require "../func_class/classes.php";
 	$igreja = new DBRecord ("igreja","1","rol");
 	$cong = new DBRecord ("igreja",$rec_ecl->congregacao(),"rol");
 	$cidade = new DBRecord ("cidade",$rec_pessoais->naturalidade(),"id");
+	$cargosPR = new DBRecord ("funcao",'13',"id");
 	$rec_ecl->c_impresso  = date("Y-m-d"); //Aqui é atribuido a esta variável um valor para UpDate
 	//$rec_ecl->Update();
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
@@ -227,7 +228,7 @@ body {
 }
 #Pastor {
 	position:absolute;
-	text-shadow: 2px 02px 2px #FFFFFF;
+	text-shadow: 1px 1px 1px #FFFFFF;
 	left:643px;
 	top:305px;
 	width:376px;
@@ -235,6 +236,9 @@ body {
 	z-index:5;
 	text-align:center;
 	font-size: 90%;
+}
+#Pastor p {
+	font-size: 85%;
 }
 #LogoAD {
 	position:absolute;
@@ -301,7 +305,9 @@ body {
 	}
 ?>
 </div>
-<div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor()));?></b></div>
+<div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor()));?></b><p>
+<?php echo $cargosPR->descricao();?></p>
+</div>
 </body>
 
 </html>
