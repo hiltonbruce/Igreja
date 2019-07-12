@@ -17,8 +17,8 @@
 
       </li> <li class="" data-target="#carousel-example-captions" data-slide-to="2"></li> </ol>
       <div class="carousel-inner" role="listbox">
-        <div class="item">
-          <img data-holder-rendered="true" src="img/marcaBkp.png" alt="900x500" width="500"  height="185" data-src="holder.js/900x500/auto/#777:#777">
+        <div class="item"><br />
+          <img data-holder-rendered="true" src="img/marcaBkp.png" alt="900x500" width="500" height="168" data-src="holder.js/900x500/auto/#777:#777">
            <br /><br />
            <div class="carousel-caption">
            </div>
