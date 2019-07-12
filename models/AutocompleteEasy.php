@@ -28,6 +28,11 @@ foreach ($resultsIgrej as $key => $value) {
    }
 
 // print_r($IgArray['1']);
+if ($igrejaRol>0) {
+	$sqlOrd  = "CASE WHEN e.congregacao=$igrejaRol THEN 0 ELSE 1 END ASC";
+} else {
+	$sqlOrd = "e.congregacao,m.nome ASC";
+}
 
 switch ($quantNomes) {
 	case '3':
@@ -35,10 +40,7 @@ switch ($quantNomes) {
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
 	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
-	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome) ORDER BY ";
-	 if ($igrejaRol>0) {
-	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
-	}
+	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome) ORDER BY ".$sqlOrd;
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME1", $q1);
@@ -51,10 +53,7 @@ switch ($quantNomes) {
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
 	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
-	 $sql .= " LOCATE(:NOME3,m.nome) ORDER BY ";
-	 if ($igrejaRol>0) {
-	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
-	}
+	 $sql .= " LOCATE(:NOME3,m.nome) ORDER BY ".$sqlOrd;
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME1", $q1);
@@ -65,11 +64,8 @@ switch ($quantNomes) {
 	 list($q1,$q2) = explode (' ',$q);
 	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol";
-	 $sql .= " AND  m.nome LIKE CONCAT('%',:NOME1,'%') AND m.nome LIKE CONCAT('%',:NOME2,'%') ORDER BY ";
+	 $sql .= " AND  m.nome LIKE CONCAT('%',:NOME1,'%') AND m.nome LIKE CONCAT('%',:NOME2,'%') ORDER BY ".$sqlOrd;
 	 // $sql .= "LOCATE(:NOME1,m.nome) ";
-	 if ($igrejaRol>0) {
-		 $sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC";
-	 }
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME1", $q1);
@@ -79,10 +75,7 @@ switch ($quantNomes) {
 	 $q=trim($q);
 	 $sql = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE";
-	 $sql .= " m.rol=e.rol AND LOCATE(:NOME,m.nome)>0 ORDER BY ";
-	 if ($igrejaRol>0) {
-	 	$sql .= "case when e.congregacao=$igrejaRol then 0 else 1 end ASC ";
-	 }
+	 $sql .= " m.rol=e.rol AND LOCATE(:NOME,m.nome)>0 ORDER BY ".$sqlOrd;
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME", $q);
@@ -124,7 +117,6 @@ $totElement = count($results);
 				}
 
 					if ($chave=='nome') {
-
 						$json .= '"name": "'.$dados.'",';
 						$dados = strtoupper(strtr( $dados, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 						$estado = $dados;
@@ -159,7 +151,7 @@ $totElement = count($results);
           if ($chave=='rol') {
             $rol = $dados;
             $img="img_membros/$rol.jpg";
-            $icon = "<img src='$img' class='img-thumbnail thumb' alt=' ' width='35' height='27' align='absmiddle' />";
+            $icon = "<img src='$img' class='img-thumbnail thumb' alt=' ' width='25' height='35' align='absmiddle' />";
 						$json .= ',"icon": "'.$icon .'"';
           }
 
@@ -171,7 +163,6 @@ $totElement = count($results);
 					if (endKey($value) !== $chave) {
 						$json .= ',';
 					}
-
 				}
 
 				if (++$item==20) {
