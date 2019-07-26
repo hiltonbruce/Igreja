@@ -1,5 +1,5 @@
 <fieldset><legend>Altera&ccedil;&atilde;o e Inicializa&ccedil;&atilde;o de Senhas</legend>
-<table id="Tabela de usuarios" class='table table-striped table-hover'>
+<table class='table table-striped table-hover'>
     <colgroup>
 		<col id="Usuários">
 		<col id="Inicializar/Excluir!">
@@ -10,6 +10,7 @@
     <?php
       $options = new usuarios();
       $lista = $options->Arrayusuario();
+      // var_dump($lista);
       for ($item=0;$item<count($lista);$item++){
     		foreach ($lista[$item] as $key => $result):
       	   $usuario->$key = $result;
@@ -31,7 +32,7 @@
 		<tr>
 			<td width='40%'>
         <?php
-					$alterar->alt_nome($usuario->nome, $usuario->id, ++$ind,$errorIni);
+					$alterar->alt_nome($usuario->nome, $usuario->id, ++$ind,$errorIni,$usuario->perfil);
 				?>
 				<a href="./?escolha=tab_auxiliar/inic_usuario.php&menu=top_admusuario&id=<?php
         echo $usuario->id;?>">

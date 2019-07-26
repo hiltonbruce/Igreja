@@ -11,7 +11,7 @@ class usuarios {
      while($this->col_lst = mysql_fetch_array($this->result))
      {
     $usuario_array [] = array ("nome"=>$this->col_lst["nome"],"id"=>$this->col_lst["id"],"cpf"=>$this->col_lst["cpf"]
-    							, "cargo"=>$this->col_lst["cargo"], "situacao"=>$this->col_lst["situacao"]
+    							, "cargo"=>$this->col_lst["cargo"], "perfil"=>strtoupper($this->col_lst["perfil"]), "situacao"=>$this->col_lst["situacao"]
     							, "setor"=>$this->col_lst["setor"],"nivel"=>$this->col_lst["nivel"]);
      }
 	  return $usuario_array;
