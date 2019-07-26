@@ -400,7 +400,7 @@ function recibosmembros (){
 	}
 		if ($lanc!=NULL && $lanc==1) {
 			//Lista apenas recibos pendentes de lançamentos
-			$op .= 't.lancamento="0" AND';
+			$op .= '(t.lancamento="0" OR t.lancamento="") AND ';
 		}elseif ($lanc==2) {
 			//Lista apenas recibos com lançamentos
 			$op .= 't.lancamento>"0" AND t.lancamento<>"Cancelado" AND ';
