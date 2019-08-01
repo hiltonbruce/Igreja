@@ -375,13 +375,13 @@ function recibosmembros (){
 	echo "</p>";
 		//In?cio das pendencias de disciplinados
 	}
-	public function periodo ($dia=NULL,$mes=NULL,$ano=NULL,$motivo=NULL,$nome=NUL,$lanc=NULLL)
+	public function periodo ($dia=NULL,$mes=NULL,$ano=NULL,$motivo=NULL,$nome=NULL,$lanc=NULL,$acesso=NULL)
 	{
 		$retorno = array();
 		if (checkdate($mes,$dia,$ano)) {
 			$op = 'DATE_FORMAT(t.data,"%Y%m%d")="'.$ano.$mes.$dia.'" AND ';
 		} elseif($mes>0 && $mes<13 && $ano>2000) {
-			$op = 'DATE_FORMAT(t.data,"%Y%m")="'.$ano.$mes.'" AND ';
+			$op = 'DATE_FORMAT(t.data,"%Y%m") = "'.$ano.$mes.'" AND ';
 		}elseif($mes>0 && $mes<13 ) {
 			$op = 'DATE_FORMAT(t.data,"%m")="'.$mes.'" AND ';
 		}elseif ($dia>0 AND $dia<32 AND $ano>2000) {
@@ -398,6 +398,13 @@ function recibosmembros (){
 		$escMotivo = mysql_escape_string($motivo);
 		$op .= 't.motivo LIKE "%'.$escMotivo.'%" AND ';
 	}
+		//Inclui o na consulta por codigo de acesso
+		if ($acesso>='60') {
+			$op .= 't.conta = "'.intval($acesso).'" AND ';
+		} elseif ($acesso<'60' && $acesso>'0') {
+			$op .= 't.fonte = "'.intval($acesso).'" AND ';
+		}
+		
 		if ($lanc!=NULL && $lanc==1) {
 			//Lista apenas recibos pendentes de lançamentos
 			$op .= '(t.lancamento="0" OR t.lancamento="") AND ';

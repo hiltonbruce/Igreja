@@ -13,7 +13,6 @@
 			$todos = 'checked';
 			break;
 	}
-
  ?>
 <fieldset>
 	<legend>Filtrar recibos</legend>
@@ -39,7 +38,7 @@
 	<label>Por RG</label>
 	<input type="text" name="rg" class="form-control input-sm" id="rg" placeholder="N&uacute;mero" >
 </div>
-	<div class="col-xs-4">
+	<div class="col-xs-2">
 	<label>Credores</label>
 	<?php
 		$for_num = new List_sele("credores", "alias", "recebeu");
@@ -55,6 +54,12 @@
 		<input type='radio' name="lanc"	value="2" <?php echo $pend; ?>
 		tabindex="<?PHP echo ++$ind; ?>"/> &nbsp;Lan&ccedil;ados
 	</label>
+</div>
+  <div class="col-xs-2">
+			<label>Cod Acesso:</label>
+			<input type="text" size="2" name="acesso"
+			value="<?php echo $_GET['acesso'];?>"tabindex="<?PHP echo ++$ind; ?>"
+			 class="form-control  input-sm" placeholder="Acesso Cta" />
 	</div>
   <div class="col-xs-1">
 			<label>Dia:</label>

@@ -37,6 +37,12 @@
     $lanc = intval($_GET['lanc']);
   }
 
+  if (!empty($_GET['acesso'])) {
+    $idCta = intval($_GET['acesso']);
+  }else {
+    $idCta = NULL;
+  }
+  
   if (isset($_GET['rol']) && $_GET['rol']>'0' ) {
     $nome = intval($_GET['rol']);
   }elseif (isset($_GET['nome'])) {
@@ -50,7 +56,7 @@ $membroPer = new membro();
 $membroLista = $membroPer->nomes();
 //print_r ($credorLista);
 
-$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome,$lanc);
+$recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome,$lanc,$idCta);
   foreach ($recLista as $key => $value) {
     if ($igr && $igr!=$value['igreja']) {
       continue;
