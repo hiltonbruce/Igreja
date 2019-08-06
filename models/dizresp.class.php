@@ -320,9 +320,10 @@ function concluir($igreja) {
 			$rol = $linha['nome']<>'' ? $linha['rol'].' - '.$linha['nome'] : 'An&ocirc;nimo';
 			if ($tesoureiro!=$linha['tesoureiro']) {
 				if ($totaltes!='0') {
+				$totalItens = ($totalItens>1) ? $totalItens.' Contribui&ccedil;&otilde;es' : $totalItens.' Contribui&ccedil;&atilde;o' ;
 				$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
 				%s</td><td colspan='3' class='text-right'>
-					%s Linha(s) - Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span> &nbsp;&nbsp;<b>%s</b></td><td></td></tr>"
+					%s - Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span> &nbsp;&nbsp;<b>%s</b></td><td></td></tr>"
 						,$dadostesoureiro->nome(),$totalItens,number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
@@ -344,8 +345,9 @@ function concluir($igreja) {
 		}
 		if ($igreja>'0') {
 			$total = number_format($total,2,',','.');
+			$totalItens = ($totalItens>1) ? $totalItens.' Contribui&ccedil;&otilde;es' : $totalItens.' Contribui&ccedil;&atilde;o' ;
 			$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
-			%s</td><td colspan='3' class='text-right'> %s Linha(s) - Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
+			%s</td><td colspan='3' class='text-right'> %s - Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
 			&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),$totalItens,number_format($totaltes,2,',','.'));
 			$tabLancamento .=  '</tbody>';
 			$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
