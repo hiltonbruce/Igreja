@@ -42,7 +42,7 @@
   }else {
     $idCta = NULL;
   }
-  
+
   if (isset($_GET['rol']) && $_GET['rol']>'0' ) {
     $nome = intval($_GET['rol']);
   }elseif (isset($_GET['nome'])) {
@@ -110,7 +110,7 @@ $recLista = $recBuscas->periodo($diaPer,$mesPer,$anoPer,$motivo,$nome,$lanc,$idC
     // $vlrTotal += $value['valor'];
   }
 $rodapeRec   = '<tr id="total">';
-$rodapeRec  .= '<td class="text-right" colspan="2" >Total Pendente de Lan&ccedil;ado... R$ '.number_format($vlrTotPendete, 2, ",", ".").'</td>';
+$rodapeRec  .= '<td class="text-right" colspan="2" >Total Pendente R$ '.number_format($vlrTotPendete, 2, ",", ".").'</td>';
 $rodapeRec  .= '<td class="text-right" colspan="2" >Total Lan&ccedil;ado.......... R$ '.number_format($vlrTotal, 2, ",", ".").'</td>';
-$rodapeRec  .= '<td colspan="2" class="text-right">Total Geral............ R$ '.number_format($vlrTotal+$vlrTotPendete, 2, ",", ".").'</td></tr>';
+$rodapeRec  .= '<td colspan="2" class="text-right"><b>Total Geral</b> R$ '.number_format($vlrTotal+$vlrTotPendete, 2, ",", ".").'</td></tr>';
 ?>
