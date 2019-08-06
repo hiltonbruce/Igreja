@@ -301,6 +301,7 @@ function concluir($igreja) {
 		$this->dquery = mysql_query($this->var_string.'WHERE d.lancamento="0" AND confirma="2" AND
 		 d.igreja="'.$igreja.'" AND d.igreja=i.rol ORDER BY tesoureiro,tipo,nome ') or die (mysql_error());
 		$totaltes=0;
+		$totalItens = 0;
 		$depto = new setores();
 		$dadoDepto = $depto->arrayDepto();
 		$tabLancamento =  '<tbody id="periodo" >';
@@ -321,16 +322,18 @@ function concluir($igreja) {
 				if ($totaltes!='0') {
 				$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
 				%s</td><td colspan='3' class='text-right'>
-						Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span> &nbsp;&nbsp;<b>%s</b></td><td></td></tr>"
-						,$dadostesoureiro->nome(),number_format($totaltes,2,',','.'));}
+					%s Linha(s) - Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span> &nbsp;&nbsp;<b>%s</b></td><td></td></tr>"
+						,$dadostesoureiro->nome(),$totalItens,number_format($totaltes,2,',','.'));}
 				$tesoureiro = $linha['tesoureiro'];
 				$dadostesoureiro = new DBRecord('usuario',$tesoureiro, 'cpf');
 				$tabLancamento .= sprintf('<tr class="danger"><td colspan="6" class="text-right">
 						<b> %s </b></td></tr>',$dadostesoureiro->nome());
 				$totaltes = 0;
+				$totalItens = 0;
 				//echo '<tr style="background:'.$bgcolor.'"><td>'.$linha['data'].'</td><td>'.$rol.' - '.$linha['nome'].'</td><td>'.$tipo.'</td><td style="text-align:right;">'.$valor.'</td><td>'.$status.'</td></tr>';
 			}
 			$totaltes += $vlr;
+			$totalItens++;
 			$tabLancamento .= '<tr><td>'.$linha['data'].'</td>';
 			$tabLancamento .= '<td>'.$rol.'</td>';
 			$tabLancamento .= '<td>'.$tipo.'</td>';
@@ -342,8 +345,8 @@ function concluir($igreja) {
 		if ($igreja>'0') {
 			$total = number_format($total,2,',','.');
 			$tabLancamento .= sprintf("<tr id='total'><td colspan='2' class='text-left'>
-			%s</td><td colspan='3' class='text-right'>Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
-			&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),number_format($totaltes,2,',','.'));
+			%s</td><td colspan='3' class='text-right'> %s Linha(s) - Total: <span class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>&nbsp;
+			&nbsp;<b>%s</b></td><td></td></tr>",$dadostesoureiro->nome(),$totalItens,number_format($totaltes,2,',','.'));
 			$tabLancamento .=  '</tbody>';
 			$tabLancamento .=  '<tfoot><tr class="primary"><td  colspan="3"
 			class="text-right">Total Geral:</td><td colspan="2" class="text-right"
