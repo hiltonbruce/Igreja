@@ -85,7 +85,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	</div></div>
     <table width="419" border="0">
       <tr>
-        <td><label>Congrega��o dos Pais:</label>
+        <td><label>Congrega&ccedil;&atilde;o dos Pais:</label>
 			<?PHP
 		 	$congr = new List_sele ("igreja","razao","id_cong");
 		 	echo $congr->List_Selec ($ind++,'','class="form-control"');
@@ -119,7 +119,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <label>Data da Apresenta&ccedil;&atilde;o:</label>
           <input name="dt_apresent" type="text" id="data" class="form-control" tabindex="<?PHP echo $ind++;?>"/>
           </td>
-        <td><label>N�mero da Certid�o:</label>
+        <td><label>N&uacute;mero da Certid&atilde;o:</label>
             <input name="num_cert" type="text" class="form-control" id="num_cert" tabindex="<?PHP echo $ind++;?>" />
         </td>
       </tr>

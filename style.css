@@ -131,8 +131,6 @@ div.info1 {
 	font-size:130%;
 }
 
-div.info1 a, div.info1 a:link, div.info1 a:visited { color:#999; }
-
 div.info1 { color: #665; }
 
 div .leftpanel {
@@ -141,8 +139,6 @@ div .leftpanel {
 	display: inline;
 	float:left;
 }
-
-a, a:visited, a:link { color:#000000; text-decoration:underline; }
 
 div .rightpanel {
 	width:23%;
@@ -217,10 +213,6 @@ div.rightpanel .inquiry, div.leftpanel .inquiry {
 	text-align:justify;
 }
 
-.inquiry a, .inquiry a:link, .inquiry a:visited, .inquiry a:hover, .mainpanel a  {
-	text-decoration:none;
-	 }
-
 fieldset {
 	margin: 1em 0;
 	padding: 4px;
@@ -238,9 +230,10 @@ legend {
 #lst_cad p{
 	padding:2px 1px; margin: 0;
 	font: 12px Arial;
-	background-color:#89DFF4; color:#000066;
+	background-color:#89DFF4;
+	color:#000066;
 	}
-
+a, a:visited, a:link { color:#000000; text-decoration:none; }
 .box {
   width: 100%;
   background: url(img/bottom-left.gif) no-repeat left bottom;

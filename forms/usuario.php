@@ -35,6 +35,11 @@
 		 ?>
   </div>
   <div class="col-xs-4">
+		<label>Perfil:</label>
+		<input name="perfil" type="text"  required="required" class="form-control"
+		 id="perfil" tabindex="<?PHP echo ++$ind; ?>" />
+  </div>
+  <div class="col-xs-4">
 		<label>N&iacute;vel de acesso</label>
 		<select name='nivel' class='form-control' tabindex='<?PHP echo ++$ind; ?>'>
 			<?php
@@ -49,31 +54,5 @@
 		<input name="escolha" type="hidden" value="tab_auxiliar/cad_usuario.php" />
   </div>
 </div>
-<table class="table">
-	<tbody>
-		<tr>
-		<td colspan="2">
-		</td>
-			<td>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			</td>
-			<td>
-			</td>
-			<td>
-			</td>
-		</tr>
-  	<tr>
-	  	<td>
-			</td>
-  		<td>
-			</td>
-  		<td>
-			</td>
-  		</tr>
-	  </tbody>
-	</table>
 </form>
 </fieldset>

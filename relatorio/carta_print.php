@@ -169,7 +169,12 @@
 	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
       <?php echo $cargosPR->descricao();?>
 	    </div>
-	  <div id="secretario"><?PHP echo  strtoupper($secretario);?><br />
+	  <div id="secretario">
+			<?PHP
+			$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
+				echo  $cargoSec.strtoupper($secretario);
+			?>
+			<br />
       <?php echo $_POST["secretario"].$cargo;?> </div>
 <br>
 

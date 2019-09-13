@@ -501,6 +501,29 @@ function id_corrente ($val_link) {
 	}
 }
 
+function item_info ($val_link) {
+	/*	Define se este bot�o ou limk � o corrente e o define para tal com mudan�a
+	*	da cor de fundo. Isto deve ser definido no script de CSS
+	*/
+	if ((strstr($_GET["escolha"], $val_link) || strstr($_POST["escolha"],$val_link))) {
+		//echo "id='current'";
+		return 'list-group-item-info';
+	}else {
+		return '';
+	}
+}
+
+function item_ativo ($val_link,$variavel) {
+	/*	Define se este bot�o ou limk � o corrente e o define para tal com mudan�a
+	*	da cor de fundo. Isto deve ser definido no script de CSS
+	*/
+	if ($variavel==$val_link) {
+			return 'list-group-item-info';
+		}else {
+			return '';
+		}
+}
+
 function id_left ($val_link) {
 	/*	Define se este bot�o ou limk � o corrente e o define para tal com mudan�a
 	*	da cor de fundo. Isto deve ser definido no script de CSS

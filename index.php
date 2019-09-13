@@ -17,7 +17,7 @@
 	date_default_timezone_set('America/Recife');
 	setlocale( LC_ALL, 'pt_BR.ISO-8859-1', 'pt_BR', 'Portuguese_Brazil');
 	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-	
+
 	function __autoload ($classe) {
     $pos = strpos($classe, '_');
     if ($pos === false) {
@@ -108,54 +108,64 @@
 	    <span class="list-group-item active">
 			<h4 class="list-group-item-heading">Administra&ccedil;&atilde;o</h4>
 	    </span>
-  <ul id="categories">
-    <li <?PHP id_left ("dados_pessoais");?> ><a href="./?escolha=adm/dados_pessoais.php">
-			<span class="glyphicon glyphicon-user text-info" ></span>&nbsp;Membros</a>
-		</li>
-    <li <?PHP id_left ("cadastro_membro");?> ><a href="./?escolha=adm/cadastro_membro.php&uf=PB">
-			<span class="glyphicon glyphicon-download-alt text-info" ></span>&nbsp;Novo Cadastro</a>
-		</li>
-    <li <?PHP echo li_ativo($secGET, '1'); ?>><a href="./?escolha=controller/secretaria.php&sec=1&uf=PB">
-			<span class="glyphicon glyphicon-hand-right text-info" >
-			</span>&nbsp;Novos&nbsp;Convertidos</a>
-		</li>
-    <li <?PHP id_left ("igreja/");?>><a href="./?escolha=igreja/list_membro.php&menu=top_igreja">
-			<span class="glyphicon glyphicon-fire text-info">
-			</span>&nbsp;Igrejas</a>
-		</li>
-    <li <?PHP echo li_ativo($secGET, '2');?>>
-			<a href="./?escolha=controller/secretaria.php&sec=2&mes=<?PHP echo date('m');?>">
-				<span class="glyphicon glyphicon-calendar text-info" ></span>&nbsp;Agenda</a>
-		</li>
-    <li <?PHP id_left ("tab_auxiliar/");?>>
-			<a href="./?escolha=tab_auxiliar/cadastro_bairro.php"><span class="glyphicon glyphicon-picture text-info" >
-			</span>&nbsp;Cadastrar Bairro</a>
-		</li>
-    <li <?PHP id_left ("relatorio/");?>>
-			<a href="./?escolha=relatorio/formularios.php&menu=top_formulario">
-				<span class="glyphicon glyphicon-list-alt text-info" >
-				</span>&nbsp;Ficha, Recibo e Certid&otilde;es</a>
-		</li>
-    <li <?PHP id_left ("aniv/");?>>
-			<a href="./?escolha=aniv/aniversario.php&menu=top_aniv">
+
+
+			<div class="list-group">
+				<a type="button" href="./?escolha=adm/dados_pessoais.php"
+				class="list-group-item <?PHP echo item_info ("dados_pessoais");?>">
+						<span class="glyphicon glyphicon-user text-info" ></span>&nbsp;Membros
+				</a>
+
+				<a type="button" href="./?escolha=adm/cadastro_membro.php&uf=PB"
+				class="list-group-item <?PHP echo item_info ("cadastro_membro");?>">
+						<span class="glyphicon glyphicon-download-alt text-info" ></span>&nbsp;Novo Cadastro
+				</a>
+				<a type="button" href="./?escolha=controller/secretaria.php&sec=1&uf=PB"
+				class="list-group-item <?PHP echo item_ativo ($secGET, '1');?>">
+				<span class="glyphicon glyphicon-hand-right text-info" >
+				</span>&nbsp;Novos&nbsp;Convertidos
+				</a>
+				<a type="button" href="./?escolha=igreja/list_membro.php&menu=top_igreja"
+				class="list-group-item <?PHP echo item_info ("igreja/");?>">
+				<span class="glyphicon glyphicon-fire text-info"></span>&nbsp;Igrejas
+				</a>
+				<a type="button" href="./?escolha=controller/secretaria.php&sec=2&mes=<?PHP echo date('m');?>"
+				class="list-group-item <?PHP echo item_ativo ($secGET, '2');?>">
+				<span class="glyphicon glyphicon-calendar text-info" ></span>&nbsp;Agenda
+				</a>
+				<a type="button" href="./?escolha=tab_auxiliar/cadastro_bairro.php"
+				class="list-group-item <?PHP echo item_info ("tab_auxiliar/");?>">
+				<span class="glyphicon glyphicon-picture text-info" >
+				</span>&nbsp;Cadastrar Bairro
+				</a>
+				<a type="button" href="./?escolha=relatorio/formularios.php&menu=top_formulario"
+				class="list-group-item <?PHP echo item_info ("relatorio/");?>">
+					<span class="glyphicon glyphicon-list-alt text-info" >
+					</span>&nbsp;Ficha, Recibo e Certid&otilde;es
+				</a>
+				<a type="button" href="./?escolha=aniv/aniversario.php&menu=top_aniv"
+				class="list-group-item <?PHP echo item_info ("aniv/");?>">
 				<span class="glyphicon glyphicon-gift text-info" ></span>
-				&nbsp;Aniversariantes</a>
-		</li>
-    <li <?PHP id_left ("caledario.php");?>><a href="./?escolha=calendario/caledario.php"
-    title="Calend&aacute;rio da Sede e Congrega&ccedil;&otilde;es">
-		<span class="glyphicon glyphicon-tree-deciduous text-info" ></span>
-		&nbsp;Santa&nbsp;Ceia</a>
-	</li>
-    <?php
-    	if ($_SESSION['nivel']>'10') {
-        $selItem = ($_GET['rec']=='25' || $_GET['rec']=='26') ?  'class="selected"': '' ;
-   	 ?>
-   		<li <?PHP echo $selItem;?>><a href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25"
-         ><span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup</a>
-      </li>
- 	 <?php
-    	}
-    ?></ul></ul>
+				&nbsp;Aniversariantes
+				</a>
+				<a type="button" href="./?escolha=calendario/caledario.php"
+				class="list-group-item <?PHP echo item_info ("caledario.php");?>">
+				<span class="glyphicon glyphicon-tree-deciduous text-info" ></span>
+				&nbsp;Santa&nbsp;Ceia
+			</a>
+	    <?php
+	    	if ($_SESSION['nivel']>'10') {
+	        $selItem = ($_GET['rec']=='25' || $_GET['rec']=='26') ?  'list-group-item-info': '' ;
+	   	 ?>
+				<a type="button" href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25"
+				class="list-group-item <?PHP echo item_info ("");?>">
+				<span class="glyphicon glyphicon-save-file text-info" ></span>&nbsp;Backup
+			</a>
+	 	 <?php
+	    	}
+	    ?>
+			</div>
+		</ul>
      <?PHP
     require_once ("autentica.php");
     ?>
