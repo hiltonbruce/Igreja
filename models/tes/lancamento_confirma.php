@@ -108,17 +108,18 @@ if ($ctaPagar) {
 	//$contaDC['350'][''] -> Contas a pagar
 	//$sldAntPagar = number_format($contaDC['350']['saldo'],2,',','.');
 //	$valor += $multa;
-	$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc,$contaDC['350']['id']);#devedora a Contas a pagar
+	$ultimolancPagar = $ultimolanc +1;
+	$contApgtoAprop 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolancPagar ,$contaDC['350']['id']);#devedora a Contas a pagar
 	$contApgtoAprop->atualizar($valor,'D',$roligreja,$vencimento);
-	$reg .= ' e ' . ($ultimolanc);
-	$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolanc,'');
+	$reg .= ' e ' . ($ultimolancPagar );
+	$contcaixa = new atualconta($contaDC['350']['codigo'],$ultimolancPagar ,'');
 	$contcaixa->atualizar($valor,'C',$roligreja,$data);
 	//$contApgtoAprop 	= new atualconta($ctaPagar->codigo(),$ultimolanc+1,$devedora->id());
 	//$contApgtoAprop->atualizar($valor,'C',$roligreja,$vencimento);
 	//Lança o histórico do lançamento
 	$histAPagar .= 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
-	$histAPagar .= ', conf. reg. '.$ultimolanc;
-	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$histAPagar,$roligreja);
+	$histAPagar .= ', conf. reg. '.$ultimolanc ;
+	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolancPagar ,$histAPagar,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
 	$caixa = $contaDC[$debitar];
