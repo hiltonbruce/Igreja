@@ -574,7 +574,7 @@ class editar_form {
 			<?php
 			if ($fJScript!='') {
 				$form=$fJScript;
-			}elseif ($this->campo=="conjugue") {$form=0;}else{$form=3;}
+			}elseif ($this->campo=="conjugue") {$form=0;}else{$form=2;}
 			?>
 		 	 <div class="col-xs-2">
 			<label>&nbsp;</label>
@@ -785,7 +785,7 @@ class List_sele {
 	  	}
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -812,7 +812,7 @@ class List_sele {
 	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";

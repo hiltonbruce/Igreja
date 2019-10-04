@@ -3,6 +3,7 @@
 <head>
 <title>Pesquisa rol e nome do conjugue</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="../tabs.css" />
 <?PHP
 $campo = $_GET["campo"];
@@ -66,11 +67,21 @@ addLoadEvent(function() {
 </script>
 </head>
 
-<body bgcolor=#C9E9F8 link=000000 alink=000000 vlink=000000 >
+<body>
 <fieldset>
-<legend>Procurar  por Nome teste </legend>
+<legend>Procurar por Nome</legend>
 <form id="form" name="form" method="get" action="">
-  <input name="nome" type="text" id="nome" size="15" tabindex="1" />
+<div class="row">
+  <div class="col-xs-12">
+		<div class="input-group">
+		<input name="nome" type="text" id="nome" class='form-control' tabindex="1"
+		autofocus placeholder="Trecho do nome para pesquisar"/>
+      <span class="input-group-btn">
+        <input type="submit" name="Submit" class="btn btn-default" type="button" src="../img/lupa_32x32.png" height="16" width="16" value='Pesquisar'>
+      </span>
+    </div>
+</div>
+
   <input name="rol" type="hidden" id="rol" value="<?PHP echo $_GET["rol"];?>" />
   <input name="nome_pesp" type="hidden" id="nome_pesq" value="<?PHP echo $_GET["nome_pesq"];?>" />
   <input name="campo" type="hidden" id="campo" value="<?PHP echo $_GET["campo"];?>" />

@@ -6,7 +6,7 @@ body{
 	color:#333333;
 	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	margin:0 auto;
-	font-size:11px;
+	font-size:140%;
 	width: 100%;
 }
 
@@ -134,19 +134,19 @@ div.info1 {
 div.info1 { color: #665; }
 
 div .leftpanel {
-	width:16%;
+	width:19%;
 	background-color: #FFFFFF;
 	display: inline;
 	float:left;
 }
 
 div .rightpanel {
-	width:23%;
+	width:21%;
 	float:right;
 }
 
 #content {
-	width: 82%;
+	width: 81%;
 	float: left;
 }
 
@@ -380,7 +380,7 @@ table.some_style td:hover {
 background-color: #93bfeb;
 }
 
-/* Personalização para BootStrap*/
+/* Personalizaï¿½ï¿½o para BootStrap*/
 
 .table > thead > tr > td.primary,
 .table > tbody > tr > td.primary,
@@ -433,7 +433,7 @@ a.list-group-item-prim#f7f50aary.active:focus {
 width: 300px; /* largura da imagem */
 height: 400px; /* altura da imagem */
 }
-/* Personalização Bootstrap para nova classe alerta */
+/* Personalizaï¿½ï¿½o Bootstrap para nova classe alerta */
 .text-alerta {
   color: #faf000;
 }
