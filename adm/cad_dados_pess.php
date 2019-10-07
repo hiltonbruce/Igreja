@@ -3,7 +3,7 @@
 /**
  * Joseilton Costa Bruce
  *
- * LICENÃ‡A
+ * LICENÇA
  *
  * Please send an email
  * to hiltonbruce@gmail.com so we can send you a copy immediately.
@@ -14,7 +14,7 @@
  * @copyright  Copyright (c) 2008-2009 Joseilton Costa BRuce (http://)
  * @license    http://
  * Insere dados no banco do form cadastro.php nas tabelas:
- * Membro e com este registro pegar o nÃºmero do rol e insere este nÃºmero
+ * Membro e com este registro pegar o número do rol e insere este número
  * nas tabelas eclesiastico, est_civil e profissional
  */
 controle("inserir");
@@ -99,8 +99,8 @@ switch ($_POST["tabela"]) {
 
 		$dados_pessoais = new insert ("$value","membro");
 		$dados_pessoais->inserir();
-		$rolMembro = mysql_insert_id();//recupera o id do Ãºltimo insert no mysql
-		// Salta para nÃ£o permitir registro 666
+		$rolMembro = mysql_insert_id();//recupera o id do último insert no mysql
+		// Salta para não permitir registro 666
 		$test_rol = $rolMembro+1;
 		if ((substr_count($test_rol, '666'))>0){
 			$aut_inc = str_replace("666","667",$test_rol);
@@ -170,7 +170,7 @@ switch ($_POST["tabela"]) {
  		$result = mysql_query($query) or die (mysql_error());
 		 if (mysql_num_rows($result)>0) {
 
-			echo "<script>alert('O aluno: {$_SESSION["membro"]}, jÃ¡ possui matrÃ­cula ativa!');window.history.go(-1);</script>";
+			echo "<script>alert('O aluno: {$_SESSION["membro"]}, já possui matrícula ativa!');window.history.go(-1);</script>";
 			echo "<a href='./?escolha=cetad/matricula.php'>Voltar ...<a>";
 			break;
 		 }
@@ -219,7 +219,7 @@ switch ($_POST["tabela"]) {
 		echo "<a href='./?escolha=cetad/matricula.php&menu=top_cetad'>Continuar...<a>";
 
 		} else {
-			echo "<script>alert('Todos os Campos sÃ£o de preenchimento OBRIGATÃ“RIO!');window.history.go(-1);</script>";
+			echo "<script>alert('Todos os Campos são de preenchimento OBRIGATÓRIO!');window.history.go(-1);</script>";
 		}
 		break;
 
@@ -232,7 +232,7 @@ switch ($_POST["tabela"]) {
 
 		$query = "SELECT * FROM usuario "
 				."WHERE cpf = '{$_SESSION["valid_user"]}'"
-				." AND senha='$pass' AND situacao = '1' ";
+				." AND senha='$pass' AND situacao = '1' AND nivel >= '10' ";
 
 		 $result = mysql_query($query) or die (mysql_error());
 		 if (mysql_num_rows($result)>0)
@@ -250,7 +250,7 @@ switch ($_POST["tabela"]) {
 			$d = $dta[2];
 			echo $d."/".$m."/".$y;
 			if (empty($_POST["prazo"])) {
-				//Se prazo for deixado em branco serÃ¡ atribuido prazo indeterminado (0000-00-00)
+				//Se prazo for deixado em branco será atribuido prazo indeterminado (0000-00-00)
 				$dt_fim = "0000-00-00";
 			}else{
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
@@ -263,15 +263,15 @@ switch ($_POST["tabela"]) {
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
 			$rec = new DBRecord ("eclesiastico",$rolMembro,"rol");
-			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui Ã© atribuido a esta variÃ¡vel o valor para UpDate
+			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui é atribuido a esta variável o valor para UpDate
 			$rec->UpDate();
 			echo "<script>location.href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'</script>";
 			echo "<a href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 			}else{
-			echo "<script> alert('Senha incorreta!');</script>";
+			echo "<script> alert('Senha incorreta ou você não tem autorização para disciplinar membros!');</script>";
 			}
 			}else {
-				echo "<script> alert('Rol do membro nÃ£o foi informado!');</script>";
+				echo "<script> alert('Rol do membro não foi informado!');</script>";
 			}
 		break;
 	case "organica";

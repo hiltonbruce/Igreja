@@ -4,11 +4,9 @@
 ?>
 <div class="bs-callout bs-callout-info" >
 <form id="form1" name="form1" method="get" action="" >
+	<h4>Busca</h4>
 <div class="row">
-  <div class="col-xs-1">
-		<h4>Busca</h4>
-  </div>
-  <div class="col-xs-1">
+  <div class="col-xs-2">
 	<label>
 		<?PHP
 		echo $campo_rol;//valor recebido do script index.php
@@ -49,9 +47,7 @@
 		</div>
 	</div>
 		<?php
-
-		require_once "forms/sec/EasyAutocomplete.php";
-
+			require_once "forms/sec/EasyAutocomplete.php";
 		?>
 		<div class="col-xs-2"><label>&nbsp;</label>
 			<input type="submit" name="Submit2"  class="btn btn-primary btn-sm"
