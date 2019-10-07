@@ -19,7 +19,8 @@
 	if ($rolPr>0) {
 		$prIgreja = $cargoIgrejas[$listInfIgr['1']['6']]['nome'].'<br />'.$cargoIgrejas['0']['nomeFunc'];
 	} else {
-		$prIgreja = $listInfIgr['1']['6'].'<br />'.$cargoIgrejas['0']['nomeFunc'];
+		$cargosPR = new DBRecord ("funcao",'13',"id");
+		$prIgreja = $listInfIgr['1']['6'].'<br />'.$cargosPR->descricao();
 	}
 
  // 	print_r($cargoIgrejas['1']);
