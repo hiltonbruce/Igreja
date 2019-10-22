@@ -31,10 +31,10 @@ div#menu .menu {
 		background-image:url("img/menu-left.gif");
 		background-repeat:no-repeat;
 		width: 5px;
-		height: 64px;
+		height: 50px;
 		overflow: visible;
 		position: relative;
-		bottom:17px;
+		bottom:10px;
 		vertical-align: bottom;
 		visibility:visible;
 		display:block;
@@ -46,10 +46,10 @@ div#menu .menu {
 	div#menu li span.hlavny {
 		background-image:url("img/menu-central.gif");
 		background-repeat:repeat-x;
-		height: 64px;
+		height: 50px;
 		overflow: visible;
 		position: relative;
-		bottom:17px;
+		bottom:10px;
 		vertical-align: bottom;
 		visibility:visible;
 		display:block;
@@ -86,10 +86,10 @@ div#menu .menu {
 		background-image:url("img/menu-right.gif");
 		background-repeat:no-repeat;
 		width: 6px;
-		height:64px;
+		height:50px;
 		overflow: visible;
 		position: relative;
-		bottom:17px;
+		bottom:10px;
 		vertical-align: bottom;
 		visibility:visible;
 		display:block;

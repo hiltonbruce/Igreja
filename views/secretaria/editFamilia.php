@@ -1,7 +1,7 @@
 <div id="lst_cad">
 	<table class='table'>
       <tr>
-        <td colspan="2">Conjugue:
+        <td colspan="2">C&ocirc;njuge:
 		<?PHP
 		$_GET["rol_conjugue"]=$arr_dad["rol_conjugue"];
 		$nome = new editar_form("conjugue",$arr_dad["conjugue"],$tab,$tab_edit);
@@ -10,7 +10,7 @@
 		<?php
 		if ($_GET["campo"]!=="conjugue")
 		{?>
-			<td>Rol do Conjugue:
+			<td>Rol do C&ocirc;njuge:
 			<?PHP
 				$nome = new editar_form("rol_conjugue",$arr_dad["rol_conjugue"],$tab,$tab_edit);
 				$nome->getMostrar();
@@ -36,14 +36,14 @@
 			?>
         <option value="Solteiro">Solteiro</option>
         <option value="Casado">Casado</option>
-        <option value="Viúvo">Vi&uacute;vo</option>
+        <option value="Viï¿½vo">Vi&uacute;vo</option>
         <option value="Divorciado">Divorciado</option>
 			<?PHP
 			}else {
 			?>
         <option value="Solteira">Solteira</option>
         <option value="Casada">Casada</option>
-        <option value="Viúva">Vi&uacute;va</option>
+        <option value="Viï¿½va">Vi&uacute;va</option>
         <option value="Divorciada">Divorciada</option>
 			<?PHP } ?>
         <option value="Outros">Outros</option>

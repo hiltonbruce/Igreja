@@ -16,28 +16,28 @@
 	$link_missoes .="&menu=top_missoes'>Miss&otilde;es</a></span></li>";
 	$linkPat  = "<li><span class='hlavny_'><a href='./?escolha=controller/patrimonio.php";
 	$linkPat .="&menu=top_Pat'>Patrim&ocirc;nio</a></span></li>";
-	$link_home = "<li><span class='left'></span><span class='hlavny'><br /><strong class='text-primary'>Cadastro</strong></span><span class='right'></span></li>";
+	$link_home = "<li><span class='left'></span><span class='hlavny'><strong class='text-primary'>Cadastro</strong></span><span class='right'></span></li>";
 	$link_suporte ="<li><span class='hlavny_'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span></li>";
 	if ($escGET=="noticias/suporte.php"){
-	$link_suporte ="<li><span class='left'></span><span class='hlavny'><br />";
+	$link_suporte ="<li><span class='left'></span><span class='hlavny'>";
 	$link_suporte .="<strong class='text-primary'>Suporte</strong></span><span class='right'></span></li>";
 	$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	if ((strstr($menuGET,"tesouraria")) || (strstr($escPOST,"tesouraria"))){
-		$link_tesour ="<li><span class='left'></span><span class='hlavny'><br />";
+		$link_tesour ="<li><span class='left'></span><span class='hlavny'>";
 		$link_tesour .="<strong class='text-primary'>Financeiro</strong></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	if ((strstr($menuGET,"missoes")) || (strstr($escPOST,"missoes"))){
 		$link_missoes  ="<li><span class='left'></span><span class='hlavny' ";
-		$link_missoes .="><br /><strong class='text-primary'>Miss&otilde;es</strong></span><span class='right'></span></li>";
+		$link_missoes .="><strong class='text-primary'>Miss&otilde;es</strong></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	if ($escGET=="controller/patrimonio.php"){
 		$linkPat  = "<li><span class='left'></span><span class='hlavny'>";
-		$linkPat .="<br /><strong class='text-primary'>Patrim&ocirc;nio</strong></span><span class='right'></span></li>";
+		$linkPat .="<strong class='text-primary'>Patrim&ocirc;nio</strong></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";
 	}
 	if ($escGET=="forms/manutencao.php"){
 			$link_admin  = "<li><span class='left'></span><span class='hlavny'>";
-			$link_admin .= "<br /><strong class='text-primary'>Administra&ccedil;&atilde;o";
+			$link_admin .= "<strong class='text-primary'>Administra&ccedil;&atilde;o";
 			$link_admin .= "</strong></span><span class='right'></span></li>";
 			$link_home = "<li><span class='hlavny_'>$hom</span></li>";
 	}
