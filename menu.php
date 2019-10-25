@@ -3,32 +3,31 @@
 	*	da cor de fundo. Isto deve ser definido no script de CSS
 	*/
 	if (!empty($_SESSION["valid_user"])) {
-			$hom = "<a href='./?escolha=adm/cadastro_membro.php&uf=PB'>Cadastro</a>";
+			$hom = "<a href='./?escolha=adm/cadastro_membro.php&uf=PB'>Secret&aacute;ria</a>";
 		}
 	$hom = (empty($hom)) ? '' : $hom ;
 	$admin = array ('forms/manutencao.php','forms/editar_igreja.php','tab_auxiliar/cadastro_bairro.php',
 				'tab_auxiliar/cadastro_igreja.php','tab_auxiliar/altexclui_igreja.php',
 				'tab_auxiliar/cad_usuario.php','patrimonio');
 	$link_admin ="<li><span class='hlavny_'><a href='./?escolha=forms/manutencao.php'>Administra&ccedil;&atilde;o</a></span></li>";
-	$link_tesour="<li><span class='hlavny_'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro
-	</a></span></li>";
+	$link_tesour="<li><span class='hlavny_'><a href='./?escolha=tesouraria/agenda.php&menu=top_tesouraria'>Financeiro</a></span></li>";
 	$link_missoes = "<li><span class='hlavny_'><a href='./?escolha=controller/missoes.php";
 	$link_missoes .="&menu=top_missoes'>Miss&otilde;es</a></span></li>";
 	$linkPat  = "<li><span class='hlavny_'><a href='./?escolha=controller/patrimonio.php";
 	$linkPat .="&menu=top_Pat'>Patrim&ocirc;nio</a></span></li>";
-	$link_home = "<li><span class='left'></span><span class='hlavny'><strong class='text-primary'>Cadastro</strong></span><span class='right'></span></li>";
+	$link_home = "<li><span class='left'></span><span class='hlavny text-primary'><strong>Secret&aacute;ria</strong></span><span class='right'></span></li>";
 	$link_suporte ="<li><span class='hlavny_'><a href='./?escolha=noticias/suporte.php'>Suporte</a></span></li>";
 	if ($escGET=="noticias/suporte.php"){
 	$link_suporte ="<li><span class='left'></span><span class='hlavny'>";
 	$link_suporte .="<strong class='text-primary'>Suporte</strong></span><span class='right'></span></li>";
 	$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	if ((strstr($menuGET,"tesouraria")) || (strstr($escPOST,"tesouraria"))){
-		$link_tesour ="<li><span class='left'></span><span class='hlavny'>";
+		$link_tesour ="<li><span class='left'></span><span class='hlavny'> ";
 		$link_tesour .="<strong class='text-primary'>Financeiro</strong></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	if ((strstr($menuGET,"missoes")) || (strstr($escPOST,"missoes"))){
 		$link_missoes  ="<li><span class='left'></span><span class='hlavny' ";
-		$link_missoes .="><strong class='text-primary'>Miss&otilde;es</strong></span><span class='right'></span></li>";
+		$link_missoes .="<strong class='text-primary'>Miss&otilde;es</strong></span><span class='right'></span></li>";
 		$link_home = "<li><span class='hlavny_'>$hom</span></li>";}
 	if ($escGET=="controller/patrimonio.php"){
 		$linkPat  = "<li><span class='left'></span><span class='hlavny'>";

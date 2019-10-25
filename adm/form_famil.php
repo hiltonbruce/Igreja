@@ -8,12 +8,12 @@ controle ("inserir");
         $estCivil = '';
     }
 	$familia = new DBRecord ("est_civil",$bsc_rol,"rol");
-	$link = "atualizar_array";//define para q página direcionará o form para atualizar
+	$link = "atualizar_array";//define para q pï¿½gina direcionarï¿½ o form para atualizar
 
 	if ($familia->rol()=="") {
-		$link = "cad_dados_pess";//define para q página direcionará o form para atualizar
+		$link = "cad_dados_pess";//define para q pï¿½gina direcionarï¿½ o form para atualizar
 	}elseif ($_GET["editar"]=="editar") {
-		$link = "atualizar_array";//define para q página direcionará o form para atualizar
+		$link = "atualizar_array";//define para q pï¿½gina direcionarï¿½ o form para atualizar
 	}
 $ind=1;
 ?>
@@ -43,14 +43,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     			?>
                     <option value="<?PHP echo $linkEstCivil;?>Solteiro">Solteiro</option>
                     <option value="<?PHP echo $linkEstCivil;?>Casado">Casado</option>
-                    <option value="<?PHP echo $linkEstCivil;?>Viúvo">Vi&uacute;vo</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Viï¿½vo">Vi&uacute;vo</option>
                     <option value="<?PHP echo $linkEstCivil;?>Divorciado">Divorciado</option>
     			<?PHP
     			}else {
     			?>
                     <option value="<?PHP echo $linkEstCivil;?>Solteira">Solteira</option>
                     <option value="<?PHP echo $linkEstCivil;?>Casada">Casada</option>
-                    <option value="<?PHP echo $linkEstCivil;?>Viúva">Vi&uacute;va</option>
+                    <option value="<?PHP echo $linkEstCivil;?>Viï¿½va">Vi&uacute;va</option>
                     <option value="<?PHP echo $linkEstCivil;?>Divorciada">Divorciada</option>
     			<?PHP
     			}
@@ -90,12 +90,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <input name="folhas" type="text" id="folhas"
             class='form-control' tabindex="<?PHP echo $ind++;?>" />
         </div>
-              <div class="col-xs-10"><label>Conjugue:</label>
+              <div class="col-xs-10"><label>C&ocirc;njuge:</label>
                   <input name="conjugue" type="text" id="conjugue"
                   tabindex="<?PHP echo $ind++;?>" class='form-control' />
               </div>
               <div class="col-xs-2">
-                <label>Rol do Conjugue:</label>
+                <label>Rol do C&ocirc;njuge:</label>
                 <input name="rol_conjugue" type="text" id="rol_conjugue"
                 class='form-control' tabindex="<?PHP echo $ind++;?>" />
               </div>

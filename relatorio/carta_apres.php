@@ -62,7 +62,6 @@
   <div id="header">
 		<div id='headerApres'>
 			<div id="nomeIgreja">
-			  <?php echo NOMEIGR; ?>
 		  </div>
 		</div>
 	</div>
