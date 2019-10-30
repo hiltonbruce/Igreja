@@ -96,7 +96,7 @@ thead tr:hover {
 
 <div id="Layer1">Congrega&ccedil;&atilde;o:</div>
 <div id="header"><h2>Cadastro de Membro</h2></div>
-<table cellspacing="0" id="FormCadastro" summary="Formulário para cadastro de membro.">
+<table cellspacing="0" id="FormCadastro" summary="Formulï¿½rio para cadastro de membro.">
 
 <tbody>
 <tr>
@@ -1046,7 +1046,7 @@ Outros, Qual?</p>
 	</td>
 </tr>
 <tr>
-  <td colspan="8">Preencher se Casado, Conjugue:</td>
+  <td colspan="8">Preencher se Casado, C&ocirc;njuge:</td>
   <td>&nbsp;</td>
   <td>&nbsp;</td>
   <td>&nbsp;</td>
