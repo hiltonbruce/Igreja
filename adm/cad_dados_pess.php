@@ -136,7 +136,7 @@ switch ($_POST["tabela"]) {
 		}
 		$value="'{$rolMembro}','{$_POST["estado_civil"]}','{$_POST["conjugue"]}','{$_POST["rol_conjugue"]}','{$_POST["certidao_casamento_n"]}','{$_POST["livro"]}','{$_POST["obs"]}','{$_POST["folhas"]}','{$data}','$hist',NOW()";
 		$est_civil = new insert ("$value","est_civil");
-		$est_civil->inserir();
+		$est_civil->inserir(); 
 
 		echo "<script>location.href='./?escolha=adm/dados_famil.php&bsc_rol={$rolMembro}'</script>";
 		echo "<a href='./?escolha=adm/dados_famil.php&bsc_rol={$rolMembro}'>Continuar...<a>";
