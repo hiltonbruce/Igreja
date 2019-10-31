@@ -37,7 +37,7 @@ function br_data ($dt,$cmp){
 			if ($res == 1 || $dt=="00/00/0000"){
 				return $y.'-'.$m.'-'.$d;
 			}else{
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
+				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
 				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				exit;
 			}
@@ -79,10 +79,10 @@ function checadata ($dt){
 
 	$res = checkdate($m,$d,$y);
 	if ($res == 1 ){
-		//Data válida
+		//Data vï¿½lida
 		return true;
 	}else{
-		//Data inválida
+		//Data invï¿½lida
 		return false;
 	}
 }
@@ -192,10 +192,10 @@ function mostra_foto ($rol,$height,$width) {
 				$img="../img_membros/$rol.JPG";
 			}elseif (file_exists("img_membros/$rol.JPG")){
 				$img="img_membros/$rol.JPG";
-			}elseif (file_exists("img_membros/ver_foto.jpg")){
-				$img="img_membros/ver_foto.jpg";
+			}elseif (file_exists("img_membros/ver_foto.png")){
+				$img="img_membros/ver_foto.png";
 			}else{
-				$img="../img_membros/ver_foto.jpg";
+				$img="../img_membros/ver_foto.png";
 			}
 	} elseif (file_exists("../img_membros/".$_SESSION["rol"].".jpg")){
 				$img="../img_membros/".$_SESSION["rol"].".jpg";
@@ -261,7 +261,7 @@ function data_venc($data){
 				break;
 			}
 	}else{
-		echo "<script> alert('Data não informada!');</script>";
+		echo "<script> alert('Data nï¿½o informada!');</script>";
 		echo "<h1> Data n&atilde;o informada! </h1>";
 	}
 }
@@ -277,14 +277,14 @@ function data_batismo($data,$link){
 		$batismo = mktime(23, 59, 59, $m, $d, $y);
 		echo "bat -> $batismo  ** atual->".mktime();
 		if ($res != 1 ){
-			echo "<script> alert('Data inválida! Você digitou: $data');  location.href='$link';</script>";
+			echo "<script> alert('Data invï¿½lida! Vocï¿½ digitou: $data');  location.href='$link';</script>";
 			break;
 		}elseif ($batismo<mktime()){
-			echo "<script> alert('Data anterior a hoje! Você digitou: $data, e é alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
+			echo "<script> alert('Data anterior a hoje! Vocï¿½ digitou: $data, e ï¿½ alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
 			break;
 		}
 	}else{
-		echo "<script> alert('Data não informada!');</script>";
+		echo "<script> alert('Data nï¿½o informada!');</script>";
 		echo "<h1> Data n&aatilde;o informada! </h1>";
 	}
 }
@@ -636,7 +636,7 @@ function data_extenso ($data) {
 			$y = $dta[2];
 			$ver_data = checkdate($m,$d,$y);
 	if (!$ver_data){
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
+				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y'); window.history.go(-2);</script>";
 				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				break;
 			}
@@ -646,7 +646,7 @@ function data_extenso ($data) {
 				break;
 		case 1: $dia_extenso="Segunda-feira";
 				break;
-		case 2: $dia_extenso="Terça-feira";
+		case 2: $dia_extenso="Terï¿½a-feira";
 				break;
 		case 3: $dia_extenso="Quarta-feira";
 				break;
@@ -654,7 +654,7 @@ function data_extenso ($data) {
 				break;
 		case 5: $dia_extenso="Sexta-feira";
 				break;
-		case 6: $dia_extenso="Sábado";
+		case 6: $dia_extenso="Sï¿½bado";
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
@@ -663,7 +663,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Março";
+		case 3: $mes_extenso="Marï¿½o";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -728,7 +728,7 @@ function arrayDia ($dia) {
 }
 
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
-	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
+	$alerta = "<script> alert('Desculpe mas vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
 		$id = ($_POST["id"]=="") ? $_GET["id"]:$_POST["id"];
@@ -842,12 +842,12 @@ function situacao ($situacao,$rol){
 	}
 
 	function periodoMembro ($rol,$mes,$ano){
-		//Retorna a data se deixou de ser membro true no mês/ano indicado
+		//Retorna a data se deixou de ser membro true no mï¿½s/ano indicado
 		/********************************
 		* situacao_espiritual
-		*		1 Em Comunhão
+		*		1 Em Comunhï¿½o
 		*		3 Faleceu
-		*		4 Modou de Denominação
+		*		4 Modou de Denominaï¿½ï¿½o
 		*		5 Afastou-se da Igreja
 		*		6 Transferido
 		*********************************/
@@ -887,7 +887,7 @@ function situacao ($situacao,$rol){
 
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
-    return (strtoupper(strtr($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','ÁÀÃÂÉÊÍÓÕÔÚÜÇÁÀÃÂÉÊÍÓÕÔÚÜÇ' )));
+    return (strtoupper(strtr($string, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' )));
     }
 
 function extenso($valor = 0, $maiusculas = false) {
@@ -1104,7 +1104,7 @@ function calcDiaSemana($dia,$mes,$ano){
    $tam=filesize("calendario.css");
    $dados=fread($arq,$tam);
    fclose($arq);
-   //Coloca o css carregado no código do calendário
+   //Coloca o css carregado no cï¿½digo do calendï¿½rio
    echo "<style type='text/css'>".$dados."</style>";
    //Calcula em que dia da semana ï¿½ o dia 1/$mes/$ano
    $dia_semana=calcDiaSemana(1,$mes,$ano);
@@ -1148,18 +1148,18 @@ function calcDiaSemana($dia,$mes,$ano){
 				 {
 					  //Caso seja um intervalo de dias
 					  if(strpos($datas[$i][$i1],"-")==2) {
-					   $d1=substr($datas[$i][$i1],0,2); //Obtém o primeiro dia
-					   $d2=substr($datas[$i][$i1],3,2); //Obtém o segundo dia
-					   $m=substr($datas[$i][$i1],6,2); //Obtém o mï¿½s do intervalo
+					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o primeiro dia
+					   $d2=substr($datas[$i][$i1],3,2); //Obtï¿½m o segundo dia
+					   $m=substr($datas[$i][$i1],6,2); //Obtï¿½m o mï¿½s do intervalo
 					  } else /*Caso seja um dia */ {
-					   $d1=substr($datas[$i][$i1],0,2); //Obtém o dia
+					   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o dia
 				  	   $d2=0;
-					   $m=substr($datas[$i][$i1],3,2); //Obtém o mês
+					   $m=substr($datas[$i][$i1],3,2); //Obtï¿½m o mï¿½s
 					  }
-					  //Atribui uma classe CSS à célula (dia) atual da tabela caso
-					  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado
+					  //Atribui uma classe CSS ï¿½ cï¿½lula (dia) atual da tabela caso
+					  //o mï¿½s atual $maux seja igual ao mï¿½s obtido de um dos vetores $m ($feriado
 					  // ou $marcado)
-					  //Verifica se o dia atual $cnt_dias estï¿½ no intervalo de dias ou se é igual
+					  //Verifica se o dia atual $cnt_dias estï¿½ no intervalo de dias ou se ï¿½ igual
 					  //ao dia obtido
 				   	  if($m==$maux && (($cnt_dias>=$d1 && $cnt_dias<=$d2) ||
 					    ($cnt_dias==$d1))) {
@@ -1170,7 +1170,7 @@ function calcDiaSemana($dia,$mes,$ano){
 			}
 			if($classe=="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 			 $classe=($d==0) ? "td_dia":"td_marcado0" ;
-			//Cria a célula referente ao dia atual
+			//Cria a cï¿½lula referente ao dia atual
 			if ($marcaDia!='') {
 				$diaAtual = '<a href="data='.$cnt_dias.'"><strong>'.$cnt_dias++.'</strong></a>';
 			} else {
@@ -1190,7 +1190,7 @@ function calcDiaSemana($dia,$mes,$ano){
      if($nl==5) $temp_ln=$temp_ln."<tr><td colspan=7>&nbsp;</td></tr>";
      $temp_tb=$temp_tb.$temp_ln;
      $k=$idx-($mes-1);
-     if($rodapes[$k]!="") //Gera um rodapé para a tabela de mês
+     if($rodapes[$k]!="") //Gera um rodapï¿½ para a tabela de mï¿½s
      {
       $temp_tb=$temp_tb."<tr><td colspan=7 class='rodape'>".$rodapes[$k].
                "</td></tr></table><br></td>";

@@ -80,7 +80,7 @@
 <link href="css/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
 <link href="css/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
 
-<link rel="icon" type="image/gif" href="brasao.jpg">
+<link rel="icon" type="image/gif" href="brasao.ico">
 </head>
 <body>
 <div class="wrap1">
