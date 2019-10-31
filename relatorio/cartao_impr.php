@@ -14,22 +14,22 @@ require "../func_class/classes.php";
 	$cong = new DBRecord ("igreja",$rec_ecl->congregacao(),"rol");
 	$cidade = new DBRecord ("cidade",$rec_pessoais->naturalidade(),"id");
 	$cargosPR = new DBRecord ("funcao",'13',"id");
-	$rec_ecl->c_impresso  = date("Y-m-d"); //Aqui é atribuido a esta variável um valor para UpDate
+	$rec_ecl->c_impresso  = date("Y-m-d"); //Aqui ï¿½ atribuido a esta variï¿½vel um valor para UpDate
 	//$rec_ecl->Update();
 	$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 	$atual = $rec_ecl -> hist ();
-	$rec_ecl->hist="@Impresso em: ". date ('d/m/Y H:i:s') .", por: $hist" . $atual ; //Aqui é atribuido a esta variável um valor para UpDate
+	$rec_ecl->hist="@Impresso em: ". date ('d/m/Y H:i:s') .", por: $hist" . $atual ; //Aqui ï¿½ atribuido a esta variï¿½vel um valor para UpDate
 	$rec_ecl->quem_imprimiu = $_SESSION['valid_user'];
-	$rec_ecl->Update(); //É feita a chamada do método q realiza a atualização no Banco
-	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em águas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();
+	$rec_ecl->Update(); //ï¿½ feita a chamada do mï¿½todo q realiza a atualizaï¿½ï¿½o no Banco
+	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em ï¿½guas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();
 	$cargoEclec = cargo($rolConsuta);
 	if ($rec_ecl->situacao_espiritual()<>"1"){
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
 	}elseif ($rec_pessoais->sexo()=='F' && file_exists("../img/cartao_feminino.jpg")) {
-		$background_cartao = "feminino"; //Define a imagem de fundo do cartão
+		$background_cartao = "feminino"; //Define a imagem de fundo do cartï¿½o
 	}elseif ($cargoEclec['0']=="Pastor") {
-		$background_cartao = "pastor"; //Define a imagem de fundo do cartão
+		$background_cartao = "pastor"; //Define a imagem de fundo do cartï¿½o
 	}elseif ($cargoEclec['0']=="Evangelista") {
 		$background_cartao = "evangelista";
 	}elseif ($cargoEclec['0']=="Presb&iacute;tero") {
@@ -37,7 +37,7 @@ require "../func_class/classes.php";
 	}elseif ($cargoEclec['0']=="Di&aacute;cono") {
 		$background_cartao = "diacono";
 	}elseif ($cargoEclec['0']=="Auxiliar"){
-		$background_cartao = "auxiliar"; //Define a imagem de fundo do cartão
+		$background_cartao = "auxiliar"; //Define a imagem de fundo do cartï¿½o
 	}else {
 		$background_cartao = "membro";
 	}
@@ -230,7 +230,7 @@ body {
 	position:absolute;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	left:643px;
-	top:305px;
+	top:303px;
 	width:376px;
 	height:24px;
 	z-index:5;
@@ -258,7 +258,7 @@ body {
 	}
 ?>
 <div id="cartao"></div>
-<div id='marca'></div><!--  Cartão com logo idependente do fundo da imagem-->
+<div id='marca'></div><!--  Cartï¿½o com logo idependente do fundo da imagem-->
 <div id='Endereco'>
   <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
    <?PHP echo '<br /> CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().'<br /> CNPJ:&nbsp;'.$igreja->cnpj();?>
