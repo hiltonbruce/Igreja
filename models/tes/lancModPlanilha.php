@@ -79,8 +79,10 @@ if ($msgErro=='') {
 	//esta variável é levada p/ o script views/exibilanc.php que chamado ao final deste loop numa linha abaixo
 	//$exibicred .= sprintf("<tr class='total'><td colspan='2'>Total Creditado</td><td id='moeda'>R$ %s</td><td></td></tr>",number_format($totalCred,2,',','.'));
 	//Lança o histórico do lançamento
-	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$rolIgreja);
-	$lanchist = new incluir($InsertHist, 'lanchist');
-	$lanchist->inserir();
+	if ($referente!='') {
+		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$rolIgreja);
+		$lanchist = new incluir($InsertHist, 'lanchist');
+		$lanchist->inserir();
+	}
 	//require_once 'views/exibilanc.php'; //Exibi a tabela com o lançamento concluído
 }
