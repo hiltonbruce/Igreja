@@ -22,6 +22,7 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 }
 require_once 'models/tes/histFinMembro.php';
 ?>
+<div class='text-center' style="overflow: auto;width: 132%;height: 550px;">
 <table id="horario" class='table table-hover table-condensed'>
 		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
@@ -102,5 +103,6 @@ require_once 'models/tes/histFinMembro.php';
 			?>
 		</tfoot>
 	</table>
+	</div>
 	<h4>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h4>
 	Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribui&ccedil;&atilde;o: '.$menorAno.' ** Ultimo ano de contribui&ccedil;&atilde;o: '.$maiorAno;?>
