@@ -1,5 +1,5 @@
 #main_container {
-    width:16%;
+    width:19%;
     background-color:#ffffff; /* DO NOT REMOVE THIS; or you'll have issue w/ the scrollbar, when the mouse pointer is on a white space */
     overflow-x: hidden;
     overflow-y: scroll;

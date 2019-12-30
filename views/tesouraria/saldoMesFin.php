@@ -48,7 +48,7 @@ $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>'
 <div class='text-center'><h5><strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
 		<?php printf('%s - Per&iacute;odo:&nbsp;&nbsp;%02s de %s',$cong,$mesPorExt,$ano);?></h5>
 </div>
-<div class='text-center' style="overflow: auto;width: 132%;height: 550px;">
+<div class='text-center' style="overflow: auto;width: 132%;height: 900px;">
 <table id="horario" class='table table-bordered table-condensed table-striped'>
 	<thead>
 		<?PHP
