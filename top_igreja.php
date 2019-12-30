@@ -25,18 +25,16 @@
 <a <?PHP $b=link_ativo($_GET["cargo"], "6");?> href="./?escolha=igreja/list_membro.php&menu=top_igreja&cargo=6">
 	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Dirigentes</button>
 </a>
-<a <?PHP $b=id_corrente ("_estrutura");?> href="./?escolha=igreja/cad_organica.php&menu=top_igreja">
-	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Estrutura</button>
-</a>
-<a <?PHP $b=id_corrente ("_famil");?> href="./?escolha=igreja/cad_organica.php&menu=top_igreja">
-	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Hor&aacute;rios</button>
-</a>
-<a <?PHP $b=id_corrente ("_cargos");?> href="./?escolha=igreja/cad_cargos.php&menu=top_igreja">
-	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Cargos</button>
-</a>
-<a <?PHP $b=id_corrente ("_orgao");?> href="./?escolha=igreja/cad_orgaos.php&menu=top_igreja">
-	  <button type="button" class="btn btn-info btn-sm <?php echo $b;?>">Org&auml;os</button>
-</a>
+<div class="btn-group" role="group">
+  <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Cartas
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Circular</a></li>
+    <li><a href="#">Convite</a></li>
+  </ul>
+</div>
 </div>
 <table class="table">
 <tbody>
@@ -71,7 +69,7 @@
 	  <td>
 	  <?php
 	  switch ($_GET['cargo']) {
-	  	//Define a 1ª linha do proximo form
+	  	//Define a 1ï¿½ linha do proximo form
 	  	case 1:
 	  		$linhaCargo = '<option value="'.$link.'1">Auxiliar de Trabalho</option>';
 	  		$titTabela = 'Auxiliares de Trabalho';
@@ -146,7 +144,7 @@
 	  <tr>
 	  <td>
 	  <?php
-	  	//1ª Linha do form (filtro)
+	  	//1ï¿½ Linha do form (filtro)
 	  	switch ($_GET['foto']) {
 	  		case '1':
 	  		$linha1 = '<option value="'.$link.'1">Com fotos</option>';
