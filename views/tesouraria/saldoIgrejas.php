@@ -1,5 +1,6 @@
 <div class="bs-docs-sidebar">
-<table class='table table-bordered table-hover table-condensed'>
+<div class='text-center' style="overflow: auto;width: 132%;height: 900px;">
+<table class='table table-bordered table-hover table-condensed table-striped'>
 	<caption>
 		<?php
 		//Cabe�alho da tabela
@@ -13,7 +14,7 @@
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';
 		}
-		echo $cong.'Hist&oacute;rico Financeiro - Ano de refer&ecirc;ncia: '.$ano;
+		echo $cong.'Hist&oacute;rico Financeiro - <strong>Entradas</strong> - Ano de refer&ecirc;ncia: '.$ano;
 		echo ' - Valores em Real (R$)';?>
 	</caption>
 	<colgroup>
@@ -31,6 +32,7 @@
 			<?php echo $tabFoot;?>
 	</tfoot>
 </table>
+</div>
 <?PHP
 
 	if ($_GET['rec']=='13') {

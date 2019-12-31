@@ -5,7 +5,14 @@
 	$cong = 'Todas as Igrejas';
 	//require_once 'forms/tes/histFinanceiro.php';
 $mes = intval($_GET['mes']);
-require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
+if (file_exists('models/tes/histFinIgreja.php')) {
+	require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
+	// code...
+} elseif (file_exists('..models/tes/histFinIgreja.php')) {
+	// code...
+	require_once '../models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
+} 
+
 $tabThead = $nivelSem; //Cabe�alho da tabela
 $mesPeriodo = sprintf('%02s',$mes);//M�s por extenso
 $mesExt = arrayMeses ();

@@ -12,7 +12,7 @@
 	foreach ($igrejas->ArrayIgrejaDados() as $igrejaDados) {
 		$saldos = new tes_igreja ($igrejaDados['rol'],$ano);
 		$valores = $saldos->ArraySaldos();
-		$bgcolor = $cor ? 'class="dados"' : 'class="odd"';
+		// $bgcolor = $cor ? 'class="dados"' : 'class="odd"';
 
 		//Monta link para detalhar a igreja
 		if ($_GET['rec']=='13') {
@@ -23,7 +23,7 @@
 			$linkIgreja .= 'rec=11&direita=1" title="Detalhar entradas">'.$igrejaDados['razao'].'</a>';
 		}
 
-		$linha .= '<tr '.$bgcolor.'><td>'.$linkIgreja.'</td>';
+		$linha .= '<tr><td class="text-left"><strong>'.$linkIgreja.'</strong></td>';
 		//print_r( $saldos->ArraySaldos());echo '<br />';
 		for ($i = 1; $i < 13; $i++) {
 			$entrada =($valores[$i]>0) ? number_format($valores[$i],2,',','.'):'---';
@@ -42,11 +42,11 @@
 		$cor = !$cor;
 	}
 
-	//Cabeçalho da tabela
+	//Cabeï¿½alho da tabela
 	$colgroup = '<col id="igreja">';
 	$tabThead = '<tr><th scope="col">Igrejas</th>';
-	//rodapé da tabela
-	$footCong  = '<tr id="subtotal"><td>Totais&nbsp;Congregações</td>';
+	//rodapï¿½ da tabela
+	$footCong  = '<tr id="subtotal"><td>Totais&nbsp;Congregaï¿½ï¿½es</td>';
 	$tabFoot   = '<tr id="total"><td>Totais</td>';
 
 	foreach(arrayMeses() as $mes => $meses) {

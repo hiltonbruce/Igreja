@@ -1,11 +1,11 @@
 <?php
 if ($_SESSION["setor"]!='2' && $_SESSION["setor"]!='99' ) {
-	exit;//Não exibe em setor sem autorização
+	exit;//Nï¿½o exibe em setor sem autorizaï¿½ï¿½o
 }
-//Opções de  impressões para o script /tesouraria/receita.php
+//Opï¿½ï¿½es de  impressï¿½es para o script /tesouraria/receita.php
 switch ($rec) {
 	case '13':
-		//imprimir entradas de todas as congregações - mensal
+		//imprimir entradas de todas as congregaï¿½ï¿½es - mensal
 		require_once '../help/tes/saldoIgrejas.php';
 		$nomeArquivo='../views/tesouraria/saldoIgrejas.php';
 		require_once '../views/modeloPrint.php';
@@ -17,20 +17,20 @@ switch ($rec) {
 		}
 		require_once '../models/saldos.php';
 		$nomeArquivo='../views/saldos.php';
-		require_once '../views/modeloPrint.php';
+		// require_once '../views/modeloPrint.php';
 		break;
 	case '15':
 		require_once '../help/tes/varRelatorio.php';
-		$titTabela = 'Relatório de Lançamentos';
+		$titTabela = 'Relat&oacute;rio de Lan&ccedil;amentos';
 		$linkImpressao ='tesouraria/receita.php/?rec=15';
 		//require_once '../models/saldos.php';
 		$nomeArquivo='../views/tesouraria/tabRelatLanc.php';
-		require_once '../views/modeloPrint.php';
+		// require_once '../views/modeloPrint.php';
 		break;
 	case '16':
 		//Relatorio COMADEP
 		$idIgreja = intval($_GET['igreja']);
-		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informações da consulta
+		require_once '../help/tes/relatorioComadep.php';//Cabeï¿½alho e informaï¿½ï¿½es da consulta
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 		require_once '../models/tes/relComadep.php';
@@ -38,10 +38,12 @@ switch ($rec) {
 		$nomeArquivo='../views/saldosComadep.php';
 		$assinatura .= '<h6><div class="row text-center">';
 		$assinatura .= '<div class="col-xs-6 col-sm-5">';
-		$assinatura .= 'Pr. Antônio Ferreira da Silva';
+		$assinatura .= $igreja->pastor();
 		$assinatura .= '</div>';
 		$assinatura .= '<div class="col-xs-6 col-sm-5">';
-		$assinatura .= 'Tes. Joseilton C Bruce';
+		$cargoIgreja = new tes_cargo;
+		$tesArray = $cargoIgreja->dadosArray();
+		$assinatura .= '1&ordm; Tesoureiro Geral: '.$tesArray['22']['1']['1']['nome'];
 		$assinatura .= '</div></div></h6>';
 		$titTabela = $congRelatorio.' &bull; Fluxo das Contas - '.$dtRelatorio;
 		require_once '../views/modeloPrint.php';
@@ -49,27 +51,47 @@ switch ($rec) {
 	case '17':
 		//Relatorio COMADEP
 		$idIgreja = intval($_GET['igreja']);
-		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informações da consulta
+		require_once '../help/tes/relatorioComadep.php';//Cabeï¿½alho e informaï¿½ï¿½es da consulta
+		// $tesIgreja = ', 1&ordm; Tesoureiro Geral: <ins>'.$tesArray['22']['1']['1']['nome'];
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 		require_once '../help/tes/dizimistasPrint.php';
 		$nomeArquivo='../views/tesouraria/tableDizimistas.php';
 		$assinatura .= '<h6><div class="row text-center">';
 		$assinatura .= '<div class="col-xs-6 col-sm-5">';
-		$assinatura .= 'Pr. Antônio Ferreira da Silva';
+		$assinatura .= $igreja->pastor();
 		$assinatura .= '</div>';
 		$assinatura .= '<div class="col-xs-6 col-sm-5">';
-		$assinatura .= 'Tes. Joseilton C Bruce';
+		$cargoIgreja = new tes_cargo;
+		$tesArray = $cargoIgreja->dadosArray();
+		$assinatura .= '1&ordm; Tesoureiro Geral: '.$tesArray['22']['1']['1']['nome'];
 		$assinatura .= '</div></div></h6>';
 		$titTabela = $congRelatorio.' &bull; Dizimistas - '.$dtRelatorio;
-		require_once '../views/modeloPrint.php';
+		// require_once '../views/modeloPrint.php';
+		break;
+	case '18':
+		#Imprimir tabela de saldos
+		$dContas = new tes_contas();
+		$descCta = $dContas->ativosArray();
+		$colUm = '';//Primeira coluna do cabecalho
+		require_once '../views/tesouraria/cabTabFin.php';//Cabeï¿½alho da tabela
+		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
+			//Lista financeira de todas as igreja com mï¿½s especï¿½fico
+			require_once '../views/tesouraria/saldoMesFin.php';
+			$tabThead = $nivelSem;
+			//require_once 'views/tesouraria/saldoIgrejas.php';
+		} else {
+			//Lista financeira da igreja com todos os  meses
+			$colUm = 'Per&iacute;odo';//Primeira coluna do cabecalho
+			require_once '../views/tesouraria/saldoMembros.php';
+		}
 		break;
 	default:
 		//imprimir plano de contas
 		$titTabela = 'Plano de Contas em: '.date('d/m/Y');
 		require_once '../models/saldos.php';
 		$nomeArquivo='../views/saldos.php';
-		require_once '../views/modeloPrint.php';
 		break;
 }
+require_once '../views/modeloPrint.php';
 ?>

@@ -2,7 +2,7 @@
 class cargoigreja {
 
 	function __construct (){
-		$this->result = mysql_query('SELECT * FROM cargoigreja') or die (mysql_error());
+		$this->result = mysql_query('SELECT * FROM cargoigreja WHERE status = "1" ') or die (mysql_error());
 	}
 
 	function Arrayusuario(){

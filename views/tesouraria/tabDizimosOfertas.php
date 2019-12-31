@@ -100,17 +100,18 @@ if ($_POST['concluir']=='1') {
 			echo '</form></div>';
 			$cabPrint = true;
 		}
+			$cargoIgreja = new tes_cargo;
+			$tesArray = $cargoIgreja->dadosArray();
+			// print_r($tesArray['22']['1']);
 			$dirigenteIgreja = $igSede->pastor();
 			$nomIgreja = '<br />Igreja: <strong>'.$igSede->razao();
 			$tesSede = $tabMembros->nomes();
-			$tesIgreja = ', 1&ordm; Tesoureiro Geral: <ins>'.$tesSede ['4037']['0'];
+			$tesIgreja = ', 1&ordm; Tesoureiro Geral: '.$tesArray['22']['1']['1']['nome'];
 			if ($idIgreja>'1') {
 				$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
 				$nomIgreja = '<br />Igreja: <strong>'.$igrejaSelecionada->razao();
 				$dirigenteIgreja = 'Dirigente: <ins>'.$dirCong->nome().'</ins>';
-				$cargoIgreja = new tes_cargo;
 				//print_r($cargoIgreja->dadosArray());
-				$tesArray = $cargoIgreja->dadosArray();
 				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins>'.$tesArray['8'][$idIgreja]['1']['nome'];
 				//reset($tesIgreja);
 				//print_r($tesArray );

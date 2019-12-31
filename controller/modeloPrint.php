@@ -75,7 +75,7 @@ case '4':
 	require_once '../help/tes/listaRecPeriodoPrint.php';
 	//Recibos para pgto
 	$nomeArquivo='../help/tes/listRec.php';
-	require_once '../views/modeloPrint.php';
+	// require_once '../views/modeloPrint.php';
 break;
 	default:
 		;
