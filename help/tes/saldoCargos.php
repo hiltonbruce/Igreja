@@ -26,7 +26,7 @@
 			//http://localhost/igrejas/GitHub/Igreja/?escolha=views/tesouraria/saldoMembros.php&bsc_rol=4352
 			$linkMemb = 'target="_blank" href="./?escolha=views/tesouraria/saldoMembros.php&bsc_rol='.$igrejaDados['rol'].'" title="Detalhar entradas"';
 			$linkIgreja  = '<div class="text-center"><a '.$linkMemb.' >';
-			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol']).'</kbd></div></a></td><td>';
+			$linkIgreja .= mostra_foto ($igrejaDados['rol']).'</div><div class="text-center"><kbd>'.cargo($igrejaDados['rol'])['0'].'</kbd></div></a></td><td>';
 			$linkIgreja .= '<a '.$linkMemb.' >'.$igrejaDados['nome'].'</a><br /><span class="text-info">'.$igrejaDados['razao'].'</span>';
 		}
 
@@ -44,7 +44,7 @@
 		$cor = !$cor;
 	}
 
-	//Cabeçalho da tabela
+	//Cabeï¿½alho da tabela
 	$colgroup = '<col id="Nome">';
 	$tabThead = '<tr><th scope="col" colspan="2">Nomes</th>';
 	$tabFoot = '<tr id="total"><td colspan="2">Totais</td>';
@@ -60,28 +60,28 @@
 	$titulo = '';
 
 	switch ($cargoMembro){//verifica o cargo
-				case "1"://Verifica se é auxiliar de trabalho
+				case "1"://Verifica se ï¿½ auxiliar de trabalho
 					$titulo = 'auxiliar de trabalho';
 					break;
-				case "2"://verifica se é diácono
-					$titulo = 'diácono';
+				case "2"://verifica se ï¿½ diï¿½cono
+					$titulo = 'diï¿½cono';
 					break;
-				case "3"://verifica se é Presbítero
-					$titulo = 'Presbítero';
+				case "3"://verifica se ï¿½ Presbï¿½tero
+					$titulo = 'Presbï¿½tero';
 					break;
-				case "4"://verifica se é Evangelista
+				case "4"://verifica se ï¿½ Evangelista
 					$titulo = 'Evangelista';
 					break;
-				case "5"://verifica se é Pastor
+				case "5"://verifica se ï¿½ Pastor
 					$titulo = 'Pastor';
 					break;
-				case "6"://verifica se é Pastor
+				case "6"://verifica se ï¿½ Pastor
 					$titulo = 'Dirigente de Congrega&ccedil;&atilde;o';
 					break;
-				case "7"://verifica se é Pastor
+				case "7"://verifica se ï¿½ Pastor
 					$titulo = 'Mulheres';
 					break;
-				case "8"://verifica se é Pastor
+				case "8"://verifica se ï¿½ Pastor
 					$titulo = 'Homens';
 					break;
 				default:

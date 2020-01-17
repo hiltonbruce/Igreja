@@ -1,4 +1,4 @@
-<fieldset style="width: 130%">
+<fieldset>
 	<legend>Detalhar entradas</legend>
 	<table class="table">
 		<tr>
