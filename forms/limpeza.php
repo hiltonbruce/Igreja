@@ -47,19 +47,10 @@
 	</table>
 </form>
 </fieldset>
-<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=2&<?php echo $linkperido;?>">
-<button type="button" class="btn btn-primary" >Mostrar totalizador</button></a>
-<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=5'>
-<button type="button" class="btn btn-primary">Alterar Per&iacute;odo...</button></a>
-<a href='./controller/limpeza.php?limpeza=6' target="_blank">
-<button type="button" class="btn btn-primary">Material Dispon&iacute;vel...</button></a>
-<a href='./controller/limpeza.php?limpeza=7' target="_blank">
-<button type="button" class="btn btn-primary">Formul&aacute;rio de Pedido...</button></a>
-<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=12&<?php echo $linkperido;?>' target="_blank">
-<button type="button" class="btn btn-primary">Gerar Pedido</button></a>
 <?php
+require_once ('views/menus/subLimp.php');
 	if ( $igreja >0) {
-		//Lista materiais da congregação
+		//Lista materiais da congregaï¿½ao
 		require_once 'views/tabLimpeza.php';
 	}
 ?>

@@ -3,7 +3,7 @@
 class limplista {
    /*****************************************************************************************************
    	* Exemplo de funcionamento desta classe:
-	*$rec = new  limplista ($igreja,$mesref); Informe a igreja e o mês de referência
+	*$rec = new  limplista ($igreja,$mesref); Informe a igreja e o mï¿½s de referï¿½ncia
 	* para montar o corpo da tabela
 	*
 	*****************************************************************************************************
@@ -28,7 +28,7 @@ class limplista {
 		$sql 	.= ' AND p.id = l.item ORDER BY p.discrim,l.id DESC ';
 		$sqlLimp = mysql_query($sql);
 		$incrrc=0; //indece p/ zebrar tabela
-		$this->tabtbody = ''; //Limpa variável para receber os dados da tabela
+		$this->tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 
 
 		if (mysql_num_rows($sqlLimp)>0) {
@@ -64,7 +64,7 @@ class limplista {
 		$sql 	.= 'p.id = l.item ORDER BY p.discrim ';
 		$sqlLimp = mysql_query($sql);
 		$incrrc=0; //indece p/ zebrar tabela
-		$this->tabtbody = ''; //Limpa variável para receber os dados da tabela
+		$this->tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 		if (mysql_num_rows($sqlLimp)>0) {
 			while($lista = mysql_fetch_array($sqlLimp)){
 				//Faz o trabalho de zebrar a tabela
@@ -74,7 +74,7 @@ class limplista {
 				$this->tabtbody .= sprintf("<td class='text-center'>%'03u</td>",$inclimp);
 				//Coluna Unidade
 				$this->tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
-				//Coluna Discriminação
+				//Coluna Discriminaï¿½ï¿½o
 				$this->tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
 				//Coluna Quantidade Solicitada
 				$this->tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$lista['quant']);
@@ -89,14 +89,14 @@ class limplista {
 	}
 
 	public function TotMaterial() {
-		//Select mysql na tabela limpeza para listar o total para o período
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
 	  $tot 	 = 'SELECT p.id,l.quant,p.discrim,p.unid,p.quant as qunid ';
 	  $tot 	.= 'FROM limpezpedid AS l, limpeza AS p ';
 	  $tot 	.= 'WHERE mesref="'.$this->mesref.'" AND ';
 	  $tot 	.= 'p.id = l.item GROUP BY l.item ORDER BY p.discrim';
 	  $totLimp = mysql_query($tot);
 	  $incrrc=0; //indece p/ zebrar tabela
-	  $tabtbody = ''; //Limpa variável para receber os dados da tabela
+	  $tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 	  if (mysql_num_rows($totLimp)>'0') {
 		while($lista = mysql_fetch_array($totLimp)){
 
@@ -111,7 +111,7 @@ class limplista {
 			$tabtbody .= sprintf("<td class='text-center'>%'03u</td>",$inclimp);
 			//Coluna Unidade
 			$tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
-			//Coluna Discriminação
+			//Coluna Discriminaï¿½ï¿½o
 			$tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
 			//Coluna Quantidade Solicitada
 			$tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$vlrtot['totitem']);
@@ -127,7 +127,7 @@ class limplista {
 	}
 
 	public function TotMatEntregar() {
-		//Select mysql na tabela limpeza para listar o total para o período
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
 
 	  $tot 	 = 'SELECT p.id,l.quant,p.discrim,p.unid,p.quant as qunid ';
 	  $tot 	.= 'FROM limpezpedid AS l, limpeza AS p ';
@@ -135,7 +135,7 @@ class limplista {
 	  $tot 	.= 'p.id = l.item GROUP BY l.item ORDER BY p.discrim';
 	  $totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
-		$tabtbody = ''; //Limpa variável para receber os dados da tabela
+		$tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 		while($lista = mysql_fetch_array($totLimp)){
 			$item 		 = "SELECT SUM(quant) as totitem ";
 			$item 		.= "FROM limpezpedid WHERE entrega = '1' AND ";
@@ -149,7 +149,7 @@ class limplista {
 			$tabtbody .= sprintf("<td class='text-center'>%'03u</td>",$inclimp);
 			//Coluna Unidade
 			$tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
-			//Coluna Discriminação
+			//Coluna Discriminaï¿½ï¿½o
 			$tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
 			//Coluna Quantidade Solicitada
 			$tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$vlrtot['totitem']);
@@ -160,14 +160,14 @@ class limplista {
 	}
 
 	public function TotMatPegar() {
-		//Select mysql na tabela limpeza para listar o total para o período
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
 	  $tot 	 = 'SELECT p.id,l.quant,p.discrim,p.unid,p.quant as qunid ';
 	  $tot 	.= 'FROM limpezpedid AS l, limpeza AS p ';
 	  $tot 	.= 'WHERE mesref="'.$this->mesref.'" AND l.entrega = 0 AND ';
 	  $tot 	.= 'p.id = l.item GROUP BY l.item ORDER BY p.discrim';
 	  $totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
-		$tabtbody = ''; //Limpa variável para receber os dados da tabela
+		$tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 		while($lista = mysql_fetch_array($totLimp)){
 			$item 		 = "SELECT SUM(quant) as totitem ";
 			$item 		.= "FROM limpezpedid WHERE entrega = 0 AND ";
@@ -180,7 +180,7 @@ class limplista {
 			$tabtbody .= sprintf("<td class='text-center'>%'03u</td>",$inclimp);
 			//Coluna Unidade
 			$tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
-			//Coluna Discriminação
+			//Coluna Discriminaï¿½ï¿½o
 			$tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
 			//Coluna Quantidade Solicitada
 			$tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$vlrtot['totitem']);
@@ -191,12 +191,12 @@ class limplista {
 	}
 
 	public function ListaMaterial() {
-		//Select mysql na tabela limpeza para listar o total para o período
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid, p.tempo  ';
 		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
-		$tabtbody = ''; //Limpa variável para receber os dados da tabela
+		$tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 		while($lista = mysql_fetch_array($totLimp)){
 			$tabtbody .=  '<tr>';
 			++$inclimp;
@@ -204,7 +204,7 @@ class limplista {
 			$tabtbody .= sprintf("<td class='text-center'>%'03u</td>",$inclimp);
 			//Coluna Unidade
 			$tabtbody .= sprintf("<td>%s %s</td>",$lista['qunid'],$lista['unid']);
-			//Coluna Discriminação
+			//Coluna Discriminaï¿½ï¿½o
 			$tabtbody .= '<td> '.$lista['discrim'].' </td>';//Modificar qdo apliar para outros documentos
 			//Coluna Quantidade Solicitada
 			$tabtbody .= sprintf("<td style='text-align: center;'>%s</td>",$lista['tempo']);
@@ -212,13 +212,148 @@ class limplista {
 		return $tabtbody;
 	}
 
+	public function FormMaterial($id=NULL) {
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
+		$tot 	 = 'SELECT * ';
+		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
+		$totLimp = mysql_query($tot);
+		$incrrc=0; //indece p/ zebrar tabela
+		$tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
+		while($lista = mysql_fetch_array($totLimp)){
+			// var_dump($lista);
+			++$inclimp;
+			$campoIncl = sprintf("<td class='text-center'>%'03u</td>",$inclimp);
+			//Coluna Status
+			switch ($lista['status']) {
+				case '0':
+					// code...
+					$verStatus .= '<button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Item Desativado</button>';
+					break;
+				case '1':
+					// code...
+					$verStatus .= '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Item Vis&iacute;vel</button>';
+					break;
+				case '2':
+					// code...
+					$verStatus .= '<button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Item oculto</button>';
+					break;
+
+				default:
+					// code...
+					$verStatus .= '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> ExibiÃ§Ã£o nÃ£o definida</button>';
+					break;
+			}
+			$tabtbody .=  '<tr>';
+			if ($id==$lista['id']) {
+						//Coluna Item
+			$tabtbody .= '<td class="text-center"><br />';
+			if ($lista['status']=='1') {
+				$tabtbody .=  '<p><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=0" ><button class="btn btn-danger btn-xs">Desativar</button> </a></p>';
+			} else {
+				$tabtbody .=  '<p><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=1" ><button class="btn btn-primary btn-xs">Ativar</button> </a></p>';
+			}
+			$tabtbody .=  '<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=2" ><button class="btn btn-warning btn-xs">Ocultar</button> </a></td>';
+
+			$tabtbody .= '<form class="" action="./" method="get">';
+
+			$tabtbody .= '<td colspan="11"><input type="hidden" name="id" value="'.$lista['id'].'">';
+			//Coluna Quantidade
+			$tabtbody .= '<div class="row"> <div class="col-xs-1"><label><small>Item</small></label><input type="text" class="form-control input-sm" disabled value="'.$lista['id'].'"></div>';
+			//Coluna Quantidade
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade">ConteÃºdo</small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
+			//Coluna Unidade
+			$tabtbody .= '<div class="col-xs-2"><label><small>Unidade</small></label><input type="text" name="unid" class="form-control input-sm" value="'.$lista['unid'].'"></div>';
+			//Coluna Discriminaï¿½ï¿½o
+			$tabtbody .= '<div class="col-xs-3"><label><small>Discrimina&ccedil;&atilde;o</small></label><input type="text" name="discrim" class="form-control input-sm" placeholder="DiscriminaÃ§Ã£o" disabled value="'.$lista['discrim'].'"></div>';
+			//Coluna Tempo
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Valor em m&ecirc;s(es)">Tempo</small></label><input type="text" name="tempo" class="form-control input-sm" value="'.$lista['tempo'].'" ></div>';
+			//Coluna Tipo 1
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Quantidade p/ Igreja classe 1 - Ver Cadastro">Tipo 1</small></label><input type="text" name="tipo1" class="form-control input-sm" value="'.$lista['tipo1'].'"></div>';
+			//Coluna Tipo 2
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Quantidade p/ Igreja classe 2 - Ver Cadastro">Tipo 2</small></label><input type="text" name="tipo2" class="form-control input-sm" value="'.$lista['tipo2'].'"></div>';
+			//Coluna Tipo 3
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Quantidade p/ Igreja classe 3 - Ver Cadastro">Tipo 3</small></label><input type="text" name="tipo3" class="form-control input-sm" value="'.$lista['tipo3'].'"></div>';
+			//Coluna Tipo 4
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Quantidade p/ Igreja classe 4 - Ver Cadastro">Tipo 4</small></label><input type="text" name="tipo4" class="form-control input-sm" value="'.$lista['tipo4'].'"></div>';
+			//Coluna Tipo 5
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Quantidade p/ Igreja classe 5 - Ver Cadastro">Tipo 5</small></label><input type="text" name="tipo5" class="form-control input-sm" value="'.$lista['tipo5'].'"></div>';
+			//Coluna Valor
+			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Valor unit&aacute;rio em R$">Valor</small></label><input type="text" name="valor" class="form-control input-sm" value="'.number_format($lista['valor'], 2, ',', ' ').'"></div>';
+			//Coluna Status
+			$tabtbody .= '<div class="col-xs-2"><label><small data-toggle="tooltip" data-placement="top" title="Status de exibi&ccedil;&atilde;o">Status</small></label><br />'.$verStatus.'</div>';
+			//Coluna Tipo 5
+			$tabtbody .= '<div class="col-xs-2"><label><small>&nbsp;</small></label><input type="submit" class=" form-control input-sm btn-primary btn-xs" value="Alterar!"></div></div>';
+
+			$tabtbody .=  '<input type="hidden" name="escolha" value="controller/limpeza.php">';
+			$tabtbody .=  '<input type="hidden" name="menu" value="top_tesouraria">';
+			$tabtbody .=  '<input type="hidden" name="limpeza" value="13">';
+
+			$tabtbody .=  '</form>';
+
+			} else {
+				$tabtbody .=  '<td class="text-center"><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'" ><button class="btn btn-success btn-xs">Editar</button> </a></td>';
+				//Coluna Item
+				//Coluna Item
+				// $tabtbody .= $campoIncl;
+				// $tabtbody .= $campoIncl;
+				// $tabtbody .=  '<form class="" action="index.html" method="post">';
+			//Coluna Quantidade
+			//Coluna Quantidade
+			$tabtbody .= '<td class="text-center"> '.$lista['quant'].' </td>';
+			// $campoQuant  = $lista['quant'];
+			//Coluna Unidade
+			// $campoUnid = ;
+			// //Coluna Unidade
+			$tabtbody .= '<td> '.$lista['unid'].' </td>';
+			//Coluna Discriminaï¿½ï¿½o
+			//Coluna Discriminaï¿½ï¿½o
+			// $campoDesc = ;
+			$tabtbody .= '<td> '.$lista['discrim'].' </td>';
+			//Coluna Tempo
+			//Coluna Tempo
+			// $campoTemp = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['tempo'].' </td>';
+			//Coluna Tipo 1
+			// $campoTipo1 = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['tipo1'].' </td>';
+			//Coluna Tipo 2
+			// $campoTipo2 = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['tipo2'].' </td>';
+			//Coluna Tipo 3
+			// $campoTipo3 = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['tipo3'].' </td>';
+			//Coluna Tipo 4
+			// $campoTipo4 = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['tipo4'].' </td>';
+			//Coluna Tipo 5
+			// $campoTipo5 = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['tipo5'].' </td>';
+			//Coluna Valor
+			// $campoValor = ;
+			$tabtbody .= '<td class="text-right"> '.number_format($lista['valor'], 2, ',', ' ').' </td>';
+			//Coluna Status
+			// $campoStatus = ;
+			$tabtbody .= '<td class="text-center"> '.$lista['status'].' </td>';
+			}
+			//Coluna Tipo 1
+			//Coluna Tipo 2
+			//Coluna Tipo 3
+			//Coluna Tipo 4
+			//Coluna Tipo 5
+			//Coluna Valor
+			//Coluna Status
+			$tabtbody .=  '</tr>';
+		}
+		return $tabtbody;
+	}
+
   public function materialFormPed() {
-		//Select mysql na tabela limpeza para listar o total para o período
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid  ';
 		$tot 	.= 'FROM limpeza AS p WHERE p.authorized="1" ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
-		$tabtbody = ''; //Limpa variável para receber os dados da tabela
+		$tabtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 		while($lista = mysql_fetch_array($totLimp)){
 			//Faz o trabalho de zebrar a tabela
 			if ($inclimp%2=="0") {
@@ -234,14 +369,14 @@ class limplista {
 	}
 
 	public function geraLista() {
-		//Select mysql na tabela limpeza para listar o total para o período
+		//Select mysql na tabela limpeza para listar o total para o perï¿½odo
 		$histReg = new datetime ('NOW');
 		$tot 	 = 'SELECT l.*,i.matlimpeza,i.rol AS igreja ';
 		$tot 	.= 'FROM limpeza AS l,igreja AS i ';
 		$tot 	.= 'ORDER BY i.razao';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
-		$tabtbody = false; //Limpa variável para receber os dados da tabela
+		$tabtbody = false; //Limpa variï¿½vel para receber os dados da tabela
 		while($lista = mysql_fetch_array($totLimp)){
 
 			$tipo = 'tipo'.$lista['matlimpeza'];
@@ -266,10 +401,10 @@ class limplista {
 		}
 
 		if ($valores!='') {
-			# Completa e inserção dos dados
+			# Completa e inserï¿½ï¿½o dos dados
 				$item=0;
 				echo '<script>alert("** Fim dos itens! **");</script>';
-				$rest = substr($valores, 0, -3);  // retorna sem os três últimos caracteres
+				$rest = substr($valores, 0, -3);  // retorna sem os trï¿½s ï¿½ltimos caracteres
 				echo $rest;
 				$pedLimpeza= new insert ($rest,"limpezpedid");
 				echo $pedLimpeza->inserir();

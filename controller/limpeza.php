@@ -10,7 +10,7 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && 
 	function __autoload ($classe) {
 	list($dir,$nomeClasse) = explode('_', $classe);
 	//$dir = strtr( $classe, '_','/' );
-	#Variáveis do script
+	#Variï¿½veis do script
 	if (file_exists("../models/$dir/$classe.class.php")){
 			require_once ("../models/$dir/$classe.class.php");
 		}elseif (file_exists("../models/$classe.class.php")){
@@ -18,9 +18,9 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && 
 		}
 	}
 		require_once "../help/tes/varLimpeza.php";
-		//montar um cabeçalho padrão e remover as chamadas a cima
+		//montar um cabeï¿½alho padrï¿½o e remover as chamadas a cima
 		$sede = new DBRecord('igreja', '1', 'rol');//Traz os dados da sede
-		//Dados para montar o cabeçalho do documento para imprimir
+		//Dados para montar o cabeï¿½alho do documento para imprimir
 		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
 		$dadosjgreja .= '<br /> '.$sede->cidade().' - '.$sede->uf().' - CNPJ:';
 		$dadosjgreja .= $sede->cnpj().'<br />	CEP: '.$sede->cep().' - Fone:';
@@ -29,7 +29,7 @@ if ($_GET['limpeza']=='1' || $_GET['limpeza']=='4' || ($_GET['limpeza']>='6' && 
 		$emailigreja  = $sede->email();
 		$icone		  = '../ad.ico';
 } else {
-	#Variáveis do script
+	#Variï¿½veis do script
 	require_once "help/tes/varLimpeza.php";
 }
 if (empty($_GET['mes']) && empty($_GET['ano'])) {
@@ -40,54 +40,54 @@ if (empty($_GET['mes']) && empty($_GET['ano'])) {
 switch ($_GET['limpeza']) {
 	case '1':
 		$dadoscong	= $igSede;//Traz os dados da Sede
-		//Mostrar totalizador geral para impressão
-		$titulo		  = 'Totalizador material de limpeza - Todas as Congregações';
+		//Mostrar totalizador geral para impressï¿½o
+		$titulo		  = 'Totalizador material de limpeza - Todas as Congregaï¿½ï¿½es';
 		$arquivo	  = '../views/limpezatot.php';
 		$todascongreg = '../models/limplisttotcong.php';
 		require_once '../tesouraria/modeloimpress.php';
 	break;
 	case '2':
 		$dadoscong	= $igSede;//Traz os dados da Sede
-		//Mostrar totalizador dentro da aplicação
+		//Mostrar totalizador dentro da aplicaï¿½ï¿½o
 		// echo '<a href="controller/limpeza.php?limpeza=1&'.$linkperido.'"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
     require_once 'views/tesouraria/buttonLimpTot.php';
-		$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações
+		$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregaï¿½ï¿½es
 		require_once 'views/limpezatot.php';
 	break;
 	case '3':
 		echo "<style type='text/css'>";
 		require_once ("aniv/style.css");
 		echo "</style>";
-			//Mostrar totalizador dentro da aplicação
+			//Mostrar totalizador dentro da aplicaï¿½ï¿½o
 		$aquivo ='../views/limpezatot.php';
 	break;
 	case '4':
-		$dadoscong	  = new DBRecord('igreja',$_GET['igreja'], 'rol');//Traz os dados da congregação
+		$dadoscong	  = new DBRecord('igreja',$_GET['igreja'], 'rol');//Traz os dados da congregaï¿½ï¿½o
 		$icone		  = '../ad.ico';
-		$titulo		  = 'Totalizador material de limpeza - Congregação:'. $dadoscong->razao();
+		$titulo		  = 'Totalizador material de limpeza - Congregaï¿½ï¿½o:'. $dadoscong->razao();
 		$arquivo	  = '../views/limpezatot.php';
 		$todascongreg = '../models/limplisttotcong.php';
 		$saltoPagina  = '';
 		require_once '../tesouraria/modeloimpress.php';
 	break;
-	case '5'://Formulário para mudança do periodo de cadastro do material
+	case '5'://Formulï¿½rio para mudanï¿½a do periodo de cadastro do material
 		//$ref = new ultimoid('limpezpedid');
 		//$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
 		require_once 'forms/limpeza/mudarperiodo.php';
 	break;
 	case '6':
-		//Mostrar Lista de todos os materiais disponíveis
+		//Mostrar Lista de todos os materiais disponï¿½veis
 		$titulo		  = 'Material de limpeza Disponibilizado!';
 		$arquivo	  = '../views/limpezaLista.php';
 		require_once '../tesouraria/modeloimpress.php';
 	break;
 	case '7':
-		//Mostrar Lista de todos os materiais disponíveis$ref = new ultimoid('limpezpedid');
+		//Mostrar Lista de todos os materiais disponï¿½veis$ref = new ultimoid('limpezpedid');
 		//$mesref = (empty($_GET['mes'])) ? $ref->ultimo('mesref'):$_GET['mes'].'/'.$_GET['ano'];//Remover quando terminar o script
 	 //	$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../views/limpeza.css" />';
-		//montar um cabeçalho padrão e remover as chamadas a cima
+		//montar um cabeï¿½alho padrï¿½o e remover as chamadas a cima
 		//$sede = $igSede;//Traz os dados da sede
-		//Dados para montar o cabeçalho do documento para imprimir
+		//Dados para montar o cabeï¿½alho do documento para imprimir
 		$dadosjgreja  = 'Templo SEDE: '.$sede->rua().', N&ordm; '.$sede->numero();
 		$dadosjgreja .= '<br /> '.$sede->cidade().' - '.$sede->uf().' - CNPJ:';
 		$dadosjgreja .= $sede->cnpj().'<br />	CEP: '.$sede->cep().' - Fone:';
@@ -95,7 +95,7 @@ switch ($_GET['limpeza']) {
 		$siteigreja	  = $sede->site();
 		$emailigreja  = $sede->email();
 		$tbodytab = new limplista();
-		//Variável com a lista
+		//Variï¿½vel com a lista
 		$tabMaterial = $tbodytab->materialFormPed();
 		$arrayComIgrejas = new igreja();
 		//print_r ($arrayComIgrejas->ArrayIgrejaDados());
@@ -108,7 +108,7 @@ switch ($_GET['limpeza']) {
 		}
 	break;
 	case '12':
-		//Gerar lista de material do período
+		//Gerar lista de material do perï¿½odo
 		$verRegistro = new limplista($mesref);
 		if ($verRegistro->TotMaterial()==false) {
 			if (empty($mesPed)) {
@@ -125,18 +125,26 @@ switch ($_GET['limpeza']) {
 			}
 			$GeraPedidos = new limplista($mesref);
 			$verRegistro->geraLista($ref);
-			$dadoscong	= $igSede;//Traz os dados da congregação
-			//Mostrar totalizador dentro da aplicação
+			$dadoscong	= $igSede;//Traz os dados da congregaï¿½ï¿½o
+			//Mostrar totalizador dentro da aplicaï¿½ï¿½o
 			echo '<a href="controller/limpeza.php?limpeza=1&'.$linkperido.'"><button type="button" class="btn btn-primary">Imprimir totalizador</button></a>';
-			$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregações
+			$todascongreg = 'models/limplisttotcong.php';//Lista os pedidos das outras congregaï¿½ï¿½es
 			require_once 'views/limpezatot.php';
 		} else {
-			echo '<script>alert("** Período já foi gerado! **");</script>';
+			echo '<script>alert("** Perï¿½odo jï¿½ foi gerado! **");</script>';
 			require_once 'forms/limpeza.php';
 		}
 	break;
+	case '13':
+    require_once ('views/menus/subLimp.php');
+    if (isset($_GET['id'])) {
+      require_once ('models/tes/upDateLimp.php');
+    }
+		//Mostrar Lista de todos os materiais disponï¿½veis
+		require_once 'views/tesouraria/formLimpeza.php';
+	break;
 	default:
-		//Mostra lista por congregação pelo $_GET['igreja']
+		//Mostra lista por congregaï¿½ï¿½o pelo $_GET['igreja']
 		require_once 'forms/limpeza.php';
 	break;
 }
