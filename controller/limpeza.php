@@ -137,7 +137,7 @@ switch ($_GET['limpeza']) {
 	break;
 	case '13':
     require_once ('views/menus/subLimp.php');
-    if (isset($_GET['id'])) {
+    if (isset($_GET['quant']) || isset($_GET['status'])) {
       require_once ('models/tes/upDateLimp.php');
     }
 		//Mostrar Lista de todos os materiais dispon�veis

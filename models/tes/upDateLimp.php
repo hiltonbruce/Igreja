@@ -1,12 +1,13 @@
 <?php
+$idMat = intval($_GET['id']);
 
 // var_dump($_GET);
 $materialLimp = "SELECT * FROM limpeza WHERE id=:ID";
-$idMateril = intval($_GET['id']);
 $stmtLimp = $conn->prepare($materialLimp);
-$stmtLimp ->bindParam(":ID", $idMateril);
+$stmtLimp ->bindParam(":ID", $idMat);
 $stmtLimp->execute();
 $resultsLimp = $stmtLimp->fetchAll(PDO::FETCH_ASSOC);
+
 
 // var_dump($resultsLimp[0]);
 $optionLimp = '';
@@ -27,7 +28,7 @@ foreach ($resultsLimp[0] as $key => $value) {
 $materialUpdate = "UPDATE limpeza SET ".$optWhere.' WHERE id=:ID';
 // echo $materialUpdate;
 $stmtUpDate = $conn->prepare($materialUpdate);
-$stmtUpDate ->bindParam(':ID', $idMateril);
+$stmtUpDate ->bindParam(':ID', $idMat);
 
 
 foreach ($resultsLimp[0] as $key => $value) {
@@ -57,7 +58,7 @@ if ($stmtUpDate->execute()) {
   ?>
 
 <br />
-  <div class="alert alert-success alert-dismissible fade in" role="alert">
+  <div class="alert alert-danger alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
       <h4>Erro!</h4>
       <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>tton type="button" class="btn btn-default">Or do this</button>

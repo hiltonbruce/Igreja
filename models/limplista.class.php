@@ -193,7 +193,7 @@ class limplista {
 	public function ListaMaterial() {
 		//Select mysql na tabela limpeza para listar o total para o per�odo
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid, p.tempo  ';
-		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
+		$tot 	.= 'FROM limpeza AS p WHERE p.status="1" ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
 		$tabtbody = ''; //Limpa vari�vel para receber os dados da tabela
@@ -213,12 +213,23 @@ class limplista {
 	}
 
 	public function FormMaterial($id=NULL) {
+		global $conn;
 		//Select mysql na tabela limpeza para listar o total para o per�odo
 		$tot 	 = 'SELECT * ';
 		$tot 	.= 'FROM limpeza AS p ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
 		$tabtbody = ''; //Limpa vari�vel para receber os dados da tabela
+
+		// Verifica se há Registros já feitos para liberar edição de nome do Item
+		if ($id >'0') {
+		$materialRow = "SELECT * FROM limpezpedid WHERE item='$id'";
+		$stmtRow = $conn->query($materialRow);
+		$resultsRow = $stmtRow->rowCount();
+	}
+
+	$discrimDisab = ($resultsRow>0) ? 'disabled' : '' ;
+
 		while($lista = mysql_fetch_array($totLimp)){
 			// var_dump($lista);
 			++$inclimp;
@@ -226,21 +237,17 @@ class limplista {
 			//Coluna Status
 			switch ($lista['status']) {
 				case '0':
-					// code...
-					$verStatus .= '<button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Item Desativado</button>';
+					$verStatus = '<button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Item Desativado</button>';
 					break;
 				case '1':
-					// code...
-					$verStatus .= '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Item Vis&iacute;vel</button>';
+					$verStatus = '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Item Vis&iacute;vel</button>';
 					break;
 				case '2':
-					// code...
-					$verStatus .= '<button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Item oculto</button>';
+					$verStatus = '<button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Item oculto</button>';
 					break;
 
 				default:
-					// code...
-					$verStatus .= '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Exibição não definida</button>';
+					$verStatus = '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Exibição não definida</button>';
 					break;
 			}
 			$tabtbody .=  '<tr>';
@@ -262,9 +269,9 @@ class limplista {
 			//Coluna Quantidade
 			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade">Conteúdo</small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
 			//Coluna Unidade
-			$tabtbody .= '<div class="col-xs-2"><label><small>Unidade</small></label><input type="text" name="unid" class="form-control input-sm" value="'.$lista['unid'].'"></div>';
+			$tabtbody .= '<div class="col-xs-2"><label><small>Unidade</small></label><input type="text" name="unid" class="form-control input-sm" '.$discrimDisab.' value="'.$lista['unid'].'"></div>';
 			//Coluna Discrimina��o
-			$tabtbody .= '<div class="col-xs-3"><label><small>Discrimina&ccedil;&atilde;o</small></label><input type="text" name="discrim" class="form-control input-sm" placeholder="Discriminação" disabled value="'.$lista['discrim'].'"></div>';
+			$tabtbody .= '<div class="col-xs-3"><label><small>Discrimina&ccedil;&atilde;o</small></label><input type="text" name="discrim" class="form-control input-sm" placeholder="Discriminação" '.$discrimDisab.' value="'.$lista['discrim'].'"></div>';
 			//Coluna Tempo
 			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Valor em m&ecirc;s(es)">Tempo</small></label><input type="text" name="tempo" class="form-control input-sm" value="'.$lista['tempo'].'" ></div>';
 			//Coluna Tipo 1
@@ -289,6 +296,17 @@ class limplista {
 			$tabtbody .=  '<input type="hidden" name="limpeza" value="13">';
 
 			$tabtbody .=  '</form>';
+			if ($discrimDisab=='disabled') {
+				$tabtbody .=  '<p><div class="alert alert-danger alert-dismissible fade in" role="alert">';
+				$tabtbody .=  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>';
+				$tabtbody .=  '<h3>Exite '.$resultsRow.' lançamento(s) deste item!</h3>';
+				$tabtbody .=  '<p>Portanto é necessário o cancelamento de todos os lan&ccedil;amentos anteriores, <strong>e não recomendados que isto seja ';
+				$tabtbody .=  'realizado</strong>, pois prejudicaria todos os relat&oacute;rios de pedidos afetados pela mudan&ccedil;a!</p>';
+				$tabtbody .=  '<p>Portanto s&oacute; podermos liberar a edição do T&iacute;tulo e da Unidade quando h&atilde;o ';
+				$tabtbody .=  'h&aacute; nenhum registro anterior.	</p></div></p>';
+			}
+			$tabtbody .=  '</form>';
+
 
 			} else {
 				$tabtbody .=  '<td class="text-center"><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'" ><button class="btn btn-success btn-xs">Editar</button> </a></td>';
