@@ -267,13 +267,13 @@ class limplista {
 			//Coluna Quantidade
 			$tabtbody .= '<div class="row"> <div class="col-xs-1"><label><small>Item</small></label><input type="text" class="form-control input-sm" disabled value="'.$lista['id'].'"></div>';
 			//Coluna Quantidade
-			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade">Conteúdo</small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
+			$tabtbody .= '<div class="col-xs-2"><label><small>Conteúdo <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade"></span></small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
 			//Coluna Unidade
 			$tabtbody .= '<div class="col-xs-2"><label><small>Unidade</small></label><input type="text" name="unid" class="form-control input-sm" '.$discrimDisab.' value="'.$lista['unid'].'"></div>';
 			//Coluna Discrimina��o
 			$tabtbody .= '<div class="col-xs-3"><label><small>Discrimina&ccedil;&atilde;o</small></label><input type="text" name="discrim" class="form-control input-sm" placeholder="Discriminação" '.$discrimDisab.' value="'.$lista['discrim'].'"></div>';
 			//Coluna Tempo
-			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Valor em m&ecirc;s(es)">Tempo</small></label><input type="text" name="tempo" class="form-control input-sm" value="'.$lista['tempo'].'" ></div>';
+			$tabtbody .= '<div class="col-xs-1"><label><small>Tempo <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Valor em m&ecirc;s(es)"></span></small></label><input type="text" name="tempo" class="form-control input-sm" value="'.$lista['tempo'].'" ></div>';
 			//Coluna Tipo 1
 			$tabtbody .= '<div class="col-xs-1"><label><small data-toggle="tooltip" data-placement="top" title="Quantidade p/ Igreja classe 1 - Ver Cadastro">Tipo 1</small></label><input type="text" name="tipo1" class="form-control input-sm" value="'.$lista['tipo1'].'"></div>';
 			//Coluna Tipo 2

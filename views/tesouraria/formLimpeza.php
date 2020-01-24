@@ -21,9 +21,9 @@ $tbodytab = new limplista($mesref);
 		<tr>
 			<th scope="col">item</th>
 			<th scope="col">Quant</th>
-			<th scope="col" data-toggle="tooltip" data-placement="top" title="Unidade de medida">Unid</th>
+			<th scope="col"><span data-toggle="tooltip" data-placement="top" title="Unidade de medida">Unid</span></th>
 			<th scope="col">Discrimina&ccedil;&atilde;o</th>
-			<th scope="col" data-toggle="tooltip" data-placement="top" title="Tempo de uso em m&ecirc;s">Tempo</th>
+			<th scope="col"><span data-toggle="tooltip" data-placement="top" title="Tempo de uso em m&ecirc;s">Tempo</span></th>
 			<th scope="col">Tipo 1</th>
 			<th scope="col">Tipo 2</th>
 			<th scope="col">Tipo 3</th>
