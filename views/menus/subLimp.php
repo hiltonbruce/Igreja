@@ -14,7 +14,7 @@
 	<button type="button" class="btn btn-primary btn-xs disabled" data-toggle="tooltip"
 	data-placement="bottom" title="Acrescentar novo item de material dispon&iacute;vel">
 	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-	Novo Item</button>
+	Cadastrar Material</button>
 </a>
 <a href='./controller/limpeza.php?limpeza=7' target="_blank">
 <button type="button" class="btn btn-primary btn-xs">Formul&aacute;rio de Pedido...</button></a>
