@@ -1,11 +1,11 @@
 <?PHP
 /***************************************************************************
- * Gerador de calendário em PHP                                            *
- * Última alteração: 28/02/2005 às 17:37                                   *
- * Autor: Raphael Araújo e Silva - khaotix_@hotmail.com                    *
- * Adaptação: Joseilton Costa Bruce (30/01/2010) - hiltonbruce@gmail.com   *
- * ATENÇÃO: VOCÊ TEM A COMPLETA PERMISSÃO PARA ALTERAÇÃO E REDISTRIBUIÇÃO  *
- *          DO CÓDIGO NESTE E EM QUALQUER ARQUIVO ACOMPANHANTE DESDE QUE O *
+ * Gerador de calendï¿½rio em PHP                                            *
+ * ï¿½ltima alteraï¿½ï¿½o: 28/02/2005 ï¿½s 17:37                                   *
+ * Autor: Raphael Araï¿½jo e Silva - khaotix_@hotmail.com                    *
+ * Adaptaï¿½ï¿½o: Joseilton Costa Bruce (30/01/2010) - hiltonbruce@gmail.com   *
+ * ATENï¿½ï¿½O: VOCï¿½ TEM A COMPLETA PERMISSï¿½O PARA ALTERAï¿½ï¿½O E REDISTRIBUIï¿½ï¿½O  *
+ *          DO Cï¿½DIGO NESTE E EM QUALQUER ARQUIVO ACOMPANHANTE DESDE QUE O *
  *          AUTOR ORIGINAL SEJA CITADO.                                    *
  ***************************************************************************/
 
@@ -39,21 +39,21 @@ function calcularDiaSemana($dia,$mes,$ano)
   if(!($mes>0 && $mes<=12 && ($nmeses>0 && $nmeses<=12) &&
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
   {
-   $tabela="Erro ao gerar calendário: [mês=".$mes."] [ano=".$ano.
-           "] [número de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
+   $tabela="Erro ao gerar calendï¿½rio: [mï¿½s=".$mes."] [ano=".$ano.
+           "] [nï¿½mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
   }else {
-   //Carrega o css do calendário e armazena em $dados
+   //Carrega o css do calendï¿½rio e armazena em $dados
    $arq=fopen("../css/calendarioCeia.css","r");
    $tam=filesize("../css/calendarioCeia.css");
    $dados=fread($arq,$tam);
    fclose($arq);
-   //Coloca o css carregado no código do calendário
+   //Coloca o css carregado no cï¿½digo do calendï¿½rio
    echo "<style type='text/css'>".$dados."</style>";
 
-   //Calcula em que dia da semana é o dia 1/$mes/$ano
+   //Calcula em que dia da semana ï¿½ o dia 1/$mes/$ano
    $dia_semana=calcularDiaSemana(1,$mes,$ano);
-   $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano é bisexto
-   $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o número de dias de cada mês
+   $bisexto=(($ano % 4 ==0) || ($ano % 100==0)); //Verifica se o ano ï¿½ bisexto
+   $ndias=array(31,($bisexto ? 29 : 28),31,30,31,30,31,31,30,31,30,31); //Vetor com o nï¿½mero de dias de cada mï¿½s
    $meses=array("Janeiro","Fevereiro","Mar&ccedil;o","Abril","Maio","Junho",
                 "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro");
    $dias=array("Dom","Seg","Ter","Qua","Qui","Sex","S&acute;b");
@@ -79,7 +79,7 @@ function calcularDiaSemana($dia,$mes,$ano)
 
      while($cnt_dias<=$ndias[$idx])
      {
-      $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mês atual
+      $temp_ln=$temp_ln."<tr>"; //Cria uma linha da tabela do mï¿½s atual
 	  //$cultos =="";
 
       for($d=0;$d<7 && $cnt_dias<=$ndias[$idx];$d++)
@@ -89,30 +89,30 @@ function calcularDiaSemana($dia,$mes,$ano)
 	  $classe="";
 	  $maux=$idx+1;
 
-	//A rotina abaixo verifica se o dia atual é um feriado ou um dia marcado
-	//onde $datas contém os dois vetores $feriados e $marcados
+	//A rotina abaixo verifica se o dia atual ï¿½ um feriado ou um dia marcado
+	//onde $datas contï¿½m os dois vetores $feriados e $marcados
 	for($i=0;$i<$nq && $classe=="";$i++)
 	{
-	  //for para marcação dos dias ou intervalos de dias
+	  //for para marcaï¿½ï¿½o dos dias ou intervalos de dias
 	 for($i1=0;$i1<$qtd[$i] && $classe=="";$i1++)
 	 {
 	  //Caso seja um intervalo de dias
 	  if(strpos($datas[$i][$i1],"-")==2)
 	  {
-	   $d1=substr($datas[$i][$i1],0,2); //Obtém o primeiro dia
-	   $d2=substr($datas[$i][$i1],3,2); //Obtém o segundo dia
-	   $m=substr($datas[$i][$i1],6,2); //Obtém o mês do intervalo
+	   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o primeiro dia
+	   $d2=substr($datas[$i][$i1],3,2); //Obtï¿½m o segundo dia
+	   $m=substr($datas[$i][$i1],6,2); //Obtï¿½m o mï¿½s do intervalo
 	  }
 	  else //Caso seja um dia
 	  {
-	   $d1=substr($datas[$i][$i1],0,2); //Obtém o dia
+	   $d1=substr($datas[$i][$i1],0,2); //Obtï¿½m o dia
   	   $d2=0;
-	   $m=substr($datas[$i][$i1],3,2); //Obtém o mês
+	   $m=substr($datas[$i][$i1],3,2); //Obtï¿½m o mï¿½s
 	  }
 
-	  //Atribui uma classe CSS à célula (dia) atual da tabela caso
-	  //o mês atual $maux seja igual ao mês obtido de um dos vetores $m ($feriado ou $marcado)
-	  //Verifica se o dia atual $cnt_dias está no intervalo de dias ou se é igual
+	  //Atribui uma classe CSS ï¿½ cï¿½lula (dia) atual da tabela caso
+	  //o mï¿½s atual $maux seja igual ao mï¿½s obtido de um dos vetores $m ($feriado ou $marcado)
+	  //Verifica se o dia atual $cnt_dias estï¿½ no intervalo de dias ou se ï¿½ igual
 	  //ao dia obtido
    	  if($m==$maux && (($cnt_dias>=$d1 && $cnt_dias<=$d2) ||
 	    ($cnt_dias==$d1))) $classe="td_marcado".($i+1);//$valor[$i];
@@ -121,17 +121,17 @@ function calcularDiaSemana($dia,$mes,$ano)
 
 	$cultos = $classe;
 
-	if($classe=="") //Caso a classe ainda não esteja definida após o for acima
+	if($classe=="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 	 $classe=($d==0 ? "td_marcado0" : "td_dia");
 
      /*
-     if($d==0 || $cultos =="") //Caso a classe ainda não esteja definida após o for acima
+     if($d==0 || $cultos =="") //Caso a classe ainda nï¿½o esteja definida apï¿½s o for acima
 	 $classe=($d==1 || $d==3 || $d==5 ? "td_marcado3" : $classe);//Define os dias de culto
      */
 
     if ($d==$dia_ceia)  ++$semana;
 
-     if ($ceia=="" &&  $d==$dia_ceia && $semana==$semana_ceia) //Se 1ª Sexta marca santa ceia
+     if ($ceia=="" &&  $d==$dia_ceia && $semana==$semana_ceia) //Se 1ï¿½ Sexta marca santa ceia
 	 {
 	 	if ($d==$dia_ceia) {
 	 		$igreja[substr($meses[$idx], 0,3)] =  $cnt_dias;
@@ -141,7 +141,7 @@ function calcularDiaSemana($dia,$mes,$ano)
 	 	}
 	 }
 
-	//Cria a célula referente ao dia atual
+	//Cria a cï¿½lula referente ao dia atual
 	$temp_ln=$temp_ln."<td class='".$classe."'> ".$cnt_dias++."</td>";
         $daux++;
         if($daux>6) $daux=0;
@@ -158,7 +158,7 @@ function calcularDiaSemana($dia,$mes,$ano)
      $tabela=$tabela.$temp_tb;
      $dia=$daux;
      $ceia = "";$culto="";
-     $idx++; //Passa para o próximo mês
+     $idx++; //Passa para o prï¿½ximo mï¿½s
      $sem=0;
      $semana=0;
     }
@@ -166,12 +166,12 @@ function calcularDiaSemana($dia,$mes,$ano)
    }
   }
 
-  for($idx2=0;$idx2<12;$idx2++) { //Gera o cabeçalho da tabela do mês atual
+  for($idx2=0;$idx2<12;$idx2++) { //Gera o cabeï¿½alho da tabela do mï¿½s atual
   	$ceiaTodos .="<td class='cabecalho'>".substr($meses[$idx2],0,3)."</td>";
   }
-  	$tabTodasCeias=$ceiaTodos."</tr><tr>"; //Fecha o cabeçalho
+  	$tabTodasCeias=$ceiaTodos."</tr><tr>"; //Fecha o cabeï¿½alho
 
-  $tabTodasCeias=$ceiaTodos."</tr>"; //Fecha o cabeçalho
+  $tabTodasCeias=$ceiaTodos."</tr>"; //Fecha o cabeï¿½alho
   $tabDias = $tabDias.'</tr>';
   return($tabDias);
  }

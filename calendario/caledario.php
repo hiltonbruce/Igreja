@@ -121,10 +121,10 @@ $imprimir = true; //permite o impress�o do rodap�
 	if ($_GET['imp']=='2') {
 		$todasCeias = new igreja('');
 		$arrayIgrejas = $todasCeias->ArrayIgrejaDados();
-		$meses=array("Jan","Fev","Mar","Abr","Mai","Jun",
+		$meses=array("Ora&ccedil;&atilde;o","Jan","Fev","Mar","Abr","Mai","Jun",
 				"Jul","Ago","Set","Out","Nov","Dez");
 		$cabMes = '<table class="tabela" height=220><tr><td width=300></td>';
-		for($ms=0; $ms<12; $ms++){
+		for($ms=0; $ms<13; $ms++){
 		$cabMes .='<td class="cabecalho">'.$meses[$ms].'</td>'; //Cria uma tabela para o m�s atual
 		}
 		$cabMes .= '</tr>';
@@ -136,6 +136,7 @@ $imprimir = true; //permite o impress�o do rodap�
 		foreach ($arrayIgrejas AS $key => $dadosCong){
 			//echo $key.' - rol: '.$dadosCong['rol'].' --> '.$dadosCong['razao'].' <---> ';
 
+
 		if ($dadosCong['rol']==$_GET['id']) {
 			$classIgreja = 'td_marcado8';
 			$classDias 	 = 'td_marcado5';
@@ -143,7 +144,7 @@ $imprimir = true; //permite o impress�o do rodap�
 			$classIgreja = 'td_marcado1';
 			$classDias 	 = 'td_marcado7';
 		}
-		$todCeias ='<tr><td class="'.$classIgreja.'">'.$dadosCong['razao'].'</td>';
+		$todCeias ='<tr><td class="'.$classIgreja.'">'.$dadosCong['razao'].'</td><td class="'.$classDias.'">'.str_replace('-feira','',arrayDia ($dadosCong['oracao']-1)).'</td>';
 		$dia_ceia = substr ($dadosCong['ceia'],-1);
 		$semana_ceia = substr ($dadosCong['ceia'],-2,1);
 		 $todCeias .= gerarCalendario($mes,$y,$todos,$colunas,

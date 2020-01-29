@@ -1,5 +1,7 @@
 <?php
 	date_default_timezone_set('America/Recife');
+	setlocale( LC_ALL, 'pt_BR.ISO-8859-1', 'pt_BR', 'Portuguese_Brazil');
+	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 	//imprimir entradas de todas as congrega��es - mensal

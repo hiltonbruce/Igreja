@@ -193,7 +193,7 @@ class limplista {
 	public function ListaMaterial() {
 		//Select mysql na tabela limpeza para listar o total para o per�odo
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid, p.tempo  ';
-		$tot 	.= 'FROM limpeza AS p WHERE p.status="1" ORDER BY discrim';
+		$tot 	.= 'FROM limpeza AS p WHERE p.status<>"0" ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
 		$tabtbody = ''; //Limpa vari�vel para receber os dados da tabela
@@ -237,29 +237,40 @@ class limplista {
 			//Coluna Status
 			switch ($lista['status']) {
 				case '0':
-					$verStatus = '<button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Item Desativado</button>';
+					$msg = '<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Indispon&iacute;vel';
+					$verStatus = '<button type="button" class="btn btn-danger btn-xs">'.$msg.'</button>';
+					$verStatusLin = '<p class="text-danger">'.$msg.'</p>';
 					break;
 				case '1':
-					$verStatus = '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Item Vis&iacute;vel</button>';
+					$msg = '<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Vis&iacute;vel';
+					$verStatus = '<button type="button" class="btn btn-info btn-xs">'.$msg.'</button>';
+					$verStatusLin = '<p class="text-info">'.$msg.'</p>';
 					break;
 				case '2':
-					$verStatus = '<button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Item oculto</button>';
+					$msg = '<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> oculto';
+					$verStatus = '<button type="button" class="btn btn-warning btn-xs">'.$msg.'</button>';
+					$verStatusLin = '<p class="text-warning">'.$msg.'</p>';
 					break;
 
 				default:
-					$verStatus = '<button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Exibição não definida</button>';
+					$msg = '<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Exibição não definida';
+					$verStatus = '<button type="button" class="btn btn-info btn-xs">'.$msg.'</button>';
+					$verStatusLin = '<p class="text-muted">'.$msg.'</p>';
 					break;
 			}
 			$tabtbody .=  '<tr>';
 			if ($id==$lista['id']) {
 						//Coluna Item
 			$tabtbody .= '<td class="text-center"><br />';
-			if ($lista['status']=='1') {
-				$tabtbody .=  '<p><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=0" ><button class="btn btn-danger btn-xs">Desativar</button> </a></p>';
-			} else {
+			if ($lista['status']!='1') {
 				$tabtbody .=  '<p><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=1" ><button class="btn btn-primary btn-xs">Ativar</button> </a></p>';
 			}
-			$tabtbody .=  '<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=2" ><button class="btn btn-warning btn-xs">Ocultar</button> </a></td>';
+			if ($lista['status']!='0') {
+				$tabtbody .=  '<p><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=0" ><button class="btn btn-danger btn-xs">Desativar</button> </a></p>';
+			}
+			if ($lista['status']!='2') {
+				$tabtbody .=  '<a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'&status=2" ><button class="btn btn-warning btn-xs">Ocultar</button> </a></td>';
+			}
 
 			$tabtbody .= '<form class="" action="./" method="get">';
 
@@ -267,7 +278,7 @@ class limplista {
 			//Coluna Quantidade
 			$tabtbody .= '<div class="row"> <div class="col-xs-1"><label><small>Item</small></label><input type="text" class="form-control input-sm" disabled value="'.$lista['id'].'"></div>';
 			//Coluna Quantidade
-			$tabtbody .= '<div class="col-xs-2"><label><small>Conteúdo <span class="glyphicon glyphicon-question-sign text-danger" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade"></span></small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
+			$tabtbody .= '<div class="col-xs-2"><label><small>Conte&uacute;do <span class="glyphicon glyphicon-question-sign text-danger" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade"></span></small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
 			//Coluna Unidade
 			$tabtbody .= '<div class="col-xs-2"><label><small>Unidade</small></label><input type="text" name="unid" class="form-control input-sm" '.$discrimDisab.' value="'.$lista['unid'].'"></div>';
 			//Coluna Discrimina��o
@@ -299,10 +310,10 @@ class limplista {
 			if ($discrimDisab=='disabled') {
 				$tabtbody .=  '<p><div class="alert alert-danger alert-dismissible fade in" role="alert">';
 				$tabtbody .=  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>';
-				$tabtbody .=  '<h3>Exite '.$resultsRow.' lançamento(s) deste item!</h3>';
-				$tabtbody .=  '<p>Portanto é necessário o cancelamento de todos os lan&ccedil;amentos anteriores, <strong>e não recomendados que isto seja ';
+				$tabtbody .=  '<h3>Exite '.$resultsRow.' lan&ccedil;amento(s) deste item!</h3>';
+				$tabtbody .=  '<p>Portanto &eacute; necess&aacute;rio o cancelamento de todos os lan&ccedil;amentos anteriores, <strong>e n&atilde;o recomendados que isto seja ';
 				$tabtbody .=  'realizado</strong>, pois prejudicaria todos os relat&oacute;rios de pedidos afetados pela mudan&ccedil;a!</p>';
-				$tabtbody .=  '<p>Portanto s&oacute; podermos liberar a edição do T&iacute;tulo e da Unidade quando h&atilde;o ';
+				$tabtbody .=  '<p>Portanto s&oacute; podermos liberar a edi&ccedil;&atilde;o do T&iacute;tulo e da Unidade quando h&atilde;o ';
 				$tabtbody .=  'h&aacute; nenhum registro anterior.	</p></div></p>';
 			}
 			$tabtbody .=  '</form>';
@@ -351,7 +362,7 @@ class limplista {
 			$tabtbody .= '<td class="text-right"> '.number_format($lista['valor'], 2, ',', ' ').' </td>';
 			//Coluna Status
 			// $campoStatus = ;
-			$tabtbody .= '<td class="text-center"> '.$lista['status'].' </td>';
+			$tabtbody .= '<td class="text-center"> '.$verStatusLin.' </td>';
 			}
 			//Coluna Tipo 1
 			//Coluna Tipo 2
@@ -368,7 +379,7 @@ class limplista {
   public function materialFormPed() {
 		//Select mysql na tabela limpeza para listar o total para o per�odo
 		$tot 	 = 'SELECT p.id,p.discrim,p.unid,p.quant as qunid  ';
-		$tot 	.= 'FROM limpeza AS p WHERE p.authorized="1" ORDER BY discrim';
+		$tot 	.= 'FROM limpeza AS p WHERE p.status="1" ORDER BY discrim';
 		$totLimp = mysql_query($tot);
 		$incrrc=0; //indece p/ zebrar tabela
 		$tabtbody = ''; //Limpa vari�vel para receber os dados da tabela
