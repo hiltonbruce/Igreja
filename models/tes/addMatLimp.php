@@ -1,7 +1,8 @@
 <?php
-$idMat = intval($_GET['id']);
+// $discrimMat = strlen($_GET['discrim']);
 
 // var_dump($_GET);
+$idMat = 1;
 $materialLimp = "SELECT * FROM limpeza WHERE id=:ID";
 $stmtLimp = $conn->prepare($materialLimp);
 $stmtLimp ->bindParam(":ID", $idMat);
@@ -10,25 +11,26 @@ $resultsLimp = $stmtLimp->fetchAll(PDO::FETCH_ASSOC);
 
 
 // var_dump($resultsLimp[0]);
+
 $optionLimp = '';
-$optWhere = '';
+$optWhere = '"",';
 $separ = '';
 foreach ($resultsLimp[0] as $key => $value) {
 
   $optionLimp .= ':'.strtoupper($key);
   // $stmt ->bindParam($optionLimp, .$value);
-  if ($_GET[$key]!='' && $key!='id') {
+  if ($key!='id') {
     $optionsVlr = strtoupper($key);
-    $optWhere .= $separ . $key.'=:'.$optionsVlr;
+    $optWhere .= $separ . ':'.$optionsVlr;
     $separ = ', ';
   }
 
 }
 
-$materialUpdate = "UPDATE limpeza SET ".$optWhere.' WHERE id=:ID';
-// echo $materialUpdate;
+$materialUpdate = "INSERT INTO limpeza VALUE ($optWhere)";
+// echo '<br />$materialUpdate '.$materialUpdate;
 $stmtUpDate = $conn->prepare($materialUpdate);
-$stmtUpDate ->bindParam(':ID', $idMat);
+// $stmtUpDate ->bindParam(':ID', $idMat);
 
 
 foreach ($resultsLimp[0] as $key => $value) {
@@ -38,6 +40,7 @@ foreach ($resultsLimp[0] as $key => $value) {
   if ($_GET[$key]!='' && $key!='id') {
     $optionsVlr = strtoupper($key);
     $stmtUpDate ->bindParam($optionsVlr, $_GET[$key]);
+    // echo '<br /> $key'.$optionsVlr.' VLR -> '.$_GET[$key];
   }
 
 }
@@ -48,20 +51,21 @@ if ($stmtUpDate->execute()) {
 <br />
   <div class="alert alert-success alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <h4>Atualizado!</h4>
-      <p>O item <?php echo $_GET['discrim'];?> foi atualizado com sucesso!</button>
+      <h4>Cadastro!</h4>
+      <p>O material <strong><?php echo $_GET['discrim'];?></strong> foi registrado com sucesso!</button>
       </p>
     </div>
 
   <?php
 } else {
+  echo mysqli_error();
   ?>
 
 <br />
   <div class="alert alert-danger alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
       <h4>Erro!</h4>
-      <p>O material <?php echo $_GET['discrim'];?> n&atilde;o foi atualizado no sistema! Se o problema persistir entre em contato o desenvolvedor!
+      <p>Nenhum material novo foi cadastrado no sistema! Se o problema persistir entre em contato o desenvolvedor!
       </p>
     </div>
 

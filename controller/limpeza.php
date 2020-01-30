@@ -143,6 +143,17 @@ switch ($_GET['limpeza']) {
 		//Mostrar Lista de todos os materiais dispon�veis
 		require_once 'views/tesouraria/formLimpeza.php';
 	break;
+	case '14':
+    require_once ('views/menus/subLimp.php');
+    if ($_GET['discrim']!='') {
+      require_once ('models/tes/addMatLimp.php');
+    }
+		//Mostrar Lista de todos os materiais dispon�veis
+		require_once 'forms/tes/cadMaterialLimp.php';
+
+		//Mostrar Lista de todos os materiais dispon�veis
+		require_once 'views/tesouraria/formLimpeza.php';
+	break;
 	default:
 		//Mostra lista por congrega��o pelo $_GET['igreja']
 		require_once 'forms/limpeza.php';

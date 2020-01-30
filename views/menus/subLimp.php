@@ -10,8 +10,8 @@
 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 	Editar Material</button>
 </a>
-<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13' >
-	<button type="button" class="btn btn-primary btn-xs disabled" data-toggle="tooltip"
+<a href='./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=14' >
+	<button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip"
 	data-placement="bottom" title="Acrescentar novo item de material dispon&iacute;vel">
 	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 	Cadastrar Material</button>
