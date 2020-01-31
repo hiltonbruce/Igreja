@@ -41,10 +41,13 @@ if ($_GET["Submit"]=="Imprimir") {
 
 controle ("consulta");
 $ordenar = new igreja ();
+$arrayIg =$ordenar->Arrayigreja();
 $opCargo = (!empty($_GET["cargo"])) ? intval($_GET["cargo"]) : 0 ;
-$query  = 'SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol ';
-$query .= 'AND e.situacao_espiritual <= 2 '.$ordenar->cargo();
-$query .= ' ORDER BY '.$ordenar->ordenar();
+// $query  = 'SELECT * from membro AS m, eclesiastico AS e WHERE m.rol=e.rol ';
+// $query .= 'AND e.situacao_espiritual <= 2 '.$ordenar->cargo();
+// $query .= ' ORDER BY '.$ordenar->ordenar();
+
+require_once ('../models/sec/listMembro.php');
 
 $sql3 = mysql_query ($query) or die (mysql_error());
 $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
@@ -57,9 +60,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			<?PHP
 			echo $_GET['titTabela'];
 
-			if ($_GET["id"]!=="" && $_GET["id"]!=="0" && $igreja->razao()!==""){
-				echo " - Igreja: {$igreja->razao()}";
-			}
+			require_once ('../views/secretaria/titTabIgreja.php');
 
 			?>
 		</caption>
@@ -125,12 +126,12 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 					$cidade = new DBRecord(cidade, $coluna["cidade"], 'id');
 					?>
 			<tr <?php echo "$cor";?>>
-				<td rowspan="2"><?php echo $coluna["rol"];?></td>
+				<td rowspan="2"><?php echo $coluna["membroRol"];?>****</td>
 				<td><?php
 				echo $foto;
 				echo $coluna["nome"];
-				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
-				echo ' - Cong.: '.$congregacao->razao();
+				// $congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
+				echo ' - Cong.: '.$coluna["razao"];
 				echo ', '.cargo ($coluna["rol"])['0'];
 
 				?>
@@ -143,7 +144,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				?></td>
 			</tr>
 			<tr <?php echo "$cor";?>>
-				<td>Endereço: <?php echo $coluna["endereco"].', Nº '.
+				<td>Endereï¿½o: <?php echo $coluna["endereco"].', Nï¿½ '.
 						$coluna["numero"].', Bairro: '.$bairro->bairro()
 						.' - '.$cidade->nome().'-'.$cidade->coduf().
 						', Complem.: '.$coluna["complemento"];?>
@@ -153,7 +154,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				}else {
 					?>
 			<tr <?php echo "$cor";?>>
-				<td><?php echo $coluna["rol"];?></td>
+				<td><?php echo $coluna["membroRol"];?></td>
 				<td>
 					<?php
 					echo $foto;
@@ -161,8 +162,8 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 					?>
 				</td>
 				<td><?php
-				$congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
-				echo $congregacao->razao();
+				// $congregacao = new DBRecord ("igreja",$coluna["congregacao"],"rol");
+				echo $coluna["razao"];
 				?></td>
 				<td><?php
 				echo cargo ($coluna["rol"])['0'];

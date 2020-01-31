@@ -832,8 +832,13 @@ class List_sele {
 	function List_Selec_pop ($link,$rol){
 	//Lista Select para uso com javascrip popup
 	//Mostra as linhas de select
-	$linha1='';
-	$linhas .="<option value='./?$link{$this->col_lst["rol"]}'>Todas</option>";
+	$linha1 ='';
+	$linhas ="<option value='./?$link{$this->col_lst["rol"]}'>Todas as Igrejas</option>";
+	if ($_GET['ig']=='0' && $rol=='') {
+		$linhas ="<option value='./?$link{$this->col_lst["rol"]}&ig=0'>Membros S/ Congrega&ccedil;&atilde;o</option>".$linhas ;
+	} else {
+		$linhas = $linhas."<option value='./?$link{$this->col_lst["rol"]}&ig=0'>Membros S/ Congrega&ccedil;&atilde;o</option>" ;
+	}
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))
 		{
 			if ($this->col_lst["rol"]==$rol) {
@@ -841,7 +846,7 @@ class List_sele {
 			}
 			 $linhas .="<option value='./?$link{$this->col_lst["rol"]}'>".$this->col_lst[$this->campo_retorno]."</option>";
 		}
-		echo $linha1.$linhas;
+		echo $linha0.$linha1.$linhas;
 	}
 
 	function List_sel ($ind,$req){

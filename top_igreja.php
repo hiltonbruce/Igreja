@@ -36,14 +36,15 @@
   </ul>
 </div>
 </div>
-<table class="table">
-<tbody>
-  <tr>
+
 	<?PHP
 	if (!ver_nome("cad_organica") && !ver_nome("altexclui") && !ver_nome("cadastro")) {
 	?>
 	<form id="form2" name="form2" method="post" action="" >
-	<td>
+	<fieldset>
+		<legend>Filtrar</legend>
+	<div class="row">
+
 	 <?PHP
 	  if (empty($_GET["id"])) {
 			$id_ig=1;
@@ -58,15 +59,16 @@
 	  }
 	  $link = "./?escolha={$_GET["escolha"]}&menu=top_igreja&id={$_GET["id"]}&ord={$_GET["ord"]}&cargo=";
 	  $link_foto = "./?escolha=igreja/lst_memfoto.php&menu=top_igreja&ord={$_GET["ord"]}&id={$_GET["id"]}&cargo={$_GET["cargo"]}&foto=";
-	  ?><label>Congrega&ccedil;&atilde;o:</label>
-	  <select name="menu1" onchange="MM_jumpMenu('parent',this,0)"  class="form-control" >
-			<?PHP
+	  ?>
+		<div class="col-xs-3">
+			<label>Congrega&ccedil;&atilde;o:</label>
+			<select name="menu1" onchange="MM_jumpMenu('parent',this,0)"  class="form-control" >
+				<?PHP
 				$congr = new List_sele ("igreja","razao","congregacao");
 				$congr->List_Selec_pop ("escolha={$_GET["escolha"]}&menu={$_GET["menu"]}&foto={$_GET["foto"]}&ord={$_GET["ord"]}&cargo={$_GET["cargo"]}&id=",$_GET['id']);
-			?>
-	  </select>
-	  </td>
-	  <td>
+				?>
+			</select>
+		</div>
 	  <?php
 	  switch ($_GET['cargo']) {
 	  	//Define a 1� linha do proximo form
@@ -123,26 +125,28 @@
 	  		$titTabela = '&bull; Ativos e Disciplinados';
 	  	break;
 	  }
-	  ?><label>Cargo</label>
-	  <select name="cargo" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
-	  <?php echo $linhaCargo;?>
-	    <option>--&gt;&gt;Lista por cargo&lt;&lt;-- </option>
-	    <option value="<?PHP echo $link;?>0">--&gt;&gt;Listar todos os Membros&lt;&lt;--</option>
-			<option value="<?PHP echo $link;?>1">Auxiliar de Trabalho</option>
-			<option value="<?PHP echo $link;?>2">Di&aacute;cono</option>
-			<option value="<?PHP echo $link;?>3">Presb&iacute;tero</option>
-			<option value="<?PHP echo $link;?>4">Evangelista</option>
-			<option value="<?PHP echo $link;?>5">Pastor</option>
-			<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
-			<option value="<?PHP echo $link;?>7">Mulheres</option>
-			<option value="<?PHP echo $link;?>8">Homens</option>
-			<option value="<?PHP echo $link;?>9">Falta identificar o sexoo</option>
-			<option value="<?PHP echo $link;?>10">Doadores de Sangue</option>
-		  </select>
-	  </td>
-	  </tr>
-	  <tr>
-	  <td>
+	  ?>
+
+
+		<div class="col-xs-3">
+			<label>Cargo</label>
+			<select name="cargo" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
+				<?php echo $linhaCargo;?>
+				<option>--&gt;&gt;Lista por cargo&lt;&lt;-- </option>
+				<option value="<?PHP echo $link;?>0">--&gt;&gt;Listar todos os Membros&lt;&lt;--</option>
+				<option value="<?PHP echo $link;?>1">Auxiliar de Trabalho</option>
+				<option value="<?PHP echo $link;?>2">Di&aacute;cono</option>
+				<option value="<?PHP echo $link;?>3">Presb&iacute;tero</option>
+				<option value="<?PHP echo $link;?>4">Evangelista</option>
+				<option value="<?PHP echo $link;?>5">Pastor</option>
+				<option value="<?PHP echo $link;?>6">Dirigente de Congrega&ccedil;&atilde;o</option>
+				<option value="<?PHP echo $link;?>7">Mulheres</option>
+				<option value="<?PHP echo $link;?>8">Homens</option>
+				<option value="<?PHP echo $link;?>9">Falta identificar o sexoo</option>
+				<option value="<?PHP echo $link;?>10">Doadores de Sangue</option>
+			</select>
+		</div>
+
 	  <?php
 	  	//1� Linha do form (filtro)
 	  	switch ($_GET['foto']) {
@@ -158,16 +162,19 @@
 	  		break;
 	  	}
 	  ?>
-	  <label>Membros com ou sem foto</label>
-	 <select name="foto" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
-		 	<?php echo $linha1;?>
-		  <option value="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=<?php echo $_GET["ord"].'&cargo='.$_GET["cargo"];?>">--&gt;&gt;Listar todos&lt;&lt;--</option>
-			<option value="<?PHP echo $link_foto;?>1">Listar com fotos</option>
-			<option value="<?PHP echo $link_foto;?>2">Listar sem fotos</option>
-	  </select>
+
+		<div class="col-xs-3">
+			<label>Membros com ou sem foto</label>
+			<select name="foto" onchange="MM_jumpMenu('parent',this,0)" class="form-control">
+				<?php echo $linha1;?>
+				<option value="./?escolha=igreja/list_membro.php&menu=top_igreja&ord=<?php echo $_GET["ord"].'&cargo='.$_GET["cargo"];?>">--&gt;&gt;Listar todos&lt;&lt;--</option>
+				<option value="<?PHP echo $link_foto;?>1">Listar com fotos</option>
+				<option value="<?PHP echo $link_foto;?>2">Listar sem fotos</option>
+			</select>
+		</div>
+	</div>
+	</fieldset>
     </form>
-    </td>
-    <td>
     <?php if ($_GET["foto"]==1 || $_GET["foto"]==2) {?>
 	<form id="form1" name="form1" method="get" action="igreja/lst_fotoprint.php">
       <input name="id" type="hidden" value="<?PHP echo $_GET["id"];?>" />
@@ -201,9 +208,9 @@
     <?php
     } else{
     ?>
-	<form id="form1" name="form1" method="get" action="igreja/membro_print.php" target="_blank">
-    <fieldset>
-    <legend> Impress&atilde;o:</legend>
+	<fieldset>
+		<legend> Impress&atilde;o:</legend>
+		<form id="form1" name="form1" method="get" action="igreja/membro_print.php" target="_blank">
       <input name="id" type="hidden" value="<?PHP echo $_GET["id"];?>" />
       <input name="ord" type="hidden" value="<?PHP echo $_GET["ord"];?>" />
       <input type="hidden" name="cargo" value="<?PHP echo $_GET["cargo"];?>" />
@@ -219,11 +226,16 @@
 		  </label>
 					</div>
   			<div class="col-xs-2">
-				<label>Tamanho da foto (pixels)
+				<label><small>Tamanho da foto (pixels)</small>
 				</label>
 				</div>
   			<div class="col-xs-2">
 					<input type="number" name="tamanho" class="form-control input-sm"/>
+					<?php
+					if (isset($_GET['ig']) && $_GET['ig']==='0') {
+						echo '<input type="hidden" name="ig" value="0"/>';
+					}
+					 ?>
 				</div>
   			<div class="col-xs-1">
       		<input type="submit" class="btn btn-primary" name="Submit" value="Imprimir" />
@@ -233,7 +245,4 @@
     </form></fieldset>
     <?php
     }
-    ?>
-	</td>
-  </tr></thead><?php } ?>
-</table>
+   } ?>
