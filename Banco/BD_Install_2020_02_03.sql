@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 03-Fev-2020 às 09:19
+-- Generation Time: 03-Fev-2020 às 11:12
 -- Versão do servidor: 10.1.41-MariaDB-0+deb9u1
 -- PHP Version: 5.6.40-0+deb8u8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `igreja`
+-- Database: `assembleia`
 --
 
 -- --------------------------------------------------------
@@ -6879,6 +6879,13 @@ CREATE TABLE `login` (
   `status` int(1) NOT NULL COMMENT 'Vazio - Online, 1- Ausente, 2-desconectado, 3-Não pertube'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `login`
+--
+
+INSERT INTO `login` (`nome`, `tempo`, `status`) VALUES
+('Joseilton_Costa', '1580732582', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -7336,7 +7343,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `cpf`, `nivel`, `setor`, `perfil`, `cargo`, `senha`, `situacao`, `historico`, `data`) VALUES
-(1, 'Joseilton Costa Bruce', '645.822.304-82', 60, 99, 'sec,admin_user,tes,mis', 'Desenvolvedor do Sistema', '9ef7cf9293c7d99b4d1e634a3fbb332f', 1, '', '2019-07-23 17:36:18');
+(1, 'Admin', '111.111.111-11', 60, 99, 'sec,admin_user,tes,mis', 'Desenvolvedor do Sistema', '202cb962ac59075b964b07152d234b70', 1, '', '2020-02-03 14:12:25');
 
 --
 -- Indexes for dumped tables
