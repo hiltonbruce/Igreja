@@ -1,5 +1,6 @@
 <?PHP
 	session_start();
+	error_reporting(E_ALL);
   require "../func_class/funcoes.php";
   require "../func_class/classes.php";
   function __autoload ($classe) {
@@ -74,7 +75,7 @@
 <div id="container">
 	<table>
 		<tr>
-			<td><img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" width='387' height='125' ></td>
+			<td><img src="../img/logoCarta.png" alt="Brasï¿½o Assembleia de Deus" width='387' height='125' ></td>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td>
 			</td>
@@ -90,7 +91,7 @@
   	<?PHP print mostra_foto($rol);?></div>
 	<div id="Tipo">
 	  <h2 class="text-primary"><u><strong>
-	Carta <?PHP //Tipo de carta - Recomendação ou Mudança
+	Carta <?PHP //Tipo de carta - Recomendaï¿½ï¿½o ou Mudanï¿½a
 	print carta ("{$carta->tipo()}");
 	$destino = (int)$carta->destino();
 	 if ((int)$carta->destino() != 0) {
