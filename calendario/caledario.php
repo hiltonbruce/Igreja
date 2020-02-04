@@ -25,7 +25,7 @@ if ($_GET['imp']>'0') {
 		$templo		= '<b>Congreg.: </b>'.$igreja->razao();
 	}
 $ano = (empty($_GET['ano'])) ? date ('Y'):$_GET['ano'];
-$templo = '<div style="background:#CCC;width:100%; text-align:left;">'.$templo.' - Santa Ceia - Calend&aacute;rio '.$ano.'</div> ';
+$templo = '<div style="background:#CCC;width:100%; text-align:left;">'.$templo.' &bull; Santa Ceia e Circulo de Ora&ccedil;&atilde;o &bull; Ano '.$ano.'</div> ';
 $imprimir = true; //permite o impress�o do rodap�
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -114,7 +114,7 @@ $imprimir = true; //permite o impress�o do rodap�
 		 echo gerarCalendario($mes,$y,$todos,$colunas,
 		                 array(array()),
 	                     $nome_igreja,/*Define o texto do Rodap� do calend�rio*/
-	                    "Santa Ceia"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
+	                    "Santa Ceia e Circulo de ora&ccedil;&atilde;o"/*Define o texto da legenda*/,$dia_ceia,$semana_ceia);
 	  }
 
 	//Mostra todas as ceias de todas as igrejas

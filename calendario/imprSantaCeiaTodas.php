@@ -40,7 +40,7 @@ function calcularDiaSemana($dia,$mes,$ano)
       ($ncols>0 && $ncols<=12) && ($mes+$nmeses<=13)))
   {
    $tabela="Erro ao gerar calend�rio: [m�s=".$mes."] [ano=".$ano.
-           "] [n�mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
+           "] [n&uacute;mero de meses=".$nmeses."] [tabelas por linha=".$ncols."]<br>";
   }else {
    //Carrega o css do calend�rio e armazena em $dados
    $arq=fopen("../css/calendarioCeia.css","r");
