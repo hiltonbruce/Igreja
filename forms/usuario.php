@@ -20,12 +20,12 @@
   <div class="col-xs-3">
 		<label>Senha:</label>
 		<input name="senha" type="password"  required="required" class="form-control"
-		id="senha" tabindex="<?PHP echo ++$ind; ?>" />
+		tabindex="<?PHP echo ++$ind; ?>" />
   </div>
   <div class="col-xs-3">
 		<label>Confirme a Senha:</label>
 		<input name="senha1" type="password"  required="required" class="form-control"
-		 id="senha1" tabindex="<?PHP echo ++$ind; ?>" />
+		 tabindex="<?PHP echo ++$ind; ?>" />
   </div>
   <div class="col-xs-3">
 		<label>Setor de atua&ccedil;&atilde;o</label>
@@ -34,10 +34,34 @@
 			echo $setor->List_Setor(++$ind,'class="form-control"',$_SESSION['setor']);
 		 ?>
   </div>
-  <div class="col-xs-4">
-		<label>Perfil:</label>
-		<input name="perfil" type="text"  required="required" class="form-control"
-		 id="perfil" tabindex="<?PHP echo ++$ind; ?>" />
+  <div class="col-xs-12">
+		<label>Perfis de Acesso:</label>
+     <div class="checkbox">
+      <label class="checkbox-inline">
+        <input type="checkbox" value="secCad" name="perfil0" tabindex="<?PHP echo ++$ind; ?>" >
+        Secretaria <strong>Cadastrar</strong>
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="secUP" name="perfil1" tabindex="<?PHP echo ++$ind; ?>" >
+        Secretaria <strong>Editar</strong>
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="secDis" name="perfil2" tabindex="<?PHP echo ++$ind; ?>" >
+        Secretaria <strong>Disciplinar</strong>
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="tesCad" name="perfil3" tabindex="<?PHP echo ++$ind; ?>" >
+        Tesouraria
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="misCad" name="perfil4" tabindex="<?PHP echo ++$ind; ?>" >
+        Miss&otilde;es
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="pastor" name="perfil5" tabindex="<?PHP echo ++$ind; ?>" >
+        Pastor da Igreja
+      </label>
+      </div>
   </div>
   <div class="col-xs-4">
 		<label>N&iacute;vel de acesso</label>
@@ -51,6 +75,9 @@
 		<label>&nbsp;</label><input type="submit" required="required"
 		 class="btn btn-primary" name="Submit" value="Cadastrar..."
 		 tabindex="<?PHP echo ++$ind; ?>"/>
+    <input type="hidden" name="data" value="<?php echo date('Y-m-d H:i:s');?>">
+    <input type="hidden" name="situacao" value="1">
+    <input type="hidden" name="historico" value="<?php echo $_SESSION['nome'].'-'.$_SESSION['valid_user'];?>">
 		<input name="escolha" type="hidden" value="tab_auxiliar/cad_usuario.php" />
   </div>
 </div>

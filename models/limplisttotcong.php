@@ -10,19 +10,31 @@
 	}
 	$todacongrLimp = mysql_query($todacongr);
 	$incrrc=0; //indece p/ zebrar tabela
-	$todacongrtbody = ''; //Limpa variável para receber os dados da tabela
+	$todacongrtbody = ''; //Limpa variï¿½vel para receber os dados da tabela
 	if ($_GET['limpeza'] !='4' && $_GET['limpeza'] !='1') {
 		$tabtodas = '<div style="page-break-before: always;"> </div>';
 	}else{
 		$tabtodas = '';
 	}
-
 	if (!empty($_GET['div'])) {
-		// Acrescenta rodape e salto de página
+		$resEntrega = '';
+		// Acrescenta rodape e salto de pï¿½gina
 		$tabtodas .= $saltoPagina;
+		if (!empty($_GET['name'])) {
+			$resEntrega  .= '<strong>'.strip_tags($_GET['name']).'</strong>';
+		}
+
+		if (!empty($_GET['phone'])) {
+			$resEntrega .= ' &bull;<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>';
+			$resEntrega .= ' <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> '.strip_tags($_GET['phone']);
+		}
+
+		if (!empty($_GET['obs'])) {
+			$resEntrega .= '<p class="text-center">OBS.: '.strip_tags($_GET['obs']).'</p>';
+		}
 		$rodResp = '<tfoot><tr>';
 		$rodResp .= '<th colspan="5" class="primary text-center">';
-		$rodResp .= '<h4>Respons&aacute;vel pela entrega: Irm&atilde;o Berg, Fone: 83 9 8691-2170</h4>';
+		$rodResp .= '<h4>Respons&aacute;vel pela entrega: '.$resEntrega.'</h4>';
 		$rodResp .= '</th>';
 		$rodResp .= '</tr></tfoot>';
 	} else {
@@ -36,7 +48,7 @@
 			<colgroup>
 				<col id="item">
 				<col id="Unidade">
-				<col id="Discriminação">
+				<col id="Discriminaï¿½ï¿½o">
 				<col id="Solicitado">
 				<col id="albumCol"/>
 			</colgroup>
@@ -44,7 +56,7 @@
 			<tr>
 				<th scope="col">item</th>
 				<th scope="col">Unidade</th>
-				<th scope="col">Discriminação</th>
+				<th scope="col">Discriminaï¿½ï¿½o</th>
 				<th scope="col">Solicitado</th>
 				<th scope="col">Entregue</th>
 			</tr>
@@ -58,9 +70,8 @@
 			$tabtodas .= '<fieldset><legend>Obs.:</legend> As congrega&ccedil;&otilde;es ';
 			$tabtodas .= 'que n&atilde;o enviarem a lista de material de limpeza ';
 			$tabtodas .= 'no pr&ocute;ximo bimestre n&atilde;o ser&atilde;o relacionadas para entrega!</fieldset>';
-			$tabtodas .= '<fieldset><legend>Enderço para entrega.:</legend>'.$endEntrega.'</fieldset>';
+			$tabtodas .= '<fieldset><legend>Enderï¿½o para entrega.:</legend>'.$endEntrega.'</fieldset>';
 		}
-
 
 			$tabtodas .= $saltoPagina;
 

@@ -7,7 +7,7 @@ if ($_GET['limpeza']!='4') {
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
-			<col id="Discriminação">
+			<col id="Discriminaï¿½ï¿½o">
 			<col id="Solicitado">
 			<col id="albumCol"/>
 		</colgroup>
@@ -15,7 +15,7 @@ if ($_GET['limpeza']!='4') {
 		<tr>
 			<th scope="col">item</th>
 			<th scope="col">Unidade</th>
-			<th scope="col">Discriminação</th>
+			<th scope="col">Discriminaï¿½ï¿½o</th>
 			<th scope="col">Total</th>
 			<th scope="col">Entregue</th>
 		</tr>
@@ -31,11 +31,11 @@ if ($_GET['limpeza']!='4') {
 		echo $saltoPagina;
 	?>
 <table class='table table-striped table-hover' >
-	<caption>Relação do Material de Limpeza Total para Entrega - <?php echo $mesref;?></caption>
+	<caption>Relaï¿½ï¿½o do Material de Limpeza Total para Entrega - <?php echo $mesref;?></caption>
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
-			<col id="Discriminação">
+			<col id="Discriminaï¿½ï¿½o">
 			<col id="Solicitado">
 			<col id="albumCol"/>
 		</colgroup>
@@ -43,7 +43,7 @@ if ($_GET['limpeza']!='4') {
 		<tr>
 			<th scope="col">item</th>
 			<th scope="col">Unidade</th>
-			<th scope="col">Discriminação</th>
+			<th scope="col">Discriminaï¿½ï¿½o</th>
 			<th scope="col">Total</th>
 			<th scope="col">Entregue</th>
 		</tr>
@@ -62,7 +62,7 @@ if ($_GET['limpeza']!='4') {
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
-			<col id="Discriminação">
+			<col id="Discriminaï¿½ï¿½o">
 			<col id="Solicitado">
 			<col id="albumCol"/>
 		</colgroup>
@@ -70,7 +70,7 @@ if ($_GET['limpeza']!='4') {
 		<tr>
 			<th scope="col">item</th>
 			<th scope="col">Unidade</th>
-			<th scope="col">Discriminação</th>
+			<th scope="col">Discriminaï¿½ï¿½o</th>
 			<th scope="col">Total</th>
 			<th scope="col">Entregue</th>
 		</tr>

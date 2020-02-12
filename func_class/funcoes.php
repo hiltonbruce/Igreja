@@ -730,7 +730,7 @@ function arrayDia ($dia) {
 function controle ($tipo){ //O tipo � definido como consulta, atualiza��o, inserir, administra��o de usu�rio
 	$alerta = "<script> alert('Desculpe mas voc� n�o tem autoriza��o para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
-	if ($_POST["tabela"]=="usuario" || $_GET["tabela"]=="usuario") {
+	if ((!empty($_POST["tabela"]) && $_POST["tabela"]=="usuario") || (!empty($_GET["tabela"]) && $_GET["tabela"]=="usuario")) {
 		$id = ($_POST["id"]=="") ? $_GET["id"]:$_POST["id"];
 		$dados = new DBRecord("usuario", $id, "id");
 		$autoriza = $_SESSION['nivel'] >= $dados->nivel ? 0 : 1;

@@ -280,7 +280,10 @@ class limplista {
 			//Coluna Quantidade
 			$tabtbody .= '<div class="col-xs-2"><label><small>Conte&uacute;do <span class="glyphicon glyphicon-question-sign text-danger" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Conte&uacute;do por unidade"></span></small></label><input type="text" name="quant" class="form-control input-sm" autofocus value="'.$lista['quant'].'"></div>';
 			//Coluna Unidade
-			$tabtbody .= '<div class="col-xs-2"><label><small>Unidade</small></label><input type="text" name="unid" class="form-control input-sm" '.$discrimDisab.' value="'.$lista['unid'].'"></div>';
+			$unid = $lista['unid'];
+			require_once ('forms/tes/selecMedida.php');
+			// echo $selMat;
+			$tabtbody .= '<div class="col-xs-2">'.$selMat.'</div>';
 			//Coluna Discrimina��o
 			$tabtbody .= '<div class="col-xs-3"><label><small>Discrimina&ccedil;&atilde;o</small></label><input type="text" name="discrim" class="form-control input-sm" placeholder="Discriminação" '.$discrimDisab.' value="'.$lista['discrim'].'"></div>';
 			//Coluna Tempo
@@ -318,59 +321,31 @@ class limplista {
 			}
 			$tabtbody .=  '</form>';
 
-
 			} else {
 				$tabtbody .=  '<td class="text-center"><a href="./?escolha=controller/limpeza.php&menu=top_tesouraria&limpeza=13&id='.$lista['id'].'" ><button class="btn btn-success btn-xs">Editar</button> </a></td>';
-				//Coluna Item
-				//Coluna Item
-				// $tabtbody .= $campoIncl;
-				// $tabtbody .= $campoIncl;
-				// $tabtbody .=  '<form class="" action="index.html" method="post">';
-			//Coluna Quantidade
 			//Coluna Quantidade
 			$tabtbody .= '<td class="text-center"> '.$lista['quant'].' </td>';
-			// $campoQuant  = $lista['quant'];
-			//Coluna Unidade
-			// $campoUnid = ;
 			// //Coluna Unidade
 			$tabtbody .= '<td> '.$lista['unid'].' </td>';
 			//Coluna Discrimina��o
-			//Coluna Discrimina��o
-			// $campoDesc = ;
 			$tabtbody .= '<td> '.$lista['discrim'].' </td>';
 			//Coluna Tempo
-			//Coluna Tempo
-			// $campoTemp = ;
 			$tabtbody .= '<td class="text-center"> '.$lista['tempo'].' </td>';
 			//Coluna Tipo 1
-			// $campoTipo1 = ;
 			$tabtbody .= '<td class="text-center"> '.$lista['tipo1'].' </td>';
 			//Coluna Tipo 2
-			// $campoTipo2 = ;
 			$tabtbody .= '<td class="text-center"> '.$lista['tipo2'].' </td>';
 			//Coluna Tipo 3
-			// $campoTipo3 = ;
 			$tabtbody .= '<td class="text-center"> '.$lista['tipo3'].' </td>';
 			//Coluna Tipo 4
-			// $campoTipo4 = ;
 			$tabtbody .= '<td class="text-center"> '.$lista['tipo4'].' </td>';
 			//Coluna Tipo 5
-			// $campoTipo5 = ;
 			$tabtbody .= '<td class="text-center"> '.$lista['tipo5'].' </td>';
 			//Coluna Valor
-			// $campoValor = ;
 			$tabtbody .= '<td class="text-right"> '.number_format($lista['valor'], 2, ',', ' ').' </td>';
 			//Coluna Status
-			// $campoStatus = ;
 			$tabtbody .= '<td class="text-center"> '.$verStatusLin.' </td>';
 			}
-			//Coluna Tipo 1
-			//Coluna Tipo 2
-			//Coluna Tipo 3
-			//Coluna Tipo 4
-			//Coluna Tipo 5
-			//Coluna Valor
-			//Coluna Status
 			$tabtbody .=  '</tr>';
 		}
 		return $tabtbody;

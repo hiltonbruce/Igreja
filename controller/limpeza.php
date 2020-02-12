@@ -148,7 +148,7 @@ switch ($_GET['limpeza']) {
     if ($_GET['discrim']!='') {
       require_once ('models/tes/addMatLimp.php');
     }
-		//Mostrar Lista de todos os materiais dispon�veis
+		//Formulario para cadasdtro de novo material
 		require_once 'forms/tes/cadMaterialLimp.php';
 
 		//Mostrar Lista de todos os materiais dispon�veis

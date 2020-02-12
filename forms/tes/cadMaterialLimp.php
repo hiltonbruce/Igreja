@@ -13,20 +13,10 @@
 		<input type="number" name="quant" class="form-control input-sm" autofocus required>
 </div>
 <div class="col-xs-2">
-	<label><small>Tipo Medida<span class="glyphicon glyphicon-question-sign text-danger"
-		aria-hidden="true" data-toggle="tooltip" data-placement="top"
-		title="Discrimina&ccedil;&atilde;o da unidade. Ex.: Unid, Cx, Pc, etc"></span></small></label>
-		<!-- <input type="text" name="unid" class="form-control input-sm"> -->
-		<select name='unid' class='form-control input-sm' required >
-		 <option value=""></option>
-		 <option value="unid">Unidade</option>
-		 <option value="m">Metro</option>
-		 <option value="l">Litro</option>
-		 <option value="ml">Mililitro</option>
-		 <option value="Cx">Caixa</option>
-		 <option value="Pc">Pacote</option>
-		 <!-- <option value=""></option> -->
-		</select>
+	<?php
+	require_once ('forms/tes/selecMedida.php');
+	echo $selMat;
+	 ?>
 </div>
 
 <div class="col-xs-6">

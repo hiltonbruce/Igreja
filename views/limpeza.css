@@ -111,7 +111,7 @@ th, td {
   border-bottom: 1px solid #000;
 }
 
-tr:hover {
+/* tr:hover {
   background-color:#3d80df;
   color: #fff;
 }
@@ -119,4 +119,4 @@ tr:hover {
 thead tr:hover {
   background-color: transparent;
   color: inherit;
-}
+} */
