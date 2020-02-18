@@ -36,17 +36,12 @@ for ($i=0; $i < 10; $i++) {
   }
 }
 
-// echo "string -> ".$perfil.'<br />';
-
 $dataUser = "SELECT * FROM usuario LIMIT 1";
 $stmtUser = $conn->prepare($dataUser);
 $stmtUser->execute();
 $resultsUser = $stmtUser->fetchAll(PDO::FETCH_ASSOC);
 
-// var_dump($resultsUser[0]);
-
 foreach ($resultsUser[0] as $key => $value) {
-  // $stmt ->bindParam($optionLimp, .$value);
   $optionsVlr = strtoupper($key);
 
   if (!empty($_POST[$key]) && $key!='id') {
@@ -58,9 +53,6 @@ foreach ($resultsUser[0] as $key => $value) {
   }
 }
 
-// echo "string perfilUser-> ".$optWhere.'<br />';
-
-// $optWhere .= $perfilUser;;
 $addUser = "INSERT INTO usuario VALUE ($optWhere)";
 $stmtAddUser = $conn->prepare($addUser);
 
@@ -68,10 +60,8 @@ foreach ($resultsUser[0] as $key => $value) {
   $optionsVlr = ':'.strtoupper($key);
   if (!empty($_POST[$key]) && $key!='id' && $key!='perfil') {
     $stmtAddUser -> bindParam($optionsVlr, $_POST[$key]);
-    // echo "$optionsVlr -> ".$_POST[$key].'<br />';
   }elseif ($key=='perfil') {
     $stmtAddUser -> bindParam($optionsVlr,$perfil );
-    // echo "$optionsVlr -> ".$perfil.'<br />';
   }
 }
 
@@ -85,7 +75,6 @@ if ($stmtAddUser->execute()) {
       <p><strong>Perfil de acesso: </strong><?=$perfil?></p>
     </div>
     <?php
-
 }
 else
 {

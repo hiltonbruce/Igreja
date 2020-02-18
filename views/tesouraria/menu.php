@@ -23,7 +23,7 @@
 	 <?PHP $b=link_ativo($_GET["rec"], "24"); ?>
 	  <button type="button" class="btn btn-warning btn-sm dropdown-toggle <?php echo $b;?>"
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	    Lan&ccedil; p/Sem
+	    Lan&ccedil; Semana
 			<span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
@@ -75,6 +75,11 @@
 	    	$linkEstonoDefino = 'data-toggle="tooltip" data-placement="bottom" href="'.$linkLancamento.'&rec=22" title="Estorna dizimos e ofertas"'
 	    ?>
 	    <li <?php echo $linkAtivo;?>><a <?php echo $linkEstonoDefino;?> >Estorno Definido</a></li>
+	    <?PHP
+	    	$linkAtivo = ($_GET['rec']=='27' ) ?  'class="active"': '' ;
+	    	$linkEstonoDefino = 'data-toggle="tooltip" data-placement="bottom" href="'.$linkLancamento.'&rec=27" title="Ajusta COMADEP"'
+	    ?>
+	    <li <?php echo $linkAtivo;?>><a <?php echo $linkEstonoDefino;?> >Ajuste Saldo Cta COMADEP</a></li>
 	  </ul>
 	</div>
 	<?PHP

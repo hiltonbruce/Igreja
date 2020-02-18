@@ -29,8 +29,11 @@ if ($_GET["Submit"]=="Imprimir") {
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title>Lista de Membros - Igreja: <?php echo $igreja->razao();?>
 </title>
-<link rel="stylesheet" type="text/css" media="print, screen"
-	href="tabs.css" />
+
+<link rel="stylesheet" type="text/css" href="../tesouraria/style.css" />
+<link rel="stylesheet" type="text/css" href="../css/print.css" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />
+
 </head>
 <body>
 
@@ -54,17 +57,17 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 
 {
 	?>
-	<table>
+	<table class='table table-striped table-hover'>
 		<caption>
-
+			<h4>
 			<?PHP
 			echo $_GET['titTabela'];
 
 			require_once ('../views/secretaria/titTabIgreja.php');
 
 			?>
+			</h4>
 		</caption>
-
 		<colgroup>
 			<col id="Rol">
 				<col id="Nome">
@@ -72,22 +75,21 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 						<col id="albumCol" />
 
 		</colgroup>
-
 		<thead>
 			<tr>
-				<th scope="col">Rol</th>
-				<th scope="col">Nome</th>
+				<th class='text-center'><h6>Rol</h6></th>
+				<th class='text-center'><h6>Nome</h6></th>
 				<?php
 				if ($_GET['ext']==1) {
 					?>
-				<th scope="col">Nascido em:</th>
-				<th scope="col">Telefones</th>
+				<th class='text-center'><h6>Nascido em:</h6></th>
+				<th class='text-center'><h6>Telefones</h6></th>
 				<?php
 				}else {
 
 					?>
-				<th scope="col">Congrega&ccedil;&atilde;o</th>
-				<th scope="col">Cargo</th>
+				<th class='text-center'><h6>Congrega&ccedil;&atilde;o</h6></th>
+				<th class='text-center'><h6>Cargo</h6></th>
 				<?php
 				}?>
 			</tr>
@@ -106,27 +108,19 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			while($coluna = mysql_fetch_array($sql3))
 			{
 
-				$ls++;
 				if (!empty($_GET['foto'])) {
-					$foto = '<img src='.foto($coluna["rol"]).' class="thumb" width="'.$tamW.'" height="'.$tamH.'" />';
+					$foto = '<img src='.foto($coluna["membroRol"]).' class="thumb" width="'.$tamW.'" height="'.$tamH.'" /> ';
 				}else {
 					$foto = '';
 				}
-
-				if ($ls>1){
-					$cor="class='dados'";
-					$ls=0;
-				}
-				else
-				{$cor="class='odd'";
-				}
-
+				?>
+				<tr>
+					<td class='text-center'><h6><?php echo $coluna["membroRol"];?></h6></td>
+				<?php
 				if ($_GET['ext']=='1') {
 					$bairro = new DBRecord( bairro, $coluna["bairro"], 'id');
 					$cidade = new DBRecord(cidade, $coluna["cidade"], 'id');
 					?>
-			<tr <?php echo "$cor";?>>
-				<td rowspan="2"><?php echo $coluna["membroRol"];?>****</td>
 				<td><?php
 				echo $foto;
 				echo $coluna["nome"];
@@ -134,27 +128,24 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				echo ' - Cong.: '.$coluna["razao"];
 				echo ', '.cargo ($coluna["rol"])['0'];
 
-				?>
+				?><p>
+				Endere&ccedil;o: <?php echo $coluna["endereco"].', N&ordm; '.
+				$coluna["numero"].', Bairro: '.$bairro->bairro()
+				.' - '.$cidade->nome().'-'.$cidade->coduf().
+				', Complem.: '.$coluna["complemento"];?>
+			</p>
 				</td>
-				<td rowspan="2" style="text-align: center;"><?php
+				<td class="text-center"><?php
 				echo conv_valor_br($coluna["datanasc"]);
 				?></td>
-				<td rowspan="2"><?php
+				<td><?php
 				echo 'Fixo: '.$coluna["fone_resid"].', Cel.:'.$coluna["celular"];
-				?></td>
-			</tr>
-			<tr <?php echo "$cor";?>>
-				<td>Endere�o: <?php echo $coluna["endereco"].', N� '.
-						$coluna["numero"].', Bairro: '.$bairro->bairro()
-						.' - '.$cidade->nome().'-'.$cidade->coduf().
-						', Complem.: '.$coluna["complemento"];?>
+				?>
 				</td>
 			</tr>
 			<?PHP
 				}else {
 					?>
-			<tr <?php echo "$cor";?>>
-				<td><?php echo $coluna["membroRol"];?></td>
 				<td>
 					<?php
 					echo $foto;
@@ -166,7 +157,7 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 				echo $coluna["razao"];
 				?></td>
 				<td><?php
-				echo cargo ($coluna["rol"])['0'];
+				echo cargo ($coluna["membroRol"])['0'];
 				?></td>
 			</tr>
 			<?PHP	}
@@ -176,20 +167,19 @@ $total = mysql_num_rows($sql3) ; //Retorna o total de linha na tabela
 			?>
 		</tbody>
 	</table>
-
 	<?PHP
 }
-echo "<br />";
+echo '<br /><h4 class="bg-primary">';
 
 if ($total>"1"){
-	printf("Com %s registros!",number_format($total, 0, ',', '.'));
-}elseif ($total=="1") {
-	print "Apenas um registro!";
+	printf("%s registros!",number_format($total, 0, ',', '.'));
+}elseif ($total=='1') {
+	print 'Apenas um registro!';
 }else {
-	print "N&atilde;o h&aacute; registros para esta pesquisa!";
+	print 'N&atilde;o h&aacute; registros para esta pesquisa!';
 }
-
-if ($_GET["Submit"]=="Imprimir") {
+echo '</h4>';
+if ($_GET['Submit']=='Imprimir') {
 	?>
 </body>
 </html>
