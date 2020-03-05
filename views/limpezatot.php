@@ -7,7 +7,7 @@ if ($_GET['limpeza']!='4') {
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
-			<col id="Discrimina��o">
+			<col id="Discriminacao">
 			<col id="Solicitado">
 			<col id="albumCol"/>
 		</colgroup>
@@ -15,7 +15,7 @@ if ($_GET['limpeza']!='4') {
 		<tr>
 			<th scope="col">item</th>
 			<th scope="col">Unidade</th>
-			<th scope="col">Discrimina��o</th>
+			<th scope="col">Discrimina&ccedil;&atilde;o</th>
 			<th scope="col">Total</th>
 			<th scope="col">Entregue</th>
 		</tr>

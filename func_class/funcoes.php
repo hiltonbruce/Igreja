@@ -37,7 +37,7 @@ function br_data ($dt,$cmp){
 			if ($res == 1 || $dt=="00/00/0000"){
 				return $y.'-'.$m.'-'.$d;
 			}else{
-				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
 				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				exit;
 			}
@@ -256,12 +256,12 @@ function data_venc($data){
 		if ($res == 1 ){
 			return date("d/m/Y",(mktime(0, 1, 0, $m, $d+30, $y)));
 			}else{
-				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y');</script>";
-				echo "data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y";
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y');</script>";
+				echo "Data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				break;
 			}
 	}else{
-		echo "<script> alert('Data nï¿½o informada!');</script>";
+		echo "<script> alert('Data n&atilde; informada!');</script>";
 		echo "<h1> Data n&atilde;o informada! </h1>";
 	}
 }
@@ -277,14 +277,14 @@ function data_batismo($data,$link){
 		$batismo = mktime(23, 59, 59, $m, $d, $y);
 		echo "bat -> $batismo  ** atual->".mktime();
 		if ($res != 1 ){
-			echo "<script> alert('Data invï¿½lida! Vocï¿½ digitou: $data');  location.href='$link';</script>";
+			echo "<script> alert('Data inválida! Você digitou: $data');  location.href='$link';</script>";
 			break;
 		}elseif ($batismo<mktime()){
-			echo "<script> alert('Data anterior a hoje! Vocï¿½ digitou: $data, e ï¿½ alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
+			echo "<script> alert('Data anterior a hoje! Você digitou: $data, e é alterior a data atual e deve ser hoje ou posterior! bat -> $batismo  ** atual->".mktime()."');  location.href='$link';</script>";
 			break;
 		}
 	}else{
-		echo "<script> alert('Data nï¿½o informada!');</script>";
+		echo "<script> alert('Data não informada!');</script>";
 		echo "<h1> Data n&aatilde;o informada! </h1>";
 	}
 }
@@ -636,7 +636,7 @@ function data_extenso ($data) {
 			$y = $dta[2];
 			$ver_data = checkdate($m,$d,$y);
 	if (!$ver_data){
-				echo "<script> alert('data ou formato invï¿½lida! O formato ï¿½ do tipo: 00/00/0000 (dd/mm/aaaa), Vocï¿½ digitou: $d/$m/$y'); window.history.go(-2);</script>";
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y'); window.history.go(-2);</script>";
 				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				break;
 			}
@@ -646,7 +646,7 @@ function data_extenso ($data) {
 				break;
 		case 1: $dia_extenso="Segunda-feira";
 				break;
-		case 2: $dia_extenso="Terï¿½a-feira";
+		case 2: $dia_extenso="Ter&ccedil;a-feira";
 				break;
 		case 3: $dia_extenso="Quarta-feira";
 				break;
@@ -654,7 +654,7 @@ function data_extenso ($data) {
 				break;
 		case 5: $dia_extenso="Sexta-feira";
 				break;
-		case 6: $dia_extenso="Sï¿½bado";
+		case 6: $dia_extenso="S&aacute;bado";
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
@@ -663,7 +663,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Marï¿½o";
+		case 3: $mes_extenso="Mar&ccedil;o";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -728,7 +728,7 @@ function arrayDia ($dia) {
 }
 
 function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o, inserir, administraï¿½ï¿½o de usuï¿½rio
-	$alerta = "<script> alert('Desculpe mas vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para $tipo!');location.href='./';</script>";
+	$alerta = "<script> alert('Desculpe mas você não tem autorização para $tipo!');location.href='./';</script>";
 	$autoriza = 0;
 	if ((!empty($_POST["tabela"]) && $_POST["tabela"]=="usuario") || (!empty($_GET["tabela"]) && $_GET["tabela"]=="usuario")) {
 		$id = ($_POST["id"]=="") ? $_GET["id"]:$_POST["id"];
@@ -887,7 +887,7 @@ function situacao ($situacao,$rol){
 
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
-    return (strtoupper(strtr($string, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' )));
+    return ( strtoupper (strtr ($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ) ) );
     }
 
 function extenso($valor = 0, $maiusculas = false) {

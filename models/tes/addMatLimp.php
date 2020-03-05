@@ -71,5 +71,4 @@ if ($stmtUpDate->execute()) {
 
   <?php
 }
-
  ?>

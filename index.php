@@ -109,7 +109,6 @@
 			<h4 class="list-group-item-heading">Administra&ccedil;&atilde;o</h4>
 	    </span>
 
-
 			<div class="list-group">
 				<a type="button" href="./?escolha=adm/dados_pessoais.php"
 				class="list-group-item <?PHP echo item_info ("dados_pessoais");?>">

@@ -6,7 +6,7 @@ $congregcao = new DBRecord('igreja', $igreja, 'rol'); // $igreja vem do script q
 		<colgroup>
 			<col id="item">
 			<col id="Unidade">
-			<col id="Discriminação">
+			<col id="Discrimina&ccedil;&atilde;o">
 			<col id="Solicitado">
 			<col id="anterior">
 			<col id="albumCol"/>

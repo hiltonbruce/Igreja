@@ -4,7 +4,8 @@
 	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
-	//imprimir entradas de todas as congrega��es - mensal
+
+	//imprimir entradas de todas as congregacoes - mensal
 
 	if (file_exists("../func_class/funcoes.php")){
 			require_once ("../func_class/funcoes.php");

@@ -26,6 +26,7 @@
 <div id="header" style="font-size : 10px;">
 	<p>
 	<?PHP
+  
 	//print_r($igreja);
 	echo "Templo SEDE: {$igSede->rua()}, N&ordm; {$igSede->numero()} <br /> $origem - {$igSede->uf()} - CNPJ: {$igSede->cnpj()}<br />
 	CEP: {$igSede->cep()} - Fone: {$igSede->fone()} - Fax: {$igSede->fax()}";?>
