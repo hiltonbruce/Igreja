@@ -18,7 +18,7 @@
 controle ("admin_user");
 
 if ($_POST['senha'] != $_POST['senha1']) {
-  echo "<script>alert('Desculpe! Mas, as senhas nÃ£o coincidem! Tente outra vez.');; window.history.go(-1);</script>";
+  echo "<script>alert('Desculpe! Mas, as senhas não coincidem! Tente outra vez.');; window.history.go(-1);</script>";
   exit;
 }
 
@@ -29,13 +29,15 @@ $sepPerfil = '';
 
 for ($i=0; $i < 10; $i++) {
   $keyPost = 'perfil'.$i;
-  if (isset($_POST[$keyPost]))
+  if (isset($_POST[$keyPost]) && $_POST[$keyPost]!='')
   {
     $perfil .= $sepPerfil.strtolower(strip_tags($_POST[$keyPost]));
     $sepPerfil = ',';
   }
 }
-
+// echo "perfil -> ".$perfil;
+echo "<br />";
+// var_dump($conn);
 $dataUser = "SELECT * FROM usuario LIMIT 1";
 $stmtUser = $conn->prepare($dataUser);
 $stmtUser->execute();
@@ -44,10 +46,13 @@ $resultsUser = $stmtUser->fetchAll(PDO::FETCH_ASSOC);
 foreach ($resultsUser[0] as $key => $value) {
   $optionsVlr = strtoupper($key);
 
-  if (!empty($_POST[$key]) && $key!='id') {
+  if (!empty($_POST[$key]) && $key!='senha') {
     $optWhere .= $separ . ':' . $optionsVlr;
     $separ = ', ';
   } elseif ($key == 'perfil' && $key!='id') {
+    $optWhere .= $separ . ':' . $optionsVlr;
+    $separ = ', ';
+  }elseif ($key == 'senha') {
     $optWhere .= $separ . ':' . $optionsVlr;
     $separ = ', ';
   }
@@ -58,12 +63,28 @@ $stmtAddUser = $conn->prepare($addUser);
 
 foreach ($resultsUser[0] as $key => $value) {
   $optionsVlr = ':'.strtoupper($key);
-  if (!empty($_POST[$key]) && $key!='id' && $key!='perfil') {
-    $stmtAddUser -> bindParam($optionsVlr, $_POST[$key]);
-  }elseif ($key=='perfil') {
-    $stmtAddUser -> bindParam($optionsVlr,$perfil );
+
+  $dataUser = $_POST[$key];
+
+  if ($key == 'id') {
+  continue;
   }
+
+  if ($key == 'perfil') {
+    $_POST[$key] = $perfil;
+  }elseif ($key == 'historico') {
+    $_POST[$key] = $_SESSION['valid_user'].": ".date("Y-m-d h:i:s");
+  }elseif ($key == 'senha') {
+    $_POST[$key] = MD5($dataUser);
+  }
+
+  $stmtAddUser -> bindParam($optionsVlr, $_POST[$key]);
+  // echo $optionsVlr.' - '.$key." value -> ".$dataUser.'<br />';
 }
+// echo "string -> ".$addUser;
+
+// echo mysqli_error($conn);
+// $stmtAddUser->execute();
 
 if ($stmtAddUser->execute()) {
   ?>
@@ -78,7 +99,7 @@ if ($stmtAddUser->execute()) {
 }
 else
 {
-	echo "<script>alert('Desculpe! Mas, lembre-se vocÃª deve ter privilÃ©gios para cadastrar esse uauÃ¡rio, para conclusÃ£o do cadastro de acesso ao sistema!{$_SESSION["setor"]} - {$_POST["perfil"]}');</script>";
+	echo "<script>alert('Desculpe! Mas, lembre-se você deve ter privilégios para cadastrar esse uauúrio, para conclusão do cadastro de acesso ao sistema! {$_SESSION["setor"]} - {$_POST["perfil"]}');</script>";
 }
 ?>
 <p>&nbsp;</p>

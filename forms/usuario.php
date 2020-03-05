@@ -13,7 +13,7 @@
 		required="required" class="form-control" value="<?PHP echo $_POST["cpf"];?>" />
   </div>
   <div class="col-xs-3">
-		<label>Cargo:</label>
+		<label>Cargos:</label>
 		<input name="cargo" type="text" required="required" class="form-control"
 		id="cargo" value="<?PHP echo $_POST["cargo"];?>" tabindex="<?PHP echo ++$ind; ?>"/>
   </div>
