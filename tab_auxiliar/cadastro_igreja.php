@@ -19,7 +19,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 </script>
 
 	<form action="" method="post" name="cadastro_igreja">
-	<fieldset><legend>Cadastrar Sede e Congra��es</legend>
+	<fieldset><legend>Cadastrar Sede e Congra&ccedil;&otilde;es</legend>
 		<table class='table'>
 			<thead>
 				<tr>
