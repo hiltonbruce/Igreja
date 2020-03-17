@@ -35,9 +35,9 @@
 	$nivelGrupoN2 = '<tr><td>'.$nivelGrupo;
 	$nivelCom02 .= '<tr><td>'.$nivelGrupo;
 	$nivelGrupo = '<tr class="danger"><td>'.$nivelGrupo;
-	$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
+	// $codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
 	$nivel2 .= $nivelGrupo.$nivel1;
 	$nivelN2 .= $nivelGrupoN2;
 	//Contas Nivel codigo, tipo: 1.1.1.001.001
-	$nivel1 = '<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - '.$planoCod[$chave]['titulo'].
+	$nivel1 = '<tr><td>'.$chave.'</td><td>'.$linkReltorio.
 		'</td><td id="moeda">'.$vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">'.$vlrSaldoAnte.'</td></tr>';

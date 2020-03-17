@@ -5,7 +5,7 @@ if (!empty($_GET['dia']) || !empty($_GET['mes']) || !empty($_GET['ano']) || !emp
 	$tesSede = $tabMembros->nomes();
 	$cargoIgreja = new tes_cargo;
 	$tesArray = $cargoIgreja->dadosArray();
-	//tabela com a lista p confirmar lançamento$idIgreja$idIgreja$idIgreja$idIgreja$idIgreja
+	//tabela com a lista p confirmar lanï¿½amento$idIgreja$idIgreja$idIgreja$idIgreja$idIgreja
 	$lancContabil = new tes_relatLanc();
 	$resultado = $lancContabil->histLancamentos($roligreja,$mes,$ano,$dia,$ctaId,$debValor,$credValor,$refer,$numLanc,$vlrLanc);
 	$tabLancamento = $resultado['0'];
@@ -27,7 +27,7 @@ if (!empty($_GET['dia']) || !empty($_GET['mes']) || !empty($_GET['ano']) || !emp
 		if ($igrejaSelecionada->rol()>'1') {
 			$dirCong = new DBRecord('membro',$igrejaSelecionada->pastor(),'rol');
 			$dirigenteIgreja = $dirCong->nome();
-			$tesIgreja = $tesArray['8'][$igrejaSelecionada->rol()]['1']['nome'];//Tesoureiro das congregações
+			$tesIgreja = $tesArray['8'][$igrejaSelecionada->rol()]['1']['nome'];//Tesoureiro das congregaï¿½ï¿½es
 		}else {
 			$tesIgreja = $tesArray['22']['1']['1']['nome'];//Tesoureiro Geral - Central
 		}
@@ -71,7 +71,22 @@ if (empty($descricao) && $tabLancamento!='') {
 	//print_r($tabMembros->nomes());
 	//print_r ($resultado['1']);
 	echo($imprimir);
-}
+} else
+  {
+  $cta = new tes_contas();
+  $dadoCta = $cta->ativosArray();
+  // var_dump($dadoCta);
+  $titCta = $dadoCta [intval($_GET['conta'])]['codigo'].' &bull; '.$dadoCta [intval($_GET['conta'])]['titulo'];
+  ?>
 
+  <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4>Nenhum Registro!</h4>
+        <p>N&atilde;o foi localizado nenhuma lan&ccedil;amento para conta <strong><?php echo $titCta;?></strong> no m&ecirc;s de <?php echo $_GET['mes'].'/'.$_GET['ano'];?> ...</p>
+        <p>
+      </div>
+
+  <?php
+  }
 }
 ?>

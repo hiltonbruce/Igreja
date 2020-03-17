@@ -20,6 +20,12 @@ $grpFim = FALSE;
 foreach ($saldo AS $chave => $valor){
 		//$acesso = sprintf("[%04s]\n", $planoCta[$chave]['1']);
 		$acesso = '';
+
+    $codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
+    $linkAce = './?escolha=tesouraria/receita.php&menu=top_tesouraria&mes='.$m.'&ano='.$a.'&fin=2&conta='.$codAcesso.'&rec=21';
+    $msgToolip = 'data-toggle="tooltip" data-placement="right" title="Click para exibir relat&oacute;rio de lanÃ§amento deste per&iacute;odo"';
+    $linkReltorio = '<a target="_blank" href="'.$linkAce.'" '.$msgToolip.' >'.$codAcesso.' - '.$planoCod[$chave]['titulo'].'</a>';
+
 		$vlrSaldo = abs($saldo[$chave]);
 		$vlrSaldo = number_format($vlrSaldo,2,',','.');
 		if ($saldo[$chave]<0 && $planoCod[$chave]['tipo']=='D') {
@@ -56,13 +62,13 @@ foreach ($saldo AS $chave => $valor){
 			$planoCod[$chave]['titulo']!='') {
 				#Inclui linha se houver saldo em dos perÃ­odos
 				$codAcesso = sprintf ("%'04u",$planoCod[$chave]['acesso']);
-				$nivel1 .= '<tr><td>'.$chave.'</td><td title="'.$title.'">'.'['.$codAcesso.'] - ';
-				$nivel1 .= $planoCod[$chave]['titulo'].'</td><td id="moeda">';
+				$nivel1 .= '<tr><td>'.$chave.'</td><td>';
+				$nivel1 .= $linkReltorio.'</td><td id="moeda">';
 				$nivel1 .= $vlrSaldo.'</td><td id="moeda">'.$vlrSaldoAtual.'</td><td id="moeda">';
 				$nivel1 .= $vlrSaldoAnte.'</td></tr>';
 			}
 		}elseif ($rec=='16') {
-			//Contas Nivel 4, tipo: 1.1.1.001 - Impressão
+			//Contas Nivel 4, tipo: 1.1.1.001 - Impressï¿½o
 			require '../help/tes/relComadepG2.php';
 		}else {
 			//Contas Nivel 4, tipo: 1.1.1.001 - Tela
@@ -81,14 +87,14 @@ foreach ($saldo AS $chave => $valor){
 					//Ixibir na tela
 					require 'help/tes/relComadepG3.php';
 				}elseif (($ctaAtualN2!=$planoCod[$chave]['nivel2'] || $ctaAtualN2=='') && $rec=='16') {
-					//impressão
+					//impressï¿½o
 					require '../help/tes/relComadepG3.php';
 		}
 		$ctaAtualN4 = $planoCod[$chave]['nivel4'];
 		$ctaAtualN3 = $planoCod[$chave]['nivel3'];
 		$ctaAtualN2 = $planoCod[$chave]['nivel2'];
 }
-#Inclui o final dos dados da tabela após o fim do array de dados
+#Inclui o final dos dados da tabela apï¿½s o fim do array de dados
 //Contas Nivel 3
 if ($rec!='16'){
 	//Ixibir na tela
@@ -97,7 +103,7 @@ if ($rec!='16'){
 	require 'help/tes/relComadepGrp.php';
 	$nivel3 .= $nivel2;
 }elseif ($rec=='16') {
-	//impressão
+	//impressï¿½o
 	require '../help/tes/relComadepG2.php';
 	require '../help/tes/relComadepG3.php';
 	require '../help/tes/relComadepGrp.php';
