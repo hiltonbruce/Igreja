@@ -58,7 +58,7 @@ switch ($recMenu){
 		require_once 'forms/tes/recFinal.php';
 		break;
 	case 3:
-		//Recibos para nï¿½o Membros
+		//Recibos para não Membros
 		require_once 'forms/tes/recInicio.php';
 		require_once 'forms/tes/recNaoMembro.php';
 		require_once 'forms/tes/recFinal.php';

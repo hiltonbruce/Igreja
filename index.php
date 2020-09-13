@@ -59,7 +59,6 @@
 <head>
 <title><?php echo $titleIgreja; ?></title>
 <!-- <script src="js/jquery-3.1.1.min.js"></script> -->
-<script type="text/javascript" src="js/autocomplete.js"></script>
 
 <script type="text/javascript" src="js/funcoes.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>

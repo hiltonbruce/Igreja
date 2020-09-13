@@ -37,7 +37,7 @@ function br_data ($dt,$cmp){
 			if ($res == 1 || $dt=="00/00/0000"){
 				return $y.'-'.$m.'-'.$d;
 			}else{
-				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), Você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
+				echo "<script> alert('data ou formato inválida! O formato é do tipo: 00/00/0000 (dd/mm/aaaa), e você digitou: $d/$m/$y, para o Campo: $cmp'); window.history.go(-1);</script>";
 				echo "data ou formato inv&aacute;lida! O formato &eacute; do tipo: 00/00/0000 (dd/mm/aaaa), Voc&ecirc; digitou: $d/$m/$y";
 				exit;
 			}
@@ -79,10 +79,10 @@ function checadata ($dt){
 
 	$res = checkdate($m,$d,$y);
 	if ($res == 1 ){
-		//Data vï¿½lida
+		//Data válida
 		return true;
 	}else{
-		//Data invï¿½lida
+		//Data inválida
 		return false;
 	}
 }

@@ -20,6 +20,7 @@
 		}
 	}
 	$igreja = new DBRecord ("igreja","1","rol");
+
 	if ($igreja->cidade()>0) {
 		$cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
 		$origem=$cidOrigem->nome().' - '.$cidOrigem->coduf();
@@ -47,7 +48,9 @@
 		if (empty($_POST["data"])) {
 			$data = date("d/m/Y");
 		}else {
-			$data = addslashes($_POST["data"]);
+		list($ano, $mes, $dia) = explode("-", addslashes($_POST["data"]));
+			$data = $dia.'/'.$mes.'/'.$ano;
+			// $data = addslashes(conv_valor_br ($_POST["data"]));
 		}
 	}else {
 		$reimprimir = new DBRecord("tes_recibo", intval($_POST["reimprimir"]), "id");

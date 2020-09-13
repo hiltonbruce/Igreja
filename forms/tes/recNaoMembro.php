@@ -1,3 +1,5 @@
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
 <?php
 	echo '<tr><td><label>Nome</label>';
 	echo '<input type="text" class="form-control" name="nome" autofocus="autofocus"
