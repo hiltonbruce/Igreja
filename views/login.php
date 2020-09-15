@@ -1,7 +1,7 @@
     <div class="login">
       <figure class="highlight text-center">
-        <h3 class="text-center"><?php echo NOMESYS; ?></h3>
-        <!-- <img data-holder-rendered="true" src="img/Eliu.png" style="width: 50%;" alt="Logo Eliu"> -->
+        <img data-holder-rendered="true" src="img/Eliu.png" style="width: 50%;" alt="Logo Eliu">
+        <h3 class="text-center"><?php //echo NOMESYS; ?></h3>
         <pre>
         <pre>
         <h5>Fazer login para prosseguir</h5>
@@ -31,7 +31,7 @@
             <div class="item active">
               <img data-holder-rendered="true" src="img/debian.png" alt="900x500" width="333" data-src="holder.js/900x500/auto/#666:#666">
               <div class="carousel-caption">
-                <h3>Joseilton Costa Bruce</h3>
+                <h4>Joseilton Costa Bruce</h4>
                 <p>hiltonbruce@gmail.com</p>
               </div>
             </div>
