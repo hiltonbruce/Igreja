@@ -1,5 +1,5 @@
 <?PHP
-define ('NOMESYS','NomeDaAplicação');
+define ('NOMESYS','Sistema ELI&Uacute <br /> Ele é meu Deus');
 define ('NOMEIGR','Igreja Evang&eacute;lica DenominaçãoDaIgreja');
 define ('CIDADEIG','CidadeDaIgreja');
 define ('UFIG','UfDaCidadeDaIgreja');

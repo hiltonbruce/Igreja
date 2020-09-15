@@ -9,10 +9,18 @@ require_once '../help/impressao.php';
 $quantExibir=0;
 $q =  $_GET['q'];
 $item = 0;
-if (empty($_GET['igreja'])) {
-	$igrejaRol = 0;
-} else {
-	$igrejaRol =intval($_GET['igreja']);
+$sexo = (empty($_GET['sexo'])) ? '' : $_GET['sexo'] ;
+
+switch ($sexo) {
+	case 'M':
+		$sqlSexo = ' AND m.sexo = "M" ';
+		break;
+	case 'F':
+		$sqlSexo = ' AND m.sexo = "F" ';
+		break;	
+	default:
+		$sqlSexo = '';
+		break;
 }
 
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
@@ -21,26 +29,16 @@ $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 $igrejaArr = "SELECT * FROM igreja ORDER BY razao";
 $stmtIgr = $conn->prepare($igrejaArr);
 $stmtIgr->execute();
-$resultsIgrej = $stmtIgr->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($resultsIgrej as $key => $value) {
-	$IgArray [$value['rol']]=array ('razao'=>$value['razao']);
-   }
+$sqlOrd = $sqlSexo." ORDER BY m.nome ASC";
 
-// print_r($IgArray['1']);
-if ($igrejaRol>0) {
-	$sqlOrd  = "CASE WHEN e.congregacao=$igrejaRol THEN 0 ELSE 1 END ASC";
-} else {
-	$sqlOrd = "e.congregacao,m.nome ASC";
-}
-
+$sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
 	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
-	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome) ORDER BY ".$sqlOrd;
+	 $sql .= " LOCATE(:NOME3,m.nome) AND LOCATE(:NOME4,m.nome)".$sqlOrd;
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME1", $q1);
@@ -50,10 +48,9 @@ switch ($quantNomes) {
 	break;
 	case '2':
 	 list($q1,$q2,$q3) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol AND";
 	 $sql .= " LOCATE(:NOME1,m.nome) AND LOCATE(:NOME2,m.nome) AND";
-	 $sql .= " LOCATE(:NOME3,m.nome) ORDER BY ".$sqlOrd;
+	 $sql .= " LOCATE(:NOME3,m.nome)".$sqlOrd;
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME1", $q1);
@@ -62,9 +59,8 @@ switch ($quantNomes) {
 	break;
 	case '1':
 	 list($q1,$q2) = explode (' ',$q);
-	 $sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE m.rol=e.rol";
-	 $sql .= " AND  m.nome LIKE CONCAT('%',:NOME1,'%') AND m.nome LIKE CONCAT('%',:NOME2,'%') ORDER BY ".$sqlOrd;
+	 $sql .= " AND  m.nome LIKE CONCAT('%',:NOME1,'%') AND m.nome LIKE CONCAT('%',:NOME2,'%')".$sqlOrd;
 	 // $sql .= "LOCATE(:NOME1,m.nome) ";
 
    $stmt = $conn->prepare($sql);
@@ -73,9 +69,8 @@ switch ($quantNomes) {
 	break;
 	default:
 	 $q=trim($q);
-	 $sql = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
 	 $sql .= " eclesiastico AS e WHERE";
-	 $sql .= " m.rol=e.rol AND LOCATE(:NOME,m.nome)>0 ORDER BY ".$sqlOrd;
+	 $sql .= " m.rol=e.rol AND LOCATE(:NOME,m.nome)>0".$sqlOrd;
 
    $stmt = $conn->prepare($sql);
    $stmt ->bindParam(":NOME", $q);
