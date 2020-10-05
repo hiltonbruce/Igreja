@@ -22,14 +22,11 @@ if ($_SESSION['nivel'] > 4) {
 	$rec_ecl->Update(); //ï¿½ feita a chamada do mï¿½todo q realiza a atualizaï¿½ï¿½o no Banco
 	//echo "Pastor em: ".$rec_ecl->pastor()." - Evangelista em: ".$rec_ecl->evangelista()." - Presb&iacute;tero em: ".$rec_ecl->presbiterio()." - Di&aacute;cono em:  ".$rec_ecl->diaconato()." - Batismo em ï¿½guas ".$rec_ecl->batismo_em_aguas()." - Espiritual ".$rec_ecl->situacao_espiritual();
 	$cargoEclec = cargo($rolConsuta);
-	$cargoMemb = $cargoEclec['0'];
-	
 	if ($rec_ecl->situacao_espiritual() <> "1") {
 		echo "<h1>Voc&ecirc; deve regularizar a situa&ccedil;&atilde;o espiritual deste membro antes de imprimir o cart&atilde;o!<br \> Use bot&atilde;o Eclesis&aacute;tico</h1>";
 		exit;
 	} elseif ($rec_pessoais->sexo() == 'F' && file_exists("../img/cartao_feminino.jpg")) {
 		$background_cartao = "feminino"; //Define a imagem de fundo do cartï¿½o
-		$cargoMemb = $cargoEclec['2'];
 	} elseif ($cargoEclec['0'] == "Pastor") {
 		$background_cartao = "pastor"; //Define a imagem de fundo do cartï¿½o
 	} elseif ($cargoEclec['0'] == "Evangelista") {
@@ -69,7 +66,7 @@ if ($_SESSION['nivel'] > 4) {
 			}
 
 			#cartao {
-				background: url(../img/cartao_<?PHP echo $background_cartao;?>.jpg) no-repeat;
+				background: url(../img/cartao_<?PHP echo "$background_cartao"; ?>.jpg) no-repeat;
 				position: absolute;
 				left: 12px;
 				top: 5px;
@@ -123,12 +120,9 @@ if ($_SESSION['nivel'] > 4) {
 
 			#foto {
 				position: absolute;
-				left: 330px;
-				top: 167px;
-				width: 111px;
-				height: 143px;
+				left: 349px;
+				top: 181px;
 				z-index: 6;
-				border: 2px solid #4F6909;
 			}
 
 			#cargo {
@@ -146,17 +140,29 @@ if ($_SESSION['nivel'] > 4) {
 			#Nome {
 				position: absolute;
 				text-shadow: 1px 1px 1px #FFFFFF;
-				left: 20px;
-				top: 190px;
-				width: 280px;
+				left: 10px;
+				top: 195px;
+				width: 340px;
 				height: 33px;
 				z-index: 8;
 				text-align: center;
-				font-size: 120%;
+				font-size: 100%;
 				font-family: Arial, Helvetica, sans-serif;
-				font-weight: bold;
+				/* font-weight: bold; */
 			}
 
+			#Valid {
+				position: absolute;
+				text-shadow: 2px 2px 1px #FFFFFF;
+				left: 630px;
+				top: 290px;
+				width: 400px;
+				height: 33px;
+				z-index: 15;
+				text-align: center;
+				font-size: 80%;
+				font-family: Arial, Helvetica, sans-serif;
+			}
 
 			#Layer7 {
 				position: absolute;
@@ -168,20 +174,8 @@ if ($_SESSION['nivel'] > 4) {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 75%;
 			}
-			#mensargem {
-				position: absolute;
-				text-shadow: 2px 2px 1px #FFFFFF;
-				left: 630px;
-				top: 290px;
-				width: 400px;
-				height: 33px;
-				z-index: 15;
-				text-align: center;
-				font-size: 90%;
-				font-family: Arial, Helvetica, sans-serif;
-			}
 
-			#Valid {
+			#mensargem {
 				position: absolute;
 				text-align: center;
 				left: 20px;
@@ -196,8 +190,8 @@ if ($_SESSION['nivel'] > 4) {
 			#Rol {
 				position: absolute;
 				text-shadow: 1px 1px 1px #FFFFFF;
-				left: 330px;
-				top: 141px;
+				left: 350px;
+				top: 158px;
 				width: 114px;
 				height: 23px;
 				z-index: 10;
@@ -221,12 +215,38 @@ if ($_SESSION['nivel'] > 4) {
 			#verso1 {
 				position: absolute;
 				text-shadow: 0px 0px 2px #FFFFFF;
-				left: 573px;
-				top: 65px;
-				width: 216px;
+				left: 195px;
+				top: 297px;
+				width: 120px;
 				height: 86px;
 				z-index: 11;
 				font-size: 90%;
+				text-align: center;
+			}
+
+			#cpf {
+				position: absolute;
+				text-shadow: 0px 0px 2px #FFFFFF;
+				left: 40px;
+				top: 249px;
+				width: 120px;
+				height: 86px;
+				z-index: 11;
+				font-size: 90%;
+				text-align: center;
+				color: #000000;
+				font: bold;
+			}
+			#congreg {
+				position: absolute;
+				text-shadow: 0px 0px 2px #FFFFFF;
+				left: 190px;
+				top: 249px;
+				width: 120px;
+				height: 86px;
+				z-index: 11;
+				font-size: 90%;
+				text-align: center;
 				color: #000000;
 				font: bold;
 			}
@@ -234,12 +254,15 @@ if ($_SESSION['nivel'] > 4) {
 			#verso2 {
 				position: absolute;
 				text-shadow: 0px 0px 2px #FFFFFF;
-				left: 880px;
-				top: 65px;
-				width: 230px;
+				left: 42px;
+				top: 295px;
+				width: 120px;
 				height: 86px;
 				z-index: 11;
 				font-size: 90%;
+				text-align: center;
+				color: #000000;
+				font: bold;
 			}
 
 			#Pastor {
@@ -261,74 +284,82 @@ if ($_SESSION['nivel'] > 4) {
 
 			#LogoAD {
 				position: absolute;
-				left: 20px;
-				top: 20px;
+				left: 38px;
+				top: 37px;
 				z-index: 13;
 			}
-			
+			-->
 		</style>
 	</head>
 
 	<body>
-		<?php
-		if (file_exists("../img/logo.png")) {
-			echo '<div id="LogoAD"><img src="../img/logo.png" width="250"/></div>';
-		} else {
-			echo '<div id="Razao">' . NOMEIGR . '</div>';
-		}
-		?>
 		<div id="cartao"></div>
 		<div id='marca'></div><!--  Carttão com logo idependente do fundo da imagem-->
 		<div id='Endereco'>
 			<div>
-				<?PHP //echo $igreja->rua() . ', N&ordm; ' . $igreja->numero() . '<br />' . CIDADEIG . ' - ' . UFIG; ?>
-				<?PHP //echo '- CEP:&nbsp;' . $igreja->cep() . ' Fone: ' . $igreja->fone() . '<br /> CNPJ:&nbsp;' . $igreja->cnpj(); ?>
+				<?PHP //echo $igreja->rua() . ', N&ordm; ' . $igreja->numero() . '<br />' . CIDADEIG . ' - ' . UFIG; 
+				?>
+				<?PHP //echo '- CEP:&nbsp;' . $igreja->cep() . ' Fone: ' . $igreja->fone() . '<br /> CNPJ:&nbsp;' . $igreja->cnpj(); 
+				?>
 			</div>
 		</div>
-		<div id="foto"><img src="../img_membros/<?PHP echo $img; ?>" alt="Foto do Membro" width="111" height="143"/></div>
-		<div id="cargo">Carteira de <br />Identidade de <?PHP echo $cargoMemb; ?></div>
+		<div id="foto"><img src="../img_membros/<?PHP echo $img; ?>" alt="Foto do Membro" width="101" height="137" border="1" /></div>
+
 		<div id="Nome">
 			<?PHP print strtoupper(toUpper($rec_pessoais->nome())); ?>
 		</div>
-		<div id="mensargem"><?php echo MSGCARTAO; ?></div>
-		<div id="Valid"><?php echo MSGVALID; ?></div>
+
 		<div id="Rol"><?PHP printf("Rol: %'04u", $rolConsuta); ?></div>
 		<div id="versoFiliacao">
 			<?PHP
-			print "<b>Filia&ccedil;&atilde;o:</b> {$rec_pessoais->pai()} e {$rec_pessoais->mae()}<hr>";
+			//print "<b>Filia&ccedil;&atilde;o:</b> {$rec_pessoais->pai()} e {$rec_pessoais->mae()}<hr>";
 			?>
 		</div>
 		<div id="verso1">
 			<?PHP
-			print "<b>Membro desde:</b> " . conv_valor_br($rec_ecl->dat_aclam());
-			print " <br /><b>Data de Nascimento:</b> " . conv_valor_br($rec_pessoais->datanasc());
-			print "<br /><b>Nacionalidade:</b> " . $rec_pessoais->nacionalidade();
-			$cidNatal = ($cidade->nome() == '') ? $rec_pessoais->naturalidade() : $cidade->nome() . ' - ' . $cidade->coduf();
-			print '<br /><b>Natural de:</b> ' . $cidNatal;
+			print conv_valor_br($rec_ecl->dat_aclam());
+			// print " <br /><b>Data de Nascimento:</b> " . conv_valor_br($rec_pessoais->datanasc());
+			// print "<br /><b>Nacionalidade:</b> " . $rec_pessoais->nacionalidade();
+			// $cidNatal = ($cidade->nome() == '') ? $rec_pessoais->naturalidade() : $cidade->nome() . ' - ' . $cidade->coduf();
+			// print '<br /><b>Natural de:</b> ' . $cidNatal;
+			?>
+		</div>
+		<div id='cpf'>
+			<?php
+			if ($rec_prof->cpf() == '') {
+				printf("%s - %s", $rec_prof->rg(), $rec_prof->orgao_expedidor());
+			} else {
+				print $rec_prof->cpf();
+			}
+			?>
+		</div>
+		<div id='congreg'>
+			<?php
+			if ($cong->rol() == '1') {
+				$nomeCong = 'Templo ' . $cong->razao();
+			} else {
+				$nomeCong = $cong->razao();
+			}
+			echo $nomeCong;
 			?>
 		</div>
 		<div id="verso2">
 			<?PHP
-			print "<b>CPF: </b>" . $rec_prof->cpf();
-			printf("<br /><b>Identidade:</b>  %s - %s", $rec_prof->rg(), $rec_prof->orgao_expedidor());
-			print "<br /><b>Estado Civil:</b> " . $rec_civil->estado_civil();
-			print "<br /><b>Data do Batismo:</b> " . conv_valor_br($rec_ecl->batismo_em_aguas());
-			if ($cong->rol() == '1') {
-				$nomeCong = 'Templo ' . $cong->razao();
-			} else {
-				$nomeCong = 'Congrega&ccedil;&atilde;o: ' . $cong->razao();
-			}
+			// printf("<br /><b>Identidade:</b>  %s - %s", $rec_prof->rg(), $rec_prof->orgao_expedidor());
+			// print "<br /><b>Estado Civil:</b> " . $rec_civil->estado_civil();
+			print conv_valor_br($rec_ecl->batismo_em_aguas());
 
-			echo '<br /><br /><b>' . $nomeCong . '</b><br />';
 			list($anoCg, $mesCg, $dCg) = explode('-', cargo_dt($rolConsuta));
 			// if ($anoCg=='2018') {
 			echo '<div id="centenario"></div>';
 			// }
 			?>
 		</div>
-		<div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor())); ?></b>
+		<div id="Pastor"><b><?PHP //echo strtoupper(toUpper($igreja->pastor())); 
+							?></b>
 			<p>
-				<?php echo $cargosPR->descricao(); ?></p>
+				<?php //echo $cargosPR->descricao(); 
+				?></p>
 		</div>
 	</body>
 

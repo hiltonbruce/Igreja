@@ -9,7 +9,7 @@ $sldNivel3 = array();
 $sldGrupoN4 = '';
 $cred = '<strong> C</strong>';
 $dev = '<strong> D</strong>';
-#Monta array com informaï¿½ï¿½es das contas atualmente
+#Monta array com informações das contas atualmente
 $plano = new tes_conta($_GET['gpconta']);
 $planoCta = $plano->contasTodas();
 $planoCod = $plano->contasCod();
@@ -73,6 +73,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			/*Quando houver saldo, mas sem movimento no mes, aqui ï¿½ forï¿½ado
 			 * a aparecer
 			*/
+			ini_set('memory_limit', '256M');
 			if ($saldo[$contaDC[$ctaCred]['codigo']]==0) {
 				$saldo[$contaDC[$ctaCred]['codigo']] = 0;
 			}

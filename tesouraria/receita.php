@@ -64,7 +64,7 @@ if ($idIgreja==0) {
 			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
 	}
 } else {
-	echo "<script> alert('Sem permiss��o de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
+	echo "<script> alert('Sem permiss�o de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
 	$_SESSION = array();
 	session_destroy();
 	header("Location: ./");

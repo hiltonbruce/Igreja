@@ -92,7 +92,7 @@ class editar_form {
 			</form>
 			<?PHP
 
-		}else{
+		} else {
 			//echo "<h3>{$this->campo} - {$this->valor}</h3>";
 			echo "<p><a title='Click aqui para alaterar este campo!' href='./?escolha={$this->link_form}'>{$this->valor}</a></p>";
 		}

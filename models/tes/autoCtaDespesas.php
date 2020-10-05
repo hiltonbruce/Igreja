@@ -6,7 +6,7 @@
 require_once '../../func_class/funcoes.php';
 require_once "../../func_class/classes.php";
 
-$q = mysql_real_escape_string( $_GET['q'] );
+$q = (empty($_GET['q'])) ? '' : mysql_real_escape_string( $_GET['q'] ) ;
 
 $sqllinhas  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0  AND nivel1="3" ';
 $sqllinhas .= 'AND acesso > "0" ';
@@ -39,7 +39,7 @@ while( $campo = mysql_fetch_array( $res ) )
 	$acesso = sprintf("%s - [%04s]\n", $campo['codigo'],$campo['acesso']);
 	$estado = addslashes($estado);
 	$html = preg_replace("/(" . $q . ")/i", "<U style='font-weight:bold'>\$1</U>", $estado);
-	$estado = strtoupper(strtr( $campo['titulo'], 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ));
+	$estado = strtoupper(strtr( $campo['titulo'], 'áàãâéêíóõôúüç','ÁÀÃÂÉÊÍÓÕÔÚÜÇ'));
 	$estado = htmlentities($estado,ENT_QUOTES,'iso-8859-1');
 	echo "<li onselect=\"this.setText('$estado').setValue('$id','$endereco','$sigla','$detalhe');\">$acesso - $html ($nomeGrp)</li>\n";
 }

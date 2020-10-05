@@ -1,6 +1,15 @@
 <?php
 $ind=1;
 $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
+
+// $referente = (empty($_GET["referente"])) ? '' :  ;
+
+if (empty($referente) && empty($_GET["referente"])) {
+	$referente = '';
+} elseif(!empty($_GET["referente"])) {
+	$referente = strip_tags($_GET["referente"]);
+}
+
 ?>
 <fieldset>
 	<legend>Lan&ccedil;amento Cont&aacute;bil</legend>
@@ -35,7 +44,7 @@ $igreja = ($_GET['rol']!='') ? $_GET['rol']:'1';
 						   <textarea class="text_area form-control" name="referente" id="referente" tabindex="<?PHP
 						   echo $ind++;?>" onKeyDown="textCounter(this.form.referente,this.form.remLen,255);"
 								onKeyUp="textCounter(this.form.referente,this.form.remLen,255);progreso_tecla(this,255);"
-								 class="form-control"><?php echo $_GET["referente"];?></textarea>
+								 class="form-control"><?php echo $referente;?></textarea>
  						    <div id="progreso"></div>
  						<div class="row">
  						  <div class="col-xs-2">
