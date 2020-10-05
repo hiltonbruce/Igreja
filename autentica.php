@@ -26,7 +26,7 @@
 		 if ( strstr($_SERVER["HTTP_USER_AGENT"], "MSIE") )
 			 {
 			//se for IE
-				echo "<script> alert('Aconselhamos fortemente que vocï¿½ feche o Internet Explorer e abra o sistema com o Mozilla Firefox!');alert('Bem vindo aos nossos Sistemas!'); location.href='./?escolha=adm/cadastro_membro.php'; </script>";
+				echo "<script> alert('Aconselhamos fortemente que você feche o Internet Explorer e abra o sistema com o Mozilla Firefox!');alert('Bem vindo aos nossos Sistemas!'); location.href='./?escolha=adm/cadastro_membro.php'; </script>";
 			 }
 				$hora = date('H');
 				if ($hora > "18")
@@ -46,7 +46,7 @@
 				}elseif ($aniv->qt_dia()==1) {
 					$quant_aniv = "Hoje temos apenas um aniversariante!";
 				}else {
-					$quant_aniv = "Hoje nï¿½o temos aniversariantes!";
+					$quant_aniv = "Hoje não temos aniversariantes!";
 				}
 			echo "<script> alert('".$sauda.$_SESSION['nome']." . $quant_aniv'); location.href='./?escolha=controller/secretaria.php&sec=2';</script>";
 		}
@@ -71,7 +71,7 @@
 		if (isset($cpf))
 		{
 			// se o usuï¿½rio tentar efetuar o login e falhar
-			echo "<script> alert('Usuï¿½rio desconhecido ou senha incorreta!');</script>";
+			echo "<script> alert('Usuário desconhecido ou senha incorreta!');</script>";
 		}
 	// o usuï¿½rio nï¿½o tentou efetuar o login ainda ou saiu
 	// fornece um formulï¿½rio para efetuar o login
