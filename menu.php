@@ -59,7 +59,7 @@
 		    </button>
 		    <ul class="dropdown-menu">
 		      <li>&nbsp;&nbsp;CPF: <?php echo $_SESSION['valid_user'];?></li>
-		      <li>&nbsp;&nbsp;Dept&ordm;: <?php echo $_SESSION['cargo'];?></li>
+		      <!-- <li>&nbsp;&nbsp;Dept&ordm;: <?php //echo $_SESSION['setor'];?></li> -->
 		      <li>&nbsp;&nbsp;Host: <?php echo $_SESSION['computador'];?></li>
     			<li role="separator" class="divider"></li>
 		      <li>&nbsp;&nbsp;

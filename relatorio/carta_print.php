@@ -188,10 +188,8 @@
 		?> (validade)
 	  </div>
     <div id="footer">
-        <h6><span class="text-center">
-        <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - $origem - {$igreja->uf()}";?>
-        <?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()} - Fone: {$igreja->fone()} <br />";?></span></h6>
-        <h4>Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> - Email: <?PHP echo "{$igreja->email()}";?></h4>
+        <h6><span class="text-center"><br />
+     
         <h5><p class="text-right"><small>Designed by<a rel="nofollow" target="_blank"
         href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></small></p></h5>
     </div>
