@@ -10,10 +10,12 @@ $acessoCreditar = (!empty($_GET['cred']) && $_GET['cred'] > 0) ? $_GET['cred'] :
 				<div class="row">
 					<div class="col-xs-9">
 						<label>Conta:</label>
-						<input type="text" name="nome" class="form-control" id="campo_estado" tabindex="<?PHP echo ++$ind; ?>" placeholder="Qual a Despesa?" />
+						<input type="text" name="nome" class="form-control" id="campo_estado" tabindex="<?PHP echo ++$ind; ?>" 
+						placeholder="Conta para ser debitada" />
 					</div>
 					<div class="col-xs-3"><label>Código de Acesso:</label>
-						<input type="text" id="acesso" name="acessoDebitar" class="form-control" value="<?PHP echo $acessoDebitar; ?>" required="required" tabindex="<?PHP echo ++$ind; ?>" />
+						<input type="text" id="acesso" name="acessoDebitar" class="form-control" value="<?PHP echo $acessoDebitar; ?>" 
+						required="required" tabindex="<?PHP echo ++$ind; ?>" />
 					</div>
 			</td>
 		</tr>
@@ -45,10 +47,12 @@ $acessoCreditar = (!empty($_GET['cred']) && $_GET['cred'] > 0) ? $_GET['cred'] :
 				<div class="row">
 					<div class="col-xs-9">
 						<label>Conta:</label>
-						<input type="text" id="inputCta" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind; ?>" name="nome1" placeholder="Nome ou partes deles para procurarmos, a partir de 2 caracteres!">
+						<input type="text" id="inputCta" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind; ?>" 
+						name="nome1" placeholder="Conta para ser creditada">
 					</div>
 					<div class="col-xs-3"><label>Código de Acesso:</label>
-						<input type="text" id="inputCta2" name="acessoCreditar" value="<?PHP echo $acessoCreditar; ?>" required="required" tabindex="<?PHP echo ++$ind; ?>" class="form-control">
+						<input type="text" id="inputCta2" name="acessoCreditar" value="<?PHP echo $acessoCreditar; ?>" 
+						required="required" tabindex="<?PHP echo ++$ind; ?>" class="form-control">
 					</div>
 				</div>
 			</td>

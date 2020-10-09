@@ -48,11 +48,38 @@ if (!empty($_GET['dia']) || !empty($_GET['mes']) || !empty($_GET['ano']) || !emp
 	}
 if (empty($descricao) && $tabLancamento!='') {
 	$descricao='Descri&ccedil;&atilde;o';
-	echo($imprimir);
+	echo '<p>'.$imprimir.'</p>';
+
+	if (!empty($_GET['conta']) && intval($_GET['conta'])>0) {
+		$acessoCta = intval($_GET['conta']);
+		$cta = new tes_contas();
+		$dadoCta = $cta->ativosArray();
+		$titCta = $dadoCta [intval($_GET['conta'])]['codigo'].' &bull; '.$dadoCta [$acessoCta]['titulo'];
+
+		?>
+		<div class="alert alert-info alert-dismissible fade in" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4>Usando filtro de Conta</h4>
+			  <p>Localizado lan&ccedil;amentos na conta <strong><?php echo $titCta;?></strong>
+			   no m&ecirc;s de 
+			   <?php 
+			   echo $_GET['mes'].'/'.$_GET['ano'];
+			   printf("</p><p>Código de acesso: <strong>%'04u</strong>", $acessoCta);
+			   ?> 
+			   </p>
+			</div>
+		<?php
+	}
 ?>
+
 <table class='table table-hover table-bordered'>
-		<caption class="text-left"><h6>
-			<?php echo $titulo;?></h6></caption>
+	
+	<?php
+		if ($titulo!='') {
+				echo '<caption class="text-left"><h6>'.$titulo.'</h6></caption>';
+			}
+		
+			?>
 			<colgroup>
 				<col id="albumCol">
 				<col id="valor"/>
@@ -82,8 +109,13 @@ if (empty($descricao) && $tabLancamento!='') {
   <div class="alert alert-danger alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4>Nenhum Registro!</h4>
-        <p>N&atilde;o foi localizado nenhuma lan&ccedil;amento para conta <strong><?php echo $titCta;?></strong> no m&ecirc;s de <?php echo $_GET['mes'].'/'.$_GET['ano'];?> ...</p>
-        <p>
+		<p>N&atilde;o foi localizado nenhuma lan&ccedil;amento para conta <strong><?php echo $titCta;?></strong> no m&ecirc;s de <?php echo $_GET['mes'].'/'.$_GET['ano'];?> ...
+		<?php 
+			   echo $_GET['mes'].'/'.$_GET['ano'];
+			   printf("</p><p>Código de acesso: <strong>%'04u</strong>", $_GET['conta']);
+			   ?> 
+			   </p>
+        
       </div>
 
   <?php
