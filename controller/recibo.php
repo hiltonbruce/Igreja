@@ -76,7 +76,7 @@ switch ($recMenu){
 		//print_r($listaPgto);
 		break;
 	case 5:
-		//Form para impressï¿½o de vï¿½rios Recibos
+		//Form para impressãoo de vários Recibos
 		require_once 'forms/tes/recImprVarios.php';
 		break;
 	case 6:

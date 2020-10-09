@@ -5,7 +5,7 @@
   </div>
   <div class="col-xs-3"><label>Código de Acesso:</label>
     <input type="text" id="inputCta2" class="form-control" tabindex="<?php echo ++$ind;?>"
-		 name="rol" placeholder="N&ordm; do Rol de membro">
+		 name="acessoDebitar" placeholder="N&ordm; do Rol de membro">
   </div>
 </div>
 
