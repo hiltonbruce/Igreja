@@ -25,14 +25,17 @@ switch ($sexo) {
 
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
 
-
 $igrejaArr = "SELECT * FROM igreja ORDER BY razao";
 $stmtIgr = $conn->prepare($igrejaArr);
 $stmtIgr->execute();
 
+$IgArray = $stmtIgr->fetchAll(PDO::FETCH_ASSOC);
+
+// var_dump($IgArray['0']['razao']);
+
 $sqlOrd = $sqlSexo." ORDER BY m.nome ASC";
 
-$sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol FROM membro AS m,";
+$sql  = "SELECT e.congregacao,e.situacao_espiritual,m.nome,m.celular,m.fone_resid,m.rol,m.sexo FROM membro AS m,";
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);
@@ -85,7 +88,7 @@ switch ($quantNomes) {
   $stmt->execute();
 
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+// var_dump($results);
 	$data2 = array();
 
 	$json = '[';
@@ -104,6 +107,14 @@ $totElement = count($results);
 
 			// array_push($data2,$value);
 			$destaque = "<code>\$1</code>";
+
+			if ($value['sexo']=='M') {
+				$cargo = cargo ($value['rol'])['0'];
+			}elseif($value['sexo']=='F'){
+				$cargo = cargo ($value['rol'])['2'];
+			}else{
+				$cargo = '';
+			}
 
 			foreach ($value as $chave => $dados) {
 
@@ -144,16 +155,17 @@ $totElement = count($results);
 					$json .= '"'.$chave.'": "'. $dados.'"';
 
           if ($chave=='rol') {
-            $rol = $dados;
+			$rol = $dados;
             $img="img_membros/$rol.jpg";
             $icon = "<img src='$img' class='img-thumbnail thumb' alt=' ' width='25' height='35' align='absmiddle' />";
 						$json .= ',"icon": "'.$icon .'"';
           }
 
 					 if ($chave=='congregacao') {
-						 $razao = ($IgArray[$dados]['razao']=='') ? 'Falta informar igreja no cadastro' : "<span class='text-warning'>".$IgArray[$dados]['razao']."</span>" ;
-							$json .= ',"razao": " - '.$razao.'"';
-           }
+						 $cong = $dados - 1;
+						 $razao = ($IgArray[$cong]['razao']=='') ? 'Falta informar igreja no cadastro' : "<span class='text-warning'>".$cargo.' &bull; '.$IgArray[$cong]['razao']."</span>" ;
+						 $json .= ',"razao": " - '.$razao.'"';
+           			}
 
 					if (endKey($value) !== $chave) {
 						$json .= ',';
@@ -173,7 +185,7 @@ $totElement = count($results);
 		$json .= '}]';
 
 	// header('Content-Type: application/json');
-
+	// var_dump($IgArray);
+	// echo '<br/>';
 	echo $json;
 	// echo ' "Toal de '.$stmt->rowCount().'"';
-?>

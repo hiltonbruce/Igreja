@@ -25,7 +25,7 @@ switch ($rec) {
 		if (!empty($_GET['id'])) {
 			require_once('forms/tes/alteraPreLanc.php'); #Edita dizimo e ofertas pre-Lançamento
 		} else {
-			require_once('forms/autodizimo.php'); #Form lanï¿½ar dizimos e ofertas
+			require_once('forms/autodizimo.php'); #Form lançar dizimos e ofertas
 		}
 		break;
 	case '2':

@@ -11,7 +11,7 @@
 			break;
 
 		default:
-			$labelCampo = 'Dirigente';
+			$labelCampo = 'Dire&ccedil;&atilde;o';
 			break;
 	}
 ?>
