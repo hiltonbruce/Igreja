@@ -24,7 +24,7 @@ body {
 
 table {
   border-collapse: collapse;
-  width: 50em;
+  width: 100%;
 }
 
 col#albumCol {
@@ -58,7 +58,7 @@ thead tr:hover {
   background-color: transparent;
   color: inherit;
 }
-#header {height: 63px; background-image: url(header2.jpg); background-size: 194px 63px;
+#header {height: 63px; background-image: url(../img/logoCarta.png); background-size: 194px 63px;
 	background-repeat: no-repeat; background-position: top bottom;
 	margin: 0; padding: 0 10px 0 50px; text-align:center;
 	font-family:"Times New Roman", Times, serif;}
