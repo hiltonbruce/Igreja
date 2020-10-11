@@ -73,7 +73,7 @@ thead tr:hover {
 	margin: 0;
 	padding-top: 25px;
 	padding:10px 0 0 0;
-	background-image: url(horbar.jpg);
+	background-image: url(../img/horbar.jpg);
 	background-size: 100% 50px;
 	width: auto;
 }
