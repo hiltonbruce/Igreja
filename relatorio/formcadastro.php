@@ -58,7 +58,7 @@ thead tr:hover {
   background-color: transparent;
   color: inherit;
 }
-#header {height: 63px; background-image: url(../img/logoCarta.png); background-size: 194px 63px;
+#header {height: 63px; background-image: url(../img/logo.png); background-size: 194px;
 	background-repeat: no-repeat; background-position: top bottom;
 	margin: 0; padding: 0 10px 0 50px; text-align:center;
 	font-family:"Times New Roman", Times, serif;}
@@ -94,7 +94,7 @@ thead tr:hover {
 
 <body>
 
-<div id="Layer1">Congrega&ccedil;&atilde;o:</div>
+<div id="Layer1">Igreja/Congrega&ccedil;&atilde;o:</div>
 <div id="header"><h2>Cadastro de Membro</h2></div>
 <table cellspacing="0" id="FormCadastro" summary="Formul�rio para cadastro de membro.">
 
@@ -1129,7 +1129,7 @@ Outros, Qual?</p>
   </tr>
 </tbody>
 </table>
-<div id="footer"> <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>&nbsp; &bull;
+<div id="footer"> <br/><br/> <?PHP echo "Templo SEDE: {$igreja->rua()}, N&ordm; {$igreja->numero()} - {$igreja->cidade()} - {$igreja->uf()}";?>&nbsp; &bull;
   Copyright &copy; <a href="http://<?PHP echo $igreja->site();?>/" title="Copyright information"><?PHP echo $igreja->site();?></a> &nbsp; &bull;
 	Email: <a rel="nofollow" target="_blank" href="mailton: <?PHP echo "{$igreja->email()}";?>"><?PHP echo "{$igreja->email()}";?></a>
 	&nbsp; &bull; <?PHP echo "CNPJ: {$igreja->cnpj()}";?> &nbsp; &bull;
