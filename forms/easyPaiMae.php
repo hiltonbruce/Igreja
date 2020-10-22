@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-xs-9"><label>Nome do Pai:</label>
     <input type="text" id="inputOne" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
-		 name="name="pai" placeholder="Nome, ...sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!">
+		 name="pai" placeholder="Nome, ...sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!">
   </div>
   <div class="col-xs-3"><label>Rol do Pai:</label>
     <input type="text" id="inputTwo" class="form-control" tabindex="<?php echo ++$ind;?>"
