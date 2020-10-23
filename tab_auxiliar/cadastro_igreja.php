@@ -92,7 +92,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					</td>
 				</tr>
 				<tr>
-					<td><label>Endereï¿½o Web</label>
+					<td><label>Endere&ccedil;o Web</label>
 						<input name="site" class="form-control" type="text" id="site" tabindex = "<?php echo ++$ind; ?>" value='www.adpb.com.br'>
 					</td>
 					<td><label>Email:</label>
@@ -105,10 +105,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                   </td>
 			  </tr>
 				<tr>
-					<td><label>Endereï¿½o</label>
+					<td><label>Endere&ccedil;o</label>
 						<input name="rua" required="required" class="form-control" type="text" id="rua" tabindex = "<?php echo ++$ind; ?>" size="30" >
 					</td>
-					<td><label>Nï¿½mero</label>
+					<td><label>N&uacute;mero</label>
 						<input name="numero" required="required" class="form-control" type="text" id="numero" tabindex = "<?php echo ++$ind; ?>" size="5">
 					</td>
 				</tr>
@@ -121,10 +121,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			</td>
 				</tr>
 				<tr>
-					<td><label>Rol do 1&ordm; Secretario</label>
+					<td><label>Rol do 1&ordm; Secret&aacute;rio</label>
 						<input name="secretario1" class="form-control" type="text" id="secretario1" tabindex = "<?php echo ++$ind; ?>">
 					</td>
-					<td><label>Rol do 2&ordm; Secretario</label>
+					<td><label>Rol do 2&ordm; Secret&aacute;rio</label>
 						<input name="secretario2" class="form-control" type="text" id="secretario2" tabindex = "<?php echo ++$ind; ?>">
 					</td>
 				</tr>
@@ -214,7 +214,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 
 }else{
-	echo "Desculpe! Mas voc&ecirc; nï¿½o te autoriza&ccedil;&atilde;o para esta terefa.";
+	echo "Desculpe! Mas voc&ecirc; não te autoriza&ccedil;&atilde;o para esta terefa.";
 }
 /*
 require_once ("HTML/QuickForm.php");
