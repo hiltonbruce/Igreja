@@ -145,7 +145,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			<td><div class="radio"><label>
 	  		<input type="radio" id="dia" name="oracao" value="2" tabindex = "<?php echo ++$ind; ?>" >Segunda</label></div></td>
 	  		<td><div class="radio"><label>
-	  		<input type="radio" id="dia" name="oracao" value="3" tabindex = "<?php echo ++$ind; ?>" >Ter�a</label></div></td>
+	  		<input type="radio" id="dia" name="oracao" value="3" tabindex = "<?php echo ++$ind; ?>" >Ter&ccedil;a</label></div></td>
 	  		<td><div class="radio"><label>
 	  		<input type="radio" id="dia" name="oracao" value="4" tabindex = "<?php echo ++$ind; ?>" >Quarta</label></div></td>
 	  		<td><div class="radio"><label>
@@ -153,7 +153,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	  		<td><div class="radio"><label>
 	  		<input type="radio" id="dia" name="oracao" value="6" tabindex = "<?php echo ++$ind; ?>" >Sexta</label></div></td>
 	  		<td><div class="radio"><label>
-	  		<input type="radio" id="dia" name="oracao" value="7" tabindex = "<?php echo ++$ind; ?>" >S�bado</label></div></td>
+	  		<input type="radio" id="dia" name="oracao" value="7" tabindex = "<?php echo ++$ind; ?>" >S&aacute;bado</label></div></td>
 	  		</tr>
 	  		</tbody>
 	  	</table>
