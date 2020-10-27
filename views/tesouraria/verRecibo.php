@@ -48,11 +48,16 @@
 				{
 					case 1:
 						$beneficiado = new DBRecord("membro", $rec_alterar->recebeu(), "rol");
+						// $recebeu = $rec_alterar->recebeu();
 						$recebeu = $beneficiado->nome();
-						$form = new formmembro("recebeu",$recebeu,$tab,$tab_edit);
-						$form->formcab();
-						$form->getMostrar($rec_alterar->recebeu());
-						// require_once "forms/EasyAutocomplete.php";
+						$nome = new editar_form("recebeu",$recebeu,$tab,$tab_edit);
+						$nome->getMostrar();
+						// $form = new formmembro("recebeu",$recebeu,$tab,$tab_edit);
+						// // $form->formcab();
+						// $form->getMostrar($rec_alterar->recebeu());
+						if ($_GET["campo"]=='recebeu'){
+						require_once "forms/EasyEditRecibo.php";
+						}
 					break;
 					case 2:
 						$beneficiado = new DBRecord("credores", $rec_alterar->recebeu(), "id");
@@ -82,7 +87,7 @@
 						$nome->getMostrar();
 						$nome->getEditar();
 						// exit;
-							break;
+						break;
 					}
 				?>
 			</td>
