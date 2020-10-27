@@ -1,6 +1,7 @@
 <?PHP
 $ind=1; //Define o indice dos campos do formulário
-$id = (int) $_GET["id"];
+$id = intval($_GET["id"]);
+
 if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 	if ($_GET['recebeu']<1 && $_GET['tipo']<1) {
 	$tab="sistema/atualizar_sistema.php";//link q informa o form quem chamar p atualizar os dados

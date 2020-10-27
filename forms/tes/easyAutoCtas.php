@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-xs-9"><label>Conta:</label>
     <input type="text" id="inputCta" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
-		 name="conta" placeholder="Busca a partir de 2 caracteres!">
+		 name="conta" placeholder="Busca a partir de 2 caracteres!" value="<?php echo $nomeCred; ?>">
   </div>
   <div class="col-xs-3"><label>Código de Acesso:</label>
     <input type="text" id="inputCta2" class="form-control" tabindex="<?php echo ++$ind;?>"
-		 name="acessoDebitar" placeholder="Planop de Contas - Acesso">
+		 name="acessoDebitar" placeholder="Planop de Contas - Acesso" value="<?php echo $cred; ?>">
   </div>
 </div>
 

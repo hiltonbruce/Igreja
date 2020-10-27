@@ -45,24 +45,23 @@ class editar_form {
 			<?PHP;	
 	}
 	
+	/* Formulário para edição por item. Neste form os campos são recebidos de qualquer 
+	campo para edição da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que é 
+	passado, também é responsável pelo da tabela que será alterado e o GET-tabela traz o nome da tabela
+	que sofrerá alteração. Em agumas ocasiões também é passado o campo UF.*/
 	public function getEditar(){
 
-	if ($this->campo==$this->vlr_get)
-		{
-			/* Formulário para edição por item. Neste form os campos são recebidos de qualquer 
-			campo para edição da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que é 
-			passado, também é responsável pelo da tabela que será alterado e o GET-tabela traz o nome da tabela
-			que sofrerá alteração. Em agumas ocasiões também é passado o campo UF.*/
+	if ($this->campo==$this->vlr_get){
 
 			//echo $this->campo." = ".$this->vlr_get;
 			?>
-			<form id="form1" name="form1" method="post" action="">
-			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" />
-			<input type="hidden" name="campo" value="<?PHP echo "{$this->campo}";?>" />
-			<input type="hidden" name="tabela" value="<?PHP echo $_GET["tabela"];?>" />
+				<form id="form1" name="form1" method="post" action="">
+				<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" />
+				<input type="hidden" name="campo" value="<?PHP echo "{$this->campo}";?>" />
+				<input type="hidden" name="tabela" value="<?PHP echo $_GET["tabela"];?>" />
 			<?PHP
-			if ($this->campo!="sexo" && $this->campo!="obs")
-			{
+				if ($this->campo!="sexo" && $this->campo!="obs")
+				{
 			?>  
 			  <input type="text" name="<?PHP echo $this->campo;?>" value="
 			  <?PHP
@@ -70,13 +69,11 @@ class editar_form {
 			  echo $this->valor;if ($this->campo=="naturalidade" || $this->campo=="cidade"){/*DEVE-SE SE ADICIONAR OUTRO FORM PARA UF*/}
 			  ?>" size="30" autofocus="autofocus" />
 			<?PHP
-			}else //Campo para form tipo textarea
-			{
+			}else { //Campo para form tipo textarea
 				echo "<textarea autofocus='autofocus' name='{$this->campo}' cols='50' >{$this->valor}</textarea>";
 			}
 
-			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")
-			{
+			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue") {
 			//Nos campos Pai e Mãe é aberto um segundo campo do form para o rol e a opção, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
 			Rol:
