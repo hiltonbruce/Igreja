@@ -1,5 +1,7 @@
 <?php
-  $igreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']) ;
+  $igreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']);
+  $nome = (empty($_GET['nome'])) ? '' : htmlentities($_GET['nome']);
+  $rol = (empty($_GET['rol'])) ? null : intval($_GET['rol']);
  ?>
  <script src="js/jquery-1.11.2.min.js"></script>
  <script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
@@ -7,11 +9,12 @@
 <div class="row">
   <div class="col-xs-9"><label>Nome:</label>
     <input type="text" id="inputOne" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
-		 name="nome" placeholder="Nome, ...sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!">
+		 name="nome" placeholder="Nome, ...sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!"
+		 value="<?=$nome?>">
   </div>
   <div class="col-xs-3"><label>Rol:</label>
     <input type="text" id="inputTwo" class="form-control" tabindex="<?php echo ++$ind;?>"
-		 name="rol" placeholder="N&ordm; do Rol de membro">
+		 name="rol" placeholder="N&ordm; do Rol de membro" value="<?=$rol?>">
   </div>
 </div>
 <script>
