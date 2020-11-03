@@ -29,9 +29,15 @@ $igrejaArr = "SELECT * FROM igreja ORDER BY razao";
 $stmtIgr = $conn->prepare($igrejaArr);
 $stmtIgr->execute();
 
-$IgArray = $stmtIgr->fetchAll(PDO::FETCH_ASSOC);
+$igrejas = $stmtIgr->fetchAll(PDO::FETCH_ASSOC);
 
-// var_dump($IgArray['0']['razao']);
+foreach ($igrejas as $value) {
+	$IgArray[$value['rol']] = $value['razao'];
+}
+
+// var_dump($IgArray);
+// // exit;
+// echo '<br /><br />';
 
 $sqlOrd = $sqlSexo." ORDER BY m.nome ASC";
 
@@ -89,6 +95,9 @@ switch ($quantNomes) {
 
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($results);
+// // exit;
+// echo '<br /><br />';
+
 	$data2 = array();
 
 	$json = '[';
@@ -156,14 +165,22 @@ $totElement = count($results);
 
           if ($chave=='rol') {
 			$rol = $dados;
-            $img="img_membros/$rol.jpg";
-            $icon = "<img src='$img' class='img-thumbnail thumb' alt=' ' width='25' height='35' align='absmiddle' />";
-						$json .= ',"icon": "'.$icon .'"';
+			$img='../img_membros/'.$rol.'.jpg';
+			if (file_exists($img)) {
+				$icon = "<img src='$img' class='img-thumbnail thumb' alt=' ' width='25' height='35' align='absmiddle' />";
+							$json .= ',"icon": "'.$icon .'"';
+			} elseif(file_exists("../img_membros/ver_foto.png")) {
+				$icon = "<img src='img_membros/ver_foto.png' class='img-thumbnail' alt=' ' width='25' height='35' align='absmiddle' />";
+							$json .= ',"icon": "'.$icon .'"';
+			}else {
+				$icon = "<img src='img_membros/ver_foto.jpg' class='img-thumbnail' alt=' ' width='25' height='35' align='absmiddle' />";
+							$json .= ',"icon": "'.$icon .'"';
+			}
           }
 
 					 if ($chave=='congregacao') {
-						 $cong = $dados - 1;
-						 $razao = ($IgArray[$cong]['razao']=='') ? 'Falta informar igreja no cadastro' : "<span class='text-warning'>".$cargo.' &bull; '.$IgArray[$cong]['razao']."</span>" ;
+						 $cong = $dados;
+						 $razao = ($IgArray[$cong]=='') ? 'Falta informar igreja no cadastro' : "<span class='text-warning'>".$cargo.' &bull; '.$IgArray[$cong]."</span>" ;
 						 $json .= ',"razao": " - '.$razao.'"';
            			}
 

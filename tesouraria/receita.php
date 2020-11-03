@@ -61,7 +61,7 @@ if ($idIgreja==0) {
 			$linkAcesso .= '&rec='.$_GET['rec'].'&idDizOf='.$idDizOf.'&igreja=';
 			$fin = ($_GET['fin'] < '1') ? '2' : $_GET['fin'];
 			$rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'];
-			require_once 'help/tes/receitaTela.php';//OpÃ§Ãµes de exibiÃ§Ã£o na tela a escolha
+			require_once 'help/tes/receitaTela.php';//Opções de exibição na tela a escolha
 	}
 } else {
 	echo "<script> alert('Sem permissão de acesso! Entre em contato com o Tesoureiro!');location.href='../?escolha=adm/cadastro_membro.php&uf=PB';</script>";
