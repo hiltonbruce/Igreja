@@ -154,19 +154,19 @@
 				<tr>
 			        <td colspan='3'><label>Motivo do pagamento:</label>
 					<?PHP
-					$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
-					$nome->getMostrar();
-					// $nome->getEditar();
+						$nome = new editar_form("motivo",$rec_alterar->motivo(),$tab,$tab_edit);
+						$nome->getMostrar();
+						$nome->getEditar();
 					?>
 					</td>
 			   </tr>
 	      <tr>
 	        <td><label>Lan&ccedil;amento:</label>
-	        <?PHP
-						$nome = new editar_form("lancamento",$rec_alterar->lancamento(),$tab,$tab_edit);
-						$nome->getMostrar();
-						// $nome->getEditar();
-					?>
+				<?PHP
+					$nome = new editar_form("lancamento",$rec_alterar->lancamento(),$tab,$tab_edit);
+					$nome->getMostrar();
+					$nome->getEditar();
+				?>
 			</td>
 	        <td>Data da emiss&atilde;o:
 	        <?PHP

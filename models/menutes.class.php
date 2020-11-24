@@ -375,6 +375,7 @@ function recibosmembros (){
 	echo "</p>";
 		//In?cio das pendencias de disciplinados
 	}
+	
 	public function periodo ($dia=NULL,$mes=NULL,$ano=NULL,$motivo=NULL,$nome=NULL,$lanc=NULL,$acesso=NULL)
 	{
 		$retorno = array();

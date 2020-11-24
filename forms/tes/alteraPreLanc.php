@@ -79,16 +79,17 @@
 <legend>D&iacute;zimos, Votos e Ofertas (Estamos na:
 			<?php echo semana(date('d/m/Y')).'&ordf;';?>
 			Semana deste m&ecirc;s)</legend>
-	<table>
+	<table class="table">
 		<tbody>
 			<tr>
-				<td colspan="3"><label>Nome:</label> <input type="text" name="nome"
-				id="campo_estado" size="50%" class="form-control"
-				placeholder="Nome do dizimista para iniciarmos a busca no cadastro da Igreja!"
-					tabindex="<?php echo ++$ind;?>" value='<?PHP echo $lancAltera->nome();?>'/>
-				</td>
-				<td><label>Rol:</label> <input type="text" id="rol" name="rol" tabindex="<?php echo ++$ind;?>"
-						value="<?PHP echo $lancAltera->rol();?>" class="form-control" placeholder="N&ordm; do membro na igreja" />
+				<td colspan="4">
+					<?php
+					$nome = $lancAltera->nome();
+					$rol = $lancAltera->rol();
+
+					require_once "forms/editDizimo.php";
+
+					?>
 				</td>
 			</tr>
 			<tr>
