@@ -463,7 +463,8 @@ class editar_form {
 					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
 					|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
 					$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="data"
-					|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao") {
+					|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao"
+					|| $this->campo=="dt_apresent") {
 						$this->classCompl = 'dataclass';
 					}else {
 						$this->classCompl = '';

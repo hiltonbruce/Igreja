@@ -133,9 +133,9 @@ $ind = 1; //Define o indice dos campos do formulário
 		$nome = new editar_form("fl",$apresenta->fl(),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
-		<td>Data:
+		<td>Data da Apresentação:
     <?PHP
-		$nome = new editar_form("data", conv_valor_br($apresenta->data()),$tab,$tab_edit);
+		$nome = new editar_form("dt_apresent", conv_valor_br($apresenta->dt_apresent()),$tab,$tab_edit);
 		$nome->getMostrar();$nome->getEditar();
 		?></td>
       </tr>
