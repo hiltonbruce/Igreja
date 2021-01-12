@@ -3,7 +3,6 @@
 	$linkPost = 'uf_nasc='.$_GET["ufNasc"].'&cid_nasc='.$_GET["cid_nasc"].'&nome_cad='.$_GET["nome_cad"].'&cpf='.$_GET["cpf"].'&nacionalidade='.$_GET["nacionalidade"].'&nacionalidade1='.$_GET["nacionalidade1"].$ufender;
  ?>
 <script language="javascript">
-<!--
 	function pergunta() {
 		var p=window.confirm("O CPF não é válido, mesmo assim deseja ultiliza-lo:<?php echo $_GET["cpf"];?>.E estando em branco será utilizado o número do rol.");
 		window.location=(p) ?
@@ -24,7 +23,7 @@ if (empty($_GET['uf_end']) && empty($_POST['uf_end'])){
 	$uf_end = $_GET['uf_end'];
 }
 
-if (isset($_GET["nacionalidade"])){
+// if (isset($_GET["nacionalidade"])){
 	$nacao = (strlen($_GET["nacionalidade1"])>'4') ? $_GET["nacionalidade1"]:$_GET["nacionalidade"];
 	$ufExtrang = (!empty($_GET['ufExtrang'])) ?  strtoupper($_GET['ufExtrang']): '';
 	$cid_natal = (!empty($_GET['cidExtrang'])) ? $_GET['cidExtrang'].'-'.$ufExtrang: $_GET["cid_nasc"] ;
@@ -54,22 +53,28 @@ if (isset($_GET["nacionalidade"])){
 			echo "Nome em uso! Ative o JavaScript!";
 			exit;
 		}
-}
+// }
 
+if ($_GET["nacionalidade"] == 'Brasileira') {
 	$cid_natal = (empty($_POST["cid_nasc"])) ? $_GET["cid_nasc"] : $_POST["cid_nasc"] ;
 	$rec = new DBRecord ("cidade",$cid_natal,"id");// Aqui será selecionado a informação do campo autor com id=2
 	$cidNatal = $rec->nome()." - ".$rec->coduf();
 	$nome_cidade = ($rec->nome()=='') ? $cid_natal : $cidNatal ;
+} else {
+	$cidNatal = $cid_natal;
+	$nome_cidade = $cid_natal;
+}
+
 	//print_r($rec);
 	//echo "<h1>Teste $uf_natal $cid_natal</h1>";
 ?>
 <script type="text/JavaScript">
-<!--
+
 function MM_jumpMenu(targ,selObj,restore){ //v3.0
   eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
   if (restore) selObj.selectedIndex=0;
 }
-//-->
+
 </script>
 </h2>
 <?php

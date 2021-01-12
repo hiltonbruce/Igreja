@@ -10,9 +10,16 @@ if ($_SESSION["setor"] != '3' && $_SESSION["setor"] != '99') {
 }
 //$rec = new DBRecord ("cidade",$_SESSION["cid_natal"],"id");
 //$nome_cidade = $rec->nome()." - ".$rec->coduf();
-$recCidNatal = new DBRecord("cidade", $_POST["cid_natal"], "id");
-$nome_cidade = $recCidNatal->nome();
-$uf_nasc = $recCidNatal->coduf();
+if (intval($_POST["cid_natal"]) != 0) {
+	$recCidNatal = new DBRecord("cidade", $_POST["cid_natal"], "id");
+	$nome_cidade = $recCidNatal->nome();
+	$id_Cidade = $recCidNatal->id();
+	$uf_nasc = $recCidNatal->coduf();
+}else {
+	list($nome_cidade,$uf_nasc) = explode('-',$_POST["cid_natal"]);
+	$id_Cidade = $nome_cidade;
+}
+
 if (isset($_POST["cid_end"])) {
 	$id_cid = intval($_POST["cid_end"]);
 } else {
@@ -103,7 +110,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					<td><label>Natural de:</label>
 						<input class='form-control' value='<?PHP echo $nome_cidade . '-' . $uf_nasc; ?>' disabled='disabled' />
 						<input name="uf_nasc" class="form-control" type="hidden" value="<?PHP echo $uf_nasc; ?>" />
-						<input name="cid_natal" class="form-control" type="hidden" value="<?PHP echo $recCidNatal->id(); ?>" />
+						<input name="cid_natal" class="form-control" type="hidden" value="<?PHP echo $id_Cidade; ?>" />
 					</td>
 					<td>
 						<label>Data&nbsp;de&nbsp;Nascimento:</label>
