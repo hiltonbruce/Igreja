@@ -285,8 +285,8 @@ body {
 	print "<b>Membro desde:</b> ".conv_valor_br ($rec_ecl->dat_aclam());
 	print " <br /><b>Data de Nascimento:</b> ".conv_valor_br ($rec_pessoais->datanasc());
 	print "<br /><b>Nacionalidade:</b> ".$rec_pessoais->nacionalidade();
-	$cidNatal = ($cidade->nome()=='') ? $rec_pessoais->naturalidade() : $cidade->nome().' - '.$cidade->coduf() ;
-	print '<br /><b>Natural de:</b> '.$cidNatal;
+	$cidNatal = ($cidade->nome() == '0') ? $rec_pessoais->naturalidade() . ' - ' . $rec_pessoais->uf_nasc() : $cidade->nome() . ' - ' . $cidade->coduf();
+	print '<br /><b>Natural de:</b> ' . $cidNatal;
 ?>
 </div>
 <div id="verso2">

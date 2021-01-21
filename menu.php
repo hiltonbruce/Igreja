@@ -53,21 +53,21 @@
 		<div class="banner"></div>
 		<div class="logar">
 		  <div class="btn-group" role="group">
-		    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		      <?php echo $_SESSION['nome']; ?>
 		      <span class="caret"></span>
 		    </button>
 		    <ul class="dropdown-menu">
-		      <li>&nbsp;&nbsp;CPF: <?php echo $_SESSION['valid_user'];?></li>
+		      <li>&nbsp;&nbsp;CPF: <?php echo $_SESSION['valid_user'];?>&nbsp;&nbsp;&nbsp;&nbsp;</li>
 		      <!-- <li>&nbsp;&nbsp;Dept&ordm;: <?php //echo $_SESSION['setor'];?></li> -->
-		      <li>&nbsp;&nbsp;Host: <?php echo $_SESSION['computador'];?></li>
+		      <li>&nbsp;&nbsp;Host: <?php echo $_SESSION['computador'];?>&nbsp;&nbsp;&nbsp;&nbsp;</li>
     			<li role="separator" class="divider"></li>
 		      <li>&nbsp;&nbsp;
-						<div class="btn-group text-center" role="group" aria-label="...">
+						<div class="btn-group t" role="group" aria-label="...">
 						<a class="btn btn-info" href="logout.php">Sair</a>
 						<a class="btn btn-info" href="./?escolha=alt_senha.php">Trocar Senha</a>
-						</div>&nbsp;&nbsp;
-					</li>
+						</div>
+				</li>
 		    </ul>
 		  </div>
 		<?php

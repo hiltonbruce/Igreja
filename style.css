@@ -65,11 +65,14 @@ div.wrap2 {
 }
 
 div .logo {
+  
+  background-image: url(baseeliu.png);
+  background-size: 300px;
 	width:100%;
 	height:75px;
 	background-color: white;
-	background-repeat:no-repeat;
-	background-size: 673px 75px;
+	/* background-repeat:no-repeat; */
+	/* background-size: 673px 75px; */
 	background-position: top center;
 	padding:30px;
 }
@@ -103,6 +106,18 @@ div.logo .slogan {
   height: 78px; /* Height of new image */
 	margin-top:-35px;
 }
+.banner {
+  display: block;
+	float: left;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url(img/bannerCentro.png) no-repeat;
+	background-size: 640px 78px;
+  width: 640px; /* Width of new image */
+  height: 78px; /* Height of new image */
+	margin-top:-35px;
+}
+
 
 
 .logar {
@@ -162,11 +177,20 @@ div .rightpanel {
 }
 
 .login {
-    width: 35%;
+    width: 360px;
+    height: 459px;
     float: right;
     padding: 0 7px 10 100px;
-    margin-bottom: 50px;
-		margin-right: 20%;
+    margin-bottom: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+}
+
+.login-logo, .register-logo {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 300;
 }
 
 div .mainpanel {
@@ -176,7 +200,7 @@ div .mainpanel {
 }
 
 div.wrap1  {
-	background-color: #c9e9f8;
+  background-color: #c9e9f8;
 	/* only with left panel- background-image: url(img/bg1.gif); */
 	/* right and left panel  background-image: url(img/bgcentro.jpg);*/
 	/* only with right panel - background-image: url(img/bg3.gif); */

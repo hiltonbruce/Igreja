@@ -190,7 +190,7 @@ controle ("consulta");
 		  <?PHP
 			$congr = new List_sele ("igreja","razao","congregacao");
 			$congr->List_Selec_pop ("campo=id_cong&menu=top_formulario&escolha=relatorio/busca_apresent.php&valor=");
-		?>
+		  ?>
 		</select>
 		</div></div>
 		</form>

@@ -68,8 +68,7 @@
 	}
 	else
 	{
-		if (isset($cpf))
-		{
+		if (isset($cpf)){
 			// se o usuï¿½rio tentar efetuar o login e falhar
 			echo "<script> alert('Usuário desconhecido ou senha incorreta!');</script>";
 		}
@@ -77,20 +76,54 @@
 	// fornece um formulï¿½rio para efetuar o login
 	if (empty($ind)){ $ind = 0;}
 ?>
-<fieldset>
-<legend>Entrar</legend>
+	
+	<p>&nbsp;</p>
+<div class="login-box-body">
+	<p class="login-box-msg">Fa&ccedil;a o login para iniciar a sess&atilde;o!</p>
+	
+	
+	<p>&nbsp;</p>
   <form name="" method="post" action="">
-	<label>CPF:</label>
+      <div class="form-group has-feedback">
 	<input name="cpf" type="text" id="cpf" autofocus="autofocus"
-	required='required' class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='CPF do Usu&aacute;rio' >
-	<label>Senha:</label>
+	required='required' class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='CPF' >
+        <span class="glyphicon glyphicon-tags form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
 	<input name="senha" type="password" id="senha" required='required'
-	class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='Senha de acesso' >
-	<br>
-  	<input type="submit" name="Submit" value="logar"
-  	class='btn btn-primary' tabindex="<?php echo ++$ind;?>" />
-  </form>
-</fieldset>
+	class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='Senha' >
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+	
+      <p>&nbsp;</p>
+		<div class="row">
+			<div class="col-xs-8">
+			<div class="checkbox icheck">
+				<label>
+				&nbsp;
+				</label>
+			</div>
+			</div>
+			<!-- /.col -->
+			<div class="col-xs-4">
+				<input type="submit" name="Submit" value="logar" class='btn btn-primary' tabindex="<?php echo ++$ind;?>" />
+			</div>
+			<!-- /.col -->
+      </div>
+	</form>
+
+
+    <div class="social-auth-links text-center">
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> &nbsp;</a>
+      <!-- <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> &nbsp;</a> -->
+    </div>
+    <!-- /.social-auth-links -->
+
+    <!-- <a href="#">&nbsp;</a><br> -->
+
+
+</div>
 <?php
 	}
 ?>
+

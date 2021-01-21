@@ -165,7 +165,7 @@
 			</div>
 		</ul>
      <?PHP
-    require_once ("autentica.php");
+    // require_once ("autentica.php");
     ?>
 </div>
 <div id="content">
@@ -176,25 +176,25 @@
 	//Painel direito
 	echo $mainpanelIni;
 	if (!empty($_SESSION["valid_user"])){
-	if (strstr($escGET,"adm/")){
-		if (strstr($escGET,"adm/dados_pessoais"))
-			require_once ("top_dados.php");
-		else
-			require_once ("views/secretaria/menuTopDados.php");
-	}elseif (strstr($escPOST, "adm/")){
-		if (strstr($escPOST,"adm/dados_pessoais"))
-			require_once ("top_dados.php");
-		else
-			require_once ("views/secretaria/menuTopDados.php");
-	}elseif ($menuGET!='') {
-		require_once ($menuGET.'.php');
-	}elseif (!empty($menuPOST)){
-		require_once ($menuPOST.'.php');
-	}elseif (strstr($escGET,"aniv/")){
-		require_once ("top_aniv.php");
-	}
-	$cent = new central();//Chama o script da pagina de acordo com $_get ou $_post ["escolha"]
-	require ($cent->get());
+		if (strstr($escGET,"adm/")){
+			if (strstr($escGET,"adm/dados_pessoais"))
+				require_once ("top_dados.php");
+			else
+				require_once ("views/secretaria/menuTopDados.php");
+		}elseif (strstr($escPOST, "adm/")){
+			if (strstr($escPOST,"adm/dados_pessoais"))
+				require_once ("top_dados.php");
+			else
+				require_once ("views/secretaria/menuTopDados.php");
+		}elseif ($menuGET!='') {
+			require_once ($menuGET.'.php');
+		}elseif (!empty($menuPOST)){
+			require_once ($menuPOST.'.php');
+		}elseif (strstr($escGET,"aniv/")){
+			require_once ("top_aniv.php");
+		}
+		$cent = new central();//Chama o script da pagina de acordo com $_get ou $_post ["escolha"]
+		require ($cent->get());
 	}else {
 		require_once ('views/login.php');
 	}
@@ -207,13 +207,70 @@
 </div>
 </div>
     <div class="info1">
-      <div style="display:inline; float:left;">&copy; 2016 <a href="http://<?php echo $igSede->site();?>/"><?php
-       echo $igSede->site();?></a>. Design <span class="text-muted">Joseilton Costa Bruce</span>.</div>
-      <div style="display:inline; float:right;"><a href="http://jigsaw.w3.org/css-validator/check/referer"></a>
-        <a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px"
-        src="img/valid-xhtml11-blue.png" alt="Validar XHTML 1.1" /></a><img style="border:0;width:88px;height:31px"
-        src="img/vcss.gif" alt="Validar CSS!" align="bottom"/> <a href="mailto:hiltonbruce@gmail.com">
-       &nbsp;<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Joseilton</a>
+
+	<div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+
+            <div class="info-box-content">
+              <span class="info-box-text">&copy; 2016 Joseilton Costa Bruce Design</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+
+            <div class="info-box-content">
+              
+			<span class="info-box-number">
+				<span class="info-box-text"><a href="http://<?php echo $igSede->site();?>/"><?php echo $igSede->site();?></a></span>
+			 </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+
+            <div class="info-box-content">
+              <span class="info-box-text"><a href="http://jigsaw.w3.org/css-validator/check/referer"></a></span>
+              <a href="mailto:hiltonbruce@gmail.com"><span class="info-box-number">
+      		</span> Joseilton - Bayeux - PB - Brasil</a> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="info-box">
+
+            <div class="info-box-content">
+              <span class="info-box-text"><img src="img/Eliu.png" alt="" width="88px"> </span>
+              <span class="info-box-number">Sistema de controle para Igrejas Evang&eacute;licas</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+
+
+	  <div style="display:inline; float:left;">
+	   
+	   </div>
+	  <div style="display:inline; float:left; width:300px">
+	 
+	   </div>
+	  <div style="display:inline; float:right;">
+	  
       </div>
     </div>
   </div>
