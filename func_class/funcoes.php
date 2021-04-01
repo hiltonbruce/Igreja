@@ -887,9 +887,9 @@ function situacao ($situacao,$rol){
 
 function toUpper($string) {
 	//Converte para maï¿½uscula as vogais acentuadas
-    return ( strtoupper (strtr ($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ) ) );
-    }
-
+    return ( strtoupper (strtr ($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAAEEIOOOUUCAAAAEEIOOOUUC' ) ) );
+	}
+	
 function extenso($valor = 0, $maiusculas = false) {
 $singular = array("centavo", "real", "mil", "milh&atilde;o", "bilh&atilde;o", "trilh&atilde;o", "quatrilh&atilde;o");
 $plural = array("centavos", "reais", "mil", "milh&otilde;es", "bilh&otilde;es", "trilh&otilde;es",
