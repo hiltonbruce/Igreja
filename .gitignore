@@ -6,5 +6,8 @@
 /tmp
 /bkpbanco/*.sql
 /bkpbanco/*.zip
-/img/marca.png
+/img/marca.*
+/img/logo*.*
+/img/header*.*
+/img/menin*.*
 /relatorio/cartao_impr_Regenerar.php
