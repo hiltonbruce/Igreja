@@ -87,12 +87,12 @@
 		<div id='comadep'></div>
       <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->data()));?></h3>
     	<br />
-			<div id="pastor"><?PHP echo $prIgreja;?>
-			</div>
+		<div id="pastor"><?PHP echo $prIgreja;?>
+			<div id='assinPastor'></div>
+		</div>
 	 	 <?PHP
-
 		 		if ($most_certidao->id_cong()>'1') {
-		 			$congreg = 'Congrega&ccedil;&atilde;o: '.$listInfIgr[$most_certidao->id_cong()]['0'].' - ';
+		 			$congreg = 'Congrega&ccedil;&atilde;o: '.$listInfIgr[$most_certidao->id_cong()]['0'];
 		 		} else {
 		 			$congreg ='';
 		 		}
@@ -123,8 +123,8 @@
       </div>
 			<div id="footer">
 					<span class="text-center">
-					<?PHP echo $congreg.'Templo SEDE: '.$igreja->rua().', N&ordm; '.$igreja->numero().' - '.$cidOrigem->nome().' - '.$cidOrigem->coduf();?>
-					<?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()}<br />";?></span>
+					<?PHP echo $congreg.'<br />SEDE: '.$igreja->rua().', N&ordm; '.$igreja->numero().' - '.$cidOrigem->nome().' - '.$cidOrigem->coduf();?>
+					<?PHP echo " - CNPJ: {$igreja->cnpj()}<br />";?></span>
 					Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> - Email: <?PHP echo "{$igreja->email()}";?>
 					&bull; <small>Designed by <a rel="nofollow" target="_blank"
 					href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></small>
