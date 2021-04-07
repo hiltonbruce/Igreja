@@ -165,7 +165,7 @@
 			</div>
 		</ul>
      <?PHP
-    // require_once ("autentica.php");
+    require_once ("autentica.php");
     ?>
 </div>
 <div id="content">
