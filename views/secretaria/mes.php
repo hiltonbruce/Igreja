@@ -58,7 +58,7 @@ if ($ord==0) {
 // echo $iconDia;
 // $ordNome = ($ord!=0) ? '' : 5 ;
 
-//Código para exibir de qual congregação é a lista de aniversariantes
+//Cï¿½digo para exibir de qual congregaï¿½ï¿½o ï¿½ a lista de aniversariantes
 $congrega = new DBRecord ("igreja","{$_GET["congregacao"]}","rol");
 if ($_GET["congregacao"]>"0" ) {
 	$cong_sele = " - Congrega&ccedil;&atilde;o: ".$congrega->razao();
