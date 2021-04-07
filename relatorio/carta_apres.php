@@ -1,7 +1,7 @@
 
 <?PHP
 	session_start();
-	require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
+	require "../help/impressao.php";//Include de funcões, classes e conexï¿½es com o BD
 	controle ("inserir");
   $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
   $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -108,7 +108,7 @@
 	        <?PHP
                 $cargo = cargo($secretario->rol());
                 $cargo = ($cargo[1]=='Mb') ? '' : $cargo[1];
-                echo $cargo.' '.strtoupper( toUpper($secretario->nome()));
+                echo $cargo.' '.strtoupper( $secretario->nome());
             ?>
             <br />
             <?php
