@@ -28,26 +28,27 @@
 		<form id="form1" name="form1" method="post" action="">
         <div class="row">
             <div class="col-xs-4">
-							<select name="estado_civil" id="estado_civil" class="form-control" tabindex="<?PHP echo $ind++;?>">
-              <option value="<?PHP echo $arr_dad["estado_civil"];?>"><?PHP echo $arr_dad["estado_civil"];?></option>
-		  	<?PHP
-		//	$membro = new DBRecord ("membro",$bsc_rol,"rol");
-			if ((strtoupper($membro->sexo()))=="M") {
-			?>
-        <option value="Solteiro">Solteiro</option>
-        <option value="Casado">Casado</option>
-        <option value="Vi�vo">Vi&uacute;vo</option>
-        <option value="Divorciado">Divorciado</option>
-			<?PHP
-			}else {
-			?>
-        <option value="Solteira">Solteira</option>
-        <option value="Casada">Casada</option>
-        <option value="Vi�va">Vi&uacute;va</option>
-        <option value="Divorciada">Divorciada</option>
-			<?PHP } ?>
-        <option value="Outros">Outros</option>
-		  </select>
+				<select name="estado_civil" id="estado_civil" class="form-control" tabindex="<?PHP echo $ind++;?>">
+					<option value="<?PHP echo $arr_dad["estado_civil"];?>"><?PHP echo $arr_dad["estado_civil"];?></option>
+					<?PHP
+				//	$membro = new DBRecord ("membro",$bsc_rol,"rol");
+					if ((strtoupper($membro->sexo()))=="M") {
+					?>
+						<option value="Solteiro">Solteiro</option>
+						<option value="Casado">Casado</option>
+						<option value="Vi&uacute;vo">Vi&uacute;vo</option>
+						<option value="Divorciado">Divorciado</option>
+						<?PHP
+					}else {
+						?>
+						<option value="Solteira">Solteira</option>
+						<option value="Casada">Casada</option>
+						<option value="Vi&uacute;va">Vi&uacute;va</option>
+						<option value="Divorciada">Divorciada</option>
+						<?PHP 
+					} ?>
+				<option value="Outros">Outros</option>
+			</select>
       </div>
         <div class="col-xs-2">
     			<input type="submit" class="btn btn-primary" name="Submit" value="Alterar..." />
