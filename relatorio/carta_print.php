@@ -19,6 +19,9 @@
 	$ecles 			= new DBRecord ("eclesiastico",$_POST['bsc_rol'],"rol");
 	$profissional	= new DBRecord ("profissional",$_POST['bsc_rol'],"rol");
 	$igreja 		= new DBRecord ("igreja","1","rol");
+	$cidade = new cidade ();
+	$cidCad = $cidade->arrayCidade();
+	
     if (is_numeric($membro->naturalidade())) {
         $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
         $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
@@ -76,17 +79,52 @@
 <div id="container">
 	<table>
 		<tr>
-			<td><img src="../img/logoCarta.png" alt="Brasï¿½o Assembleia de Deus" width='387' height='125' ></td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td>
-			</td>
+			<td><img src="../img/logoCarta.png" alt="Brasãoo Assembleia de Deus" width='387' height='125' ></td>
+			<td class="text-right">
+			<div class="col-md-12 text-right">
+				<div class="row">
+					<div class="col-md-12">
+					<h4>Templo SEDE</h4>
+						<h5>
+							<?php
+								echo $igreja->rua();
+								echo ', N&ordm; '.$igreja->numero();
+								echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
+								echo ' - '.$cidCad[$igreja->cidade()]['uf'];
+								echo '<br/>Fone: '.$igreja->fone();
+								echo '<br/>CEP: '.$igreja->cep();
+								echo ' / CNPJ: '.$igreja->cnpj();
+								echo '<br/>Email: '.$igreja->email();
+							?>					
+						</h5>
+					</div>
+				</div>
+			</div>
+		</td>
 		</tr>
 	</table>
-  <div class='row'>
-  <div class="col-md-4"></div>
-  <div class="col-md-8 text-left">
-   	</div>
-  </div>
+  <!-- <div class='row'>
+	<div class="col-md-5"><img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" width='387' height='125' ></div>
+	<div class="col-md-5 text-right">
+		<div class="row">
+			<div class="col-md-12">
+			<h4>Templo SEDE</h4>
+				<h5>
+					<?php
+						// echo $igreja->rua();
+						// echo ', N&ordm;'.$igreja->numero();
+						// echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
+						// echo ' - '.$cidCad[$igreja->cidade()]['uf'];
+						// echo '<br/>Fone:'.$igreja->fone();
+						// echo '<br/>CEP:'.$igreja->cep();
+						// echo ' / CNPJ: '.$igreja->cnpj();
+						// echo '<br/>Email: '.$igreja->email();
+					?>					
+				</h5>
+			</div>
+		</div>
+	</div>
+  </div> -->
 <div id="mainnav">
     <div id="foto">
   	<?PHP print mostra_foto($rol);?></div>
@@ -119,12 +157,7 @@
 			    <?PHP echo $intr;?>
     	<p>Sauda&ccedil;&otilde;es no Senhor:</p>
 
-     	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apresentamos a amada Igreja, <strong><?PHP
-      	if ($membro->sexo()=="M"){
-      			print " o irm&atilde;o: ";}
-      		else {
-      			print " a irm&atilde; ";} ?>
-                </strong></p>
+     	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apresentamos:</p>
     <table class='table table-bordered'>
 		<tbody>
 			<tr>
@@ -143,11 +176,8 @@
 			</tr>
 		</tbody>
 	</table>
-      	<p class='text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E  serve ao Senhor nesta igreja, e por se achar em comunh&atilde;o, &eacute; que  recomendamos para que <?PHP
-      	if ($membro->sexo()=="M"){
-      	 print "o";}
-      	 else {
-      	 	print "a";} ?> recebais no Senhor como usam fazer os Santos.
+      	<p class='text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E 
+		  serve ao Senhor nesta igreja, e por se achar em comunh&atilde;o, &eacute; que recomendamos.
       	 <p>
 		<?php
 			if ($carta->obs()!='') {
@@ -168,27 +198,39 @@
     </div>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
-	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
-      <?php echo $cargosPR->descricao();?>
+	  <div id="pastor">
+	  <table  style="width: 100%;">
+			<tbody>
+			<tr>
+				<td>
+					______________________________________<br />
+					<?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
+					<?php echo $cargosPR->descricao();?>
+				</td>
+				<td style="width: 24px;)">&nbsp;</td>
+				<td>
+					______________________________________<br />
+					<?PHP
+					$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
+						echo  $cargoSec.strtoupper($secretario);
+					?><br />
+					<?php echo $_POST["secretario"].$cargo;?> 
+				</td>
+			</tr>
+			</tbody>
+	  </table>
+	</div>
 	    </div>
-	  <div id="secretario">
-			<?PHP
-			$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
-				echo  $cargoSec.strtoupper($secretario);
-			?>
-			<br />
-      <?php echo $_POST["secretario"].$cargo;?> </div>
-<br>
 
     </div>
-	<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
-	  <div id="vencimento">Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
+	  <div id="vencimento"><br />Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
         <?PHP
 		echo data_venc(conv_valor_br($dataCarta));
 		?> (validade)
 	  </div>
     <div id="footer">
-        <h6><span class="text-center"><br />
+        <h6><span class="text-center">
+		<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
      
         <h5><p class="text-right"><small>Designed by<a rel="nofollow" target="_blank"
         href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></small></p></h5>

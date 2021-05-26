@@ -49,7 +49,7 @@ $result = mysql_query($query) or die (mysql_error());
 				$atualHist .= 'AND datafim="0000-00-00" LIMIT 1';
 				$result = mysql_query($atualHist);
 				if (!$result) {
-				    echo 'Falha na autaliza??o: ' . mysql_error();
+				    echo 'Falha na autalização: ' . mysql_error();
 				    exit;
 				}
 				#Cadastra os dados na tabela de hist?rico de fun??es
@@ -77,6 +77,8 @@ $result = mysql_query($query) or die (mysql_error());
 			$atualizador = trim($_POST["pastor"]);
 		}
 		$rec->$_POST["campo"] = $atualizador; //Aqui ? atribuido a esta vari?vel um valor para UpDate
+
+		// echo $atualizador.' ***********';
 		$rec->Update(); //? feita a chamada do m?todo q realiza a atualiza??o no Banco
 
 		print "Para:<h3> $atualizador</h3>";

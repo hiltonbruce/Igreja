@@ -347,6 +347,7 @@ class DBRecord {
 	//echo "$sql";
   $sth = $db->prepare( $sql );
   //echo "$sth";
+//   echo var_dump($values);
 	$db->execute( $sth, $values );
   }
   public function UpdateID ()
@@ -703,13 +704,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.</h2>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Não há nenhum bairro cadastrado nesta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado nesta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -746,13 +747,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.</h2>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Não há nenhum bairro cadastrado para esta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado para esta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -786,7 +787,7 @@ class List_sele {
 	  	}
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -813,7 +814,7 @@ class List_sele {
 	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
