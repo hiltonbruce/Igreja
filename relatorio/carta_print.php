@@ -77,29 +77,26 @@
 </head>
 <body>
 <div id="container">
-	<table>
+	<table style="width: 100%;">
 		<tr>
-			<td><img src="../img/logoCarta.png" alt="Brasãoo Assembleia de Deus" width='387' height='125' ></td>
-			<td class="text-right">
-			<div class="col-md-12 text-right">
-				<div class="row">
-					<div class="col-md-12">
-					<h4>Templo SEDE</h4>
-						<h5>
-							<?php
-								echo $igreja->rua();
-								echo ', N&ordm; '.$igreja->numero();
-								echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
-								echo ' - '.$cidCad[$igreja->cidade()]['uf'];
-								echo '<br/>Fone: '.$igreja->fone();
-								echo '<br/>CEP: '.$igreja->cep();
-								echo ' / CNPJ: '.$igreja->cnpj();
-								echo '<br/>Email: '.$igreja->email();
-							?>					
-						</h5>
-					</div>
-				</div>
-			</div>
+			<td>
+				<br>
+				<img src="../img/logoCarta.png" alt="Brasãoo Assembleia de Deus" width='387' height='125' >
+			</td>
+			<td class="text-right" style="vertical-align: text-top;">
+				<h4>Templo SEDE</h4>
+				<h5>
+					<?php
+						echo $igreja->rua();
+						echo ', N&ordm; '.$igreja->numero();
+						echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
+						echo ' - '.$cidCad[$igreja->cidade()]['uf'];
+						echo '<br/>Fone: '.$igreja->fone();
+						echo '<br/>CEP: '.$igreja->cep();
+						echo ' / CNPJ: '.$igreja->cnpj();
+						echo '<br/>Email: '.$igreja->email();
+					?>					
+				</h5>
 		</td>
 		</tr>
 	</table>
@@ -125,45 +122,49 @@
 		</div>
 	</div>
   </div> -->
-<div id="mainnav">
+	<div id="mainnav">
     <div id="foto">
   	<?PHP print mostra_foto($rol);?></div>
 	<div id="Tipo">
-	  <h2 class="text-primary"><u><strong>
-	Carta <?PHP //Tipo de carta - Recomendaï¿½ï¿½o ou Mudanï¿½a
-	print carta ("{$carta->tipo()}");
-	$destino = (int)$carta->destino();
-	 if ((int)$carta->destino() != 0) {
-			$cidade = new DBRecord ("cidade",$carta->destino(),"id");
-			$destino=$cidade->nome()." - ".$cidade->coduf();
-		}else {
-		 	$destino = $carta->destino();
-		}
+	  <h2 class="text-primary">
+	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  <u>
+		  <strong>
+		  Carta <?PHP //Tipo de carta - Recomendaï¿½ï¿½o ou Mudanï¿½a
+			print carta ("{$carta->tipo()}");
+			$destino = (int)$carta->destino();
+			if ((int)$carta->destino() != 0) {
+					$cidade = new DBRecord ("cidade",$carta->destino(),"id");
+					$destino=$cidade->nome()." - ".$cidade->coduf();
+				}else {
+					$destino = $carta->destino();
+				}
 
-	if ($carta->tipo()!=="3") {
-		$intr .= '<div class="panel panel-default text-center">';
-		$intr .= '	 <div class="panel-body">';
-		$intr .= '	    DESTINO: '.$carta->igreja().', em '.$destino;
-		$intr .= '	</div>';
-		$intr .= '</div>';
-	}else {
-		$intr = "";
-	}
-  ?></strong></u></h2>
+			if ($carta->tipo()!=="3") {
+				$intr .= '<div class="panel panel-default text-center">';
+				$intr .= '	 <div class="panel-body">';
+				$intr .= '	    DESTINO: '.$carta->igreja().', em '.$destino;
+				$intr .= '	</div>';
+				$intr .= '</div>';
+			}else {
+				$intr = "";
+			}
+			?></strong>
+		</u>
+	</h2>
   </div>
   </div>
-	<div id="content">
     <div id="added-div1">
-			    <?PHP echo $intr;?>
+		<?PHP echo $intr;?>
     	<p>Sauda&ccedil;&otilde;es no Senhor:</p>
 
      	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apresentamos:</p>
-    <table class='table table-bordered'>
+    <table class='table table-bordered' >
 		<tbody>
 			<tr>
 				<td colspan='3'><h4><small>Nome:</small><br><?php print strtoupper( toUpper($membro->nome())); ?></h4></td>
-				<td><h4><small>Rol</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
-				<td><h4><small>Est. Civil</small><br><?php print $est_civil->estado_civil(); ?></h4></td>
+				<td><h4><small>Rol:</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
+				<td><h4><small>Est. Civil:</small><br><?php print $est_civil->estado_civil(); ?></h4></td>
 				<td><h4><small>Func. Eclesiast&iacute;ca:</small><br><?php print cargo($_POST['bsc_rol'])['0']; ?></h4></td>
 			</tr>
 			<tr>
@@ -171,13 +172,13 @@
 				<td><h4><small>CPF:</small><br><?php echo $cpf; ?></h4></td>
 				<td><h4><small>Data de Nasc.:</small><br><?php print conv_valor_br($membro->datanasc()); ?></h4></td>
 				<td><h4><small>Naturalidade:</small><br><?php print $cidNatal; ?></h4></td>
-				<td><h4><small>Batismo</small><br><?php print conv_valor_br($ecles->batismo_em_aguas()); ?></h4></td>
+				<td><h4><small>Batismo:</small><br><?php print conv_valor_br($ecles->batismo_em_aguas()); ?></h4></td>
 				<td><h4><small>Membro Desde:</small><br><?php print conv_valor_br($ecles->dat_aclam()); ?></h4></td>
 			</tr>
 		</tbody>
 	</table>
-      	<p class='text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E 
-		  serve ao Senhor nesta igreja, e por se achar em comunh&atilde;o, &eacute; que recomendamos.
+      	<p class='text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  Que serve ao Senhor nesta igreja, e por se achar em comunh&atilde;o, &eacute; que recomendamos.
       	 <p>
 		<?php
 			if ($carta->obs()!='') {
@@ -222,7 +223,6 @@
 	</div>
 	    </div>
 
-    </div>
 	  <div id="vencimento"><br />Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
         <?PHP
 		echo data_venc(conv_valor_br($dataCarta));

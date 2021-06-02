@@ -40,7 +40,7 @@ a:link:after, a:visited:after {
 
 #added-div1 {
 	position:relative;
-	width:800px;
+	width:100%;
 	z-index:1;
 	height: auto;
 	float: left;
@@ -151,14 +151,19 @@ legend {
 
 #foto {
 	float:right;
-	left:207px;
+	/* left:207px; */
 	top:174px;
 	width:86px;
 	height:120px;
 	z-index:3;
+	padding: 0 10px;
 }
 #Tipo {
 	float:left;
-	width:700px;
+	width:650px;
 	padding: 20px 5px 0;
+}
+
+h4 small {
+    color: #4d4a4a !important;
 }
