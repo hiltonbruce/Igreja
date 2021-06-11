@@ -81,7 +81,7 @@
 		<tr>
 			<td>
 				<br>
-				<img src="../img/logoCarta.png" alt="Brasãoo Assembleia de Deus" width='387' height='125' >
+				<img src="../img/logoCarta.png" alt="Brasï¿½oo Assembleia de Deus" width='387' height='125' >
 			</td>
 			<td class="text-right" style="vertical-align: text-top;">
 				<h4>Templo SEDE</h4>
@@ -101,7 +101,7 @@
 		</tr>
 	</table>
   <!-- <div class='row'>
-	<div class="col-md-5"><img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" width='387' height='125' ></div>
+	<div class="col-md-5"><img src="../img/logoCarta.png" alt="Brasï¿½o Assembleia de Deus" width='387' height='125' ></div>
 	<div class="col-md-5 text-right">
 		<div class="row">
 			<div class="col-md-12">
@@ -199,17 +199,19 @@
     </div>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
-	  <div id="pastor">
+	  <div id="pastor"> 
 	  <table  style="width: 100%;">
 			<tbody>
 			<tr>
-				<td>
+				<td style="background-image:  url(../imgAssin/assinPastor.png);background-repeat: no-repeat;background-position: center bottom;height: 100px;">
+					<!-- <img src="../imgAssin/assinPastor.png" width="" height="">  -->
 					______________________________________<br />
 					<?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
 					<?php echo $cargosPR->descricao();?>
 				</td>
-				<td style="width: 24px;)">&nbsp;</td>
+				<td>&nbsp;</td>
 				<td>
+					<!-- <img src="../imgAssin/2242.png" width="" height=""> -->
 					______________________________________<br />
 					<?PHP
 					$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
