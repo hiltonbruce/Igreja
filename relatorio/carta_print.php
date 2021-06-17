@@ -203,7 +203,7 @@
 	  <table  style="width: 100%;">
 			<tbody>
 			<tr>
-				<td style="background-image:  url(../imgAssin/assinPastor.png);background-repeat: no-repeat;background-position: center bottom;height: 100px;">
+				<td>
 					<!-- <img src="../imgAssin/assinPastor.png" width="" height="">  -->
 					______________________________________<br />
 					<?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />

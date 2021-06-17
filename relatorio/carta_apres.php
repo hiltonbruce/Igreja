@@ -1,7 +1,7 @@
 
 <?PHP
 	session_start();
-	require "../help/impressao.php";//Include de funcões, classes e conexï¿½es com o BD
+	require "../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
 	controle ("inserir");
   $secretario = new DBRecord ("membro",$_POST["secretario"],"rol");
   $cidOrigem = new DBRecord ("cidade",$igreja->cidade(),"id");
@@ -96,19 +96,19 @@
 		 		} else {
 		 			$congreg ='';
 		 		}
-        $assinSecret  = '../imgAssin/'.$secretario->rol().'a.png';
+        $assinSecret  = '../imgAssin/'.$secretario->rol().'.png';
         if (!file_exists($assinSecret)){
           $assinSecret  = '../imgAssin/noAssin.png';
         }
     ?>
       <div id='assinSec'>
-          <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
+          <img src='<?php echo $assinSecret;?>' width="300" height="100"/>
       </div>
       <div id="secretario">
 	        <?PHP
                 $cargo = cargo($secretario->rol());
                 $cargo = ($cargo[1]=='Mb') ? '' : $cargo[1];
-                echo $cargo.' '.strtoupper( $secretario->nome());
+                echo $cargo.' '.strtoupper( $secretario->nome()).$secretario->rol();
             ?>
             <br />
             <?php
