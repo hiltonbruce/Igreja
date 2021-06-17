@@ -64,13 +64,13 @@
 #assinPastor {
 
 	position:relative;
-	background-image: url(../img/assinPastor.png);
+	background-image: url(../imgAssin/assinPastor.png);
 	background-repeat: no-repeat;
 	background-size: 300px 100px;
 	width:350px;
 	height: 180px;
-	margin-left: -30px;
-	top: -90px;
+	margin-left: -25px;
+	top: -80px;
 }
 
 #secretario {
@@ -85,7 +85,7 @@
 #assinSec {
 	position:relative;
 	width:115px;
-	margin-left: 530px;
+	margin-left: 520px;
 	top: -260px;
 }
 
