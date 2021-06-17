@@ -108,7 +108,7 @@
 	        <?PHP
                 $cargo = cargo($secretario->rol());
                 $cargo = ($cargo[1]=='Mb') ? '' : $cargo[1];
-                echo $cargo.' '.strtoupper( $secretario->nome()).$secretario->rol();
+                echo $cargo.' '.strtoupper( $secretario->nome());
             ?>
             <br />
             <?php
