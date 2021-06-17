@@ -96,7 +96,7 @@
 		 		} else {
 		 			$congreg ='';
 		 		}
-        $assinSecret  = '../imgAssin/'.$secretario->rol().'.png';
+        $assinSecret  = '../imgAssin/'.$secretario->rol().'a.png';
         if (!file_exists($assinSecret)){
           $assinSecret  = '../imgAssin/noAssin.png';
         }
