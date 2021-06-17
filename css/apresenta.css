@@ -56,7 +56,7 @@
 	position:relative;
 	width:250px;
 	margin-top: 40px;
-	margin-left: 40px;
+	margin-left: 10px;
 	padding: 0 0 0 100px;
 	text-align:center;
 }
@@ -69,7 +69,7 @@
 	background-size: 300px 100px;
 	width:350px;
 	height: 180px;
-	margin-left: -5px;
+	margin-left: -30px;
 	top: -80px;
 }
 
