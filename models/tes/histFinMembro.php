@@ -17,7 +17,7 @@ if ($_GET['ano']=='') {
 //$ano = 2014;
 switch ($hisFinanceiro) {
 	case 1:
-		//Listagem para historico finaceiro das contribuições dos membros
+		//Listagem para historico finaceiro das contribuiï¿½ï¿½es dos membros
 		$query  = 'SELECT *,mesrefer AS mes,anorefer ';
 		$query .= 'AS ano FROM dizimooferta WHERE lancamento<>"0" AND rol="'.$bsc_rol.'" ';
 		$query .= 'AND credito!="803" ORDER BY anorefer,mesrefer';
@@ -35,7 +35,14 @@ switch ($hisFinanceiro) {
 
 $lista = mysql_query($query);
 //Logica para montar o conjunto de variï¿½veis para compor a tabelar a seguir
-require_once 'help/tes/histFinanceiroMembro.php';
+// require_once 'help/tes/histFinanceiroMembro.php';
+if (file_exists('help/tes/histFinanceiroMembro.php')) {
+	require_once 'help/tes/histFinanceiroMembro.php';//Tabela com saldos por igreja e semanal
+} elseif (file_exists('../help/tes/histFinanceiroMembro.php')) {
+// echo '<h1> saldoMesFinPrint.php </h1>';
+require_once '../help/tes/histFinanceiroMembro.php';//Tabela com saldos por igreja e semanal
+} 
+
 	//echo "<h1> ** $ano **</h1>";
 	$ano = ($ano=='') ? date('Y'):$ano;
 	//$ano = 2013;

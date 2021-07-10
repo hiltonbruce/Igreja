@@ -15,8 +15,17 @@ $queryLista  = 'SELECT *,DATE_FORMAT(data,"%c") AS mes,DATE_FORMAT(data,"%Y") AS
 $queryLista .= 'FROM dizimooferta WHERE lancamento<>"0" AND DATE_FORMAT(data,"%c%Y")';
 $queryLista .= '="'.$mes.$ano.'" ORDER BY igreja,anorefer,mesrefer ';
 $lista = mysql_query($queryLista);
-//Logica para montar o conjunto de variáveis para compor a tabelar a seguir
-require_once 'help/tes/histFinanceiroIgreja.php';
+//Logica para montar o conjunto de variï¿½veis para compor a tabelar a seguir
+// require_once 'help/tes/histFinanceiroIgreja.php';
+
+if (file_exists('help/tes/histFinanceiroIgreja.php')) {
+	require_once 'help/tes/histFinanceiroIgreja.php';//Tabela com saldos por igreja e semanal
+} elseif (file_exists('../help/tes/histFinanceiroIgreja.php')) {
+// echo '<h1> saldoMesFinPrint.php </h1>';
+require_once '../help/tes/histFinanceiroIgreja.php';//Tabela com saldos por igreja e semanal
+} 
+
+
 	//echo "<h1> ** $ano **</h1>";
 	$ano = ($ano=='') ? date('Y'):$ano;
 	//$ano = 2013;
@@ -26,7 +35,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 	$linha='';
 	//print_r($igrejas->Arrayigreja());
 	foreach ($igrejas->Arrayigreja() as $cont => $igrejaDados) {
-		$bgcolor = $cor ? 'style="background:#ffffff"' : 'style="background:#d0d0d0"';
+		$bgcolor = $cor ? 'style="background:#d0d0d0"' : 'style="background:#d0d0d0"';
 		$dz = 'dizimos'."$cont$ano";
 		$of = 'ofertaCultos'."$cont$ano";
 		$ofm = 'ofertaMissoes'."$cont$ano";
@@ -38,7 +47,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 		$ofCampanha = 'ofertaCampanha'."$cont$ano";
 		$ofExtra = 'ofertaExtra'."$cont$ano";
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
-		//Soma da coluna para linha Sub-total das congregações Sem a Sede
+		//Soma da coluna para linha Sub-total das congregaï¿½ï¿½es Sem a Sede
 		if ($cont!='1') {
 		$totDizAno  += $$dz;
 		$totOfertaExtraAno  += $$ofExtra;
@@ -87,7 +96,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 			$subTotalSem = $$dizSem+$$ofExtraSem+$$ofSem;
 			$ofOpSem = $subTotalSem+$$ofsSem+$$ofmocSem+$$ofiSem+$$ofeSem;
 
-			$nivel1Sem .= '<tr><td><strong>'.$i.'&ordf;&nbsp; Sem</strong></td>';
+			$nivel1Sem .= '<tr class=""><td>'.$i.'&ordf;&nbsp; Sem</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$dizSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofExtraSem,2,',','.').'</td>';
 			$nivel1Sem .= '<td id="moeda">'.number_format($$ofSem,2,',','.').'</td>';
@@ -104,7 +113,7 @@ require_once 'help/tes/histFinanceiroIgreja.php';
 			$nivel1Sem .= '</tr>';
 		}
 		$nivel1 .= $nivelSem.$nivel1Sem;
-		$nivel1Sem = '';//Limpa a variável para o próximo mês
+		$nivel1Sem = '';//Limpa a variï¿½vel para o prï¿½ximo mï¿½s
 		$nivel1 .= '</tbody>';
 		$cor = !$cor;
 	}

@@ -13,7 +13,7 @@ $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 if ($rec>'12' && $rec<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
-	require "../help/impressao.php";//Include de funï¿½ï¿½es, classes e conexï¿½es com o BD
+	require "../help/impressao.php";//Include de funções, classes e conexï¿½es com o BD
 	if ($idIgreja==0) {
 			$igrejaSelecionada = $igSede;
 			//$igLanc = $igrejaSelecionada;

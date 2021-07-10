@@ -45,12 +45,12 @@ h3 {
 	margin-right:9.5%;
 }
 
-a:link:after, a:visited:after {
+/* a:link:after, a:visited:after {
 	content:"("attr(href)")";
 	font-size: 80%;
 	color:#555555;
 	background:#ffffff;
-}
+} */
 
 .odd {
   background-color:#F0F0F0;

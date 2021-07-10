@@ -1,5 +1,5 @@
 <?php
-//Opções de exibir na tela para o script /tesouraria/receita.php
+//Opï¿½ï¿½es de exibir na tela para o script /tesouraria/receita.php
 //$dtlanc = (empty($dtlanc)) ? date('d/m/Y'):$_GET['data'];
 $assinatura = '';
 if (empty($_GET['ano'])) {
@@ -23,9 +23,9 @@ switch ($rec) {
 	case '1':
 		require_once 'forms/concluirdiz.php'; #Form fecha caixa
 		if (!empty($_GET['id'])) {
-			require_once('forms/tes/alteraPreLanc.php'); #Edita dizimo e ofertas pre-Lançamento
+			require_once('forms/tes/alteraPreLanc.php'); #Edita dizimo e ofertas pre-Lanï¿½amento
 		} else {
-			require_once('forms/autodizimo.php'); #Form lançar dizimos e ofertas
+			require_once('forms/autodizimo.php'); #Form lanï¿½ar dizimos e ofertas
 		}
 		break;
 	case '2':
@@ -34,16 +34,16 @@ switch ($rec) {
 		break;
 	case '3':
 		require_once 'forms/concluirdiz.php';
-		require_once('forms/ofertaEBD.php'); #Form lançaar ofertas Esc Bíblica
+		require_once('forms/ofertaEBD.php'); #Form lanï¿½aar ofertas Esc Bï¿½blica
 		break;
 	case '4':
 		require_once('forms/tes/lancarRec.php');
 		break;
 	case '5':
 		//$form = 'forms/tes/autoLancarDespesas.php';
-		$tabRelatorio = 'forms/tes/lancarTipoPlan.php'; #Form lançar despesas tipo planilha
+		$tabRelatorio = 'forms/tes/lancarTipoPlan.php'; #Form lanï¿½ar despesas tipo planilha
 		break;
-	case '6': //Relatório COMADEP
+	case '6': //Relatï¿½rio COMADEP
 		require_once 'help/tes/relatorioComadep.php';
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso($d . '/' . $m . '/' . $a);
@@ -86,13 +86,14 @@ switch ($rec) {
 		$dContas = new tes_contas();
 		$descCta = $dContas->ativosArray();
 		$colUm = ''; //Primeira coluna do cabecalho
-		require_once 'views/tesouraria/cabTabFin.php'; //Cabeï¿½alho da tabela
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
 			//Lista financeira de todas as igreja com mï¿½s especï¿½fico
+			require_once 'views/tesouraria/cabTabFinPrint.php'; //Cabeï¿½alho da tabela
 			require_once 'views/tesouraria/saldoMesFin.php';
 			$tabThead = $nivelSem;
 			//require_once 'views/tesouraria/saldoIgrejas.php';
 		} else {
+			require_once 'views/tesouraria/cabTabFin.php'; //Cabeï¿½alho da tabela
 			//Lista financeira da igreja com todos os  meses
 			$colUm = 'Per&iacute;odo'; //Primeira coluna do cabecalho
 			require_once 'views/tesouraria/saldoMembros.php';
@@ -109,7 +110,7 @@ switch ($rec) {
 		require_once 'views/tesouraria/saldoCargos.php';
 		break;
 	case '21':
-		//Exibi lista de lançamentos
+		//Exibi lista de lanï¿½amentos
 		require_once 'help/tes/varRelatorio.php';
 		require_once('forms/tes/relatorioLanc.php');
 		$tabRelatorio = 'views/tesouraria/tabRelatLanc.php';
@@ -148,7 +149,7 @@ switch ($rec) {
 		$acessoCreditar = 871;
 
 		require_once('models/tes/comadapProv.php');
-		$referente = 'Contribuição convenção estadual, n/ mês';
+		$referente = 'Contribuiï¿½ï¿½o convenï¿½ï¿½o estadual, n/ mï¿½s';
 		$form = 'forms/tes/lancarApropriacao.php';
 		$tabRelatorio = 'forms/lancar.php';
 		break;

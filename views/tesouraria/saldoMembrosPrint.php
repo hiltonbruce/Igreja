@@ -1,14 +1,14 @@
 <?php
 controle ("tes");
 if ($_GET['fin']=='' || $_GET['fin']<2) {
-	require_once ("views/secretaria/menuTopDados.php");
+	// require_once ("views/secretaria/menuTopDados.php");
 	$hisFinanceiro = 1;
 	$cong = '';
 }elseif (empty($_GET['igreja'])) {
 	$igreja = '';
 	$hisFinanceiro = 3;
 	$cong = 'Todas as Igrejas<br />';
-	require_once 'forms/tes/histFinanceiro.php';
+	// require_once 'forms/tes/histFinanceiro.php';
 }else {
 	$igreja = intval($_GET['igreja']);
 	if ($igreja=='1') {
@@ -18,28 +18,14 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 	}
 	$cong = 'Igreja - '.$ingSeleciona->razao().'<br />';
 	$hisFinanceiro = 2;
-	require_once 'forms/tes/histFinanceiro.php';
+	// require_once 'forms/tes/histFinanceiro.php';
 }
-require_once 'models/tes/histFinMembro.php';
-?>
-<div class='text-center' style="overflow: auto;width: 132%;">
-<table id="horario" class='table table-hover table-striped table-condensed'>
-		<caption>
-		<?php echo $cong;?>
-		
-		<?php
-			if (!empty($_GET['ano'])) {
-				$dadoLink = 'tesouraria/receita.php?ano='.intval($_GET['ano']).'&fin=11&rec=18'.$mesLink.'&igreja='.$_GET['igreja'];
-		?>
-		<p>&nbsp;</p>
-		<a href='<?php echo $dadoLink;?>' target="_blank">
-			<button class="btn btn-success" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-				Imprimir</button></a>
-		<?php
-		}
-		?>
 
-		Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
+require_once '../models/tes/histFinMembro.php';
+?>
+<!-- <div class='text-center' style="overflow: auto;width: 132%;"> -->
+<table id="horario" class='table table-hover table-condensed'>
+		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
@@ -74,11 +60,8 @@ require_once 'models/tes/histFinMembro.php';
 			</tr>
 		</thead>
 			<?php
-			if ($_GET['tipo']==1) {
+			
 				echo $nivel1;//Valor veio do script /models/saldos.php
-			}else {
-				echo $nivel1;//Valor veio do script /models/saldos.php
-			}
 			?>
 		<tfoot>
 			<?php
@@ -118,6 +101,6 @@ require_once 'models/tes/histFinMembro.php';
 			?>
 		</tfoot>
 	</table>
-	</div>
+	<!-- </div> -->
 	<h4>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h4>
 	Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribui&ccedil;&atilde;o: '.$menorAno.' ** Ultimo ano de contribui&ccedil;&atilde;o: '.$maiorAno;?>

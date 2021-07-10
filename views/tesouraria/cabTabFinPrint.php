@@ -21,6 +21,10 @@ $nivelSem = '
                   <span data-toggle="tooltip" data-placement="top" title="Total das Receitas Operacionais" >
                   Operac</span>
                 </th>
+                <th class="text-center">
+                  <span data-toggle="tooltip" data-placement="top" title="Total das Receitas N&atilde;o Operacionais" >
+                    Out&nbsp;Rec</span>
+                  </th>
                 <th class="text-center">Campanhas</th>
                 <th class="text-center">Miss&otilde;es</th>
                 <th class="text-center">Total</th>

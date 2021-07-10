@@ -38,11 +38,11 @@ body {
 	text-decoration: underline
 }
 
-a:link:after, a:visited:after {
+/* a:link:after, a:visited:after {
 	content:"("attr(href)")";
 	font-size: 80%;
 	color:#555555;
-}
+} */
 
 #footer a:link       { color: #636466; text-decoration: underline }
 #footer a:visited { }
@@ -127,7 +127,7 @@ h1{
 h4 { color: #a12621; font-weight: normal; margin-bottom: 5px; padding-top: 0; padding-left: 20px; }
 h5 { color: #a12621; font-size: 0.5em; font-weight: normal; text-align: center; margin: 5px 0 10px; padding: 10px 0 0; }
 a    { color: #e7790e; font-size: 0.9em; text-decoration: underline  }
-a:link    { color: #e7790e; font-size: 1em; text-decoration: underline }
+a:link    { color: #030303; font-size: 1em; }
 a:active  { color: #800000 }
 p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:justify;}
 

@@ -3,15 +3,10 @@
 	$igreja = '';
 	$hisFinanceiro = 3;
 	$cong = 'Todas as Igrejas';
+
 	//require_once 'forms/tes/histFinanceiro.php';
 $mes = intval($_GET['mes']);
-if (file_exists('models/tes/histFinIgreja.php')) {
-	require_once 'models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
-	// code...
-} elseif (file_exists('..models/tes/histFinIgreja.php')) {
-	// code...
-	require_once '../models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
-} 
+require_once '../models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
 
 $tabThead = $nivelSem; //Cabe�alho da tabela
 $mesPeriodo = sprintf('%02s',$mes);//M�s por extenso
@@ -21,8 +16,8 @@ $totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
 $totGeral = $totSubTotal+$totOfertaCampanha+$totMissoes+$totSenhoras+$totMocidade+$totInfantil+$totEnsino+$totOfertaNaoOpAno;
 $totOperacAno = $totSubTotalAno+$totEnsinoAno+$totInfantilAno+$totMocidadeAno+$totSenhorasAno;
 $totTotal = $totOperacAno + $totNaoOpAno + $totCampanhaAno + $totMissoesAno;
-$totalCong = '<tbody><tr id="subtotal" class="sub" >';
-$totalCong .= '<td class="text-left">Congrega&ccedil;&otilde;es:</td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>';
+$totalCong = '<tbody><tr class="active" >';
+$totalCong .= '<td class="text-left"> <strong>Congrega&ccedil;&otilde;es:</strong> </td><td id="moeda">'.number_format($totDizAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOfertaExtraAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totOfertaAno,2,',','.').'</td>';
 $totalCong .= '<td id="moeda">'.number_format($totSubTotalAno,2,',','.').'</td>';
@@ -53,24 +48,11 @@ $totalGeral .= '</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td
 $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>';
 ?>
 <div class='text-center'><h5>
-
-<?php
-	if (!empty($_GET['ano'])) {
-	$dadoLink = 'tesouraria/receita.php?ano='.intval($_GET['ano']).'&fin=11&rec=18'.$mesLink;
-?>
-	<p>&nbsp;</p>
-	<a href='<?php echo $dadoLink;?>' target="_blank">
-		<button class="btn btn-success" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-		Imprimir</button>
-	</a>
-<?php
-	}
-?>
-<strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
+    <strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
 		<?php printf('%s - Per&iacute;odo:&nbsp;&nbsp;%02s de %s',$cong,$mesPorExt,$ano);?></h5>
 </div>
-<div class='text-center' style="overflow: auto;width: 132%;height: 900px;">
-<table id="horario" class='table table-bordered table-condensed table-striped'>
+<!-- <div class='text-center' style="overflow: auto;width: 132%;height: 900px;"> -->
+<table class='table table-bordered table-condensed'>
 	<thead>
 		<?PHP
 			echo $nivelSem;
@@ -88,7 +70,7 @@ $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>'
 		?>
 	</tfoot>
 </table>
-</div>
+<!-- </div> -->
 <h4>Total geral: <?php echo 'R$ '.number_format($totGeral,2,',','.');?></h4>
 Em: <?php echo date('d/m/Y').'</br>Ano inicial de contribui&ccedil;&atilde;o: '.$menorAno.' ** Ultimo ano de contribui&ccedil;&atilde;o: '.$maiorAno;?>
 </fieldset>

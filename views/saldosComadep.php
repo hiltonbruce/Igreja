@@ -48,12 +48,11 @@ echo $fontIniCom;
 			}
 			?>
 		</tbody>
-		<tfoot>
+		<tfoot> 
 			<?php
 				echo '<tr id="total">';
 				echo '<tdid="moeda" ></td>';
-				echo '<td colspan="3" class="text-right">Movimento do per&iacute;odo <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>';
-				echo 'R$ '.number_format($debito,2,',','.').'</td>';
+				echo '<td colspan="3" class="text-right"></td>';
 				echo '<td colspan="2" id="moeda" ></td></tr>';
 			?>
 		</tfoot>
