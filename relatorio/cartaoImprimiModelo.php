@@ -264,7 +264,13 @@ body {
 <div id='marca'></div><!--  Cart?o com logo idependente do fundo da imagem-->
 <div id='Endereco'>
   <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
-   <?PHP echo '<br /> CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().'<br /> CNPJ:&nbsp;'.$igreja->cnpj();?>
+   <?PHP
+    echo '<br /> CEP:&nbsp;'.$igreja->cep();
+   if ($igreja->fone() != null) {
+	   echo ' Fone: '.$igreja->fone();
+   }
+   echo '<br /> CNPJ:&nbsp;'.$igreja->cnpj();
+   ?>
   </div>
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
