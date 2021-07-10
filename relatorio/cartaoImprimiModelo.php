@@ -231,7 +231,7 @@ body {
 	position:absolute;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	left:643px;
-	top:303px;
+	top:298px;
 	width:376px;
 	height:24px;
 	z-index:5;
