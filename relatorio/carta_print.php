@@ -91,7 +91,9 @@
 						echo ', N&ordm; '.$igreja->numero();
 						echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
 						echo ' - '.$cidCad[$igreja->cidade()]['uf'];
-						echo '<br/>Fone: '.$igreja->fone();
+						if ($igreja->fone() != 0) {
+							echo '<br/>Fone: '.$igreja->fone();
+						}
 						echo '<br/>CEP: '.$igreja->cep();
 						echo ' / CNPJ: '.$igreja->cnpj();
 						echo '<br/>Email: '.$igreja->email();
