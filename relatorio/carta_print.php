@@ -84,7 +84,7 @@
 				<img src="../img/logoCarta.png" alt="Bras�oo Assembleia de Deus" width='387' height='125' >
 			</td>
 			<td class="text-right" style="vertical-align: text-top;">
-				<h4>Templo SEDE</h4>
+				<h4><?php echo NOMEIGR;?></h4>
 				<h5>
 					<?php
 						echo $igreja->rua();
