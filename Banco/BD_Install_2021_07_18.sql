@@ -6694,7 +6694,7 @@ CREATE TABLE `igreja` (
   `cidade` varchar(200) NOT NULL,
   `uf` varchar(2) NOT NULL,
   `cep` varchar(10) NOT NULL,
-  `fone` varchar(9) NOT NULL,
+  `fone` varchar(30) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '0 - Destivada, 1 - Ativada',
   `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hist` varchar(150) NOT NULL COMMENT 'log do cadastrador'
