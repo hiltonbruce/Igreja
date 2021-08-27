@@ -146,11 +146,25 @@ body {
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight: bold;
 }
+#obs {
+	position:absolute;
+	text-shadow: 2px 2px 1px #FFFFFF;
+	left:39px;
+	top:250px;
+	width:354px;
+	height:33px;
+	z-index:15;
+	text-align:center;
+	font-weight: bold;
+	color: red;
+	font-size: 120%;
+	font-family:Arial, Helvetica, sans-serif;
+}
 #Valid {
 	position:absolute;
 	text-shadow: 2px 2px 1px #FFFFFF;
 	left:39px;
-	top:270px;
+	top:280px;
 	width:354px;
 	height:33px;
 	z-index:15;
@@ -279,6 +293,7 @@ body {
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?>
 </div>
  <div id="mensargem"><?php echo MSGCARTAO;?></div>
+ <div id="obs"><?php echo $rec_ecl->obs();?></div>
  <div id="Valid"><?php echo MSGVALID;?></div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
 <div id="versoFiliacao">
