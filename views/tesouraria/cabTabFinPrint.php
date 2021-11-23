@@ -42,7 +42,7 @@ $colgroup = '
             <col id="Operacional">
             <col id="Outras&nbsp;Receitas">
             <col id="Campanhas">
-            <col id="Missï¿½es">
+            <col id="Missões">
             <col id="Total">
             ';
 ?>

@@ -87,15 +87,15 @@ switch ($rec) {
 		$descCta = $dContas->ativosArray();
 		$colUm = ''; //Primeira coluna do cabecalho
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
-			//Lista financeira de todas as igreja com mï¿½s especï¿½fico
-			require_once 'views/tesouraria/cabTabFinPrint.php'; //Cabeï¿½alho da tabela
+			//Lista financeira de todas as igreja com mês específico
+			require_once 'views/tesouraria/cabTabFinPrint.php'; //Cabeçalho da tabela
 			require_once 'views/tesouraria/saldoMesFin.php';
 			$tabThead = $nivelSem;
 			//require_once 'views/tesouraria/saldoIgrejas.php';
 		} else {
-			require_once 'views/tesouraria/cabTabFin.php'; //Cabeï¿½alho da tabela
+			require_once 'views/tesouraria/cabTabFin.php'; //Cabeçalho da tabela
 			//Lista financeira da igreja com todos os  meses
-			$colUm = 'Per&iacute;odo'; //Primeira coluna do cabecalho
+			$colUm = 'Per&iacute;odo'; //Primeira coluna do cabeçalho
 			require_once 'views/tesouraria/saldoMembros.php';
 		}
 		break;

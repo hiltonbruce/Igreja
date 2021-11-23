@@ -13,7 +13,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	}
 
 	$periodo	= "$mesr$anor";
-	$dz 		= 'dizimos'.$periodo;//dizimos do mÃªs
+	$dz 		= 'dizimos'.$periodo;//dizimos do mês
 	$dizSem 	= $dz.$semana;//Dizimos do mÃªs separando a semana
 
 	$ofExtra	= 'ofertaExtra'.$periodo;//Ofertas do mÃªs
@@ -46,7 +46,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	  switch ($dev) {
 	  	case 1:
 	  		//Dizimos e ofertas
-	  	if ($contas['credito']=='700') {
+	  	if ($contas['credito']=='700' || $contas['credito']=='704') {
 				$$dz 		+= $valor;
 				$$dizSem 	+= $valor;
 				$totDizimo 	+= $valor;
@@ -65,36 +65,132 @@ while ($contas = mysql_fetch_array($lista)) {
 				$totOfertaCultos += $valor;
 			}
 	  	break;
+	  	case 20:
+			//Dizimos e ofertas
+		if ($contas['credito']=='700' || $contas['credito']=='704') {
+			  $$dz 		+= $valor;
+			  $$dizSem 	+= $valor;
+			  $totDizimo 	+= $valor;
+		}elseif ($contas['credito']>'729' && $contas['credito']<'800') {
+			  $$ofCampanha += $valor;
+			  $$ofCampSem   += $valor;
+			  $totOfertaCampanha += $valor;
+		  }elseif ($contas['credito']=='702') {
+			  //ofertas extra
+			  $$ofExtra 		+= $valor;
+			  $$ofExtraSem   	+= $valor;
+			  $totOfertaExtra += $valor;
+		  }elseif ($contas['credito']=='701') {
+			  $$ofc += $valor;
+			  $$ofcSem += $valor;
+			  $totOfertaCultos += $valor;
+		  }else {
+			  #Receitas não operacionais
+			  $$ofNaoOp += $valor;
+			  $$ofNaoOpSem += $valor;
+			  $totOfertaNaoOpAno += $valor;
+		  }
+		break;
+
+		case 30:
+			//Dizimos e ofertas
+		if ($contas['credito']=='700' || $contas['credito']=='704') {
+			  $$dz 		+= $valor;
+			  $$dizSem 	+= $valor;
+			  $totDizimo 	+= $valor;
+		}elseif ($contas['credito']>'729' && $contas['credito']<'800') {
+			  $$ofCampanha += $valor;
+			  $$ofCampSem   += $valor;
+			  $totOfertaCampanha += $valor;
+		  }elseif ($contas['credito']=='702') {
+			  //ofertas extra
+			  $$ofExtra 		+= $valor;
+			  $$ofExtraSem   	+= $valor;
+			  $totOfertaExtra += $valor;
+		  }elseif ($contas['credito']=='701') {
+			  $$ofc += $valor;
+			  $$ofcSem += $valor;
+			  $totOfertaCultos += $valor;
+		  }else {
+			  #Receitas não operacionais
+			  $$ofNaoOp += $valor;
+			  $$ofNaoOpSem += $valor;
+			  $totOfertaNaoOpAno += $valor;
+		  }
+		break;
 	  	case 2:
-	  		//Oferta Missoes
-			$$ofm 		+= $valor;
-			$$ofmSem	+= $valor;
-			$totMissoes += $valor;
+			if ($contas['credito']>'819' && $contas['credito']<'840') {
+				//Oferta Missoes
+			  $$ofm 	+= $valor;
+			  $$ofmSem	+= $valor;
+			  $totMissoes += $valor;
+			}else{
+				#Receitas não operacionais
+				$$ofNaoOp += $valor;
+				$$ofNaoOpSem += $valor;
+				$totOfertaNaoOpAno += $valor;
+			}
 	  	break;
 	  	case 3:
-	  		//Oferta Senhoras
-			$$ofs 		 += $valor;
-			$$ofsSem	 += $valor;
-			$totSenhoras += $valor;
+			if ($contas['credito']>'719' && $contas['credito']<'730') {
+				//Oferta Senhoras
+				$$ofs 		 += $valor;
+				$$ofsSem	 += $valor;
+				$totSenhoras += $valor;
+			}else{
+				#Receitas não operacionais
+				$$ofNaoOp += $valor;
+				$$ofNaoOpSem += $valor;
+				$totOfertaNaoOpAno += $valor;
+			}
 	  	break;
 	  	case 4:
-	  		//Oferta Ensino
+			if ($contas['credito']>'799' && $contas['credito']<'820') {
+				//Oferta Ensino
 			$$ofe 		+= $valor;
 			$$ofeSem	+= $valor;
 			$totEnsino 	+= $valor;
+			}else{
+				#Receitas não operacionais
+				$$ofNaoOp += $valor;
+				$$ofNaoOpSem += $valor;
+				$totOfertaNaoOpAno += $valor;
+			}
 	  	break;
 	  	case 5:
-	  		//Oferta Infantil
+			if ($contas['credito']>'979' && $contas['credito']<'1000') {
+				//Oferta Infantil
 			$$ofi			+= $valor;
 			$$ofiSem		+= $valor;
 			$totInfantil 	+= $valor;
-
+			}else{
+				#Receitas não operacionais
+				$$ofNaoOp += $valor;
+				$$ofNaoOpSem += $valor;
+				$totOfertaNaoOpAno += $valor;
+			}
 	  	break;
 	  	case 8:
-	  		//Oferta Mocidade
-			$$ofmoc 		+= $valor;
-			$$ofmocSem 		+= $valor;
-			$totMocidade 	+= $valor;
+			if ($contas['credito']>'429' && $contas['credito']<'440') {
+				if ($dev>7 && $dev<13) {
+					//Oferta Mocidade
+				  $$ofmoc 		+= $valor;
+				  $$ofmocSem 		+= $valor;
+				  $totMocidade 	+= $valor;
+				} else {
+				$linhaCargo = 'definir cta script histFinaceiroIgreja.php';
+					//Outras entradas nÃ£o classificadas
+					  #Receitas não operacionais
+					  $$ofNaoOp += $valor;
+					  $$ofNaoOpSem += $valor;
+					  $totOfertaNaoOpAno += $valor;
+			  }
+			}else{
+				#Receitas não operacionais
+				$$ofNaoOp += $valor;
+				$$ofNaoOpSem += $valor;
+				$totOfertaNaoOpAno += $valor;
+			}
 	  	break;
 	  	default:
 	  		$linhaCargo = 'Falha';

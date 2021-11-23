@@ -103,7 +103,8 @@ require_once 'models/tes/histFinMembro.php';
 				$totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
 				$totOp = $totSubTotal +$totSenhoras + $totMocidade +$totInfantil+$totEnsino;
 				$totGeral = $totOp+$totOfertaCampanha+$totMissoes;
-				echo '<td>Acumulado&nbsp;at&eacute:&nbsp'.date('d/m/Y').'</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
+				echo '<td>Acumulado&nbsp;at&eacute:&nbsp'.date('d/m/Y').'</td>
+					<td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>
 					<td id="moeda">'.number_format($totSubTotal,2,',','.').'</td>';

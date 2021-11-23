@@ -48,6 +48,7 @@ require_once '../help/tes/histFinanceiroIgreja.php';//Tabela com saldos por igre
 		$ofExtra = 'ofertaExtra'."$cont$ano";
 		$subTotal= $$dz+$$ofExtra+$$of;//Total do dizimo + Ofertas Extras + ofertas + votos dos cultos
 		//Soma da coluna para linha Sub-total das congrega��es Sem a Sede
+		//echo $dz.' +++++++ => '.$$dz.' | ';
 		if ($cont!='1') {
 		$totDizAno  += $$dz;
 		$totOfertaExtraAno  += $$ofExtra;
