@@ -8,8 +8,8 @@
 $mes = intval($_GET['mes']);
 require_once '../models/tes/histFinIgreja.php';//Tabela com saldos por igreja e semanal
 
-$tabThead = $nivelSem; //Cabeï¿½alho da tabela
-$mesPeriodo = sprintf('%02s',$mes);//Mï¿½s por extenso
+$tabThead = $nivelSem; //Cabeçalho da tabela
+$mesPeriodo = sprintf('%02s',$mes);//Mês por extenso
 $mesExt = arrayMeses ();
 $mesPorExt = $mesExt[$mesPeriodo];
 $totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;

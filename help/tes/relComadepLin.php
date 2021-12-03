@@ -103,7 +103,7 @@ if ($rec!='16'){
 	require 'help/tes/relComadepGrp.php';
 	$nivel3 .= $nivel2;
 }elseif ($rec=='16') {
-	//impressï¿½o
+	//impressão
 	require '../help/tes/relComadepG2.php';
 	require '../help/tes/relComadepG3.php';
 	require '../help/tes/relComadepGrp.php';

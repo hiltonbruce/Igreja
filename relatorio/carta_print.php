@@ -81,7 +81,7 @@
 		<tr>
 			<td>
 				<br>
-				<img src="../img/logoCarta.png" alt="Brasï¿½oo Assembleia de Deus" width='387' height='125' >
+				<img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" width='387' height='125' >
 			</td>
 			<td class="text-right" style="vertical-align: text-top;">
 				<h4><?php echo NOMEIGR;?></h4>
@@ -143,7 +143,7 @@
 				}
 
 			if ($carta->tipo()!=="3") {
-				$intr .= '<div class="panel panel-default text-center">';
+				$intr .= '<div class="panel-default text-center">';
 				$intr .= '	 <div class="panel-body">';
 				$intr .= '	    DESTINO: '.$carta->igreja().', em '.$destino;
 				$intr .= '	</div>';
