@@ -68,7 +68,7 @@ echo $fontIniCom;
 
 <div style='page-break-after:always'></div>
 
-<div class="col-md-8">
+<div class="col-12">
 <div class="panel panel-info">
 	<div class="panel-heading">
 		<h3 class="panel-title">Receita <span class="small">versus</span> Despesas</h3>
@@ -77,8 +77,8 @@ echo $fontIniCom;
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th class="text-center"></th>Total das Saídas</th>
-						<th class="text-center">Total das Entradas</th>
+						<th class="text-center">Saídas</th>
+						<th class="text-center">Entradas</th>
 						<th class="text-center">Diferença de Saldos</th>
 						<th class="text-center">Situação</th>
 					</tr>
@@ -128,7 +128,7 @@ echo $fontIniCom;
 	</div>
   </div>
 
-  <div class="col-md-8">
+  <div class="col-12">
 <div class="panel panel-info md-2">
 <div class="panel-heading">Saldo Disponível</div>
   <div class="panel-body">
