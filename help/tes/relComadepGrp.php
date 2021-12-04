@@ -2,7 +2,7 @@
 //Contas Nivel 3, tipo: 1.1.1
 	$sldN3 = number_format(abs($saldoGrp[$planoCta[$ctaCred]['nivel3']]),2,',','.');
 	$sldGrupoCta = $saldoGrp[$planoCod[$ctaAtualN3]['nivel3']];//Sld do movimento grupo nível 3
-	$movSld = number_format(abs($sldGrupoCta),2,',','.').' ** ctaAtualN3'.$ctaAtualN3.' - '.substr($ctaAtualN3, 0, 1);
+	$movSld = number_format(abs($sldGrupoCta),2,',','.');
 
 	if (substr($ctaAtualN3, 0, 1) == '3') {
 		$saidasCta += $sldGrupoCta;
