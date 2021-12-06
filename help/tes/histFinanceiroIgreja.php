@@ -167,7 +167,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			}
 			break;
 	  	case 5:
-			if ($contas['credito']>'979' && $contas['credito']<'1000') {
+			if ($contas['credito']>'949' && $contas['credito']<'980') {
 				//Oferta Infantil
 			$$ofi			+= $valor;
 			$$ofiSem		+= $valor;
@@ -181,7 +181,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			break;
 	  	default:
 
-		if ($contas['credito']>'429' && $contas['credito']<'440') {
+		if ($contas['credito']>'899' && $contas['credito']<'950') {
 			if ($dev>7 && $dev<13) {
 				//Oferta Mocidade
 			  $$ofmoc 		+= $valor;
