@@ -31,6 +31,9 @@ switch ($_POST["tabela"]) {
 		if (!empty ($_POST["dt_mudanca_denominacao"])) {
 			echo $_POST["dt_mudanca_denominacao"];
 			$dt_mudanca_denominacao	= br_data($_POST["dt_mudanca_denominacao"],"dt_mudanca_denominacao");
+		}else{
+			echo "dt_mudanca_denominacao null - ";
+			$dt_mudanca_denominacao	= null;
 		}
 		if (!empty ($_POST["auxiliar"])) {
 			echo $_POST["auxiliar"];
@@ -49,8 +52,13 @@ switch ($_POST["tabela"]) {
 		if (!empty ($_POST["pastor"])) {
 			$pastor=br_data($_POST["pastor"],"pastor");
 		}
+		if (!empty ($_POST["missionario"])) {
+			$missionario=br_data($_POST["missionario"],"missionario");
+		}
 		if (!empty ($_POST["dt_muda_assembleia"])) {
 			$dt_muda_assembleia=br_data($_POST["dt_muda_assembleia"],"dt_muda_assembleia");
+		}else{
+			$dt_muda_assembleia=null;
 		}
 		if (!empty ($_POST["data"])) {
 			$data=br_data($_POST["data"],"data");
@@ -66,17 +74,24 @@ switch ($_POST["tabela"]) {
 		if (!empty ($_POST["c_impresso"])) {
 			$c_impresso=br_data($_POST["c_impresso"],"c_impresso");
 		}
+		if (!empty ($_POST["batismo_espirito_santo"])) {
+			$batismo_espirito_santo= intval ($_POST["batismo_espirito_santo"]);
+		}else{
+			$batismo_espirito_santo=null;
+			
+		}
 
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
 		$cad = date("Y-m-d h:i:s");
-		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
-		echo "Rol-------> ".$rolMembro;
-		$value = "'{$rolMembro}','{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
-				 ."'{$_POST["batismo_espirito_santo"]}','$dt_mudanca_denominacao',"
+		$rolMembro = (!empty($_POST['bsc_rol'])) ? intval($_POST['bsc_rol']): intval($_GET['bsc_rol']);
+		// echo "Rol-------> ".$rolMembro;
+		$value = "$rolMembro,'{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
+				 ."'$batismo_espirito_santo','$dt_mudanca_denominacao',"
 				 ."'{$_POST["veio_qual_denominacao"]}','$auxiliar','$diaconato','$presbitero','$evangelista','$pastor',"
-				 ."'{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
+				 ."'$missionario','{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
 				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','{$_POST["c_entregue"]}','$quem_recebeu','$quem_enttregou',"
 				 ."'$num_recibo','{$_POST["situacao_espiritual"]}','','$hist','$cad','{$_POST["obs"]}'";
+		echo $value;
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
 
@@ -88,16 +103,21 @@ switch ($_POST["tabela"]) {
 
 	case "membro"://cadastro de membro
 		$dt_nasc=br_data($_POST["datanasc"],"dt_nasc");
-		echo $dt_nasc;
-		$value = "'','{$_POST["nome"]}','{$_POST["nacao"]}',
-			'{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','{$_POST["sexo"]}','{$_POST["endereco"]}',
-			'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',
-			'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',
-			'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',
-			'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',
-			'{$_POST["rol_mae"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',NOW(),'$hist'";
 
-		$dados_pessoais = new insert ("$value","membro");
+		// print_r($_POST);
+
+		echo $dt_nasc;
+		$value = "'','{$_POST["nome"]}','{$_POST["nacao"]}',".
+			"'{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','{$_POST["sexo"]}','{$_POST["endereco"]}',".
+			"'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',".
+			"'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',".
+			"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',".
+			"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
+			"'{$_POST["rol_mae"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}','".date('Y-m-d H:i:s')."','$hist'";
+
+		// echo '<br /><br />*** '.$value.' *** <br />';
+
+		$dados_pessoais = new insert ($value,"membro");
 		$dados_pessoais->inserir();
 		$rolMembro = mysql_insert_id();//recupera o id do último insert no mysql
 		// Salta para não permitir registro 666
