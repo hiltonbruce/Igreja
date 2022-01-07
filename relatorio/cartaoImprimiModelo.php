@@ -32,6 +32,8 @@ require "../func_class/classes.php";
 		$background_cartao = "pastor"; //Define a imagem de fundo do cart?o
 	}elseif ($cargoEclec['0']=="Evangelista") {
 		$background_cartao = "evangelista";
+	}elseif ($cargoEclec['1']=="Miss") {
+		$background_cartao = "missionario";
 	}elseif ($cargoEclec['0']=="Presb&iacute;tero") {
 		$background_cartao = "presbitero";
 	}elseif ($cargoEclec['0']=="Di&aacute;cono") {
