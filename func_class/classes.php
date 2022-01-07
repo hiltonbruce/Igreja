@@ -454,22 +454,24 @@ class editar_form {
 	public $link_form;
 	public $ind;
 
-	function __construct ($vlr_get="",$valor="",$acao="",$link_form="") {
+	function __construct ($vlr_get="",$valor="",$acao="",$link_form="") 
+	{
 		$this->campo 		= $_GET["campo"];       //Nome do campo para get
 		$this->vlr_get		= $vlr_get;             //Valor relacionado ao get
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
 		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edi��o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
-			if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" ||
-					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
-					|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
-					$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="data"
-					|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao"
-					|| $this->campo=="dt_apresent") {
-						$this->classCompl = 'dataclass';
-					}else {
-						$this->classCompl = '';
-					}
+		if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" ||
+			$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
+			|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
+			$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="missionario" || $this->campo=="data"
+			|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao"
+			|| $this->campo=="dt_apresent") 
+				{
+					$this->classCompl = 'dataclass';
+				}else {
+					$this->classCompl = '';
+				}
 	}
 
 	public function getEditar($placeholder,$fJScript,$ident){

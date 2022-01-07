@@ -116,35 +116,49 @@
     </tr>
     <tr>
       <td>Evangelista em:
+        <?PHP
+        $nome = new editar_form("evangelista",$arr_dad["evangelista"],$tab,$tab_edit);
+        $nome->getMostrar();
+        $nome->getEditar('','',$bsc_rol);
+        ?>
+    </td>
+    <td>Pastor em:
       <?PHP
-  $nome = new editar_form("evangelista",$arr_dad["evangelista"],$tab,$tab_edit);
-  $nome->getMostrar();
-  $nome->getEditar('','',$bsc_rol);
-  ?></td>
-      <td>Pastor em:
-      <?PHP
-  $nome = new editar_form("pastor",$arr_dad["pastor"],$tab,$tab_edit);
-  $nome->getMostrar();
-  $nome->getEditar('','',$bsc_rol);
-  ?></td>
-      <td>Data:
-      <?PHP
-  $nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
-  $nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-  ?></td>
+        $nome = new editar_form("pastor",$arr_dad["pastor"],$tab,$tab_edit);
+        $nome->getMostrar();
+        $nome->getEditar('','',$bsc_rol);
+      ?>
+    </td>
+      <td>Mission&aacute;rio em:
+        <?PHP
+          $nome = new editar_form("missionario",$arr_dad["missionario"],$tab,$tab_edit);
+          $nome->getMostrar();
+          $nome->getEditar('','',$bsc_rol);
+        ?>
+      </td>
     </tr>
     <tr>
+      <td>Data:
+        <?PHP
+        $nome = new editar_form("data",$arr_dad["data"],$tab,$tab_edit);
+        $nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+        ?>
+      </td>
       <td>Cidade e UF de onde veio:
-      <?PHP
-  $nome = new editar_form("lugar",$arr_dad["lugar"],$tab,$tab_edit);
-  $nome->getMostrar();
-  $nome->getEditar('','',$bsc_rol);
-  ?></td>
+        <?PHP
+        $nome = new editar_form("lugar",$arr_dad["lugar"],$tab,$tab_edit);
+        $nome->getMostrar();
+        $nome->getEditar('','',$bsc_rol);
+        ?>
+      </td>
       <td>Data da mudan&ccedil;a da outra Assembleia:
-      <?PHP
-  $nome = new editar_form("dt_muda_assembleia",$arr_dad["dt_muda_assembleia"],$tab,$tab_edit);
-  $nome->getMostrar();$nome->getEditar('','',$bsc_rol);
-  ?></td>
+        <?PHP
+        $nome = new editar_form("dt_muda_assembleia",$arr_dad["dt_muda_assembleia"],$tab,$tab_edit);
+        $nome->getMostrar();$nome->getEditar('','',$bsc_rol);
+        ?>
+      </td>
+    </tr>
+    <tr>
       <td>
         Data da aclama&ccedil;&atilde;o: (Membro desde)
         <?PHP
@@ -152,20 +166,18 @@
         $nome->getMostrar();
         $nome->getEditar('','',$bsc_rol);
         ?>
-    </td>
-    </tr>
-    <tr>
+      </td>
       <td>Cart&atilde;o Impresso em:
-      <?PHP
-      echo '<p>'.$arr_dad["c_impresso"].'<p>';
-  ?></td>
+        <?PHP
+        echo '<p>'.$arr_dad["c_impresso"].'<p>';
+        ?>
+      </td>
       <td>Cart&atilde;o Impresso por:
         <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_imprimiu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_imprimiu"];?> - Click aqui para dados completos">
           <?PHP echo substr (fun_igreja ($arr_dad["quem_imprimiu"]),0,25);?>
         </a>
       </p>
       </td>
-      <td><p>&nbsp;</p></td>
     </tr>
     <tr>
       <td>Cartão Entregue em:
@@ -176,14 +188,17 @@
       <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_recebeu"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_recebeu"];?> - Click aqui para dados completos">
         <?PHP  echo substr (fun_igreja ($arr_dad["quem_recebeu"]),0,25);?>
       </a></p></td>
-      <td>Cartão Entregue por:
-  <p><a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_entregou"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_entregou"];?> - Click aqui para dados completos">
-       <?PHP  echo substr (fun_igreja ($arr_dad["quem_entregou"]),0,25); ?>
-      </a></p>
+      <td>
+        Cartão Entregue por:
+        <p>
+          <a href="./?escolha=adm/dados_pessoais.php&bsc_rol=<?PHP echo $arr_dad["quem_entregou"];?>" title="<?PHP echo  "Rol: ".$arr_dad["quem_entregou"];?> - Click aqui para dados completos">
+          <?PHP  echo substr (fun_igreja ($arr_dad["quem_entregou"]),0,25); ?>
+          </a>
+        </p>
       </td>
     </tr>
     <tr>
-    <td colspan="4">Observa&ccedil;&otilde;es:
+    <td colspan="3">Observa&ccedil;&otilde;es:
         <p>
   <?PHP
   $nome = new editar_form("obs",$arr_dad["obs"],$tab,$tab_edit);

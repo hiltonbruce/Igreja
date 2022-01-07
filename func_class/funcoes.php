@@ -125,14 +125,23 @@ function cargo ($rol) {
 		$opcao = $_SESSION["rol"];
 	}
 	$rec = new DBRecord ("eclesiastico",$opcao,"rol");
+	$membro = new DBRecord ("membro",$opcao,"rol");
+
 		if ($rec->pastor()>"0000-00-00") {
-			$cargo = array( 'Pastor', 'Pr','Pastora');
+			$cargo = ($membro->sexo() == 'M') ? array( 'Pastor', 'Pr','Pastor') : array( 'Pastora', 'Pra','Pastora') ;
+			// $cargo = array( 'Pastor', 'Pr','Pastora');
 		}elseif ($rec->evangelista()>"0000-00-00") {
+			// $cargo = ($membro->sexo() == 'M') ?  :  ;
 			$cargo = array( 'Evangelista', 'Ev','Evangelista');
+		}elseif ($rec->missionario()>"0000-00-00") {
+			$cargo = ($membro->sexo() == 'M') ?  array( 'Mission&aacute;rio', 'Miss','Mission&aacute;rio') : array( 'Mission&aacute;ria', 'Miss','Mission&aacute;ria');
+			// $cargo = array( 'Mission&aacute;rio', 'Miss','Mission&aacute;ria');
 		}elseif ($rec->presbitero()>"0000-00-00") {
-			$cargo = array( 'Presb&iacute;tero', 'Pb','Presb&iacute;tera');
+			$cargo = ($membro->sexo() == 'M') ?  array( 'Presb&iacute;tero', 'Presb','Presb&iacute;tero'): array( 'Presb&iacute;tera', 'Presb','Presb&iacute;tera') ;
+			// $cargo = array( 'Presb&iacute;tero', 'Presb','Presb&iacute;tera');
 		}elseif ($rec->diaconato()>"0000-00-00") {
-			$cargo = array( 'Di&aacute;cono', 'Dc','Diaconisa');
+			$cargo = ($membro->sexo() == 'M') ?  array( 'Di&aacute;cono', 'Dc','Diaacute;cono'):  array( 'Diaconisa', 'Dc','Diaconisa');
+			$cargo = array( 'Di&aacute;cono', 'Di&aacute.c','Diaconisa');
 		}elseif ($rec->auxiliar()>"0000-00-00") {
 			$cargo = array( 'Auxiliar', 'Ax', 'Auxiliar');
 		}else {
@@ -149,6 +158,8 @@ function cargo_dt ($rol) {
 			$cargo_dt = $car_dt->pastor();
 		}elseif ($car_dt->evangelista()>"0000-00-00") {
 			$cargo_dt = $car_dt->evangelista();
+		}elseif ($car_dt->missionario()>"0000-00-00") {
+			$cargo_dt = $car_dt->missionario();
 		}elseif ($car_dt->presbitero()>"0000-00-00") {
 			$cargo_dt = $car_dt->presbitero();
 		}elseif ($car_dt->diaconato()>"0000-00-00") {
@@ -157,7 +168,7 @@ function cargo_dt ($rol) {
 			$cargo_dt = $car_dt->auxiliar();
 		}elseif ($car_dt->dat_aclam()<>"0000-00-00") {
 				$cargo_dt = $car_dt->dat_aclam();
-			}
+		}
 	return $cargo_dt;
 }
 
