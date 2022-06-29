@@ -7,7 +7,7 @@ class setor {
 			echo "<option value=''>-->> Escolha o Setor <<--</option>";
 				for ($i=1; $i<= SECTOR_QUANT ; $i++)
 				{
-					echo '<option value=$i >Setor '.nRomano($i).'</option>';
+					echo '<option value='.$i.' >Setor '.nRomano($i).'</option>';
 				}
 		echo "</select>";
 	}

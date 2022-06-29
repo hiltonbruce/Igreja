@@ -15,6 +15,7 @@
  * @license    http://
  * Insere dados no banco do form cadastro.php na tabela:igreja
  */
+// print_r($_SESSION);
 controle("inserir");
 $virgula = '';
 for ($i=1; $i<8; $i++) {
@@ -24,11 +25,14 @@ for ($i=1; $i<8; $i++) {
        $virgula = '-';
     }
 }
+$primSecretario = (empty($_POST["secretario1"])) ? 'NULL' : intval($_POST["secretario1"]) ;
+$segSecretario = (empty($_POST["secretario2"])) ? 'NULL' : intval($_POST["secretario2"]) ;
+
 $ceia = $_POST["semana"].$_POST["dia"];
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-$value  = "'','{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}'";
+$value  = "NULL,'{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}'";
 $value .= ",'{$_POST["email"]}','$ceia','{$_POST["oracao"]}','$diasDeCulto','{$_POST["pastor"]}'";
-$value .= ",'{$_POST["secretario1"]}','{$_POST["secretario2"]}','1','{$_POST["rua"]}'";
+$value .= ",{$primSecretario},{$segSecretario},'1','{$_POST["rua"]}'";
 $value .= ",'{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','PB','{$_POST["cep"]}'";
 $value .= ",'{$_POST["fone"]}','1',NOW(),'$hist'";
 echo "<h1> $value </h1>";

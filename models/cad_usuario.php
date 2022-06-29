@@ -3,7 +3,7 @@
 /**
  * Joseilton Costa Bruce
  *
- * LICENï¿½A
+ * LICENÇA
  *
  * Please send an email
  * to hiltonbruce@gmail.com so we can send you a copy immediately.
@@ -24,69 +24,109 @@ if ($_POST['senha'] != $_POST['senha1']) {
 
 $separ = '';
 $optWhere = '"",';
-$perfil = '';
+$perfil = 'user';
 $sepPerfil = '';
+$campos = '';
+
+// $conn = new PDO('mysql:dbname='.DBNAME.';host='.DBPATH,DBUSER,DBPASS);
 
 for ($i=0; $i < 10; $i++) {
   $keyPost = 'perfil'.$i;
   if (isset($_POST[$keyPost]) && $_POST[$keyPost]!='')
   {
-    $perfil .= $sepPerfil.strtolower(strip_tags($_POST[$keyPost]));
-    $sepPerfil = ',';
+    $perfil .= ','.strtolower(strip_tags($_POST[$keyPost]));
+    // $sepPerfil = ',';
   }
 }
-// echo "perfil -> ".$perfil;
-echo "<br />";
+// echo "<br /> perfil -> ".$perfil;
+// echo "<br />";
+
 // var_dump($conn);
+
+// echo "<br />";
 $dataUser = "SELECT * FROM usuario LIMIT 1";
 $stmtUser = $conn->prepare($dataUser);
 $stmtUser->execute();
 $resultsUser = $stmtUser->fetchAll(PDO::FETCH_ASSOC);
+// echo "<br />";
+// print("PDO::FETCH_ASSOC: ");
+// print_r($resultsUser);
+// echo "<br />";
 
 foreach ($resultsUser[0] as $key => $value) {
+
   $optionsVlr = strtoupper($key);
 
-  if (!empty($_POST[$key]) && $key!='senha') {
+  if (!empty($_POST[$key]) && $key!='senha' && $key!='data') {
     $optWhere .= $separ . ':' . $optionsVlr;
-    $separ = ', ';
   } elseif ($key == 'perfil' && $key!='id') {
     $optWhere .= $separ . ':' . $optionsVlr;
-    $separ = ', ';
   }elseif ($key == 'senha') {
     $optWhere .= $separ . ':' . $optionsVlr;
-    $separ = ', ';
+  }elseif ($key == 'id') {
+    $optWhere = ':ID' ;
+  }elseif ($key == 'data') {
+    $optWhere .= ',:DATAHIST' ;
   }
+  $campos .= $separ.$key ;
+
+  $valores .= $separ.$key ;
+
+  $separ = ', ';
 }
 
-$addUser = "INSERT INTO usuario VALUE ($optWhere)";
+
+// echo "<br />";
+// print("optWhere ");
+// print_r($optWhere);
+// echo "<br />";
+// print("campos ");
+// print_r($campos);
+// echo "<br />";
+
+$addUser = "INSERT INTO usuario ($campos) VALUE ($optWhere)";
 $stmtAddUser = $conn->prepare($addUser);
+
+// $resultsUser[0]['id'] = 'NULL';
 
 foreach ($resultsUser[0] as $key => $value) {
   $optionsVlr = ':'.strtoupper($key);
 
-  $dataUser = $_POST[$key];
+  $dado = $_POST[$key];
 
   if ($key == 'id') {
-  continue;
-  }
-
-  if ($key == 'perfil') {
-    $_POST[$key] = $perfil;
+    $dado = NULL;
+  // continue;
+  }elseif ($key == 'data') {
+    $optionsVlr = ":DATAHIST";
+    $dado = $_POST[$key];
+  }elseif ($key == 'perfil') {
+    $dado = "$perfil";
   }elseif ($key == 'historico') {
-    $_POST[$key] = $_SESSION['valid_user'].": ".date("Y-m-d h:i:s");
+    $dado = $_SESSION['valid_user']." @ ".date("Y-m-d h:i:s");
   }elseif ($key == 'senha') {
-    $_POST[$key] = MD5($dataUser);
+    $dado = MD5($value);
+  }else{
+    $dado = $_POST[$key];
   }
 
-  $stmtAddUser -> bindParam($optionsVlr, $_POST[$key]);
-  // echo $optionsVlr.' - '.$key." value -> ".$dataUser.'<br />';
+  $stmtAddUser->bindValue($optionsVlr, $dado);
+  // echo $optionsVlr.' - '.$key." value -> ".$dado.'<br />';
 }
 // echo "string -> ".$addUser;
 
-// echo mysqli_error($conn);
-// $stmtAddUser->execute();
+// $dados = new insert ($value,'usuario');
 
-if ($stmtAddUser->execute()) {
+// echo mysqli_error($conn);
+$result = $stmtAddUser->execute();
+
+
+// echo "***************2222**********";echo "<br />";
+// print("PDO::FETCH_ASSOC: ");
+// print_r($result);
+// echo "<br />";
+
+if ($result) {
   ?>
   <div class="bs-callout bs-callout-warning bg-success" id="callout-input-needs-type">
       <h4>Cadastrado realizado com sucesso!!!</h4>
@@ -99,7 +139,8 @@ if ($stmtAddUser->execute()) {
 }
 else
 {
-	echo "<script>alert('Desculpe! Mas, lembre-se você deve ter privilégios para cadastrar esse uauúrio, para conclusão do cadastro de acesso ao sistema! {$_SESSION["setor"]} - {$_POST["perfil"]}');</script>";
+	echo "<script>alert('Desculpe! Mas, houve um erro no Banco de Dados! {$_SESSION["setor"]} - Perfil: {$perfil}');</script>";
 }
+// echo mysqli_error($conn);
 ?>
 <p>&nbsp;</p>

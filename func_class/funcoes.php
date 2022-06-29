@@ -794,6 +794,7 @@ function controle ($tipo){ //O tipo � definido como consulta, atualiza��o,
 			return exit;
 			break;
 	}
+	return true;
 }
 
 function ver_cad ($rol){
