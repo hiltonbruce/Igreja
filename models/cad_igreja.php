@@ -25,8 +25,8 @@ for ($i=1; $i<8; $i++) {
        $virgula = '-';
     }
 }
-$primSecretario = (empty($_POST["secretario1"])) ? 'NULL' : intval($_POST["secretario1"]) ;
-$segSecretario = (empty($_POST["secretario2"])) ? 'NULL' : intval($_POST["secretario2"]) ;
+$primSecretario = (empty($_POST["secretario1"])) ? 'null' : intval($_POST["secretario1"]) ;
+$segSecretario = (empty($_POST["secretario2"])) ? 'null' : intval($_POST["secretario2"]) ;
 
 $ceia = $_POST["semana"].$_POST["dia"];
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];

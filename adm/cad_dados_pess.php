@@ -33,32 +33,50 @@ switch ($_POST["tabela"]) {
 			$dt_mudanca_denominacao	= br_data($_POST["dt_mudanca_denominacao"],"dt_mudanca_denominacao");
 		}else{
 			echo "dt_mudanca_denominacao null - ";
-			$dt_mudanca_denominacao	= null;
+			$dt_mudanca_denominacao	= '0000-00-00';
 		}
 		if (!empty ($_POST["auxiliar"])) {
 			echo $_POST["auxiliar"];
 			$auxiliar	= br_data($_POST["auxiliar"],"auxiliar");
+		}else{
+			echo "auxiliar null - ";
+			$auxiliar	= '0000-00-00';
 		}
 		if (!empty ($_POST["diaconato"])) {
 			echo $_POST["diaconato"];
 			$diaconato=br_data($_POST["diaconato"],"diaconato");
+		}else{
+			echo "diaconato null - ";
+			$diaconato	= '0000-00-00';
 		}
 		if (!empty ($_POST["presbitero"])) {
 			$presbitero=br_data($_POST["presbitero"],"presbitero");
+		}else{
+			echo "presbitero null - ";
+			$presbitero	= '0000-00-00';
 		}
 		if (!empty ($_POST["evangelista"])) {
 			$evangelista=br_data($_POST["evangelista"],"evangelista");
+		}else{
+			echo "evangelista null - ";
+			$evangelista	= '0000-00-00';
 		}
 		if (!empty ($_POST["pastor"])) {
 			$pastor=br_data($_POST["pastor"],"pastor");
+		}else{
+			echo "pastor null - ";
+			$pastor	= '0000-00-00';
 		}
 		if (!empty ($_POST["missionario"])) {
 			$missionario=br_data($_POST["missionario"],"missionario");
+		}else{
+			echo "missionario null - ";
+			$missionario	= '0000-00-00';
 		}
 		if (!empty ($_POST["dt_muda_assembleia"])) {
 			$dt_muda_assembleia=br_data($_POST["dt_muda_assembleia"],"dt_muda_assembleia");
 		}else{
-			$dt_muda_assembleia=null;
+			$dt_muda_assembleia = '0000-00-00';
 		}
 		if (!empty ($_POST["data"])) {
 			$data=br_data($_POST["data"],"data");
@@ -77,8 +95,7 @@ switch ($_POST["tabela"]) {
 		if (!empty ($_POST["batismo_espirito_santo"])) {
 			$batismo_espirito_santo= intval ($_POST["batismo_espirito_santo"]);
 		}else{
-			$batismo_espirito_santo=null;
-			
+			$batismo_espirito_santo='null';			
 		}
 
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
@@ -112,7 +129,7 @@ switch ($_POST["tabela"]) {
 		$nacao = (empty($_POST["nacao"])) ? 'null' : $_POST["nacao"];
 		$endereco = (empty($_POST["endereco"])) ? 'null' : 'TEste';
 
-		var_dump($_POST).'<br />';
+		// var_dump($_POST).'<br />';
 		// echo $dt_nasc;
 
 		$value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','$sexo','$endereco',".
