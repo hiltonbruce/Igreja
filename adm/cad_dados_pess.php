@@ -326,7 +326,7 @@ switch ($_POST["tabela"]) {
 
 			$motivo = addslashes($_POST['motivo']);
 			$situacao = addslashes($_POST['situacao']);
-			$value = "null,'{$rolMembro}','$motivo','$motivo','$dt_ini','$dt_fim','$hist',NOW()";
+			$value = "null,'{$rolMembro}','$situacao','$motivo','$dt_ini','$dt_fim','$hist',NOW()";
 			$disciplina = new insert ("$value","disciplina");
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor

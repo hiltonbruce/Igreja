@@ -24,16 +24,22 @@
 	}
 
  // 	print_r($cargoIgrejas['1']);
-
+	$rolPai = (empty($_POST["rol_pai"])) ? 0 : intval($_POST["rol_pai"]);
+	$rolMae = (empty($_POST["rol_mae"])) ? 0 : intval($_POST["rol_mae"]) ;
+	$dtRegistro = date('Y-m-d H:i:s');
+ 
 	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
 	if (empty($_POST["id"]) && isset($_POST["nome"])) {
 		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
 		$dt_apresent = br_data ($_POST["dt_apresent"],"dt_apresent");
-		$value="null,'{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
-				'{$_POST["mae"]}','{$_POST["rol_mae"]}','$dt_nasc','{$_POST["maternidade"]}',
-				'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',
-				'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}',NOW(),'{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
-		$cert_apresentacao = new insert ("$value","cart_apresentacao");
+		
+		$value  = "null,'{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}',$rolPai,";
+		$value .= "'{$_POST["mae"]}',$rolMae,'$dt_nasc','{$_POST["maternidade"]}',";
+		$value .="'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',";
+		$value .="'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}','$dtHist','{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
+
+
+		$cert_apresentacao = new insert ($value,"cart_apresentacao");
 		$cert_apresentacao->inserir();
 		$most_certidao = new DBRecord ("cart_apresentacao",mysql_insert_id(),"rol");
 	} else {

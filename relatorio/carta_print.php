@@ -208,7 +208,7 @@
 				<td>
 					<!-- <img src="../imgAssin/assinPastor.png" width="" height="">  -->
 					______________________________________<br />
-					<?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
+					<?PHP echo $igreja->pastor();?><br />
 					<?php echo $cargosPR->descricao();?>
 				</td>
 				<td>&nbsp;</td>
@@ -217,7 +217,7 @@
 					______________________________________<br />
 					<?PHP
 					$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
-						echo  $cargoSec.strtoupper($secretario);
+						echo  $cargoSec.$secretario;
 					?><br />
 					<?php echo $_POST["secretario"].$cargo;?> 
 				</td>

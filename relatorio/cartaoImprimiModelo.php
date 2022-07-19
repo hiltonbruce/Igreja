@@ -331,7 +331,7 @@ body {
 	}
 ?>
 </div>
-<div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor()));?></b><p>
+<div id="Pastor"><b><?PHP echo $igreja->pastor();?></b><p>
 <?php echo $cargosPR->descricao();?></p>
 </div>
 <div id="assinPastor"></div>
