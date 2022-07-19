@@ -27,6 +27,9 @@ switch ($_POST["tabela"]) {
 			echo $_POST["batismo_em_aguas"];
 			$batismo_em_aguas	= br_data($_POST["batismo_em_aguas"],"batismo_em_aguas");
 			$_SESSION['dtbatismo'] = $_POST["batismo_em_aguas"];
+		}else{
+			echo "batismo_em_aguas null - ";
+			$batismo_em_aguas	= '0000';
 		}
 		if (!empty ($_POST["dt_mudanca_denominacao"])) {
 			echo $_POST["dt_mudanca_denominacao"];
@@ -91,12 +94,28 @@ switch ($_POST["tabela"]) {
 		}
 		if (!empty ($_POST["c_impresso"])) {
 			$c_impresso=br_data($_POST["c_impresso"],"c_impresso");
+		}else{
+			$c_impresso = '0000-00-00';
 		}
 		if (!empty ($_POST["batismo_espirito_santo"])) {
 			$batismo_espirito_santo= intval ($_POST["batismo_espirito_santo"]);
 		}else{
-			$batismo_espirito_santo='null';			
+			$batismo_espirito_santo='0';			
 		}
+		if (!empty ($_POST["c_entregue "])) {
+			$c_entregue = br_data($_POST["c_entregue "],"c_entregue");
+		}else{
+			$c_entregue = '0000-00-00';			
+		}
+		if (!empty ($_POST["quem_recebeu"])) {
+			$quem_recebeu = intval ($_POST["quem_recebeu"]);
+		}else{
+			$quem_recebeu = 0;			
+		}
+
+		$quem_enttregou = (empty($_POST["quem_entregou"])) ? 0 : intval ($_POST["quem_entregou"]) ;
+		$num_recibo = (empty($_POST["rec_entrega"])) ? 0 : intval ($_POST["rec_entrega"]) ;
+
 
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
 		$cad = date("Y-m-d h:i:s");
@@ -106,8 +125,8 @@ switch ($_POST["tabela"]) {
 				 ."'$batismo_espirito_santo','$dt_mudanca_denominacao',"
 				 ."'{$_POST["veio_qual_denominacao"]}','$auxiliar','$diaconato','$presbitero','$evangelista','$pastor',"
 				 ."'$missionario','{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
-				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','{$_POST["c_entregue"]}','$quem_recebeu','$quem_enttregou',"
-				 ."'$num_recibo','{$_POST["situacao_espiritual"]}','','$hist','$cad','{$_POST["obs"]}'";
+				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','$c_entregue','$quem_recebeu','$quem_enttregou',"
+				 ."'$num_recibo','{$_POST["situacao_espiritual"]}',null,'$hist','$cad','{$_POST["obs"]}'";
 		echo $value;
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
@@ -179,7 +198,11 @@ switch ($_POST["tabela"]) {
 		}else{
 			$data ="00000000";
 		}
-		$value="'{$rolMembro}','{$_POST["estado_civil"]}','{$_POST["conjugue"]}','{$_POST["rol_conjugue"]}','{$_POST["certidao_casamento_n"]}','{$_POST["livro"]}','{$_POST["obs"]}','{$_POST["folhas"]}','{$data}','$hist',NOW()";
+
+		
+		$rol_conjugue = (empty($_POST["rol_conjugue"])) ? 0 : intval ($_POST["rol_conjugue"]);
+
+		$value="'{$rolMembro}','{$_POST["estado_civil"]}','{$_POST["conjugue"]}','$rol_conjugue','{$_POST["certidao_casamento_n"]}','{$_POST["livro"]}','{$_POST["obs"]}','{$_POST["folhas"]}','{$data}','$hist',NOW()";
 		$est_civil = new insert ("$value","est_civil");
 		$est_civil->inserir(); 
 
@@ -198,7 +221,7 @@ switch ($_POST["tabela"]) {
 			$dt_nasc=br_data($_POST["dt_nasc"],"dt_nasc");
 		}
 
-		$value="'','{$_POST["nome"]}','{$_POST["endereco"]}','{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["nacionalidade"]}','{$_POST["fone"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["congregacao"]}','{$_POST["sexo"]}','$dt_aceitou','{$_POST["obs"]}','$hist',NOW()";
+		$value="null,'{$_POST["nome"]}','{$_POST["endereco"]}','{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["nacionalidade"]}','{$_POST["fone"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["congregacao"]}','{$_POST["sexo"]}','$dt_aceitou','{$_POST["obs"]}','$hist',NOW()";
 		$est_civil = new insert ("$value","{$_POST["tabela"]}");
 		$est_civil->inserir();
 
@@ -222,7 +245,7 @@ switch ($_POST["tabela"]) {
 
 		if (!empty ($_POST["curso"])) {
 		$valor = number_format($_POST["mensal"], 2, '.', ',');
-		$value = "'','{$rolMembro}','{$_POST["nome"]}','{$_POST["curso"]}','1','$valor','{$_POST["vencimento"]}',NOW(),'$hist'";
+		$value = "null,'{$rolMembro}','{$_POST["nome"]}','{$_POST["curso"]}','1','$valor','{$_POST["vencimento"]}',NOW(),'$hist'";
 		$cad = new insert ("$value","{$_POST["tabela"]}");
 		$cad -> inserir();
 
@@ -238,7 +261,7 @@ switch ($_POST["tabela"]) {
 		//Cadastra pagamento
 		if (!empty ($_POST["valor"])) {
 		$valor = number_format($_POST["valor"], 2, '.', ',');
-		$value = "'','{$_POST["curso"]}','{$_POST["aluno"]}','$valor','$hist',NOW()";
+		$value = "null,'{$_POST["curso"]}','{$_POST["aluno"]}','$valor','$hist',NOW()";
 		$cad = new insert ("$value","{$_POST["tabela"]}");
 		$cad -> inserir();
 
@@ -256,7 +279,7 @@ switch ($_POST["tabela"]) {
 
 		if ((!empty($_POST["mensal"])) AND (!empty($_POST["tipo"])) AND (!empty($_POST["turma"])) AND (!empty($_POST["horas_total"])) AND (!empty($_POST["hora_ini"])) AND (!empty($_POST["hora_fim"])) AND (!empty($dias))) {
 		$mensal = number_format($_POST["mensal"], 2, '.', ',');
-		$value = "'','{$_POST["tipo"]}','{$_POST["turma"]}','$mensal','{$_POST["horas_total"]}','$dias','{$_POST["hora_ini"]}','{$_POST["hora_fim"]}','$hist','1'";
+		$value = "null,'{$_POST["tipo"]}','{$_POST["turma"]}','$mensal','{$_POST["horas_total"]}','$dias','{$_POST["hora_ini"]}','{$_POST["hora_fim"]}','$hist','1'";
 		$cad = new insert ("$value","{$_POST["tabela"]}");
 		$cad -> inserir();
 
@@ -303,7 +326,7 @@ switch ($_POST["tabela"]) {
 
 			$motivo = addslashes($_POST['motivo']);
 			$situacao = addslashes($_POST['situacao']);
-			$value = "'','{$rolMembro}','$motivo','$motivo','$dt_ini','$dt_fim','$hist',NOW()";
+			$value = "null,'{$rolMembro}','$motivo','$motivo','$dt_ini','$dt_fim','$hist',NOW()";
 			$disciplina = new insert ("$value","disciplina");
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
@@ -327,7 +350,7 @@ switch ($_POST["tabela"]) {
 		    }else {
 
 	       }
-		$value="'','$codigo','{$_POST["alias"]}','{$_POST["descricao"]}','$hist',NOW()";
+		$value="null,'$codigo','{$_POST["alias"]}','{$_POST["descricao"]}','$hist',NOW()";
 		$cargos = new insert ("$value","{$_POST["tabela"]}");
 		$cargos->inserir();
 			echo "<script>location.href='./?escolha=igreja/cad_organica.php&menu=top_igreja'</script>";
@@ -336,7 +359,7 @@ switch ($_POST["tabela"]) {
 	case "cargo_igreja";
 		//insere na tabela
 		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
-		$value="'','{$_POST["descricao"]}','{$_POST["obs"]}','{$_POST["igreja"]}','{$rolMembro}','{$_POST["hierarquia"]}','1','$hist',NOW()";
+		$value="null,'{$_POST["descricao"]}','{$_POST["obs"]}','{$_POST["igreja"]}','{$rolMembro}','{$_POST["hierarquia"]}','1','$hist',NOW()";
 		$cargos = new insert ("$value","{$_POST["tabela"]}");
 		$cargos->inserir();
 					echo "<script>location.href='./?escolha=igreja/cad_cargos.php&menu=top_igreja'</script>";
@@ -350,7 +373,7 @@ switch ($_POST["tabela"]) {
 
 
 /*
-$value="'{$rolMembro}','','','','','','','','','','','','','','','','','','','','','','','',''";
+$value="'{$rolMembro}',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null";
 $eclesiastico = new insert ("$value","eclesiastico");
 $eclesiastico->inserir();
 */

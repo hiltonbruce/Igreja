@@ -75,7 +75,7 @@ if ($_POST['tabela'] == 'carta') {
 					}else{
 						$dt_fim = date ("Y-m-d",mktime (0,0,0,date("m"),date("d")+$_POST["prazo"],date("Y")));
 					}
-					$value = "'','{$_SESSION["rol"]}','{$_POST["situacao"]}','{$_POST["motivo"]}','".date("Y-m-d")."','$dt_fim','$hist',NOW()";
+					$value = "null,'{$_SESSION["rol"]}','{$_POST["situacao"]}','{$_POST["motivo"]}','".date("Y-m-d")."','$dt_fim','$hist',NOW()";
 					$disciplina = new insert ("$value","disciplina");
 					$disciplina -> inserir();
 				}

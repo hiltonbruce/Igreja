@@ -42,7 +42,6 @@ echo "<h1>".mysql_insert_id()."</h>";//recupera o id do último insert no mysql
 echo "<script>location.href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=PB'</script>";
 echo "<a href='./?escolha=tab_auxiliar/cadastro_igreja.php&uf_end=PB'>Continuar...<a>";
 /*
-$value="'{$_SESSION["rol"]}','','','','','','','','','','','','','','','','','','','','','','','',''";
 $eclesiastico = new insert ("$value","eclesiastico");
 $eclesiastico->inserir();
 */

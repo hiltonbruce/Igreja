@@ -202,7 +202,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 	if (!$rec->exitecad()) { //verifica se o igreja j� est� cadastrado para esta cidade
 
-	$value = "'','$igreja','$cidade',NULL,'$log'";
+	$value = "null,'$igreja','$cidade',NULL,'$log'";
 	$carta = new insert ("$value","igreja");
 	$carta->inserir();
 	}

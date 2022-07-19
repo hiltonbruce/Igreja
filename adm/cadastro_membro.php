@@ -16,7 +16,7 @@ if ($_SESSION["setor"]!='3' && $_SESSION["setor"]!='99'){
 	}else{
 		$ufNasc = $_GET['uf_nasc'];
 	}
-	$cpf_val = (empty($_GET['cpf_val'])) ? '' : $_GET['cpf_val'] ;
+	$cpf_val = (empty($_GET['cpf_val'])) ? 'null' : $_GET['cpf_val'] ;
 ?>
 <fieldset>
 <legend>Dados Pessoais - Cadastro de Membro </legend>

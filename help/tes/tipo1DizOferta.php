@@ -69,7 +69,7 @@ for ($i = 0; $i < 13; $i++) {
 			echo $msg;
 		}	else {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
+			$value  = "null,null,$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 			$value .= "'".$confirma."','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");

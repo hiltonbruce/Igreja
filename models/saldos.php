@@ -1,7 +1,7 @@
 <?php
-$nivel1 	= '';
-$nivel2 	= '';
-$comSaldo	= '';
+$nivel1 	= null;
+$nivel2 	= null;
+$comSaldo	= null;
 if ($grupoCta!='') {
 	$lista = mysql_query('SELECT * FROM contas WHERE codigo LIKE "'.$grupoCta.'%" ORDER BY codigo ');
 } else {
@@ -20,7 +20,7 @@ while ($contas = mysql_fetch_array($lista)) {
 	}
 	
 	$sldConta = (abs($contas['saldo']));
-	$acesso = ($contas['acesso']>0) ? sprintf("[%04s]\n", $contas['acesso']):'';
+	$acesso = ($contas['acesso']>0) ? sprintf("[%04s]\n", $contas['acesso']):'null';
 	//Balancete de todas as contas
 		$title = $contas['descricao'];
 	if (strlen($contas['codigo'])<10) {

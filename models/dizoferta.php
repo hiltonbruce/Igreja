@@ -128,7 +128,6 @@ if (($vlr && ($vlrregistro[0] == $datalanc || $_POST['tipo']=='4')) || ($vlr && 
 		echo $msgErro;
 	}
 		/*
-		$value="'{$_SESSION["rol"]}','','','','','','','','','','','','','','','','','','','','','','','',''";
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
 		*/

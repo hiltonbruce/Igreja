@@ -30,10 +30,10 @@ controle("inserir");
 			Estado
 			</td>
 			<td>
-						<?PHP							
-							$esc_cidade = new cidadepop('cidade', 'id', 'coduf');
-							$esc_cidade->List_Selec_pop("escolha=tab_auxiliar/cadastro_cidade.php&uf=$uf&idcidade=");
-						?>
+				<?PHP							
+					$esc_cidade = new cidadepop('cidade', 'id', 'coduf');
+					$esc_cidade->List_Selec_pop("escolha=tab_auxiliar/cadastro_cidade.php&uf=$uf&idcidade=");
+				?>
 		</td>
 	</tbody>
 </table>

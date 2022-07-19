@@ -34,7 +34,7 @@ if (checadata($_POST['data'])) {
 			echo '<script>alert("** O item foi apagado! **");</script>';
 		}elseif ($quant>0) {
 			$cong = new DBRecord('igreja',$igreja, 'rol');
-			$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$item,$quant,$mesref,$data,$igreja,$cong->matlimpeza(),$hist);
+			$dadosagenda = sprintf("null,'%s','%s','%s','%s','%s','%s','%s'",$item,$quant,$mesref,$data,$igreja,$cong->matlimpeza(),$hist);
 			echo $dadosagenda.' *** <br />';
 			$pedLimpeza= new insert ($dadosagenda,"limpezpedid");
 			echo $pedLimpeza->inserir();

@@ -1,7 +1,7 @@
 <?php
 class atualconta {
 
-	function __construct($codigo='',$ultimolanc='',$creditar='') {
+	function __construct($codigo=null,$ultimolanc=null,$creditar='') {
 		/*
 		*$codigo -> Número do plano de Cta a ser debitada
 		*$creditar -> acesso da Cta a ser creditada
@@ -37,7 +37,7 @@ class atualconta {
 			$atualizar->saldo = $ValorAtual;
 			$atualizar->UpdateID();
 			if ($i=='5') {//Faz o lançamento
-				$InsertLanc = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,
+				$InsertLanc = sprintf("null,'%s','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,
 						$linha,strtoupper($dc),$valor,$igreja,$convencao,$data,$_SESSION['valid_user']);
 				//echo '<br />'.$InsertLanc;//Exibi lançamento no banco
 				$lancamento = new incluir($InsertLanc, 'lancamento');
@@ -46,7 +46,7 @@ class atualconta {
 				if ($this->creditar >'0' ) {
 				//$histLancamento = mysql_escape_string($histLanc);
 				$cadResp = date('d/m/Y H:i:s').' '.$_SESSION['valid_user'];
-				$insertLancNova = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,$linha,$this->creditar,$valor,$igreja,$data,$cadResp);
+				$insertLancNova = sprintf("null,'%s','%s','%s','%s','%s','%s','%s'",$this->ultimolanc,$linha,$this->creditar,$valor,$igreja,$data,$cadResp);
 				$lancNovaVersao = new incluir($insertLancNova, 'lanc');
 				$lancNovaVersao->inserir();
 				}

@@ -45,7 +45,7 @@ class agenda {
 				//adiciona campo vencimento na confirmação de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
 				//Acrescentar busca por igreja, motivo, fonecedor
 				for ($i = 1; $i <= $mesvenc; $i++) {
-					$value	 = sprintf("'','%s','%s','%s','%s','','%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
+					$value	 = sprintf("null,'%s','%s','%s','%s',null,'%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
 					$value 	.=',"'. $id['valor'].'","","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
 					$value	.='","'.$id['resppgto'].'","","","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro automático"';
 					$agendamento = new insert ("$value","agenda");

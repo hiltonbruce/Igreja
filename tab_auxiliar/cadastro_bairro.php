@@ -117,7 +117,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		echo $cidade.'"><button class="btn btn-primary">Clique aqui...</button></a></h3>';
 	}else {
   	$log = "Inserido por:{$_SESSION["valid_user"]}";
-  	$value = "'','{$_POST["bairro"]}','$cidade',NULL,'$log'";
+  	$value = "null,'{$_POST["bairro"]}','$cidade',NULL,'$log'";
   	$carta = new insert ("$value","bairro");
   	$idBairro = $carta->inserir();
 	}

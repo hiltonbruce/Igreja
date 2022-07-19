@@ -29,7 +29,7 @@
 	if (empty($_POST["id"]) && isset($_POST["nome"])) {
 		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
 		$dt_apresent = br_data ($_POST["dt_apresent"],"dt_apresent");
-		$value="'','{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
+		$value="null,'{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
 				'{$_POST["mae"]}','{$_POST["rol_mae"]}','$dt_nasc','{$_POST["maternidade"]}',
 				'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',
 				'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}',NOW(),'{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
