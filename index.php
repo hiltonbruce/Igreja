@@ -1,5 +1,7 @@
 <?PHP
+	ini_set( 'default_charset', 'ISO-8859-1' ); // 'UTF-8'
 	session_start();
+
 	//echo $_GET["escolha"]." -----------".$_POST["escolha"];
 	require_once ("func_class/classes.php");
 	require_once ("func_class/funcoes.php");
@@ -14,6 +16,7 @@
 
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
+
 	date_default_timezone_set('America/Recife');
 	setlocale( LC_ALL, 'pt_BR.ISO-8859-1', 'pt_BR', 'Portuguese_Brazil');
 	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');

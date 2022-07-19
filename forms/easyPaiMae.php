@@ -13,11 +13,11 @@
     <input type="text" id="inputTwo" class="form-control" tabindex="<?php echo ++$ind;?>"
 		 name="rol_pai" placeholder="N&ordm; do Rol de membro">
   </div>
-  <div class="col-xs-9"><label>Nome da Mãe:</label>
+  <div class="col-xs-9"><label>Nome da M&atilde;e:</label>
     <input type="text" id="inputMae" class="form-control" autofocus="autofocus" tabindex="<?php echo ++$ind;?>"
 		 name="mae" placeholder="Nome, ...sobrenome ou partes deles para procurarmos, a partir de 2 caracteres!">
   </div>
-  <div class="col-xs-3"><label>Rol da Mãe:</label>
+  <div class="col-xs-3"><label>Rol da M&atilde;e:</label>
     <input type="text" id="inputMaeTwo" class="form-control" tabindex="<?php echo ++$ind;?>"
 		 name="rol_mae" placeholder="N&ordm; do Rol de membro">
   </div>

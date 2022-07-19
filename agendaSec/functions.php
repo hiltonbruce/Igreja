@@ -258,7 +258,7 @@ function getDayNameHeader()
 
 function getEventDataArray($month, $year,$igreja)
 {
-	$sql = "SELECT a.id,a.d,a.title,a.start_time,a.end_time,a.setor,a.text,a.igreja,i.razao,s.alias, ";
+	$sql = "SELECT a.*,i.*,s.*, ";
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
 		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";

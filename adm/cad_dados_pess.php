@@ -106,14 +106,22 @@ switch ($_POST["tabela"]) {
 
 		// print_r($_POST);
 
-		echo $dt_nasc;
-		$value = "'','{$_POST["nome"]}','{$_POST["nacao"]}',".
-			"'{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','{$_POST["sexo"]}','{$_POST["endereco"]}',".
-			"'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',".
-			"'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',".
-			"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',".
-			"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
-			"'{$_POST["rol_mae"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}','".date('Y-m-d H:i:s')."','$hist'";
+		$rolMae = (empty($_POST["rol_mae"])) ? 0 : intval($_POST["rol_mae"]) ;
+		$rolPai = (empty($_POST["rol_pai"])) ? 0 : intval($_POST["rol_pai"]) ;
+		$sexo = (empty($_POST["sexo"])) ? 'M' : $_POST["sexo"];
+		$nacao = (empty($_POST["nacao"])) ? 'null' : $_POST["nacao"];
+		$endereco = (empty($_POST["endereco"])) ? 'null' : 'TEste';
+
+		var_dump($_POST).'<br />';
+		// echo $dt_nasc;
+
+		$value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','$sexo','$endereco',".
+				"'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',".
+				"'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',".
+				"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',".
+				"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
+				"$rolMae,'{$_POST["pai"]}','$rolPai','".date('Y-m-d H:i:s')."','$hist'";
+
 
 		// echo '<br /><br />*** '.$value.' *** <br />';
 

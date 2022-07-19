@@ -30,7 +30,7 @@ $segSecretario = (empty($_POST["secretario2"])) ? 'NULL' : intval($_POST["secret
 
 $ceia = $_POST["semana"].$_POST["dia"];
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-$value  = "NULL,'{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}'";
+$value  = "null,'{$_POST["razao"]}','{$_POST["setor"]}','{$_POST["cnpj"]}','{$_POST["site"]}'";
 $value .= ",'{$_POST["email"]}','$ceia','{$_POST["oracao"]}','$diasDeCulto','{$_POST["pastor"]}'";
 $value .= ",{$primSecretario},{$segSecretario},'1','{$_POST["rua"]}'";
 $value .= ",'{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','PB','{$_POST["cep"]}'";

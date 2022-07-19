@@ -141,6 +141,6 @@ else
 {
 	echo "<script>alert('Desculpe! Mas, houve um erro no Banco de Dados! {$_SESSION["setor"]} - Perfil: {$perfil}');</script>";
 }
-// echo mysqli_error($conn);
+echo mysqli_error($conn);
 ?>
 <p>&nbsp;</p>
