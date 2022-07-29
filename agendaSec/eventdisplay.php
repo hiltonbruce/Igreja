@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 'off');
 require("./config.php");
 require("./lang/lang." . LANGUAGE_CODE . ".php");
 require("./functions.php");
