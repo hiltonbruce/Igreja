@@ -279,13 +279,13 @@ body {
 <div id="cartao"></div>
 <div id='marca'></div><!--  Cart?o com logo idependente do fundo da imagem-->
 <div id='Endereco'>
-  <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
+  <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().'<br />';?>
    <?PHP
-    echo '<br /> CEP:&nbsp;'.$igreja->cep();
+    echo CIDADEIG.' - '.UFIG.' &bull; CEP:&nbsp;'.$igreja->cep();
    if ($igreja->fone() != null) {
-	   echo ' Fone: '.$igreja->fone();
+	   echo '<br />Fone: '.$igreja->fone();
    }
-   echo '<br /> CNPJ:&nbsp;'.$igreja->cnpj();
+   echo ' &bull; CNPJ:&nbsp;'.$igreja->cnpj();
    ?>
   </div>
 </div>

@@ -156,7 +156,7 @@
 			</a>
 	    <?php
 	    	if ($_SESSION['nivel']>'10') {
-	        $selItem = ($_GET['rec']=='25' || $_GET['rec']=='26') ?  'list-group-item-info': '' ;
+	        $selItem = (!empty($_GET['rec']) && ($_GET['rec']=='25' || $_GET['rec']=='26')) ?  'list-group-item-info': '' ;
 	   	 ?>
 				<a type="button" href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25"
 				class="list-group-item <?PHP echo item_info ("");?>">

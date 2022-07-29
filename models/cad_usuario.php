@@ -105,7 +105,7 @@ foreach ($resultsUser[0] as $key => $value) {
   }elseif ($key == 'historico') {
     $dado = $_SESSION['valid_user']." @ ".date("Y-m-d h:i:s");
   }elseif ($key == 'senha') {
-    $dado = MD5($value);
+    $dado = MD5($_POST['senha']);
   }else{
     $dado = $_POST[$key];
   }
