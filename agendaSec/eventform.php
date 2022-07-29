@@ -3,6 +3,8 @@ session_start();
 require("config.php");
 require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
 require("functions.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 'off');
 
 if (!empty($_SESSION['valid_user'])) {
 	require "../func_class/classes.php";
