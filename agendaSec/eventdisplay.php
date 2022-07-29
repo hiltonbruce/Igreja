@@ -23,7 +23,7 @@ writePosting($id, $auth);
 echo '<img src="images/clear.gif" width="1" height="25" border="0"><br clear="all">';
 // query for rest of this day's postings
 $sql = "SELECT id, start_time FROM " . DB_TABLE_PREFIX . "mssgs ";
-$sql .= "WHERE y = " . $y . " AND m = " . $m . " AND d = " . $d . " AND id != $id ";
+$sql .= "WHERE y = '$y' AND m = '$m' AND d = '$d' AND id != $id ";
 $sql .= "ORDER BY start_time ASC";
 $result = mysql_query($sql) or die(mysql_error());
 if (mysql_num_rows($result)) {
