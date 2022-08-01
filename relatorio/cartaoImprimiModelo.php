@@ -281,11 +281,11 @@ body {
 <div id='Endereco'>
   <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().'<br />';?>
    <?PHP
-    echo CIDADEIG.' - '.UFIG.' &bull; CEP:&nbsp;'.$igreja->cep();
+    echo CIDADEIG.' - '.UFIG.' &bull; CEP:&nbsp;'.$igreja->cep().'<br />';
    if ($igreja->fone() != null) {
-	   echo '<br />Fone: '.$igreja->fone();
+	   echo 'Fone: '.$igreja->fone().' &bull; ';
    }
-   echo ' &bull; CNPJ:&nbsp;'.$igreja->cnpj();
+   echo 'CNPJ:&nbsp;'.$igreja->cnpj();
    ?>
   </div>
 </div>

@@ -81,21 +81,22 @@
 		<tr>
 			<td>
 				<br>
-				<img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" width='387' height='125' >
+				<img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" height='125' >
 			</td>
-			<td class="text-right" style="vertical-align: text-top;">
+			<td class="text-right" style="vertical-align: text-top;" >
 				<h4><?php echo NOMEIGR;?></h4>
 				<h5>
 					<?php
 						echo $igreja->rua();
 						echo ', N&ordm; '.$igreja->numero();
-						echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
-						echo ' - '.$cidCad[$igreja->cidade()]['uf'];
-						if ($igreja->fone() != 0) {
-							echo '<br/>Fone: '.$igreja->fone();
+						echo '-'.$cidCad[$igreja->cidade()]['cidade'];
+						echo '-'.$cidCad[$igreja->cidade()]['uf'].'<br/>CEP: '.$igreja->cep().'';
+						if ($igreja->fone() != null) {
+							echo ' &bull; Fone: '.$igreja->fone().'<br/>';
+						}else{
+							echo '<br/>';
 						}
-						echo '<br/>CEP: '.$igreja->cep();
-						echo ' / CNPJ: '.$igreja->cnpj();
+						echo 'CNPJ: '.$igreja->cnpj();
 						echo '<br/>Email: '.$igreja->email();
 					?>					
 				</h5>
