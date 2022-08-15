@@ -657,7 +657,7 @@ function data_extenso ($data) {
 				break;
 		case 1: $dia_extenso="Segunda-feira";
 				break;
-		case 2: $dia_extenso="Ter&ccedil;a-feira";
+		case 2: $dia_extenso="Terça-feira";
 				break;
 		case 3: $dia_extenso="Quarta-feira";
 				break;
@@ -665,7 +665,7 @@ function data_extenso ($data) {
 				break;
 		case 5: $dia_extenso="Sexta-feira";
 				break;
-		case 6: $dia_extenso="S&aacute;bado";
+		case 6: $dia_extenso="Sábado";
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
@@ -674,7 +674,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Mar&ccedil;o";
+		case 3: $mes_extenso="Março";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -694,7 +694,7 @@ function data_extenso ($data) {
 				break;
 		case 12: $mes_extenso="Dezembro";
 				break;
-		default: echo $mes_extenso="M&ecirc;s incorreto";
+		default: echo $mes_extenso="Mês incorreto";
 	}//fim do case para o mï¿½s
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
 }
@@ -703,7 +703,7 @@ function arrayMeses () {
 	$meses = array(
 			'01' => 'Janeiro',
 			'02' => 'Fevereiro',
-			'03' => 'Mar&ccedil;o',
+			'03' => 'Março',
 			'04' => 'Abril',
 			'05' => 'Maio',
 			'06' => 'Junho',
@@ -723,7 +723,7 @@ function arrayDia ($dia) {
 				break;
 		case 1: $dia_extenso="Segunda-feira";
 				break;
-		case 2: $dia_extenso="Ter&ccedil;a-feira";
+		case 2: $dia_extenso="Terça-feira";
 				break;
 		case 3: $dia_extenso="Quarta-feira";
 				break;
@@ -731,7 +731,7 @@ function arrayDia ($dia) {
 				break;
 		case 5: $dia_extenso="Sexta-feira";
 				break;
-		case 6: $dia_extenso="S&aacute;bado";
+		case 6: $dia_extenso="Sábado";
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia

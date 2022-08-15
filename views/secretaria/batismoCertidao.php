@@ -61,7 +61,11 @@
     </div>
     <div id="added-div-2">
 		<div id='comadep'></div>
-      <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->data()));?></h3>
+      <h3>
+		<?PHP  
+		print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->data()));
+		?>
+	</h3>
     	<br />
 		<div id="pastor">
 			<?PHP echo strtoupper( toUpper($igreja->pastor()));?><br />
