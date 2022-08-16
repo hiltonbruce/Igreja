@@ -50,7 +50,7 @@ imagestring($image, 3, 420, 714, $secretario, $titleColor);
 imagestring($image, 3, 420, 728,'Secretário', $titleColor);
 imagestring($image, 3, 870, 714, $pastor, $titleColor);
 imagettftext($image, 50, 0, 145, 590, $titleColor, '../../fonts/Catamaran/Catamaran-Bold.ttf', $y);
-imagestring($image, 3, 310, 800, html_entity_decode(NOMEIGR,ENT_QUOTES,'ISO-8859-1') .'-'.UFIG, $titleColor);
+imagestring($image, 3, 310, 800, html_entity_decode(NOMEIGR,ENT_QUOTES,'ISO-8859-1') .' - '.html_entity_decode(CIDADEIG,ENT_QUOTES,'ISO-8859-1').' - '.UFIG, $titleColor);
 
 header('Content-type: image/jpeg');
 
