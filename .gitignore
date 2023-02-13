@@ -4,8 +4,8 @@
 /img/log_70anos.jpg
 /teste
 /tmp
-/bkpbanco/*.sql
-/bkpbanco/*.zip
+#/bkpbanco/*.sql
+#/bkpbanco/*.zip
 /img/marca.*
 /img/logoCarta.*
 /img/assinPastor.*
