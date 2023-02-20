@@ -112,7 +112,7 @@ if ($_POST['concluir']=='1') {
 				$nomIgreja = '<br />Igreja: <strong>'.$igrejaSelecionada->razao();
 				$dirigenteIgreja = 'Dirigente: <ins>'.$dirCong->nome().'</ins>';
 				//print_r($cargoIgreja->dadosArray());
-				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins>'.$tesArray['8'][$idIgreja]['1']['nome'];
+				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins> ++++'.$tesArray['8'][$idIgreja]['1']['nome'];
 				//reset($tesIgreja);
 				//print_r($tesArray );
 			}elseif ($idIgreja=='0' || $idIgreja=='') {
@@ -124,7 +124,7 @@ if ($_POST['concluir']=='1') {
 			} else {
 				echo '<br /><div class="alert alert-info">';
 				echo '<h4>'.$statusLancamento.' &bull; Igreja: '.$igrejaSelecionada->razao().'<br />'
-					.$dirigenteIgreja.', 1&ordm; Tesoureiro: '.$tesIgreja.'</h4>';
+					.$dirigenteIgreja.' '.$tesIgreja.'</h4>';
 				$sldPendente = (empty($_GET['rolIgreja'])) ? '' : $dizmista->outrosdizimos($igrejaGet);
 				if ($sldPendente>0) {
 					printf("<h4> Lan&ccedil;amentos de outros respons&aacute;veis:
