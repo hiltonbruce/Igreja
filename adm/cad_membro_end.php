@@ -114,7 +114,7 @@ if (empty($_POST["nacionalidade1"]) && empty($_GET["nacionalidade1"])) {
   </div>
   <div class="col-xs-8">
 		<label>Natural de: </label>
-			<input class="form-control" disabled='disabled' value = '<?PHP echo utf8_decode($nome_cidade);?>'>
+			<input class="form-control" disabled='disabled' value = '<?PHP echo $nome_cidade;?>'>
 			<input name='cid_natal' type='hidden' value = '<?PHP echo $cid_natal;?>'>
   </div>
   <div class="col-xs-4">

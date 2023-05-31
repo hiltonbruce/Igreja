@@ -699,9 +699,9 @@ class sele_cidade {
 		{
 			$linhas = $this->res->fetchRow(DB_FETCHMODE_ASSOC);
 			if ($id == $linhas["id"]) {
-				$linhoOptions1 = "<option value='".$linhas["id"]."'>".utf8_decode($linhas[$this->campo_retorno])."</option>";
+				$linhoOptions1 = "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
 			}
-			$linhoOptions .= "<option value='".$linhas["id"]."'>".utf8_decode($linhas[$this->campo_retorno])."</option>";
+			$linhoOptions .= "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
 		}
 	echo $linhoOptions1.$linhoOptions.'</select>';
 	//Disconecta do Banco
