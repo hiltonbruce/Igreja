@@ -303,7 +303,7 @@ function data_batismo($data,$link){
 function fun_igreja ($rol){
 	//retorno o nome do membro de acordo com o rol
 	$membro = new DBRecord ('membro',$rol,'rol');
-	return  $membro->nome();
+	return  utf8_decode($membro->nome());
 }
 
 function quem_entregou ($cpf){

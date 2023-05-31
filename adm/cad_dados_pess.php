@@ -142,24 +142,29 @@ switch ($_POST["tabela"]) {
 
 		// print_r($_POST);
 
-		$rolMae = (empty($_POST["rol_mae"])) ? 0 : intval($_POST["rol_mae"]) ;
-		$rolPai = (empty($_POST["rol_pai"])) ? 0 : intval($_POST["rol_pai"]) ;
+		$rolMae = (empty($_POST["rol_mae"])) ? 'NULL' : intval($_POST["rol_mae"]) ;
+		$rolPai = (empty($_POST["rol_pai"])) ? 'NULL' : intval($_POST["rol_pai"]) ;
 		$sexo = (empty($_POST["sexo"])) ? 'M' : $_POST["sexo"];
-		$nacao = (empty($_POST["nacao"])) ? 'null' : $_POST["nacao"];
-		$endereco = (empty($_POST["endereco"])) ? 'null' : 'TEste';
+		$nacao = (empty($_POST["nacao"])) ? 'NULL' : $_POST["nacao"];
+		$endereco = (empty($_POST["endereco"])) ? 'NULL' : 'TEste';
+		$doador = (empty($_POST["doador"]) || $_POST["doador"]=='') ? 'NULL' : $_POST["doador"];
+		$obs = (empty($_POST["obs"]) || $_POST["obs"]=='') ? 'NULL' : $_POST["obs"];
 
 		// var_dump($_POST).'<br />';
 		// echo $dt_nasc;
 
-		$value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','$sexo','$endereco',".
+		$value = "NULL ,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','$sexo','$endereco',".
 				"'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',".
 				"'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',".
-				"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',".
-				"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
+				"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','$obs',".
+				"'$doador','{$_POST["sangue"]}','{$_POST["mae"]}',".
 				"$rolMae,'{$_POST["pai"]}','$rolPai','".date('Y-m-d H:i:s')."','$hist'";
 
 
-		// echo '<br /><br />*** '.$value.' *** <br />';
+			echo count($_POST).'<br /><br />';
+			print_r ($_POST).'<br /><br />';
+		echo '<br /><br />*** '.$value.' *** <br />';
+		// var_dump($_POST).'<br />';
 
 		$dados_pessoais = new insert ($value,"membro");
 		$dados_pessoais->inserir();

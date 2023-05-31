@@ -2,18 +2,32 @@
 clearstatcache();
 error_reporting(E_ALL);
 ini_set('display_errors', 'off');
+session_start();
 setlocale( LC_ALL, 'pt_BR.ISO-8859-1', 'pt_BR', 'Portuguese_Brazil');
 
 require_once ('../../func_class/funcoes.php');
 require_once ('../../func_class/constantes.php');
-$secretario = titleCase($_POST['secretario']);
-$nome = titleCase($_POST['nome']);
-$pastor = titleCase($_POST['pastor']);
-list($y,$m,$d) = explode('-', $_POST['dtbatismo']);
+require_once ('../../func_class/dbRecord.php');
+// require "../../help/impressao.php";//Include de funcï¿½es, classes e conexï¿½es com o BD
+$secretario_dados =  new DBRecord("membro", $_POST['secretario'], "rol");
+$secretario =  utf8_decode($secretario_dados->nome());
+
+if (isset($_POST['rol'])) {
+  $dados_pessoais = new DBRecord("membro", $_POST['rol'], "rol");
+  $nome = $dados_pessoais->nome;
+  $dados_eclesiastico = new DBRecord("eclesiastico", $_POST['rol'], "rol");
+  list($y,$m,$d) =  explode('-', $dados_eclesiastico->batismo_em_aguas);
+  // $y = 2018;
+  // var_dump($dt);
+}else {
+  $nome = utf8_decode($_POST['nome']);
+  list($y,$m,$d) = explode('-', $_POST['dtbatismo']);
+}
+$pastor = utf8_decode($_POST['pastor']);
 if ($y==2018) {
   $image = imagecreatefrompng('../../img/354Cent.png');
 } else {
-  $image = imagecreatefrompng('../../img/354.png');
+  $image = imagecreatefrompng('../../img/certidaDeBatismo.png');
 }
 
 
@@ -49,8 +63,11 @@ imagestring($image, 3, 750, 630, 'Emissão: '.htmlspecialchars_decode(data_extens
 imagestring($image, 3, 420, 714, $secretario, $titleColor);
 imagestring($image, 3, 420, 728,'Secretário', $titleColor);
 imagestring($image, 3, 870, 714, $pastor, $titleColor);
-imagettftext($image, 50, 0, 145, 590, $titleColor, '../../fonts/Catamaran/Catamaran-Bold.ttf', $y);
-imagestring($image, 3, 310, 800, html_entity_decode(NOMEIGR,ENT_QUOTES,'ISO-8859-1') .' - '.html_entity_decode(CIDADEIG,ENT_QUOTES,'ISO-8859-1').' - '.UFIG, $titleColor);
+if ($_POST['anoBatismo'] == 'true') {
+  imagettftext($image, 50, 0, 145, 590, $titleColor, '../../fonts/Catamaran/Catamaran-Bold.ttf', $y);
+}
+imagestring($image, 3, 870, 728,'Pastor em '.html_entity_decode(CIDADEIG,ENT_QUOTES,'ISO-8859-1').' - '.UFIG, $titleColor);
+// imagestring($image, 3, 310, 800, html_entity_decode(NOMEIGR,ENT_QUOTES,'ISO-8859-1') .' - '.html_entity_decode(CIDADEIG,ENT_QUOTES,'ISO-8859-1').' - '.UFIG, $titleColor);
 
 header('Content-type: image/jpeg');
 

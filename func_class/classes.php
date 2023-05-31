@@ -230,6 +230,7 @@ class DBRecord {
 	if (empty($campo)){$campo="rol";}
 	$res = $db->query( "SELECT * from $table WHERE $campo=?", array( $id ) );
 	$res->fetchInto( $row, DB_FETCHMODE_ASSOC );
+	// var_dump($res );
 	$this->{'h'} = $row;
 	$this->{'table'} = $table;
 	$this->{'id'} = $id;
@@ -428,6 +429,7 @@ class insert {
 	}
 
 	public function inserir() {
+		var_dump($this->getCampos());
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		if ($inserir){
 				$idCad = mysql_insert_id();
@@ -697,9 +699,9 @@ class sele_cidade {
 		{
 			$linhas = $this->res->fetchRow(DB_FETCHMODE_ASSOC);
 			if ($id == $linhas["id"]) {
-				$linhoOptions1 = "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+				$linhoOptions1 = "<option value='".$linhas["id"]."'>".utf8_decode($linhas[$this->campo_retorno])."</option>";
 			}
-			$linhoOptions .= "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+			$linhoOptions .= "<option value='".$linhas["id"]."'>".utf8_decode($linhas[$this->campo_retorno])."</option>";
 		}
 	echo $linhoOptions1.$linhoOptions.'</select>';
 	//Disconecta do Banco

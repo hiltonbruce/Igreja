@@ -51,7 +51,7 @@
    template: {
   		 type: "custom",
   		 method: function(value, item) {
-  			 return  item.icon + " &bull; " + item.nome+' Rol: '+item.rol + item.razao + item.situacao_espiritual;
+  			 return  item.icon + " &bull; " + item.nome +' Rol: '+item.rol + item.razao + item.situacao_espiritual;
   		 }
   	 },
    // theme: "round"
