@@ -25,14 +25,24 @@ if (isset($_POST['rol'])) {
 }
 $pastor = utf8_decode($_POST['pastor']);
 if ($y==2018) {
-  $image = imagecreatefrompng('../../img/354Cent.png');
+  // $image = imagecreatefrompng('../../img/354Cent.png');
+  if (file_exists('../../img/certidaDeBatismoCentenario.png')) {
+    $image = imagecreatefrompng('../../img/certidaDeBatismoCentenario.png');
+  } else {
+    $image = imagecreatefrompng('../../img/354Cent.png');
+  }
 } else {
-  $image = imagecreatefrompng('../../img/certidaDeBatismo.png');
+  if (file_exists('../../img/certidaDeBatismo.png')) {
+    $image = imagecreatefrompng('../../img/certidaDeBatismo.png');
+  } else {
+    $image = imagecreatefrompng('../../img/354.png');
+  }
+  
 }
 
 
 $certifico = 'Certificamos que: ';
-$sexo = ($_POST['sexo']=='M' || $_POST['sexo']=='m') ? 'batizado' : 'batizada' ;
+$sexo = ($dados_pessoais->sexo()=='M' || $_POST['sexo']=='m') ? 'batizado' : 'batizada' ;
 
 // $titleColor = imagecolorallocate($image, 0, 0, 0);
 $certifColor = imagecolorallocate($image, 255, 255, 0);
