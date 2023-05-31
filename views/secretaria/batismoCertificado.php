@@ -14,7 +14,7 @@ $secretario =  utf8_decode($secretario_dados->nome());
 
 if (isset($_POST['rol'])) {
   $dados_pessoais = new DBRecord("membro", $_POST['rol'], "rol");
-  $nome = utf8_decode(titleCase($dados_pessoais->nome));
+  $nome = titleCase(utf8_decode($dados_pessoais->nome));
   $dados_eclesiastico = new DBRecord("eclesiastico", $_POST['rol'], "rol");
   list($y,$m,$d) =  explode('-', $dados_eclesiastico->batismo_em_aguas);
   // $y = 2018;
