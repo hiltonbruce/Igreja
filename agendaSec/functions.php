@@ -204,7 +204,7 @@ function writeCalendar($month, $year,$igreja)
 					$textEven = $eventdata[$day]["text"][$j];
 					$textTitle = strip_tags($textEven.' - '.$igrejaEven.' ('.$setorCad.')');
 					$titLink = 'data-toggle="tooltip" data-placement="top" title="'.$textTitle.'"';
-					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["id"][$j] . ")\">";
+					$str .= "<a href=\"javascript:openPosting(" . $eventdata[$day]["idMensage"][$j] . ")\">";
 					if ($eventdata[$day]['rol'][$j]=='1') {
 						$classDest = 'text-danger';
 					} elseif ($eventdata[$day]['rol'][$j]=='0') {
@@ -258,7 +258,7 @@ function getDayNameHeader()
 
 function getEventDataArray($month, $year,$igreja)
 {
-	$sql = "SELECT a.*,i.*,s.*, ";
+	$sql = "SELECT a.*,i.*,s.*, a.id AS idMensage, ";
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(a.start_time, '%l:%i%p') AS stime, ";
 		$sql .= "TIME_FORMAT(a.end_time, '%l:%i%p') AS etime ";
@@ -277,7 +277,12 @@ function getEventDataArray($month, $year,$igreja)
 	$sql .= "GROUP BY a.id ORDER BY a.start_time,a.end_time";
 	$result = mysql_query($sql) or die(mysql_error());
 	while($row = mysql_fetch_assoc($result)) {
-		$eventdata[$row["d"]]["id"][] = $row["id"];
+		// while($row = mysql_fetch_array($result)) {
+				// exit;
+				$eventdata[$row["d"]]["idMensage"][] = $row["idMensage"];
+				// print_r($row);
+				// echo '<br /><br />'.$row["idMensage"];
+				// echo '<br /><br />';
 		if ($row["igreja"]=='0') {
 			$eventdata[$row["d"]]["igreja"][] = '<strong>Sede e Congrega&ccedil;&otilde;es</strong>';
 		}elseif ($row["igreja"]=='-1') {

@@ -69,9 +69,23 @@ for ($i = 0; $i < 13; $i++) {
 			echo $msg;
 		}	else {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-			$value  = "null,0,$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
+			$nome = mysql_real_escape_string($nome);
+			$rol = (isset($_POST["rol"])) ? '0' : intval($_POST["rol"]) ;
+			$value  = " null,0,$conta,'".$congcontrib."','$rol','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
-			$value .= "'".$confirma."','{$_POST["obs"]}',NOW(),'$hist'";
+			$value .= "'".$confirma."','{$_POST["obs"]}','".date('Y-m-d H:i:s')."','$hist'";
+
+			print_r($value);
+
+			echo '<br />';
+			$str = mb_convert_encoding($nome,'ISO-8859-1');
+			echo mb_detect_encoding($nome);
+			echo '<br />';
+			echo mb_detect_encoding($str);
+			echo '<br />';
+			echo $str;
+
+			exit;
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 			}

@@ -36,8 +36,7 @@
 		$value  = "null,'{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}',$rolPai,";
 		$value .= "'{$_POST["mae"]}',$rolMae,'$dt_nasc','{$_POST["maternidade"]}',";
 		$value .="'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',";
-		$value .="'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}','$dtHist','{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
-
+		$value .="'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}','".date('Y-m-d H:i:s')."','{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
 
 		$cert_apresentacao = new insert ($value,"cart_apresentacao");
 		$cert_apresentacao->inserir();
