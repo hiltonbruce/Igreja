@@ -234,6 +234,7 @@ class DBRecord {
 	$this->{'table'} = $table;
 	$this->{'id'} = $id;
 	$this->campo = $campo;
+	
   }
 
   public function __call( $method, $args ){

@@ -261,8 +261,6 @@
         <!-- /.col -->
       </div>
 
-
-
 	  <div style="display:inline; float:left;">
 	   
 	   </div>
