@@ -17,6 +17,7 @@ define ('DESPCONVENCAO','3.1.1.001.007');#Conta da Despesa da provisão para conv
 define ('MESBLOQUEA','2017-05-01');#Não é permitido lançamento de dízimos e ofertas anterior ou igaula a esta data
 $dns = 'mysql://'.DBUSER.':'.DBPASS.'@'.DBPATH.'/'.DBNAME;
 //MySQLi
+
 $conn = new PDO('mysql:dbname='.DBNAME.';host='.DBPATH,DBUSER,DBPASS);
 /*
  * Usuário e senha de Backup:

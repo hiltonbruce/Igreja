@@ -431,6 +431,15 @@ class insert {
 	public function inserir() {
 		var_dump($this->getCampos());
 		echo '<br /><br />';
+		// $cod = mb_detect_encoding( $this->getCampos(), "auto" );
+		// echo $cod ;
+		// echo '<br /><br />';
+		// $valores = mb_convert_encoding($this->getCampos(), "ISO-8859-1", $cod  );
+		// echo  $valores;
+	
+		// echo '<br /><br />';
+		// echo $this->getCampos();
+		// echo '<br /><br />';
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		if ($inserir){
 				$idCad = mysql_insert_id();
