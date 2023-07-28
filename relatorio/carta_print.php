@@ -81,7 +81,7 @@
 		<tr>
 			<td>
 				<br>
-				<img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" height='125' >
+				<img src="../img/logoCarta.png" alt="Brasï¿½o Assembleia de Deus" height='125' >
 			</td>
 			<td class="text-right" style="vertical-align: text-top;" >
 				<h4><?php echo NOMEIGR;?></h4>
@@ -211,6 +211,7 @@
 					______________________________________<br />
 					<?PHP echo $igreja->pastor();?><br />
 					<?php echo $cargosPR->descricao();?>
+					<br />
 				</td>
 				<td>&nbsp;</td>
 				<td>
