@@ -65,7 +65,6 @@
 
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/bootstrap.css" />

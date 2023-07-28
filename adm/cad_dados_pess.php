@@ -89,7 +89,7 @@ switch ($_POST["tabela"]) {
 	case "membro"://cadastro de membro
 		$dt_nasc=br_data($_POST["datanasc"],"dt_nasc");
 		echo $dt_nasc;
-		$value = "'','{$_POST["nome"]}','{$_POST["nacao"]}',
+		$value = "NULL,'{$_POST["nome"]}','{$_POST["nacao"]}',
 			'{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','{$_POST["sexo"]}','{$_POST["endereco"]}',
 			'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',
 			'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',
