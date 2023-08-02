@@ -343,9 +343,9 @@ $('[data-toggle="tooltip"]').tooltip()
   #Chamada para o Chat
   if (!empty($_SESSION['valid_user'])){
     //Descomenta para o chat funcionar
-    // echo '<script type="text/javascript" src="chat/js/chat.js"></script>';
-    // $batepapo = new chat('');
-    // echo $batepapo->incluir();
+    echo '<script type="text/javascript" src="chat/js/chat.js"></script>';
+    $batepapo = new chat('');
+    echo $batepapo->incluir();
   }
 ?>
 </html>

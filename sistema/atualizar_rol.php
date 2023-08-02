@@ -6,7 +6,7 @@ $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
 
 $id = intval($_POST["id"]);
 $query = 'SELECT * FROM '.$_POST["tabela"];
-//echo "ID: ".$_POST["id"]." Campo: ".$_POST["campo"]." Tabela: ".$_POST["tabela"]." Post[Post[campo]]: ".ltrim($_POST[$_POST["campo"]]);
+// echo "ID: ".$_POST["id"]." - Campo: ".$_POST["campo"]."- Tabela: ".$_POST["tabela"]."- Post[campo]: ".ltrim($_POST["campo"]);
 $query .=' WHERE rol="'.$id.'"';
 
 $result = mysql_query($query) or die (mysql_error());
@@ -42,7 +42,7 @@ $result = mysql_query($query) or die (mysql_error());
 				} else {
 					$atualizador = ltrim($_POST["pastor"]);
 				}
-				#Atualiza os dados na tabela de hist?rico de fun??es
+				#Atualiza os dados na tabela de histórico de funções
 				$atualHist  = 'UPDATE cargohist SET datafim="'.date('Y-m-d').'", ';
 				$atualHist .= 'cadfim= "'.$hist.'" ';
 				$atualHist .= 'WHERE descricao = "1" AND igreja="'.$id.'" ';
@@ -52,11 +52,16 @@ $result = mysql_query($query) or die (mysql_error());
 				    echo 'Falha na autalização: ' . mysql_error();
 				    exit;
 				}
-				#Cadastra os dados na tabela de hist?rico de fun??es
-				$dt = br_data ($_POST["data"],'Data de in?cio na fun??o!');
+				#Cadastra os dados na tabela de hist?rico de funções
+				// $dt = br_data ($_POST["data"],'Data de início na função!');
+				// echo $dt." - 1<br />";
+				// echo $_POST["pastor"]." - 3<br />";
+				$rolPastor = (is_int($_POST["pastor"]) ) ? $_POST["pastor"] : 'null' ;
+
 				if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
-					$value  = '"","1","'.$_POST["nome"].'","'.$id.'","'.$_POST["pastor"].'"';
-					$value .= ',"1","'.$dt.'","","'.$hist.'",""';
+					$value  = 'null,1,"'.$_POST["nome"].'",'.$id.','.$rolPastor;
+					$value .= ',1,"'.$dt.'",null,"'.$hist.'",""';
+					// echo $value." - 2<br />";
 					$dados = new insert ($value,'cargohist');
 					$dados->inserir();
 				}

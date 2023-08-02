@@ -159,8 +159,8 @@ switch ($_POST["tabela"]) {
 				"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
 				"$rolMae,'{$_POST["pai"]}',$rolPai,'".date('Y-m-d H:i:s')."','$hist'";
 
-			echo count($_POST).'<br /><br />';
-			print_r ($_POST).'<br /><br />';
+			// echo count($_POST).'<br /><br />';
+			// print_r ($_POST).'<br /><br />';
 		echo '<br /><br />*** '.$value.' *** <br />';
 		// var_dump($_POST).'<br />';
 
