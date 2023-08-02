@@ -52,8 +52,9 @@ $result = mysql_query($query) or die (mysql_error());
 				    echo 'Falha na autalização: ' . mysql_error();
 				    exit;
 				}
+				// echo $atualHist." - 1<br />";
 				#Cadastra os dados na tabela de hist?rico de funções
-				// $dt = br_data ($_POST["data"],'Data de início na função!');
+				$dt = br_data ($_POST["data"],'Data de início na função!');
 				// echo $dt." - 1<br />";
 				// echo $_POST["pastor"]." - 3<br />";
 				$rolPastor = (is_int($_POST["pastor"]) ) ? $_POST["pastor"] : 'null' ;
@@ -61,7 +62,7 @@ $result = mysql_query($query) or die (mysql_error());
 				if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
 					$value  = 'null,1,"'.$_POST["nome"].'",'.$id.','.$rolPastor;
 					$value .= ',1,"'.$dt.'",null,"'.$hist.'",""';
-					// echo $value." - 2<br />";
+					echo $value." - 2<br />";
 					$dados = new insert ($value,'cargohist');
 					$dados->inserir();
 				}
