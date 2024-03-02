@@ -60,7 +60,7 @@ $result = mysql_query($query) or die (mysql_error());
 				$rolPastor = (is_int($_POST["pastor"]) ) ? $_POST["pastor"] : 'null' ;
 
 				if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
-					$value  = 'null,1,"'.$_POST["nome"].'",'.$id.','.$rolPastor;
+					$value  = '"null",1,"'.$_POST["nome"].'",'.$id.','.$rolPastor;
 					$value .= ',1,"'.$dt.'",null,"'.$hist.'",""';
 					echo $value." - 2<br />";
 					$dados = new insert ($value,'cargohist');

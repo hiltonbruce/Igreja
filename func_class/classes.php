@@ -7,7 +7,7 @@
 	}elseif (file_exists('../../func_class/constantes.php')){
 		require('../../func_class/constantes.php');
 	}
-	$db =& DB::connect ($dns, array());
+	$db = DB::connect ($dns, array());
 	if (PEAR::isError($db)){ die ($db->getMessage());exit;}
 
 	/*

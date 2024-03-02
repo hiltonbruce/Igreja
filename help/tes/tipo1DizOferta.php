@@ -71,7 +71,7 @@ for ($i = 0; $i < 13; $i++) {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
 			$nome = mysql_real_escape_string($nome);
 			$rol = (isset($_POST["rol"])) ? '0' : intval($_POST["rol"]) ;
-			$value  = " null,0,$conta,'".$congcontrib."','$rol','$nome','$valor',";
+			$value  = " ,0,$conta,'".$congcontrib."','$rol','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 			$value .= "'".$confirma."','{$_POST["obs"]}','".date('Y-m-d H:i:s')."','$hist'";
 

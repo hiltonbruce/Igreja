@@ -132,12 +132,13 @@ $totElement = count($results);
 				}
 
 					if ($chave=='nome') {
-						$json .= '"name": "'.utf8_decode($dados).'",';
-						$dados = strtoupper(strtr( utf8_decode($dados), 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+						$json .= '"name": "'.$dados.'",';
+						$dados = strtoupper(strtr($dados, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 						$estado = $dados;
 						require ('../help/destaqueNome.php');
 					}
 
+					
 					if ($chave=='situacao_espiritual') {
 						 switch ($dados) {
 							 case '2':
