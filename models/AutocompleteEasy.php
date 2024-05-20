@@ -126,14 +126,12 @@ $totElement = count($results);
 			}
 
 			foreach ($value as $chave => $dados) {
-
 				if ($dados=='') {
-					$dados = 'N&atilde;o informado' ;
+					$dados = 'Não informado' ;
 				}
-
 					if ($chave=='nome') {
-						$json .= '"name": "'.utf8_decode($dados).'",';
-						$dados = strtoupper(strtr( utf8_decode($dados), 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+						$json .= '"name": "'.$dados.'",';
+						$dados = strtoupper(strtr( $dados, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 						$estado = $dados;
 						require ('../help/destaqueNome.php');
 					}

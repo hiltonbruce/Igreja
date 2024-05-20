@@ -17,7 +17,6 @@
   	},
 
   getValue: "name",
-
   list: {
 
       onSelectItemEvent: function() {

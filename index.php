@@ -13,7 +13,6 @@
 	$dirPOST = (empty($_POST["direita"])) ? '' : $_POST["direita"];
 	$menuGET = (empty($_GET["menu"])) ? '' : $_GET["menu"];
 	$menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
-
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 

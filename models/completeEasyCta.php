@@ -11,7 +11,7 @@ $q =  $_GET['q'];
 $item = 0;
 $sqlOrd = 'titulo';
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
-
+ 
 $sql  = 'SELECT * FROM contas AS c WHERE acesso<>"0" AND ' ;
 switch ($quantNomes) {
 	case '3':
@@ -84,7 +84,7 @@ $totElement = count($results);
 
 					if ($chave=='titulo') {
 						$json .= '"name": "'.$dados.'",';
-						$dados = strtoupper(strtr( $dados, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+						$dados = strtoupper(strtr( $dados, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 						$estado = $dados;
 						require ('../help/destaqueNome.php');
                     }
