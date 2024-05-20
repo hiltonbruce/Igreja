@@ -106,12 +106,25 @@ body {
 	z-index:6;
 }
 
+#assinPastor {
+	position:absolute;
+	background: url(../img/assinPastor.png) no-repeat;
+	background-size: 222px 150px;
+	text-shadow: 1px 1px 1px #FFFFFF;
+	left:700px;
+	top:180px;
+	width:376px;
+	height:150px;
+	z-index:5;
+	text-align:center;
+	font-size: 90%;
+}
 #centenario {
 	position:absolute;
 	background: url(../img/Centenario2.png) no-repeat;
 	background-size: 128px 87px;
-	left: -250px;
-	top:55px;
+	left: 160px;
+	top: 180px;
 	width:214px;
 	height:145px;
 }
@@ -146,11 +159,25 @@ body {
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight: bold;
 }
+#obs {
+	position:absolute;
+	text-shadow: 2px 2px 1px #FFFFFF;
+	left:39px;
+	top:250px;
+	width:354px;
+	height:33px;
+	z-index:15;
+	text-align:center;
+	font-weight: bold;
+	color: red;
+	font-size: 120%;
+	font-family:Arial, Helvetica, sans-serif;
+}
 #Valid {
 	position:absolute;
 	text-shadow: 2px 2px 1px #FFFFFF;
 	left:39px;
-	top:270px;
+	top:280px;
 	width:354px;
 	height:33px;
 	z-index:15;
@@ -231,7 +258,7 @@ body {
 	position:absolute;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	left:643px;
-	top:303px;
+	top:298px;
 	width:376px;
 	height:24px;
 	z-index:5;
@@ -264,7 +291,13 @@ body {
 <div id='marca'></div><!--  Cart?o com logo idependente do fundo da imagem-->
 <div id='Endereco'>
   <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
-   <?PHP echo '<br /> CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().'<br /> CNPJ:&nbsp;'.$igreja->cnpj();?>
+   <?PHP
+    echo '<br /> CEP:&nbsp;'.$igreja->cep();
+   if ($igreja->fone() != null) {
+	   echo ' Fone: '.$igreja->fone();
+   }
+   echo '<br /> CNPJ:&nbsp;'.$igreja->cnpj();
+   ?>
   </div>
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
@@ -273,6 +306,7 @@ body {
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?>
 </div>
  <div id="mensargem"><?php echo MSGCARTAO;?></div>
+ <div id="obs"><?php echo $rec_ecl->obs();?></div>
  <div id="Valid"><?php echo MSGVALID;?></div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
 <div id="versoFiliacao">
@@ -282,26 +316,27 @@ body {
 </div>
 <div id="verso1">
 <?PHP
-	print "<b>Membro desde:</b> ".conv_valor_br ($rec_ecl->dat_aclam());
-	print " <br /><b>Data de Nascimento:</b> ".conv_valor_br ($rec_pessoais->datanasc());
-	print "<br /><b>Nacionalidade:</b> ".$rec_pessoais->nacionalidade();
-	$cidNatal = (intval($rec_pessoais->naturalidade()) == 0) ? $rec_pessoais->naturalidade() . ' - ' . $rec_pessoais->uf_nasc() : $cidade->nome() . ' - ' . $cidade->coduf();
-	print '<br /><b>Natural de:</b> ' . $cidNatal;
 ?>
 </div>
 <div id="verso2">
-<?PHP
-	print "<b>CPF: </b>".$rec_prof->cpf();
+    <?PHP
+    print "<b>Membro desde:</b> ".conv_valor_br ($rec_ecl->dat_aclam());
+    print " <br /><b>Data de Nascimento:</b> ".conv_valor_br ($rec_pessoais->datanasc());
+    print "<br /><b>Nacionalidade:</b> ".$rec_pessoais->nacionalidade();
+    $cidNatal = (intval($rec_pessoais->naturalidade()) == 0) ? $rec_pessoais->naturalidade() . ' - ' . $rec_pessoais->uf_nasc() : $cidade->nome() . ' - ' . $cidade->coduf();
+    print '<br /><b>Natural de:</b> ' . $cidNatal;
+	print "<br /><b>CPF: </b>".$rec_prof->cpf();
 	printf ("<br /><b>Identidade:</b>  %s - %s",$rec_prof->rg(),$rec_prof->orgao_expedidor());
 	print "<br /><b>Estado Civil:</b> ".$rec_civil->estado_civil();
 	print "<br /><b>Data do Batismo:</b> ".conv_valor_br ($rec_ecl->batismo_em_aguas());
+	print "<br />";
 	if ($cong->rol()=='1') {
 		$nomeCong = 'Templo '.$cong->razao();
 	} else {
 		$nomeCong = 'Congrega&ccedil;&atilde;o: '.$cong->razao();
 	}
 
-	echo '<br /><br /><b>'.$nomeCong.'</b><br />';
+	echo '<b>'.$nomeCong.'</b><br />';
 	list($anoCg,$mesCg,$dCg) = explode('-',cargo_dt($rolConsuta));
 	if ($anoCg=='2018') {
 		echo '<div id="centenario"></div>';
@@ -311,6 +346,7 @@ body {
 <div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor()));?></b><p>
 <?php echo $cargosPR->descricao();?></p>
 </div>
+<div id="assinPastor"></div>
 </body>
 
 </html>

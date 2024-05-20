@@ -24,16 +24,22 @@
 	}
 
  // 	print_r($cargoIgrejas['1']);
-
+	$rolPai = (empty($_POST["rol_pai"])) ? 0 : intval($_POST["rol_pai"]);
+	$rolMae = (empty($_POST["rol_mae"])) ? 0 : intval($_POST["rol_mae"]) ;
+	$dtRegistro = date('Y-m-d H:i:s');
+ 
 	//echo "<h1>Teste 1 - ".$_POST["id"]."</h1>";
 	if (empty($_POST["id"]) && isset($_POST["nome"])) {
 		$dt_nasc = br_data ($_POST["dt_nasc"],"dt_nasc");
 		$dt_apresent = br_data ($_POST["dt_apresent"],"dt_apresent");
-		$value="'','{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}','{$_POST["rol_pai"]}',
-				'{$_POST["mae"]}','{$_POST["rol_mae"]}','$dt_nasc','{$_POST["maternidade"]}',
-				'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',
-				'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}',NOW(),'{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
-		$cert_apresentacao = new insert ("$value","cart_apresentacao");
+		
+		$value  = "null,'{$_POST["id_cong"]}','{$_POST["nome"]}','{$_POST["pai"]}',$rolPai,";
+		$value .= "'{$_POST["mae"]}',$rolMae,'$dt_nasc','{$_POST["maternidade"]}',";
+		$value .="'{$_POST["sexo"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["fl"]}','{$_POST["livro"]}',";
+		$value .="'$dt_apresent','{$_POST["num_cert"]}','{$_POST["obs"]}','".date('Y-m-d H:i:s')."','{$_SESSION['valid_user']}: {$_SESSION['nome']}'";
+
+
+		$cert_apresentacao = new insert ($value,"cart_apresentacao");
 		$cert_apresentacao->inserir();
 		$most_certidao = new DBRecord ("cart_apresentacao",mysql_insert_id(),"rol");
 	} else {
@@ -85,14 +91,16 @@
     </div>
     <div id="added-div-2">
 		<div id='comadep'></div>
-      <h3><?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso (conv_valor_br ($most_certidao->data()));?></h3>
+      <h3>
+	<?PHP  print $cidOrigem->nome()." - ".$cidOrigem->coduf().", ".data_extenso(conv_valor_br ($most_certidao->data()));?>
+</h3
     	<br />
-			<div id="pastor"><?PHP echo $prIgreja;?>
-			</div>
+		<div id="pastor"><?PHP echo $prIgreja;?>
+			<div id='assinPastor'></div>
+		</div>
 	 	 <?PHP
-
 		 		if ($most_certidao->id_cong()>'1') {
-		 			$congreg = 'Congrega&ccedil;&atilde;o: '.$listInfIgr[$most_certidao->id_cong()]['0'].' - ';
+		 			$congreg = 'Congrega&ccedil;&atilde;o: '.$listInfIgr[$most_certidao->id_cong()]['0'];
 		 		} else {
 		 			$congreg ='';
 		 		}
@@ -102,13 +110,13 @@
         }
     ?>
       <div id='assinSec'>
-          <img src=<?PHP echo $assinSecret;?> width="300" height="100"/>
+          <img src='<?php echo $assinSecret;?>' width="300" height="100"/>
       </div>
       <div id="secretario">
 	        <?PHP
                 $cargo = cargo($secretario->rol());
                 $cargo = ($cargo[1]=='Mb') ? '' : $cargo[1];
-                echo $cargo.' '.strtoupper( toUpper($secretario->nome()));
+                echo $cargo.' '.strtoupper( $secretario->nome());
             ?>
             <br />
             <?php
@@ -123,8 +131,8 @@
       </div>
 			<div id="footer">
 					<span class="text-center">
-					<?PHP echo $congreg.'Templo SEDE: '.$igreja->rua().', N&ordm; '.$igreja->numero().' - '.$cidOrigem->nome().' - '.$cidOrigem->coduf();?>
-					<?PHP echo " - CNPJ: {$igreja->cnpj()} - CEP: {$igreja->cep()}<br />";?></span>
+					<?PHP echo $congreg.'<br />SEDE: '.$igreja->rua().', N&ordm; '.$igreja->numero().' - '.$cidOrigem->nome().' - '.$cidOrigem->coduf();?>
+					<?PHP echo " - CNPJ: {$igreja->cnpj()}<br />";?></span>
 					Copyright &copy; http://<?PHP echo "{$igreja->site()}";?> - Email: <?PHP echo "{$igreja->email()}";?>
 					&bull; <small>Designed by <a rel="nofollow" target="_blank"
 					href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></small>

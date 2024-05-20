@@ -52,7 +52,21 @@ $totalGeral .= '<td id="moeda">'.number_format($totOfertaCampanha,2,',','.').'</
 $totalGeral .= '</td><td id="moeda">'.number_format($totMissoes,2,',','.').'</td>';
 $totalGeral .= '<td id="moeda">'.number_format($totGeral,2,',','.').'</td></tr>';
 ?>
-<div class='text-center'><h5><strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
+<div class='text-center'><h5>
+
+<?php
+	if (!empty($_GET['ano'])) {
+	$dadoLink = 'tesouraria/receita.php?ano='.intval($_GET['ano']).'&fin=11&rec=18'.$mesLink;
+?>
+	<p>&nbsp;</p>
+	<a href='<?php echo $dadoLink;?>' target="_blank">
+		<button class="btn btn-success" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+		Imprimir</button>
+	</a>
+<?php
+	}
+?>
+<strong>Hist&oacute;rico Financeiro por m&ecirc;s de d&iacute;zimos, ofertas e campanhas&nbsp;-&nbsp;Valores em Real(R$)</strong>
 		<?php printf('%s - Per&iacute;odo:&nbsp;&nbsp;%02s de %s',$cong,$mesPorExt,$ano);?></h5>
 </div>
 <div class='text-center' style="overflow: auto;width: 132%;height: 900px;">

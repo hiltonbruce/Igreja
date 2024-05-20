@@ -71,7 +71,7 @@
 
 			}
 
-		$value="'','{$_POST["tipo"]}','{$this->recibos}','{$_POST["resp_recebeu"]}','{$_SESSION["valid_user"]}',NOW(),'{$_POST["obs"]}'";
+		$value="null,'{$_POST["tipo"]}','{$this->recibos}','{$_POST["resp_recebeu"]}','{$_SESSION["valid_user"]}',NOW(),'{$_POST["obs"]}'";
 
 		$registra_recibo = new insert ("$value","recibos");
 		$registra_recibo->inserir();

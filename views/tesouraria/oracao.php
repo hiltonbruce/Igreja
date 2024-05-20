@@ -94,7 +94,7 @@ for ($i=1; $i < 6; $i++) {
 		$ofertaOr = formataNumBanco ($ofertaOr);
 		if ($ofertaOr>0) {
 			$conta = "'$ofeLanc','$ctaCaixa','7'";//Oração Adulto
-			$value  = "'','',$conta,'".$roligreja."','','','$ofertaOr',";
+			$value  = "null,null,$conta,'".$roligreja."',null,null,'$ofertaOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
 			$value .= "'$setor','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");
@@ -103,7 +103,7 @@ for ($i=1; $i < 6; $i++) {
 		$votoOr = formataNumBanco ($votoOr) ;
 		if ($votoOr>0) {
 			$conta = "'$votoLan','$ctaCaixa','7'";//Voto em Circ. de Oração
-			$value  = "'','',$conta,'".$roligreja."','','','$votoOr',";
+			$value  = "null,null,$conta,'".$roligreja."',null,null,'$votoOr',";
 			$value .= "'$datalanc','$sem','$mes','$ano','$roligreja','{$_SESSION['valid_user']}',";
 			$value .= "'$setor','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");

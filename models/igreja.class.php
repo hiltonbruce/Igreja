@@ -45,7 +45,7 @@ class igreja {
 				else
 				{
 				$erro=mysql_error();
-				echo "Nï¿½o foi possï¿½vel apagar, apresentou o seguite erro:  '$erro'";
+				echo "Não foi possível apagar, apresentou o seguite erro:  '$erro'";
 				}
 	}
 
@@ -99,16 +99,16 @@ class igreja {
 					$congreg .= " AND DATE_FORMAT(e.pastor,'%d') <> '00' ";
 					break;
 				case "7"://Lista apenas mulheres
-					$congreg = " AND m.sexo = 'F' ";
+					$congreg .= " AND m.sexo = 'F' ";
 					break;
 				case "8"://Lista apenas Homens
-					$congreg = " AND m.sexo = 'M' ";
+					$congreg .= " AND m.sexo = 'M' ";
 					break;
 				case "9"://Lista apenas Homens
-					$congreg = " AND m.sexo <> 'M' AND m.sexo <> 'F'";
+					$congreg .= " AND m.sexo <> 'M' AND m.sexo <> 'F'";
 					break;
 				case "10"://Lista apenas Doadores de Sangue
-					$congreg = " AND m.doador = 'SIM'";
+					$congreg .= " AND m.doador = 'SIM'";
 					break;
 				default:
 					break;

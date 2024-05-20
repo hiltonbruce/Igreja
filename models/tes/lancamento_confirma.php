@@ -119,7 +119,7 @@ if ((!empty($_POST['recibo']) && !$gerarPgto) || empty($_POST['recibo'])){
 			//Lança o histórico do lançamento
 			$histAPagar  = 'Reconhecido despesa nesta data e pago em '.$_POST['data'];
 			$histAPagar .= ', conf. reg. '.$ultimolanc ;
-			$InsertHist = sprintf("'','%s','%s','%s'",$ultimolancPagar,$histAPagar,$roligreja);
+			$InsertHist = sprintf("null,'%s','%s','%s'",$ultimolancPagar,$histAPagar,$roligreja);
 			$lanchist = new incluir($InsertHist, 'lanchist');
 			$lanchist->inserir();
 			$caixa = $contaDC[$debitar];
@@ -342,14 +342,14 @@ if ((!empty($_POST['recibo']) && !$gerarPgto) || empty($_POST['recibo'])){
 		//inserir o histórico do lançamento das provisões na tabela lanchist
 		//Lança o histórico do lan�amento das provisões $provmissoes>0 $provcomadep>0
 		if ($lancprovmissoes) {
-			$HistProv = sprintf("'','%s','%s','%s'",$ultimolanc,$histTextProv,$roligreja);
+			$HistProv = sprintf("null,'%s','%s','%s'",$ultimolanc,$histTextProv,$roligreja);
 			//$lanchist = new incluir($HistProv, 'lanchist');
 			//$lanchist->inserir();
 		}
 		//Lança o histórico do lançamento
 		$referente .= $histTextProv.$ctaVencida;
 		// $referente = mysql_real_escape_string($referente);
-		$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
+		$InsertHist = sprintf("null,'%s','%s','%s'",$ultimolanc,$referente,$roligreja);
 		$lanchist = new incluir($InsertHist, 'lanchist');
 		$lanchist->inserir();
 		if (!empty($_POST['recibo']) && intval($_POST['recibo']) == $_POST['recibo']) {

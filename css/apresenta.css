@@ -26,8 +26,8 @@
 #headerApres {
 	position:absolute;
 	background: url(../img/header_apresen.png) no-repeat;
-	left:9em;
-	top:8em;
+	left: 8.2em;
+	top: 8em;
 	width:80em;
 	height:15em;
 	z-index:6;
@@ -55,10 +55,22 @@
 #pastor {
 	position:relative;
 	width:250px;
-	margin-top: 50px;
-	margin-left: 40px;
+	margin-top: 55px;
+	margin-left: 10px;
 	padding: 0 0 0 100px;
 	text-align:center;
+}
+
+#assinPastor {
+
+	position:relative;
+	background-image: url(../imgAssin/assinPastor.png);
+	background-repeat: no-repeat;
+	background-size: 300px 100px;
+	width:350px;
+	height: 180px;
+	margin-left: -30px;
+	top: -90px;
 }
 
 #secretario {
@@ -66,15 +78,15 @@
 	position:relative;
 	width:280px;
 	text-align:center;
-	margin-right: 190px;
-	top: -135px;
+	margin-right: 200px;
+	top: -320px;
 }
 
 #assinSec {
 	position:relative;
 	width:115px;
-	margin-left: 530px;
-	top: -100px;
+	margin-left: 520px;
+	top: -290px;
 }
 
 h1{
@@ -127,15 +139,16 @@ p{font-size: 0.9em; margin-bottom: 5px; padding: 5px 10px 5px 5px; text-align:ju
 
 #footer {
   position: absolute;
-  left: 10px;
-  top: 150px;
-	width: 100%;
-	color: #000000;
-	height: 50px;
-	padding-top: 25px;
-	background-repeat: no-repeat;
-	background-position: top;
-	margin: 10;
-	background-image: url(../img/horbar.png);
-	font-size: 80%;
+  left: 10%;
+  top: 120px;
+  width: 80%;
+  color: #000000;
+  height: 50px;
+  padding-top: 25px;
+  background-repeat: no-repeat;
+  background-position: top;
+  margin: 10;
+  background-image: url(../img/horbar.png);
+  background-size: 80%;
+  font-size: 80%;
 }

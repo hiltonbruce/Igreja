@@ -29,10 +29,13 @@ if (empty($_GET['uf_end']) && empty($_POST['uf_end'])){
 	$cid_natal = (!empty($_GET['cidExtrang'])) ? $_GET['cidExtrang'].'-'.$ufExtrang: $_GET["cid_nasc"] ;
 	//$_SESSION["cid_natal"] = $_GET["cid_nasc"];
 	$cpf = ltrim($_GET["cpf"]);
-	$nome_cad = ltrim($_GET["nome_cad"]);
+	$nome = ltrim($_GET["nome"]);
+	$nome_cad = new DBRecord ("membro",$nome,"nome");
 	$profis = new DBRecord ("profissional",ltrim($_GET["cpf"]),"cpf");
-	$nome_cad = new DBRecord ("membro",$nome_cad,"nome");
-	$nome_cad_alt = new DBRecord ("membro",strtoupper($nome_cad),"nome");
+	$nome_cad_alt = new DBRecord ("membro",strtoupper($nome),"nome");
+
+
+
 	if ($profis->cpf()<>"") {
 	?>
 		<h2>CPF: <?PHP echo "{$_GET["cpf"]} j&aacute; cadastrado para o Rol: {$profis->rol()}"?> !
@@ -60,6 +63,7 @@ if ($_GET["nacionalidade"] == 'Brasileira') {
 	$rec = new DBRecord ("cidade",$cid_natal,"id");// Aqui será selecionado a informação do campo autor com id=2
 	$cidNatal = $rec->nome()." - ".$rec->coduf();
 	$nome_cidade = ($rec->nome()=='') ? $cid_natal : $cidNatal ;
+	// print_r($rec)  ;
 } else {
 	$cidNatal = $cid_natal;
 	$nome_cidade = $cid_natal;

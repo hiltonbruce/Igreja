@@ -1,5 +1,7 @@
 <?PHP
+	ini_set( 'default_charset', 'ISO-8859-1' ); // 'UTF-8'
 	session_start();
+
 	//echo $_GET["escolha"]." -----------".$_POST["escolha"];
 	require_once ("func_class/classes.php");
 	require_once ("func_class/funcoes.php");
@@ -14,6 +16,7 @@
 
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
+
 	date_default_timezone_set('America/Recife');
 	setlocale( LC_ALL, 'pt_BR.ISO-8859-1', 'pt_BR', 'Portuguese_Brazil');
 	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -65,6 +68,7 @@
 
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="menu.css" />
 <link rel="stylesheet" type="text/css" media="screen, projection" href="css/bootstrap.css" />
@@ -152,7 +156,7 @@
 			</a>
 	    <?php
 	    	if ($_SESSION['nivel']>'10') {
-	        $selItem = ($_GET['rec']=='25' || $_GET['rec']=='26') ?  'list-group-item-info': '' ;
+	        $selItem = (!empty($_GET['rec']) && ($_GET['rec']=='25' || $_GET['rec']=='26')) ?  'list-group-item-info': '' ;
 	   	 ?>
 				<a type="button" href="./?escolha=tesouraria/receita.php&menu=top_tesouraria&rec=25"
 				class="list-group-item <?PHP echo item_info ("");?>">
@@ -164,7 +168,7 @@
 			</div>
 		</ul>
      <?PHP
-    // require_once ("autentica.php");
+    require_once ("autentica.php");
     ?>
 </div>
 <div id="content">
@@ -250,7 +254,32 @@
           <div class="info-box">
 
             <div class="info-box-content">
-              <span class="info-box-text"><img src="img/Eliu.png" alt="" width="88px"> </span>
+              <span class="info-box-text">
+				<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+						width="50.000000pt" height="20.000000pt" viewBox="0 0 464.000000 80.000000"
+						preserveAspectRatio="xMidYMid meet">
+
+						<g transform="translate(0.000000,152.000000) scale(0.100000,-0.100000)"
+						fill="#000000" stroke="none">
+							<path d="M1760 820 l0 -620 125 0 125 0 0 620 0 620 -125 0 -125 0 0 -620z"/>
+							<path d="M3780 1289 c-68 -60 -130 -115 -138 -122 -13 -13 -12 -14 64 -115 1
+							-2 79 40 173 93 119 67 169 100 164 109 -21 33 -119 146 -128 145 -5 0 -66
+							-49 -135 -110z"/>
+							<path d="M570 795 l0 -595 340 0 340 0 0 59 c0 32 -3 86 -6 120 l-7 61 -198 0
+							-199 0 0 120 0 120 195 0 196 0 -3 118 -3 117 -192 3 -193 2 0 115 0 115 205
+							0 205 0 0 59 c0 32 -3 86 -6 120 l-7 61 -333 0 -334 0 0 -595z"/>
+							<path d="M2595 1372 c-54 -34 -69 -59 -73 -120 -3 -47 0 -63 20 -91 54 -80
+							158 -94 224 -30 68 66 68 152 0 218 -29 28 -45 35 -88 38 -40 3 -60 -1 -83
+							-15z"/>
+							<path d="M2540 570 l0 -370 125 0 125 0 0 370 0 370 -125 0 -125 0 0 -370z"/>
+							<path d="M3312 677 l3 -262 33 -67 c36 -73 76 -109 156 -141 43 -18 73 -21
+							201 -22 131 0 158 3 217 23 74 26 134 80 164 149 20 47 36 326 27 481 l-6 102
+							-123 0 -122 0 -4 -227 c-3 -195 -6 -233 -21 -260 -25 -47 -58 -65 -121 -65
+							-45 -1 -62 4 -90 26 -48 36 -56 73 -56 261 0 88 -3 184 -6 213 l-7 52 -124 0
+							-125 0 4 -263z"/>
+						</g>
+				</svg>
+			  </span>
               <span class="info-box-number">Sistema de controle para Igrejas Evang&eacute;licas</span>
             </div>
             <!-- /.info-box-content -->
@@ -259,6 +288,8 @@
         </div>
         <!-- /.col -->
       </div>
+
+
 
 	  <div style="display:inline; float:left;">
 	   
@@ -312,9 +343,9 @@ $('[data-toggle="tooltip"]').tooltip()
   #Chamada para o Chat
   if (!empty($_SESSION['valid_user'])){
     //Descomenta para o chat funcionar
-    echo '<script type="text/javascript" src="chat/js/chat.js"></script>';
-    $batepapo = new chat('');
-    echo $batepapo->incluir();
+     echo '<script type="text/javascript" src="chat/js/chat.js"></script>';
+     $batepapo = new chat('');
+     echo $batepapo->incluir();
   }
 ?>
 </html>

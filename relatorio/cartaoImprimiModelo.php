@@ -32,6 +32,8 @@ require "../func_class/classes.php";
 		$background_cartao = "pastor"; //Define a imagem de fundo do cart?o
 	}elseif ($cargoEclec['0']=="Evangelista") {
 		$background_cartao = "evangelista";
+	}elseif ($cargoEclec['1']=="Miss") {
+		$background_cartao = "missionario";
 	}elseif ($cargoEclec['0']=="Presb&iacute;tero") {
 		$background_cartao = "presbitero";
 	}elseif ($cargoEclec['0']=="Di&aacute;cono") {
@@ -146,11 +148,25 @@ body {
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight: bold;
 }
+#obs {
+	position:absolute;
+	text-shadow: 2px 2px 1px #FFFFFF;
+	left:39px;
+	top:250px;
+	width:354px;
+	height:33px;
+	z-index:15;
+	text-align:center;
+	font-weight: bold;
+	color: red;
+	font-size: 120%;
+	font-family:Arial, Helvetica, sans-serif;
+}
 #Valid {
 	position:absolute;
 	text-shadow: 2px 2px 1px #FFFFFF;
 	left:39px;
-	top:270px;
+	top:280px;
 	width:354px;
 	height:33px;
 	z-index:15;
@@ -231,7 +247,7 @@ body {
 	position:absolute;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	left:643px;
-	top:303px;
+	top:298px;
 	width:376px;
 	height:24px;
 	z-index:5;
@@ -263,8 +279,14 @@ body {
 <div id="cartao"></div>
 <div id='marca'></div><!--  Cart?o com logo idependente do fundo da imagem-->
 <div id='Endereco'>
-  <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().' - '.CIDADEIG.' - '.UFIG;?>
-   <?PHP echo '<br /> CEP:&nbsp;'.$igreja->cep().' Fone: '.$igreja->fone().'<br /> CNPJ:&nbsp;'.$igreja->cnpj();?>
+  <div><?PHP echo $igreja->rua().', N&ordm; '.$igreja->numero().'<br />';?>
+   <?PHP
+    echo CIDADEIG.' - '.UFIG.' &bull; CEP:&nbsp;'.$igreja->cep().'<br />';
+   if ($igreja->fone() != null) {
+	   echo 'Fone: '.$igreja->fone().' &bull; ';
+   }
+   echo 'CNPJ:&nbsp;'.$igreja->cnpj();
+   ?>
   </div>
 </div>
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
@@ -273,6 +295,7 @@ body {
  <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?>
 </div>
  <div id="mensargem"><?php echo MSGCARTAO;?></div>
+ <div id="obs"><?php echo $rec_ecl->obs();?></div>
  <div id="Valid"><?php echo MSGVALID;?></div>
 <div id="Rol"><?PHP printf ("Rol: %'04u",$rolConsuta);?></div>
 <div id="versoFiliacao">
@@ -308,9 +331,10 @@ body {
 	}
 ?>
 </div>
-<div id="Pastor"><b><?PHP echo strtoupper(toUpper($igreja->pastor()));?></b><p>
+<div id="Pastor"><b><?PHP echo $igreja->pastor();?></b><p>
 <?php echo $cargosPR->descricao();?></p>
 </div>
+<div id="assinPastor"></div>
 </body>
 
 </html>

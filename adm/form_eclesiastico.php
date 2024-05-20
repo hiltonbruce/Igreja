@@ -51,7 +51,7 @@ $cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
           </div>
           <div class="col-xs-4">
             <label>Data Batismo &Aacute;guas:</label>
-            <input name="batismo_em_aguas" type="text" tabindex="<?PHP echo ++$ind;?>"
+            <input name="batismo_em_aguas" type="text" required tabindex="<?PHP echo ++$ind;?>"
              value="<?php echo $_SESSION['dtbatismo'];?>" class="form-control dataclass" />
           </div>
           <div class="col-xs-4">
@@ -104,12 +104,18 @@ $cpf = (empty($_POST["cpf"])) ? $_GET["cpf"] : $_POST["cpf"] ;
               <input name="evangelista" type="text" id="evangelista" tabindex="<?PHP echo ++$ind;?>"
                class="form-control dataclass" />
             </div>
-          <div class="col-xs-4">
-            <label>Pastor em:</label>
-            <input name="pastor" type="text" id="pastor" tabindex="<?PHP echo ++$ind;?>"
-             class="form-control dataclass" />
-          </div></div>
-        </td>
+            <div class="col-xs-4">
+              <label>Pastor em:</label>
+              <input name="pastor" type="text" id="pastor" tabindex="<?PHP echo ++$ind;?>"
+              class="form-control dataclass" />
+            </div>
+            <div class="col-xs-4">
+              <label>Mission&aacute;rio em:</label>
+              <input name="missionario" type="text" id="missionario" tabindex="<?PHP echo ++$ind;?>"
+              class="form-control dataclass" />
+            </div>
+          </div>
+      </td>
       </tr>
       <tr>
         <td colspan='2'>

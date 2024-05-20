@@ -127,8 +127,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				<tr>
 					<td>
 						<h6>Doador de Sangue?
-							<label class="radio-inline"><input type='radio' name='doador' required="required" value='Sim' tabindex='<?PHP echo $ind++; ?>' /> Sim</label>
-							<label class="radio-inline"><input type='radio' name='doador' required="required" value='Não' tabindex='<?PHP echo $ind++; ?>' /> N&atilde;o</label></h6>
+							<label class="radio-inline">
+								<input type='radio' name='doador' required="required" value='Sim' tabindex='<?PHP echo $ind++; ?>' />
+								 Sim
+								</label>
+							<label class="radio-inline">
+								<input type='radio' name='doador' required="required" value='Não' tabindex='<?PHP echo $ind++; ?>' /> 
+								N&atilde;o
+							</label>
+						</h6>
 					</td>
 					<td>
 						<label>Tipo</label> <select name='sangue' placeholder="Tipo Sanguínio" class="form-control" tabindex='<?PHP echo $ind++; ?>'>
@@ -193,7 +200,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			<tfoot>
 				<tr>
 					<th colspan="3">Obs: A data deve estar no formato: dd/mm/aaaa
-						(00/00/0000). <input name="tabela" type="hidden" id="tabela" value="membro" /> <input type="hidden" name="escolha" value="adm/cad_dados_pess.php">
+						(00/00/0000). 
+						<input name="tabela" type="hidden" id="tabela" value="membro" /> 
+						<input type="hidden" name="escolha" value="adm/cad_dados_pess.php">
 					</th>
 				</tr>
 			</tfoot>

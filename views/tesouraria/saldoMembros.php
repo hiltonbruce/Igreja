@@ -23,8 +23,23 @@ if ($_GET['fin']=='' || $_GET['fin']<2) {
 require_once 'models/tes/histFinMembro.php';
 ?>
 <div class='text-center' style="overflow: auto;width: 132%;">
-<table id="horario" class='table table-hover table-condensed'>
-		<caption><?php echo $cong;?>Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
+<table id="horario" class='table table-hover table-striped table-condensed'>
+		<caption>
+		<?php echo $cong;?>
+		
+		<?php
+			if (!empty($_GET['ano'])) {
+				$dadoLink = 'tesouraria/receita.php?ano='.intval($_GET['ano']).'&fin=11&rec=18'.$mesLink.'&igreja='.$_GET['igreja'];
+		?>
+		<p>&nbsp;</p>
+		<a href='<?php echo $dadoLink;?>' target="_blank">
+			<button class="btn btn-success" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+				Imprimir</button></a>
+		<?php
+		}
+		?>
+
+		Hist&oacute;rico Financeiro de D&iacute;zimos e Ofertas - Ano de refer&ecirc;ncia:&nbsp;
 		<?php echo $ano;?> - Valores em Real(R$)</caption>
 		<colgroup>
 				<col id="Mes">
@@ -88,7 +103,8 @@ require_once 'models/tes/histFinMembro.php';
 				$totSubTotal = $totDizimo+$totOfertaExtra+$totOfertaCultos;
 				$totOp = $totSubTotal +$totSenhoras + $totMocidade +$totInfantil+$totEnsino;
 				$totGeral = $totOp+$totOfertaCampanha+$totMissoes;
-				echo '<td>Acumulado&nbsp;at&eacute:&nbsp'.date('d/m/Y').'</td><td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
+				echo '<td>Acumulado&nbsp;at&eacute:&nbsp'.date('d/m/Y').'</td>
+					<td id="moeda">'.number_format($totDizimo,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaExtra,2,',','.').'</td>
 					<td id="moeda">'.number_format($totOfertaCultos,2,',','.').'</td>
 					<td id="moeda">'.number_format($totSubTotal,2,',','.').'</td>';

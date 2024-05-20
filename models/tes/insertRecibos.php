@@ -93,7 +93,7 @@ if ($gerarPgto) {
 	//echo("<h1>$debitoContas - $debito</h1>");
 	//echo("<h1> $creditoContas - $credito</h1>");
 	$dt = br_data($data,"Data do recibo invalida: $data");
-	$value  = "'','$cad_igreja','$rec_tipo','$recebeu','$valor_us','$debito','$credito',";
+	$value  = "null,'$cad_igreja','$rec_tipo','$recebeu','$valor_us','$debito','$credito',";
 	$value .= "'$lancamento','$referente','$dt','$hist'";
 	$dados = new insert ($value,"tes_recibo");
 	$dados->inserir();

@@ -1,6 +1,8 @@
 <?php
 require("config.php");
 require("./lang/lang.admin." . LANGUAGE_CODE . ".php");
+error_reporting(E_ALL);
+ini_set('display_errors', 'off');
 
 mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
 mysql_select_db(DB_NAME) or die(mysql_error());

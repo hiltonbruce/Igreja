@@ -37,7 +37,7 @@ class tes_ativaCargo {
 
 		//Insert o membro no cargo
 		$sth = $db->prepare('INSERT INTO  cargoigreja VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-		$data = array( '',$this->descricao,'0','1', $this->igreja, $rol, $nome, $this->hierarquia, $valor, $diapgto, $fonte,$codDespesa, $hist, date('Y-m-d H:i:s'));
+		$data = array( null,$this->descricao,'0','1', $this->igreja, $rol, $nome, $this->hierarquia, $valor, $diapgto, $fonte,$codDespesa, $hist, date('Y-m-d H:i:s'));
 		$db->execute($sth, $data);// Always check that result is not an error
 		if (PEAR::isError($res)) {
 			die($res->getMessage());

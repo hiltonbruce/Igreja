@@ -11,7 +11,7 @@ class agenda {
 		$ind = 0;
 		while($this->dados = mysql_fetch_array($this->agenda))
 		{
-			$mud_acent = strtoupper(strtr($this->dados["nome"], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+			$mud_acent = strtoupper(strtr($this->dados["nome"], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 			$todos[$ind++] = $mud_acent;
 		}
 		return $todos ;
@@ -45,7 +45,7 @@ class agenda {
 				//adiciona campo vencimento na confirmaÃ§Ã£o de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
 				//Acrescentar busca por igreja, motivo, fonecedor
 				for ($i = 1; $i <= $mesvenc; $i++) {
-					$value	 = sprintf("'','%s','%s','%s','%s','','%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
+					$value	 = sprintf("null,'%s','%s','%s','%s',null,'%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
 					$value 	.=',"'. $id['valor'].'","","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
 					$value	.='","'.$id['resppgto'].'","","","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro automÃ¡tico"';
 					$agendamento = new insert ("$value","agenda");
@@ -138,10 +138,10 @@ class agenda {
 			case 2:
 				$idLanc = ($coluna_fix['idlanc']>0) ? '(Reg. '.$coluna_fix['idlanc'].') ' : $semLanc ;
 				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ';
-				$evento .= 'alt="D&iacute;­vida Paga! Obrigado."></span>'.$idLanc;
+				$evento .= 'alt="D&iacute;ï¿½vida Paga! Obrigado."></span>'.$idLanc;
 				$status = $evento.' Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
 				$status .= ' - '.$coluna_fix['resppgto'];
-				$titulo = 'D&iacute;­vida Paga! Obrigado.';
+				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado.';
 				break;
 			case 3:
 				$status = 'Quitado';
@@ -151,14 +151,14 @@ class agenda {
 				if (date("Y-m-d")==$coluna_fix['vencimento']) {
 					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
 					$status .= ' aria-hidden="true" ></span>Pgto Hoje!';
-					$titulo = 'D&iacute;­vida n&atilde;o Paga!';
+					$titulo = 'D&iacute;ï¿½vida n&atilde;o Paga!';
 				}elseif (date("Y-m-d")>$coluna_fix['vencimento']){
 					$status .= '<span class="glyphicon glyphicon-remove-sign text-danger"';
 					$status .= ' aria-hidden="true" ></span>Vencida!';
-					$titulo = 'D&iacute;­vida Vencida!';
+					$titulo = 'D&iacute;ï¿½vida Vencida!';
 				}else {
 					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
-					$status .= ' aria-hidden="true" ></span>Falta€ Pagar';
+					$status .= ' aria-hidden="true" ></span>Faltaï¿½ Pagar';
 					$titulo = 'D&iacute;vida a Pagar!';
 				}
 				break;
@@ -334,7 +334,7 @@ class agenda {
 			if ($periodo_dados['status']=='2') {//Marca os jÃ¡ pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ></span> '.$idLanc;
-				$titulo = 'D&iacute;­vida Paga! Obrigado.';
+				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado.';
 			}elseif ($periodo_dados['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -424,7 +424,7 @@ class agenda {
 				$idLanc = ($contas['idlanc']>0) ? '(Reg. '.$contas['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
-				$titulo = 'D&iacute;­vida Paga! Obrigado.';
+				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado.';
 			}elseif ($contas['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -432,7 +432,7 @@ class agenda {
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
 				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'D&iacute;­vida vencida!';
+				$titulo = 'D&iacute;ï¿½vida vencida!';
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -485,7 +485,7 @@ class agenda {
 				$idLanc = ($contas['idlanc']>0) ? '(Reg. '.$contas['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
-				$titulo = 'D&acute;­vida Paga! Obrigado. Motivo:'.$contas['motivo'];
+				$titulo = 'D&acute;ï¿½vida Paga! Obrigado. Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -493,7 +493,7 @@ class agenda {
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
 				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'D&iacute;­vida vencida! Motivo:'.$contas['motivo'];
+				$titulo = 'D&iacute;ï¿½vida vencida! Motivo:'.$contas['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -550,7 +550,7 @@ class agenda {
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
-				$titulo = 'D&iacute;­vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -558,7 +558,7 @@ class agenda {
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
 				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'D&iacute;­vida vencida! Motivo: '.$periodo_dados['motivo'];
+				$titulo = 'D&iacute;ï¿½vida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];

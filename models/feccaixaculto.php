@@ -190,13 +190,13 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			$ofetdiz->UpdateID();
 		}
 	//Lança o histórico do lançamento
-	$InsertHist = sprintf("'','%s','%s','%s'",$ultimolanc,$referente,$roligreja);
+	$InsertHist = sprintf("null,'%s','%s','%s'",$ultimolanc,$referente,$roligreja);
 	$lanchist = new incluir($InsertHist, 'lanchist');
 	$lanchist->inserir();
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
 	//inserir o histórico do lançamento das provisões na tabela lanchist
 	//Lança o histórico do lançamento das provisões
-	$HistProv = sprintf("'','%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
+	$HistProv = sprintf("null,'%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');
 	$lanchist->inserir();
 	$dtLanc = new DateTime (br_data($_POST['data']));

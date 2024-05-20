@@ -53,16 +53,20 @@
 			</td>
 			<td>
 				<?php
-				if (!empty($_GET['ano'])) {
-					$dadoLink = 'tesouraria/receita.php?ano='.intval($_GET['ano']).'&fin=11&rec=18'.$mesLink;
-					?>
-					<p>&nbsp;</p>
-					<a href='<?php echo $dadoLink;?>' target="_blank">
-						<button class="btn btn-primary" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-							Imprimir</button></a>
-							<?php
-						}
+				//	if (!empty($_GET['ano'])) {
+				//		$dadoLink = 'tesouraria/receita.php?ano='.intval($_GET['ano']).'&fin=11&rec=18'.$mesLink;
+				?>
+					<!-- <p>&nbsp;</p> -->
+					<!-- <a href=' -->
+						<?php 
+						// echo $dadoLink;
 						?>
+						<!-- ' target="_blank"> -->
+						<!-- <button class="btn btn-primary" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+						Imprimir</button></a> -->
+				<?php
+					// }
+				?>
 			</td>
 		</tr>
 	</table>

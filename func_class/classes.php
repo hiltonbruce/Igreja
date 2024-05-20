@@ -230,11 +230,11 @@ class DBRecord {
 	if (empty($campo)){$campo="rol";}
 	$res = $db->query( "SELECT * from $table WHERE $campo=?", array( $id ) );
 	$res->fetchInto( $row, DB_FETCHMODE_ASSOC );
+	// var_dump($res );
 	$this->{'h'} = $row;
 	$this->{'table'} = $table;
 	$this->{'id'} = $id;
 	$this->campo = $campo;
-	
   }
 
   public function __call( $method, $args ){
@@ -348,6 +348,7 @@ class DBRecord {
 	//echo "$sql";
   $sth = $db->prepare( $sql );
   //echo "$sth";
+//   echo var_dump($values);
 	$db->execute( $sth, $values );
   }
   public function UpdateID ()
@@ -428,7 +429,17 @@ class insert {
 	}
 
 	public function inserir() {
+		// var_dump($this->getCampos());
+		// echo'<br /><br />';
+		// var_dump($this->getTabela());
+		// echo'<br /><br />';
+		// echo "INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")";
+		// echo'<br /><br />';
+		// exit;
+		// print_r($this->getCampos());
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
+		// echo $inserir;
+		// exit;
 		if ($inserir){
 				$idCad = mysql_insert_id();
 				//echo "<script> alert('Inclusï¿½o ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
@@ -454,22 +465,24 @@ class editar_form {
 	public $link_form;
 	public $ind;
 
-	function __construct ($vlr_get="",$valor="",$acao="",$link_form="") {
+	function __construct ($vlr_get="",$valor="",$acao="",$link_form="") 
+	{
 		$this->campo 		= $_GET["campo"];       //Nome do campo para get
 		$this->vlr_get		= $vlr_get;             //Valor relacionado ao get
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
 		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para ediï¿½ï¿½o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
-			if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" ||
-					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
-					|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
-					$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="data"
-					|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao"
-					|| $this->campo=="dt_apresent") {
-						$this->classCompl = 'dataclass';
-					}else {
-						$this->classCompl = '';
-					}
+		if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" ||
+			$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
+			|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
+			$this->campo=="evangelista" || $this->campo=="pastor" || $this->campo=="missionario" || $this->campo=="data"
+			|| $this->campo=="dat_aclam" || $this->campo=="dt_mudanca_denominacao"
+			|| $this->campo=="dt_apresent") 
+				{
+					$this->classCompl = 'dataclass';
+				}else {
+					$this->classCompl = '';
+				}
 	}
 
 	public function getEditar($placeholder,$fJScript,$ident){
@@ -704,13 +717,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.</h2>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Não há nenhum bairro cadastrado nesta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado nesta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -747,13 +760,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou o estado de batismo! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou o estado de batismo! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.</h2>";
-		echo "<script> alert('Você não informou a cidade ou falta atualizar! Faça-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.</h2>";
+		echo "<script> alert('Vocï¿½ nï¿½o informou a cidade ou falta atualizar! Faï¿½a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('Não há nenhum bairro cadastrado para esta cidade! Recomendamos que você faça-o antes de continuar.');</script>";
+		echo "<script> alert('Nï¿½o hï¿½ nenhum bairro cadastrado para esta cidade! Recomendamos que vocï¿½ faï¿½a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -787,7 +800,7 @@ class List_sele {
 	  	}
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -814,7 +827,7 @@ class List_sele {
 	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";

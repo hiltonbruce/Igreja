@@ -123,10 +123,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	$cidade = ($_POST["pais"]<>"") ?  $pais : $_POST["cidade"];
 	if ($_POST["obs"]=="nada"){$_POST["obs"]="";}
 	$log = time()."@Inserido por:{$_SESSION["valid_user"]}";
-	$value = "'','{$_POST["tipo"]}','{$bsc_rol}','$cidade','{$_POST["igreja"]}','{$_POST["obs"]}',NOW(),'$log'";
+	$value = "null,'{$_POST["tipo"]}','{$bsc_rol}','$cidade','{$_POST["igreja"]}','{$_POST["obs"]}',NOW(),'$log'";
 	$carta = new insert ("$value","carta");
 		if ($_POST["tipo"]=="2") {
-			$transf = "'','{$bsc_rol}','6','Carta de Mudança',NOW(),'','$log',NOW()";
+			$transf = "null,'{$bsc_rol}','6','Carta de Mudança',NOW(),null,'$log',NOW()";
 			$registro = new insert ("$transf","disciplina");
 		}
 	
@@ -138,7 +138,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 		//Insere o histórico para registro da transferência
 		$motivo = 'Transferido para igreja: '.$_POST["igreja"].' conf. carta de mudança.';
 		$hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
-		$value = "'','{$bsc_rol}','6','$motivo',NOW(),'','$hist',NOW()";
+		$value = "null,'{$bsc_rol}','6','$motivo',NOW(),null,'$hist',NOW()";
 		$disciplina = new insert ("$value","disciplina");
 		$disciplina -> inserir();
 	}

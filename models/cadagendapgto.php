@@ -12,7 +12,7 @@ if ($credor=='' && $_POST['rol']>0) {
 	$credor=$_POST['rol'].'r';
 }elseif (strlen($_POST['nome'])>'5' && strlen($_POST['cnpj'])=='18') {
 	//Cadastrar fornecedor
-	$dadosEmpresa  = '"","'.$_POST['cnpj'].'","'.$_POST['nome'].'","'.$_POST['alias'].'",';
+	$dadosEmpresa  = 'null,"'.$_POST['cnpj'].'","'.$_POST['nome'].'","'.$_POST['alias'].'",';
 	$dadosEmpresa .= '"'.$_POST['desp1'].','.$_POST['desp2'].','.$_POST['desp3'].'",';
 	$dadosEmpresa .= '"'.$_POST['telefone'].'","'.$_POST['celular'].'","'.$_POST['estado'].'",';
 	$dadosEmpresa .= '"'.$_POST['bairro'].'","'.$_POST['cidade'].'","'.$_POST['uf'].'",';
@@ -84,7 +84,7 @@ if ($credor!='' && $datven && $numcredor) {
 		$motivo 	= $_POST['motivo0'];
 		$vencimento	= br_data($_POST['vencimento0'], 'Vencimento');
 
-		$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s','','%s','%s','','','','%s'",
+		$dadosagenda = sprintf("null,'%s','%s','%s','%s','%s','%s','%s','%s',null,'%s','%s',null,null,null,'%s'",
 			$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
 		echo $dadosagenda.' *** <br />';
 		$agenda= new insert ($dadosagenda,"agenda");
@@ -98,7 +98,7 @@ if ($credor!='' && $datven && $numcredor) {
 			$motivo 	= $_POST['motivo'.$j2];
 			$vencimento	= br_data($_POST['vencimento'.$j2], 'Vencimento');
 
-			$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s','%s','','%s','%s','','','','%s'",$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
+			$dadosagenda = sprintf("null,'%s','%s','%s','%s','%s','%s','%s','%s',null,'%s','%s',null,null,null,'%s'",$idfatura,$credor,$debitar,$creditar,$lanc,$frequencia,$igreja,$valor,$motivo,$vencimento,$hist);
 			echo $dadosagenda.' *** <br />';
 			$agenda= new insert ($dadosagenda,"agenda");
 

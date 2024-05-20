@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'off');
+
 require("./agendaSec/config.php");
 require("./agendaSec/lang/lang." . LANGUAGE_CODE . ".php");
 require("./agendaSec/functions.php");

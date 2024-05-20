@@ -73,7 +73,7 @@ for ($i = 0; $i < 13; $i++) {
 		$congcontrib = ($congcontrib=='') ? $_POST["igreja"]:$congcontrib;
 
 		//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-		$value  = "'','',$conta,'".$congregacao."','{$_POST["rol"]}','$nome','$valor',";
+		$value  = "null,null,$conta,'".$congregacao."','{$_POST["rol"]}','$nome','$valor',";
 		$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 		$value .= "'".$confirma."','{$_POST["obs"]}',NOW(),'$hist'";
 		$dados = new insert ($value,"dizimooferta");

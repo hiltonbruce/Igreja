@@ -9,7 +9,7 @@
 		if ($_GET['rec']!='13') {
 			echo '<a href="'.$linkImpressao.'&ano='.$ano.'" ';
 			echo 'target="_black" title="Imprimir demonstrativo">';
-			echo '<button class="btn btn-default glyphicon glyphicon-print"> </button></a>&nbsp;';
+			echo '<button class="btn btn-success "> <i class="glyphicon glyphicon-print"></i> Imprimir </button> </a>&nbsp;';
 			$imprimir = '';
 		}else {
 			$imprimir = '<script type="text/javascript">window.print();</script>';

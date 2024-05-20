@@ -1,8 +1,21 @@
 *{ margin: 0; padding: 0; }
 
-body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; color: #505367; background-color: #fff;font-family:"Times New Roman", Times, serif;  }
+body { margin: 0; 
+	padding: 0; 
+	font: 85% tahoma, sans-serif; 
+	text-align: center; 
+	color: #505367; 
+	background-color: #fff;
+	font-family:"Times New Roman", Times, serif;  
+}
 
-	#container { margin: 1em auto; width: 800px; text-align: left; background: url(../img/log_70anos.jpg) no-repeat 50%; }
+	#container { 
+		margin: 1em auto; 
+		width: 800px; 
+		text-align: left; 
+		background: url(../img/logo.jpg) no-repeat 50%;
+		background-position: bottom; 
+	}
 
 	#header { width: 900px; height: 100px; margin: 0; padding: 0 20px 0 120px;
 		 text-align:center; font-family:"Times New Roman", Times, serif;}
@@ -15,7 +28,7 @@ body { margin: 0; padding: 0; font: 85% tahoma, sans-serif; text-align: center; 
 #footer {
 	color: #000000;
 	font-size: 1.0em;
-	height: 50px;
+	/* height: 20px; */
 	padding-top: 5px;
 	background-repeat: no-repeat;
 	background-position: top;
@@ -40,7 +53,7 @@ a:link:after, a:visited:after {
 
 #added-div1 {
 	position:relative;
-	width:800px;
+	width:100%;
 	z-index:1;
 	height: auto;
 	float: left;
@@ -69,12 +82,12 @@ a:link:after, a:visited:after {
 }
 
 #pastor {
-	float:left;
-	width:400px;
+	/* float:left; */
+	/* width:400px; */
 	padding: 0 0 0 50px;
 	text-align:center;
 	font-size: 70%;
-	top: -20px;
+	top: -30px;
 	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 }
 
@@ -91,9 +104,10 @@ a:link:after, a:visited:after {
 #vencimento {
 	float:left;
 	width:800px;
-	font-size: 150%;
-	text-align:right;
+	font-size: 200%;
+	text-align:center;
 	color:#FF0000;
+	padding-bottom: 5px;
 }
 
 .mensagem {
@@ -150,14 +164,19 @@ legend {
 
 #foto {
 	float:right;
-	left:207px;
+	/* left:207px; */
 	top:174px;
 	width:86px;
 	height:120px;
 	z-index:3;
+	padding: 0 10px;
 }
 #Tipo {
 	float:left;
-	width:700px;
+	width:650px;
 	padding: 20px 5px 0;
+}
+
+h4 small {
+    color: #4d4a4a !important;
 }

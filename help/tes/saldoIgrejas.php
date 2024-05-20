@@ -46,17 +46,17 @@
 	$colgroup = '<col id="igreja">';
 	$tabThead = '<tr><th scope="col">Igrejas</th>';
 	//rodapï¿½ da tabela
-	$footCong  = '<tr id="subtotal"><td>Totais&nbsp;Congregaï¿½ï¿½es</td>';
+	$footCong  = '<tr id="subtotal"><td>Totais&nbsp;Congregações</td>';
 	$tabFoot   = '<tr id="total"><td>Totais</td>';
 
 	foreach(arrayMeses() as $mes => $meses) {
 		$colgroup .= '<col id="'.substr($meses, 0, 3).'">';
-		$tabThead .= '<th scope="col" class="centro">'.substr($meses, 0, 3).'</th>';
+		$tabThead .= '<th scope="col" class="text-center">'.substr($meses, 0, 3).'</th>';
 		$footCong .= '<td id="moeda">'.number_format($totalMes[(int)$mes]-$totSedeMes[(int)$mes],2,',','.').'</td>';
 		$tabFoot  .= '<td id="moeda">'.number_format($totalMes[(int)$mes],2,',','.').'</td>';
 	}
 	$colgroup .= '<col id="Total">';
-	$tabThead .= '<th scope="col"  class="centro">Total</th></tr>';
+	$tabThead .= '<th scope="col"  class="text-center">Total</th></tr>';
 	$footCong .= '<td id="moeda">'.number_format($totalGeral-$totSede,2,',','.').'</td></tr>';
 	$tabFoot  .= '<td id="moeda">'.number_format($totalGeral,2,',','.').'</td></tr>';
 	$tabFoot  = $footCong.$tabFoot ;

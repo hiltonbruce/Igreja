@@ -48,6 +48,9 @@
       <td><strong>Pastor em:</strong>
         <h6><?PHP echo $arr_dad["pastor"];?></h6>
       </td>
+      <td><strong>Mission&aacute;rio em:</strong>
+        <h6><?PHP echo $arr_dad["missinario"];?></h6>
+      </td>
       <td><strong>Data:</strong>
         <h6><?PHP echo $arr_dad["data"];?></h6>
       </td>

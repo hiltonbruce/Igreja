@@ -1,5 +1,10 @@
 <?PHP
 	session_start();
+  
+  error_reporting(E_ALL);
+	ini_set( 'default_charset', 'ISO-8859-1' ); // 'UTF-8'
+	ini_set('display_errors', 'off');
+
 	require_once ("../func_class/classes.php");
 	require_once ("../func_class/funcoes.php");
 	//conectar ();

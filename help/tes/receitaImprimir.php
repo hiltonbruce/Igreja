@@ -8,7 +8,6 @@ switch ($rec) {
 		//imprimir entradas de todas as congregaï¿½ï¿½es - mensal
 		require_once '../help/tes/saldoIgrejas.php';
 		$nomeArquivo='../views/tesouraria/saldoIgrejas.php';
-		require_once '../views/modeloPrint.php';
 		break;
 	case '14':
 		//imprimir
@@ -30,7 +29,7 @@ switch ($rec) {
 	case '16':
 		//Relatorio COMADEP
 		$idIgreja = intval($_GET['igreja']);
-		require_once '../help/tes/relatorioComadep.php';//Cabeï¿½alho e informaï¿½ï¿½es da consulta
+		require_once '../help/tes/relatorioComadep.php';//Cabeçalho e informaï¿½ï¿½es da consulta
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso ($d.'/'.$m.'/'.$a);
 		require_once '../models/tes/relComadep.php';
@@ -46,7 +45,7 @@ switch ($rec) {
 		$assinatura .= '1&ordm; Tesoureiro Geral: '.$tesArray['22']['1']['1']['nome'];
 		$assinatura .= '</div></div></h6>';
 		$titTabela = $congRelatorio.' &bull; Fluxo das Contas - '.$dtRelatorio;
-		require_once '../views/modeloPrint.php';
+		// require_once '../views/modeloPrint.php';
 		break;
 	case '17':
 		//Relatorio COMADEP
@@ -74,16 +73,19 @@ switch ($rec) {
 		$dContas = new tes_contas();
 		$descCta = $dContas->ativosArray();
 		$colUm = '';//Primeira coluna do cabecalho
-		require_once '../views/tesouraria/cabTabFin.php';//Cabeï¿½alho da tabela
+		// require_once '../views/modeloPrint.php';
 		if (!empty($_GET['mes']) && empty($_GET['igreja'])) {
+			require_once '../views/tesouraria/cabTabFinPrint.php';//Cabeï¿½alho da tabela
 			//Lista financeira de todas as igreja com mï¿½s especï¿½fico
-			require_once '../views/tesouraria/saldoMesFin.php';
+			$nomeArquivo = '../views/tesouraria/saldoMesFinPrint.php';
 			$tabThead = $nivelSem;
 			//require_once 'views/tesouraria/saldoIgrejas.php';
 		} else {
 			//Lista financeira da igreja com todos os  meses
+		require_once '../views/tesouraria/cabTabFin.php';//Cabeï¿½alho da tabela
 			$colUm = 'Per&iacute;odo';//Primeira coluna do cabecalho
-			require_once '../views/tesouraria/saldoMembros.php';
+			// echo "<h1>$colUm</h1>";
+			$nomeArquivo =  '../views/tesouraria/saldoMembrosPrint.php';
 		}
 		break;
 	default:

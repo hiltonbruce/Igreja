@@ -132,8 +132,8 @@ $totElement = count($results);
 				}
 
 					if ($chave=='nome') {
-						$json .= '"name": "'.$dados.'",';
-						$dados = strtoupper(strtr( $dados, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+						$json .= '"name": "'.utf8_decode($dados).'",';
+						$dados = strtoupper(strtr( utf8_decode($dados), 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 						$estado = $dados;
 						require ('../help/destaqueNome.php');
 					}

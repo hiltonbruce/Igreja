@@ -19,6 +19,9 @@
 	$ecles 			= new DBRecord ("eclesiastico",$_POST['bsc_rol'],"rol");
 	$profissional	= new DBRecord ("profissional",$_POST['bsc_rol'],"rol");
 	$igreja 		= new DBRecord ("igreja","1","rol");
+	$cidade = new cidade ();
+	$cidCad = $cidade->arrayCidade();
+	
     if (is_numeric($membro->naturalidade())) {
         $cidadeNatal = new DBRecord ("cidade",$membro->naturalidade(),"id");
         $cidNatal =  $cidadeNatal->nome().' - '.$cidadeNatal->coduf();
@@ -74,63 +77,97 @@
 </head>
 <body>
 <div id="container">
-	<table>
+	<table style="width: 100%;">
 		<tr>
-			<td><img src="../img/logoCarta.png" alt="Brasï¿½o Assembleia de Deus" width='387' height='125' ></td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td>
+				<br>
+				<img src="../img/logoCarta.png" alt="Brasão Assembleia de Deus" height='125' >
 			</td>
+			<td class="text-right" style="vertical-align: text-top;" >
+				<h4><?php echo NOMEIGR;?></h4>
+				<h5>
+					<?php
+						echo $igreja->rua();
+						echo ', N&ordm; '.$igreja->numero();
+						echo '-'.$cidCad[$igreja->cidade()]['cidade'];
+						echo '-'.$cidCad[$igreja->cidade()]['uf'].'<br/>CEP: '.$igreja->cep().'';
+						if ($igreja->fone() != null) {
+							echo ' &bull; Fone: '.$igreja->fone().'<br/>';
+						}else{
+							echo '<br/>';
+						}
+						echo 'CNPJ: '.$igreja->cnpj();
+						echo '<br/>Email: '.$igreja->email();
+					?>					
+				</h5>
+		</td>
 		</tr>
 	</table>
-  <div class='row'>
-  <div class="col-md-4"></div>
-  <div class="col-md-8 text-left">
-   	</div>
-  </div>
-<div id="mainnav">
+  <!-- <div class='row'>
+	<div class="col-md-5"><img src="../img/logoCarta.png" alt="Brasï¿½o Assembleia de Deus" width='387' height='125' ></div>
+	<div class="col-md-5 text-right">
+		<div class="row">
+			<div class="col-md-12">
+			<h4>Templo SEDE</h4>
+				<h5>
+					<?php
+						// echo $igreja->rua();
+						// echo ', N&ordm;'.$igreja->numero();
+						// echo ' - '.$cidCad[$igreja->cidade()]['cidade'];
+						// echo ' - '.$cidCad[$igreja->cidade()]['uf'];
+						// echo '<br/>Fone:'.$igreja->fone();
+						// echo '<br/>CEP:'.$igreja->cep();
+						// echo ' / CNPJ: '.$igreja->cnpj();
+						// echo '<br/>Email: '.$igreja->email();
+					?>					
+				</h5>
+			</div>
+		</div>
+	</div>
+  </div> -->
+	<div id="mainnav">
     <div id="foto">
   	<?PHP print mostra_foto($rol);?></div>
 	<div id="Tipo">
-	  <h2 class="text-primary"><u><strong>
-	Carta <?PHP //Tipo de carta - Recomendaï¿½ï¿½o ou Mudanï¿½a
-	print carta ("{$carta->tipo()}");
-	$destino = (int)$carta->destino();
-	 if ((int)$carta->destino() != 0) {
-			$cidade = new DBRecord ("cidade",$carta->destino(),"id");
-			$destino=$cidade->nome()." - ".$cidade->coduf();
-		}else {
-		 	$destino = $carta->destino();
-		}
+	  <h2 class="text-primary">
+	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  <u>
+		  <strong>
+		  Carta <?PHP //Tipo de carta - Recomendaï¿½ï¿½o ou Mudanï¿½a
+			print carta ("{$carta->tipo()}");
+			$destino = (int)$carta->destino();
+			if ((int)$carta->destino() != 0) {
+					$cidade = new DBRecord ("cidade",$carta->destino(),"id");
+					$destino=$cidade->nome()." - ".$cidade->coduf();
+				}else {
+					$destino = $carta->destino();
+				}
 
-	if ($carta->tipo()!=="3") {
-		$intr .= '<div class="panel panel-default text-center">';
-		$intr .= '	 <div class="panel-body">';
-		$intr .= '	    DESTINO: '.$carta->igreja().', em '.$destino;
-		$intr .= '	</div>';
-		$intr .= '</div>';
-	}else {
-		$intr = "";
-	}
-  ?></strong></u></h2>
+			if ($carta->tipo()!=="3") {
+				$intr .= '<div class="panel-default text-center">';
+				$intr .= '	 <div class="panel-body">';
+				$intr .= '	    DESTINO: '.$carta->igreja().', em '.$destino;
+				$intr .= '	</div>';
+				$intr .= '</div>';
+			}else {
+				$intr = "";
+			}
+			?></strong>
+		</u>
+	</h2>
   </div>
   </div>
-	<div id="content">
     <div id="added-div1">
-			    <?PHP echo $intr;?>
+		<?PHP echo $intr;?>
     	<p>Sauda&ccedil;&otilde;es no Senhor:</p>
 
-     	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apresentamos a amada Igreja, <strong><?PHP
-      	if ($membro->sexo()=="M"){
-      			print " o irm&atilde;o: ";}
-      		else {
-      			print " a irm&atilde; ";} ?>
-                </strong></p>
-    <table class='table table-bordered'>
+     	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apresentamos:</p>
+    <table class='table table-bordered' >
 		<tbody>
 			<tr>
 				<td colspan='3'><h4><small>Nome:</small><br><?php print strtoupper( toUpper($membro->nome())); ?></h4></td>
-				<td><h4><small>Rol</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
-				<td><h4><small>Est. Civil</small><br><?php print $est_civil->estado_civil(); ?></h4></td>
+				<td><h4><small>Rol:</small><br><?php printf ("%'03u",$_POST['bsc_rol']); ?></h4></td>
+				<td><h4><small>Est. Civil:</small><br><?php print $est_civil->estado_civil(); ?></h4></td>
 				<td><h4><small>Func. Eclesiast&iacute;ca:</small><br><?php print cargo($_POST['bsc_rol'])['0']; ?></h4></td>
 			</tr>
 			<tr>
@@ -138,16 +175,13 @@
 				<td><h4><small>CPF:</small><br><?php echo $cpf; ?></h4></td>
 				<td><h4><small>Data de Nasc.:</small><br><?php print conv_valor_br($membro->datanasc()); ?></h4></td>
 				<td><h4><small>Naturalidade:</small><br><?php print $cidNatal; ?></h4></td>
-				<td><h4><small>Batismo</small><br><?php print conv_valor_br($ecles->batismo_em_aguas()); ?></h4></td>
+				<td><h4><small>Batismo:</small><br><?php print conv_valor_br($ecles->batismo_em_aguas()); ?></h4></td>
 				<td><h4><small>Membro Desde:</small><br><?php print conv_valor_br($ecles->dat_aclam()); ?></h4></td>
 			</tr>
 		</tbody>
 	</table>
-      	<p class='text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E  serve ao Senhor nesta igreja, e por se achar em comunh&atilde;o, &eacute; que  recomendamos para que <?PHP
-      	if ($membro->sexo()=="M"){
-      	 print "o";}
-      	 else {
-      	 	print "a";} ?> recebais no Senhor como usam fazer os Santos.
+      	<p class='text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  Que serve ao Senhor nesta igreja, e por se achar em comunh&atilde;o, &eacute; que recomendamos.
       	 <p>
 		<?php
 			if ($carta->obs()!='') {
@@ -168,27 +202,40 @@
     </div>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
-	  <div id="pastor"><?PHP echo strtoupper(toUpper($igreja->pastor()));?><br />
-      <?php echo $cargosPR->descricao();?>
+	  <div id="pastor"> 
+	  <table  style="width: 100%;">
+			<tbody>
+			<tr>
+				<td>
+					<!-- <img src="../imgAssin/assinPastor.png" width="" height="">  -->
+					______________________________________<br />
+					<?PHP echo $igreja->pastor();?><br />
+					<?php echo $cargosPR->descricao();?>
+				</td>
+				<td>&nbsp;</td>
+				<td>
+					<!-- <img src="../imgAssin/2242.png" width="" height=""> -->
+					______________________________________<br />
+					<?PHP
+					$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
+						echo  $cargoSec.$secretario;
+					?><br />
+					<?php echo $_POST["secretario"].$cargo;?> 
+				</td>
+			</tr>
+			</tbody>
+	  </table>
+	</div>
 	    </div>
-	  <div id="secretario">
-			<?PHP
-			$cargoSec = ($secretario!='') ? cargo ($sec1->rol())['1'].' ' : '' ;
-				echo  $cargoSec.strtoupper($secretario);
-			?>
-			<br />
-      <?php echo $_POST["secretario"].$cargo;?> </div>
-<br>
 
-    </div>
-	<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
-	  <div id="vencimento">Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
+	  <div id="vencimento"><br />Esta carta deve ser apresentada a igreja destinat&aacute;ria at&eacute;:
         <?PHP
 		echo data_venc(conv_valor_br($dataCarta));
 		?> (validade)
 	  </div>
     <div id="footer">
-        <h6><span class="text-center"><br />
+        <h6><span class="text-center">
+		<div class='mensagem'>Alcan&ccedil;ando Vidas para Cristo</div>
      
         <h5><p class="text-right"><small>Designed by<a rel="nofollow" target="_blank"
         href="mailton: hiltonbruce@gmail.com">Joseilton Costa Bruce</a></small></p></h5>

@@ -15,7 +15,7 @@ $result = mysql_query($query) or die (mysql_error());
 	{
 		//$rec = new UPDatesist($_POST["tabela"], $id,$_POST["campo"]);
 
-		$rec = new DBRecord ("{$_POST["tabela"]}",$id,"rol"); //Aqui será selecionado a informação do campo
+		$rec = new DBRecord ("{$_POST["tabela"]}",$id,"rol"); //Aqui ser? selecionado a informa??o do campo
 		print "<br \>Foi atualizado de:<h3>{$rec->$_POST["campo"]()}</h3>\n";
 
 		switch ($_POST["campo"]) {
@@ -42,7 +42,7 @@ $result = mysql_query($query) or die (mysql_error());
 				} else {
 					$atualizador = ltrim($_POST["pastor"]);
 				}
-				#Atualiza os dados na tabela de histórico de funções
+				#Atualiza os dados na tabela de hist?rico de fun??es
 				$atualHist  = 'UPDATE cargohist SET datafim="'.date('Y-m-d').'", ';
 				$atualHist .= 'cadfim= "'.$hist.'" ';
 				$atualHist .= 'WHERE descricao = "1" AND igreja="'.$id.'" ';
@@ -52,8 +52,8 @@ $result = mysql_query($query) or die (mysql_error());
 				    echo 'Falha na autalização: ' . mysql_error();
 				    exit;
 				}
-				#Cadastra os dados na tabela de histórico de funções
-				$dt = br_data ($_POST["data"],'Data de início na função!');
+				#Cadastra os dados na tabela de hist?rico de fun??es
+				$dt = br_data ($_POST["data"],'Data de in?cio na fun??o!');
 				if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
 					$value  = '"","1","'.$_POST["nome"].'","'.$id.'","'.$_POST["pastor"].'"';
 					$value .= ',"1","'.$dt.'","","'.$hist.'",""';
@@ -76,8 +76,10 @@ $result = mysql_query($query) or die (mysql_error());
 		if ($_POST["campo"]=='secretario1' || $_POST["campo"]=='secretario2') {
 			$atualizador = trim($_POST["pastor"]);
 		}
-		$rec->$_POST["campo"] = $atualizador; //Aqui é atribuido a esta variável um valor para UpDate
-		$rec->Update(); //É feita a chamada do método q realiza a atualização no Banco
+		$rec->$_POST["campo"] = $atualizador; //Aqui ? atribuido a esta vari?vel um valor para UpDate
+
+		// echo $atualizador.' ***********';
+		$rec->Update(); //? feita a chamada do m?todo q realiza a atualiza??o no Banco
 
 		print "Para:<h3> $atualizador</h3>";
 		echo mysql_error();

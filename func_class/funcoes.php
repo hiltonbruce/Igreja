@@ -125,14 +125,23 @@ function cargo ($rol) {
 		$opcao = $_SESSION["rol"];
 	}
 	$rec = new DBRecord ("eclesiastico",$opcao,"rol");
+	$membro = new DBRecord ("membro",$opcao,"rol");
+
 		if ($rec->pastor()>"0000-00-00") {
-			$cargo = array( 'Pastor', 'Pr','Pastora');
+			$cargo = ($membro->sexo() == 'M') ? array( 'Pastor', 'Pr','Pastor') : array( 'Pastora', 'Pra','Pastora') ;
+			// $cargo = array( 'Pastor', 'Pr','Pastora');
 		}elseif ($rec->evangelista()>"0000-00-00") {
+			// $cargo = ($membro->sexo() == 'M') ?  :  ;
 			$cargo = array( 'Evangelista', 'Ev','Evangelista');
+		}elseif ($rec->missionario()>"0000-00-00") {
+			$cargo = ($membro->sexo() == 'M') ?  array( 'Mission&aacute;rio', 'Miss','Mission&aacute;rio') : array( 'Mission&aacute;ria', 'Miss','Mission&aacute;ria');
+			// $cargo = array( 'Mission&aacute;rio', 'Miss','Mission&aacute;ria');
 		}elseif ($rec->presbitero()>"0000-00-00") {
-			$cargo = array( 'Presb&iacute;tero', 'Pb','Presb&iacute;tera');
+			$cargo = ($membro->sexo() == 'M') ?  array( 'Presb&iacute;tero', 'Presb','Presb&iacute;tero'): array( 'Presb&iacute;tera', 'Presb','Presb&iacute;tera') ;
+			// $cargo = array( 'Presb&iacute;tero', 'Presb','Presb&iacute;tera');
 		}elseif ($rec->diaconato()>"0000-00-00") {
-			$cargo = array( 'Di&aacute;cono', 'Dc','Diaconisa');
+			$cargo = ($membro->sexo() == 'M') ?  array( 'Di&aacute;cono', 'Dc','Diaacute;cono'):  array( 'Diaconisa', 'Dc','Diaconisa');
+			$cargo = array( 'Di&aacute;cono', 'Di&aacute.c','Diaconisa');
 		}elseif ($rec->auxiliar()>"0000-00-00") {
 			$cargo = array( 'Auxiliar', 'Ax', 'Auxiliar');
 		}else {
@@ -149,6 +158,8 @@ function cargo_dt ($rol) {
 			$cargo_dt = $car_dt->pastor();
 		}elseif ($car_dt->evangelista()>"0000-00-00") {
 			$cargo_dt = $car_dt->evangelista();
+		}elseif ($car_dt->missionario()>"0000-00-00") {
+			$cargo_dt = $car_dt->missionario();
 		}elseif ($car_dt->presbitero()>"0000-00-00") {
 			$cargo_dt = $car_dt->presbitero();
 		}elseif ($car_dt->diaconato()>"0000-00-00") {
@@ -157,7 +168,7 @@ function cargo_dt ($rol) {
 			$cargo_dt = $car_dt->auxiliar();
 		}elseif ($car_dt->dat_aclam()<>"0000-00-00") {
 				$cargo_dt = $car_dt->dat_aclam();
-			}
+		}
 	return $cargo_dt;
 }
 
@@ -292,7 +303,7 @@ function data_batismo($data,$link){
 function fun_igreja ($rol){
 	//retorno o nome do membro de acordo com o rol
 	$membro = new DBRecord ('membro',$rol,'rol');
-	return  $membro->nome();
+	return  utf8_decode($membro->nome());
 }
 
 function quem_entregou ($cpf){
@@ -646,7 +657,7 @@ function data_extenso ($data) {
 				break;
 		case 1: $dia_extenso="Segunda-feira";
 				break;
-		case 2: $dia_extenso="Ter&ccedil;a-feira";
+		case 2: $dia_extenso="Terça-feira";
 				break;
 		case 3: $dia_extenso="Quarta-feira";
 				break;
@@ -654,7 +665,7 @@ function data_extenso ($data) {
 				break;
 		case 5: $dia_extenso="Sexta-feira";
 				break;
-		case 6: $dia_extenso="S&aacute;bado";
+		case 6: $dia_extenso="Sábado";
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
@@ -663,7 +674,7 @@ function data_extenso ($data) {
 				break;
 		case 2: $mes_extenso="Fevereiro";
 				break;
-		case 3: $mes_extenso="Mar&ccedil;o";
+		case 3: $mes_extenso="Março";
 				break;
 		case 4: $mes_extenso="Abril";
 				break;
@@ -683,7 +694,7 @@ function data_extenso ($data) {
 				break;
 		case 12: $mes_extenso="Dezembro";
 				break;
-		default: echo $mes_extenso="M&ecirc;s incorreto";
+		default: echo $mes_extenso="Mês incorreto";
 	}//fim do case para o mï¿½s
 	return $dia_extenso.", ".$d." de ".$mes_extenso." de ".$y.".";
 }
@@ -692,7 +703,7 @@ function arrayMeses () {
 	$meses = array(
 			'01' => 'Janeiro',
 			'02' => 'Fevereiro',
-			'03' => 'Mar&ccedil;o',
+			'03' => 'Março',
 			'04' => 'Abril',
 			'05' => 'Maio',
 			'06' => 'Junho',
@@ -712,7 +723,7 @@ function arrayDia ($dia) {
 				break;
 		case 1: $dia_extenso="Segunda-feira";
 				break;
-		case 2: $dia_extenso="Ter&ccedil;a-feira";
+		case 2: $dia_extenso="Terça-feira";
 				break;
 		case 3: $dia_extenso="Quarta-feira";
 				break;
@@ -720,7 +731,7 @@ function arrayDia ($dia) {
 				break;
 		case 5: $dia_extenso="Sexta-feira";
 				break;
-		case 6: $dia_extenso="S&aacute;bado";
+		case 6: $dia_extenso="Sábado";
 				break;
 		default: echo $dia_extenso="Dia inv&aacute;lido";
 	}//fim do case para o dia
@@ -783,6 +794,7 @@ function controle ($tipo){ //O tipo ï¿½ definido como consulta, atualizaï¿½ï¿½o,
 			return exit;
 			break;
 	}
+	return true;
 }
 
 function ver_cad ($rol){
@@ -885,11 +897,12 @@ function situacao ($situacao,$rol){
 		return $estilo;
 		}
 
-function toUpper($string) {
-	//Converte para maï¿½uscula as vogais acentuadas
-    return ( strtoupper (strtr ($string, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ) ) );
-    }
 
+function toUpper($string) {
+	//Converte para maíuscula as vogais acentuadas
+    return ( strtoupper ($string) );
+	}
+	
 function extenso($valor = 0, $maiusculas = false) {
 $singular = array("centavo", "real", "mil", "milh&atilde;o", "bilh&atilde;o", "trilh&atilde;o", "quatrilh&atilde;o");
 $plural = array("centavos", "reais", "mil", "milh&otilde;es", "bilh&otilde;es", "trilh&otilde;es",
@@ -1327,17 +1340,17 @@ function titleCase($string, $delimiters = array(" ", "-", ".", "'", "O'", "Mc"),
      *   but should be converted to upper case, e.g.:
      *   king henry viii or king henry Viii should be King Henry VIII
      */
-    $string = mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
+    $string = mb_convert_case($string, MB_CASE_TITLE, "ISO-8859-1");
     foreach ($delimiters as $dlnr => $delimiter) {
         $words = explode($delimiter, $string);
         $newwords = array();
         foreach ($words as $wordnr => $word) {
-            if (in_array(mb_strtoupper($word, "UTF-8"), $exceptions)) {
+            if (in_array(mb_strtoupper($word, "ISO-8859-1"), $exceptions)) {
                 // check exceptions list for any words that should be in upper case
-                $word = mb_strtoupper($word, "UTF-8");
-            } elseif (in_array(mb_strtolower($word, "UTF-8"), $exceptions)) {
+                $word = mb_strtoupper($word, "ISO-8859-1");
+            } elseif (in_array(mb_strtolower($word, "ISO-8859-1"), $exceptions)) {
                 // check exceptions list for any words that should be in upper case
-                $word = mb_strtolower($word, "UTF-8");
+                $word = mb_strtolower($word, "ISO-8859-1");
             } elseif (!in_array($word, $exceptions)) {
                 // convert to uppercase (non-utf8 only)
                 $word = ucfirst($word);

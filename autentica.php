@@ -77,25 +77,27 @@
 	if (empty($ind)){ $ind = 0;}
 ?>
 	
-	<p>&nbsp;</p>
+	<!-- <p>&nbsp;</p> -->
 <div class="login-box-body">
 	<p class="login-box-msg">Fa&ccedil;a o login para iniciar a sess&atilde;o!</p>
 	
 	
-	<p>&nbsp;</p>
+	<!-- <p>&nbsp;</p> -->
   <form name="" method="post" action="">
       <div class="form-group has-feedback">
+		  <label for="" class="text-left">CPF</label>
 	<input name="cpf" type="text" id="cpf" autofocus="autofocus"
 	required='required' class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='CPF' >
         <span class="glyphicon glyphicon-tags form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
+		  <label for="" class="text-left">Senha</label>
 	<input name="senha" type="password" id="senha" required='required'
 	class="form-control" tabindex="<?php echo ++$ind;?>" placeholder='Senha' >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
 	
-      <p>&nbsp;</p>
+      <!-- <p>&nbsp;</p> -->
 		<div class="row">
 			<div class="col-xs-8">
 			<div class="checkbox icheck">
@@ -113,10 +115,10 @@
 	</form>
 
 
-    <div class="social-auth-links text-center">
+    <!-- <div class="social-auth-links text-center">
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> &nbsp;</a>
-      <!-- <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> &nbsp;</a> -->
-    </div>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> &nbsp;</a>
+    </div> -->
     <!-- /.social-auth-links -->
 
     <!-- <a href="#">&nbsp;</a><br> -->
