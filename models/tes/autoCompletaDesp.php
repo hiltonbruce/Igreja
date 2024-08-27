@@ -18,7 +18,6 @@ $sqllinhas .= 'AND acesso > "0" ';
 
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows($reslinhas);
-
 $sql  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0 AND acesso > "0" ';
 $sql .= 'AND tipo="D" AND nivel1="3" order by codigo limit 10';
 

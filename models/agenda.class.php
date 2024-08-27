@@ -11,7 +11,7 @@ class agenda {
 		$ind = 0;
 		while($this->dados = mysql_fetch_array($this->agenda))
 		{
-			$mud_acent = strtoupper(strtr($this->dados["nome"], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+			$mud_acent = strtoupper(strtr($this->dados["nome"], 'багвйкнухфъьзБАГВЙКНУХФЪЬЗ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 			$todos[$ind++] = $mud_acent;
 		}
 		return $todos ;

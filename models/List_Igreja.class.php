@@ -27,7 +27,6 @@ class List_Igreja extends List_sele {
 	    $linha3 = "</select>";
 	  return $linha1.$linhas.$linha3 ;
 	}
-
 	function corpoSelec(){
 		$linhas =  '<option value="">-->> Escolha a Igrejas <<--</option>';
 		while($this->col_lst = mysql_fetch_array($this->sql_lst))

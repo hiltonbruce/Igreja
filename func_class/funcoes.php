@@ -898,9 +898,9 @@ function situacao ($situacao,$rol){
 		}
 
 
-function toUpper($string) {
+function toUpper($string) { 
 	//Converte para maíuscula as vogais acentuadas
-    return ( strtoupper ($string) );
+    return strtr( strtoupper($string), 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','ÁÀÃÂÉÊÍÓÕÔÚÜÇÁÀÃÂÉÊÍÓÕÔÚÜÇ' );
 	}
 	
 function extenso($valor = 0, $maiusculas = false) {

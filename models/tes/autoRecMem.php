@@ -45,7 +45,6 @@ switch ($quantNomes) {
 	$sql .= 'AND m.rol=t.recebeu AND t.tipo=1 GROUP BY m.rol ORDER BY LOCATE("'.$q.'",m.nome)';
 	break;
 }
-
 $res = mysql_query($sql);
 $linhas = mysql_num_rows($res);
 # 1�linha em branco

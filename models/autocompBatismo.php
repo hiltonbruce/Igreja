@@ -41,7 +41,7 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
-	$id = $campo['dtbatismo'];
+	$id = $campo['dtbatismo']; 
 	$sexo = $campo['sexo'];
 	//$estado = $campo['nome'];
 	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));

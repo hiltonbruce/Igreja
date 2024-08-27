@@ -12,7 +12,7 @@ $item = 0;
 $sqlOrd = 'titulo';
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
  
-$sql  = 'SELECT * FROM contas AS c WHERE acesso<>"0" AND ' ;
+$sql  = 'SELECT * FROM contas AS c WHERE acesso<>"0" AND (nivel1 ="3" || nivel1 ="2") AND ' ;
 switch ($quantNomes) {
 	case '3':
 	 list($q1,$q2,$q3,$q4) = explode (' ',$q);

@@ -2,8 +2,6 @@
   $igreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']) ;
  ?>
 <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,600,600italic&amp;subset=latin,cyrillic-ext,greek-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'> -->
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
 
   <div class="col-xs-10"><label>Nome:</label>
     <input type="text" id="inputOne" class="form-control" tabindex="<?php echo ++$ind;?>"

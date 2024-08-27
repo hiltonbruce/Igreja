@@ -26,7 +26,7 @@ if ($_GET['rec']>'19' || $_POST['rec']>'19') {
 				require_once '../views/modeloPrint.php';
 			break;
 			case '21':
-				//Impressão de vários Reciboserror_reporting(E_ALL);
+				//Impressï¿½o de vï¿½rios Reciboserror_reporting(E_ALL);
 				error_reporting(E_ALL);
 				ini_set('display_errors', 'off');
 				$scriptCSS  = '<link rel="stylesheet" type="text/css" href="../css/bootstrap.print.css" />';
@@ -58,7 +58,7 @@ switch ($recMenu){
 		require_once 'forms/tes/recFinal.php';
 		break;
 	case 3:
-		//Recibos para não Membros
+		//Recibos para nï¿½o Membros
 		require_once 'forms/tes/recInicio.php';
 		require_once 'forms/tes/recNaoMembro.php';
 		require_once 'forms/tes/recFinal.php';
@@ -76,7 +76,7 @@ switch ($recMenu){
 		//print_r($listaPgto);
 		break;
 	case 5:
-		//Form para impressãoo de vários Recibos
+		//Form para impressï¿½oo de vï¿½rios Recibos
 		require_once 'forms/tes/recImprVarios.php';
 		break;
 	case 6:

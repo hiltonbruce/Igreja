@@ -1,5 +1,5 @@
-<?php
-//Opï¿½ï¿½es de exibir na tela para o script /tesouraria/receita.php
+<?php 
+//Opições de exibir na tela para o script /tesouraria/receita.php
 //$dtlanc = (empty($dtlanc)) ? date('d/m/Y'):$_GET['data'];
 $assinatura = '';
 if (empty($_GET['ano'])) {
@@ -34,16 +34,16 @@ switch ($rec) {
 		break;
 	case '3':
 		require_once 'forms/concluirdiz.php';
-		require_once('forms/ofertaEBD.php'); #Form lanï¿½aar ofertas Esc Bï¿½blica
+		require_once('forms/ofertaEBD.php'); #Form lançar ofertas Escola Bïílica
 		break;
 	case '4':
 		require_once('forms/tes/lancarRec.php');
 		break;
 	case '5':
 		//$form = 'forms/tes/autoLancarDespesas.php';
-		$tabRelatorio = 'forms/tes/lancarTipoPlan.php'; #Form lanï¿½ar despesas tipo planilha
+		$tabRelatorio = 'forms/tes/lancarTipoPlan.php'; #Form lançar despesas tipo planilha
 		break;
-	case '6': //Relatï¿½rio COMADEP
+	case '6': //Relatório COMADEP
 		require_once 'help/tes/relatorioComadep.php';
 		//$mesRelatorio .=$rolIgreja;
 		$dtRelatorio = data_extenso($d . '/' . $m . '/' . $a);
@@ -51,7 +51,7 @@ switch ($rec) {
 		$recLink = '16&dia=' . $d . '&mes=' . $m . '&ano=' . $a;
 		$linkImpressao = 'tesouraria/receita.php/?rec=' . $recLink . '&igreja=' . $_GET['igreja'];
 		$linkImpressao .= '&tipo=' . $_GET['tipo'];
-		//Busca do movimento no mï¿½s
+		//Busca do movimento no mês
 		require_once 'models/tes/relComadep.php';
 		require_once 'help/tes/relComadepLin.php';
 		require_once 'forms/tes/mesComadep.php';
