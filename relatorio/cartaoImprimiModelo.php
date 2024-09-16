@@ -64,7 +64,7 @@ require "../func_class/classes.php";
 <link rel="stylesheet" type="text/css" href="../reset.css" />
 <link rel="icon" type="image/gif" href="../img/br_igreja.gif">
 <style type="text/css">
-<!--
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -108,6 +108,19 @@ body {
 	z-index:6;
 }
 
+#assinPastor {
+	position:absolute;
+	background: url(../img/assinPastor.png) no-repeat;
+	background-size: 222px 150px;
+	text-shadow: 1px 1px 1px #FFFFFF;
+	left:700px;
+	top:180px;
+	width:376px;
+	height:150px;
+	z-index:5;
+	text-align:center;
+	font-size: 90%;
+}
 #centenario {
 	position:absolute;
 	background: url(../img/Centenario2.png) no-repeat;
