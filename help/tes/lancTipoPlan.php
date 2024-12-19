@@ -47,7 +47,7 @@ if ($gerarPgto && !empty($_POST["transid"])) {
 	        	<span aria-hidden="true">&otimes;—</span></button> <strong>lan&ccedil;amento n&atilde;o Realizado!</strong>
 	        	Cr&eacute;dito e D&eacute;bito com mesma conta n&atilde;o &eacute; realizado o lan&ccedil;amento. </div>
 	        	<?PHP
-	        }elseif (MESBLOQUEA >= $data) { 
+	        }elseif (MESBLOQUEA >= $data) {
 						echo "<script>alert('Lançamento bloqueados para esta data!');</script>";
 						$msgAlert  = '<div class="alert alert-danger" role="alert">';
 						$msgAlert .= '<h3>Lan&ccedil;amento n&atilde;o permitido!</h3>';

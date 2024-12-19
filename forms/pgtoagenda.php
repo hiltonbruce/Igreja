@@ -49,7 +49,7 @@
  	$pago= '';
 	$enviado = '';
 	switch ($itemagenda->status()) {
-		//Marca o opïção do status atual no formulário
+		//Marca o opï¿½ï¿½o do status atual no formulï¿½rio
 		case 3:
 			$quitado = 'checked="checked" autofocus="autofocus"';
 			break;
@@ -66,9 +66,9 @@
 			$pendende = 'checked="checked" autofocus="autofocus"';
 			break;
 	}
-	//concluir a migração dos dados da tabela fatura para a de fonecedores
-	//fazer verificação no campo credor da tabela agenda se refere a rol ou CPF e CNPJ
-	//No campo da tabela estar definida da seguinte forma tabela@numero ou tabela@cnpj/cpf
+	//concluir a migraï¿½ï¿½o dos dados da tabela fatura para a de fonecedores
+	//fazer verificaï¿½ï¿½o no campo credor da tabela agenda se refere a rol ou CPF e CNPJ
+	//No campo da tabela estï¿½ definida da seguinte forma tabela@numero ou tabela@cnpj/cpf
 	if ($itemagenda->igreja()<'1') {
 		$igreja_pgto = 'Templo Sede';
 	}else {
@@ -121,12 +121,13 @@
 					</td>
 				</tr>
 				<tr>
-					<?PHP $ctaDespesa = new DBRecord ('contas',$itemagenda->debitar(),'acesso'); ?>
+					<?PHP
+						$ctaDespesa = new DBRecord ('contas',$itemagenda->debitar(),'acesso');
+					?>
 					<td colspan="3">Despesas com:<br /> <input type="text" name="cta" class="form-control"
 						id="campo_estado" size="78%" tabindex="<?PHP echo ++$ind; ?>"
 						placeholder="Qual a Despesa?" value='<?php echo $ctaDespesa->titulo();?>'
 						 <?PHP echo $desCampoCta; ?> />
-						 <?PHP require_once 'forms/tes/easyAutoAgenda.php'; ?>
 					</td>
 				</tr>
 				<tr>
@@ -201,7 +202,9 @@
 				tabindex="<?php echo ++$ind; ?>">
 		  </div>
 		  <div class="col-xs-3"><label>Id Lan&ccedil;amento</label>
-				<?php $idlanc = ($itemagenda->idlanc()=='0') ? 'name="idlanc" ' : 'disabled' ; ?>
+				<?php
+					$idlanc = ($itemagenda->idlanc()=='0') ? 'name="idlanc" ' : 'disabled' ;
+				?>
 				<input type="text" class="form-control" tabindex="<?PHP echo ++$ind; ?>"
 				<?php echo 'value="'.$itemagenda->idlanc().'" '.$idlanc;?>>
 		  </div>

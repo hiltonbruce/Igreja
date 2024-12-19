@@ -2,7 +2,6 @@
 	ini_set( 'default_charset', 'ISO-8859-1' ); // 'UTF-8'
 	session_start();
 
-	//echo $_GET["escolha"]." -----------".$_POST["escolha"];
 	require_once ("func_class/classes.php");
 	require_once ("func_class/funcoes.php");
 
@@ -13,6 +12,7 @@
 	$dirPOST = (empty($_POST["direita"])) ? '' : $_POST["direita"];
 	$menuGET = (empty($_GET["menu"])) ? '' : $_GET["menu"];
 	$menuPOST = (empty($_POST["menu"])) ? '' : $_POST["menu"];
+
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
 
@@ -54,7 +54,7 @@
 			}
 	}
 	$titleIgreja = NOMEIGR.' &bull; '.CIDADEIG.'-'.UFIG;
-	$campo_rol="Rol N&ordm;:"; //Quando a vari?vel de sess?o rol existir define 'Rol n?:' como legenda para o form listar dados do membro pelo rol
+	$campo_rol="Rol N&ordm;:"; //Quando a vari�vel de sess�o rol existir define 'Rol n�:' como legenda para o form listar dados do membro pelo rol
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

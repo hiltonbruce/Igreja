@@ -1,6 +1,8 @@
 <?php
 $igreja = (empty($_GET['igreja'])) ? 1 : intval($_GET['igreja']);
 ?>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
 
 
 <form id="form1" name="form1" method="post" action="">

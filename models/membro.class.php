@@ -2,12 +2,14 @@
 class membro {
 
 	function __construct () {
+
 		$this->query  = 'SELECT m.*,e.auxiliar,e.diaconato,e.presbitero,e.evangelista,e.pastor ';
 		$this->query .= 'FROM membro AS m, eclesiastico AS e ';
 		$this->query .= 'WHERE m.rol=e.rol ';
 		$this->query .= ' ORDER BY m.nome ';
 		$this->membros = mysql_query($this->query) or die (mysql_error());
 	}
+
 	function nomes () {
 		while($dados = mysql_fetch_array($this->membros))
 		{

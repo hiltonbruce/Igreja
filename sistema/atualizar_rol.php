@@ -1,5 +1,5 @@
 <?PHP
- 
+
 controle ("atualizar");
 
 $hist = $_SESSION['valid_user'].": ".$_SESSION['nome'];
@@ -47,23 +47,19 @@ $result = mysql_query($query) or die (mysql_error());
 				$atualHist .= 'cadfim= "'.$hist.'" ';
 				$atualHist .= 'WHERE descricao = "1" AND igreja="'.$id.'" ';
 				$atualHist .= 'AND datafim="0000-00-00" LIMIT 1';
-
 				$result = mysql_query($atualHist);
 				if (!$result) {
-				    echo '** Falha na autalização: ' . mysql_error();
+				    echo 'Falha na autalização: ' . mysql_error();
 				    exit;
 				}
 				#Cadastra os dados na tabela de hist?rico de fun??es
-
-
-				// $dt = br_data ($_POST["data"],'Data de início na função!');
-				// if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
-				// 	$value  = '"","1","'.$_POST["nome"].'","'.$id.'","'.$_POST["pastor"].'"';
-				// 	$value .= ',"1","'.$dt.'","","'.$hist.'","2024-01-01"';
-				// 	$dados = new insert ($value,'cargohist');
-				// 	print_r($value);
-				// 	$dados->inserir();
-				// }
+				$dt = br_data ($_POST["data"],'Data de in?cio na fun??o!');
+				if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
+					$value  = '"","1","'.$_POST["nome"].'","'.$id.'","'.$_POST["pastor"].'"';
+					$value .= ',"1","'.$dt.'","","'.$hist.'",""';
+					$dados = new insert ($value,'cargohist');
+					$dados->inserir();
+				}
 				break;
 			case 'razao':
 				//$atualizador =intval($_POST["semana"].$_POST["dia"]);

@@ -87,8 +87,8 @@ switch ($quantNomes) {
 }
 
 // 	$exibiCong = strip_tags($nomecong);
-// 	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
-// 	$endereco = strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+// 	$estado = strtoupper(strtr( $campo['nome'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+// 	$endereco = strtoupper(strtr( $campo ['endereco'], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 // 	//$endereco .=', '.$campo['numero'];
 
   $stmt->execute();
@@ -126,12 +126,14 @@ $totElement = count($results);
 			}
 
 			foreach ($value as $chave => $dados) {
+
 				if ($dados=='') {
-					$dados = 'Não informado' ;
+					$dados = 'N&atilde;o informado' ;
 				}
+
 					if ($chave=='nome') {
 						$json .= '"name": "'.$dados.'",';
-						$dados = strtoupper(strtr( $dados, 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+						$dados = strtoupper(strtr( $dados, 'Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³ÃµÃ´ÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã•Ã”ÃšÃœÃ‡','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 						$estado = $dados;
 						require ('../help/destaqueNome.php');
 					}

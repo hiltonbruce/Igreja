@@ -3,6 +3,8 @@
   $nome = (empty($_GET['nome'])) ? '' : htmlentities($_GET['nome']);
   $rol = (empty($_GET['rol'])) ? null : intval($_GET['rol']);
  ?>
+ <script src="js/jquery-1.11.2.min.js"></script>
+ <script src="js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
 
 <div class="row">
   <div class="col-xs-9"><label>Nome:</label>

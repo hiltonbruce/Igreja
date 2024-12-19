@@ -303,7 +303,7 @@ body {
 <div id="foto"><img src="../img_membros/<?PHP echo $img;?>" alt="Foto do Membro" width="109" height="141" border="1" /></div>
 <div id="cargo">Carteira de Identidade de <?PHP echo $cargoEclec['0'];?></div>
 <div id="Nome">
- <?PHP print toUpper($rec_pessoais->nome());?> É
+ <?PHP print strtoupper(toUpper($rec_pessoais->nome()));?>
 </div>
  <div id="mensargem"><?php echo MSGCARTAO;?></div>
  <div id="obs"><?php echo $rec_ecl->obs();?></div>

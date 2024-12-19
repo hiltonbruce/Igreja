@@ -11,11 +11,15 @@
 
 <script>
   var options = {
+
   url: function(phrase) {
   		return "models/completeEasyCta.php?q=" + phrase ;
   	},
+
   getValue: "name",
+
   list: {
+
       onSelectItemEvent: function() {
           var selectedItemValue = $("#inputCta").getSelectedItemData().acesso;
           $("#inputCta2").val(selectedItemValue).trigger("change");
@@ -28,6 +32,7 @@
   			time: 200,
   			callback: function() {}
   		},
+
   		hideAnimation: {
   			type: "slide", //normal|slide|fade
   			time: 200,
@@ -35,6 +40,7 @@
   		},
   		maxNumberOfElements: 10,
     },
+
    template: {
   		 type: "custom",
   		 method: function(value, item) {
@@ -43,5 +49,6 @@
   	 },
    // theme: "round"
   };
+
   $("#inputCta").easyAutocomplete(options);
 </script>

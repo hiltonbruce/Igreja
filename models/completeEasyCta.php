@@ -11,7 +11,7 @@ $q =  $_GET['q'];
 $item = 0;
 $sqlOrd = 'titulo';
 $quantNomes = substr_count(trim($q),' ');//Quantidade de palavras
- 
+
 $sql  = 'SELECT * FROM contas AS c WHERE acesso<>"0" AND ' ;
 switch ($quantNomes) {
 	case '3':

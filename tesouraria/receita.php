@@ -13,7 +13,7 @@ $rec = (empty($_GET['rec'])) ? 0 : $_GET['rec'] ;
 if ($rec>'12' && $rec<'20') {
 	session_start();
 	if ($_SESSION["setor"]=="2" || $_SESSION["setor"]>"50" || $_SESSION["setor"]==1){
-	require "../help/impressao.php";//Include de funções, classes e conexões com o BD
+	require "../help/impressao.php";//Include de funções, classes e conexï¿½es com o BD
 	if ($idIgreja==0) {
 			$igrejaSelecionada = $igSede;
 			//$igLanc = $igrejaSelecionada;
@@ -28,7 +28,7 @@ if ($rec>'12' && $rec<'20') {
 	}else {
 		$origem = $igreja->cidade();
 	}
-	require_once '../help/tes/receitaImprimir.php';//Opïções de  impressões para o script
+	require_once '../help/tes/receitaImprimir.php';//Opï¿½ï¿½es de  impressï¿½es para o script
 	}
 }else {
 $ind=1;
@@ -39,7 +39,6 @@ $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
 
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
-// echo '<h1> Teste</h1>';
 
 $dizmista = new dizresp($_SESSION['valid_user'],'',$rec);
 if ($idIgreja==0) {
@@ -49,10 +48,10 @@ if ($idIgreja==0) {
 	$igrejaSelecionada = new DBRecord('igreja', $idIgreja, 'rol');
 	$igLanc = $igrejaSelecionada;
 }
-	// verifica se há valor a ser lançado e libera os forms
-	// printf('<h1> teste %s</h1>',$teste);
+	// verifica se hï¿½ valor a ser lanï¿½ado e libera os forms
+	//printf('<h1> teste %s</h1>',$teste);
 	$tituloColuna5 = ($idIgreja > '1') ? 'Congrega&ccedil;&atilde;o' : 'Igreja';
-if ($_POST['concluir'] == '1') {
+	if ($_POST['concluir'] == '1') {
 			$tituloColuna5 = 'Status';
 			require_once 'forms/lancdizimo.php';
 		} elseif ($_POST['lancar'] == '1') {

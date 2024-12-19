@@ -94,7 +94,7 @@ while( $campo = mysql_fetch_array( $res ) )
 	$estado = strtoupper(strtr( $campo['nome'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco = strtoupper(strtr( $campo ['endereco'], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	//$endereco .=', '.$campo['numero'];
-	//$estado = addslashes($estado); 
+	//$estado = addslashes($estado);
 	$destaque = "<span style=\"font-weight:bold\">\$1</span>";
 	switch ($quantNomes) {
 		case '3':

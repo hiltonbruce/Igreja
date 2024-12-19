@@ -429,17 +429,8 @@ class insert {
 	}
 
 	public function inserir() {
-		// var_dump($this->getCampos());
-		// echo'<br /><br />';
-		// var_dump($this->getTabela());
-		// echo'<br /><br />';
-		// echo "INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")";
-		// echo'<br /><br />';
-		// exit;
-		// print_r($this->getCampos());
+//		var_dump($this->getCampos());
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
-		// echo $inserir;
-		// exit;
 		if ($inserir){
 				$idCad = mysql_insert_id();
 				//echo "<script> alert('Inclusï¿½o ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
@@ -800,7 +791,7 @@ class List_sele {
 	  	}
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -827,7 +818,7 @@ class List_sele {
 	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";

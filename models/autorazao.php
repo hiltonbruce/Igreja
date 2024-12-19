@@ -21,7 +21,7 @@ while( $campo = mysql_fetch_array( $res ) )
 {
 	//echo "Id: {$campo['id']}\t{$campo['sigla']}\t{$campo['estado']}<br />";
 	$id 		= $campo['id'];
-	$estado 	= strtoupper(strtr( $campo['razao'], 'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC' )); 
+	$estado 	= strtoupper(strtr( $campo['razao'], 'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$endereco 	= strtoupper(strtr( $campo ['end'], 'срутщъэѓѕєњќчСРУТЩЪЭгедкмЧ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 	$alias 		= htmlentities($campo['alias'], ENT_QUOTES,'ISO-8859-1');
 	$sigla 		= $campo['cnpj_cpf'];

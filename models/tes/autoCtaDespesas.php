@@ -13,8 +13,10 @@ $sqllinhas .= 'AND acesso > "0" ';
 //crit�rios de fon�tica
 $reslinhas = mysql_query( $sqllinhas );
 $linhas = mysql_num_rows( $sqllinhas );
+
 $sql  = 'SELECT * FROM contas where locate("'.$q.'",titulo) > 0 AND acesso > "0" ';
 $sql .= 'AND tipo="D" AND nivel1="3" order by locate(codigo,"'.$q.'") limit 10';
+
 $res = mysql_query( $sql );
 
 while( $campo = mysql_fetch_array( $res ) )

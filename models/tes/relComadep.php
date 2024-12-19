@@ -9,7 +9,7 @@ $sldNivel3 = array();
 $sldGrupoN4 = '';
 $cred = '<strong> C</strong>';
 $dev = '<strong> D</strong>';
-#Monta array com informações das contas atualmente
+#Monta array com informaï¿½ï¿½es das contas atualmente
 $plano = new tes_conta($_GET['gpconta']);
 $planoCta = $plano->contasTodas();
 $planoCod = $plano->contasCod();
@@ -20,7 +20,7 @@ if (!empty($_GET['gpconta'])) {
 }else {
 	$contaDC = $planoCta;
 }
-//Busca do movimento no mï¿½s
+//Busca do movimento no mês
 $queryLanc  = 'SELECT l.*,DATE_FORMAT(l.data,"%Y%m") AS dt FROM lanc AS l';
 $queryLanc .= ' WHERE DATE_FORMAT(data,"%Y%m")<="'.$a.$m.'"';
 //Filtra por igreja
@@ -73,7 +73,7 @@ while ($contas = mysql_fetch_array($lista)) {
 			/*Quando houver saldo, mas sem movimento no mes, aqui ï¿½ forï¿½ado
 			 * a aparecer
 			*/
-			ini_set('memory_limit', '256M');
+			ini_set('memory_limit', '1024M');
 			if ($saldo[$contaDC[$ctaCred]['codigo']]==0) {
 				$saldo[$contaDC[$ctaCred]['codigo']] = 0;
 			}

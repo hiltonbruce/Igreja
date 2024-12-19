@@ -34,7 +34,7 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 			$atualizar->idlanc	=	$_POST['idlanc'];
 		}
 		$atualizar->resppgto	=	$_POST['resppgto'];
-		//Verifica se o vencimento é uma data validade e atualiza
+		//Verifica se o vencimento Ã© uma data validade e atualiza
 		if (checadata($_POST['vencimento'])) {
 			$vencimento = br_data ($_POST['vencimento'],'Data de Vencimento');
 			$dataAtual = new DateTime($atualizar->vencimento());
@@ -98,8 +98,8 @@ if ($_SESSION["setor"]==2 || $_SESSION["setor"]>50 || $_SESSION["setor"]==1){
 			# Atualiza agenda
 			$atualizar->Update();
 		}
-		require_once 'forms/pgtoagenda.php';//Form para atualização, pagamento ou pendência
-		require_once 'forms/tes/buscaAgenda.php';//Busca por Despesas Agendadas
+		require_once 'forms/pgtoagenda.php';//Form para atualizaï¿½ï¿½o, pagamento ou pendï¿½ncia
+		require_once 'forms/tes/buscaAgenda.php';// Busca por Despesas Agendadas
 		echo $mensagem;
 	}elseif ($_POST['Submit']=='Inserir...'){
 		$maior_idfat  = 'SELECT MAX(idfatura) AS maximo FROM agenda ';

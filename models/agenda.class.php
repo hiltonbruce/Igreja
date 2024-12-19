@@ -11,7 +11,7 @@ class agenda {
 		$ind = 0;
 		while($this->dados = mysql_fetch_array($this->agenda))
 		{
-			$mud_acent = strtoupper(strtr($this->dados["nome"], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+			$mud_acent = strtoupper(strtr($this->dados["nome"], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 			$todos[$ind++] = $mud_acent;
 		}
 		return $todos ;
@@ -31,6 +31,7 @@ class agenda {
 
 			//$fatura += 1;
 			$fatura = ($contas['idfatura']>'0') ? $contas['idfatura']:++$fatura;
+
 			$fatu =  'SELECT * FROM agenda where idfatura='.$contas['idfatura'].' ORDER BY vencimento DESC LIMIT 1';
 			$idfatura = mysql_query($fatu);
 			$id = mysql_fetch_array($idfatura);
@@ -45,10 +46,9 @@ class agenda {
 				//Acrescentar busca por igreja, motivo, fonecedor
 				for ($i = 1; $i <= $mesvenc; $i++) {
 					$value	 = sprintf("null,'%s','%s','%s','%s',null,'%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
-					$value 	.=',"'. $id['valor'].'","0.00","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
-					$value	.='","'.$id['resppgto'].'","0000-00-00","0","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro automático"';
-				
-					$agendamento = new insert ($value,'agenda');
+					$value 	.=',"'. $id['valor'].'","","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
+					$value	.='","'.$id['resppgto'].'","","","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro automÃ¡tico"';
+					$agendamento = new insert ("$value","agenda");
 					$agendamento->inserir();/**/
 					if (strstr($id['credor'], '@')) {
 						list($tipo,$credor) = explode('@',$id['credor'] );
