@@ -1,15 +1,15 @@
 <?PHP
 controle("tes");
 
-$atualiza = new DBRecord ('dizimooferta',(int)$_POST['idDizOf'],"id"); //Aqui será selecionado pelo id
+$atualiza = new DBRecord ('dizimooferta',(int)$_POST['idDizOf'],"id"); //Aqui serï¿½ selecionado pelo id
 
-	//Se cada variável tem um valor
+	//Se cada variï¿½vel tem um valor
 	if ($_POST['valor']>0 && ($atualiza->lancamento()=='0' || $_SESSION["setor"]>"50") &&  $_POST['rolIgreja']>0){
 		echo "<p>";
 	  foreach ($_POST as $key => $value) {
 		if ($key!=="Submit" && $key!=="tabela" && $key!=="escolha" && $key!=="listar" && $key!=="idDizOf") {
 			
-		echo "Campo: ".$key." <-> value: ".$value." ++++";
+		echo "Campo: ".$key." <-> value: ".$value;
 		//print $atualiza->$key()." ++++ ";
 		 if ($key=='data') {
 		 	$value = br_data($value, 'Campo data invalida!');
@@ -18,18 +18,18 @@ $atualiza = new DBRecord ('dizimooferta',(int)$_POST['idDizOf'],"id"); //Aqui se
 		 }elseif ($key=='rolIgreja'){
 		 	$key = 'igreja';
 		 }
-		$atualiza->$key = ltrim($value); //Aqui é atribuido a esta variável um valor para UpDate
+		$atualiza->$key = ltrim($value); //Aqui ï¿½ atribuido a esta variï¿½vel um valor para UpDate
 		}
 	  }
 	 echo '</p>';
 	  $atualiza->Update();	  //Atualizar dados
 	
 	}elseif ($atualiza->lancamento()!='0') {
-		echo  "Após o fechamento do caixa a alteração não é permitida!";
+		echo  "Apï¿½s o fechamento do caixa a alteraï¿½ï¿½o nï¿½o ï¿½ permitida!";
 	}elseif ($_POST['rolIgreja']=='0') {
-		echo  "Será exibida para todas as igrejas!";
+		echo  "Serï¿½ exibida para todas as igrejas!";
 	}else{
-	  echo  "Não definido valor!";
+	  echo  "Nï¿½o definido valor!";
 	}
 	
 

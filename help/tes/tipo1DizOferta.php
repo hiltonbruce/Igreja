@@ -4,8 +4,6 @@ $msg = "<script> alert('Você não definiu para qual CONTA deseja contribuir. Refa
 for ($i = 0; $i < 13; $i++) {
 
 	$campo = 'oferta'.$i;
-	//printf ("$campo: %s",$_POST["$campo"]);
-
 	$valor = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );//Captura o valor e converte p o padrão americano
 
 	if ($valor>0) {
@@ -28,7 +26,12 @@ for ($i = 0; $i < 13; $i++) {
 					$msg = "<script> alert('Você não definiu para qual campnha deseja contribuir. Refaça o lançamento da campanha!');</script>";
 					$conta ='';
 				}else {
-				$conta = "'{$_POST['acescamp']}','1','6'";//Campanha
+					$campanha = new DBRecord('contas', $_POST['acescamp'], 'acesso');
+					$cxCampanha = 1;
+					if ($campanha->contrapartida()<>null) {
+						$cxCampanha = $campanha->contrapartida();
+					}
+					$conta = "'{$_POST['acescamp']}',$cxCampanha,'6'";//Campanha
 				}
 				break;
 			case 5:
@@ -72,6 +75,9 @@ for ($i = 0; $i < 13; $i++) {
 			$value  = "null,0,$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 			$value .= "'".$confirma."','{$_POST["obs"]}',NOW(),'$hist'";
+			// echo '<br/>';
+			// var_dump($value);
+			// exit;
 			$dados = new insert ($value,"dizimooferta");
 			$dados->inserir();
 			}

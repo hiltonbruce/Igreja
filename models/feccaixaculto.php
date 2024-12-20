@@ -22,10 +22,11 @@ $idlancmis = $ultimolanc + 1;//id do lançamento das provisões
 //Foi criado a tabela lanchist exclusivamente para o histórico dos lançamentos
 //Antes de começar os lançamentos verificar se há inconcistência nos saldo antes de continuar
 //Criar uma classe que retorne falso ou verdadeiro
-//Analizar os valres para lançar o dízimo para COMADEP e SEMAD
+//Analizar os valores para lançar o dízimo para COMADEP e SEMAD
 $referente = ($_POST['hist']<>'') ? $_POST['hist']:$_POST['histsug'];//Atribui a variável o histórico do lançamento
 $referente = mysql_escape_string($referente);
 $data = br_data($_POST['data'], 'Data do lançamento inv&aacute;lida!');
+
 if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) {
 	//Faz o lançamento do débito para tabela lancamento
 	$sqlFecha  = 'SELECT devedora,tipo,SUM(valor) AS valor,credito ';
@@ -48,22 +49,26 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 
 	$exibir = '';
 
-	$arrayCta = new tes_conta();
+	$arrayCta = new tes_conta();//Lista de contas ativas
 	//print_r($arrayCta->ativosArray()['1021']);
+	//echo '<br>';
 	$contaDC = $arrayCta->ativosArray();
 
 	while ($tablancarr = mysql_fetch_array($tablanc)) {
 		$debitar = $tablancarr['devedora'];
 		//$devedora 	= new DBRecord('contas',$debitar,'acesso');
-		if ($sldAntDev=='') {
+
+		// if ($sldAntDev=='') {
 			#Manter saldo inicial se houver novo lançamento na conta
 		//	$sldAntDev = number_format($devedora->saldo(),2,',','.');
-		}
+		// }
+
 		$credora 	= new DBRecord('contas',$tablancarr['credito'],'acesso');
 		if ($sldAntCred =='') {
 			#Manter saldo inicial se houver novo lançamento na conta
 			$sldAntCred = number_format($credora->saldo(),2,',','.');
 		}
+
 		$contcaixa 	= new atualconta($contaDC[$debitar]['codigo'],$ultimolanc,$credora->id());
 		$valor 		= $tablancarr['valor'];
 		$contcaixa->atualizar($valor,'D',$roligreja,$data); //Faz o lançamento na tabela lancamento e atualiza o saldo
@@ -189,12 +194,14 @@ if ($dizmista->totalgeral()>'0' && $referente!='' && checadata($_POST['data'])) 
 			$ofetdiz->lancamento = $ultimolanc;
 			$ofetdiz->UpdateID();
 		}
-	//Lança o histórico do lançamento
-	$InsertHist = sprintf("null,'%s','%s','%s'",$ultimolanc,$referente,$roligreja);
-	$lanchist = new incluir($InsertHist, 'lanchist');
-	$lanchist->inserir();
+	//Lanca o historico do lancamento
+	if ($referente != '') {
+		$InsertHist = sprintf("null,'%s','%s','%s'",$ultimolanc,$referente,$roligreja);
+		$lanchist = new incluir($InsertHist, 'lanchist');
+		$lanchist->inserir();
+	}
 	//echo "Missões: $provmissoes, Comadep: $provcomadep";
-	//inserir o histórico do lançamento das provisões na tabela lanchist
+	//inserir o histórico do lancamento das provisoes na tabela lanchist
 	//Lança o histórico do lançamento das provisões
 	$HistProv = sprintf("null,'%s','%s','%s'",$idlancmis,$histProvisao,$roligreja);
 	$lanchist = new incluir($HistProv, 'lanchist');

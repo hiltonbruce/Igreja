@@ -8,8 +8,7 @@ $atualiza = new DBRecord ('dizimooferta',(int)$_POST['idDizOf'],"id"); //Aqui se
 		echo "<p>";
 	  foreach ($_POST as $key => $value) {
 		if ($key!=="Submit" && $key!=="tabela" && $key!=="escolha") {
-		echo "Campo: ".$key." <-> value: ".$value." ++++";
-		//print $atualiza->$key()." ++++ ";
+		echo "Campo: ".$key." <-> value: ".$value;
 		 if ($key=='data') {
 		 	$value = br_data($value, 'Campo data invalida!');
 		 }elseif ($key=='valor'){

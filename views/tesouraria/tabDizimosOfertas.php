@@ -112,7 +112,7 @@ if ($_POST['concluir']=='1') {
 				$nomIgreja = '<br />Igreja: <strong>'.$igrejaSelecionada->razao();
 				$dirigenteIgreja = 'Dirigente: <ins>'.$dirCong->nome().'</ins>';
 				//print_r($cargoIgreja->dadosArray());
-				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins> ++++'.$tesArray['8'][$idIgreja]['1']['nome'];
+				$tesIgreja = ', 1&ordm; Tesoureiro da Congre&ccedil;&atilde;o: <ins> '.$tesArray['8'][$idIgreja]['1']['nome'];
 				//reset($tesIgreja);
 				//print_r($tesArray );
 			}elseif ($idIgreja=='0' || $idIgreja=='') {
