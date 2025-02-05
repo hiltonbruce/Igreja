@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4+deb9u2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: 06-Jan-2022 às 21:48
--- Versão do servidor: 10.3.31-MariaDB-0+deb10u1-log
--- PHP Version: 5.6.40-0+deb8u12
+-- Host: 127.0.0.1
+-- Generation Time: 02-Fev-2025 às 12:42
+-- Versão do servidor: 10.1.38-MariaDB
+-- versão do PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bd_igreja`
+-- Database: `assembleia`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +32,7 @@ CREATE TABLE `aceitagenda` (
   `id` int(11) NOT NULL,
   `idag` int(11) NOT NULL COMMENT 'Id da tabela agendaexec',
   `usuario` varchar(14) NOT NULL COMMENT 'CPF do usuario do sistema',
-  `dataceit` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Data que o usuário visualizou a mensagem da agenda',
+  `dataceit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Data que o usuário visualizou a mensagem da agenda',
   `alerta` bit(1) NOT NULL COMMENT '0 - alerta popup'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -47,7 +49,7 @@ CREATE TABLE `agenda` (
   `debitar` int(11) NOT NULL COMMENT 'Código de acesso da tabela contas',
   `creditar` int(11) NOT NULL COMMENT 'Código de acesso da tabela contas',
   `idlanc` int(11) NOT NULL COMMENT 'Valor da tabela lanc campo lancamento',
-  `frequencia` int(11) NOT NULL DEFAULT 0 COMMENT '0-Único,1-Mensal, 2-Mensal c/ quantidade, 3-Quinzenal, 4-Semanal',
+  `frequencia` int(11) NOT NULL DEFAULT '0' COMMENT '0-Único,1-Mensal, 2-Mensal c/ quantidade, 3-Quinzenal, 4-Semanal',
   `igreja` int(11) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `multa` decimal(10,2) NOT NULL COMMENT 'Multas e juros em pagamentos após vencimento',
@@ -73,7 +75,7 @@ CREATE TABLE `agendaexec` (
   `dataini` date NOT NULL COMMENT 'Início para o alerta',
   `dataeven` datetime NOT NULL COMMENT 'Data e hora para o evento',
   `nivel` int(11) NOT NULL COMMENT '1 - Pessoal, 2 - Grupo, 3 - Todos os usuários do sistema',
-  `hist` timestamp NOT NULL DEFAULT current_timestamp()
+  `hist` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Agenda executiva da igreja';
 
 -- --------------------------------------------------------
@@ -87,9 +89,9 @@ CREATE TABLE `agendamssgs` (
   `uid` varchar(14) NOT NULL,
   `setor` int(11) NOT NULL,
   `igreja` int(4) NOT NULL,
-  `m` tinyint(2) NOT NULL DEFAULT 0,
-  `d` tinyint(2) NOT NULL DEFAULT 0,
-  `y` smallint(4) NOT NULL DEFAULT 0,
+  `m` tinyint(2) NOT NULL DEFAULT '0',
+  `d` tinyint(2) NOT NULL DEFAULT '0',
+  `y` smallint(4) NOT NULL DEFAULT '0',
   `start_time` time NOT NULL DEFAULT '00:00:00',
   `end_time` time NOT NULL DEFAULT '00:00:00',
   `title` varchar(50) NOT NULL DEFAULT '',
@@ -112,15 +114,8 @@ CREATE TABLE `agsercretaria` (
   `resp` int(11) NOT NULL COMMENT 'id da tabela eventosresp',
   `fim` date NOT NULL,
   `cad` varchar(150) NOT NULL COMMENT 'Nome do cadastrador',
-  `data` timestamp NOT NULL DEFAULT current_timestamp()
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `agsercretaria`
---
-
-INSERT INTO `agsercretaria` (`id`, `igreja`, `inicio`, `semana`, `dia`, `evento`, `resp`, `fim`, `cad`, `data`) VALUES
-(1, 2, '2016-07-03', 1, '1', 1, 0, '0000-00-00', 'Joseiltn', '2016-07-06 22:01:04');
 
 -- --------------------------------------------------------
 
@@ -132,7 +127,7 @@ CREATE TABLE `bairro` (
   `id` int(11) NOT NULL,
   `bairro` varchar(70) NOT NULL,
   `idcidade` int(11) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `historico` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -186,7 +181,7 @@ INSERT INTO `bairro` (`id`, `bairro`, `idcidade`, `data`, `historico`) VALUES
 (91, 'Trav. São Paulo', 2585, '2017-01-06 13:39:04', 'Inserido por:873.703.604-15'),
 (92, 'Marcos Moura', 2731, '2017-10-17 13:58:53', 'Inserido por:873.703.604-15'),
 (93, '', 2731, '2017-10-17 14:05:16', 'Inserido por:873.703.604-15'),
-(94, 'Popular', 2731, '2018-11-19 23:34:23', 'Inserido por:873.703.604-15');
+(94, 'Centro', 2638, '2025-01-30 17:40:59', 'Inserido por:111.111.111-11');
 
 -- --------------------------------------------------------
 
@@ -196,16 +191,23 @@ INSERT INTO `bairro` (`id`, `bairro`, `idcidade`, `data`, `historico`) VALUES
 
 CREATE TABLE `cargohist` (
   `id` int(11) NOT NULL,
-  `descricao` int(2) NOT NULL,
-  `obs` varchar(255) NOT NULL,
-  `igreja` int(4) NOT NULL,
-  `rol` int(11) NOT NULL COMMENT 'rol do membro nesta função',
-  `hierarquia` int(2) NOT NULL,
-  `dataini` date NOT NULL COMMENT 'data de inicio na função',
-  `datafim` date NOT NULL COMMENT 'data final na função',
+  `descricao` int(2) DEFAULT NULL,
+  `obs` varchar(255) DEFAULT NULL,
+  `igreja` int(4) DEFAULT NULL,
+  `rol` int(11) DEFAULT NULL COMMENT 'rol do membro nesta função',
+  `hierarquia` int(2) DEFAULT NULL,
+  `dataini` date DEFAULT NULL COMMENT 'data de inicio na função',
+  `datafim` date DEFAULT NULL COMMENT 'data final na função',
   `cad` varchar(255) NOT NULL,
-  `cadfim` varchar(150) NOT NULL COMMENT 'REsp pelo pela data final'
+  `cadfim` varchar(150) DEFAULT NULL COMMENT 'REsp pelo pela data final'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `cargohist`
+--
+
+INSERT INTO `cargohist` (`id`, `descricao`, `obs`, `igreja`, `rol`, `hierarquia`, `dataini`, `datafim`, `cad`, `cadfim`) VALUES
+(1, 1, 'Pr. Paulo Roberto de Sena', 1, NULL, 1, '2025-01-31', NULL, '111.111.111-11@Admin@31/01/2025 13:48:47', '');
 
 -- --------------------------------------------------------
 
@@ -217,17 +219,17 @@ CREATE TABLE `cargoigreja` (
   `id` int(11) NOT NULL,
   `descricao` int(2) NOT NULL,
   `setor` int(11) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT 1 COMMENT '0-Inativo,1-Ativo',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0-Inativo,1-Ativo',
   `igreja` int(4) NOT NULL,
   `rol` int(11) NOT NULL COMMENT 'rol do membro nesta função',
   `naomembro` varchar(200) NOT NULL,
-  `hierarquia` int(2) NOT NULL DEFAULT 1,
+  `hierarquia` int(2) NOT NULL DEFAULT '1',
   `pgto` decimal(10,2) NOT NULL,
   `diapgto` varchar(3) NOT NULL DEFAULT '15' COMMENT 'Dia do pagamento, iniciado com u é dia útil, 1º digito dia da semana, 2º a semana do mês',
-  `tipo` int(11) NOT NULL DEFAULT 1 COMMENT '1-Social,2-Adm,3-Minist,4-Func,5-Oferta',
+  `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1-Social,2-Adm,3-Minist,4-Func,5-Oferta',
   `coddespesa` int(11) NOT NULL,
   `hist` varchar(255) NOT NULL DEFAULT 'Joseilton',
-  `cad` timestamp NOT NULL DEFAULT current_timestamp()
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -248,15 +250,6 @@ CREATE TABLE `cargo_igreja` (
   `cad` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `cargo_igreja`
---
-
-INSERT INTO `cargo_igreja` (`id`, `descricao`, `obs`, `igreja`, `rol`, `hierarquia`, `ativo`, `hist`, `cad`) VALUES
-(1, 1, '', 3, 2272, 1, '1', '2272: Jailton Costa Bruce', '2009-10-07 20:43:00'),
-(2, 5, '', 1, 131, 1, '1', '2272: Jailton Costa Bruce', '2009-10-07 21:03:15'),
-(3, 7, '', 1, 2272, 2, '1', '2272: Jailton Costa Bruce', '2009-10-07 22:01:12');
-
 -- --------------------------------------------------------
 
 --
@@ -270,7 +263,7 @@ CREATE TABLE `carta` (
   `destino` varchar(255) NOT NULL,
   `igreja` varchar(200) NOT NULL DEFAULT 'Assembleia de Deus',
   `obs` varchar(500) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -298,7 +291,7 @@ CREATE TABLE `cart_apresentacao` (
   `dt_apresent` date NOT NULL COMMENT 'Data da apresentação da criança',
   `num_cert` int(10) NOT NULL COMMENT 'Número da certidão de nascimento -Cartório',
   `obs` varchar(200) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hist` varchar(150) NOT NULL COMMENT 'log de cadastro'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -314,7 +307,7 @@ CREATE TABLE `chat` (
   `to` varchar(255) NOT NULL DEFAULT '',
   `message` text NOT NULL,
   `sent` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `recd` int(10) UNSIGNED NOT NULL DEFAULT 0
+  `recd` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -5918,7 +5911,7 @@ CREATE TABLE `compra` (
   `data` date NOT NULL COMMENT 'Data do recebimento do adiantamento',
   `cpfforneceu` varchar(14) NOT NULL COMMENT 'CPF de quem forneceu o dinheiro',
   `motivo` varchar(255) NOT NULL COMMENT 'Motivo inicial para o suporte financeiro',
-  `cad` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `cad` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `dtconta` date NOT NULL COMMENT 'Data em que concluiu a prestação de contas',
   `cpfconcluiu` varchar(14) NOT NULL COMMENT 'CPF (do financeiro) de quem concluiu a prestação de contas',
   `cadfim` datetime NOT NULL COMMENT 'Data da final',
@@ -5942,8 +5935,8 @@ CREATE TABLE `comprapresta` (
   `valor` decimal(10,2) NOT NULL COMMENT 'Valor total da nota fiscal ou do cupom  fiscal',
   `data` date NOT NULL COMMENT 'Data da nota fiscal',
   `numnota` int(11) NOT NULL COMMENT 'Número da nota fiscal',
-  `igreja` int(11) NOT NULL DEFAULT 1 COMMENT 'Igreja que será atribuída toda ou a maior parte do gasto',
-  `cad` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `igreja` int(11) NOT NULL DEFAULT '1' COMMENT 'Igreja que será atribuída toda ou a maior parte do gasto',
+  `cad` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Recebimento da prestação de contas';
 
@@ -5965,7 +5958,7 @@ CREATE TABLE `contas` (
   `histlancam` varchar(60) NOT NULL COMMENT 'Tesxto para histórico de lançamentos',
   `descricao` text NOT NULL COMMENT 'informa detalhes do que deve ser lançado nesta conta',
   `saldo` decimal(12,2) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   `tipo` varchar(1) NOT NULL COMMENT 'D - Devedora, C - Credora'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -5974,352 +5967,341 @@ CREATE TABLE `contas` (
 --
 
 INSERT INTO `contas` (`id`, `codigo`, `nivel1`, `nivel2`, `nivel3`, `nivel4`, `acesso`, `titulo`, `histlancam`, `descricao`, `saldo`, `status`, `tipo`) VALUES
-(1, '1', '1', '1', '1', '1', 0, 'Ativo', '', '', 0.00, 1, 'D'),
-(2, '1.1', '1', '1.1', '1.1', '1.1', 0, 'Ativo Circulante', '', '', 0.00, 1, 'D'),
-(3, '1.1.1', '1', '1.1', '1.1.1', '1.1.1', 0, 'Disponível', '', '', 0.00, 1, 'D'),
-(4, '1.1.1.001', '1', '1.1', '1.1.1', '1.1.1.001', 0, 'Caixa Geral - Disponível', '', 'Saldo de todos os caixas deduzida as provisões', 0.00, 1, 'D'),
-(5, '1.1.1.001.001', '1', '1.1', '1.1.1', '1.1.1.001', 1, 'Caixa Central', '', '', 0.00, 1, 'D'),
-(6, '1.1.1.001.002', '1', '1.1', '1.1.1', '1.1.1.001', 2, 'Caixa de Missões', '', '', 0.00, 1, 'D'),
-(7, '1.1.1.001.003', '1', '1.1', '1.1.1', '1.1.1.001', 3, 'Caixa de Senhoras', '', '', 0.00, 1, 'D'),
-(8, '1.1.1.001.004', '1', '1.1', '1.1.1', '1.1.1.001', 4, 'Caixa de Ensino', '', '', 0.00, 1, 'D'),
-(9, '1.1.1.001.005', '1', '1.1', '1.1.1', '1.1.1.001', 5, 'Caixa Infantil', '', '', 0.00, 1, 'D'),
-(10, '1.1.1.001.006', '1', '1.1', '1.1.1', '1.1.1.001', 6, '( - ) Provisão p/ COMADEP - Contribuição 10%', '', '', 0.00, 1, 'C'),
-(11, '1.1.1.001.007', '1', '1.1', '1.1.1', '1.1.1.001', 7, '( - ) Provisão p/ SEMAD - Contribuição 40%', '', '', 0.00, 1, 'C'),
-(12, '1.1.1.002', '1', '1.1', '1.1.1', '1.1.1.002', 0, 'Banco Conta Movimentos', '', '', 0.00, 1, 'D'),
-(13, '1.1.1.002.001', '1', '1.1', '1.1.1', '1.1.1.002', 20, 'Banco do Brasil S/A', '', '', 0.00, 1, 'D'),
-(14, '1.1.1.003', '1', '1.1', '1.1.1', '1.1.1.003', 0, 'Banco Conta Poupança', '', '', 0.00, 1, 'D'),
-(15, '1.1.1.003.001', '1', '1.1', '1.1.1', '1.1.1.003', 30, 'Caixa Econônica Federal', '', '', 0.00, 1, 'D'),
-(16, '1.1.1.004', '1', '1.1', '1.1.1', '1.1.1.004', 0, 'Títulos de Capitalização', '', '', 0.00, 1, 'D'),
-(17, '1.1.1.005', '1', '1.1', '1.1.1', '1.1.1.005', 0, 'Mercado Aberto', '', '', 0.00, 1, 'D'),
-(18, '1.1.1.006', '1', '1.1', '1.1.1', '1.1.1.006', 0, 'Banco Conta Vínculadas', '', '', 0.00, 1, 'D'),
-(19, '1.1.1.006.001', '1', '1.1', '1.1.1', '1.1.1.006', 60, 'Banco do Brasil S/A', '', '', 0.00, 1, 'D'),
-(20, '1.1.1.007', '1', '1.1', '1.1.1', '1.1.1.007', 0, 'Adiantamentos a Funcionários', '', '', 0.00, 1, 'D'),
-(21, '1.1.1.007.001', '1', '1.1', '1.1.1', '1.1.1.007', 70, 'Adiantamento de Salários', '', '', 0.00, 1, 'D'),
-(22, '1.1.1.007.002', '1', '1.1', '1.1.1', '1.1.1.007', 71, 'Adiantamentos de Férias', '', '', 0.00, 1, 'D'),
-(23, '1.1.1.007.003', '1', '1.1', '1.1.1', '1.1.1.007', 72, 'Adiantamento de 13º Salário', '', '', 0.00, 1, 'D'),
-(24, '1.1.1.099', '1', '1.1', '1.1.1', '1.1.1.099', 0, 'Outros Créditos', '', '', 0.00, 1, 'D'),
-(25, '1.1.1.099.001', '1', '1.1', '1.1.1', '1.1.1.099', 150, 'Créditos em Circulação', '', '', 0.00, 1, 'D'),
-(26, '1.2', '1', '1.2', '1.2', '1.2', 0, 'Ativo Permanete', '', '', 0.00, 1, 'D'),
-(27, '1.2.1', '1', '1.2', '1.2.1', '1.2.1', 0, 'Imobilizado', '', '', 0.00, 1, 'D'),
-(28, '1.2.1.001', '1', '1.2', '1.2.1', '1.2.1.001', 0, 'Matriz', '', '', 0.00, 1, 'D'),
-(29, '1.2.1.001.005', '1', '1.2', '1.2.1', '1.2.1.001', 164, 'Templo Sede', '', '', 0.00, 1, 'D'),
-(30, '1.2.1.001.001', '1', '1.2', '1.2.1', '1.2.1.001', 160, 'Móveis e Utensílios - Sede', '', '', 0.00, 1, 'D'),
-(31, '1.2.1.001.002', '1', '1.2', '1.2.1', '1.2.1.001', 161, 'Máquinas e Equipamentos - Sede', '', '', 0.00, 1, 'D'),
-(32, '1.2.1.001.003', '1', '1.2', '1.2.1', '1.2.1.001', 162, 'Veículos', '', '', 0.00, 1, 'D'),
-(33, '1.2.1.001.004', '1', '1.2', '1.2.1', '1.2.1.001', 163, 'Aquisição Terrenos - Sede', '', '', 0.00, 1, 'D'),
-(34, '1.2.1.002', '1', '1.2', '1.2.1', '1.2.1.002', 0, 'Congregações', '', '', 0.00, 1, 'D'),
-(35, '1.2.1.002.001', '1', '1.2', '1.2.1', '1.2.1.002', 170, 'Móveis e Utensílios - Congregação', '', '', 0.00, 1, 'D'),
-(36, '1.2.1.002.002', '1', '1.2', '1.2.1', '1.2.1.002', 171, 'Aquisição Terrenos - Congregações', '', '', 0.00, 1, 'D'),
-(37, '1.2.1.002.003', '1', '1.2', '1.2.1', '1.2.1.002', 172, 'Instalações de Equipamentos - Congregações', '', '', 0.00, 1, 'D'),
-(38, '1.2.1.002.004', '1', '1.2', '1.2.1', '1.2.1.002', 173, 'Máquinas e Equipamentos - Congregação', '', '', 0.00, 1, 'D'),
-(39, '1.2.1.002.005', '1', '1.2', '1.2.1', '1.2.1.002', 174, 'Templos', '', '', 0.00, 1, 'D'),
-(40, '1.3', '1', '1.3', '1.3', '1.3', 0, 'Investimentos', '', '', 0.00, 1, 'D'),
-(41, '2', '2', '2', '2', '2', 0, 'Passivo', '', '', 0.00, 1, 'C'),
-(42, '2.1', '2', '2.1', '2.1', '2.1', 0, 'Passivo Circulante', '', '', 0.00, 1, 'C'),
-(43, '2.1.1', '2', '2.1', '2.1.1', '2.1.1', 0, 'Fornecedores', '', '', 0.00, 1, 'C'),
-(44, '2.1.1.001', '2', '2.1', '2.1.1', '2.1.1.001', 0, 'Sede e Congregações - Contas a Pagar', '', 'Dívidas a pagar', 0.00, 1, 'C'),
-(45, '2.1.1.001.001', '2', '2.1', '2.1.1', '2.1.1.001', 300, 'Kiluz - Mat. Elétrico Ltda.  a Pagar', '', 'Dívidas a pagar', 0.00, 1, 'C'),
-(46, '2.1.1.001.002', '2', '2.1', '2.1.1', '2.1.1.001', 301, 'Tocmix a Pagar', '', 'Dívidas a pagar', 0.00, 1, 'C'),
-(47, '2.1.1.001.003', '2', '2.1', '2.1.1', '2.1.1.001', 302, 'Geraldo - Mat. de Construção a Pagar', '', 'Dívidas a pagar', 0.00, 1, 'C'),
-(48, '2.1.1.001.004', '2', '2.1', '2.1.1', '2.1.1.001', 303, 'Lojão da Econômica - Mat. de Construção a Pagar', '', 'Dívidas a pagar', 0.00, 1, 'C'),
-(49, '2.1.2', '2', '2.1', '2.1.2', '2.1.2', 0, 'Credores Diversos', '', '', 0.00, 1, 'C'),
-(50, '2.1.2.001', '2', '2.1', '2.1.2', '2.1.2.001', 0, 'Sede e Congregações', '', '', 0.00, 1, 'C'),
-(51, '2.1.3', '2', '2.1', '2.1.3', '2.1.3', 0, 'Obrigações Sociais', '', '', 0.00, 1, 'C'),
-(52, '2.1.3.001', '2', '2.1', '2.1.3', '2.1.3.001', 0, 'Sede e Congregações', '', '', 0.00, 1, 'C'),
-(53, '2.1.3.001.001', '2', '2.1', '2.1.3', '2.1.3.001', 304, 'MPS - Previdência Social - A Recolher', '', '', 0.00, 1, 'C'),
-(54, '2.1.3.001.002', '2', '2.1', '2.1.3', '2.1.3.001', 305, 'FGTS - Fundo de Garantia - A Recolher', '', '', 0.00, 1, 'C'),
-(55, '2.1.3.001.003', '2', '2.1', '2.1.3', '2.1.3.001', 306, 'PIS a Recolher', '', '', 0.00, 1, 'C'),
-(56, '2.1.3.001.004', '2', '2.1', '2.1.3', '2.1.3.001', 307, 'Salários a Pagar', '', '', 0.00, 1, 'C'),
-(57, '2.1.3.001.005', '2', '2.1', '2.1.3', '2.1.3.001', 308, 'Férias a Pagar', '', '', 0.00, 1, 'C'),
-(58, '2.1.3.001.006', '2', '2.1', '2.1.3', '2.1.3.001', 309, 'Vale Transporte a Pagar', '', '', 0.00, 1, 'C'),
-(59, '2.1.4', '2', '2.1', '2.1.4', '2.1.4', 0, 'Emprestimos e financiamentos', '', '', 0.00, 1, 'C'),
-(60, '2.1.4.001', '2', '2.1', '2.1.4', '2.1.4.001', 0, 'Sede e Congregações', '', '', 0.00, 1, 'C'),
-(61, '2.1.4.001.001', '2', '2.1', '2.1.4', '2.1.4.001', 330, 'Tambay Motor - Concesionária', '', '', 0.00, 1, 'C'),
-(62, '2.1.5', '2', '2.1', '2.1.5', '2.1.5', 0, 'Saldos à Pagar', '', '', 0.00, 1, 'C'),
-(71, '2.1.5.001', '2', '2.1', '2.1.5', '2.1.5.001', 0, 'Convenção Estadual', '', '', 0.00, 1, 'C'),
-(72, '2.1.5.001.001', '2', '2.1', '2.1.5', '2.1.5.001', 870, 'Saldo à Pagar SEMAD', 'Pago n/ data conf recibo nº', 'Diferenças de saldos observado após analise das entradas da Secretaria de Missões do Estado', 0.00, 1, 'C'),
-(73, '2.2', '2', '2.2', '2.2', '2.2', 0, 'Patrimônio Líquido', '', '', 0.00, 1, 'C'),
-(74, '2.2.1', '2', '2.2', '2.2.1', '2.2.1', 0, 'Patrimônio', '', '', 0.00, 1, 'C'),
-(75, '2.2.1.001', '2', '2.2', '2.2.1', '2.2.1.001', 0, 'Sede e Congregações', '', '', 0.00, 1, 'C'),
-(76, '2.2.1.001.001', '2', '2.2', '2.2.1', '2.2.1.001', 311, 'Patrimômio Social', '', '', 0.00, 1, 'C'),
-(80, '3', '3', '3', '3', '3', 0, 'DESPESAS', '', '', 0.00, 1, 'D'),
-(81, '3.1', '3', '3.1', '3.1', '3.1', 0, 'DESPESAS OPERACIONAIS', '', '', 0.00, 1, 'D'),
-(82, '3.1.1', '3', '3.1', '3.1.1', '3.1.1', 0, 'DESPESAS ECLESIÁSTICAS', '', '', 0.00, 1, 'D'),
-(83, '3.1.1.001', '3', '3.1', '3.1.1', '3.1.1.001', 0, 'DESPESAS C/ CULTOS', '', '', 0.00, 1, 'D'),
-(84, '3.1.1.001.001', '3', '3.1', '3.1.1', '3.1.1.001', 400, 'Despesas c/ Energia Elétrica', '', '', 0.00, 1, 'D'),
-(85, '3.1.1.001.002', '3', '3.1', '3.1.1', '3.1.1.001', 401, 'Água e Esgoto', '', '', 0.00, 1, 'D'),
-(86, '3.1.1.001.003', '3', '3.1', '3.1.1', '3.1.1.001', 402, 'Material de Higiene e Limpeza', '', '', 0.00, 1, 'D'),
-(87, '3.1.1.001.004', '3', '3.1', '3.1.1', '3.1.1.001', 403, 'Santa Ceia', '', '', 0.00, 1, 'D'),
-(88, '3.1.1.001.005', '3', '3.1', '3.1.1', '3.1.1.001', 404, 'Oferta Zelador', '', '', 0.00, 1, 'D'),
-(89, '3.1.1.001.006', '3', '3.1', '3.1.1', '3.1.1.001', 405, 'Aluguel e Locação', '', '', 0.00, 1, 'D'),
-(90, '3.1.1.001.007', '3', '3.1', '3.1.1', '3.1.1.001', 406, 'COMADEP - Contribuição 10%', '', 'Contribuição sobre arrecadação cultos em geral (exeto oferta missões), circ. de oração', 0.00, 1, 'D'),
-(100, '3.1.1.002', '3', '3.1', '3.1.1', '3.1.1.002', 0, 'AÇÃO SOCIAL', '', '', 0.00, 1, 'D'),
-(101, '3.1.1.002.001', '3', '3.1', '3.1.1', '3.1.1.002', 410, 'Medicamentos e Consultas', '', '', 0.00, 1, 'D'),
-(102, '3.1.1.002.002', '3', '3.1', '3.1.1', '3.1.1.002', 411, 'Generos Alimentícios', '', '', 0.00, 1, 'D'),
-(103, '3.1.1.002.003', '3', '3.1', '3.1.1', '3.1.1.002', 412, 'Auxílio Social', '', '', 0.00, 1, 'D'),
-(104, '3.1.1.002.004', '3', '3.1', '3.1.1', '3.1.1.002', 413, 'Energia Elétrica', '', '', 0.00, 1, 'D'),
-(105, '3.1.1.002.005', '3', '3.1', '3.1.1', '3.1.1.002', 414, 'Água e Esgoto', '', '', 0.00, 1, 'D'),
-(106, '3.1.1.003', '3', '3.1', '3.1.1', '3.1.1.003', 0, 'USADEBY', '', '', 0.00, 1, 'D'),
-(107, '3.1.1.003.001', '3', '3.1', '3.1.1', '3.1.1.003', 420, 'Ofertas a Pregadores', '', '', 0.00, 1, 'D'),
-(108, '3.1.1.003.002', '3', '3.1', '3.1.1', '3.1.1.003', 421, 'Passagem e Transporte', '', '', 0.00, 1, 'D'),
-(109, '3.1.1.003.003', '3', '3.1', '3.1.1', '3.1.1.003', 422, 'Presentes', '', '', 0.00, 1, 'D'),
-(110, '3.1.1.003.004', '3', '3.1', '3.1.1', '3.1.1.003', 423, 'Congressos e Eventos - Senhoras', '', '', 0.00, 1, 'D'),
-(111, '3.1.1.003.005', '3', '3.1', '3.1.1', '3.1.1.003', 424, 'Alimentação', '', '', 0.00, 1, 'D'),
-(112, '3.1.1.004', '3', '3.1', '3.1.1', '3.1.1.004', 0, 'UMADEBY', '', '', 0.00, 1, 'D'),
-(113, '3.1.1.004.001', '3', '3.1', '3.1.1', '3.1.1.004', 430, 'Ofertas a Pregadores', '', '', 0.00, 1, 'D'),
-(114, '3.1.1.004.002', '3', '3.1', '3.1.1', '3.1.1.004', 431, 'Passagem e Transporte', '', '', 0.00, 1, 'D'),
-(115, '3.1.1.004.003', '3', '3.1', '3.1.1', '3.1.1.004', 432, 'Presentes', '', '', 0.00, 1, 'D'),
-(116, '3.1.1.004.004', '3', '3.1', '3.1.1', '3.1.1.004', 433, 'Congressos e Eventos - Jovens', '', '', 0.00, 1, 'D'),
-(117, '3.1.1.004.005', '3', '3.1', '3.1.1', '3.1.1.004', 434, 'Alimentação', '', '', 0.00, 1, 'D'),
-(118, '3.1.1.005', '3', '3.1', '3.1.1', '3.1.1.005', 0, 'DEADBY - DEPARTAMENTO DE ENSINO', '', '', 0.00, 1, 'D'),
-(119, '3.1.1.005.001', '3', '3.1', '3.1.1', '3.1.1.005', 440, 'Lições bíblicas Infantil', '', '', 0.00, 1, 'D'),
-(120, '3.1.1.005.002', '3', '3.1', '3.1.1', '3.1.1.005', 441, 'Lições Bíblicas Adulto', '', '', 0.00, 1, 'D'),
-(121, '3.1.1.005.003', '3', '3.1', '3.1.1', '3.1.1.005', 442, 'Material Escolar', '', 'Despesas com quadro, canetas, cadernos, carteiras e outros do mesmo gênero', 0.00, 1, 'D'),
-(122, '3.1.1.005.004', '3', '3.1', '3.1.1', '3.1.1.005', 443, 'Passagem e Transporte', '', 'Auxílio de passagens a professores de EB e teologia da Igreja', 0.00, 1, 'D'),
-(123, '3.1.1.005.005', '3', '3.1', '3.1.1', '3.1.1.005', 444, 'Congressos e Eventos - Ensino', 'Despesas com cursos', 'Despesas com cursos, inscrições em congressos e viagens para capacitação e aperfeiçoamento de professores\r\n', 0.00, 1, 'D'),
-(124, '3.1.1.005.006', '3', '3.1', '3.1.1', '3.1.1.005', 445, 'Biblioteca', '', 'Despesas com livros para o acervo', 0.00, 1, 'D'),
-(125, '3.1.1.005.007', '3', '3.1', '3.1.1', '3.1.1.005', 446, 'Capacitação de Professores', '', '', 0.00, 1, 'D'),
-(126, '3.1.1.005.008', '3', '3.1', '3.1.1', '3.1.1.005', 447, 'Ofertas a Professores e Palestrantes', '', '', 0.00, 1, 'D'),
-(127, '3.1.1.006', '3', '3.1', '3.1.1', '3.1.1.006', 0, 'DEMADBY - DEP. DE MÚSICA', '', 'Despesas com corais, sonoplastia, professores de música e outros do gênero', 0.00, 1, 'D'),
-(128, '3.1.1.006.001', '3', '3.1', '3.1.1', '3.1.1.006', 460, 'Oferta Maestro', '', '', 0.00, 1, 'D'),
-(129, '3.1.1.006.002', '3', '3.1', '3.1.1', '3.1.1.006', 461, 'Oferta Sonoplasta', '', '', 0.00, 1, 'D'),
-(130, '3.1.2', '3', '3.1', '3.1.2', '3.1.2', 0, 'DESPESAS ADMINISTRATIVAS', '', '', 0.00, 1, 'D'),
-(131, '3.1.2.001', '3', '3.1', '3.1.2', '3.1.2.001', 0, 'ADMINISTRAÇÃO', '', '', 0.00, 1, 'D'),
-(132, '3.1.2.001.001', '3', '3.1', '3.1.2', '3.1.2.001', 501, 'Água e Esgoto', '', '', 0.00, 1, 'D'),
-(133, '3.1.2.001.002', '3', '3.1', '3.1.2', '3.1.2.001', 502, 'Energia Elétrica', '', '', 0.00, 1, 'D'),
-(134, '3.1.2.001.003', '3', '3.1', '3.1.2', '3.1.2.001', 503, 'Material de Expediente', '', 'Gastos com canetas, papeis, cartuchos, tonners e outros', 0.00, 1, 'D'),
-(135, '3.1.2.001.004', '3', '3.1', '3.1.2', '3.1.2.001', 504, 'Telefone', '', '', 0.00, 1, 'D'),
-(136, '3.1.2.001.005', '3', '3.1', '3.1.2', '3.1.2.001', 505, 'Auxílios e Ofertas', '', '', 0.00, 1, 'D'),
-(137, '3.1.2.001.006', '3', '3.1', '3.1.2', '3.1.2.001', 506, 'Combustíveis e Lubrificantes', '', 'De veículos', 0.00, 1, 'D'),
-(138, '3.1.2.001.007', '3', '3.1', '3.1.2', '3.1.2.001', 507, 'Despesas com Veículos', '', 'Manuteção, multas de trânsito, lavagem ...', 0.00, 1, 'D'),
-(139, '3.1.2.001.008', '3', '3.1', '3.1.2', '3.1.2.001', 508, 'Café e Lanches', '', '', 0.00, 1, 'D'),
-(140, '3.1.2.001.009', '3', '3.1', '3.1.2', '3.1.2.001', 509, 'Higiene e Limpeza', '', '', 0.00, 1, 'D'),
-(141, '3.1.2.001.010', '3', '3.1', '3.1.2', '3.1.2.001', 510, 'Impostos e Taxas', '', '', 0.00, 1, 'D'),
-(142, '3.1.2.001.011', '3', '3.1', '3.1.2', '3.1.2.001', 511, 'Serviços de Terceiros', '', '', 0.00, 1, 'D'),
-(143, '3.1.2.001.012', '3', '3.1', '3.1.2', '3.1.2.001', 512, 'Fretes e Carretos', '', '', 0.00, 1, 'D'),
-(144, '3.1.2.001.013', '3', '3.1', '3.1.2', '3.1.2.001', 513, 'Cópias', '', '', 0.00, 1, 'D'),
-(145, '3.1.2.001.014', '3', '3.1', '3.1.2', '3.1.2.001', 514, 'Consertos e Reparos', '', 'Serviços e peças para conserto de equipamentos', 0.00, 1, 'D'),
-(146, '3.1.2.001.015', '3', '3.1', '3.1.2', '3.1.2.001', 515, 'A definir', '', '', 0.00, 1, 'D'),
-(147, '3.1.2.001.016', '3', '3.1', '3.1.2', '3.1.2.001', 516, 'Aluguel de Imóvel', '', '', 0.00, 1, 'D'),
-(148, '3.1.2.001.017', '3', '3.1', '3.1.2', '3.1.2.001', 517, 'À definir', '', '', 0.00, 1, 'D'),
-(149, '3.1.2.001.018', '3', '3.1', '3.1.2', '3.1.2.001', 518, 'Gratificações', '', '', 0.00, 1, 'D'),
-(150, '3.1.2.001.019', '3', '3.1', '3.1.2', '3.1.2.001', 519, 'Manutenção e Conservação de Imóveis', '', 'Serviço e material para manutenção de imóvel', 0.00, 1, 'D'),
-(151, '3.1.2.001.020', '3', '3.1', '3.1.2', '3.1.2.001', 520, 'Viagens e Translados', '', '', 0.00, 1, 'D'),
-(152, '3.1.2.001.021', '3', '3.1', '3.1.2', '3.1.2.001', 521, 'Instalações', '', '', 0.00, 1, 'D'),
-(153, '3.1.2.001.022', '3', '3.1', '3.1.2', '3.1.2.001', 522, 'Hospedagens e Estadias', '', '', 0.00, 1, 'D'),
-(154, '3.1.2.001.023', '3', '3.1', '3.1.2', '3.1.2.001', 523, 'Publicidade', '', 'propagandas, Carro de som...', 0.00, 1, 'D'),
-(155, '3.1.2.001.024', '3', '3.1', '3.1.2', '3.1.2.001', 524, 'Sinistro com Veículos', '', 'Despesas com acidentes envolvendo veículos da igreja', 0.00, 1, 'D'),
-(156, '3.1.2.001.025', '3', '3.1', '3.1.2', '3.1.2.001', 525, 'Ajuda de Custo', '', '', 0.00, 1, 'D'),
-(157, '3.1.2.001.026', '3', '3.1', '3.1.2', '3.1.2.001', 526, 'Despesas com Cartório', '', 'Autenticações, escrituras ...', 0.00, 1, 'D'),
-(158, '3.1.2.001.027', '3', '3.1', '3.1.2', '3.1.2.001', 527, 'Comunicação', '', 'Programs de rádio, provedores de intenet', 0.00, 1, 'D'),
-(159, '3.1.2.001.028', '3', '3.1', '3.1.2', '3.1.2.001', 528, 'Correios e Postagens', '', '', 0.00, 1, 'D'),
-(160, '3.1.2.001.029', '3', '3.1', '3.1.2', '3.1.2.001', 529, 'Máquinas e Equipamentos', '', '', 0.00, 1, 'D'),
-(161, '3.1.2.001.030', '3', '3.1', '3.1.2', '3.1.2.001', 530, 'Móveis e Utensílios', '', '', 0.00, 1, 'D'),
-(162, '3.1.2.001.031', '3', '3.1', '3.1.2', '3.1.2.001', 531, 'A definir cta', '', '', 0.00, 1, 'D'),
-(180, '3.1.2.001.099', '3', '3.1', '3.1.2', '3.1.2.001', 549, 'Despesas Diversas', '', '', 0.00, 1, 'D'),
-(185, '3.1.2.002', '3', '3.1', '3.1.2', '3.1.2.002', 0, 'DESPESAS C/ CONSTRUÇÃO - MANUTENÇÃO', '', '', 0.00, 1, 'D'),
-(186, '3.1.2.002.001', '3', '3.1', '3.1.2', '3.1.2.002', 600, 'Materiais para Construção Civil', '', '', 0.00, 1, 'D'),
-(187, '3.1.2.002.002', '3', '3.1', '3.1.2', '3.1.2.002', 601, 'Serviços', '', '', 0.00, 1, 'D'),
-(210, '3.1.3', '3', '3.1', '3.1.3', '3.1.3', 0, 'DESPESAS COM PESSOAL', '', '', 0.00, 1, 'D'),
-(211, '3.1.3.001', '3', '3.1', '3.1.3', '3.1.3.001', 0, 'MÃO DE OBRA DIRETA', '', '', 0.00, 1, 'D'),
-(212, '3.1.3.001.001', '3', '3.1', '3.1.3', '3.1.3.001', 550, 'Salário', '', '', 0.00, 1, 'D'),
-(213, '3.1.3.001.002', '3', '3.1', '3.1.3', '3.1.3.001', 551, 'Décimo Terceiro', '', '', 0.00, 1, 'D'),
-(214, '3.1.3.001.003', '3', '3.1', '3.1.3', '3.1.3.001', 552, 'Férias', '', '', 0.00, 1, 'D'),
-(215, '3.1.3.001.004', '3', '3.1', '3.1.3', '3.1.3.001', 553, 'Encargos Sociais', '', '', 0.00, 1, 'D'),
-(216, '3.1.3.001.005', '3', '3.1', '3.1.3', '3.1.3.001', 554, 'Vale Transporte', '', '', 0.00, 1, 'D'),
-(217, '3.1.3.001.006', '3', '3.1', '3.1.3', '3.1.3.001', 555, 'Uniformes', '', '', 0.00, 1, 'D'),
-(218, '3.1.3.001.007', '3', '3.1', '3.1.3', '3.1.3.001', 556, 'Refeições', '', '', 0.00, 1, 'D'),
-(219, '3.1.3.001.008', '3', '3.1', '3.1.3', '3.1.3.001', 557, 'PIS Sobre a Folha', '', '', 0.00, 1, 'D'),
-(220, '3.1.3.001.009', '3', '3.1', '3.1.3', '3.1.3.001', 558, 'FGTS', '', '', 0.00, 1, 'D'),
-(230, '3.1.4', '3', '3.1', '3.1.4', '3.1.4', 0, 'DESPESAS TRIBUTÁRIAS', '', '', 0.00, 1, 'D'),
-(231, '3.1.4.001', '3', '3.1', '3.1.4', '3.1.4.001', 0, 'DESPESAS E MULTAS FISCAIS', '', '', 0.00, 1, 'D'),
-(232, '3.1.4.001.001', '3', '3.1', '3.1.4', '3.1.4.001', 565, 'IPTU', '', '', 0.00, 1, 'D'),
-(233, '3.1.4.001.002', '3', '3.1', '3.1.4', '3.1.4.001', 564, 'IPVA', '', '', 0.00, 1, 'D'),
-(234, '3.1.4.001.003', '3', '3.1', '3.1.4', '3.1.4.001', 559, 'IOF', '', '', 0.00, 1, 'D'),
-(235, '3.1.4.001.004', '3', '3.1', '3.1.4', '3.1.4.001', 560, 'Multas Fiscais', '', '', 0.00, 1, 'D'),
-(236, '3.1.4.001.005', '3', '3.1', '3.1.4', '3.1.4.001', 561, 'ITBI ', '', '', 0.00, 1, 'D'),
-(237, '3.1.4.001.006', '3', '3.1', '3.1.4', '3.1.4.001', 562, 'IRRF - Imposto de Renda Retido na Fonte', '', '', 0.00, 1, 'D'),
-(238, '3.1.4.001.099', '3', '3.1', '3.1.4', '3.1.4.001', 563, 'Impostos e Taxas Diversas', '', '', 0.00, 1, 'D'),
-(250, '3.1.5', '3', '3.1', '3.1.5', '3.1.5', 0, 'DESPESAS FINANCEIRAS', '', '', 0.00, 1, 'D'),
-(251, '3.1.5.001', '3', '3.1', '3.1.5', '3.1.5.001', 0, 'JUROS, MULTAS E CUSTOS FINANCEIROS', '', '', 0.00, 1, 'D'),
-(252, '3.1.5.001.001', '3', '3.1', '3.1.5', '3.1.5.001', 570, 'Juros de Mora', '', '', 0.00, 1, 'D'),
-(253, '3.1.5.001.002', '3', '3.1', '3.1.5', '3.1.5.001', 571, 'Multas Diversas', '', '', 0.00, 1, 'D'),
-(254, '3.1.5.001.003', '3', '3.1', '3.1.5', '3.1.5.001', 572, 'Taxas Bancárias', '', '', 0.00, 1, 'D'),
-(255, '3.1.5.001.004', '3', '3.1', '3.1.5', '3.1.5.001', 573, 'IOF', '', '', 0.00, 1, 'D'),
-(260, '3.2.1', '3', '3.2', '3.2.1', '3.2.1.001', 0, 'DESPESAS OPERACIONAIS DE MISSÕES', '', 'Secretaria de Missões. Despesas na compra de bíblias, cruzadas, literatura...', 0.00, 1, 'D'),
-(261, '3.2.1.001', '3', '3.2', '3.2.1', '3.2.1.001', 0, 'DESPESAS SEC. DE MISSÕES', '', 'Secretaria de Missões. Despesas na compra de bíblias, cruzadas, literatura...', 0.00, 1, 'D'),
-(262, '3.2.1.001.001', '3', '3.2', '3.2.1', '3.2.1.001', 580, 'Compra de Bíblias', '', '', 0.00, 1, 'D'),
-(263, '3.2.1.001.002', '3', '3.2', '3.2.1', '3.2.1.001', 581, 'Compra de Literaturas', '', '', 0.00, 1, 'D'),
-(264, '3.2.1.001.003', '3', '3.2', '3.2.1', '3.2.1.001', 574, 'Oferta a Pregadores - Missões', '', '', 0.00, 1, 'D'),
-(265, '3.2.1.001.004', '3', '3.2', '3.2.1', '3.2.1.001', 575, 'Despesas com Cruzadas - Missões', '', '', 0.00, 1, 'D'),
-(266, '3.2.1.001.005', '3', '3.2', '3.2.1', '3.2.1.001', 576, 'SEMAD - Contrib. Sec. de Missões 40%', '', 'Contribuição da Sec. de Missões local a sede da convenção - indice de 40% das arrecadações', 0.00, 1, 'D'),
-(300, '4', '4', '4', '4', '4', 0, 'RECEITAS', '', '', 0.00, 1, 'C'),
-(301, '4.1', '4', '4.1', '4.1', '4.1', 0, 'RECEITAS OPERACIONAIS', '', '', 0.00, 1, 'C'),
-(302, '4.1.1', '4', '4.1', '4.1.1', '4.1.1', 0, 'SEDE E CONGREGAÇÕES', '', '', 0.00, 1, 'C'),
-(303, '4.1.1.001', '4', '4.1', '4.1.1', '4.1.1.001', 0, 'RECEITA DE CULTOS', '', '', 0.00, 1, 'C'),
-(304, '4.1.1.001.001', '4', '4.1', '4.1.1', '4.1.1.001', 700, 'Dízimos', 'dízimos', '', 0.00, 1, 'C'),
-(305, '4.1.1.001.002', '4', '4.1', '4.1.1', '4.1.1.001', 701, 'Ofertas de cultos', 'ofertas', '', 0.00, 1, 'C'),
-(306, '4.1.1.001.003', '4', '4.1', '4.1.1', '4.1.1.001', 702, 'Ofertas Extras', 'ofertas extras', '', 0.00, 1, 'C'),
-(307, '4.1.1.001.004', '4', '4.1', '4.1.1', '4.1.1.002', 703, 'Outras Arrecadações em Cultos', 'ofertas', '', 0.00, 1, 'C'),
-(308, '4.1.1.001.005', '4', '4.1', '4.1.1', '4.1.1.001', 704, 'Votos em Cultos', 'votos', '', 0.00, 1, 'C'),
-(320, '4.1.1.002', '4', '4.1', '4.1.1', '4.1.1.002', 0, 'RECEITAS USADEBY', '', '', 0.00, 1, 'C'),
-(321, '4.1.1.002.001', '4', '4.1', '4.1.1', '4.1.1.002', 720, 'Ofertas em Circ. de Oração - Adulto', 'ofertas (Senhoras)', '', 0.00, 1, 'C'),
-(322, '4.1.1.002.002', '4', '4.1', '4.1.1', '4.1.1.002', 721, 'Votos em Circ. de Oração', 'votos em circ. de oração', '', 0.00, 1, 'C'),
-(323, '4.1.1.002.003', '4', '4.1', '4.1.1', '4.1.1.002', 722, 'Ofertas de Cultos - Senhoras', 'ofertas (Senhoras)', 'Ofertas de Cultos de Senhoras na Sede e congregações', 0.00, 1, 'C'),
-(325, '4.1.1.002.005', '4', '4.1', '4.1.1', '4.1.1.002', 724, 'ofertas extras de circ. de oração', 'ofertas (Senhoras)', '', 0.00, 1, 'C'),
-(326, '4.1.1.002.006', '4', '4.1', '4.1.1', '4.1.1.002', 726, 'Sobras de Vendas para Congresso', 'Sobras de Vendas', 'Sobras de Vendas para Congresso\',\'Sobra da venda de camisas, lanches, doações e outros relacionados, para realização do congresso ou outras festividades das Senhoras', 0.00, 1, 'C'),
-(330, '4.1.1.002.099', '4', '4.1', '4.1.1', '4.1.1.002', 725, 'Outras Arrecadações em Circ. de Oração', 'ofertas (Senhoras)', '', 0.00, 1, 'C'),
-(331, '4.1.1.003', '4', '4.1', '4.1.1', '4.1.1.003', 0, 'RECEITAS DE CAMPANHAS ', '', '', 0.00, 1, 'C'),
-(332, '4.1.1.003.001', '4', '4.1', '4.1.1', '4.1.1.003', 730, 'Joaquim Fernades - Compra e Construção', 'campanha (Joaquim Fernades)', 'Arrecadação para compra e/ou construção da nova congregação', 0.00, 1, 'C'),
-(333, '4.1.1.003.002', '4', '4.1', '4.1.1', '4.1.1.003', 731, 'Templo Sede - Casas para ampliação', 'campanha das casas', 'Compra de casa para ampliação do templo sede', 0.00, 1, 'C'),
-(334, '4.1.1.003.003', '4', '4.1', '4.1.1', '4.1.1.003', 732, 'Andreazza I - Reforma', 'campanha (Andreazza I )', 'Campanha para reforma da igreja realizada pelos irmãos', 0.00, 1, 'C'),
-(400, '4.1.1.004', '4', '4.1', '4.1.1', '4.1.1.004', 0, 'DEADBY - DEPARTAMENTO DE ENSINO', '', '', 0.00, 1, 'C'),
-(401, '4.1.1.004.001', '4', '4.1', '4.1.1', '4.1.1.004', 800, 'Ofertas - Escola Bíblica', 'ofertas p/ ensino', '', 0.00, 1, 'C'),
-(402, '4.1.1.004.002', '4', '4.1', '4.1.1', '4.1.1.004', 801, 'Ofertas - Corpo de Professores', 'ofertas p/ ensino', '', 0.00, 1, 'C'),
-(403, '4.1.1.004.003', '4', '4.1', '4.1.1', '4.1.1.004', 802, 'Outras Arrecadações - Dep. de Ensino', 'ofertas p/ ensino', '', 0.00, 1, 'C'),
-(404, '4.1.1.004.004', '4', '4.1', '4.1.1', '4.1.1.004', 803, 'Arrecadações p/ pgto de Revista da EBD', 'coleta pgto revistas EBD', 'Arrecadações p/ pgto de Revista da EBD\',\'A igreja compra e repassa a preço de custo as revistas adquiridas diretamente na CPDA, além de custear todas as de criança', 0.00, 1, 'C'),
-(420, '4.1.2', '4', '4.1', '4.1.2', '4.1.2', 0, 'MISSÕES', '', '', 0.00, 1, 'C'),
-(421, '4.1.2.001', '4', '4.1', '4.1.2', '4.1.2.001', 0, 'SEDE E CONGREGAÇÕES - MISSÕES', '', '', 0.00, 1, 'C'),
-(422, '4.1.2.001.001', '4', '4.1', '4.1.2', '4.1.2.001', 820, 'Ofertas de Missões -  Cultos na Sede', 'missões', '', 0.00, 1, 'C'),
-(423, '4.1.2.001.002', '4', '4.1', '4.1.2', '4.1.2.001', 821, 'Ofertas de Missões -  Cultos nas Congregações', 'missões', '', 0.00, 1, 'C'),
-(424, '4.1.2.001.003', '4', '4.1', '4.1.2', '4.1.2.001', 822, 'Ofertas de Missões -  Carnês', 'missões', '', 0.00, 1, 'C'),
-(425, '4.1.2.001.004', '4', '4.1', '4.1.2', '4.1.2.001', 823, 'Ofertas de Missões -  Cofre', 'missões', '', 0.00, 1, 'C'),
-(426, '4.1.2.001.005', '4', '4.1', '4.1.2', '4.1.2.001', 824, 'Ofertas de Missões -  Envelopes', 'missões', '', 0.00, 1, 'C'),
-(427, '4.1.2.001.007', '4', '4.1', '4.1.2', '4.1.2.001', 825, 'Votos para Missões', 'missões', '', 0.00, 1, 'C'),
-(440, '4.1.2.001.099', '4', '4.1', '4.1.2', '4.1.2.001', 826, 'Outras Arrecadações - Cultos de Missões', 'missões', '', 0.00, 1, 'C'),
-(460, '4.2', '4', '4.2', '4.2', '4.2', 0, 'RECEITAS NÃO OPERACIONAIS', '', '', 0.00, 1, 'C'),
-(461, '4.2.1', '4', '4.2', '4.2.1', '4.2.1', 0, 'OUTRAS RECEITAS', '', '', 0.00, 1, 'C'),
-(462, '4.2.1.001', '4', '4.2', '4.2.1', '4.2.1.001', 0, 'RECEITAS DIVERSAS - SEDE E CONGREGAÇÕES', '', '', 0.00, 1, 'C'),
-(463, '4.2.1.001.001', '4', '4.2', '4.2.1', '4.2.1.001', 840, 'Arrecadação - Revistas Esc. Bíblica', 'coleta pgto revistas EBD', 'Arrecadação pela compra de revistas bíblicas', 0.00, 1, 'C'),
-(464, '4.2.1.001.002', '4', '4.2', '4.2.1', '4.2.1.001', 841, 'Sobras de Vendas - Custear Eventos', 'sobras vendas pgto eventos', 'Venda de camisas e blusas para custear eventos de qualquer natureza', 0.00, 1, 'C'),
-(480, '4.2.1.002', '4', '4.2', '4.2.1', '4.2.1.002', 0, 'RECEITAS FINANCEIRAS', '', '', 0.00, 1, 'C'),
-(481, '4.2.1.002.001', '4', '4.2', '4.2.1', '4.2.1.002', 860, 'Rendimentos Sobre Aplicações ', 'Rendimentos de poupança', 'Poupança e outras aplicações', 0.00, 1, 'C'),
-(482, '1.1.1.001.008', '1', '1.1', '1.1.1', '1.1.1.001', 8, 'Caixa Mocidade', '', 'Referente cultos, ofertas e orações de mocidade', 0.00, 1, 'D'),
-(483, '3.1.3.002', '3', '3.1', '3.1.3', '3.1.3.002', 0, 'DESPESAS COM SECRETARIA E MINISTÉRIO', '', '', 0.00, 1, 'D'),
-(484, '3.1.3.002.001', '3', '3.1', '3.1.3', '3.1.3.002', 880, 'Oferta a Dirigentes de Congregação', '', '', 0.00, 1, 'D'),
-(485, '3.1.3.002.002', '3', '3.1', '3.1.3', '3.1.3.002', 881, 'Ministério', '', '', 0.00, 1, 'D'),
-(486, '3.1.2.002.003', '3', '3.1', '3.1.2', '3.1.2.002', 602, 'Alimentação trabalhadores da construção civil', '', 'Gastos com alimentação relacionadas a construção civil e assemelhados ', 0.00, 1, 'D'),
-(487, '3.1.2.001.032', '3', '3.1', '3.1.2', '3.1.2.001', 532, 'Serviço de Segurança', '', 'Guarda e segurança de terceiros nas igrejas', 0.00, 1, 'D'),
-(490, '4.1.1.005', '4', '4.1', '4.1.1', '4.1.1.005', 0, 'RECEITA UMADEBY', '', 'Todas as entradas relacionadas as arrecadações de mocidade', 0.00, 1, 'C'),
-(491, '4.1.1.005.001', '4', '4.1', '4.1.1', '4.1.1.005', 900, 'Ofertas em Circ. de Oração - Mocidade', 'ofertas mocidade', 'Circulo de oração da mocidade', 0.00, 1, 'C'),
-(492, '4.1.1.005.007', '4', '4.1', '4.1.1', '4.1.1.005', 906, 'Sobras de Vendas - UMADEBY', '', '', 0.00, 1, 'C'),
-(493, '4.2.1.001.003', '4', '4.2', '4.2.1', '4.2.1.001', 842, 'Sobras de Vendas p/ Custear Eventos - UMADEBY', 'sobras vendas pgto eventos', 'Vendas de Camisas, cantinas e assemelhados para custear qualquer tipo de evento da União da Mocidade', 0.00, 1, 'C'),
-(494, '4.2.1.001.004', '4', '4.2', '4.2.1', '4.2.1.001', 843, 'Sobras de Vendas p/ Custear Eventos - USADEBY', 'sobras vendas pgto eventos', 'Vendas de Camisas, cantinas e assemelhados para custear qualquer tipo de evento da União da Mocidade', 0.00, 1, 'C'),
-(495, '3.1.4.001.007', '3', '3.1', '3.1.4', '3.1.4.001', 566, 'MPS - Previdência Social', '', 'Contribuições sociais dos contribuintes da Previdência Social', 0.00, 1, 'D'),
-(496, '4.1.1.003.004', '4', '4.1', '4.1.1', '4.1.1.003', 733, 'Balbino de Mendonça - Campanha', 'campanha (Balbino )', 'Campanha realizada pela congregação para compra de algum equipamento, móvel ou qualquer objeto, desde que autorizado pelo Pastor da cidade', 0.00, 1, 'C'),
-(497, '3.1.1.005.009', '3', '3.1', '3.1.1', '3.1.1.005', 448, 'Curso de Teologia', '', 'Investimento em Curso de teologia para membros da igreja', 0.00, 1, 'D'),
-(498, '3.1.1.001.008', '3', '3.1', '3.1.1', '3.1.1.001', 407, 'Som - Manutenção e Consertos', '', 'Reparo, Manutenção, compra de peças para os equipamentos de som de uso exclusivo da congregação', 0.00, 1, 'D'),
-(499, '3.1.1.006.003', '3', '3.1', '3.1.1', '3.1.1.006', 462, 'Professores de Música', '', 'Pgto a professores e instrutores de música, hora aula, e outras despesas relacionadas', 0.00, 1, 'D'),
-(500, '4.1.1.005.002', '4', '4.1', '4.1.1', '4.1.1.005', 901, 'Setor I - Rubem', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor I, para composição de seu caixa', 0.00, 1, 'C'),
-(501, '4.1.1.005.003', '4', '4.1', '4.1.1', '4.1.1.005', 902, 'Setor II - Zebulom', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor II, para composição de seu caixa', 0.00, 1, 'C'),
-(502, '4.1.1.005.004', '4', '4.1', '4.1.1', '4.1.1.005', 903, 'Setor III - Azer', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor III, para composição de seu caixa', 0.00, 1, 'C'),
-(503, '4.1.1.005.005', '4', '4.1', '4.1.1', '4.1.1.005', 904, 'Setor IV - Juda', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor IV, para composição de seu caixa', 0.00, 1, 'C'),
-(504, '1.1.1.001.009', '1', '1.1', '1.1.1', '1.1.1.001', 9, 'Caixa Mocidade Setor I - Rubem', '', 'Arrecadação realizada pela mocidade do setor I, para composição de seu caixa', 0.00, 1, 'D'),
-(505, '1.1.1.001.010', '1', '1.1', '1.1.1', '1.1.1.001', 10, 'Caixa Mocidade Setor II - Zebulom', '', 'Arrecadação realizada pela mocidade do setor II, para composição de seu caixa', 0.00, 1, 'D'),
-(506, '1.1.1.001.011', '1', '1.1', '1.1.1', '1.1.1.001', 11, 'Caixa Mocidade Setor III - Azer', '', 'Arrecadação realizada pela mocidade do setor III, para composição de seu caixa', 0.00, 1, 'D'),
-(507, '1.1.1.001.012', '1', '1.1', '1.1.1', '1.1.1.001', 12, 'Caixa Mocidade Setor IV - Juda', '', 'Arrecadação realizada pela mocidade do setor IV, para composição de seu caixa', 0.00, 1, 'D'),
-(508, '3.1.1.001.009', '3', '3.1', '3.1.1', '3.1.1.001', 408, 'Predial - Manutenção e Conservação', 'Pago conf. comprovantes', 'Reparos e material para conservação do imóvel e equipamentos elétricos da igreja', 0.00, 1, 'D'),
-(509, '4.1.1.006', '4', '4.1', '4.1.1', '4.1.1.006', 0, 'DEPARTAMENTO INFANTIL', '', 'Receitas das ofertas: nos círculos de orações de crianças, dos cultos de crianças e nos eventos voltados especificamente infantil', 0.00, 1, 'C'),
-(510, '4.1.1.006.001', '4', '4.1', '4.1.1', '4.1.1.006', 950, 'Ofertas em Circ. de Oração - Infantil', 'ofertas infantil', 'Circulo de orações da Sede e congregações', 0.00, 1, 'C'),
-(511, '4.1.1.006.002', '4', '4.1', '4.1.1', '4.1.1.006', 951, 'Votos em Circ. Oração - Infantil', 'votos infantil', 'Votos em Circ. Oração de crianças na Sede e congregações', 0.00, 1, 'C'),
-(512, '4.1.1.006.003', '4', '4.1', '4.1.1', '4.1.1.006', 952, 'Ofertas Extras - Infantil', 'ofertas infantil', 'Ofertas Extras nos cultos e círculos de orações de crianças', 0.00, 1, 'C'),
-(513, '4.1.1.006.004', '4', '4.1', '4.1.1', '4.1.1.006', 953, 'Ofertas de Cultos - Infantil', 'ofertas infantil', 'Ofertas de cultos de crianças', 0.00, 1, 'C'),
-(514, '4.1.1.005.006', '4', '4.1', '4.1.1', '4.1.1.005', 905, 'Ofertas de Cultos - Mocidade', 'ofertas mocidade', 'Ofertas de Cultos de jovens', 0.00, 1, 'C'),
-(515, '4.1.1.003.005', '4', '4.1', '4.1.1', '4.1.1.003', 734, 'São Vicente - Construção', 'campanha (São Vicente - Construção )', 'Campanha para ajudar na construção da nova congregação', 0.00, 1, 'C'),
-(516, '3.1.1.007', '3', '3.1', '3.1.1', '3.1.1.007', 0, 'DEPARTAMENTO INFANTIL', '', 'Despesas com eventos de crianças, não incluindo escola bíblica', 0.00, 1, 'D'),
-(517, '3.1.1.007.001', '3', '3.1', '3.1.1', '3.1.1.007', 980, 'Ofertas a Pregadores', '', 'Ofertas a Pregadores para cultos e eventos para crianças.', 0.00, 1, 'D'),
-(518, '4.2.1.001.005', '4', '4.2', '4.2.1', '4.2.1.001', 844, 'Sobras de Vendas p/ Custear Eventos - Setor I', 'sobras vendas', '', 0.00, 1, 'C'),
-(519, '4.2.1.001.006', '4', '4.2', '4.2.1', '4.2.1.001', 845, 'Sobras de Vendas p/ Custear Eventos - Setor II', 'sobras vendas', '', 0.00, 1, 'C'),
-(522, '4.2.1.001.007', '4', '4.2', '4.2.1', '4.2.1.001', 846, 'Sobras de Vendas p/ Custear Eventos - Setor III', 'sobras vendas', '', 0.00, 1, 'C'),
-(523, '4.2.1.001.008', '4', '4.2', '4.2.1', '4.2.1.001', 847, 'Sobras de Vendas p/ Custear Eventos - Setor IV', 'sobras vendas', '', 0.00, 1, 'C'),
-(524, '4.2.1.001.009', '4', '4.2', '4.2.1', '4.2.1.001', 848, 'USADEBY - Congressos, Sobras de Vendas', 'sobras vendas', '', 0.00, 1, 'C'),
-(525, '3.2.1.001.006', '3', '3.2', '3.2.1', '3.2.1.001', 577, 'Assinaturas - Revista e Jornais', '', '', 0.00, 1, 'D'),
-(526, '3.1.2.002.004', '3', '3.1', '3.1.2', '3.1.2.002', 603, 'Locação de Máquinas e Equipamentos', '', 'Aluguel de: andaimes, betoneira, fretes para transporte de material, etc.', 0.00, 1, 'D'),
-(527, '4.2.1.001.010', '4', '4.2', '4.2.1', '4.2.1.001', 849, 'Doações para Congressos e Eventos - Diversos', 'Ofertas extras', 'Doações e ofertas para congressos em geral', 0.00, 1, 'C'),
-(528, '4.2.1.001.011', '4', '4.2', '4.2.1', '4.2.1.001', 850, 'Campanhas p/ Compra de Equipamentos', 'campanha', 'Contribuições de membros ou simpatizantes para aquisição de equipamentos de qualquer natureza para uso na congregação', 0.00, 1, 'C'),
-(529, '2.1.1.001.099', '2', '2.1', '2.1.1', '2.1.1.001', 350, 'Contas a Pagar', 'Reconhecimento de dívidas a pagar', '', 0.00, 1, 'C'),
-(530, '3.2.1.001.007', '3', '3.2', '3.2.1', '3.2.1.001', 578, 'Administração Missões - Salários ', 'Pgto de despesas administrativas', 'Pgto de salário ou pró-labore da diretoria', 0.00, 1, 'D'),
-(531, '3.2.1.001.008', '3', '3.2', '3.2.1', '3.2.1.001', 579, 'Ajuda de Custos - Missões', 'Pgto de despesas para ajuda de custos em eventos de missões', 'Pgto de despesas para ajuda de custos em eventos de missões, tipo café, translado, hotel, táxi etc', 0.00, 1, 'D'),
-(532, '3.1.1.001.010', '3', '3.1', '3.1.1', '3.1.1.001', 409, 'Oferta à Pregadores', 'Auxílio para pregadores do culto', '\0', 0.00, 1, 'D'),
-(533, '1.2.1.001.006', '1', '1.2', '1.2.1', '1.2.1.001', 165, 'Instalações de Equipamentos - Sede', 'Material para manutenção predial - Sede', '', 0.00, 1, 'D'),
-(534, '3.1.2.002.005', '3', '3.1', '3.1.2', '3.1.2.002', 604, 'Material Elétrico', '', 'Despesas com material elétrico para manutenção, reforma e construção de Igrejas', 0.00, 1, 'D'),
-(535, '3.1.1.001.011', '3', '3.1', '3.1.1', '3.1.1.001', 750, 'Maquinas e Equipamentos - Manutenção e Consertos', 'Consertos de equipamentos', 'Conserto de maquinas e equipamento, exceto som, tais com ventiladores, motores e outros', 0.00, 1, 'D'),
-(536, '3.2.1.001.009', '3', '3.2', '3.2.1', '3.2.1.001', 582, 'Programas de Rádio', '', '', 0.00, 1, 'D'),
-(537, '3.1.1.008', '3', '3.1', '3.1.1', '3.1.1.008', 0, 'MANUTENÇÃO E CONSERVAÇÃO DE TEMPLOS', '', 'Material elétrico e construção civil', 0.00, 1, 'D'),
-(538, '3.1.1.008.001', '3', '3.1', '3.1.1', '3.1.1.008', 1000, 'Material de Construção Civil', '', '', 0.00, 1, 'D'),
-(539, '3.1.1.008.002', '3', '3.1', '3.1.1', '3.1.1.008', 1001, 'Material Elétrico', '', '', 0.00, 1, 'D'),
-(540, '3.1.1.008.003', '3', '3.1', '3.1.1', '3.1.1.008', 1002, 'Material Hidráulico ', '', '', 0.00, 1, 'D'),
-(541, '3.1.1.008.004', '3', '3.1', '3.1.1', '3.1.1.008', 1003, 'Mão de Obra', '', '', 0.00, 1, 'D'),
-(542, '3.1.1.008.005', '3', '3.1', '3.1.1', '3.1.1.008', 1004, 'Serviços', '', '', 0.00, 1, 'D'),
-(543, '3.1.3.003', '3', '3.1', '3.1.3', '3.1.3.003', 0, 'MANUTENÇÃO PASTORAL', '', '', 0.00, 1, 'D'),
-(544, '3.1.3.003.001', '3', '3.1', '3.1.3', '3.1.3.003', 1010, 'Oferta Administrativa', '', '', 0.00, 1, 'D'),
-(545, '3.1.3.002.003', '3', '3.1', '3.1.3', '3.1.3.002', 882, 'Secretaria', '', '', 0.00, 1, 'D'),
-(546, '3.1.3.002.004', '3', '3.1', '3.1.3', '3.1.3.002', 883, 'Tesouraria', '', '', 0.00, 1, 'D'),
-(547, '3.1.3.003.002', '3', '3.1', '3.1.3', '3.1.3.003', 1011, 'Construção Civil', '', '', 0.00, 1, 'D'),
-(548, '3.1.3.003.099', '3', '3.1', '3.1.3', '3.1.3.003', 1012, 'Outras Despesas Pastorais', '', '', 0.00, 1, 'D'),
-(549, '3.1.3.004', '3', '3.1', '3.1.3', '3.1.3.004', 0, 'VOLUNTÁRIOS', '', '', 0.00, 1, 'D'),
-(550, '3.1.3.004.001', '3', '3.1', '3.1.3', '3.1.3.004', 1020, 'Tesoureiros - Passagens', '', '', 0.00, 1, 'D'),
-(551, '3.1.3.004.002', '3', '3.1', '3.1.3', '3.1.3.004', 1021, 'Zeladores - Ajuda de custos', '', '', 0.00, 1, 'D'),
-(553, '3.1.1.003.006', '3', '3.1', '3.1.1', '3.1.1.003', 425, 'Dirigentes Circ. de Oração - Passagem', '', '', 0.00, 1, 'D'),
-(554, '3.1.1.008.006', '3', '3.1', '3.1.1', '3.1.1.008', 1005, 'Aluguel e Locação de Máquinas e Equipamentos', '', '', 0.00, 1, 'D'),
-(555, '4.2.1.001.012', '4', '4.2', '4.2.1', '4.2.1.001', 851, 'Oferta p/ Pgto de Ônibus', 'Contribuição p/ locação de ônibus', '', 0.00, 1, 'C'),
-(556, '3.1.1.007.002', '3', '3.1', '3.1.1', '3.1.1.007', 981, 'Congresso e Eventos - Crianças', 'Despesas com festividades', 'Despesas com festividades dos eventos e congressos de crinças', 0.00, 1, 'D'),
-(557, '3.2.1.001.010', '3', '3.2', '3.2.1', '3.2.1.001', 583, 'Congressos e Eventos - Missões', '', 'Despesas com eventos, festas e congressos em geral', 0.00, 1, 'D'),
-(558, '3.1.3.002.005', '3', '3.1', '3.1.3', '3.1.3.002', 884, 'Festas, Aniversários e Eventos - Ministério', 'Comemoração', 'Festas, aniversários e eventos em geral, na Sede e congregações', 0.00, 1, 'D'),
-(559, '1.1.1.008', '1', '1.1', '1.1.1', '1.1.1.008', 0, 'Adiantamento a Fornecedoes', '', ' os adiantamentos efetuados a fornecedores de produtos como móveis, máquinas, construção,registrados nessa conta. Sendo baixa efetuada por ocasião do efetivo recebimento do material ou bem, registrando-se o custo total na correspondente conta, e caso haja saldo a pagar, na conta Fornecedores, no passivo circulante', 0.00, 1, 'D'),
-(562, '1.1.1.008.001', '1', '1.1', '1.1.1', '1.1.1.008', 1050, 'Construção Civil', 'Adiatemento para aquisição de material', 'Materiais para construção civil em geral, como tijolo, areia, pedra, entre outros', 0.00, 1, 'D'),
-(563, '1.1.1.008.002', '1', '1.1', '1.1.1', '1.1.1.008', 1051, 'Móveis e Utensílios', '', 'Contabilização de adiantamentos para compra de bancos para nave da igreja e demais móveis', 0.00, 1, 'D'),
-(564, '1.1.1.008.003', '1', '1.1', '1.1.1', '1.1.1.008', 1052, 'Produtos de Limpeza', 'Adiatemento para aquisição de material de limpeza', 'Adiantamento para compra de água sanitária, sabão em pó, pano de chão e outros materiais relacionados', 0.00, 1, 'D'),
-(565, '1.1.1.008.004', '1', '1.1', '1.1.1', '1.1.1.008', 1053, 'Manutenções em Máquinas e Equipamentos', 'Adiantamentos para consertos de equipamentos', 'Adiantamentos para consertos de equipamentos e maquinas de som, aparelhos de ar condicionado, bebedouros e outros relacionados', 0.00, 1, 'D'),
-(566, '4.2.1.001.013', '4', '4.2', '4.2.1', '4.2.1.001', 852, 'UMADEBY - Zebulom Setor II', 'sobras de vendas p/ eventos', '', 0.00, 1, 'C'),
-(567, '3.1.1.002.006', '3', '3.1', '3.1.1', '3.1.1.002', 751, 'Construção Civil', 'auxílio para construção', 'Auxílio para construções em alvenaria e similares', 0.00, 1, 'D'),
-(568, '3.1.1.008.007', '3', '3.1', '3.1.1', '3.1.1.008', 1006, 'Forro - Material e Mão de Obra', 'Material e instalação de forros ', '', 0.00, 1, 'D'),
-(570, '4.2.1.001.014', '4', '4.2', '4.2.1', '4.2.1.001', 853, 'Doações - USADEBY', 'Recebimento de ofertas para eventos de senhoras', 'Doações e ofertas de qualquer natureza para congressos e eventos de senhoras', 0.00, 1, 'C'),
-(577, '1.2.1.001.007', '1', '1.2', '1.2.1', '1.2.1.001', 166, 'Aparelhos e Equipamentos de Som - Sede', 'Compras de equipamento e manutenção', 'Contabilizar compras de equipamentos de sonorização da sede', 0.00, 1, 'D'),
-(578, '1.2.1.002.006', '1', '1.2', '1.2.1', '1.2.1.002', 175, 'Aparelhos e Equipamentos de Som - Congregação', 'Compras de equipamento de som e assemelhados', 'Contabilizar compras e manutenção de equipamentos de sonorização nas congregações', 0.00, 1, 'D'),
-(579, '3.1.2.001.033', '3', '3.1', '3.1.2', '3.1.2.001', 533, 'Internet', 'Gasto com internet', 'Despesas com internet e comunicação de dados', 0.00, 1, 'D'),
-(580, '3.1.1.003.007', '3', '3.1', '3.1.1', '3.1.1.003', 426, 'Telefone Diretoria', 'Gasto com telefone', 'Despesas com telefones da diretoria da usaDeby', 0.00, 1, 'D'),
-(581, '3.1.3.004.003', '3', '3.1', '3.1.3', '3.1.3.004', 1022, 'Portaria e vigilante', '', '', 0.00, 1, 'D'),
-(582, '3.1.3.004.004', '3', '3.1', '3.1.3', '3.1.3.004', 1023, 'Ajuda de custos a voluntários', '', '', 0.00, 1, 'D'),
-(583, '3.1.3.001.010', '3', '3.1', '3.1.3', '3.1.3.001', 620, 'Previdência Social', 'Despesas com previdência social do trabalhadores registrados', 'Gasto com previdência', 0.00, 1, 'D'),
-(584, '3.1.2.001.034', '3', '3.1', '3.1.2', '3.1.2.001', 670, 'Presentes', 'Compra do presente', 'Compras de presentes - Despesas administrativas', 0.00, 1, 'D'),
-(585, '3.2.1.001.011', '3', '3.2', '3.2.1', '3.2.1.001', 584, 'Som p/ Evangelismo - Manutenção', 'Pago manuteção som de missões', 'Manutenções em geral dos equipamentos e instrumentos musicais pagos pela sec. de Missões', 0.00, 1, 'D'),
-(586, '3.1.1.003.008', '3', '3.1', '3.1.1', '3.1.1.003', 427, 'Diretoria e Departamentos de Senhoras', 'Pago ajuda de custos', 'Pgto de ajudas de custos para direção e departamentos da USADEY', 0.00, 1, 'D'),
-(587, '3.1.3.003.003', '3', '3.1', '3.1.3', '3.1.3.003', 1013, 'Previdência Privada', 'Pago', 'Despesas com previdência privada do Pastor da igreja', 0.00, 1, 'D'),
-(588, '3.1.3.003.004', '3', '3.1', '3.1.3', '3.1.3.003', 1014, 'Despesas Médicas', 'Pago', 'Despesas com plano de saúde, consultas, exames e demais relacionada ao Pastor geral da igreja', 0.00, 1, 'D'),
-(589, '3.1.1.009', '3', '3.1', '3.1.1', '3.1.1.009', 0, 'MANUTENÇÃO E REFORMAS', '', 'Serviços, material e qualquer despesas relacionada a manutenção de templos', 0.00, 1, 'D'),
-(590, '3.1.1.009.001', '3', '3.1', '3.1.1', '3.1.1.009', 1030, 'Meteriais de Construção Civil', 'Compra de material', 'Pedra, cimento, porcelanato, cerâmica ...', 0.00, 1, 'D'),
-(591, '3.1.1.009.002', '3', '3.1', '3.1.1', '3.1.1.009', 1031, 'Serviços', 'Pago serviço', '', 0.00, 1, 'D'),
-(592, '3.1.2.001.035', '3', '3.1', '3.1.2', '3.1.2.001', 534, 'Festas, Aniversários e Eventos - Adminstração', 'Compra conf. comprovantes', 'Despesas com presentes, festas ', 0.00, 1, 'D'),
-(593, '3.1.1.001.012', '3', '3.1', '3.1.1', '3.1.1.001', 450, 'Água Mineral', 'Pago conf. comprovantes', 'Compra de água mineral para todas as congregações', 0.00, 1, 'D'),
-(594, '3.1.3.001.011', '3', '3.1', '3.1.3', '3.1.3.001', 621, 'Cesta Básica', 'Compra n/ data', 'Despesas com compras de cesta básica dos trabalhadores', 0.00, 1, 'D'),
-(595, '1.2.1.001.008', '1', '1.2', '1.2.1', '1.2.1.001', 167, 'Reformas Predial - SEDE', '', '', 0.00, 1, 'D'),
-(596, '1.2.1.002.007', '1', '1.2', '1.2.1', '1.2.1.002', 176, 'Reforma Predial - Congregações', '', '', 0.00, 1, 'D'),
-(597, '3.1.3.001.012', '3', '3.1', '3.1.3', '3.1.3.001', 622, 'Taxas e Contibuições Sindicais', 'Pago', 'Despesas com taxas e/ou contribuições sindicais de qualquer espécie que onere a folha de pagamento', 0.00, 1, 'D'),
-(598, '3.2.1.001.012', '3', '3.2', '3.2.1', '3.2.1.001', 585, 'Material de Expediente', 'Compra nesta data', 'Papel, cola, grampos, clipes e material de escritório em geral', 0.00, 1, 'D'),
-(599, '3.2', '3', '3.2', '3.2', '3.2', 0, 'DESPESAS COM MISSÕES', '', '', 0.00, 1, 'D'),
-(600, '3.1.1.006.004', '3', '3.1', '3.1.1', '3.1.1.006', 463, 'Festas, Congressos e Eventos - Dep de Música', 'Pagos nesta data', 'Despesas com festas, congressos e eventos', 0.00, 1, 'D'),
-(601, '3.1.3.001.013', '3', '3.1', '3.1.3', '3.1.3.001', 623, 'Rescisões e Idenizações Trabalhistas', 'pago nesta data', 'Despesas com rescisões, exames e outros', 0.00, 1, 'D'),
-(602, '3.1.1.006.005', '3', '3.1', '3.1.1', '3.1.1.006', 464, 'Material de Expediente - Música', 'Compra nesta data', '', 0.00, 1, 'D'),
-(603, '4.2.1.001.015', '4', '4.2', '4.2.1', '4.2.1.001', 854, 'Venda de Bens', 'Receita pela venda', 'Venda de bens ativos, móveis e imóveis', 0.00, 1, 'C'),
-(604, '3.1.3.003.005', '3', '3.1', '3.1.3', '3.1.3.003', 1015, 'Serviços', 'Realizado conf recibo', 'Serviço realizados para auxiliar nas despesas pastorais em geral. Ex. Mão de obra, instalações, locações e outros da mesma natureza', 0.00, 1, 'D'),
-(605, '3.2.1.001.013', '3', '3.2', '3.2.1', '3.2.1.001', 586, 'Missões  - Manutenção Escritório', 'Pago nesta data', '', 0.00, 1, 'D'),
-(606, '4.2.1.001.016', '4', '4.2', '4.2.1', '4.2.1.001', 855, 'UCADEBY - Doações e Sobras de Vendas', 'Recebido n/ data', 'Receita de qualquer natureza para realização de congressos e eventos', 0.00, 1, 'C'),
-(607, '3.1.1.005.010', '3', '3.1', '3.1.1', '3.1.1.005', 449, 'Outros Cursos', 'Pago n/ data', 'Cursos diversos para capacitação de membros da igreja', 0.00, 1, 'D'),
-(608, '4.2.1.001.017', '4', '4.2', '4.2.1', '4.2.1.001', 856, 'Sobras de Vendas p/ Custear Eventos - SEMADBY', 'Recebido n/ data', 'Vendas de camisas, cantina e outras entradas específicas para custear eventos de missões', 0.00, 1, 'C'),
-(609, '4.1.1.003.006', '4', '4.1', '4.1.1', '4.1.1.003', 735, 'Jardim I - Campanha', 'Recebido n/ data', 'Receitas não operacionais para aquisição de bem feito diretamente pelos membros da congregação, não compõe a base de dados do caixa de evangelismo', 0.00, 1, 'C'),
-(610, '2.1.5.001.002', '2', '2.1', '2.1.5', '2.1.5.001', 871, 'Saldo à Pagar COMADEP', 'Pago n/ data conf rec nº', 'Diferenças de saldos observado após analise das entradas a pagar para o caixa de evangelização', 0.00, 1, 'C'),
-(611, '4.1.1.003.007', '4', '4.1', '4.1.1', '4.1.1.003', 736, 'Tambay - Campanha', 'Recebido nesta', 'Campanha realizada pela congregação para compra de equipamentos, móveis ou qualquer objeto, desde que autorizado pelo Pastor da cidade', 0.00, 1, 'C'),
-(612, '3.2.1.001.014', '3', '3.2', '3.2.1', '3.2.1.001', 587, 'Investimento em Missões', 'Doado n/ dasta', 'Doações, ofertas e investimentos p/ construções e a pastores', 0.00, 1, 'D'),
-(613, '3.2.1.001.015', '3', '3.2', '3.2.1', '3.2.1.001', 588, 'Transportes e Translados - Missões', 'Pagos n/ data', 'Pagamentos de viagens e transportes para equipes de missões', 0.00, 1, 'D'),
-(614, '3.1.1.001.013', '3', '3.1', '3.1.1', '3.1.1.001', 770, 'Eventos em Cultos', 'Pagos n/ data', 'Aniversários, batismos e festas em geral', 0.00, 1, 'D'),
-(615, '3.1.1.001.014', '3', '3.1', '3.1.1', '3.1.1.001', 451, 'Material de Uso Comum', 'Compra nesta data', 'Tipo material de expediente no uso litúrgico ou referente a', 0.00, 1, 'D'),
-(616, '4.2.1.001.018', '4', '4.2', '4.2.1', '4.2.1.001', 857, 'Oferta P/ Doação Imediata', 'Recebido n/ Data', 'Oferta levantada pelo Pastor para entrega imediata: Social e outros', 0.00, 1, 'C'),
-(617, '3.2.1.001.016', '3', '3.2', '3.2.1', '3.2.1.001', 589, 'Máquinas e Equipamentos - Missões', 'Compra nesta data', 'Equipamentos de escritório, como computadores, eletrônicos, etc', 0.00, 1, 'D'),
-(618, '4.1.1.006.005', '4', '4.1', '4.1.1', '4.1.1.006', 954, 'Ofertas - Escola Bíblica Infatil', 'Recebido n/ Data', '', 0.00, 1, 'C'),
-(619, '4.1.1.003.008', '4', '4.1', '4.1.1', '4.1.1.003', 737, 'Trav São Paulo - Campanha', 'Recebido n/ Data', 'Campanhas autorizadas pelo Pastor da cidade para de equipamentos ou materiais', 0.00, 1, 'C'),
-(620, '3.1.3.001.014', '3', '3.1', '3.1.3', '3.1.3.001', 624, 'IRPF Retido na Fonte', 'Pago ref reolhimento na fonte', 'Pagamento de IRPF na fonte sobre salários de funcionários', 0.00, 1, 'D'),
-(621, '1.1.1.099.002', '1', '1.1', '1.1.1', '1.1.1.099', 151, 'Saldo a Receber - SEMAD', 'Slados a receber da SEMAD', '', 0.00, 1, 'D');
+(1, '1', '1', '1', '1', '1', 0, 'Ativo', '', '', '0.00', 1, 'D'),
+(2, '1.1', '1', '1.1', '1.1', '1.1', 0, 'Ativo Circulante', '', '', '0.00', 1, 'D'),
+(3, '1.1.1', '1', '1.1', '1.1.1', '1.1.1', 0, 'Disponível', '', '', '0.00', 1, 'D'),
+(4, '1.1.1.001', '1', '1.1', '1.1.1', '1.1.1.001', 0, 'Caixa Geral - Disponível', '', 'Saldo de todos os caixas deduzida as provisões', '0.00', 1, 'D'),
+(5, '1.1.1.001.001', '1', '1.1', '1.1.1', '1.1.1.001', 1, 'Caixa Central', '', '', '0.00', 1, 'D'),
+(6, '1.1.1.001.002', '1', '1.1', '1.1.1', '1.1.1.001', 2, 'Caixa de Missões', '', '', '0.00', 1, 'D'),
+(7, '1.1.1.001.003', '1', '1.1', '1.1.1', '1.1.1.001', 3, 'Caixa de Senhoras', '', '', '0.00', 1, 'D'),
+(8, '1.1.1.001.004', '1', '1.1', '1.1.1', '1.1.1.001', 4, 'Caixa de Ensino', '', '', '0.00', 1, 'D'),
+(9, '1.1.1.001.005', '1', '1.1', '1.1.1', '1.1.1.001', 5, 'Caixa Infantil', '', '', '0.00', 1, 'D'),
+(10, '1.1.1.001.006', '1', '1.1', '1.1.1', '1.1.1.001', 6, '( - ) Provisão p/ COMADEP - Contribuição 10%', '', '', '0.00', 1, 'C'),
+(11, '1.1.1.001.007', '1', '1.1', '1.1.1', '1.1.1.001', 7, '( - ) Provisão p/ SEMAD - Contribuição 40%', '', '', '0.00', 1, 'C'),
+(12, '1.1.1.002', '1', '1.1', '1.1.1', '1.1.1.002', 0, 'Banco Conta Movimentos', '', '', '0.00', 1, 'D'),
+(13, '1.1.1.002.001', '1', '1.1', '1.1.1', '1.1.1.002', 20, 'Banco do Brasil S/A', '', '', '0.00', 1, 'D'),
+(14, '1.1.1.003', '1', '1.1', '1.1.1', '1.1.1.003', 0, 'Banco Conta Poupança', '', '', '0.00', 1, 'D'),
+(15, '1.1.1.003.001', '1', '1.1', '1.1.1', '1.1.1.003', 30, 'Caixa Econônica Federal', '', '', '0.00', 1, 'D'),
+(16, '1.1.1.004', '1', '1.1', '1.1.1', '1.1.1.004', 0, 'Títulos de Capitalização', '', '', '0.00', 1, 'D'),
+(17, '1.1.1.005', '1', '1.1', '1.1.1', '1.1.1.005', 0, 'Mercado Aberto', '', '', '0.00', 1, 'D'),
+(18, '1.1.1.006', '1', '1.1', '1.1.1', '1.1.1.006', 0, 'Banco Conta Vínculadas', '', '', '0.00', 1, 'D'),
+(19, '1.1.1.006.001', '1', '1.1', '1.1.1', '1.1.1.006', 60, 'Banco do Brasil S/A', '', '', '0.00', 1, 'D'),
+(20, '1.1.1.007', '1', '1.1', '1.1.1', '1.1.1.007', 0, 'Adiantamentos a Funcionários', '', '', '0.00', 1, 'D'),
+(21, '1.1.1.007.001', '1', '1.1', '1.1.1', '1.1.1.007', 70, 'Adiantamento de Salários', '', '', '0.00', 1, 'D'),
+(22, '1.1.1.007.002', '1', '1.1', '1.1.1', '1.1.1.007', 71, 'Adiantamentos de Férias', '', '', '0.00', 1, 'D'),
+(23, '1.1.1.007.003', '1', '1.1', '1.1.1', '1.1.1.007', 72, 'Adiantamento de 13º Salário', '', '', '0.00', 1, 'D'),
+(24, '1.1.1.099', '1', '1.1', '1.1.1', '1.1.1.099', 0, 'Outros Créditos', '', '', '0.00', 1, 'D'),
+(25, '1.1.1.099.001', '1', '1.1', '1.1.1', '1.1.1.099', 150, 'Créditos em Circulação', '', '', '0.00', 1, 'D'),
+(26, '1.2', '1', '1.2', '1.2', '1.2', 0, 'Ativo Permanete', '', '', '0.00', 1, 'D'),
+(27, '1.2.1', '1', '1.2', '1.2.1', '1.2.1', 0, 'Imobilizado', '', '', '0.00', 1, 'D'),
+(28, '1.2.1.001', '1', '1.2', '1.2.1', '1.2.1.001', 0, 'Matriz', '', '', '0.00', 1, 'D'),
+(29, '1.2.1.001.005', '1', '1.2', '1.2.1', '1.2.1.001', 164, 'Templo Sede', '', '', '0.00', 1, 'D'),
+(30, '1.2.1.001.001', '1', '1.2', '1.2.1', '1.2.1.001', 160, 'Móveis e Utensílios - Sede', '', '', '0.00', 1, 'D'),
+(31, '1.2.1.001.002', '1', '1.2', '1.2.1', '1.2.1.001', 161, 'Máquinas e Equipamentos - Sede', '', '', '0.00', 1, 'D'),
+(32, '1.2.1.001.003', '1', '1.2', '1.2.1', '1.2.1.001', 162, 'Veículos', '', '', '0.00', 1, 'D'),
+(33, '1.2.1.001.004', '1', '1.2', '1.2.1', '1.2.1.001', 163, 'Aquisição Terrenos - Sede', '', '', '0.00', 1, 'D'),
+(34, '1.2.1.002', '1', '1.2', '1.2.1', '1.2.1.002', 0, 'Congregações', '', '', '0.00', 1, 'D'),
+(35, '1.2.1.002.001', '1', '1.2', '1.2.1', '1.2.1.002', 170, 'Móveis e Utensílios - Congregação', '', '', '0.00', 1, 'D'),
+(36, '1.2.1.002.002', '1', '1.2', '1.2.1', '1.2.1.002', 171, 'Aquisição Terrenos - Congregações', '', '', '0.00', 1, 'D'),
+(37, '1.2.1.002.003', '1', '1.2', '1.2.1', '1.2.1.002', 172, 'Instal./Manutenção de Equipamentos - Congregações', '', '', '0.00', 1, 'D'),
+(38, '1.2.1.002.004', '1', '1.2', '1.2.1', '1.2.1.002', 173, 'Máquinas e Equipamentos - Congregação', '', '', '0.00', 1, 'D'),
+(39, '1.2.1.002.005', '1', '1.2', '1.2.1', '1.2.1.002', 174, 'Templos', '', '', '0.00', 1, 'D'),
+(40, '1.3', '1', '1.3', '1.3', '1.3', 0, 'Investimentos', '', '', '0.00', 1, 'D'),
+(41, '2', '2', '2', '2', '2', 0, 'Passivo', '', '', '0.00', 1, 'C'),
+(42, '2.1', '2', '2.1', '2.1', '2.1', 0, 'Passivo Circulante', '', '', '0.00', 1, 'C'),
+(43, '2.1.1', '2', '2.1', '2.1.1', '2.1.1', 0, 'Fornecedores', '', '', '0.00', 1, 'C'),
+(44, '2.1.1.001', '2', '2.1', '2.1.1', '2.1.1.001', 0, 'Sede e Congregações', '', '', '0.00', 1, 'C'),
+(45, '2.1.1.001.001', '2', '2.1', '2.1.1', '2.1.1.001', 300, 'Kiluz - Mat. Elétrico Ltda.', '', '', '0.00', 1, 'C'),
+(46, '2.1.1.001.002', '2', '2.1', '2.1.1', '2.1.1.001', 301, 'Tocmix', '', '', '0.00', 1, 'C'),
+(47, '2.1.1.001.003', '2', '2.1', '2.1.1', '2.1.1.001', 302, 'Geraldo - Mat. de Construção', '', '', '0.00', 1, 'C'),
+(48, '2.1.1.001.004', '2', '2.1', '2.1.1', '2.1.1.001', 303, 'Lojão da Econômica - Mat. de Construção', '', '', '0.00', 1, 'C'),
+(49, '2.1.2', '2', '2.1', '2.1.2', '2.1.2', 0, 'Credores Diversos', '', '', '0.00', 1, 'C'),
+(50, '2.1.2.001', '2', '2.1', '2.1.2', '2.1.2.001', 0, 'Sede e Congregações', '', '', '0.00', 1, 'C'),
+(51, '2.1.3', '2', '2.1', '2.1.3', '2.1.3', 0, 'Obrigações Sociais', '', '', '0.00', 1, 'C'),
+(52, '2.1.3.001', '2', '2.1', '2.1.3', '2.1.3.001', 0, 'Sede e Congregações', '', '', '0.00', 1, 'C'),
+(53, '2.1.3.001.001', '2', '2.1', '2.1.3', '2.1.3.001', 304, 'MPS - Previdência Social - A Recolher', '', '', '0.00', 1, 'C'),
+(54, '2.1.3.001.002', '2', '2.1', '2.1.3', '2.1.3.001', 305, 'FGTS - Fundo de Garantia - A Recolher', '', '', '0.00', 1, 'C'),
+(55, '2.1.3.001.003', '2', '2.1', '2.1.3', '2.1.3.001', 306, 'PIS a Recolher', '', '', '0.00', 1, 'C'),
+(56, '2.1.3.001.004', '2', '2.1', '2.1.3', '2.1.3.001', 307, 'Salários a Pagar', '', '', '0.00', 1, 'C'),
+(57, '2.1.3.001.005', '2', '2.1', '2.1.3', '2.1.3.001', 308, 'Férias a Pagar', '', '', '0.00', 1, 'C'),
+(58, '2.1.3.001.006', '2', '2.1', '2.1.3', '2.1.3.001', 309, 'Vale Transporte a Pagar', '', '', '0.00', 1, 'C'),
+(59, '2.1.4', '2', '2.1', '2.1.4', '2.1.4', 0, 'Emprestimos e financiamentos', '', '', '0.00', 1, 'C'),
+(60, '2.1.4.001', '2', '2.1', '2.1.4', '2.1.4.001', 0, 'Sede e Congregações', '', '', '0.00', 1, 'C'),
+(61, '2.1.4.001.001', '2', '2.1', '2.1.4', '2.1.4.001', 330, 'Tambay Motor - Concesionária', '', '', '0.00', 1, 'C'),
+(62, '2.1.5', '2', '2.1', '2.1.5', '2.1.5', 0, 'Saldos à Pagar', '', '', '0.00', 1, 'C'),
+(71, '2.1.5.001', '2', '2.1', '2.1.5', '2.1.5.001', 0, 'Convenção Estadual', '', '', '0.00', 1, 'C'),
+(72, '2.1.5.001.001', '2', '2.1', '2.1.5', '2.1.5.001', 870, 'Saldo à Pagar SEMAD', 'Pago n/ data conf recibo nº', 'Diferenças de saldos observado após analise das entradas da Secretaria de Missões do Estado', '0.00', 1, 'C'),
+(73, '2.2', '2', '2.2', '2.2', '2.2', 0, 'Patrimônio Líquido', '', '', '0.00', 1, 'C'),
+(74, '2.2.1', '2', '2.2', '2.2.1', '2.2.1', 0, 'Patrimônio', '', '', '0.00', 1, 'C'),
+(75, '2.2.1.001', '2', '2.2', '2.2.1', '2.2.1.001', 0, 'Sede e Congregações', '', '', '0.00', 1, 'C'),
+(76, '2.2.1.001.001', '2', '2.2', '2.2.1', '2.2.1.001', 311, 'Patrimômio Social', '', '', '0.00', 1, 'C'),
+(80, '3', '3', '3', '3', '3', 0, 'DESPESAS', '', '', '0.00', 1, 'D'),
+(81, '3.1', '3', '3.1', '3.1', '3.1', 0, 'DESPESAS OPERACIONAIS', '', '', '0.00', 1, 'D'),
+(82, '3.1.1', '3', '3.1', '3.1.1', '3.1.1', 0, 'DESPESAS ECLESIÁSTICAS', '', '', '0.00', 1, 'D'),
+(83, '3.1.1.001', '3', '3.1', '3.1.1', '3.1.1.001', 0, 'DESPESAS C/ CULTOS', '', '', '0.00', 1, 'D'),
+(84, '3.1.1.001.001', '3', '3.1', '3.1.1', '3.1.1.001', 400, 'Despesas c/ Energia Elétrica', '', '', '0.00', 1, 'D'),
+(85, '3.1.1.001.002', '3', '3.1', '3.1.1', '3.1.1.001', 401, 'Água e Esgoto', '', '', '0.00', 1, 'D'),
+(86, '3.1.1.001.003', '3', '3.1', '3.1.1', '3.1.1.001', 402, 'Material de Higiene e Limpeza', '', '', '0.00', 1, 'D'),
+(87, '3.1.1.001.004', '3', '3.1', '3.1.1', '3.1.1.001', 403, 'Santa Ceia', '', '', '0.00', 1, 'D'),
+(88, '3.1.1.001.005', '3', '3.1', '3.1.1', '3.1.1.001', 404, 'Oferta Zelador', '', '', '0.00', 1, 'D'),
+(89, '3.1.1.001.006', '3', '3.1', '3.1.1', '3.1.1.001', 405, 'Aluguel e Locação', '', '', '0.00', 1, 'D'),
+(90, '3.1.1.001.007', '3', '3.1', '3.1.1', '3.1.1.001', 406, 'COMADEP - Contribuição 10%', '', 'Contribuição sobre arrecadação cultos em geral (exeto oferta missões), circ. de oração', '0.00', 1, 'D'),
+(100, '3.1.1.002', '3', '3.1', '3.1.1', '3.1.1.002', 0, 'AÇÃO SOCIAL', '', '', '0.00', 1, 'D'),
+(101, '3.1.1.002.001', '3', '3.1', '3.1.1', '3.1.1.002', 410, 'Medicamentos e Consultas', '', '', '0.00', 1, 'D'),
+(102, '3.1.1.002.002', '3', '3.1', '3.1.1', '3.1.1.002', 411, 'Generos Alimentícios', '', '', '0.00', 1, 'D'),
+(103, '3.1.1.002.003', '3', '3.1', '3.1.1', '3.1.1.002', 412, 'Auxílio Social', '', '', '0.00', 1, 'D'),
+(104, '3.1.1.002.004', '3', '3.1', '3.1.1', '3.1.1.002', 413, 'Energia Elétrica', '', '', '0.00', 1, 'D'),
+(105, '3.1.1.002.005', '3', '3.1', '3.1.1', '3.1.1.002', 414, 'Água e Esgoto', '', '', '0.00', 1, 'D'),
+(106, '3.1.1.003', '3', '3.1', '3.1.1', '3.1.1.003', 0, 'USADEBY', '', '', '0.00', 1, 'D'),
+(107, '3.1.1.003.001', '3', '3.1', '3.1.1', '3.1.1.003', 420, 'Ofertas a Pregadores', '', '', '0.00', 1, 'D'),
+(108, '3.1.1.003.002', '3', '3.1', '3.1.1', '3.1.1.003', 421, 'Passagem e Transporte', '', '', '0.00', 1, 'D'),
+(109, '3.1.1.003.003', '3', '3.1', '3.1.1', '3.1.1.003', 422, 'Presentes', '', '', '0.00', 1, 'D'),
+(110, '3.1.1.003.004', '3', '3.1', '3.1.1', '3.1.1.003', 423, 'Congressos e Eventos - Senhoras', '', '', '0.00', 1, 'D'),
+(111, '3.1.1.003.005', '3', '3.1', '3.1.1', '3.1.1.003', 424, 'Alimentação', '', '', '0.00', 1, 'D'),
+(112, '3.1.1.004', '3', '3.1', '3.1.1', '3.1.1.004', 0, 'UMADEBY', '', '', '0.00', 1, 'D'),
+(113, '3.1.1.004.001', '3', '3.1', '3.1.1', '3.1.1.004', 430, 'Ofertas a Pregadores', '', '', '0.00', 1, 'D'),
+(114, '3.1.1.004.002', '3', '3.1', '3.1.1', '3.1.1.004', 431, 'Passagem e Transporte', '', '', '0.00', 1, 'D'),
+(115, '3.1.1.004.003', '3', '3.1', '3.1.1', '3.1.1.004', 432, 'Presentes', '', '', '0.00', 1, 'D'),
+(116, '3.1.1.004.004', '3', '3.1', '3.1.1', '3.1.1.004', 433, 'Congressos e Eventos - Jovens', '', '', '0.00', 1, 'D'),
+(117, '3.1.1.004.005', '3', '3.1', '3.1.1', '3.1.1.004', 434, 'Alimentação', '', '', '0.00', 1, 'D'),
+(118, '3.1.1.005', '3', '3.1', '3.1.1', '3.1.1.005', 0, 'DEADBY - DEPARTAMENTO DE ENSINO', '', '', '0.00', 1, 'D'),
+(119, '3.1.1.005.001', '3', '3.1', '3.1.1', '3.1.1.005', 440, 'Lições bíblicas Infantil', '', '', '0.00', 1, 'D'),
+(120, '3.1.1.005.002', '3', '3.1', '3.1.1', '3.1.1.005', 441, 'Lições Bíblicas Adulto', '', '', '0.00', 1, 'D'),
+(121, '3.1.1.005.003', '3', '3.1', '3.1.1', '3.1.1.005', 442, 'Material Escolar', '', 'Despesas com quadro, canetas, cadernos, carteiras e outros do mesmo gênero', '0.00', 1, 'D'),
+(122, '3.1.1.005.004', '3', '3.1', '3.1.1', '3.1.1.005', 443, 'Passagem e Transporte', '', 'Auxílio de passagens a professores de EB e teologia da Igreja', '0.00', 1, 'D'),
+(123, '3.1.1.005.005', '3', '3.1', '3.1.1', '3.1.1.005', 444, 'Congressos e Eventos - Ensino', 'Despesas com cursos', 'Despesas com cursos, inscrições em congressos e viagens para capacitação e aperfeiçoamento de professores\r\n', '0.00', 1, 'D'),
+(124, '3.1.1.005.006', '3', '3.1', '3.1.1', '3.1.1.005', 445, 'Biblioteca', '', 'Despesas com livros para o acervo', '0.00', 1, 'D'),
+(125, '3.1.1.005.007', '3', '3.1', '3.1.1', '3.1.1.005', 446, 'Capacitação de Professores', '', '', '0.00', 1, 'D'),
+(126, '3.1.1.005.008', '3', '3.1', '3.1.1', '3.1.1.005', 447, 'Ofertas a Professores e Palestrantes', '', '', '0.00', 1, 'D'),
+(127, '3.1.1.006', '3', '3.1', '3.1.1', '3.1.1.006', 0, 'DEMADBY - DEP. DE MÚSICA', '', 'Despesas com corais, sonoplastia, professores de música e outros do gênero', '0.00', 1, 'D'),
+(128, '3.1.1.006.001', '3', '3.1', '3.1.1', '3.1.1.006', 460, 'Oferta Maestro', '', '', '0.00', 1, 'D'),
+(129, '3.1.1.006.002', '3', '3.1', '3.1.1', '3.1.1.006', 461, 'Oferta Sonoplasta', '', '', '0.00', 1, 'D'),
+(130, '3.1.2', '3', '3.1', '3.1.2', '3.1.2', 0, 'DESPESAS ADMINISTRATIVAS', '', '', '0.00', 1, 'D'),
+(131, '3.1.2.001', '3', '3.1', '3.1.2', '3.1.2.001', 0, 'ADMINISTRAÇÃO', '', '', '0.00', 1, 'D'),
+(132, '3.1.2.001.001', '3', '3.1', '3.1.2', '3.1.2.001', 501, 'Água e Esgoto', '', '', '0.00', 1, 'D'),
+(133, '3.1.2.001.002', '3', '3.1', '3.1.2', '3.1.2.001', 502, 'Energia Elétrica', '', '', '0.00', 1, 'D'),
+(134, '3.1.2.001.003', '3', '3.1', '3.1.2', '3.1.2.001', 503, 'Material de Expediente', '', 'Gastos com canetas, papeis, cartuchos, tonners e outros', '0.00', 1, 'D'),
+(135, '3.1.2.001.004', '3', '3.1', '3.1.2', '3.1.2.001', 504, 'Telefone', '', '', '0.00', 1, 'D'),
+(136, '3.1.2.001.005', '3', '3.1', '3.1.2', '3.1.2.001', 505, 'Auxílios e Ofertas', '', '', '0.00', 1, 'D'),
+(137, '3.1.2.001.006', '3', '3.1', '3.1.2', '3.1.2.001', 506, 'Combustíveis e Lubrificantes', '', 'De veículos', '0.00', 1, 'D'),
+(138, '3.1.2.001.007', '3', '3.1', '3.1.2', '3.1.2.001', 507, 'Despesas com Veículos', '', 'Manuteção, multas de trânsito, lavagem ...', '0.00', 1, 'D'),
+(139, '3.1.2.001.008', '3', '3.1', '3.1.2', '3.1.2.001', 508, 'Café e Lanches', '', '', '0.00', 1, 'D'),
+(140, '3.1.2.001.009', '3', '3.1', '3.1.2', '3.1.2.001', 509, 'Higiene e Limpeza', '', '', '0.00', 1, 'D'),
+(141, '3.1.2.001.010', '3', '3.1', '3.1.2', '3.1.2.001', 510, 'Impostos e Taxas', '', '', '0.00', 1, 'D'),
+(142, '3.1.2.001.011', '3', '3.1', '3.1.2', '3.1.2.001', 511, 'Serviços de Terceiros', '', '', '0.00', 1, 'D'),
+(143, '3.1.2.001.012', '3', '3.1', '3.1.2', '3.1.2.001', 512, 'Fretes e Carretos', '', '', '0.00', 1, 'D'),
+(144, '3.1.2.001.013', '3', '3.1', '3.1.2', '3.1.2.001', 513, 'Cópias', '', '', '0.00', 1, 'D'),
+(145, '3.1.2.001.014', '3', '3.1', '3.1.2', '3.1.2.001', 514, 'Consertos e Reparos', '', 'Serviços e peças para conserto de equipamentos', '0.00', 1, 'D'),
+(146, '3.1.2.001.015', '3', '3.1', '3.1.2', '3.1.2.001', 515, 'A definir', '', '', '0.00', 1, 'D'),
+(147, '3.1.2.001.016', '3', '3.1', '3.1.2', '3.1.2.001', 516, 'Aluguel de Imóvel', '', '', '0.00', 1, 'D'),
+(148, '3.1.2.001.017', '3', '3.1', '3.1.2', '3.1.2.001', 517, 'À definir', '', '', '0.00', 1, 'D'),
+(149, '3.1.2.001.018', '3', '3.1', '3.1.2', '3.1.2.001', 518, 'Gratificações', '', '', '0.00', 1, 'D'),
+(150, '3.1.2.001.019', '3', '3.1', '3.1.2', '3.1.2.001', 519, 'Manutenção e Conservação', '', 'Serviço e material para manutenção de imóvel', '0.00', 1, 'D'),
+(151, '3.1.2.001.020', '3', '3.1', '3.1.2', '3.1.2.001', 520, 'Viagens e Translados', '', '', '0.00', 1, 'D'),
+(152, '3.1.2.001.021', '3', '3.1', '3.1.2', '3.1.2.001', 521, 'Instalações', '', '', '0.00', 1, 'D'),
+(153, '3.1.2.001.022', '3', '3.1', '3.1.2', '3.1.2.001', 522, 'Hospedagens e Estadias', '', '', '0.00', 1, 'D'),
+(154, '3.1.2.001.023', '3', '3.1', '3.1.2', '3.1.2.001', 523, 'Publicidade', '', 'propagandas, Carro de som...', '0.00', 1, 'D'),
+(155, '3.1.2.001.024', '3', '3.1', '3.1.2', '3.1.2.001', 524, 'Sinistro com Veículos', '', 'Despesas com acidentes envolvendo veículos da igreja', '0.00', 1, 'D'),
+(156, '3.1.2.001.025', '3', '3.1', '3.1.2', '3.1.2.001', 525, 'Ajuda de Custo', '', '', '0.00', 1, 'D'),
+(157, '3.1.2.001.026', '3', '3.1', '3.1.2', '3.1.2.001', 526, 'Despesas com Cartório', '', 'Autenticações, escrituras ...', '0.00', 1, 'D'),
+(158, '3.1.2.001.027', '3', '3.1', '3.1.2', '3.1.2.001', 527, 'Comunicação', '', 'Programs de rádio, provedores de intenet', '0.00', 1, 'D'),
+(159, '3.1.2.001.028', '3', '3.1', '3.1.2', '3.1.2.001', 528, 'Correios e Postagens', '', '', '0.00', 1, 'D'),
+(160, '3.1.2.001.029', '3', '3.1', '3.1.2', '3.1.2.001', 529, 'Máquinas e Equipamentos', '', '', '0.00', 1, 'D'),
+(161, '3.1.2.001.030', '3', '3.1', '3.1.2', '3.1.2.001', 530, 'Móveis e Utensílios', '', '', '0.00', 1, 'D'),
+(162, '3.1.2.001.031', '3', '3.1', '3.1.2', '3.1.2.001', 531, 'A definir cta', '', '', '0.00', 1, 'D'),
+(180, '3.1.2.001.099', '3', '3.1', '3.1.2', '3.1.2.001', 549, 'Despesas Diversas', '', '', '0.00', 1, 'D'),
+(185, '3.1.2.002', '3', '3.1', '3.1.2', '3.1.2.002', 0, 'DESPESAS C/ CONSTRUÇÃO - MANUTENÇÃO', '', '', '0.00', 1, 'D'),
+(186, '3.1.2.002.001', '3', '3.1', '3.1.2', '3.1.2.002', 600, 'Materiais para Construção Civil', '', '', '0.00', 1, 'D'),
+(187, '3.1.2.002.002', '3', '3.1', '3.1.2', '3.1.2.002', 601, 'Serviços', '', '', '0.00', 1, 'D'),
+(210, '3.1.3', '3', '3.1', '3.1.3', '3.1.3', 0, 'DESPESAS COM PESSOAL', '', '', '0.00', 1, 'D'),
+(211, '3.1.3.001', '3', '3.1', '3.1.3', '3.1.3.001', 0, 'MÃO DE OBRA DIRETA', '', '', '0.00', 1, 'D'),
+(212, '3.1.3.001.001', '3', '3.1', '3.1.3', '3.1.3.001', 550, 'Salário', '', '', '0.00', 1, 'D'),
+(213, '3.1.3.001.002', '3', '3.1', '3.1.3', '3.1.3.001', 551, 'Décimo Terceiro', '', '', '0.00', 1, 'D'),
+(214, '3.1.3.001.003', '3', '3.1', '3.1.3', '3.1.3.001', 552, 'Férias', '', '', '0.00', 1, 'D'),
+(215, '3.1.3.001.004', '3', '3.1', '3.1.3', '3.1.3.001', 553, 'Encargos Sociais', '', '', '0.00', 1, 'D'),
+(216, '3.1.3.001.005', '3', '3.1', '3.1.3', '3.1.3.001', 554, 'Vale Transporte', '', '', '0.00', 1, 'D'),
+(217, '3.1.3.001.006', '3', '3.1', '3.1.3', '3.1.3.001', 555, 'Uniformes', '', '', '0.00', 1, 'D'),
+(218, '3.1.3.001.007', '3', '3.1', '3.1.3', '3.1.3.001', 556, 'Refeições', '', '', '0.00', 1, 'D'),
+(219, '3.1.3.001.008', '3', '3.1', '3.1.3', '3.1.3.001', 557, 'PIS Sobre a Folha', '', '', '0.00', 1, 'D'),
+(220, '3.1.3.001.009', '3', '3.1', '3.1.3', '3.1.3.001', 558, 'FGTS', '', '', '0.00', 1, 'D'),
+(230, '3.1.4', '3', '3.1', '3.1.4', '3.1.4', 0, 'DESPESAS TRIBUTÁRIAS', '', '', '0.00', 1, 'D'),
+(231, '3.1.4.001', '3', '3.1', '3.1.4', '3.1.4.001', 0, 'DESPESAS E MULTAS FISCAIS', '', '', '0.00', 1, 'D'),
+(232, '3.1.4.001.001', '3', '3.1', '3.1.4', '3.1.4.001', 565, 'IPTU', '', '', '0.00', 1, 'D'),
+(233, '3.1.4.001.002', '3', '3.1', '3.1.4', '3.1.4.001', 564, 'IPVA', '', '', '0.00', 1, 'D'),
+(234, '3.1.4.001.003', '3', '3.1', '3.1.4', '3.1.4.001', 559, 'IOF', '', '', '0.00', 1, 'D'),
+(235, '3.1.4.001.004', '3', '3.1', '3.1.4', '3.1.4.001', 560, 'Multas Fiscais', '', '', '0.00', 1, 'D'),
+(236, '3.1.4.001.005', '3', '3.1', '3.1.4', '3.1.4.001', 561, 'ITBI ', '', '', '0.00', 1, 'D'),
+(237, '3.1.4.001.006', '3', '3.1', '3.1.4', '3.1.4.001', 562, 'IRRF - Imposto de Renda Retido na Fonte', '', '', '0.00', 1, 'D'),
+(238, '3.1.4.001.099', '3', '3.1', '3.1.4', '3.1.4.001', 563, 'Impostos e Taxas Diversas', '', '', '0.00', 1, 'D'),
+(250, '3.1.5', '3', '3.1', '3.1.5', '3.1.5', 0, 'DESPESAS FINANCEIRAS', '', '', '0.00', 1, 'D'),
+(251, '3.1.5.001', '3', '3.1', '3.1.5', '3.1.5.001', 0, 'JUROS, MULTAS E CUSTOS FINANCEIROS', '', '', '0.00', 1, 'D'),
+(252, '3.1.5.001.001', '3', '3.1', '3.1.5', '3.1.5.001', 570, 'Juros de Mora', '', '', '0.00', 1, 'D'),
+(253, '3.1.5.001.002', '3', '3.1', '3.1.5', '3.1.5.001', 571, 'Multas Diversas', '', '', '0.00', 1, 'D'),
+(254, '3.1.5.001.003', '3', '3.1', '3.1.5', '3.1.5.001', 572, 'Taxas Bancárias', '', '', '0.00', 1, 'D'),
+(255, '3.1.5.001.004', '3', '3.1', '3.1.5', '3.1.5.001', 573, 'IOF', '', '', '0.00', 1, 'D'),
+(260, '3.2.1', '3', '3.2', '3.2.1', '3.2.1.001', 0, 'DESPESAS OPERACIONAIS DE MISSÕES', '', 'Secretaria de Missões. Despesas na compra de bíblias, cruzadas, literatura...', '0.00', 1, 'D'),
+(261, '3.2.1.001', '3', '3.2', '3.2.1', '3.2.1.001', 0, 'DESPESAS SEC. DE MISSÕES', '', 'Secretaria de Missões. Despesas na compra de bíblias, cruzadas, literatura...', '0.00', 1, 'D'),
+(262, '3.2.1.001.001', '3', '3.2', '3.2.1', '3.2.1.001', 580, 'Compra de Bíblias', '', '', '0.00', 1, 'D'),
+(263, '3.2.1.001.002', '3', '3.2', '3.2.1', '3.2.1.001', 581, 'Compra de Literaturas', '', '', '0.00', 1, 'D'),
+(264, '3.2.1.001.003', '3', '3.2', '3.2.1', '3.2.1.001', 574, 'Oferta a Pregadores - Missões', '', '', '0.00', 1, 'D'),
+(265, '3.2.1.001.004', '3', '3.2', '3.2.1', '3.2.1.001', 575, 'Despesas com Cruzadas - Missões', '', '', '0.00', 1, 'D'),
+(266, '3.2.1.001.005', '3', '3.2', '3.2.1', '3.2.1.001', 576, 'SEMAD - Contrib. Sec. de Missões 40%', '', 'Contribuição da Sec. de Missões local a sede da convenção - indice de 40% das arrecadações', '0.00', 1, 'D'),
+(300, '4', '4', '4', '4', '4', 0, 'RECEITAS', '', '', '0.00', 1, 'C'),
+(301, '4.1', '4', '4.1', '4.1', '4.1', 0, 'RECEITAS OPERACIONAIS', '', '', '0.00', 1, 'C'),
+(302, '4.1.1', '4', '4.1', '4.1.1', '4.1.1', 0, 'SEDE E CONGREGAÇÕES', '', '', '0.00', 1, 'C'),
+(303, '4.1.1.001', '4', '4.1', '4.1.1', '4.1.1.001', 0, 'RECEITA DE CULTOS', '', '', '0.00', 1, 'C'),
+(304, '4.1.1.001.001', '4', '4.1', '4.1.1', '4.1.1.001', 700, 'Dízimos', 'dízimos', '', '0.00', 1, 'C'),
+(305, '4.1.1.001.002', '4', '4.1', '4.1.1', '4.1.1.001', 701, 'Ofertas de cultos', 'ofertas', '', '0.00', 1, 'C'),
+(306, '4.1.1.001.003', '4', '4.1', '4.1.1', '4.1.1.001', 702, 'Ofertas Extras', 'ofertas extras', '', '0.00', 1, 'C'),
+(307, '4.1.1.001.004', '4', '4.1', '4.1.1', '4.1.1.002', 703, 'Outras Arrecadações em Cultos', 'ofertas', '', '0.00', 1, 'C'),
+(308, '4.1.1.001.005', '4', '4.1', '4.1.1', '4.1.1.001', 704, 'Votos em Cultos', 'votos', '', '0.00', 1, 'C'),
+(320, '4.1.1.002', '4', '4.1', '4.1.1', '4.1.1.002', 0, 'RECEITAS USADEBY', '', '', '0.00', 1, 'C'),
+(321, '4.1.1.002.001', '4', '4.1', '4.1.1', '4.1.1.002', 720, 'Ofertas em Circ. de Oração - Adulto', 'ofertas (Senhoras)', '', '0.00', 1, 'C'),
+(322, '4.1.1.002.002', '4', '4.1', '4.1.1', '4.1.1.002', 721, 'Votos em Circ. de Oração', 'votos em circ. de oração', '', '0.00', 1, 'C'),
+(323, '4.1.1.002.003', '4', '4.1', '4.1.1', '4.1.1.002', 722, 'Ofertas de Cultos - Senhoras', 'ofertas (Senhoras)', 'Ofertas de Cultos de Senhoras na Sede e congregações', '0.00', 1, 'C'),
+(325, '4.1.1.002.005', '4', '4.1', '4.1.1', '4.1.1.002', 724, 'ofertas extras de circ. de oração', 'ofertas (Senhoras)', '', '0.00', 1, 'C'),
+(326, '4.1.1.002.006', '4', '4.1', '4.1.1', '4.1.1.002', 726, 'Sobras de Vendas para Congresso', 'Sobras de Vendas', 'Sobras de Vendas para Congresso\',\'Sobra da venda de camisas, lanches, doações e outros relacionados, para realização do congresso ou outras festividades das Senhoras', '0.00', 1, 'C'),
+(330, '4.1.1.002.099', '4', '4.1', '4.1.1', '4.1.1.002', 725, 'Outras Arrecadações em Circ. de Oração', 'ofertas (Senhoras)', '', '0.00', 1, 'C'),
+(331, '4.1.1.003', '4', '4.1', '4.1.1', '4.1.1.003', 0, 'RECEITAS DE CAMPANHAS ', '', '', '0.00', 1, 'C'),
+(332, '4.1.1.003.001', '4', '4.1', '4.1.1', '4.1.1.003', 730, 'Joaquim Fernades - Compra e Construção', 'campanha (Joaquim Fernades)', 'Arrecadação para compra e/ou construção da nova congregação', '0.00', 1, 'C'),
+(333, '4.1.1.003.002', '4', '4.1', '4.1.1', '4.1.1.003', 731, 'Templo Sede - Casas para ampliação', 'campanha das casas', 'Compra de casa para ampliação do templo sede', '0.00', 1, 'C'),
+(334, '4.1.1.003.003', '4', '4.1', '4.1.1', '4.1.1.003', 732, 'Andreazza I - Reforma', 'campanha (Andreazza I )', 'Campanha para reforma da igreja realizada pelos irmãos', '0.00', 1, 'C'),
+(400, '4.1.1.004', '4', '4.1', '4.1.1', '4.1.1.004', 0, 'DEADBY - DEPARTAMENTO DE ENSINO', '', '', '0.00', 1, 'C'),
+(401, '4.1.1.004.001', '4', '4.1', '4.1.1', '4.1.1.004', 800, 'Ofertas - Escola Bíblica', 'ofertas p/ ensino', '', '0.00', 1, 'C'),
+(402, '4.1.1.004.002', '4', '4.1', '4.1.1', '4.1.1.004', 801, 'Ofertas - Corpo de Professores', 'ofertas p/ ensino', '', '0.00', 1, 'C'),
+(403, '4.1.1.004.003', '4', '4.1', '4.1.1', '4.1.1.004', 802, 'Outras Arrecadações - Dep. de Ensino', 'ofertas p/ ensino', '', '0.00', 1, 'C'),
+(404, '4.1.1.004.004', '4', '4.1', '4.1.1', '4.1.1.004', 803, 'Arrecadações p/ pgto de Revista da EBD', 'coleta pgto revistas EBD', 'Arrecadações p/ pgto de Revista da EBD\',\'A igreja compra e repassa a preço de custo as revistas adquiridas diretamente na CPDA, além de custear todas as de criança', '0.00', 1, 'C'),
+(420, '4.1.2', '4', '4.1', '4.1.2', '4.1.2', 0, 'MISSÕES', '', '', '0.00', 1, 'C'),
+(421, '4.1.2.001', '4', '4.1', '4.1.2', '4.1.2.001', 0, 'SEDE E CONGREGAÇÕES - MISSÕES', '', '', '0.00', 1, 'C'),
+(422, '4.1.2.001.001', '4', '4.1', '4.1.2', '4.1.2.001', 820, 'Ofertas de Missões -  Cultos na Sede', 'missões', '', '0.00', 1, 'C'),
+(423, '4.1.2.001.002', '4', '4.1', '4.1.2', '4.1.2.001', 821, 'Ofertas de Missões -  Cultos nas Congregações', 'missões', '', '0.00', 1, 'C'),
+(424, '4.1.2.001.003', '4', '4.1', '4.1.2', '4.1.2.001', 822, 'Ofertas de Missões -  Carnês', 'missões', '', '0.00', 1, 'C'),
+(425, '4.1.2.001.004', '4', '4.1', '4.1.2', '4.1.2.001', 823, 'Ofertas de Missões -  Cofre', 'missões', '', '0.00', 1, 'C'),
+(426, '4.1.2.001.005', '4', '4.1', '4.1.2', '4.1.2.001', 824, 'Ofertas de Missões -  Envelopes', 'missões', '', '0.00', 1, 'C'),
+(427, '4.1.2.001.007', '4', '4.1', '4.1.2', '4.1.2.001', 825, 'Votos para Missões', 'missões', '', '0.00', 1, 'C'),
+(440, '4.1.2.001.099', '4', '4.1', '4.1.2', '4.1.2.001', 826, 'Outras Arrecadações - Cultos de Missões', 'missões', '', '0.00', 1, 'C'),
+(460, '4.2', '4', '4.2', '4.2', '4.2', 0, 'RECEITAS NÃO OPERACIONAIS', '', '', '0.00', 1, 'C'),
+(461, '4.2.1', '4', '4.2', '4.2.1', '4.2.1', 0, 'OUTRAS RECEITAS', '', '', '0.00', 1, 'C'),
+(462, '4.2.1.001', '4', '4.2', '4.2.1', '4.2.1.001', 0, 'RECEITAS DIVERSAS - SEDE E CONGREGAÇÕES', '', '', '0.00', 1, 'C'),
+(463, '4.2.1.001.001', '4', '4.2', '4.2.1', '4.2.1.001', 840, 'Arrecadação - Revistas Esc. Bíblica', 'coleta pgto revistas EBD', 'Arrecadação pela compra de revistas bíblicas', '0.00', 1, 'C'),
+(464, '4.2.1.001.002', '4', '4.2', '4.2.1', '4.2.1.001', 841, 'Sobras de Vendas - Custear Eventos', 'sobras vendas pgto eventos', 'Venda de camisas e blusas para custear eventos de qualquer natureza', '0.00', 1, 'C'),
+(480, '4.2.1.002', '4', '4.2', '4.2.1', '4.2.1.002', 0, 'RECEITAS FINANCEIRAS', '', '', '0.00', 1, 'C'),
+(481, '4.2.1.002.001', '4', '4.2', '4.2.1', '4.2.1.002', 860, 'Rendimentos Sobre Aplicações ', 'Rendimentos de poupança', 'Poupança e outras aplicações', '0.00', 1, 'C'),
+(482, '1.1.1.001.008', '1', '1.1', '1.1.1', '1.1.1.001', 8, 'Caixa Mocidade', '', 'Referente cultos, ofertas e orações de mocidade', '0.00', 1, 'D'),
+(483, '3.1.3.002', '3', '3.1', '3.1.3', '3.1.3.002', 0, 'DESPESAS COM SECRETARIA E MINISTÉRIO', '', '', '0.00', 1, 'D'),
+(484, '3.1.3.002.001', '3', '3.1', '3.1.3', '3.1.3.002', 880, 'Oferta a Dirigentes de Congregação', '', '', '0.00', 1, 'D'),
+(485, '3.1.3.002.002', '3', '3.1', '3.1.3', '3.1.3.002', 881, 'Ministério', '', '', '0.00', 1, 'D'),
+(486, '3.1.2.002.003', '3', '3.1', '3.1.2', '3.1.2.002', 602, 'Alimentação trabalhadores da construção civil', '', 'Gastos com alimentação relacionadas a construção civil e assemelhados ', '0.00', 1, 'D'),
+(487, '3.1.2.001.032', '3', '3.1', '3.1.2', '3.1.2.001', 532, 'Serviço de Segurança', '', 'Guarda e segurança de terceiros nas igrejas', '0.00', 1, 'D'),
+(490, '4.1.1.005', '4', '4.1', '4.1.1', '4.1.1.005', 0, 'RECEITA UMADEBY', '', 'Todas as entradas relacionadas as arrecadações de mocidade', '0.00', 1, 'C'),
+(491, '4.1.1.005.001', '4', '4.1', '4.1.1', '4.1.1.005', 900, 'Ofertas em Circ. de Oração - Mocidade', 'ofertas mocidade', 'Circulo de oração da mocidade', '0.00', 1, 'C'),
+(492, '4.1.1.005.007', '4', '4.1', '4.1.1', '4.1.1.005', 906, 'Sobras de Vendas - UMADEBY', '', '', '0.00', 1, 'C'),
+(493, '4.2.1.001.003', '4', '4.2', '4.2.1', '4.2.1.001', 842, 'Sobras de Vendas p/ Custear Eventos - UMADEBY', 'sobras vendas pgto eventos', 'Vendas de Camisas, cantinas e assemelhados para custear qualquer tipo de evento da União da Mocidade', '0.00', 1, 'C'),
+(494, '4.2.1.001.004', '4', '4.2', '4.2.1', '4.2.1.001', 843, 'Sobras de Vendas p/ Custear Eventos - USADEBY', 'sobras vendas pgto eventos', 'Vendas de Camisas, cantinas e assemelhados para custear qualquer tipo de evento da União da Mocidade', '0.00', 1, 'C'),
+(495, '3.1.4.001.007', '3', '3.1', '3.1.4', '3.1.4.001', 566, 'MPS - Previdência Social', '', 'Contribuições sociais dos contribuintes da Previdência Social', '0.00', 1, 'D'),
+(496, '4.1.1.003.004', '4', '4.1', '4.1.1', '4.1.1.003', 733, 'Balbino de Mendonça - Campanha', 'campanha (Balbino )', 'Campanha realizada pela congregação para compra de algum equipamento, móvel ou qualquer objeto, desde que autorizado pelo Pastor da cidade', '0.00', 1, 'C'),
+(497, '3.1.1.005.009', '3', '3.1', '3.1.1', '3.1.1.005', 448, 'Curso de Teologia', '', 'Investimento em Curso de teologia para membros da igreja', '0.00', 1, 'D'),
+(498, '3.1.1.001.008', '3', '3.1', '3.1.1', '3.1.1.001', 407, 'Som - Manutenção e Consertos', '', 'Reparo, Manutenção, compra de peças para os equipamentos de som de uso na congregação e no evangelismo de rua', '0.00', 1, 'D'),
+(499, '3.1.1.006.003', '3', '3.1', '3.1.1', '3.1.1.006', 462, 'Professores de Música', '', 'Pgto a professores e instrutores de música, hora aula, e outras despesas relacionadas', '0.00', 1, 'D'),
+(500, '4.1.1.005.002', '4', '4.1', '4.1.1', '4.1.1.005', 901, 'Setor I - Rubem', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor I, para composição de seu caixa', '0.00', 1, 'C'),
+(501, '4.1.1.005.003', '4', '4.1', '4.1.1', '4.1.1.005', 902, 'Setor II - Zebulom', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor II, para composição de seu caixa', '0.00', 1, 'C'),
+(502, '4.1.1.005.004', '4', '4.1', '4.1.1', '4.1.1.005', 903, 'Setor III - Azer', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor III, para composição de seu caixa', '0.00', 1, 'C'),
+(503, '4.1.1.005.005', '4', '4.1', '4.1.1', '4.1.1.005', 904, 'Setor IV - Juda', 'sobras vendas da mocidade', 'Arrecadação realizada pela mocidade do setor IV, para composição de seu caixa', '0.00', 1, 'C'),
+(504, '1.1.1.001.009', '1', '1.1', '1.1.1', '1.1.1.001', 9, 'Caixa Mocidade Setor I - Rubem', '', 'Arrecadação realizada pela mocidade do setor I, para composição de seu caixa', '0.00', 1, 'D'),
+(505, '1.1.1.001.010', '1', '1.1', '1.1.1', '1.1.1.001', 10, 'Caixa Mocidade Setor II - Zebulom', '', 'Arrecadação realizada pela mocidade do setor II, para composição de seu caixa', '0.00', 1, 'D'),
+(506, '1.1.1.001.011', '1', '1.1', '1.1.1', '1.1.1.001', 11, 'Caixa Mocidade Setor III - Azer', '', 'Arrecadação realizada pela mocidade do setor III, para composição de seu caixa', '0.00', 1, 'D'),
+(507, '1.1.1.001.012', '1', '1.1', '1.1.1', '1.1.1.001', 12, 'Caixa Mocidade Setor IV - Juda', '', 'Arrecadação realizada pela mocidade do setor IV, para composição de seu caixa', '0.00', 1, 'D'),
+(508, '3.1.1.001.009', '3', '3.1', '3.1.1', '3.1.1.001', 408, 'Predial - Manutenção e Conservação', 'Pago conf. comprovantes', 'Reparos e material para conservação do imóvel e equipamentos elétricos da igreja', '0.00', 1, 'D'),
+(509, '4.1.1.006', '4', '4.1', '4.1.1', '4.1.1.006', 0, 'DEPARTAMENTO INFANTIL', '', 'Receitas das ofertas: nos círculos de orações de crianças, dos cultos de crianças e nos eventos voltados especificamente infantil', '0.00', 1, 'C'),
+(510, '4.1.1.006.001', '4', '4.1', '4.1.1', '4.1.1.006', 950, 'Ofertas em Circ. de Oração - Infantil', 'ofertas infantil', 'Circulo de orações da Sede e congregações', '0.00', 1, 'C'),
+(511, '4.1.1.006.002', '4', '4.1', '4.1.1', '4.1.1.006', 951, 'Votos em Circ. Oração - Infantil', 'votos infantil', 'Votos em Circ. Oração de crianças na Sede e congregações', '0.00', 1, 'C'),
+(512, '4.1.1.006.003', '4', '4.1', '4.1.1', '4.1.1.006', 952, 'Ofertas Extras - Infantil', 'ofertas infantil', 'Ofertas Extras nos cultos e círculos de orações de crianças', '0.00', 1, 'C'),
+(513, '4.1.1.006.004', '4', '4.1', '4.1.1', '4.1.1.006', 953, 'Ofertas de Cultos - Infantil', 'ofertas infantil', 'Ofertas de cultos de crianças', '0.00', 1, 'C'),
+(514, '4.1.1.005.006', '4', '4.1', '4.1.1', '4.1.1.005', 905, 'Ofertas de Cultos - Mocidade', 'ofertas mocidade', 'Ofertas de Cultos de jovens', '0.00', 1, 'C'),
+(515, '4.1.1.003.005', '4', '4.1', '4.1.1', '4.1.1.003', 734, 'São Vicente - Construção', 'campanha (São Vicente - Construção )', 'Campanha para ajudar na construção da nova congregação', '0.00', 1, 'C'),
+(516, '3.1.1.007', '3', '3.1', '3.1.1', '3.1.1.007', 0, 'DEPARTAMENTO INFANTIL', '', 'Despesas com eventos de crianças, não incluindo escola bíblica', '0.00', 1, 'D'),
+(517, '3.1.1.007.001', '3', '3.1', '3.1.1', '3.1.1.007', 980, 'Ofertas a Pregadores', '', 'Ofertas a Pregadores para cultos e eventos para crianças.', '0.00', 1, 'D'),
+(518, '4.2.1.001.005', '4', '4.2', '4.2.1', '4.2.1.001', 844, 'Sobras de Vendas p/ Custear Eventos - Setor I', 'sobras vendas', '', '0.00', 1, 'C'),
+(519, '4.2.1.001.006', '4', '4.2', '4.2.1', '4.2.1.001', 845, 'Sobras de Vendas p/ Custear Eventos - Setor II', 'sobras vendas', '', '0.00', 1, 'C'),
+(522, '4.2.1.001.007', '4', '4.2', '4.2.1', '4.2.1.001', 846, 'Sobras de Vendas p/ Custear Eventos - Setor III', 'sobras vendas', '', '0.00', 1, 'C'),
+(523, '4.2.1.001.008', '4', '4.2', '4.2.1', '4.2.1.001', 847, 'Sobras de Vendas p/ Custear Eventos - Setor IV', 'sobras vendas', '', '0.00', 1, 'C'),
+(524, '4.2.1.001.009', '4', '4.2', '4.2.1', '4.2.1.001', 848, 'USADEBY - Congressos, Sobras de Vendas', 'sobras vendas', '', '0.00', 1, 'C'),
+(525, '3.2.1.001.006', '3', '3.2', '3.2.1', '3.2.1.001', 577, 'Assinaturas - Revista e Jornais', '', '', '0.00', 1, 'D'),
+(526, '3.1.2.002.004', '3', '3.1', '3.1.2', '3.1.2.002', 603, 'Locação de Máquinas e Equipamentos', '', 'Aluguel de: andaimes, betoneira, fretes para transporte de material, etc.', '0.00', 1, 'D'),
+(527, '4.2.1.001.010', '4', '4.2', '4.2.1', '4.2.1.001', 849, 'Doações para Congressos e Eventos - Diversos', 'Ofertas extras', 'Doações e ofertas para congressos em geral', '0.00', 1, 'C'),
+(528, '4.2.1.001.011', '4', '4.2', '4.2.1', '4.2.1.001', 850, 'Campanhas p/ Compra de Equipamentos', 'campanha', 'Contribuições de membros ou simpatizantes para aquisição de equipamentos de qualquer natureza para uso na congregação', '0.00', 1, 'C'),
+(529, '2.1.1.001.099', '2', '2.1', '2.1.1', '2.1.1.001', 350, 'Contas a Pagar', 'Reconhecimento de dívidas a pagar', '', '0.00', 1, 'C'),
+(530, '3.2.1.001.007', '3', '3.2', '3.2.1', '3.2.1.001', 578, 'Administração Missões - Salários ', 'Pgto de despesas administrativas', 'Pgto de salário ou pró-labore da diretoria', '0.00', 1, 'D'),
+(531, '3.2.1.001.008', '3', '3.2', '3.2.1', '3.2.1.001', 579, 'Ajuda de Custos - Missões', 'Pgto de despesas para ajuda de custos em eventos de missões', 'Pgto de despesas para ajuda de custos em eventos de missões, tipo café, translado, hotel, táxi etc', '0.00', 1, 'D'),
+(532, '3.1.1.001.010', '3', '3.1', '3.1.1', '3.1.1.001', 409, 'Oferta à Pregadores', 'Auxílio para pregadores do culto', '\0', '0.00', 1, 'D'),
+(533, '1.2.1.001.006', '1', '1.2', '1.2.1', '1.2.1.001', 165, 'Instalações e Manutenção de Equipamentos - Sede', 'Material para manutenção predial - Sede', '', '0.00', 1, 'D'),
+(534, '3.1.2.002.005', '3', '3.1', '3.1.2', '3.1.2.002', 604, 'Material Elétrico', '', 'Despesas com material elétrico para manutenção, reforma e construção de Igrejas', '0.00', 1, 'D'),
+(535, '3.1.1.001.011', '3', '3.1', '3.1.1', '3.1.1.001', 750, 'Maquinas e Equipamentos - Manutenção e Consertos', 'Consertos de equipamentos', 'Conserto de maquinas e equipamento, exceto som, tais com ventiladores, motores e outros', '0.00', 1, 'D'),
+(536, '3.2.1.001.009', '3', '3.2', '3.2.1', '3.2.1.001', 582, 'Programas de Rádio', '', '', '0.00', 1, 'D'),
+(537, '3.1.1.008', '3', '3.1', '3.1.1', '3.1.1.008', 0, 'MANUTENÇÃO E CONSERVAÇÃO DE TEMPLOS', '', 'Material elétrico e construção civil', '0.00', 1, 'D'),
+(538, '3.1.1.008.001', '3', '3.1', '3.1.1', '3.1.1.008', 1000, 'Material de Construção Civil', '', '', '0.00', 1, 'D'),
+(539, '3.1.1.008.002', '3', '3.1', '3.1.1', '3.1.1.008', 1001, 'Material Elétrico', '', '', '0.00', 1, 'D'),
+(540, '3.1.1.008.003', '3', '3.1', '3.1.1', '3.1.1.008', 1002, 'Material Hidráulico ', '', '', '0.00', 1, 'D'),
+(541, '3.1.1.008.004', '3', '3.1', '3.1.1', '3.1.1.008', 1003, 'Mão de Obra', '', '', '0.00', 1, 'D'),
+(542, '3.1.1.008.005', '3', '3.1', '3.1.1', '3.1.1.008', 1004, 'Serviços', '', '', '0.00', 1, 'D'),
+(543, '3.1.3.003', '3', '3.1', '3.1.3', '3.1.3.003', 0, 'MANUTENÇÃO PASTORAL', '', '', '0.00', 1, 'D'),
+(544, '3.1.3.003.001', '3', '3.1', '3.1.3', '3.1.3.003', 1010, 'Oferta Administrativa', '', '', '0.00', 1, 'D'),
+(545, '3.1.3.002.003', '3', '3.1', '3.1.3', '3.1.3.002', 882, 'Secretaria', '', '', '0.00', 1, 'D'),
+(546, '3.1.3.002.004', '3', '3.1', '3.1.3', '3.1.3.002', 883, 'Tesouraria', '', '', '0.00', 1, 'D'),
+(547, '3.1.3.003.002', '3', '3.1', '3.1.3', '3.1.3.003', 1011, 'Construção Civil', '', '', '0.00', 1, 'D'),
+(548, '3.1.3.003.099', '3', '3.1', '3.1.3', '3.1.3.003', 1012, 'Outras Despesas Pastorais', '', '', '0.00', 1, 'D'),
+(549, '3.1.3.004', '3', '3.1', '3.1.3', '3.1.3.004', 0, 'VOLUNTÁRIOS', '', '', '0.00', 1, 'D'),
+(550, '3.1.3.004.001', '3', '3.1', '3.1.3', '3.1.3.004', 1020, 'Tesoureiros - Passagens', '', '', '0.00', 1, 'D'),
+(551, '3.1.3.004.002', '3', '3.1', '3.1.3', '3.1.3.004', 1021, 'Zeladores - Ajuda de custos', '', '', '0.00', 1, 'D'),
+(553, '3.1.1.003.006', '3', '3.1', '3.1.1', '3.1.1.003', 425, 'Dirigentes Circ. de Oração - Passagem', '', '', '0.00', 1, 'D'),
+(554, '3.1.1.008.006', '3', '3.1', '3.1.1', '3.1.1.008', 1005, 'Aluguel e Locação de Máquinas e Equipamentos', '', '', '0.00', 1, 'D'),
+(555, '4.2.1.001.012', '4', '4.2', '4.2.1', '4.2.1.001', 851, 'Oferta p/ Pgto de Ônibus', 'Contribuição p/ locação de ônibus', '', '0.00', 1, 'C'),
+(556, '3.1.1.007.002', '3', '3.1', '3.1.1', '3.1.1.007', 981, 'Congresso e Eventos - Crianças', 'Despesas com festividades', 'Despesas com festividades dos eventos e congressos de crinças', '0.00', 1, 'D'),
+(557, '3.2.1.001.010', '3', '3.2', '3.2.1', '3.2.1.001', 583, 'Congressos e Eventos - Missões', '', 'Despesas com eventos, festas e congressos em geral', '0.00', 1, 'D'),
+(558, '3.1.3.002.005', '3', '3.1', '3.1.3', '3.1.3.002', 884, 'Festas, Aniversários e Eventos - Ministério', 'Comemoração', 'Festas, aniversários e eventos em geral, na Sede e congregações', '0.00', 1, 'D'),
+(559, '1.1.1.008', '1', '1.1', '1.1.1', '1.1.1.008', 0, 'Adiantamento a Fornecedoes', '', ' os adiantamentos efetuados a fornecedores de produtos como móveis, máquinas, construção,registrados nessa conta. Sendo baixa efetuada por ocasião do efetivo recebimento do material ou bem, registrando-se o custo total na correspondente conta, e caso haja saldo a pagar, na conta Fornecedores, no passivo circulante', '0.00', 1, 'D'),
+(562, '1.1.1.008.001', '1', '1.1', '1.1.1', '1.1.1.008', 1050, 'Construção Civil', 'Adiatemento para aquisição de material', 'Materiais para construção civil em geral, como tijolo, areia, pedra, entre outros', '0.00', 1, 'D'),
+(563, '1.1.1.008.002', '1', '1.1', '1.1.1', '1.1.1.008', 1051, 'Móveis e Utensílios', '', 'Contabilização de adiantamentos para compra de bancos para nave da igreja e demais móveis', '0.00', 1, 'D'),
+(564, '1.1.1.008.003', '1', '1.1', '1.1.1', '1.1.1.008', 1052, 'Produtos de Limpeza', 'Adiatemento para aquisição de material de limpeza', 'Adiantamento para compra de água sanitária, sabão em pó, pano de chão e outros materiais relacionados', '0.00', 1, 'D'),
+(565, '1.1.1.008.004', '1', '1.1', '1.1.1', '1.1.1.008', 1053, 'Manutenções em Máquinas e Equipamentos', 'Adiantamentos para consertos de equipamentos', 'Adiantamentos para consertos de equipamentos e maquinas de som, aparelhos de ar condicionado, bebedouros e outros relacionados', '0.00', 1, 'D'),
+(566, '4.2.1.001.013', '4', '4.2', '4.2.1', '4.2.1.001', 852, 'UMADEBY - Zebulom Setor II', 'sobras de vendas p/ eventos', '', '0.00', 1, 'C'),
+(567, '3.1.1.002.006', '3', '3.1', '3.1.1', '3.1.1.002', 751, 'Construção Civil', 'auxílio para construção', 'Auxílio para construções em alvenaria e similares', '0.00', 1, 'D'),
+(568, '3.1.1.008.007', '3', '3.1', '3.1.1', '3.1.1.008', 1006, 'Forro - Material e Mão de Obra', 'Material e instalação de forros ', '', '0.00', 1, 'D'),
+(570, '4.2.1.001.014', '4', '4.2', '4.2.1', '4.2.1.001', 853, 'Doações - USADEBY', 'Recebimento de ofertas para eventos de senhoras', 'Doações e ofertas de qualquer natureza para congressos e eventos de senhoras', '0.00', 1, 'C'),
+(577, '1.2.1.001.007', '1', '1.2', '1.2.1', '1.2.1.001', 166, 'Aparelhos e Equipamentos de Som - Sede', 'Compras de equipamento e manutenção', 'Contabilizar compras e manutenção de equipamentos de sonorização da sede', '0.00', 1, 'D'),
+(578, '1.2.1.002.006', '1', '1.2', '1.2.1', '1.2.1.002', 175, 'Aparelhos e Equipamentos de Som - Congregação', 'Compras de equipamento de som e assemelhados', 'Contabilizar compras e manutenção de equipamentos de sonorização nas congregações', '0.00', 1, 'D'),
+(579, '3.1.2.001.033', '3', '3.1', '3.1.2', '3.1.2.001', 533, 'Internet', 'Gasto com internet', 'Despesas com internet e comunicação de dados', '0.00', 1, 'D'),
+(580, '3.1.1.003.007', '3', '3.1', '3.1.1', '3.1.1.003', 426, 'Telefone Diretoria', 'Gasto com telefone', 'Despesas com telefones da diretoria da usaDeby', '0.00', 1, 'D'),
+(581, '3.1.3.004.003', '3', '3.1', '3.1.3', '3.1.3.004', 1022, 'Portaria e vigilante', '', '', '0.00', 1, 'D'),
+(582, '3.1.3.004.004', '3', '3.1', '3.1.3', '3.1.3.004', 1023, 'Ajuda de custos a voluntários', '', '', '0.00', 1, 'D'),
+(583, '3.1.3.001.010', '3', '3.1', '3.1.3', '3.1.3.001', 620, 'Previdência Social', 'Despesas com previdência social do trabalhadores registrados', 'Gasto com previdência', '0.00', 1, 'D'),
+(584, '3.1.2.001.034', '3', '3.1', '3.1.2', '3.1.2.001', 670, 'Presentes', 'Compra do presente', 'Compras de presentes - Despesas administrativas', '0.00', 1, 'D'),
+(585, '3.2.1.001.011', '3', '3.2', '3.2.1', '3.2.1.001', 584, 'Som p/ Evangelismo - Manutenção', 'Pago manuteção som de missões', 'Manutenções em geral dos equipamentos e instrumentos musicais pagos pela sec. de Missões', '0.00', 1, 'D'),
+(586, '3.1.1.003.008', '3', '3.1', '3.1.1', '3.1.1.003', 427, 'Diretoria e Departamentos de Senhoras', 'Pago ajuda de custos', 'Pgto de ajudas de custos para direção e departamentos da USADEY', '0.00', 1, 'D'),
+(587, '3.1.3.003.003', '3', '3.1', '3.1.3', '3.1.3.003', 1013, 'Previdência Privada', 'Pago', 'Despesas com previdência privada do Pastor da igreja', '0.00', 1, 'D'),
+(588, '3.1.3.003.004', '3', '3.1', '3.1.3', '3.1.3.003', 1014, 'Despesas Médicas', 'Pago', 'Despesas com plano de saúde, consultas, exames e demais relacionada ao Pastor geral da igreja', '0.00', 1, 'D'),
+(589, '3.1.1.009', '3', '3.1', '3.1.1', '3.1.1.009', 0, 'MANUTENÇÃO E REFORMAS', '', 'Serviços, material e qualquer despesas relacionada a manutenção de templos', '0.00', 1, 'D'),
+(590, '3.1.1.009.001', '3', '3.1', '3.1.1', '3.1.1.009', 1030, 'Meteriais de Construção Civil', 'Compra de material', 'Pedra, cimento, porcelanato, cerâmica ...', '0.00', 1, 'D'),
+(591, '3.1.1.009.002', '3', '3.1', '3.1.1', '3.1.1.009', 1031, 'Serviços', 'Pago serviço', '', '0.00', 1, 'D'),
+(592, '3.1.2.001.035', '3', '3.1', '3.1.2', '3.1.2.001', 534, 'Festas, Aniversários e Eventos - Adminstração', 'Compra conf. comprovantes', 'Despesas com presentes, festas ', '0.00', 1, 'D'),
+(593, '3.1.1.001.012', '3', '3.1', '3.1.1', '3.1.1.001', 450, 'Água Mineral', 'Pago conf. comprovantes', 'Compra de água mineral para todas as congregações', '0.00', 1, 'D'),
+(594, '3.1.3.001.011', '3', '3.1', '3.1.3', '3.1.3.001', 621, 'Cesta Básica', 'Compra n/ data', 'Despesas com compras de cesta básica dos trabalhadores', '0.00', 1, 'D'),
+(595, '1.2.1.001.008', '1', '1.2', '1.2.1', '1.2.1.001', 167, 'Reformas Predial - SEDE', '', '', '0.00', 1, 'D'),
+(596, '1.2.1.002.007', '1', '1.2', '1.2.1', '1.2.1.002', 176, 'Reforma Predial - Congregações', '', '', '0.00', 1, 'D'),
+(597, '3.1.3.001.012', '3', '3.1', '3.1.3', '3.1.3.001', 622, 'Taxas e Contibuições Sindicais', 'Pago', 'Despesas com taxas e/ou contribuições sindicais de qualquer espécie que onere a folha de pagamento', '0.00', 1, 'D'),
+(598, '3.2.1.001.012', '3', '3.2', '3.2.1', '3.2.1.001', 585, 'Material de Expediente', 'Compra nesta data', 'Papel, cola, grampos, clipes e material de escritório em geral', '0.00', 1, 'D'),
+(599, '3.2', '3', '3.2', '3.2', '3.2', 0, 'DESPESAS COM MISSÕES', '', '', '0.00', 1, 'D'),
+(600, '3.1.1.006.004', '3', '3.1', '3.1.1', '3.1.1.006', 463, 'Festas, Congressos e Eventos - Dep de Música', 'Pagos nesta data', 'Despesas com festas, congressos e eventos', '0.00', 1, 'D'),
+(601, '3.1.3.001.013', '3', '3.1', '3.1.3', '3.1.3.001', 623, 'Rescisões e Idenizações Trabalhistas', 'pago nesta data', 'Despesas com rescisões, exames e outros', '0.00', 1, 'D'),
+(602, '3.1.1.006.005', '3', '3.1', '3.1.1', '3.1.1.006', 464, 'Material de Expediente - Música', 'Compra nesta data', '', '0.00', 1, 'D'),
+(603, '4.2.1.001.015', '4', '4.2', '4.2.1', '4.2.1.001', 854, 'Venda de Bens', 'Receita pela venda', 'Venda de bens ativos, móveis e imóveis', '0.00', 1, 'C'),
+(604, '3.1.3.003.005', '3', '3.1', '3.1.3', '3.1.3.003', 1015, 'Serviços', 'Realizado conf recibo', 'Serviço realizados para auxiliar nas despesas pastorais em geral. Ex. Mão de obra, instalações, locações e outros da mesma natureza', '0.00', 1, 'D'),
+(605, '3.2.1.001.013', '3', '3.2', '3.2.1', '3.2.1.001', 586, 'Missões  - Manutenção Escritório', 'Pago nesta data', '', '0.00', 1, 'D'),
+(606, '4.2.1.001.016', '4', '4.2', '4.2.1', '4.2.1.001', 855, 'UCADEBY - Doações e Sobras de Vendas', 'Recebido n/ data', 'Receita de qualquer natureza para realização de congressos e eventos', '0.00', 1, 'C'),
+(607, '3.1.1.005.010', '3', '3.1', '3.1.1', '3.1.1.005', 449, 'Outros Cursos', 'Pago n/ data', 'Cursos diversos para capacitação de membros da igreja', '0.00', 1, 'D'),
+(608, '4.2.1.001.017', '4', '4.2', '4.2.1', '4.2.1.001', 856, 'Sobras de Vendas p/ Custear Eventos - SEMADBY', 'Recebido n/ data', 'Vendas de camisas, cantina e outras entradas específicas para custear eventos de missões', '0.00', 1, 'C'),
+(609, '4.1.1.003.006', '4', '4.1', '4.1.1', '4.1.1.003', 735, 'Jardim I - Campanha', 'Recebido n/ data', 'Receitas não operacionais para aquisição de bem feito diretamente pelos membros da congregação, não compõe a base de dados do caixa de evangelismo', '0.00', 1, 'C'),
+(610, '2.1.5.001.002', '2', '2.1', '2.1.5', '2.1.5.001', 871, 'Saldo à Pagar COMADEP', 'Pago n/ data conf rec nº', 'Diferenças de saldos observado após analise das entradas a pagar para o caixa de evangelização', '0.00', 1, 'C');
 
 -- --------------------------------------------------------
 
@@ -6341,7 +6323,7 @@ CREATE TABLE `contascong` (
   `anorefer` int(4) NOT NULL,
   `tesoureiro` varchar(50) NOT NULL COMMENT 'Rol e nome do tesoureiro que prestou conta',
   `obs` varchar(250) NOT NULL,
-  `lanc` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lanc` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Transcrição dos carnês de entrada das congregações';
 
@@ -6365,7 +6347,7 @@ CREATE TABLE `credores` (
   `uf` varchar(2) NOT NULL,
   `responsavel` varchar(255) NOT NULL,
   `cpf` varchar(30) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6390,28 +6372,13 @@ CREATE TABLE `despautcong` (
 CREATE TABLE `disciplina` (
   `id` int(20) NOT NULL,
   `rol` int(11) NOT NULL,
-  `situacao` int(2) NOT NULL DEFAULT 2,
+  `situacao` int(2) NOT NULL DEFAULT '2',
   `motivo` text NOT NULL,
   `data_ini` date NOT NULL,
   `data_fim` date NOT NULL,
   `cad` varchar(255) NOT NULL,
-  `hist` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `hist` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `dizimistas`
---
-
-CREATE TABLE `dizimistas` (
-  `id` int(11) NOT NULL,
-  `rol` int(11) NOT NULL,
-  `nome` varchar(200) NOT NULL,
-  `igreja` int(5) NOT NULL,
-  `cad` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `hist` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cadastro de dizimistas';
 
 -- --------------------------------------------------------
 
@@ -6432,35 +6399,12 @@ CREATE TABLE `dizimooferta` (
   `data` date NOT NULL,
   `semana` enum('1','2','3','4','5') NOT NULL,
   `mesrefer` enum('1','2','3','4','5','6','7','8','9','10','11','12') NOT NULL COMMENT 'Mês de referência da contribuição',
-  `anorefer` int(4) NOT NULL DEFAULT 2012,
+  `anorefer` int(4) NOT NULL DEFAULT '2012',
   `igreja` int(11) NOT NULL,
   `tesoureiro` varchar(14) NOT NULL COMMENT 'CPF do tesoureiro responsável pelo lançamento',
   `confirma` varchar(14) NOT NULL COMMENT 'CPF do 2º tesoureiro confirmando lançamento',
   `obs` varchar(255) NOT NULL,
-  `cad` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `hist` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `dizofertcong`
---
-
-CREATE TABLE `dizofertcong` (
-  `id` int(11) NOT NULL,
-  `lancamento` int(11) NOT NULL COMMENT 'Quando realizado lançamento id referente ao lançamento',
-  `credito` int(11) NOT NULL COMMENT 'Acesso da conta credora',
-  `devedora` int(11) NOT NULL COMMENT 'Acesso da conta devedora',
-  `tesourcong` int(11) NOT NULL COMMENT 'Rol do tesoureiro da congregação ou de quem estiver prestando conta',
-  `valor` decimal(10,2) NOT NULL,
-  `data` date NOT NULL,
-  `senana` enum('1','2','3','4','5') NOT NULL,
-  `igreja` int(11) NOT NULL,
-  `tesoureiro` varchar(14) NOT NULL COMMENT 'CPF do tesoureiro responsável pelo lançamento',
-  `confirma` varchar(14) NOT NULL COMMENT 'CPF do 2º tesoureiro confirmando lançamento',
-  `obs` varchar(255) NOT NULL,
-  `cad` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6476,31 +6420,31 @@ CREATE TABLE `eclesiastico` (
   `batismo_em_aguas` date NOT NULL,
   `local_batismo` varchar(100) NOT NULL,
   `uf` varchar(2) NOT NULL,
-  `batismo_espirito_santo` year(4) NOT NULL,
-  `dt_mudanca_denominacao` date NOT NULL,
-  `veio_qual_denominacao` varchar(100) NOT NULL,
-  `auxiliar` date NOT NULL,
-  `diaconato` date NOT NULL,
-  `presbitero` date NOT NULL,
-  `evangelista` date NOT NULL,
-  `pastor` date NOT NULL,
+  `batismo_espirito_santo` year(4) DEFAULT NULL,
+  `dt_mudanca_denominacao` date DEFAULT NULL,
+  `veio_qual_denominacao` varchar(100) DEFAULT NULL,
+  `auxiliar` date DEFAULT NULL,
+  `diaconato` date DEFAULT NULL,
+  `presbitero` date DEFAULT NULL,
+  `evangelista` date DEFAULT NULL,
+  `pastor` date DEFAULT NULL,
   `missionario` date DEFAULT NULL,
-  `veio_outra_assemb_deus` varchar(3) NOT NULL,
-  `dt_muda_assembleia` date NOT NULL,
-  `lugar` varchar(100) NOT NULL,
-  `data` date NOT NULL,
-  `dat_aclam` date NOT NULL,
-  `c_impresso` date NOT NULL,
-  `quem_imprimiu` varchar(14) NOT NULL,
-  `c_entregue` date NOT NULL,
-  `quem_recebeu` int(11) NOT NULL,
-  `quem_entregou` int(11) NOT NULL,
-  `rec_entrega` int(11) NOT NULL,
+  `veio_outra_assemb_deus` varchar(3) DEFAULT NULL,
+  `dt_muda_assembleia` date DEFAULT NULL,
+  `lugar` varchar(100) DEFAULT NULL,
+  `data` date DEFAULT NULL,
+  `dat_aclam` date DEFAULT NULL,
+  `c_impresso` date DEFAULT NULL,
+  `quem_imprimiu` varchar(14) DEFAULT NULL,
+  `c_entregue` date DEFAULT NULL,
+  `quem_recebeu` int(11) DEFAULT NULL,
+  `quem_entregou` int(11) DEFAULT NULL,
+  `rec_entrega` int(11) DEFAULT NULL,
   `situacao_espiritual` int(1) NOT NULL,
-  `envelope` varchar(500) NOT NULL,
+  `envelope` varchar(500) DEFAULT NULL,
   `hist` varchar(255) NOT NULL,
-  `dt_cadastro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `obs` text NOT NULL
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `obs` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -6564,7 +6508,7 @@ CREATE TABLE `est_civil` (
   `folhas` varchar(15) NOT NULL,
   `data` date NOT NULL,
   `hist` varchar(150) NOT NULL,
-  `dt_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -6619,14 +6563,14 @@ CREATE TABLE `folha` (
   `idant` int(11) NOT NULL COMMENT 'id desta tabela de quem tinha esta função',
   `idpos` int(11) NOT NULL COMMENT 'id desta tabela de quem assumiu após este',
   `valor` decimal(10,2) NOT NULL,
-  `tipo` int(1) NOT NULL DEFAULT 5 COMMENT '1-Remuneração, 2-Auxilio, 3-Oferta Administrativa, 4-Oferta Ministerial, 5-Oferta passagem, 6-Oferta Zeladores',
-  `diapgto` int(1) NOT NULL DEFAULT 1,
+  `tipo` int(1) NOT NULL DEFAULT '5' COMMENT '1-Remuneração, 2-Auxilio, 3-Oferta Administrativa, 4-Oferta Ministerial, 5-Oferta passagem, 6-Oferta Zeladores',
+  `diapgto` int(1) NOT NULL DEFAULT '1',
   `inicio` date NOT NULL DEFAULT '2011-09-28' COMMENT 'Data início de quando assumiu esta atividade',
   `final` date NOT NULL COMMENT 'Data início de quando foi afastado desta atividade',
   `apresentado` date NOT NULL COMMENT 'Se foi apresentado a igreja, coloque a data aqui, caso contrário será apontado o início',
   `pastor` varchar(150) NOT NULL DEFAULT 'Pr. Antônio Ferreira da Siva' COMMENT 'Pastor da igreja na época em que assumiu esta função e que tenha sido nomeado por ele',
   `cad` varchar(255) NOT NULL DEFAULT '645.822.304-82',
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='fonções e cargos na igreja';
 
 -- --------------------------------------------------------
@@ -6638,7 +6582,7 @@ CREATE TABLE `folha` (
 CREATE TABLE `fontes` (
   `id` int(11) NOT NULL,
   `discriminar` varchar(255) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6677,7 +6621,7 @@ CREATE TABLE `fornecedores` (
   `responsavel` varchar(255) NOT NULL,
   `cpf` varchar(14) NOT NULL,
   `fornece` varchar(255) NOT NULL COMMENT 'Que produto fornece',
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6690,10 +6634,43 @@ CREATE TABLE `fornecedores` (
 CREATE TABLE `funcao` (
   `id` int(2) NOT NULL,
   `descricao` varchar(200) NOT NULL,
-  `tipo` int(1) NOT NULL DEFAULT 1 COMMENT '0-Auxílio,1-Cargo',
+  `tipo` int(1) NOT NULL DEFAULT '1' COMMENT '0-Auxílio,1-Cargo',
   `hist` varchar(255) NOT NULL,
-  `cad` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `funcao`
+--
+
+INSERT INTO `funcao` (`id`, `descricao`, `tipo`, `hist`, `cad`) VALUES
+(1, 'Dirigente de Congregação', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:35:42'),
+(2, 'Professor do CETAD', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:43:26'),
+(3, 'Professor de Escola Bíblica', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:43:41'),
+(4, 'Dirigente de Mocidade', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:44:17'),
+(5, 'Superintendente de Escola Bíblica', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:45:17'),
+(6, 'Dirigente de Circulo de Oração', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:45:49'),
+(7, 'Secretário', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:51:24'),
+(8, 'Tesoureiro', 1, '2272: Jailton Costa Bruce', '2014-03-08 02:19:51'),
+(9, 'Porteiro', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:52:04'),
+(10, 'Dirigente de Circulo de Oração Infantil', 1, '2272: Jailton Costa Bruce', '2009-10-08 02:59:41'),
+(11, 'Dirigente de Circulo de Oração de Mocidade', 1, '2272: Jailton Costa Bruce', '2009-10-08 03:00:06'),
+(12, 'Zelador(a)', 1, '2272: Jailton Costa Bruce', '2009-10-08 03:00:40'),
+(13, 'Pastor da Cidade', 1, '2272: Jailton Costa Bruce 	', '2014-03-01 03:05:42'),
+(14, 'Auxílio Social', 0, 'Joseilton', '2014-05-05 15:11:57'),
+(15, 'Tesoureiro de Missões', 1, 'Joseilton', '2014-07-04 22:09:43'),
+(16, 'Secretário de Missões', 1, 'Joseilton', '2014-07-04 22:09:53'),
+(17, 'Ministério', 1, 'Joseilton', '2014-07-04 22:08:05'),
+(18, 'Mestre de Obras', 1, 'Joseilton', '2014-07-04 22:08:05'),
+(19, 'Pedreiro', 1, 'Joseilton', '2014-07-04 22:08:33'),
+(20, 'Servente de Pedreiro', 1, 'Joseilton', '2014-07-04 22:08:33'),
+(21, 'Vigia', 0, 'Joseilton', '2014-07-12 23:03:08'),
+(22, 'Tesoureiro Geral', 1, 'Joseilton', '2014-07-13 22:33:02'),
+(23, 'Manuteção predial', 1, '', '2014-10-16 00:59:06'),
+(24, 'Auxiliar de Serviços', 1, '', '2014-10-16 01:01:47'),
+(25, 'Técnico de Áudio ', 1, '', '2016-02-13 00:14:06'),
+(26, 'Pintor', 1, ' 	Joseilton', '2016-02-19 11:23:26'),
+(27, 'Secretário da Umadeby', 1, 'Joseilton', '2016-03-23 20:05:28');
 
 -- --------------------------------------------------------
 
@@ -6706,14 +6683,14 @@ CREATE TABLE `igreja` (
   `razao` varchar(150) NOT NULL,
   `setor` int(11) NOT NULL,
   `cnpj` varchar(18) NOT NULL,
-  `site` varchar(255) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `ceia` int(2) NOT NULL COMMENT 'Dia da Santa Ceia. 1º dígito ref. semana do mês. 2º dígito ref. dia da semana. Domingo como 1º dia',
-  `oracao` int(1) NOT NULL COMMENT 'Dia da semena do circulo de oração. Domingo como 1º dia da semana',
-  `cultos` varchar(15) NOT NULL,
+  `site` varchar(255) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `ceia` int(2) DEFAULT NULL COMMENT 'Dia da Santa Ceia. 1º dígito ref. semana do mês. 2º dígito ref. dia da semana. Domingo como 1º dia',
+  `oracao` int(1) DEFAULT NULL COMMENT 'Dia da semena do circulo de oração. Domingo como 1º dia da semana',
+  `cultos` varchar(15) DEFAULT NULL,
   `pastor` varchar(150) NOT NULL COMMENT 'Nome completo do Pastor ou dirigente da Igreja',
-  `secretario1` int(11) NOT NULL COMMENT 'Rol do membro',
-  `secretario2` int(11) NOT NULL COMMENT 'Rol do membro',
+  `secretario1` int(11) DEFAULT NULL COMMENT 'Rol do membro',
+  `secretario2` int(11) DEFAULT NULL COMMENT 'Rol do membro',
   `matlimpeza` binary(1) NOT NULL DEFAULT '1' COMMENT '1 - Entregue na congregação, 0 - Adquirir em mercado autorizado',
   `rua` varchar(200) NOT NULL,
   `numero` varchar(10) NOT NULL,
@@ -6721,11 +6698,18 @@ CREATE TABLE `igreja` (
   `cidade` varchar(200) NOT NULL,
   `uf` varchar(2) NOT NULL,
   `cep` varchar(10) NOT NULL,
-  `fone` varchar(9) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT 1 COMMENT '0 - Destivada, 1 - Ativada',
-  `registro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fone` varchar(30) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0 - Destivada, 1 - Ativada',
+  `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hist` varchar(150) NOT NULL COMMENT 'log do cadastrador'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `igreja`
+--
+
+INSERT INTO `igreja` (`rol`, `razao`, `setor`, `cnpj`, `site`, `email`, `ceia`, `oracao`, `cultos`, `pastor`, `secretario1`, `secretario2`, `matlimpeza`, `rua`, `numero`, `bairro`, `cidade`, `uf`, `cep`, `fone`, `status`, `registro`, `hist`) VALUES
+(1, 'Sede', 1, '09.253.568/0040-03', 'www.adpb.com.br', 'adesppb@gmail.com', 15, 5, '1-2-4-6', 'Pr. Paulo Roberto de Sena', 1, NULL, 0x31, 'Rua Joaquim Santiago', '65', '', '2638', 'PB', '58135 000', '', 1, '2025-01-30 17:37:28', '111.111.111-11: Admin');
 
 -- --------------------------------------------------------
 
@@ -6737,7 +6721,7 @@ CREATE TABLE `lanc` (
   `id` int(11) NOT NULL,
   `lancamento` int(11) NOT NULL,
   `debitar` int(11) NOT NULL COMMENT 'id da tabelas contas - debitada',
-  `creditar` int(11) NOT NULL COMMENT 'id da cta -  Creditada',
+  `creditar` int(11) NOT NULL COMMENT 'id da tabelas contas -  Creditada',
   `valor` decimal(12,2) NOT NULL,
   `igreja` int(11) NOT NULL COMMENT 'Informar para qual igreja',
   `data` date NOT NULL,
@@ -6783,7 +6767,6 @@ CREATE TABLE `lanchist` (
 
 CREATE TABLE `limpeza` (
   `id` int(11) NOT NULL,
-  `authorized` int(11) NOT NULL DEFAULT 1,
   `discrim` varchar(100) NOT NULL,
   `unid` varchar(20) NOT NULL,
   `quant` int(11) NOT NULL COMMENT 'Quantidade por uidade',
@@ -6794,8 +6777,8 @@ CREATE TABLE `limpeza` (
   `tipo4` int(11) NOT NULL,
   `tipo5` int(11) NOT NULL,
   `valor` decimal(10,0) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT 1,
-  `cad` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT '1',
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hist` varchar(50) NOT NULL DEFAULT 'Joseilton'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lista de material de limpeza disponível para entrega';
 
@@ -6803,68 +6786,80 @@ CREATE TABLE `limpeza` (
 -- Extraindo dados da tabela `limpeza`
 --
 
-INSERT INTO `limpeza` (`id`, `authorized`, `discrim`, `unid`, `quant`, `tempo`, `tipo1`, `tipo2`, `tipo3`, `tipo4`, `tipo5`, `valor`, `status`, `cad`, `hist`) VALUES
-(1, 1, 'Água sanitária', 'unid', 2, 2, 0, 0, 0, 0, 0, 0, 0, '2013-01-29 06:18:19', 'Joseilton'),
-(2, 1, 'Balde 5 litros', 'Unid', 1, 4, 0, 0, 0, 0, 0, 0, 1, '2013-01-29 06:18:19', 'Joseilton'),
-(3, 1, 'Balde grande', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:08:38', 'Joseilton'),
-(5, 0, 'Cera liquida incolor', 'litros', 5, 2, 0, 0, 0, 0, 0, 0, 0, '2013-01-30 07:27:44', 'Joseilton'),
-(6, 0, 'Cera incolor', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, 0, '2013-01-30 07:27:44', 'Joseilton'),
-(7, 1, 'Cesto de lixo', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2013-01-29 09:00:00', 'Joseilton'),
-(8, 1, 'Cesto de lixo grande', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2013-01-29 09:00:00', 'Joseilton'),
-(9, 1, 'Cloro', 'litros', 5, 2, 4, 2, 1, 1, 0, 0, 0, '2013-01-30 07:31:06', 'Joseilton'),
-(10, 1, 'Desinfetante', 'litros', 5, 2, 10, 5, 4, 3, 0, 0, 1, '2013-01-29 09:00:00', 'Joseilton'),
-(11, 1, 'Destac p/ piso', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, 0, '2013-01-30 07:32:10', 'Joseilton'),
-(12, 1, 'Detergente', 'ml', 500, 2, 5, 1, 1, 1, 0, 0, 1, '2013-01-30 07:32:10', 'Joseilton'),
-(13, 1, 'Espanador', 'unid', 1, 3, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:32:42', 'Joseilton'),
-(14, 1, 'Esponja', 'unid', 1, 2, 40, 1, 1, 1, 0, 0, 1, '2013-01-30 07:32:42', 'Joseilton'),
-(15, 1, 'Flanela', 'unid', 1, 2, 20, 4, 3, 3, 0, 0, 1, '2013-01-30 07:33:16', 'Joseilton'),
-(16, 1, 'Limpa vidro - refil', 'ml', 500, 2, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:33:16', ''),
-(17, 1, 'Lustra móveis', 'ml', 200, 2, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:34:34', 'Joseilton'),
-(18, 1, 'Luva emborrachada', 'par', 1, 2, 0, 1, 1, 1, 0, 0, 1, '2013-01-30 07:34:34', 'Joseilton'),
-(19, 1, 'Mangueira', 'm', 25, 12, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:35:50', 'Joseilton'),
-(20, 1, 'Óleo de peroba', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, 0, '2013-01-30 07:35:50', 'Joseilton'),
-(21, 1, 'Pá', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:36:33', 'Joseilton'),
-(22, 1, 'Palha de aço', 'pc', 1, 2, 10, 1, 1, 1, 0, 0, 1, '2013-01-30 07:36:33', 'Joseilton'),
-(23, 1, 'Pano de chão', 'unid', 1, 6, 30, 6, 4, 3, 0, 0, 1, '2013-01-30 07:37:05', 'Joseilton'),
-(24, 1, 'Pano de prato', 'unid', 1, 6, 10, 0, 0, 0, 0, 0, 1, '2013-01-30 07:37:05', 'Joseilton'),
-(25, 1, 'Papel higiênico', 'pc c/ 4 unid', 1, 2, 0, 16, 12, 10, 0, 0, 1, '2013-01-30 07:37:46', 'Joseilton'),
-(26, 1, 'Pastilha para banheiro', 'unid', 1, 2, 0, 0, 0, 0, 0, 0, 0, '2013-01-30 07:37:46', 'Joseilton'),
-(27, 1, 'Limpeza Pesada', 'Litro', 1, 2, 50, 20, 10, 5, 0, 0, 1, '2013-01-30 07:38:22', 'Joseilton'),
-(28, 1, 'Querosene', 'ml', 200, 2, 20, 0, 0, 0, 0, 0, 1, '2013-01-30 07:38:22', 'Joseilton'),
-(29, 1, 'Rodo', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:38:55', 'Joseilton'),
-(30, 1, 'Sabão de coco', 'unid', 1, 2, 0, 3, 2, 2, 0, 0, 1, '2013-01-30 07:38:55', 'Joseilton'),
-(31, 1, 'Sabão de pedra', 'unid', 1, 2, 0, 3, 2, 2, 0, 0, 1, '2013-01-30 07:39:22', 'Joseilton'),
-(32, 1, 'Sabão em pó Ala ou Bem-te-vi', 'g', 500, 2, 25, 8, 5, 3, 0, 0, 1, '2013-01-30 07:39:22', 'Joseilton'),
-(33, 1, 'Sabão líquido', 'Litro', 1, 2, 15, 0, 0, 0, 0, 0, 1, '2013-01-30 07:40:26', 'Joseilton'),
-(34, 1, 'Sabonete', 'g', 90, 2, 10, 0, 0, 0, 0, 0, 1, '2013-01-30 07:40:26', 'Joseilton'),
-(35, 1, 'Saco de lixo - 100 litros', 'pc c/ 5 unid', 1, 2, 0, 10, 6, 4, 0, 0, 1, '2013-01-30 07:41:49', 'Joseilton'),
-(36, 1, 'Saco de lixo - 30 litros', 'pc c/ 5 unid', 1, 2, 0, 10, 8, 6, 0, 0, 1, '2013-01-30 07:41:49', 'Joseilton'),
-(37, 1, 'Saco de lixo - 60 litros', 'pc c/ 5 unid', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:42:24', 'Joseilton'),
-(39, 1, 'Tapete de porta', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:43:32', 'Joseilton'),
-(40, 1, 'Toalha de mão', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:44:03', 'Joseilton'),
-(41, 1, 'Vaselina líquida', 'ml', 200, 6, 0, 0, 0, 0, 0, 0, 0, '2013-01-30 07:44:03', 'Joseilton'),
-(42, 1, 'Vassoura de nylon', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:44:32', 'Joseilton'),
-(43, 1, 'Vassoura de pelo', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:44:58', 'Joseilton'),
-(44, 1, 'Vassoura de talo', 'unid', 1, 4, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:44:58', 'Joseilton'),
-(45, 1, 'Vassoura p/ vaso sanitário', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:45:21', 'Joseilton'),
-(46, 1, 'Vassourão', 'unid', 1, 6, 0, 0, 0, 0, 0, 0, 1, '2013-01-30 07:45:21', 'Joseilton'),
-(47, 1, 'Veja multiuso', 'ml', 200, 2, 0, 2, 1, 1, 0, 0, 1, '2013-01-30 07:45:47', 'Joseilton'),
-(48, 1, 'Veneno p/ inseto – aerosol', 'unid', 1, 4, 10, 1, 1, 1, 0, 0, 1, '2013-01-30 07:46:10', 'Joseilton'),
-(49, 1, 'Lixeira p/ Banheiro', 'litros', 5, 6, 0, 0, 0, 0, 0, 0, 1, '2013-05-16 02:05:56', 'Joseilton'),
-(50, 1, 'Detergente limpa alumínio', 'ml', 500, 2, 15, 0, 0, 0, 0, 0, 1, '2013-05-16 02:10:11', 'Joseilton'),
-(51, 1, 'Saco de Lixo - 15 litros', 'unid', 5, 2, 0, 0, 0, 0, 0, 0, 1, '2013-05-28 03:36:32', 'Joseilton'),
-(52, 1, 'Limpa vidro com gatilho', 'ml', 500, 2, 0, 0, 0, 0, 0, 0, 1, '2013-08-14 00:45:52', 'Joseilton'),
-(53, 1, 'Adesivo sanitário', 'Unid', 1, 2, 50, 25, 20, 18, 0, 0, 1, '2014-11-12 03:05:37', 'Joseilton'),
-(55, 1, 'Agua sanitária de 1litro', 'litros', 1, 2, 50, 19, 16, 10, 0, 0, 1, '2015-08-20 01:43:59', 'Joseilton'),
-(56, 1, 'Espanador de teto', 'Unid', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2016-01-26 22:14:53', 'Joseilton'),
-(57, 1, 'Tapete frete de Igreja', 'unid', 1, 12, 0, 0, 0, 0, 0, 0, 1, '2016-01-26 22:17:33', 'Joseilton'),
-(58, 1, 'Lixeira média', 'Unid', 1, 3, 0, 0, 0, 0, 0, 0, 0, '2016-01-26 22:20:47', 'Joseilton'),
-(59, 1, 'Pinho Sol', 'Litro', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2016-07-24 20:08:27', 'Joseilton'),
-(60, 1, 'Escova de Nylon', 'Unid', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2017-03-24 21:26:40', 'Joseilton'),
-(61, 1, 'Cloro 2L', 'Litro', 2, 2, 0, 0, 0, 0, 0, 0, 1, '2017-03-24 21:30:38', 'Joseilton'),
-(62, 1, 'Detergente 5L', 'Litro', 5, 2, 0, 0, 0, 0, 0, 0, 1, '2017-03-24 23:05:07', 'Joseilton'),
-(63, 1, 'Papel Toalha', 'pc', 1, 2, 0, 0, 0, 0, 0, 0, 1, '2019-09-11 22:58:54', 'Joseilton'),
-(64, 1, 'Álcool em Gel', 'l', 5, 2, 0, 0, 0, 0, 0, 0, 1, '2019-09-11 23:00:03', 'Joseilton');
+INSERT INTO `limpeza` (`id`, `discrim`, `unid`, `quant`, `tempo`, `tipo1`, `tipo2`, `tipo3`, `tipo4`, `tipo5`, `valor`, `status`, `cad`, `hist`) VALUES
+(1, 'ï¿½gua sanitï¿½ria', 'litros', 3, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-29 06:18:19', 'Joseilton'),
+(2, 'Balde 5 litros', 'Unid', 1, 4, 0, 0, 0, 0, 0, '0', 0, '2013-01-29 06:18:19', 'Joseilton'),
+(3, 'Balde grande', 'unid', 1, 4, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:08:38', 'Joseilton'),
+(5, 'Cera liquida incolor', 'litros', 5, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:27:44', 'Joseilton'),
+(6, 'Cera incolor', 'unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:27:44', 'Joseilton'),
+(7, 'Cesto de lixo', 'unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-29 09:00:00', 'Joseilton'),
+(8, 'Cesto de lixo grande', 'unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-29 09:00:00', 'Joseilton'),
+(9, 'Cloro', 'litros', 5, 2, 0, 3, 1, 1, 0, '0', 1, '2013-01-30 07:31:06', 'Joseilton'),
+(10, 'Desinfetante', 'litros', 5, 2, 0, 5, 3, 2, 0, '0', 1, '2013-01-29 09:00:00', 'Joseilton'),
+(11, 'Destac p/ piso', 'unid', 1, 2, 0, 5, 3, 1, 0, '0', 1, '2013-01-30 07:32:10', 'Joseilton'),
+(12, 'Detergente', 'Militros', 200, 2, 0, 1, 1, 1, 0, '0', 1, '2013-01-30 07:32:10', 'Joseilton'),
+(13, 'Espanador', 'unid', 1, 3, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:32:42', 'Joseilton'),
+(14, 'Esponja', 'unid', 1, 2, 0, 5, 4, 2, 0, '0', 1, '2013-01-30 07:32:42', 'Joseilton'),
+(15, 'Flanela', 'unid', 1, 2, 0, 5, 3, 2, 0, '0', 1, '2013-01-30 07:33:16', 'Joseilton'),
+(16, 'Limpa vidro - refil', 'ml', 500, 2, 0, 4, 2, 0, 0, '0', 1, '2013-01-30 07:33:16', ''),
+(17, 'Lustra móveis', 'ml', 200, 2, 0, 10, 4, 2, 0, '0', 1, '2013-01-30 07:34:34', 'Joseilton'),
+(18, 'Luva emborrachada', 'par', 1, 2, 0, 2, 1, 1, 0, '0', 1, '2013-01-30 07:34:34', 'Joseilton'),
+(19, 'Mangueira', 'm', 25, 12, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:35:50', 'Joseilton'),
+(20, 'Óleo de peroba', 'unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:35:50', 'Joseilton'),
+(21, 'Pá', 'unid', 1, 6, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:36:33', 'Joseilton'),
+(22, 'Palha de aço', 'pc', 1, 2, 0, 2, 1, 1, 0, '0', 1, '2013-01-30 07:36:33', 'Joseilton'),
+(23, 'Pano de chão', 'unid', 1, 6, 0, 5, 3, 2, 0, '0', 1, '2013-01-30 07:37:05', 'Joseilton'),
+(24, 'Pano de prato', 'unid', 1, 6, 0, 4, 3, 1, 0, '0', 1, '2013-01-30 07:37:05', 'Joseilton'),
+(25, 'Papel higiênico', 'pc c/ 4 unid', 1, 2, 0, 25, 14, 10, 0, '0', 1, '2013-01-30 07:37:46', 'Joseilton'),
+(26, 'Pastilha para banheiro', 'unid', 3, 2, 0, 25, 17, 10, 0, '0', 1, '2013-01-30 07:37:46', 'Joseilton'),
+(27, 'Limpeza Pesada', 'Litro', 1, 2, 0, 16, 6, 3, 0, '0', 1, '2013-01-30 07:38:22', 'Joseilton'),
+(28, 'Querosene', 'ml', 200, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:38:22', 'Joseilton'),
+(29, 'Rodo', 'unid', 1, 6, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:38:55', 'Joseilton'),
+(30, 'Sabão de coco', 'unid', 1, 2, 0, 0, 1, 1, 0, '0', 1, '2013-01-30 07:38:55', 'Joseilton'),
+(31, 'Sabão de pedra', 'unid', 1, 2, 0, 2, 2, 1, 0, '0', 1, '2013-01-30 07:39:22', 'Joseilton'),
+(32, 'Sabão em pó Ala ou Bem-te-vi', 'g', 500, 2, 0, 25, 15, 8, 0, '0', 1, '2013-01-30 07:39:22', 'Joseilton'),
+(33, 'Sabão líquido', 'Litro', 1, 2, 0, 1, 0, 0, 0, '0', 1, '2013-01-30 07:40:26', 'Joseilton'),
+(34, 'Sabonete', 'g', 90, 2, 0, 0, 2, 1, 0, '0', 1, '2013-01-30 07:40:26', 'Joseilton'),
+(35, 'Saco de lixo - 100 litros', 'pc c/ 5 unid', 1, 2, 0, 10, 4, 2, 0, '0', 1, '2013-01-30 07:41:49', 'Joseilton'),
+(36, 'Saco de lixo - 30 litros', 'pc c/ 5 unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:41:49', 'Joseilton'),
+(37, 'Saco de lixo - 60 litros', 'pc c/ 5 unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:42:24', 'Joseilton'),
+(39, 'Tapete de porta', 'unid', 1, 6, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:43:32', 'Joseilton'),
+(40, 'Toalha de mão', 'unid', 1, 6, 0, 4, 2, 2, 0, '0', 1, '2013-01-30 07:44:03', 'Joseilton'),
+(41, 'Vaselina líquida', 'ml', 200, 6, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:44:03', 'Joseilton'),
+(42, 'Vassoura de nylon', 'unid', 1, 4, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:44:32', 'Joseilton'),
+(43, 'Vassoura de pelo', 'unid', 1, 4, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:44:58', 'Joseilton'),
+(44, 'Vassoura de talo', 'unid', 1, 4, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:44:58', 'Joseilton'),
+(45, 'Vassoura p/ vaso sanitário', 'unid', 1, 6, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:45:21', 'Joseilton'),
+(46, 'Vassourão', 'unid', 1, 6, 0, 0, 0, 0, 0, '0', 1, '2013-01-30 07:45:21', 'Joseilton'),
+(47, 'Veja multiuso', 'ml', 200, 2, 0, 5, 2, 2, 0, '0', 1, '2013-01-30 07:45:47', 'Joseilton'),
+(48, 'Veneno p/ inseto – aerosol', 'unid', 1, 4, 0, 3, 1, 1, 0, '0', 1, '2013-01-30 07:46:10', 'Joseilton'),
+(49, 'Lixeira p/ Banheiro', 'litros', 5, 6, 0, 0, 0, 0, 0, '0', 1, '2013-05-16 02:05:56', 'Joseilton'),
+(50, 'Detergente limpa alumínio', 'litro', 1, 2, 0, 1, 1, 1, 0, '0', 1, '2013-05-16 02:10:11', 'Joseilton'),
+(51, 'Saco de Lixo - 15 litros', 'unid/pc', 5, 2, 0, 10, 5, 3, 0, '0', 1, '2013-05-28 03:36:32', 'Joseilton'),
+(52, 'Limpa vidro com gatilho', 'ml', 500, 2, 0, 1, 1, 1, 0, '0', 1, '2013-08-14 00:45:52', 'Joseilton'),
+(53, 'Adesivo sanit?rio', 'Cx', 6, 3, 0, 0, 0, 0, 2, '4', 2, '2014-11-12 03:05:37', 'Joseilton'),
+(55, 'Agua sanitária de 1litro', 'litros', 1, 2, 0, 30, 14, 10, 0, '0', 1, '2015-08-20 01:43:59', 'Joseilton'),
+(56, 'Espanador de teto', 'Unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2016-01-26 22:14:53', 'Joseilton'),
+(57, 'Tapete frete de Igreja', 'unid', 1, 12, 0, 0, 0, 0, 0, '0', 1, '2016-01-26 22:17:33', 'Joseilton'),
+(58, 'Lixeira média', 'Unid', 1, 3, 0, 0, 0, 0, 0, '0', 1, '2016-01-26 22:20:47', 'Joseilton'),
+(59, 'Pinho Sol', 'Litro', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2016-07-24 20:08:27', 'Joseilton'),
+(60, 'Escova de Nylon', 'Unid', 1, 2, 0, 0, 0, 0, 0, '0', 1, '2017-03-24 21:26:40', 'Joseilton'),
+(61, 'Cloro 2L', 'Litro', 2, 2, 1, 1, 1, 1, 1, '0', 1, '2017-03-24 21:30:38', 'Joseilton'),
+(62, 'Detergente 5L', 'Litro', 5, 2, 1, 1, 1, 1, 1, '0', 1, '2017-03-24 23:05:07', 'Joseilton'),
+(63, 'Bom Ar', 'Unid', 1, 2, 1, 1, 1, 1, 1, '17', 1, '2020-01-24 16:32:45', 'Joseilton'),
+(64, 'twww', 'm', 1, 1, 1, 1, 1, 1, 1, '5', 1, '0000-00-00 00:00:00', 'Joseilton_Costa'),
+(65, 'twww', 'm', 1, 1, 1, 1, 1, 1, 1, '5', 1, '0000-00-00 00:00:00', 'Joseilton_Costa'),
+(66, 'twww', 'm', 1, 1, 1, 1, 1, 1, 1, '5', 1, '0000-00-00 00:00:00', 'Joseilton_Costa'),
+(67, 'twww', 'm', 1, 1, 1, 1, 1, 1, 1, '5', 1, '0000-00-00 00:00:00', 'Joseilton_Costa'),
+(68, 'Adesivo', 'unid', 1, 2, 2, 2, 2, 2, 2, '8', 1, '0000-00-00 00:00:00', 'Joseilton_Costa'),
+(69, 'Adesivo', 'unid', 1, 2, 2, 2, 2, 2, 2, '8', 1, '0000-00-00 00:00:00', 'Joseilton_Costa'),
+(70, 'teste2', 'unid', 2, 2, 2, 2, 2, 2, 2, '8', 1, '0000-00-00 00:00:00', 'Joseilton Costa Bruce-645.822.304-82'),
+(71, 'teste5', 'unid', 2, 2, 2, 2, 2, 2, 2, '21', 1, '2020-01-30 16:19:27', 'Joseilton Costa Bruce-645.822.304-82'),
+(72, 'teste10', 'unid', 2, 1, 1, 1, 1, 1, 4, '47', 1, '2020-01-30 16:26:58', 'Joseilton Costa Bruce-645.822.304-82'),
+(73, 'teste10', 'unid', 2, 1, 1, 1, 1, 1, 4, '47', 1, '2020-01-30 16:26:58', 'Joseilton Costa Bruce-645.822.304-82'),
+(74, 'teste10', 'unid', 2, 1, 1, 1, 1, 1, 4, '47', 1, '2020-01-30 16:26:58', 'Joseilton Costa Bruce-645.822.304-82'),
+(75, 'teste10', 'unid', 2, 1, 1, 1, 1, 1, 4, '47', 1, '2020-01-30 16:26:58', 'Joseilton Costa Bruce-645.822.304-82'),
+(76, 'teste10', 'unid', 2, 1, 1, 1, 1, 1, 4, '47', 1, '2020-01-30 16:26:58', 'Joseilton Costa Bruce-645.822.304-82');
 
 -- --------------------------------------------------------
 
@@ -6877,7 +6872,7 @@ CREATE TABLE `limpezpedid` (
   `item` int(11) NOT NULL,
   `quant` int(2) NOT NULL,
   `mesref` varchar(7) NOT NULL COMMENT 'Mes de referência (01/2013)',
-  `cad` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `cad` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `igreja` int(11) NOT NULL,
   `entrega` binary(1) NOT NULL DEFAULT '1' COMMENT '1 - Entregue na congregação, 0 - Adquirir em mercado autorizado',
   `hist` varchar(50) NOT NULL
@@ -6895,6 +6890,15 @@ CREATE TABLE `login` (
   `status` int(1) NOT NULL COMMENT 'Vazio - Online, 1- Ausente, 2-desconectado, 3-Não pertube'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `login`
+--
+
+INSERT INTO `login` (`nome`, `tempo`, `status`) VALUES
+('Admin_', '1738496470', 0),
+('Joseilton_Costa', '1580732582', 0),
+('Joseilton_Pereira', '1738347453', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -6910,25 +6914,25 @@ CREATE TABLE `membro` (
   `sexo` varchar(1) NOT NULL,
   `endereco` varchar(200) NOT NULL,
   `numero` varchar(20) NOT NULL,
-  `complemento` varchar(150) NOT NULL,
+  `complemento` varchar(150) DEFAULT NULL,
   `cep` varchar(15) NOT NULL,
   `bairro` varchar(150) NOT NULL,
   `cidade` varchar(150) NOT NULL,
   `uf_resid` varchar(4) NOT NULL,
   `escolaridade` varchar(30) NOT NULL,
-  `graduacao` varchar(50) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `fone_resid` varchar(50) NOT NULL,
-  `celular` varchar(50) NOT NULL,
+  `graduacao` varchar(50) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `fone_resid` varchar(50) DEFAULT NULL,
+  `celular` varchar(50) DEFAULT NULL,
   `datanasc` date NOT NULL,
   `obs` text NOT NULL,
   `doador` varchar(4) NOT NULL,
   `sangue` varchar(5) NOT NULL,
-  `mae` varchar(200) NOT NULL,
-  `rol_mae` int(11) NOT NULL,
-  `pai` varchar(200) NOT NULL,
-  `rol_pai` int(11) NOT NULL,
-  `dt_cadastro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `mae` varchar(200) DEFAULT NULL,
+  `rol_mae` int(11) DEFAULT NULL,
+  `pai` varchar(200) DEFAULT NULL,
+  `rol_pai` int(11) DEFAULT NULL,
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hist` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6963,7 +6967,7 @@ CREATE TABLE `noticia` (
   `noticia` text NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `autor` varchar(200) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -6997,9 +7001,16 @@ CREATE TABLE `nv_convert` (
   `congregacao` int(2) NOT NULL,
   `sexo` varchar(1) NOT NULL,
   `dt_aceitou` date NOT NULL,
+  `dtBatismo` date NOT NULL COMMENT 'Campo data para realização do batismo',
+  `autorizaDir` int(11) NOT NULL COMMENT 'Campo de autorização do dirigente - rol',
+  `respMenor` varchar(200) NOT NULL COMMENT 'Campo autorização para menores - Nome e RG ou CPF do responsável',
+  `pastorCid` varchar(150) NOT NULL COMMENT 'Pastor da Igreja na época do batismo',
+  `celebranteBat` varchar(150) NOT NULL COMMENT 'Quem celebrou o batismo - Nome e Rol',
+  `prodFe` enum('0','1') NOT NULL COMMENT 'Campo profissão de fé - Rol ou nome do dirigente responsável',
+  `status` enum('0','1') NOT NULL COMMENT '0-Realizado, 1-Não Realizado',
   `obs` text NOT NULL,
   `hist` varchar(255) NOT NULL,
-  `dt_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -7018,7 +7029,7 @@ CREATE TABLE `organica` (
   `cargo2` varchar(150) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   `cad` varchar(150) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp()
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -7128,15 +7139,15 @@ CREATE TABLE `pedlimpeza` (
 
 CREATE TABLE `produtos` (
   `id` int(11) NOT NULL,
-  `conta` int(11) NOT NULL DEFAULT 402 COMMENT 'Número de Acesso da conta devedora',
-  `autoriza` int(1) NOT NULL DEFAULT 1 COMMENT '1-Material de Limpeza p cong',
+  `conta` int(11) NOT NULL DEFAULT '402' COMMENT 'Número de Acesso da conta devedora',
+  `autoriza` int(1) NOT NULL DEFAULT '1' COMMENT '1-Material de Limpeza p cong',
   `descricao` varchar(150) NOT NULL,
   `Marca` varchar(50) NOT NULL,
   `Modelo` varchar(50) NOT NULL,
   `unid` varchar(10) NOT NULL COMMENT 'Se embalagem pc, cx ou unidade',
   `quatunid` int(3) NOT NULL COMMENT 'Quantidades no pacate ou caixa',
   `tamunid` varchar(50) NOT NULL COMMENT 'Quando houver indicar tamanho ou quantidade em litros',
-  `data` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `hist` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -7204,7 +7215,7 @@ CREATE TABLE `profissional` (
   `orgao_expedidor` varchar(150) NOT NULL,
   `onde_trabalha` varchar(200) NOT NULL,
   `hist` varchar(255) NOT NULL,
-  `dt_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
+  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -7219,7 +7230,7 @@ CREATE TABLE `recibos` (
   `rol_entregue` varchar(255) NOT NULL COMMENT 'o rol separado por vígula dos cartões entregues',
   `rol_recebeu` int(11) NOT NULL,
   `cpf_entregou` varchar(14) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `obs` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Será registrado a entrega de todos os recibos nesta tabela';
 
@@ -7239,7 +7250,7 @@ CREATE TABLE `setores` (
   `cargo2` varchar(150) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   `cad` varchar(150) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp()
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -7316,8 +7327,8 @@ CREATE TABLE `tes_recibo` (
 --
 
 CREATE TABLE `transcheck` (
-  `transid` text DEFAULT NULL,
-  `posted` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `transid` text,
+  `posted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -7330,14 +7341,14 @@ CREATE TABLE `usuario` (
   `id` int(10) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `cpf` varchar(14) NOT NULL,
-  `nivel` int(2) NOT NULL DEFAULT 0,
+  `nivel` int(2) NOT NULL DEFAULT '0',
   `setor` int(2) NOT NULL,
-  `perfil` varchar(255) NOT NULL,
+  `perfil` varchar(255) NOT NULL COMMENT 'Autorização de acesso',
   `cargo` varchar(100) NOT NULL,
   `senha` varchar(32) NOT NULL DEFAULT '379dba6199d9986e77b272c75adee08f',
-  `situacao` int(1) NOT NULL DEFAULT 1 COMMENT '0 - inativo; 1-ativo',
+  `situacao` int(1) NOT NULL DEFAULT '1' COMMENT '0 - inativo; 1-ativo',
   `historico` varchar(255) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+  `data` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -7345,7 +7356,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `cpf`, `nivel`, `setor`, `perfil`, `cargo`, `senha`, `situacao`, `historico`, `data`) VALUES
-(1, 'Admin', '111.111.111-11', 60, 99, 'sec,admin_user,tes,mis', 'Desenvolvedor do Sistema', '202cb962ac59075b964b07152d234b70', 1, '', '2020-02-03 17:12:25');
+(1, 'Admin', '111.111.111-11', 60, 99, 'sec,admin_user,tes,mis', 'Desenvolvedor do Sistema', '202cb962ac59075b964b07152d234b70', 1, '', '2020-02-03 14:12:25'),
+(2, 'Joseilton Pereira', '643.743.434-15', 10, 3, 'user,seccad,secup,secdis', 'Secretário', '25d55ad283aa400af464c76d713c07ad', 1, '111.111.111-11 @ 2025-01-31 02:03:35', '2025-01-31 17:02:02');
 
 --
 -- Indexes for dumped tables
@@ -7477,21 +7489,9 @@ ALTER TABLE `disciplina`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dizimistas`
---
-ALTER TABLE `dizimistas`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `dizimooferta`
 --
 ALTER TABLE `dizimooferta`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `dizofertcong`
---
-ALTER TABLE `dizofertcong`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7677,231 +7677,265 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `aceitagenda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `agenda`
 --
 ALTER TABLE `agenda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `agendaexec`
 --
 ALTER TABLE `agendaexec`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `agendamssgs`
 --
 ALTER TABLE `agendamssgs`
-  MODIFY `id` mediumint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` mediumint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `agsercretaria`
 --
 ALTER TABLE `agsercretaria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `bairro`
 --
 ALTER TABLE `bairro`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
 --
 -- AUTO_INCREMENT for table `cargohist`
 --
 ALTER TABLE `cargohist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `cargoigreja`
 --
 ALTER TABLE `cargoigreja`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `cargo_igreja`
 --
 ALTER TABLE `cargo_igreja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `carta`
 --
 ALTER TABLE `carta`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `cart_apresentacao`
 --
 ALTER TABLE `cart_apresentacao`
   MODIFY `rol` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `cidade`
 --
 ALTER TABLE `cidade`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5567;
+
 --
 -- AUTO_INCREMENT for table `compra`
 --
 ALTER TABLE `compra`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `comprapresta`
 --
 ALTER TABLE `comprapresta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `contas`
 --
 ALTER TABLE `contas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=622;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=611;
+
 --
 -- AUTO_INCREMENT for table `contascong`
 --
 ALTER TABLE `contascong`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `credores`
 --
 ALTER TABLE `credores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `despautcong`
 --
 ALTER TABLE `despautcong`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `disciplina`
 --
 ALTER TABLE `disciplina`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `dizimistas`
---
-ALTER TABLE `dizimistas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `dizimooferta`
 --
 ALTER TABLE `dizimooferta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `dizofertcong`
---
-ALTER TABLE `dizofertcong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `eventos`
 --
 ALTER TABLE `eventos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `fatura`
 --
 ALTER TABLE `fatura`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `folha`
 --
 ALTER TABLE `folha`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `fontes`
 --
 ALTER TABLE `fontes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `fornecedores`
 --
 ALTER TABLE `fornecedores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `funcao`
 --
 ALTER TABLE `funcao`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
 -- AUTO_INCREMENT for table `igreja`
 --
 ALTER TABLE `igreja`
-  MODIFY `rol` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `rol` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `lanc`
 --
 ALTER TABLE `lanc`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `lancamento`
 --
 ALTER TABLE `lancamento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `lanchist`
 --
 ALTER TABLE `lanchist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `limpeza`
 --
 ALTER TABLE `limpeza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
 --
 -- AUTO_INCREMENT for table `limpezpedid`
 --
 ALTER TABLE `limpezpedid`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `membro`
 --
 ALTER TABLE `membro`
   MODIFY `rol` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `nivel`
 --
 ALTER TABLE `nivel`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `noticia`
 --
 ALTER TABLE `noticia`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `nv_convert`
 --
 ALTER TABLE `nv_convert`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `organica`
 --
 ALTER TABLE `organica`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
 --
 -- AUTO_INCREMENT for table `pedlimpeza`
 --
 ALTER TABLE `pedlimpeza`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
 --
 -- AUTO_INCREMENT for table `recibos`
 --
 ALTER TABLE `recibos`
   MODIFY `rol` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `setores`
 --
 ALTER TABLE `setores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
 --
 -- AUTO_INCREMENT for table `tes_recibo`
 --
 ALTER TABLE `tes_recibo`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- Constraints for dumped tables
 --
@@ -7917,6 +7951,7 @@ ALTER TABLE `cidade`
 --
 ALTER TABLE `comprapresta`
   ADD CONSTRAINT `comprapresta_ibfk_1` FOREIGN KEY (`idcompras`) REFERENCES `compra` (`id`) ON DELETE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
