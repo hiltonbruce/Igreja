@@ -15,6 +15,7 @@
  * Insere dados no banco do forms/autodizimo.php na tabela:usuario
  */
 controle ("tes");
+$totalContr = 0;
 $igreja = new DBRecord('igreja', $_POST['rolIgreja'], 'rol');
 if ($_POST["rol"]>'0' ) {
 	if (!empty($_POST["nome"])) {

@@ -13,7 +13,7 @@ $anolanc = ($_GET['ano']=='') ? date('Y'):$_GET['ano'];
 						<label>Entrada ref. Igreja:</label>
 						<?php
 						$bsccredor = new List_sele('igreja', 'razao', 'rolIgreja');
-						$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'required="required" autofocus="autofocus" class="form-control" ');
+						$listaIgreja = $bsccredor->List_Selec(++$ind,$_GET['igreja'],'required  autofocus="autofocus" class="form-control" ');
 						echo $listaIgreja;
 						?>
 					</td>

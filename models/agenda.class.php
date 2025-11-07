@@ -11,7 +11,7 @@ class agenda {
 		$ind = 0;
 		while($this->dados = mysql_fetch_array($this->agenda))
 		{
-			$mud_acent = strtoupper(strtr($this->dados["nome"], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
+			$mud_acent = strtoupper(strtr($this->dados["nome"], 'áàãâéêíóõôúüçÁÀÃÂÉÊÍÓÕÔÚÜÇ','AAAAEEIOOOUUCAAAAEEIOOOUUC' ));
 			$todos[$ind++] = $mud_acent;
 		}
 		return $todos ;
@@ -19,15 +19,15 @@ class agenda {
 
 	function insdespmes(){
 
-		//verifica o mÃªs da ultima conta e inseri as atuais e as que estiverem com
-		//vencimento atÃ© o dia 10 de cada mÃªs serÃ¡ inserida jÃ¡ para o prÃ³ximo mÃªs
+		//verifica o mês da ultima conta e inseri as atuais e as que estiverem com
+		//vencimento até o dia 10 de cada mês será inserida já para o próximo mês
 		$ins_conta = 'SELECT * FROM agenda WHERE frequencia = "1" AND status <> "3" GROUP BY idfatura' ;
 		$lista = mysql_query($ins_conta);
 
 		while ($contas = mysql_fetch_array($lista)) {
 			//$despesaMes = '';
 			list($ano, $mes, $dia) = explode("-", $contas['vencimento']);
-			//echo '<br/>dia: '.$dia.' - MÃªs: '.$mes.' - Ano: '.$ano;
+			//echo '<br/>dia: '.$dia.' - Mês: '.$mes.' - Ano: '.$ano;
 
 			//$fatura += 1;
 			$fatura = ($contas['idfatura']>'0') ? $contas['idfatura']:++$fatura;
@@ -42,12 +42,12 @@ class agenda {
 			if (ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24))>'0' && $id['status']<>'3') {
 				$mesvenc = (date('m',mktime() - mktime(0,0,0,$mesv,$diav,$anov)));
 				//corrigir os dados da tabela agenda para unificar os fornecedores
-				//adiciona campo vencimento na confirmaÃ§Ã£o de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
+				//adiciona campo vencimento na confirmação de pgto da conta e sinalizar qdo conta atualizada ou confimada a fatura
 				//Acrescentar busca por igreja, motivo, fonecedor
 				for ($i = 1; $i <= $mesvenc; $i++) {
 					$value	 = sprintf("null,'%s','%s','%s','%s',null,'%s','%s'",$id['idfatura'],$id['credor'],$id['debitar'],$id['creditar'],$id['frequencia'],$id['igreja']);
-					$value 	.=',"'. $id['valor'].'","","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
-					$value	.='","'.$id['resppgto'].'","","","'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro automÃ¡tico"';
+					$value 	.=',"'. $id['valor'].'","0.00","'. $id['motivo'].'","'.date('Y-m-d',mktime(0,0,0,$mesv+$i,$diav,$anov));
+					$value	.='","'.$id['resppgto'].'","0000-00-00",NULL,"'.date('d/m/Y H:i:s').', '.$_SESSION['valid_user'] .', Registro automático"';
 					$agendamento = new insert ("$value","agenda");
 					$agendamento->inserir();/**/
 					if (strstr($id['credor'], '@')) {
@@ -76,7 +76,7 @@ class agenda {
 		$nmpp_fix="10"; //N?mero de mensagens por p?rginas
 		$paginacao_fix = Array();
 		$paginacao_fix['link'] = "?"; //Pagina??o na mesma p?gina
-		//Faz os calculos na paginaÃ§Ã£o
+		//Faz os calculos na paginação
 		$sql2_fix = mysql_query ($query_fix) or die (mysql_error());
 		$total_fix = mysql_num_rows($sql2_fix) ; //Retorna o total de linha na tabela
 		$paginas_fix = ceil ($total_fix/$nmpp_fix); //Retorna o total de p?ginas
@@ -138,10 +138,10 @@ class agenda {
 			case 2:
 				$idLanc = ($coluna_fix['idlanc']>0) ? '(Reg. '.$coluna_fix['idlanc'].') ' : $semLanc ;
 				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ';
-				$evento .= 'alt="D&iacute;ï¿½vida Paga! Obrigado."></span>'.$idLanc;
+				$evento .= 'alt="D&iacute;?vida Paga! Obrigado."></span>'.$idLanc;
 				$status = $evento.' Pago em: '.conv_valor_br ($coluna_fix['datapgto']);
 				$status .= ' - '.$coluna_fix['resppgto'];
-				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado.';
+				$titulo = 'D&iacute;?vida Paga! Obrigado.';
 				break;
 			case 3:
 				$status = 'Quitado';
@@ -151,14 +151,14 @@ class agenda {
 				if (date("Y-m-d")==$coluna_fix['vencimento']) {
 					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
 					$status .= ' aria-hidden="true" ></span>Pgto Hoje!';
-					$titulo = 'D&iacute;ï¿½vida n&atilde;o Paga!';
+					$titulo = 'D&iacute;?vida n&atilde;o Paga!';
 				}elseif (date("Y-m-d")>$coluna_fix['vencimento']){
 					$status .= '<span class="glyphicon glyphicon-remove-sign text-danger"';
 					$status .= ' aria-hidden="true" ></span>Vencida!';
-					$titulo = 'D&iacute;ï¿½vida Vencida!';
+					$titulo = 'D&iacute;?vida Vencida!';
 				}else {
 					$status .= '<span class="glyphicon glyphicon-warning-sign text-warning"';
-					$status .= ' aria-hidden="true" ></span>Faltaï¿½ Pagar';
+					$status .= ' aria-hidden="true" ></span>Falta? Pagar';
 					$titulo = 'D&iacute;vida a Pagar!';
 				}
 				break;
@@ -193,7 +193,7 @@ class agenda {
 	//Classe que monta o rodape
 	$_rod_fix = new rodape($paginas_fix,$_GET["pagina1_fix"],"pagina1_fix",$_urlLi_fix,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_fix->getRodape(); $_rod_fix->form_rodape ("P&aacute;gina:");
-	//InÃ­cio das pendencias de disciplinados
+	//Início das pendencias de disciplinados
 	}
 
 	function mostra10dias (){
@@ -208,7 +208,7 @@ class agenda {
 		$nmpp_pen="10"; //N?mero de mensagens por p?rginas
 		$paginacao_pen = Array();
 		$paginacao_pen['link'] = "?"; //Pagina??o na mesma p?gina
-		//Faz os calculos na paginaÃ§Ã£o
+		//Faz os calculos na paginação
 		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());
 		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela
 		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas
@@ -237,7 +237,7 @@ class agenda {
 				<th scope="col">Credor(es)</th>
 				<th scope="col">Motivo</th>
 				<th scope="col">Valor(R$)</th>
-				<th scope="col">SituaÃ§Ã£o</th>
+				<th scope="col">Situação</th>
 				<th scope="col">Vencimento</th>
 			</tr>
 		</thead>
@@ -307,7 +307,7 @@ class agenda {
 	//Classe que monta o rodape
 	$_rod_pen = new rodape($paginas_pen,$_GET["pagina1_pen"],"pagina1_pen",$_urlLi_pen,8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod_pen->getRodape(); $_rod_pen->form_rodape ("P&aacute;gina:");
-	//InÃ­cio das pendencias de disciplinados
+	//Início das pendencias de disciplinados
 	}
 
 	function periodo ($dia,$credor,$pagamento) {
@@ -331,10 +331,10 @@ class agenda {
 		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		if ($numLinhas>0) {
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
-			if ($periodo_dados['status']=='2') {//Marca os jÃ¡ pagos
+			if ($periodo_dados['status']=='2') {//Marca os já pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ></span> '.$idLanc;
-				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado.';
+				$titulo = 'D&iacute;?vida Paga! Obrigado.';
 			}elseif ($periodo_dados['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -420,11 +420,11 @@ class agenda {
 		$listvenc_array = mysql_query($listvenc);
 		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		while ($contas = mysql_fetch_array($listvenc_array)) {
-			if ($contas['status']=='2') {//Marca os jÃ¡ pagos
+			if ($contas['status']=='2') {//Marca os já pagos
 				$idLanc = ($contas['idlanc']>0) ? '(Reg. '.$contas['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
-				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado.';
+				$titulo = 'D&iacute;?vida Paga! Obrigado.';
 			}elseif ($contas['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -432,7 +432,7 @@ class agenda {
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
 				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'D&iacute;ï¿½vida vencida!';
+				$titulo = 'D&iacute;?vida vencida!';
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -481,19 +481,19 @@ class agenda {
 		$listvenc_array = mysql_query($listvenc);
 		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		while ($contas = mysql_fetch_array($listvenc_array)) {
-			if ($contas['status']=='2') {//Marca os jÃ¡ pagos
+			if ($contas['status']=='2') {//Marca os já pagos
 				$idLanc = ($contas['idlanc']>0) ? '(Reg. '.$contas['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
-				$titulo = 'D&acute;ï¿½vida Paga! Obrigado. Motivo:'.$contas['motivo'];
+				$titulo = 'Dívida Paga! Obrigado. Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'Atualizado. Aguardado confirma&ccedil;o de pgto! Motivo:'.$contas['motivo'];
+				$titulo = 'Atualizado. Aguardado confirmação de pgto! Motivo:'.$contas['motivo'];
 			}elseif ($contas['status']<'2' && $contas['vencimento'] < date ('Y-m-d') ){
 				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'D&iacute;ï¿½vida vencida! Motivo:'.$contas['motivo'];
+				$titulo = 'Dívida vencida! Motivo:'.$contas['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar!';
@@ -546,11 +546,11 @@ class agenda {
 		$semLanc = '(<span class="text-danger">S/ Lan&ccedil;amento</span>)';
 		if ($numLinhas>0) {
 		while ($periodo_dados =mysql_fetch_array($periodo_array)) {
-			if ($periodo_dados['status']=='2') {//Marca os jÃ¡ pagos
+			if ($periodo_dados['status']=='2') {//Marca os já pagos
 				$idLanc = ($periodo_dados['idlanc']>0) ? '(Reg. '.$periodo_dados['idlanc'].') ' : $semLanc;
 				$evento = '<span class="glyphicon glyphicon-ok text-success"';
 				$evento .= ' aria-hidden="true" ></span>  '.$idLanc;
-				$titulo = 'D&iacute;ï¿½vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
+				$titulo = 'D&iacute;?vida Paga! Obrigado. Motivo: '.$periodo_dados['motivo'];
 			}elseif ($periodo_dados['status']=='1'){
 				$evento  = '<span class="glyphicon glyphicon-warning-sign text-warning"';
 				$evento .= ' aria-hidden="true" ></span> ';
@@ -558,7 +558,7 @@ class agenda {
 			}elseif ($periodo_dados['status']<'2' && $periodo_dados['vencimento'] < date ('Y-m-d') ){
 				$evento  = '<span class="glyphicon glyphicon-remove-sign text-danger"';
 				$evento .= ' aria-hidden="true" ></span> ';
-				$titulo = 'D&iacute;ï¿½vida vencida! Motivo: '.$periodo_dados['motivo'];
+				$titulo = 'D&iacute;?vida vencida! Motivo: '.$periodo_dados['motivo'];
 			}else {
 				$evento ='';
 				$titulo = 'Click aqui atualizar! Motivo: '.$periodo_dados['motivo'];

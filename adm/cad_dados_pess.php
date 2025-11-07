@@ -131,7 +131,7 @@ switch ($_POST["tabela"]) {
 				 ."'{$_POST["veio_qual_denominacao"]}','$auxiliar','$diaconato','$presbitero','$evangelista','$pastor',"
 				 ."'{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
 				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','{$_POST["c_entregue"]}','$quem_recebeu','$quem_enttregou',"
-				 ."'$num_recibo','{$_POST["situacao_espiritual"]}','','$hist','$cad','{$_POST["obs"]}'";
+				 ."'$num_recibo','{$_POST["situacao_espiritual"]}',NULL,'$hist','$cad','{$_POST["obs"]}'";
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
 

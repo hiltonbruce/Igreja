@@ -39,8 +39,9 @@ $linkLancamento  = './?escolha=tesouraria/receita.php&menu=top_tesouraria';
 $linkLancamento .= '&igreja='.$_GET['igreja'];
 
 require_once 'views/tesouraria/menu.php';//Sub-Menu de links
-
 $dizmista = new dizresp($_SESSION['valid_user'],'',$rec);
+// echo '<hr />' . print_r($_POST, true) . ' - ' . $rec . '<hr />';
+// exit;
 if ($idIgreja==0) {
 		$igrejaSelecionada = $igSede;
 		//$igLanc = $igrejaSelecionada;
