@@ -16,8 +16,8 @@ if ($bsc_rol=='1') {
 		$dirigente = 'Informe o Rol do dirigente';
 	}
 $tabela = "igreja";
-$tab="sistema/atualizar_rol.php";//link q informa o script quem receber� os dados do form para atualizar
-$tab_edit="forms/editar_igreja.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma p�gina para abrir o form de edi��o do item
+$tab="sistema/atualizar_rol.php";//link q informa o script quem receber? os dados do form para atualizar
+$tab_edit="forms/editar_igreja.php&tabela=$tabela&bsc_rol=$bsc_rol&campo=";//Link de chamada da mesma p?gina para abrir o form de edi??o do item
 $ind = 1;
 	if (!empty($_GET["bsc_rol"]))
 	{

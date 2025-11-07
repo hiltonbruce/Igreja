@@ -1,7 +1,7 @@
 <?PHP
 require_once 'models/sec/consCartas.php';#Select dos dados das cartas
 $tab="adm/atualizar_dados.php";//link q informa o form quem chamar p atualizar os dados
-$tab_edit='adm/dados_cartas.php&tabela=carta&bsc_rol='.$bsc_rol.'&campo=';//Link de chamada da mesma pï¿½gina para abrir o form de ediï¿½ï¿½o do item
+$tab_edit='adm/dados_cartas.php&tabela=carta&bsc_rol='.$bsc_rol.'&campo=';//Link de chamada da mesma página para abrir o form de edição do item
 list($diav,$mesv,$anov) = explode("/", $arr_dad["data"]);
 //echo '<br />  - Data atual - ultimo Vencimento: '.$rec_alterar->data().' ---- '. ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24));
 $diasemissao = ceil( (mktime() - mktime(0,0,0,$mesv,$diav,$anov))/(3600*24)); //quantidade de dias apï¿½s a emissï¿½o do recibo

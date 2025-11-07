@@ -145,14 +145,14 @@
 		echo 'Tendo, ainda, 3 dias para alterar a data e 20 para os demais dados! <br>';
 		echo '</div>';
 	}
-      //Primeiro Secretário
+      //Primeiro Secretï¿½rio
       $sec1 = new DBRecord ('membro',$igSede->secretario1(),"rol");
       $primSecretario = $sec1->nome();
-    //Segundo Secretário
+    //Segundo Secretï¿½rio
       $sec1 = new DBRecord ('membro',$igSede->secretario2(),"rol");
       $segSecretario = $sec1->nome();
 
-  //  echo var_dump($igSede);
+//    echo var_dump($igSede);
   print_r($dadosCargo['7']);
   //  echo $dadosCargo['7']['1']['2']['nome'].' *** ';
 
@@ -175,5 +175,72 @@ if ($cidade!=''){
 </form>
 <?PHP
 }
+
+
+$query = "SELECT c.*,DATE_FORMAT(c.data,'%d/%m/%Y') AS data, ci.nome AS cidade,ci.coduf FROM carta as c, cidade as ci WHERE c.rol='$bsc_rol' AND ci.id=c.destino ORDER BY c.id DESC";
+$sql2 = mysql_query($query) or die (mysql_error());
+
+echo '<br />
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">HIST&Oacute;RICO DE CARTAS</h3>
+  </div>
+  <div class="panel-body">
+   ';
+   echo '<table class="table table-striped table-hover table-condensed table-primary">';
+   echo '<tr>';
+   echo '<th class="bg-success">#</th>';
+   echo '<th class="bg-success">Tipo</th>';
+   echo '<th class="bg-success">Destino</th>';
+   echo '<th class="bg-success">Observação</th>';
+   echo '<th class="bg-success">data</th>';
+   echo '<th class="bg-success">Cadastro</th>';
+   echo '</tr>';
+   echo '<tbody>';
+   while($dados = mysql_fetch_assoc($sql2))
+   {
+	   echo '<tr class="bg-secondary">';
+	   echo '<td>'.$dados['id'].'</td>';
+	   echo '<td>'.carta ($dados['tipo']).'</td>';
+	   echo '<td>'.$dados['igreja'].' - ';
+	   if (is_numeric($dados['destino'])) {
+		   $destino = new DBRecord("cidade", $dados['destino'], "id");
+		   echo $destino->nome() . " - " . $destino->coduf();
+	   } else {
+		   echo $dados['destino'];
+	   }
+	   ;
+	   echo '</td>';
+	   echo '<td>'.$dados['obs'].'</td>';
+	   echo '<td>'.$dados['data'].'</td>';
+	   echo '<td>';
+		   list($dt, $user) = explode("@", $dados['hist']);
+		   echo date("d/m/Y H:i", $dt).', por: ';
+		   list($txt, $usuario) = explode(":", $user);
+   
+		   if (is_numeric($usuario)) {
+			   $usera = new DBRecord("membro", $usuario, "rol");
+			   $nome = $usera->nome();
+		   } else {
+			   $usera = new DBRecord("usuario", $usuario, "cpf");
+			   $nome = $usera->nome();
+		   }
+		   
+   
+	   echo $nome;
+	   echo '</td>';
+	   echo '</tr>';
+	   
+   }
+   echo '</tbody>';
+   echo '</table>';
+   
+   echo '
+  </div> 
+  <div class="panel-footer">Total de Cartas: '.mysql_num_rows($sql2) .'</div>
+</div>
+';
+
+
 ?>
 </div>
