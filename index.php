@@ -54,7 +54,7 @@
 			}
 	}
 	$titleIgreja = NOMEIGR.' &bull; '.CIDADEIG.'-'.UFIG;
-	$campo_rol="Rol N&ordm;:"; //Quando a variï¿½vel de sessï¿½o rol existir define 'Rol nï¿½:' como legenda para o form listar dados do membro pelo rol
+	$campo_rol="Rol N&ordm;:"; //Quando a variável de sessão rol existir define 'Rol nº:' como legenda para o form listar dados do membro pelo rol
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -312,8 +312,8 @@ jQuery(function($) {
       $('#venc').mask('99/99/9999');
       $('#ano').mask('9999');
       $('#mesnum').mask('99');
-      $('#fone').mask('(99) 9999-9999');
-      $('.fone').mask('(99) 9999-9999');
+      $('#fone').mask('(99) 99999-9999');
+      $('.fone').mask('(99) 99999-9999');
       $('#celular').mask('(99) 99999-9999');
       $('.celular').mask('(99) 99999-9999');
       $('#cpf').mask("999.999.999-99");

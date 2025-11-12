@@ -3,7 +3,7 @@
 /**
  * Joseilton Costa Bruce
  *
- * LICENÇA
+ * LICENï¿½A
  *
  * Please send an email
  * to hiltonbruce@gmail.com so we can send you a copy immediately.
@@ -14,7 +14,7 @@
  * @copyright  Copyright (c) 2008-2009 Joseilton Costa BRuce (http://)
  * @license    http://
  * Insere dados no banco do form cadastro.php nas tabelas:
- * Membro e com este registro pegar o número do rol e insere este número
+ * Membro e com este registro pegar o nï¿½mero do rol e insere este nï¿½mero
  * nas tabelas eclesiastico, est_civil e profissional
  */
 controle("inserir");
@@ -70,12 +70,6 @@ switch ($_POST["tabela"]) {
 			echo "pastor null - ";
 			$pastor	= '0000-00-00';
 		}
-		if (!empty ($_POST["missionario"])) {
-			$missionario=br_data($_POST["missionario"],"missionario");
-		}else{
-			echo "missionario null - ";
-			$missionario	= '0000-00-00';
-		}
 		if (!empty ($_POST["dt_muda_assembleia"])) {
 			$dt_muda_assembleia=br_data($_POST["dt_muda_assembleia"],"dt_muda_assembleia");
 		}else{
@@ -116,7 +110,6 @@ switch ($_POST["tabela"]) {
 		$quem_enttregou = (empty($_POST["quem_entregou"])) ? 0 : intval ($_POST["quem_entregou"]) ;
 		$num_recibo = (empty($_POST["rec_entrega"])) ? 0 : intval ($_POST["rec_entrega"]) ;
 
-
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
 		$cad = date("Y-m-d h:i:s");
 		$rolMembro = (!empty($_POST['bsc_rol'])) ? intval($_POST['bsc_rol']): intval($_GET['bsc_rol']);
@@ -124,7 +117,7 @@ switch ($_POST["tabela"]) {
 
 		$_SESSION['igreja'] = (int)$_POST["congregacao"];
 		$cad = date("Y-m-d h:i:s");
-		$rolMembro = (!empty($_POST[bsc_rol])) ? intval($_POST[bsc_rol]): intval($_GET[bsc_rol]);
+		$rolMembro = (!empty($_POST['bsc_rol'])) ? intval($_POST['bsc_rol']): intval($_GET['bsc_rol']);
 		echo "Rol-------> ".$rolMembro;
 		$value = "'{$rolMembro}','{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
 				 ."'{$_POST["batismo_espirito_santo"]}','$dt_mudanca_denominacao',"
@@ -132,19 +125,24 @@ switch ($_POST["tabela"]) {
 				 ."'{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
 				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','{$_POST["c_entregue"]}','$quem_recebeu','$quem_enttregou',"
 				 ."'$num_recibo','{$_POST["situacao_espiritual"]}',NULL,'$hist','$cad','{$_POST["obs"]}'";
+		// $eclesiastico = new insert ("$value","eclesiastico");
+		// $eclesiastico->inserir();
+
+
+		$value = "$rolMembro,'{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
+				 ."'$batismo_espirito_santo','$dt_mudanca_denominacao',"
+				 ."'{$_POST["veio_qual_denominacao"]}','$auxiliar','$diaconato','$presbitero','$evangelista','$pastor',"
+				 ."'{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
+				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','$c_entregue','$quem_recebeu','$quem_enttregou',"
+				 ."'$num_recibo','{$_POST["situacao_espiritual"]}',null,'$hist','$cad','{$_POST["obs"]}'";
+
+		echo '<br /><br />'.$value;
+		echo '<br /><br />';
+
+		// exit;
+
 		$eclesiastico = new insert ("$value","eclesiastico");
 		$eclesiastico->inserir();
-
-
-//		$value = "$rolMembro,'{$_SESSION['igreja']}','$batismo_em_aguas','{$_POST["local_batismo"]}','{$_POST["uf"]}',"
-//				 ."'$batismo_espirito_santo','$dt_mudanca_denominacao',"
-//				 ."'{$_POST["veio_qual_denominacao"]}','$auxiliar','$diaconato','$presbitero','$evangelista','$pastor',"
-//				 ."'$missionario','{$_POST["veio_outra_assemb_deus"]}','$dt_muda_assembleia','{$_POST["lugar"]}',"
-//				 ."'$data','$dat_aclam','$c_impresso','$quem_imprimiu','$c_entregue','$quem_recebeu','$quem_enttregou',"
-//				 ."'$num_recibo','{$_POST["situacao_espiritual"]}',null,'$hist','$cad','{$_POST["obs"]}'";
-		echo $value;
-//		$eclesiastico = new insert ("$value","eclesiastico");
-//		$eclesiastico->inserir();
 
 		$cpf = $_GET["cpf"];
 		echo "<script>location.href='./?escolha=adm/dados_profis.php&cpf=$cpf&bsc_rol=$rolMembro'</script>";
@@ -157,35 +155,36 @@ switch ($_POST["tabela"]) {
 
 		// print_r($_POST);
 
-		$rolMae = (empty($_POST["rol_mae"])) ? 'NULL' : intval($_POST["rol_mae"]) ;
-		$rolPai = (empty($_POST["rol_pai"])) ? 'NULL' : intval($_POST["rol_pai"]) ;
+		$rolMae = (empty($_POST["rol_mae"])) ? 0 : intval($_POST["rol_mae"]) ;
+		$rolPai = (empty($_POST["rol_pai"])) ? 0 : intval($_POST["rol_pai"]) ;
 		$sexo = (empty($_POST["sexo"])) ? 'M' : $_POST["sexo"];
 		$nacao = (empty($_POST["nacao"])) ? 'NULL' : $_POST["nacao"];
-		$endereco = (empty($_POST["endereco"])) ? 'NULL' : 'TEste';
+		$endereco = (empty($_POST["endereco"])) ? 'NULL' : 'Teste';
 		$doador = (empty($_POST["doador"]) || $_POST["doador"]=='') ? 'NULL' : $_POST["doador"];
 		$obs = (empty($_POST["obs"]) || $_POST["obs"]=='') ? 'NULL' : $_POST["obs"];
 
 		// var_dump($_POST).'<br />';
 		// echo $dt_nasc;
 
-$value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','$sexo','$endereco',".
-				"'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',".
-				"'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',".
-				"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',".
-				"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
-				"$rolMae,'{$_POST["pai"]}','$rolPai','".date('Y-m-d H:i:s')."','$hist'";
+		$value = "NULL,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_nasc"]}','$sexo','$endereco',".
+						"'{$_POST["numero"]}','{$_POST["complemento"]}','{$_POST["cep"]}','{$_POST["bairro"]}',".
+						"'{$_POST["cidade"]}','{$_POST["uf_resid"]}','{$_POST["escolaridade"]}','{$_POST["graduacao"]}',".
+						"'{$_POST["email"]}','{$_POST["fone_resid"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["obs"]}',".
+						"'{$_POST["doador"]}','{$_POST["sangue"]}','{$_POST["mae"]}',".
+						"$rolMae,'{$_POST["pai"]}',$rolPai,'".date('Y-m-d H:i:s')."','$hist'";
 
 
 
-//			echo count($_POST).'<br /><br />';
-//			print_r ($_POST).'<br /><br />';
-//		echo '<br /><br />*** '.$value.' *** <br />';
-		// var_dump($_POST).'<br />';
+			echo count($_POST).'<br /><br />';
+			print_r ($_POST).'<br /><br />';
+		echo '<br /><br />*** '.$value.' *** <br /><br />';
+		echo '<br /><br />*** '.$hist.' *** <br /><br />';
+		var_dump($_POST).'<br />';
 
 		$dados_pessoais = new insert ($value,"membro");
 		$dados_pessoais->inserir();
-		$rolMembro = mysql_insert_id();//recupera o id do último insert no mysql
-		// Salta para não permitir registro 666
+		$rolMembro = mysql_insert_id();//recupera o id do ï¿½ltimo insert no mysql
+		// Salta para nï¿½o permitir registro 666
 		$test_rol = $rolMembro+1;
 		if ((substr_count($test_rol, '666'))>0){
 			$aut_inc = str_replace("666","667",$test_rol);
@@ -242,7 +241,7 @@ $value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_
 			$dt_nasc=br_data($_POST["dt_nasc"],"dt_nasc");
 		}
 
-		$value="null,'{$_POST["nome"]}','{$_POST["endereco"]}','{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["nacionalidade"]}','{$_POST["fone"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["congregacao"]}','{$_POST["sexo"]}','$dt_aceitou','{$_POST["obs"]}','$hist',NOW()";
+		$value="NULL,'{$_POST["nome"]}','{$_POST["endereco"]}','{$_POST["numero"]}','{$_POST["bairro"]}','{$_POST["cidade"]}','{$_POST["uf"]}','{$_POST["nacionalidade"]}','{$_POST["fone"]}','{$_POST["celular"]}','$dt_nasc','{$_POST["congregacao"]}','{$_POST["sexo"]}','$dt_aceitou','{$_POST["obs"]}','$hist',NOW()";
 		$est_civil = new insert ("$value","{$_POST["tabela"]}");
 		$est_civil->inserir();
 
@@ -259,7 +258,7 @@ $value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_
  		$result = mysql_query($query) or die (mysql_error());
 		 if (mysql_num_rows($result)>0) {
 
-			echo "<script>alert('O aluno: {$_SESSION["membro"]}, já possui matrícula ativa!');window.history.go(-1);</script>";
+			echo "<script>alert('O aluno: {$_SESSION["membro"]}, jï¿½ possui matrï¿½cula ativa!');window.history.go(-1);</script>";
 			echo "<a href='./?escolha=cetad/matricula.php'>Voltar ...<a>";
 			break;
 		 }
@@ -308,7 +307,7 @@ $value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_
 		echo "<a href='./?escolha=cetad/matricula.php&menu=top_cetad'>Continuar...<a>";
 
 		} else {
-			echo "<script>alert('Todos os Campos são de preenchimento OBRIGATÓRIO!');window.history.go(-1);</script>";
+			echo "<script>alert('Todos os Campos sï¿½o de preenchimento OBRIGATï¿½RIO!');window.history.go(-1);</script>";
 		}
 		break;
 
@@ -339,7 +338,7 @@ $value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_
 			$d = $dta[2];
 			echo $d."/".$m."/".$y;
 			if (empty($_POST["prazo"])) {
-				//Se prazo for deixado em branco será atribuido prazo indeterminado (0000-00-00)
+				//Se prazo for deixado em branco serï¿½ atribuido prazo indeterminado (0000-00-00)
 				$dt_fim = "0000-00-00";
 			}else{
 				$dt_fim = date ("Y-m-d",mktime (0,0,0,$m,$d+$_POST["prazo"],$y));
@@ -352,15 +351,15 @@ $value = "null,'{$_POST["nome"]}','$nacao','{$_POST["cid_natal"]}','{$_POST["uf_
 			$disciplina -> inserir();
 			//Atualiza a tabela eclesiastico com o novo valor
 			$rec = new DBRecord ("eclesiastico",$rolMembro,"rol");
-			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui é atribuido a esta variável o valor para UpDate
+			$rec->situacao_espiritual = intval($_POST["situacao"]); //Aqui ï¿½ atribuido a esta variï¿½vel o valor para UpDate
 			$rec->UpDate();
 			echo "<script>location.href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'</script>";
 			echo "<a href='./?escolha=adm/dados_disciplina.php&bsc_rol={$rolMembro}'>Continuar...<a>";
 			}else{
-			echo "<script> alert('Senha incorreta ou você não tem autorização para disciplinar membros!');</script>";
+			echo "<script> alert('Senha incorreta ou vocï¿½ nï¿½o tem autorizaï¿½ï¿½o para disciplinar membros!');</script>";
 			}
 			}else {
-				echo "<script> alert('Rol do membro não foi informado!');</script>";
+				echo "<script> alert('Rol do membro nï¿½o foi informado!');</script>";
 			}
 		break;
 	case "organica";

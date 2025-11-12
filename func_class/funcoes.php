@@ -900,7 +900,15 @@ function situacao ($situacao,$rol){
 
 function toUpper($string) {
 	//Converte para maíuscula as vogais acentuadas
-    return ( strtoupper ($string) );
+	$string = strtoupper($string);
+	
+	// Arrays para conversão de vogais acentuadas
+	$search = array("á","à","â","ã","ä","é","è","ê","ë","í","ì","î","ï","ó","ò","ô","õ","ö","ú","ù","û","ü");
+	$replace = array("Á","À","Â","Ã","Ä","É","È","Ê","Ë","Í","Ì","Î","Ï","Ó","Ò","Ô","Õ","Ö","Ú","Ù","Û","Ü");
+	
+	$string = str_replace($search, $replace, $string);
+	
+	return $string;
 	}
 	
 function extenso($valor = 0, $maiusculas = false) {

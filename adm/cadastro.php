@@ -28,7 +28,7 @@ if (isset($_POST["cid_end"])) {
 $rec_end = new DBRecord("cidade", $id_cid, "id"); //Faz a busca do cidade pelo id e traz o nome
 $cid_end = $rec_end->nome() . " - " . $rec_end->coduf();
 $cpf = $_POST['cpf'];
-$ind = 1; //Define o ï¿½ndece dos campos do formulï¿½rio
+$ind = 1; //Define o índice dos campos do formulário
 ?>
 <script type="text/JavaScript">
 	<!--
@@ -138,7 +138,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 						</h6>
 					</td>
 					<td>
-						<label>Tipo</label> <select name='sangue' placeholder="Tipo Sanguínio" class="form-control" tabindex='<?PHP echo $ind++; ?>'>
+						<label>Tipo</label> <select name='sangue' placeholder="Tipo Sanguíneo" class="form-control" tabindex='<?PHP echo $ind++; ?>'>
 							<option value=''>Tipo de Sangue</option>
 							<option value='A+'>A+</option>
 							<option value='A-'>A-</option>
