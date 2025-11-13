@@ -49,16 +49,16 @@ $result = mysql_query($query) or die (mysql_error());
 				$atualHist .= 'AND datafim="0000-00-00" LIMIT 1';
 				$result = mysql_query($atualHist);
 				if (!$result) {
-				    echo 'Falha na autalização: ' . mysql_error();
+				    echo 'Falha na autalizaï¿½ï¿½o: ' . mysql_error();
 				    exit;
 				}
-				#Cadastra os dados na tabela de histórico de funções
-				$dt = br_data ($_POST["data"],'Data de início na função!');
-				$rolPastor = (is_int($_POST["pastor"]) ) ? $_POST["pastor"] : NULL ;
+				#Cadastra os dados na tabela de histï¿½rico de funï¿½ï¿½es
+				$dt = br_data ($_POST["data"],'Data de início na funções!');
+				$rolPastor = (is_int($_POST["pastor"]) ) ? $_POST["pastor"] : 0 ;
 				
 				if ($_POST["campo"]=='pastor' && $_POST["tabela"]=='igreja' ) {
 					$value  = 'NULL,1,"'.$_POST["nome"].'",'.$id.',"'.$rolPastor;
-					$value .= '",1,"'.$dt.'",NULL,"'.$hist.'",NULL';
+					$value .= '",1,"'.$dt.'",0,"'.$hist.'",0';
 					echo $value." - 2<br />";
 					$dados = new insert ($value,'cargohist');
 					$dados->inserir();
@@ -88,7 +88,7 @@ $result = mysql_query($query) or die (mysql_error());
 		print "Para:<h3> $atualizador</h3>";
 		echo mysql_error();
 		echo "<script> alert('Alteração realizada com sucesso!');window.history.go(-1);</script>";
-				/*echo "<script> alert('Alteração realizada com sucesso!');  location.href='./?escolha=tab_auxiliar/cadastro_bairro.php&uf={$_POST["uf_end"]}';</script>";*/
+				/*echo "<script> alert('Alteraï¿½ï¿½o realizada com sucesso!');  location.href='./?escolha=tab_auxiliar/cadastro_bairro.php&uf={$_POST["uf_end"]}';</script>";*/
 
 	}
 
