@@ -1,7 +1,7 @@
-<!-- Lançamento para o caixa do Dep de Ensino -->
+<!-- Lanï¿½amento para o caixa do Dep de Ensino -->
 <?php
 if ($_POST["rol"]!='') {
-	//Se for informado o rol, então traz o nome do banco
+	//Se for informado o rol, entï¿½o traz o nome do banco
 	$nomecont = new DBRecord('membro', $_POST["rol"], 'rol');
 	$rolMembro = $nomecont -> rol();
 	if ($_POST["nome"]!='')  {
@@ -20,7 +20,7 @@ for ($i = 0; $i < 3; $i++) {
 	$campo = 'oferta'.$i;
 	//printf ("$campo: %s",$_POST["$campo"]);
 
-	$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );//Captura o valor e vonverte p o padrão americano
+	$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );//Captura o valor e vonverte p o padrï¿½o americano
 
 	if ($valor>0) {
 
@@ -29,7 +29,7 @@ for ($i = 0; $i < 3; $i++) {
 				$conta = "'801','4','1'";//Corpo de Professores da EBD
 				break;
 			case 2:
-				$conta = "'803','4','9'";//Revistas sem provisão p caixa de evangelização
+				$conta = "'803','4','9'";//Revistas sem provisï¿½o p caixa de evangelizaï¿½ï¿½o
 				break;
 			default:
 				$conta = "'800','4','1'";//Ofertas
@@ -39,7 +39,7 @@ for ($i = 0; $i < 3; $i++) {
 		$congcontrib = ($congcontrib=='') ? $_POST["igreja"]:$congcontrib;
 
 		//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-		$value  = "'','',$conta,'".$congcontrib."','$rolMembro','$nome','$valor',";
+		$value  = "NULL,NULL,$conta,'".$congcontrib."','$rolMembro','$nome','$valor',";
 		$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 		$value .= "'".$confirma."','{$_POST["obs"]}',NOW(),'$hist'";
 		$dados = new insert ($value,"dizimooferta");

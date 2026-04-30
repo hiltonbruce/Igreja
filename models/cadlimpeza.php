@@ -7,7 +7,7 @@ $item 	= (int)$_POST['item'];
 $quant	= (int)$_POST['quant'];
 $menerro = '';
 
-//verifica se data está ok
+//verifica se data estï¿½ ok
 if (checadata($_POST['data'])) {
 
 	if ($igreja && $data) {
@@ -23,7 +23,7 @@ if (checadata($_POST['data'])) {
 		$prodCadastrado->fetchInto($row, DB_FETCHMODE_ASSOC);
 		echo '<h1> ** '.$row['id'].' **</h1>';
 		if ($row['id']>0 && $quant>0) {
-			//Atualiza se o item já estiver cadastrado
+			//Atualiza se o item jï¿½ estiver cadastrado
 			$upPedLimpeza = new DBRecord('limpezpedid', $row['id'], 'id');
 			$upPedLimpeza->quant = $quant;
 			$upPedLimpeza->Update();
@@ -34,7 +34,7 @@ if (checadata($_POST['data'])) {
 			echo '<script>alert("** O item foi apagado! **");</script>';
 		}elseif ($quant>0) {
 			$cong = new DBRecord('igreja',$igreja, 'rol');
-			$dadosagenda = sprintf("'','%s','%s','%s','%s','%s','%s','%s'",$item,$quant,$mesref,$data,$igreja,$cong->matlimpeza(),$hist);
+			$dadosagenda = sprintf("NULL,'%s','%s','%s','%s','%s','%s','%s'",$item,$quant,$mesref,$data,$igreja,$cong->matlimpeza(),$hist);
 			echo $dadosagenda.' *** <br />';
 			$pedLimpeza= new insert ($dadosagenda,"limpezpedid");
 			echo $pedLimpeza->inserir();
@@ -49,6 +49,6 @@ if (checadata($_POST['data'])) {
 	}
 }else {
 	$data = false;
-	echo "<script>alert('Desculpe! Mas, é inválida');</script>";
+	echo "<script>alert('Desculpe! Mas, ï¿½ invï¿½lida');</script>";
 }
 ?>

@@ -22,6 +22,7 @@ if (!empty($_GET['ext']) && $_GET['ext']=='1') {
 				<col id="Rol">
 				<col id="Nome">
 				<col id="Dirigente Atual">
+<col id="Cargo">
 				<?php
 					echo $group;
 				?>
@@ -32,7 +33,8 @@ if (!empty($_GET['ext']) && $_GET['ext']=='1') {
 				<tr>
 				<th scope="col">Rol</th>
 				<th scope="col">Dire&ccedil;&atilde;o - Atual</th>
-				<th scope="col">Congre&ccedil;&atilde;o</th>
+<th scope="col">Cargo</th>
+				<th scope="col">Congrega&ccedil;&atilde;o</th>
 				<?php
 					echo $tabTh;
 				?>
@@ -50,13 +52,14 @@ if (!empty($_GET['ext']) && $_GET['ext']=='1') {
 				<td>
 					<?php
 						if ($coluna["nome"]!='') {
-							echo cargo ($coluna["rol"])['1'].' '.$coluna["nome"];
+							echo $coluna["nome"];
 						} else {
 							echo $igSede->pastor();
 						}
 
 				 	?>
 				</td>
+<td> <?php echo cargo($coluna['rol'])['0']; ?> </td>
 				<td><?php echo $coluna["razao"];?></td>
 				<?php
 				if ($group!='') {
@@ -73,10 +76,10 @@ if (!empty($_GET['ext']) && $_GET['ext']=='1') {
 				</td>
 				<td>
 					<?php
-					$cel = ($coluna['celular']=='') ? '<strong>N&atildeo informado</strong>' : $coluna['celular'] ;
-					$res = ($coluna['fone_resid']=='') ? '<strong>N&atildeo informado</strong>' : $coluna['fone_resid'] ;
-	         echo 'Cel.: '.$cel.'&nbsp;-&nbsp;';
- 	         echo 'Resid.:&nbsp;'.$res;
+					$cel = ($coluna['celular']=='') ? '' : 'Cel.: '.$coluna['celular'] ;
+					$res = ($coluna['fone_resid']=='') ? '' : ' - Res.: '.$coluna['fone_resid'] ;
+	         echo $cel.'&nbsp;&nbsp;';
+ 	         echo $res;
 	        ?>
 				</td>
 			<?PHP

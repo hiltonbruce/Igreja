@@ -385,7 +385,7 @@ class limplista {
 
 			$tipo = 'tipo'.$lista['matlimpeza'];
 			if ($item=='50' && $lista[$tipo]>'0') {
-				$valores .= '"", "'.$lista['id'].'", "'.$lista[$tipo].'", "'.$this->mesref.'", "'.$histReg->format('Y-m-d H:i:s').'",';
+				$valores .= 'NULL, "'.$lista['id'].'", "'.$lista[$tipo].'", "'.$this->mesref.'", "'.$histReg->format('Y-m-d H:i:s').'",';
 				$valores .= ' "'.$lista['igreja'].'", "1", "'.$_SESSION['valid_user'].' '.$histReg->format('Y-m-d H:i:s').'"';
 
 				$item=0;
@@ -397,7 +397,7 @@ class limplista {
 				$valores='';
 			}elseif ($lista[$tipo]>'0') {
 				++$item;
-				$valores .= '"", "'.$lista['id'].'", "'.$lista[$tipo].'", "'.$this->mesref.'", "'.$histReg->format('Y-m-d H:i:s').'",';
+				$valores .= 'NULL, "'.$lista['id'].'", "'.$lista[$tipo].'", "'.$this->mesref.'", "'.$histReg->format('Y-m-d H:i:s').'",';
 				$valores .= ' "'.$lista['igreja'].'", "1", "'.$_SESSION['valid_user'].' '.$histReg->format('Y-m-d H:i:s').'"),(';
 				//Faz o trabalho de zebrar a tabela
 				$tabtbody = true;

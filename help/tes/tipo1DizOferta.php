@@ -1,18 +1,18 @@
 <?php
 //corrigir os post para oferta...
-$msg = "<script> alert('Você não definiu para qual CONTA deseja contribuir. Refaça o lançamento!');</script>";
+$msg = "<script> alert('Vocï¿½ nï¿½o definiu para qual CONTA deseja contribuir. Refaï¿½a o lanï¿½amento!');</script>";
 for ($i = 0; $i < 13; $i++) {
 
 	$campo = 'oferta'.$i;
 	//printf ("$campo: %s",$_POST["$campo"]);
 
-	$valor = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );//Captura o valor e converte p o padrão americano
+	$valor = strtr( str_replace(array('.'),array(''),$_POST["$campo"]), ',.','.,' );//Captura o valor e converte p o padrï¿½o americano
 
 	if ($valor>0) {
 
 		switch ($i) {
 			case 0:
-				$conta = "'700','1','1'";//Dízimo
+				$conta = "'700','1','1'";//Dï¿½zimo
 				break;
 			case 1:
 				$conta = "'701','1','2'";//Oferta
@@ -25,7 +25,7 @@ for ($i = 0; $i < 13; $i++) {
 				break;
 			case 4:
 				if ($_POST['acescamp']=='') {
-					$msg = "<script> alert('Você não definiu para qual campnha deseja contribuir. Refaça o lançamento da campanha!');</script>";
+					$msg = "<script> alert('Vocï¿½ nï¿½o definiu para qual campnha deseja contribuir. Refaï¿½a o lanï¿½amento da campanha!');</script>";
 					$conta ='';
 				}else {
 				$conta = "'{$_POST['acescamp']}','1','6'";//Campanha
@@ -33,31 +33,31 @@ for ($i = 0; $i < 13; $i++) {
 				break;
 			case 5:
 				if ($rolIgreja=='1') {
-					$conta = "'820','2','5'";//Missões Sede;
+					$conta = "'820','2','5'";//Missï¿½es Sede;
 				} else {
-					$conta = "'821','2','5'";//Missões Congreções;
+					$conta = "'821','2','5'";//Missï¿½es Congreï¿½ï¿½es;
 				}
 				break;
 			case 6:
-				$conta = "'824','2','5'";//Missões Envelopes
+				$conta = "'824','2','5'";//Missï¿½es Envelopes
 				break;
 			case 7:
-				$conta = "'823','2','5'";//Missões Cofres
+				$conta = "'823','2','5'";//Missï¿½es Cofres
 				break;
 			case 8:
-				$conta = "'822','2','5'";//Missões Carnês
+				$conta = "'822','2','5'";//Missï¿½es Carnï¿½s
 				break;
 			case 9:
-				$conta = "'720','3','7'";//Oração Adulto
+				$conta = "'720','3','7'";//Oraï¿½ï¿½o Adulto
 				break;
 			case 10:
-				$conta = "'900','8','7'";//Oração Mocidade
+				$conta = "'900','8','7'";//Oraï¿½ï¿½o Mocidade
 				break;
 			case 11:
-				$conta = "'950','5','7'";//Oração Infantil
+				$conta = "'950','5','7'";//Oraï¿½ï¿½o Infantil
 				break;
 			case 12:
-				$conta = "'721','3','7'";//Voto em Circ. de Oração
+				$conta = "'721','3','7'";//Voto em Circ. de Oraï¿½ï¿½o
 				break;
 			default:
 				break;
@@ -69,7 +69,7 @@ for ($i = 0; $i < 13; $i++) {
 			echo $msg;
 		}	else {
 			//$valor = strtr( str_replace(".","",$_POST["$campo"]), ',','. ' );
-			$value  = "'','',$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
+			$value  = "NULL,NULL,$conta,'".$congcontrib."','{$_POST["rol"]}','$nome','$valor',";
 			$value .= "'$y-$m-$d','$sem','{$_POST["mes"]}','{$_POST["ano"]}','{$rolIgreja}','{$_SESSION['valid_user']}',";
 			$value .= "'".$confirma."','{$_POST["obs"]}',NOW(),'$hist'";
 			$dados = new insert ($value,"dizimooferta");

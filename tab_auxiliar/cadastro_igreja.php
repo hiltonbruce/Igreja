@@ -202,7 +202,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 	if (!$rec->exitecad()) { //verifica se o igreja jï¿½ estï¿½ cadastrado para esta cidade
 
-	$value = "'','$igreja','$cidade',NULL,'$log'";
+	$value = "NULL,'$igreja','$cidade',NULL,'$log'";
 	$carta = new insert ("$value","igreja");
 	$carta->inserir();
 	}
@@ -214,7 +214,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 
 }else{
-	echo "Desculpe! Mas voc&ecirc; não te autoriza&ccedil;&atilde;o para esta terefa.";
+	echo "Desculpe! Mas voc&ecirc; nï¿½o te autoriza&ccedil;&atilde;o para esta terefa.";
 }
 /*
 require_once ("HTML/QuickForm.php");

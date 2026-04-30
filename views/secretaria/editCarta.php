@@ -61,7 +61,7 @@
         <?PHP
         $det_inteiro = (int)$arr_dad["destino"];
         if ($det_inteiro!=0){
-        	$rec = new DBRecord ("cidade",$arr_dad["destino"],"id");// Aqui serï¿½ selecionado a informaï¿½ï¿½o do campo autor com id=2
+        	$rec = new DBRecord ("cidade",$arr_dad["destino"],"id");// Aqui ser? selecionado a informa??o do campo autor com id=2
 					$cidade=$rec->nome()." - ".$rec->coduf();
     		}else {
     		 	$cidade = $arr_dad["destino"];
@@ -145,10 +145,10 @@
 		echo 'Tendo, ainda, 3 dias para alterar a data e 20 para os demais dados! <br>';
 		echo '</div>';
 	}
-      //Primeiro Secretário
+      //Primeiro Secret?rio
       $sec1 = new DBRecord ('membro',$igSede->secretario1(),"rol");
       $primSecretario = $sec1->nome();
-    //Segundo Secretário
+    //Segundo Secret?rio
       $sec1 = new DBRecord ('membro',$igSede->secretario2(),"rol");
       $segSecretario = $sec1->nome();
 
@@ -169,7 +169,7 @@ if ($cidade!=''){
     <option value="2"><?PHP echo $segSecretario;?></option>
   </select></div>
   <div class="col-xs-2">
-  <!-- Envia o id para a impressï¿½o da carta escolhida -->
+  <!-- Envia o id para a impress?o da carta escolhida -->
   <input type="image" src="img/Preview-48x48.png" name="Submit2" value="Imprimir esta Carta" align="absmiddle" alt="Visualizar Impress&atilde;o" title="Visualizar Impress&atilde;o"/>
 	</div></div>
 </form>

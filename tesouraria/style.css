@@ -13,8 +13,8 @@ body {
 
 	#container { margin: 1em auto; width: 800px; text-align: left;}
 
-	#header { width:auto; height: 80px; background-image: url(../img/AssDeusEnvelope.png); background-repeat: no-repeat;
-	 background-position: left bottom; margin: 0; padding: 0 0 0 10px; text-align:right;}
+	#header { width:auto; height: 80px; background-image: url(../img/LogoCarta.jpg); background-repeat: no-repeat;background-size: 300px 90px;
+	 background-position: left bottom; margin: 0; padding: 20px 0 0 10px; text-align:right;}
 	#header p { position:relative;width:400px; height: 100%; font-size: 140%; padding: 0 0 0 10px; text-align:right;float: right;}
 	#mainnav {
 	height: 20px;

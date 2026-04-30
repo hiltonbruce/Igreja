@@ -11,20 +11,20 @@
 	if (PEAR::isError($db)){ die ($db->getMessage());exit;}
 
 	/*
-		 *@categoria  Pagina��o
-		 * @Pacote    Rodap�
+		 *@categoria  Pagina??o
+		 * @Pacote    Rodap?
 		 * @autor     Joseilton Costa Bruce <hiltonbruce@gmail.com>
 		 * @copyright 2009
-		 * @licen�a   www.gnu.org/licenses/licenses.html#GPL
+		 * @licen?a   www.gnu.org/licenses/licenses.html#GPL
 		 * @version   CVS: $Id: rodape.php,v 0.10 2009/03/30 05:27:25 aharvey Exp $
 	*/
 
 	class rodape {
-		protected $_pagina; //Recebe a quantidade de Links de p�ginas dispon�veis
-		protected $_url; //Recebe o n�mero da p�gina para direcionar as solicita��es
-		protected $_linkpagina; //nome do link com a pagina��o
-		protected $_urlextra; //Recebe o link da p�gina atual para enviar a url da p�gina
-		protected $_linkppag; //Define a quantidade de links num�ricos na p�gina
+		protected $_pagina; //Recebe a quantidade de Links de p?ginas dispon?veis
+		protected $_url; //Recebe o n?mero da p?gina para direcionar as solicita??es
+		protected $_linkpagina; //nome do link com a pagina??o
+		protected $_urlextra; //Recebe o link da p?gina atual para enviar a url da p?gina
+		protected $_linkppag; //Define a quantidade de links num?ricos na p?gina
 
 		function __construct($_pagina=0,$_url=0,$_linkpagina="",$_urlextra="",$_linkppag=0) {
 			$this->_pagina = $_pagina;
@@ -35,15 +35,15 @@
 		}
 
 		public function getPagina(){
-			//Total de link de p�ginas
+			//Total de link de p?ginas
 			return $this->_pagina;
 		}
 
-		public function getUrl(){ //P�gina atual para o PHP, ou seja, para o usu�rio ela � este valor + 1 - Visual
+		public function getUrl(){ //P?gina atual para o PHP, ou seja, para o usu?rio ela ? este valor + 1 - Visual
 			return $this->_url;
 		}      //echo "<h1>$table</h1>";      //echo "<h1>$table</h1>";      //echo "<h1>$table</h1>";      //echo "<h1>$table</h1>";
 
-		public function getLinkpagina(){ //nome do link da p�gina. Ex.
+		public function getLinkpagina(){ //nome do link da p?gina. Ex.
 			return $this->_linkpagina;
 		}
 
@@ -51,7 +51,7 @@
 			return $this->_urlextra;
 		}
 
-		public function getLinkppag(){ //Se a quant de links por p�ginas for maior q a quant de paginas dispon�veis ele retorna quant de p�aginas
+		public function getLinkppag(){ //Se a quant de links por p?ginas for maior q a quant de paginas dispon?veis ele retorna quant de p?aginas
 			if ($this->_linkppag<=$this->_pagina)
 				return $this->_linkppag;
 			else
@@ -59,7 +59,7 @@
 		}
 
 		public function getQuantpg() {
-			//Total de p�ginas
+			//Total de p?ginas
 			if ($this->getLinkppag()>0)
 				return ceil(($this->getUrl())/$this->getLinkppag());
 			else
@@ -67,7 +67,7 @@
 		}
 
 		public function getUltimapg(){
-			//limita o loop for ao valor da �ltima p�gina
+			//limita o loop for ao valor da ?ltima p?gina
 			if (($this->getQuantpg()*$this->getLinkppag())<=$this->getPagina())
 				return $this->getQuantpg()*$this->getLinkppag();
 			elseif (($this->getQuantpg()*$this->getLinkppag())>$this->getPagina())
@@ -76,7 +76,7 @@
 
 		public function getDados(){
 			echo 	"Links de P&acute;gina: \$this->getPagina() : <span>".$this->getPagina()."</span><br/>".
-					"linkP�gina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
+					"linkP?gina: \$this->getLinkpagina() : <span>".$this->getLinkpagina()."</span><br/>".
 					"url da p&acute;gina: \$this->getUrl() : <span> ".$this->getUrl()."</span><br/>".
 					"Link por P&acute;gina: \$this->getLinkppag() : <span>".$this->getLinkppag()."</span><br/>".
 					"urlExtra: \$this->getUrlextra() : <span >".$this->getUrlextra()."</span><br/>".
@@ -89,7 +89,7 @@
 			{
 				$url = $this->_url-1;
 				echo 	"<ul class='pagination pagination-sm'><li><a href='./{$this->getUrlextra()}&{$this->_linkpagina}=1'>In&iacute;cio</a>";
-				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>&laquo;</a>"; //Vai p a p�gina anterior
+				echo 	"<a href='./{$this->getUrlextra()}&{$this->_linkpagina}=$url'>&laquo;</a>"; //Vai p a p?gina anterior
 			}else {
 				echo '<ul class="pagination pagination-sm">';
 			}
@@ -99,12 +99,12 @@
 	{
 	$url = $this->_url-1;
 	echo 	"<a href='./{$this->getUrlextra()}'>In&iacute;cio</a> | ".
-	"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a p�gina anterior
+	"<a href='./pesq_membro.php?nome={$_GET["nome"]}&campo={$_GET["campo"]}&rol_pai={$_GET["rol_pai"]}&".$this->_linkpagina."=$url'>Anterior</a>"; //Vai p a p?gina anterior
 	}
 	}
 	*/
 	public function getRodapemeio() {
-		//Define a parte central da pagina��
+		//Define a parte central da pagina??
 			for ($i=($this->getUltimapg()-$this->getLinkppag() ); $i<($this->getUltimapg()); $i++)
 			{
 				$pg=$i+1;
@@ -131,13 +131,13 @@
 				}
 	}
 
-	public function getRodaperes() { //Total das p�ginas disponibilizadas
+	public function getRodaperes() { //Total das p?ginas disponibilizadas
 	if ($this->getPagina()>"1"){
 	return "<br/><span>Total de ".$this->getPagina()." p&aacute;ginas";
 		}elseif ($this->getPagina()=="1"){
 		return "<br/><span>Total de ".$this->getPagina()." p&aacute;gina";
 		}else {
-		return "N�o h� nenhuma informa��o para esta pesquisa!";
+		return "N?o h? nenhuma informa??o para esta pesquisa!";
 	}
 	}
 
@@ -190,15 +190,15 @@
 	}
 
 	function __destruct() {
-		//foi removido pois ao final da p�gina aparecia informa��es do rodap�
+		//foi removido pois ao final da p?gina aparecia informa??es do rodap?
 	//echo $this->getRodaperes ();
 	}
 	/* Exemplo para chamada desta classe
 	$_urlLi="escolha=".$_GET["escolha"]."&menu=".$_GET["menu"]."&ord_m=".$_GET["ord_m"];
-	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de p�ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p�gina)
+	$_rod = new rodape(20,$_GET["pag_rodape"],"pag_rodape","$_urlLi",8);//(Quantidade de p?ginas,$_GET["pag_rodape"],mesmo nome dado ao parametro do $_GET anterior  ,"$_urlLi",links por p?gina)
 	$_rod->getDados();
 	$_rod->getRodape();
-	Exemplo de CSS para o Radap�:
+	Exemplo de CSS para o Radap?:
 
 	span#rodape{
 	font-weight:bold;
@@ -214,10 +214,10 @@
 
 class DBRecord {
   /*Exemplo de funcionamento desta classe:
-	$rec = new DBRecord ("tabela","op��o","campo"); Aqui ser� selecionado a informa��o do campo da tabela autor igual a op�ao
+	$rec = new DBRecord ("tabela","op??o","campo"); Aqui ser? selecionado a informa??o do campo da tabela autor igual a op?ao
 	print $rec->Name()."\n"; Imprime o valor na tela
-	$rec->Name = "Novo Nome"; Aqui � atribuido a esta vari�vel um valor para UpDate
-	$rec->Update(); � feita a chamada do m�todo q realiza a atualiza��o no Banco
+	$rec->Name = "Novo Nome"; Aqui ? atribuido a esta vari?vel um valor para UpDate
+	$rec->Update(); ? feita a chamada do m?todo q realiza a atualiza??o no Banco
   */
   var $h;
   var $table;
@@ -242,7 +242,7 @@ class DBRecord {
   }
 
   public function cad_organica($ind) {
-     //Lista subordinado � do script igreja/cad_organica
+     //Lista subordinado ? do script igreja/cad_organica
      $lin = mysql_query("SELECT * from {$this->{'table'}} ORDER BY id_igreja,codigo ");
      $coluna = 0;
      $id_igreja = 0;
@@ -431,8 +431,8 @@ class insert {
 		$inserir = mysql_query ("INSERT INTO ".$this->getTabela()." VALUES (".$this->getCampos().")") or die (mysql_error());
 		if ($inserir){
 				$idCad = mysql_insert_id();
-				//echo "<script> alert('Inclus�o ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
-				//echo "Inclus�o realizada com sucesso!";
+				//echo "<script> alert('Inclus?o ######$idCad### realizada com sucesso! Em ".$this->getTabela()."');</script>";
+				//echo "Inclus?o realizada com sucesso!";
 		}else{
 			echo "<script> alert('Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!');window.history.go(-1);</script>";
 			echo "Falha no Cadastro. Se o probelama continua informe ao desenvolvedor do sistema!";
@@ -459,7 +459,7 @@ class editar_form {
 		$this->vlr_get		= $vlr_get;             //Valor relacionado ao get
 		$this->valor 		= $valor;               //O valor do campo no banco de dados
 		$this->acao 		= $acao;                //Link para onde o form ira direcionar os dadosa. Ex.:adm/atualizar_dados.php
-		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edi��o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
+		$this->link_form 	= $link_form.$vlr_get;  //Link de chamada do form para edi??o do form. Ex.: adm/dados_pessoais.php&campo=datanasc&tabela=membro
 			if ($this->campo=="datanasc" || $this->campo=="dt_nasc" || $this->campo=="batismo_em_aguas" ||
 					$this->campo=="dt_muda_assembleia"  || $this->campo=="auxiliar"
 					|| $this->campo=="diaconato" || $this->campo=="presbitero" ||
@@ -486,10 +486,10 @@ class editar_form {
 	}
 	if ($this->campo==$this->vlr_get)
 		{
-			/* Formul�rio para edi��o por item. Neste form os campos s�o recebidos de qualquer
-			campo para edi��o da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que �
-			passado, tamb�m � respons�vel pelo da tabela que ser� alterada e o GET-tabela traz o nome da tabela
-			que sofrer� altera��o. Em agumas ocasi�es tamb�m � passado o campo UF.*/
+			/* Formul?rio para edi??o por item. Neste form os campos s?o recebidos de qualquer
+			campo para edi??o da tabela. Bastando para isso o envio do campo por GET-campo, esse campo que ?
+			passado, tamb?m ? respons?vel pelo da tabela que ser? alterada e o GET-tabela traz o nome da tabela
+			que sofrer? altera??o. Em agumas ocasi?es tamb?m ? passado o campo UF.*/
 
 			//echo $this->campo." = ".$this->vlr_get;
       if ($ident=='') {
@@ -498,7 +498,7 @@ class editar_form {
 			?>
 			<form id="form1" name="form1" method="post" action="">
 			<table><tbody><tr><td>
-			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receber� os dados -->
+			<input type="hidden" name="escolha" value="<?PHP echo "{$this->acao}";?>" /> <!-- indica o script que receber? os dados -->
 			<input type="hidden" name="campo" value="<?PHP echo "{$this->campo}";?>" />
 			<input type="hidden" name="tabela" value="<?PHP echo $_GET["tabela"];?>" />
 			<input type="hidden" name="id" value="<?PHP echo $ident;?>" />
@@ -563,9 +563,9 @@ class editar_form {
 					<?PHP
 					break;
 			}
-			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")//Abre para edi��o 2 campos para Pai e M�e
+			if ($this->campo=="pai" || $this->campo=="mae" || $this->campo=="conjugue")//Abre para edi??o 2 campos para Pai e M?e
 			{
-			//Nos campos Pai e M�e � aberto um segundo campo do form para o rol e a op��o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
+			//Nos campos Pai e M?e ? aberto um segundo campo do form para o rol e a op??o, por JavaScript, de um script para pesquisa de membros e preenchimeto destes campos
 			?>
 			<td>
 		    <div class="row">
@@ -664,9 +664,9 @@ class sele_cidade {
 		$this->tabela = $tabela;//
 		$this->valor = $valor;//O valor do campo no banco de dados
 		$this->campo = $campo;//Campo para pesquisa no Banco
-		//Monta a parte o retorno html do formul�rio
-		$this->campo_retorno = $campo_retorno;//Campo que ser� retornado
-		$this->texto_field = $texto_field;//O nome que ser� relaciondo ao campo de retorno para envio pelo form
+		//Monta a parte o retorno html do formul?rio
+		$this->campo_retorno = $campo_retorno;//Campo que ser? retornado
+		$this->texto_field = $texto_field;//O nome que ser? relaciondo ao campo de retorno para envio pelo form
 		if (DB::isError($res))
 		{
 			echo $db->getMessage;
@@ -674,18 +674,18 @@ class sele_cidade {
 		}
 	}
 
-	function ListDados ($indice,$id=null,$pers=null){//indice da sequ�ncia do formul�rio
+	function ListDados ($indice,$id=null,$pers=null){//indice da sequ?ncia do formul?rio
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
 	$this->res = $db->query($sql_lst, array( $this->valor ));
-	//Obt�m o n�mero de linhas
+	//Obt?m o n?mero de linhas
 	$num_linhas = (int)$this->res->numRows();
 	//Mostra as linhas de select
 	if ($num_linhas>0){
 	$linhoOptions1 = '';
 	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice' $pers >";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
-					echo "<option value='{$_SESSION["cid_end"]}'>C�d. - {$_SESSION["cid_end"]}</option>";
+					echo "<option value='{$_SESSION["cid_end"]}'>C?d. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
 					echo "<option value='2585'>Bayeux</option>";
 				}else{
@@ -704,13 +704,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Voc� n�o informou o estado de batismo! Fa�a-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Voc? n?o informou o estado de batismo! Fa?a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Voc� n�o informou a cidade ou falta atualizar! Fa�a-o antes de continuar.</h2>";
-		echo "<script> alert('Voc� n�o informou a cidade ou falta atualizar! Fa�a-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Voc? n?o informou a cidade ou falta atualizar! Fa?a-o antes de continuar.</h2>";
+		echo "<script> alert('Voc? n?o informou a cidade ou falta atualizar! Fa?a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('N�o h� nenhum bairro cadastrado nesta cidade! Recomendamos que voc� fa�a-o antes de continuar.');</script>";
+		echo "<script> alert('N?o h? nenhum bairro cadastrado nesta cidade! Recomendamos que voc? fa?a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -718,17 +718,17 @@ class sele_cidade {
 	}
 	}
 
-	function cidadePopup ($indice,$id=null,$link=null){//indice da sequ�ncia do formul�rio
+	function cidadePopup ($indice,$id=null,$link=null){//indice da sequ?ncia do formul?rio
 	global $db;
 	$sql_lst = "SELECT * from {$this->tabela} WHERE {$this->campo}=? ORDER BY {$this->campo_retorno}";
 	$this->res = $db->query($sql_lst, array( $this->valor ));
-	//Obt�m o n�mero de linhas
+	//Obt?m o n?mero de linhas
 	$num_linhas = (int)$this->res->numRows();
 	//Mostra as linhas de select
 	if ($num_linhas>0){
 	$linhoOptions1 = '';
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
-					echo "<option value='{$_SESSION["cid_end"]}'>C�d. - {$_SESSION["cid_end"]}</option>";
+					echo "<option value='{$_SESSION["cid_end"]}'>C?d. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
 					echo "<option value='$link'>Bayeux</option>";
 				}else{
@@ -747,13 +747,13 @@ class sele_cidade {
 	//$db->disconnect();
 	}elseif (empty($this->valor) && $this->campo==strtolower("uf")){
 		echo "Voc&ecirc; n&atilde;o informou o estado de batismo! Fa&ccedil;a-o antes de continuar.</h2>";
-		echo "<script> alert('Voc� n�o informou o estado de batismo! Fa�a-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "<script> alert('Voc? n?o informou o estado de batismo! Fa?a-o antes de continuar.'); window.history.go(-1);</script>";
 		exit;
 	}elseif ($this->campo==strtolower("idcidade") && $this->valor == ""){
-		echo "Voc� n�o informou a cidade ou falta atualizar! Fa�a-o antes de continuar.</h2>";
-		echo "<script> alert('Voc� n�o informou a cidade ou falta atualizar! Fa�a-o antes de continuar.'); window.history.go(-1);</script>";
+		echo "Voc? n?o informou a cidade ou falta atualizar! Fa?a-o antes de continuar.</h2>";
+		echo "<script> alert('Voc? n?o informou a cidade ou falta atualizar! Fa?a-o antes de continuar.'); window.history.go(-1);</script>";
 	}else{
-		echo "<script> alert('N�o h� nenhum bairro cadastrado para esta cidade! Recomendamos que voc� fa�a-o antes de continuar.');</script>";
+		echo "<script> alert('N?o h? nenhum bairro cadastrado para esta cidade! Recomendamos que voc? fa?a-o antes de continuar.');</script>";
 		echo 	"<select name='{$this->texto_field}' id='{$this->texto_field}' class='form-control' tabindex='$indice'>";
 		echo "<option value=''>-->> Escolha <<--</option>";
 		echo "<option value='Centro'>Centro</option>";
@@ -771,8 +771,8 @@ class List_sele {
 
 	function __construct ($tabela="", $campo_retorno= "", $texto_field=""){
 		$this->tabela = $tabela;//
-		$this->campo_retorno = $campo_retorno;//Campo que ser� retornado
-		$this->texto_field = $texto_field;//O nome que ser� relaciondo ao campo de retorno para envio pelo form
+		$this->campo_retorno = $campo_retorno;//Campo que ser? retornado
+		$this->texto_field = $texto_field;//O nome que ser? relaciondo ao campo de retorno para envio pelo form
 		$this->query = "SELECT * from {$this->tabela} ";
 		$this->sql_lst = mysql_query($this->query.' ORDER BY '.$this->campo_retorno);
 	}
@@ -787,7 +787,7 @@ class List_sele {
 	  	}
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], '��������������������������','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], '??????????????????????????','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -814,7 +814,7 @@ class List_sele {
 	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], '��������������������������','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], '??????????????????????????','aaaaeeiooouucAAAAEEIOOOUUC' );
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -883,7 +883,7 @@ class ultimo_registro {
      }
 
   function ultimo_registro ($codigo,$campo){
-	//seleciona o ultimo registro subordinado ao c�digo escolhido
+	//seleciona o ultimo registro subordinado ao c?digo escolhido
 	if (empty($codigo))
 	$codigo .=".00";
 	//echo "<h1>".$codigo."</h1>";
@@ -923,7 +923,7 @@ class List_congr {
 }
 
 class central {
-	//Define o script da p�gina central
+	//Define o script da p?gina central
 
 	function get(){
 		if (!empty($_POST["escolha"]) && !(strstr($_POST["escolha"], "http")) ){
@@ -946,9 +946,9 @@ class aniversario {
 	function __construct (){
 		//$sql_lst = "SELECT * from membro WHERE DATE_FORMAT(datanasc,'%d/%m/%Y')=? ORDER BY {$this->campo_retorno}";
 		//$this->res = $db->query($sql_lst, array( $this->valor ));
-		$this->dia = date('d/m');//Recupera o dia e m�s
+		$this->dia = date('d/m');//Recupera o dia e m?s
 		$this->semana = date('w');//Recupera a semana
-		$this->mes = date('m');//Recupera o m�s
+		$this->mes = date('m');//Recupera o m?s
 		$this->ano = date('Y');//Recupera o ano
 		$this->query  = "SELECT m.rol, m.nome, DATE_FORMAT(m.datanasc,'%Y') AS idade, ";
 		$this->query .= "DATE_FORMAT(m.datanasc,'%m') AS mes,DATE_FORMAT(m.datanasc,'%d') AS dia, ";
@@ -957,7 +957,7 @@ class aniversario {
 		$this->query .= "WHERE e.situacao_espiritual<2 AND m.rol=e.rol AND m.rol=c.rol AND ";
 
 		switch ($_GET["ord"]){
-		//Ordena a lista pelas seguintes tabelas conforme as op��es que define a tabela a ser escolhida
+		//Ordena a lista pelas seguintes tabelas conforme as op??es que define a tabela a ser escolhida
 			case "2";
 				$this->ord = "e.congregacao ASC";
 				break;
@@ -1047,11 +1047,11 @@ class aniversario {
 	$semana = date('W') + $_GET["proxima"];
 	if ($semana<10 && $semana>0) {$semana="0".$semana;}
 	if ($semana < "1"){
-		echo "<script> alert('Voc� j� atingiu o Ano anterior!');</script>";
-		echo "Voc� j� atingiu o Ano anterior!";
+		echo "<script> alert('Voc? j? atingiu o Ano anterior!');</script>";
+		echo "Voc? j? atingiu o Ano anterior!";
 	} elseif ($semana > "53") {
-		echo "<script> alert('Voc� j� atingiu o Ano seguinte!');</script>";
-		echo "Voc� j� atingiu o Ano seguinte!";
+		echo "<script> alert('Voc? j? atingiu o Ano seguinte!');</script>";
+		echo "Voc? j? atingiu o Ano seguinte!";
 	}
 		$sql_semana = mysql_query ($this->query." DATE_FORMAT(m.datanasc,'%m')='{$this->semana_consulta}'".$this->query_fim) or die (mysql_error());
 		while($this->dados=mysql_fetch_array($sql_semana))
@@ -1060,7 +1060,7 @@ class aniversario {
 			$var_aniv = date('W',mktime (0,0,0,$this->dados["mes"],$this->dados["dia"],date ('Y')));
 
 			if ($semana == $var_aniv) {
-			//Como o MySQL retornava o valor da semana do ano em que o membro nasceu e em muitos casos diferente da semana atual optei selecionar do banco o m�s inteiro e impor esta condi��o e assim aparentemente n�o houve erro na listagem.
+			//Como o MySQL retornava o valor da semana do ano em que o membro nasceu e em muitos casos diferente da semana atual optei selecionar do banco o m?s inteiro e impor esta condi??o e assim aparentemente n?o houve erro na listagem.
 			$inc++;
 			$this->tot_aniv ++;
 			if ($inc==1) { echo "<tr class='odd'>"; } else {echo "<tr class='dados'>"; $inc=0;}
@@ -1168,7 +1168,7 @@ class situacao_espiritual {
 				return "<span style='color:#006633'><blink>Corrija a comunh&atilde;o com a Igreja. Use bot&atilde;o Eclesi&aacute;stico acima!</blink></span>";
 				break;
 			case "2":
-				return 	"<span style='color:#FF0000'><blink>Displinado at�: </blink></span>".$this->data_fim;
+				return 	"<span style='color:#FF0000'><blink>Displinado at?: </blink></span>".$this->data_fim;
 				break;
 			default:
 				return "<span style='color:#FF0000'><blink>{$this->situacao}</blink></span>";
