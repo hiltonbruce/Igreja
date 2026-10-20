@@ -486,7 +486,7 @@ class editar_form {
 				}
 	}
 
-	public function getEditar($placeholder,$fJScript,$ident){
+	public function getEditar($placeholder='',$fJScript='',$ident=''){
 	$ind = 1;
 	if ($this->valor=="" || $this->valor=='N&atilde;o Informado!'){
 		$this->valor='';
@@ -699,7 +699,7 @@ class sele_cidade {
 	$linhoOptions1 = '';
 	echo 	"<select name='{$this->texto_field}' class='form-control' tabindex='$indice' $pers >";
 				if (($_SESSION["cid_end"])>0 && $this->campo=="cidade"){
-					echo "<option value='{$_SESSION["cid_end"]}'>Cï¿½d. - {$_SESSION["cid_end"]}</option>";
+					echo "<option value='{$_SESSION["cid_end"]}'>Cód. - {$_SESSION["cid_end"]}</option>";
 				}elseif ($this->campo=="coduf" && $_GET["uf_end"]=="PB"){
 					echo "<option value='2585'>Bayeux</option>";
 				}else{
@@ -709,9 +709,9 @@ class sele_cidade {
 		{
 			$linhas = $this->res->fetchRow(DB_FETCHMODE_ASSOC);
 			if ($id == $linhas["id"]) {
-				$linhoOptions1 = "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+				$linhoOptions1 = "<option value='".$linhas["id"]."'>". para_iso8859_1($linhas[$this->campo_retorno])."</option>";
 			}
-			$linhoOptions .= "<option value='".$linhas["id"]."'>".$linhas[$this->campo_retorno]."</option>";
+			$linhoOptions .= "<option value='".$linhas["id"]."'>". para_iso8859_1($linhas[$this->campo_retorno])."</option>";
 		}
 	echo $linhoOptions1.$linhoOptions.'</select>';
 	//Disconecta do Banco
@@ -801,7 +801,8 @@ class List_sele {
 	  	}
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
+		  $retorLinha = para_iso8859_1($this->col_lst[$this->campo_retorno]);
+		  
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";
@@ -828,7 +829,8 @@ class List_sele {
 	  	$linhas .=  "<option value='-1'>-->> Todas as Congrega&ccedil;&otilde;es <<--</option>";
 	       while($this->col_lst = mysql_fetch_array($this->sql_lst))
 	       {
-          $retorLinha = strtr( $this->col_lst[$this->campo_retorno], 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaeeiooouucAAAAEEIOOOUUC' );
+          $retorLinha = para_iso8859_1($this->col_lst[$this->campo_retorno]);
+
 	       	if ($this->col_lst["rol"]=='') {
 	       		if ($item==$this->col_lst["id"]) {
 		       		$linha1 .=  "<option value='".$this->col_lst["id"]."'>".$retorLinha."</option>";

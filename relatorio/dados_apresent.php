@@ -12,17 +12,19 @@ $id = $apresenta->rol();
 $ind = 1; //Define o indice dos campos do formulário
 ?>
 <fieldset>
+	<caption>Dados da Criança</caption>
 <div id="lst_cad">
 	<?PHP
 	if (!empty($id)) {
 	?>
 	<table class='table'>
     <tr>
-      <td colspan="2">Nome da Crian&ccedil;a :
-      <?PHP
-			$nome = new editar_form("nome",$apresenta->nome(),$tab,$tab_edit);
-			$nome->getMostrar();$nome->getEditar();
-			?></td>
+		<td colspan="2">Nome da Crian&ccedil;a :
+			<?PHP
+				$nome = new editar_form("nome",$apresenta->nome(),$tab,$tab_edit);
+				$nome->getMostrar();$nome->getEditar();
+			?>
+		</td>
 			<td>Congrega&ccedil;&atilde;o:
 	    <?PHP
 			$nome = new editar_form("id_cong",$igreja->razao(),$tab,$tab_edit);
@@ -148,20 +150,20 @@ $ind = 1; //Define o indice dos campos do formulário
       </tr>
     </table>
     <form id="form1" name="form1" method="post" action="relatorio/carta_apres.php">
-    <div class="row">
- 	 <div class="col-xs-6">
-      <input name="rol" type="hidden" id="rol" value="<?PHP echo $apresenta->rol();?>" />
-      <label>Secret&aacute;rio:</label>
-		<select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
-			<option value="<?PHP echo $igSede->secretario1();?>"><?PHP echo fun_igreja ($igSede->secretario1());?></option>
-			<option value="<?PHP echo $igSede->secretario2();?>"><?PHP echo fun_igreja ($igSede->secretario2());?></option>
-		</select>
+		<div class="row">
+		<div class="col-xs-6">
+			<input name="rol" type="hidden" id="rol" value="<?PHP echo $apresenta->rol();?>" />
+			<label>Secret&aacute;rio:</label>
+				<select name="secretario" id="secretario" class="form-control" tabindex="<?PHP echo $ind++;?>">
+					<option value="<?PHP echo $igSede->secretario1();?>"><?PHP echo fun_igreja ($igSede->secretario1());?></option>
+					<option value="<?PHP echo $igSede->secretario2();?>"><?PHP echo fun_igreja ($igSede->secretario2());?></option>
+				</select>
 		</div>
  	 	<div class="col-xs-2">
-        <label>&nbsp;</label>
-        <input type="submit" class="btn btn-primary btn-sm" name="Submit" value="Imprimir..." />
+			<label>&nbsp;</label>
+			<input type="submit" class="btn btn-primary btn-sm" name="Submit" value="Imprimir..." />
         </div>
-        </div>
+	</div>
   </form>
     <?PHP
     }else {

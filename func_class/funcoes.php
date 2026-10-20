@@ -300,10 +300,30 @@ function data_batismo($data,$link){
 	}
 }
 
+function para_iso8859_1($texto) {
+	if ($texto === null || $texto === '') {
+		return '';
+	}
+	// Converte somente UTF-8 valido; dados ja em Latin-1 permanecem intactos.
+	if (preg_match('//u', $texto)) {
+		if (function_exists('mb_convert_encoding')) {
+			return mb_convert_encoding($texto, 'ISO-8859-1', 'UTF-8');
+		}
+		return utf8_decode($texto);
+	}
+	return $texto;
+}
+
 function fun_igreja ($rol){
-	//retorno o nome do membro de acordo com o rol
-	$membro = new DBRecord ('membro',$rol,'rol');
-	return  utf8_decode($membro->nome());
+	//retorna o nome do membro de acordo com o rol
+	if (empty($rol)) {
+		return '';
+	}
+	$membro = new DBRecord ('membro', $rol, 'rol');
+	if (empty($membro->rol())) {
+		return '';
+	}
+	return para_iso8859_1($membro->nome());
 }
 
 function quem_entregou ($cpf){
